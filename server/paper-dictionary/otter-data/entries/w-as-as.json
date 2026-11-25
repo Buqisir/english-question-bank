@@ -1,0 +1,6 @@
+{
+  "entryId": "w:as-as", "version": 1, "kind": "phrase", "headword": "as … as …",
+  "lists": [], "variants": [], "forms": [], "pronunciations": [], "relatedPhrases": [], "counts": {"gaokao": 0, "mock": 0},
+  "pattern": {"tokens": ["as", {"slot": "…"}, "as", {"slot": "…"}], "separable": false, "alternatives": []},
+  "senses": [{"senseId": "w:as-as#s1", "pos": "短语", "glossZh": "和……一样……", "origin": "dictionary", "counts": {"gaokao": 0, "mock": 0}, "folded": true, "examples": []}]
+}

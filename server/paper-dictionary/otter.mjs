@@ -226,7 +226,8 @@ export function openOtterDictionary(rootDir) {
     phrasesAvailable,
     entryById,
     findId,
-    searchId: (surface, db) => headwords.get(normalize(surface)) ?? search(surface, db, findId),
+    search: (surface, db) => search(surface, db, findId),
+    searchId: (surface, db) => search(surface, db, findId)?.entryId ?? null,
     find: surface => entryById(findId(surface)),
     relatedPhrases(entry) {
       return [...new Set(entry.relatedPhrases)]

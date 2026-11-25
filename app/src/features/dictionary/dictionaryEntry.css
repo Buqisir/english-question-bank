@@ -50,6 +50,9 @@
 .otter-gloss i,
 .otter-example p[lang="en"] { font-family: var(--otter-serif); }
 .otter-entry--full > .eqb-button { justify-self: start; }
+.otter-alternatives { color: var(--desk-muted); font-size: var(--eqb-font-size-control); }
+.otter-alternatives a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
+.otter-alternatives a:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
 
 .otter-senses {
   border-top: 1px solid var(--eqb-color-border-subtle);

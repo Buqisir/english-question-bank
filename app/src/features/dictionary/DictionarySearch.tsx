@@ -3,7 +3,7 @@ import { searchOtterEntry } from '../../services/paperDictionary'
 import { Notice } from '../../shared-ui/Notice'
 import { SearchField } from '../../shared-ui/SearchField'
 
-export function DictionarySearch({ onFound }: { onFound: (entryId: string) => void }) {
+export function DictionarySearch({ onFound }: { onFound: (result: NonNullable<Awaited<ReturnType<typeof searchOtterEntry>>>) => void }) {
   const [query, setQuery] = useState('')
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
@@ -26,9 +26,9 @@ export function DictionarySearch({ onFound }: { onFound: (entryId: string) => vo
     setBusy(true)
     setMessage('')
     try {
-      const entryId = await searchOtterEntry(text, controller.signal)
+      const result = await searchOtterEntry(text, controller.signal)
       if (controller.signal.aborted) return
-      if (entryId) onFound(entryId)
+      if (result) onFound(result)
       else setMessage('没有找到这个单词或短语')
     } catch (error) {
       if (!controller.signal.aborted) setMessage(error instanceof Error ? error.message : '词典搜索失败，请重试')

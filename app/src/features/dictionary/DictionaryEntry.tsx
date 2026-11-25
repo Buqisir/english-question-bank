@@ -6,7 +6,7 @@ import { Chip } from '../../shared-ui/Chip'
 import { Notice } from '../../shared-ui/Notice'
 import { PronunciationButton } from '../../shared-ui/PronunciationButton'
 import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton'
-import { fetchOtterEntry, type OtterEntry, type OtterSense } from '../../services/paperDictionary'
+import { fetchOtterEntry, type OtterEntry, type OtterEntryLink, type OtterSense } from '../../services/paperDictionary'
 import { getDictionaryAudioSnapshot, playDictionaryAudio, subscribeDictionaryAudio } from '../paper-browse/selection/dictionaryAudio'
 import { ExampleSentence } from './ExampleSentence'
 import './dictionaryEntry.css'
@@ -28,7 +28,7 @@ type EntryProps = {
     menu: ReactNode
     actions: ReactNode
   }
-  | { density: 'full'; entry?: OtterEntry; word?: string; returnHref?: string }
+  | { density: 'full'; entry?: OtterEntry; word?: string; returnHref?: string; alternatives?: OtterEntryLink[] }
 )
 
 export function DictionaryEntry(props: EntryProps) {
@@ -123,6 +123,12 @@ export function DictionaryEntry(props: EntryProps) {
         {quick?.menu}
         {props.onClose && <Button size="sm" className="otter-close" label={full ? '关闭完整词条' : '关闭'} icon={<X size={16} />} onClick={props.onClose} />}
       </header>
+      {props.density === 'full' && Boolean(props.alternatives?.length) && (
+        <p className="otter-alternatives">也可能是：{props.alternatives?.map(({ entryId, headword }, index) => (
+          <span key={entryId}>{index > 0 && '、'}<a lang="en"
+            href={`?${new URLSearchParams({ view: 'word', w: entryId })}`}>{headword}</a></span>
+        ))}</p>
+      )}
       {pending && <SkeletonGate pending label="正在查词典" skeleton={<><Skeleton height={12} /><Skeleton width="68%" height={12} /></>} />}
       {error && <Notice kind="error" action={{ label: '重试', onClick: () => { setError(''); setAttempt(n => n + 1) } }}>{error}</Notice>}
       {!quick && entry === null && <Notice kind="info">该词暂未加入</Notice>}

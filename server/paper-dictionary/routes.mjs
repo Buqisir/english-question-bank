@@ -89,8 +89,7 @@ export function createPaperDictionaryRoutes() {
         }
         const search = url.pathname.endsWith('/search')
         const result = search ? context.paperDictionary.search(input) : context.paperDictionary.entry(input)
-        sendPrivateJson(response, result ? 200 : 404,
-          result ? (search ? { entryId: result } : result) : { error: '该词暂未加入' })
+        sendPrivateJson(response, result ? 200 : 404, result || { error: '该词暂未加入' })
       } catch (error) {
         sendPrivateJson(response, error.status || 500, { error: userMessage(error.code) })
       }

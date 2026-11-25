@@ -391,7 +391,7 @@ export function createPaperDictionaryRuntime({
 
   function search({ surface, context, userId }) {
     admitEntry(context, userId)
-    return surface && surface.length <= MAX_WORD_UTF16 ? otter.searchId(surface, dictionary().db) : null
+    return surface && surface.length <= MAX_WORD_UTF16 ? otter.search(surface, dictionary().db) : null
   }
 
   function senseRecordFromReply(reply) {

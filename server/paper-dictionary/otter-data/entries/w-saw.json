@@ -1,0 +1,9 @@
+{
+  "entryId": "w:saw", "version": 1, "headword": "saw", "lists": [], "variants": [],
+  "forms": [{"form": "sawed", "tags": ["past"]}, {"form": "sawn", "tags": ["participle", "past"]}, {"form": "sawing", "tags": ["participle", "present"]}, {"form": "saws", "tags": ["plural", "present", "third-person"]}],
+  "pronunciations": [], "relatedPhrases": [], "counts": {"gaokao": 0, "mock": 0},
+  "senses": [
+    {"senseId": "w:saw#s1", "pos": "n.", "glossZh": "锯子", "origin": "dictionary", "counts": {"gaokao": 0, "mock": 0}, "folded": true, "examples": []},
+    {"senseId": "w:saw#s2", "pos": "v.", "glossZh": "用锯切割", "origin": "dictionary", "counts": {"gaokao": 0, "mock": 0}, "folded": true, "examples": []}
+  ]
+}

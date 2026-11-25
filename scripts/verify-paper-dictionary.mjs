@@ -961,6 +961,8 @@ evilRuntime.close()
   check('search resolves exact and inflected phrase forms', [
     ['gave up', 'w:give-up'], ['MAKE SURE', 'w:make-sure'], ['made sure', 'w:make-sure'],
   ].every(([w, id]) => get('search', { w }).parsed?.entryId === id))
+  const alternatives = get('search', { w: '  gave up  ' }).parsed?.alternatives
+  check('the search response keeps entryId and adds an alternatives array', Array.isArray(alternatives))
   check('search uses the configured lexical database for forms missing from bundled entries',
     get('search', { w: 'Running' }).parsed?.entryId === 'w:run'
     && get('search', { w: 'children' }).parsed?.entryId === 'w:child')
@@ -1063,14 +1065,23 @@ evilRuntime.close()
   const dict = openOtterDictionary(rootDir)
   for (const [label, searches] of Object.entries({
     'word inflections': [
-      ['took', 'take'], ['lain', 'lie'], ['left', 'left'], ['saw', 'see'],
+      ['took', 'take'], ['lain', 'lie'], ['left', 'left'], ['saw', 'saw'],
       ['stopped', 'stop'], ['making', 'make'], ['studied', 'study'],
       ['children', 'child'], ['mice', 'mouse'], ['better', 'better'], ['bigger', 'big'], ['happier', 'happy'],
     ],
-    'phrase inflections': [['gone on', 'go-on'], ['brought up', 'bring-up'], ['there were', 'there-be']],
+    'phrase inflections': [
+      ['gone on', 'go-on'], ['brought up', 'bring-up'], ['there were', 'there-be'], ['coming and gone', 'come-and-go'],
+    ],
+    'ellipsis slots': [
+      ['not only but also', 'not-only-but-also'], ['not only...but also', 'not-only-but-also'],
+      ['not only smart but also kind', 'not-only-but-also'], ['so warm that we left', 'so-that'],
+      ['too cold to swim', 'too-to'], ['either read or write', 'either-or'], ['as cold as ice', 'as-as'],
+      ['not only a b c d e f but also', 'not-only-but-also'], ['not only a b c d e f g but also', null],
+    ],
     'declared slots': [
       ['makes up Amy’s mind', 'make-up-ones-mind'], ['applying herself', 'apply-oneself'],
       ['Amy’s heart sinks', 'ones-heart-sinks'], ['did it up', 'do-up'],
+      ['knock him down/over', 'knock-sb-sth-down-over'],
       ['ask him out', 'ask-out'], ['bring the book to life', 'bring-sth-to-life'],
       ['is about to read', 'be-about-to-do'], ['look forward to reading', 'look-forward-to-doing-sth'],
     ],
@@ -1088,6 +1099,16 @@ evilRuntime.close()
       check(`Otter search ${label}: ${query}`, dict.searchId(query) === (expected && `w:${expected}`),
         `got ${dict.searchId(query)}`)
     }
+  }
+  for (const [query, primary, alternate] of [
+    ['based on', 'w:be-based-on', 'w:base-on'], ['BASED ON', 'w:be-based-on', 'w:base-on'], ['base on', 'w:base-on'],
+    ['left', 'w:left', 'w:leave'], ['saw', 'w:saw', 'w:see'], ['found', 'w:found', 'w:find'],
+    ['lay', 'w:lay', 'w:lie'], ['rose', 'w:rose', 'w:rise'],
+  ]) {
+    const result = dict.search(query)
+    check(`Otter search ranks ${query} and keeps its alternate`, result?.entryId === primary
+      && (alternate ? result.alternatives.includes(alternate) && dict.entryById(alternate) : result.alternatives.length === 0)
+      && result.alternatives.length <= 3 && !result.alternatives.includes(primary))
   }
   const searchLexicon = openPaperDictionary(fixturePath).db
   try {

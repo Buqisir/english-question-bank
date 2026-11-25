@@ -664,13 +664,15 @@ function App() {
 
   if (route.view === 'word') {
     const source = appRouteUrl('paper-browse', { w: null, wordSense: null })
+    const wordSearch = window.history.state?.wordSearch
     return (
       <div className="app-shell">
         <AppTopbar {...shellNav} variant="sub" pageTitle="獭獭词典" onBack={paperBrowseOnBackToWorkbench} />
         <main className="otter-page">
-          <DictionarySearch onFound={entryId => navigate('word', { w: entryId, wordSense: null }, { state: {} })} />
+          <DictionarySearch onFound={result => navigate('word', { w: result.entryId, wordSense: null }, { state: { wordSearch: result } })} />
           {route.word && <Surface variant="board" padding="md">
             <DictionaryEntry key={route.word} density="full" word={route.word}
+              alternatives={wordSearch?.entryId === route.word ? wordSearch.alternatives : undefined}
               senseId={route.paperId ? route.wordSense : undefined}
               returnHref={route.paperId ? `${source.pathname}${source.search}` : undefined} />
           </Surface>}

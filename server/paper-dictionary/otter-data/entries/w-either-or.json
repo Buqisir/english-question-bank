@@ -1,0 +1,6 @@
+{
+  "entryId": "w:either-or", "version": 1, "kind": "phrase", "headword": "either … or …",
+  "lists": [], "variants": [], "forms": [], "pronunciations": [], "relatedPhrases": [], "counts": {"gaokao": 0, "mock": 0},
+  "pattern": {"tokens": ["either", {"slot": "…"}, "or", {"slot": "…"}], "separable": false, "alternatives": []},
+  "senses": [{"senseId": "w:either-or#s1", "pos": "短语", "glossZh": "要么……要么……", "origin": "dictionary", "counts": {"gaokao": 0, "mock": 0}, "folded": true, "examples": []}]
+}

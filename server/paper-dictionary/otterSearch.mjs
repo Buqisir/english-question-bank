@@ -6,12 +6,13 @@ const reflexive = /^(?:oneself|myself|yourself|himself|herself|itself|ourselves|
 const person = /^(?:sb|me|you|him|her|us|them|someone|somebody|anyone|anybody|everyone|everybody)$/u
 const thing = /^(?:sth|it|this|that|these|those|something|anything|everything|nothing)$/u
 const determiner = /^(?:a|an|the|some|any|each|every|this|that|these|those)$/u
-const slotNames = new Set(["one's", 'oneself', 'sb', 'sth', 'sb/sth', 'do', 'doing'])
+const slotNames = new Set(["one's", 'oneself', 'sb', 'sth', 'sb/sth', 'do', 'doing', '…'])
+const spacePhrasePunctuation = text => text.replace(/…|\.\.\./gu, ' … ').replace(/,/gu, ' , ')
 const exactWord = word => classifyCompleteEnglishWord(word, 0, word.length)?.surface === word
 const objectSlot = { slot: 'sb/sth' }
 
 function searchPatterns(headword, variants, pattern) {
-  const first = normalizeSearch(headword).split(' ')[0]
+  const canonical = normalizeSearch(spacePhrasePunctuation(headword)).replace(/[()]/g, '').split(' ')
   const patterns = [pattern.tokens, ...pattern.alternatives].map(tokens => tokens.map(token =>
     token === 'oneself' ? { slot: token } : token))
   // Some occurrence patterns only index the fixed words, omitting the
@@ -19,7 +20,7 @@ function searchPatterns(headword, variants, pattern) {
   const recorded = patterns.length
   const verbSlots = new Set(patterns.flat().filter(token => typeof token === 'object').map(token => token.slot))
   for (const form of [headword, ...variants]) {
-    const declared = normalizeSearch(form).replace(/[()]/g, '')
+    const declared = normalizeSearch(spacePhrasePunctuation(form)).replace(/[()]/g, '')
     const forms = declared.includes('sth/doing sth')
       ? [declared.replace('sth/doing sth', 'sth'), declared.replace('sth/doing sth', 'doing sth')]
       : [declared]
@@ -41,7 +42,7 @@ function searchPatterns(headword, variants, pattern) {
   }
   return patterns.map((tokens, index) => ({
     tokens, fixed: tokens.find(token => typeof token === 'string'), recorded: index < recorded,
-    inflectFirst: tokens[0] === first,
+    inflect: tokens.map((token, at) => typeof token === 'string' && token === canonical[at]),
   })).filter(({ tokens, fixed }) => tokens.length >= 2 && fixed)
 }
 
@@ -64,16 +65,23 @@ function matchSlot(slot, words, start, end, lexicon, isName) {
     lexicon(token).some(row => row.noun || row.adjective || row.gerund))
 }
 
-function patternScore({ tokens, inflectFirst }, words, lexicon, isName) {
+function patternScore({ tokens, inflect }, words, lexicon, isName) {
   function match(index, at) {
     if (index === tokens.length) return at === words.length ? 0 : -1
-    if (at === words.length) return -1
     const token = tokens[index]
+    if (token.slot === '…') {
+      let best = -1
+      for (let end = at; end <= Math.min(at + 6, words.length); end++) {
+        best = Math.max(best, match(index + 1, end))
+      }
+      return best
+    }
+    if (at === words.length) return -1
     if (typeof token === 'string') {
       const exact = words[at] === token
       // Recorded variants match literally. Only the canonical verb can
       // receive new forms, so sawed cannot match the variant saw off.
-      if (!exact && (!(index === 0 ? inflectFirst : token === 'be') ||
+      if (!exact && (!inflect[index] || words[at] === '…' ||
         !lexicon(words[at]).some(row => row.verb && row.lemma === token))) return -1
       const rest = match(index + 1, at + 1)
       return rest < 0 ? -1 : rest + 1024 + (exact ? 1 : 0)
@@ -102,11 +110,17 @@ function addIndex(index, key, value) {
   index.get(key).push(value)
 }
 
-const unique = ids => new Set(ids).size === 1 ? ids[0] : null
+function searchResult(ids) {
+  const [entryId, ...alternatives] = [...new Set(ids.filter(Boolean))].slice(0, 4)
+  return entryId ? { entryId, alternatives } : null
+}
 const spaced = word => word.replace(/-/g, ' ')
 
 export function createOtterSearch(entries, lookupForms, commonWords) {
   const exact = new Map()
+  const literal = new Map()
+  const literalVariants = new Map()
+  const foldedVariants = new Map()
   const aliases = new Map()
   const compounds = new Map()
   const headwords = new Map()
@@ -115,8 +129,12 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
   const leadingSlots = new Map()
   for (const { entryId, headword, variants, forms, kind, pattern, positions, counts } of entries) {
     const lemma = normalizeSearch(headword)
-    if (!exact.has(lemma)) exact.set(lemma, new Map())
-    exact.get(lemma).set(headword, entryId)
+    addIndex(exact, lemma, entryId)
+    addIndex(literal, headword.normalize('NFC'), entryId)
+    for (const variant of variants) {
+      addIndex(literalVariants, variant.normalize('NFC'), entryId)
+      addIndex(foldedVariants, normalizeSearch(variant), entryId)
+    }
     for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
       addIndex(aliases, normalizeSearch(form), entryId)
       addIndex(compounds, spaced(normalizeSearch(form)), entryId)
@@ -155,29 +173,32 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
 
   return function search(surface, db, findId) {
     const query = normalizeSearch(surface)
-    const literal = unique([...(exact.get(query)?.values() ?? [])])
-    if (literal) return literal
-    const direct = findId(surface)
-    if (direct) return direct
-    const alias = unique(aliases.get(query) ?? [])
-    if (alias) return alias
-    const compound = unique(compounds.get(spaced(query)) ?? [])
-    if (compound) return compound
+    const spelling = surface.normalize('NFC').trim()
+    const aliasIds = aliases.get(query) ?? []
+    const preferred = [...(literal.get(spelling) ?? []), ...(literalVariants.get(spelling) ?? []),
+      ...(exact.get(query) ?? []), ...(foldedVariants.get(query) ?? []), findId(surface)]
+    const compoundIds = compounds.get(spaced(query)) ?? []
+    const compound = new Set(compoundIds).size === 1 ? compoundIds[0] : null
 
     const cache = new Map()
     function lexicon(word) {
       if (!cache.has(word)) cache.set(word, [...lookupForms(db, word), ...(local.get(word) ?? [])])
       return cache.get(word)
     }
-    const words = query.split(' ')
+    const punctuated = spacePhrasePunctuation(surface)
+    const words = normalizeSearch(punctuated).split(' ')
     if (words.length === 1) {
       const ranked = rows => rows.map(row => headwords.get(row.lemma)).filter(Boolean)
         .sort((a, b) => b.counts.gaokao - a.counts.gaokao || b.counts.mock - a.counts.mock
           || a.entryId.localeCompare(b.entryId))
-      return ranked(lookupForms(db, query))[0]?.entryId ?? ranked(lexicon(query))[0]?.entryId ?? null
+        .map(row => row.entryId)
+      return searchResult([...preferred, compound, ...ranked(lookupForms(db, query)),
+        ...ranked(lexicon(query)), ...aliasIds])
     }
-    if (!words.every(word => exactWord(word) || word === 'sb/sth')) return null
-    const rawWords = surface.trim().split(/\s+/u)
+    if (!words.every(word => word === '…' || word === ',' || word.split('/').every(exactWord))) {
+      return searchResult([...preferred, ...aliasIds, compound])
+    }
+    const rawWords = punctuated.trim().split(/\s+/u)
     function isName(start, end) {
       if (lexicon(words.slice(start, end).join(' ')).some(row => row.name)) return true
       return rawWords.slice(start, end).every((word, index) => {
@@ -188,8 +209,7 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
       })
     }
     const anchors = new Set([words[0], ...lexicon(words[0]).filter(row => row.verb).map(row => row.lemma)])
-    let best = -1
-    let ids = []
+    const scores = new Map()
     const templates = [
       ...[...anchors].flatMap(anchor => patterns.get(anchor) ?? []),
       ...[...new Set(words.slice(1))].flatMap(anchor => leadingSlots.get(anchor) ?? []),
@@ -199,11 +219,9 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
       const matched = patternScore(template, words, lexicon, isName)
       if (matched < 0) continue
       const score = matched + (recorded ? 0.5 : 0)
-      if (score < best) continue
-      if (score > best) ids = []
-      best = score
-      ids.push(entryId)
+      scores.set(entryId, Math.max(scores.get(entryId) ?? -1, score))
     }
-    return unique(ids)
+    const ids = [...scores].sort(([a, first], [b, second]) => second - first || a.localeCompare(b)).map(([id]) => id)
+    return searchResult([...preferred, ...aliasIds, compound, ...ids])
   }
 }

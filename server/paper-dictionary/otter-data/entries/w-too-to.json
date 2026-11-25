@@ -1,0 +1,6 @@
+{
+  "entryId": "w:too-to", "version": 1, "kind": "phrase", "headword": "too … to …",
+  "lists": [], "variants": [], "forms": [], "pronunciations": [], "relatedPhrases": [], "counts": {"gaokao": 0, "mock": 0},
+  "pattern": {"tokens": ["too", {"slot": "…"}, "to", {"slot": "…"}], "separable": false, "alternatives": []},
+  "senses": [{"senseId": "w:too-to#s1", "pos": "短语", "glossZh": "太……而不能……", "origin": "dictionary", "counts": {"gaokao": 0, "mock": 0}, "folded": true, "examples": []}]
+}

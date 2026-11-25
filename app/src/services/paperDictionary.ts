@@ -82,7 +82,7 @@ export type PaperDictionaryResponse = {
   phrases?: OtterPhraseHit[]
 }
 
-type OtterEntryLink = { entryId: string; headword: string }
+export type OtterEntryLink = { entryId: string; headword: string }
 export type OtterPhraseHit = OtterEntryLink & {
   senseId: string
   glossZh: string
@@ -138,12 +138,16 @@ export async function fetchOtterEntry(word: string, signal: AbortSignal): Promis
   return response.json()
 }
 
-export async function searchOtterEntry(query: string, signal: AbortSignal): Promise<string | null> {
+export async function searchOtterEntry(query: string, signal: AbortSignal): Promise<{ entryId: string; alternatives: OtterEntryLink[] } | null> {
   const response = await fetch(`/api/paper-dictionary/search?${new URLSearchParams({ w: query })}`, { signal })
   if (response.status === 404) return null
   if (!response.ok) throw await errorFromResponse(response, '词典搜索失败')
-  const { entryId } = await response.json() as { entryId: string }
-  return entryId
+  const { entryId, alternatives = [] } = await response.json() as { entryId: string; alternatives?: string[] }
+  const entries = await Promise.allSettled(alternatives.map(id => fetchOtterEntry(id, signal)))
+  return { entryId, alternatives: entries.flatMap(result => {
+    const entry = result.status === 'fulfilled' ? result.value : null
+    return entry ? [{ entryId: entry.entryId, headword: entry.headword }] : []
+  }) }
 }
 
 export async function fetchPaperDictionaryStatus(
