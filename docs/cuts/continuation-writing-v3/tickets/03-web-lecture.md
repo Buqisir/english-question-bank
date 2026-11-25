@@ -1,6 +1,6 @@
 # 03 — Web lecture
 
-Status: ready after application V4 ticket 03
+Status: done; on main 2026-11-25
 Blocked by: 01; application-writing-v4 ticket 03
 Next on PASS: owner QA
 Terminal: no

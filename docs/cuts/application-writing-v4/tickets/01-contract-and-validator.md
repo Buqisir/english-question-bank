@@ -1,6 +1,6 @@
 # 01 — Contract and validator
 
-Status: done (branch), not on main
+Status: done; on main 2026-11-25
 Blocked by: Owner acceptance of `../spec.md`
 Next on PASS: 02
 Terminal: no

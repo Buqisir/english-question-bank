@@ -1,6 +1,6 @@
 # 04 — PDF
 
-Status: done (branch), awaiting Owner sample approval
+Status: done; on main 2026-11-25; samples approved by Owner (「PDF 样张认可，04 也推 main」)
 Blocked by: 01; application-writing-v4 ticket 04
 Next on PASS: owner QA
 Terminal: yes
@@ -29,7 +29,14 @@ Verify: `node scripts/verify-companion-analysis-export.mjs` passes, with a new
   (checked separately by hashing the HTML after `<body`); only the embedded
   stylesheet gained the WritingLecture rules. Live 2026 Ⅰ data in the old
   formats (reviewCard V2, continuation V2) also prints a byte-identical body.
-  Full verify-ci: run with the push to main.
+  Full verify-ci on origin/main@3dbc7a936 plus tickets 01–03: 38 scripts
+  failed; 36 are the environment failures listed since ticket 02 (no
+  ImageMagick 7, Node 22, no live services). The other 2
+  (`verify-paper-canonical-continuation-writing-rendered-behavior`,
+  `verify-paper-canonical-listening-zero-occurrence`) failed on port
+  contention from a parallel run and pass when run alone. With 04 added:
+  `verify-companion-analysis-export`, `verify-companion-analysis-snapshots`
+  (35 papers unchanged), `verify-paper-browse` (246/0) and app `tsc` pass.
 Notes:
 - New PDF component WritingLecture in `components.mjs`, listed in
   `docs/product/companion-analysis-components.md`. Essays reuse ModelEssay
