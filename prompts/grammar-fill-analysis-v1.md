@@ -495,6 +495,9 @@ All offsets are Unicode code points, `start` inclusive, `end` exclusive, and
 every `quote` equals the exact slice. Count in the exact text named by
 `textId` + `paragraphId`; never trim, normalize or first-match. Every range
 object has exactly the keys `textId`, `paragraphId`, `start`, `end`, `quote`.
+Only `translation.paragraphs[].start/end` count inside the whole
+`fullTranslationZh`; every `translationRanges` item counts from 0 inside its own
+translation paragraph (that paragraph's `quote`).
 
 ```json
 "teachingContent": {
