@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto'
+
 export const codePointOffset = (text, utf16Offset) => [...text.slice(0, utf16Offset)].length
 
 // Store the producer's trimmed sentence, its block origin, and the sentence-relative offsets.
@@ -33,6 +35,14 @@ export function normalizePhraseText(text) {
   return { text: normalized.trimEnd(), starts, ends }
 }
 
+const hashNormalizedBlock = text => createHash('sha256').update(text, 'utf8').digest('hex')
+
+// SHA-256 (lowercase hex) over UTF-8 block text with trimmed/collapsed whitespace
+// and curly apostrophes folded to ASCII. Case and all other characters are kept.
+export function hashPhraseBlock(text) {
+  return hashNormalizedBlock(normalizePhraseText(text).text)
+}
+
 // The apostrophe/whitespace folding here is for occurrence text and phrase forms.
 // Ordinary dictionary fallback uses the original lookup spelling.
 const phraseForm = text => text.replace(/[‘’]/g, "'").trim().replace(/\s+/g, ' ').toLowerCase()
@@ -41,7 +51,7 @@ const wordCharacter = '[\\p{L}\\p{M}\\p{N}_]'
 const wordEnd = new RegExp(`${wordCharacter}$`, 'u')
 const wordStart = new RegExp(`^${wordCharacter}`, 'u')
 const joinedWordStart = new RegExp(`^(?:['-])?${wordCharacter}`, 'u')
-const sentenceEnding = /[.!?。！？…][\p{Pe}\p{Pf}"']*$/u
+const sentenceEnding = /(?:(?<!\.)\.|[!?。！？])[\p{Pe}\p{Pf}"']*$/u
 
 function wordBoundary(text, offset) {
   const before = text.slice(0, offset)
@@ -52,6 +62,7 @@ function wordBoundary(text, offset) {
 
 export function locatePhraseOccurrence(block, row, sentenceText, entry) {
   const { sentence, sentenceStart, start, end, surface } = row
+  if (Object.hasOwn(row, 'blockHash') && row.blockHash !== hashNormalizedBlock(block.text)) return null
   if (!Number.isInteger(sentence) || sentence < 1 || typeof surface !== 'string' || !surface ||
       typeof sentenceText !== 'string') return null
   const quote = normalizePhraseText(sentenceText.trim())

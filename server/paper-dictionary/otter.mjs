@@ -186,6 +186,7 @@ export function openOtterDictionary(rootDir) {
     if (phraseIds.has(row.entryId)) {
       // occurrence-senses.ndjson schema: optional sentenceStart is a zero-based
       // code-point offset of the trimmed sentence in the original block.
+      // Optional blockHash is the normalized block digest from hashPhraseBlock.
       // Bundled legacy rows store the sentence ordinal but leave the text in the examples.
       const indexedSentences = row.sentenceText
         ? [row.sentenceText]

@@ -31,7 +31,7 @@ import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
 import { installOtterPhraseFixture, laterText, officeText, takeOffText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
 import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
-import { indexPhraseOccurrence, locatePhraseOccurrence, normalizePhraseText } from '../shared/paper-dictionary/phraseOccurrence.mjs'
+import { hashPhraseBlock, indexPhraseOccurrence, locatePhraseOccurrence, normalizePhraseText } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-dictionary-'))
@@ -996,6 +996,20 @@ evilRuntime.close()
     bothAnchorModes.every(row => locatePhraseOccurrence(normalizePhraseText('They took off. We waited.'), row, 'They took off.', takeOff)?.from === 5))
   check('a stored suffix must start at a sentence boundary',
     !locatePhraseOccurrence(normalizePhraseText('We know they took off.'), takeOffRow, 'they took off.', takeOff))
+  check('neither ellipsis spelling establishes a sentence boundary before more text',
+    ['…', '...'].every(ellipsis => bothAnchorModes.every(row =>
+      !locatePhraseOccurrence(normalizePhraseText(`They took off${ellipsis} their coats.`), row, `They took off${ellipsis}`, takeOff))
+      && !locatePhraseOccurrence(normalizePhraseText(`He said${ellipsis} they took off.`), takeOffRow, 'they took off.', takeOff)))
+  check('the block hash uses SHA-256 hex and the same apostrophe and whitespace normalization as lookup',
+    hashPhraseBlock('abc') === 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
+    && hashPhraseBlock('  They\tcan’t  wait.\n') === hashPhraseBlock("They can't wait."))
+  const hashedBlock = 'They took off. We waited.'
+  check('a block hash mismatch rejects the row even when its sentence and offsets still match',
+    bothAnchorModes.every(row => {
+      const hashed = { ...row, blockHash: hashPhraseBlock(hashedBlock) }
+      return locatePhraseOccurrence(normalizePhraseText(hashedBlock), hashed, 'They took off.', takeOff)?.from === 5
+        && locatePhraseOccurrence(normalizePhraseText('They took off. We left.'), hashed, 'They took off.', takeOff) === null
+    }))
   const nationalA = JSON.parse(readFileSync(path.join(rootDir, 'test-fixtures/retired-paper-assets/paper-2023-jia/latest/paper-asset.json'), 'utf8'))
   const nationalAText = nationalA.content.groups['group-2023-jia-reading-d'].passage.paragraphs
     .find(paragraph => paragraph.paragraphId === 'para-2023-jia-reading-d-4').text

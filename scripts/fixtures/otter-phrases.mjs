@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { indexPhraseOccurrence } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
+import { hashPhraseBlock, indexPhraseOccurrence } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 
 export const text = 'She gave it up and made up her mind.'
 export const laterText = 'Rain fell. Due to fog, we waited. Due to rain, we stayed.'
@@ -67,7 +67,7 @@ export function installOtterPhraseFixture(root) {
   const start = takeOffText.lastIndexOf('took off')
   const takeOff = { paperId: source.paperId, groupId: 'g', sentence: 2, entryId: 'w:take-off', senseId: 'w:take-off#s1' }
   occurrences.push({
-    ...takeOff, paragraphId: 'anchored',
+    ...takeOff, paragraphId: 'anchored', blockHash: hashPhraseBlock(takeOffText),
     ...indexPhraseOccurrence(takeOffText, { start: sentenceStart, text: takeOffSentence }, [start, start + 8]),
   }, {
     ...takeOff, paragraphId: 'ambiguous', start: 5, end: 13, surface: 'took off',
