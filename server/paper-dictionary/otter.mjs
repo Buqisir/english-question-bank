@@ -247,9 +247,12 @@ export function openOtterDictionary(rootDir) {
         const from = codePointOffset(text, Math.max(0, start - leaf.start))
         const to = codePointOffset(text, end - leaf.start)
         return [...rows].sort((a, b) => a.sentence - b.sentence || a.start - b.start).flatMap(row => {
+          const entry = entryById(row.entryId)
+          const sense = entry?.senses.find(item => item.senseId === row.senseId)
+          if (!sense) return []
           const positions = new Map()
           for (const sentence of row.indexedSentences) {
-            const indexed = locatePhraseOccurrence(block, row, sentence)
+            const indexed = locatePhraseOccurrence(block, row, sentence, entry)
             if (indexed) positions.set(occurrenceKey(indexed.from, indexed.to, indexed.parts), indexed)
           }
           if (positions.size !== 1) return []
@@ -258,9 +261,6 @@ export function openOtterDictionary(rootDir) {
             ? indexed.parts.some(([s, e]) => s <= from && to <= e)
             : from <= indexed.from && indexed.to <= to
           if (!hit) return []
-          const entry = entryById(row.entryId)
-          const sense = entry.senses.find(item => item.senseId === row.senseId)
-          if (!sense) return []
           const exact = !word && start >= leaf.start && end <= leaf.end && from === indexed.from && to === indexed.to
           return [{ entry, sense, exact }]
         })

@@ -29,7 +29,7 @@ import { initializeUsageLedger } from '../server/paper-translation/usageLedger.m
 import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from '../server/paper-dictionary/routes.mjs'
 import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
-import { installOtterPhraseFixture, laterText, takeOffText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
+import { installOtterPhraseFixture, laterText, officeText, takeOffText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
 import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
 import { indexPhraseOccurrence, locatePhraseOccurrence, normalizePhraseText } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
@@ -946,6 +946,10 @@ evilRuntime.close()
     .map(start => select('took off', start, 'ambiguous')))
   check('a legacy phrase in a repeated sentence returns no contextual sense or phrase',
     legacyMatches.every(result => !result.otterSenseId && !result.phrases))
+  const officeMatches = await Promise.all(['took office', 'took off', 'took']
+    .map(surface => select(surface, officeText.indexOf(surface), 'office')))
+  check('took office cannot expose the took off contextual sense or phrase',
+    officeMatches.every(result => !result.otterSenseId && !result.phrases))
   phraseRuntime.close()
 }
 
@@ -955,10 +959,24 @@ evilRuntime.close()
   const indexed = indexPhraseOccurrence(indexedSentence, { start: 0, text: indexedSentence }, [start, start + 5])
   const normalized = '🦦 They   can’t wait.'
   const anchored = { ...indexed, sentence: 1, sentenceStart: 2 }
+  const cant = { headword: "can't", variants: [], forms: [] }
   check('an absolute origin preserves apostrophe and whitespace normalization in source offsets',
-    locatePhraseOccurrence(normalizePhraseText(normalized), anchored, indexed.sentenceText)?.from === normalized.indexOf('can’t') - 1)
+    locatePhraseOccurrence(normalizePhraseText(normalized), anchored, indexed.sentenceText, cant)?.from === normalized.indexOf('can’t') - 1)
   check('a stale absolute origin does not fall back to another copy of the saved sentence',
-    locatePhraseOccurrence(normalizePhraseText('🦦 They won’t wait. They can’t wait.'), anchored, indexed.sentenceText) === null)
+    locatePhraseOccurrence(normalizePhraseText('🦦 They won’t wait. They can’t wait.'), anchored, indexed.sentenceText, cant) === null)
+  check('an indexed phrase cannot use offsets beyond its saved sentence',
+    locatePhraseOccurrence(normalizePhraseText(normalized), { ...anchored, end: 99 }, indexed.sentenceText, cant) === null)
+  const giveUp = { headword: 'give up', variants: ['gave up'], forms: [] }
+  const locateParts = (sentenceText, surface) => locatePhraseOccurrence(normalizePhraseText(sentenceText),
+    { sentence: 1, start: 4, end: 4 + surface.length, surface, parts: [[4, 8], [12, 14]] }, sentenceText, giveUp)
+  const cutPart = 'She made it upper for them.'
+  check('each separable part must stop at a word boundary even inside a valid outer span',
+    locatePhraseOccurrence(normalizePhraseText(cutPart), {
+      sentence: 1, start: 4, end: 21, surface: 'made it upper for', parts: [[4, 8], [12, 14], [18, 21]],
+    }, cutPart, { headword: 'make up for', variants: ['made up for'], forms: [] }) === null)
+  check('fixed parts must spell a registered word form',
+    locateParts('She gave it in.', 'gave it in') === null
+    && locateParts('She gave it up.', 'gave it up')?.parts.length === 2)
   const nationalA = JSON.parse(readFileSync(path.join(rootDir, 'test-fixtures/retired-paper-assets/paper-2023-jia/latest/paper-asset.json'), 'utf8'))
   const nationalAText = nationalA.content.groups['group-2023-jia-reading-d'].passage.paragraphs
     .find(paragraph => paragraph.paragraphId === 'para-2023-jia-reading-d-4').text

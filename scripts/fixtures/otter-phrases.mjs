@@ -6,6 +6,7 @@ export const text = 'She gave it up and made up her mind.'
 export const laterText = 'Rain fell. Due to fog, we waited. Due to rain, we stayed.'
 const takeOffSentence = 'They took off.'
 export const takeOffText = `🦦 ${takeOffSentence} ${takeOffSentence}`
+export const officeText = 'They took office.'
 export const source = {
   paperId: 'paper-phrases', sourceRevision: 'rev-1',
   streams: [{
@@ -14,6 +15,9 @@ export const source = {
   }, {
     streamId: 'later', groupId: 'g', role: 'passage-body', text: laterText,
     leaves: [{ kind: 'paragraph', id: 'p2', start: 0, end: laterText.length }],
+  }, {
+    streamId: 'office', groupId: 'g', role: 'passage-body', text: officeText,
+    leaves: [{ kind: 'paragraph', id: 'office', start: 0, end: officeText.length }],
   }, ...['anchored', 'ambiguous'].map(streamId => ({
     streamId, groupId: 'g', role: 'passage-body', text: takeOffText,
     leaves: [{ kind: 'paragraph', id: streamId, start: 0, end: takeOffText.length }],
@@ -33,6 +37,7 @@ export function installOtterPhraseFixture(root) {
     { entryId: 'w:due-to', headword: 'due to', kind: 'phrase', glossZh: '由于',
       exampleText: 'Due to fog, we waited.', locator: { paragraphId: 'p2', sentence: 2 } },
     { entryId: 'w:take-off', headword: 'take off', kind: 'phrase', glossZh: '起飞',
+      variants: ['took off'],
       exampleText: takeOffSentence, locator: { paragraphId: 'ambiguous', sentence: 2 } },
   ]
   const rows = [
@@ -66,6 +71,9 @@ export function installOtterPhraseFixture(root) {
     ...indexPhraseOccurrence(takeOffText, { start: sentenceStart, text: takeOffSentence }, [start, start + 8]),
   }, {
     ...takeOff, paragraphId: 'ambiguous', start: 5, end: 13, surface: 'took off',
+  }, {
+    ...takeOff, paragraphId: 'office', sentence: 1, start: 5, end: 13, surface: 'took off',
+    sentenceText: 'They took off',
   })
   writeFileSync(path.join(dir, 'occurrence-senses.ndjson'), occurrences.map(row => JSON.stringify(row)).join('\n'))
 }
