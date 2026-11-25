@@ -29,9 +29,9 @@ import { initializeUsageLedger } from '../server/paper-translation/usageLedger.m
 import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from '../server/paper-dictionary/routes.mjs'
 import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
-import { installOtterPhraseFixture, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
+import { installOtterPhraseFixture, laterText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
 import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
-import { indexPhraseOccurrence, locatePhraseOccurrence } from '../shared/paper-dictionary/phraseOccurrence.mjs'
+import { indexPhraseOccurrence, locatePhraseOccurrence, phraseOccurrenceSentences } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-dictionary-'))
@@ -883,14 +883,15 @@ evilRuntime.close()
 
 {
   installOtterPhraseFixture(temp)
+  let activeSource = phraseSource
   const phraseRuntime = createPaperDictionaryRuntime({
-    rootDir: temp, loadSource: () => phraseSource,
+    rootDir: temp, loadSource: () => activeSource,
     env: { QUESTION_BANK_PAPER_DICTIONARY_PATH: fixturePath, QUESTION_BANK_PUBLIC_ORIGIN: 'http://127.0.0.1:5173' },
   })
   const phraseContext = { ...context, paperDictionary: phraseRuntime }
-  const select = async (selectedText, start = phraseText.indexOf(selectedText)) => (await lookup({
+  const select = async (selectedText, start = phraseText.indexOf(selectedText), streamId = 'passage') => (await lookup({
     schemaVersion: 'paper-dictionary-request-v1', paperId: phraseSource.paperId, sourceRevision: phraseSource.sourceRevision,
-    segments: [{ streamId: 'passage', start, end: start + selectedText.length, selectedText }],
+    segments: [{ streamId, start, end: start + selectedText.length, selectedText }],
   }, phraseContext)).parsed
   const word = await select('gave')
   check('a fixed word keeps its own entry and shows the contextual phrase', word.otter?.entryId === 'w:give'
@@ -917,6 +918,21 @@ evilRuntime.close()
   check('phrase examples use the indexed fixed parts or contiguous range',
     highlighted('w:give-up') === 'gave|up' && highlighted('w:make-up-ones-mind') === 'made up her mind')
   check('word examples retain the original highlighting path', highlighted('w:give') === undefined)
+  const second = await select('Due to', laterText.indexOf('Due to'), 'later')
+  const third = await select('Due to', laterText.lastIndexOf('Due to'), 'later')
+  const selectEdited = (text) => {
+    activeSource = { ...phraseSource, streams: phraseSource.streams.map(stream => stream.streamId === 'later'
+      ? { ...stream, text, leaves: [{ ...stream.leaves[0], end: text.length }] } : stream) }
+    return select('Due to', text.indexOf('Due to'), 'later')
+  }
+  const thirdAfterEdit = await selectEdited(laterText.replace('Due to fog, we waited.', 'They left early.'))
+  const changedSecond = await selectEdited(laterText.replace('fog, we waited', 'hail, they left'))
+  check('legacy phrase offsets apply only to the indexed second sentence',
+    second.otterSenseId === 'w:due-to#s1'
+    && !third.otterSenseId && !third.phrases
+    && !thirdAfterEdit.otterSenseId && !thirdAfterEdit.phrases)
+  check('a changed example sentence falls back even with the same phrase and offset',
+    !changedSecond.otterSenseId && !changedSecond.phrases)
   phraseRuntime.close()
 }
 
@@ -924,12 +940,10 @@ evilRuntime.close()
   const repeated = '🦦 Due to rain. Due to snow.'
   const start = repeated.lastIndexOf('Due to')
   const indexed = indexPhraseOccurrence(repeated, start, [start, start + 6])
-  check('a producer-supplied origin resolves repeated phrases in code-point coordinates',
-    locatePhraseOccurrence([...repeated], { ...indexed, sentence: 2 })?.from === start - 1)
-  const legacy = { sentence: 2, start: 0, end: 6, surface: 'Due to' }
-  check('legacy later sentences require a unique quote at a possible sentence origin',
-    locatePhraseOccurrence([...repeated], legacy)?.from === start - 1
-    && locatePhraseOccurrence([...`${repeated} Due to ice.`], legacy) === null)
+  const sentences = phraseOccurrenceSentences(repeated)
+  check('a producer-supplied origin must agree with the indexed sentence in code-point coordinates',
+    locatePhraseOccurrence(sentences, { ...indexed, sentence: 2 })?.from === start - 1
+    && locatePhraseOccurrence(sentences, { ...indexed, sentence: 1 }) === null)
   const entry = JSON.parse(readFileSync(path.join(rootDir, 'server/paper-dictionary/otter-data/entries/w-due-to.json'), 'utf8'))
   const example = entry.senses.flatMap(sense => sense.examples)
     .find(item => item.text.includes('Mr. Somerset was due to return'))

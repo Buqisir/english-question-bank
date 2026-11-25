@@ -2,7 +2,7 @@ import { closeSync, openSync, readFileSync, readdirSync, readSync } from 'node:f
 import path from 'node:path'
 import { StringDecoder } from 'node:string_decoder'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
-import { codePointOffset, locatePhraseOccurrence } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
+import { codePointOffset, locatePhraseOccurrence, phraseOccurrenceSentences } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
 
 const normalize = (text) => text.normalize('NFC').replace(/[‘’]/g, "'").trim().replace(/\s+/g, ' ')
@@ -215,14 +215,15 @@ export function openOtterDictionary(rootDir) {
     findPhrases(paperId, stream, { start, end }, word) {
       return stream.leaves.flatMap(leaf => {
         if (leaf.end <= start || leaf.start >= end) return []
-        const rows = phrases.get(occurrenceKey(paperId, stream.groupId, leafLocator(leaf)))
+        const locator = occurrenceKey(paperId, stream.groupId, leafLocator(leaf))
+        const rows = phrases.get(locator)
         if (!rows) return []
         const text = stream.text.slice(leaf.start, leaf.end)
-        const points = [...text]
+        const sentences = phraseOccurrenceSentences(text)
         const from = codePointOffset(text, Math.max(0, start - leaf.start))
         const to = codePointOffset(text, end - leaf.start)
         return [...rows].sort((a, b) => a.sentence - b.sentence || a.start - b.start).flatMap(row => {
-          const indexed = locatePhraseOccurrence(points, row)
+          const indexed = locatePhraseOccurrence(sentences, row)
           if (!indexed) return []
           const hit = word
             ? (row.parts ?? [[row.start, row.end]]).some(([s, e]) => indexed.origin + s <= from && to <= indexed.origin + e)
@@ -230,8 +231,12 @@ export function openOtterDictionary(rootDir) {
           if (!hit) return []
           const entry = entryById(row.entryId)
           const sense = entry.senses.find(item => item.senseId === row.senseId)
+          if (!sense) return []
+          const examples = sense.examples.filter(({ source }) => source.locator.sentence === row.sentence &&
+            occurrenceKey(source.paperId, source.groupId, source.locator.paragraphId ?? source.locator.questionId) === locator)
+          if (examples.length && !examples.some(example => example.text === indexed.sentenceText)) return []
           const exact = !word && start >= leaf.start && end <= leaf.end && from === indexed.from && to === indexed.to
-          return sense ? [{ entry, sense, exact }] : []
+          return [{ entry, sense, exact }]
         })
       })
     },
