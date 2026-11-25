@@ -30,7 +30,7 @@ import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from '../se
 import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
 import { installOtterPhraseFixture, laterText, officeText, takeOffText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
-import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
+import { openOtterDictionary, OTTER_OCCURRENCE_CACHE_SIZE } from '../server/paper-dictionary/otter.mjs'
 import { hashPhraseBlock, indexPhraseOccurrence, locatePhraseOccurrence, normalizePhraseText } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -883,6 +883,35 @@ evilRuntime.close()
 
 {
   installOtterPhraseFixture(temp)
+  const shardDir = path.join(temp, 'server/paper-dictionary/otter-data/occurrences')
+  const shardPath = paperId => path.join(shardDir, `${paperId}.ndjson`)
+  const rows = readFileSync(shardPath(phraseSource.paperId), 'utf8')
+  const otherPapers = Array.from({ length: OTTER_OCCURRENCE_CACHE_SIZE }, (_, i) => `paper-shard-${i}`)
+  const writeShard = paperId => writeFileSync(shardPath(paperId), rows.replaceAll(phraseSource.paperId, paperId))
+  const dict = openOtterDictionary(temp)
+  const stream = phraseSource.streams[0]
+  const surface = 'gave'
+  const start = phraseText.indexOf(surface)
+  const wordAt = { surface, start, end: start + surface.length }
+  const occurrence = paperId => dict.findOccurrence(paperId, stream, wordAt)
+  check('missing shards fall back while general phrase entries remain available',
+    !occurrence('paper-absent') && !dict.findPhrases('paper-absent', stream, wordAt, true).length
+    && dict.find('give up')?.headword === 'give up')
+  otherPapers.forEach(writeShard)
+  writeFileSync(shardPath('paper-corrupt'), `${rows.replaceAll(phraseSource.paperId, 'paper-corrupt')}{\n`)
+  check('a corrupt shard falls back without serving partial matches', !occurrence('paper-corrupt'))
+  check('shards added after opening are read on demand and keep word and phrase rows together',
+    occurrence(otherPapers[0])?.senseId === 'w:give#s1'
+    && dict.findPhrases(otherPapers[0], stream, wordAt, true)[0]?.entry.entryId === 'w:give-up')
+  check('the same locator in another paper uses its own shard', occurrence(phraseSource.paperId)?.senseId === 'w:give#s1')
+  rmSync(shardPath(otherPapers[0]))
+  rmSync(shardPath(phraseSource.paperId))
+  check('a cached shard stays available and moves to the front on access', occurrence(otherPapers[0])?.senseId === 'w:give#s1')
+  otherPapers.slice(1).forEach(occurrence)
+  check('the 40-paper cache evicts the least recently used shard',
+    occurrence(otherPapers[0])?.senseId === 'w:give#s1' && !occurrence(phraseSource.paperId))
+  writeFileSync(shardPath(phraseSource.paperId), rows)
+
   let activeSource = phraseSource
   const phraseRuntime = createPaperDictionaryRuntime({
     rootDir: temp, loadSource: () => activeSource,
@@ -1026,10 +1055,11 @@ evilRuntime.close()
     }, { start, end: start + 6 }, false)
   }
   const somerset = examples.find(item => item.text.includes('Mr. Somerset was due to return'))
+  const somersetBlock = `${somerset.text} After a while, he spotted her on the other side of that fence. As he approached, he instantly understood what attracted her out – the green grass. Thoughtfully, he looked at the rich pastures (草场) beyond.`
   const grizzlies = examples.find(item => item.source.paperId === 'paper-gaokao-2023-national-a')
   check('the bundled Somerset phrase keeps its indexed sentence and sense after Mr.',
-    lookupDueTo(somerset, `He had waited. ${somerset.text} It grew dark.`)
-      .some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s2'))
+    lookupDueTo(somerset, somersetBlock).some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s2')
+    && !lookupDueTo(somerset, `He had waited. ${somersetBlock}`).length)
   check('the bundled National A Reading D phrase uses its archived second sentence after U.S.',
     grizzlies.source.locator.sentence === 2
     && lookupDueTo(grizzlies, nationalAText).some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s1'))
