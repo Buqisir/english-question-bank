@@ -105,7 +105,7 @@ function addIndex(index, key, value) {
 const unique = ids => new Set(ids).size === 1 ? ids[0] : null
 const spaced = word => word.replace(/-/g, ' ')
 
-export function createOtterSearch(entries, lookupForms) {
+export function createOtterSearch(entries, lookupForms, commonWords) {
   const exact = new Map()
   const aliases = new Map()
   const compounds = new Map()
@@ -141,6 +141,18 @@ export function createOtterSearch(entries, lookupForms) {
     }
   }
 
+  const isListed = word => local.has(word) || commonWords.has(word)
+  function isCommonWord(word) {
+    if (isListed(word)) return true
+    return ['ly', 's', 'es', 'ed', 'ing'].some(suffix => {
+      if (!word.endsWith(suffix)) return false
+      const stem = word.slice(0, -suffix.length)
+      return isListed(stem) || isListed(`${stem}e`)
+        || (stem.endsWith('i') && isListed(`${stem.slice(0, -1)}y`))
+        || (/([^aeiou])\1$/u.test(stem) && isListed(stem.slice(0, -1)))
+    })
+  }
+
   return function search(surface, db, findId) {
     const query = normalizeSearch(surface)
     const literal = unique([...(exact.get(query)?.values() ?? [])])
@@ -168,11 +180,11 @@ export function createOtterSearch(entries, lookupForms) {
     const rawWords = surface.trim().split(/\s+/u)
     function isName(start, end) {
       if (lexicon(words.slice(start, end).join(' ')).some(row => row.name)) return true
-      // With no offline lexicon, an unknown capitalized word is unverified.
-      return Boolean(db) && rawWords.slice(start, end).every((word, index) => {
-        const rows = lexicon(words[start + index])
+      return rawWords.slice(start, end).every((word, index) => {
+        const folded = words[start + index]
+        const rows = lexicon(folded)
         return /^[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)*$/u.test(word)
-          && (rows.some(row => row.name) || rows.length === 0)
+          && (rows.some(row => row.name) || (rows.length === 0 && !isCommonWord(folded)))
       })
     }
     const anchors = new Set([words[0], ...lexicon(words[0]).filter(row => row.verb).map(row => row.lemma)])

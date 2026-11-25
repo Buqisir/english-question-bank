@@ -3,6 +3,7 @@ import path from 'node:path'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
+import { gaokaoHeadwordVariants } from './gaokao.mjs'
 import { createOtterSearch, normalizeSearch } from './otterSearch.mjs'
 import { lookupSearchForms } from './store.mjs'
 
@@ -150,7 +151,13 @@ export function openOtterDictionary(rootDir) {
       }
     }
   }
-  const search = createOtterSearch(searchEntries, lookupSearchForms)
+  const vocabulary = readOptional(
+    () => JSON.parse(readFileSync(path.join(rootDir, 'data/vocabulary/gaokao-frequency-source-content-v1.json'), 'utf8')),
+    { entries: [] },
+  )
+  const commonWords = new Set(vocabulary.entries.flatMap(({ headword }) =>
+    gaokaoHeadwordVariants(headword).map(({ folded }) => normalizeSearch(folded))))
+  const search = createOtterSearch(searchEntries, lookupSearchForms, commonWords)
   function readShard(paperId) {
     const occurrences = new Map()
     const phrases = new Map()

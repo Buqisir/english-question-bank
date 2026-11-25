@@ -1099,10 +1099,14 @@ evilRuntime.close()
     ]) {
       check(`Otter search canonical forms and names: ${query}`, dict.searchId(query, searchLexicon) === expected)
     }
-    check('Otter search requires lexical evidence before treating capitalization as a name',
-      dict.searchId('ask Quickly out') === null)
   } finally {
     searchLexicon.close()
+  }
+  for (const [query, expected] of [
+    ['ask Mary out', 'w:ask-out'], ['ask Mary Wrenfall out', 'w:ask-out'],
+    ['ask Quickly out', null], ['ask Licence out', null], ['ask Mary Quickly out', null],
+  ]) {
+    check(`Otter search without the offline lexicon: ${query}`, dict.searchId(query) === expected)
   }
   const lookupDueTo = (example, text = example.text) => {
     const { paperId, groupId, locator } = example.source
