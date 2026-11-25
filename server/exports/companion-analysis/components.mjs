@@ -50,6 +50,9 @@ export const analysisComponents = [
     classes: ['writing-block', 'review-card', 'review-group', 'review-facts', 'reader-facts', 'review-points',
       'story-map', 'route-paragraph', 'continuation-section', 'continuation-grounded', 'continuation-evidence',
       'legacy-analysis-preserved'] },
+  { name: 'WritingLecture', role: '应用文 V4、读后续写 V3 的讲解：读原文问答、必须做到 / 可以换、逐段看（英文引句一行，讲解缩进一行）、本题可用表达和容易写偏（粗体词条接排说明）；不画线，块间一行空',
+    classes: ['lecture-block', 'lecture-qa', 'lecture-question', 'lecture-subhead', 'lecture-list', 'lecture-note',
+      'lecture-quote', 'lecture-explain', 'lecture-paragraph', 'lecture-pair', 'lecture-term'] },
   { name: 'ModelEssay', role: '参考范文：英文左对齐，段间小空',
     classes: ['model-answer', 'model-essay', 'model-paragraph', 'model-signoff'] },
 ]

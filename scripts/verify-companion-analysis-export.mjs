@@ -587,3 +587,69 @@ console.log('Companion analysis grammar-fill sentence lines, no reprinted passag
   assert.match(numberRule, /text-align-last: center;/u, 'the body’s text-align-last: start would pin the figures to the block’s left edge')
 }
 console.log('Companion analysis 定位, paragraph count and answer table: PASS')
+
+// 应用文 V4 and 读后续写 V3 print their lecture in the spec D6 order; groups
+// in the older formats keep printing as before (the snapshot verifier pins
+// their bytes).
+{
+  const { validateApplicationAnalysisV4 } = await import('../server/paper-import-ai/applicationWritingWorkflow.mjs')
+  const { validateContinuationAnalysisV3 } = await import('../server/paper-import-ai/analyzeNarrativeContinuation.mjs')
+  const { analysisComponentByClass } = await import('../server/exports/companion-analysis/components.mjs')
+  const readFixture = (relativePath) => JSON.parse(readFileSync(path.join(rootDir, relativePath), 'utf8'))
+  const appFixture = readFixture('docs/cuts/application-writing-v4/qa/fixtures/paper-gaokao-2026-i.json')
+  const contFixture = readFixture('docs/cuts/continuation-writing-v3/qa/fixtures/round3-paper-2026-i.json')
+  const appWriting = validateApplicationAnalysisV4({
+    analysis: appFixture.output, writingTask: appFixture.writingTask, groupPassage: appFixture.groupPassage,
+  }).writing
+  const contWriting = validateContinuationAnalysisV3({ analysis: contFixture.output, writingTask: contFixture.writingTask }).writing
+  // The 2026 Ⅰ fixture carries no writing analysis; give it the trial outputs.
+  const lectureSource = loadCompanionAnalysisSource({ paperAssetsDir, paperId: 'paper-2026-i' })
+  const appGroupId = 'group-2026-i-writing-application'
+  const contGroupId = 'group-2026-i-writing-continuation'
+  lectureSource.analyses.writing = {
+    schemaVersion: 'writing-analysis-v1',
+    paperId: 'paper-2026-i',
+    groups: { [appGroupId]: { writing: appWriting }, [contGroupId]: { writing: contWriting } },
+  }
+  const lectureHtml = buildCompanionAnalysisHtml(lectureSource)
+  const writingPart = (document, groupId) => {
+    const sections = document.split('<section class="analysis-group analysis-group--writing">').slice(1)
+    return sections[groupId === appGroupId ? 0 : 1]
+  }
+  const blocksOf = (part) => [...part.matchAll(/data-writing-lecture-block="(\w+)"/gu)].map(([, name]) => name)
+  const appPart = writingPart(lectureHtml, appGroupId)
+  const contPart = writingPart(lectureHtml, contGroupId)
+  assert.deepEqual(blocksOf(appPart), ['taskCard', 'standardEssay', 'notes', 'expressions', 'advancedEssay', 'beyondStandard'])
+  assert.deepEqual(blocksOf(contPart),
+    ['reading', 'taskCard', 'standardEssay', 'notes', 'expressions', 'pitfalls', 'advancedEssay', 'beyondStandard'])
+  // Neither the V2 card nor the V1/V2 continuation sections print for the new formats.
+  assert.doesNotMatch(appPart, /review-card|参考范文（AI 撰写）/u)
+  assert.doesNotMatch(contPart, /data-continuation-section="(?:storyUnderstanding|continuationContract|developmentPlan)"/u)
+  // The group heading opens the first block, never stands alone.
+  assert.match(appPart, /^\s*<section class="writing-block lecture-block" data-writing-lecture-block="taskCard"><div class="heading-lead">[\s\S]*?<h3 class="group-title"/u)
+  // Every note, expression, pitfall and both essays are on the page.
+  const text = (part) => part.replace(/<[^>]+>/gu, '').replaceAll('&#39;', "'").replaceAll('&quot;', '"').replaceAll('&amp;', '&')
+  for (const [writing, part] of [[appWriting.applicationAnalysis, appPart], [contWriting.continuationAnalysis, contPart]]) {
+    const plain = text(part)
+    for (const note of writing.standard.notes) {
+      for (const item of note.items) assert.ok(plain.includes(item.explain), `note missing: ${item.explain}`)
+    }
+    for (const item of writing.standard.expressions) assert.ok(plain.includes(item.expression))
+    for (const item of writing.advanced.beyondStandard) assert.ok(plain.includes(item.explain))
+    for (const essay of [writing.standard.essay, writing.advanced.essay]) {
+      for (const paragraph of essay.split(/\n\s*\n|\n/u).map((line) => line.trim()).filter(Boolean)) {
+        assert.ok(plain.includes(paragraph), `essay paragraph missing: ${paragraph.slice(0, 40)}`)
+      }
+    }
+  }
+  for (const item of contWriting.continuationAnalysis.standard.pitfalls) assert.ok(text(contPart).includes(item.why))
+  for (const item of contWriting.continuationAnalysis.reading.questions) assert.ok(text(contPart).includes(item.answer))
+  assert.doesNotMatch(lectureHtml, /<p[^>]*>\s*<\/p>/u)
+  const body = lectureHtml.slice(lectureHtml.indexOf('<body'))
+  for (const [, classes] of body.matchAll(/class="([^"]+)"/gu)) {
+    for (const className of classes.split(/\s+/u)) {
+      assert.ok(analysisComponentByClass.has(className), `class "${className}" belongs to no component`)
+    }
+  }
+}
+console.log('Companion analysis writing lecture (application V4, continuation V3): PASS')

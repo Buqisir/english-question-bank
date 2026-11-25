@@ -906,6 +906,65 @@ dd {
   margin-top: 1mm;
 }
 
+/* 应用文 V4、读后续写 V3 的讲解 (WritingLecture). */
+.lecture-subhead {
+  margin: 0;
+}
+
+.lecture-list {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.lecture-qa {
+  break-inside: avoid;
+}
+
+.lecture-qa + .lecture-qa {
+  margin-top: calc(var(--lh) / 4);
+}
+
+.lecture-question {
+  font-weight: 700;
+}
+
+.lecture-block .lecture-list + p,
+.lecture-qa + .heading-lead {
+  margin-top: calc(var(--lh) / 4);
+}
+
+.lecture-note {
+  margin-top: calc(var(--lh) / 4);
+  break-inside: avoid;
+}
+
+.lecture-quote {
+  font-family: var(--en);
+}
+
+.lecture-explain {
+  padding-left: 1em;
+}
+
+.lecture-note + .lecture-paragraph {
+  margin-top: calc(var(--lh) / 2);
+}
+
+.lecture-paragraph h5 {
+  margin: 0;
+  color: var(--ink);
+  font: 700 var(--fs)/var(--lh) var(--zh);
+}
+
+.lecture-pair + .lecture-pair {
+  margin-top: calc(var(--lh) / 4);
+}
+
+.lecture-term {
+  margin-right: 0.5em;
+  font-weight: 700;
+}
+
 @media screen {
   html {
     background: #ededea;
