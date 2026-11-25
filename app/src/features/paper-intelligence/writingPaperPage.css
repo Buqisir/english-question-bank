@@ -225,3 +225,58 @@
 .pi-writing-answer-box--drawing .pi-writing-answer-bottom {
   flex-shrink: 0;
 }
+
+/* 新版写作讲评（应用文 V4、续写 V3）：答题框上面一行「AI 参考范文 + 标准版 / 提高版」，
+   宽度跟答题框对齐。这一行是界面字，不是卷面字，所以字体取回 index.css :root 那一套。 */
+.writing-lecture-essay-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: var(--paper-application-response-width, var(--application-writing-response-width));
+  max-width: 100%;
+  align-self: center;
+  margin-top: var(--paper-application-response-margin-top, var(--application-writing-response-margin-top));
+  font-family:
+    Inter, "PingFang SC", "Hiragino Sans GB", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  line-height: 1.4;
+}
+
+.pi-writing-page--continuation .writing-lecture-essay-bar {
+  width: var(--paper-continuation-response-width, var(--continuation-writing-response-width));
+  margin-top: var(--paper-continuation-response-margin-top, var(--continuation-writing-response-margin-top));
+}
+
+.writing-lecture-essay-bar-label {
+  color: var(--eqb-color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.writing-lecture-essay-bar + .pi-writing-answer-box {
+  margin-top: 8px;
+}
+
+/* 范文在框里时框随内容撑高；续写的段首句和范文接成一段，首行缩进代替整段左缩进。 */
+.pi-writing-answer-box.pi-writing-answer-box--essay-open {
+  height: auto;
+  min-height: 0;
+}
+
+.pi-writing-answer-box--continuation.pi-writing-answer-box--essay-open .pi-writing-answer-top {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.pi-writing-answer-box--essay-open .pi-writing-continuation-row {
+  padding-top: 0;
+}
+
+.pi-writing-answer-box--continuation.pi-writing-answer-box--essay-open .pi-writing-answer-given {
+  margin: 0;
+  text-indent: var(--paper-continuation-starter-indent, var(--continuation-writing-starter-indent));
+}

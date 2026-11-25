@@ -12,6 +12,7 @@ import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
 import { continuationStarterDisplayInlines, continuationStarterDisplayText } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
+import { splitApplicationEssay } from '../../../../shared/writing/applicationAnalysisV4.mjs'
 import {
   paperTypographyRuntime,
   sectionHeadingRuntime,
@@ -176,6 +177,56 @@ function renderSectionHeadingText(text: string): ReactNode {
       : run.text)
 }
 
+/** 新版讲评（应用文 V4、续写 V3）放进答题框的范文和切换条。 */
+export type LectureEssay = {
+  essay: string
+  officialModelAnswer?: string
+  bar: ReactNode
+}
+
+function givenPlainText(part: WritingGivenPart): string {
+  return (typeof part === 'string' ? part : part.text).trim()
+}
+
+const collapseSpace = (text: string) => text.replace(/\s+/g, ' ').trim()
+
+/**
+ * 应用文：框里已经印着标题、称呼、落款和题目给的开头句，范文里同样的部分不再重复，
+ * 剩下的正文按空行分段。
+ */
+function applicationEssayBody(essay: string, givenTop: readonly WritingGivenPart[], givenBottom: readonly WritingGivenPart[]): string[] {
+  const given = [...givenTop, ...givenBottom].map(givenPlainText).filter(Boolean)
+  const { paragraphs } = splitApplicationEssay(essay, given)
+  const result = [...paragraphs]
+  for (const lead of givenTop.map(givenPlainText)) {
+    if (!lead || /^[^.!?]*$/.test(lead) || result.length === 0) continue
+    const first = collapseSpace(result[0])
+    const want = collapseSpace(lead)
+    if (first.startsWith(want)) {
+      const rest = first.slice(want.length).trim()
+      if (rest) result[0] = rest
+      else result.shift()
+    }
+  }
+  return result
+}
+
+/** 续写：每段范文去掉框里已经印着的段首句，剩下的接在段首句后面。接不上的整段放到框下面。 */
+function continuationEssayRests(essay: string, starters: readonly WritingGivenPart[]): { rests: (string | null)[]; extra: string[] } {
+  const paragraphs = essay.split(/\n[ \t]*\n/).map(paragraph => paragraph.trim()).filter(Boolean)
+  const rests: (string | null)[] = starters.map(() => null)
+  const extra: string[] = []
+  paragraphs.forEach((paragraph, index) => {
+    const starter = index < starters.length
+      ? collapseSpace(continuationStarterDisplayText(givenPlainText(starters[index]), index))
+      : ''
+    const flat = collapseSpace(paragraph)
+    if (starter && flat.startsWith(starter)) rests[index] = flat.slice(starter.length).trim()
+    else extra.push(paragraph)
+  })
+  return { rests, extra }
+}
+
 function writingGivenIdentity(part: WritingGivenPart): Record<string, string> {
   if (typeof part === 'string') return {}
   if ('starterId' in part) {
@@ -203,6 +254,7 @@ function WritingPaperPageContent({
   retainedOfficialModelAnswer,
   unofficialReferenceEssays,
   onAnswerBoxActivate,
+  lectureEssay,
   grammarFillPredecessorGroupId,
   applicationWritingPredecessorGroupId,
 }: {
@@ -212,6 +264,7 @@ function WritingPaperPageContent({
   retainedOfficialModelAnswer?: string
   unofficialReferenceEssays?: UnofficialReferenceEssay[]
   onAnswerBoxActivate?: () => void
+  lectureEssay?: LectureEssay
   grammarFillPredecessorGroupId?: string
   applicationWritingPredecessorGroupId?: string
 }) {
@@ -324,7 +377,16 @@ function WritingPaperPageContent({
           case 'passage':
             return <div key={index} className="pi-writing-passage">{children}</div>
           case 'answerBox': {
-            const lectureOpenInBox = retainedModelAnswer !== undefined || retainedOfficialModelAnswer !== undefined
+            const essayInBox = lectureEssay !== undefined
+            const lectureOpenInBox = essayInBox
+              || retainedModelAnswer !== undefined
+              || retainedOfficialModelAnswer !== undefined
+            const continuationEssay = essayInBox && isContinuationWriting
+              ? continuationEssayRests(lectureEssay.essay, block.givenTop)
+              : null
+            const applicationEssay = essayInBox && !isContinuationWriting
+              ? applicationEssayBody(lectureEssay.essay, block.givenTop, block.givenBottom)
+              : null
             const givenTop = block.givenTop.map((part, lineIndex) => {
                       const partKey = typeof part === 'string'
                         ? `t${lineIndex}`
@@ -363,6 +425,11 @@ function WritingPaperPageContent({
                             part,
                             isContinuationWriting ? lineIndex : null,
                           )}
+                          {continuationEssay?.rests[lineIndex] && (
+                            <span className="pi-writing-continuation-essay" data-writing-essay-paragraph={lineIndex + 1}>
+                              {' '}{continuationEssay.rests[lineIndex]}
+                            </span>
+                          )}
                         </p>
                       )
                       if (!isContinuationWriting) {
@@ -374,18 +441,19 @@ function WritingPaperPageContent({
                           className="pi-writing-continuation-row"
                         >
                           {given}
-                          <span
+                          {!continuationEssay && <span
                             className="pi-writing-continuation-writable-area"
                             data-canonical-continuation-writing-rhythm-role={
                               `writable_after_starter_${lineIndex + 1}`
                             }
                             aria-hidden="true"
-                          />
+                          />}
                         </div>
                       )
                     })
             return (
               <Fragment key={index}>
+                {lectureEssay?.bar}
                 <div
                   className={[
                     'pi-writing-answer-box',
@@ -399,6 +467,7 @@ function WritingPaperPageContent({
                     block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
                     onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
                     lectureOpenInBox ? 'pi-writing-answer-box--lecture-open' : '',
+                    essayInBox ? 'pi-writing-answer-box--essay-open' : '',
                   ].filter(Boolean).join(' ')}
                   aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
                   data-canonical-application-semantic-signature={block.semanticSignature}
@@ -442,7 +511,7 @@ function WritingPaperPageContent({
                       </>
                     ) : givenTop}
                   </div>
-                  {lectureOpenInBox && (
+                  {lectureOpenInBox && !essayInBox && (
                     <div
                       className="pi-writing-answer-supplement"
                       data-writing-answer-supplement=""
@@ -451,6 +520,27 @@ function WritingPaperPageContent({
                         modelAnswer={retainedModelAnswer}
                         officialModelAnswer={retainedOfficialModelAnswer}
                       />
+                    </div>
+                  )}
+                  {essayInBox && (applicationEssay || continuationEssay?.extra.length || lectureEssay.officialModelAnswer) && (
+                    <div
+                      className="pi-writing-answer-supplement"
+                      data-writing-answer-supplement=""
+                    >
+                      <div className="retained-writing-answer">
+                        {(applicationEssay ?? continuationEssay?.extra ?? []).length > 0 && (
+                          <section className="retained-writing-answer-section" data-model-answer-source="ai">
+                            <div className="retained-writing-answer-copy">
+                              {(applicationEssay ?? continuationEssay?.extra ?? []).map((paragraph, paragraphIndex) => (
+                                <p key={paragraphIndex} className="retained-writing-answer-line">{paragraph}</p>
+                              ))}
+                            </div>
+                          </section>
+                        )}
+                        {lectureEssay.officialModelAnswer && (
+                          <RetainedModelAnswer officialModelAnswer={lectureEssay.officialModelAnswer} />
+                        )}
+                      </div>
                     </div>
                   )}
                   {block.givenBottom.length > 0 && (

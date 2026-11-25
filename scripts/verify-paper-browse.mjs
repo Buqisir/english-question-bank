@@ -2252,6 +2252,75 @@ try {
       .includes('点击左侧题目查看解析')
       && renderToStaticMarkup(createElement(PaperAssetAnalysisPanel, { ...props, analysis: null }))
         .includes('解析未发布'))
+
+  // 应用文 V4 工单 03、读后续写 V3 工单 03：新版写作讲评（spec D5）。
+  const { validateApplicationAnalysisV4 } = await import('../server/paper-import-ai/applicationWritingWorkflow.mjs')
+  const { validateContinuationAnalysisV3 } = await import('../server/paper-import-ai/analyzeNarrativeContinuation.mjs')
+  const readFixture = (file) => JSON.parse(readFileSync(path.join(rootDir, file), 'utf8'))
+  const appFixture = readFixture('docs/cuts/application-writing-v4/qa/fixtures/paper-gaokao-2026-i.json')
+  const contFixture = readFixture('docs/cuts/continuation-writing-v3/qa/fixtures/round3-paper-2026-i.json')
+  const appWriting = validateApplicationAnalysisV4({
+    analysis: appFixture.output, writingTask: appFixture.writingTask, groupPassage: appFixture.groupPassage,
+  }).writing
+  const contWriting = validateContinuationAnalysisV3({ analysis: contFixture.output, writingTask: contFixture.writingTask }).writing
+  const lectureV4 = await panelRenderer.ssrLoadModule('/src/features/paper-browse/WritingLectureV4.tsx')
+  const appLecture = lectureV4.writingLectureV4Of('application', appWriting)
+  const contLecture = lectureV4.writingLectureV4Of('continuation', contWriting)
+  assert('V4 application and V3 continuation writing resolve to the new lecture',
+    appLecture?.taskType === 'application' && contLecture?.taskType === 'continuation')
+  assert('legacy reviewCard and continuation V1/V2 stay on the old lecture',
+    lectureV4.writingLectureV4Of('application', { taskType: 'application', reviewCard: {} }) === null
+      && lectureV4.writingLectureV4Of('continuation', {
+        taskType: 'continuation', continuationAnalysis: { schemaVersion: 'continuation-analysis-v2' },
+      }) === null
+      && lectureV4.writingLectureV4Of('continuation', appWriting) === null)
+  assert('lecture is handed over only while open on its own group',
+    lectureV4.getWritingLectureV4({ lectureOpen: false, panelGroupId: 'g', groupId: 'g', sourceTaskType: 'application', analysis: appWriting }) === null
+      && lectureV4.getWritingLectureV4({ lectureOpen: true, panelGroupId: 'h', groupId: 'g', sourceTaskType: 'application', analysis: appWriting }) === null
+      && lectureV4.getWritingLectureV4({ lectureOpen: true, panelGroupId: 'g', groupId: 'g', sourceTaskType: 'application', analysis: appWriting }) !== null)
+  const blocksOf = (markup) => [...markup.matchAll(/data-writing-lecture-block="(\w+)"/g)].map((match) => match[1])
+  const railMarkup = (lecture, variant) => renderToStaticMarkup(
+    createElement(lectureV4.WritingLectureV4Rail, { lecture, variant }))
+  const appStandard = railMarkup(appLecture, 'standard')
+  const appAdvanced = railMarkup(appLecture, 'advanced')
+  const contStandard = railMarkup(contLecture, 'standard')
+  const contAdvanced = railMarkup(contLecture, 'advanced')
+  assert('application rail: task card, paragraph notes, expressions; what the advanced essay adds only with it',
+    blocksOf(appStandard).join() === 'taskCard,notes,expressions'
+      && blocksOf(appAdvanced).join() === 'taskCard,notes,expressions,beyondStandard',
+    blocksOf(appAdvanced).join())
+  assert('continuation rail: the six D5 blocks in order',
+    blocksOf(contStandard).join() === 'reading,taskCard,notes,expressions,pitfalls'
+      && blocksOf(contAdvanced).join() === 'reading,taskCard,notes,expressions,pitfalls,beyondStandard',
+    blocksOf(contAdvanced).join())
+  assert('rails show every quote, expression, pitfall and reading answer from the fixtures',
+    [appLecture, contLecture].every((lecture) => {
+      const markup = railMarkup(lecture, 'advanced')
+      const a = lecture.analysis
+      return a.taskCard.taskRequires.every((text) => markup.includes(encoded(text)))
+        && markup.includes(encoded(a.taskCard.thisEssayChooses))
+        && a.standard.notes.every((note) => markup.includes(encoded(note.role))
+          && note.items.every((item) => markup.includes(encoded(item.quote)) && markup.includes(encoded(item.explain))))
+        && a.standard.expressions.every((item) => markup.includes(encoded(item.expression)) && markup.includes(encoded(item.function)))
+        && a.advanced.beyondStandard.every((item) => markup.includes(encoded(item.quote)) && markup.includes(encoded(item.explain)))
+    })
+      && contLecture.analysis.reading.questions.every((item) => contAdvanced.includes(encoded(item.answer)))
+      && contLecture.analysis.reading.sourceLinks.every((item) => contAdvanced.includes(encoded(item.sourceQuote)))
+      && contLecture.analysis.standard.pitfalls.every((item) => contAdvanced.includes(encoded(item.pitfall))))
+  assert('rails and essays have no empty paragraph lines',
+    ![appStandard, appAdvanced, contStandard, contAdvanced].some((markup) => /<p[^>]*>\s*<\/p>/.test(markup))
+      && [appLecture, contLecture].every((lecture) => ['standard', 'advanced'].every((variant) => {
+        const paragraphs = lectureV4.essayParagraphs(lectureV4.essayOf(lecture, variant))
+        return paragraphs.length >= 2 && paragraphs.every((paragraph) => paragraph.trim() === paragraph && paragraph.length > 0)
+      }))
+      && lectureV4.essayParagraphs(contLecture.analysis.standard.essay).length === 2)
+  const barMarkup = renderToStaticMarkup(createElement(lectureV4.EssayVariantBar, { value: 'advanced', onChange: () => {} }))
+  assert('essay switch is one radiogroup with 标准版 / 提高版 and a single tab stop on the chosen one',
+    barMarkup.includes('role="radiogroup"')
+      && (barMarkup.match(/role="radio"/g) ?? []).length === 2
+      && /aria-checked="true" tabindex="0" data-value="advanced"/.test(barMarkup)
+      && /aria-checked="false" tabindex="-1" data-value="standard"/.test(barMarkup)
+      && barMarkup.includes('标准版') && barMarkup.includes('提高版'))
 } finally {
   await panelRenderer.close()
 }
