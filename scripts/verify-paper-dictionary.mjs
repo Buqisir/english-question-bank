@@ -234,6 +234,14 @@ function buildFixture(filePath, { huge = false } = {}) {
   add('saw', 'saw', 'noun', [
     { text: 'saw', tags: ['lemma'] },
   ], [{ id: 's1', priority: 'common', gloss: '锯子' }])
+  add('saw-verb', 'saw', 'verb', [{ text: 'sawed', tags: ['past'] }],
+    [{ id: 's1', priority: 'common', gloss: '锯开' }])
+  add('found', 'found', 'verb', [{ text: 'founded', tags: ['past'] }],
+    [{ id: 's1', priority: 'common', gloss: '创立' }])
+  add('quickly', 'quickly', 'adv', [{ text: 'quickly', tags: ['lemma'] }],
+    [{ id: 's1', priority: 'common', gloss: '迅速地' }])
+  add('mary', 'Mary', 'name', [{ text: 'Mary', tags: ['lemma'] }],
+    [{ id: 's1', priority: 'common', gloss: '玛丽' }])
   add('good', 'good', 'adj', [
     { text: 'good', tags: ['lemma'] },
     { text: 'better', tags: ['comparative'] },
@@ -1063,7 +1071,7 @@ evilRuntime.close()
     'declared slots': [
       ['makes up Amy’s mind', 'make-up-ones-mind'], ['applying herself', 'apply-oneself'],
       ['Amy’s heart sinks', 'ones-heart-sinks'], ['did it up', 'do-up'],
-      ['ask Amy out', 'ask-out'], ['bring the book to life', 'bring-sth-to-life'],
+      ['ask him out', 'ask-out'], ['bring the book to life', 'bring-sth-to-life'],
       ['is about to read', 'be-about-to-do'], ['look forward to reading', 'look-forward-to-doing-sth'],
     ],
     'separable objects': [['turn it off', 'turn-off'], ['picked her up', 'pick-up']],
@@ -1080,6 +1088,21 @@ evilRuntime.close()
       check(`Otter search ${label}: ${query}`, dict.searchId(query) === (expected && `w:${expected}`),
         `got ${dict.searchId(query)}`)
     }
+  }
+  const searchLexicon = openPaperDictionary(fixturePath).db
+  try {
+    for (const [query, expected] of [
+      ['sawed off', null], ['founded out', null],
+      ['saw her off', 'w:see-sb-off'], ['found out', 'w:find-out'],
+      ['ask Quickly out', null], ['ask Mary out', 'w:ask-out'],
+      ['ask Mary Wrenfall out', 'w:ask-out'], ['ask Mary Quickly out', null],
+    ]) {
+      check(`Otter search canonical forms and names: ${query}`, dict.searchId(query, searchLexicon) === expected)
+    }
+    check('Otter search requires lexical evidence before treating capitalization as a name',
+      dict.searchId('ask Quickly out') === null)
+  } finally {
+    searchLexicon.close()
   }
   const lookupDueTo = (example, text = example.text) => {
     const { paperId, groupId, locator } = example.source

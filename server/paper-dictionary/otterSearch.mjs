@@ -11,6 +11,7 @@ const exactWord = word => classifyCompleteEnglishWord(word, 0, word.length)?.sur
 const objectSlot = { slot: 'sb/sth' }
 
 function searchPatterns(headword, variants, pattern) {
+  const first = normalizeSearch(headword).split(' ')[0]
   const patterns = [pattern.tokens, ...pattern.alternatives].map(tokens => tokens.map(token =>
     token === 'oneself' ? { slot: token } : token))
   // Some occurrence patterns only index the fixed words, omitting the
@@ -40,10 +41,11 @@ function searchPatterns(headword, variants, pattern) {
   }
   return patterns.map((tokens, index) => ({
     tokens, fixed: tokens.find(token => typeof token === 'string'), recorded: index < recorded,
+    inflectFirst: tokens[0] === first,
   })).filter(({ tokens, fixed }) => tokens.length >= 2 && fixed)
 }
 
-function matchSlot(slot, words, rawWords, start, end, lexicon) {
+function matchSlot(slot, words, start, end, lexicon, isName) {
   const word = words[start]
   if (end === start + 1) {
     if (slot === "one's") return possessive.test(word)
@@ -52,9 +54,9 @@ function matchSlot(slot, words, rawWords, start, end, lexicon) {
     if (slot === 'doing') return word === 'doing' || lexicon(word).some(row => row.gerund)
     if (word === 'sb/sth') return slot === word
     if (person.test(word)) return slot !== 'sth'
-    if (thing.test(word)) return slot !== 'sb'
-    if (slot !== 'sth' && (/^[A-Z][a-z]/u.test(rawWords[start]) || lexicon(word).some(row => row.name))) return true
+    if (thing.test(word)) return slot !== 'sb' || word === 'it'
   }
+  if (slot !== 'sth' && end - start <= 2 && isName(start, end)) return true
   if (slot !== 'sth' && slot !== 'sb/sth') return false
   const noun = token => lexicon(token).some(row => row.noun)
   return noun(words[end - 1]) && words.slice(start, end - 1).every((token, index) =>
@@ -62,16 +64,16 @@ function matchSlot(slot, words, rawWords, start, end, lexicon) {
     lexicon(token).some(row => row.noun || row.adjective || row.gerund))
 }
 
-function patternScore(tokens, words, rawWords, lexicon) {
+function patternScore({ tokens, inflectFirst }, words, lexicon, isName) {
   function match(index, at) {
     if (index === tokens.length) return at === words.length ? 0 : -1
     if (at === words.length) return -1
     const token = tokens[index]
     if (typeof token === 'string') {
       const exact = words[at] === token
-      // The first verb can inflect. Internal forms come from the entry's
-      // alternatives or an explicit auxiliary in the template.
-      if (!exact && (!(index === 0 || token === 'be') ||
+      // Recorded variants match literally. Only the canonical verb can
+      // receive new forms, so sawed cannot match the variant saw off.
+      if (!exact && (!(index === 0 ? inflectFirst : token === 'be') ||
         !lexicon(words[at]).some(row => row.verb && row.lemma === token))) return -1
       const rest = match(index + 1, at + 1)
       return rest < 0 ? -1 : rest + 1024 + (exact ? 1 : 0)
@@ -82,11 +84,11 @@ function patternScore(tokens, words, rawWords, lexicon) {
       ? words.length - remaining : at + 1
     let best = -1
     for (let end = at + 1; end <= maxEnd; end++) {
-      if (!matchSlot(token.slot, words, rawWords, at, end, lexicon)) continue
+      if (!matchSlot(token.slot, words, at, end, lexicon, isName)) continue
       const rest = match(index + 1, end)
       if (rest >= 0) {
         const specificity = ['do', 'doing', 'oneself', "one's"].includes(token.slot) ? 32
-          : token.slot === 'sb/sth' ? 1 : 16
+          : token.slot === 'sb' && words[at] === 'it' ? 0 : token.slot === 'sb/sth' ? 1 : 16
         best = Math.max(best, rest + specificity)
       }
     }
@@ -164,6 +166,15 @@ export function createOtterSearch(entries, lookupForms) {
     }
     if (!words.every(word => exactWord(word) || word === 'sb/sth')) return null
     const rawWords = surface.trim().split(/\s+/u)
+    function isName(start, end) {
+      if (lexicon(words.slice(start, end).join(' ')).some(row => row.name)) return true
+      // With no offline lexicon, an unknown capitalized word is unverified.
+      return Boolean(db) && rawWords.slice(start, end).every((word, index) => {
+        const rows = lexicon(words[start + index])
+        return /^[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)*$/u.test(word)
+          && (rows.some(row => row.name) || rows.length === 0)
+      })
+    }
     const anchors = new Set([words[0], ...lexicon(words[0]).filter(row => row.verb).map(row => row.lemma)])
     let best = -1
     let ids = []
@@ -171,8 +182,9 @@ export function createOtterSearch(entries, lookupForms) {
       ...[...anchors].flatMap(anchor => patterns.get(anchor) ?? []),
       ...[...new Set(words.slice(1))].flatMap(anchor => leadingSlots.get(anchor) ?? []),
     ]
-    for (const { entryId, tokens, recorded } of templates) {
-      const matched = patternScore(tokens, words, rawWords, lexicon)
+    for (const template of templates) {
+      const { entryId, recorded } = template
+      const matched = patternScore(template, words, lexicon, isName)
       if (matched < 0) continue
       const score = matched + (recorded ? 0.5 : 0)
       if (score < best) continue
