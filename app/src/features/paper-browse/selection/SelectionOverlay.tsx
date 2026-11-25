@@ -309,6 +309,7 @@ export function SelectionOverlay({
             </Button>
           ) : null}
 
+          {phrases}
           {phase !== 'loading' ? (
             <p className="paper-selection-privacy">机器参考译文 · Qwen-MT（阿里云）· 选中文字及相邻句会发送到服务区域</p>
           ) : null}

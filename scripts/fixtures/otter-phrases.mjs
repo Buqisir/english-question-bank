@@ -27,10 +27,10 @@ export function installOtterPhraseFixture(root) {
   ]
   for (const { glossZh, ...entry } of entries) {
     writeFileSync(path.join(dir, 'entries', `${entry.entryId}.json`), JSON.stringify({
-      version: 1, lists: ['3000'], variants: [], forms: [], pronunciations: [], counts, ...entry,
-      senses: [{ senseId: `${entry.entryId}#s1`, pos: 'v.', glossZh, origin: 'gaokao', counts, folded: false,
+      version: 1, lists: entry.kind === 'phrase' ? [] : ['3000'], variants: [], forms: [], pronunciations: [], counts, ...entry,
+      senses: [{ senseId: `${entry.entryId}#s1`, pos: entry.kind === 'phrase' ? '短语' : 'v.', glossZh, origin: 'gaokao', counts, folded: false,
         examples: [{ exampleId: `${entry.entryId}#e1`, text, source: {
-          paperId: source.paperId, groupId: 'g', paperTitle: '短语测试卷', locator: { paragraphId: 'p1' },
+          paperId: source.paperId, groupId: 'g', paperTitle: '短语测试卷', locator: { paragraphId: 'p1', sentence: 1 },
         } }] }],
     }))
   }

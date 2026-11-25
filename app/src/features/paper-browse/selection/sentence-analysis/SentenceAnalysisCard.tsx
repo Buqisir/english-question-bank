@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import type { CSSProperties, MutableRefObject } from 'react'
+import type { CSSProperties, MutableRefObject, ReactNode } from 'react'
 import { copyText, difficulties, restoreLayout, unitText, unitDisplayLabel } from '../../../../../../shared/sentence-analysis/derive.mjs'
 import type { LayoutItem, SentenceAnalysisV1 } from '../../../../../../shared/sentence-analysis/types.d.mts'
 import { useSentenceInteraction } from './useSentenceInteraction'
@@ -37,6 +37,7 @@ export function SentenceAnalysisCard({
   onAnnounce,
   bindEscapeRef,
   textSize,
+  phrases,
 }: {
   status: SentenceAnalysisCardStatus
   analysis: SentenceAnalysisV1 | null
@@ -49,6 +50,7 @@ export function SentenceAnalysisCard({
   onAnnounce?: (message: string) => void
   bindEscapeRef?: MutableRefObject<(() => boolean) | null>
   textSize?: number | null
+  phrases?: ReactNode
 }) {
   const ready = (status === 'ok' || status === 'partial') && analysis?.status !== 'unavailable' ? analysis : null
   const interaction = useSentenceInteraction(ready)
@@ -58,6 +60,7 @@ export function SentenceAnalysisCard({
   const analysisSlow = useSlowWait(status === 'loading')
   const [detailHost, setDetailHost] = useState<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement>(null)
+  const hasPhrases = Boolean(phrases)
   useLayoutEffect(() => {
     const card = cardRef.current
     if (!card) return
@@ -93,7 +96,7 @@ export function SentenceAnalysisCard({
       document.fonts?.removeEventListener('loadingdone', fontsReady)
       card.style.height = ''
     }
-  }, [ready, textSize])
+  }, [ready, textSize, hasPhrases])
   const flags = useMemo(() => {
     if (!ready) return []
     return visibleFlags(ready, difficulties(ready), scopeId)
@@ -276,6 +279,7 @@ export function SentenceAnalysisCard({
           <p className="sa-status">{status === 'invalid' ? '分析数据无效' : (analysis?.unavailableReason || '该句暂时无法分析')}</p>
         </>
       ) : null}
+      {phrases}
     </div>
   )
 }

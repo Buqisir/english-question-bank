@@ -388,7 +388,7 @@ export function usePaperSelectionTranslation({
     const controller = new AbortController()
     lookupAbortRef.current = controller
     const segment = current.segments[0]
-    const isCurrent = () => !controller.signal.aborted && generationRef.current === generation
+    const isCurrent = () => !controller.signal.aborted && snapshotRef.current?.generation === generation
     const cacheKey = JSON.stringify({
       kind: 'dictionary',
       version: dictionaryStatus?.dictionaryVersion || '',
@@ -972,6 +972,7 @@ export function usePaperSelectionTranslation({
             onAnnounce={setLiveMessage}
             bindEscapeRef={analysisEscapeRef}
             textSize={paperTextSize(analysisRange || snapshot.range)}
+            phrases={sentencePhrases}
           />
         ) : null}
         onRetry={() => {

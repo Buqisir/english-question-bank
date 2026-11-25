@@ -43,6 +43,7 @@ export function DictionaryEntry(props: EntryProps) {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const contextRef = useRef<HTMLLIElement>(null)
   const entry = props.entry ?? loaded
+  const isPhrase = entry?.kind === 'phrase'
   const context = entry?.senses.find(sense => sense.senseId === props.senseId)
   const full = props.density === 'full'
   const pending = quick?.pending ?? Boolean(word && entry === undefined && !error)
@@ -111,7 +112,7 @@ export function DictionaryEntry(props: EntryProps) {
       }}>回到原句</ButtonLink>}
       <header className="otter-entry-heading">
         {title && <Title ref={titleRef} tabIndex={full ? -1 : undefined} lang="en">{title}</Title>}
-        {entry && <Chip>{entry.lists.some(list => list === '3000' || list === '3100') ? '高考词汇' : '超纲'}</Chip>}
+        {entry && !isPhrase && <Chip>{entry.lists.some(list => list === '3000' || list === '3100') ? '高考词汇' : '超纲'}</Chip>}
         {quick?.fallback && <Chip>通用词典</Chip>}
         {quick?.menu}
         {props.onClose && <Button size="sm" className="otter-close" label={full ? '关闭完整词条' : '关闭'} icon={<X size={16} />} onClick={props.onClose} />}
@@ -123,7 +124,7 @@ export function DictionaryEntry(props: EntryProps) {
       {entry && pronunciations(full ? entry.pronunciations : quickPronunciation ? [quickPronunciation] : [], full)}
       {audioError && <Notice kind="error">读音播放失败，请重试</Notice>}
       {quick && <>
-        {quickSense && <p className="otter-gloss">{context && <Chip>本文</Chip>} <i lang="en">{quickSense.pos}</i> {quickSense.glossZh}</p>}
+        {quickSense && <p className="otter-gloss">{context && <Chip>本文</Chip>} <i lang={isPhrase ? undefined : 'en'}>{quickSense.pos}</i> {quickSense.glossZh}</p>}
         {quick.fallback}
         {quick.phrases}
         {quick.actions && <div className="otter-actions">{quick.actions}</div>}
@@ -134,7 +135,7 @@ export function DictionaryEntry(props: EntryProps) {
             icon={<DisclosureIcon size={12} expanded={otherOpen} />}>{title}</Button> : <h3>{title}</h3>}
           {(!folded || otherOpen) && <ol>
             {senses.map(sense => <li key={sense.senseId} ref={sense === context ? contextRef : undefined}>
-              <p className="otter-gloss"><i lang="en">{sense.pos}</i> {sense.glossZh} {sense === context && <Chip>本文</Chip>}</p>
+              <p className="otter-gloss"><i lang={isPhrase ? undefined : 'en'}>{sense.pos}</i> {sense.glossZh} {sense === context && <Chip>本文</Chip>}</p>
               {sense.examples.slice(0, expanded[sense.senseId] ? undefined : 1).map(example =>
                 <ExampleSentence key={example.exampleId} example={example} forms={forms} />)}
               {sense.examples.length > 1 && <Button size="sm" aria-expanded={Boolean(expanded[sense.senseId])}

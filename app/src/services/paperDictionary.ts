@@ -91,6 +91,7 @@ type Accents = { uk: string | null; us: string | null }
 export type OtterExample = {
   exampleId: string
   text: string
+  highlightRanges?: [start: number, end: number][]
   zh?: string
   source: {
     paperId: string

@@ -89,11 +89,19 @@ function shortPaperTitle(paperId, paperTitle) {
   return [year, compact || title].filter(Boolean).join(' ')
 }
 
-function prepareEntry(entry) {
+function prepareEntry(entry, phrases) {
   for (const sense of entry.senses) {
     for (const example of sense.examples) {
       example.text = cleanExample(example.text)
-      const { paperId, paperTitle, groupId } = example.source
+      const { paperId, paperTitle, groupId, locator } = example.source
+      if (entry.kind === 'phrase') {
+        const rows = phrases.get(occurrenceKey(paperId, groupId, locator.paragraphId ?? locator.questionId))
+        const points = [...example.text]
+        const row = rows?.find(row => row.entryId === entry.entryId && row.senseId === sense.senseId
+          && row.sentence === locator.sentence && row.end <= points.length
+          && (!row.surface || points.slice(row.start, row.end).join('') === row.surface))
+        if (row) example.highlightRanges = row.parts ?? [[row.start, row.end]]
+      }
       const reading = /:reading-([a-d])$/i.exec(groupId)?.[1]?.toUpperCase()
       const section = reading ? `阅读 ${reading}` : SECTION_LABELS[groupId.split(':').at(-1)]
       example.source.label = [shortPaperTitle(paperId, paperTitle), section].filter(Boolean).join(' · ')
@@ -181,7 +189,7 @@ export function openOtterDictionary(rootDir) {
     if (!name) return null
     const cached = entries.get(entryId)
     if (cached) return cached
-    const entry = prepareEntry(readEntry(name))
+    const entry = prepareEntry(readEntry(name), phrases)
     entries.set(entryId, entry)
     return entry
   }

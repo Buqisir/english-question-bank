@@ -910,6 +910,11 @@ evilRuntime.close()
     get('search', { w }).parsed?.entryId === 'w:make-up-ones-mind'))
   check('an absent phrase returns 404', get('search', { w: 'unknown phrase' }).statusCode === 404)
   check('entry by ID resolves related phrase links', get('entry', { id: 'w:give' }).parsed?.relatedPhraseLinks?.[0]?.headword === 'give up')
+  const highlighted = id => get('entry', { id }).parsed?.senses[0].examples[0].highlightRanges
+    ?.map(([start, end]) => phraseText.slice(start, end)).join('|')
+  check('phrase examples use the indexed fixed parts or contiguous range',
+    highlighted('w:give-up') === 'gave|up' && highlighted('w:make-up-ones-mind') === 'made up her mind')
+  check('word examples retain the original highlighting path', highlighted('w:give') === undefined)
   phraseRuntime.close()
 }
 
