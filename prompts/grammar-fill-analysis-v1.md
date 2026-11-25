@@ -176,6 +176,9 @@ of, “X 是固定搭配” / “prepare sb for sth” / “keep one's eyes on�
 acceptable, including for prepositions, articles and `to do` blanks. When the
 governing word is separated from the gap (long subject, inserted phrase,
 antecedent across a prepositional phrase), name that governing word.
+A multi-word preposition (thanks to, because of, instead of, according to,
+in front of, due to) is one preposition: write “作 thanks to 的宾语”, never
+“作介词 to 的宾语”.
 
 Simple blanks may combine these into one sentence. A difficult blank may use up
 to three. Do not expand a simple article or preposition blank into a general
