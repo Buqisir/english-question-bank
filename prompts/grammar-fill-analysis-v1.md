@@ -97,6 +97,40 @@ For **`grammar-fill.given.verb.non-finite`**, identify the ordinary syntactic ro
 
 For every other facet: `"role": null`.
 
+#### Judging the role — test, then label
+
+Most wrong labels in past data were 后置定语 / 伴随状语 / 方式状语 put on the
+wrong blank. Decide with these tests, then write the same role in `reason`:
+
+- **attributive（定语，含后置定语）**: the non-finite tells *which / what kind
+  of* noun, and can be rewritten as a relative clause on that noun:
+  `the chance to discover...` → `the chance that I could discover...`;
+  `a sheet left to sun` → `a sheet that is left to sun`. Name the noun it
+  modifies. A comma-separated phrase at the end of a clause that describes what
+  the subject does is usually not attributive.
+- **adverbial（状语）**: the non-finite's logical subject is the sentence
+  subject (or the whole clause), and it can be rewritten as a second predicate
+  or an adverbial clause: `He sat there, reading.` → `He sat there and read.`
+  Name the predicate it attaches to. Use a finer name only when it is literally
+  true: 伴随 = another action happening at the same time as the predicate;
+  方式 = how the predicate is done (by doing / means); 目的 = in order to;
+  结果 = what follows from the whole clause (`only to do`, `, making...`).
+  If none of these fits exactly, write just 作状语.
+- **object-complement（宾补）vs attributive**: after find / keep / leave /
+  have / see / make / let + object, if removing the non-finite changes what the
+  verb means (`I found myself feeling at home` ≠ `I found myself`), it is 宾补.
+- **predicative（表语）vs subject-complement（主补）**: after a linking verb
+  (be / seem / stay / remain / become / look / get / keep), the form is 表语:
+  `The structure stays closed` → `predicative`. Use 主补 only for the passive of
+  an object-complement verb (`was seen running`, `is expected to do`).
+- If two readings are both defensible, choose by the rewrite test and do not
+  discuss the other unless it changes the form.
+
+`reason` must not name a different role from `role`: with `role:
+"attributive"` do not write 作状语 / 伴随状语, with `role: "predicative"` do
+not write 作主语补足语. A contrast after a negation (不是作状语，而是……) is
+allowed. The validator rejects a mismatch.
+
 Use `appositive`（同位语）when a gerund phrase explains a noun's
 content, rather than modifying an action or describing a noun's property.
 This route currently supports only ordinary active `doing`.
@@ -133,6 +167,16 @@ Write `reason` by walking the actual sentence:
 4. when useful, verify it with a nearby parallel structure, paired blank,
    antecedent, time relation, or governing word.
 
+**Job first.** The first clause of `reason` says what the gap does in its own
+sentence: which part is missing (谓语、宾语、连接两个分句……) or what the gap
+attaches to (修饰哪个名词、把哪个宾语接到哪个动词上). Only after that may a
+collocation, sentence pattern or fixed phrase appear, and only as the reason
+for the particular word or form. A `reason` that opens with, or consists only
+of, “X 是固定搭配” / “prepare sb for sth” / “keep one's eyes on” is not
+acceptable, including for prepositions, articles and `to do` blanks. When the
+governing word is separated from the gap (long subject, inserted phrase,
+antecedent across a prepositional phrase), name that governing word.
+
 Simple blanks may combine these into one sentence. A difficult blank may use up
 to three. Do not expand a simple article or preposition blank into a general
 grammar lecture, and do not invent distractors for a task with no options.
@@ -156,6 +200,19 @@ Do not stop at:
 
 ```text
 find oneself doing 是固定搭配。
+```
+
+A preposition blank, job first:
+
+```text
+prepare 的宾语位置已经是 me，this one 要靠介词接到 prepared 上；“为……做准备”
+用 prepare sb for sth，填 for。
+```
+
+Not:
+
+```text
+固定搭配 prepare sb for sth，故填 for。
 ```
 
 ## Required Top-Level Shape
@@ -431,6 +488,73 @@ optional refinements and must be `[]` when none applies.
   Locate the actual replacement for each blank, not another copy of its answer.
   Text identities must be distinct. A non-key difficult sentence has empty
   `relatedQuestionIds` and sentence-structure `questionIds`; do not invent links.
+
+### `teachingContent` structure
+
+All offsets are Unicode code points, `start` inclusive, `end` exclusive, and
+every `quote` equals the exact slice. Count in the exact text named by
+`textId` + `paragraphId`; never trim, normalize or first-match. Every range
+object has exactly the keys `textId`, `paragraphId`, `start`, `end`, `quote`.
+
+```json
+"teachingContent": {
+  "schemaVersion": "objective-teaching-content-v1",
+  "sourceTextId": "src-<group>",
+  "sourceAssetVersion": 1,
+  "translation": {
+    "textId": "tr-<group>",
+    "legacyField": "fullTranslationZh",
+    "paragraphs": [
+      { "paragraphId": "tr-<source paragraph id>",
+        "sourceParagraphIds": ["<source paragraph id>"],
+        "start": 0, "end": 84, "quote": "<exact slice of fullTranslationZh>" }
+    ]
+  },
+  "completedSourceTexts": [
+    { "textId": "done-<source paragraph id>", "paragraphId": "<source paragraph id>",
+      "text": "<that paragraph with every blank completed>" }
+  ],
+  "annotations": [
+    { "annotationId": "ev-56", "kind": "answer-evidence", "questionIds": ["q-...-056"],
+      "sourceRanges": [ { "textId": "src-<group>", "paragraphId": "...", "start": 0, "end": 0, "quote": "..." } ],
+      "translationRanges": [ { "textId": "tr-<group>", "paragraphId": "tr-...", "start": 0, "end": 0, "quote": "..." } ] },
+    { "annotationId": "ins-56", "kind": "answer-insertion", "questionIds": ["q-...-056"],
+      "blankId": "<exact blankId>",
+      "sourceRanges": [ { "textId": "done-...", "paragraphId": "...", "start": 0, "end": 0, "quote": "where" } ],
+      "translationRanges": [ { "textId": "tr-<group>", "paragraphId": "tr-...", "start": 0, "end": 0, "quote": "在那里" } ] },
+    { "annotationId": "ss-1", "kind": "sentence-structure", "questionIds": ["<= relatedQuestionIds>"],
+      "selectedSentenceId": "<sentenceId>",
+      "sourceRanges": [ { "textId": "done-...", "paragraphId": "...", "start": 0, "end": 0, "quote": "..." } ],
+      "translationRanges": [ { "textId": "tr-<group>", "paragraphId": "tr-...", "start": 0, "end": 0, "quote": "..." } ] }
+  ]
+}
+```
+
+- The four text identities (`sourceTextId`, `translation.textId`, each
+  `completedSourceTexts[].textId`) are all different.
+- `translation.paragraphs` cover `fullTranslationZh` completely and in order:
+  the first starts at 0, consecutive paragraphs are separated only by line
+  breaks, and the last ends at the end of the string. Write one translation
+  paragraph per source paragraph, separated by `\n`.
+- `fullTranslationZh` contains no blank numbers: no `[56]`, `（56）` or `56`
+  markers. The Chinese words that carry an answer are located by offsets.
+- `completedSourceTexts[].text` is the source paragraph with each `__N__`
+  replaced by the authoritative answer and the following ` (hint)` removed.
+  Keep every other character, including double spaces; insert one space only
+  where the answer would otherwise touch a letter or digit. Include every
+  paragraph that contains a blank.
+- `answer-evidence`: `sourceRanges` point into the original text
+  (`sourceTextId`, with the `__N__` markers still in it) at the trigger words,
+  not at the marker; `translationRanges` point at the Chinese for those words.
+- `answer-insertion`: exactly one per blank, one question, the exact `blankId`;
+  its single source range covers exactly the inserted answer in the completed
+  text; its translation range covers the Chinese words that carry the answer.
+  For a function word whose meaning is absorbed, cover the governing phrase
+  (e.g. 为……做准备 for `for`).
+- `sentence-structure`: one per selected long sentence, `selectedSentenceId`
+  equal to its `sentenceId`, `questionIds` equal to its `relatedQuestionIds`,
+  source ranges inside that sentence (original or completed text), translation
+  ranges at its Chinese.
 
 (Grammar fill reasoning is local/syntactic, so no `affectiveArc` is needed — unlike cloze.)
 

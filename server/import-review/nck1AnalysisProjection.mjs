@@ -386,7 +386,7 @@ export function validateNck1StagedAnalysis(request, raw) {
   } else {
     if (key === 'grammar') stampGrammarFillDerivedFields(analysis)
     const validator = { seven: validateSevenChoicesShape, cloze: validateClozeShape, grammar: validateGrammarFillShape }[key]
-    validator(analysis, options)
+    validator(analysis, key === 'grammar' ? { ...options, requireReasonRoleAgreement: true } : options)
     const collection = key === 'seven' ? 'questions' : 'blanks'
     const answerAt = key === 'seven' ? (item) => item.optionFit?.correctOptionLabel
       : key === 'cloze' ? (item) => item.correctFit?.optionLabel : (item) => item.answer
