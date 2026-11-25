@@ -31,7 +31,7 @@ import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
 import { installOtterPhraseFixture, laterText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
 import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
-import { indexPhraseOccurrence, locatePhraseOccurrence, phraseOccurrenceSentences } from '../shared/paper-dictionary/phraseOccurrence.mjs'
+import { indexPhraseOccurrence, locatePhraseOccurrence, normalizePhraseText } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-dictionary-'))
@@ -911,6 +911,9 @@ evilRuntime.close()
   }
   check('search accepts case, apostrophes, and possessive variants', ["Make up one’s mind", 'MADE UP YOUR MIND'].every(w =>
     get('search', { w }).parsed?.entryId === 'w:make-up-ones-mind'))
+  check('word fallback keeps straight and curly apostrophe forms distinct like main',
+    get('entry', { w: "can't" }).parsed?.entryId === 'w:cant'
+    && get('entry', { w: 'can’t' }).statusCode === 404)
   check('an absent phrase returns 404', get('search', { w: 'unknown phrase' }).statusCode === 404)
   check('entry by ID resolves related phrase links', get('entry', { id: 'w:give' }).parsed?.relatedPhraseLinks?.[0]?.headword === 'give up')
   const highlighted = id => get('entry', { id }).parsed?.senses[0].examples[0].highlightRanges
@@ -937,24 +940,38 @@ evilRuntime.close()
 }
 
 {
-  const repeated = '🦦 Due to rain. Due to snow.'
-  const start = repeated.lastIndexOf('Due to')
-  const indexed = indexPhraseOccurrence(repeated, start, [start, start + 6])
-  const sentences = phraseOccurrenceSentences(repeated)
-  check('a producer-supplied origin must agree with the indexed sentence in code-point coordinates',
-    locatePhraseOccurrence(sentences, { ...indexed, sentence: 2 })?.from === start - 1
-    && locatePhraseOccurrence(sentences, { ...indexed, sentence: 1 }) === null)
+  const indexedSentence = "They can't wait."
+  const start = indexedSentence.indexOf("can't")
+  const indexed = indexPhraseOccurrence(indexedSentence, { start: 0, text: indexedSentence }, [start, start + 5])
+  const repeated = '🦦 They can’t wait. They   can’t wait.'
+  const block = normalizePhraseText(repeated)
+  check('repeated normalized sentences use the indexed occurrence order and map back to source offsets',
+    locatePhraseOccurrence(block, { ...indexed, sentence: 2 }, indexed.sentenceText)?.from === repeated.lastIndexOf('can’t') - 1
+    && locatePhraseOccurrence(block, { ...indexed, sentence: 1 }, indexed.sentenceText)?.from === repeated.indexOf('can’t') - 1
+    && locatePhraseOccurrence(block, { ...indexed, sentence: 3 }, indexed.sentenceText) === null)
+  const nationalA = JSON.parse(readFileSync(path.join(rootDir, 'test-fixtures/retired-paper-assets/paper-2023-jia/latest/paper-asset.json'), 'utf8'))
+  const nationalAText = nationalA.content.groups['group-2023-jia-reading-d'].passage.paragraphs
+    .find(paragraph => paragraph.paragraphId === 'para-2023-jia-reading-d-4').text
+    .replaceAll('U. S.', 'U.S.')
   const entry = JSON.parse(readFileSync(path.join(rootDir, 'server/paper-dictionary/otter-data/entries/w-due-to.json'), 'utf8'))
-  const example = entry.senses.flatMap(sense => sense.examples)
-    .find(item => item.text.includes('Mr. Somerset was due to return'))
-  const { paperId, groupId, locator } = example.source
-  const startDue = example.text.indexOf('due to')
-  const hits = openOtterDictionary(rootDir).findPhrases(paperId, {
-    groupId, text: example.text,
-    leaves: [{ kind: 'paragraph', id: locator.paragraphId, start: 0, end: example.text.length }],
-  }, { start: startDue, end: startDue + 6 }, false)
+  const examples = entry.senses.flatMap(sense => sense.examples)
+  const dict = openOtterDictionary(rootDir)
+  const lookupDueTo = (example, text = example.text) => {
+    const { paperId, groupId, locator } = example.source
+    const start = text.indexOf('due to')
+    return dict.findPhrases(paperId, {
+      groupId, text,
+      leaves: [{ kind: 'paragraph', id: locator.paragraphId, start: 0, end: text.length }],
+    }, { start, end: start + 6 }, false)
+  }
+  const somerset = examples.find(item => item.text.includes('Mr. Somerset was due to return'))
+  const grizzlies = examples.find(item => item.source.paperId === 'paper-gaokao-2023-national-a')
   check('the bundled Somerset phrase keeps its indexed sentence and sense after Mr.',
-    hits.some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s2'))
+    lookupDueTo(somerset, `He had waited. ${somerset.text} It grew dark.`)
+      .some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s2'))
+  check('the bundled National A Reading D phrase uses its archived second sentence after U.S.',
+    grizzlies.source.locator.sentence === 2
+    && lookupDueTo(grizzlies, nationalAText).some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s1'))
 }
 
 async function verifyBrowser() {

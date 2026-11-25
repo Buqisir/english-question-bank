@@ -21,6 +21,7 @@ export function installOtterPhraseFixture(root) {
   const counts = { gaokao: 1, mock: 0 }
   const entries = [
     { entryId: 'w:give', headword: 'give', forms: [{ form: 'gave' }], relatedPhrases: ['w:give-up'], glossZh: '给' },
+    { entryId: 'w:cant', headword: "can't", glossZh: '不能' },
     { entryId: 'w:give-up', headword: 'give up', kind: 'phrase', variants: ['gave up'], glossZh: '放弃' },
     { entryId: 'w:make-up-ones-mind', headword: "make up one's mind", kind: 'phrase',
       variants: ["made up one's mind"], glossZh: '下定决心' },
@@ -42,7 +43,7 @@ export function installOtterPhraseFixture(root) {
     }))
   }
   const occurrences = rows.map(row => ({
-    ...row, ...indexPhraseOccurrence(text, 0, [row.start, row.end], row.parts),
+    ...row, ...indexPhraseOccurrence(text, { start: 0, text }, [row.start, row.end], row.parts),
     paperId: source.paperId, groupId: 'g', paragraphId: 'p1', sentence: 1,
     senseId: `${row.entryId}#s1`,
   }))

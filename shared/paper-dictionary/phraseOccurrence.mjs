@@ -1,14 +1,11 @@
-import { analysisSentences } from '../sentence-analysis/resolveTarget.mjs'
-
 export const codePointOffset = (text, utf16Offset) => [...text.slice(0, utf16Offset)].length
 
-// The producer supplies the start of its trimmed sentence in the leaf.
-// Persist that origin in code points, in the same coordinate system as start/end/parts.
-export function indexPhraseOccurrence(leafText, sentenceStart, [start, end], parts) {
+// Store the producer's trimmed sentence and its sentence-relative code-point offsets.
+export function indexPhraseOccurrence(leafText, { start: sentenceStart, text: sentenceText }, [start, end], parts) {
   const origin = codePointOffset(leafText, sentenceStart)
   const offset = index => codePointOffset(leafText, index) - origin
   return {
-    sentenceStart: origin,
+    sentenceText,
     surface: leafText.slice(start, end),
     start: offset(start),
     end: offset(end),
@@ -16,20 +13,55 @@ export function indexPhraseOccurrence(leafText, sentenceStart, [start, end], par
   }
 }
 
-export function phraseOccurrenceSentences(text) {
-  return analysisSentences(text).map(sentence => {
-    const trimmed = sentence.text.trimStart()
-    const origin = codePointOffset(text, sentence.start + sentence.text.length - trimmed.length)
-    return { origin, points: [...trimmed.trimEnd()] }
-  })
+// Map normalized UTF-16 boundaries back to the unmodified code-point offsets.
+export function normalizePhraseText(text) {
+  const starts = []
+  const ends = []
+  let normalized = ''
+  let offset = 0
+  for (const [token] of text.matchAll(/\s+|\S/gu)) {
+    const space = /^\s/u.test(token)
+    const length = space ? [...token].length : 1
+    if (normalized || !space) {
+      starts[normalized.length] = offset
+      normalized += space ? ' ' : token.replace(/[‘’]/g, "'")
+      ends[normalized.length] = offset + length
+    }
+    offset += length
+  }
+  return { text: normalized.trimEnd(), starts, ends }
 }
 
-export function locatePhraseOccurrence(sentences, row) {
-  const { sentence, sentenceStart, start, end, surface } = row
-  if (!Number.isInteger(sentence) || sentence < 1 || !Number.isInteger(start) || !Number.isInteger(end)) return null
-  const indexed = sentences[sentence - 1]
-  if (!indexed || (sentenceStart != null && sentenceStart !== indexed.origin)) return null
-  const { origin, points } = indexed
-  if (start < 0 || end <= start || end > points.length || !surface || points.slice(start, end).join('') !== surface) return null
-  return { from: origin + start, to: origin + end, origin, sentenceText: points.join('') }
+const wordStart = /^[\p{L}\p{M}\p{N}]/u
+const wordEnd = /[\p{L}\p{M}\p{N}]$/u
+
+export function locatePhraseOccurrence(block, row, sentenceText) {
+  const { sentence, start, end, surface } = row
+  if (!Number.isInteger(sentence) || sentence < 1 || !surface) return null
+  const quote = normalizePhraseText(sentenceText.trim())
+  const from = quote.starts.indexOf(start)
+  const to = quote.ends.indexOf(end)
+  if (from < 0 || to <= from || quote.text.slice(from, to) !== normalizePhraseText(surface).text) return null
+
+  const matches = []
+  let base = block.text.indexOf(quote.text)
+  while (base >= 0) {
+    const after = base + quote.text.length
+    if ((!wordStart.test(quote.text) || !wordEnd.test(block.text.slice(0, base))) &&
+        !wordStart.test(block.text.slice(after))) matches.push(base)
+    base = block.text.indexOf(quote.text, after)
+  }
+  const at = matches.length === 1 ? matches[0] : matches[sentence - 1]
+  if (at == null) return null
+
+  const parts = []
+  for (const [partStart, partEnd] of row.parts ?? [[start, end]]) {
+    const left = quote.starts.indexOf(partStart)
+    const right = quote.ends.indexOf(partEnd)
+    if (left < from || right > to || right <= left) return null
+    parts.push([block.starts[at + left], block.ends[at + right]])
+  }
+  const first = block.starts[at + from]
+  const last = block.ends[at + to]
+  return { from: first, to: last, parts }
 }

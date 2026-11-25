@@ -2,12 +2,14 @@ import { closeSync, openSync, readFileSync, readdirSync, readSync } from 'node:f
 import path from 'node:path'
 import { StringDecoder } from 'node:string_decoder'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
-import { codePointOffset, locatePhraseOccurrence, phraseOccurrenceSentences } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
+import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
 
-const normalize = (text) => text.normalize('NFC').replace(/[‘’]/g, "'").trim().replace(/\s+/g, ' ')
+const normalize = (text) => text.normalize('NFC').trim()
+const normalizePhraseAlias = (text) => normalize(text).replace(/[‘’]/g, "'").replace(/\s+/g, ' ').toLowerCase()
 const cleanExample = (text) => text.trim().replace(/^(?:[■□●○•▪▫‣◦]\s*)+/, '')
 const occurrenceKey = (...parts) => JSON.stringify(parts)
+const sentenceKey = (paperId, groupId, id, sentence) => occurrenceKey(paperId, groupId, id, sentence)
 
 function leafLocator(leaf) {
   if (leaf.kind === 'option') return leaf.id.replace(/:([^:]+)$/, '#option=$1')
@@ -149,18 +151,31 @@ export function openOtterDictionary(rootDir) {
   const files = new Map()
   const headwords = new Map()
   const aliases = new Map()
+  const phraseAliases = new Map()
   const phraseIds = new Set()
+  const exampleSentences = new Map()
   const entries = createBoundedLru({ maxEntries: 300 })
   const readEntry = name => JSON.parse(readFileSync(path.join(entriesDir, name), 'utf8'))
   const names = readOptional(() => readdirSync(entriesDir), []).filter(name => name.endsWith('.json')).sort()
   for (const name of names) {
-    const { entryId, headword, variants, forms, kind } = readEntry(name)
+    const { entryId, headword, variants, forms, kind, senses } = readEntry(name)
     if (kind === 'phrase') phraseIds.add(entryId)
     files.set(entryId, name)
     headwords.set(normalize(headword), entryId)
     for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
       const key = normalize(form).toLowerCase()
       aliases.set(key, !aliases.has(key) || aliases.get(key) === entryId ? entryId : null)
+      if (kind === 'phrase') {
+        const phraseKey = normalizePhraseAlias(form)
+        phraseAliases.set(phraseKey, !phraseAliases.has(phraseKey) || phraseAliases.get(phraseKey) === entryId ? entryId : null)
+      }
+    }
+    for (const sense of senses) {
+      for (const { text, source: { paperId, groupId, locator } } of sense.examples) {
+        const key = sentenceKey(paperId, groupId, locator.paragraphId ?? locator.questionId, locator.sentence)
+        if (!exampleSentences.has(key)) exampleSentences.set(key, new Set())
+        exampleSentences.get(key).add(cleanExample(text))
+      }
     }
   }
   const occurrences = new Map()
@@ -169,8 +184,13 @@ export function openOtterDictionary(rootDir) {
   for (const row of readOccurrenceRows(path.join(dir, 'occurrence-senses.ndjson'))) {
     const locator = occurrenceKey(row.paperId, row.groupId, row.paragraphId ?? row.questionId)
     if (phraseIds.has(row.entryId)) {
+      // Bundled legacy rows store the sentence ordinal but leave the text in the examples.
+      const indexedSentences = row.sentenceText
+        ? [row.sentenceText]
+        : exampleSentences.get(sentenceKey(row.paperId, row.groupId, row.paragraphId ?? row.questionId, row.sentence))
+      if (!indexedSentences) continue
       if (!phrases.has(locator)) phrases.set(locator, [])
-      phrases.get(locator).push(row)
+      phrases.get(locator).push({ ...row, indexedSentences })
       continue
     }
     let positions = occurrences.get(locator)
@@ -185,6 +205,7 @@ export function openOtterDictionary(rootDir) {
     if (!matches.has(matchKey)) matches.set(matchKey, { entryId: row.entryId, senseId: row.senseId })
     positions.set(key, matches.get(matchKey))
   }
+  exampleSentences.clear()
   function entryById(entryId) {
     const name = files.get(entryId)
     if (!name) return null
@@ -196,10 +217,11 @@ export function openOtterDictionary(rootDir) {
   }
   function findId(surface) {
     const key = normalize(surface)
-    const lower = key.toLowerCase()
-    if (headwords.has(key) || aliases.has(lower)) return headwords.get(key) ?? aliases.get(lower)
-    const placeholder = aliases.get(lower.replace(/\b(?:my|your|his|her|its|our|their)\b/g, "one's"))
-    return phraseIds.has(placeholder) ? placeholder : null
+    const direct = headwords.get(key) ?? aliases.get(key.toLowerCase())
+    if (direct !== undefined || !/\s/u.test(key)) return direct
+    const phrase = normalizePhraseAlias(key)
+    if (phraseAliases.has(phrase)) return phraseAliases.get(phrase)
+    return phraseAliases.get(phrase.replace(/\b(?:my|your|his|her|its|our|their)\b/g, "one's"))
   }
   return {
     available: files.size > 0,
@@ -217,24 +239,26 @@ export function openOtterDictionary(rootDir) {
         if (leaf.end <= start || leaf.start >= end) return []
         const locator = occurrenceKey(paperId, stream.groupId, leafLocator(leaf))
         const rows = phrases.get(locator)
-        if (!rows) return []
+        if (!rows?.length) return []
         const text = stream.text.slice(leaf.start, leaf.end)
-        const sentences = phraseOccurrenceSentences(text)
+        const block = normalizePhraseText(text)
         const from = codePointOffset(text, Math.max(0, start - leaf.start))
         const to = codePointOffset(text, end - leaf.start)
         return [...rows].sort((a, b) => a.sentence - b.sentence || a.start - b.start).flatMap(row => {
-          const indexed = locatePhraseOccurrence(sentences, row)
-          if (!indexed) return []
+          const positions = new Map()
+          for (const sentence of row.indexedSentences) {
+            const indexed = locatePhraseOccurrence(block, row, sentence)
+            if (indexed) positions.set(occurrenceKey(indexed.from, indexed.to, indexed.parts), indexed)
+          }
+          if (positions.size !== 1) return []
+          const [indexed] = positions.values()
           const hit = word
-            ? (row.parts ?? [[row.start, row.end]]).some(([s, e]) => indexed.origin + s <= from && to <= indexed.origin + e)
+            ? indexed.parts.some(([s, e]) => s <= from && to <= e)
             : from <= indexed.from && indexed.to <= to
           if (!hit) return []
           const entry = entryById(row.entryId)
           const sense = entry.senses.find(item => item.senseId === row.senseId)
           if (!sense) return []
-          const examples = sense.examples.filter(({ source }) => source.locator.sentence === row.sentence &&
-            occurrenceKey(source.paperId, source.groupId, source.locator.paragraphId ?? source.locator.questionId) === locator)
-          if (examples.length && !examples.some(example => example.text === indexed.sentenceText)) return []
           const exact = !word && start >= leaf.start && end <= leaf.end && from === indexed.from && to === indexed.to
           return [{ entry, sense, exact }]
         })
