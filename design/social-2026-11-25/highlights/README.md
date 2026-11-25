@@ -6,3 +6,8 @@
   1 封面 · 2 答案速查 · 3 定位 + 原文依据（阅读 B 篇 25）· 4 错项逐个讲（26）· 5 长难句（关联 34）· 6 完形找法（48）· 7 作文三篇范文 · 8 全卷覆盖
 - `build.py`：生成 2–8 页的 HTML（`python3 build.py <Noto Serif SC 字体目录> <输出目录>`），`shot.js` 截图。
 - `cover.html` + `R1.png`：封面排版和底图（gpt-image-2.6-sunburst，`prompt-R1.txt`），字体替换 `FONTS_SERIF`。
+
+## 第二版（2026-11-25）
+
+- 封面底图换成 `R2.png`：獭獭看镜头、爪子指着书上的高亮行（`prompt-R2.txt`）。`R3.png` 是低头看书的一版，对比 `contact-R.png`（左 R1 原版）。
+- 2–7 页改成「解析原页截图 + 右侧标注」：`crops/` 是从 2026 卷 PDF 按 300dpi 渲染后裁下的原图，`build2.py <字体目录> <输出目录> <crops目录>` 生成，`shot2.js` 截图。第 2 页另加听力第 2 题的截图。
