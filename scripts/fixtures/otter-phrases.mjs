@@ -4,6 +4,8 @@ import { indexPhraseOccurrence } from '../../shared/paper-dictionary/phraseOccur
 
 export const text = 'She gave it up and made up her mind.'
 export const laterText = 'Rain fell. Due to fog, we waited. Due to rain, we stayed.'
+const takeOffSentence = 'They took off.'
+export const takeOffText = `🦦 ${takeOffSentence} ${takeOffSentence}`
 export const source = {
   paperId: 'paper-phrases', sourceRevision: 'rev-1',
   streams: [{
@@ -12,7 +14,10 @@ export const source = {
   }, {
     streamId: 'later', groupId: 'g', role: 'passage-body', text: laterText,
     leaves: [{ kind: 'paragraph', id: 'p2', start: 0, end: laterText.length }],
-  }],
+  }, ...['anchored', 'ambiguous'].map(streamId => ({
+    streamId, groupId: 'g', role: 'passage-body', text: takeOffText,
+    leaves: [{ kind: 'paragraph', id: streamId, start: 0, end: takeOffText.length }],
+  }))],
 }
 
 export function installOtterPhraseFixture(root) {
@@ -27,6 +32,8 @@ export function installOtterPhraseFixture(root) {
       variants: ["made up one's mind"], glossZh: '下定决心' },
     { entryId: 'w:due-to', headword: 'due to', kind: 'phrase', glossZh: '由于',
       exampleText: 'Due to fog, we waited.', locator: { paragraphId: 'p2', sentence: 2 } },
+    { entryId: 'w:take-off', headword: 'take off', kind: 'phrase', glossZh: '起飞',
+      exampleText: takeOffSentence, locator: { paragraphId: 'ambiguous', sentence: 2 } },
   ]
   const rows = [
     { entryId: 'w:give', start: 4, end: 8 },
@@ -50,6 +57,15 @@ export function installOtterPhraseFixture(root) {
   occurrences.push({
     paperId: source.paperId, groupId: 'g', paragraphId: 'p2', sentence: 2,
     start: 0, end: 6, surface: 'Due to', entryId: 'w:due-to', senseId: 'w:due-to#s1',
+  })
+  const sentenceStart = takeOffText.lastIndexOf(takeOffSentence)
+  const start = takeOffText.lastIndexOf('took off')
+  const takeOff = { paperId: source.paperId, groupId: 'g', sentence: 2, entryId: 'w:take-off', senseId: 'w:take-off#s1' }
+  occurrences.push({
+    ...takeOff, paragraphId: 'anchored',
+    ...indexPhraseOccurrence(takeOffText, { start: sentenceStart, text: takeOffSentence }, [start, start + 8]),
+  }, {
+    ...takeOff, paragraphId: 'ambiguous', start: 5, end: 13, surface: 'took off',
   })
   writeFileSync(path.join(dir, 'occurrence-senses.ndjson'), occurrences.map(row => JSON.stringify(row)).join('\n'))
 }

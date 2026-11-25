@@ -29,7 +29,7 @@ import { initializeUsageLedger } from '../server/paper-translation/usageLedger.m
 import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from '../server/paper-dictionary/routes.mjs'
 import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
-import { installOtterPhraseFixture, laterText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
+import { installOtterPhraseFixture, laterText, takeOffText, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
 import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
 import { indexPhraseOccurrence, locatePhraseOccurrence, normalizePhraseText } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
@@ -936,6 +936,16 @@ evilRuntime.close()
     && !thirdAfterEdit.otterSenseId && !thirdAfterEdit.phrases)
   check('a changed example sentence falls back even with the same phrase and offset',
     !changedSecond.otterSenseId && !changedSecond.phrases)
+  const firstTakeOff = takeOffText.indexOf('took off')
+  const secondTakeOff = takeOffText.lastIndexOf('took off')
+  const anchored = await select('took off', secondTakeOff, 'anchored')
+  const other = await select('took off', firstTakeOff, 'anchored')
+  check('an absolute sentence origin assigns a phrase only to the indexed copy of a repeated sentence',
+    anchored.otterSenseId === 'w:take-off#s1' && !other.otterSenseId && !other.phrases)
+  const legacyMatches = await Promise.all([firstTakeOff, secondTakeOff]
+    .map(start => select('took off', start, 'ambiguous')))
+  check('a legacy phrase in a repeated sentence returns no contextual sense or phrase',
+    legacyMatches.every(result => !result.otterSenseId && !result.phrases))
   phraseRuntime.close()
 }
 
@@ -943,12 +953,12 @@ evilRuntime.close()
   const indexedSentence = "They can't wait."
   const start = indexedSentence.indexOf("can't")
   const indexed = indexPhraseOccurrence(indexedSentence, { start: 0, text: indexedSentence }, [start, start + 5])
-  const repeated = '🦦 They can’t wait. They   can’t wait.'
-  const block = normalizePhraseText(repeated)
-  check('repeated normalized sentences use the indexed occurrence order and map back to source offsets',
-    locatePhraseOccurrence(block, { ...indexed, sentence: 2 }, indexed.sentenceText)?.from === repeated.lastIndexOf('can’t') - 1
-    && locatePhraseOccurrence(block, { ...indexed, sentence: 1 }, indexed.sentenceText)?.from === repeated.indexOf('can’t') - 1
-    && locatePhraseOccurrence(block, { ...indexed, sentence: 3 }, indexed.sentenceText) === null)
+  const normalized = '🦦 They   can’t wait.'
+  const anchored = { ...indexed, sentence: 1, sentenceStart: 2 }
+  check('an absolute origin preserves apostrophe and whitespace normalization in source offsets',
+    locatePhraseOccurrence(normalizePhraseText(normalized), anchored, indexed.sentenceText)?.from === normalized.indexOf('can’t') - 1)
+  check('a stale absolute origin does not fall back to another copy of the saved sentence',
+    locatePhraseOccurrence(normalizePhraseText('🦦 They won’t wait. They can’t wait.'), anchored, indexed.sentenceText) === null)
   const nationalA = JSON.parse(readFileSync(path.join(rootDir, 'test-fixtures/retired-paper-assets/paper-2023-jia/latest/paper-asset.json'), 'utf8'))
   const nationalAText = nationalA.content.groups['group-2023-jia-reading-d'].passage.paragraphs
     .find(paragraph => paragraph.paragraphId === 'para-2023-jia-reading-d-4').text

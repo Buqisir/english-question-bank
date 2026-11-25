@@ -1,10 +1,11 @@
 export const codePointOffset = (text, utf16Offset) => [...text.slice(0, utf16Offset)].length
 
-// Store the producer's trimmed sentence and its sentence-relative code-point offsets.
+// Store the producer's trimmed sentence, its block origin, and the sentence-relative offsets.
 export function indexPhraseOccurrence(leafText, { start: sentenceStart, text: sentenceText }, [start, end], parts) {
   const origin = codePointOffset(leafText, sentenceStart)
   const offset = index => codePointOffset(leafText, index) - origin
   return {
+    sentenceStart: origin,
     sentenceText,
     surface: leafText.slice(start, end),
     start: offset(start),
@@ -32,27 +33,23 @@ export function normalizePhraseText(text) {
   return { text: normalized.trimEnd(), starts, ends }
 }
 
-const wordStart = /^[\p{L}\p{M}\p{N}]/u
-const wordEnd = /[\p{L}\p{M}\p{N}]$/u
-
 export function locatePhraseOccurrence(block, row, sentenceText) {
-  const { sentence, start, end, surface } = row
+  const { sentence, sentenceStart, start, end, surface } = row
   if (!Number.isInteger(sentence) || sentence < 1 || !surface) return null
   const quote = normalizePhraseText(sentenceText.trim())
   const from = quote.starts.indexOf(start)
   const to = quote.ends.indexOf(end)
   if (from < 0 || to <= from || quote.text.slice(from, to) !== normalizePhraseText(surface).text) return null
 
-  const matches = []
-  let base = block.text.indexOf(quote.text)
-  while (base >= 0) {
-    const after = base + quote.text.length
-    if ((!wordStart.test(quote.text) || !wordEnd.test(block.text.slice(0, base))) &&
-        !wordStart.test(block.text.slice(after))) matches.push(base)
-    base = block.text.indexOf(quote.text, after)
+  let at
+  if (Object.hasOwn(row, 'sentenceStart')) {
+    if (!Number.isInteger(sentenceStart) || sentenceStart < 0) return null
+    at = block.starts.indexOf(sentenceStart)
+    if (at < 0 || !block.text.startsWith(quote.text, at)) return null
+  } else {
+    at = block.text.indexOf(quote.text)
+    if (at < 0 || block.text.indexOf(quote.text, at + 1) >= 0) return null
   }
-  const at = matches.length === 1 ? matches[0] : matches[sentence - 1]
-  if (at == null) return null
 
   const parts = []
   for (const [partStart, partEnd] of row.parts ?? [[start, end]]) {

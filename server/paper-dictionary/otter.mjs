@@ -184,6 +184,8 @@ export function openOtterDictionary(rootDir) {
   for (const row of readOccurrenceRows(path.join(dir, 'occurrence-senses.ndjson'))) {
     const locator = occurrenceKey(row.paperId, row.groupId, row.paragraphId ?? row.questionId)
     if (phraseIds.has(row.entryId)) {
+      // occurrence-senses.ndjson schema: optional sentenceStart is a zero-based
+      // code-point offset of the trimmed sentence in the original block.
       // Bundled legacy rows store the sentence ordinal but leave the text in the examples.
       const indexedSentences = row.sentenceText
         ? [row.sentenceText]
