@@ -41,7 +41,12 @@
     "us": null
   },
   "pronunciations": [],
-  "forms": [],
+  "forms": [
+    {
+      "form": "drives down",
+      "tags": []
+    }
+  ],
   "version": 1,
   "updatedAt": "2026-11-25",
   "headword": "drive sth down",
@@ -50,25 +55,57 @@
       "senseId": "w:drive-down#s1",
       "pos": "短语",
       "glossZh": "压低（价格、成本、比率等）",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:drive-down#e-7ce3fa1a1b73fa09",
+          "text": "The more it is used, the more it drives down the price of electricity from all sources.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              44
+            ]
+          ]
+        }
+      ],
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "dictionary",
-  "folded": true
+  "origin": "mock",
+  "folded": false
 }

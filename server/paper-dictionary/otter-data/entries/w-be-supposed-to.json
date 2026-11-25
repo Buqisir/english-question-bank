@@ -44,6 +44,22 @@
     {
       "form": "are supposed to",
       "tags": []
+    },
+    {
+      "form": "i'm supposed to",
+      "tags": []
+    },
+    {
+      "form": "it's supposed to",
+      "tags": []
+    },
+    {
+      "form": "that's supposed to",
+      "tags": []
+    },
+    {
+      "form": "they're supposed to",
+      "tags": []
     }
   ],
   "version": 1,
@@ -123,40 +139,40 @@
           ]
         },
         {
-          "exampleId": "w:be-supposed-to#e-9fc7d3fa32bcfca4",
-          "text": "Each student was supposed to bake cookies with their father.",
+          "exampleId": "w:be-supposed-to#e-2eaab2f0e58e3a4e",
+          "text": "Sometimes it’s because I actually am busy, but other times it’s because that’s what I think I’m supposed to say.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:2",
-              "sentence": 3
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:1",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 13,
-            "end": 28
+            "start": 92,
+            "end": 107
           },
           "parts": [
             [
-              13,
-              28
+              92,
+              107
             ]
           ],
           "highlightRanges": [
             [
-              13,
-              28
+              92,
+              107
             ]
           ]
         }
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 4
+        "mock": 6
       }
     },
     {
@@ -265,14 +281,14 @@
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 10
+        "mock": 15
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 14
+    "mock": 21
   },
   "unassignedCounts": {
     "gaokao": 0,

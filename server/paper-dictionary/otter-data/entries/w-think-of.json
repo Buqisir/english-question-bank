@@ -154,7 +154,7 @@
       "note": "常用于 What do you think of …?",
       "counts": {
         "gaokao": 28,
-        "mock": 173
+        "mock": 174
       }
     },
     {
@@ -484,7 +484,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 34,
-    "mock": 234
+    "mock": 235
   },
   "unassignedCounts": {
     "gaokao": 0,

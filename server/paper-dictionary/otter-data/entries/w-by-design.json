@@ -103,46 +103,46 @@
           ]
         },
         {
-          "exampleId": "w:by-design#e-71ac32da4b8c2593",
-          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
+          "exampleId": "w:by-design#e-c1cdd2a827f2a5da",
+          "text": "As we soon come to learn from AI by Design, AI is already super-smart and will become more capable, moving from the current generation of “narrow-AI\" to Artificial General Intelligence.",
           "source": {
             "paperId": "paper-gaokao-2024-ii",
             "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
             "groupId": "group:paper-gaokao-2024-ii:reading-d",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:3",
               "sentence": 1
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 146,
-            "end": 155
+            "start": 33,
+            "end": 42
           },
           "parts": [
             [
-              146,
-              155
+              33,
+              42
             ]
           ],
           "highlightRanges": [
             [
-              146,
-              155
+              33,
+              42
             ]
           ]
         }
       ],
       "counts": {
-        "gaokao": 3,
+        "gaokao": 4,
         "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 3,
+    "gaokao": 4,
     "mock": 2
   },
   "unassignedCounts": {

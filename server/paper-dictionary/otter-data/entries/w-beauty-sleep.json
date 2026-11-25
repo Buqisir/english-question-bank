@@ -38,26 +38,58 @@
       "senseId": "w:beauty-sleep#s1",
       "pos": "短语",
       "glossZh": "美容觉；为恢复好气色而睡的觉",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:beauty-sleep#e-cbe45f5ae49d93b4",
+          "text": "You wouldn’t wanna get stepped on by members of the track team in the middle of your beauty sleep, right?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 97
+          },
+          "parts": [
+            [
+              85,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              97
+            ]
+          ]
+        }
+      ],
       "note": "也可诙谐地指自己需要的睡眠或补的一觉。",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "dictionary",
-  "folded": true
+  "origin": "mock",
+  "folded": false
 }

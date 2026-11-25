@@ -53,6 +53,10 @@
     {
       "form": "had no time for",
       "tags": []
+    },
+    {
+      "form": "i've no time for",
+      "tags": []
     }
   ],
   "version": 1,
@@ -173,20 +177,52 @@
       "senseId": "w:have-no-time-for#s2",
       "pos": "短语",
       "glossZh": "不愿理会；无法容忍",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:have-no-time-for#e-4ad4b34eb30f86a8",
+          "text": "“I’ve no time for this nonsense!”",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 17
+          },
+          "parts": [
+            [
+              1,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              17
+            ]
+          ]
+        }
+      ],
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 1,
-    "mock": 2
+    "mock": 3
   },
   "unassignedCounts": {
     "gaokao": 0,

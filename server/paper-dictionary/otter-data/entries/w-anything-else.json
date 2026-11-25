@@ -101,47 +101,47 @@
           ]
         },
         {
-          "exampleId": "w:anything-else#e-ccb89edfe377a4b5",
-          "text": "When we arrived, I asked her whether she needed anything else.",
+          "exampleId": "w:anything-else#e-29651576f3790826",
+          "text": "“Different strokes for different folks” applies as much to dining as to anything else.",
           "source": {
-            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
-            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
-            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:writing-continuation",
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:seven-choices",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:writing-continuation:5",
-              "sentence": 4
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:seven-choices:1",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 48,
-            "end": 61
+            "start": 72,
+            "end": 85
           },
           "parts": [
             [
-              48,
-              61
+              72,
+              85
             ]
           ],
           "highlightRanges": [
             [
-              48,
-              61
+              72,
+              85
             ]
           ]
         }
       ],
       "counts": {
         "gaokao": 2,
-        "mock": 3
+        "mock": 5
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 2,
-    "mock": 3
+    "mock": 5
   },
   "unassignedCounts": {
     "gaokao": 0,

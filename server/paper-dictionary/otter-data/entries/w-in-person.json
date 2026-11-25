@@ -106,46 +106,46 @@
           ]
         },
         {
-          "exampleId": "w:in-person#e-04d5c3d673cf3ae2",
-          "text": "Instead of following the polished versions of one another’s lives, they could get together in person",
+          "exampleId": "w:in-person#e-cacb12a6e857aaeb",
+          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
           "source": {
-            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
-            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
-            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices",
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
             "locator": {
-              "paragraph": 21,
-              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices:21",
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
               "sentence": 1
             }
           },
-          "tier": "mock",
+          "tier": "gaokao",
           "target": {
-            "start": 91,
-            "end": 100
+            "start": 125,
+            "end": 134
           },
           "parts": [
             [
-              91,
-              100
+              125,
+              134
             ]
           ],
           "highlightRanges": [
             [
-              91,
-              100
+              125,
+              134
             ]
           ]
         }
       ],
       "counts": {
-        "gaokao": 8,
+        "gaokao": 9,
         "mock": 21
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 8,
+    "gaokao": 9,
     "mock": 21
   },
   "unassignedCounts": {

@@ -35,6 +35,10 @@
     {
       "form": "was caught in",
       "tags": []
+    },
+    {
+      "form": "you're caught in",
+      "tags": []
     }
   ],
   "version": 1,
@@ -51,6 +55,37 @@
         "w:catch#s10"
       ],
       "examples": [
+        {
+          "exampleId": "w:be-caught-in#e-56b202dd1171c885",
+          "text": "If you’re caught in a cycle of overthinking, remember that you’re not alone.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 19
+          },
+          "parts": [
+            [
+              3,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              19
+            ]
+          ]
+        },
         {
           "exampleId": "w:be-caught-in#e-de912c61481ddd20",
           "text": "Cities Are Caught in Crisis",
@@ -118,14 +153,14 @@
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 2
+    "mock": 3
   },
   "unassignedCounts": {
     "gaokao": 0,

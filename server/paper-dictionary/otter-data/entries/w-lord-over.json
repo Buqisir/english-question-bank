@@ -37,7 +37,12 @@
     "us": null
   },
   "pronunciations": [],
-  "forms": [],
+  "forms": [
+    {
+      "form": "lord over",
+      "tags": []
+    }
+  ],
   "version": 1,
   "updatedAt": "2026-11-25",
   "headword": "lord over sb/sth",
@@ -46,14 +51,46 @@
       "senseId": "w:lord-over#s1",
       "pos": "短语",
       "glossZh": "盛气凌人地支配；对人摆架子",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:lord-over#e-5d2f8bfd0184cb56",
+          "text": "The host then voiced a concern: as AI advances, machines will come to lord over us.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          },
+          "parts": [
+            [
+              70,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              79
+            ]
+          ]
+        }
+      ],
       "note": "常见用法为 lord it over sb。",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       }
     },
     {
@@ -88,12 +125,12 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "dictionary",
-  "folded": true
+  "origin": "mock",
+  "folded": false
 }

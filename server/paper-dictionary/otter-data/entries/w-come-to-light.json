@@ -86,18 +86,50 @@
               71
             ]
           ]
+        },
+        {
+          "exampleId": "w:come-to-light#e-1a58e2027075a5be",
+          "text": "His works didn’t come to light until he died.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 30
+          },
+          "parts": [
+            [
+              17,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              30
+            ]
+          ]
         }
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 2
   },
   "unassignedCounts": {
     "gaokao": 0,

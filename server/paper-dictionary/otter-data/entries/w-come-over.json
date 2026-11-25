@@ -237,6 +237,37 @@
           ]
         },
         {
+          "exampleId": "w:come-over#e-5c8386522ec6ddad",
+          "text": "I saw your post – could this be your bird?” A bit of relief came over me.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 69
+          },
+          "parts": [
+            [
+              60,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              69
+            ]
+          ]
+        },
+        {
           "exampleId": "w:come-over#e-68dc27bb53e40797",
           "text": "I’m not sure what came over me – perhaps it was because my husband was watching a film that didn’t particularly interest me – but I decided to give it a go.",
           "source": {
@@ -270,7 +301,7 @@
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       }
     },
     {
@@ -304,7 +335,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 1,
-    "mock": 11
+    "mock": 12
   },
   "unassignedCounts": {
     "gaokao": 0,

@@ -38,7 +38,12 @@
     "us": null
   },
   "pronunciations": [],
-  "forms": [],
+  "forms": [
+    {
+      "form": "he's fed up with",
+      "tags": []
+    }
+  ],
   "version": 1,
   "updatedAt": "2026-11-25",
   "headword": "be fed up with sth",
@@ -47,27 +52,60 @@
       "senseId": "w:be-fed-up-with-sth#s1",
       "pos": "短语",
       "glossZh": "对某事烦透了；受够了某事",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [
         "w:feed#s8"
       ],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:be-fed-up-with-sth#e-055d86ce206b8404",
+          "text": "He’s fed up with it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "dictionary",
-  "folded": true
+  "origin": "mock",
+  "folded": false
 }

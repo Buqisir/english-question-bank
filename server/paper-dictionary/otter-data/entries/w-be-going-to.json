@@ -35,7 +35,27 @@
       "tags": []
     },
     {
+      "form": "i'm going to",
+      "tags": []
+    },
+    {
       "form": "is going to",
+      "tags": []
+    },
+    {
+      "form": "it's going to",
+      "tags": []
+    },
+    {
+      "form": "someone's going to",
+      "tags": []
+    },
+    {
+      "form": "that's going to",
+      "tags": []
+    },
+    {
+      "form": "they're going to",
       "tags": []
     },
     {
@@ -43,7 +63,15 @@
       "tags": []
     },
     {
+      "form": "we're going to",
+      "tags": []
+    },
+    {
       "form": "were going to",
+      "tags": []
+    },
+    {
+      "form": "you're going to",
       "tags": []
     }
   ],
@@ -60,102 +88,103 @@
       "legacySenseIds": [],
       "examples": [
         {
-          "exampleId": "w:be-going-to#e-2a2710d80ccac559",
-          "text": "“We are going to make a change, \" she said.",
+          "exampleId": "w:be-going-to#e-97d5f794c5e2c336",
+          "text": "I missed that paragraph because I was thinking of something else, but I’m going to keep on going and start paying close attention.”",
           "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
-              "sentence": 2
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 4
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 4,
-            "end": 16
+            "start": 70,
+            "end": 82
           },
           "parts": [
             [
-              4,
-              16
+              70,
+              82
             ]
           ],
           "highlightRanges": [
             [
-              4,
-              16
+              70,
+              82
             ]
           ]
         },
         {
-          "exampleId": "w:be-going-to#e-eaf40300d2e38e14",
-          "text": "Still, the moment we were going to solve the last riddle together, I realized I was beginning to belong.",
+          "exampleId": "w:be-going-to#e-e4c9739a5d53e74f",
+          "text": "As the speaker, you already know what you’re going to say.",
           "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 53
+          },
+          "parts": [
+            [
+              38,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-going-to#e-cba2476f3c954b8b",
+          "text": "“I’m going to set it down, now,” I said, and with Jason helping to support its weight， I bent back over the table to give it somewhere to rest.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
             "locator": {
               "paragraph": 5,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:5",
-              "sentence": 5
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 3
             }
           },
-          "tier": "mock",
+          "tier": "gaokao",
           "target": {
-            "start": 21,
-            "end": 34
+            "start": 1,
+            "end": 13
           },
           "parts": [
             [
-              21,
-              34
+              1,
+              13
             ]
           ],
           "highlightRanges": [
             [
-              21,
-              34
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:be-going-to#e-d048c9f1be77ab92",
-          "text": "One reason why we arrived so early was that we didn’t have any idea how we were going to arrange our space.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
-            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:6",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 75,
-            "end": 88
-          },
-          "parts": [
-            [
-              75,
-              88
-            ]
-          ],
-          "highlightRanges": [
-            [
-              75,
-              88
+              1,
+              13
             ]
           ]
         }
       ],
       "counts": {
-        "gaokao": 1,
-        "mock": 7
+        "gaokao": 11,
+        "mock": 18
       }
     },
     {
@@ -231,47 +260,47 @@
           ]
         },
         {
-          "exampleId": "w:be-going-to#e-6db23e5d8e0dfe5d",
-          "text": "It was only when I tried to remove my head that I realized getting out was going to be less straightforward than getting in.",
+          "exampleId": "w:be-going-to#e-449ebeab18438b12",
+          "text": "“If you’re scared about something and thinking only about that, there’s no way you’re going to be able to learn,” Ho says.",
           "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
-              "sentence": 4
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+              "sentence": 3
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 71,
-            "end": 83
+            "start": 79,
+            "end": 94
           },
           "parts": [
             [
-              71,
-              83
+              79,
+              94
             ]
           ],
           "highlightRanges": [
             [
-              71,
-              83
+              79,
+              94
             ]
           ]
         }
       ],
       "counts": {
-        "gaokao": 5,
-        "mock": 20
+        "gaokao": 8,
+        "mock": 34
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 6,
-    "mock": 27
+    "gaokao": 19,
+    "mock": 52
   },
   "unassignedCounts": {
     "gaokao": 0,

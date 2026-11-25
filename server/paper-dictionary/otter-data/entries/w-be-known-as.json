@@ -37,7 +37,19 @@
       "tags": []
     },
     {
+      "form": "he's known as",
+      "tags": []
+    },
+    {
       "form": "is known as",
+      "tags": []
+    },
+    {
+      "form": "it's known as",
+      "tags": []
+    },
+    {
+      "form": "what's known as",
       "tags": []
     }
   ],
@@ -87,6 +99,37 @@
           ]
         },
         {
+          "exampleId": "w:be-known-as#e-3e0a3dcc216a983c",
+          "text": "On March 7,1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 121
+          },
+          "parts": [
+            [
+              110,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              121
+            ]
+          ]
+        },
+        {
           "exampleId": "w:be-known-as#e-9d96708ea839c590",
           "text": "This accidental harvest is known as bycatch, and every year it kills millions of marine animals.",
           "source": {
@@ -116,42 +159,11 @@
               35
             ]
           ]
-        },
-        {
-          "exampleId": "w:be-known-as#e-16d408ed434f6799",
-          "text": "This phenomenon is known as “greenhushing” and it could be just as dangerous as greenwashing.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
-            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
-            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 27
-          },
-          "parts": [
-            [
-              16,
-              27
-            ]
-          ],
-          "highlightRanges": [
-            [
-              16,
-              27
-            ]
-          ]
         }
       ],
       "counts": {
-        "gaokao": 1,
-        "mock": 26
+        "gaokao": 2,
+        "mock": 30
       }
     },
     {
@@ -162,6 +174,37 @@
       "folded": false,
       "legacySenseIds": [],
       "examples": [
+        {
+          "exampleId": "w:be-known-as#e-19bc169e4eb3dcc0",
+          "text": "He’s known as a chef, best-selling food writer, and podcast host, but he grew up as a musician.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
         {
           "exampleId": "w:be-known-as#e-c613c52b3ee2408a",
           "text": "Khoomei, a traditional art form from Mongolia, is known as a kind of throat singing.",
@@ -194,78 +237,47 @@
           ]
         },
         {
-          "exampleId": "w:be-known-as#e-0a996bf41d90d085",
-          "text": "Drug development has long been known as a high-risk and high-cost process.",
+          "exampleId": "w:be-known-as#e-68a56daf2a96f01d",
+          "text": "In three short years, Thorleifsson has become a legend in his hometown, where he’s known as a “benevolent (仁慈的) tech titan”.",
           "source": {
-            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
-            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
-            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-d",
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:cloze",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-d:1",
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:cloze:6",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 39
+            "start": 78,
+            "end": 91
           },
           "parts": [
             [
-              26,
-              39
+              78,
+              91
             ]
           ],
           "highlightRanges": [
             [
-              26,
-              39
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:be-known-as#e-62cab563f1d30ae5",
-          "text": "Above all we should be known as a school devoted to developing healthy minds and bodies, always ready to cooperate and compete.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n123",
-            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
-            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 20,
-            "end": 31
-          },
-          "parts": [
-            [
-              20,
-              31
-            ]
-          ],
-          "highlightRanges": [
-            [
-              20,
-              31
+              78,
+              91
             ]
           ]
         }
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 5
+        "mock": 7
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 1,
-    "mock": 31
+    "gaokao": 2,
+    "mock": 37
   },
   "unassignedCounts": {
     "gaokao": 0,

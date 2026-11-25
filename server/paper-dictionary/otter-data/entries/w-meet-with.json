@@ -50,6 +50,116 @@
   "headword": "meet with",
   "senses": [
     {
+      "senseId": "w:meet-with#s2",
+      "pos": "短语",
+      "glossZh": "遭遇（困难等）；得到（某种反应或结果）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:meet#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:meet-with#e-537b636ca8cfb4af",
+          "text": "Most parents will have eagerly asked their child about their day, only to meet with a “good”, quickly followed by \"I’m hungry\".",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 83
+          },
+          "parts": [
+            [
+              74,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meet-with#e-da10026c805ff1fa",
+          "text": "Our next thought, a drink at the hotel bar, was met with another sign: “Closed on Mondays”.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          },
+          "parts": [
+            [
+              48,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meet-with#e-d7079583bf1c1988",
+          "text": "It could feel small: the same faces in the same places, and where a new café or gallery was often met with doubt.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 106
+          },
+          "parts": [
+            [
+              98,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              106
+            ]
+          ]
+        }
+      ],
+      "note": "反应义也常用 be met with sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
       "senseId": "w:meet-with#s1",
       "pos": "短语",
       "glossZh": "与……会面；与……商谈",
@@ -125,127 +235,17 @@
         "gaokao": 0,
         "mock": 2
       }
-    },
-    {
-      "senseId": "w:meet-with#s2",
-      "pos": "短语",
-      "glossZh": "遭遇（困难等）；得到（某种反应或结果）",
-      "origin": "mock",
-      "folded": false,
-      "legacySenseIds": [
-        "w:meet#s5"
-      ],
-      "examples": [
-        {
-          "exampleId": "w:meet-with#e-da10026c805ff1fa",
-          "text": "Our next thought, a drink at the hotel bar, was met with another sign: “Closed on Mondays”.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
-            "paperTitle": "南昌市2025年高三年级九月测试英语",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:writing-continuation:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 48,
-            "end": 56
-          },
-          "parts": [
-            [
-              48,
-              56
-            ]
-          ],
-          "highlightRanges": [
-            [
-              48,
-              56
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:meet-with#e-d7079583bf1c1988",
-          "text": "It could feel small: the same faces in the same places, and where a new café or gallery was often met with doubt.",
-          "source": {
-            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
-            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
-            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 98,
-            "end": 106
-          },
-          "parts": [
-            [
-              98,
-              106
-            ]
-          ],
-          "highlightRanges": [
-            [
-              98,
-              106
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:meet-with#e-324a19e26cc26940",
-          "text": "I felt like I was pouring years of love into an empty space, my constant efforts met with a peaceful, yet heartbreaking, apathy.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
-            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
-            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b:2",
-              "sentence": 8
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 81,
-            "end": 89
-          },
-          "parts": [
-            [
-              81,
-              89
-            ]
-          ],
-          "highlightRanges": [
-            [
-              81,
-              89
-            ]
-          ]
-        }
-      ],
-      "note": "反应义也常用 be met with sth。",
-      "counts": {
-        "gaokao": 0,
-        "mock": 6
-      }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 0,
+    "gaokao": 1,
     "mock": 8
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "mock",
+  "origin": "gaokao",
   "folded": false
 }

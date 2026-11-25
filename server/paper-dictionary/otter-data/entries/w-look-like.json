@@ -90,33 +90,33 @@
           ]
         },
         {
-          "exampleId": "w:look-like#e-c9137ec34ab3dd12",
-          "text": "\"They’re the only thing that looks like human language in that respect.”",
+          "exampleId": "w:look-like#e-ec62f9652c5c29cd",
+          "text": "\"There’s something about me,\" he thought – and it took him a few seconds but he finally remembered what she used to look like.",
           "source": {
             "paperId": "paper-gaokao-2021-zhejiang-jan",
             "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:3",
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
               "sentence": 2
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 29,
-            "end": 39
+            "start": 116,
+            "end": 125
           },
           "parts": [
             [
-              29,
-              39
+              116,
+              125
             ]
           ],
           "highlightRanges": [
             [
-              29,
-              39
+              116,
+              125
             ]
           ]
         },
@@ -154,7 +154,7 @@
         }
       ],
       "counts": {
-        "gaokao": 9,
+        "gaokao": 10,
         "mock": 51
       }
     },
@@ -269,7 +269,7 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 11,
+    "gaokao": 12,
     "mock": 59
   },
   "unassignedCounts": {

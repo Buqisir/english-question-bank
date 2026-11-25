@@ -31,6 +31,10 @@
       "tags": []
     },
     {
+      "form": "i'm careful",
+      "tags": []
+    },
+    {
       "form": "was careful",
       "tags": []
     }
@@ -47,6 +51,37 @@
       "folded": false,
       "legacySenseIds": [],
       "examples": [
+        {
+          "exampleId": "w:be-careful#e-e95c5b32d1dfa86c",
+          "text": "Because of this, I’m careful not to connect what my kids weigh with their worth as people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        },
         {
           "exampleId": "w:be-careful#e-54207bfacbf77938",
           "text": "And be careful about the foods you keep at hand.",
@@ -109,49 +144,18 @@
               10
             ]
           ]
-        },
-        {
-          "exampleId": "w:be-careful#e-29785e576dafdca5",
-          "text": "If you are careful, your house plants will offer oxygen and companionship when you are able to get back to them.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
-            "paperTitle": "2025年「三新」协同教研共同体高三联考",
-            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 7,
-            "end": 18
-          },
-          "parts": [
-            [
-              7,
-              18
-            ]
-          ],
-          "highlightRanges": [
-            [
-              7,
-              18
-            ]
-          ]
         }
       ],
       "note": "可单独用来提醒别人，也可接 about 或 of。",
       "counts": {
-        "gaokao": 2,
+        "gaokao": 3,
         "mock": 13
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 2,
+    "gaokao": 3,
     "mock": 13
   },
   "unassignedCounts": {

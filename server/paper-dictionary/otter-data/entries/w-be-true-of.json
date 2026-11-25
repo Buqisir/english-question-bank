@@ -31,6 +31,10 @@
     {
       "form": "is true of",
       "tags": []
+    },
+    {
+      "form": "what's true of",
+      "tags": []
     }
   ],
   "version": 1,
@@ -47,6 +51,68 @@
         "w:true#s4"
       ],
       "examples": [
+        {
+          "exampleId": "w:be-true-of#e-72d357d8df3e04d8",
+          "text": "What’s true of gratitude is also true of kindness and generosity more generally.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-true-of#e-310710bfd85ac59b",
+          "text": "What’s true of gratitude is also true of kindness and generosity.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
         {
           "exampleId": "w:be-true-of#e-062add829691c7a8",
           "text": "Which of the following is true of Grinter’s story?",
@@ -81,14 +147,14 @@
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 3
   },
   "unassignedCounts": {
     "gaokao": 0,

@@ -42,6 +42,37 @@
       ],
       "examples": [
         {
+          "exampleId": "w:at-last#e-72dcd8f68b8e497a",
+          "text": "Paragraph 1: The pay arrived at last.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        },
+        {
           "exampleId": "w:at-last#e-5c5495b0d2f9149d",
           "text": "The big day came at last.",
           "source": {
@@ -102,48 +133,17 @@
               58
             ]
           ]
-        },
-        {
-          "exampleId": "w:at-last#e-35f2ef1285cb8f46",
-          "text": "What made the woman choose to travel by train at last?",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
-            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
-            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:listening.long-form",
-            "locator": {
-              "question": 10,
-              "questionId": "question:listening:10",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 46,
-            "end": 53
-          },
-          "parts": [
-            [
-              46,
-              53
-            ]
-          ],
-          "highlightRanges": [
-            [
-              46,
-              53
-            ]
-          ]
         }
       ],
       "counts": {
-        "gaokao": 2,
+        "gaokao": 3,
         "mock": 22
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 2,
+    "gaokao": 3,
     "mock": 22
   },
   "unassignedCounts": {

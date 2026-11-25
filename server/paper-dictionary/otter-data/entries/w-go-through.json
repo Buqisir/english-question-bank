@@ -350,40 +350,40 @@
           ]
         },
         {
-          "exampleId": "w:go-through#e-d457161f3dbb339a",
-          "text": "The next day, my sister and I were going through his old clothes when something fell out and hit the floor – it was a 1928 Wheat penny.",
+          "exampleId": "w:go-through#e-9785aafaf13576f2",
+          "text": "I used to go through one book continuously from beginning to end, taking notes or highlighting lines before going on to the next book.",
           "source": {
-            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
-            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
-            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices",
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices:4",
-              "sentence": 1
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:seven-choices:1",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 35,
-            "end": 48
+            "start": 10,
+            "end": 20
           },
           "parts": [
             [
-              35,
-              48
+              10,
+              20
             ]
           ],
           "highlightRanges": [
             [
-              35,
-              48
+              10,
+              20
             ]
           ]
         }
       ],
       "counts": {
         "gaokao": 2,
-        "mock": 3
+        "mock": 4
       }
     },
     {
@@ -475,7 +475,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 6,
-    "mock": 24
+    "mock": 25
   },
   "unassignedCounts": {
     "gaokao": 0,

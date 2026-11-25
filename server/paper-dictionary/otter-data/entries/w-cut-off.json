@@ -364,6 +364,51 @@
       }
     },
     {
+      "senseId": "w:cut-off#s4",
+      "pos": "短语",
+      "glossZh": "打断某人说话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-off#e-f3ca77f376c3ec04",
+          "text": "“I’m so sorry, but my...” she began, only to be cut off by Sophia whose patience had run out.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 55
+          },
+          "parts": [
+            [
+              48,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
       "senseId": "w:cut-off#s5",
       "pos": "短语",
       "glossZh": "截住去路；驾车突然插到前面",
@@ -407,25 +452,12 @@
         "gaokao": 0,
         "mock": 1
       }
-    },
-    {
-      "senseId": "w:cut-off#s4",
-      "pos": "短语",
-      "glossZh": "打断某人说话",
-      "origin": "dictionary",
-      "folded": true,
-      "legacySenseIds": [],
-      "examples": [],
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 17
+    "mock": 18
   },
   "unassignedCounts": {
     "gaokao": 0,

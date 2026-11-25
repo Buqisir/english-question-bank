@@ -39,6 +39,37 @@
       "legacySenseIds": [],
       "examples": [
         {
+          "exampleId": "w:you-guys#e-82fdfc8ec1c09599",
+          "text": "“I don’t know what I would have done without you guys” he said.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 53
+          },
+          "parts": [
+            [
+              45,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              53
+            ]
+          ]
+        },
+        {
           "exampleId": "w:you-guys#e-e1478d238354d776",
           "text": "“Are you guys responsible for this playlist?” A nod.",
           "source": {
@@ -73,14 +104,14 @@
       "note": "口语中用于称呼两人或多人。",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 2
   },
   "unassignedCounts": {
     "gaokao": 0,

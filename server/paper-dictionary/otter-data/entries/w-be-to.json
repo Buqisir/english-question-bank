@@ -458,6 +458,37 @@
       "legacySenseIds": [],
       "examples": [
         {
+          "exampleId": "w:be-to#e-0c68c3c83570ce4c",
+          "text": "What if he were to pay the $110 adoption fees for all 40 dogs?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
           "exampleId": "w:be-to#e-48ea4251e4787db1",
           "text": "Microplastic and nanoplastic pollution in the environment is certain to grow, the researchers warn – for even if we were to cease plastic production tomorrow, existing plastic would still be around to break down into tiny and then super tiny pieces.",
           "source": {
@@ -492,7 +523,7 @@
       "note": "if sb were to do sth 用来设想不确定的情形。",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       }
     },
     {
@@ -576,7 +607,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 4,
-    "mock": 17
+    "mock": 18
   },
   "unassignedCounts": {
     "gaokao": 0,

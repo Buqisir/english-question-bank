@@ -66,6 +66,37 @@
       ],
       "examples": [
         {
+          "exampleId": "w:come-to-an-end#e-34cc8e222dd59310",
+          "text": "The world won’t come to an end in most cases just because you left a few things undone.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 30
+          },
+          "parts": [
+            [
+              16,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              30
+            ]
+          ]
+        },
+        {
           "exampleId": "w:come-to-an-end#e-4994d59789cf1d55",
           "text": "Terri, who now rents a house with friends in Wandsworth, South West London, says DIY also saves her from losing any deposit when a tenancy (租期) comes to an end.",
           "source": {
@@ -97,77 +128,47 @@
           ]
         },
         {
-          "exampleId": "w:come-to-an-end#e-cc289d0d4cb1411f",
-          "text": "As summer came to an end, Michael felt a deep sense of loneliness.",
+          "exampleId": "w:come-to-an-end#e-1b3be6c0535f22f8",
+          "text": "It will come to an end sooner or later.",
           "source": {
-            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
-            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
-            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
             "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:9",
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:24#option=D",
+              "option": "D",
               "sentence": 1
             }
           },
-          "tier": "mock",
+          "tier": "gaokao",
           "target": {
-            "start": 10,
-            "end": 24
+            "start": 8,
+            "end": 22
           },
           "parts": [
             [
-              10,
-              24
+              8,
+              22
             ]
           ],
           "highlightRanges": [
             [
-              10,
-              24
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:come-to-an-end#e-e63b006319d8605b",
-          "text": "We tend to assign to the elderly the vague (模糊的) and often fading quality of wisdom, thus suggesting that their own creative and intellectual (智力的) growth has come to an end, and that their only role left is to give advice to others.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
-            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
-            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 159,
-            "end": 173
-          },
-          "parts": [
-            [
-              159,
-              173
-            ]
-          ],
-          "highlightRanges": [
-            [
-              159,
-              173
+              8,
+              22
             ]
           ]
         }
       ],
       "counts": {
-        "gaokao": 1,
+        "gaokao": 3,
         "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 1,
+    "gaokao": 3,
     "mock": 2
   },
   "unassignedCounts": {

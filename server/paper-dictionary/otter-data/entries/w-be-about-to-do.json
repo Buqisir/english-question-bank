@@ -51,17 +51,29 @@
       "tags": []
     },
     {
+      "form": "it's about to",
+      "tags": []
+    },
+    {
+      "form": "she's about to",
+      "tags": []
+    },
+    {
       "form": "was about to",
       "tags": []
     },
     {
       "form": "were about to",
       "tags": []
+    },
+    {
+      "form": "you're about to",
+      "tags": []
     }
   ],
   "counts": {
-    "gaokao": 6,
-    "mock": 26
+    "gaokao": 8,
+    "mock": 29
   },
   "unassignedCounts": {
     "gaokao": 0,
@@ -74,8 +86,8 @@
       "glossZh": "正要；即将",
       "origin": "gaokao",
       "counts": {
-        "gaokao": 6,
-        "mock": 26
+        "gaokao": 8,
+        "mock": 29
       },
       "folded": false,
       "legacySenseIds": [

@@ -41,6 +41,37 @@
       ],
       "examples": [
         {
+          "exampleId": "w:at-times#e-8fe2b90c50b4f229",
+          "text": "Klein, a noted historian of technology, spins a narrative so lively that at times it reads like a novel.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 81
+          },
+          "parts": [
+            [
+              73,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              81
+            ]
+          ]
+        },
+        {
           "exampleId": "w:at-times#e-bc62ea3736bf6ce6",
           "text": "And in the process, I’ve experienced things that really surprise me at times.",
           "source": {
@@ -102,49 +133,17 @@
               59
             ]
           ]
-        },
-        {
-          "exampleId": "w:at-times#e-f889500b08f7aad1",
-          "text": "We waste food unintentionally at times.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-gaokao-2022-i:24#option=B",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 38
-          },
-          "parts": [
-            [
-              30,
-              38
-            ]
-          ],
-          "highlightRanges": [
-            [
-              30,
-              38
-            ]
-          ]
         }
       ],
       "counts": {
-        "gaokao": 15,
+        "gaokao": 16,
         "mock": 11
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 15,
+    "gaokao": 16,
     "mock": 11
   },
   "unassignedCounts": {

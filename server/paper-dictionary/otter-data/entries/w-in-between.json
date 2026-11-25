@@ -70,6 +70,37 @@
           ]
         },
         {
+          "exampleId": "w:in-between#e-f7ea2066f7ffb1a4",
+          "text": "The high intensity group reported that conversations where people spoke at the same time when expressing agreement were not interruptive but engaged and friendlier than the conversations with moments of silence in between speaking turns.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 211,
+            "end": 221
+          },
+          "parts": [
+            [
+              211,
+              221
+            ]
+          ],
+          "highlightRanges": [
+            [
+              211,
+              221
+            ]
+          ]
+        },
+        {
           "exampleId": "w:in-between#e-29364038db77cf3c",
           "text": "For the first time, I truly listened – not just to words, but to the silence in between.",
           "source": {
@@ -99,42 +130,10 @@
               87
             ]
           ]
-        },
-        {
-          "exampleId": "w:in-between#e-070e4db14563c4c6",
-          "text": "Taking deep breaths in between.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
-            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:23#option=A",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 20,
-            "end": 30
-          },
-          "parts": [
-            [
-              20,
-              30
-            ]
-          ],
-          "highlightRanges": [
-            [
-              20,
-              30
-            ]
-          ]
         }
       ],
       "counts": {
-        "gaokao": 1,
+        "gaokao": 2,
         "mock": 4
       }
     },
@@ -293,7 +292,7 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 1,
+    "gaokao": 2,
     "mock": 10
   },
   "unassignedCounts": {

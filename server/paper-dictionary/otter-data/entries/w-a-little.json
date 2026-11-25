@@ -208,48 +208,48 @@
           ]
         },
         {
-          "exampleId": "w:a-little#e-4f5dfb34aea45290",
-          "text": "A little self-forgiveness also goes a long way.",
+          "exampleId": "w:a-little#e-5661504d6a996abd",
+          "text": "They’re all situations where we could use a little extra patience",
           "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
             "locator": {
               "question": 36,
-              "questionId": "question:paper-gaokao-2023-i:36#option=A",
-              "option": "A",
+              "questionId": "question:paper-gaokao-2023-national-a:36#option=G",
+              "option": "G",
               "sentence": 1
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 0,
-            "end": 8
+            "start": 42,
+            "end": 50
           },
           "parts": [
             [
-              0,
-              8
+              42,
+              50
             ]
           ],
           "highlightRanges": [
             [
-              0,
-              8
+              42,
+              50
             ]
           ]
         }
       ],
       "note": "可接不可数名词，也可单用。",
       "counts": {
-        "gaokao": 9,
+        "gaokao": 15,
         "mock": 42
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 23,
+    "gaokao": 29,
     "mock": 102
   },
   "unassignedCounts": {

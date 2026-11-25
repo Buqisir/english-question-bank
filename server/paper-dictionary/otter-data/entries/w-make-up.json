@@ -81,7 +81,7 @@
   ],
   "counts": {
     "gaokao": 4,
-    "mock": 25
+    "mock": 26
   },
   "unassignedCounts": {
     "gaokao": 0,
@@ -255,11 +255,43 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 11
+        "mock": 12
       },
       "folded": false,
       "legacySenseIds": [],
       "examples": [
+        {
+          "exampleId": "w:make-up#e-44d919d8c596613d",
+          "text": "VR was first used to make up sci-fi stories in the 1930s.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:32#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 28
+          },
+          "parts": [
+            [
+              21,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              28
+            ]
+          ]
+        },
         {
           "exampleId": "w:make-up#e-1d0ae0a437ca23d3",
           "text": "They didn’t know that some of the choices were made up.",
@@ -320,38 +352,6 @@
             [
               52,
               59
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:make-up#e-2ef9c49053fd395b",
-          "text": "Making up typical characters.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
-            "paperTitle": "重庆市高2026届高三第七次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1#option=B",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 9
-          },
-          "parts": [
-            [
-              0,
-              9
-            ]
-          ],
-          "highlightRanges": [
-            [
-              0,
-              9
             ]
           ]
         }

@@ -61,7 +61,19 @@
       "tags": []
     },
     {
+      "form": "they're able to",
+      "tags": []
+    },
+    {
+      "form": "we're able to",
+      "tags": []
+    },
+    {
       "form": "were able to",
+      "tags": []
+    },
+    {
+      "form": "you're able to",
       "tags": []
     }
   ],
@@ -173,15 +185,15 @@
       ],
       "note": "在具体的过去情境中，was/were able to 可表示当时成功做到了。",
       "counts": {
-        "gaokao": 32,
-        "mock": 100
+        "gaokao": 33,
+        "mock": 104
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 32,
-    "mock": 100
+    "gaokao": 33,
+    "mock": 104
   },
   "unassignedCounts": {
     "gaokao": 0,

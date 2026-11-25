@@ -39,7 +39,36 @@
     "us": null
   },
   "pronunciations": [],
-  "forms": [],
+  "forms": [
+    {
+      "form": "i've got",
+      "tags": []
+    },
+    {
+      "form": "it's got",
+      "tags": []
+    },
+    {
+      "form": "marla's got",
+      "tags": []
+    },
+    {
+      "form": "she's got",
+      "tags": []
+    },
+    {
+      "form": "they've got",
+      "tags": []
+    },
+    {
+      "form": "we've got",
+      "tags": []
+    },
+    {
+      "form": "you've got",
+      "tags": []
+    }
+  ],
   "version": 1,
   "updatedAt": "2026-11-25",
   "headword": "have got",
@@ -53,65 +82,94 @@
       "legacySenseIds": [],
       "examples": [
         {
-          "exampleId": "w:have-got#e-cd34d1399ae34def",
-          "text": "He has got a new job.",
+          "exampleId": "w:have-got#e-d52ea8a280bc3282",
+          "text": "We’ve got a foundation built on ancient cultures but with a drive and dynamism of a young country.",
           "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
             "locator": {
-              "question": 15,
-              "questionId": "question:listening:15#option=A",
-              "option": "A",
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-got#e-d880d1a17562d614",
+          "text": "It’s affordable, and it’s got a fun atmosphere without being too noisy.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          },
+          "parts": [
+            [
+              21,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-got#e-2e73ded08607a0cc",
+          "text": "You’ve got mail…and it’s a postcard",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:1",
               "sentence": 1
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 3,
+            "start": 0,
             "end": 10
           },
           "parts": [
             [
-              3,
+              0,
               10
             ]
           ],
           "highlightRanges": [
             [
-              3,
-              10
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:have-got#e-a81ab968f19df52e",
-          "text": "He has got a new job there.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:listening.long-form",
-            "locator": {
-              "question": 6,
-              "questionId": "question:listening:6#option=B",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 10
-          },
-          "parts": [
-            [
-              3,
-              10
-            ]
-          ],
-          "highlightRanges": [
-            [
-              3,
+              0,
               10
             ]
           ]
@@ -119,29 +177,92 @@
       ],
       "note": "口语用法，表示当前状态，常用 have/has got。",
       "counts": {
-        "gaokao": 1,
-        "mock": 1
+        "gaokao": 5,
+        "mock": 15
       }
     },
     {
       "senseId": "w:have-got#s2",
       "pos": "短语",
       "glossZh": "必须；得",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:have-got#e-85ed8182e0c095f5",
+          "text": "They’ve got to have drive, give efforts, be adaptable, and have faith in the process,” says Schmidt.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-got#e-0900b3a9e2fc59e1",
+          "text": "So naturally, Marla’s got to have them,” answered Barbara.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
       "note": "用 have got to do sth。",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 1,
-    "mock": 1
+    "gaokao": 5,
+    "mock": 17
   },
   "unassignedCounts": {
     "gaokao": 0,

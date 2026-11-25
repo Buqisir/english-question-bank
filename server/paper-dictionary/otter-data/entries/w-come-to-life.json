@@ -154,7 +154,52 @@
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:come-to-life#s3",
+      "pos": "短语",
+      "glossZh": "获得生命；活过来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-to-life#e-8ab16cbb31702ced",
+          "text": "But just as the judge was handing us the prize, our dragon came to life and swallowed us up!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 71
+          },
+          "parts": [
+            [
+              59,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
       }
     },
     {
@@ -169,25 +214,12 @@
         "gaokao": 0,
         "mock": 0
       }
-    },
-    {
-      "senseId": "w:come-to-life#s3",
-      "pos": "短语",
-      "glossZh": "获得生命；活过来",
-      "origin": "dictionary",
-      "folded": true,
-      "legacySenseIds": [],
-      "examples": [],
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 3
+    "mock": 5
   },
   "unassignedCounts": {
     "gaokao": 0,

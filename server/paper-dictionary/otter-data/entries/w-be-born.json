@@ -83,6 +83,10 @@
     {
       "form": "were born",
       "tags": []
+    },
+    {
+      "form": "you're born",
+      "tags": []
     }
   ],
   "version": 1,
@@ -195,7 +199,7 @@
       "note": "be born with sth 表示生来就有某种特征。",
       "counts": {
         "gaokao": 16,
-        "mock": 30
+        "mock": 31
       }
     },
     {
@@ -310,7 +314,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 18,
-    "mock": 34
+    "mock": 35
   },
   "unassignedCounts": {
     "gaokao": 0,

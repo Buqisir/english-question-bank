@@ -44,13 +44,44 @@
       "senseId": "w:on-time#s1",
       "pos": "短语",
       "glossZh": "准时；按时",
-      "origin": "mock",
+      "origin": "gaokao",
       "folded": false,
       "legacySenseIds": [
         "w:on#s20",
         "w:time#s13"
       ],
       "examples": [
+        {
+          "exampleId": "w:on-time#e-a7b7b36fb2c3bdce",
+          "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 94
+          },
+          "parts": [
+            [
+              87,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              94
+            ]
+          ]
+        },
         {
           "exampleId": "w:on-time#e-aa0f6becce1bae99",
           "text": "In Japan, for example, you’re always expected to arrive on time, and preferably a few minutes early.",
@@ -112,54 +143,23 @@
               38
             ]
           ]
-        },
-        {
-          "exampleId": "w:on-time#e-03a7fa2b42f372f1",
-          "text": "“I’m really sorry for not being there on time,” he said, his voice filled with worry.",
-          "source": {
-            "paperId": "paper-mock-hubei-mingxiao-2025-09",
-            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
-            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 38,
-            "end": 45
-          },
-          "parts": [
-            [
-              38,
-              45
-            ]
-          ],
-          "highlightRanges": [
-            [
-              38,
-              45
-            ]
-          ]
         }
       ],
       "counts": {
-        "gaokao": 0,
-        "mock": 15
+        "gaokao": 1,
+        "mock": 16
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 0,
-    "mock": 15
+    "gaokao": 1,
+    "mock": 16
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "mock",
+  "origin": "gaokao",
   "folded": false
 }

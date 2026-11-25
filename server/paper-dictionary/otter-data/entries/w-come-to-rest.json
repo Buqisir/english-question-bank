@@ -53,25 +53,57 @@
       "senseId": "w:come-to-rest#s1",
       "pos": "短语",
       "glossZh": "停下来；停稳",
-      "origin": "dictionary",
-      "folded": true,
+      "origin": "mock",
+      "folded": false,
       "legacySenseIds": [],
-      "examples": [],
+      "examples": [
+        {
+          "exampleId": "w:come-to-rest#e-6362d589162bc7a4",
+          "text": "The guy’s body slid briefly along the third rail, coming to rest on the outer edge of the tracks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:cloze:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 64
+          },
+          "parts": [
+            [
+              50,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              64
+            ]
+          ]
+        }
+      ],
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "dictionary",
-  "folded": true
+  "origin": "mock",
+  "folded": false
 }

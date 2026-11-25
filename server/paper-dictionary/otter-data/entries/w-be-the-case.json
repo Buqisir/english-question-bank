@@ -55,6 +55,10 @@
     {
       "form": "being the case",
       "tags": []
+    },
+    {
+      "form": "that's the case",
+      "tags": []
     }
   ],
   "version": 1,
@@ -130,18 +134,49 @@
               19
             ]
           ]
+        },
+        {
+          "exampleId": "w:be-the-case#e-b0d2fa7e4329128f",
+          "text": "“But there was always the question, ‘What if there’s an alien advanced technology that is using wideband radio?’ And if that’s the case, our traditional methods wouldn’t work; it would look like a bunch of noise on the screen.” However, Mr Diamond says that the ability of AI to handle massive amounts of data means it’s possible to take millions of “snapshots” of the snowy audio picture over time, and to start to look for patterns.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 135
+          },
+          "parts": [
+            [
+              120,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              135
+            ]
+          ]
         }
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 2
+    "mock": 3
   },
   "unassignedCounts": {
     "gaokao": 0,

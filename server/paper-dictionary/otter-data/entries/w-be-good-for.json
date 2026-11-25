@@ -53,6 +53,14 @@
     {
       "form": "are good for",
       "tags": []
+    },
+    {
+      "form": "it's good for",
+      "tags": []
+    },
+    {
+      "form": "what's good for",
+      "tags": []
     }
   ],
   "version": 1,
@@ -97,11 +105,43 @@
               22
             ]
           ]
+        },
+        {
+          "exampleId": "w:be-good-for#e-b11f01a997fc18d1",
+          "text": "It’s good for beginners.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
         }
       ],
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       }
     },
     {
@@ -145,6 +185,37 @@
           ]
         },
         {
+          "exampleId": "w:be-good-for#e-4bd4bbd5f6e23e96",
+          "text": "Do scientists really not know what's good for us, or is the news report to blame for the confusion?",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 45
+          },
+          "parts": [
+            [
+              30,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              45
+            ]
+          ]
+        },
+        {
           "exampleId": "w:be-good-for#e-d65b2609d611f1af",
           "text": "The deep, thoughtful, quiet reading of great books is good for mental health.",
           "source": {
@@ -174,43 +245,11 @@
               62
             ]
           ]
-        },
-        {
-          "exampleId": "w:be-good-for#e-7cce76589797eeb8",
-          "text": "Night singing is good for their vocal system.",
-          "source": {
-            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
-            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
-            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-mock-hunan-zhuzhou-2026-01-first:29#option=D",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 25
-          },
-          "parts": [
-            [
-              14,
-              25
-            ]
-          ],
-          "highlightRanges": [
-            [
-              14,
-              25
-            ]
-          ]
         }
       ],
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       }
     },
     {
@@ -230,7 +269,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 2,
-    "mock": 2
+    "mock": 5
   },
   "unassignedCounts": {
     "gaokao": 0,

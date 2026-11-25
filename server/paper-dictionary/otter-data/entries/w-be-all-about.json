@@ -53,6 +53,10 @@
     {
       "form": "are all about",
       "tags": []
+    },
+    {
+      "form": "it's all about",
+      "tags": []
     }
   ],
   "version": 1,
@@ -99,71 +103,71 @@
           ]
         },
         {
-          "exampleId": "w:be-all-about#e-9081167bd0484fa3",
-          "text": "Particularly during a season that’s supposed to be all about love, I think about all the ways that can look – specifically, how we reach out and connect.",
+          "exampleId": "w:be-all-about#e-7e9a775c7661eca2",
+          "text": "“It’s all about routine, about getting up and leaving at the same time,” said James.",
           "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
-            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
-            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices:3",
-              "sentence": 2
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:5",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 48,
-            "end": 60
+            "start": 1,
+            "end": 15
           },
           "parts": [
             [
-              48,
-              60
+              1,
+              15
             ]
           ],
           "highlightRanges": [
             [
-              48,
-              60
+              1,
+              15
             ]
           ]
         },
         {
-          "exampleId": "w:be-all-about#e-ccc6bacb85b2c9c8",
-          "text": "And it was exactly what Scouting is all about.",
+          "exampleId": "w:be-all-about#e-1190ff2e3692970a",
+          "text": "“Our debate about AI and the capabilities of AI is really misplaced, because it’s all about ‘Is AI better than the human?’”, he continues.",
           "source": {
-            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
-            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
-            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:cloze",
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:cloze:4",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:2",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 33,
-            "end": 45
+            "start": 77,
+            "end": 91
           },
           "parts": [
             [
-              33,
-              45
+              77,
+              91
             ]
           ],
           "highlightRanges": [
             [
-              33,
-              45
+              77,
+              91
             ]
           ]
         }
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 4
+        "mock": 8
       }
     },
     {
@@ -184,7 +188,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 4
+    "mock": 8
   },
   "unassignedCounts": {
     "gaokao": 0,

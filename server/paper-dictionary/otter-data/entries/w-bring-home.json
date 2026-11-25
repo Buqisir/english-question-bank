@@ -41,6 +41,10 @@
   "pronunciations": [],
   "forms": [
     {
+      "form": "bring home",
+      "tags": []
+    },
+    {
       "form": "brought home",
       "tags": []
     }
@@ -53,10 +57,41 @@
       "senseId": "w:bring-home#s1",
       "pos": "短语",
       "glossZh": "把（人、动物或物品）带回家",
-      "origin": "mock",
+      "origin": "gaokao",
       "folded": false,
       "legacySenseIds": [],
       "examples": [
+        {
+          "exampleId": "w:bring-home#e-8401d1273e2f57b7",
+          "text": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 65
+          },
+          "parts": [
+            [
+              55,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              65
+            ]
+          ]
+        },
         {
           "exampleId": "w:bring-home#e-198148653606c2b9",
           "text": "Alia Bhatt grew up in Mumbai surrounded by animals, largely because her sister Shaheen kept bringing home stray kittens.",
@@ -121,7 +156,7 @@
         }
       ],
       "counts": {
-        "gaokao": 0,
+        "gaokao": 1,
         "mock": 2
       }
     },
@@ -155,13 +190,13 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 0,
+    "gaokao": 1,
     "mock": 2
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "mock",
+  "origin": "gaokao",
   "folded": false
 }

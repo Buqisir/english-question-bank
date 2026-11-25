@@ -70,18 +70,49 @@
               30
             ]
           ]
+        },
+        {
+          "exampleId": "w:peace-and-quiet#e-534d57a33e367642",
+          "text": "I just fancied a bit of peace and quiet.”",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation:10",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 39
+          },
+          "parts": [
+            [
+              24,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              39
+            ]
+          ]
         }
       ],
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 1,
-    "mock": 0
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,

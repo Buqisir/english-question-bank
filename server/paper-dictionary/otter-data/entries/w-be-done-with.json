@@ -53,6 +53,10 @@
     {
       "form": "be done with",
       "tags": []
+    },
+    {
+      "form": "i'm done with",
+      "tags": []
     }
   ],
   "version": 1,
@@ -144,6 +148,37 @@
       "legacySenseIds": [],
       "examples": [
         {
+          "exampleId": "w:be-done-with#e-48b74baf04d8593e",
+          "text": "Paragraph 1: The moment she got home, Zahara shouted, “I’m done with being called Zahara!”",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 68
+          },
+          "parts": [
+            [
+              55,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              68
+            ]
+          ]
+        },
+        {
           "exampleId": "w:be-done-with#e-3e0b9d12b2e2e189",
           "text": "Soon you’ll be done with the stresses of high school.",
           "source": {
@@ -177,7 +212,7 @@
       ],
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       }
     },
     {
@@ -197,7 +232,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 3
+    "mock": 4
   },
   "unassignedCounts": {
     "gaokao": 0,

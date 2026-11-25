@@ -33,6 +33,10 @@
       "tags": []
     },
     {
+      "form": "that's sure to",
+      "tags": []
+    },
+    {
       "form": "was sure to",
       "tags": []
     }
@@ -255,14 +259,14 @@
       ],
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 9,
-    "mock": 6
+    "mock": 7
   },
   "unassignedCounts": {
     "gaokao": 0,

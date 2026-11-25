@@ -42,7 +42,7 @@
   ],
   "counts": {
     "gaokao": 7,
-    "mock": 45
+    "mock": 46
   },
   "unassignedCounts": {
     "gaokao": 0,
@@ -56,7 +56,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 27
+        "mock": 28
       },
       "folded": false,
       "legacySenseIds": [

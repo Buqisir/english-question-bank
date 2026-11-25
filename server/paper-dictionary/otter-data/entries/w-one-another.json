@@ -42,6 +42,37 @@
       ],
       "examples": [
         {
+          "exampleId": "w:one-another#e-4c0a8f4a986904fb",
+          "text": "Little by little, these different kinds of life got used to one another and formed their own ecosystem.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 71
+          },
+          "parts": [
+            [
+              60,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              71
+            ]
+          ]
+        },
+        {
           "exampleId": "w:one-another#e-4b2434241a9ba95b",
           "text": "They say wild chimps communicate 19 specific messages to one another with a \"vocabulary\" of 66 gestures.",
           "source": {
@@ -102,49 +133,17 @@
               142
             ]
           ]
-        },
-        {
-          "exampleId": "w:one-another#e-df8593e2a7c7cf3b",
-          "text": "Listen to one another.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2023-four-provinces-feb:33#option=C",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 21
-          },
-          "parts": [
-            [
-              10,
-              21
-            ]
-          ],
-          "highlightRanges": [
-            [
-              10,
-              21
-            ]
-          ]
         }
       ],
       "counts": {
-        "gaokao": 5,
+        "gaokao": 6,
         "mock": 36
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 5,
+    "gaokao": 6,
     "mock": 36
   },
   "unassignedCounts": {

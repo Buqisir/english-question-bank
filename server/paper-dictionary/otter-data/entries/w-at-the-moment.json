@@ -36,12 +36,43 @@
       "senseId": "w:at-the-moment#s1",
       "pos": "短语",
       "glossZh": "此刻；目前；当时",
-      "origin": "mock",
+      "origin": "gaokao",
       "folded": false,
       "legacySenseIds": [
         "w:moment#s4"
       ],
       "examples": [
+        {
+          "exampleId": "w:at-the-moment#e-534e2a2a8d6d16bb",
+          "text": "“Part of being a good thinker is experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work,” he says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 122
+          },
+          "parts": [
+            [
+              109,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              122
+            ]
+          ]
+        },
         {
           "exampleId": "w:at-the-moment#e-3e7f0439cc68f421",
           "text": "At the moment, Ethan was turning his old pen between his fingers.",
@@ -106,20 +137,20 @@
         }
       ],
       "counts": {
-        "gaokao": 0,
+        "gaokao": 1,
         "mock": 2
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 0,
+    "gaokao": 1,
     "mock": 2
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "mock",
+  "origin": "gaokao",
   "folded": false
 }
