@@ -173,6 +173,15 @@ import {
   hasCompleteApplicationLecturePayload,
   RetainedReviewCard,
 } from './RetainedWritingLecture.tsx'
+import {
+  EssayVariantBar,
+  essayOf,
+  getWritingLectureV4,
+  WritingLectureV4Rail,
+  writingLectureV4Of,
+  type EssayVariant,
+} from './WritingLectureV4.tsx'
+import { isContinuationAnalysisV3 } from '../../../../shared/writing/continuationAnalysisV3.mjs'
 // 刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness 同款
 // 组件（见 PaperIntelligencePaperSurfaceHarness.tsx ~1567 行的接线），零
 // 修改。只对阅读题组接入（卷面显影原则：完形/语法填空原位型只给证据高亮，
@@ -280,6 +289,7 @@ function isRenderableWritingAnalysis(value: unknown): value is WritingAnalysis {
     )
   }
   if (isNarrativeContinuationWritingAnalysis(analysis)) return true
+  if (isContinuationAnalysisV3(analysis.continuationAnalysis)) return true
   if (!Array.isArray(analysis.highlightExpressions)) return false
   const continuationDesign = analysis.continuationDesign
   if (!continuationDesign || typeof continuationDesign !== 'object') {
@@ -907,6 +917,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     useState<WholePaperConsumption | null>(null)
   // URL 的 lecture=1 在首次渲染就展开讲评，避免先闪一下挑题态。
   const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
+  // 新版写作讲评（应用文 V4、续写 V3）每组一个「标准版 / 提高版」，答题框和右栏共用。
+  const [essayVariantByGroupId, setEssayVariantByGroupId] = useState<Record<string, EssayVariant>>({})
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
   const playerIdByAudio = useRef(new WeakMap<HTMLAudioElement, string>())
   const [activePlayerId, setActivePlayerId] = useState<string | null>(null)
@@ -2876,6 +2888,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       sourceTaskType,
       analysis: writingLectureEntry?.kind === 'writing' ? writingLectureEntry.analysis : undefined,
     })
+    const writingLectureV4 = getWritingLectureV4({
+      lectureOpen,
+      panelGroupId,
+      groupId,
+      sourceTaskType,
+      analysis: writingLectureEntry?.kind === 'writing' ? writingLectureEntry.analysis : undefined,
+    })
+    const essayVariant = essayVariantByGroupId[groupId] ?? 'standard'
 
     const surfaceEl = (
       <PaperSurface
@@ -2989,13 +3009,28 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           analysis: writingLectureEntry?.kind === 'writing'
             ? writingLectureEntry.analysis
             : undefined,
-        }))
+        }) || writingLectureV4Of(
+          sourceTaskType,
+          writingLectureEntry?.kind === 'writing' ? writingLectureEntry.analysis : undefined,
+        ) !== null)
       )
       return (
         <WritingPaperPage
           pageModel={entry.model.pageModel}
-          retainedModelAnswer={retainedLecture?.modelAnswer}
-          retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
+          retainedModelAnswer={writingLectureV4 ? undefined : retainedLecture?.modelAnswer}
+          retainedOfficialModelAnswer={writingLectureV4 ? undefined : retainedLecture?.officialModelAnswer}
+          lectureEssay={writingLectureV4
+            ? {
+                essay: essayOf(writingLectureV4, essayVariant),
+                officialModelAnswer: writingLectureV4.officialModelAnswer,
+                bar: (
+                  <EssayVariantBar
+                    value={essayVariant}
+                    onChange={(value) => setEssayVariantByGroupId(current => ({ ...current, [groupId]: value }))}
+                  />
+                ),
+              }
+            : undefined}
           unofficialReferenceEssays={isPanelGroup ? referenceEssays : undefined}
           onAnswerBoxActivate={
             lectureOpen || answerBoxOpensLecture
@@ -3632,6 +3667,21 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           sourceTaskType,
           analysis: lectureEntry.analysis,
         })
+        const writingLectureV4 = getWritingLectureV4({
+          lectureOpen,
+          panelGroupId,
+          groupId,
+          sourceTaskType,
+          analysis: lectureEntry.analysis,
+        })
+        if (writingLectureV4) {
+          return (
+            <WritingLectureV4Rail
+              lecture={writingLectureV4}
+              variant={essayVariantByGroupId[groupId] ?? 'standard'}
+            />
+          )
+        }
         if (retainedLecture?.reviewCard) {
           return <RetainedReviewCard reviewCard={retainedLecture.reviewCard} />
         }
