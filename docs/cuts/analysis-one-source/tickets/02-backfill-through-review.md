@@ -1,6 +1,6 @@
 # 02 — Backfills go through review, so the rail and the 解析 PDF stay together
 
-Status: draft, awaiting Owner acceptance
+Status: accepted 2026-11-25; not started
 Blocked by: none
 Next on PASS: Owner acceptance; production check only with Owner authorization
 Terminal: no

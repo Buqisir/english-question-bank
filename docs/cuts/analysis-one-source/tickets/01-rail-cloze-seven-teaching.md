@@ -1,6 +1,6 @@
 # 01 — Lecture rail shows the cloze and seven-choices teaching
 
-Status: draft, awaiting Owner acceptance
+Status: accepted 2026-11-25; not started
 Blocked by: none
 Next on PASS: Owner QA of before/after samples
 Terminal: no
@@ -36,19 +36,19 @@ not the adopted teaching.
 - Existing components and tokens only (Notice, Card, inline labels, the
   existing evidence and distractor styles). No new colours.
 
-## Rail placement (Owner decisions marked)
+## Rail placement
 
 - At 1440 px and wider the rail is sticky with its own scroll. Below that it
   flows under the paper. In both cases the clicked blank's explanation must be
   the first thing visible after a click.
 - Cloze 主线 is group-level and several lines long. Proposal: a collapsible
   block next to 文章简介, open when no blank is active and closed once one is,
-  matching how 文章简介 behaves now. **Owner decision.**
+  matching how 文章简介 behaves now. Owner accepted 2026-11-25.
 - Seven-choices: the rail is organised by option (A–G cards) while the PDF is
   organised by blank. Proposal: keep the A–G cards. Put 空前/答案/空后, 找法,
   讲解 and 错项 inside the card of each blank's answer, and put a spare
   option's text in that option's own card (the 多余项 tag, plus its likely
-  blank). **Owner decision.**
+  blank). Owner accepted 2026-11-25.
 - Clicking a quote in 找法 or a 锁定词 highlights it in the passage, the same
   way reading evidence does today. If a quote cannot be located, it shows as
   plain bold text with no error.

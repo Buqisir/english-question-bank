@@ -1,6 +1,6 @@
 # Analysis: one source, every surface
 
-Status: draft, awaiting Owner acceptance (2026-11-25)
+Status: accepted by the Owner 2026-11-25
 
 ## Why
 
