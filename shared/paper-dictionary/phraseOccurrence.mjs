@@ -41,6 +41,7 @@ const wordCharacter = '[\\p{L}\\p{M}\\p{N}_]'
 const wordEnd = new RegExp(`${wordCharacter}$`, 'u')
 const wordStart = new RegExp(`^${wordCharacter}`, 'u')
 const joinedWordStart = new RegExp(`^(?:['-])?${wordCharacter}`, 'u')
+const sentenceEnding = /[.!?。！？…][\p{Pe}\p{Pf}"']*$/u
 
 function wordBoundary(text, offset) {
   const before = text.slice(0, offset)
@@ -70,6 +71,11 @@ export function locatePhraseOccurrence(block, row, sentenceText, entry) {
     at = block.text.indexOf(quote.text)
     if (at < 0 || block.text.indexOf(quote.text, at + 1) >= 0) return null
   }
+
+  // A saved fragment must not inherit the sense of a longer or different sentence.
+  const after = at + quote.text.length
+  if (at > 0 && (block.text[at - 1] !== ' ' || !sentenceEnding.test(block.text.slice(0, at - 1)))) return null
+  if (after < block.text.length && (block.text[after] !== ' ' || !sentenceEnding.test(quote.text))) return null
 
   // Check boundaries in the containing block, including the envelope of separable phrases.
   const hasBoundaries = (left, right) => wordBoundary(block.text, at + left) && wordBoundary(block.text, at + right)

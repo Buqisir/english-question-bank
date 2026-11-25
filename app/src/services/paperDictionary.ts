@@ -83,7 +83,11 @@ export type PaperDictionaryResponse = {
 }
 
 type OtterEntryLink = { entryId: string; headword: string }
-export type OtterPhraseHit = OtterEntryLink & { senseId: string; glossZh: string }
+export type OtterPhraseHit = OtterEntryLink & {
+  senseId: string
+  glossZh: string
+  source: { groupId: string | null; paragraphId?: string; questionId?: string }
+}
 
 type WordCounts = { gaokao: number; mock: number }
 type Accents = { uk: string | null; us: string | null }

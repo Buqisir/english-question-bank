@@ -347,8 +347,9 @@ export function createPaperDictionaryRuntime({
     const match = word ? otter?.findOccurrence(body.paperId, slice.stream, word) : null
     const found = word ? otter?.find(word.surface) : null
     const entry = primary?.entry ?? match?.entry ?? (found?.kind === 'phrase' ? null : found)
-    const phrases = [...new Map(hits.filter(hit => hit !== primary).map(({ entry, sense }) => [
-      `${entry.entryId}:${sense.senseId}`, { entryId: entry.entryId, headword: entry.headword, senseId: sense.senseId, glossZh: sense.glossZh },
+    const phrases = [...new Map(hits.filter(hit => hit !== primary).map(({ entry, sense, source }) => [
+      JSON.stringify([entry.entryId, sense.senseId, source]),
+      { entryId: entry.entryId, headword: entry.headword, senseId: sense.senseId, glossZh: sense.glossZh, source },
     ])).values()]
     const lexical = word && !entry && (dictionary().available || !phrases.length) ? lexicalEntry(word.surface) : {
       dictionaryVersion: dictionary().meta?.dictionary_version || DICTIONARY_SCHEMA,

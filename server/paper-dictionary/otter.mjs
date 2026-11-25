@@ -246,6 +246,12 @@ export function openOtterDictionary(rootDir) {
         const block = normalizePhraseText(text)
         const from = codePointOffset(text, Math.max(0, start - leaf.start))
         const to = codePointOffset(text, end - leaf.start)
+        const source = {
+          groupId: stream.groupId,
+          ...(leaf.kind === 'paragraph' ? { paragraphId: leaf.id } : {}),
+          ...(leaf.kind === 'option' || leaf.kind === 'question-stem'
+            ? { questionId: leafLocator(leaf).split('#')[0] } : {}),
+        }
         return [...rows].sort((a, b) => a.sentence - b.sentence || a.start - b.start).flatMap(row => {
           const entry = entryById(row.entryId)
           const sense = entry?.senses.find(item => item.senseId === row.senseId)
@@ -262,7 +268,7 @@ export function openOtterDictionary(rootDir) {
             : from <= indexed.from && indexed.to <= to
           if (!hit) return []
           const exact = !word && start >= leaf.start && end <= leaf.end && from === indexed.from && to === indexed.to
-          return [{ entry, sense, exact }]
+          return [{ entry, sense, exact, source }]
         })
       })
     },

@@ -912,8 +912,16 @@ export function usePaperSelectionTranslation({
     return url
   }
   const sentencePhrases = dictionaryResult?.phrases?.length ? (
-    <SentencePhrases phrases={dictionaryResult.phrases} href={(entryId, senseId) => {
-      const url = selectedSourceUrl()
+    <SentencePhrases phrases={dictionaryResult.phrases} href={({ entryId, senseId, source }) => {
+      const url = new URL(window.location.href)
+      for (const [param, value] of [
+        ['focusGroupId', source.groupId],
+        ['focusParagraphId', source.paragraphId],
+        ['questionId', source.questionId],
+      ] as const) {
+        if (value) url.searchParams.set(param, value)
+        else url.searchParams.delete(param)
+      }
       url.searchParams.set('view', 'word')
       url.searchParams.set('w', entryId)
       url.searchParams.set('wordSense', senseId)

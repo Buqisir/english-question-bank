@@ -5,7 +5,7 @@ import { indexPhraseOccurrence } from '../../shared/paper-dictionary/phraseOccur
 export const text = 'She gave it up and made up her mind.'
 export const laterText = 'Rain fell. Due to fog, we waited. Due to rain, we stayed.'
 const takeOffSentence = 'They took off.'
-export const takeOffText = `🦦 ${takeOffSentence} ${takeOffSentence}`
+export const takeOffText = `The 🦦 stayed. ${takeOffSentence} ${takeOffSentence}`
 export const officeText = 'They took office.'
 export const source = {
   paperId: 'paper-phrases', sourceRevision: 'rev-1',

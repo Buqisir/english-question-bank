@@ -903,6 +903,15 @@ evilRuntime.close()
   const longer = await select(phraseText)
   check('a larger selection returns both phrases without a primary entry', !longer.otter
     && longer.phrases?.map(hit => hit.entryId).join(',') === 'w:give-up,w:make-up-ones-mind')
+  const across = (await lookup({
+    schemaVersion: 'paper-dictionary-request-v1', paperId: phraseSource.paperId, sourceRevision: phraseSource.sourceRevision,
+    segments: [
+      { streamId: 'passage', start: 0, end: phraseText.length, selectedText: phraseText },
+      { streamId: 'later', start: 0, end: laterText.length, selectedText: laterText },
+    ],
+  }, phraseContext)).parsed
+  check('each contextual phrase carries its own paragraph locator across a selection',
+    across.phrases?.map(hit => hit.source.paragraphId).join(',') === 'p1,p1,p2')
   const get = (pathname, params) => {
     const response = createResponse()
     const url = new URL(`http://localhost/api/paper-dictionary/${pathname}?${new URLSearchParams(params)}`)
@@ -957,13 +966,14 @@ evilRuntime.close()
   const indexedSentence = "They can't wait."
   const start = indexedSentence.indexOf("can't")
   const indexed = indexPhraseOccurrence(indexedSentence, { start: 0, text: indexedSentence }, [start, start + 5])
-  const normalized = '🦦 They   can’t wait.'
-  const anchored = { ...indexed, sentence: 1, sentenceStart: 2 }
+  const prefix = 'The 🦦 stayed. '
+  const normalized = `${prefix}They   can’t wait.`
+  const anchored = { ...indexed, sentence: 2, sentenceStart: [...prefix].length }
   const cant = { headword: "can't", variants: [], forms: [] }
   check('an absolute origin preserves apostrophe and whitespace normalization in source offsets',
     locatePhraseOccurrence(normalizePhraseText(normalized), anchored, indexed.sentenceText, cant)?.from === normalized.indexOf('can’t') - 1)
   check('a stale absolute origin does not fall back to another copy of the saved sentence',
-    locatePhraseOccurrence(normalizePhraseText('🦦 They won’t wait. They can’t wait.'), anchored, indexed.sentenceText, cant) === null)
+    locatePhraseOccurrence(normalizePhraseText(`${prefix}They won’t wait. They can’t wait.`), anchored, indexed.sentenceText, cant) === null)
   check('an indexed phrase cannot use offsets beyond its saved sentence',
     locatePhraseOccurrence(normalizePhraseText(normalized), { ...anchored, end: 99 }, indexed.sentenceText, cant) === null)
   const giveUp = { headword: 'give up', variants: ['gave up'], forms: [] }
@@ -977,6 +987,15 @@ evilRuntime.close()
   check('fixed parts must spell a registered word form',
     locateParts('She gave it in.', 'gave it in') === null
     && locateParts('She gave it up.', 'gave it up')?.parts.length === 2)
+  const takeOff = { headword: 'take off', variants: ['took off'], forms: [] }
+  const takeOffRow = { sentence: 1, start: 5, end: 13, surface: 'took off' }
+  const bothAnchorModes = [takeOffRow, { ...takeOffRow, sentenceStart: 0 }]
+  check('a stored sentence cannot apply its sense to the prefix of a longer sentence',
+    bothAnchorModes.every(row => !locatePhraseOccurrence(normalizePhraseText('They took off their coats.'), row, 'They took off', takeOff)))
+  check('a complete stored sentence still matches with or without an absolute origin',
+    bothAnchorModes.every(row => locatePhraseOccurrence(normalizePhraseText('They took off. We waited.'), row, 'They took off.', takeOff)?.from === 5))
+  check('a stored suffix must start at a sentence boundary',
+    !locatePhraseOccurrence(normalizePhraseText('We know they took off.'), takeOffRow, 'they took off.', takeOff))
   const nationalA = JSON.parse(readFileSync(path.join(rootDir, 'test-fixtures/retired-paper-assets/paper-2023-jia/latest/paper-asset.json'), 'utf8'))
   const nationalAText = nationalA.content.groups['group-2023-jia-reading-d'].passage.paragraphs
     .find(paragraph => paragraph.paragraphId === 'para-2023-jia-reading-d-4').text
@@ -1020,6 +1039,7 @@ async function verifyBrowser() {
         return Promise.resolve(new Response(JSON.stringify({
           schemaVersion: 'paper-dictionary-status-v1', enabled: true, available: true,
           dictionaryVersion: 'fixture', reason: 'ok', limits: {},
+          phrasesAvailable: location.search.includes('cross-block'),
           sensePick: { enabled: !disabled, reason: disabled ? 'disabled' : 'ok' },
         }), { status: 200, headers: { 'content-type': 'application/json' } }))
       }
@@ -1041,7 +1061,8 @@ async function verifyBrowser() {
               status: 'found', truncated: false,
               attribution: 'Open Dictionary / Wiktionary 衍生数据，含模型生成释义',
               otter: payload.otter,
-              entries: payload.otter ? [] : [{
+              phrases: payload.phrases,
+              entries: payload.otter || payload.phrases ? [] : [{
                 entryId: 'adopt', headword: payload.headword, posGroups: [{
                   posGroupIndex: 1, pos: 'verb', posLabel: 'v.', etymologyId: 'et1',
                   morphologyLabels: payload.labels, matchedForm: body.segments[0].selectedText,
@@ -1071,21 +1092,26 @@ async function verifyBrowser() {
       return originalFetch(url, init)
     }
     const sourceText = ${JSON.stringify(text)}
+    const secondParagraph = 'Both efforts failed due to rain.'
     function Fixture() {
       const hostRef = useRef(null)
       const selection = usePaperSelectionTranslation({
         paperId: 'paper-example',
         consumption: { selectionSource: {
           paperId: 'paper-example', sourceRevision: 'rev-1', streams: [{
-            streamId: 'passage', text: sourceText, role: 'passage-body', groupId: 'g',
-            leaves: [{ kind: 'paragraph', id: 'p1', start: 0, end: sourceText.length }],
+            streamId: 'passage', text: sourceText + '\\n' + secondParagraph, role: 'passage-body', groupId: 'g',
+            leaves: [
+              { kind: 'paragraph', id: 'p1', start: 0, end: sourceText.length },
+              { kind: 'paragraph', id: 'p2', start: sourceText.length + 1, end: sourceText.length + 1 + secondParagraph.length },
+            ],
           }],
         } },
         hostRef,
       })
       return React.createElement(React.Fragment, null,
         React.createElement('div', { id: 'host', ref: hostRef, className: 'paper-browse-group-card', 'data-paper-browse-anchor': 'g' },
-          React.createElement('p', { id: 'passage', 'data-paper-paragraph-id': 'p1' }, sourceText)),
+          React.createElement('p', { id: 'passage', 'data-paper-paragraph-id': 'p1' }, sourceText),
+          React.createElement('p', { id: 'second-paragraph', 'data-paper-paragraph-id': 'p2' }, secondParagraph)),
         selection.overlay)
     }
     createRoot(document.getElementById('root')).render(React.createElement(Fixture))
@@ -1226,6 +1252,30 @@ async function verifyBrowser() {
     check('dictionary hides the 本文义 row when it is off, with no upstream call', await page.evaluate(() => window.__dictCalls.sense.length) === 0
       && await page.locator('.paper-dictionary-card .paper-dictionary-sense-block').count() === 0
       && (await page.locator('.paper-dictionary-card').innerText()).includes('采用；采纳'))
+
+    await page.goto(`http://127.0.0.1:${port}/dict?cross-block=1&paperId=paper-example&focusParagraphId=p1`)
+    await page.waitForSelector('#second-paragraph')
+    await page.evaluate(() => {
+      const first = document.querySelector('#passage').firstChild
+      const second = document.querySelector('#second-paragraph').firstChild
+      window.getSelection().setBaseAndExtent(first, 0, second, second.textContent.length)
+    })
+    await page.waitForFunction(() => window.__dictCalls.dictionary.length === 1)
+    const request = await page.evaluate(() => {
+      const lookup = window.__dictCalls.dictionary[0]
+      lookup.complete({ phrases: [{
+        entryId: 'w:due-to', senseId: 'w:due-to#s1', headword: 'due to', glossZh: '由于',
+        source: { groupId: 'g', paragraphId: 'p2' },
+      }] })
+      return lookup.body
+    })
+    const link = page.getByRole('link', { name: 'due to', exact: true })
+    await link.waitFor()
+    const href = new URL(await link.getAttribute('href'), page.url())
+    check('a phrase link from a cross-paragraph selection returns to its own paragraph',
+      request.segments.length === 1 && request.segments[0].selectedText.includes('\n')
+      && href.searchParams.get('focusParagraphId') === 'p2'
+      && href.searchParams.get('focusGroupId') === 'g')
   } finally {
     await browser.close()
     await vite.close()

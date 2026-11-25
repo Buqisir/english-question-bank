@@ -16,15 +16,16 @@ import { getDictionaryAudioSnapshot, playDictionaryAudio, subscribeDictionaryAud
 
 export function SentencePhrases({ phrases, href }: {
   phrases: OtterPhraseHit[]
-  href: (entryId: string, senseId: string) => string
+  href: (phrase: OtterPhraseHit) => string
 }) {
   return <section className="otter-sentence-phrases" aria-label="本句短语">
     <h3>本句短语</h3>
-    {phrases.map(({ entryId, headword, senseId, glossZh }) => (
-      <p key={`${entryId}:${senseId}`}>
-        <ButtonLink size="sm" lang="en" href={href(entryId, senseId)}>{headword}</ButtonLink> {glossZh}
+    {phrases.map(phrase => {
+      const link = href(phrase)
+      return <p key={link}>
+        <ButtonLink size="sm" lang="en" href={link}>{phrase.headword}</ButtonLink> {phrase.glossZh}
       </p>
-    ))}
+    })}
   </section>
 }
 
