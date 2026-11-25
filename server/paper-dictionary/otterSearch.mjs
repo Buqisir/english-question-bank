@@ -110,13 +110,10 @@ function addIndex(index, key, value) {
   index.get(key).push(value)
 }
 
-function searchResult(ids) {
-  const [entryId, ...alternatives] = [...new Set(ids.filter(Boolean))].slice(0, 4)
-  return entryId ? { entryId, alternatives } : null
-}
 const spaced = word => word.replace(/-/g, ' ')
 
 export function createOtterSearch(entries, lookupForms, commonWords) {
+  const labels = new Map()
   const exact = new Map()
   const literal = new Map()
   const literalVariants = new Map()
@@ -127,7 +124,9 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
   const local = new Map()
   const patterns = new Map()
   const leadingSlots = new Map()
+  const fixedPhrases = new Map()
   for (const { entryId, headword, variants, forms, kind, pattern, positions, counts } of entries) {
+    labels.set(entryId, headword)
     const lemma = normalizeSearch(headword)
     addIndex(exact, lemma, entryId)
     addIndex(literal, headword.normalize('NFC'), entryId)
@@ -142,6 +141,15 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
     if (kind === 'phrase') {
       for (const match of searchPatterns(headword, variants, pattern ?? { tokens: [], alternatives: [] })) {
         addIndex(typeof match.tokens[0] === 'string' ? patterns : leadingSlots, match.fixed, { entryId, ...match })
+        if (match.tokens.every(token => typeof token === 'string')) {
+          addIndex(fixedPhrases, match.tokens.join(' '), entryId)
+        }
+      }
+      if (!pattern || pattern.tokens.every(token => typeof token === 'string')) {
+        for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
+          const fixed = normalizeSearch(spacePhrasePunctuation(form))
+          if (fixed.includes(' ') && !fixed.includes('…')) addIndex(fixedPhrases, fixed, entryId)
+        }
       }
       continue
     }
@@ -157,6 +165,11 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
         verb: verb && (!tags.length || tags.includes('past') || tags.includes('present') || tags.includes('participle')),
         gerund: verb && tags.includes('participle') && tags.includes('present') })
     }
+  }
+
+  function searchResult(ids) {
+    const [entryId, ...alternatives] = [...new Set(ids.filter(Boolean))].slice(0, 4)
+    return entryId ? { entryId, alternatives: alternatives.map(id => ({ entryId: id, headword: labels.get(id) })) } : null
   }
 
   const isListed = word => local.has(word) || commonWords.has(word)
@@ -210,6 +223,7 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
     }
     const anchors = new Set([words[0], ...lexicon(words[0]).filter(row => row.verb).map(row => row.lemma)])
     const scores = new Map()
+    const wildcardScores = new Map()
     const templates = [
       ...[...anchors].flatMap(anchor => patterns.get(anchor) ?? []),
       ...[...new Set(words.slice(1))].flatMap(anchor => leadingSlots.get(anchor) ?? []),
@@ -219,9 +233,20 @@ export function createOtterSearch(entries, lookupForms, commonWords) {
       const matched = patternScore(template, words, lexicon, isName)
       if (matched < 0) continue
       const score = matched + (recorded ? 0.5 : 0)
-      scores.set(entryId, Math.max(scores.get(entryId) ?? -1, score))
+      const matches = template.tokens.some(token => token.slot === '…') ? wildcardScores : scores
+      matches.set(entryId, Math.max(matches.get(entryId) ?? -1, score))
     }
-    const ids = [...scores].sort(([a, first], [b, second]) => second - first || a.localeCompare(b)).map(([id]) => id)
-    return searchResult([...preferred, ...aliasIds, compound, ...ids])
+    let fixedPrefix = []
+    if (wildcardScores.size) {
+      for (let end = words.length; end >= 2; end--) {
+        const entries = fixedPhrases.get(words.slice(0, end).join(' '))
+        if (!entries) continue
+        fixedPrefix = entries
+        break
+      }
+    }
+    const matches = scores.size || fixedPrefix.length ? scores : wildcardScores
+    const ids = [...matches].sort(([a, first], [b, second]) => second - first || a.localeCompare(b)).map(([id]) => id)
+    return searchResult([...preferred, ...aliasIds, compound, ...ids, ...fixedPrefix])
   }
 }

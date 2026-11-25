@@ -5,7 +5,7 @@ import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '..
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
 import { gaokaoHeadwordVariants } from './gaokao.mjs'
 import { createOtterSearch, normalizeSearch } from './otterSearch.mjs'
-import { lookupSearchForms } from './store.mjs'
+import { isStandardSearchForm, lookupSearchForms } from './store.mjs'
 
 const normalize = (text) => text.normalize('NFC').trim()
 export const cleanExample = (text) => text.trim().replace(/^(?:[■□●○•▪▫‣◦]\s*)+/, '')
@@ -136,7 +136,8 @@ export function openOtterDictionary(rootDir) {
   const readEntry = name => JSON.parse(readFileSync(path.join(entriesDir, name), 'utf8'))
   const names = readOptional(() => readdirSync(entriesDir), []).filter(name => name.endsWith('.json')).sort()
   for (const name of names) {
-    const { entryId, headword, variants, forms, kind, counts, pattern, senses } = readEntry(name)
+    const { entryId, headword, variants, forms: allForms, kind, counts, pattern, senses } = readEntry(name)
+    const forms = allForms.filter(form => isStandardSearchForm(form.tags))
     searchEntries.push({ entryId, headword, variants, forms, kind, counts, pattern,
       positions: new Set(senses.map(sense => sense.pos)) })
     if (kind === 'phrase') phraseEntries.set(entryId, { entryId, headword, counts })

@@ -142,12 +142,8 @@ export async function searchOtterEntry(query: string, signal: AbortSignal): Prom
   const response = await fetch(`/api/paper-dictionary/search?${new URLSearchParams({ w: query })}`, { signal })
   if (response.status === 404) return null
   if (!response.ok) throw await errorFromResponse(response, '词典搜索失败')
-  const { entryId, alternatives = [] } = await response.json() as { entryId: string; alternatives?: string[] }
-  const entries = await Promise.allSettled(alternatives.map(id => fetchOtterEntry(id, signal)))
-  return { entryId, alternatives: entries.flatMap(result => {
-    const entry = result.status === 'fulfilled' ? result.value : null
-    return entry ? [{ entryId: entry.entryId, headword: entry.headword }] : []
-  }) }
+  const { entryId, alternatives = [] } = await response.json() as { entryId: string; alternatives?: OtterEntryLink[] }
+  return { entryId, alternatives }
 }
 
 export async function fetchPaperDictionaryStatus(

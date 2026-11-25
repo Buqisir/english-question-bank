@@ -961,8 +961,12 @@ evilRuntime.close()
   check('search resolves exact and inflected phrase forms', [
     ['gave up', 'w:give-up'], ['MAKE SURE', 'w:make-sure'], ['made sure', 'w:make-sure'],
   ].every(([w, id]) => get('search', { w }).parsed?.entryId === id))
-  const alternatives = get('search', { w: '  gave up  ' }).parsed?.alternatives
-  check('the search response keeps entryId and adds an alternatives array', Array.isArray(alternatives))
+  const saw = get('search', { w: 'saw' }).parsed
+  check('search returns alternate IDs and labels in its own response', saw?.entryId === 'w:saw'
+    && saw.alternatives.length === 1 && saw.alternatives[0].entryId === 'w:see'
+    && saw.alternatives[0].headword === 'see')
+  check('tagged nonstandard forms do not enter either search index',
+    get('search', { w: 'maked' }).statusCode === 404 && get('search', { w: 'maked sure' }).statusCode === 404)
   check('search uses the configured lexical database for forms missing from bundled entries',
     get('search', { w: 'Running' }).parsed?.entryId === 'w:run'
     && get('search', { w: 'children' }).parsed?.entryId === 'w:child')
@@ -1063,6 +1067,21 @@ evilRuntime.close()
   const entry = JSON.parse(readFileSync(path.join(rootDir, 'server/paper-dictionary/otter-data/entries/w-due-to.json'), 'utf8'))
   const examples = entry.senses.flatMap(sense => sense.examples)
   const dict = openOtterDictionary(rootDir)
+  const overrides = JSON.parse(readFileSync(path.join(rootDir, 'server/paper-dictionary/otter-entry-overrides.json'), 'utf8'))
+  check('local rebuild overrides agree with the shipped entries',
+    overrides.entries.every(entry => JSON.stringify(entry) === JSON.stringify(dict.entryById(entry.entryId)))
+    && Object.entries(overrides.excludedForms).every(([id, forms]) =>
+      !dict.entryById(id).forms.some(({ form }) => forms.includes(form))))
+  for (const [phrase, tail] of [['as soon as', 'you arrive'], ['as well as', 'she could'], ['as long as', 'it works']]) {
+    const id = `w:${phrase.replaceAll(' ', '-')}`
+    check(`fixed phrase ${phrase} excludes wildcard matches, including with a tail`, [phrase, `${phrase} ${tail}`]
+      .every(query => {
+        const result = dict.search(query)
+        return result?.entryId === id && !result.alternatives.some(link => link.entryId === 'w:as-as')
+      }))
+  }
+  check('laid resolves to lay without suggesting lie', dict.search('laid')?.entryId === 'w:lay'
+    && !dict.search('laid').alternatives.some(link => link.entryId === 'w:lie'))
   for (const [label, searches] of Object.entries({
     'word inflections': [
       ['took', 'take'], ['lain', 'lie'], ['left', 'left'], ['saw', 'saw'],
@@ -1106,9 +1125,10 @@ evilRuntime.close()
     ['lay', 'w:lay', 'w:lie'], ['rose', 'w:rose', 'w:rise'],
   ]) {
     const result = dict.search(query)
+    const alternativeIds = result?.alternatives.map(link => link.entryId) ?? []
     check(`Otter search ranks ${query} and keeps its alternate`, result?.entryId === primary
-      && (alternate ? result.alternatives.includes(alternate) && dict.entryById(alternate) : result.alternatives.length === 0)
-      && result.alternatives.length <= 3 && !result.alternatives.includes(primary))
+      && (alternate ? alternativeIds.includes(alternate) && dict.entryById(alternate) : alternativeIds.length === 0)
+      && alternativeIds.length <= 3 && !alternativeIds.includes(primary))
   }
   const searchLexicon = openPaperDictionary(fixturePath).db
   try {

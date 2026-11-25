@@ -52,6 +52,8 @@ export function openPaperDictionary(filePath) {
 }
 
 const searchFormQueries = new WeakMap()
+const unsupportedSearchTags = new Set(['archaic', 'obsolete', 'dialectal', 'colloquial', 'misspelling', 'nonstandard', 'error'])
+export const isStandardSearchForm = (tags = []) => !tags.some(tag => unsupportedSearchTags.has(tag))
 
 export function lookupSearchForms(db, form) {
   if (!db) return []
@@ -66,7 +68,7 @@ export function lookupSearchForms(db, form) {
   }
   return searchFormQueries.get(db).all(form).flatMap(({ lemma, pos, tags_json: tagsJson }) => {
     const tags = parseTags(tagsJson)
-    if (tags.some(tag => ['archaic', 'obsolete', 'dialectal', 'colloquial', 'misspelling', 'nonstandard'].includes(tag))) return []
+    if (!isStandardSearchForm(tags)) return []
     return [{
       lemma,
       verb: pos === 'verb',
