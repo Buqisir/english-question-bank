@@ -176,6 +176,7 @@ export function usePaperSelectionTranslation({
   const [analysisError, setAnalysisError] = useState('')
   const [analysisReject, setAnalysisReject] = useState<'cross-sentence' | 'too-long'>('cross-sentence')
   const generationRef = useRef(0)
+  const openedPhraseRef = useRef<number | null>(null)
   const snapshotRef = useRef<Snapshot | null>(null)
   const abortRef = useRef<AbortController | null>(null)
   const lookupAbortRef = useRef<AbortController | null>(null)
@@ -666,11 +667,13 @@ export function usePaperSelectionTranslation({
   }, [dictionaryStatus, sense])
 
   useEffect(() => {
-    if (phase === 'toolbar' && dictionaryResult?.otter?.kind === 'phrase') {
+    if (phase === 'toolbar' && snapshot && dictionaryResult?.otter?.kind === 'phrase'
+      && openedPhraseRef.current !== snapshot.generation) {
+      openedPhraseRef.current = snapshot.generation
       setPhase('dictionary')
       setLiveMessage('短语词典已打开')
     }
-  }, [dictionaryResult, phase])
+  }, [dictionaryResult, phase, snapshot])
 
   // Re-read the live DOM selection once the policies arrive, as if a selectionchange had fired.
   const refreshFromSelection = useEffectEvent(() => updateFromSelection())
@@ -736,10 +739,11 @@ export function usePaperSelectionTranslation({
         const current = snapshotRef.current
         if (phaseRef.current === 'dictionary' && current) {
           event.stopPropagation()
-          const lookup = { ...current, action: 'lookup' as const, input: 'keyboard' as const }
-          snapshotRef.current = lookup
-          setSnapshot(lookup)
-          setPhase('lookup')
+          const backTo = current.action === 'toolbar' ? 'toolbar' : 'lookup'
+          const restored: Snapshot = { ...current, action: backTo, input: 'keyboard' }
+          snapshotRef.current = restored
+          setSnapshot(restored)
+          setPhase(backTo)
           stopDictionaryAudio()
           return
         }
@@ -948,7 +952,7 @@ export function usePaperSelectionTranslation({
         results={results}
         errorMessage={errorMessage}
         liveMessage={liveMessage}
-        focusLookup={snapshot.input === 'keyboard'}
+        focusLookup={snapshot.input === 'keyboard' && (phase !== 'toolbar' || openedPhraseRef.current === snapshot.generation)}
         onTranslate={() => {
           void runTranslate(snapshot)
         }}
@@ -999,6 +1003,9 @@ export function usePaperSelectionTranslation({
             phrases={sentencePhrases}
             actions={otter ? <>
               <Button size="sm" tone="strong" autoFocus={restoreQuickFocus || snapshot.input === 'keyboard'} onClick={openFullEntry}>完整词条</Button>
+              {otter.kind === 'phrase' && status?.enabled && (
+                <Button size="sm" onClick={() => { void runTranslate(snapshot) }}>翻译</Button>
+              )}
               {notebook}
             </> : notebook}
             menu={<Menu label="更多查词操作" className="otter-menu" triggerSize="sm" items={[

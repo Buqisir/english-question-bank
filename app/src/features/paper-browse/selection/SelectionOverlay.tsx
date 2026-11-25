@@ -199,6 +199,7 @@ export function SelectionOverlay({
             <button
               type="button"
               className="paper-selection-translate"
+              autoFocus={focusLookup}
               onClick={onTranslate}
             >
               <Translate size={16} className="paper-selection-btn-icon" />
@@ -209,6 +210,7 @@ export function SelectionOverlay({
             <button
               type="button"
               className="paper-selection-analyze"
+              autoFocus={phase === 'toolbar' && !showTranslate && focusLookup}
               onMouseDown={(event) => event.preventDefault()}
               onClick={onAnalyze}
             >

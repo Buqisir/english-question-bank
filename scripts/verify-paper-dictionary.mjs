@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, mkdtempSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { createServer as createNetServer } from 'node:net'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -30,6 +30,8 @@ import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from '../se
 import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
 import { installOtterPhraseFixture, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
+import { openOtterDictionary } from '../server/paper-dictionary/otter.mjs'
+import { indexPhraseOccurrence, locatePhraseOccurrence } from '../shared/paper-dictionary/phraseOccurrence.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-dictionary-'))
@@ -916,6 +918,29 @@ evilRuntime.close()
     highlighted('w:give-up') === 'gave|up' && highlighted('w:make-up-ones-mind') === 'made up her mind')
   check('word examples retain the original highlighting path', highlighted('w:give') === undefined)
   phraseRuntime.close()
+}
+
+{
+  const repeated = '🦦 Due to rain. Due to snow.'
+  const start = repeated.lastIndexOf('Due to')
+  const indexed = indexPhraseOccurrence(repeated, start, [start, start + 6])
+  check('a producer-supplied origin resolves repeated phrases in code-point coordinates',
+    locatePhraseOccurrence([...repeated], { ...indexed, sentence: 2 })?.from === start - 1)
+  const legacy = { sentence: 2, start: 0, end: 6, surface: 'Due to' }
+  check('legacy later sentences require a unique quote at a possible sentence origin',
+    locatePhraseOccurrence([...repeated], legacy)?.from === start - 1
+    && locatePhraseOccurrence([...`${repeated} Due to ice.`], legacy) === null)
+  const entry = JSON.parse(readFileSync(path.join(rootDir, 'server/paper-dictionary/otter-data/entries/w-due-to.json'), 'utf8'))
+  const example = entry.senses.flatMap(sense => sense.examples)
+    .find(item => item.text.includes('Mr. Somerset was due to return'))
+  const { paperId, groupId, locator } = example.source
+  const startDue = example.text.indexOf('due to')
+  const hits = openOtterDictionary(rootDir).findPhrases(paperId, {
+    groupId, text: example.text,
+    leaves: [{ kind: 'paragraph', id: locator.paragraphId, start: 0, end: example.text.length }],
+  }, { start: startDue, end: startDue + 6 }, false)
+  check('the bundled Somerset phrase keeps its indexed sentence and sense after Mr.',
+    hits.some(hit => hit.exact && hit.sense.senseId === 'w:due-to#s2'))
 }
 
 async function verifyBrowser() {

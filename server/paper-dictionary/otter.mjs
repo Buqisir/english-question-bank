@@ -2,6 +2,7 @@ import { closeSync, openSync, readFileSync, readdirSync, readSync } from 'node:f
 import path from 'node:path'
 import { StringDecoder } from 'node:string_decoder'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
+import { codePointOffset, locatePhraseOccurrence } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
 
 const normalize = (text) => text.normalize('NFC').replace(/[‘’]/g, "'").trim().replace(/\s+/g, ' ')
@@ -216,24 +217,20 @@ export function openOtterDictionary(rootDir) {
         if (leaf.end <= start || leaf.start >= end) return []
         const rows = phrases.get(occurrenceKey(paperId, stream.groupId, leafLocator(leaf)))
         if (!rows) return []
-        const sentences = splitSentences(stream.text.slice(leaf.start, leaf.end))
+        const text = stream.text.slice(leaf.start, leaf.end)
+        const points = [...text]
+        const from = codePointOffset(text, Math.max(0, start - leaf.start))
+        const to = codePointOffset(text, end - leaf.start)
         return [...rows].sort((a, b) => a.sentence - b.sentence || a.start - b.start).flatMap(row => {
-          const sentence = sentences[row.sentence - 1]
-          if (!sentence) return []
-          const base = leaf.start + sentence.start
-          if (end <= base || start >= leaf.start + sentence.end) return []
-          // The occurrence index counts code points from the trimmed sentence.
-          const indexedText = [...sentence.text.trimStart()].slice(row.start, row.end).join('')
-          if (!indexedText || (row.surface && indexedText !== row.surface)) return []
-          const from = [...sentence.text.slice(0, Math.max(0, start - base)).trimStart()].length
-          const to = [...sentence.text.slice(0, end - base).trimStart()].length
+          const indexed = locatePhraseOccurrence(points, row)
+          if (!indexed) return []
           const hit = word
-            ? (row.parts ?? [[row.start, row.end]]).some(([s, e]) => s <= from && to <= e)
-            : from <= row.start && row.end <= to
+            ? (row.parts ?? [[row.start, row.end]]).some(([s, e]) => indexed.origin + s <= from && to <= indexed.origin + e)
+            : from <= indexed.from && indexed.to <= to
           if (!hit) return []
           const entry = entryById(row.entryId)
           const sense = entry.senses.find(item => item.senseId === row.senseId)
-          const exact = !word && start >= base && end <= leaf.start + sentence.end && from === row.start && to === row.end
+          const exact = !word && start >= leaf.start && end <= leaf.end && from === indexed.from && to === indexed.to
           return sense ? [{ entry, sense, exact }] : []
         })
       })

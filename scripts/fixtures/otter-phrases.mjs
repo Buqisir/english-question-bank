@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { indexPhraseOccurrence } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 
 export const text = 'She gave it up and made up her mind.'
 export const source = {
@@ -35,7 +36,8 @@ export function installOtterPhraseFixture(root) {
     }))
   }
   writeFileSync(path.join(dir, 'occurrence-senses.ndjson'), rows.map(row => JSON.stringify({
-    ...row, paperId: source.paperId, groupId: 'g', paragraphId: 'p1', sentence: 1,
-    senseId: `${row.entryId}#s1`, surface: text.slice(row.start, row.end),
+    ...row, ...indexPhraseOccurrence(text, 0, [row.start, row.end], row.parts),
+    paperId: source.paperId, groupId: 'g', paragraphId: 'p1', sentence: 1,
+    senseId: `${row.entryId}#s1`,
   })).join('\n'))
 }
