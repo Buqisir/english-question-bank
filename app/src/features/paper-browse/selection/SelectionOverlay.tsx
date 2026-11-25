@@ -27,6 +27,7 @@ export type SelectionOverlayProps = {
   onClose?: () => void
   onPointerInsideChange: (inside: boolean) => void
   dictionary?: ReactNode
+  phrases?: ReactNode
   focusLookup?: boolean
   showTranslate?: boolean
   showAnalyze?: boolean
@@ -62,6 +63,7 @@ export function SelectionOverlay({
   onClose,
   onPointerInsideChange,
   dictionary,
+  phrases,
   focusLookup = false,
   showTranslate = true,
   showAnalyze = false,
@@ -171,7 +173,7 @@ export function SelectionOverlay({
       className="paper-selection-overlay"
       role={phase === 'dictionary' ? 'dialog' : 'region'}
       aria-modal={phase === 'dictionary' ? false : undefined}
-      aria-label={phase === 'sentence-analysis' ? '句子分析' : phase === 'dictionary' || phase === 'lookup' ? '单词查词' : '选区翻译'}
+      aria-label={phase === 'sentence-analysis' ? '句子分析' : phase === 'dictionary' || phase === 'lookup' ? '查词' : '选区翻译'}
       onMouseDown={(event) => {
         if (phase === 'sentence-analysis') return
         event.preventDefault()
@@ -181,7 +183,8 @@ export function SelectionOverlay({
     >
       <div className="paper-selection-live" aria-live="polite">{liveMessage}</div>
       {phase === 'toolbar' || phase === 'lookup' ? (
-        <div className="paper-selection-toolbar">
+        <>
+        {(phase === 'lookup' || showTranslate || showAnalyze) && <div className="paper-selection-toolbar">
           {phase === 'lookup' ? (
             <button
               type="button"
@@ -213,7 +216,9 @@ export function SelectionOverlay({
               <span>{analyzeLabel}</span>
             </button>
           ) : null}
-        </div>
+        </div>}
+        {phase === 'toolbar' && phrases}
+        </>
       ) : phase === 'sentence-analysis' ? analysis : phase === 'dictionary' ? dictionary : (
         <div className="paper-selection-card">
           <div className="paper-selection-card-header">

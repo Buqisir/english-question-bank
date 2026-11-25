@@ -14,7 +14,6 @@ import './dictionaryEntry.css'
 type EntryProps = {
   senseId?: string | null
   onClose?: () => void
-  showCounts?: boolean
 } & (
   | {
     density: 'quick'
@@ -23,6 +22,7 @@ type EntryProps = {
     pending: boolean
     fallback?: ReactNode
     notice?: ReactNode
+    phrases?: ReactNode
     menu: ReactNode
     actions: ReactNode
   }
@@ -47,6 +47,7 @@ export function DictionaryEntry(props: EntryProps) {
   const full = props.density === 'full'
   const pending = quick?.pending ?? Boolean(word && entry === undefined && !error)
   const Title = word ? 'h1' : 'h2'
+  const title = entry?.headword ?? (word?.startsWith('w:') ? null : word) ?? quick?.surface
   const returnInHistory = Boolean(returnHref && window.history.state?.otterFromSelection)
 
   useEffect(() => {
@@ -109,7 +110,7 @@ export function DictionaryEntry(props: EntryProps) {
         window.history.back()
       }}>回到原句</ButtonLink>}
       <header className="otter-entry-heading">
-        <Title ref={titleRef} tabIndex={full ? -1 : undefined} lang="en">{entry?.headword ?? word ?? quick?.surface}</Title>
+        {title && <Title ref={titleRef} tabIndex={full ? -1 : undefined} lang="en">{title}</Title>}
         {entry && <Chip>{entry.lists.some(list => list === '3000' || list === '3100') ? '高考词汇' : '超纲'}</Chip>}
         {quick?.fallback && <Chip>通用词典</Chip>}
         {quick?.menu}
@@ -123,8 +124,8 @@ export function DictionaryEntry(props: EntryProps) {
       {audioError && <Notice kind="error">读音播放失败，请重试</Notice>}
       {quick && <>
         {quickSense && <p className="otter-gloss">{context && <Chip>本文</Chip>} <i lang="en">{quickSense.pos}</i> {quickSense.glossZh}</p>}
-        {entry && props.showCounts && <p className="otter-count">本词在真题中出现 {entry.counts.gaokao} 次 · 模拟题 {entry.counts.mock} 次</p>}
         {quick.fallback}
+        {quick.phrases}
         {quick.actions && <div className="otter-actions">{quick.actions}</div>}
       </>}
       {sections.filter(section => section.senses.length).map(({ title, senses, folded }) => (
@@ -134,7 +135,6 @@ export function DictionaryEntry(props: EntryProps) {
           {(!folded || otherOpen) && <ol>
             {senses.map(sense => <li key={sense.senseId} ref={sense === context ? contextRef : undefined}>
               <p className="otter-gloss"><i lang="en">{sense.pos}</i> {sense.glossZh} {sense === context && <Chip>本文</Chip>}</p>
-              {props.showCounts && !sense.folded && <p className="otter-count">真题 {sense.counts.gaokao} 次 · 模拟 {sense.counts.mock} 次</p>}
               {sense.examples.slice(0, expanded[sense.senseId] ? undefined : 1).map(example =>
                 <ExampleSentence key={example.exampleId} example={example} forms={forms} />)}
               {sense.examples.length > 1 && <Button size="sm" aria-expanded={Boolean(expanded[sense.senseId])}
@@ -146,6 +146,17 @@ export function DictionaryEntry(props: EntryProps) {
           </ol>}
         </section>
       ))}
+      {full && !!entry?.relatedPhraseLinks?.length && (
+        <section aria-label="相关短语" className="otter-senses">
+          <h3>相关短语</h3>
+          <div className="otter-actions">
+            {entry.relatedPhraseLinks.map(({ entryId, headword }) => (
+              <ButtonLink key={entryId} size="sm" lang="en"
+                href={`?${new URLSearchParams({ view: 'word', w: entryId })}`}>{headword}</ButtonLink>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }

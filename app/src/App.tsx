@@ -33,6 +33,7 @@ import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-wo
 import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { DictionaryEntry } from './features/dictionary/DictionaryEntry'
+import { DictionarySearch } from './features/dictionary/DictionarySearch'
 import { Surface } from './shared-ui/Surface'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem, fetchCurrentDraftPaper } from './services/draftPapers'
 import { Button } from './shared-ui/Button.tsx'
@@ -661,17 +662,18 @@ function App() {
     )
   }
 
-  if (route.view === 'word' && route.word) {
+  if (route.view === 'word') {
     const source = appRouteUrl('paper-browse', { w: null, wordSense: null })
     return (
       <div className="app-shell">
         <AppTopbar {...shellNav} variant="sub" pageTitle="獭獭词典" onBack={paperBrowseOnBackToWorkbench} />
         <main className="otter-page">
-          <Surface variant="board" padding="md">
+          <DictionarySearch onFound={entryId => navigate('word', { w: entryId, wordSense: null }, { state: {} })} />
+          {route.word && <Surface variant="board" padding="md">
             <DictionaryEntry key={route.word} density="full" word={route.word}
               senseId={route.paperId ? route.wordSense : undefined}
               returnHref={route.paperId ? `${source.pathname}${source.search}` : undefined} />
-          </Surface>
+          </Surface>}
         </main>
       </div>
     )

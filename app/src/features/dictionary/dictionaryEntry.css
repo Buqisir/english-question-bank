@@ -2,7 +2,11 @@
   max-width: 720px;
   margin: var(--eqb-space-5) auto;
   padding: 0 var(--eqb-space-4);
+  display: grid;
+  gap: var(--eqb-space-3);
 }
+
+.otter-page > .eqb-search { width: min(100%, 320px); }
 
 .otter-entry {
   --otter-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
@@ -37,7 +41,6 @@
 .otter-entry-heading .eqb-button[aria-haspopup] + .otter-close { margin-inline-start: 0; }
 .otter-entry .paper-dictionary-notebook { margin: 0; padding: 0; }
 .otter-pronunciations,
-.otter-count,
 .otter-source { color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
 .otter-pronunciations [lang="en-fonipa"] {
   font-family: var(--otter-serif);
@@ -58,6 +61,25 @@
 .otter-senses ol { padding-inline-start: var(--eqb-space-5); }
 .otter-senses li { padding-block-start: var(--eqb-space-3); }
 .otter-senses li::marker { color: var(--eqb-color-text-muted); }
+.otter-sentence-phrases {
+  color: var(--eqb-color-text);
+  font-size: var(--eqb-font-size-control);
+}
+.paper-selection-overlay > .otter-sentence-phrases {
+  padding: var(--eqb-space-2);
+  background: var(--desk-raised);
+  border-radius: var(--eqb-radius-card);
+  box-shadow: var(--elev-3);
+  max-height: inherit;
+  overflow: auto;
+}
+.paper-selection-toolbar + .otter-sentence-phrases { margin-block-start: var(--eqb-space-2); }
+.otter-sentence-phrases :is(h3, p) { margin: 0; }
+.otter-sentence-phrases h3 {
+  font-size: var(--eqb-font-size-xs);
+  color: var(--eqb-color-text-muted);
+}
+.otter-sentence-phrases .eqb-button-label { white-space: normal; text-align: start; }
 .otter-gloss .eqb-chip { vertical-align: middle; }
 .otter-example { margin-block-start: var(--eqb-space-2); }
 .otter-example p[lang="en"] { font-size: var(--eqb-font-size-md); line-height: 1.55; }

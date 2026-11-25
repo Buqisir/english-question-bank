@@ -1,7 +1,7 @@
 import { useId, useState, useSyncExternalStore } from 'react'
 import { DisclosureIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
-import { Button } from '../../../shared-ui/Button.tsx'
+import { Button, ButtonLink } from '../../../shared-ui/Button.tsx'
 import { Notice } from '../../../shared-ui/Notice'
 import { PronunciationButton } from '../../../shared-ui/PronunciationButton'
 import type {
@@ -10,8 +10,23 @@ import type {
   PaperDictionaryPronunciation,
   PaperDictionaryResponse,
   PaperDictionarySense,
+  OtterPhraseHit,
 } from '../../../services/paperDictionary'
 import { getDictionaryAudioSnapshot, playDictionaryAudio, subscribeDictionaryAudio } from './dictionaryAudio'
+
+export function SentencePhrases({ phrases, href }: {
+  phrases: OtterPhraseHit[]
+  href: (entryId: string, senseId: string) => string
+}) {
+  return <section className="otter-sentence-phrases" aria-label="本句短语">
+    <h3>本句短语</h3>
+    {phrases.map(({ entryId, headword, senseId, glossZh }) => (
+      <p key={`${entryId}:${senseId}`}>
+        <ButtonLink size="sm" lang="en" href={href(entryId, senseId)}>{headword}</ButtonLink> {glossZh}
+      </p>
+    ))}
+  </section>
+}
 
 export type DictionarySenseState =
   | { status: 'loading' }

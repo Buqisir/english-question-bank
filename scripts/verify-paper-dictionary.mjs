@@ -29,6 +29,7 @@ import { initializeUsageLedger } from '../server/paper-translation/usageLedger.m
 import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from '../server/paper-dictionary/routes.mjs'
 import { enrichWithGaokao } from '../server/paper-dictionary/gaokao.mjs'
 import { MAX_DICTIONARY_RESPONSE_BYTES } from '../shared/paper-dictionary/constants.mjs'
+import { installOtterPhraseFixture, source as phraseSource, text as phraseText } from './fixtures/otter-phrases.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-dictionary-'))
@@ -877,6 +878,40 @@ hugeRuntime.close()
 missingRuntime.close()
 clockRuntime.close()
 evilRuntime.close()
+
+{
+  installOtterPhraseFixture(temp)
+  const phraseRuntime = createPaperDictionaryRuntime({
+    rootDir: temp, loadSource: () => phraseSource,
+    env: { QUESTION_BANK_PAPER_DICTIONARY_PATH: fixturePath, QUESTION_BANK_PUBLIC_ORIGIN: 'http://127.0.0.1:5173' },
+  })
+  const phraseContext = { ...context, paperDictionary: phraseRuntime }
+  const select = async (selectedText, start = phraseText.indexOf(selectedText)) => (await lookup({
+    schemaVersion: 'paper-dictionary-request-v1', paperId: phraseSource.paperId, sourceRevision: phraseSource.sourceRevision,
+    segments: [{ streamId: 'passage', start, end: start + selectedText.length, selectedText }],
+  }, phraseContext)).parsed
+  const word = await select('gave')
+  check('a fixed word keeps its own entry and shows the contextual phrase', word.otter?.entryId === 'w:give'
+    && word.phrases?.[0]?.glossZh === '放弃')
+  check('a word in the separable gap does not match the phrase', !(await select('it')).phrases)
+  check('the second fixed part matches the separable phrase', (await select('up')).phrases?.[0]?.entryId === 'w:give-up')
+  const exact = await select('gave it up')
+  check('an exact phrase selects its entry and sense', exact.otter?.entryId === 'w:give-up' && exact.otterSenseId === 'w:give-up#s1')
+  const longer = await select(phraseText)
+  check('a larger selection returns both phrases without a primary entry', !longer.otter
+    && longer.phrases?.map(hit => hit.entryId).join(',') === 'w:give-up,w:make-up-ones-mind')
+  const get = (pathname, params) => {
+    const response = createResponse()
+    const url = new URL(`http://localhost/api/paper-dictionary/${pathname}?${new URLSearchParams(params)}`)
+    routeBy('GET', url.pathname).handle({ response, url, context: phraseContext })
+    return response
+  }
+  check('search accepts case, apostrophes, and possessive variants', ["Make up one’s mind", 'MADE UP YOUR MIND'].every(w =>
+    get('search', { w }).parsed?.entryId === 'w:make-up-ones-mind'))
+  check('an absent phrase returns 404', get('search', { w: 'unknown phrase' }).statusCode === 404)
+  check('entry by ID resolves related phrase links', get('entry', { id: 'w:give' }).parsed?.relatedPhraseLinks?.[0]?.headword === 'give up')
+  phraseRuntime.close()
+}
 
 async function verifyBrowser() {
   const requireFromApp = createRequire(new URL('../app/package.json', import.meta.url))

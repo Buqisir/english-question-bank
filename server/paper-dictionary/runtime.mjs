@@ -23,6 +23,7 @@ import {
   SENSE_PICK_RESPONSE_SCHEMA,
 } from '../../shared/paper-dictionary/constants.mjs'
 import { classifyCompleteEnglishWord } from '../../shared/paper-dictionary/wordToken.mjs'
+import { MAX_SEGMENTS } from '../../shared/paper-selection/constants.mjs'
 import {
   buildSelectionSourceFromConsumption,
   readSelection,
@@ -172,6 +173,7 @@ export function createPaperDictionaryRuntime({
       schemaVersion: DICTIONARY_STATUS_SCHEMA,
       enabled,
       available: Boolean(current.available || otter?.available),
+      phrasesAvailable: Boolean(otter?.phrasesAvailable),
       dictionaryVersion: current.meta?.dictionary_version || null,
       reason: enabled ? current.reason : 'disabled',
       sensePick: {
@@ -278,8 +280,8 @@ export function createPaperDictionaryRuntime({
     return payload
   }
 
-  // lookup 与 sense 共用的入站校验：同一套 schema 白名单、限流、来源校验和整词校验。
-  function resolveWordSelection({ body, context, userId, schemaVersion }) {
+  // lookup 与 sense 共用 schema 白名单、限流和来源校验。
+  function resolveSelection({ body, context, userId, schemaVersion }) {
     requireAuth(context)
     const current = dictionary()
     if (!enabled || (!current.available && !otter?.available)) {
@@ -295,12 +297,12 @@ export function createPaperDictionaryRuntime({
     if (typeof body.paperId !== 'string' || !body.paperId || typeof body.sourceRevision !== 'string') {
       throw serviceError('DICTIONARY_REQUEST_INVALID', 'paperId and sourceRevision are required', 400)
     }
-    if (!Array.isArray(body.segments) || body.segments.length !== 1) {
-      throw serviceError('DICTIONARY_REQUEST_INVALID', 'Dictionary lookup accepts one word segment', 400)
+    const maxSegments = schemaVersion === DICTIONARY_REQUEST_SCHEMA ? MAX_SEGMENTS : 1
+    if (!Array.isArray(body.segments) || !body.segments.length || body.segments.length > maxSegments) {
+      throw serviceError('DICTIONARY_REQUEST_INVALID', 'Invalid dictionary segment count', 400)
     }
-    const segment = body.segments[0]
     const segmentKeys = new Set(['streamId', 'start', 'end', 'selectedText'])
-    if (!segment || Object.keys(segment).some((key) => !segmentKeys.has(key))) {
+    if (body.segments.some(segment => !segment || Object.keys(segment).some(key => !segmentKeys.has(key)))) {
       throw serviceError('DICTIONARY_REQUEST_INVALID', 'Dictionary segment is malformed', 400)
     }
     admit(userId)
@@ -314,49 +316,81 @@ export function createPaperDictionaryRuntime({
     if (source.sourceRevision !== body.sourceRevision) {
       throw serviceError('SELECTION_SOURCE_MISMATCH', 'sourceRevision does not match', 409)
     }
-    let slice
-    try {
-      slice = readSelection(source, segment)
-    } catch (error) {
-      const status = error.code === 'SELECTION_SOURCE_MISMATCH' ? 409 : 400
-      throw serviceError(error.code || 'DICTIONARY_REQUEST_INVALID', error.message, status)
-    }
-    const word = classifyCompleteEnglishWord(slice.stream.text, segment.start, segment.end)
-    if (!word || word.surface !== segment.selectedText || word.start !== segment.start || word.end !== segment.end) {
-      throw serviceError('DICTIONARY_NOT_A_WORD', 'Selection is not one complete English word', 400)
-    }
-    return { source, segment, slice, word }
+    const slices = body.segments.map(segment => {
+      try {
+        return { ...readSelection(source, segment), segment }
+      } catch (error) {
+        const status = error.code === 'SELECTION_SOURCE_MISMATCH' ? 409 : 400
+        throw serviceError(error.code || 'DICTIONARY_REQUEST_INVALID', error.message, status)
+      }
+    })
+    return { source, slices }
+  }
+
+  function completeWord({ stream, segment }) {
+    const word = classifyCompleteEnglishWord(stream.text, segment.start, segment.end)
+    return word?.start === segment.start && word.end === segment.end ? word : null
   }
 
   function lookup({ body, context, requestId = randomUUID(), userId }) {
-    const { source, slice, word } = resolveWordSelection({
+    const { source, slices } = resolveSelection({
       body, context, userId, schemaVersion: DICTIONARY_REQUEST_SCHEMA,
     })
-    const match = otter?.findOccurrence(body.paperId, slice.stream, word)
-    const entry = match?.entry ?? otter?.find(word.surface) ?? null
-    const lexical = entry
-      ? { dictionaryVersion: dictionary().meta?.dictionary_version || DICTIONARY_SCHEMA, status: 'found', entries: [], attribution: '' }
-      : lexicalEntry(word.surface)
+    const [slice] = slices
+    const word = slices.length === 1 ? completeWord(slice) : null
+    if (!word && slices.length === 1 && !/\S\s+\S/.test(slice.selectedText)) {
+      throw serviceError('DICTIONARY_NOT_A_WORD', 'Selection is not one complete English word', 400)
+    }
+    const hits = slices.flatMap(({ stream, segment }) => otter?.findPhrases(body.paperId, stream, segment, word) ?? [])
+    const exact = slices.length === 1 ? hits.filter(hit => hit.exact) : []
+    const primary = exact.length === 1 ? exact[0] : null
+    const match = word ? otter?.findOccurrence(body.paperId, slice.stream, word) : null
+    const found = word ? otter?.find(word.surface) : null
+    const entry = primary?.entry ?? match?.entry ?? (found?.kind === 'phrase' ? null : found)
+    const phrases = [...new Map(hits.filter(hit => hit !== primary).map(({ entry, sense }) => [
+      `${entry.entryId}:${sense.senseId}`, { entryId: entry.entryId, headword: entry.headword, senseId: sense.senseId, glossZh: sense.glossZh },
+    ])).values()]
+    const lexical = word && !entry && (dictionary().available || !phrases.length) ? lexicalEntry(word.surface) : {
+      dictionaryVersion: dictionary().meta?.dictionary_version || DICTIONARY_SCHEMA,
+      status: 'not-found', entries: [], attribution: '',
+    }
     return fitPayload({
       schemaVersion: DICTIONARY_RESPONSE_SCHEMA,
       requestId,
       sourceRevision: source.sourceRevision,
       dictionaryVersion: lexical.dictionaryVersion,
-      selectedText: word.surface,
-      status: lexical.status,
+      selectedText: slice.selectedText,
+      status: entry || (phrases.length && !lexical.entries.length) ? 'found' : lexical.status,
       entries: lexical.entries,
       truncated: false,
       attribution: lexical.attribution,
-      otter: entry,
-      otterSenseId: match?.senseId ?? null,
+      otter: withRelatedPhrases(entry),
+      otterSenseId: primary?.sense.senseId ?? match?.senseId ?? null,
+      ...(phrases.length ? { phrases } : {}),
     })
   }
 
-  function entry({ surface, context, userId }) {
+  function admitEntry(context, userId) {
     requireAuth(context)
     if (!enabled) throw serviceError('DICTIONARY_UNAVAILABLE', '词典暂不可用', 503)
     admit(userId)
-    return surface && surface.length <= MAX_WORD_UTF16 ? otter.find(surface) : null
+  }
+
+  function withRelatedPhrases(entry) {
+    return entry?.relatedPhrases ? { ...entry, relatedPhraseLinks: otter.relatedPhrases(entry) } : entry || null
+  }
+
+  function entry({ surface, entryId, context, userId }) {
+    admitEntry(context, userId)
+    const found = entryId
+      ? entryId.length <= MAX_WORD_UTF16 && otter.entryById(entryId)
+      : surface && surface.length <= MAX_WORD_UTF16 && otter.find(surface)
+    return withRelatedPhrases(found)
+  }
+
+  function search({ surface, context, userId }) {
+    admitEntry(context, userId)
+    return surface && surface.length <= MAX_WORD_UTF16 ? otter.findId(surface) : null
   }
 
   function senseRecordFromReply(reply) {
@@ -387,9 +421,12 @@ export function createPaperDictionaryRuntime({
     if (context?.authMode === 'open' && !translationConfig.allowOpenAuth) {
       throw serviceError('SENSE_UNAVAILABLE', '本文义暂不可用', 503)
     }
-    const { source, segment, slice, word } = resolveWordSelection({
+    const { source, slices: [slice] } = resolveSelection({
       body, context, userId, schemaVersion: SENSE_PICK_REQUEST_SCHEMA,
     })
+    const { segment } = slice
+    const word = completeWord(slice)
+    if (!word) throw serviceError('DICTIONARY_NOT_A_WORD', 'Selection is not one complete English word', 400)
     const respond = (record) => ({
       schemaVersion: SENSE_PICK_RESPONSE_SCHEMA,
       requestId,
@@ -400,7 +437,7 @@ export function createPaperDictionaryRuntime({
     const match = otter?.findOccurrence(body.paperId, slice.stream, word)
     if (match) return respond({ status: 'ok', match: null, phrase: null, otterSenseId: match.senseId })
     const entry = otter?.find(word.surface)
-    if (entry) {
+    if (entry && entry.kind !== 'phrase') {
       const noMatch = { status: 'none', match: null, phrase: null, otterSenseId: null }
       const occurrence = readOtterOccurrence(slice.stream, word)
       if (!occurrence || occurrence.sentence.length > SENSE_PICK_MAX_OCCURRENCE_UTF16 || !entry.senses.length) {
@@ -525,6 +562,7 @@ export function createPaperDictionaryRuntime({
     status,
     lookup,
     entry,
+    search,
     sense,
     close() {
       opened?.db?.close()

@@ -4,6 +4,7 @@ export type PaperDictionaryStatus = {
   schemaVersion: string
   enabled: boolean
   available: boolean
+  phrasesAvailable?: boolean
   dictionaryVersion: string | null
   reason: string
   sensePick?: {
@@ -78,7 +79,11 @@ export type PaperDictionaryResponse = {
   attribution: string
   otter?: OtterEntry | null
   otterSenseId?: string | null
+  phrases?: OtterPhraseHit[]
 }
+
+type OtterEntryLink = { entryId: string; headword: string }
+export type OtterPhraseHit = OtterEntryLink & { senseId: string; glossZh: string }
 
 type WordCounts = { gaokao: number; mock: number }
 type Accents = { uk: string | null; us: string | null }
@@ -116,13 +121,24 @@ export type OtterEntry = {
   pronunciations: { pronunciationId: string; ipa: Accents; audio: Accents; label?: string }[]
   counts: WordCounts
   senses: OtterSense[]
+  kind?: 'word' | 'phrase'
+  relatedPhraseLinks?: OtterEntryLink[]
 }
 
 export async function fetchOtterEntry(word: string, signal: AbortSignal): Promise<OtterEntry | null> {
-  const response = await fetch(`/api/paper-dictionary/entry?${new URLSearchParams({ w: word })}`, { signal })
+  const params = new URLSearchParams({ [word.startsWith('w:') ? 'id' : 'w']: word })
+  const response = await fetch(`/api/paper-dictionary/entry?${params}`, { signal })
   if (response.status === 404) return null
   if (!response.ok) throw await errorFromResponse(response, '词条加载失败')
   return response.json()
+}
+
+export async function searchOtterEntry(query: string, signal: AbortSignal): Promise<string | null> {
+  const response = await fetch(`/api/paper-dictionary/search?${new URLSearchParams({ w: query })}`, { signal })
+  if (response.status === 404) return null
+  if (!response.ok) throw await errorFromResponse(response, '词典搜索失败')
+  const { entryId } = await response.json() as { entryId: string }
+  return entryId
 }
 
 export async function fetchPaperDictionaryStatus(

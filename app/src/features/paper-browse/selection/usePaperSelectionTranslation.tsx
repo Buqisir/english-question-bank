@@ -19,7 +19,7 @@ import {
   type PaperTranslationResultItem,
   type PaperTranslationStatus,
 } from '../../../services/paperTranslation.ts'
-import { DictionaryFallback, dictionaryCopyText, type DictionarySenseState } from './DictionaryCard'
+import { DictionaryFallback, SentencePhrases, dictionaryCopyText, type DictionarySenseState } from './DictionaryCard'
 import { DictionaryEntry } from '../../dictionary/DictionaryEntry'
 import { Button } from '../../../shared-ui/Button'
 import { Menu } from '../../../shared-ui/Menu'
@@ -112,6 +112,7 @@ type Snapshot = {
   segments: Array<{ streamId: string; start: number; end: number; selectedText: string }>
   anchor: { x: number; y: number } | null
   word: boolean
+  phraseProbe?: boolean
   analysisEligible: boolean
   input: 'pointer' | 'keyboard'
 }
@@ -393,7 +394,7 @@ export function usePaperSelectionTranslation({
       version: dictionaryStatus?.dictionaryVersion || '',
       paperId: current.paperId,
       sourceRevision: current.sourceRevision,
-      segment,
+      segments: current.segments,
     })
     const announce = (message: string) => {
       if (snapshotRef.current?.action === 'dictionary') setLiveMessage(message)
@@ -580,12 +581,15 @@ export function usePaperSelectionTranslation({
       }
     }
     const analysisEligible = SENTENCE_ANALYSIS_ENABLED && analysisButtonEligible(source, consumption, segments)
-    const action = chooseAction({
+    const phraseProbe = !word && Boolean(dictionaryStatus?.phrasesAvailable)
+      && (segments.length > 1 || /\S\s+\S/.test(segments[0].selectedText))
+    const preferredAction = chooseAction({
       word,
       translationEnabled,
       dictionaryAvailable,
       analysisEligible,
     })
+    const action = preferredAction === 'none' && phraseProbe ? 'toolbar' : preferredAction
     if (action === 'lookup' && status === undefined) return
     if (action === 'none') {
       if (phase !== 'idle') close()
@@ -596,7 +600,8 @@ export function usePaperSelectionTranslation({
       && previous.range.startContainer === range.startContainer && previous.range.startOffset === range.startOffset
       && previous.range.endContainer === range.endContainer && previous.range.endOffset === range.endOffset)
     const translationInFlight = phase === 'loading' || phase === 'result' || phase === 'error' || phase === 'dictionary' || phase === 'sentence-analysis'
-    if (sameRange && previous && (previous.action === action || translationInFlight)) {
+    if (sameRange && previous && (previous.action === action || translationInFlight)
+      && !(phase === 'toolbar' && phraseProbe && !previous.phraseProbe)) {
       pendingAnchorRef.current = null
       return
     }
@@ -624,6 +629,7 @@ export function usePaperSelectionTranslation({
       segments,
       anchor: pendingAnchorRef.current,
       word,
+      phraseProbe,
       analysisEligible,
       input: lastInputRef.current,
     }
@@ -639,9 +645,10 @@ export function usePaperSelectionTranslation({
     setLookupError('')
     setPlayErrorId('')
     resetCopy()
-    if (action === 'toolbar') {
+    if (next.action === 'toolbar') {
       setPhase('toolbar')
-      setLiveMessage('已选中文字，可翻译')
+      setLiveMessage(translationEnabled ? '已选中文字，可翻译' : '')
+      if (phraseProbe) void runLookup(next)
       return
     }
     if (action === 'lookup') {
@@ -658,6 +665,13 @@ export function usePaperSelectionTranslation({
     return sense
   }, [dictionaryStatus, sense])
 
+  useEffect(() => {
+    if (phase === 'toolbar' && dictionaryResult?.otter?.kind === 'phrase') {
+      setPhase('dictionary')
+      setLiveMessage('短语词典已打开')
+    }
+  }, [dictionaryResult, phase])
+
   // Re-read the live DOM selection once the policies arrive, as if a selectionchange had fired.
   const refreshFromSelection = useEffectEvent(() => updateFromSelection())
   useEffect(() => {
@@ -672,8 +686,8 @@ export function usePaperSelectionTranslation({
   }, [dictionaryStatus, status])
 
   useEffect(() => {
-    if (phase !== 'dictionary' || !snapshot || !dictionaryResult || dictionaryResult.otterSenseId
-      || dictionaryResult.status === 'not-found') return undefined
+    if (phase !== 'dictionary' || !snapshot?.word || !dictionaryResult || dictionaryResult.otterSenseId
+      || (!dictionaryResult.otter && !dictionaryResult.entries.length)) return undefined
     scheduleSense(snapshot, dictionaryResult.otter)
     return () => clearSenseTimer()
   }, [clearSenseTimer, dictionaryResult, phase, scheduleSense, snapshot])
@@ -884,6 +898,24 @@ export function usePaperSelectionTranslation({
   const otterSenseId = dictionaryResult?.otterSenseId ?? (sense.status === 'otter' ? sense.senseId : null)
   const surface = snapshot?.segments[0]?.selectedText ?? ''
   const fallback = !otter && dictionaryResult?.entries.length ? dictionaryResult : null
+  const selectedSourceUrl = () => {
+    const url = new URL(window.location.href)
+    const segment = snapshot?.segments[0]
+    const stream = source?.streams.find(item => item.streamId === segment?.streamId)
+    const leaf = segment && stream?.leaves.find(item => item.start <= segment.start && item.end >= segment.end)
+    if (stream?.groupId) url.searchParams.set('focusGroupId', stream.groupId)
+    if (leaf?.kind === 'paragraph') url.searchParams.set('focusParagraphId', leaf.id)
+    return url
+  }
+  const sentencePhrases = dictionaryResult?.phrases?.length ? (
+    <SentencePhrases phrases={dictionaryResult.phrases} href={(entryId, senseId) => {
+      const url = selectedSourceUrl()
+      url.searchParams.set('view', 'word')
+      url.searchParams.set('w', entryId)
+      url.searchParams.set('wordSense', senseId)
+      return `${url.pathname}${url.search}${url.hash}`
+    }} />
+  ) : null
   const openFullEntry = () => {
     if (!otter || !snapshot) return
     if (window.matchMedia('(width > 980px)').matches) {
@@ -891,25 +923,20 @@ export function usePaperSelectionTranslation({
       setFullEntryOpen(true)
       return
     }
-    const sourceUrl = new URL(window.location.href)
-    const segment = snapshot.segments[0]
-    const stream = source?.streams.find(item => item.streamId === segment?.streamId)
-    const leaf = stream?.leaves.find(item => item.start <= segment.start && item.end >= segment.end)
-    if (stream?.groupId) sourceUrl.searchParams.set('focusGroupId', stream.groupId)
-    if (leaf?.kind === 'paragraph') sourceUrl.searchParams.set('focusParagraphId', leaf.id)
+    const sourceUrl = selectedSourceUrl()
     window.history.replaceState(window.history.state, '', sourceUrl)
     sourceUrl.searchParams.set('view', 'word')
-    sourceUrl.searchParams.set('w', otter.headword)
+    sourceUrl.searchParams.set('w', otter.entryId)
     if (otterSenseId) sourceUrl.searchParams.set('wordSense', otterSenseId)
     window.history.pushState({ otterFromSelection: true }, '', sourceUrl)
     window.dispatchEvent(new PopStateEvent('popstate'))
   }
-  const notebook = snapshot?.segments.length === 1 ? (
+  const notebook = snapshot?.word ? (
     <NotebookAddButton paperId={snapshot.paperId} sourceRevision={snapshot.sourceRevision} segment={snapshot.segments[0]} />
   ) : null
   const overlay = !fullEntryOpen && snapshot && phase !== 'idle' && (
     phase === 'dictionary' || phase === 'lookup' || phase === 'sentence-analysis' || status?.enabled
-    || (phase === 'toolbar' && snapshot.analysisEligible)
+    || (phase === 'toolbar' && (snapshot.analysisEligible || sentencePhrases))
   )
     ? createPortal(
       <SelectionOverlay
@@ -926,6 +953,7 @@ export function usePaperSelectionTranslation({
           void runTranslate(snapshot)
         }}
         onLookup={openLookup}
+        phrases={sentencePhrases}
         showTranslate={Boolean(status?.enabled)}
         showAnalyze={SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible && (phase === 'toolbar' || phase === 'lookup')}
         analyzeLabel={snapshot.word ? '分析所在句' : '分析此句'}
@@ -967,6 +995,7 @@ export function usePaperSelectionTranslation({
               <DictionaryFallback surface={surface} result={fallback} playErrorId={playErrorId} sense={shownSense}
                 onRetrySense={() => { void runSense(snapshot) }} onPlayError={setPlayErrorId} />
             )}
+            phrases={sentencePhrases}
             actions={otter ? <>
               <Button size="sm" tone="strong" autoFocus={restoreQuickFocus || snapshot.input === 'keyboard'} onClick={openFullEntry}>完整词条</Button>
               {notebook}
