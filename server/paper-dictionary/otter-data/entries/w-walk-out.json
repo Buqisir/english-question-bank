@@ -53,41 +53,10 @@
       "senseId": "w:walk-out#s1",
       "pos": "短语",
       "glossZh": "走出去；步行离开",
-      "origin": "gaokao",
+      "origin": "mock",
       "folded": false,
       "legacySenseIds": [],
       "examples": [
-        {
-          "exampleId": "w:walk-out#e-c22cc8b288255b51",
-          "text": "“I’ll see you back home in a month, okay?” His parents nodded, and they watched as he walked out of sight into the crowds of hundreds of students and parents.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 86,
-            "end": 96
-          },
-          "parts": [
-            [
-              86,
-              96
-            ]
-          ],
-          "highlightRanges": [
-            [
-              86,
-              96
-            ]
-          ]
-        },
         {
           "exampleId": "w:walk-out#e-acf72379f715261a",
           "text": "Then the officer walked out to the parking lot with us to take a look at the damage to my car.",
@@ -149,10 +118,41 @@
               26
             ]
           ]
+        },
+        {
+          "exampleId": "w:walk-out#e-091ea0f81d2711c2",
+          "text": "Just then, Briana Williams, a new girl in his class who had just moved from Houston, a large modern city in Texas, walked out.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 125
+          },
+          "parts": [
+            [
+              115,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              125
+            ]
+          ]
         }
       ],
       "counts": {
-        "gaokao": 1,
+        "gaokao": 0,
         "mock": 6
       }
     },
@@ -245,13 +245,13 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 1,
+    "gaokao": 0,
     "mock": 7
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "gaokao",
+  "origin": "mock",
   "folded": false
 }

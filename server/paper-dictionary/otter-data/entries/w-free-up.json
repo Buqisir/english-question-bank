@@ -59,119 +59,25 @@
       "senseId": "w:free-up#s1",
       "pos": "短语",
       "glossZh": "腾出（时间、空间、人手等）供另作他用",
-      "origin": "mock",
-      "folded": false,
+      "origin": "dictionary",
+      "folded": true,
       "legacySenseIds": [],
-      "examples": [
-        {
-          "exampleId": "w:free-up#e-5c97a371a01ed16a",
-          "text": "Politely declining these invitations frees up more time for what truly matters to you.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
-            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
-            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 37,
-            "end": 45
-          },
-          "parts": [
-            [
-              37,
-              45
-            ]
-          ],
-          "highlightRanges": [
-            [
-              37,
-              45
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:free-up#e-1f06929d4fb8171d",
-          "text": "In fact, it can free up cognitive resources for more complex tasks.”",
-          "source": {
-            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
-            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
-            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-d:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 23
-          },
-          "parts": [
-            [
-              16,
-              23
-            ]
-          ],
-          "highlightRanges": [
-            [
-              16,
-              23
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:free-up#e-423bfc622ed54773",
-          "text": "They will also free up over 2.5 billion hectares of land, thus opening the door to reforestation, conservation and rewilding opportunities.",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
-            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
-            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-d:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 22
-          },
-          "parts": [
-            [
-              15,
-              22
-            ]
-          ],
-          "highlightRanges": [
-            [
-              15,
-              22
-            ]
-          ]
-        }
-      ],
+      "examples": [],
       "counts": {
         "gaokao": 0,
-        "mock": 11
+        "mock": 0
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 11
+    "mock": 0
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "mock",
-  "folded": false
+  "origin": "dictionary",
+  "folded": true
 }

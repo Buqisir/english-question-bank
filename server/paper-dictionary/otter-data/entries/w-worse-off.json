@@ -34,91 +34,28 @@
       "senseId": "w:worse-off#s1",
       "pos": "短语",
       "glossZh": "处境更差；经济状况更糟",
-      "origin": "gaokao",
-      "folded": false,
+      "origin": "dictionary",
+      "folded": true,
       "legacySenseIds": [
         "w:off#s14",
         "w:worse#s4"
       ],
-      "examples": [
-        {
-          "exampleId": "w:worse-off#e-dedad57912706cf9",
-          "text": "“Within 10 years rich farmers became worse off, and in 10 years from now they will be poor.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 46
-          },
-          "parts": [
-            [
-              37,
-              46
-            ]
-          ],
-          "highlightRanges": [
-            [
-              37,
-              46
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:worse-off#e-8026fb966b93a8b4",
-          "text": "People often think they need a master’s degree to get or keep a job, mainly because they feel insecure, yet research shows a master’s usually raises pay much less than a college degree, and some programs leave graduates worse off.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
-            "paperTitle": "浙江省七校2025年12月高三联考 英语",
-            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 220,
-            "end": 229
-          },
-          "parts": [
-            [
-              220,
-              229
-            ]
-          ],
-          "highlightRanges": [
-            [
-              220,
-              229
-            ]
-          ]
-        }
-      ],
+      "examples": [],
       "counts": {
-        "gaokao": 1,
-        "mock": 1
+        "gaokao": 0,
+        "mock": 0
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 1,
-    "mock": 1
+    "gaokao": 0,
+    "mock": 0
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "gaokao",
-  "folded": false
+  "origin": "dictionary",
+  "folded": true
 }

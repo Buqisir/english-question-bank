@@ -136,7 +136,7 @@
       ],
       "counts": {
         "gaokao": 7,
-        "mock": 80
+        "mock": 79
       }
     },
     {
@@ -149,37 +149,6 @@
         "w:up#s7"
       ],
       "examples": [
-        {
-          "exampleId": "w:up-to#e-4002fb9e885aa88c",
-          "text": "Pulling up to the building, Grant saw flames (火焰) shooting out of a second-floor window.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-ii:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 13
-          },
-          "parts": [
-            [
-              8,
-              13
-            ]
-          ],
-          "highlightRanges": [
-            [
-              8,
-              13
-            ]
-          ]
-        },
         {
           "exampleId": "w:up-to#e-5e942a1ccee1bec1",
           "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
@@ -241,11 +210,42 @@
               54
             ]
           ]
+        },
+        {
+          "exampleId": "w:up-to#e-a4283a6abacaa2a4",
+          "text": "Then a rail-thin teenager, in a baggy white T-shirt, skidded (滑) up to the beam.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          },
+          "parts": [
+            [
+              65,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              70
+            ]
+          ]
         }
       ],
       "counts": {
-        "gaokao": 10,
-        "mock": 13
+        "gaokao": 5,
+        "mock": 10
       }
     },
     {
@@ -482,8 +482,8 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 18,
-    "mock": 103
+    "gaokao": 13,
+    "mock": 99
   },
   "unassignedCounts": {
     "gaokao": 0,

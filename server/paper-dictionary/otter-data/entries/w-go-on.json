@@ -49,7 +49,7 @@
   "forms": [],
   "counts": {
     "gaokao": 7,
-    "mock": 42
+    "mock": 34
   },
   "unassignedCounts": {
     "gaokao": 0,
@@ -63,7 +63,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 21
+        "mock": 14
       },
       "folded": false,
       "legacySenseIds": [
@@ -326,42 +326,11 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 1
       },
       "folded": false,
       "legacySenseIds": [],
       "examples": [
-        {
-          "exampleId": "w:go-on#e-fd69da1de63a3d41",
-          "text": "But there were problems: the sizzle, the smell, the mosquitoes, and one green bulb(灯泡) that went on and off for no reason.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
-            "paperTitle": "南京市2026届高三年级学情调研 英语",
-            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 92,
-            "end": 99
-          },
-          "parts": [
-            [
-              92,
-              99
-            ]
-          ],
-          "highlightRanges": [
-            [
-              92,
-              99
-            ]
-          ]
-        },
         {
           "exampleId": "w:go-on#e-73cb4a584db7320c",
           "text": "Instantly, it was like a light bulb went on.",

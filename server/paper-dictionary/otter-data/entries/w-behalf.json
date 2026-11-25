@@ -38,7 +38,21 @@
     "gaokao": 1,
     "mock": 3
   },
-  "senses": [],
+  "senses": [
+    {
+      "senseId": "w:behalf#s2",
+      "pos": "noun",
+      "glossZh": "某人的利益或福祉",
+      "pronunciationId": "w:behalf#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
   "droppedSenses": [],
   "version": 2,
   "updatedAt": "2026-11-25",

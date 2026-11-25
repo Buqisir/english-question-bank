@@ -284,83 +284,20 @@
       "senseId": "w:reach-for-sth#s3",
       "pos": "短语",
       "glossZh": "努力争取；追求（目标、成就等）",
-      "origin": "mock",
-      "folded": false,
+      "origin": "dictionary",
+      "folded": true,
       "legacySenseIds": [],
-      "examples": [
-        {
-          "exampleId": "w:reach-for-sth#e-7d2b82237a52db54",
-          "text": "I am still reaching for the moon, but I am no longer afraid.",
-          "source": {
-            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
-            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:6",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 23
-          },
-          "parts": [
-            [
-              11,
-              23
-            ]
-          ],
-          "highlightRanges": [
-            [
-              11,
-              23
-            ]
-          ]
-        },
-        {
-          "exampleId": "w:reach-for-sth#e-f6a81cf8389f5293",
-          "text": "What does the author mean by saying “reaching for the moon”?",
-          "source": {
-            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
-            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:27",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 37,
-            "end": 49
-          },
-          "parts": [
-            [
-              37,
-              49
-            ]
-          ],
-          "highlightRanges": [
-            [
-              37,
-              49
-            ]
-          ]
-        }
-      ],
+      "examples": [],
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 0
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 25
   },
   "unassignedCounts": {
     "gaokao": 0,

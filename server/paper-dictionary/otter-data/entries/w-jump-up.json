@@ -87,37 +87,6 @@
           ]
         },
         {
-          "exampleId": "w:jump-up#e-34a6771dce397e96",
-          "text": "Instead of running away immediately, you might jump up and down with all four legs.",
-          "source": {
-            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
-            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
-            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 47,
-            "end": 54
-          },
-          "parts": [
-            [
-              47,
-              54
-            ]
-          ],
-          "highlightRanges": [
-            [
-              47,
-              54
-            ]
-          ]
-        },
-        {
           "exampleId": "w:jump-up#e-dac095c240e6b449",
           "text": "All of a sudden, Mateo jumped up from where he was sitting on the kitchen floor.",
           "source": {
@@ -151,7 +120,7 @@
       ],
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 1
       }
     },
     {
@@ -184,7 +153,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 2,
-    "mock": 2
+    "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,

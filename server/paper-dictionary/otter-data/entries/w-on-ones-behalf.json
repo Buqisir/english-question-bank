@@ -47,12 +47,52 @@
       "senseId": "w:on-ones-behalf#s1",
       "pos": "短语",
       "glossZh": "代表某人；代某人行事",
-      "origin": "mock",
+      "origin": "gaokao",
       "folded": false,
       "legacySenseIds": [
         "w:behalf#s1"
       ],
       "examples": [
+        {
+          "exampleId": "w:on-ones-behalf#e-5cb4e777fea9c8a4",
+          "text": "on my behalf",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "question": 42,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:42#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              6,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              6,
+              12
+            ]
+          ]
+        },
         {
           "exampleId": "w:on-ones-behalf#e-e3fd87ae18efd441",
           "text": "Why struggle with an essay when AI can generate one on your behalf in seconds?",
@@ -94,7 +134,7 @@
         }
       ],
       "counts": {
-        "gaokao": 0,
+        "gaokao": 1,
         "mock": 1
       }
     },
@@ -116,13 +156,13 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 0,
+    "gaokao": 1,
     "mock": 1
   },
   "unassignedCounts": {
     "gaokao": 0,
     "mock": 0
   },
-  "origin": "mock",
+  "origin": "gaokao",
   "folded": false
 }

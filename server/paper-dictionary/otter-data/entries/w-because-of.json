@@ -73,37 +73,6 @@
           ]
         },
         {
-          "exampleId": "w:because-of#e-f71cfa1fde1e9c1e",
-          "text": "So I absolutely think we will get more riders just because of short stories,\" she says.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 61
-          },
-          "parts": [
-            [
-              51,
-              61
-            ]
-          ],
-          "highlightRanges": [
-            [
-              51,
-              61
-            ]
-          ]
-        },
-        {
           "exampleId": "w:because-of#e-b37a8b3a8592e0c7",
           "text": "Komodo National Park, officially recognized in 1980, is popular for ecotourism because of its unique biodiversity.",
           "source": {
@@ -133,18 +102,49 @@
               89
             ]
           ]
+        },
+        {
+          "exampleId": "w:because-of#e-dbd123e5aabc117c",
+          "text": "We managed to leave this spot to climb higher because of the spare time until sunset.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
         }
       ],
       "note": "后接名词、代词或动名词。",
       "counts": {
-        "gaokao": 6,
+        "gaokao": 5,
         "mock": 76
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 6,
+    "gaokao": 5,
     "mock": 76
   },
   "unassignedCounts": {

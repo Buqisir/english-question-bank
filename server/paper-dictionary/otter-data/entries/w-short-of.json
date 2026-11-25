@@ -134,7 +134,7 @@
       ],
       "counts": {
         "gaokao": 1,
-        "mock": 4
+        "mock": 3
       }
     },
     {
@@ -231,7 +231,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 1,
-    "mock": 6
+    "mock": 5
   },
   "unassignedCounts": {
     "gaokao": 0,

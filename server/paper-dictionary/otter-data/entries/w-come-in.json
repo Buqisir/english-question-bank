@@ -117,39 +117,39 @@
           ]
         },
         {
-          "exampleId": "w:come-in#e-eb1eca9934cfb322",
-          "text": "Research at Ohio State University in Columbus found that a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior.",
+          "exampleId": "w:come-in#e-786488b18ba3f417",
+          "text": "The boxes come in a variety of sizes and Hungry Harvest shares simple recipes.",
           "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-a",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
-              "sentence": 4
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-a:9",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 121,
-            "end": 128
+            "start": 10,
+            "end": 17
           },
           "parts": [
             [
-              121,
-              128
+              10,
+              17
             ]
           ],
           "highlightRanges": [
             [
-              121,
-              128
+              10,
+              17
             ]
           ]
         }
       ],
       "counts": {
-        "gaokao": 3,
+        "gaokao": 2,
         "mock": 6
       }
     },
@@ -574,7 +574,7 @@
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 5,
+    "gaokao": 4,
     "mock": 21
   },
   "unassignedCounts": {

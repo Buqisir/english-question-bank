@@ -53,37 +53,6 @@
       ],
       "examples": [
         {
-          "exampleId": "w:how-about-sth#e-5a13c224ae06ffe7",
-          "text": "Paragraph 1: “How about going to the beach?” Mike said.",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
-            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
-            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation:10",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 23
-          },
-          "parts": [
-            [
-              14,
-              23
-            ]
-          ],
-          "highlightRanges": [
-            [
-              14,
-              23
-            ]
-          ]
-        },
-        {
           "exampleId": "w:how-about-sth#e-0c36cc4a3e2f4780",
           "text": "“How about pizza?” He wiped his tears on his sleeve and sniffed, “OK.” A short while later his persistence was eased by the sweet taste of pizza.",
           "source": {
@@ -144,12 +113,43 @@
               20
             ]
           ]
+        },
+        {
+          "exampleId": "w:how-about-sth#e-63647cedfbd15030",
+          "text": "“How about you try riding Harley?” Rose said.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
         }
       ],
       "note": "可接名词、动名词或带主语的动词结构，如 how about you try it?。",
       "counts": {
         "gaokao": 0,
-        "mock": 5
+        "mock": 4
       }
     },
     {
@@ -169,7 +169,7 @@
   "droppedSenses": [],
   "counts": {
     "gaokao": 0,
-    "mock": 5
+    "mock": 4
   },
   "unassignedCounts": {
     "gaokao": 0,

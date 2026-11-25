@@ -88,110 +88,111 @@
       "legacySenseIds": [],
       "examples": [
         {
-          "exampleId": "w:be-based-on#e-e2902b8739305284",
-          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
+          "exampleId": "w:be-based-on#e-7fc6154ea7599757",
+          "text": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
           "source": {
             "paperId": "paper-gaokao-2021-eight-provinces-jan",
             "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
               "sentence": 1
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 0,
-            "end": 8
+            "start": 38,
+            "end": 49
           },
           "parts": [
             [
-              0,
-              8
+              38,
+              49
             ]
           ],
           "highlightRanges": [
             [
-              0,
-              8
+              38,
+              49
             ]
           ]
         },
         {
-          "exampleId": "w:be-based-on#e-c334b36f0f5222ba",
-          "text": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "exampleId": "w:be-based-on#e-53f2f3eefe047eb8",
+          "text": "My choices are based on the lifestyle I want.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
               "sentence": 3
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 47,
-            "end": 55
+            "start": 11,
+            "end": 23
           },
           "parts": [
             [
-              47,
-              55
+              11,
+              23
             ]
           ],
           "highlightRanges": [
             [
-              47,
-              55
+              11,
+              23
             ]
           ]
         },
         {
-          "exampleId": "w:be-based-on#e-671f428e5b1baa64",
-          "text": "What is the author’s statement about multigenerational family based on?",
+          "exampleId": "w:be-based-on#e-0470e5e59c430689",
+          "text": "It was based on a number of large families.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
             "locator": {
-              "question": 30,
-              "questionId": "question:paper-gaokao-2020-national-iii:30",
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:27#option=B",
+              "option": "B",
               "sentence": 1
             }
           },
           "tier": "gaokao",
           "target": {
-            "start": 62,
-            "end": 70
+            "start": 3,
+            "end": 15
           },
           "parts": [
             [
-              62,
-              70
+              3,
+              15
             ]
           ],
           "highlightRanges": [
             [
-              62,
-              70
+              3,
+              15
             ]
           ]
         }
       ],
       "note": "based on sth 作状语时常译为“根据……”。",
       "counts": {
-        "gaokao": 10,
-        "mock": 113
+        "gaokao": 3,
+        "mock": 20
       }
     }
   ],
   "droppedSenses": [],
   "counts": {
-    "gaokao": 10,
-    "mock": 113
+    "gaokao": 3,
+    "mock": 20
   },
   "unassignedCounts": {
     "gaokao": 0,
