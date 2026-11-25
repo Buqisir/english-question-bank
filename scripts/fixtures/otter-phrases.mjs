@@ -32,6 +32,8 @@ export function installOtterPhraseFixture(root) {
   const entries = [
     { entryId: 'w:give', headword: 'give', forms: [{ form: 'gave' }], relatedPhrases: ['w:give-up'], glossZh: '给' },
     { entryId: 'w:cant', headword: "can't", glossZh: '不能' },
+    { entryId: 'w:make', headword: 'make', forms: ['made', 'makes', 'making'].map(form => ({ form })), glossZh: '做' },
+    { entryId: 'w:make-sure', headword: 'make sure', kind: 'phrase', glossZh: '确保' },
     { entryId: 'w:give-up', headword: 'give up', kind: 'phrase', variants: ['gave up'], glossZh: '放弃' },
     { entryId: 'w:make-up-ones-mind', headword: "make up one's mind", kind: 'phrase',
       variants: ["made up one's mind"], glossZh: '下定决心' },

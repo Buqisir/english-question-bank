@@ -123,6 +123,7 @@ export function openOtterDictionary(rootDir) {
   const files = new Map()
   const headwords = new Map()
   const aliases = new Map()
+  const wordHeadwords = new Map()
   const phraseAliases = new Map()
   const phraseEntries = new Map()
   const { legacySentences = {}, exampleHighlights = {}, phrasesAvailable = false } = readOptional(
@@ -135,6 +136,7 @@ export function openOtterDictionary(rootDir) {
   for (const name of names) {
     const { entryId, headword, variants, forms, kind, counts } = readEntry(name)
     if (kind === 'phrase') phraseEntries.set(entryId, { entryId, headword, counts })
+    else wordHeadwords.set(entryId, normalize(headword).toLowerCase())
     files.set(entryId, name)
     headwords.set(normalize(headword), entryId)
     for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
@@ -209,11 +211,26 @@ export function openOtterDictionary(rootDir) {
     if (phraseAliases.has(phrase)) return phraseAliases.get(phrase)
     return phraseAliases.get(phrase.replace(/\b(?:my|your|his|her|its|our|their)\b/g, "one's"))
   }
+  function searchId(surface) {
+    const direct = findId(surface)
+    if (direct !== undefined) return direct
+    const words = normalizePhraseAlias(surface).split(' ')
+    if (words.length < 2) return null
+    const possessive = words.map(word =>
+      /^(?:my|your|his|her|its|our|their|[\p{L}\p{M}'-]+'s)$/u.test(word) ? "one's" : word)
+    const normalized = phraseAliases.get(possessive.join(' '))
+    if (normalized !== undefined) return normalized
+    const lemma = wordHeadwords.get(aliases.get(words[0]))
+    if (!lemma || lemma === words[0]) return null
+    const inflected = phraseAliases.get([lemma, ...words.slice(1)].join(' '))
+    return inflected !== undefined ? inflected : phraseAliases.get([lemma, ...possessive.slice(1)].join(' '))
+  }
   return {
     available: files.size > 0,
     phrasesAvailable,
     entryById,
     findId,
+    searchId,
     find: surface => entryById(findId(surface)),
     relatedPhrases(entry) {
       return [...new Set(entry.relatedPhrases)]

@@ -947,8 +947,12 @@ evilRuntime.close()
     routeBy('GET', url.pathname).handle({ response, url, context: phraseContext })
     return response
   }
-  check('search accepts case, apostrophes, and possessive variants', ["Make up one’s mind", 'MADE UP YOUR MIND'].every(w =>
-    get('search', { w }).parsed?.entryId === 'w:make-up-ones-mind'))
+  check('search accepts inflected phrases with possessive variants',
+    ["Make up one’s mind", 'MADE UP YOUR MIND', 'made up her mind', 'Making Up Their Mind', 'makes up Amy’s mind']
+      .every(w => get('search', { w }).parsed?.entryId === 'w:make-up-ones-mind'))
+  check('search resolves exact and inflected phrase forms', [
+    ['gave up', 'w:give-up'], ['MAKE SURE', 'w:make-sure'], ['made sure', 'w:make-sure'],
+  ].every(([w, id]) => get('search', { w }).parsed?.entryId === id))
   check('word fallback keeps straight and curly apostrophe forms distinct like main',
     get('entry', { w: "can't" }).parsed?.entryId === 'w:cant'
     && get('entry', { w: 'can’t' }).statusCode === 404)
