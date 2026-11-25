@@ -426,7 +426,7 @@ function WritingPaperPageContent({
                             isContinuationWriting ? lineIndex : null,
                           )}
                           {continuationEssay?.rests[lineIndex] && (
-                            <span className="pi-writing-continuation-essay" data-writing-essay-paragraph={lineIndex + 1}>
+                            <span data-writing-essay-paragraph={lineIndex + 1}>
                               {' '}{continuationEssay.rests[lineIndex]}
                             </span>
                           )}
