@@ -11,6 +11,8 @@ import { getDictionaryAudioSnapshot, playDictionaryAudio, subscribeDictionaryAud
 import { ExampleSentence } from './ExampleSentence'
 import './dictionaryEntry.css'
 
+const RELATED_PHRASE_LIMIT = 12
+
 type EntryProps = {
   senseId?: string | null
   onClose?: () => void
@@ -37,6 +39,7 @@ export function DictionaryEntry(props: EntryProps) {
   const [error, setError] = useState('')
   const [attempt, setAttempt] = useState(0)
   const [otherOpen, setOtherOpen] = useState(false)
+  const [openRelatedEntryId, setOpenRelatedEntryId] = useState<string | null>(null)
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
   const [audioError, setAudioError] = useState(false)
   const audio = useSyncExternalStore(subscribeDictionaryAudio, getDictionaryAudioSnapshot)
@@ -46,6 +49,9 @@ export function DictionaryEntry(props: EntryProps) {
   const isPhrase = entry?.kind === 'phrase'
   const context = entry?.senses.find(sense => sense.senseId === props.senseId)
   const full = props.density === 'full'
+  const relatedPhrases = entry?.relatedPhraseLinks ?? []
+  const relatedOpen = openRelatedEntryId === entry?.entryId
+  const morePhrases = relatedPhrases.length - RELATED_PHRASE_LIMIT
   const pending = quick?.pending ?? Boolean(word && entry === undefined && !error)
   const Title = word ? 'h1' : 'h2'
   const title = entry?.headword ?? (word?.startsWith('w:') ? null : word) ?? quick?.surface
@@ -147,15 +153,20 @@ export function DictionaryEntry(props: EntryProps) {
           </ol>}
         </section>
       ))}
-      {full && !!entry?.relatedPhraseLinks?.length && (
+      {full && relatedPhrases.length > 0 && (
         <section aria-label="相关短语" className="otter-senses">
           <h3>相关短语</h3>
           <div className="otter-actions">
-            {entry.relatedPhraseLinks.map(({ entryId, headword }) => (
+            {relatedPhrases.slice(0, relatedOpen ? undefined : RELATED_PHRASE_LIMIT).map(({ entryId, headword }) => (
               <ButtonLink key={entryId} size="sm" lang="en"
                 href={`?${new URLSearchParams({ view: 'word', w: entryId })}`}>{headword}</ButtonLink>
             ))}
           </div>
+          {morePhrases > 0 && <Button size="sm" aria-expanded={relatedOpen}
+            icon={<DisclosureIcon size={12} expanded={relatedOpen} />}
+            onClick={() => setOpenRelatedEntryId(relatedOpen ? null : entry?.entryId ?? null)}>
+            {relatedOpen ? '收起短语' : `更多短语 ${morePhrases}`}
+          </Button>}
         </section>
       )}
     </div>

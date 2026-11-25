@@ -124,7 +124,7 @@ export function openOtterDictionary(rootDir) {
   const headwords = new Map()
   const aliases = new Map()
   const phraseAliases = new Map()
-  const phraseIds = new Set()
+  const phraseEntries = new Map()
   const { legacySentences = {}, exampleHighlights = {}, phrasesAvailable = false } = readOptional(
     () => JSON.parse(readFileSync(path.join(dir, 'occurrences', 'index.json'), 'utf8')), {},
   )
@@ -133,8 +133,8 @@ export function openOtterDictionary(rootDir) {
   const readEntry = name => JSON.parse(readFileSync(path.join(entriesDir, name), 'utf8'))
   const names = readOptional(() => readdirSync(entriesDir), []).filter(name => name.endsWith('.json')).sort()
   for (const name of names) {
-    const { entryId, headword, variants, forms, kind } = readEntry(name)
-    if (kind === 'phrase') phraseIds.add(entryId)
+    const { entryId, headword, variants, forms, kind, counts } = readEntry(name)
+    if (kind === 'phrase') phraseEntries.set(entryId, { entryId, headword, counts })
     files.set(entryId, name)
     headwords.set(normalize(headword), entryId)
     for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
@@ -158,7 +158,7 @@ export function openOtterDictionary(rootDir) {
         if (row.paperId !== paperId) continue
         const id = row.paragraphId ?? row.questionId
         const locator = occurrenceKey(row.groupId, id)
-        if (phraseIds.has(row.entryId)) {
+        if (phraseEntries.has(row.entryId)) {
           const indexedSentences = row.sentenceText
             ? [row.sentenceText]
             : legacySentences[occurrenceKey(paperId, row.groupId, id, row.sentence)]
@@ -216,9 +216,12 @@ export function openOtterDictionary(rootDir) {
     findId,
     find: surface => entryById(findId(surface)),
     relatedPhrases(entry) {
-      return [...new Set(entry.relatedPhrases)].filter(id => phraseIds.has(id)).map(id => ({
-        entryId: id, headword: entryById(id).headword,
-      }))
+      return [...new Set(entry.relatedPhrases)]
+        .map(id => phraseEntries.get(id))
+        .filter(Boolean)
+        .sort((a, b) => b.counts.gaokao - a.counts.gaokao || b.counts.mock - a.counts.mock
+          || a.headword.localeCompare(b.headword, 'en'))
+        .map(({ entryId, headword }) => ({ entryId, headword }))
     },
     findPhrases(paperId, stream, { start, end }, word) {
       const { phrases } = shardFor(paperId)
