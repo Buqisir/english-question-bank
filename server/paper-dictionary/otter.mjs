@@ -3,9 +3,10 @@ import path from 'node:path'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
+import { createOtterSearch, normalizeSearch } from './otterSearch.mjs'
+import { lookupSearchForms } from './store.mjs'
 
 const normalize = (text) => text.normalize('NFC').trim()
-const normalizePhraseAlias = (text) => normalize(text).replace(/[‘’]/g, "'").replace(/\s+/g, ' ').toLowerCase()
 export const cleanExample = (text) => text.trim().replace(/^(?:[■□●○•▪▫‣◦]\s*)+/, '')
 export const occurrenceKey = (...parts) => JSON.stringify(parts)
 export const OTTER_OCCURRENCE_CACHE_SIZE = 40
@@ -123,9 +124,9 @@ export function openOtterDictionary(rootDir) {
   const files = new Map()
   const headwords = new Map()
   const aliases = new Map()
-  const wordHeadwords = new Map()
   const phraseAliases = new Map()
   const phraseEntries = new Map()
+  const searchEntries = []
   const { legacySentences = {}, exampleHighlights = {}, phrasesAvailable = false } = readOptional(
     () => JSON.parse(readFileSync(path.join(dir, 'occurrences', 'index.json'), 'utf8')), {},
   )
@@ -134,20 +135,22 @@ export function openOtterDictionary(rootDir) {
   const readEntry = name => JSON.parse(readFileSync(path.join(entriesDir, name), 'utf8'))
   const names = readOptional(() => readdirSync(entriesDir), []).filter(name => name.endsWith('.json')).sort()
   for (const name of names) {
-    const { entryId, headword, variants, forms, kind, counts } = readEntry(name)
+    const { entryId, headword, variants, forms, kind, counts, pattern, senses } = readEntry(name)
+    searchEntries.push({ entryId, headword, variants, forms, kind, counts, pattern,
+      positions: new Set(senses.map(sense => sense.pos)) })
     if (kind === 'phrase') phraseEntries.set(entryId, { entryId, headword, counts })
-    else wordHeadwords.set(entryId, normalize(headword).toLowerCase())
     files.set(entryId, name)
     headwords.set(normalize(headword), entryId)
     for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
       const key = normalize(form).toLowerCase()
       aliases.set(key, !aliases.has(key) || aliases.get(key) === entryId ? entryId : null)
       if (kind === 'phrase') {
-        const phraseKey = normalizePhraseAlias(form)
+        const phraseKey = normalizeSearch(form)
         phraseAliases.set(phraseKey, !phraseAliases.has(phraseKey) || phraseAliases.get(phraseKey) === entryId ? entryId : null)
       }
     }
   }
+  const search = createOtterSearch(searchEntries, lookupSearchForms)
   function readShard(paperId) {
     const occurrences = new Map()
     const phrases = new Map()
@@ -207,30 +210,16 @@ export function openOtterDictionary(rootDir) {
     const key = normalize(surface)
     const direct = headwords.get(key) ?? aliases.get(key.toLowerCase())
     if (direct !== undefined || !/\s/u.test(key)) return direct
-    const phrase = normalizePhraseAlias(key)
+    const phrase = normalizeSearch(key)
     if (phraseAliases.has(phrase)) return phraseAliases.get(phrase)
     return phraseAliases.get(phrase.replace(/\b(?:my|your|his|her|its|our|their)\b/g, "one's"))
-  }
-  function searchId(surface) {
-    const direct = findId(surface)
-    if (direct !== undefined) return direct
-    const words = normalizePhraseAlias(surface).split(' ')
-    if (words.length < 2) return null
-    const possessive = words.map(word =>
-      /^(?:my|your|his|her|its|our|their|[\p{L}\p{M}'-]+'s)$/u.test(word) ? "one's" : word)
-    const normalized = phraseAliases.get(possessive.join(' '))
-    if (normalized !== undefined) return normalized
-    const lemma = wordHeadwords.get(aliases.get(words[0]))
-    if (!lemma || lemma === words[0]) return null
-    const inflected = phraseAliases.get([lemma, ...words.slice(1)].join(' '))
-    return inflected !== undefined ? inflected : phraseAliases.get([lemma, ...possessive.slice(1)].join(' '))
   }
   return {
     available: files.size > 0,
     phrasesAvailable,
     entryById,
     findId,
-    searchId,
+    searchId: (surface, db) => headwords.get(normalize(surface)) ?? search(surface, db, findId),
     find: surface => entryById(findId(surface)),
     relatedPhrases(entry) {
       return [...new Set(entry.relatedPhrases)]

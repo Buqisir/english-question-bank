@@ -31,6 +31,8 @@ export function installOtterPhraseFixture(root) {
   const counts = { gaokao: 1, mock: 0 }
   const entries = [
     { entryId: 'w:give', headword: 'give', forms: [{ form: 'gave' }], relatedPhrases: ['w:give-up'], glossZh: '给' },
+    { entryId: 'w:run', headword: 'run', glossZh: '跑' },
+    { entryId: 'w:child', headword: 'child', glossZh: '孩子' },
     { entryId: 'w:cant', headword: "can't", glossZh: '不能' },
     { entryId: 'w:make', headword: 'make', forms: ['made', 'makes', 'making'].map(form => ({ form })), glossZh: '做' },
     { entryId: 'w:make-sure', headword: 'make sure', kind: 'phrase', glossZh: '确保' },

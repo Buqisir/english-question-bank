@@ -51,6 +51,33 @@ export function openPaperDictionary(filePath) {
   }
 }
 
+const searchFormQueries = new WeakMap()
+
+export function lookupSearchForms(db, form) {
+  if (!db) return []
+  if (!searchFormQueries.has(db)) {
+    searchFormQueries.set(db, db.prepare(`
+      SELECT e.normalized_headword AS lemma, g.pos, f.tags_json
+      FROM forms f
+      JOIN entries e USING (entry_id)
+      JOIN pos_groups g USING (entry_id, pos_group_index)
+      WHERE f.form_fold = ?
+    `))
+  }
+  return searchFormQueries.get(db).all(form).flatMap(({ lemma, pos, tags_json: tagsJson }) => {
+    const tags = parseTags(tagsJson)
+    if (tags.some(tag => ['archaic', 'obsolete', 'dialectal', 'colloquial', 'misspelling', 'nonstandard'].includes(tag))) return []
+    return [{
+      lemma,
+      verb: pos === 'verb',
+      noun: pos === 'noun',
+      name: pos === 'name',
+      adjective: pos === 'adj',
+      gerund: pos === 'verb' && tags.includes('participle') && tags.includes('present'),
+    }]
+  })
+}
+
 function groupMatches(rows) {
   const entries = new Map()
   for (const row of rows) {

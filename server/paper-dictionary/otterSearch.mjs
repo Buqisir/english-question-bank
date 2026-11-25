@@ -1,0 +1,185 @@
+import { classifyCompleteEnglishWord } from '../../shared/paper-dictionary/wordToken.mjs'
+
+export const normalizeSearch = text => text.normalize('NFC').trim().replace(/[‘’]/g, "'").replace(/\s+/g, ' ').toLowerCase()
+const possessive = /^(?:my|your|his|her|its|our|their|one's|[a-z][a-z'-]*'s|[a-z]+s')$/u
+const reflexive = /^(?:oneself|myself|yourself|himself|herself|itself|ourselves|yourselves|themselves)$/u
+const person = /^(?:sb|me|you|him|her|us|them|someone|somebody|anyone|anybody|everyone|everybody)$/u
+const thing = /^(?:sth|it|this|that|these|those|something|anything|everything|nothing)$/u
+const determiner = /^(?:a|an|the|some|any|each|every|this|that|these|those)$/u
+const slotNames = new Set(["one's", 'oneself', 'sb', 'sth', 'sb/sth', 'do', 'doing'])
+const exactWord = word => classifyCompleteEnglishWord(word, 0, word.length)?.surface === word
+const objectSlot = { slot: 'sb/sth' }
+
+function searchPatterns(headword, variants, pattern) {
+  const patterns = [pattern.tokens, ...pattern.alternatives].map(tokens => tokens.map(token =>
+    token === 'oneself' ? { slot: token } : token))
+  // Some occurrence patterns only index the fixed words, omitting the
+  // advertised object at the end of the dictionary headword.
+  const recorded = patterns.length
+  const verbSlots = new Set(patterns.flat().filter(token => typeof token === 'object').map(token => token.slot))
+  for (const form of [headword, ...variants]) {
+    const declared = normalizeSearch(form).replace(/[()]/g, '')
+    const forms = declared.includes('sth/doing sth')
+      ? [declared.replace('sth/doing sth', 'sth'), declared.replace('sth/doing sth', 'doing sth')]
+      : [declared]
+    for (const text of forms) {
+      const words = text.split(' ')
+      const withSlots = words.map((token, index) =>
+        slotNames.has(token) && (!['do', 'doing'].includes(token) ||
+          index > 0 && (verbSlots.has(token) || words[index + 1] === 'sth'))
+          ? { slot: token } : token)
+      if (withSlots.some(token => typeof token === 'object') || !pattern.tokens.length) patterns.push(withSlots)
+    }
+  }
+  if (pattern.separable && pattern.tokens.length === 2) {
+    const [verb, particle] = pattern.tokens
+    if (typeof verb === 'string' && typeof particle === 'string'
+      && !patterns.some(tokens => typeof tokens[1] === 'object')) {
+      patterns.push([verb, objectSlot, particle])
+    }
+  }
+  return patterns.map((tokens, index) => ({
+    tokens, fixed: tokens.find(token => typeof token === 'string'), recorded: index < recorded,
+  })).filter(({ tokens, fixed }) => tokens.length >= 2 && fixed)
+}
+
+function matchSlot(slot, words, rawWords, start, end, lexicon) {
+  const word = words[start]
+  if (end === start + 1) {
+    if (slot === "one's") return possessive.test(word)
+    if (slot === 'oneself') return reflexive.test(word)
+    if (slot === 'do') return word === 'do' || lexicon(word).some(row => row.verb && row.lemma === word)
+    if (slot === 'doing') return word === 'doing' || lexicon(word).some(row => row.gerund)
+    if (word === 'sb/sth') return slot === word
+    if (person.test(word)) return slot !== 'sth'
+    if (thing.test(word)) return slot !== 'sb'
+    if (slot !== 'sth' && (/^[A-Z][a-z]/u.test(rawWords[start]) || lexicon(word).some(row => row.name))) return true
+  }
+  if (slot !== 'sth' && slot !== 'sb/sth') return false
+  const noun = token => lexicon(token).some(row => row.noun)
+  return noun(words[end - 1]) && words.slice(start, end - 1).every((token, index) =>
+    (index === 0 && (determiner.test(token) || possessive.test(token))) ||
+    lexicon(token).some(row => row.noun || row.adjective || row.gerund))
+}
+
+function patternScore(tokens, words, rawWords, lexicon) {
+  function match(index, at) {
+    if (index === tokens.length) return at === words.length ? 0 : -1
+    if (at === words.length) return -1
+    const token = tokens[index]
+    if (typeof token === 'string') {
+      const exact = words[at] === token
+      // The first verb can inflect. Internal forms come from the entry's
+      // alternatives or an explicit auxiliary in the template.
+      if (!exact && (!(index === 0 || token === 'be') ||
+        !lexicon(words[at]).some(row => row.verb && row.lemma === token))) return -1
+      const rest = match(index + 1, at + 1)
+      return rest < 0 ? -1 : rest + 1024 + (exact ? 1 : 0)
+    }
+    if (!slotNames.has(token.slot)) return -1
+    const remaining = tokens.length - index - 1
+    const maxEnd = ['sb', 'sth', 'sb/sth'].includes(token.slot)
+      ? words.length - remaining : at + 1
+    let best = -1
+    for (let end = at + 1; end <= maxEnd; end++) {
+      if (!matchSlot(token.slot, words, rawWords, at, end, lexicon)) continue
+      const rest = match(index + 1, end)
+      if (rest >= 0) {
+        const specificity = ['do', 'doing', 'oneself', "one's"].includes(token.slot) ? 32
+          : token.slot === 'sb/sth' ? 1 : 16
+        best = Math.max(best, rest + specificity)
+      }
+    }
+    return best
+  }
+  return match(0, 0)
+}
+
+function addIndex(index, key, value) {
+  if (!index.has(key)) index.set(key, [])
+  index.get(key).push(value)
+}
+
+const unique = ids => new Set(ids).size === 1 ? ids[0] : null
+const spaced = word => word.replace(/-/g, ' ')
+
+export function createOtterSearch(entries, lookupForms) {
+  const exact = new Map()
+  const aliases = new Map()
+  const compounds = new Map()
+  const headwords = new Map()
+  const local = new Map()
+  const patterns = new Map()
+  const leadingSlots = new Map()
+  for (const { entryId, headword, variants, forms, kind, pattern, positions, counts } of entries) {
+    const lemma = normalizeSearch(headword)
+    if (!exact.has(lemma)) exact.set(lemma, new Map())
+    exact.get(lemma).set(headword, entryId)
+    for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
+      addIndex(aliases, normalizeSearch(form), entryId)
+      addIndex(compounds, spaced(normalizeSearch(form)), entryId)
+    }
+    if (kind === 'phrase') {
+      for (const match of searchPatterns(headword, variants, pattern ?? { tokens: [], alternatives: [] })) {
+        addIndex(typeof match.tokens[0] === 'string' ? patterns : leadingSlots, match.fixed, { entryId, ...match })
+      }
+      continue
+    }
+    headwords.set(lemma, { entryId, counts })
+    const verb = positions.has('v.')
+    const noun = positions.has('n.')
+    const adjective = positions.has('adj.')
+    for (const form of [{ form: headword, tags: [] }, ...variants.map(form => ({ form, tags: [] })), ...forms]) {
+      const tags = form.tags ?? []
+      addIndex(local, normalizeSearch(form.form), { lemma,
+        noun: noun && (!tags.length || tags.includes('plural')),
+        adjective: adjective && (!tags.length || tags.includes('comparative') || tags.includes('superlative')),
+        verb: verb && (!tags.length || tags.includes('past') || tags.includes('present') || tags.includes('participle')),
+        gerund: verb && tags.includes('participle') && tags.includes('present') })
+    }
+  }
+
+  return function search(surface, db, findId) {
+    const query = normalizeSearch(surface)
+    const literal = unique([...(exact.get(query)?.values() ?? [])])
+    if (literal) return literal
+    const direct = findId(surface)
+    if (direct) return direct
+    const alias = unique(aliases.get(query) ?? [])
+    if (alias) return alias
+    const compound = unique(compounds.get(spaced(query)) ?? [])
+    if (compound) return compound
+
+    const cache = new Map()
+    function lexicon(word) {
+      if (!cache.has(word)) cache.set(word, [...lookupForms(db, word), ...(local.get(word) ?? [])])
+      return cache.get(word)
+    }
+    const words = query.split(' ')
+    if (words.length === 1) {
+      const ranked = rows => rows.map(row => headwords.get(row.lemma)).filter(Boolean)
+        .sort((a, b) => b.counts.gaokao - a.counts.gaokao || b.counts.mock - a.counts.mock
+          || a.entryId.localeCompare(b.entryId))
+      return ranked(lookupForms(db, query))[0]?.entryId ?? ranked(lexicon(query))[0]?.entryId ?? null
+    }
+    if (!words.every(word => exactWord(word) || word === 'sb/sth')) return null
+    const rawWords = surface.trim().split(/\s+/u)
+    const anchors = new Set([words[0], ...lexicon(words[0]).filter(row => row.verb).map(row => row.lemma)])
+    let best = -1
+    let ids = []
+    const templates = [
+      ...[...anchors].flatMap(anchor => patterns.get(anchor) ?? []),
+      ...[...new Set(words.slice(1))].flatMap(anchor => leadingSlots.get(anchor) ?? []),
+    ]
+    for (const { entryId, tokens, recorded } of templates) {
+      const matched = patternScore(tokens, words, rawWords, lexicon)
+      if (matched < 0) continue
+      const score = matched + (recorded ? 0.5 : 0)
+      if (score < best) continue
+      if (score > best) ids = []
+      best = score
+      ids.push(entryId)
+    }
+    return unique(ids)
+  }
+}

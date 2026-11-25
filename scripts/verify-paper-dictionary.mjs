@@ -953,6 +953,9 @@ evilRuntime.close()
   check('search resolves exact and inflected phrase forms', [
     ['gave up', 'w:give-up'], ['MAKE SURE', 'w:make-sure'], ['made sure', 'w:make-sure'],
   ].every(([w, id]) => get('search', { w }).parsed?.entryId === id))
+  check('search uses the configured lexical database for forms missing from bundled entries',
+    get('search', { w: 'Running' }).parsed?.entryId === 'w:run'
+    && get('search', { w: 'children' }).parsed?.entryId === 'w:child')
   check('word fallback keeps straight and curly apostrophe forms distinct like main',
     get('entry', { w: "can't" }).parsed?.entryId === 'w:cant'
     && get('entry', { w: 'can’t' }).statusCode === 404)
@@ -1050,6 +1053,34 @@ evilRuntime.close()
   const entry = JSON.parse(readFileSync(path.join(rootDir, 'server/paper-dictionary/otter-data/entries/w-due-to.json'), 'utf8'))
   const examples = entry.senses.flatMap(sense => sense.examples)
   const dict = openOtterDictionary(rootDir)
+  for (const [label, searches] of Object.entries({
+    'word inflections': [
+      ['took', 'take'], ['lain', 'lie'], ['left', 'left'], ['saw', 'see'],
+      ['stopped', 'stop'], ['making', 'make'], ['studied', 'study'],
+      ['children', 'child'], ['mice', 'mouse'], ['better', 'better'], ['bigger', 'big'], ['happier', 'happy'],
+    ],
+    'phrase inflections': [['gone on', 'go-on'], ['brought up', 'bring-up'], ['there were', 'there-be']],
+    'declared slots': [
+      ['makes up Amy’s mind', 'make-up-ones-mind'], ['applying herself', 'apply-oneself'],
+      ['Amy’s heart sinks', 'ones-heart-sinks'], ['did it up', 'do-up'],
+      ['ask Amy out', 'ask-out'], ['bring the book to life', 'bring-sth-to-life'],
+      ['is about to read', 'be-about-to-do'], ['look forward to reading', 'look-forward-to-doing-sth'],
+    ],
+    'separable objects': [['turn it off', 'turn-off'], ['picked her up', 'pick-up']],
+    'spelling variants': [
+      ['  ICE   CREAM  ', 'ice-cream'], ['ice-cream', 'ice-cream'],
+      ['COLOR', 'colour'], ['realize', 'realise'], ['Let’s go', 'lets-go'],
+    ],
+    'partial and extra text': [
+      ['make up', 'make-up'], ['up one’s mind', null], ['took off yesterday', null],
+      ['look forward to quickly book', null],
+    ],
+  })) {
+    for (const [query, expected] of searches) {
+      check(`Otter search ${label}: ${query}`, dict.searchId(query) === (expected && `w:${expected}`),
+        `got ${dict.searchId(query)}`)
+    }
+  }
   const lookupDueTo = (example, text = example.text) => {
     const { paperId, groupId, locator } = example.source
     const start = text.indexOf('due to')
