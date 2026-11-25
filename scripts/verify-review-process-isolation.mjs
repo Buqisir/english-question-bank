@@ -116,6 +116,20 @@ try {
       `${mode} disposal must release its leader before the next verifier`)
     console.log(`PASS ${mode}: descendant RSS triggers kill; supervisor HTTP survives, legacy fallback applies and workspace is removed`)
   }
+  {
+    // Shutdown can abort while custody is being recorded. That abort event has
+    // already fired, so the runner must read the flag again and stop at once
+    // instead of sending the job and waiting out its deadline.
+    let reads = 0
+    const signal = { get aborted() { return reads++ > 0 }, addEventListener() {}, removeEventListener() {} }
+    const started = performance.now()
+    const output = await runReviewCompatibilityWorker({ mode: 'backfill' }, { signal, timeoutMs: 10000 })
+    assert.equal(output.comparison.reasonCode, 'WORKER_EXIT')
+    assert(performance.now() - started < 3000, 'abort during custody must not wait for the worker deadline')
+    assert.deepEqual(readdirSync(tmpdir()).filter(name => name.startsWith('eqb-review-job-')), before)
+    assert.equal(reviewCompatibilityLockDiagnostics().leader.state, 'missing')
+    console.log('PASS abort during custody recording stops the worker without sending the job')
+  }
   for (const args of [[], ['--hold']]) {
     // Give each fault-injection subprocess its own lock root, just as a
     // standalone verifier has; a retained live-owner test must not poison us.
@@ -125,7 +139,7 @@ try {
       [fileURLToPath(new URL('../test-fixtures/review-compatibility/disposal.mjs', import.meta.url)), ...args],
       { env, timeout: 30000, encoding: 'utf8' }))
   }
-  console.log(`PASS ${process.platform === 'darwin' ? 7 : 6} review process isolation checks`)
+  console.log(`PASS ${process.platform === 'darwin' ? 8 : 7} review process isolation checks`)
 } finally {
   delete process.env.REVIEW_TEST_PID
   delete process.env.EQB_REVIEW_COMPATIBILITY_AUTORUN

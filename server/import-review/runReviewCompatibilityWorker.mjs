@@ -75,6 +75,9 @@ export async function runReviewCompatibilityWorker(input, {
     const identity = await reviewProcessIdentity(worker.pid)
     if (!identity || worker.exitCode !== null || worker.signalCode) throw new Error('Compatibility worker exited before custody')
     custody.record(identity)
+    // An abort during the identity read already fired its event, before the
+    // listener below exists. Check again so shutdown never waits out a job.
+    if (signal?.aborted) return unknown('WORKER_EXIT')
     return await new Promise((resolve, reject) => {
       let settled = false
       let failureReason = null
