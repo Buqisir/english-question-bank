@@ -1,6 +1,6 @@
 # 02 — Prompt and generation routes
 
-Status: done (branch), not on main; full verify-ci pending
+Status: done; on main 2026-11-25
 Blocked by: 01
 Next on PASS: 03
 Terminal: no

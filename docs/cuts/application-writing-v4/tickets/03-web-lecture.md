@@ -1,6 +1,6 @@
 # 03 — Web lecture
 
-Status: ready
+Status: done; on main 2026-11-25
 Blocked by: 01
 Next on PASS: owner QA
 Terminal: no

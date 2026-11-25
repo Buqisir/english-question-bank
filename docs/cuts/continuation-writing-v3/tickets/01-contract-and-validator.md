@@ -1,6 +1,6 @@
 # 01 — Contract and validator
 
-Status: done (branch)
+Status: done; on main 2026-11-25
 Blocked by: none (spec accepted 2026-11-24)
 Next on PASS: 02
 Terminal: no
