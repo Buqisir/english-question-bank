@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { grammarFillReasonRoleConflicts } from './grammarFillReasonRole.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
@@ -349,6 +350,7 @@ export function validateGrammarFillShape(analysis, {
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
   requireTeachingContent = false,
+  requireReasonRoleAgreement = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'grammar-fill-analysis-v2') throw new Error('AI JSON schemaVersion 不正确。')
@@ -445,6 +447,12 @@ export function validateGrammarFillShape(analysis, {
 
     // reason
     if (!optionalString(item.reason)) throw new Error(`${questionId}: 缺少 reason。`)
+    if (requireReasonRoleAgreement) {
+      const conflicts = grammarFillReasonRoleConflicts(item)
+      if (conflicts.length) {
+        throw new Error(`${questionId}: reason 写的成分「${conflicts.map((claim) => claim.quote).join('、')}」与 role ${item.role} 不一致；按本空在句中的实际成分改 reason 或 role。`)
+      }
+    }
 
     // C1: answer-match against answer key — FROZEN 4-op normalization
     const aiAnswer = optionalString(item.answer)
@@ -677,6 +685,7 @@ export const analyzeGrammarFillImportCandidate = createAnalyzerProviderShell({
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
     requireTeachingContent: true,
+    requireReasonRoleAgreement: true,
   }),
   isRetryable: isRetryableGrammarFillError,
   beforeValidate: stampGrammarFillMeta,

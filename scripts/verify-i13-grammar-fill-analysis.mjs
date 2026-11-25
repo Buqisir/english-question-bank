@@ -508,6 +508,24 @@ async function assertAnalysisValidation() {
         Object.values(valid.blanks)[0].answer === answer && authority.group.questions[0].answerKey === sourceAnswer)
     }
     if (!conversion) {
+      const strict = { ...syntacticInput, requireReasonRoleAgreement: true }
+      validateGrammarFillShape(structuredClone(synthetic), strict)
+      assert('reason/role agreement accepts a matching role claim', true)
+      const contrast = structuredClone(synthetic)
+      Object.values(contrast.blanks)[0].reason = 'helping ... 不是作状语，而是解释 principle 的内容，作同位语。'
+      validateGrammarFillShape(contrast, strict)
+      assert('reason/role agreement ignores a negated contrast', true)
+      await assertRejects('reason/role agreement rejects a conflicting role claim', () => {
+        const invalid = structuredClone(synthetic)
+        Object.values(invalid.blanks)[0].reason = 'helping new members settle in 修饰 principle，作后置定语。'
+        validateGrammarFillShape(invalid, strict)
+      }, /reason 写的成分「作后置定语」与 role appositive 不一致/)
+      const lenient = structuredClone(synthetic)
+      Object.values(lenient.blanks)[0].reason = 'helping new members settle in 修饰 principle，作后置定语。'
+      validateGrammarFillShape(lenient, syntacticInput)
+      assert('reason/role agreement stays off for stored readback', true)
+    }
+    if (!conversion) {
       await assertRejects('appositive cannot omit its new similarity profile', () => {
         const invalid = structuredClone(synthetic)
         delete Object.values(invalid.blanks)[0].similarityProfile
