@@ -20,8 +20,11 @@ export function normalizedSentenceKey(row) {
 export const sentencesOf = raw => splitSentences(raw).map(({ text }) => text.trim())
 export const recordRows = record => record.rows.map(row =>
   ({ ...row, sentenceText: row.sentenceText ?? record.sentences[row.sentence - 1] }))
-const compact = ({ sentenceText, ...row }) => row
-export const makeRecord = (sentences, rows) => ({ sentences, rows: rows.map(compact) })
+export const makeRecord = (sentences, rows) => ({
+  sentences,
+  rows: rows.map(({ sentenceText, ...row }) =>
+    sentenceText === undefined || sentenceText === sentences[row.sentence - 1] ? row : { ...row, sentenceText }),
+})
 
 export function reusePicks(previous, sentences, rows, reanchor = false) {
   if (!previous) return new Map()

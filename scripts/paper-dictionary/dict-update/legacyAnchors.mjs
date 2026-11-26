@@ -4,9 +4,8 @@ import { locatePhraseOccurrence, normalizePhraseText } from '../../../shared/pap
 import { position } from './annotations.mjs'
 
 const spanKey = row => JSON.stringify([row.sentence, row.start])
-const compareAnchors = (a, b) => a.sentence - b.sentence || a.start - b.start
-const leftEdge = /[\p{L}\p{M}\p{N}]['-]?$/u
-const rightEdge = /^(?:[\p{L}\p{M}\p{N}]|['-][\p{L}\p{M}\p{N}])/u
+const leftEdge = /(?:[\p{L}\p{M}\p{N}]|[\p{L}\p{M}\p{N}]'|[\p{L}\p{M}]-)$/u
+const rightEdge = /^(?:[\p{L}\p{M}\p{N}]|'[\p{L}\p{M}\p{N}]|-[\p{L}\p{M}])/u
 const escape = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const graphemes = new Intl.Segmenter('en', { granularity: 'grapheme' })
 
@@ -25,25 +24,7 @@ function searchOffsets(text) {
   return { text: composed, starts, ends }
 }
 
-// Pair the shorter sequence with the closest ordered subsequence of the longer one.
-function orderedPairs(old, current, distance) {
-  if (old.length > current.length) {
-    return orderedPairs(current, old, (row, saved) => distance(saved, row)).map(([row, saved]) => [saved, row])
-  }
-  const costs = Array.from({ length: old.length + 1 }, () => Array(current.length + 1).fill(Infinity))
-  costs[0].fill(0)
-  for (let i = 1; i <= old.length; i++) for (let j = 1; j <= current.length; j++) {
-    costs[i][j] = Math.min(costs[i][j - 1], costs[i - 1][j - 1] + distance(old[i - 1], current[j - 1]))
-  }
-  const pairs = []
-  for (let i = old.length, j = current.length; i > 0; j--) {
-    if (costs[i][j] === costs[i][j - 1]) continue
-    pairs.push([old[--i], current[j - 1]])
-  }
-  return pairs.reverse()
-}
-
-export function reanchorLegacy(paperId, block, confirmed, matches, entries) {
+export function reanchorLegacy(paperId, block, confirmed, matches, entries, exampleQuotes = new Map()) {
   const reasons = new Map()
   const assigned = new Map()
   const review = new Set()
@@ -57,19 +38,25 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries) {
   const source = { paperId, groupId: block.groupId, blockHash: block.hash,
     [block.kind === 'paragraph' ? 'paragraphId' : 'questionId']: block.id }
   const hits = new Map(matches.map(row => [position(row), row]))
-  const confirmedAt = Map.groupBy(confirmed, position)
-  const anchored = new Set()
-  for (const row of matches) {
-    const phrase = entries.get(row.entryId).kind === 'phrase'
-    const saved = (confirmedAt.get(position(row)) ?? []).filter(old =>
-      old.surface === row.surface && (!phrase || old.blockHash === row.blockHash))
-    if (!saved.length) continue
-    assigned.set(row, saved)
-    for (const old of saved) anchored.add(old)
-  }
   const matchesAt = Map.groupBy(matches, spanKey)
-  const groups = Map.groupBy(confirmed.filter(row => !anchored.has(row)),
-    row => JSON.stringify([row.entryId, normalizeSearch(row.surface)]))
+  const byQuote = Map.groupBy(sentences, row => normalizeSearch(row.sentenceText))
+  const quoteAnchor = row => JSON.stringify([position(row), row.senseId])
+  const quotesAt = new Map()
+  for (const row of confirmed) {
+    const quote = row.sentenceText ?? exampleQuotes.get(row)
+    if (!quote) continue
+    const key = quoteAnchor(row)
+    const quotes = quotesAt.get(key) ?? new Set()
+    quotes.add(normalizeSearch(quote))
+    quotesAt.set(key, quotes)
+  }
+  const originalQuote = row => {
+    const quote = row.sentenceText ?? exampleQuotes.get(row)
+    if (quote) return normalizeSearch(quote)
+    const aliases = quotesAt.get(quoteAnchor(row))
+    return aliases?.size === 1 ? aliases.values().next().value : undefined
+  }
+  const groups = Map.groupBy(confirmed, row => JSON.stringify([row.entryId, normalizeSearch(row.surface)]))
   for (const savedRows of groups.values()) {
     const sample = savedRows[0]
     const entry = entries.get(sample.entryId)
@@ -80,10 +67,6 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries) {
     const phrase = entry.kind === 'phrase'
     const form = normalizeSearch(sample.surface)
     if (!form) continue
-    const locks = [...assigned.keys()].filter(row => row.entryId === entry.entryId &&
-      normalizeSearch(row.surface) === form).sort(compareAnchors)
-    const locked = new Set(locks.map(spanKey))
-    const segment = row => locks.filter(lock => compareAnchors(lock, row) < 0).length
     const expression = new RegExp(escape(form), 'giu')
     const candidates = []
     for (const { quote, ...sentence } of sentences) {
@@ -99,28 +82,66 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries) {
         candidates.push({ row, from, quote })
       }
     }
-    const old = [...Map.groupBy(savedRows, position).values()].sort(([a], [b]) => compareAnchors(a, b))
-    const distance = ([saved], { row }) => {
-      const origin = saved.sentenceStart ?? sentences[saved.sentence - 1]?.sentenceStart ?? 0
-      return Math.abs(origin + saved.start - row.sentenceStart - row.start)
-    }
-    const candidateSegments = Map.groupBy(candidates.filter(({ row }) => !locked.has(spanKey(row))), ({ row }) => segment(row))
-    const pairs = [...Map.groupBy(old, ([row]) => segment(row))].flatMap(([i, rows]) =>
-      orderedPairs(rows, candidateSegments.get(i) ?? [], distance))
-    for (const [saved, candidate] of pairs) {
+    const bySentence = Map.groupBy(candidates, ({ row }) => row.sentence)
+    const proposed = []
+    for (const saved of Map.groupBy(savedRows, old => JSON.stringify([
+      position(old), old.blockHash, originalQuote(old),
+    ])).values()) {
       const [first] = saved
-      const { row, from, quote } = candidate
+      const quote = originalQuote(first)
+      const matchingSentences = quote ? (byQuote.get(quote) ?? []) : []
+      const sentence = quote
+        ? (matchingSentences.find(row => row.sentence === first.sentence) ??
+          (matchingSentences.length === 1 ? matchingSentences[0] : undefined))
+        : sentences[first.sentence - 1]
+      const local = bySentence.get(sentence?.sentence) ?? []
+      let candidate = local.find(({ row }) => row.start === first.start && row.end === first.end)
+      if (!candidate && local.length === 1) candidate = local[0]
+      if (!candidate) {
+        // A same-hash phrase can still have a valid archived sentence when the
+        // current splitter divides it differently (for example, before dialogue).
+        const { senseId, ...legacy } = first
+        const archived = { ...legacy, ...source }
+        if (phrase && first.blockHash === block.hash &&
+          locatePhraseOccurrence(normalized, archived, archived.sentenceText, entry)) {
+          proposed.push({ saved, row: archived })
+        } else {
+          for (const item of saved) reasons.set(item, local.length ? 'ambiguousAnchor' : 'missingOriginalSentenceForm')
+          const pending = local.length ? local : candidates
+          for (const { row } of pending) for (const hit of matchesAt.get(spanKey(row)) ?? []) {
+            if (hit.entryId === entry.entryId) review.add(hit)
+          }
+        }
+        continue
+      }
+      const { row: span, from, quote: offsets } = candidate
+      const row = { ...span }
       if (phrase && first.parts) {
         const oldForm = searchOffsets(first.surface)
         row.parts = first.parts.map(([a, b]) => [
-          quote.starts[from + oldForm.starts.indexOf(a - first.start)],
-          quote.ends[from + oldForm.ends.indexOf(b - first.start)],
+          offsets.starts[from + oldForm.starts.indexOf(a - first.start)],
+          offsets.ends[from + oldForm.ends.indexOf(b - first.start)],
         ])
       }
+      proposed.push({ saved, row })
+    }
+    for (const proposals of Map.groupBy(proposed, ({ row }) => position(row)).values()) {
+      const [{ row: candidate }] = proposals
+      const sameAnchor = [...Map.groupBy(proposals, ({ saved: [old] }) => position(old)).values()]
+      const exact = sameAnchor.filter(([{ saved: [old] }]) => old.start === candidate.start && old.end === candidate.end)
+      const selected = exact.length === 1 ? exact[0] : sameAnchor.length === 1 ? sameAnchor[0] : []
+      for (const item of proposals) if (!selected.includes(item)) {
+        for (const old of item.saved) reasons.set(old, 'ambiguousAnchor')
+        const hit = hits.get(position(candidate))
+        if (hit) review.add(hit)
+      }
+      if (!selected.length) continue
+      const [{ row }] = selected
+      const saved = selected.flatMap(item => item.saved)
       const key = position(row)
       const target = hits.get(key) ?? row
       if (assigned.has(target)) continue
-      const other = (matchesAt.get(spanKey(row)) ?? []).filter(hit => hit.entryId !== row.entryId &&
+      const other = hits.has(key) ? [] : (matchesAt.get(spanKey(row)) ?? []).filter(hit => hit.entryId !== row.entryId &&
         normalizeSearch(hit.surface).replace(/'$/, '') === form.replace(/'$/, ''))
       if (other.length) {
         for (const item of saved) reasons.set(item, 'changedEntry')
@@ -143,7 +164,6 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries) {
         assigned.set(target, verified)
       }
     }
-    for (const row of savedRows) if (!reasons.has(row)) reasons.set(row, candidates.length ? 'unassignedAnchor' : 'missingForm')
   }
   return { rows: [...hits.values()], assigned, reasons, review }
 }

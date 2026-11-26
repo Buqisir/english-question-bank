@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
+import { makeRecord, recordRows, sentencesOf } from './annotations.mjs'
 import { matcher } from './match.mjs'
 import { reanchorLegacy } from './legacyAnchors.mjs'
 import { blocksOf, localPaper } from './source.mjs'
@@ -170,7 +171,7 @@ try {
     version: 1, counts, unassignedCounts: counts, senses: [
       { senseId: 'w:recall#s1', pos: 'v.', glossZh: '回想', counts, examples: [] },
     ] })
-  paper('The record shows birds. We recall songs! We play games.')
+  paper('We record birds. We recall songs! We play games.')
   const adoption = JSON.parse(run('prepare', 'adopt-legacy', '--local', dir, '--legacy', dir))
   assert.equal(adoption.changed, 1)
   assert.equal(adoption.legacyRetained, 1)
@@ -226,6 +227,51 @@ try {
   assert.equal(transferred.assigned.size, 0)
   assert.equal(transferred.reasons.get(legacy[1]), 'changedEntry')
   assert.deepEqual([...transferred.review].map(row => [row.entryId, row.sentence]), [['w:friends', 2]])
+
+  const it = { ...friend, entryId: 'w:it', headword: 'it', forms: [] }
+  const june = { ...it, entryId: 'w:june', headword: 'June' }
+  const sentenceEntries = new Map([it, june].map(entry => [entry.entryId, entry]))
+  const [sentenceBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'original-quote', passage: {
+    paragraphs: [{ text: 'It was cold. It went well. It is failure that brings improvement. Dates:1 June-31 July.' }],
+  } }] }))
+  const emphasis = { entryId: it.entryId, sentence: 2, start: 0, end: 2, surface: 'It', senseId: 'emphasis' }
+  const alias = { ...emphasis, questionId: 'alias' }
+  const date = { entryId: june.entryId, sentence: 4, start: 8, end: 12, surface: 'June', senseId: 'month' }
+  const currentMatches = matcher(sentenceEntries)(paperId, sentenceBlock)
+  const corrected = reanchorLegacy(paperId, sentenceBlock, [emphasis, alias, date], currentMatches, sentenceEntries,
+    new Map([[emphasis, 'It is failure that brings improvement.']]))
+  assert.deepEqual([...corrected.assigned.keys()].map(row => [row.surface, row.sentence, row.start]),
+    [['It', 3, 0], ['June', 4, 8]])
+  assert.deepEqual([...corrected.assigned.values()][0], [emphasis, alias])
+  const missing = reanchorLegacy(paperId, sentenceBlock, [emphasis], currentMatches, sentenceEntries,
+    new Map([[emphasis, 'It was the only way.']]))
+  assert.equal(missing.assigned.size, 0)
+  assert.equal(missing.reasons.get(emphasis), 'missingOriginalSentenceForm')
+  const [ambiguousBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'ambiguous', passage: {
+    paragraphs: [{ text: 'It was cold, but it went well.' }],
+  } }] }))
+  const ambiguous = { ...emphasis, sentence: 1, start: 8, end: 10 }
+  const uncertain = reanchorLegacy(paperId, ambiguousBlock, [ambiguous],
+    matcher(sentenceEntries)(paperId, ambiguousBlock), sentenceEntries)
+  assert.equal(uncertain.assigned.size, 0)
+  assert.equal(uncertain.reasons.get(ambiguous), 'ambiguousAnchor')
+  assert.equal(uncertain.review.size, 2)
+
+  const dialogue = 'He smiled.“We made it,” he said.'
+  const [dialogueBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'dialogue', passage: {
+    paragraphs: [{ text: dialogue }],
+  } }] }))
+  const makeIt = { entryId: 'w:make-it', kind: 'phrase', headword: 'make it', variants: [],
+    forms: [{ form: 'made it', tags: [] }] }
+  const phraseEntries = new Map([[makeIt.entryId, makeIt]])
+  const start = dialogue.indexOf('made it')
+  const archived = { entryId: makeIt.entryId, senseId: 'arrive', sentence: 1, sentenceStart: 0,
+    sentenceText: dialogue, start, end: start + 7, surface: 'made it', blockHash: dialogueBlock.hash }
+  const phraseHits = matcher(phraseEntries)(paperId, dialogueBlock)
+  assert.equal(phraseHits.length, 0)
+  const [restored] = reanchorLegacy(paperId, dialogueBlock, [archived], phraseHits, phraseEntries).assigned.keys()
+  assert.equal(restored?.start, start)
+  assert.equal(recordRows(makeRecord(sentencesOf(dialogue), [restored]))[0].sentenceText, dialogue)
 
   const otherDir = join(dir, 'other')
   mkdirSync(otherDir)

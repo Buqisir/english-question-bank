@@ -56,6 +56,13 @@ const fingerprint = row => JSON.stringify([row.blockHash, row.sentence, row.star
 const ref = b => JSON.stringify([b.groupId, b.id])
 const aliases = b => [ref(b), ...(b.aliases ?? []).map(id => ref({ ...b, id }))]
 const senseOf = row => entries.get(row.entryId)?.senses.find(sense => sense.senseId === row.senseId)
+function exampleLocator(example) {
+  const { paragraphId, questionId, optionBank, option } = example.source.locator
+  return paragraphId ?? (optionBank ? `option-bank:${optionBank}` :
+    option && !questionId?.includes('#option=') ? `${questionId}#option=${option}` : questionId)
+}
+const quoteKey = (paperId, senseId, locator, sentence, start, end) =>
+  JSON.stringify([paperId, senseId, locator, sentence, start, end])
 const scopeFile = args.scope ? resolve(args.scope) : fileURLToPath(new URL('./scope.json', import.meta.url))
 const scopeAllows = ({ include, exclude }, id) => include.includes(id) || !exclude.includes(id)
 const targetIdentity = paper => paper ? [paper.revisionId ?? null, paper.status, paper.type] : null
@@ -141,6 +148,15 @@ async function prepare() {
     }
   }
   if (legacy.size) await readLegacy(args.legacy ?? join(homedir(), 'Projects/otter-dict-work'), legacy, entries)
+  const legacyQuotes = new Map()
+  for (const entry of entries.values()) for (const sense of entry.senses) for (const example of sense.examples) {
+    const { paperId, groupId, locator } = example.source
+    const id = exampleLocator(example)
+    if (!legacy.has(paperId) || !id || !example.target) continue
+    const key = quoteKey(paperId, sense.senseId, JSON.stringify([groupId, id]),
+      locator.sentence, example.target.start, example.target.end)
+    legacyQuotes.set(key, example.text)
+  }
   const match = matcher(entries)
   const packets = new Map()
   const stats = { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counters() }
@@ -169,6 +185,11 @@ async function prepare() {
     const current = paper ? blocksOf(paper) : {}
     const activeRows = readShard(id)
     const at = Map.groupBy(activeRows, rowLocator)
+    const exampleQuotes = new Map(activeRows.flatMap(row => {
+      if (!bootstrap || row.sentenceText) return []
+      const quote = legacyQuotes.get(quoteKey(id, row.senseId, rowLocator(row), row.sentence, row.start, row.end))
+      return quote ? [[row, quote]] : []
+    }))
     const blocks = {}
     const changed = {}
     const archive = old?.archive ?? {}
@@ -194,7 +215,7 @@ async function prepare() {
         const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
         const matches = match(id, block)
         const originalPositions = new Set(matches.map(position))
-        const { rows, assigned, reasons, review } = reanchorLegacy(id, block, confirmed, matches, entries)
+        const { rows, assigned, reasons, review } = reanchorLegacy(id, block, confirmed, matches, entries, exampleQuotes)
         for (const [saved, reason] of reasons) missedLegacy.set(saved, reason)
         for (const row of rows) {
           const verified = assigned.get(row) ?? []
@@ -501,9 +522,7 @@ async function buildChanges(plan, picks, available, detail) {
       sense.examples = sense.examples.filter(example => {
         const p = updated.get(example.source.paperId)
         if (!p || p.rejudge) return true
-        const { paragraphId, questionId, optionBank, option } = example.source.locator
-        const id = paragraphId ?? (optionBank ? `option-bank:${optionBank}` :
-          option && !questionId?.includes('#option=') ? `${questionId}#option=${option}` : questionId)
+        const id = exampleLocator(example)
         if (!id) return Boolean(p.tier)
         const source = JSON.stringify([example.source.groupId, id])
         const retained = Object.entries(p.blocks).find(([key]) => !p.changed[key] && p.before[key].aliases.includes(source))
