@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { setTimeout as delay } from 'node:timers/promises'
 import { appendTiming } from './lib-timing.mjs'
@@ -24,6 +24,21 @@ function aggregatePutMetrics(timing, metrics) {
     aggregate.durationsMs[phase] = (aggregate.durationsMs[phase] || 0) + duration
     aggregate.maxDurationsMs[phase] = Math.max(aggregate.maxDurationsMs[phase] || 0, duration)
   }
+}
+
+export function readUploadReceipt(file) {
+  try { return JSON.parse(readFileSync(file, 'utf8')) } catch (error) {
+    if (error.code === 'ENOENT' || error instanceof SyntaxError) return null
+    throw error
+  }
+}
+
+export function writeUploadReceipt(file, receipt) {
+  const staging = `${file}.${randomUUID()}`
+  try {
+    writeFileSync(staging, `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' })
+    renameSync(staging, file)
+  } finally { rmSync(staging, { force: true }) }
 }
 
 export function reconcileRevision(status, manifest, kind, baseline, stranded = []) {

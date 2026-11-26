@@ -10,10 +10,10 @@ import { test } from 'node:test'
 import { setTimeout as delay } from 'node:timers/promises'
 import { receiveVerifiedUpload } from '../../server/import-ops/receiveVerifiedUpload.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { assertSubmissionPaper, boundOcrReceipt, matchingOcr, priorStrandedUploads } from './review.mjs'
+import { assertSubmissionPaper, boundOcrReceipt, matchingOcr, strandedUploads } from './review.mjs'
 import { finishSubmissionHandoff } from './fast-import.mjs'
 import { withReviewPaperLock } from './review-target.mjs'
-import { reconcileRevision, uploadReviewBundle } from './lib-review-upload.mjs'
+import { readUploadReceipt, reconcileRevision, uploadReviewBundle, writeUploadReceipt } from './lib-review-upload.mjs'
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 
@@ -336,29 +336,44 @@ test('latest finalized reconciliation fills missing screenshots and an unreviewe
   assert.match(report, /Screen 和 PDF 待目检/)
 })
 
-test('later lecture upload recognizes the exact stranded Candidate in its production receipts', async t => {
-  const { dir, manifest: { paperId } } = await fixture(t)
-  const origin = 'https://example.test'
-  const originDir = path.join(dir, 'submissions', encodeURIComponent(origin))
-  const frozen = path.join(originDir, '1'.repeat(64))
-  mkdirSync(frozen, { recursive: true })
-  const stranded = { id: 'rev-old', bundleDigest: digest('invalid OCR') }
-  const base = { id: 'rev-replacement', paperId, reviewKind: 'candidate', state: 'approved',
-    bundleDigest: digest('corrected OCR'), finalizedAt: '2026-01-01' }
-  const old = { ...stranded, paperId, reviewKind: 'candidate', state: 'uploading', finalizedAt: null }
-  writeFileSync(path.join(frozen, 'submission.json'), JSON.stringify({ stranded, manifest: base }))
-  writeFileSync(path.join(frozen, 'upload-receipt.json'), JSON.stringify({ origin, paperId, bundleDigest: base.bundleDigest, revisionId: base.id }))
-  const status = { paperId, latestRevisionId: base.id, latest: base, revisions: [base, old] }
-  const observe = target => reconcileRevision(status, { paperId, bundleDigest: digest('lecture') },
-    'candidate', base.id, priorStrandedUploads(originDir, target, paperId))
-  assert.equal(observe(origin), undefined)
-  assert.throws(() => observe('http://localhost'), /UNKNOWN/)
-  rmSync(path.join(frozen, 'upload-receipt.json'))
-  assert.throws(() => observe(origin), /UNKNOWN/)
-  writeFileSync(path.join(dir, 'review-push-attempts.jsonl'), JSON.stringify({ paperId, origin, bundleDigest: base.bundleDigest }))
-  assert.equal(observe(origin), undefined)
-  status.revisions.push({ ...old, id: 'rev-foreign' })
-  assert.throws(() => observe(origin), /UNKNOWN/)
+test('a fresh worktree reconciles stranded Candidates against production OCR history', () => {
+  const paperId = 'paper-test'
+  const manifest = { paperId, bundleDigest: digest('lecture') }
+  const base = { paperId, id: 'rev-base', reviewKind: 'candidate', state: 'approved', finalizedAt: '2026-01-01',
+    bundleDigest: digest('base'), revisionNumber: 3 }
+  const report = { paperId, ocrRevisionId: 'rev-local' }
+  const old = { paperId, id: 'rev-old', reviewKind: 'candidate', state: 'uploading', finalizedAt: null,
+    revisionNumber: 1, bundleDigest: digest('old'), manifest: { schemaVersion: 'web-import-review-bundle-v3', ocrCorrectionReportDigest: digestJson(report) } }
+  const status = { paperId, latest: base, latestRevisionId: base.id, revisions: [base, old] }
+  const observe = report => reconcileRevision(status, manifest, 'candidate', base.id, strandedUploads(status, report))
+  assert.equal(observe(), undefined)
+  const ocr = { ...base, reviewKind: 'ocr', id: 'rev-production', revisionNumber: 2 }
+  status.revisions.push(ocr)
+  assert.equal(observe(), undefined)
+  old.revisionNumber = 4
+  assert.throws(() => observe(), /UNKNOWN/)
+  assert.equal(observe(report), undefined)
+  assert.throws(() => observe({ ...report, ocrRevisionId: 'rev-other' }), /UNKNOWN/)
+  ocr.id = report.ocrRevisionId
+  assert.throws(() => observe(report), /UNKNOWN/)
+  status.revisions.splice(2)
+  delete old.manifest.ocrCorrectionReportDigest
+  assert.throws(() => observe(), /UNKNOWN/)
+})
+
+test('a truncated upload receipt is absent until replaced after exact finalized reconciliation', async t => {
+  const { dir, manifest } = await fixture(t)
+  const file = path.join(dir, 'upload-receipt.json')
+  writeFileSync(file, '{"revision":')
+  assert.equal(readUploadReceipt(file), null)
+  const revision = { paperId: manifest.paperId, reviewKind: 'candidate', id: 'rev-latest',
+    state: 'awaiting_review', finalizedAt: '2026-01-01', bundleDigest: digest('sealed') }
+  const status = { paperId: manifest.paperId, latestRevisionId: revision.id, latest: revision, revisions: [revision] }
+  manifest.bundleDigest = revision.bundleDigest
+  const result = await uploadReviewBundle({ manifest, api: assert.fail, timelinePath: path.join(dir, 'timing.jsonl'),
+    observe: () => reconcileRevision(status, manifest, 'candidate', null, strandedUploads(status)) })
+  writeUploadReceipt(file, result)
+  assert.deepEqual(readUploadReceipt(file), { revision, reconciled: true })
 })
 
 test('only a dead same-host lock owner can be replaced', async t => {

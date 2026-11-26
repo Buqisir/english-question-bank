@@ -21,6 +21,7 @@ import { PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
 import { alignReviewedListeningSentences } from './listening-sentence-align.mjs'
+import { readUploadReceipt, writeUploadReceipt } from './lib-review-upload.mjs'
 import { hydrateReviewRevision, hydratedEvidenceBase, prepareReviewPush, reviewCandidate, uploadReviewBundle } from './review.mjs'
 
 const readJson = file => JSON.parse(readFileSync(file, 'utf8'))
@@ -265,17 +266,19 @@ export async function pushPreparedCandidate(work) {
   const attempt = path.join(work, 'upload-attempt.json')
   if (!/^rev-[a-z0-9-]+$/iu.test(base)) throw new Error('缺少基线 revision')
   const identity = { base, bundleDigest }
-  if (existsSync(attempt)) deepStrictEqual(readJson(attempt), identity, 'UNKNOWN: 原上传尝试与待传包不同')
+  const prior = readUploadReceipt(attempt)
+  if (prior) deepStrictEqual(prior, identity, 'UNKNOWN: 原上传尝试与待传包不同')
   for (const file of manifest.files) {
     const bytes = readFileSync(path.join(bundle, file.path))
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) throw new Error(`合稿后文件有变化：${file.path}`)
   }
   // Preserve this marker if registration or finalize returns an unknown outcome.
-  if (!existsSync(attempt)) writeJson(attempt, identity)
+  if (!prior) writeUploadReceipt(attempt, identity)
   const result = await uploadReviewBundle(bundle, manifest, path.join(work, 'upload-timeline.jsonl'))
   const receipt = path.join(work, 'upload-receipt.json')
-  if (!existsSync(receipt)) writeJson(receipt, { ...result, baseRevisionId, merged })
-  else deepStrictEqual(readJson(receipt).revision.id, result.revision.id, 'UNKNOWN: 上传回执 revision 不符')
+  const completed = readUploadReceipt(receipt)
+  if (!completed) writeUploadReceipt(receipt, { ...result, baseRevisionId, merged })
+  else deepStrictEqual(completed.revision.id, result.revision.id, 'UNKNOWN: 上传回执 revision 不符')
   rmSync(path.join(homedir(), '.cache', 'eqbank', 'revisions', base), { recursive: true, force: true })
   console.log(JSON.stringify({ revisionId: result.revision.id }))
 }

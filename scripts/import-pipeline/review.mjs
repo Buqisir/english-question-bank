@@ -84,7 +84,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { hydratedEvidenceBase, isLocalReviewOrigin, resolveReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 export { hydratedEvidenceBase } from './review-target.mjs'
-import { reconcileRevision, uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
+import { reconcileRevision, uploadReviewBundle as uploadBundle, writeUploadReceipt } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
@@ -327,7 +327,7 @@ export function loadLocalReviewedListening(paperDir, loaded, candidate) {
 async function productionStatus(paperId) {
   const empty = { paperId, latest: null, latestRevisionId: null, revisions: [] }
   const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
-    { cache: 'no-store', signal: AbortSignal.timeout(15_000) }, { allowNotFound: true, notFoundValue: empty })
+    { cache: 'no-store', signal: AbortSignal.timeout(15_000) }, { allowNotFound: true, notFoundValue: empty }).catch(error => { throw new Error(`UNKNOWN: ${error.message}`, { cause: error }) })
   if (status?.paperId !== paperId || !Array.isArray(status.revisions)) fail('UNKNOWN: Review 状态不完整')
   return status
 }
@@ -344,10 +344,12 @@ export async function uploadReviewBundle(paperDir, manifest, timelinePath = path
     if (reviewBundleDigest(manifest) !== manifest.bundleDigest
       || fileDescriptors(paperDir, manifest.files).some((file, i) => file.sha256 !== manifest.files[i].sha256)) fail('UNKNOWN: 冻结文件已变化')
   }
-  const prior = local ? [] : priorStrandedUploads(path.join(root, 'imports/ocr-proofread', manifest.paperId,
-    'fast/submissions', encodeURIComponent(destination)), destination, manifest.paperId)
-  const observe = async () => reconcileRevision(await productionStatus(manifest.paperId), manifest, kind,
-    lifecycle.baseline ?? manifest.expectedBaseRevisionId ?? null, prior.concat(lifecycle.stranded || []))
+  const report = !local && manifest.ocrCorrectionReportDigest && requiredJson(path.join(paperDir, correctionFile))
+  const observe = async () => {
+    const status = await productionStatus(manifest.paperId)
+    return reconcileRevision(status, manifest, kind, lifecycle.baseline ?? manifest.expectedBaseRevisionId ?? null,
+      strandedUploads(status, report, lifecycle.sourceReport))
+  }
   return uploadBundle({
     paperDir, manifest, api, resolveReviewFile, timelinePath,
     localOrigin: local ? destination : null, ...(!local && { observe, concurrency: 1 }),
@@ -460,23 +462,20 @@ export function assertSubmissionPaper(paperId, manifest) {
   if (manifest?.paperId !== paperId) fail('UNKNOWN: 送审命令与包内 paperId 不一致')
 }
 
-export function priorStrandedUploads(originDir, destination, paperId) {
-  if (!existsSync(originDir)) return []
-  const attemptsFile = path.resolve(originDir, '../../review-push-attempts.jsonl')
-  const attempts = existsSync(attemptsFile) ? readFileSync(attemptsFile, 'utf8').trim().split('\n').filter(Boolean)
-    .flatMap(line => { try { return [JSON.parse(line)] } catch { return [] } }) : []
-  const result = []
-  for (const dir of readdirSync(originDir, { withFileTypes: true })) {
-    if (!dir.isDirectory() || !/^[a-f0-9]{64}$/u.test(dir.name)) continue
-    const frozen = path.join(originDir, dir.name)
-    const receiptPath = path.join(frozen, 'upload-receipt.json')
-    const { manifest, stranded } = requiredJson(path.join(frozen, 'submission.json'))
-    if (!stranded || manifest.paperId !== paperId || manifest.bundleDigest === stranded.bundleDigest) continue
-    const receipts = existsSync(receiptPath) ? [requiredJson(receiptPath)] : attempts
-    if (receipts.some(row => row.origin === destination && row.paperId === paperId
-      && row.bundleDigest === manifest.bundleDigest)) result.push(stranded)
-  }
-  return result
+export function strandedUploads(status, ...reports) {
+  const ocr = status.revisions.filter(row => row.reviewKind === 'ocr' && row.paperId === status.paperId)
+  const references = new Map([status.ocrCorrectionReport, ...reports]
+    .filter(report => report?.paperId === status.paperId && typeof report.ocrRevisionId === 'string' && report.ocrRevisionId)
+    .map(report => [digestJson(report), report.ocrRevisionId]))
+  return status.revisions.filter(row => {
+    if (row.paperId !== status.paperId || row.reviewKind !== 'candidate' || row.state !== 'uploading' || row.finalizedAt !== null
+      || row.manifest?.schemaVersion !== 'web-import-review-bundle-v3' || !row.manifest.ocrCorrectionReportDigest) return false
+    const reference = references.get(row.manifest.ocrCorrectionReportDigest)
+    if (reference) return !ocr.some(item => item.id === reference)
+    // A frozen report predating every OCR registration cannot name an ID issued later by the server.
+    return !ocr.length || (Number.isSafeInteger(row.revisionNumber) && row.revisionNumber > 0
+      && ocr.every(item => Number.isSafeInteger(item.revisionNumber) && item.revisionNumber > row.revisionNumber))
+  })
 }
 
 async function freezeSubmission(paperId, paperDir, fast, status) {
@@ -496,18 +495,17 @@ async function freezeSubmission(paperId, paperDir, fast, status) {
     const bundle = path.join(stage, 'bundle')
     const { manifest: source } = prepareReviewPush(bundle, { resolvesIssueIds: resolves })
     assertSubmissionPaper(paperId, source)
-    const prior = priorStrandedUploads(originDir, origin(), paperId)
-    let stranded
     const old = status.revisions.filter(item => item.state === 'uploading' && item.reviewKind === 'candidate')
     const original = status.revisions.find(item => item.reviewKind === 'candidate'
       && reviewBundleDigest({ ...source, producerBuildId: item.producerBuildId }) === item.bundleDigest
       && stableStringify(item.manifest.resolvesIssueIds ?? []) === stableStringify(resolves))
     const report = source.ocrCorrectionReportDigest && read(path.join(paperDir, correctionFile))
-    if (original && report && !status.revisions.some(item => item.id === report.ocrRevisionId)) {
-      if (original.finalizedAt) fail('UNKNOWN: finalized Candidate 缺少关联 OCR')
-      stranded = { id: original.id, bundleDigest: original.bundleDigest }
+    const prior = strandedUploads(status, report)
+    const stranded = original && prior.includes(original)
+    if (original?.finalizedAt && report && !status.revisions.some(item => item.id === report.ocrRevisionId)) {
+      fail('UNKNOWN: finalized Candidate 缺少关联 OCR')
     }
-    if (old.some(item => item.id !== original?.id && !prior.some(proof => proof.id === item.id && proof.bundleDigest === item.bundleDigest))) fail('UNKNOWN: 存在其他未完成 Candidate')
+    if (old.some(item => item.id !== original?.id && !prior.includes(item))) fail('UNKNOWN: 存在其他未完成 Candidate')
     if ((source.expectedBaseRevisionId && source.expectedBaseRevisionId !== status.latestRevisionId
       || !source.expectedBaseRevisionId && status.latest?.reviewKind === 'candidate') && status.latest?.id !== original?.id) {
       fail('UNKNOWN: Candidate 基线已变化')
@@ -526,13 +524,13 @@ async function freezeSubmission(paperId, paperDir, fast, status) {
         if (ocr) input.producerBuildId = ocr.producerBuildId
         const manifest = { ...input, bundleDigest: ocrReviewBundleDigest(input) }
         if (ocr && ocr.bundleDigest !== manifest.bundleDigest) fail('UNKNOWN: OCR bundle 已变化')
-        const finalized = await uploadReviewBundle(paperDir, manifest, undefined, { baseline, stranded })
+        const finalized = await uploadReviewBundle(paperDir, manifest, undefined, { baseline, sourceReport: report })
         ocr = finalized.revision
         baseline = ocr.id
       }
       if (ocr.state === 'awaiting_review') {
         const fresh = await productionStatus(paperId)
-        reconcileRevision(fresh, ocr.manifest, 'ocr', baseline, prior.concat(stranded || []))
+        reconcileRevision(fresh, ocr.manifest, 'ocr', baseline, strandedUploads(fresh, report))
         await proofreadOcr(paperId, ocr.id, inputPath)
       }
       const remote = await api(`/api/import-agent-reviews/revisions/${encodeURIComponent(ocr.id)}/ocr-confirmation`)
@@ -554,7 +552,7 @@ async function freezeSubmission(paperId, paperDir, fast, status) {
       manifest.bundleDigest = reviewBundleDigest(manifest)
       if (manifest.bundleDigest !== original.bundleDigest) fail('UNKNOWN: 原包已变化')
     }
-    const result = { manifest, baseline, stranded }
+    const result = { manifest, baseline }
     writeFileSync(path.join(stage, 'submission.json'), JSON.stringify(result))
     renameSync(stage, directory)
     return { ...result, directory }
@@ -576,13 +574,15 @@ async function pushRevision(paperId) {
         `${JSON.stringify({ paperId, origin: destination, bundleDigest: manifest.bundleDigest, startedAt: new Date().toISOString() })}\n`)
     }
     const bundle = frozen ? path.join(frozen.directory, 'bundle') : paperDir
-    const finalized = await uploadReviewBundle(bundle, manifest, undefined, frozen || {
+    const finalized = await uploadReviewBundle(bundle, manifest, undefined, frozen ? { baseline: frozen.baseline,
+      sourceReport: existsSync(path.join(paperDir, correctionFile)) && requiredJson(path.join(paperDir, correctionFile)),
+    } : {
       baseline: manifest.expectedBaseRevisionId ?? (manifest.ocrCorrectionReportDigest ? requiredJson(path.join(bundle, correctionFile)).ocrRevisionId : null),
     })
-    if (frozen) writeFileSync(path.join(frozen.directory, 'upload-receipt.json'), JSON.stringify({
+    if (frozen) writeUploadReceipt(path.join(frozen.directory, 'upload-receipt.json'), {
       origin: destination, paperId, revisionId: finalized.revision.id, bundleDigest: manifest.bundleDigest,
       ocrRevisionId: manifest.ocrCorrectionReportDigest && requiredJson(path.join(bundle, correctionFile)).ocrRevisionId,
-    }))
+    })
     console.log(JSON.stringify({
       paperId,
       revisionId: finalized.revision.id,
