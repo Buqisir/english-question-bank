@@ -1,6 +1,33 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
+import { answerKeyValuesMatch, comparePageAnswers } from './lib-answer-key-comparison.mjs'
+
+test('page transcriptions surface conflicts and omissions in both directions', () => {
+  const result = comparePageAnswers({ answers: [
+    { canonicalNumber: 21, value: 'B' }, { canonicalNumber: 22, value: 'C' },
+    { canonicalNumber: 24, value: 'that/which' },
+  ] }, [
+    { name: 'first.json', pages: ['answer-p01'], answers: { 21: 'A', 23: 'D', 24: 'which/that' } },
+    { name: 'second.json', pages: ['answer-p02'], answers: { 21: 'B', 24: 'that/which' } },
+  ])
+  assert.deepEqual(result.conflicts.map(c => [c.key, c.first.pages, c.current.pages]),
+    [['21', ['answer-p01'], ['answer-p02']]])
+  assert.deepEqual(result.omitted, ['23'])
+  assert.deepEqual(result.missing, [22])
+  assert.deepEqual(result.mismatches.map(entry => entry.transcribed), ['A'])
+})
+
+test('national legacy matches independent transcriptions by question identity', () => {
+  const written = 'question:paper-test:21'
+  const editing = 'question:paper-test:error-correction:1'
+  const result = comparePageAnswers({
+    profileId: 'national-legacy', listening: { answers: [{ canonicalNumber: 1, value: 'A' }] },
+    answers: [{ canonicalNumber: 21, questionId: written, value: 'B' },
+      { canonicalNumber: 1, questionId: editing, value: 'was' }],
+  }, [{ answers: { 'listening:1': 'A', [written]: 'B', [editing]: 'was' } }])
+  assert.deepEqual(result.entries.map(entry => entry.questionId), ['listening:1', written, editing])
+  for (const key of ['missing', 'omitted', 'conflicts', 'mismatches']) assert.deepEqual(result[key], [])
+})
 
 for (const [actual, expected] of [
   ['that / which', 'which / that'], // Nanning April 2026, question 59.

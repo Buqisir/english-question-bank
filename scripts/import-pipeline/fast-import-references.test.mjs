@@ -465,6 +465,21 @@ test('after-proofread forwards explicit body width to figure-sizes on resume', t
   assert(JSON.parse(readFileSync(statePath)).steps['figure-sizes'].finishedAt)
   assert.match(readFileSync(path.join(work, 'fast/logs/figure-sizes.log'), 'utf8'),
     /--body-width-ratio 0\.785894/u)
+  assert.match(readFileSync(path.join(work, 'pending-declarations.md'), 'utf8'), /当前诊断未发现待声明项/u)
+  const sourceFlags = path.join(work, 'source-flags')
+  json(path.join(sourceFlags, 'answer-p01.json'), { answers: { 21: 'A' } })
+  json(path.join(sourceFlags, 'answer-p02.json'), { answers: { 21: 'B' } })
+  const signal = path.join(paperDir, 'signals/ai-answer-check.json')
+  json(signal, { ok: true })
+  const blocked = run([])
+  assert.equal(blocked.status, 2, blocked.stderr)
+  assert.match(blocked.stderr, /抄录冲突 21.*材料化漏题 21/u)
+  assert.equal(fs.existsSync(signal), false)
+  assert.equal(JSON.parse(readFileSync(statePath)).steps['answer-check'], undefined)
+  json(materializationPath, { ...JSON.parse(readFileSync(materializationPath)),
+    issues: [{ code: 'NCK1_OCR_SOURCE_NUMBER_MISMATCH', path: 'questions.21', source: { page: 4 } }] })
+  assert.equal(run([]).status, 2)
+  assert.match(readFileSync(path.join(work, 'pending-declarations.md'), 'utf8'), /题号映射[\s\S]*页码　4/u)
 })
 
 test('producer and driver import the same pure version constant; current results remain cache hits', async t => {

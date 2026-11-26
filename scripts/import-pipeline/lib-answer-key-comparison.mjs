@@ -24,3 +24,34 @@ export function answerKeyValuesMatch(transcribed, answerKey) {
   const rightSet = new Set(rightParts)
   return leftSet.size === rightSet.size && [...leftSet].every(part => rightSet.has(part))
 }
+
+export function comparePageAnswers(materialization, flags) {
+  const transcriptions = new Map()
+  const conflicts = []
+  for (const { name, pages, answers } of flags) {
+    for (const [key, value] of Object.entries(answers || {})) {
+      const current = { value, name, pages }
+      const first = transcriptions.get(key)
+      if (!first) transcriptions.set(key, current)
+      else if (!answerKeyValuesMatch(first.value, value)) conflicts.push({ key, first, current })
+    }
+  }
+  const expected = [...(materialization.listening?.answers || []), ...(materialization.answers || [])]
+  const legacy = materialization.profileId === 'national-legacy'
+  const keys = new Set()
+  const entries = expected.map(answer => {
+    const key = legacy ? answer.questionId ?? `listening:${answer.canonicalNumber}` : String(answer.canonicalNumber)
+    keys.add(key)
+    return {
+      ...(legacy ? { questionId: key } : {}),
+      number: answer.canonicalNumber,
+      answerKey: answer.value,
+      transcribed: transcriptions.get(key)?.value ?? null,
+    }
+  })
+  const missing = entries.filter(entry => entry.transcribed === null).map(entry => entry.questionId ?? entry.number)
+  const mismatches = entries.filter(entry => entry.transcribed !== null
+    && !answerKeyValuesMatch(entry.transcribed, entry.answerKey))
+  const omitted = [...transcriptions.keys()].filter(key => !keys.has(key))
+  return { compared: entries.length, conflicts, missing, mismatches, omitted, entries }
+}

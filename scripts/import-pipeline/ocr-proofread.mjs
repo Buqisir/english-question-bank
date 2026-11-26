@@ -1501,7 +1501,8 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   }
   if (assignedFigures.size + excludedFigures.length !== referenceFigures.length) {
     const unresolved = referenceFigures.filter(figure => !assignedFigures.has(figure) && !excludedFigures.includes(figure))
-    throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
+    throw Object.assign(new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`),
+      { unresolvedReferenceFigures: unresolved })
   }
   applyEssayTextCorrections(groups, essayTextCorrections)
   const joined = text => text.normalize('NFKC').replace(/-\s+/gu, '-').replace(/\s+/gu, '')

@@ -42,7 +42,8 @@ import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE, expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { segmentListening } from './listening-segment.mjs'
-import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
+import { comparePageAnswers } from './lib-answer-key-comparison.mjs'
+import { writePendingDeclarations } from './pending-declarations.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 import { sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
@@ -481,31 +482,25 @@ function applySubtitlesAndCheckWatermarks(ctx) {
   return { subtitles: edits.length, watermarksChecked: flags.flatMap((flag) => flag.watermarks || []).length }
 }
 
-function answerCheck(ctx, verified) {
-  const materialization = readJson(materializationPath(ctx))
-  const expected = [...(materialization.listening?.answers || []), ...(materialization.answers || [])]
-  const transcribed = Object.assign({}, ...readFlags(ctx).map((flag) => flag.answers || {}))
-  const entries = expected.map((answer) => ({
-    ...(materialization.profileId === 'national-legacy' ? { questionId: answer.questionId ?? `listening:${answer.canonicalNumber}` } : {}),
-    number: answer.canonicalNumber,
-    answerKey: answer.value,
-    transcribed: transcribed[materialization.profileId === 'national-legacy'
-      ? answer.questionId ?? `listening:${answer.canonicalNumber}` : String(answer.canonicalNumber)] ?? null,
-  }))
-  const missing = entries.filter((entry) => entry.transcribed === null).map((entry) => entry.number)
-  const mismatches = entries.filter((entry) => entry.transcribed !== null
-    && !answerKeyValuesMatch(entry.transcribed, entry.answerKey))
+function answerCheck(ctx) {
+  const comparison = comparePageAnswers(readJson(materializationPath(ctx)), readFlags(ctx))
+  const { compared, conflicts, missing, mismatches, omitted } = comparison
   writeJson(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json'), {
-    paperId: ctx.paperId, method: 'proofreader-page-transcription-vs-answerKey', compared: entries.length,
-    missing, mismatches, entries })
-  if (missing.length || mismatches.length) {
-    throw new Stop(`答案核对未通过：缺 ${missing.join(',') || '无'}；不一致 ${mismatches.map((entry) =>
-      `${entry.number}: key=${entry.answerKey} 原页=${entry.transcribed}`).join('；') || '无'}。对照答案页原图处理后重跑。`)
+    paperId: ctx.paperId, method: 'proofreader-page-transcription-vs-answerKey', ...comparison })
+  if (conflicts.length || missing.length || mismatches.length || omitted.length) {
+    archive(ctx, path.join(ctx.paperDir, 'signals/ai-answer-check.json'))
+    delete ctx.state.steps['answer-check']
+    save(ctx)
+    const details = [
+      ...conflicts.map(({ key, first, current }) =>
+        `抄录冲突 ${key}（${first.name}=${first.value}，${current.name}=${current.value}）`),
+      ...omitted.map(key => `材料化漏题 ${key}`),
+      ...missing.map(key => `缺抄录 ${key}`),
+      ...mismatches.map(entry => `答案不一致 ${entry.questionId ?? entry.number}（key=${entry.answerKey}，原页=${entry.transcribed}）`),
+    ]
+    throw new Stop(`答案核对未通过：${details.join('；')}。对照答案页原图处理后重跑。`)
   }
-  writeJson(path.join(ctx.paperDir, 'signals/ai-answer-check.json'), {
-    ok: true, checkedAt: new Date().toISOString(), method: 'source-markings-vs-answerKey', paperId: ctx.paperId,
-    sourceDigest: verified.sourceDigest, candidateDigest: verified.candidateDigest })
-  return { compared: entries.length }
+  return { compared }
 }
 
 export function splitSummaries(ctx, parts) {
@@ -651,6 +646,8 @@ async function afterProofread(ctx, args) {
     return run(ctx, 'chinese-numbering', cli('ocr-proofread.mjs', 'numbering', ctx.paperId))
   })
   const materialization = readJson(materializationPath(ctx))
+  const declarations = await writePendingDeclarations(ctx, materialization, readFlags(ctx))
+  say(`待声明清单 ${path.relative(root, declarations)}`)
   const trailingHeadings = trailingHeadingHints(materialization)
   if (trailingHeadings.length) throw new Stop(trailingHeadingMessage(trailingHeadings))
   const issues = materialization.issues || []
@@ -687,11 +684,17 @@ async function afterProofread(ctx, args) {
     await run(ctx, 'verify-spelling', cli('review.mjs', 'verify-spelling', ctx.paperId))
     return { unchanged: built.unchanged, correct: built.correct, uncertain: built.uncertain, mechanical: built.mechanical }
   })
+  const comparison = answerCheck(ctx)
   const verified = await step(ctx, 'verify', async () => {
     const result = await run(ctx, 'verify', cli('universal-nck1.mjs', 'verify', ctx.paperId))
     return { sourceDigest: result.sourceDigest, candidateDigest: result.candidateDigest, groups: result.groups, assertions: result.assertions }
   })
-  await step(ctx, 'answer-check', () => answerCheck(ctx, verified))
+  await step(ctx, 'answer-check', () => {
+    writeJson(path.join(ctx.paperDir, 'signals/ai-answer-check.json'), {
+      ok: true, checkedAt: new Date().toISOString(), method: 'source-markings-vs-answerKey', paperId: ctx.paperId,
+      sourceDigest: verified.sourceDigest, candidateDigest: verified.candidateDigest })
+    return comparison
+  })
   await step(ctx, 'build', () => run(ctx, 'build', cli('universal-nck1.mjs', 'build', ctx.paperId)))
   const retainedListening = hasListening(ctx) && await retainFastListening(ctx, verified.candidateDigest)
   await step(ctx, 'round2-requests', async () => {
