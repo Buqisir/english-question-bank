@@ -257,6 +257,19 @@ try {
   assert.equal(uncertain.reasons.get(ambiguous), 'ambiguousAnchor')
   assert.equal(uncertain.review.size, 2)
 
+  const [splitBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'archive-split', passage: {
+    paragraphs: [{ text: 'Dr. Smith called. It was fine.” It went well. It ended.' }],
+  } }] }))
+  const splitRows = [
+    { ...emphasis, sentence: 2, start: 0, end: 2, senseId: 'first' },
+    { ...emphasis, sentence: 2, start: 14, end: 16, senseId: 'second' },
+    { ...emphasis, sentence: 3, start: 0, end: 2, senseId: 'third' },
+  ]
+  const split = reanchorLegacy(paperId, splitBlock, splitRows, matcher(sentenceEntries)(paperId, splitBlock), sentenceEntries)
+  assert.deepEqual([...split.assigned].map(([row, [saved]]) => [row.sentenceText, saved.senseId]), [
+    ['It was fine.”', 'first'], ['It went well.', 'second'], ['It ended.', 'third'],
+  ])
+
   const dialogue = 'He smiled.“We made it,” he said.'
   const [dialogueBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'dialogue', passage: {
     paragraphs: [{ text: dialogue }],

@@ -24,22 +24,61 @@ function searchOffsets(text) {
   return { text: composed, starts, ends }
 }
 
+// The original word index used these boundaries before the current sentence splitter.
+function archiveSentences(raw, withQuotes) {
+  const boundary = withQuotes
+    ? /([.!?]+[”’"']*)([^\S\n]+|$)|([.!?]*[”’"']*)\n+/gu
+    : /([.!?]+)([^\S\n]+|$)|([.!?]*[”’"']*)\n+/gu
+  const sentences = []
+  let start = 0
+  for (const match of raw.matchAll(boundary)) {
+    const end = match.index + (match[1] ?? match[3]).length
+    const text = raw.slice(start, end)
+    if (match[2] && /\b(?:Mr|Mrs|Ms|Dr|Prof|St|Jr|Sr|No|vs|[A-Z]|[ap](?:\.\s*m)?|[ei]\.\s*[gi]|[A-Z]\.[A-Z])\.$/u
+      .test(text.trim()) && raw.slice(end).trim()) continue
+    if (text.trim()) sentences.push({ text, start })
+    start = match.index + match[0].length
+  }
+  if (raw.slice(start).trim()) sentences.push({ text: raw.slice(start), start })
+  return sentences
+}
+
+function sentenceRange(raw, { text, start }) {
+  const sentenceText = text.trim()
+  const from = [...raw.slice(0, start + text.length - text.trimStart().length)].length
+  const chars = [...sentenceText]
+  return { from, to: from + chars.length, chars, sentenceText }
+}
+
+function archiveLayouts(raw, current, confirmed, originalQuote) {
+  const layouts = [archiveSentences(raw, false), archiveSentences(raw, true), current]
+    .map(layout => layout.map(sentence => sentenceRange(raw, sentence)))
+  const anchors = [...Map.groupBy(confirmed, position).values()].map(([row]) =>
+    ({ row, form: normalizeSearch(row.surface), quote: originalQuote(row) }))
+  const scores = layouts.map(layout => anchors.reduce((score, { row, form, quote }) => {
+    const sentence = layout[row.sentence - 1]
+    if (!sentence || normalizeSearch(sentence.chars.slice(row.start, row.end).join('')) !== form) return score
+    return score + (quote && quote === normalizeSearch(sentence.sentenceText) ? 2 : 1)
+  }, 0))
+  const best = Math.max(...scores)
+  return layouts.filter((_, index) => scores[index] === best)
+}
+
 export function reanchorLegacy(paperId, block, confirmed, matches, entries, exampleQuotes = new Map()) {
   const reasons = new Map()
   const assigned = new Map()
   const review = new Set()
   if (!confirmed.length) return { rows: matches, assigned, reasons, review }
   const normalized = normalizePhraseText(block.raw)
-  const sentences = splitSentences(block.raw).map(({ text, start }, index) => ({
-    sentence: index + 1, sentenceText: text.trim(),
-    sentenceStart: [...block.raw.slice(0, start + text.length - text.trimStart().length)].length,
-    quote: searchOffsets(text.trim()),
-  }))
+  const current = splitSentences(block.raw)
+  const sentences = current.map((item, index) => {
+    const { from, sentenceText } = sentenceRange(block.raw, item)
+    return { sentence: index + 1, sentenceText, sentenceStart: from, quote: searchOffsets(sentenceText) }
+  })
   const source = { paperId, groupId: block.groupId, blockHash: block.hash,
     [block.kind === 'paragraph' ? 'paragraphId' : 'questionId']: block.id }
   const hits = new Map(matches.map(row => [position(row), row]))
   const matchesAt = Map.groupBy(matches, spanKey)
-  const byQuote = Map.groupBy(sentences, row => normalizeSearch(row.sentenceText))
   const quoteAnchor = row => JSON.stringify([position(row), row.senseId])
   const quotesAt = new Map()
   for (const row of confirmed) {
@@ -55,6 +94,17 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries, exam
     if (quote) return normalizeSearch(quote)
     const aliases = quotesAt.get(quoteAnchor(row))
     return aliases?.size === 1 ? aliases.values().next().value : undefined
+  }
+  const layouts = archiveLayouts(block.raw, current, confirmed, originalQuote)
+  const fullText = searchOffsets(block.raw)
+  const quoteRanges = new Map()
+  function rangesOf(quote) {
+    if (!quoteRanges.has(quote)) {
+      quoteRanges.set(quote, [...fullText.text.matchAll(new RegExp(escape(quote), 'giu'))]
+        .map(match => ({ from: fullText.starts[match.index], to: fullText.ends[match.index + match[0].length] }))
+        .filter(({ from, to }) => from !== undefined && to !== undefined))
+    }
+    return quoteRanges.get(quote)
   }
   const groups = Map.groupBy(confirmed, row => JSON.stringify([row.entryId, normalizeSearch(row.surface)]))
   for (const savedRows of groups.values()) {
@@ -82,35 +132,37 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries, exam
         candidates.push({ row, from, quote })
       }
     }
-    const bySentence = Map.groupBy(candidates, ({ row }) => row.sentence)
     const proposed = []
     for (const saved of Map.groupBy(savedRows, old => JSON.stringify([
       position(old), old.blockHash, originalQuote(old),
     ])).values()) {
       const [first] = saved
       const quote = originalQuote(first)
-      const matchingSentences = quote ? (byQuote.get(quote) ?? []) : []
-      const sentence = quote
-        ? (matchingSentences.find(row => row.sentence === first.sentence) ??
-          (matchingSentences.length === 1 ? matchingSentences[0] : undefined))
-        : sentences[first.sentence - 1]
-      const local = bySentence.get(sentence?.sentence) ?? []
-      let candidate = local.find(({ row }) => row.start === first.start && row.end === first.end)
-      if (!candidate && local.length === 1) candidate = local[0]
-      if (!candidate) {
-        // A same-hash phrase can still have a valid archived sentence when the
-        // current splitter divides it differently (for example, before dialogue).
+      const indexed = layouts.map(layout => layout[first.sentence - 1]).filter(Boolean)
+      const quoted = quote ? rangesOf(quote) : []
+      const atIndex = quoted.filter(range => indexed.some(sentence => sentence.from === range.from))
+      const ranges = quote ? (quoted.length > 1 && atIndex.length === 1 ? atIndex : quoted) : indexed
+      const local = candidates.filter(({ row }) => ranges.some(({ from, to }) =>
+        row.sentenceStart + row.start >= from && row.sentenceStart + row.end <= to))
+      const exact = local.filter(({ row }) => ranges.some(({ from, to }) =>
+        row.sentenceStart + row.start === from + first.start &&
+        row.sentenceStart + row.end === from + first.end && from + first.end <= to))
+      const candidate = exact.length === 1 ? exact[0] : local.length === 1 ? local[0] : undefined
+      // Keep a runtime-valid archived phrase if the current splitter divided its quote.
+      if (phrase && first.blockHash === block.hash && first.sentenceText &&
+          (!candidate || normalizeSearch(candidate.row.sentenceText) !== quote)) {
         const { senseId, ...legacy } = first
         const archived = { ...legacy, ...source }
-        if (phrase && first.blockHash === block.hash &&
-          locatePhraseOccurrence(normalized, archived, archived.sentenceText, entry)) {
-          proposed.push({ saved, row: archived })
-        } else {
-          for (const item of saved) reasons.set(item, local.length ? 'ambiguousAnchor' : 'missingOriginalSentenceForm')
-          const pending = local.length ? local : candidates
-          for (const { row } of pending) for (const hit of matchesAt.get(spanKey(row)) ?? []) {
-            if (hit.entryId === entry.entryId) review.add(hit)
-          }
+        if (locatePhraseOccurrence(normalized, archived, archived.sentenceText, entry)) {
+          proposed.push({ saved, row: archived, exact: true })
+          continue
+        }
+      }
+      if (!candidate) {
+        for (const item of saved) reasons.set(item, local.length ? 'ambiguousAnchor' : 'missingOriginalSentenceForm')
+        const pending = local.length ? local : candidates
+        for (const { row } of pending) for (const hit of matchesAt.get(spanKey(row)) ?? []) {
+          if (hit.entryId === entry.entryId) review.add(hit)
         }
         continue
       }
@@ -123,12 +175,12 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries, exam
           offsets.ends[from + oldForm.ends.indexOf(b - first.start)],
         ])
       }
-      proposed.push({ saved, row })
+      proposed.push({ saved, row, exact: exact.length === 1 })
     }
     for (const proposals of Map.groupBy(proposed, ({ row }) => position(row)).values()) {
       const [{ row: candidate }] = proposals
       const sameAnchor = [...Map.groupBy(proposals, ({ saved: [old] }) => position(old)).values()]
-      const exact = sameAnchor.filter(([{ saved: [old] }]) => old.start === candidate.start && old.end === candidate.end)
+      const exact = sameAnchor.filter(items => items.some(item => item.exact))
       const selected = exact.length === 1 ? exact[0] : sameAnchor.length === 1 ? sameAnchor[0] : []
       for (const item of proposals) if (!selected.includes(item)) {
         for (const old of item.saved) reasons.set(old, 'ambiguousAnchor')
