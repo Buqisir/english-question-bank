@@ -63,6 +63,8 @@ test('explicit Chinese English alternatives compare symmetrically as complete se
     ['most stable或者stablest', 'stablest 或者 most stable'],
     ["well-known或者it's fine", "it’s fine / well-known"],
     ['one或者two/three', 'three / two / one'],
+    ['look（s）或see', 'look/looks/see'],
+    ['Look（s）　或  see ／ hear', 'hear / look / looks / see'],
   ]) {
     assert.equal(answerKeyValuesMatch(left, right), true, `${left} vs ${right}`)
     assert.equal(answerKeyValuesMatch(right, left), true, `${right} vs ${left}`)

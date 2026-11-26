@@ -1,20 +1,21 @@
-const normalize = (value) => String(value ?? '').replace(/[’]/gu, "'").replace(/\s+/gu, ' ').trim().toLowerCase()
+const normalize = value => String(value ?? '').replace(/（/gu, '(').replace(/）/gu, ')').replace(/／/gu, '/')
+  .replace(/’/gu, "'").replace(/\s+/gu, ' ').trim().toLowerCase()
 
 // Recognize Chinese separators only when the entire value consists of English
 // alternatives; leave every other value to the existing literal/slash rules.
 function normalizeChineseAlternatives(value) {
   if (!value.includes('或')) return value
-  const parts = value.split(/或者?|\/|／/u)
+  const parts = value.split(/或者?|\//u).map(part => part.trim())
   const englishPhrase = /^[a-z]+(?:['-][a-z]+)*(?: [a-z]+(?:['-][a-z]+)*)*(?:\([a-z]+\))?$/u
-  if (!parts.every(part => englishPhrase.test(part.trim()))) return value
-  return value.replace(/或者?/gu, '/')
+  if (!parts.every(part => englishPhrase.test(part))) return value
+  return parts.join('/')
 }
 
 function acceptedAnswers(value) {
-  const parts = normalizeChineseAlternatives(normalize(value)).split(/[/／]/u).map(part => part.trim())
+  const parts = normalizeChineseAlternatives(normalize(value)).split('/').map(part => part.trim())
   if (parts.length > 1 && parts.some(part => !part)) return null
   return new Set(parts.flatMap(part => {
-    const suffix = /^(.*[a-z])[(（]([a-z]+)[)）]$/u.exec(part)
+    const suffix = /^(.*[a-z])\(([a-z]+)\)$/u.exec(part)
     return suffix ? [suffix[1], suffix[1] + suffix[2]] : [part]
   }))
 }

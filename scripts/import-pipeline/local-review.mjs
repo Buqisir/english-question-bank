@@ -12,7 +12,7 @@
 import { spawn, spawnSync } from 'node:child_process'
 import { randomBytes } from 'node:crypto'
 import {
-  chmodSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, realpathSync, renameSync, rmdirSync, writeFileSync,
+  chmodSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, realpathSync, renameSync, writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
@@ -35,6 +35,11 @@ const runtime = path.resolve(option('--runtime') || path.join(root, 'imports/loc
 const statePath = path.join(runtime, 'state.json')
 const tokenPath = path.join(runtime, 'secrets/agent.token')
 const bindingPath = path.join(root, '.amp/import-review-origin')
+const appDir = path.join(root, 'app')
+const services = {
+  api: { script: path.join(root, 'server/api.mjs'), cwd: root },
+  app: { script: path.join(appDir, 'node_modules/vite/bin/vite.js'), cwd: appDir },
+}
 
 function readState() {
   return existsSync(statePath) ? JSON.parse(readFileSync(statePath, 'utf8')) : null
@@ -97,36 +102,25 @@ function bindOrigin(apiOrigin) {
   writeFileSync(bindingPath, `${apiOrigin}\n`)
 }
 
-async function withLifecycleLock(action) {
-  const lock = path.join(path.dirname(bindingPath), 'local-review-lifecycle.lock')
+function lockLifecycle() {
+  const lock = path.join(path.dirname(bindingPath), 'local-review-lifecycle.flock')
   mkdirSync(path.dirname(lock), { recursive: true })
-  const deadline = Date.now() + 135_000
-  for (;;) {
-    try {
-      mkdirSync(lock)
-      break
-    } catch (error) {
-      if (error.code !== 'EEXIST') throw error
-      if (Date.now() >= deadline) throw new Error(`Local Review lock still held at ${lock}; check startup before removing it`)
-      await delay(150)
-    }
-  }
-  const interrupted = () => {
-    rmdirSync(lock)
-    process.exit(1)
-  }
-  process.once('SIGINT', interrupted)
-  process.once('SIGTERM', interrupted)
-  try {
-    return await action()
-  } finally {
-    process.removeListener('SIGINT', interrupted)
-    process.removeListener('SIGTERM', interrupted)
-    rmdirSync(lock)
-  }
+  // Keep the same PID and lock inode across exec. The OS closes the lock on
+  // exit even after SIGKILL; the detached servers do not inherit this fd.
+  process.execve('/usr/bin/env', ['env', 'python3', '-c', `
+import fcntl, os, signal, sys
+with open(sys.argv[1], 'a') as lock:
+    signal.alarm(135)
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    signal.alarm(0)
+    os.set_inheritable(lock.fileno(), True)
+    os.environ['EQB_LOCAL_REVIEW_LOCK_PID'] = str(os.getpid())
+    os.execv(sys.argv[2], sys.argv[2:])
+`, lock, ...process.argv], process.env)
 }
 
-function listenerPid(port, script, cwd) {
+function listenerPid(port, service) {
+  const { script, cwd } = services[service]
   const find = spawnSync('lsof', ['-nP', '-t', `-iTCP:${port}`, '-sTCP:LISTEN'], { encoding: 'utf8' })
   if (find.error) throw find.error
   const pids = find.stdout.trim().split(/\s+/u).filter(Boolean)
@@ -134,10 +128,11 @@ function listenerPid(port, script, cwd) {
   const [pid] = pids
   const command = spawnSync('ps', ['-p', pid, '-o', 'command='], { encoding: 'utf8' }).stdout?.trim()
   const args = command?.match(/^\S*\bnode(?:\.exe)? (.*)$/u)?.[1]
-  const directory = spawnSync('lsof', ['-a', '-p', pid, '-d', 'cwd', '-Fn'], { encoding: 'utf8' }).stdout
+  const files = spawnSync('lsof', ['-a', '-p', pid, '-d', 'cwd,1,2', '-Fn'], { encoding: 'utf8' }).stdout?.split('\n')
+  const log = path.join(realpathSync(runtime), 'logs', `${service}.log`)
   if (pids.length !== 1 || !(args === script || args?.startsWith(`${script} `))
-    || !directory?.split('\n').includes(`n${realpathSync(cwd)}`)) {
-    throw new Error(`Port ${port} is occupied by a process outside this Local Review worktree`)
+    || !files?.includes(`n${realpathSync(cwd)}`) || !files.includes(`n${log}`)) {
+    throw new Error(`Port ${port} is occupied by a process outside this Local Review runtime`)
   }
   return Number(pid)
 }
@@ -165,24 +160,18 @@ async function up() {
     apiOrigin: `http://127.0.0.1:${apiPort}`,
     appOrigin: `http://127.0.0.1:${appPort}`,
   }
-  const apiScript = path.join(root, 'server/api.mjs')
-  const appDir = path.join(root, 'app')
-  const appScript = path.join(appDir, 'node_modules/vite/bin/vite.js')
-  const activeApi = listenerPid(apiPort, apiScript, root)
-  const activeApp = listenerPid(appPort, appScript, appDir)
-  if ((activeApi || activeApp) && !existing && runtime !== path.join(root, 'imports/local-review')) {
-    throw new Error('Cannot claim an occupied port for a custom runtime without its state file')
-  }
+  const activeApi = listenerPid(apiPort, 'api')
+  const activeApp = listenerPid(appPort, 'app')
   bindOrigin(state.apiOrigin)
   const environment = serverEnvironment(state)
   const log = (name) => openSync(path.join(runtime, 'logs', name), 'a')
-  const api = activeApi ? null : spawn(process.execPath, [apiScript], {
+  const api = activeApi ? null : spawn(process.execPath, [services.api.script], {
     cwd: root, env: environment, detached: true, stdio: ['ignore', log('api.log'), log('api.log')],
   })
   api?.unref()
   await waitFor(`${state.apiOrigin}/api/health`, 'API')
   const app = activeApp ? null : spawn(process.execPath, [
-    appScript, '--host', '127.0.0.1', '--port', String(appPort), '--strictPort',
+    services.app.script, '--host', '127.0.0.1', '--port', String(appPort), '--strictPort',
   ], {
     cwd: path.join(root, 'app'),
     env: { ...environment, HOME: process.env.HOME },
@@ -193,7 +182,7 @@ async function up() {
   await waitFor(state.appOrigin, 'Website')
   const apiPid = activeApi ?? api.pid
   const appPid = activeApp ?? app.pid
-  if (listenerPid(apiPort, apiScript, root) !== apiPid || listenerPid(appPort, appScript, appDir) !== appPid) {
+  if (listenerPid(apiPort, 'api') !== apiPid || listenerPid(appPort, 'app') !== appPid) {
     throw new Error('Local Review listeners changed during startup')
   }
   const reused = activeApi && activeApp
@@ -250,11 +239,15 @@ function status() {
     : { state: 'not_started', runtime }, null, 2))
 }
 
-function down() {
+async function down() {
   const state = readState()
   if (!state) return console.log(JSON.stringify({ ok: true, state: 'not_started' }))
-  for (const pid of [state.appPid, state.apiPid]) {
-    if (alive(pid)) process.kill(-pid, 'SIGTERM')
+  const listeners = () => [listenerPid(state.appPort, 'app'), listenerPid(state.apiPort, 'api')]
+  for (const pid of listeners().filter(Boolean)) process.kill(-pid, 'SIGTERM')
+  const deadline = Date.now() + 5000
+  while (listeners().some(Boolean)) {
+    if (Date.now() >= deadline) throw new Error('Local Review listeners did not stop')
+    await delay(150)
   }
   console.log(JSON.stringify({ ok: true, state: 'stopped', runtime }, null, 2))
 }
@@ -262,7 +255,8 @@ function down() {
 const command = process.argv[2]
 if (command === 'up' || command === 'down') {
   try {
-    await withLifecycleLock(command === 'up' ? up : down)
+    if (process.env.EQB_LOCAL_REVIEW_LOCK_PID !== String(process.pid)) lockLifecycle()
+    await (command === 'up' ? up() : down())
   } catch (error) {
     fail(error.message)
   }
