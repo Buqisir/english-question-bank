@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { extractDocxDocumentStructure } from '../../server/paper-canonical/docxSourceAdapter.mjs'
 import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
-import { produceNck1MaterializationFromStructures, RECORDING_TRANSCRIPT_TITLE } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
+import { produceNck1DocxMaterialization, produceNck1MaterializationFromStructures, RECORDING_TRANSCRIPT_TITLE } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { makeSyntheticNck1DocxFixture } from '../../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 import { mergeReadings, normalizeRecordingTranscript, recordingCuts, recordingDocx, recordingReviewCuts } from './recording-transcript.mjs'
@@ -47,6 +47,21 @@ test('recording merge uses Whisper only at a disagreement and leaves three-way s
   assert.equal(unresolved.text, 'Please bring two tickets today.')
 })
 
+test('recording merge compares and replaces the whole signed amount', async () => {
+  const group = { key: '01', occurrence: { startSeconds: 10, endSeconds: 16 } }
+  const sentence = amount => `It was ${amount} yesterday.`
+  const reading = amount => ({ '01': sentence(amount).split(' ')
+    .map((text, start) => ({ text, start, end: start + 0.5 })) })
+  for (const [before, after] of [['−10', '10'], ['€10', '£10'],
+    ['€ −10 euros', '£ +10 pounds'], ['10 cents', '20 cents'], ['10%', '10']]) {
+    const result = await mergeReadings(group, { apple: reading(before), 'parakeet-v2': reading(after) },
+      async () => ({ text: sentence(after) }))
+    assert.equal(result.text, normalizeRecordingTranscript(sentence(after)))
+    assert.deepEqual(result.disagreements.map(({ apple, parakeet, accepted }) => [apple, parakeet, accepted]),
+      [[before, after, after]])
+  }
+})
+
 test('explicit recording transcript keeps the answers and derives an audio-bound Candidate', async () => {
   const printed = produce(original)
   const groups = printed.listening.transcript.map(({ segmentId, questionNumbers }, i) => ({
@@ -83,6 +98,9 @@ test('explicit recording transcript keeps the answers and derives an audio-bound
   const document = await supplemental(paragraphs)
   const materialization = produce(answerWithoutTranscript, document)
   assert.deepEqual(produce(original, document).listening, materialization.listening)
+  const native = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: [...sources, document] })
+  assert.deepEqual(native.materialization.issues, [])
+  assert.deepEqual(native.materialization.listening, materialization.listening)
   assert.deepEqual(materialization.issues, [])
   assert.deepEqual(materialization.listening.answers, printed.listening.answers)
   assert.equal(materialization.listening.transcript[9].text, 'This is spoken dialogue 10.')

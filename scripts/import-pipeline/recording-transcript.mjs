@@ -61,14 +61,45 @@ export function recordingReviewCuts(review, paperId, audioSha256, duration, rule
   return recordingCuts({ ...review.subject, groups }, paperId, audioSha256, duration)
 }
 
+const quantityUnit = /^(?:cents?|dollars?|pounds?|euros?|yen|yuan|percent|degrees?|hours?|minutes?|seconds?|kilometers?|kilometres?|meters?|metres?|miles?|kilograms?|grams?)$/iu
+
+function recordingUnits(text) {
+  const words = units(text)
+  const spans = [...text.matchAll(/(?<![\p{L}\p{N}])(?:[−+-]\s*[$£€¢]?\s*|[$£€¢]\s*[−+-]?\s*)?\d+(?:[.,:]\s*\d+)*\s*%?/gu)]
+  for (const { 0: raw, index: start } of spans.reverse()) {
+    const end = start + raw.trimEnd().length
+    const first = words.findIndex(word => word.end > start)
+    if (first < 0 || words[first].start < start || words[first].end > end) continue
+    const last = words.findIndex((word, index) => index > first && word.end > end)
+    const count = (last < 0 ? words.length : last) - first
+    const prefix = raw.match(/^[^0-9]+/u)?.[0].replace(/\s+/gu, '').replace('−', '-') ?? ''
+    const parts = prefix ? units(raw.replace(/^[^0-9]+/u, '')) : words.slice(first, first + count)
+    const token = prefix + parts.map(word => word.token).join(' ') + (raw.endsWith('%') ? '%' : '')
+    words.splice(first, count, { token, start, end, quantity: !raw.endsWith('%') })
+  }
+  for (let index = words.length - 1; index > 0; index--) {
+    const unit = words[index]
+    if (!quantityUnit.test(unit.token)) continue
+    let first = index
+    while (first > 0 && (words[first - 1].quantity || words[first - 1].expressionType === 'cardinal')
+      && /^\s*$/u.test(text.slice(words[first - 1].end, words[first].start))) first--
+    if (first === index) continue
+    words.splice(first, index - first + 1, { start: words[first].start, end: unit.end,
+      token: words.slice(first, index + 1).map(word => word.token).join(' ') })
+    index = first + 1
+  }
+  return words
+}
+
 export async function mergeReadings(group, engines, remote) {
-  const [apple, parakeet] = [engines.apple, engines['parakeet-v2']].map(engine => timedReading(engine[group.key] || [], []))
+  const [apple, parakeet] = [engines.apple, engines['parakeet-v2']]
+    .map(engine => timedReading(engine[group.key] || [], [], recordingUnits))
   const exact = (a, b) => a.token === b.token
   const { changes } = align(apple.words, parakeet.words, exact)
   if (!apple.words.length || !parakeet.words.length) throw new Error(`本地转写缺段 · Text ${group.key}`)
   let text = apple.text
   const disagreements = []
-  const tokens = value => units(value).map(word => word.token).join(' ')
+  const tokens = value => JSON.stringify(recordingUnits(value).map(word => word.token))
   const excerpt = (reading, first, last) => first === last ? ''
     : reading.text.slice(reading.words[first].start, reading.words[last - 1].end)
   for (const site of changes.reverse()) {
@@ -85,7 +116,7 @@ export async function mergeReadings(group, engines, remote) {
     if (range.endSeconds > range.startSeconds) {
       const clip = (await remote(range)).text
       evidence.whisper = clip
-      const heard = units(clip)
+      const heard = recordingUnits(clip)
       const { matches } = align(reference, heard, exact)
       const before = start === 0 ? 0 : matches.find(m => m.end === start - left)?.heardEnd
       const after = end === apple.words.length ? heard.length : matches.find(m => m.start === end - left)?.heardStart
@@ -151,6 +182,7 @@ export async function stageRecordingTranscript(paperDir, cutsPath, reviewDir) {
   const cache = path.join(path.dirname(audio), 'recording-transcript', evidence.slice(7))
   mkdirSync(cache, { recursive: true })
   const sourceDigest = digestJson(manifest)
+  const documents = manifest.documents.filter(document => document.documentId !== RECORDING_TRANSCRIPT_ID)
   const requestPath = path.join(reviewDir, 'recording-transcript-request.json')
   const decisionsPath = path.join(reviewDir, 'recording-transcript-decisions.json')
   const draft = await withWork(async (work, env) => {
@@ -161,7 +193,8 @@ export async function stageRecordingTranscript(paperDir, cutsPath, reviewDir) {
       ...await mergeReadings(group, engines, range => remoteEngine(audio, range, cache, 'whisper-1')),
     })))
   })
-  const request = { paperId: manifest.paperId, audioSha256, sourceDigest, groups: draft }
+  const request = { paperId: manifest.paperId, audioSha256,
+    sourceDigest: digestJson({ ...manifest, documents }), groups: draft }
   const requestDigest = digestJson(request)
   writeFileSync(requestPath, `${JSON.stringify({ ...request, requestDigest }, null, 2)}\n`)
   const decisions = existsSync(decisionsPath) ? JSON.parse(readFileSync(decisionsPath, 'utf8')) : null
@@ -199,13 +232,12 @@ export async function stageRecordingTranscript(paperDir, cutsPath, reviewDir) {
     const relative = `source/recording-transcript-${digest.slice(7)}.docx`
     const file = path.join(paperDir, relative)
     const existing = current.documents.find(document => document.documentId === RECORDING_TRANSCRIPT_ID)
-    if (existing && existing.sha256 !== digest) throw new Error('本卷已封存另一份录音转写')
     if (!existsSync(file)) writeFileSync(file, bytes, { flag: 'wx' })
     if (sha256(readFileSync(file)) !== digest) throw new Error('已封存的录音转写文件已变化')
-    if (existing) return
-    current.documents.push({ documentId: RECORDING_TRANSCRIPT_ID, role: 'unofficial_listening', path: relative,
+    if (existing?.sha256 === digest && existing.path === relative) return
+    current.documents = [...documents, { documentId: RECORDING_TRANSCRIPT_ID, role: 'unofficial_listening', path: relative,
       mediaType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', sha256: digest,
-      byteLength: bytes.length, pageCount: 1 })
+      byteLength: bytes.length, pageCount: 1 }]
     writeFileSync(`${manifestPath}.recording.tmp`, `${JSON.stringify(current, null, 2)}\n`)
     renameSync(`${manifestPath}.recording.tmp`, manifestPath)
   })

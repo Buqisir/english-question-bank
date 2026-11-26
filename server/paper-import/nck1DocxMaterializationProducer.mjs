@@ -2834,5 +2834,7 @@ export function produceNck1DocxMaterialization({ paperId, documents }) {
     sourceDigest: nck1DocxProducerSourceDigest(documents),
     mediaInventory: preparedMedia.media,
     mediaFiles: preparedMedia.mediaFiles,
+    recordingTranscript: documents.find(document => document.documentId === RECORDING_TRANSCRIPT_ID
+      && document.role === 'unofficial_listening'),
   })
 }

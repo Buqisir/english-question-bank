@@ -90,14 +90,14 @@ export function preserveSourceForms(before, after, speakerLabels) {
   return after
 }
 
-export function timedReading(runs, source) {
+export function timedReading(runs, source, tokenize = units) {
   let text = ''
   const spans = runs.map(run => {
     const start = text.length
     text += `${run.text.trim()} `
     return { ...run, first: start, last: text.length - 1 }
   })
-  const words = units(text).map(word => ({
+  const words = tokenize(text).map(word => ({
     ...word,
     startSeconds: spans.find(run => run.last > word.start)?.start,
     endSeconds: spans.findLast(run => run.first < word.end)?.end,

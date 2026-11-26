@@ -655,6 +655,39 @@ for (const [edit, expectation] of [
   }
 })
 
+test('after-proofread redo checks newly supplied cuts even with a sealed recording transcript', t => {
+  const paperId = `paper-synthetic-recording-redo-${process.pid}`
+  const paperDir = path.join(import.meta.dirname, 'papers', paperId)
+  const work = path.resolve(import.meta.dirname, '../../imports/ocr-proofread', paperId)
+  t.after(() => {
+    rmSync(paperDir, { recursive: true, force: true })
+    rmSync(work, { recursive: true, force: true })
+  })
+  json(path.join(paperDir, 'config.json'), {})
+  const manifest = path.join(paperDir, 'universal-source-manifest.json')
+  json(manifest, { paperId, documents: [{ documentId: 'recording-transcript', sha256: 'old' }] })
+  const audioDir = path.join(paperDir, 'materialization/listening-audio')
+  const audio = Buffer.from('test recording')
+  json(path.join(audioDir, 'segments-v1.json'), { paperId, playbackAudioSha256: sha256(audio), durationSeconds: 30 })
+  writeFileSync(path.join(audioDir, 'playback.mp3'), audio)
+  const cuts = path.join(work, 'new-cuts.json')
+  json(cuts, { schemaVersion: 'listening-review-v1', subject: {
+    paperId, playbackAudioSha256: sha256(audio), durationSeconds: 30,
+  }, groups: [] })
+  const statePath = path.join(work, 'fast/state.json')
+  json(statePath, { paperId, steps: Object.fromEntries(['flags-present', 'compile', 'ocr-review', 'materialize']
+    .map(name => [name, completed({})])), background: {}, data: {} })
+  const snapshot = readFileSync(manifest)
+  const run = args => spawnSync(process.execPath, [path.join(import.meta.dirname, 'fast-import.mjs'),
+    'after-proofread', paperId, ...args], { encoding: 'utf8' })
+  for (const args of [['--redo-from', 'materialize', '--audio-transcript', cuts], []]) {
+    const result = run(args)
+    assert.notEqual(result.status, 0)
+    assert.match(result.stderr, /录音转写需要本卷播放音频 SHA-256 和十段/u)
+    assert.deepEqual(readFileSync(manifest), snapshot)
+  }
+})
+
 test('after-proofread forwards explicit body width to figure-sizes on resume', t => {
   const paperId = `paper-synthetic-fast-body-width-${process.pid}`
   const paperDir = path.join(import.meta.dirname, 'papers', paperId)

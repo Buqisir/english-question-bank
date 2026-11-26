@@ -627,7 +627,8 @@ export async function runOcrReview(ctx, generationPlan = null, execute = run) {
 
 async function afterProofread(ctx, args) {
   const generationPlan = option(args, '--ocr-generation-plan')
-  const audioTranscript = option(args, '--audio-transcript')
+  const suppliedCuts = option(args, '--audio-transcript')
+  const audioTranscript = suppliedCuts || ctx.state.data.recordingTranscriptCuts
   const sourceManifest = readJson(path.join(ctx.paperDir, 'universal-source-manifest.json'))
   const recordingSealed = sourceManifest.documents.some(document => document.documentId === 'recording-transcript')
   if (audioTranscript && (!hasListening(ctx) || ctx.state.steps.materialize?.finishedAt)) {
@@ -654,8 +655,10 @@ async function afterProofread(ctx, args) {
   await step(ctx, 'compile', () => run(ctx, 'compile', cli('ocr-proofread.mjs', 'compile', ctx.paperId)))
   await step(ctx, 'ocr-review', () => runOcrReview(ctx, generationPlan))
   await step(ctx, 'materialize', async () => {
-    if (audioTranscript && !recordingSealed) {
-      const result = await stageRecordingTranscript(ctx.paperDir, audioTranscript, ctx.fast)
+    if (audioTranscript) {
+      ctx.state.data.recordingTranscriptCuts = path.resolve(audioTranscript)
+      save(ctx)
+      const result = await stageRecordingTranscript(ctx.paperDir, ctx.state.data.recordingTranscriptCuts, ctx.fast)
       if (result.blocked?.length) {
         const ids = result.blocked.map(group => group.segmentId).join(', ')
         const reviewSite = path.join(os.homedir(), 'Projects/eqb-listening-review')
@@ -677,6 +680,7 @@ async function afterProofread(ctx, args) {
         + ' 并提供仍有分歧的段落的定稿 text。')
     }
     await run(ctx, 'materialize', cli('universal-nck1.mjs', 'materialize', ctx.paperId))
+    delete ctx.state.data.recordingTranscriptCuts
     return { issues: (readJson(materializationPath(ctx)).issues || []).length }
   })
   await step(ctx, 'chinese-numbering', () => {
