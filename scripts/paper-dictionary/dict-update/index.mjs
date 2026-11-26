@@ -17,7 +17,7 @@ import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs
 const { positionals: [command], values: args } = parseArgs({ allowPositionals: true, options: {
   work: { type: 'string' }, data: { type: 'string' }, paper: { type: 'string', multiple: true },
   local: { type: 'string', multiple: true }, legacy: { type: 'string' }, scope: { type: 'string' },
-  entry: { type: 'string' },
+  entry: { type: 'string' }, pending: { type: 'boolean' },
 } })
 assert(['prepare', 'apply', 'check'].includes(command) && args.work, '用法见 dict-update/README.md')
 const data = args.data ?? fileURLToPath(new URL('../../../server/paper-dictionary/otter-data/', import.meta.url))
@@ -99,8 +99,9 @@ async function targetsFor(local) {
 async function prepare() {
   assert(!existsSync(work('changes.json')), '这批已经进入 apply，新批次请使用新的 --work')
   const selected = new Set(args.paper ?? [])
-  const rejudge = args.entry
-  if (rejudge) assert(entries.has(rejudge), `未知词条 ${rejudge}`)
+  assert(!(args.entry && args.pending), '--entry 和 --pending 分开使用')
+  const rejudge = args.entry ?? args.pending
+  if (args.entry) assert(entries.has(args.entry), `未知词条 ${args.entry}`)
   for (const id of selected) assert(validPaperId(id), `卷 ID 无效 ${id}`)
   assert(!args.local || !selected.size, '--local 和 --paper 分开使用')
   const local = args.local?.map(path => resolve(path))
@@ -266,17 +267,17 @@ async function prepare() {
         blocks[key] = { ...info, wordCounts: previous.wordCounts ?? {}, talliedPhrases: previous.talliedPhrases }
         if (rejudge) {
           const record = records[key]?.[block.hash]
-          const pending = new Map((record ? recordRows(record) : [])
-            .filter(row => row.entryId === rejudge && unresolved(row.pick) &&
+          const pending = (record ? recordRows(record) : []).filter(row => args.pending
+            ? row.counted && row.pick === UNMARKED && entries.has(row.entryId)
+            : row.entryId === rejudge && unresolved(row.pick) &&
               (entries.get(rejudge).kind !== 'phrase' || row.counted))
-            .map(row => [position(row), row]))
-          if (pending.size) {
-            const rows = match(id, block).flatMap(row => {
-              const old = pending.get(position(row))
+          const indexed = new Map(pending.map(row => [position(row), row]))
+          const rows = args.pending ? pending.map(({ pick, history, ...row }) => row) :
+            !indexed.size ? [] : match(id, block).flatMap(row => {
+              const old = indexed.get(position(row))
               return old?.sentenceText === row.sentenceText ? [{ ...row, counted: old.counted }] : []
             })
-            if (rows.length) changed[key] = { raw, rows }
-          }
+          if (rows.length) changed[key] = { raw, rows }
         }
         continue
       }
@@ -327,8 +328,8 @@ async function prepare() {
     }
     if (represented.size !== activeRows.length) { skipped[id] = '旧分片存在无法定位的命中'; continue }
     const edits = Object.values(changed).flatMap(edit => edit.rows)
-    const selectedRows = rejudge ? new Set(edits) :
-      new Set([...reviewLegacy, ...budget(edits.filter(row => !reviewLegacy.has(row)), tierOf(paper ?? {}), entries)])
+    const selectedRows = new Set(bootstrap ? [...reviewLegacy].filter(row => row.pick === undefined) :
+      args.entry ? edits : budget(edits, tierOf(paper ?? {}), entries))
     for (const row of edits) {
       if (selectedRows.has(row)) {
         const packetKey = `${tierOf(paper)}/${names.get(row.entryId).split('/').at(-1)}`
@@ -682,7 +683,7 @@ if (command === 'check') {
     for (const { raw, rows } of Object.values(changed)) if (rows.length) {
       const indexed = byLocator.get(rowLocator(rows[0])) ?? []
       const targets = new Set(rows.map(position))
-      validate(rejudge ? indexed.filter(row => row.entryId === rejudge && targets.has(position(row))) : indexed, raw)
+      validate(rejudge ? indexed.filter(row => targets.has(position(row))) : indexed, raw)
     }
   }
   console.log('分片引用、变动块短语定位与重叠检查通过')

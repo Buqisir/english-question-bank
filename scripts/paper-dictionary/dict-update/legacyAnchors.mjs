@@ -4,8 +4,8 @@ import { locatePhraseOccurrence, normalizePhraseText } from '../../../shared/pap
 import { position } from './annotations.mjs'
 
 const spanKey = row => JSON.stringify([row.sentence, row.start])
-const leftEdge = /(?:[\p{L}\p{M}\p{N}]|[\p{L}\p{M}\p{N}]'|[\p{L}\p{M}]-)$/u
-const rightEdge = /^(?:[\p{L}\p{M}\p{N}]|'[\p{L}\p{M}\p{N}]|-[\p{L}\p{M}])/u
+const leftEdge = /(?:[\p{L}\p{M}]|[\p{L}\p{M}\p{N}]'|[\p{L}\p{M}]-)$/u
+const rightEdge = /^(?:[\p{L}\p{M}]|'[\p{L}\p{M}\p{N}]|-[\p{L}\p{M}])/u
 const escape = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const graphemes = new Intl.Segmenter('en', { granularity: 'grapheme' })
 
@@ -144,10 +144,13 @@ export function reanchorLegacy(paperId, block, confirmed, matches, entries, exam
       const ranges = quote ? (quoted.length > 1 && atIndex.length === 1 ? atIndex : quoted) : indexed
       const local = candidates.filter(({ row }) => ranges.some(({ from, to }) =>
         row.sentenceStart + row.start >= from && row.sentenceStart + row.end <= to))
-      const exact = local.filter(({ row }) => ranges.some(({ from, to }) =>
+      const atOffset = (anchors) => local.filter(({ row }) => anchors.some(({ from, to }) =>
         row.sentenceStart + row.start === from + first.start &&
         row.sentenceStart + row.end === from + first.end && from + first.end <= to))
-      const candidate = exact.length === 1 ? exact[0] : local.length === 1 ? local[0] : undefined
+      // An example may omit a cloze marker included in the indexed offsets.
+      const inQuote = atOffset(ranges)
+      const exact = quote && !inQuote.length ? atOffset(indexed) : inQuote
+      const candidate = exact.length === 1 ? exact[0] : quote && local.length === 1 ? local[0] : undefined
       // Keep a runtime-valid archived phrase if the current splitter divided its quote.
       if (phrase && first.blockHash === block.hash && first.sentenceText &&
           (!candidate || normalizeSearch(candidate.row.sentenceText) !== quote)) {

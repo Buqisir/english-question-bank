@@ -176,7 +176,8 @@ try {
   assert.equal(adoption.changed, 1)
   assert.equal(adoption.legacyRetained, 1)
   assert.equal(adoption.legacyDropped, 1)
-  assert.equal(adoption.pending.mock, 1)
+  assert.equal(adoption.pending.mock, 0)
+  assert.equal(adoption.unmarked, 1)
   run('apply', 'adopt-legacy')
   const adopted = JSON.parse(readFileSync(join(dir, state), 'utf8'))
   const target = localPaper(dir)
@@ -186,6 +187,15 @@ try {
   assert.equal(JSON.parse(readFileSync(join(dir, shard), 'utf8').trim()).senseId, sense)
   assert.equal(readWord().counts.mock, 1)
   assert.equal(JSON.parse(readFileSync(join(dir, recall), 'utf8')).counts.mock, 1)
+  assert.equal(JSON.parse(run('prepare', 'daily', '--local', dir, '--pending')).pending.mock, 1)
+  mkdirSync(join(dir, 'daily/out/mock'), { recursive: true })
+  writeFileSync(join(dir, 'daily/out/mock/w-recall.ndjson'), '{"idx":0,"pick":"w:recall#s1"}\n')
+  run('apply', 'daily')
+  run('check', 'daily')
+  const reviewedRecall = JSON.parse(readFileSync(join(dir, recall), 'utf8'))
+  assert.equal(reviewedRecall.counts.mock, 1)
+  assert.equal(reviewedRecall.senses[0].counts.mock, 1)
+  assert.equal(JSON.parse(run('prepare', 'daily-again', '--local', dir, '--pending')).pending.mock, 0)
   paper('The record lists birds. We recall songs! We recall games.')
   const revised = JSON.parse(run('prepare', 'after-adoption', '--local', dir))
   assert.equal(revised.pending.mock, 1)
@@ -218,12 +228,13 @@ try {
   ] }))
   const legacy = [{ entryId: friend.entryId, sentence: 1, start: 9, end: 16, surface: 'friends', senseId: 'friend-1' },
     { entryId: friend.entryId, sentence: 2, start: 1, end: 8, surface: 'friends', senseId: 'friend-2' }]
-  const anchored = reanchorLegacy(paperId, testBlock, legacy, matcher(testEntries)(paperId, testBlock), testEntries)
+  const quotes = new Map([[legacy[0], 'His friends’ invitation.'], [legacy[1], 'My friends left.']])
+  const anchored = reanchorLegacy(paperId, testBlock, legacy, matcher(testEntries)(paperId, testBlock), testEntries, quotes)
   assert.deepEqual([...anchored.assigned].map(([row, [saved]]) => [row.sentence, row.start, saved.senseId]),
     [[1, 4, 'friend-1'], [2, 3, 'friend-2']])
   const friends = { ...friend, entryId: 'w:friends', headword: 'friends', forms: [] }
   testEntries.set(friends.entryId, friends)
-  const transferred = reanchorLegacy(paperId, testBlock, [legacy[1]], matcher(testEntries)(paperId, testBlock), testEntries)
+  const transferred = reanchorLegacy(paperId, testBlock, [legacy[1]], matcher(testEntries)(paperId, testBlock), testEntries, quotes)
   assert.equal(transferred.assigned.size, 0)
   assert.equal(transferred.reasons.get(legacy[1]), 'changedEntry')
   assert.deepEqual([...transferred.review].map(row => [row.entryId, row.sentence]), [['w:friends', 2]])
@@ -256,6 +267,21 @@ try {
   assert.equal(uncertain.assigned.size, 0)
   assert.equal(uncertain.reasons.get(ambiguous), 'ambiguousAnchor')
   assert.equal(uncertain.review.size, 2)
+
+  const record = { ...it, entryId: 'w:record', headword: 'record' }
+  const day = { ...it, entryId: 'w:day', headword: 'day', forms: [{ form: 'days', tags: [] }] }
+  const gym = { ...it, entryId: 'w:gym', headword: 'gym' }
+  const edgeEntries = new Map([record, day, gym].map(entry => [entry.entryId, entry]))
+  const [edgeBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'edge-cases', passage: {
+    paragraphs: [{ text: 'The record lists 13days. __38__ We met at the gym, another gym.' }],
+  } }] }))
+  const verb = { ...emphasis, entryId: record.entryId, surface: 'record', sentence: 1, start: 0, end: 6 }
+  const days = { ...emphasis, entryId: day.entryId, surface: 'days', sentence: 1, start: 19, end: 23 }
+  const firstGym = { ...emphasis, entryId: gym.entryId, surface: 'gym', sentence: 2, start: 21, end: 24 }
+  const edge = reanchorLegacy(paperId, edgeBlock, [verb, days, firstGym], matcher(edgeEntries)(paperId, edgeBlock),
+    edgeEntries, new Map([[firstGym, 'We met at the gym, another gym.']]))
+  assert.deepEqual([...edge.assigned.keys()].map(row => [row.surface, row.start]), [['days', 19], ['gym', 21]])
+  assert.deepEqual([...edge.review].map(row => row.surface), ['record'])
 
   const [splitBlock] = Object.values(blocksOf({ paperId, groups: [{ groupId: 'archive-split', passage: {
     paragraphs: [{ text: 'Dr. Smith called. It was fine.” It went well. It ended.' }],
