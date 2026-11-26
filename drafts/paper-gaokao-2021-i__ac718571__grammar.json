@@ -1,0 +1,964 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-i:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-i:grammar-fill": {
+      "overview": "作者介绍黄山之行：山顶云海让人感到人类渺小，山脚温泉天越冷水越热，一级级人工台阶既为旅程增色又供人歇脚；黄山之路令人难忘，来中国一定要去。",
+      "fullTranslationZh": "去黄山让我想起披头士乐队的流行歌曲《漫长曲折的路》。这段经历最令人惊叹的，是那些超凡脱俗的景色。登上山顶后看到的翻滚云海，会让你意识到我们人类是多么渺小。\n山脚下的温泉是爬完山后一定要试试的。它无疑会帮你恢复精神！这温泉神奇的地方在于，气温越低，泉水就越热！很奇怪，是不是？可大自然就是这样，总让我们惊叹不已。\n接下来是没有尽头的一级级台阶。你会忍不住想，当年的人们要把这些石头一块块砌好该有多难。虽然它是上山路上唯一的人造之物，可它仍为整趟旅程增色不少，还提供了一个让你坐下来歇歇酸痛双腿的地方。\n正如歌里唱的，这条漫长曲折的路“永远不会消失”，它会一直留在游客的记忆里。在我的记忆里当然也是如此。你来中国的话，黄山是必去之地！",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-fill-1",
+          "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+          "sourceText": "Though it is the only unnatural thing on your way up the mountain, still it highlights the whole adventure __62__ offers a place where you can sit down to rest your __63__ (ache) legs.",
+          "displayText": "Though it is the only unnatural thing on your way up the mountain, still it highlights the whole adventure and offers a place where you can sit down to rest your aching legs.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:62",
+            "question:paper-gaokao-2021-i:63"
+          ],
+          "translationZh": "虽然它是上山路上唯一的人造之物，可它仍为整趟旅程增色不少，还提供了一个让你坐下来歇歇酸痛双腿的地方。",
+          "analysisZh": "主干是 it highlights the whole adventure and offers a place，主语 it 指台阶，带两个由 and 连起来的谓语；句首 Though 引出让步状语从句，主句的 still 与它呼应；where 引出定语从句修饰 a place，从句里 to rest your aching legs 说坐下来的目的。",
+          "underlineRanges": [
+            {
+              "start": 73,
+              "end": 125,
+              "quote": "it highlights the whole adventure and offers a place"
+            },
+            {
+              "start": 126,
+              "end": 148,
+              "quote": "where you can sit down"
+            },
+            {
+              "start": 0,
+              "end": 6,
+              "quote": "Though"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-fill-2",
+          "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+          "sourceText": "__56__ is so breathtaking about the experience is the out-of-this-world scenes.",
+          "displayText": "What is so breathtaking about the experience is the out-of-this-world scenes.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:56"
+          ],
+          "translationZh": "这段经历最令人惊叹的，是那些超凡脱俗的景色。",
+          "analysisZh": "主干是“主语从句 + is + 表语”：What is so breathtaking about the experience 整体作主语，第二个 is 是谓语，the out-of-this-world scenes 是表语；out-of-this-world 用连字符连成一个形容词，修饰 scenes。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 44,
+              "quote": "What is so breathtaking about the experience"
+            },
+            {
+              "start": 45,
+              "end": 76,
+              "quote": "is the out-of-this-world scenes"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2021-i:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-fill-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 77,
+              "quote": "去黄山让我想起披头士乐队的流行歌曲《漫长曲折的路》。这段经历最令人惊叹的，是那些超凡脱俗的景色。登上山顶后看到的翻滚云海，会让你意识到我们人类是多么渺小。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:grammar-fill:2"
+              ],
+              "start": 78,
+              "end": 155,
+              "quote": "山脚下的温泉是爬完山后一定要试试的。它无疑会帮你恢复精神！这温泉神奇的地方在于，气温越低，泉水就越热！很奇怪，是不是？可大自然就是这样，总让我们惊叹不已。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:grammar-fill:3"
+              ],
+              "start": 156,
+              "end": 249,
+              "quote": "接下来是没有尽头的一级级台阶。你会忍不住想，当年的人们要把这些石头一块块砌好该有多难。虽然它是上山路上唯一的人造之物，可它仍为整趟旅程增色不少，还提供了一个让你坐下来歇歇酸痛双腿的地方。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:grammar-fill:4"
+              ],
+              "start": 250,
+              "end": 315,
+              "quote": "正如歌里唱的，这条漫长曲折的路“永远不会消失”，它会一直留在游客的记忆里。在我的记忆里当然也是如此。你来中国的话，黄山是必去之地！"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+            "text": "Going to Mount Huangshan reminds me of the popular Beatles’ song “The Long and Winding Road”. What is so breathtaking about the experience is the out-of-this-world scenes. The rolling sea of clouds you see once you are at the top will remind you how tiny we humans are."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+            "text": "The hot spring at the foot of the mountain is something you must try after the climb. It will undoubtedly help you get refreshed! The amazing thing about the spring is that the colder the temperature gets, the hotter the spring! Strange, isn’t it? But that’s how nature is – always leaving us astonished."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+            "text": "What comes next is the endless series of steps. You can’t help wondering how hard it was for the people then to put all those rocks into place. Though it is the only unnatural thing on your way up the mountain, still it highlights the whole adventure and offers a place where you can sit down to rest your aching legs."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:4",
+            "text": "As the song goes, this long and winding road “will never disappear”, and it will always stick in the visitor’s memory. It sure does in mine. While you’re in China, Mount Huangshan is a must to visit!"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-fill-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+                "start": 101,
+                "end": 140,
+                "quote": "is so breathtaking about the experience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 30,
+                "end": 36,
+                "quote": "最令人惊叹的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:56"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+                "start": 94,
+                "end": 98,
+                "quote": "What"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 30,
+                "end": 36,
+                "quote": "最令人惊叹的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+                "start": 248,
+                "end": 259,
+                "quote": "how tiny we"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 67,
+                "end": 69,
+                "quote": "我们"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:57"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+                "start": 258,
+                "end": 264,
+                "quote": "humans"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 69,
+                "end": 71,
+                "quote": "人类"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+                "start": 113,
+                "end": 135,
+                "quote": "help you get refreshed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 22,
+                "end": 28,
+                "quote": "帮你恢复精神"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:58"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+                "start": 94,
+                "end": 105,
+                "quote": "undoubtedly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 19,
+                "end": 21,
+                "quote": "无疑"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+                "start": 180,
+                "end": 211,
+                "quote": "the colder the temperature gets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 40,
+                "end": 44,
+                "quote": "气温越低"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:59"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+                "start": 210,
+                "end": 216,
+                "quote": "hotter"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 48,
+                "end": 50,
+                "quote": "越热"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+                "start": 288,
+                "end": 305,
+                "quote": "always leaving us"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 68,
+                "end": 72,
+                "quote": "总让我们"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:60"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+                "start": 293,
+                "end": 303,
+                "quote": "astonished"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 72,
+                "end": 76,
+                "quote": "惊叹不已"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 97,
+                "end": 116,
+                "quote": "for the people then"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 22,
+                "end": 27,
+                "quote": "当年的人们"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:61"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 85,
+                "end": 88,
+                "quote": "was"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 38,
+                "end": 42,
+                "quote": "该有多难"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 266,
+                "end": 280,
+                "quote": "offers a place"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 72,
+                "end": 78,
+                "quote": "还提供了一个"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:62"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 251,
+                "end": 254,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 72,
+                "end": 78,
+                "quote": "还提供了一个"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 331,
+                "end": 335,
+                "quote": "legs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 87,
+                "end": 89,
+                "quote": "双腿"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:63"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 306,
+                "end": 312,
+                "quote": "aching"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 85,
+                "end": 87,
+                "quote": "酸痛"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:4",
+                "start": 97,
+                "end": 117,
+                "quote": "the visitor’s memory"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 30,
+                "end": 36,
+                "quote": "游客的记忆里"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:64"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:4",
+                "start": 135,
+                "end": 139,
+                "quote": "mine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 37,
+                "end": 43,
+                "quote": "在我的记忆里"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:4",
+                "start": 196,
+                "end": 209,
+                "quote": "must to visit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 60,
+                "end": 64,
+                "quote": "必去之地"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:65"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:4",
+                "start": 183,
+                "end": 184,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 60,
+                "end": 64,
+                "quote": "必去之地"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-grammar-fill-1",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:62",
+              "question:paper-gaokao-2021-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:3",
+                "start": 144,
+                "end": 318,
+                "quote": "Though it is the only unnatural thing on your way up the mountain, still it highlights the whole adventure and offers a place where you can sit down to rest your aching legs."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 43,
+                "end": 93,
+                "quote": "虽然它是上山路上唯一的人造之物，可它仍为整趟旅程增色不少，还提供了一个让你坐下来歇歇酸痛双腿的地方。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-grammar-fill-2",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+                "start": 94,
+                "end": 171,
+                "quote": "What is so breathtaking about the experience is the out-of-this-world scenes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 26,
+                "end": 48,
+                "quote": "这段经历最令人惊叹的，是那些超凡脱俗的景色。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2021-i:56": {
+      "blankId": "blank:paper-gaokao-2021-i:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "What",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "subject-clause"
+        ]
+      },
+      "reason": "这句有两个 is：___ is so breathtaking about the experience 整体作主语，后一个 is 才是全句谓语；从句里 is 前缺主语，指“令人惊叹的东西”，用 What，句首大写。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "is so breathtaking about the experience",
+          "signalSide": "passage",
+          "relation": "中文：从句缺主语，整体又作全句主语。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "is the out-of-this-world scenes",
+          "signalSide": "passage",
+          "relation": "中文：这个 is 是全句谓语，前面整块是主语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:57": {
+      "blankId": "blank:paper-gaokao-2021-i:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "human",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "humans",
+      "role": null,
+      "similarityProfile": {
+        "route": "sentence-number-agreement",
+        "features": []
+      },
+      "reason": "从句 how tiny we ___ are 里，空格紧跟 we，补充说明“我们”是谁，即“我们人类”；we 和谓语 are 都是复数，human 也要用复数 humans。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "how tiny we",
+          "signalSide": "passage",
+          "relation": "中文：we 是复数，空格说明 we 是谁。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:58": {
+      "blankId": "blank:paper-gaokao-2021-i:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "undoubted",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "undoubtedly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "句子 It will ___ help you get refreshed 已有完整谓语 will help，空格插在 will 和 help 之间修饰这个动作，要用副词，undoubted 变 undoubtedly。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "help you get refreshed",
+          "signalSide": "passage",
+          "relation": "中文：空格修饰谓语动词 help。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:59": {
+      "blankId": "blank:paper-gaokao-2021-i:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "hot",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "hotter",
+      "role": null,
+      "similarityProfile": {
+        "route": "comparative",
+        "features": [
+          "fixed-comparative-frame",
+          "parallel-comparative"
+        ]
+      },
+      "reason": "这是“越……越……”的 the + 比较级, the + 比较级 结构：前半句 the colder the temperature gets，后半句 the ___ the spring 省了 is，空格作 the spring 的表语，也用比较级 hotter。",
+      "evidence": [
+        {
+          "type": "comparison",
+          "signalText": "the colder the temperature gets",
+          "signalSide": "passage",
+          "relation": "中文：前半句 the colder，后半句对应用比较级。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:60": {
+      "blankId": "blank:paper-gaokao-2021-i:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "astonish",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "astonished",
+      "role": "object-complement",
+      "similarityProfile": {
+        "route": "object-complement-participle-state",
+        "features": []
+      },
+      "reason": "leaving us ___ 中 us 是 leave 的宾语，空格说明我们被弄成什么状态，作宾补；us 是感到惊讶的人，与 astonish 是被动关系，用过去分词 astonished。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "always leaving us",
+          "signalSide": "passage",
+          "relation": "中文：leave sb + 状态，空格作 us 的补足语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:61": {
+      "blankId": "blank:paper-gaokao-2021-i:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "宾语从句 how hard it ___ for the people then to put all those rocks into place 缺谓语，it 是形式主语，真正的主语是后面的 to put；then 指当年砌台阶的时候，说的是过去的事，主语单数，用 was。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "for the people then",
+          "signalSide": "passage",
+          "relation": "中文：then 指当年，过去时。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "how hard it",
+          "signalSide": "passage",
+          "relation": "中文：how 引导的从句里 it 后缺谓语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:62": {
+      "blankId": "blank:paper-gaokao-2021-i:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "主句主语 it 后面有两个谓语 highlights the whole adventure 和 offers a place，中间缺连词；两件事顺着往下说，用 and 把两个并列谓语连起来。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "highlights the whole adventure",
+          "signalSide": "passage",
+          "relation": "中文：第一个谓语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "offers a place",
+          "signalSide": "passage",
+          "relation": "中文：第二个谓语，与 highlights 并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:63": {
+      "blankId": "blank:paper-gaokao-2021-i:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "ache",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "aching",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "active-relation"
+        ]
+      },
+      "reason": "rest your ___ legs 中空格夹在 your 和 legs 之间，修饰 legs，作定语；是腿自己在酸痛，ache 与 legs 是主动关系，用现在分词 aching。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "legs",
+          "signalSide": "passage",
+          "relation": "中文：空格修饰名词 legs。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:64": {
+      "blankId": "blank:paper-gaokao-2021-i:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "I",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "mine",
+      "role": null,
+      "similarityProfile": {
+        "route": "possessive-pronoun",
+        "features": []
+      },
+      "reason": "It sure does in ___ 承接上句 stick in the visitor’s memory，in 后要一个词代替 my memory，作 in 的宾语，用名词性物主代词 mine。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the visitor’s memory",
+          "signalSide": "passage",
+          "relation": "中文：mine 代替 my memory，与 the visitor’s memory 对应。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "It sure does in",
+          "signalSide": "passage",
+          "relation": "中文：介词 in 后缺宾语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:65": {
+      "blankId": "blank:paper-gaokao-2021-i:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-structural",
+        "features": [
+          "fixed-indefinite-phrase",
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "Mount Huangshan is ___ must to visit 中 must 作名词表语，意为“必做的事”，是可数名词单数，前面要不定冠词，a must 是固定说法；must 以辅音开头，填 a。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "must to visit",
+          "signalSide": "passage",
+          "relation": "中文：名词 must 前用 a，a must 意为必做之事。"
+        }
+      ]
+    }
+  }
+}

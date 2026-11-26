@@ -1,0 +1,830 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-i:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-i:reading-c": {
+      "overview": "欧洲人到来后，北美水禽遭滥杀、湿地被排干。1934年美国通过法案，要求猎人每年购买联邦鸭票，所得几乎全部用来购买湿地和栖息地，这项计划因此被称为最成功的保护计划之一。",
+      "fullTranslationZh": "探险者最初踏上北美大陆时，天空和大地上生活着种类多得惊人的野生动物。美洲原住民一直明智地守护着这些珍贵的自然资源。不幸的是，探险者和随后到来的定居者只用了短短几十年，就毁掉了这些资源的很大一部分。数以百万计的水禽死在市场猎人和少数野心过大的狩猎者手中。为了养活和安置不断增长的人口，数百万英亩湿地被排干，大大\n\n减少了水禽的栖息地。\n\n1934年，随着《候鸟狩猎印花税法》（简称《法案》）的通过，日益忧心的国家采取坚决行动，制止对迁徙水禽及其赖以生存的湿地的破坏。根据这部法案，所有16岁及以上的水禽猎人每年都必须购买并随身携带一枚联邦鸭票。第一枚联邦鸭票由来自艾奥瓦州得梅因的政治漫画家 J.N. “Ding” Darling 设计，他当时被 Franklin Roosevelt 总统任命为生物调查局局长。猎人们心甘情愿地支付鸭票的费用，以确保我们的自然资源得以延续。\n\n鸭票收入每1美元中约有98美分直接进入候鸟保护基金，用来购买湿地和野生动物栖息地，并将其纳入国家野生动物保护区系统——这确保了这些土地会受到保护，并留给子子孙孙。自1934年以来，已有超过5亿美元进入该基金，购买了500多万英亩栖息地。难怪联邦鸭票计划被誉为有史以来最成功的保护计划之一。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2021-i:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+          "sourceText": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+          "displayText": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:30"
+          ],
+          "translationZh": "1934年，随着《候鸟狩猎印花税法》（简称《法案》）的通过，日益忧心的国家采取坚决行动，制止对迁徙水禽及其赖以生存的湿地的破坏。",
+          "analysisZh": "先抓主干 an increasingly concerned nation took firm action：日益忧心的国家采取了坚决行动。句首 In 1934 和 with the passage of the … Act 交代时间和背景：随着法案通过。to stop the destruction of … 说行动的目的，要制止的破坏有两样，用 and 并列：迁徙水禽，和 the wetlands so vital to their survival（对它们生存至关重要的湿地），so vital 这个形容词短语后置修饰 wetlands。",
+          "underlineRanges": [
+            {
+              "start": 73,
+              "end": 122,
+              "quote": "an increasingly concerned nation took firm action"
+            },
+            {
+              "start": 9,
+              "end": 28,
+              "quote": "with the passage of"
+            },
+            {
+              "start": 123,
+              "end": 149,
+              "quote": "to stop the destruction of"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2021-i:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+          "sourceText": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come.",
+          "displayText": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:31"
+          ],
+          "translationZh": "鸭票收入每1美元中约有98美分直接进入候鸟保护基金，用来购买湿地和野生动物栖息地，并将其纳入国家野生动物保护区系统——这确保了这些土地会受到保护，并留给子子孙孙。",
+          "analysisZh": "主干 About 98 cents … goes directly into the Fund：鸭票收入每1美元里约98美分直接进了基金。of every duck stamp dollar 说是哪笔钱。to purchase wetlands and wildlife habitat 说钱的用途，for inclusion into the … System 说买来的地并入保护区系统。破折号后 a fact that ensures … 是同位语，a fact 总括前面整件事，that 从句说这件事保证土地受保护、留给后代。这句交代鸭票的钱去了哪里，是全文“鸭票故事”的落脚点。",
+          "underlineRanges": [
+            {
+              "start": 42,
+              "end": 97,
+              "quote": "goes directly into the Migratory Bird Conservation Fund"
+            },
+            {
+              "start": 98,
+              "end": 139,
+              "quote": "to purchase wetlands and wildlife habitat"
+            },
+            {
+              "start": 197,
+              "end": 216,
+              "quote": "a fact that ensures"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2021-i:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-c:1"
+              ],
+              "start": 0,
+              "end": 154,
+              "quote": "探险者最初踏上北美大陆时，天空和大地上生活着种类多得惊人的野生动物。美洲原住民一直明智地守护着这些珍贵的自然资源。不幸的是，探险者和随后到来的定居者只用了短短几十年，就毁掉了这些资源的很大一部分。数以百万计的水禽死在市场猎人和少数野心过大的狩猎者手中。为了养活和安置不断增长的人口，数百万英亩湿地被排干，大大"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-c:2"
+              ],
+              "start": 156,
+              "end": 166,
+              "quote": "减少了水禽的栖息地。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-c:3"
+              ],
+              "start": 168,
+              "end": 386,
+              "quote": "1934年，随着《候鸟狩猎印花税法》（简称《法案》）的通过，日益忧心的国家采取坚决行动，制止对迁徙水禽及其赖以生存的湿地的破坏。根据这部法案，所有16岁及以上的水禽猎人每年都必须购买并随身携带一枚联邦鸭票。第一枚联邦鸭票由来自艾奥瓦州得梅因的政治漫画家 J.N. “Ding” Darling 设计，他当时被 Franklin Roosevelt 总统任命为生物调查局局长。猎人们心甘情愿地支付鸭票的费用，以确保我们的自然资源得以延续。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-c:4"
+              ],
+              "start": 388,
+              "end": 532,
+              "quote": "鸭票收入每1美元中约有98美分直接进入候鸟保护基金，用来购买湿地和野生动物栖息地，并将其纳入国家野生动物保护区系统——这确保了这些土地会受到保护，并留给子子孙孙。自1934年以来，已有超过5亿美元进入该基金，购买了500多万英亩栖息地。难怪联邦鸭票计划被誉为有史以来最成功的保护计划之一。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:28-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+                "start": 463,
+                "end": 562,
+                "quote": "Millions of acres of wetlands were dried to feed and house the ever-increasing populations, greatly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p1",
+                "start": 126,
+                "end": 154,
+                "quote": "为了养活和安置不断增长的人口，数百万英亩湿地被排干，大大"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:28-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:2",
+                "start": 0,
+                "end": 27,
+                "quote": "reducing waterfowl habitat."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p2",
+                "start": 0,
+                "end": 10,
+                "quote": "减少了水禽的栖息地。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:29-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+                "start": 350,
+                "end": 462,
+                "quote": "Millions of waterfowl（水禽）were killed at the hands of market hunters and a handful of overly ambitious sportsmen."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p1",
+                "start": 98,
+                "end": 126,
+                "quote": "数以百万计的水禽死在市场猎人和少数野心过大的狩猎者手中。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:29-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+                "start": 143,
+                "end": 218,
+                "quote": "Native Americans had taken care of these precious natural resources wisely."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p1",
+                "start": 34,
+                "end": 57,
+                "quote": "美洲原住民一直明智地守护着这些珍贵的自然资源。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:30-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+                "start": 221,
+                "end": 338,
+                "quote": "Under this Act, all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p3",
+                "start": 64,
+                "end": 103,
+                "quote": "根据这部法案，所有16岁及以上的水禽猎人每年都必须购买并随身携带一枚联邦鸭票。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:30-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+                "start": 288,
+                "end": 408,
+                "quote": "Since 1934, better than half a billion dollars has gone into that Fund to purchase more than 5 million acres of habitat."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p4",
+                "start": 81,
+                "end": 118,
+                "quote": "自1934年以来，已有超过5亿美元进入该基金，购买了500多万英亩栖息地。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:31-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+                "start": 409,
+                "end": 534,
+                "quote": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p4",
+                "start": 118,
+                "end": 144,
+                "quote": "难怪联邦鸭票计划被誉为有史以来最成功的保护计划之一。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:31-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+                "start": 339,
+                "end": 566,
+                "quote": "The very first Federal Duck Stamp was designed by J.N. “Ding” Darling, a political cartoonist from Des Moines, Iowa, who at that time was appointed by President Franklin Roosevelt as Director of the Bureau of Biological Survey."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p3",
+                "start": 103,
+                "end": 187,
+                "quote": "第一枚联邦鸭票由来自艾奥瓦州得梅因的政治漫画家 J.N. “Ding” Darling 设计，他当时被 Franklin Roosevelt 总统任命为生物调查局局长。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:31-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+                "start": 0,
+                "end": 287,
+                "quote": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p4",
+                "start": 0,
+                "end": 81,
+                "quote": "鸭票收入每1美元中约有98美分直接进入候鸟保护基金，用来购买湿地和野生动物栖息地，并将其纳入国家野生动物保护区系统——这确保了这些土地会受到保护，并留给子子孙孙。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2021-i:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+                "start": 0,
+                "end": 220,
+                "quote": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p3",
+                "start": 0,
+                "end": 64,
+                "quote": "1934年，随着《候鸟狩猎印花税法》（简称《法案》）的通过，日益忧心的国家采取坚决行动，制止对迁徙水禽及其赖以生存的湿地的破坏。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2021-i:reading-c-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2021-i:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+                "start": 0,
+                "end": 287,
+                "quote": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-c-p4",
+                "start": 0,
+                "end": 81,
+                "quote": "鸭票收入每1美元中约有98美分直接进入候鸟保护基金，用来购买湿地和野生动物栖息地，并将其纳入国家野生动物保护区系统——这确保了这些土地会受到保护，并留给子子孙孙。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2021-i:reading-c-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写欧洲人到来后水禽被滥杀、湿地被排干，再写1934年法案推出联邦鸭票，最后写鸭票收入用于购买栖息地、成效显著，按“破坏—立法—成效”讲完鸭票的来龙去脉。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+            "summary": "北美野生资源本来丰富，定居者几十年内大肆猎杀水禽、排干湿地",
+            "function": "交代背景：水禽和湿地遭到破坏。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-c:2",
+            "summary": "湿地被排干，大大减少了水禽栖息地",
+            "function": "接上一段没写完的句子，因排版分页另起一行。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+            "summary": "1934年法案要求猎人每年购买联邦鸭票，猎人乐于付钱",
+            "function": "介绍法案和鸭票制度。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+            "summary": "鸭票收入几乎全用来购买湿地栖息地，计划成效卓著",
+            "function": "说明鸭票的用途和成果，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-i:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在写水禽遭殃的几句里，找出和选项对得上的那个原因。",
+      "stemTranslationZh": "北美水禽数量减少的原因之一是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句找另一个原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "湿地消失。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "quote": "Millions of acres of wetlands were dried to feed and house the ever-increasing populations, greatly",
+              "anchor": "湿地被排干"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:2",
+              "quote": "reducing waterfowl habitat.",
+              "anchor": "水禽栖息地减少"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "水上运动流行。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "sportsmen",
+            "optionText": "sports",
+            "matchType": "wordFamily",
+            "relationNote": "原文的 sportsmen 指少数贪心的狩猎者，和市场猎人一起滥杀水禽；原文没提水上运动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "quote": "Millions of waterfowl（水禽）were killed at the hands of market hunters and a handful of overly ambitious sportsmen.",
+              "anchor": "水禽遭猎杀"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "河流污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pollution of rivers.",
+            "explanation": "原文写的是湿地被排干（dried），不是河流受污染，全文没提污染。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "其他野生动物到来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "wildlife",
+            "optionText": "wild animals",
+            "matchType": "wordFamily",
+            "relationNote": "wildlife 出自[[block:paper-gaokao-2021-i:reading-c:1|When the explorers first]]，说的是大陆上原本就有种类惊人的野生动物；后来到来的是探险者和定居者，不是别的动物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "quote": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+              "anchor": "原有的野生动物"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "waterfowl population decline",
+          "sourceZh": "水禽数量减少",
+          "targetText": "Millions of waterfowl（水禽）were killed at the hands of market hunters and a handful of overly ambitious sportsmen.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:1",
+          "targetCue": "waterfowl（水禽）were killed",
+          "targetCueZh": "水禽被杀",
+          "answerText": "Millions of acres of wetlands were dried",
+          "bridgeZh": "猎杀之外，人口增长也在挤占水禽的家",
+          "note": "题干 waterfowl population decline 对应原文 waterfowl were killed。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Loss of wetlands.",
+          "targetText": "Millions of acres of wetlands were dried",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“湿地消失”就是原文数百万英亩湿地被排干（wetlands were dried），句子接着说这大大减少了水禽的栖息地（reducing waterfowl habitat），选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:29": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借前后句的转折和随后写的后果，推出 decimate 的意思。",
+      "stemTranslationZh": "第一段中画线词 decimate 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看具体发生了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "获得。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Acquire.",
+            "explanation": "放进去成了“几十年就得到了这些资源的一大部分”，可句首是 Unfortunately，后面写的是水禽被杀、湿地被排干。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "出口。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Export.",
+            "explanation": "放进去成了“几十年就把大部分资源运出去”，原文里水禽是被猎杀（killed），湿地是被排干，没有运往别处。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "毁坏。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "quote": "Millions of waterfowl（水禽）were killed at the hands of market hunters and a handful of overly ambitious sportsmen.",
+              "anchor": "水禽遭猎杀"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "quote": "Native Americans had taken care of these precious natural resources wisely.",
+              "anchor": "原住民守护资源"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "分配。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Distribute.",
+            "explanation": "放进去成了“几十年就把大部分资源分给了大家”，这是中性的做法，而 Unfortunately 引出的是坏结果：数百万水禽死去。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "decimate",
+          "targetText": "Unfortunately, it took the explorers and the settlers who followed only a few decades to decimate a large part of these resources.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:1",
+          "answerText": "Millions of waterfowl（水禽）were killed",
+          "bridgeZh": "被杀的水禽、排干的湿地就是 decimate 的结果",
+          "note": "题干 decimate 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Destroy.",
+          "targetText": "decimate a large part of these resources",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "Destroy（毁坏）由上下文推出：前句说资源被守护得很好，本句用 Unfortunately 一转，随后写水禽被杀（were killed），所以 decimate 必须是对资源的破坏。放回去：探险者和定居者几十年就毁掉了这些资源的一大部分，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:30": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从法案对猎人的规定，推出它最先带来的结果。",
+      "stemTranslationZh": "1934年通过的法案带来的直接结果是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "鸭票价格下降了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The stamp price has gone down.",
+            "explanation": "原文只说猎人愿意支付票价（willingly pay the stamp price），没提票价涨跌。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "候鸟都飞走了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "migratory",
+            "optionText": "migratory",
+            "matchType": "exact",
+            "relationNote": "migratory 出自[[block:paper-gaokao-2021-i:reading-c:3|In 1934, with the]]，法案正是为了保护迁徙水禽不再遭破坏，没说鸟飞走了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "quote": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+              "anchor": "法案保护迁徙水禽"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "猎人们不再打猎了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Under this Act, all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+            "sourceHighlight": "must annually purchase and carry a Federal Duck Stamp",
+            "optionText": "The hunters have stopped hunting.",
+            "optionHighlight": "stopped hunting",
+            "explanation": "法案没有禁猎，只要求猎人每年买票、带票打猎（purchase and carry）；猎人还乐意付钱，说明他们照样在打猎。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "quote": "Under this Act, all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+              "anchor": "猎人须买鸭票"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "政府筹集到了资金。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "quote": "Under this Act, all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+              "anchor": "猎人每年须买鸭票"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "quote": "Since 1934, better than half a billion dollars has gone into that Fund to purchase more than 5 million acres of habitat.",
+              "anchor": "超过5亿美元进入基金"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Act",
+          "targetText": "Under this Act, all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:3",
+          "answerText": "must annually purchase and carry a Federal Duck Stamp",
+          "note": "题干 the Act 对应原文 Under this Act。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "The government has collected money.",
+          "targetText": "must annually purchase and carry a Federal Duck Stamp",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "原文没直说政府收了钱，只说法案规定16岁以上的猎人每年都必须买鸭票（must annually purchase），[[block:paper-gaokao-2021-i:reading-c:4|Since 1934, better than]]又说已有超过5亿美元进了基金，由此推出政府收到了钱，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文围绕什么展开，选出能盖住鸭票来由、做法和成效的标题。",
+      "stemTranslationZh": "下列哪项适合作本文标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2021-i:reading-c:1]]写资源被 decimate，[[block:paper-gaokao-2021-i:reading-c:3]]立法推出 Duck Stamp，[[block:paper-gaokao-2021-i:reading-c:4]]卖票的钱买下栖息地；标题要盖住鸭票的来由和成效",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "联邦鸭票的故事",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "quote": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
+              "anchor": "鸭票计划成效卓著"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "quote": "The very first Federal Duck Stamp was designed by J.N. “Ding” Darling, a political cartoonist from Des Moines, Iowa, who at that time was appointed by President Franklin Roosevelt as Director of the Bureau of Biological Survey.",
+              "anchor": "第一枚鸭票的设计者"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "quote": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come.",
+              "anchor": "鸭票收入的去向"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "国家野生动物保护区系统",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "National Wildlife Refuge System",
+            "optionText": "National Wildlife Refuge System",
+            "matchType": "exact",
+            "relationNote": "保护区系统（National Wildlife Refuge System）只在[[block:paper-gaokao-2021-i:reading-c:4]]出现一次，是买来的土地的去处，盖不住前面的破坏和立法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "quote": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come.",
+              "anchor": "买来的土地并入保护区"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "拯救水禽的益处",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The Benefits of Saving Waterfowl",
+            "explanation": "文章讲的是怎样靠卖鸭票筹钱保护水禽和湿地，没有讲保护水禽能带来哪些好处。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "候鸟狩猎的历史",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Migratory Bird Hunting",
+            "optionText": "Migratory Bird Hunting",
+            "matchType": "exact",
+            "relationNote": "Migratory Bird Hunting 取自法案名称；文章没讲打猎本身的历史，讲的是这张鸭票的来龙去脉。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "quote": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+              "anchor": "法案名称"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The Federal Duck Stamp Story",
+          "targetText": "the Federal Duck Stamp Program",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "几段都围着鸭票转：它为何出现、谁必须买、钱用在哪、成效如何（most successful conservation programs）。“联邦鸭票的故事”正好把来由、做法和成效都包进去，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

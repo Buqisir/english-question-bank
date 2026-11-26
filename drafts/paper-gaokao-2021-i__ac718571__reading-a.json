@@ -1,0 +1,597 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-i:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-i:reading-a": {
+      "overview": "文章先说罗马花费高、许多旅行者因此选住旅社，再分别介绍四家旅社：Yellow 实惠热闹，Alessandro Palace 社交活动多，Youth Station 干净现代，Des Artistes 位置方便但上网要另付费。",
+      "fullTranslationZh": "罗马对旅行者来说花费不菲，这就是许多人选择住旅社的原因。罗马的旅社提供宿舍床位，每晚约25美元；花这笔钱，你往往能住在市中心的位置，既安全又舒适。\n\nYellow 旅社\n\n如果只让我推荐一个在罗马的住处，那就是 Yellow 旅社。它是城里评价最高的旅社之一，这是有原因的。它价格实惠，气氛有趣又不会太吵。另一个好处是，它离主火车站很近。\n\nAlessandro Palace 旅社\n\n如果你喜欢社交型旅社，这里就是你在罗马的最佳选择。Alessandro Palace 旅社很好玩。工作人员为客人举办大量酒吧活动，比如免费小杯酒、串酒吧和卡拉OK。夏天，屋顶上还有一块区域，供你和其他旅行者一起消磨时光。\n\nYouth Station 旅社\n\n如果你想找一家干净又现代的旅社，Youth Station 就是不二之选。它的家具和床铺都很漂亮。它还有很多别的好处：不收城市税；房间既有空调又有暖气；每个房间都有免费 Wi-Fi。\n\nDes Artistes 酒店兼旅社\n\nDes Artistes 酒店兼旅社离中央车站步行只需10分钟，离城里所有主要景点也都很近。员工友好热心，你一到就给你一张城市地图，需要时还会给你出主意。不过，Wi-Fi 每天要付2欧元。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2021-i:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+          "sourceText": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+          "displayText": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:21"
+          ],
+          "translationZh": "罗马的旅社提供宿舍床位，每晚约25美元；花这笔钱，你往往能住在市中心的位置，既安全又舒适。",
+          "analysisZh": "这是 and 连接的两个分句。前一句主干 The hostels offer a bed：旅社提供床位，in a dorm room 说床在宿舍里，for around $25 a night 说价钱。后一句主干 you’ll get to stay in a central location，开头的 for that 指“花这25美元”，意思是花这点钱就能换到这些；句末 with security and comfort 补充住得安全又舒适。前面先讲价钱，后面讲这笔钱换来的好处，和第21题“旅客最在乎价格”连在一起看。",
+          "underlineRanges": [
+            {
+              "start": 20,
+              "end": 69,
+              "quote": "offer a bed in a dorm room for around $25 a night"
+            },
+            {
+              "start": 75,
+              "end": 83,
+              "quote": "for that"
+            },
+            {
+              "start": 98,
+              "end": 131,
+              "quote": "get to stay in a central location"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2021-i:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2021-i:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:1"
+              ],
+              "start": 0,
+              "end": 73,
+              "quote": "罗马对旅行者来说花费不菲，这就是许多人选择住旅社的原因。罗马的旅社提供宿舍床位，每晚约25美元；花这笔钱，你往往能住在市中心的位置，既安全又舒适。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:2"
+              ],
+              "start": 75,
+              "end": 84,
+              "quote": "Yellow 旅社"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:3"
+              ],
+              "start": 86,
+              "end": 169,
+              "quote": "如果只让我推荐一个在罗马的住处，那就是 Yellow 旅社。它是城里评价最高的旅社之一，这是有原因的。它价格实惠，气氛有趣又不会太吵。另一个好处是，它离主火车站很近。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:4"
+              ],
+              "start": 171,
+              "end": 191,
+              "quote": "Alessandro Palace 旅社"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:5"
+              ],
+              "start": 193,
+              "end": 303,
+              "quote": "如果你喜欢社交型旅社，这里就是你在罗马的最佳选择。Alessandro Palace 旅社很好玩。工作人员为客人举办大量酒吧活动，比如免费小杯酒、串酒吧和卡拉OK。夏天，屋顶上还有一块区域，供你和其他旅行者一起消磨时光。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:6"
+              ],
+              "start": 305,
+              "end": 321,
+              "quote": "Youth Station 旅社"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:7"
+              ],
+              "start": 323,
+              "end": 414,
+              "quote": "如果你想找一家干净又现代的旅社，Youth Station 就是不二之选。它的家具和床铺都很漂亮。它还有很多别的好处：不收城市税；房间既有空调又有暖气；每个房间都有免费 Wi-Fi。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:8"
+              ],
+              "start": 416,
+              "end": 434,
+              "quote": "Des Artistes 酒店兼旅社"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-a:9"
+              ],
+              "start": 436,
+              "end": 530,
+              "quote": "Des Artistes 酒店兼旅社离中央车站步行只需10分钟，离城里所有主要景点也都很近。员工友好热心，你一到就给你一张城市地图，需要时还会给你出主意。不过，Wi-Fi 每天要付2欧元。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:21-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+                "start": 0,
+                "end": 83,
+                "quote": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p1",
+                "start": 0,
+                "end": 28,
+                "quote": "罗马对旅行者来说花费不菲，这就是许多人选择住旅社的原因。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:22-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
+                "start": 0,
+                "end": 193,
+                "quote": "If you love social hostels, this is the best hostel for you in Rome. Hostel Alessandro Palace is fun. Staff members hold plenty of bar events for guests like free shots, bar crawls and karaoke."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p5",
+                "start": 0,
+                "end": 82,
+                "quote": "如果你喜欢社交型旅社，这里就是你在罗马的最佳选择。Alessandro Palace 旅社很好玩。工作人员为客人举办大量酒吧活动，比如免费小杯酒、串酒吧和卡拉OK。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:23-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+                "start": 277,
+                "end": 326,
+                "quote": "However, you need to pay 2 euros a day for Wi-Fi."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p9",
+                "start": 77,
+                "end": 94,
+                "quote": "不过，Wi-Fi 每天要付2欧元。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2021-i:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+                "start": 84,
+                "end": 245,
+                "quote": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-a-p1",
+                "start": 28,
+                "end": 73,
+                "quote": "罗马的旅社提供宿舍床位，每晚约25美元；花这笔钱，你往往能住在市中心的位置，既安全又舒适。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2021-i:reading-a-1"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一段说罗马花费高，旅社便宜又安全舒适；接着以旅社名分栏，依次介绍四家旅社各自的长处，最后一家附带说明它的不足。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+            "summary": "罗马花费高，许多旅客选住便宜又安全舒适的旅社",
+            "function": "导语，交代住旅社的原因，引出下面的推荐。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:2",
+            "summary": "Yellow Hostel",
+            "function": "小标题，引出第一家旅社。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:3",
+            "summary": "作者首推 Yellow：评价高、实惠、热闹不吵，离火车站近",
+            "function": "介绍第一家旅社的长处。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:4",
+            "summary": "Hostel Alessandro Palace",
+            "function": "小标题，引出第二家旅社。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
+            "summary": "Alessandro Palace 适合爱社交的人：酒吧活动、卡拉OK、屋顶聚会",
+            "function": "介绍第二家旅社的社交特色。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:6",
+            "summary": "Youth Station Hostel",
+            "function": "小标题，引出第三家旅社。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:7",
+            "summary": "Youth Station 干净现代，免城市税，有冷暖空调和免费 Wi-Fi",
+            "function": "介绍第三家旅社的设施。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:8",
+            "summary": "Hotel and Hostel Des Artistes",
+            "function": "小标题，引出第四家旅社。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+            "summary": "Des Artistes 位置方便、员工热心，但 Wi-Fi 每天收2欧元",
+            "function": "介绍第四家旅社的长处，最后点出不足。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-i:21": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从开头说的选旅社原因，推出住旅社的人最看重什么。",
+      "stemTranslationZh": "选择住旅社的旅行者最关心的可能是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看逗号前说的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "舒适。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "comfort",
+            "optionText": "Comfort",
+            "matchType": "exact",
+            "relationNote": "comfort 出自[[block:paper-gaokao-2021-i:reading-a:1|The hostels in Rome offer]]，是花约25美元就能附带得到的条件（for that）；促使人选旅社的是罗马太贵。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "quote": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+              "anchor": "旅社附带的好处"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "安全。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "security",
+            "optionText": "Security",
+            "matchType": "exact",
+            "relationNote": "安全（security）和舒适并列，都是住进旅社后顺带享有的；原文说选旅社的原因（which is why）在前半句的花费高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "quote": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+              "anchor": "旅社附带的好处"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "价格。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "quote": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）.",
+              "anchor": "选住旅社的原因"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "位置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "location",
+            "optionText": "Location",
+            "matchType": "exact",
+            "relationNote": "市中心的位置（central location）是旅社常有的优点，原文用 often 说“往往能住到”，并不是旅客选旅社的理由。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "quote": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+              "anchor": "旅社附带的好处"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "choose to stay",
+          "targetText": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-a:1",
+          "answerText": "Rome can be pricey for travelers",
+          "note": "题干 choose to stay 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Price.",
+          "targetText": "Rome can be pricey for travelers",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "原文没直说旅客最在乎什么，只说罗马花费高（pricey），这正是许多人选旅社的原因（which is why），由此推出他们最看重价格，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把“喜欢活跃社交生活的人”这一需求，和四家旅社的特色对上号。",
+      "stemTranslationZh": "哪家旅店最适合喜欢活跃社交生活的人？",
+      "locateBy": "stem",
+      "locateFindZh": "this 指哪家，看店名",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Yellow 旅社。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Yellow Hostel.",
+            "explanation": "Yellow 是作者的首推，气氛也有趣（fun atmosphere），但它的卖点是实惠、不太吵、离车站近，没提社交活动。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Alessandro Palace 旅社。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
+              "quote": "If you love social hostels, this is the best hostel for you in Rome. Hostel Alessandro Palace is fun. Staff members hold plenty of bar events for guests like free shots, bar crawls and karaoke.",
+              "anchor": "Alessandro Palace 的社交特色"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Youth Station 旅社。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Youth Station Hostel.",
+            "explanation": "Youth Station 吸引的是想要干净、现代的人（cleanliness），好处是免城市税、有空调和免费 Wi-Fi，和社交无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Des Artistes 酒店兼旅社。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Hotel and Hostel Des Artistes.",
+            "explanation": "Des Artistes 的员工会给地图、出主意（offering advice），这是服务周到，不是给客人办社交活动。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "enjoy an active social life",
+          "sourceZh": "喜欢活跃的社交生活",
+          "targetText": "If you love social hostels, this is the best hostel for you in Rome.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-a:5",
+          "targetCue": "love social hostels",
+          "targetCueZh": "喜爱社交型旅社",
+          "answerText": "Hostel Alessandro Palace",
+          "bridgeZh": "this 指的就是这一栏介绍的旅社",
+          "note": "题干 enjoy an active social life 对应原文 love social hostels。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Hostel Alessandro Palace.",
+          "targetText": "Hostel Alessandro Palace is fun.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-a:5",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文店名。这家点明最合爱社交的人，员工还常办酒吧活动、卡拉OK（bar events），屋顶也能和其他旅客聚会，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在 Des Artistes 一栏的优点之后，找出它唯一的缺点。",
+      "stemTranslationZh": "Des Artistes 酒店兼旅社的缺点是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读，看 However 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它晚上很吵。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "noisy",
+            "optionText": "noisy",
+            "matchType": "exact",
+            "relationNote": "noisy 出自[[block:paper-gaokao-2021-i:reading-a:3]]，说的是 Yellow 旅社不会太吵（without being too noisy）；Des Artistes 一栏没提噪音。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:3",
+              "quote": "It’s affordable, and it’s got a fun atmosphere without being too noisy.",
+              "anchor": "Yellow 旅社不吵"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的员工话太多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The staff is friendly and helpful, providing you with a map of the city when you arrive, and offering advice if you require some.",
+            "sourceHighlight": "friendly and helpful",
+            "optionText": "Its staff is too talkative.",
+            "optionHighlight": "too talkative",
+            "explanation": "原文夸员工友好热心（friendly and helpful），会送地图、给建议，是在说优点；选项把热心说成了话多惹人烦。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "quote": "The staff is friendly and helpful, providing you with a map of the city when you arrive, and offering advice if you require some.",
+              "anchor": "员工友好热心"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的 Wi-Fi 要收费。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "quote": "However, you need to pay 2 euros a day for Wi-Fi.",
+              "anchor": "Wi-Fi 另收费"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的位置不方便。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+            "sourceHighlight": "just a 10-minute walk",
+            "optionText": "It’s inconveniently located.",
+            "optionHighlight": "inconveniently located",
+            "explanation": "离中央车站步行只要10分钟（just a 10-minute walk），离主要景点也近，位置正是它的长处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "quote": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+              "anchor": "位置方便"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Des Artistes",
+          "targetText": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-a:9",
+          "answerText": "you need to pay 2 euros a day for Wi-Fi",
+          "bridgeZh": "前面都在夸它，However 一转才说不足",
+          "note": "题干店名 Des Artistes 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "It charges for Wi-Fi.",
+          "targetText": "you need to pay 2 euros a day for Wi-Fi",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "选项的“Wi-Fi 收费”（charges for Wi-Fi）就是原文上网每天要付2欧元（pay 2 euros a day），选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

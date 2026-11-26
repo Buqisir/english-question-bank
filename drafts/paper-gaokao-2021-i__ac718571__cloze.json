@@ -1,0 +1,1814 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-i:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-i:cloze": {
+      "overview": "作者中学时趁春假到朋友父亲的烘焙厂打了三天工，流水线活比想象中难，压力很大；父亲笑着讲起自己童年送货的经历，告诉作者这种劳动让人珍惜挣来的钱、尊重劳动者。",
+      "fullTranslationZh": "我作为纳税的受雇者，生活始于中学：那时我在一家烘焙工厂整整干了三天。\n\n我最好的朋友贝琪的父亲是霍夫面包公司的经理。每到复活节，这家公司都要为它在克利夫兰各处的门店制作小兔蛋糕。碰巧市中心的工厂在我们春假期间需要八个孩子临时帮忙，而这个春假我除了听最喜欢的唱片，没有别的计划。我能挣到最低工资，还能看看工厂是怎么运转的。我父母觉得这一切都是个好主意，就给贝琪的爸爸打电话，表示同意。\n\n我们在工厂里的分工很简单：把蛋糕放到移动的传送带上，装上糖霜耳朵，点上糖霜眼睛和鼻子，再把小兔蛋糕从传送带上取下来。这比听起来要难。稍一放慢，蛋糕就堆起来了。第一天晚上吃饭时我对父母说，这活儿的压力比我预想的要大一些。\n\n爸爸笑了。他是杂货店老板的儿子，童年的每个暑假都在新泽西州伯纳兹维尔送食品。他告诉我，正是这种活儿让人珍惜自己挣来的钱，也让人尊重干这些活儿的人。",
+      "mainLine": {
+        "theme": {
+          "text": "亲手干过辛苦活，才会珍惜挣来的钱，也会 respect those who did the work，尊重劳动者。",
+          "quote": "respect those who did the work"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:1",
+            "text": "作者回忆中学时在烘焙工厂干了三天，开始第一份工作。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+            "text": "工厂春假招临时工，作者正好有空，父母也同意了。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+            "text": "流水线的活看似简单，干起来却难，压力超出预想。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+            "text": "父亲笑着讲起童年送货，说这种活让人珍惜钱、尊重劳动者。"
+          }
+        ],
+        "emotion": "新鲜期待→手忙脚乱的压力→听父亲讲后有所领悟"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+          "sourceText": "My best friend Betsy’s father was a manager at Hough Bakeries, which, at Easter time, __41__ little bunny (兔子) cakes for all its __42__ throughout Cleveland.",
+          "displayText": "My best friend Betsy’s father was a manager at Hough Bakeries, which, at Easter time, made little bunny (兔子) cakes for all its stores throughout Cleveland.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:41",
+            "question:paper-gaokao-2021-i:42"
+          ],
+          "translationZh": "我最好的朋友贝琪的父亲是霍夫面包公司的经理。每到复活节，这家公司都要为它在克利夫兰各处的门店制作小兔蛋糕。",
+          "analysisZh": "主干是 Betsy’s father was a manager，说贝琪的父亲是经理；which 引出的从句补充说明 Hough Bakeries，从句里 at Easter time 是插入的时间，主干是 which made little bunny cakes，for all its stores throughout Cleveland 说蛋糕供给谁。",
+          "underlineRanges": [
+            {
+              "start": 30,
+              "end": 43,
+              "quote": "was a manager"
+            },
+            {
+              "start": 63,
+              "end": 68,
+              "quote": "which"
+            },
+            {
+              "start": 86,
+              "end": 114,
+              "quote": "made little bunny (兔子) cakes"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+          "sourceText": "This was the sort of work that made you __55__ the dollars you earned and respect those who did the work, he told me.",
+          "displayText": "This was the sort of work that made you appreciate the dollars you earned and respect those who did the work, he told me.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:55"
+          ],
+          "translationZh": "他告诉我，正是这种活儿让人珍惜自己挣来的钱，也让人尊重干这些活儿的人。",
+          "analysisZh": "he told me 是插在句末的说话人；主干是 This was the sort of work；that 引出的定语从句修饰 work，里面是 make sb do，made you 后接 appreciate 和 respect 两个并列动作；you earned 修饰 dollars，who did the work 修饰 those。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 25,
+              "quote": "This was the sort of work"
+            },
+            {
+              "start": 31,
+              "end": 50,
+              "quote": "made you appreciate"
+            },
+            {
+              "start": 74,
+              "end": 91,
+              "quote": "and respect those"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2021-i:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2021-i:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:cloze:1"
+              ],
+              "start": 0,
+              "end": 34,
+              "quote": "我作为纳税的受雇者，生活始于中学：那时我在一家烘焙工厂整整干了三天。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:cloze:2"
+              ],
+              "start": 36,
+              "end": 191,
+              "quote": "我最好的朋友贝琪的父亲是霍夫面包公司的经理。每到复活节，这家公司都要为它在克利夫兰各处的门店制作小兔蛋糕。碰巧市中心的工厂在我们春假期间需要八个孩子临时帮忙，而这个春假我除了听最喜欢的唱片，没有别的计划。我能挣到最低工资，还能看看工厂是怎么运转的。我父母觉得这一切都是个好主意，就给贝琪的爸爸打电话，表示同意。"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:cloze:3"
+              ],
+              "start": 193,
+              "end": 302,
+              "quote": "我们在工厂里的分工很简单：把蛋糕放到移动的传送带上，装上糖霜耳朵，点上糖霜眼睛和鼻子，再把小兔蛋糕从传送带上取下来。这比听起来要难。稍一放慢，蛋糕就堆起来了。第一天晚上吃饭时我对父母说，这活儿的压力比我预想的要大一些。"
+            },
+            {
+              "paragraphId": "zh-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:cloze:4"
+              ],
+              "start": 304,
+              "end": 377,
+              "quote": "爸爸笑了。他是杂货店老板的儿子，童年的每个暑假都在新泽西州伯纳兹维尔送食品。他告诉我，正是这种活儿让人珍惜自己挣来的钱，也让人尊重干这些活儿的人。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+            "text": "My best friend Betsy’s father was a manager at Hough Bakeries, which, at Easter time, made little bunny (兔子) cakes for all its stores throughout Cleveland. It happened that the plant downtown needed eight kids for temporary help during our spring break, for which I had no plans beyond listening to my favorite records. I’d earn minimum wage. I’d see how a factory worked. My parents thought all of this was a grand idea and called Betsy’s dad with their permission."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:cloze:3",
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+            "text": "Our roles in the factory were simple: Place cakes on a moving belt. Attach icing (糖霜) ears. Apply icing eyes and nose. Remove bunny from the belt. This was harder than it sounds. Slow down a bit and the cakes pile up. As I told my parents at dinner that first night, it was all a little more high-pressure than I’d expected."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:cloze:4",
+            "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+            "text": "Dad smiled. The son of a grocer, he’d spent the summers of his childhood delivering food in Benardsville, New Jersey. This was the sort of work that made you appreciate the dollars you earned and respect those who did the work, he told me."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:1",
+                "start": 104,
+                "end": 120,
+                "quote": "a baking factory"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 21,
+                "end": 27,
+                "quote": "一家烘焙工厂"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:41"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 86,
+                "end": 90,
+                "quote": "made"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 46,
+                "end": 48,
+                "quote": "制作"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 136,
+                "end": 156,
+                "quote": "throughout Cleveland"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 37,
+                "end": 43,
+                "quote": "克利夫兰各处"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:42"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 127,
+                "end": 133,
+                "quote": "stores"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 44,
+                "end": 46,
+                "quote": "门店"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 228,
+                "end": 251,
+                "quote": "during our spring break"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 61,
+                "end": 68,
+                "quote": "在我们春假期间"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:43"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 214,
+                "end": 223,
+                "quote": "temporary"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 74,
+                "end": 76,
+                "quote": "临时"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 279,
+                "end": 318,
+                "quote": "beyond listening to my favorite records"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 85,
+                "end": 94,
+                "quote": "除了听最喜欢的唱片"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:44"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 273,
+                "end": 278,
+                "quote": "plans"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 99,
+                "end": 101,
+                "quote": "计划"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 161,
+                "end": 183,
+                "quote": "the dollars you earned"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 53,
+                "end": 59,
+                "quote": "自己挣来的钱"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:45"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 324,
+                "end": 328,
+                "quote": "earn"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 104,
+                "end": 106,
+                "quote": "挣到"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 54,
+                "end": 67,
+                "quote": "a moving belt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 18,
+                "end": 24,
+                "quote": "移动的传送带"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:46"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 365,
+                "end": 371,
+                "quote": "worked"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 120,
+                "end": 122,
+                "quote": "运转"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 386,
+                "end": 422,
+                "quote": "thought all of this was a grand idea"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 127,
+                "end": 138,
+                "quote": "觉得这一切都是个好主意"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:47"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 455,
+                "end": 465,
+                "quote": "permission"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 150,
+                "end": 154,
+                "quote": "表示同意"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 39,
+                "end": 67,
+                "quote": "Place cakes on a moving belt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 13,
+                "end": 25,
+                "quote": "把蛋糕放到移动的传送带上"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:48"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 4,
+                "end": 9,
+                "quote": "roles"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 7,
+                "end": 9,
+                "quote": "分工"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 133,
+                "end": 146,
+                "quote": "from the belt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 49,
+                "end": 54,
+                "quote": "从传送带上"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:49"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 119,
+                "end": 125,
+                "quote": "Remove"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 54,
+                "end": 57,
+                "quote": "取下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 290,
+                "end": 303,
+                "quote": "high-pressure"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 97,
+                "end": 108,
+                "quote": "压力比我预想的要大一些"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:50"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 156,
+                "end": 162,
+                "quote": "harder"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 64,
+                "end": 65,
+                "quote": "难"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 197,
+                "end": 214,
+                "quote": "the cakes pile up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 71,
+                "end": 78,
+                "quote": "蛋糕就堆起来了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:51"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 179,
+                "end": 188,
+                "quote": "Slow down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 66,
+                "end": 70,
+                "quote": "稍一放慢"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 285,
+                "end": 312,
+                "quote": "more high-pressure than I’d"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 97,
+                "end": 108,
+                "quote": "压力比我预想的要大一些"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:52"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+                "start": 315,
+                "end": 323,
+                "quote": "expected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 101,
+                "end": 103,
+                "quote": "预想"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 12,
+                "end": 31,
+                "quote": "The son of a grocer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 7,
+                "end": 15,
+                "quote": "杂货店老板的儿子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:53"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 4,
+                "end": 10,
+                "quote": "smiled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 2,
+                "end": 4,
+                "quote": "笑了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 12,
+                "end": 31,
+                "quote": "The son of a grocer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 7,
+                "end": 15,
+                "quote": "杂货店老板的儿子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:54"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 73,
+                "end": 83,
+                "quote": "delivering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 34,
+                "end": 37,
+                "quote": "送食品"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 188,
+                "end": 218,
+                "quote": "respect those who did the work"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 63,
+                "end": 72,
+                "quote": "尊重干这些活儿的人"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:55"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 158,
+                "end": 168,
+                "quote": "appreciate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 51,
+                "end": 53,
+                "quote": "珍惜"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-cloze-1",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:41",
+              "question:paper-gaokao-2021-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+                "start": 0,
+                "end": 157,
+                "quote": "My best friend Betsy’s father was a manager at Hough Bakeries, which, at Easter time, __41__ little bunny (兔子) cakes for all its __42__ throughout Cleveland."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 0,
+                "end": 53,
+                "quote": "我最好的朋友贝琪的父亲是霍夫面包公司的经理。每到复活节，这家公司都要为它在克利夫兰各处的门店制作小兔蛋糕。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-cloze-2",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+                "start": 114,
+                "end": 231,
+                "quote": "This was the sort of work that made you __55__ the dollars you earned and respect those who did the work, he told me."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 38,
+                "end": 73,
+                "quote": "他告诉我，正是这种活儿让人珍惜自己挣来的钱，也让人尊重干这些活儿的人。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "新鲜期待→手忙脚乱的压力→听父亲讲后有所领悟"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2021-i:41": {
+      "blankId": "blank:paper-gaokao-2021-i:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "这句介绍面包公司复活节对小兔蛋糕做什么，要一个“生产”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是 Hough Bakeries 这家面包公司，下一段工厂里干的正是 Place cakes on a moving belt 这类做蛋糕的活。",
+        "quotes": [
+          "Hough Bakeries",
+          "Place cakes on a moving belt"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "制作",
+        "reason": "这句介绍面包公司复活节对小兔蛋糕做什么，要一个“生产”的动作。动词看搭配：主语是 Hough Bakeries 这家面包公司，下一段工厂里干的正是 Place cakes on a moving belt 这类做蛋糕的活。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sold",
+          "meaning": "出售；后面招人的是 the plant downtown，工厂要的是做蛋糕的人手，不是卖蛋糕。",
+          "quote": "the plant downtown"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ordered",
+          "meaning": "订购；Hough Bakeries 自己就是面包公司，给自家门店的蛋糕不用向别人订。",
+          "quote": "Hough Bakeries"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reserved",
+          "meaning": "预留；后面说工厂缺人手要招 eight kids，是在赶着生产，不是替谁留货。",
+          "quote": "eight kids"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Hough Bakeries",
+          "signalSide": "context-before",
+          "targetText": "Hough Bakeries … made little bunny (兔子) cakes",
+          "relation": "中文：面包公司做的事是制作蛋糕。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a baking factory",
+          "signalSide": "context-before",
+          "relation": "中文：首段点明是烘焙工厂，讲的是生产。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:42": {
+      "blankId": "blank:paper-gaokao-2021-i:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "蛋糕做好后供给克利夫兰各处，要一个属于这家公司、接收蛋糕的地方。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 its 指 Hough Bakeries，后面 throughout Cleveland 说遍布全城，属于面包公司又遍布全城的是门店。",
+        "quotes": [
+          "Hough Bakeries",
+          "throughout Cleveland"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "商店",
+        "meaning": "面包公司的门店",
+        "reason": "蛋糕做好后供给克利夫兰各处，要一个属于这家公司、接收蛋糕的地方。名词看搭配：前面 its 指 Hough Bakeries，后面 throughout Cleveland 说遍布全城，属于面包公司又遍布全城的是门店。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "families",
+          "meaning": "家庭；its 指面包公司，家庭不归一家公司所有，归 Hough Bakeries 的是门店。",
+          "quote": "Hough Bakeries"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "schools",
+          "meaning": "学校；学校不属于面包公司，throughout Cleveland 遍布全城的是它自家的店。",
+          "quote": "throughout Cleveland"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "citizens",
+          "meaning": "市民；市民不是公司的，for all its 说的是这家公司自己名下的东西。",
+          "quote": "for all its"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for all its",
+          "signalSide": "context-before",
+          "targetText": "for all its stores",
+          "relation": "中文：its 指面包公司，它名下的是门店。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "throughout Cleveland",
+          "signalSide": "context-after",
+          "relation": "中文：门店遍布克利夫兰全城。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:43": {
+      "blankId": "blank:paper-gaokao-2021-i:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "工厂只在春假这几天要人，要一个说明帮工时间短的词。",
+      "find": {
+        "check": "echo",
+        "text": "后面 during our spring break 限定了时间，首段 for three whole days 也说只干了三天，是临时帮工。",
+        "quotes": [
+          "during our spring break",
+          "for three whole days"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "临时的",
+        "reason": "工厂只在春假这几天要人，要一个说明帮工时间短的词。形容词看复现：后面 during our spring break 限定了时间，首段 for three whole days 也说只干了三天，是临时帮工。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "generous",
+          "meaning": "慷慨的；孩子们来干活是为了挣 minimum wage，谈不上慷慨相助。",
+          "quote": "minimum wage"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "financial",
+          "meaning": "财务的；孩子们要干的是 Place cakes on a moving belt 这种手上活，不是财务帮助。",
+          "quote": "Place cakes on a moving belt"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "technical",
+          "meaning": "技术的；孩子们干的是放蛋糕、装糖霜，原文说这些活 were simple，用不着技术。",
+          "quote": "were simple"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "help",
+          "signalSide": "context-after",
+          "targetText": "temporary help",
+          "relation": "中文：temporary 修饰 help，说明帮工是临时的。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "for three whole days",
+          "signalSide": "context-before",
+          "relation": "中文：只干三天，和临时呼应。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:44": {
+      "blankId": "blank:paper-gaokao-2021-i:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "春假里作者除了听唱片别无安排，要一个表示“打算、安排”的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "for which 指春假，had no … beyond listening to my favorite records 是说假期除了听唱片没别的安排。",
+        "quotes": [
+          "beyond listening to my favorite records"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "计划",
+        "reason": "春假里作者除了听唱片别无安排，要一个表示“打算、安排”的名词。名词看搭配：for which 指春假，had no … beyond listening to my favorite records 是说假期除了听唱片没别的安排。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "problems",
+          "meaning": "问题；beyond listening to my favorite records 说的是假期要做的事，听唱片不是问题。",
+          "quote": "beyond listening to my favorite records"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "excuses",
+          "meaning": "借口；作者是说假期正好有空，后面父母也觉得 a grand idea，没有要推托的。",
+          "quote": "a grand idea"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hobbies",
+          "meaning": "爱好；for which 指 spring break，说的是这个假期的安排，爱好不属于哪一个假期。",
+          "quote": "spring break"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "beyond listening to my favorite records",
+          "signalSide": "context-after",
+          "targetText": "no plans beyond listening to my favorite records",
+          "relation": "中文：除了听唱片没有别的计划。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:45": {
+      "blankId": "blank:paper-gaokao-2021-i:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者在盘算去打工的收获，最低工资是他靠干活拿到的。",
+      "find": {
+        "check": "echo",
+        "text": "宾语是 minimum wage，末段父亲说的 the dollars you earned 又用了 earn，挣钱这件事前后呼应。",
+        "quotes": [
+          "minimum wage",
+          "the dollars you earned"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "挣得",
+        "reason": "作者在盘算去打工的收获，最低工资是他靠干活拿到的。动词看复现：宾语是 minimum wage，末段父亲说的 the dollars you earned 又用了 earn，挣钱这件事前后呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "offer",
+          "meaning": "提供；付工资的是工厂，末段 the dollars you earned 说作者是挣钱的一方。",
+          "quote": "the dollars you earned"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "set",
+          "meaning": "设定；工资标准由工厂定，作者只是 eight kids 里的一个，定不了工资。",
+          "quote": "eight kids"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "suggest",
+          "meaning": "建议；这里在列打工的好处，紧接着 I’d see how a factory 也是他能得到的收获，不是提议。",
+          "quote": "I’d see how a factory"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "minimum wage",
+          "signalSide": "context-after",
+          "targetText": "earn minimum wage",
+          "relation": "中文：earn 和 wage 搭配，挣工资。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the dollars you earned",
+          "signalSide": "context-after",
+          "relation": "中文：末段原词复现 earn。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:46": {
+      "blankId": "blank:paper-gaokao-2021-i:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者还想借机看看工厂里是怎么回事，要一个说工厂运转的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是 a factory，前面是 I’d see how，下一段写的正是流水线 a moving belt 怎样一步步转起来。",
+        "quotes": [
+          "I’d see how",
+          "a moving belt"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "运转",
+        "reason": "作者还想借机看看工厂里是怎么回事，要一个说工厂运转的动词。动词看搭配：主语是 a factory，前面是 I’d see how，下一段写的正是流水线 a moving belt 怎样一步步转起来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "closed",
+          "meaning": "关闭；工厂正 needed eight kids 帮忙赶工，作者要看的是它怎么生产。",
+          "quote": "needed eight kids"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "developed",
+          "meaning": "发展；作者只去干 for three whole days，几天里看不出工厂怎样发展。",
+          "quote": "for three whole days"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "survived",
+          "meaning": "幸存；工厂复活节正忙得 needed eight kids，没有熬过难关这回事。",
+          "quote": "needed eight kids"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a factory",
+          "signalSide": "context-before",
+          "targetText": "how a factory worked",
+          "relation": "中文：工厂怎样运转。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a moving belt",
+          "signalSide": "context-after",
+          "relation": "中文：下段写的就是流水线怎么运转。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:47": {
+      "blankId": "blank:paper-gaokao-2021-i:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "main",
+      "context": "父母觉得是好主意并打电话给贝琪爸爸，要一个表示“同意”的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 thought all of this was a grand idea 说父母赞成，打电话 called Betsy’s dad 带去的就是同意。",
+        "quotes": [
+          "thought all of this was a grand idea",
+          "called Betsy’s dad"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "许可",
+        "meaning": "同意孩子去打工",
+        "reason": "父母觉得是好主意并打电话给贝琪爸爸，要一个表示“同意”的名词。名词看搭配：前面 thought all of this was a grand idea 说父母赞成，打电话 called Betsy’s dad 带去的就是同意。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ambition",
+          "meaning": "抱负；父母打电话是回应招人的事，觉得 a grand idea，要表的是同意。",
+          "quote": "a grand idea"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "experience",
+          "meaning": "经验；父母这里只是表态，讲经验的是末段父亲说起 the summers of his childhood。",
+          "quote": "the summers of his childhood"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "invitation",
+          "meaning": "邀请；要人的是 the plant downtown needed eight kids，父母是回应，不是发出邀请。",
+          "quote": "the plant downtown needed eight kids"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "called Betsy’s dad",
+          "signalSide": "context-before",
+          "targetText": "called Betsy’s dad with their permission",
+          "relation": "中文：打电话带去同意。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "a grand idea",
+          "signalSide": "context-before",
+          "relation": "中文：父母态度正面，是赞成。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:48": {
+      "blankId": "blank:paper-gaokao-2021-i:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "detail",
+      "context": "冒号后列出放蛋糕、装耳朵等活，要一个指每人要干的活的名词。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后 Place cakes … Attach icing … Apply icing 都是要干的活，这个名词把它们概括成“分工”。",
+        "quotes": [
+          "Place cakes",
+          "Attach icing",
+          "Apply icing"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "职责",
+        "meaning": "流水线上的分工",
+        "reason": "冒号后列出放蛋糕、装耳朵等活，要一个指每人要干的活的名词。名词看复现：冒号后 Place cakes … Attach icing … Apply icing 都是要干的活，这个名词把它们概括成“分工”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "joys",
+          "meaning": "乐趣；冒号后列的是要干的活，下一句又说比 than it sounds 难，谈不上乐趣。",
+          "quote": "than it sounds"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ideas",
+          "meaning": "想法；冒号后 Place cakes on a moving belt 是一步步的操作，不是想法。",
+          "quote": "Place cakes on a moving belt"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "choices",
+          "meaning": "选择；Attach icing、Apply icing 是规定好的步骤，孩子们没得挑。",
+          "quote": "Apply icing"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the factory",
+          "signalSide": "context-after",
+          "targetText": "Our roles in the factory",
+          "relation": "中文：在工厂里的分工。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Place cakes on a moving belt",
+          "signalSide": "context-after",
+          "relation": "中文：冒号后列出的具体活。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:49": {
+      "blankId": "blank:paper-gaokao-2021-i:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "detail",
+      "context": "装完眼睛和鼻子，最后一步要把小兔蛋糕从传送带上拿下来。",
+      "find": {
+        "check": "action-sequence",
+        "text": "前面依次 Place cakes on a moving belt、Attach、Apply，最后 from the belt，放上去的蛋糕要取下来。",
+        "quotes": [
+          "Place cakes on a moving belt",
+          "from the belt"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "移走",
+        "meaning": "从传送带上取下",
+        "reason": "装完眼睛和鼻子，最后一步要把小兔蛋糕从传送带上拿下来。动词看动作顺序：前面依次 Place cakes on a moving belt、Attach、Apply，最后 from the belt，放上去的蛋糕要取下来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Save",
+          "meaning": "挽救；save … from the belt 是把蛋糕从危险中救出，蛋糕放在带上没遇险。",
+          "quote": "from the belt"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Keep",
+          "meaning": "使远离；keep … from the belt 是不让蛋糕上带，可第一步就是 Place cakes on a moving belt。",
+          "quote": "Place cakes on a moving belt"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Stop",
+          "meaning": "阻止；stop … from 是拦着不让，蛋糕本来就在 a moving belt 上跑，最后是取下。",
+          "quote": "a moving belt"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "from the belt",
+          "signalSide": "context-after",
+          "targetText": "Remove bunny from the belt",
+          "relation": "中文：remove … from 从……取走。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Place cakes on a moving belt",
+          "signalSide": "context-before",
+          "relation": "中文：第一步放上，最后一步取下。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-gaokao-2021-i:50": {
+      "blankId": "blank:paper-gaokao-2021-i:50",
+      "blankNo": 50,
+      "pos": "adjective",
+      "role": "main",
+      "context": "前面说活很简单，这里要翻过来说做起来不容易，是全文的转折。",
+      "find": {
+        "check": "affect",
+        "text": "前句 were simple，than it sounds 说听着简单；后面 the cakes pile up 和 high-pressure 说做着难。",
+        "quotes": [
+          "were simple",
+          "than it sounds",
+          "the cakes pile up",
+          "high-pressure"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "更困难的",
+        "reason": "前面说活很简单，这里要翻过来说做起来不容易，是全文的转折。形容词看情感：前句 were simple，than it sounds 说听着简单；后面 the cakes pile up 和 high-pressure 说做着难。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "better",
+          "meaning": "更好的；后面 the cakes pile up 说一慢蛋糕就堆，是在讲难，不是讲好。",
+          "quote": "the cakes pile up"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "longer",
+          "meaning": "更长的；than it sounds 比的是难易，后文说的是 high-pressure，不是时间长。",
+          "quote": "high-pressure"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cheaper",
+          "meaning": "更便宜的；这句评价的是 Our … in the factory 这份活好不好干，和价钱无关。",
+          "quote": "in the factory"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "than it sounds",
+          "signalSide": "context-after",
+          "targetText": "harder than it sounds",
+          "relation": "中文：比听起来更难。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "high-pressure",
+          "signalSide": "context-after",
+          "relation": "中文：压力大，说明活难干。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2021-i:51": {
+      "blankId": "blank:paper-gaokao-2021-i:51",
+      "blankNo": 51,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "这是“稍一……蛋糕就堆起来”，要一个让人跟不上传送带的动作。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后半句 and the cakes pile up，传送带不停，人一慢蛋糕就堆积；a bit 说的是稍微慢一点。",
+        "quotes": [
+          "and the cakes pile up",
+          "a bit"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "放慢速度",
+        "reason": "这是“稍一……蛋糕就堆起来”，要一个让人跟不上传送带的动作。词组看语境义：后半句 and the cakes pile up，传送带不停，人一慢蛋糕就堆积；a bit 说的是稍微慢一点。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Calm down",
+          "meaning": "冷静下来；人冷静了不会让 the cakes pile up，蛋糕堆起来是因为手慢。",
+          "quote": "the cakes pile up"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Stay on",
+          "meaning": "继续待着；待在岗位上不会让蛋糕堆积，堆积是因为跟不上 a moving belt。",
+          "quote": "a moving belt"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Move on",
+          "meaning": "接着往下做；接着干正好不让蛋糕堆积，和 the cakes pile up 相反。",
+          "quote": "the cakes pile up"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the cakes pile up",
+          "signalSide": "context-after",
+          "targetText": "Slow down a bit and the cakes pile up",
+          "relation": "中文：一放慢，蛋糕就堆起来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "down",
+          "signalSide": "option",
+          "targetText": "Slow down",
+          "relation": "中文：down 表示速度降下来。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2021-i:52": {
+      "blankId": "blank:paper-gaokao-2021-i:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者把实际的压力和事前心里的想法相比，要一个“事先以为”的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "more high-pressure than I’d 比的是实际干起来和事前的想法，事前作者和父母都觉得这是 a grand idea。",
+        "quotes": [
+          "more high-pressure than I’d",
+          "a grand idea"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "预料",
+        "reason": "作者把实际的压力和事前心里的想法相比，要一个“事先以为”的动词。动词看搭配：more high-pressure than I’d 比的是实际干起来和事前的想法，事前作者和父母都觉得这是 a grand idea。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "indicated",
+          "meaning": "表明；作者事前没对人说过这份活，这里比的是 high-pressure 和心里的想法。",
+          "quote": "high-pressure"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "witnessed",
+          "meaning": "目睹；作者 that first night 才下班，之前没进过工厂，谈不上见过。",
+          "quote": "that first night"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "remembered",
+          "meaning": "记得；这是作者第一份工作，began in middle school，此前无从回忆。",
+          "quote": "began in middle school"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "more high-pressure than I’d",
+          "signalSide": "context-before",
+          "targetText": "more high-pressure than I’d expected",
+          "relation": "中文：比我预想的压力大。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:53": {
+      "blankId": "blank:paper-gaokao-2021-i:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "听孩子诉苦后爸爸的反应，要和后面耐心讲自己童年经历相配。",
+      "find": {
+        "check": "affect",
+        "text": "后面爸爸讲 the summers of his childhood 的活，说这种活让人 respect those who did the work，是懂得的笑。",
+        "quotes": [
+          "the summers of his childhood",
+          "respect those who did the work"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "微笑",
+        "meaning": "会心地笑",
+        "reason": "听孩子诉苦后爸爸的反应，要和后面耐心讲自己童年经历相配。动词看情感：后面爸爸讲 the summers of his childhood 的活，说这种活让人 respect those who did the work，是懂得的笑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cried",
+          "meaning": "哭；孩子只是说活累，爸爸接着平静地讲道理，he told me，没有伤心事。",
+          "quote": "he told me"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hesitated",
+          "meaning": "犹豫；爸爸马上讲起 The son of a grocer 的童年，没有迟疑。",
+          "quote": "The son of a grocer"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "refused",
+          "meaning": "拒绝；孩子只是饭桌上讲感受 As I told my parents，没有请求可拒绝。",
+          "quote": "As I told my parents"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Dad",
+          "signalSide": "context-before",
+          "targetText": "Dad smiled",
+          "relation": "中文：爸爸的反应。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "respect those who did the work",
+          "signalSide": "context-after",
+          "relation": "中文：爸爸在讲劳动的价值，态度平和。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:54": {
+      "blankId": "blank:paper-gaokao-2021-i:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "杂货店老板的儿子童年暑假干的活，要一件后面能称作这种活的差事。",
+      "find": {
+        "check": "collocation",
+        "text": "The son of a grocer 说家里开杂货店，宾语是 food，送货是这家孩子的活，后文称它 the sort of work。",
+        "quotes": [
+          "The son of a grocer",
+          "the sort of work"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "递送",
+        "reason": "杂货店老板的儿子童年暑假干的活，要一件后面能称作这种活的差事。动词看搭配：The son of a grocer 说家里开杂货店，宾语是 food，送货是这家孩子的活，后文称它 the sort of work。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tasting",
+          "meaning": "品尝；后文说这是能挣钱的 the sort of work，尝食物算不上一份活。",
+          "quote": "the sort of work"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "finding",
+          "meaning": "寻找；杂货店的食物不用去找，The son of a grocer 干的是店里的差事。",
+          "quote": "The son of a grocer"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sharing",
+          "meaning": "分享；分享食物挣不到钱，后文说的是 the dollars you earned。",
+          "quote": "the dollars you earned"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "food",
+          "signalSide": "context-after",
+          "targetText": "delivering food",
+          "relation": "中文：送食品。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "The son of a grocer",
+          "signalSide": "context-before",
+          "relation": "中文：杂货店的孩子帮着送货。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:55": {
+      "blankId": "blank:paper-gaokao-2021-i:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "这是点题：干这种活让人怎样看待挣来的钱，要一个正面的态度。",
+      "find": {
+        "check": "affect",
+        "text": "它和 and respect those who did the work 并列，宾语是 the dollars you earned，和尊重同向是珍惜。",
+        "quotes": [
+          "and respect those who did the work",
+          "the dollars you earned"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "珍惜",
+        "reason": "这是点题：干这种活让人怎样看待挣来的钱，要一个正面的态度。动词看情感：它和 and respect those who did the work 并列，宾语是 the dollars you earned，和尊重同向是珍惜。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "withdraw",
+          "meaning": "取出；和 respect 并列的应是态度，取钱只是动作，说不出劳动教会人什么。",
+          "quote": "respect"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donate",
+          "meaning": "捐出；这句讲辛苦劳动后对 the dollars you earned 的体会，捐钱接不上尊重。",
+          "quote": "the dollars you earned"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "receive",
+          "meaning": "收到；the dollars you earned 本来就是挣到手的钱，再说收到等于没说。",
+          "quote": "the dollars you earned"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the dollars you earned",
+          "signalSide": "context-after",
+          "targetText": "appreciate the dollars you earned",
+          "relation": "中文：珍惜挣来的钱。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "respect those who did the work",
+          "signalSide": "context-after",
+          "relation": "中文：与尊重并列，态度正面。"
+        }
+      ]
+    }
+  }
+}

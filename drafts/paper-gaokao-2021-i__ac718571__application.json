@@ -1,0 +1,158 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Youth and Me\n\nCongratulations to Youth on its tenth birthday! As a loyal reader, I'd like to share what it has meant to me.\n\nI first picked up a copy in Senior One, hoping to improve my English. Soon I was hooked, and reading it every Friday has become a habit.\n\nMy favourite column is Campus Voices, where students write about their own lives. Last spring, a story about a shy girl who joined the debate team gave me the courage to speak up in class.\n\nI hope Youth will give more students a chance to be heard, perhaps by adding a column for book reviews. Happy birthday, Youth, and here's to the next ten years!",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "给校英文报 Youth 投稿，庆祝创刊十周年；读者是编辑和全校读者，用第一人称写自己与报纸的故事。",
+        "三个要点：读报的经历、喜爱的栏目、期望和祝福；标题 Youth and Me 照题面写在最上面，这是短文不是书信，不加称呼和署名。"
+      ],
+      "thisEssayChooses": "本文自拟了细节：高一偶然开始读、每周五读报的习惯、名为 Campus Voices 的学生来稿栏目，以及读到一篇文章后加入辩论队的经历；期望落在“多给学生发声的版面、加一个书评栏目”。栏目名、具体经历和建议都可以换成你自己的，但要具体，经历和栏目最好能连成一件事。语气是一个真诚的老读者，开头祝贺，结尾祝福。"
+    },
+    "standard": {
+      "essay": "Youth and Me\n\nCongratulations to Youth on its tenth birthday! As a loyal reader, I'd like to share what it has meant to me.\n\nI first picked up a copy in Senior One, hoping to improve my English. Soon I was hooked, and reading it every Friday has become a habit.\n\nMy favourite column is Campus Voices, where students write about their own lives. Last spring, a story about a shy girl who joined the debate team gave me the courage to speak up in class.\n\nI hope Youth will give more students a chance to be heard, perhaps by adding a column for book reviews. Happy birthday, Youth, and here's to the next ten years!",
+      "pointMap": [
+        {
+          "point": "读报的经历",
+          "quote": "I first picked up a copy in Senior One, hoping to improve my English."
+        },
+        {
+          "point": "读报的经历",
+          "quote": "Soon I was hooked, and reading it every Friday has become a habit."
+        },
+        {
+          "point": "喜爱的栏目",
+          "quote": "My favourite column is Campus Voices, where students write about their own lives."
+        },
+        {
+          "point": "期望和祝福",
+          "quote": "I hope Youth will give more students a chance to be heard, perhaps by adding a column for book reviews."
+        },
+        {
+          "point": "期望和祝福",
+          "quote": "Happy birthday, Youth, and here's to the next ten years!"
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "开头先祝贺十周年，再交代“我”是谁、要讲什么，读者一眼知道这是一篇读者投稿。",
+          "items": [
+            {
+              "quote": "Congratulations to Youth on its tenth birthday!",
+              "explain": "一句话同时回应“庆祝创刊十周年”的场合和读者对象，比先写“我是某某”更快进入正题。"
+            },
+            {
+              "quote": "what it has meant to me",
+              "explain": "用现在完成时 has meant 说报纸对“我”一直以来的意义，点出全文中心：报纸和我的关系，正好扣住标题 Youth and Me。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写读报经历：从什么时候、为什么开始读，到读成了习惯。",
+          "items": [
+            {
+              "quote": "hoping to improve my English",
+              "explain": "现在分词短语交代最初读报的目的，一个高中生读英文报的真实理由，不用编大道理。"
+            },
+            {
+              "quote": "Soon I was hooked",
+              "explain": "短短几个词写出转变：本来为了学英语，后来真的读入了迷。hooked（入迷）是地道的口语词，比 I liked it very much 生动。"
+            },
+            {
+              "quote": "reading it every Friday has become a habit",
+              "explain": "“每周五”这个具体时间让经历有画面感；动名词短语作主语，配 has become 说明这个习惯一直持续到现在。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "写喜爱的栏目：先点名栏目，再用一件事说明为什么喜欢。",
+          "items": [
+            {
+              "quote": "My favourite column is Campus Voices, where students write about their own lives.",
+              "explain": "开门见山点出栏目名，where 引导的定语从句顺带介绍它写什么，读者不用猜。"
+            },
+            {
+              "quote": "a story about a shy girl who joined the debate team",
+              "explain": "喜欢的理由不写“很有趣、很有用”，而是讲一篇具体文章，读者信得过。"
+            },
+            {
+              "quote": "gave me the courage to speak up in class",
+              "explain": "写出栏目对“我”的实际影响，喜欢的理由落在自己的变化上；speak up 是“大胆说出来”的常用搭配。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "写期望和祝福：先提一个具体可做的建议，再送上祝福收尾。",
+          "items": [
+            {
+              "quote": "perhaps by adding a column for book reviews",
+              "explain": "期望不停在“越办越好”，而是给编辑一个能马上考虑的建议；perhaps 让建议听起来客气。"
+            },
+            {
+              "quote": "here's to the next ten years",
+              "explain": "here's to 是祝酒时说的“为……干杯”，用在周年庆的结尾既有分寸又呼应“十周年”。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "what ... has meant to me",
+          "function": "说某样东西对自己一直以来的意义，适合周年、毕业、告别这类回顾性的投稿开头。"
+        },
+        {
+          "expression": "Soon I was hooked.",
+          "function": "写自己从随便看看到读入迷的转变，让读报经历有起伏。"
+        },
+        {
+          "expression": "Happy birthday, ... and here's to the next ten years!",
+          "function": "周年庆投稿的祝福结尾，把祝福和“下一个十年”连在一起。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Youth and Me\n\nAs Youth celebrates its tenth birthday, I want to thank a friend that has been with me all through senior high.\n\nI came across Youth in Senior One, when someone left a copy on my desk. I only meant to flip through it, but I ended up reading it from cover to cover. Since then, every Friday has meant a fresh issue and a lively chat with my deskmate.\n\nWhat I look forward to most is Campus Voices, a column written by students for students. Last spring, I read a piece by a girl too shy to speak in class until she joined the debate team. Her story spoke to me, and I signed up too.\n\nI hope Youth will open its pages to more student writers, maybe with a column for book reviews. Happy birthday, Youth! May you inspire readers like me for years to come.",
+      "pointMap": [
+        {
+          "point": "读报的经历",
+          "quote": "I came across Youth in Senior One, when someone left a copy on my desk."
+        },
+        {
+          "point": "读报的经历",
+          "quote": "Since then, every Friday has meant a fresh issue and a lively chat with my deskmate."
+        },
+        {
+          "point": "喜爱的栏目",
+          "quote": "What I look forward to most is Campus Voices, a column written by students for students."
+        },
+        {
+          "point": "期望和祝福",
+          "quote": "I hope Youth will open its pages to more student writers, maybe with a column for book reviews."
+        },
+        {
+          "point": "期望和祝福",
+          "quote": "May you inspire readers like me for years to come."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "I want to thank a friend that has been with me all through senior high",
+          "explain": "把报纸说成陪伴“我”整个高中的朋友，比标准版的“分享它对我的意义”更贴近读者和报纸的关系，也给全文定下感谢的基调。"
+        },
+        {
+          "quote": "I only meant to flip through it, but I ended up reading it from cover to cover.",
+          "explain": "flip through（随手翻翻）和 from cover to cover（从头读到尾）一前一后形成对比，把“读入迷”写成一个看得见的动作，比 Soon I was hooked 更具体。"
+        },
+        {
+          "quote": "a column written by students for students",
+          "explain": "同位语用 by ... for ... 的对称结构，一句话说清栏目的特点，也暗示了喜欢它的原因：读到的是和自己一样的人。"
+        }
+      ]
+    }
+  }
+}

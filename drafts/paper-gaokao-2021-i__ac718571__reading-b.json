@@ -1,0 +1,706 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-i:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-i:reading-b": {
+      "overview": "律师 Robert Titterton 业余为钢琴家 Maria Raspopova 当翻谱员。文章写他为此学会识谱，讲翻谱需要的技巧、练习和台上的小意外，最后借 Maria 之口把他和她丈夫作对比。",
+      "fullTranslationZh": "白天，Robert Titterton 是一名律师。不过在业余时间，他会走上舞台，坐在钢琴家 Maria Raspopova 身边——不是作为音乐家，而是作为她的翻谱员。“我不是科班出身的音乐人，但我学会了识谱，这样就能在 Maria 演出时帮上她。”\n\nTitterton 先生是 Omega 合奏团的主席，过去四年来也一直是这个乐团的正式翻谱员。他的工作是坐在钢琴家身旁翻乐谱，这样演奏者就不必自己动手翻页而打断音乐的连贯。他说，他和台上演奏乐器的人一样紧张。\n\n“这份工作需要很多技巧。你得确保不会一次翻过两页，还得在需要回到正确位置时找到乐曲中的反复段。”Titterton 先生解释道。\n\n当翻谱员需要大量练习。有些乐曲长达40分钟，需要翻页多达50次，其中包括为反复段往回翻。台上无声的交流是关键，每位钢琴家都有自己“点头”示意翻页的方式，这需要他们和自己的翻谱员一起练习。\n\n但和所有演出一样，也有出差错的时候。“我正翻着页，准备翻下一页，可翻页带起的风把备用的几页谱子从谱架上吹落了，”Titterton 先生说，“幸好我接住了它们，又放了回去。”\n\n大多数翻谱员是学钢琴的学生或崭露头角的音乐会钢琴家，不过 Raspopova 女士曾经请她丈夫上台帮忙。\n\n“我丈夫是最差劲的翻谱员，”她笑着说，“他对音乐很感兴趣，感受着每一个音符，我只好提醒他：‘翻呀，翻呀！’Robert 是我这辈子遇到的最好的翻谱员。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2021-i:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+          "sourceText": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+          "displayText": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:26"
+          ],
+          "translationZh": "台上无声的交流是关键，每位钢琴家都有自己“点头”示意翻页的方式，这需要他们和自己的翻谱员一起练习。",
+          "analysisZh": "and 连接两个分句。前一句很短：无声的交流是关键。后一句主干 each pianist has their own style of “nodding”：每位钢琴家都有自己的点头方式；to indicate a page turn 说点头是为了示意翻页。句末 which they need to practise with their page turner 修饰 style of “nodding”，they 指钢琴家，意思是这套点头暗号要和翻谱员一起练。第26题问翻谱员要练什么，答案就在这个 which 从句里。",
+          "underlineRanges": [
+            {
+              "start": 41,
+              "end": 86,
+              "quote": "each pianist has their own style of “nodding”"
+            },
+            {
+              "start": 87,
+              "end": 110,
+              "quote": "to indicate a page turn"
+            },
+            {
+              "start": 111,
+              "end": 138,
+              "quote": "which they need to practise"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2021-i:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:1"
+              ],
+              "start": 0,
+              "end": 126,
+              "quote": "白天，Robert Titterton 是一名律师。不过在业余时间，他会走上舞台，坐在钢琴家 Maria Raspopova 身边——不是作为音乐家，而是作为她的翻谱员。“我不是科班出身的音乐人，但我学会了识谱，这样就能在 Maria 演出时帮上她。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:2"
+              ],
+              "start": 128,
+              "end": 232,
+              "quote": "Titterton 先生是 Omega 合奏团的主席，过去四年来也一直是这个乐团的正式翻谱员。他的工作是坐在钢琴家身旁翻乐谱，这样演奏者就不必自己动手翻页而打断音乐的连贯。他说，他和台上演奏乐器的人一样紧张。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:3"
+              ],
+              "start": 234,
+              "end": 298,
+              "quote": "“这份工作需要很多技巧。你得确保不会一次翻过两页，还得在需要回到正确位置时找到乐曲中的反复段。”Titterton 先生解释道。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:4"
+              ],
+              "start": 300,
+              "end": 393,
+              "quote": "当翻谱员需要大量练习。有些乐曲长达40分钟，需要翻页多达50次，其中包括为反复段往回翻。台上无声的交流是关键，每位钢琴家都有自己“点头”示意翻页的方式，这需要他们和自己的翻谱员一起练习。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:5"
+              ],
+              "start": 395,
+              "end": 482,
+              "quote": "但和所有演出一样，也有出差错的时候。“我正翻着页，准备翻下一页，可翻页带起的风把备用的几页谱子从谱架上吹落了，”Titterton 先生说，“幸好我接住了它们，又放了回去。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:6"
+              ],
+              "start": 484,
+              "end": 536,
+              "quote": "大多数翻谱员是学钢琴的学生或崭露头角的音乐会钢琴家，不过 Raspopova 女士曾经请她丈夫上台帮忙。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:reading-b:7"
+              ],
+              "start": 538,
+              "end": 614,
+              "quote": "“我丈夫是最差劲的翻谱员，”她笑着说，“他对音乐很感兴趣，感受着每一个音符，我只好提醒他：‘翻呀，翻呀！’Robert 是我这辈子遇到的最好的翻谱员。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:24-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+                "start": 156,
+                "end": 253,
+                "quote": "I’m not a trained musician, but I’ve learnt to read music so I can help Maria in her performance."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p1",
+                "start": 86,
+                "end": 125,
+                "quote": "我不是科班出身的音乐人，但我学会了识谱，这样就能在 Maria 演出时帮上她。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:25-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
+                "start": 1,
+                "end": 40,
+                "quote": "A lot of skills are needed for the job."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p3",
+                "start": 1,
+                "end": 12,
+                "quote": "这份工作需要很多技巧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:25-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+                "start": 0,
+                "end": 48,
+                "quote": "Being a page turner requires plenty of practice."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p4",
+                "start": 0,
+                "end": 11,
+                "quote": "当翻谱员需要大量练习。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:26-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+                "start": 167,
+                "end": 329,
+                "quote": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p4",
+                "start": 44,
+                "end": 93,
+                "quote": "台上无声的交流是关键，每位钢琴家都有自己“点头”示意翻页的方式，这需要他们和自己的翻谱员一起练习。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2021-i:27-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+                "start": 53,
+                "end": 135,
+                "quote": "He’s interested in the music, feeling every note, and I have to say: ‘Turn, turn!’"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p7",
+                "start": 20,
+                "end": 53,
+                "quote": "他对音乐很感兴趣，感受着每一个音符，我只好提醒他：‘翻呀，翻呀！’"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2021-i:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+                "start": 167,
+                "end": 329,
+                "quote": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2021-i:reading-b-p4",
+                "start": 44,
+                "end": 93,
+                "quote": "台上无声的交流是关键，每位钢琴家都有自己“点头”示意翻页的方式，这需要他们和自己的翻谱员一起练习。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2021-i:reading-b-1"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先介绍律师 Titterton 业余当翻谱员，再讲这份工作的内容、技巧和练习，接着写台上的意外，最后借钢琴家的话把丈夫和 Titterton 对比，夸他是最好的翻谱员。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+            "summary": "律师 Titterton 业余给钢琴家翻谱，为此学会了识谱",
+            "function": "引出人物和他的特殊角色。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+            "summary": "他当了四年正式翻谱员，工作是替钢琴家翻页，上台也会紧张",
+            "function": "说明翻谱员的职责。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
+            "summary": "翻谱需要多种技巧：别一次翻两页，要找准反复段",
+            "function": "用他的原话说明这份工作不简单。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+            "summary": "长曲翻页多，要和钢琴家练习各自的点头暗号",
+            "function": "具体说明为什么需要大量练习。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+            "summary": "有一次翻页的风吹落谱页，他及时接住",
+            "function": "举一次意外，说明台上难免出错。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:6",
+            "summary": "翻谱员多是钢琴学生，Maria 曾请丈夫帮忙",
+            "function": "过渡，引出她丈夫的例子。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+            "summary": "Maria 说丈夫沉迷音乐忘了翻页，Titterton 才是最好的翻谱员",
+            "function": "用对比收尾，突出 Titterton 的称职。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-i:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Titterton 自己的话里找出他为当翻谱员专门学会的本事。",
+      "stemTranslationZh": "Titterton 要当翻谱员，得会做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 but 后学会了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "识谱。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+              "quote": "I’m not a trained musician, but I’ve learnt to read music so I can help Maria in her performance.",
+              "anchor": "为翻谱学会识谱"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "弹钢琴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In his spare time though he goes on stage beside pianist Maria Raspopova – not as a musician but as her page turner.",
+            "sourceEntity": "pianist Maria Raspopova",
+            "optionText": "Play the piano.",
+            "optionEntity": "Play the piano",
+            "explanation": "弹钢琴的是钢琴家 Maria（pianist），Titterton 只坐在旁边翻谱，还说自己不是音乐家（not as a musician）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+              "quote": "In his spare time though he goes on stage beside pianist Maria Raspopova – not as a musician but as her page turner.",
+              "anchor": "弹琴的是 Maria"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "唱歌。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Sing songs.",
+            "explanation": "文中是钢琴演出，没人唱歌；翻谱要的本事只提到识谱、别翻错页、找准反复段。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "修理乐器。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Fix the instruments.",
+            "explanation": "他的工作是坐在钢琴家旁翻乐谱（turn the pages of the score），文中没提修乐器。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "be able to do",
+          "sourceZh": "能够做到",
+          "targetText": "I’m not a trained musician, but I’ve learnt to read music so I can help Maria in her performance.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:1",
+          "targetCue": "learnt to",
+          "targetCueZh": "学会了",
+          "answerText": "learnt to read music",
+          "note": "题干 be able to do 对应原文 learnt to。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Read music.",
+          "targetText": "learnt to read music",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文 read music。他不是科班音乐人，却为了在演出时帮 Maria 专门学会识谱（so I can help Maria），选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:25": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把文中写翻谱要的技巧和练习合起来，概括这份工作的特点。",
+      "stemTranslationZh": "下列哪项最能描述 Titterton 在台上的工作？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "乏味的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "He said he became just as nervous as those playing instruments on stage.",
+            "sourceHighlight": "just as nervous",
+            "optionText": "Boring.",
+            "optionHighlight": "Boring",
+            "explanation": "他说上台和演奏者一样紧张（just as nervous），还得盯着页码和反复段，一刻也闲不下来，谈不上乏味。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+              "quote": "He said he became just as nervous as those playing instruments on stage.",
+              "anchor": "上台也紧张"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "报酬高的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Well-paid.",
+            "explanation": "文中没提翻谱的报酬；他本职是律师，翻谱是业余时间（spare time）做的事。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "要求高的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
+              "quote": "A lot of skills are needed for the job.",
+              "anchor": "需要很多技巧"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "quote": "Being a page turner requires plenty of practice.",
+              "anchor": "需要大量练习"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "危险的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Dangerous.",
+            "explanation": "台上出过的差错只是谱页被风吹落（fall off the stand），他接住放回就没事了，谈不上危险。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "job",
+          "targetText": "A lot of skills are needed for the job.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:3",
+          "answerText": "A lot of skills are needed",
+          "note": "题干 job 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Demanding.",
+          "targetText": "A lot of skills are needed",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "“要求高”（demanding）由两处合起来：先说这活要很多技巧（A lot of skills），接着[[block:paper-gaokao-2021-i:reading-b:4]]说还要大量练习（plenty of practice），选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出翻谱员必须和钢琴家一起练的那件事。",
+      "stemTranslationZh": "Titterton 需要练习什么？",
+      "locateBy": "stem",
+      "locateFindZh": "which 指什么，同句往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "数页数。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "page",
+            "optionText": "page",
+            "matchType": "exact",
+            "relationNote": "原文说一首曲子要翻页多达50次（up to 50 page turns），是在说翻页之多，没说要练数页数。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "quote": "Some pieces of music can go for 40 minutes and require up to 50 page turns, including back turns for repeat passages.",
+              "anchor": "翻页次数多"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "识别“点头”示意。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "quote": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+              "anchor": "和钢琴家练点头暗号"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "接住掉落的东西。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "catch",
+            "optionText": "Catching",
+            "matchType": "wordFamily",
+            "relationNote": "Catching 来自[[block:paper-gaokao-2021-i:reading-b:5]]的 catch，那是一次意外里他碰巧接住了谱页（Luckily），不是平时要练的功夫。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+              "quote": "Luckily I was able to catch them and put them back.",
+              "anchor": "意外中接住谱页"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "以自己的风格表演。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+            "sourceEntity": "each pianist",
+            "optionText": "Performing in his own style.",
+            "optionEntity": "his own style",
+            "explanation": "原文的 own style 属于每位钢琴家（each pianist），指各自的点头方式；Titterton 不演奏，要做的是适应对方的风格。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "quote": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+              "anchor": "钢琴家各有风格"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "need to practise",
+          "targetText": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:4",
+          "answerText": "each pianist has their own style of “nodding” to indicate a page turn which they need to practise",
+          "note": "题干 need to practise 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Recognizing the “nodding”.",
+          "targetText": "their own style of “nodding” to indicate a page turn",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“识别点头”就是读懂钢琴家各自示意翻页的点头方式（style of “nodding”）。每人点法不同，翻谱员得一起练才看得懂，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:27": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Maria 解释丈夫的那句话里，推出他当不好翻谱员的原因。",
+      "stemTranslationZh": "为什么 Raspopova 女士的丈夫是“最差劲的翻谱员”？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读她怎么解释",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他视力很差。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He has very poor eyesight.",
+            "explanation": "原文没提他的视力；他翻不好是因为听音乐太投入（feeling every note）。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他不理会观众。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He ignores the audience.",
+            "explanation": "他顾不上的是翻页，不是观众；文中没写他对观众怎样。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他对音乐不感兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "He’s interested in the music, feeling every note",
+            "sourceHighlight": "interested in the music",
+            "optionText": "He has no interest in music.",
+            "optionHighlight": "no interest in music",
+            "explanation": "原文说他对音乐很感兴趣（interested in the music），正是太投入才忘了翻页，选项说成了不感兴趣。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+              "quote": "He’s interested in the music, feeling every note",
+              "anchor": "丈夫沉浸在音乐里"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他忘了做自己的事。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+              "quote": "He’s interested in the music, feeling every note, and I have to say: ‘Turn, turn!’",
+              "anchor": "丈夫顾着听音乐"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the worst page turner",
+          "targetText": "“My husband is the worst page turner,” she laughed.",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:7",
+          "answerText": "feeling every note, and I have to say: ‘Turn, turn!’",
+          "bridgeZh": "评价之后，她用丈夫台上的表现作解释",
+          "note": "题干 the worst page turner 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "He forgets to do his job.",
+          "targetText": "I have to say: ‘Turn, turn!’",
+          "targetParagraphId": "block:paper-gaokao-2021-i:reading-b:7",
+          "relationType": "paraphrase",
+          "note": "原文没直说他忘了翻页，只说他沉浸在音乐里、感受每个音符（feeling every note），她还得喊“翻呀，翻呀！”（Turn, turn!），由此推出他常常忘了自己的活，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

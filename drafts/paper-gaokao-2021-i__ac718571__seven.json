@@ -1,0 +1,942 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-i:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-i:seven-choices": {
+      "overview": "作者带着自嘲写一周巴黎生活：想像本地人那样过日子，租下又小又贵的公寓；巴黎人吃美食不长胖，因为好吃一点就够、水果又贵；咖啡馆满座和每周35小时工作制说明法国人重生活质量。",
+      "fullTranslationZh": "我和丈夫刚在巴黎住了一周。我们的目标是看看能否在某种程度上像真正的巴黎人那样生活。因此，第一件事就是租下一套贵得惊人、只有橱柜大小的六楼公寓。它太小了，我们不得不把行李箱放在走廊。\n\n不过，这地方也不完全地道。和通常的巴黎公寓不同，这里的水管能正常工作。有一间不错的厨房和一张舒适的床。楼里甚至有一部小电梯，用完美的法语女声说“门正在打开”。这是我唯一学会的法语，可惜平时用不上几次。\n\n巴黎人和你我不同。他们从不显得懒散或邋遢。正如几周前有人在本报所说，他们吃着美食却从不长胖。食物实在太美味，只需吃一点就能感到满足。法国草莓不像硬纸板；相反，它们在口中像一颗颗小小的味觉炸弹一样迸发滋味。\n\n这并不是法国人比我们吃得少的唯一原因。到巴黎的第一个早晨，我绕过街角去食品市场采购。我买了一小把完全成熟的小草莓和一只小甜瓜。丈夫和我都觉得这是我们吃过的最好吃的水果。但它们竟要18美元！\n\n在法国，生活质量比效率重要得多。\n\n从咖啡馆生活就能看出来。法国咖啡馆总是挤满人。并非所有顾客都是游客。这些人什么时候工作呢？法国人认真对待每周35小时工作制，认真到一些工会最近与一批公司达成协议，限制独立承包者随时待命的小时数。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-seven-choices-1",
+          "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+          "sourceText": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+          "displayText": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:40"
+          ],
+          "translationZh": "法国人认真对待每周35小时工作制，认真到一些工会最近与一批公司达成协议，限制独立承包者随时待命的小时数。",
+          "analysisZh": "主干是 The French take their 35-hour workweek seriously。破折号后的 so seriously that 重复并推进 seriously，that 引出结果：工会 struck a deal（达成协议）。limiting the number of hours 是现在分词短语，修饰 a deal，说明协议的内容；最后的 that independent contractors can be on call 是定语从句，修饰 hours。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 48,
+              "quote": "The French take their 35-hour workweek seriously"
+            },
+            {
+              "start": 51,
+              "end": 68,
+              "quote": "so seriously that"
+            },
+            {
+              "start": 136,
+              "end": 164,
+              "quote": "limiting the number of hours"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-seven-choices-2",
+          "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+          "sourceText": "So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard.",
+          "displayText": "So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-i:36"
+          ],
+          "translationZh": "因此，第一件事就是租下一套贵得惊人、只有橱柜大小的六楼公寓。",
+          "analysisZh": "主干是 the first thing ... was rent ...：主语 the first thing 后面省略了关系词，we did 是定语从句；was 后面用不带 to 的 rent 作表语。the size of a cupboard 是名词短语直接作后置定语，夸张地说公寓只有橱柜大。So 承接空里的目的，说明租房是为它迈出的第一步。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 2,
+              "quote": "So"
+            },
+            {
+              "start": 3,
+              "end": 34,
+              "quote": "the first thing we did was rent"
+            },
+            {
+              "start": 83,
+              "end": 105,
+              "quote": "the size of a cupboard"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2021-i:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-seven-choices-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 90,
+              "quote": "我和丈夫刚在巴黎住了一周。我们的目标是看看能否在某种程度上像真正的巴黎人那样生活。因此，第一件事就是租下一套贵得惊人、只有橱柜大小的六楼公寓。它太小了，我们不得不把行李箱放在走廊。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:seven-choices:2"
+              ],
+              "start": 92,
+              "end": 192,
+              "quote": "不过，这地方也不完全地道。和通常的巴黎公寓不同，这里的水管能正常工作。有一间不错的厨房和一张舒适的床。楼里甚至有一部小电梯，用完美的法语女声说“门正在打开”。这是我唯一学会的法语，可惜平时用不上几次。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:seven-choices:3"
+              ],
+              "start": 194,
+              "end": 296,
+              "quote": "巴黎人和你我不同。他们从不显得懒散或邋遢。正如几周前有人在本报所说，他们吃着美食却从不长胖。食物实在太美味，只需吃一点就能感到满足。法国草莓不像硬纸板；相反，它们在口中像一颗颗小小的味觉炸弹一样迸发滋味。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:seven-choices:4"
+              ],
+              "start": 298,
+              "end": 392,
+              "quote": "这并不是法国人比我们吃得少的唯一原因。到巴黎的第一个早晨，我绕过街角去食品市场采购。我买了一小把完全成熟的小草莓和一只小甜瓜。丈夫和我都觉得这是我们吃过的最好吃的水果。但它们竟要18美元！"
+            },
+            {
+              "paragraphId": "zh-seven-choices-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:seven-choices:5"
+              ],
+              "start": 394,
+              "end": 410,
+              "quote": "在法国，生活质量比效率重要得多。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-i:seven-choices:6"
+              ],
+              "start": 412,
+              "end": 509,
+              "quote": "从咖啡馆生活就能看出来。法国咖啡馆总是挤满人。并非所有顾客都是游客。这些人什么时候工作呢？法国人认真对待每周35小时工作制，认真到一些工会最近与一批公司达成协议，限制独立承包者随时待命的小时数。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+            "text": "My husband and I just spent a week in Paris. Our aim was to see if we could live, in some way, like real Parisians. So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard. It was so tiny that we had to leave our suitcases in the hallway."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+            "text": "The place wasn’t entirely authentic, though. Unlike a normal Parisian apartment, the plumbing (水管) worked. There was a nice kitchen and a comfortable bed. Our building even had a tiny lift with a female voice that said, “Ouverture des portes,” in perfect French. That is the only French phrase I mastered, and it’s a shame I don’t have much use for it."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+            "text": "Parisians are different from you and me. They never look lazy or untidy. As someone noted in this paper a couple of weeks ago, they eat great food and never gain weight. The food is so delicious that you don’t need much of it to make you happy. French strawberries do not taste like cardboard. Instead, they explode in your mouth like little flavor bombs."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+            "text": "That’s not the only reason the French eat less than we do. On our first morning in Paris, I went around the corner to the food market to pick up some groceries. I bought a handful of perfectly ripe small strawberries and a little sweet melon. My husband and I agreed they were the best fruit we had ever eaten. But they cost $18!"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2021-i:seven-choices:6",
+            "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+            "text": "You can tell this by café life. French cafés are always crowded. Not all the customers are tourists. When do these people work? The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-seven-choices-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+                "quote": "So the first thing we did",
+                "start": 52,
+                "end": 77
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "因此，第一件事就是租下一套贵得惊人、只有橱柜大小的六楼公寓。",
+                "start": 41,
+                "end": 71
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:36"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:36",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+                "quote": "Our aim was to see if we could live, in some way, like real Parisians.",
+                "start": 45,
+                "end": 115
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "我们的目标是看看能否在某种程度上像真正的巴黎人那样生活。",
+                "start": 13,
+                "end": 41
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+                "quote": "the plumbing (水管) worked.",
+                "start": 81,
+                "end": 106
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "quote": "这里的水管能正常工作。",
+                "start": 24,
+                "end": 35
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:37"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:37",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+                "quote": "There was a nice kitchen and a comfortable bed.",
+                "start": 107,
+                "end": 154
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "quote": "有一间不错的厨房和一张舒适的床。",
+                "start": 35,
+                "end": 51
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+                "quote": "eat great food and never gain weight",
+                "start": 132,
+                "end": 168
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "quote": "他们吃着美食却从不长胖。",
+                "start": 34,
+                "end": 46
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:38"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:38",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+                "quote": "The food is so delicious that you don’t need much of it to make you happy.",
+                "start": 170,
+                "end": 244
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "quote": "食物实在太美味，只需吃一点就能感到满足。",
+                "start": 46,
+                "end": 66
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+                "quote": "But they cost $18!",
+                "start": 259,
+                "end": 277
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "quote": "但它们竟要18美元！",
+                "start": 84,
+                "end": 94
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:39"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:39",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+                "quote": "That’s not the only reason the French eat less than we do.",
+                "start": 0,
+                "end": 58
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "quote": "这并不是法国人比我们吃得少的唯一原因。",
+                "start": 0,
+                "end": 19
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+                "quote": "these people work",
+                "start": 80,
+                "end": 97
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "quote": "这些人什么时候工作呢？",
+                "start": 34,
+                "end": 45
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:40"
+            ],
+            "blankId": "blank:paper-gaokao-2021-i:40",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2021-i:seven-choices:6",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+                "quote": "Not all the customers are tourists.",
+                "start": 65,
+                "end": 100
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "quote": "并非所有顾客都是游客。",
+                "start": 23,
+                "end": 34
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-seven-choices-1",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+                "quote": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+                "start": 99,
+                "end": 308
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "quote": "法国人认真对待每周35小时工作制，认真到一些工会最近与一批公司达成协议，限制独立承包者随时待命的小时数。",
+                "start": 45,
+                "end": 97
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-seven-choices-2",
+            "questionIds": [
+              "question:paper-gaokao-2021-i:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+                "quote": "So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard.",
+                "start": 52,
+                "end": 158
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2021-i:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "因此，第一件事就是租下一套贵得惊人、只有橱柜大小的六楼公寓。",
+                "start": 41,
+                "end": 71
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段交代来巴黎的打算，随后三块依次展开：住处并不地道，美食与少吃的两个原因，咖啡馆和工作时长体现的生活观。单独成段的一句 \"quality of life is much more important than efficiency\" 是最后一块的总起。",
+        "units": [
+          {
+            "unitId": "unit-seven-1",
+            "heading": "住进巴黎公寓",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-i:seven-choices:1",
+              "block:paper-gaokao-2021-i:seven-choices:2"
+            ],
+            "summary": "为了像本地人一样生活，夫妻租下橱柜大小的六楼公寓；作者又反讽它设施太好，不够地道。"
+          },
+          {
+            "unitId": "unit-seven-2",
+            "heading": "巴黎人为什么不胖",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-i:seven-choices:3",
+              "block:paper-gaokao-2021-i:seven-choices:4"
+            ],
+            "summary": "先说食物好吃到少量就满足，再用一小把草莓卖18美元说明贵也是少吃的原因。"
+          },
+          {
+            "unitId": "unit-seven-3",
+            "heading": "生活质量重于效率",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-i:seven-choices:5",
+              "block:paper-gaokao-2021-i:seven-choices:6"
+            ],
+            "summary": "先下论断，再用总是满座的咖啡馆和认真执行的35小时工作制来印证。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 38,
+          "secondary": 40,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"equally excellent\" 像在接空前 \"eat great food\"：吃得好，生活也一样好。但空后 \"French strawberries do not taste like cardboard\" 还在讲食物的味道，它却岔到生活质量，也没解释 \"never gain weight\"。它借的是后文 \"quality of life\" 那句；放到咖啡馆那一空，空后 \"these people\" 在它里面找不到人。",
+          "quotes": [
+            "equally excellent",
+            "eat great food",
+            "French strawberries do not taste like cardboard",
+            "never gain weight",
+            "quality of life",
+            "these people"
+          ]
+        },
+        "D": {
+          "target": 38,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "food"
+          ],
+          "text": "它的 \"The amazing food\" 对上空前 \"eat great food\"，空后 \"French strawberries\" 也是吃的。但空前吃美食的 they 是 \"Parisians\"，它却换成 \"local farmers\"；空后 \"explode in your mouth\" 讲的是味道，不是谁在吃。它是照答案 G 改的：都有 \"food\"，G 说好吃到吃一点就够，它改成主要由农民吃。",
+          "quotes": [
+            "The amazing food",
+            "eat great food",
+            "French strawberries",
+            "Parisians",
+            "local farmers",
+            "explode in your mouth",
+            "food"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-i:36": {
+      "blankId": "blank:paper-gaokao-2021-i:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "spent a week in Paris",
+        "So the first thing we did",
+        "rent",
+        "sixth-floor apartment"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+        "beforeQuote": "My husband and I just spent a week in Paris.",
+        "afterQuote": "So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "So",
+          "signalSide": "context-after",
+          "targetText": "Our aim was to see if we could live",
+          "relation": "So 表示“于是”，前面要有一个打算，后面租房是为这个打算做的第一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Our aim was",
+          "signalSide": "option",
+          "targetText": "So the first thing we did",
+          "relation": "选项先亮出目的，空后的 So 才有东西可承接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "like real Parisians",
+          "signalSide": "option",
+          "targetText": "rent ... sixth-floor apartment",
+          "relation": "想像真正的巴黎人那样生活，所以不住酒店，去租本地人住的小公寓。"
+        }
+      ],
+      "lock": [
+        "So the first thing we did",
+        "Our aim was"
+      ],
+      "find": {
+        "text": "先看空后 \"So the first thing we did\"：So 前面要有个打算，租房是为它做的第一件事。七个选项里只有 F 的 \"Our aim was\" 交代目的。",
+        "quotes": [
+          "So the first thing we did",
+          "Our aim was"
+        ]
+      },
+      "explain": "空前只说在巴黎住了一周，这句亮出此行的打算；空后租下又贵又小的六楼公寓，正是照这个打算迈出的第一步；下一段嫌房子不够地道，也是拿这个打算来比。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "matchedClues": [
+          {
+            "contextSide": "So the first thing we did was rent",
+            "optionSide": "Our aim was to see if we could live, in some way, like real Parisians",
+            "relation": "先说目的，再说为目的做的第一件事。"
+          }
+        ],
+        "fitSummary": "空前只说在巴黎住了一周，这句亮出此行的打算；空后租下又贵又小的六楼公寓，正是照这个打算迈出的第一步；下一段嫌房子不够地道，也是拿这个打算来比。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2021-i:37": {
+      "blankId": "blank:paper-gaokao-2021-i:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "wasn’t entirely authentic",
+        "Parisian apartment",
+        "the plumbing (水管) worked",
+        "a tiny lift"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+        "beforeQuote": "The place wasn’t entirely authentic, though. Unlike a normal Parisian apartment, the plumbing (水管) worked.",
+        "afterQuote": "Our building even had a tiny lift"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "even",
+          "signalSide": "context-after",
+          "targetText": "a nice kitchen and a comfortable bed",
+          "relation": "even 表示“甚至”，前面得先列过几样好设施，电梯是再往上加的一样。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the plumbing (水管) worked",
+          "signalSide": "context-before",
+          "targetText": "a nice kitchen and a comfortable bed",
+          "relation": "水管好用是第一样设施，选项接着列厨房和床。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a nice kitchen and a comfortable bed",
+          "signalSide": "option",
+          "targetText": "the plumbing / a tiny lift",
+          "relation": "和空前的水管、空后的电梯是同一类：屋里的设施。"
+        }
+      ],
+      "lock": [
+        "the plumbing (水管) worked",
+        "even"
+      ],
+      "find": {
+        "text": "空前 \"the plumbing (水管) worked\" 在列住处设施，空后 \"Our building even had a tiny lift\" 用 even 再加一样，空里也该是设施。只有 C 写厨房和床。",
+        "quotes": [
+          "the plumbing (水管) worked",
+          "Our building even had a tiny lift"
+        ]
+      },
+      "explain": "段首说住处不够地道，理由反而是条件太好。这句接在水管后面再添厨房和床，空后由屋里说到整栋楼的电梯，好处一样比一样多，自嘲的味道也越来越浓。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "matchedClues": [
+          {
+            "contextSide": "the plumbing (水管) worked / Our building even had a tiny lift",
+            "optionSide": "There was a nice kitchen and a comfortable bed",
+            "relation": "三样设施依次排开，even 把电梯放在最后加码。"
+          }
+        ],
+        "fitSummary": "段首说住处不够地道，理由反而是条件太好。这句接在水管后面再添厨房和床，空后由屋里说到整栋楼的电梯，好处一样比一样多，自嘲的味道也越来越浓。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2021-i:38": {
+      "blankId": "blank:paper-gaokao-2021-i:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "eat great food",
+        "never gain weight",
+        "French strawberries",
+        "cardboard",
+        "little flavor bombs"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+        "beforeQuote": "As someone noted in this paper a couple of weeks ago, they eat great food and never gain weight.",
+        "afterQuote": "French strawberries do not taste like cardboard. Instead, they explode in your mouth like little flavor bombs."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "never gain weight",
+          "signalSide": "context-before",
+          "targetText": "you don’t need much of it",
+          "relation": "吃美食却不胖，选项给出原因：吃一点就够。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "great food",
+          "signalSide": "context-before",
+          "targetText": "The food is so delicious",
+          "relation": "空前的 great food 在选项里换成 The food ... delicious。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "you don’t need much of it",
+          "signalSide": "option",
+          "targetText": "never gain weight",
+          "relation": "吃得少，所以不胖。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "French strawberries",
+          "signalSide": "context-after",
+          "targetText": "delicious",
+          "relation": "草莓“像味觉炸弹”是 delicious 的具体例子。"
+        }
+      ],
+      "lock": [
+        "never gain weight",
+        "don’t need much of it"
+      ],
+      "find": {
+        "text": "空前 \"eat great food and never gain weight\" 让人想问：吃好的怎么不胖？G 的 \"don’t need much of it\" 正好回答；空后草莓那两句又在证明 \"delicious\"。",
+        "quotes": [
+          "eat great food and never gain weight",
+          "don’t need much of it",
+          "delicious"
+        ]
+      },
+      "explain": "这句替空前的说法补上原因，把“吃得好”和“不长胖”连起来；空后拿草莓不像硬纸板、像味觉炸弹作例子，把“好吃”说具体，下一段再讲另一个原因。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 \"eat less\" 像在解释 \"never gain weight\"，但这里还没给出任何原因，\"That’s not the only reason\" 里的 That 没有可指的。",
+          "quotes": [
+            "eat less",
+            "never gain weight",
+            "That’s not the only reason"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "matchedClues": [
+          {
+            "contextSide": "eat great food and never gain weight",
+            "optionSide": "The food is so delicious that you don’t need much of it",
+            "relation": "美食对应 delicious，不胖对应吃得少。"
+          }
+        ],
+        "fitSummary": "这句替空前的说法补上原因，把“吃得好”和“不长胖”连起来；空后拿草莓不像硬纸板、像味觉炸弹作例子，把“好吃”说具体，下一段再讲另一个原因。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 \"eat less\" 像在解释 \"never gain weight\"，但这里还没给出任何原因，\"That’s not the only reason\" 里的 That 没有可指的。"
+        },
+        {
+          "optionLabel": "B",
+          "reason": "它的 \"equally excellent\" 像在接空前 \"eat great food\"：吃得好，生活也一样好。但空后 \"French strawberries do not taste like cardboard\" 还在讲食物的味道，它却岔到生活质量，也没解释 \"never gain weight\"。它借的是后文 \"quality of life\" 那句；放到咖啡馆那一空，空后 \"these people\" 在它里面找不到人。"
+        },
+        {
+          "optionLabel": "D",
+          "reason": "它的 \"The amazing food\" 对上空前 \"eat great food\"，空后 \"French strawberries\" 也是吃的。但空前吃美食的 they 是 \"Parisians\"，它却换成 \"local farmers\"；空后 \"explode in your mouth\" 讲的是味道，不是谁在吃。它是照答案 G 改的：都有 \"food\"，G 说好吃到吃一点就够，它改成主要由农民吃。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:39": {
+      "blankId": "blank:paper-gaokao-2021-i:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "food market",
+        "perfectly ripe small strawberries",
+        "the best fruit we had ever eaten",
+        "But they cost $18!"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "My husband and I agreed they were the best fruit we had ever eaten. But they cost $18!"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That",
+          "signalSide": "option",
+          "targetText": "The food is so delicious that you don’t need much of it",
+          "relation": "That 回指上一段给出的原因：好吃到吃一点就够。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "never gain weight",
+          "signalSide": "context-before",
+          "targetText": "That’s not the only reason",
+          "relation": "上一段在解释巴黎人为什么不胖，That 指的就是那里给出的原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But they cost $18!",
+          "signalSide": "context-after",
+          "targetText": "not the only reason",
+          "relation": "But 把话从“最好吃”转到价钱，贵正是少吃的另一个原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "eat less",
+          "signalSide": "option",
+          "targetText": "never gain weight",
+          "relation": "吃得少，是不胖的原因。"
+        }
+      ],
+      "lock": [
+        "not the only reason",
+        "But they cost $18!"
+      ],
+      "find": {
+        "text": "上段已解释巴黎人为何 \"never gain weight\"；本段夸完水果，落点是 \"But they cost $18!\"，贵也让人少吃。E 的 \"not the only reason\" 正好引出这第二个原因。",
+        "quotes": [
+          "never gain weight",
+          "But they cost $18!",
+          "not the only reason"
+        ]
+      },
+      "explain": "上一段用“好吃所以吃得少”解释巴黎人不胖，这句先用 That 收住那个原因，再说还有别的；本段买水果的经历绕了一圈，最后落到价钱上，第二个原因就出来了。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 的 \"delicious\" 像在概括本段 \"the best fruit\"，但本段落点是 \"But they cost $18!\"，讲的是价钱，不是好吃。",
+          "quotes": [
+            "delicious",
+            "the best fruit",
+            "But they cost $18!"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "matchedClues": [
+          {
+            "contextSide": "But they cost $18!",
+            "optionSide": "That’s not the only reason the French eat less than we do",
+            "relation": "价格贵是吃得少的另一个原因。"
+          }
+        ],
+        "fitSummary": "上一段用“好吃所以吃得少”解释巴黎人不胖，这句先用 That 收住那个原因，再说还有别的；本段买水果的经历绕了一圈，最后落到价钱上，第二个原因就出来了。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 的 \"delicious\" 像在概括本段 \"the best fruit\"，但本段落点是 \"But they cost $18!\"，讲的是价钱，不是好吃。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-i:40": {
+      "blankId": "blank:paper-gaokao-2021-i:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "café life",
+        "French cafés are always crowded",
+        "these people",
+        "35-hour workweek"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+        "beforeQuote": "French cafés are always crowded.",
+        "afterQuote": "When do these people work?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these people",
+          "signalSide": "context-after",
+          "targetText": "the customers",
+          "relation": "these people 指咖啡馆里的顾客，而且是本该上班的本地人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "customers",
+          "signalSide": "option",
+          "targetText": "these people",
+          "relation": "选项里的 customers 给 these people 提供了先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "crowded",
+          "signalSide": "context-before",
+          "targetText": "customers",
+          "relation": "咖啡馆挤满人，选项接着说这些顾客是谁。"
+        }
+      ],
+      "lock": [
+        "these people work",
+        "customers"
+      ],
+      "find": {
+        "text": "先看空后 \"When do these people work?\"：these people 要有人可指，还得是该上班的人。A 的 \"Not all the customers are tourists\" 给出这群人，还点明其中有本地人。",
+        "quotes": [
+          "When do these people work?",
+          "Not all the customers are tourists"
+        ]
+      },
+      "explain": "空前说咖啡馆总是挤满人，这句点明里面不光是游客，也有本地人；正因如此空后才会问他们什么时候上班，再引出认真执行的35小时工作制，印证生活质量重于效率。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "matchedClues": [
+          {
+            "contextSide": "French cafés are always crowded / these people work",
+            "optionSide": "Not all the customers are tourists",
+            "relation": "顾客里有本地人，才谈得上他们什么时候工作。"
+          }
+        ],
+        "fitSummary": "空前说咖啡馆总是挤满人，这句点明里面不光是游客，也有本地人；正因如此空后才会问他们什么时候上班，再引出认真执行的35小时工作制，印证生活质量重于效率。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

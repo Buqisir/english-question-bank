@@ -1,0 +1,1107 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2021-i",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: I was in Mallorca last week.\nM: Oh, what were you doing there?\nW: My best friend worked there. And I went to visit her. It was a good chance to practice my Spanish.",
+      "translationZh": "女：我上周在马略卡岛。\n男：哦，你去那儿做什么？\n女：我最好的朋友在那儿工作。我去看望了她。这也是练习西班牙语的好机会。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士上周去马略卡岛探望在那里工作的好友，顺便练了西班牙语。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我上周在马略卡岛。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "哦，你去那儿做什么？"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我最好的朋友在那儿工作。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "我去看望了她。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "这也是练习西班牙语的好机会。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: Ruth, I’ve got this terrible cold and I have to see a doctor. I am afraid I can’t go to the class. Could you help me hand in my lab report to Dr. Davidson?\nW: Sure, no problem. Just take care of yourself and don’t worry about the class.",
+      "translationZh": "男：露丝，我得了重感冒，得去看医生。恐怕我去不了课了。你能帮我把实验报告交给戴维森博士吗？\n女：当然，没问题。你好好照顾自己，别担心课的事。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "男士得了重感冒要去看病，请露丝帮他把实验报告交给戴维森博士。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "露丝，我得了重感冒，得去看医生。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "恐怕我去不了课了。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "你能帮我把实验报告交给戴维森博士吗？"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "当然，没问题。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "你好好照顾自己，别担心课的事。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: Marie, if no one takes care of your children while you’re away, Jennifer and I will be glad to have them stay with us.\nW: That’s very kind of you. But they’ve already left for their Grandma’s. You know, Suzy lives close by.",
+      "translationZh": "男：玛丽，你不在家的时候如果没人照看孩子，詹妮弗和我很乐意让他们住在我们家。\n女：你们真是太好了。不过他们已经去他们祖母家了。你知道的，苏茜就住在附近。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "男士愿意帮玛丽照看孩子，玛丽道谢说孩子已去住在附近的祖母苏茜家。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "玛丽，你不在家的时候如果没人照看孩子，詹妮弗和我很乐意让他们住在我们家。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你们真是太好了。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "不过他们已经去他们祖母家了。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "你知道的，苏茜就住在附近。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "M: Hurry up with your food, Sally. They say there’s a big storm coming. We’d better get home before that.\nW: Okay, I’m done. Let’s get back to the car. Could you carry these shopping bags?\nM: Oh, sure.",
+      "translationZh": "男：萨莉，快点吃。听说有一场大暴风雨要来了。我们最好在那之前赶回家。\n女：好的，我吃完了。我们回车上吧。你能拎一下这些购物袋吗？\n男：哦，当然。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "暴风雨要来了，两人吃完饭拎上购物袋，准备回到车上开车回家。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "萨莉，快点吃。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "听说有一场大暴风雨要来了。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我们最好在那之前赶回家。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "好的，我吃完了。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我们回车上吧。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "你能拎一下这些购物袋吗？"
+        },
+        {
+          "id": "listening-text-4:7",
+          "zh": "哦，当然。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: We deep fried fish three days ago in the kitchen, but the unpleasant smell stays.\nW: There is a method you can try. Every time you make coffee, dry the leftover coffee grounds and keep them in small bowls, then place the bowls in the kitchen.",
+      "translationZh": "男：我们三天前在厨房炸了鱼，可那股难闻的气味一直散不掉。\n女：有个办法你可以试试。每次煮完咖啡，把剩下的咖啡渣晾干，装在小碗里，再把碗放在厨房。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "厨房炸鱼后留下难闻气味，女士建议用晾干的咖啡渣放在厨房去除异味。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "我们三天前在厨房炸了鱼，可那股难闻的气味一直散不掉。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "有个办法你可以试试。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "每次煮完咖啡，把剩下的咖啡渣晾干，装在小碗里，再把碗放在厨房。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Are you a football fan, Gomez?\nM: Yes, I go to the stadium whenever there is a good game. And if I can’t get a ticket, I watch the game on TV. That way, they’re less exciting though.\nW: Is the ticket expensive?\nM: It depends. It usually costs about 20 to 50 dollars. Last time I paid 25.\nW: That’s not very expensive. Maybe we can go together sometime.\nM: Great. It’ll be more fun to watch the game with a friend.",
+      "translationZh": "女：戈麦斯，你是足球迷吗？\n男：是的，只要有好比赛我就去体育场。如果买不到票，我就在电视上看。不过那样看就没那么激动人心了。\n女：票贵吗？\n男：看情况。通常要 20 到 50 美元。上次我付了 25 美元。\n女：不算很贵。也许哪天我们可以一起去。\n男：太好了。和朋友一起看球会更有意思。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "戈麦斯是球迷，买不到票就看电视转播，上次买票花了 25 美元。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "戈麦斯，你是足球迷吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "是的，只要有好比赛我就去体育场。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "如果买不到票，我就在电视上看。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "不过那样看就没那么激动人心了。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "票贵吗？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "看情况。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "通常要 20 到 50 美元。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "上次我付了 25 美元。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "不算很贵。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "也许哪天我们可以一起去。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "和朋友一起看球会更有意思。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: You were out the whole afternoon, Alex? What did you do?\nM: I took a walk by myself.\nW: You just kept walking and walking for four hours?\nM: Actually, it’s not so boring. Walking in the woods is a grand adventure. Your feet can take you to the most amazing places.\nW: What did you do in the woods?\nM: I smelt the flowers, looked at the birds, and yeah, I picked many tree leaves. I will make bookmarks with them. Look!\nW: Aren’t they beautiful?\nM: Then I met Bob at the lake. He was fishing while his kids were having a swim.\nW: Did you talk to him?\nM: No, I walked on and took a lot of pictures. There’s just so much out there to see.",
+      "translationZh": "女：亚历克斯，你出去了一整个下午？你做什么了？\n男：我一个人去散步了。\n女：你就一直走啊走，走了四个小时？\n男：其实一点也不无聊。在树林里散步是一场了不起的冒险。你的双脚能把你带到最奇妙的地方。\n女：你在树林里做了什么？\n男：我闻了闻花，看了看鸟，对了，我还捡了很多树叶。我要用它们做书签。你看！\n女：它们是不是很漂亮？\n男：后来我在湖边碰到了鲍勃。他在钓鱼，他的孩子们在游泳。\n女：你和他说话了吗？\n男：没有，我继续往前走，拍了很多照片。外面值得看的东西实在太多了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "亚历克斯独自在林中散步一下午，捡了树叶要做书签，还见到鲍勃在湖边钓鱼。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "亚历克斯，你出去了一整个下午？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你做什么了？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "我一个人去散步了。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "你就一直走啊走，走了四个小时？"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "其实一点也不无聊。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "在树林里散步是一场了不起的冒险。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "你的双脚能把你带到最奇妙的地方。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "你在树林里做了什么？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "我闻了闻花，看了看鸟，对了，我还捡了很多树叶。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "我要用它们做书签。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "你看！"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "它们是不是很漂亮？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "后来我在湖边碰到了鲍勃。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "他在钓鱼，他的孩子们在游泳。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "你和他说话了吗？"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "没有，我继续往前走，拍了很多照片。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "外面值得看的东西实在太多了。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: David, how was your holiday?\nM: Great, I climbed Mount Fuji. It was really beautiful. Now I can check one more thing off my list.\nW: Your list?\nM: Yes. When I was 12, I made a list of things I wanted to do some day.\nW: That’s interesting. How many of the things on your list have you done so far?\nM: Almost half. I have pictures. Would you like to see them?\nW: Yes, sure.\nM: Here I am on top of Mount Fuji. And here I am in a hot air balloon.\nW: When did you do that? I’ve always wanted to go up in a hot air balloon.\nM: It was two years ago, in August, in California.\nW: What are your plans for the next holiday?\nM: I’m thinking of deep-sea diving in Australia. Do you have any other suggestions?\nW: You really ought to take a boat down the Amazon. You’ll see a lot of interesting animals and beautiful trees. It’s one of the best places I’ve been to.\nM: OK. I’ll put it on my list.",
+      "translationZh": "女：大卫，假期过得怎么样？\n男：很棒，我爬了富士山。真的很美。现在我的清单上又可以划掉一项了。\n女：你的清单？\n男：是的。我 12 岁时列了一张清单，写下将来想做的事。\n女：真有意思。你清单上的事到现在完成了多少？\n男：差不多一半了。我有照片。想看看吗？\n女：好啊，当然。\n男：这是我在富士山顶。这是我在热气球上。\n女：你什么时候坐的？我一直都想坐热气球升空。\n男：那是两年前的八月，在加利福尼亚。\n女：你下个假期有什么计划？\n男：我在考虑去澳大利亚深海潜水。你还有别的建议吗？\n女：你真应该乘船顺亚马孙河而下。你会看到很多有趣的动物和美丽的树木。那是我去过的最好的地方之一。\n男：好的。我会把它加到清单上。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "丰富自我"
+      },
+      "summaryZh": "大卫假期爬了富士山，又完成心愿清单上一项；女士建议他下次乘船游亚马孙河。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "大卫，假期过得怎么样？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "很棒，我爬了富士山。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "真的很美。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "现在我的清单上又可以划掉一项了。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "你的清单？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我 12 岁时列了一张清单，写下将来想做的事。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "真有意思。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "你清单上的事到现在完成了多少？"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "差不多一半了。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我有照片。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "想看看吗？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "好啊，当然。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "这是我在富士山顶。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "这是我在热气球上。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "你什么时候坐的？"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "我一直都想坐热气球升空。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "那是两年前的八月，在加利福尼亚。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "你下个假期有什么计划？"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "我在考虑去澳大利亚深海潜水。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "你还有别的建议吗？"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "你真应该乘船顺亚马孙河而下。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "你会看到很多有趣的动物和美丽的树木。"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "那是我去过的最好的地方之一。"
+        },
+        {
+          "id": "listening-text-8:25",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:26",
+          "zh": "我会把它加到清单上。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Hello, Michael.\nM: Hi, Sarah.\nW: Are you attending the conference tomorrow morning at the Shelton Hotel?\nM: Yes. Are you?\nW: Yeah, but when I arrived home five minutes ago, I found that my car wouldn’t start. And John is in Brighton on business.\nM: Do you know what’s wrong with the car?\nW: I’m not exactly sure. I think there is a problem with the engine. Err…I wonder if you could give me a ride to the hotel tomorrow morning.\nM: Sure. When shall I be at your place?\nW: Well, what about 8: 00? From my place to Shelton, we have to drive through the quarters, so we’d better leave early to avoid the traffic.\nM: OK. No problem. It takes twenty minutes to reach your place. So I’ll set off at 7:40. By the way, do you also need me to drive you home tomorrow afternoon?\nW: No, John will be back then, and he’ll get me home. Thank you, Michael.\nM: That’s okay. See you tomorrow.",
+      "translationZh": "女：你好，迈克尔。\n男：你好，萨拉。\n女：你参加明天上午在谢尔顿酒店举行的会议吗？\n男：参加。你呢？\n女：我也参加，可我五分钟前到家时，发现车发动不了了。约翰又在布莱顿出差。\n男：你知道车出了什么毛病吗？\n女：我不太确定。我想是发动机有问题。呃……不知道你明天上午能不能顺路载我去酒店。\n男：当然可以。我几点到你家？\n女：嗯，8 点怎么样？从我家到谢尔顿要穿过城区，所以我们最好早点出发，避开堵车。\n男：好的。没问题。我开到你家要 20 分钟。那我 7:40 出发。顺便问一下，明天下午还需要我送你回家吗？\n女：不用了，那时约翰就回来了，他会接我回家。谢谢你，迈克尔。\n男：不客气。明天见。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "萨拉的车坏了，约翰又在外地出差，她请迈克尔明早开车送她去酒店开会。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "你好，迈克尔。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "你好，萨拉。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "你参加明天上午在谢尔顿酒店举行的会议吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "参加。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我也参加，可我五分钟前到家时，发现车发动不了了。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "约翰又在布莱顿出差。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "你知道车出了什么毛病吗？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我不太确定。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我想是发动机有问题。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "呃……不知道你明天上午能不能顺路载我去酒店。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "当然可以。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我几点到你家？"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "嗯，8 点怎么样？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "从我家到谢尔顿要穿过城区，所以我们最好早点出发，避开堵车。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我开到你家要 20 分钟。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "那我 7:40 出发。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "顺便问一下，明天下午还需要我送你回家吗？"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "不用了，那时约翰就回来了，他会接我回家。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "谢谢你，迈克尔。"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "不客气。"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "明天见。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Hello, everyone. Today I’ll talk about how to improve your pronunciation. Language researchers say pronunciation and fluency are the biggest barriers, followed by grammar, in effective spoken English. However, most people don’t regard pronunciation as a very important part of communication skills. They’re more focused on vocabulary. One reason is that most people are not even aware of their mispronunciations. So it’s important to first find out the words you mispronounce. You should listen to experts, by experts, I mean those who are less likely to make pronunciation mistakes. When listening to them, pay attention to words that sound strange, strange because you pronounce the same words differently. When you come across such words, check a dictionary to confirm their exact pronunciations. You can also search for difficult-to-pronounce words and names, and make a list of them. The last suggestion is to read aloud. Now you’ve got the correct pronunciations of the words, it’s time to practice reading them every day.",
+      "translationZh": "女：大家好。今天我来讲讲怎样改进发音。语言研究者说，在有效的英语口语中，发音和流利度是最大的障碍，其次是语法。然而，大多数人并不认为发音是交际能力中很重要的一部分。他们更关注词汇。原因之一是大多数人甚至意识不到自己读错了。所以首先要找出自己读错的词。你应该听专家说话，我说的专家是指那些不太会犯发音错误的人。听的时候，留意那些听起来别扭的词，之所以别扭，是因为你把同样的词读得不一样。遇到这样的词，就查词典确认它们的准确读音。你还可以搜索难读的单词和人名，把它们列成清单。最后一条建议是大声朗读。既然已经掌握了这些词的正确读音，就该每天练习朗读它们了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "语言学习的方法"
+      },
+      "summaryZh": "讲话人介绍改进发音的方法：听专家找出读错的词，查词典核对读音，每天朗读。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "今天我来讲讲怎样改进发音。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "语言研究者说，在有效的英语口语中，发音和流利度是最大的障碍，其次是语法。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "然而，大多数人并不认为发音是交际能力中很重要的一部分。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "他们更关注词汇。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "原因之一是大多数人甚至意识不到自己读错了。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "所以首先要找出自己读错的词。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "你应该听专家说话，我说的专家是指那些不太会犯发音错误的人。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "听的时候，留意那些听起来别扭的词，之所以别扭，是因为你把同样的词读得不一样。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "遇到这样的词，就查词典确认它们的准确读音。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "你还可以搜索难读的单词和人名，把它们列成清单。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "最后一条建议是大声朗读。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "既然已经掌握了这些词的正确读音，就该每天练习朗读它们了。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士为什么去马略卡岛？",
+      "optionTranslationsZh": {
+        "A": "去教西班牙语。",
+        "B": "去找工作。",
+        "C": "去看朋友。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "My best friend worked there. And I went to visit her."
+      },
+      "reasonZh": "“看朋友”就是女士说的去探望在那里工作的好友（went to visit her），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "西班牙语是女士顺带提的，这趟是练习西班牙语的机会（practice my Spanish），她是去练，不是去教。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士请女士做什么？",
+      "optionTranslationsZh": {
+        "A": "送他去医院。",
+        "B": "和他一起去上课。",
+        "C": "替他交报告。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Could you help me hand in my lab report to Dr. Davidson?"
+      },
+      "reasonZh": "“交报告”就是男士请露丝帮他把实验报告交给戴维森博士（hand in my lab report），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "class 是男士说自己去不了课（can’t go to the class），他请女士做的是替他交报告，不是陪他上课。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "谁将照看孩子们？",
+      "optionTranslationsZh": {
+        "A": "詹妮弗。",
+        "B": "苏茜。",
+        "C": "玛丽。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But they’ve already left for their Grandma’s. You know, Suzy lives close by."
+      },
+      "reasonZh": "玛丽说孩子们已经去了祖母家（left for their Grandma’s），又补一句苏茜就住在附近（Suzy lives close by），可见苏茜就是孩子们的祖母，由她照看，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "詹妮弗是男士提的，他和詹妮弗愿意让孩子住到他们家（Jennifer and I will be glad），但玛丽谢绝了，说孩子已经走了（But they’ve already left）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "玛丽是女士本人，她正要外出（while you’re away），所以才要有人照看孩子。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "开车回家。",
+        "B": "去购物。",
+        "C": "在外面吃饭。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We’d better get home before that."
+      },
+      "reasonZh": "男士说要赶在暴风雨前回家（get home before that），女士吃完后说回车上去（get back to the car），两处合起来就是开车回家，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "shopping 是女士请男士拎的购物袋（carry these shopping bags），东西已经买好，接下来是回家。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "他们正在外面吃饭，女士已经吃完了（I’m done），接下来不是再去吃饭。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "怎样炸鱼。",
+        "B": "怎样煮咖啡。",
+        "C": "怎样去除难闻的气味。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "the unpleasant smell stays"
+      },
+      "reasonZh": "男士说炸鱼留下的难闻气味散不掉（the unpleasant smell stays），女士教他用晾干的咖啡渣去味，两人谈的都是怎么除掉这股气味，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "炸鱼是三天前的事（deep fried fish three days ago），只是气味的来由，两人没讲怎么炸。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "咖啡出现在女士的办法里，用的是煮完咖啡剩下的咖啡渣（leftover coffee grounds），是拿来去味，不是讲怎么煮咖啡。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "戈麦斯什么时候在电视上看足球比赛？",
+      "optionTranslationsZh": {
+        "A": "他买不到票的时候。",
+        "B": "体育场拥挤的时候。",
+        "C": "他的朋友太忙的时候。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "And if I can’t get a ticket, I watch the game on TV."
+      },
+      "reasonZh": "“买不到票”就是戈麦斯说的弄不到票（can’t get a ticket）时才在电视上看，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "体育场是有好比赛时他就去的地方（I go to the stadium），他说的是拿不到票才看电视，没讲人多不多。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "朋友出现在最后，是他说和朋友一起去现场看更有意思（watch the game with a friend），不是看电视的条件。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "戈麦斯上次看足球比赛付了多少钱？",
+      "optionTranslationsZh": {
+        "A": "20 美元。",
+        "B": "25 美元。",
+        "C": "50 美元。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Last time I paid 25."
+      },
+      "reasonZh": "戈麦斯说上次付了 25 美元（Last time I paid 25），选项沿用这个数，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "20 是他说的通常票价的下限（about 20 to 50 dollars），不是他上次实际付的钱。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "50 是通常票价的上限（20 to 50 dollars），他上次付的是 25。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "亚历克斯下午做了什么？",
+      "optionTranslationsZh": {
+        "A": "他散了步。",
+        "B": "他去打猎了。",
+        "C": "他种了树。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I took a walk by myself."
+      },
+      "reasonZh": "亚历克斯直接说自己一个人去散步了（took a walk），选项沿用 walk，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的 tree 说的是他捡的树叶（tree leaves），他没有种树。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "亚历克斯带回了什么？",
+      "optionTranslationsZh": {
+        "A": "花。",
+        "B": "树叶。",
+        "C": "书。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I picked many tree leaves. I will make bookmarks with them. Look!"
+      },
+      "reasonZh": "亚历克斯说捡了很多树叶（picked many tree leaves），要拿来做书签，还让女士看（Look），可见树叶带回来了，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "花他只是闻了闻（smelt the flowers），没有摘回来。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "bookmarks 是他打算用树叶做的书签（make bookmarks with them），不是书。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "亚历克斯看到鲍勃时，鲍勃在做什么？",
+      "optionTranslationsZh": {
+        "A": "钓鱼。",
+        "B": "拍照。",
+        "C": "游泳。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "He was fishing while his kids were having a swim."
+      },
+      "reasonZh": "亚历克斯说在湖边碰到鲍勃时他正在钓鱼（He was fishing），选项沿用，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "拍照的是亚历克斯自己，他继续往前走，拍了很多照片（took a lot of pictures）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "游泳的是鲍勃的孩子们（his kids were having a swim），鲍勃本人在钓鱼。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "大卫最近一个假期做了什么？",
+      "optionTranslationsZh": {
+        "A": "他乘船旅行了。",
+        "B": "他坐了热气球。",
+        "C": "他爬了一座山。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Great, I climbed Mount Fuji."
+      },
+      "reasonZh": "大卫说这个假期爬了富士山（climbed Mount Fuji），选项把富士山说成“一座山”，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "乘船是女士给他下个假期的建议（take a boat down the Amazon），他还没去。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "坐热气球是两年前八月在加利福尼亚的事（two years ago），不是最近这个假期。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "大卫的清单上写的是什么？",
+      "optionTranslationsZh": {
+        "A": "他需要买的礼物。",
+        "B": "他希望做的事。",
+        "C": "他必须记住的日期。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "When I was 12, I made a list of things I wanted to do some day."
+      },
+      "reasonZh": "“希望做的事”就是大卫 12 岁时列下的将来想做的事（things I wanted to do some day），选 B。"
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士建议大卫下个假期去哪里？",
+      "optionTranslationsZh": {
+        "A": "澳大利亚。",
+        "B": "加利福尼亚。",
+        "C": "亚马孙河。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "You really ought to take a boat down the Amazon."
+      },
+      "reasonZh": "女士说他真该乘船顺亚马孙河而下（ought to take a boat down the Amazon），这是她给的建议，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "澳大利亚是大卫自己的打算，他在考虑去那里深海潜水（deep-sea diving in Australia），随后才问女士有没有别的建议。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "加利福尼亚是大卫两年前坐热气球的地方（in California），说的是过去。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "萨拉为什么打这个电话？",
+      "optionTranslationsZh": {
+        "A": "请人帮忙。",
+        "B": "传达一个口信。",
+        "C": "约定一次见面。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I wonder if you could give me a ride to the hotel tomorrow morning."
+      },
+      "reasonZh": "萨拉的车发动不了，她问迈克尔明早能不能载她去酒店（give me a ride to the hotel），这就是请人帮忙，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "8 点是迈克尔答应载她之后才商量的接人时间（what about 8: 00），两人本来就都要去开会，电话是为了请他捎一程。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "萨拉现在在哪里？",
+      "optionTranslationsZh": {
+        "A": "在布莱顿。",
+        "B": "在她家。",
+        "C": "在谢尔顿酒店。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "when I arrived home five minutes ago"
+      },
+      "reasonZh": "萨拉说五分钟前刚到家（arrived home five minutes ago），接着就发现车坏了，她现在在家，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "在布莱顿出差的是约翰（John is in Brighton on business），不是萨拉。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "谢尔顿酒店是明天上午开会的地方（tomorrow morning at the Shelton Hotel），她还没去。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "迈克尔明天上午几点从自己家出发？",
+      "optionTranslationsZh": {
+        "A": "7:40。",
+        "B": "8:00。",
+        "C": "8:20。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It takes twenty minutes to reach your place. So I’ll set off at 7:40."
+      },
+      "reasonZh": "萨拉要他 8 点到她家，迈克尔说开过去要 20 分钟（twenty minutes），8:00 − 20 分钟 = 7:40，他也直接说了 7:40 出发（set off at 7:40），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "8:00 是萨拉要迈克尔到她家的时间（what about 8: 00），不是他从自己家出发的时间。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "8:20 是把 20 分钟加到 8 点上算反了，要准时 8 点到，20 分钟得往前减。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "约翰和萨拉可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "邻居。",
+        "B": "同事。",
+        "C": "夫妻。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "No, John will be back then, and he’ll get me home."
+      },
+      "reasonZh": "萨拉说车坏了，紧接着提约翰出差了（John is in Brighton on business），像是平时能送她的人；明天下午约翰回来后接她回家（he’ll get me home），两人很可能是夫妻，选 C。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "大多数人认为口语交际中什么很重要？",
+      "optionTranslationsZh": {
+        "A": "发音。",
+        "B": "词汇。",
+        "C": "语法。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "They’re more focused on vocabulary."
+      },
+      "reasonZh": "讲话人说大多数人不把发音看作很重要（don’t regard pronunciation），而是更看重词汇（more focused on vocabulary），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "发音前面有否定：多数人恰恰不认为发音很重要（don’t regard pronunciation as a very important part），把发音当最大障碍的是语言研究者。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "语法是研究者排的口语障碍，排在发音和流利度之后（followed by grammar），不是多数人看重的东西。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "根据讲话人的说法，为什么要听专家说话？",
+      "optionTranslationsZh": {
+        "A": "为了提高朗读的流利度。",
+        "B": "为了提高记笔记的能力。",
+        "C": "为了找出自己读错的音。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "So it’s important to first find out the words you mispronounce. You should listen to experts"
+      },
+      "reasonZh": "讲话人先说要找出自己读错的词（find out the words you mispronounce），接着就让你听专家、留意听着别扭的词，听专家正是为了发现读错的地方，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "fluency 是研究者说的口语障碍（pronunciation and fluency），reading 出现在最后一条朗读建议里，两处都不是听专家的目的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "improve 说的是改进发音（improve your pronunciation），skills 说的是交际能力（communication skills），两处都和记笔记无关。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "讲话人的最后一条建议是什么？",
+      "optionTranslationsZh": {
+        "A": "把难词拼读出来。",
+        "B": "在词典里查这些词。",
+        "C": "练习大声朗读这些词。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The last suggestion is to read aloud."
+      },
+      "reasonZh": "讲话人说最后一条建议是大声朗读（read aloud），并每天练习读这些词（practice reading them），选项沿用原话，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "words 出现在列难读词清单那条（make a list of them），录音里的 out 是找出读错的词（find out），没让你把词拼出来。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "查词典是前面的建议，遇到听着别扭的词就查词典核对读音（check a dictionary），不是最后一条。"
+        }
+      ]
+    }
+  }
+}

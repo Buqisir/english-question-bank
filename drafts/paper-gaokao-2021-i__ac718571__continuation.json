@@ -1,0 +1,135 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "As the twins looked around them in disappointment, their father appeared. He looked at the black bread in the sink, the messy stove and Jeff's red hand. Instead of getting angry, he checked the burn first. Jenna explained that they had wanted to surprise Mother, but everything had gone wrong. Father smiled and told them that every cook burns something at first. He offered to stay, but only as a helper. So the twins started again. Jeff wiped the stove clean while Jenna cooked the rest of the porridge over a low fire. Then Jeff dipped two new slices of bread into the egg mixture. This time he kept the fire low and watched the pan closely. Soon two golden pieces of French toast lay on the plate.\n\nThe twins carried the breakfast upstairs and woke their mother up. Mother sat up in surprise. On the tray were the French toast and a bowl of warm chicken porridge. When she noticed the red mark on Jeff's hand, the twins told her the whole story, from the black bread to the boiling pot. Mother did not mind the mess at all. She tasted the toast and said it was the best breakfast she had ever had. Then she pulled the twins into her arms. \"Happy Mother's Day!\" they said together. At the door, Father gave them a wink.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "停在第二片面包也烧黑了：粥溢出来浇灭了火、灶台一片狼藉、Jeff 的手被烫伤，早餐一样都没做成。没解决的问题是：母亲节的床上早餐还能不能做出来。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "双胞胎想给母亲一个惊喜，开头 \"How pleased and proud Mother would be\" 写出他们的期待；\"There was nothing to it\" 说明他们把做饭想得太简单。出事时 \"Jenna panicked\"，Jeff 却 \"stayed calm\"；Jeff 烫了手，Jenna 马上让他泡冷水，两人互相照应。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第三人称、过去时，句子短，一句一个动作，几乎没有描写。原文没有一处带引号的直接引语，人物的话都是转述（Jenna told Jeff to clean it up）。续写也以转述为主，最多留一句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "This time, she turned down the fire so it cooked nicely.",
+          "use": "原文已经交代了失败的原因是火太大。续写里重做时让孩子们自己把火调小，问题由他们解决，而不是靠父亲一手包办。"
+        },
+        {
+          "sourceQuote": "Jenna threw the burnt piece into the sink",
+          "use": "父亲出现时看到的“水槽里的黑面包”就从这里来；第二段向母亲讲经过时，也可以用 \"the black bread\" 一笔带过。"
+        },
+        {
+          "sourceQuote": "But Jeff’s hand touched the hot burner and he gave a cry of pain.",
+          "use": "Jeff 烫伤的手是一个可以一直用到结尾的细节：父亲先看伤，母亲因为手上的红印才问出整个经过。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从父亲出现写起，结束时早餐必须已经做好，因为第二段一开头孩子们就把早餐端上楼了。",
+        "要接上原文留下的局面：面包烧黑、粥溢出灭火、灶台脏乱、Jeff 的手烫伤。重做时得交代问题怎么解决，比如把火调小。",
+        "第二段写母亲被叫醒后的反应，收住“母亲节惊喜”这条线；人称、过去时和人物（Jenna、Jeff、父亲、母亲）都不变。"
+      ],
+      "thisEssayChooses": "本文让父亲只当帮手、不接手，鼓励一句后让孩子们自己重做；重做时 Jeff 擦灶台、Jenna 小火煮粥，两人都用上了“把火调小”的教训。第二段让母亲从 Jeff 手上的红印问出经过，用拥抱和一句 \"Happy Mother's Day!\" 收尾，父亲在门口眨眼。也可以换成父亲教他们做、母亲吃得狼狈却开心等路线，只要早餐在第一段做好、母亲的反应在第二段写足。"
+    },
+    "standard": {
+      "essay": "As the twins looked around them in disappointment, their father appeared. He looked at the black bread in the sink, the messy stove and Jeff's red hand. Instead of getting angry, he checked the burn first. Jenna explained that they had wanted to surprise Mother, but everything had gone wrong. Father smiled and told them that every cook burns something at first. He offered to stay, but only as a helper. So the twins started again. Jeff wiped the stove clean while Jenna cooked the rest of the porridge over a low fire. Then Jeff dipped two new slices of bread into the egg mixture. This time he kept the fire low and watched the pan closely. Soon two golden pieces of French toast lay on the plate.\n\nThe twins carried the breakfast upstairs and woke their mother up. Mother sat up in surprise. On the tray were the French toast and a bowl of warm chicken porridge. When she noticed the red mark on Jeff's hand, the twins told her the whole story, from the black bread to the boiling pot. Mother did not mind the mess at all. She tasted the toast and said it was the best breakfast she had ever had. Then she pulled the twins into her arms. \"Happy Mother's Day!\" they said together. At the door, Father gave them a wink.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "父亲出现后先处理伤和情绪，再让孩子们自己重做，段末早餐做好，正好接上第二段首句。",
+          "items": [
+            {
+              "quote": "He looked at the black bread in the sink, the messy stove and Jeff's red hand.",
+              "explain": "用父亲的眼睛把原文留下的三个烂摊子一次点到，读者马上知道续写接的是哪里，也不用整句照抄原文。"
+            },
+            {
+              "quote": "Instead of getting angry, he checked the burn first.",
+              "explain": "父亲的性格从他做的第一件事看出来：先管孩子的手，不管厨房。不用写 He was kind。"
+            },
+            {
+              "quote": "He offered to stay, but only as a helper.",
+              "explain": "这句定下父亲的角色：他在场，但做早餐的还是孩子们，惊喜仍然是他们自己的，避免“大人一出现问题就解决了”。"
+            },
+            {
+              "quote": "This time he kept the fire low and watched the pan closely.",
+              "explain": "把原文 \"turned down the fire\" 的教训用回来，说清这一次为什么能成功；This time 也和原文前面的失败形成对照。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "母亲醒来看到早餐，从红印问出经过，用拥抱和一句祝福收住“惊喜”这条线。",
+          "items": [
+            {
+              "quote": "When she noticed the red mark on Jeff's hand, the twins told her the whole story",
+              "explain": "用烫伤的红印引出讲经过，让母亲知道这份早餐来得不容易，情节有了由头，不是凭空把故事复述一遍。"
+            },
+            {
+              "quote": "Mother did not mind the mess at all.",
+              "explain": "一句话回应孩子们最担心的事：搞砸了厨房。母亲的态度由此写出来，不用堆砌形容词。"
+            },
+            {
+              "quote": "\"Happy Mother's Day!\" they said together.",
+              "explain": "全文唯一一句直接引语，放在最后点题；原文没有引号对话，所以只用这一句，短而有分量。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Instead of getting angry, he ...",
+          "function": "用“没有做什么、而是做了什么”写出人物在意外面前的态度，写父亲、老师这类大人时很好用。"
+        },
+        {
+          "expression": "This time he kept the fire low and watched the pan closely.",
+          "function": "写“吸取教训后重做成功”，This time 把前面的失败和这次的成功连起来。"
+        },
+        {
+          "expression": "pulled the twins into her arms",
+          "function": "用一个看得见的动作写母亲的感动，比 She was very moved 更具体。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "父亲一来就把早餐全做好了，孩子们在一边看。",
+          "why": "惊喜是孩子们给母亲的，父亲包办就成了“天降的帮助”，第二段母亲感动的理由也没了。父亲可以提醒、陪着，动手的应当是双胞胎。"
+        },
+        {
+          "pitfall": "第一段没写完早餐，第二段才说“他们终于做好了”。",
+          "why": "第二段首句已经写孩子们端着早餐上楼，早餐必须在第一段结束前做好，否则两段接不上。"
+        },
+        {
+          "pitfall": "大段对话或大段心理、景物描写，结尾再加一句“这次经历让他们懂得了……”。",
+          "why": "原文没有一句引号对话，句子短、动作多，满篇对话和描写跟原文不是一种写法；空洞的道理也不推进任何情节，落在拥抱、眨眼这样的动作上更好。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "As the twins looked around them in disappointment, their father appeared. He took in the scene at once: a sink full of black bread, porridge all over the stove, and Jeff holding his hand under the cold tap. He looked at the burn first, and to everyone's relief, it was only a little red. Jenna's eyes filled with tears as she explained that they had only wanted to give Mother a special breakfast. Father patted her shoulder and admitted that he had burnt plenty of toast in his time. He did not take over. Instead, he stood by and let them try again. Jeff wiped the stove clean while Jenna turned the burner down low and stirred the rest of the porridge until it was thick and smooth. Then Jeff soaked two fresh slices of bread in the egg mixture. Remembering what had happened twice already, he kept the fire gentle and never took his eyes off the pan. Soon a sweet, buttery smell filled the kitchen, and two golden slices of toast slid onto the plate.\n\nThe twins carried the breakfast upstairs and woke their mother up. Mother sat up in surprise. There was French toast, a steaming bowl of chicken porridge and a little card that read \"Happy Mother's Day\". When she spotted the red mark on Jeff's hand, the twins poured out the whole story, from the black bread to the porridge that put out the fire. Mother laughed so hard that tears came to her eyes. She tasted the toast and declared it the best she had ever eaten. Then she opened her arms and hugged them both tightly. Father, leaning against the doorway, gave the twins a wink. Downstairs, the dirty pans were still waiting, but nobody was in a hurry.",
+      "beyondStandard": [
+        {
+          "quote": "He took in the scene at once: a sink full of black bread, porridge all over the stove, and Jeff holding his hand under the cold tap",
+          "explain": "take in the scene（一眼看清局面）加冒号后的三个画面，比标准版的 looked at 更像母语作者的写法；\"under the cold tap\" 也接住了原文 Jenna 让 Jeff 泡冷水的细节。"
+        },
+        {
+          "quote": "Remembering what had happened twice already, he kept the fire gentle and never took his eyes off the pan.",
+          "explain": "现在分词短语交代他为什么这么小心，never took his eyes off 比 watched closely 更生动，也点出面包已经烧糊过两次。"
+        },
+        {
+          "quote": "Downstairs, the dirty pans were still waiting, but nobody was in a hurry.",
+          "explain": "结尾不讲道理，而用楼下还没洗的锅收住：厨房还乱着，但一家人此刻更在乎彼此，余味比标准版的眨眼更足。"
+        }
+      ]
+    }
+  }
+}
