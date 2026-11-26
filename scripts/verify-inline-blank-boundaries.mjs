@@ -53,18 +53,21 @@ assert.equal(check([text('well-'), blank])[0].code, 'INLINE_BLANK_BOUNDARY_REVIE
 assert.equal(grammarFillPromptPrefix(text('(noun)—particularly'), 'noun'), '(noun)')
 for (const family of ['grammar-fill', 'cloze', 'seven-choices']) {
   assert.deepEqual(check([text('Before—'), blank, text('—after')], family), [])
-  assert.deepEqual(check([text('She said, “'), blank, text('” today.')], family), [])
-  assert.deepEqual(check([text('Before”'), blank, text('“after')], family).map(x => x.code),
-    ['INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED', 'INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED'])
+  for (const [opening, closing] of [['“', '”'], ['‘', '’']]) {
+    assert.deepEqual(check([text(`She said, ${opening}`), blank, text(`${closing} today.`)], family), [])
+    assert.deepEqual(check([text(`Before${closing}`), blank, text(`${opening}after`)], family).map(x => x.code),
+      ['INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED', 'INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED'])
+  }
 }
 for (const suffix of [[text('(noun)—particularly')], [text('(noun)'), text('—particularly')]]) {
   assert.deepEqual(check([text('Before '), blank, ...suffix], 'grammar-fill', 'noun'), [])
 }
-for (const punctuation of ['-', '–', '"', '’']) {
+for (const punctuation of ['-', '–', '"', "'"]) {
   assert.equal(grammarFillPromptPrefix(text(`(noun)${punctuation}after`), 'noun'), null)
   assert.deepEqual(check([text(`Before${punctuation}`), blank, text(`${punctuation}after`)]).map(x => x.code),
     ['INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED', 'INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED'])
 }
+assert.equal(grammarFillPromptPrefix(text('(noun)’after'), 'noun'), null)
 assert.equal(grammarFillPromptPrefix(text('(noun)particularly'), 'noun'), null)
 assert.deepEqual(check([blank, text('(noun)'), text('particularly')], 'grammar-fill', 'noun').map(x => x.code),
   ['INLINE_BLANK_SEPARATOR_MISSING'])
