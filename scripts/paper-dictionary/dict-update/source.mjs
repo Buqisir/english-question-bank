@@ -1,13 +1,12 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { createReadStream, readFileSync } from 'node:fs'
+import { createReadStream, readFileSync, readdirSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import { createInterface } from 'node:readline'
 import { createGunzip } from 'node:zlib'
 import { hashPhraseBlock } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { inlineText } from '../../../server/agent-api/agentPassage.mjs'
-import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs'
 
 export const json = path => JSON.parse(readFileSync(path, 'utf8'))
 export const ndjson = text => text.split('\n').filter(line => line.trim()).map(JSON.parse)
@@ -60,39 +59,41 @@ export function blocksOf(paper) {
   return blocks
 }
 
-export function legacyHashMatches(rows, blocks) {
-  const hashes = new Set(Object.values(blocks).map(block => block.hash))
-  const saved = rows.map(row => row.blockHash).filter(Boolean)
-  return saved.length > 0 && saved.every(hash => hashes.has(hash))
-}
-
 export async function readLegacy(directory, candidates, entries) {
   const wordIds = new Map([...entries.values()].filter(e => e.kind !== 'phrase')
     .map(e => [e.headword, e.entryId]))
   for (const p of candidates.values()) {
     p.byLocator = new Map(Object.entries(p.blocks).map(([key, b]) => [legacyLocator(b.groupId, b.locator), key]))
     p.legacyHits = {}
+    p.quotes = new Map()
+    p.blocks.counts ??= { locator: {}, wordCounts: {} }
   }
-  const archivedBlock = (p, key) => p.legacyHits[key] ??= {
-    sentences: splitSentences(p.blocks[key]?.raw).map(({ text }) => text.trim()), words: [], phrases: [],
-  }
-  const find = (p, source) => p.unavailable ? legacyLocator(source.groupId, source.locator) :
+  const archivedBlock = (p, key) => p.legacyHits[key] ??= { words: [], phrases: [] }
+  const find = (p, source) =>
     p.byLocator.get(legacyLocator(source.groupId, source.locator)) ??
-    (source.locator.option && p.byLocator.get(legacyLocator(source.groupId, { optionBank: source.locator.option })))
-  for await (const { source, tier, hits } of lines(join(directory, 'occurrences.ndjson.gz'), true)) {
+    (source.locator.option && p.byLocator.get(legacyLocator(source.groupId, { optionBank: source.locator.option }))) ??
+    legacyLocator(source.groupId, source.locator)
+  const saveQuote = (p, key, entryId, sentence, start, end, text) => {
+    if (typeof text !== 'string' || !text) return
+    for (const id of [legacyQuoteKey(key, entryId, sentence, start, end), legacyQuoteKey(key, null, sentence)]) {
+      p.quotes.set(id, !p.quotes.has(id) || p.quotes.get(id) === text ? text : null)
+    }
+  }
+  for await (const { source, tier, hits, sentenceText, text } of lines(join(directory, 'occurrences.ndjson.gz'), true)) {
     const p = candidates.get(source.paperId)
     if (!p) continue
     p.tier = tier
     const key = find(p, source)
-    if (!key) { p.incomplete = true; continue }
-    const block = p.blocks[p.unavailable ? 'counts' : key]
-    const counts = block.wordCounts ??= {}
+    const counts = p.blocks.counts.wordCounts
     for (const [headword, spans] of Object.entries(hits)) {
       const id = wordIds.get(headword)
       if (!id) continue
       counts[id] = (counts[id] ?? 0) + spans.length
       const archived = archivedBlock(p, key)
       archived.words.push([source.locator, id, spans])
+      for (const [start, end] of spans) {
+        saveQuote(p, key, id, source.locator.sentence, start, end, sentenceText ?? text)
+      }
     }
   }
   for await (const { source, tier, entryCanonical, sentence, start, end, parts } of lines(join(directory, 'phrases/hits.ndjson'))) {
@@ -100,16 +101,49 @@ export async function readLegacy(directory, candidates, entries) {
     if (!p) continue
     p.tier ??= tier
     const key = find(p, source)
-    if (!key) { p.incomplete = true; continue }
     const archived = archivedBlock(p, key)
     archived.phrases.push({ entryCanonical, sentence, start, end, parts, locator: source.locator })
+    saveQuote(p, key, null, source.locator.sentence, undefined, undefined, sentence)
   }
   for (const p of candidates.values()) {
-    if (!p.unavailable) continue
     const words = Map.groupBy(p.rows.filter(row => entries.get(row.entryId)?.kind === 'word'), row => row.entryId)
     p.incomplete = [...words].some(([id, rows]) => (p.blocks.counts.wordCounts[id] ?? 0) < rows.length)
   }
+  const dirs = path => {
+    try { return readdirSync(path, { withFileTypes: true }) }
+    catch (error) { if (error.code === 'ENOENT') return []; throw error }
+  }
+  // The old gzip usually stores spans only. The archived judging packets retain the original quotes.
+  const packetDirs = ['tools/batch-packets', 'tools/batch-rework-packets'].map(path => join(directory, path))
+  for (const kind of ['batches', 'mock']) {
+    for (const batch of dirs(join(directory, kind)).filter(item => /^\d+$/u.test(item.name) && item.isDirectory())) {
+      packetDirs.push(join(directory, kind, batch.name, 'packets'))
+    }
+  }
+  for (const path of packetDirs) for (const file of dirs(path)) {
+    if (!file.isFile() || !file.name.endsWith('.json')) continue
+    const { entryId, sentences } = json(join(path, file.name))
+    if (Array.isArray(sentences)) {
+      for (const row of sentences) {
+        const p = candidates.get(row.paperId)
+        if (!p || p.unavailable) continue
+        const chars = [...row.text]
+        if (chars[row.start] !== '【' || chars[row.end + 1] !== '】' ||
+            chars.slice(row.start + 1, row.end + 1).join('') !== row.surface) continue
+        const text = chars.filter((_, index) => index !== row.start && index !== row.end + 1).join('')
+        saveQuote(p, rowLocator(row), entryId, row.sentence, row.start, row.end, text)
+      }
+    } else {
+      for (const { source, text, hits } of Object.values(sentences ?? {}).flat()) {
+        const p = candidates.get(source.paperId)
+        if (!p || p.unavailable) continue
+        for (const { start, end } of hits) saveQuote(p, find(p, source), entryId, source.locator.sentence, start, end, text)
+      }
+    }
+  }
 }
+
+export const legacyQuoteKey = (key, entryId, sentence, start, end) => JSON.stringify([key, entryId, sentence, start, end])
 
 function legacyLocator(groupId, { paragraph, question, option, optionBank }) {
   return JSON.stringify([groupId, paragraph, question, option, optionBank])

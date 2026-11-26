@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path'
 import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
-import { agentReader, blocksOf, json, legacyHashMatches, localPaper, ndjson, readLegacy, rowLocator,
+import { agentReader, blocksOf, json, legacyQuoteKey, localPaper, ndjson, readLegacy, rowLocator,
   tierOf, validPaperId } from './source.mjs'
 import { matcher, phraseWinners } from './match.mjs'
 import { budget, editorialSense, legacyRecord, makeRecord, normalizedSentenceKey, position, recordRows, reusePicks, sentencesOf,
@@ -54,6 +54,8 @@ const counters = () => ({ gaokao: 0, mock: 0 })
 const fingerprint = row => JSON.stringify([row.blockHash, row.sentence, row.start, row.end, row.entryId, row.parts])
 const ref = b => JSON.stringify([b.groupId, b.id])
 const aliases = b => [ref(b), ...(b.aliases ?? []).map(id => ref({ ...b, id }))]
+const hasLegacyBlockHash = (rows, block) => rows.some(row =>
+  entries.get(row.entryId)?.kind === 'phrase' && row.blockHash === block.hash)
 const senseOf = row => entries.get(row.entryId)?.senses.find(sense => sense.senseId === row.senseId)
 const scopeFile = args.scope ? resolve(args.scope) : fileURLToPath(new URL('./scope.json', import.meta.url))
 const scopeAllows = ({ include, exclude }, id) => include.includes(id) || !exclude.includes(id)
@@ -103,6 +105,7 @@ async function prepare() {
   for (const id of targets) {
     const summary = available.get(id)
     const bootstrap = exists(shard(id)) && !exists(state(id))
+    if (rejudge && bootstrap) { skipped[id] = '请先执行首次归档'; continue }
     if (!summary || !scopeAllows(scope, id)) {
       if (bootstrap && !rejudge) {
         const rows = readShard(id)
@@ -127,11 +130,6 @@ async function prepare() {
     if (bootstrap) {
       const blocks = blocksOf(paper)
       const rows = readShard(id)
-      if (!legacyHashMatches(rows, blocks) &&
-          rows.some(row => row.blockHash || entries.get(row.entryId)?.kind === 'phrase')) {
-        skipped[id] = '旧分片块哈希与目标卷不符'
-        continue
-      }
       sameLegacy++
       legacy.set(id, { blocks, rows })
     }
@@ -140,6 +138,7 @@ async function prepare() {
   const match = matcher(entries)
   const packets = new Map()
   const stats = { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counters() }
+  let legacyDropped = 0
   if (rejudge) stats.rejudge = rejudge
   stats.unmarked = 0
   const plan = []
@@ -166,36 +165,57 @@ async function prepare() {
     const archive = old?.archive ?? {}
     const records = old?.records ?? {}
     const oldBlocks = exists(shard(id)) ? old.blocks : {}
-    const unsafeLegacy = new Map()
-    if (bootstrap && !old.unavailable) for (const [key, block] of Object.entries(oldBlocks)) {
-      const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
-      const hits = match(id, block)
-      const verified = new Map(hits.map(row => [position(row), row]))
-      for (const row of confirmed) {
-        const word = entries.get(row.entryId).kind !== 'phrase'
-        if (word && !(verified.has(position(row)) && verifiedLegacyHit(row, verified.get(position(row))))) {
-          if (!unsafeLegacy.has(key)) unsafeLegacy.set(key, new Set())
-          unsafeLegacy.get(key).add(row.entryId)
-          continue
-        }
-        if (row.blockHash && row.sentenceText) (archive[key] ??= {})[fingerprint(row)] = row.senseId
-      }
-      const byHash = records[key] ??= {}
-      byHash[block.hash] = legacyRecord(block, old.legacyHits[key], confirmed, hits)
-    }
+    const retainedLegacy = new Set()
+    const reviewLegacy = new Set()
     const layoutChanged = rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
       Object.entries(current).some(([key, block]) => {
         const previous = oldBlocks[key]
         return previous?.hash !== block.hash || rawChanged(previous, block, records[key]?.[previous.hash]) ||
           ref(previous) !== ref(block)
       }))
-    if (rejudge && (unsafeLegacy.size || layoutChanged)) {
+    if (layoutChanged) {
       skipped[id] = '目标卷面已变，先执行常规更新'
       continue
     }
     for (const [key, block] of Object.entries(current)) {
       const previous = oldBlocks[key]
       const { raw, ...info } = block
+      if (bootstrap) {
+        const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
+        const labels = Map.groupBy(confirmed, position)
+        const sameBlock = hasLegacyBlockHash(confirmed, block)
+        const matchedLabels = new Map()
+        const rows = match(id, block).map(row => {
+          const verified = (labels.get(position(row)) ?? []).filter(saved => {
+            const locations = [rowLocator(saved), key]
+            const quotes = [saved.sentenceText ?? undefined, ...locations.map(locator =>
+              old.quotes.get(legacyQuoteKey(locator, saved.entryId, saved.sentence, saved.start, saved.end)))]
+              .filter(text => text !== undefined)
+            if (!quotes.length) for (const locator of locations) {
+              const quote = old.quotes.get(legacyQuoteKey(locator, null, saved.sentence))
+              if (quote !== undefined) quotes.push(quote)
+            }
+            return verifiedLegacyHit({ ...saved, blockHash: undefined }, row) &&
+              (quotes.length ? quotes.every(text => text === row.sentenceText) : sameBlock)
+          })
+          if (!verified.length || new Set(verified.map(saved => saved.senseId)).size !== 1) {
+            if (labels.has(position(row))) reviewLegacy.add(row)
+            stats.hits++
+            return row
+          }
+          const hit = { ...row, pick: verified[0].senseId }
+          matchedLabels.set(hit, verified[0])
+          return hit
+        })
+        const phrases = phraseWinners(rows.filter(row => entries.get(row.entryId).kind === 'phrase'),
+          row => Number(row.pick !== undefined))
+        for (const row of [...rows.filter(row => entries.get(row.entryId).kind !== 'phrase'), ...phrases]) {
+          if (matchedLabels.has(row)) retainedLegacy.add(matchedLabels.get(row))
+        }
+        blocks[key] = { ...info, wordCounts: {}, talliedPhrases: true }
+        changed[key] = { raw, rows, sentences: sentencesOf(raw) }
+        continue
+      }
       if (previous && !records[key]?.[previous.hash]) {
         const byHash = records[key] ??= {}
         const confirmed = aliases(previous).flatMap(locator => at.get(locator) ?? [])
@@ -209,7 +229,7 @@ async function prepare() {
       }
       const sameHash = previous?.hash === block.hash
       const reanchor = sameHash && rawChanged(previous, block, records[key]?.[previous.hash])
-      if (sameHash && !reanchor && (!unsafeLegacy.has(key) || rejudge)) {
+      if (sameHash && !reanchor) {
         blocks[key] = { ...info, wordCounts: previous.wordCounts ?? {}, talliedPhrases: previous.talliedPhrases }
         if (rejudge) {
           const record = records[key]?.[block.hash]
@@ -229,30 +249,27 @@ async function prepare() {
       }
       const hits = match(id, block)
       const sentences = sentencesOf(raw)
-      const restored = !previous && old?.legacyRows
-        ? old.legacyRows.filter(row => aliases(block).includes(rowLocator(row))) : []
-      const saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash] ??
-        (restored.length ? legacyRecord(block, null, restored, hits) : undefined)
-      const repair = unsafeLegacy.has(key)
-      const reused = repair ? new Map(saved.rows.map(row => [position(row), row.pick])) :
-        reusePicks(saved, sentences, hits, reanchor)
-      const rows = hits.flatMap(row => {
+      let saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash]
+      if (!saved && !previous && old?.legacyRows) {
+        const locations = aliases(block)
+        const restored = old.legacyRows.filter(row => locations.includes(rowLocator(row)))
+        const sameBlock = hasLegacyBlockHash(restored, block)
+        saved = legacyRecord(block, null, restored.filter(row => row.sentenceText || sameBlock), hits)
+      }
+      const reused = reusePicks(saved, sentences, hits, reanchor)
+      const rows = hits.map(row => {
         const prior = reused.get(position(row)) ?? (!previous ? archive[key]?.[fingerprint(row)] : undefined)
-        if (sameHash && repair) {
-          if (unsafeLegacy.get(key).has(row.entryId) && (prior === undefined || unresolved(prior))) return [row]
-          return prior === undefined ? [] : [{ ...row, pick: prior }]
-        }
         const entry = entries.get(row.entryId)
-        if (prior !== undefined) return [{ ...row, pick: prior }]
-        if (reanchor) return [{ ...row, pick: UNMARKED }]
+        if (prior !== undefined) return { ...row, pick: prior }
+        if (reanchor) return { ...row, pick: UNMARKED }
         stats.hits++
         if (entry.kind !== 'phrase' && entry.senses.length === 1) {
           stats.automatic++
-          return [{ ...row, pick: entry.senses[0].senseId }]
+          return { ...row, pick: entry.senses[0].senseId }
         }
-        return [row]
+        return row
       })
-      const keepWordCounts = Boolean(sameHash && (repair || reanchor))
+      const keepWordCounts = reanchor
       const wordCounts = keepWordCounts ? Object.fromEntries(Object.entries(previous.wordCounts ?? {})
         .filter(([entryId]) => entries.get(entryId).kind !== 'phrase')) : {}
       blocks[key] = { ...info, wordCounts, talliedPhrases: true }
@@ -266,9 +283,18 @@ async function prepare() {
       [key, { locator: ref(b), aliases: aliases(b), wordCounts: b.wordCounts ?? {}, talliedPhrases: b.talliedPhrases,
         rows: aliases(b).flatMap(locator => at.get(locator) ?? []) }]))
     const represented = new Set(Object.values(before).flatMap(b => b.rows))
+    if (bootstrap) {
+      // A removed or renamed block still contributes to the old counts.
+      before.counts.rows.push(...activeRows.filter(row => !represented.has(row)))
+      if (paper) legacyDropped += activeRows.length - retainedLegacy.size
+      for (const row of before.counts.rows) represented.add(row)
+      // Deleted entries have no active counters, but their rows stay in legacyRows.
+      for (const block of Object.values(before)) block.rows = block.rows.filter(row => entries.has(row.entryId))
+    }
     if (represented.size !== activeRows.length) { skipped[id] = '旧分片存在无法定位的命中'; continue }
     const edits = Object.values(changed).flatMap(edit => edit.rows)
-    const selectedRows = new Set(rejudge ? edits : budget(edits, tierOf(paper ?? {}), entries))
+    const selectedRows = rejudge ? new Set(edits) :
+      new Set([...reviewLegacy, ...budget(edits.filter(row => !reviewLegacy.has(row)), tierOf(paper ?? {}), entries)])
     for (const row of edits) {
       if (selectedRows.has(row)) {
         const packetKey = `${tierOf(paper)}/${names.get(row.entryId).split('/').at(-1)}`
@@ -300,8 +326,10 @@ async function prepare() {
       base: [read(dir(shard(id))), read(dir(state(id)))].map(text => text === null ? null : digest(text)) })
   }
   mkdirSync(args.work, { recursive: true })
-  const snapshot = body({ plan, packets: [...packets.keys()], local, scopeFile, versioned })
-  assert([null, snapshot].includes(read(work('plan.json'))), '卷面或词典基线已变化，请使用新的 --work')
+  const snapshot = JSON.stringify({ plan, packets: [...packets.keys()], local, scopeFile, versioned }) + '\n'
+  const previousPlan = read(work('plan.json'))
+  assert(previousPlan === null || previousPlan === snapshot ||
+    JSON.stringify(JSON.parse(previousPlan)) + '\n' === snapshot, '卷面或词典基线已变化，请使用新的 --work')
   for (const [key, packet] of packets) {
     const file = work(`packets/${key}`)
     mkdirSync(join(file, '..'), { recursive: true })
@@ -310,7 +338,7 @@ async function prepare() {
     save(file, body(packet))
   }
   save(work('plan.json'), snapshot)
-  console.log(JSON.stringify({ ...stats, sameLegacy, skipped }))
+  console.log(JSON.stringify({ ...stats, sameLegacy, ...(legacy.size ? { legacyDropped } : {}), skipped }))
 }
 
 function validate(rows, raw) {

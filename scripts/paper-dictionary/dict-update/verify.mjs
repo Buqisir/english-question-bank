@@ -48,7 +48,8 @@ try {
   }) + '\n')
   const baseline = JSON.parse(run('prepare', 'legacy', '--local', dir, '--legacy', dir))
   assert.equal(baseline.sameLegacy, 1)
-  assert.equal(baseline.changed, 0)
+  assert.equal(baseline.changed, 1)
+  assert.equal(baseline.legacyDropped, 0)
   run('apply', 'legacy')
   assert.equal(readFileSync(join(dir, shard), 'utf8'), initialShard)
   assert.equal(JSON.parse(readFileSync(join(dir, state), 'utf8')).legacyRows.length, 1)
@@ -149,25 +150,34 @@ try {
   assert.equal(readWord().senses[0].examples[0].exampleId, pinned)
   const savedState = readFileSync(join(dir, state))
   rmSync(join(dir, state))
-  const stale = spaced.map(row => ({ ...row, blockHash: undefined,
-    surface: row.senseId === sense ? 'recall' : row.surface }))
+  const stale = spaced.map(({ blockHash, sentenceText, ...row }) => row)
   const saveRows = rows => writeFileSync(join(dir, shard), rows.map(row => `${JSON.stringify(row)}\n`).join(''))
   saveRows(stale)
   writeFileSync(join(dir, 'occurrences.ndjson.gz'), gzipSync([...spaced, { sentence: 3, start: 3, end: 9 }].map(row => JSON.stringify({
     source: { paperId, groupId: 'g', locator: { paragraph: 1, sentence: row.sentence } },
-    tier: 'mock', hits: { record: [[row.start, row.end]] },
+    tier: 'mock', sentenceText: row.sentenceText, hits: { record: [[row.start, row.end]] },
   })).join('\n') + '\n'))
   writeFileSync(join(dir, 'phrases/hits.ndjson'), '')
+  const recall = 'entries/w-recall.json'
+  write(recall, { entryId: 'w:recall', headword: 'recall', kind: 'word', lists: ['3000'], variants: [], forms: [],
+    version: 1, counts, unassignedCounts: counts, senses: [
+      { senseId: 'w:recall#s1', pos: 'v.', glossZh: '回想', counts, examples: [] },
+    ] })
+  paper('The record shows birds. We recall songs! We record games.')
   const invalid = JSON.parse(run('prepare', 'invalid-legacy', '--local', dir, '--legacy', dir))
   assert.equal(invalid.changed, 1)
-  assert.equal(invalid.pending.mock, 2)
-  assert.match(readFileSync(join(dir, 'invalid-legacy', packetPath), 'utf8'), /We  【record】 birds\./u)
+  assert.equal(invalid.legacyDropped, 2)
+  assert.equal(invalid.pending.mock, 3)
+  assert.match(readFileSync(join(dir, 'invalid-legacy', packetPath), 'utf8'), /The 【record】 shows birds\./u)
+  answer('invalid-legacy', [{ idx: 0, pick: 'w:record#s2' }])
   run('apply', 'invalid-legacy')
   assert(!readFileSync(join(dir, shard), 'utf8').includes(sense))
-  assert.equal(readWord().counts.mock, 3)
-  assert.equal(readWord().unassignedCounts.mock, 2)
+  assert.equal(readWord().counts.mock, 2)
+  assert.equal(readWord().senses[1].counts.mock, 1)
+  assert.equal(JSON.parse(readFileSync(join(dir, recall), 'utf8')).counts.mock, 1)
   saveRows(spaced)
   writeFileSync(join(dir, state), savedState)
+  paper('We  record birds. We record songs! We record games.')
   write(word, { ...edited, senses: edited.senses.map(s => s.senseId === sense ? {
     ...s, examples: [{ ...s.examples[0], text: 'We  record birds.' }],
   } : s) })
