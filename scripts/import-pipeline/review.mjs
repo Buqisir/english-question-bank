@@ -5,6 +5,7 @@ import { createHash, randomBytes, randomUUID } from 'node:crypto'
 import {
   appendFileSync,
   chmodSync,
+  cpSync,
   createReadStream,
   existsSync,
   lstatSync,
@@ -83,7 +84,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { hydratedEvidenceBase, isLocalReviewOrigin, resolveReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 export { hydratedEvidenceBase } from './review-target.mjs'
-import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
+import { reconcileRevision, uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
@@ -323,14 +324,32 @@ export function loadLocalReviewedListening(paperDir, loaded, candidate) {
     loadReviewedListening(paperDir, loaded, candidate, null, retained))
 }
 
+async function productionStatus(paperId) {
+  const empty = { paperId, latest: null, latestRevisionId: null, revisions: [] }
+  const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+    { cache: 'no-store', signal: AbortSignal.timeout(15_000) }, { allowNotFound: true, notFoundValue: empty })
+  if (status?.paperId !== paperId || !Array.isArray(status.revisions)) fail('UNKNOWN: Review 状态不完整')
+  return status
+}
+
 export async function uploadReviewBundle(paperDir, manifest, timelinePath = path.join(
   root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl',
-)) {
+), lifecycle = {}) {
   const destination = origin()
+  const local = isLocalReviewOrigin(destination)
+  const kind = manifest.schemaVersion === 'web-import-ocr-review-bundle-v1' ? 'ocr' : 'candidate'
+  if (!local && kind === 'candidate') {
+    const remote = await boundOcrReceipt(paperDir, manifest)
+    if (remote && digestJson(remote) !== digestJson(requiredJson(path.join(paperDir, receiptFile)))) fail('UNKNOWN: OCR 收据归属不符')
+    if (reviewBundleDigest(manifest) !== manifest.bundleDigest
+      || fileDescriptors(paperDir, manifest.files).some((file, i) => file.sha256 !== manifest.files[i].sha256)) fail('UNKNOWN: 冻结文件已变化')
+  }
+  const observe = async () => reconcileRevision(await productionStatus(manifest.paperId), manifest, kind,
+    lifecycle.baseline ?? manifest.expectedBaseRevisionId ?? null, lifecycle.stranded)
   return uploadBundle({
     paperDir, manifest, api, resolveReviewFile, timelinePath,
-    localOrigin: isLocalReviewOrigin(destination) ? destination : null,
-  })
+    localOrigin: local ? destination : null, ...(!local && { observe, concurrency: 1 }),
+  }).catch(error => { if (local) throw error; throw new Error(`UNKNOWN: ${error.message}`, { cause: error }) })
 }
 
 export function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId(), approvedBaseRevisionId) {
@@ -427,18 +446,114 @@ export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBas
   return { manifest: reviewManifest(paperDir, projection, resolvesIssueIds, undefined, expectedBaseRevisionId), projection }
 }
 
+const correctionFile = 'agent-ocr-correction-report-v2.json'
+const receiptFile = 'signals/agent-proofreading-receipt.json'
+
+export function matchingOcr(revisions, projection) {
+  return revisions.find(item => item.reviewKind === 'ocr' && item.manifest.sourceSetDigest === projection.sourceSetDigest
+    && item.manifest.evidenceDigest === projection.evidenceDigest)
+}
+
+async function freezeSubmission(paperId, paperDir, fast, status) {
+  const read = file => JSON.parse(readFileSync(file, 'utf8'))
+  const resolves = resolvedIssueIds()
+  const originDir = path.join(fast, 'submissions', encodeURIComponent(origin()))
+  mkdirSync(originDir, { recursive: true })
+  const inputs = fileDescriptors(paperDir, reviewBundleFilePaths(paperDir, null, hydratedEvidenceBase(paperDir)))
+  const key = digestJson({ inputs, resolves, base: hydratedEvidenceBase(paperDir)?.revision.id,
+    initialization: existsSync(path.join(paperDir, 'signals/source-intake-initialization.json')) && read(path.join(paperDir, 'signals/source-intake-initialization.json')).baseRevisionId })
+  const directory = path.join(originDir, key.slice(7))
+  const seal = path.join(directory, 'submission.json')
+  if (existsSync(seal)) return { ...read(seal), directory }
+  const stage = mkdtempSync(path.join(originDir, '.freeze-'))
+  try {
+    cpSync(paperDir, path.join(stage, 'bundle'), { recursive: true })
+    const bundle = path.join(stage, 'bundle')
+    const { manifest: source } = prepareReviewPush(bundle, { resolvesIssueIds: resolves })
+    let stranded
+    const old = status.revisions.filter(item => item.state === 'uploading' && item.reviewKind === 'candidate')
+    const original = status.revisions.find(item => item.reviewKind === 'candidate'
+      && reviewBundleDigest({ ...source, producerBuildId: item.producerBuildId }) === item.bundleDigest
+      && stableStringify(item.manifest.resolvesIssueIds ?? []) === stableStringify(resolves))
+    const report = source.ocrCorrectionReportDigest && read(path.join(paperDir, correctionFile))
+    if (original && report && !status.revisions.some(item => item.id === report.ocrRevisionId)) {
+      if (original.finalizedAt) fail('UNKNOWN: finalized Candidate 缺少关联 OCR')
+      stranded = { id: original.id, bundleDigest: original.bundleDigest }
+    }
+    if (old.some(item => item.id !== original?.id)) fail('UNKNOWN: 存在其他未完成 Candidate')
+    if ((source.expectedBaseRevisionId && source.expectedBaseRevisionId !== status.latestRevisionId
+      || !source.expectedBaseRevisionId && status.latest?.reviewKind === 'candidate') && status.latest?.id !== original?.id) {
+      fail('UNKNOWN: Candidate 基线已变化')
+    }
+    let baseline = status.latestRevisionId
+    if (report) {
+      const inputPath = path.join(path.dirname(fast), 'proofread-input.json')
+      const projection = buildNck1OcrReviewProjection(paperDir)
+      let ocr = matchingOcr(status.revisions, projection)
+      if (!ocr || ocr.state === 'uploading') {
+        if (status.latest && status.latest.id !== ocr?.id || existsSync(path.join(paperDir, 'ocr-revision-declaration.json'))) {
+          fail('UNKNOWN: 需要核对 OCR generation 基线')
+        }
+        const input = ocrBundleInput(paperId, projection)
+        if (ocr) input.producerBuildId = ocr.producerBuildId
+        const manifest = { ...input, bundleDigest: ocrReviewBundleDigest(input) }
+        if (ocr && ocr.bundleDigest !== manifest.bundleDigest) fail('UNKNOWN: OCR bundle 已变化')
+        const finalized = await uploadReviewBundle(paperDir, manifest, undefined, { baseline, stranded })
+        ocr = finalized.revision
+        baseline = ocr.id
+      }
+      if (ocr.state === 'awaiting_review') {
+        const fresh = await productionStatus(paperId)
+        reconcileRevision(fresh, ocr.manifest, 'ocr', baseline, stranded)
+        await proofreadOcr(paperId, ocr.id, inputPath)
+      }
+      const remote = await api(`/api/import-agent-reviews/revisions/${encodeURIComponent(ocr.id)}/ocr-confirmation`)
+      if (remote.receipt?.paperId !== paperId || remote.receipt.revisionId !== ocr.id
+        || remote.receipt.bundleDigest !== ocr.bundleDigest || remote.receipt.sourceSetDigest !== projection.sourceSetDigest
+        || remote.receipt.evidenceDigest !== projection.evidenceDigest || !remote.confirmation
+        || digestJson(remote.confirmation) !== digestJson(read(path.join(bundle, 'materialization/nck1-ocr-source-confirmation-v1.json')))
+        || digestJson(remote.receipt.confirmation) !== digestJson(remote.confirmation)) fail('UNKNOWN: OCR 校对依据不同')
+      writeFileSync(path.join(bundle, receiptFile), JSON.stringify(remote.receipt))
+      if (report.ocrConfirmationId !== remote.receipt.confirmationId || report.ocrRevisionId !== ocr.id) {
+        rmSync(path.join(bundle, correctionFile))
+        finalizeOcrCorrectionReport(paperId, bundle, path.join(path.dirname(fast), 'ocr-correction-entries.json'))
+      }
+    }
+    const { manifest } = prepareReviewPush(bundle, { resolvesIssueIds: resolves,
+      expectedBaseRevisionId: (!original || stranded) && baseline ? baseline : source.expectedBaseRevisionId })
+    if (original && !stranded) {
+      manifest.producerBuildId = original.producerBuildId
+      manifest.bundleDigest = reviewBundleDigest(manifest)
+      if (manifest.bundleDigest !== original.bundleDigest) fail('UNKNOWN: 原包已变化')
+    }
+    const result = { manifest, baseline, stranded }
+    writeFileSync(path.join(stage, 'submission.json'), JSON.stringify(result))
+    renameSync(stage, directory)
+    return { ...result, directory }
+  } finally { rmSync(stage, { recursive: true, force: true }) }
+}
+
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
   const fast = path.join(root, 'imports/ocr-proofread', paperId, 'fast')
   await withReviewPaperLock(path.join(fast, 'review-upload.lock'), async () => {
-    const { manifest, projection } = prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
     const destination = origin()
+    const frozen = !isLocalReviewOrigin(destination) && process.argv.includes('--submit')
+      && await freezeSubmission(paperId, paperDir, fast, await productionStatus(paperId))
+    const { manifest, projection } = frozen || prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
     if (!isLocalReviewOrigin(destination)) {
       // Preserve direct CLI attempts even if registration or its response is interrupted.
       appendFileSync(path.join(fast, 'review-push-attempts.jsonl'),
         `${JSON.stringify({ paperId, origin: destination, startedAt: new Date().toISOString() })}\n`)
     }
-    const finalized = await uploadReviewBundle(paperDir, manifest)
+    const bundle = frozen ? path.join(frozen.directory, 'bundle') : paperDir
+    const finalized = await uploadReviewBundle(bundle, manifest, undefined, frozen || {
+      baseline: manifest.expectedBaseRevisionId ?? (manifest.ocrCorrectionReportDigest ? requiredJson(path.join(bundle, correctionFile)).ocrRevisionId : null),
+    })
+    if (frozen) writeFileSync(path.join(frozen.directory, 'upload-receipt.json'), JSON.stringify({
+      origin: destination, paperId, revisionId: finalized.revision.id, bundleDigest: manifest.bundleDigest,
+      ocrRevisionId: manifest.ocrCorrectionReportDigest && requiredJson(path.join(bundle, correctionFile)).ocrRevisionId,
+    }))
     console.log(JSON.stringify({
       paperId,
       revisionId: finalized.revision.id,
@@ -446,7 +561,8 @@ async function pushRevision(paperId) {
       state: finalized.revision.state,
       bundleDigest: finalized.revision.bundleDigest,
       localUploadId: finalized.localUploadId,
-      ...(projection.spellingReviewSummary ? { spellingReview: projection.spellingReviewSummary } : {}),
+      ...(frozen && { bundle, reconciled: finalized.reconciled === true }),
+      ...(projection?.spellingReviewSummary ? { spellingReview: projection.spellingReviewSummary } : {}),
     }, null, 2))
   })
 }
@@ -758,6 +874,34 @@ async function retryHydrationRead(read) {
   }
 }
 
+export async function boundOcrReceipt(directory, manifest, read = operation => operation()) {
+  const { paperId } = manifest
+  const reportPath = 'agent-ocr-correction-report-v2.json'
+  if (manifest.files.some(file => file.path === reportPath)
+    || manifest.ocrCorrectionReportDigest) {
+    const report = requiredJson(resolveReviewFile(directory, reportPath), reportPath)
+    if (digestJson(report) !== manifest.ocrCorrectionReportDigest) {
+      fail('Hydrated OCR correction report does not match its finalized manifest')
+    }
+    const { receipt } = await read(signal => api(
+      `/api/import-agent-reviews/revisions/${encodeURIComponent(report.ocrRevisionId)}/ocr-confirmation`,
+      { signal },
+    ))
+    if (receipt?.schemaVersion !== 'web-import-ocr-review-confirmation-v1'
+      || receipt.paperId !== paperId
+      || receipt.revisionId !== report.ocrRevisionId
+      || receipt.confirmationId !== report.ocrConfirmationId
+      || receipt.reviewerKind !== 'import_agent'
+      || receipt.sourceSetDigest !== report.originalSourceSetDigest
+      || receipt.evidenceDigest !== report.ocrEvidenceDigest
+      || receipt.correctionReport?.sourceSetDigest !== report.originalSourceSetDigest
+      || !receipt.confirmation) {
+      fail('Hydrated OCR receipt does not match the exact historical correction binding')
+    }
+    return receipt
+  }
+}
+
 export async function hydrateReviewRevision(revision, paperDir, { resumeDirectory } = {}) {
   const { paperId } = revision
   if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperDir}`)
@@ -784,28 +928,8 @@ export async function hydrateReviewRevision(revision, paperDir, { resumeDirector
       const failure = settled.find(result => result.status === 'rejected')
       if (failure) throw failure.reason
     }
-    const reportPath = 'agent-ocr-correction-report-v2.json'
-    if (revision.manifest.files.some(file => file.path === reportPath)
-      || revision.manifest.ocrCorrectionReportDigest) {
-      const report = requiredJson(resolveReviewFile(temporary, reportPath), reportPath)
-      if (digestJson(report) !== revision.manifest.ocrCorrectionReportDigest) {
-        fail('Hydrated OCR correction report does not match its finalized manifest')
-      }
-      const { receipt } = await read(signal => api(
-        `/api/import-agent-reviews/revisions/${encodeURIComponent(report.ocrRevisionId)}/ocr-confirmation`,
-        { signal },
-      ))
-      if (receipt?.schemaVersion !== 'web-import-ocr-review-confirmation-v1'
-        || receipt.paperId !== paperId
-        || receipt.revisionId !== report.ocrRevisionId
-        || receipt.confirmationId !== report.ocrConfirmationId
-        || receipt.reviewerKind !== 'import_agent'
-        || receipt.sourceSetDigest !== report.originalSourceSetDigest
-        || receipt.evidenceDigest !== report.ocrEvidenceDigest
-        || receipt.correctionReport?.sourceSetDigest !== report.originalSourceSetDigest
-        || !receipt.confirmation) {
-        fail('Hydrated OCR receipt does not match the exact historical correction binding')
-      }
+    const receipt = await boundOcrReceipt(temporary, revision.manifest, read)
+    if (receipt) {
       // Recover server-held evidence, never recreate an approval or transfer
       // the previous worker's source-intake lease. This is outside the bundle.
       const receiptPath = path.join(temporary, 'signals', 'agent-proofreading-receipt.json')
@@ -967,9 +1091,7 @@ async function pushOcrReview(paperId) {
   }, null, 2))
 }
 
-async function proofreadOcr(paperId) {
-  const revisionId = option('--revision')
-  const inputPath = option('--input')
+async function proofreadOcr(paperId, revisionId = option('--revision'), inputPath = option('--input')) {
   if (!revisionId || !inputPath) fail('proofread-ocr requires --revision and --input')
   const projection = buildNck1OcrReviewProjection(paperDirectory(paperId))
   const input = JSON.parse(readFileSync(path.resolve(inputPath), 'utf8'))
@@ -1040,9 +1162,7 @@ async function reuseOcrConfirmation(paperId) {
   console.log(JSON.stringify(result, null, 2))
 }
 
-function finalizeOcrCorrectionReport(paperId) {
-  const paperDir = paperDirectory(paperId)
-  const inputPath = option('--input')
+function finalizeOcrCorrectionReport(paperId, paperDir = paperDirectory(paperId), inputPath = option('--input')) {
   if (!inputPath) fail('finalize-ocr-correction-report requires --input <entries.json>')
   const receiptPaths = [
     path.join(paperDir, 'signals', 'agent-proofreading-receipt.json'),
@@ -1339,7 +1459,7 @@ async function preprocessingReport(paperId) {
   const output = option('--output')
   if (!evidencePath || !output) fail('preprocessing-report requires --evidence <evidence.json> --output <report.md>')
   const evidenceFile = path.resolve(evidencePath)
-  const projection = buildLocalReviewProjection(paperDirectory(paperId))
+  const projection = buildLocalReviewProjection(option('--frozen-bundle') || paperDirectory(paperId))
   const evidence = requiredJson(evidenceFile, 'handoff evidence')
   const reviewStatus = ['preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion) && evidence.screen
     ? await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`) : null

@@ -26,8 +26,26 @@ function aggregatePutMetrics(timing, metrics) {
   }
 }
 
+export function reconcileRevision(status, manifest, kind, baseline, stranded) {
+  const unknown = () => { throw new Error('UNKNOWN: Review 归属、基线或修订状态已变化') }
+  if (status?.paperId !== manifest.paperId || !Array.isArray(status.revisions)
+    || status.latestRevisionId !== (status.latest?.id ?? null)
+    || (status.latestRevisionId && !status.revisions.some(item => item.id === status.latestRevisionId))) unknown()
+  let match
+  for (const item of status.revisions) {
+    if (item?.paperId !== manifest.paperId || !item.id || !['candidate', 'ocr'].includes(item.reviewKind)
+      || !item.bundleDigest || (item.state === 'uploading' ? item.finalizedAt !== null : !item.finalizedAt)) unknown()
+    if (item.reviewKind === kind && item.bundleDigest === manifest.bundleDigest) {
+      if (match || JSON.stringify(item.manifest?.resolvesIssueIds ?? []) !== JSON.stringify(manifest.resolvesIssueIds ?? [])) unknown()
+      match = item
+    } else if (item.state === 'uploading' && (item.id !== stranded?.id || item.bundleDigest !== stranded.bundleDigest)) unknown()
+  }
+  if (match?.finalizedAt ? match.id !== status.latestRevisionId : status.latestRevisionId !== baseline) unknown()
+  return match
+}
+
 export async function uploadReviewBundle({
-  paperDir, manifest, api, resolveReviewFile, timelinePath, localOrigin,
+  paperDir, manifest, api, resolveReviewFile, timelinePath, localOrigin, observe,
   concurrency = Number(process.env.QUESTION_BANK_IMPORT_UPLOAD_CONCURRENCY ?? 4),
 }) {
   if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 6) {
@@ -40,11 +58,21 @@ export async function uploadReviewBundle({
     putConcurrency: concurrency, completed: false }
   const uploadId = localOrigin && randomUUID()
   try {
+    const previous = observe && await observe()
+    if (previous?.finalizedAt) return { revision: previous, reconciled: true }
     const created = await api('/api/import-agent-reviews/revisions', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(manifest),
     })
+    if (observe && (created.revision?.bundleDigest !== manifest.bundleDigest
+      || created.revision.paperId !== manifest.paperId || created.revision.state !== 'uploading'
+      || (previous && (created.created !== false || previous.id !== created.revision.id))
+      || !Array.isArray(created.missingFiles))) throw new Error('UNKNOWN: 登记回执与目标包不一致')
+    const check = async () => {
+      const current = await observe()
+      if (current?.id !== created.revision.id || current.state !== 'uploading') throw new Error('UNKNOWN: 上传目标变化')
+    }
     if (created.metrics) timing.registerMetrics = created.metrics
     const filesByPath = new Map(manifest.files.map(file => [file.path, file]))
     const missing = [...new Set(created.missingFiles || [])].map(relativePath => {
@@ -64,6 +92,7 @@ export async function uploadReviewBundle({
         try {
           const bytes = readFileSync(resolveReviewFile(paperDir, file.path))
           for (let attempt = 0; ; attempt++) {
+            if (observe) await check()
             const started = performance.now()
             timing.putAttempts++
             try {
@@ -78,7 +107,7 @@ export async function uploadReviewBundle({
               break
             } catch (error) {
               aggregatePutMetrics(timing, error.metrics)
-              if (attempt >= 2 || !retryable(error)) throw error
+              if (observe || attempt >= 2 || !retryable(error)) throw error
               timing.putRetries++
             } finally {
               // Keep the existing sum-of-request-time metric; wall time is separate.
@@ -98,7 +127,11 @@ export async function uploadReviewBundle({
     if (failure) throw failure
     const finalizeStarted = performance.now()
     try {
+      if (observe) await check()
       const result = await api(`${revisionPath}/finalize`, { method: 'POST' })
+      const completed = observe && await observe()
+      if (observe && (completed?.id !== created.revision.id || !completed.finalizedAt
+        || result.revision?.id !== created.revision.id || !result.revision.finalizedAt)) throw new Error('UNKNOWN: finalize 回执未闭合')
       if (result.metrics) timing.finalizeMetrics = result.metrics
       timing.completed = true
       if (uploadId) {

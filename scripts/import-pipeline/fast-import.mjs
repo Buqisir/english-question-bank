@@ -163,9 +163,9 @@ function say(message) {
   console.log(message)
 }
 
-async function step(ctx, name, fn) {
+async function step(ctx, name, fn, refresh = false) {
   const done = ctx.state.steps[name]
-  if (done?.finishedAt) {
+  if (done?.finishedAt && !refresh) {
     say(`= ${name}（已完成，${done.seconds}s）`)
     return done.result
   }
@@ -1693,19 +1693,24 @@ export async function submit(ctx, args) {
     say(`生成听核包：node scripts/import-pipeline/listening-owner-review-pack.mjs ${ctx.paperId} --output <仓库外新目录>`)
   }
   const localPreview = args.includes('--local-preview')
-  if (!localPreview && ctx.state.steps.push && !ctx.state.steps.push.finishedAt && !reconciledPush(ctx)) {
+  if (target.local && !localPreview && ctx.state.steps.push && !ctx.state.steps.push.finishedAt && !reconciledPush(ctx)) {
     fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 未完成的 push 须先只读对账，禁止重放')
   }
   if (localPreview && !target.local) fail('preview-local 只允许已绑定的 loopback Review，禁止访问生产')
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
   const pushed = await step(ctx, localPreview ? 'local-preview' : 'push', async () => {
-    const result = await run(ctx, localPreview ? 'local-preview' : 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
+    const result = await run(ctx, localPreview ? 'local-preview' : 'push', cli('review.mjs', 'push', ctx.paperId, ...(!target.local ? ['--submit'] : []), ...(resolves ? ['--resolves', resolves] : [])), { review: true })
     return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin,
+      ...(result.bundle && { bundle: result.bundle, reconciled: result.reconciled }),
       ...(localPreview ? { localUploadId: result.localUploadId } : {}) }
-  })
+  }, !target.local)
   if (!localPreview && ctx.state.data.feedbackFix) {
     delete ctx.state.data.feedbackFix
     save(ctx)
+  }
+  if (pushed.reconciled) {
+    say(`已核对最新送审版本 ${pushed.revisionId}，上传回执已补齐。`)
+    return
   }
   const qa = path.join(ctx.work, 'handoff/qa')
   const screen = await step(ctx, localPreview ? 'local-screen' : 'screen', async () => {
@@ -1739,7 +1744,7 @@ async function report(ctx, args) {
   const handoff = path.join(ctx.work, 'handoff')
   const evidencePath = path.join(handoff, 'evidence.json')
   const now = new Date().toISOString().replace(/\.\d{3}Z$/u, 'Z')
-  const paper = (name) => path.join(ctx.paperDir, name)
+  const paper = (name) => path.join(pushed.bundle || ctx.paperDir, name)
   const selection = productSet(ctx, buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true }))
   const selectedProducts = selection.products
   const products = selectedProducts.map((product) => paper(`products/${product}.pdf`))
@@ -1758,7 +1763,7 @@ async function report(ctx, args) {
     pdfs: selectedProducts.map((edition, index) => ({ edition, ...fileEntry(handoff, products[index]) })),
     screen: { url: screen.url, revisionId: pushed.revisionId },
     checks: {
-      ocr: check(`扫描源共 ${readJson(path.join(ctx.work, 'trace.json')).pages.length} 页，Tesseract OCR 后由导题 Agent 对照原图逐行校对（${compile.items} 条，${compile.textCorrections} 处文字修正，${compile.uncertain} 处存疑）；${localOnly ? '本机隔离' : ''}服务器 proofread/pull 收据已绑定（${steps['ocr-review'].result.revisionId}）。可精确定位的识别修正写入更正报告。`,
+      ocr: check(`扫描源共 ${readJson(path.join(ctx.work, 'trace.json')).pages.length} 页，Tesseract OCR 后由导题 Agent 对照原图逐行校对（${compile.items} 条，${compile.textCorrections} 处文字修正，${compile.uncertain} 处存疑）；${localOnly ? '本机隔离' : ''}服务器 proofread/pull 收据已绑定（${pushed.bundle ? readJson(paper('agent-ocr-correction-report-v2.json')).ocrRevisionId : steps['ocr-review'].result.revisionId}）。可精确定位的识别修正写入更正报告。`,
         [path.join(ctx.work, 'proofread-input.json'), paper('agent-ocr-correction-report-v2.json')]),
       sourceExtraction: check(`Materialization 由服务器 producer 从确认文本生成；Agent 编辑 ${edits.length} 处，逐条记录在编辑日志。写作源参考按答案卷行几何重建段落。`,
         [path.join(ctx.work, 'materialization-edits.json'), paper('source-references-v1.json')]),
@@ -1780,7 +1785,7 @@ async function report(ctx, args) {
   const output = path.join(handoff, '校正报告与预处理完成表.md')
   archive(ctx, output)
   await run(ctx, 'preprocessing-report', cli('review.mjs', 'preprocessing-report', ctx.paperId,
-    '--evidence', evidencePath, '--output', output), { review: true })
+    '--evidence', evidencePath, '--output', output, ...(pushed.bundle ? ['--frozen-bundle', pushed.bundle] : [])), { review: true })
   const sentenceDetail = steps['listening-sentences']?.result?.detail
   if (sentenceDetail) appendFileSync(output, `\n- 听力跟读 · ${sentenceDetail}\n`)
   if (localOnly) {

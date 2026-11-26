@@ -8,7 +8,9 @@ import path from 'node:path'
 import { test } from 'node:test'
 import { setTimeout as delay } from 'node:timers/promises'
 import { receiveVerifiedUpload } from '../../server/import-ops/receiveVerifiedUpload.mjs'
-import { uploadReviewBundle } from './lib-review-upload.mjs'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { boundOcrReceipt, matchingOcr } from './review.mjs'
+import { reconcileRevision, uploadReviewBundle } from './lib-review-upload.mjs'
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 
@@ -245,3 +247,62 @@ for (const failPhase of ['manifest', 'finalize']) {
     assert.equal(f.timing().completed, false)
   })
 }
+
+test('production resumes the frozen manifest through lost PUT and finalize replies', async t => {
+  const { dir, manifest } = await fixture(t)
+  const { paperId } = manifest
+  Object.assign(manifest, { producerBuildId: 'old-build', bundleDigest: digest('frozen') })
+  const revision = { paperId, id: 'rev-own', bundleDigest: manifest.bundleDigest, reviewKind: 'candidate',
+    state: 'uploading', finalizedAt: null, manifest }
+  const stranded = { ...revision, id: 'rev-old', bundleDigest: digest('old invalid report') }
+  const status = { paperId, latest: null, latestRevisionId: null, revisions: [stranded] }
+  const observe = () => reconcileRevision(status, manifest, 'candidate', null, stranded)
+  const missing = new Set(manifest.files.slice(0, 2).map(file => file.path))
+  const operations = []
+  const api = async (route, init) => {
+    operations.push(init.method)
+    if (route.endsWith('/revisions')) {
+      assert.deepEqual(JSON.parse(init.body), manifest)
+      const created = !status.revisions.includes(revision)
+      if (created) status.revisions.push(revision)
+      return { revision, created, missingFiles: [...missing] }
+    }
+    if (init.method === 'PUT') {
+      assert(missing.delete(decodeURIComponent(route.split('path=')[1])))
+      if (missing.size) throw new TypeError('lost PUT reply')
+      return {}
+    }
+    assert.equal(missing.size, 0)
+    Object.assign(revision, { finalizedAt: '2026-01-01', state: 'awaiting_review' })
+    Object.assign(status, { latest: revision, latestRevisionId: revision.id })
+    throw new TypeError('lost finalize reply')
+  }
+  const run = () => uploadReviewBundle({ paperDir: dir, manifest, api, resolveReviewFile: path.join,
+    timelinePath: path.join(dir, 'production.jsonl'), concurrency: 1, observe })
+  status.revisions.push({ ...stranded, id: 'rev-foreign' })
+  await assert.rejects(run, /UNKNOWN/)
+  assert.deepEqual(operations, [])
+  status.revisions.pop()
+  await assert.rejects(run, /lost PUT/)
+  await assert.rejects(run, /lost finalize/)
+  assert.deepEqual(await run(), { revision, reconciled: true })
+  assert.deepEqual(operations, ['POST', 'PUT', 'POST', 'PUT', 'POST'])
+})
+
+test('candidate referencing loopback OCR fails the production receipt check', async t => {
+  const { dir, manifest } = await fixture(t)
+  const file = 'agent-ocr-correction-report-v2.json'
+  const report = { ocrRevisionId: 'rev-local', ocrConfirmationId: 'local-confirmation' }
+  writeFileSync(path.join(dir, file), JSON.stringify(report))
+  await assert.rejects(() => boundOcrReceipt(dir, { ...manifest, files: [{ path: file }],
+    ocrCorrectionReportDigest: digestJson(report) }, async () => ({ receipt: {
+      schemaVersion: 'web-import-ocr-review-confirmation-v1', paperId: manifest.paperId, revisionId: 'rev-production',
+    } })), /exact historical correction binding/)
+})
+
+test('an absent production OCR needs upload, an exact evidence match reuses its revision', () => {
+  const projection = { sourceSetDigest: digest('source'), evidenceDigest: digest('evidence') }
+  const ocr = { reviewKind: 'ocr', manifest: projection }
+  assert.equal(matchingOcr([], projection), undefined)
+  assert.equal(matchingOcr([{ ...ocr, manifest: { ...projection, evidenceDigest: digest('other') } }, ocr], projection), ocr)
+})

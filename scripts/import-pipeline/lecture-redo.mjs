@@ -263,17 +263,19 @@ export async function pushPreparedCandidate(work) {
   const { baseRevisionId, bundleDigest, merged } = readJson(path.join(ready, 'merge-receipt.json'))
   deepStrictEqual([baseRevisionId, bundleDigest], [base, manifest.bundleDigest], '合稿回执与待上传清单不一致')
   const attempt = path.join(work, 'upload-attempt.json')
-  if (existsSync(attempt)) throw new Error('已有上传尝试，请先只读对账上传回执和生产 Candidate')
-  const latest = await reviewCandidate(manifest.paperId)
-  if (!/^rev-[a-z0-9-]+$/iu.test(base) || latest?.id !== base) throw new Error('最新 Candidate 已变化')
+  if (!/^rev-[a-z0-9-]+$/iu.test(base)) throw new Error('缺少基线 revision')
+  const identity = { base, bundleDigest }
+  if (existsSync(attempt)) deepStrictEqual(readJson(attempt), identity, 'UNKNOWN: 原上传尝试与待传包不同')
   for (const file of manifest.files) {
     const bytes = readFileSync(path.join(bundle, file.path))
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) throw new Error(`合稿后文件有变化：${file.path}`)
   }
   // Preserve this marker if registration or finalize returns an unknown outcome.
-  writeJson(attempt, { base, bundleDigest: manifest.bundleDigest })
+  if (!existsSync(attempt)) writeJson(attempt, identity)
   const result = await uploadReviewBundle(bundle, manifest, path.join(work, 'upload-timeline.jsonl'))
-  writeJson(path.join(work, 'upload-receipt.json'), { ...result, baseRevisionId, merged })
+  const receipt = path.join(work, 'upload-receipt.json')
+  if (!existsSync(receipt)) writeJson(receipt, { ...result, baseRevisionId, merged })
+  else deepStrictEqual(readJson(receipt).revision.id, result.revision.id, 'UNKNOWN: 上传回执 revision 不符')
   rmSync(path.join(homedir(), '.cache', 'eqbank', 'revisions', base), { recursive: true, force: true })
   console.log(JSON.stringify({ revisionId: result.revision.id }))
 }
