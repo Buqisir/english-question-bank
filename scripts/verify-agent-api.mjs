@@ -263,7 +263,7 @@ try {
   assert(ready, logs)
   seedReview()
   const pendingRevisionId = seedReview(pendingId, { number: 2, largeMedia: true })
-  seedReview(publishedId)
+  const newerPublicationCandidate = seedReview(publishedId)
   for (const state of ['changes_requested', 'uploading', 'approved', 'superseded']) {
     seedReview(`paper-agent-${state}`, { state })
   }
@@ -311,6 +311,17 @@ try {
   assert.equal(list.papers[1].type, 'real')
   assert.equal(list.papers[1].status, 'published')
   assert(!('revisionId' in list.papers[1]))
+  const authDictionary = { token: credential.token }
+  const dictionary = await expectStatus(`${api}/papers?view=dictionary`, authDictionary, 200)
+  assert.equal(dictionary.view, 'dictionary')
+  assert.equal(dictionary.papers.find(p => p.paperId === publishedId).revisionId, newerPublicationCandidate)
+  const target = `${api}/papers/${publishedId}?view=dictionary&revision=`
+  assert.equal((await expectStatus(target + newerPublicationCandidate, authDictionary, 200)).status, 'awaiting_review')
+  await expectStatus(target + encodeURIComponent(ref.publicationDigest), authDictionary, 404)
+  const revisionDb = new DatabaseSync(reviewPath)
+  revisionDb.prepare("UPDATE import_review_revisions SET state = 'changes_requested' WHERE id = ?").run(newerPublicationCandidate)
+  revisionDb.close()
+  assert.equal((await expectStatus(target + encodeURIComponent(ref.publicationDigest), authDictionary, 200)).status, 'published')
   for (const failure of ['missing', 'identity']) {
     const id = `paper-agent-broken-${failure}`
     const revision = seedReview(id)

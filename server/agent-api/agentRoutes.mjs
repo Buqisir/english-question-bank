@@ -76,8 +76,10 @@ export function createAgentRoutes({ getReviewStore } = {}) {
     if (!input.context.agent) { input.context.sendJson(input.response, 401, { error: 'not_authenticated' }); return }
     return action(input)
   })
-  const catalog = context => listAgentPapers(context, getReviewStore?.())
-  const read = (pattern, action) => authorized(pattern, input => action(input, catalog(input.context)))
+  const catalog = (context, dictionary = false) => listAgentPapers(context, getReviewStore?.(), { dictionary })
+  const dictionaryView = url => url.searchParams.get('view') === 'dictionary'
+  const read = (pattern, action, versioned = false) => authorized(pattern, input =>
+    action(input, catalog(input.context, versioned && dictionaryView(input.url))))
   const submission = (method, pattern, action) => authorized(pattern, async input => {
     const { context, request, response } = input
     let body
@@ -133,13 +135,16 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       return containsQuestion(paper, questionId) && putAgentDraft(db, tokenId, paperId, questionId, body)
     }),
     read(/^\/api\/agent\/v1\/papers$/, ({ context, response, url }, papers) =>
-      context.sendJson(response, 200, { papers: papers.filter(paper => matchesPaper(paper, url.searchParams)
-        && matchesQuery(`${paper.title} ${paper.paperId}`, url.searchParams.get('q') || '')).map(paperSummary) })),
+      context.sendJson(response, 200, { ...(dictionaryView(url) ? { view: 'dictionary' } : {}),
+        papers: papers.filter(paper => matchesPaper(paper, url.searchParams)
+          && matchesQuery(`${paper.title} ${paper.paperId}`, url.searchParams.get('q') || '')).map(paperSummary) }), true),
     read(/^\/api\/agent\/v1\/papers\/([^/]+)$/, (input, papers) => {
       const paper = findPaper(papers, input.match[1])
-      if (!paper) return notFound(input)
+      if (!paper || (dictionaryView(input.url) && input.url.searchParams.get('revision') !== paper.revisionId)) {
+        return notFound(input)
+      }
       input.context.sendJson(input.response, 200, agentPaperDetail(paper))
-    }),
+    }, true),
     read(/^\/api\/agent\/v1\/papers\/([^/]+)\/answer-source$/, (input, papers) => {
       const paper = findPaper(papers, input.match[1])
       if (!paper) return notFound(input)

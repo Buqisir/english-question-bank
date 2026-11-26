@@ -24,7 +24,7 @@ function paperEntry(paperId, asset, meta) {
   }
 }
 
-export function listAgentPapers(context, reviewStore) {
+export function listAgentPapers(context, reviewStore, { dictionary = false } = {}) {
   const db = context.openDatabase({ readOnly: true })
   let published
   try {
@@ -44,21 +44,24 @@ export function listAgentPapers(context, reviewStore) {
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
     const versionDir = path.join(context.paperAssetsDir, paperId, 'versions', versionName)
     // Rollback replaces the current ref but keeps the old version's original creation date.
-    let updatedAt = Date.parse(publishedAt.includes('T') ? publishedAt : `${publishedAt.replace(' ', 'T')}Z`)
+    const publishedAtMs = Date.parse(publishedAt.includes('T') ? publishedAt : `${publishedAt.replace(' ', 'T')}Z`)
+    let updatedAt = publishedAtMs
     try {
       updatedAt = Math.max(updatedAt, statSync(path.join(baseDir, 'canonical-paper-publication-ref-v1.json')).mtimeMs)
     } catch { /* Keep the indexed publication timestamp. */ }
     return { ...paperEntry(paperId, asset, { ...meta, sourceType: meta?.sourceType ?? sourceType }),
       status: 'published', updatedAt: new Date(updatedAt).toISOString(),
+      ...(dictionary ? { revisionId: publicationDigest, publishedAt: publishedAtMs } : {}),
       readSource: () => publishedAgentSource(versionDir, publicationDigest) }
   })
-  const publishedIds = new Set(papers.map(paper => paper.paperId))
+  const publishedById = new Map(papers.map(paper => [paper.paperId, paper]))
   if (reviewStore) {
     const cache = reviewPaperCaches.get(reviewStore) || new Map()
     reviewPaperCaches.set(reviewStore, cache)
     const activeKeys = new Set()
     for (const revision of reviewStore.listAwaitingCandidateRevisions()) {
-      if (publishedIds.has(revision.paperId)) continue
+      const published = publishedById.get(revision.paperId)
+      if (published && (!dictionary || Date.parse(revision.updatedAt) <= published.publishedAt)) continue
       const key = `${revision.id}:${revision.bundleDigest}`
       activeKeys.add(key)
       const paper = cache.get(key) || { paperId: revision.paperId, title: revision.paperName,
@@ -80,6 +83,7 @@ export function listAgentPapers(context, reviewStore) {
         return paper
       }
       paper.updatedAt = revision.updatedAt
+      if (published) papers.splice(papers.indexOf(published), 1)
       papers.push(paper)
     }
     for (const key of cache.keys()) if (!activeKeys.has(key)) cache.delete(key)
@@ -88,7 +92,7 @@ export function listAgentPapers(context, reviewStore) {
 }
 
 export function paperSummary(paper) {
-  const { asset, groupIds, load, updatedAt, readSource, ...summary } = paper
+  const { asset, groupIds, load, updatedAt, publishedAt, readSource, ...summary } = paper
   return { ...summary, groupCount: groupIds?.length ?? null }
 }
 

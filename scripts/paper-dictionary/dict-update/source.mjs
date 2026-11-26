@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { createReadStream, readFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
@@ -6,6 +7,7 @@ import { createInterface } from 'node:readline'
 import { createGunzip } from 'node:zlib'
 import { hashPhraseBlock } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { inlineText } from '../../../server/agent-api/agentPassage.mjs'
+import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs'
 
 export const json = path => JSON.parse(readFileSync(path, 'utf8'))
 export const ndjson = text => text.split('\n').filter(line => line.trim()).map(JSON.parse)
@@ -39,47 +41,67 @@ export function blocksOf(paper) {
         const ordinal = duplicates.get(hash) ?? 0
         duplicates.set(hash, ordinal + 1)
         add('option', `${id}#option=${o.label}`, { question: number, option: o.label }, text,
-          o.optionId ?? `${id}:${hash}:${ordinal}`)
+          o.optionId && o.optionId !== `option:${id}:${o.label}` ? o.optionId : `${id}:${hash}:${ordinal}`)
       }
     }
     const shared = new Set()
     for (const o of group.optionBank ?? []) {
       const text = o.text ?? o.content
       if (typeof text !== 'string' || !text.trim()) continue
-      const stable = o.optionId ?? hashPhraseBlock(text)
+      const stable = o.optionId && o.optionId !== `option:${o.label}` ? o.optionId : hashPhraseBlock(text)
       if (shared.has(stable)) continue
       shared.add(stable)
       add('bank', `option-bank:${o.label}`, { optionBank: o.label }, text, stable)
+      blocks[JSON.stringify([groupId, 'bank', stable])].aliases = (group.questions ?? []).map(q =>
+        `${q.questionId ?? `question:${q.number ?? q.questionNo}`}#option=${o.label}`)
     }
   }
   return blocks
 }
 
-export async function readLegacy(archive, ids, entries) {
-  assert(archive, '处理旧分片需要 --legacy-corpus 和 --legacy-hits')
-  const result = new Map()
-  for await (const p of lines(archive.corpus)) {
-    if (ids.has(p.paperId)) result.set(p.paperId, { tier: tierOf(p), blocks: blocksOf(p) })
-  }
+export function legacyHashMatches(rows, blocks) {
+  const hashes = new Set(Object.values(blocks).map(block => block.hash))
+  const saved = rows.map(row => row.blockHash).filter(Boolean)
+  return saved.length > 0 && saved.every(hash => hashes.has(hash))
+}
+
+export async function readLegacy(directory, candidates, entries) {
   const wordIds = new Map([...entries.values()].filter(e => e.kind !== 'phrase')
     .map(e => [e.headword, e.entryId]))
-  for (const p of result.values()) {
-    p.byLocator = new Map(Object.values(p.blocks).map(b => [legacyLocator(b.groupId, b.locator), b]))
+  for (const p of candidates.values()) {
+    p.byLocator = new Map(Object.entries(p.blocks).map(([key, b]) => [legacyLocator(b.groupId, b.locator), key]))
+    p.legacyHits = {}
   }
-  for await (const { source, tier, hits } of lines(archive.hits, true)) {
-    const p = result.get(source.paperId)
+  const archivedBlock = (p, key) => p.legacyHits[key] ??= {
+    sentences: splitSentences(p.blocks[key].raw).map(({ text }) => text.trim()), words: [], phrases: [],
+  }
+  const find = (p, source) => p.byLocator.get(legacyLocator(source.groupId, source.locator)) ??
+    (source.locator.option && p.byLocator.get(legacyLocator(source.groupId, { optionBank: source.locator.option })))
+  for await (const { source, tier, hits } of lines(join(directory, 'occurrences.ndjson.gz'), true)) {
+    const p = candidates.get(source.paperId)
     if (!p) continue
     p.tier = tier
-    const block = p.byLocator.get(legacyLocator(source.groupId, source.locator))
-    assert(block, `旧词频找不到原文块 ${source.paperId} ${legacyLocator(source.groupId, source.locator)}`)
+    const key = find(p, source)
+    if (!key) { p.incomplete = true; continue }
+    const block = p.blocks[key]
     const counts = block.wordCounts ??= {}
     for (const [headword, spans] of Object.entries(hits)) {
       const id = wordIds.get(headword)
-      if (id) counts[id] = (counts[id] ?? 0) + spans.length
+      if (!id) continue
+      counts[id] = (counts[id] ?? 0) + spans.length
+      const archived = archivedBlock(p, key)
+      archived.words.push([source.locator, id, spans])
     }
   }
-  for (const id of ids) assert(result.has(id) && result.get(id).tier, `旧分片缺少原始语料 ${id}`)
-  return result
+  for await (const { source, tier, entryCanonical, sentence, start, end, parts } of lines(join(directory, 'phrases/hits.ndjson'))) {
+    const p = candidates.get(source.paperId)
+    if (!p) continue
+    p.tier ??= tier
+    const key = find(p, source)
+    if (!key) { p.incomplete = true; continue }
+    const archived = archivedBlock(p, key)
+    archived.phrases.push({ entryCanonical, sentence, start, end, parts, locator: source.locator })
+  }
 }
 
 function legacyLocator(groupId, { paragraph, question, option, optionBank }) {
@@ -95,14 +117,16 @@ async function* lines(path, compressed = false) {
 }
 
 export function localPaper(dir, type) {
-  const asset = json(join(dir, 'paper-asset.json'))
+  const content = readFileSync(join(dir, 'paper-asset.json'), 'utf8')
+  const asset = JSON.parse(content)
   const { paperId, title } = asset.paper
   const groups = asset.content.blocks.filter(b => b.type === 'group').map(({ groupId }) => {
     const group = asset.content.groups[groupId]
     return { ...group, groupId, questions: (group.questionIds ?? []).map(id =>
       ({ ...asset.content.questions[id], questionId: id })) }
   })
-  return { paperId, title, type: type ?? (paperId.startsWith('paper-mock-') ? 'mock' : 'real'), groups }
+  return { paperId, title, type: type ?? (paperId.startsWith('paper-mock-') ? 'mock' : 'real'), groups,
+    status: 'local', revisionId: createHash('sha256').update(content).digest('hex') }
 }
 
 export function agentReader() {

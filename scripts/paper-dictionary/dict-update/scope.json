@@ -1,0 +1,24 @@
+{
+  "include": [],
+  "exclude": [
+    "paper-mock-2026-02-qingdao-gao2-first-term-final-english",
+    "paper-mock-fujian-xiamen-2025-g2-final-june",
+    "paper-mock-guangdong-greater-bay-area-2025-06-grade-two-final",
+    "paper-mock-heilongjiang-harbin-2025-07-g2-second-semester-quality-test",
+    "paper-mock-hubei-wuhan-key-schools-2025-g2-final-june",
+    "paper-mock-import-20261026-n102",
+    "paper-mock-jiangsu-nantong-2025-06-senior-two-second-semester-final-quality-monitoring",
+    "paper-mock-liaoning-dalian-2025-07-senior-two-final-v2",
+    "paper-mock-shandong-weifang-2025-g2-final-july",
+    "paper-mock-shandong-yantai-2025-07-senior-two-second-semester-final",
+    "paper-mock-zhejiang-beidouxing-alliance-2025-12-gao2-stage-exam",
+    "paper-mock-zhejiang-excellent-high-school-alliance-2025-11-senior-two-joint-exam",
+    "paper-mock-zhejiang-hangzhou-wenzhou-jinhua-shaoxing-four-school-alliance-2026-04-midterm",
+    "paper-mock-zhejiang-mingxiao-2025-aug-grade11",
+    "paper-mock-zhejiang-ningbo-2025-06-senior-two-second-semester-nine-school-joint-final-exam",
+    "paper-mock-zhejiang-six-school-alliance-2025-04-g2-midterm",
+    "paper-mock-zhejiang-six-schools-2025-10-g2-joint-exam",
+    "paper-mock-zhejiang-taizhou-2025-06-senior-two-final",
+    "paper-mock-zhejiang-zhenan-alliance-2025-09-g2-opening"
+  ]
+}

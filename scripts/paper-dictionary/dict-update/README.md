@@ -10,9 +10,9 @@ work=$(mktemp -d)
 node "$tool" prepare --work "$work" --paper paper-… --paper paper-…
 ```
 
-`prepare` 只写工作目录。`--paper` 可重复，涵盖新增、修订及撤回的卷。省略它会对照生产全部真题和模拟卷，包含待审卷。生产只读口令取自 `~/.config/eqbank/agent-token`。已建增量状态的待审卷按 revision 跳过，无 revision 的卷逐块比对。卷目录也可重复传 `--local <包含 paper-asset.json 的 Canonical 包目录>`，只处理这些卷。
+`prepare` 只写工作目录。`--paper` 可重复，涵盖新增、修订及撤回的卷。省略时使用生产目录和已有分片。生产只读口令取自 `~/.config/eqbank/agent-token`。`scope.json` 的 `exclude` 排除旧批次高二卷，`include` 可显式恢复。`--local <Canonical 包目录>` 可重复，读取其中的 `paper-asset.json`。
 
-首次处理旧分片时，额外指定 `--legacy-corpus <原始卷导出.ndjson> --legacy-hits <原始 occurrences.ndjson.gz>`。旧分片只有已归义命中，原始归档用于恢复旧块哈希和全部词频。增量状态随数据提交，此后该卷无需再读原始归档。
+首次接入的归档目录默认为 `~/Projects/otter-dict-work`，可用 `--legacy` 覆盖。旧分片现存块哈希全部出现在目标卷时，才用 `occurrences.ndjson.gz` 和 `phrases/hits.ndjson` 归档。来源对不上的卷列在 `skipped`，原分片保留。
 
 ## 2. 判题并应用
 
@@ -22,7 +22,7 @@ node "$tool" prepare --work "$work" --paper paper-… --paper paper-…
 node "$tool" apply --work "$work"
 ```
 
-`apply` 写词条、命中分片和按卷增量状态。`new-senses.ndjson` 交 Medium 复核待补新义。一次 `apply` 中断时，在同一工作目录重跑。后续批次使用新目录。
+`apply` 复核目标 revision、状态和范围，变动卷列在 `deferred`。生产尚未提供 `view=dictionary` 时只可 dry-run。`new-senses.ndjson` 交 Medium 复核待补新义。中断时用同一工作目录重跑，后续批次使用新目录。
 
 ## 3. 检查并提交当天一批
 
