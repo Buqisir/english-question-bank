@@ -5,13 +5,14 @@ import { join, resolve } from 'node:path'
 import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
-import { agentReader, blocksOf, json, legacyQuoteKey, localPaper, ndjson, readLegacy, rowLocator,
+import { agentReader, blocksOf, json, legacyQuoteKey, localPaper, ndjson, predatesLegacyExport, readLegacy, rowLocator,
   tierOf, validPaperId } from './source.mjs'
 import { matcher, phraseWinners } from './match.mjs'
 import { budget, editorialSense, legacyRecord, makeRecord, normalizedSentenceKey, position, recordRows, reusePicks, sentencesOf,
   UNMARKED, unresolved, verifiedLegacyHit } from './annotations.mjs'
 import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs'
+import { digestJson } from '../../../shared/paper-canonical/stable.mjs'
 
 const { positionals: [command], values: args } = parseArgs({ allowPositionals: true, options: {
   work: { type: 'string' }, data: { type: 'string' }, paper: { type: 'string', multiple: true },
@@ -77,9 +78,20 @@ async function targetsFor(local) {
   const get = agentReader()
   const { papers: list, view } = await get('papers?view=dictionary')
   const versioned = view === 'dictionary'
-  return { list, versioned, detail: async paper => {
+  let exported
+  const exportPapers = () => exported ??= get('export').then(rows => new Map(rows.map(row => [row.paperId, row])))
+    .catch(error => { console.warn(`无法读取归档时间 ${error.message}`); return new Map() })
+  return { list, versioned, detail: async (paper, bootstrap = false) => {
+    const snapshot = bootstrap ? (await exportPapers()).get(paper.paperId) : undefined
+    if (snapshot && !versioned && JSON.stringify(targetIdentity(snapshot)) === JSON.stringify(targetIdentity(paper))) {
+      return snapshot
+    }
     const name = `papers/${paper.paperId}`
-    return get(versioned ? `${name}?view=dictionary&revision=${encodeURIComponent(paper.revisionId)}` : name)
+    const current = await get(versioned ? `${name}?view=dictionary&revision=${encodeURIComponent(paper.revisionId)}` : name)
+    if (snapshot?.etag && snapshot.etag === digestJson(current)) {
+      return { ...current, updatedAt: current.updatedAt ?? snapshot.updatedAt }
+    }
+    return current
   } }
 }
 
@@ -120,7 +132,7 @@ async function prepare() {
     if (!rejudge && exists(state(id)) && versioned && exists(shard(id)) &&
         JSON.stringify(json(dir(state(id))).target) === JSON.stringify(targetIdentity(summary))) continue
     let paper
-    try { paper = detail ? await detail(summary) : summary }
+    try { paper = detail ? await detail(summary, bootstrap) : summary }
     catch (error) { skipped[id] = error.message; continue }
     if (paper.paperId !== id || JSON.stringify(targetIdentity(paper)) !== JSON.stringify(targetIdentity(summary))) {
       skipped[id] = '列表与详情版本不一致'
@@ -139,6 +151,8 @@ async function prepare() {
   const packets = new Map()
   const stats = { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counters() }
   let legacyDropped = 0
+  let legacyByTime = 0
+  let legacyStrict = 0
   if (rejudge) stats.rejudge = rejudge
   stats.unmarked = 0
   const plan = []
@@ -167,6 +181,11 @@ async function prepare() {
     const oldBlocks = exists(shard(id)) ? old.blocks : {}
     const retainedLegacy = new Set()
     const reviewLegacy = new Set()
+    const sameByTime = bootstrap && paper && predatesLegacyExport(paper)
+    if (bootstrap && paper) {
+      if (sameByTime) legacyByTime++
+      else legacyStrict++
+    }
     const layoutChanged = rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
       Object.entries(current).some(([key, block]) => {
         const previous = oldBlocks[key]
@@ -187,6 +206,7 @@ async function prepare() {
         const matchedLabels = new Map()
         const rows = match(id, block).map(row => {
           const verified = (labels.get(position(row)) ?? []).filter(saved => {
+            if (sameByTime) return verifiedLegacyHit({ ...saved, sentenceText: undefined, blockHash: undefined }, row)
             const locations = [rowLocator(saved), key]
             const quotes = [saved.sentenceText ?? undefined, ...locations.map(locator =>
               old.quotes.get(legacyQuoteKey(locator, saved.entryId, saved.sentence, saved.start, saved.end)))]
@@ -338,7 +358,7 @@ async function prepare() {
     save(file, body(packet))
   }
   save(work('plan.json'), snapshot)
-  console.log(JSON.stringify({ ...stats, sameLegacy, ...(legacy.size ? { legacyDropped } : {}), skipped }))
+  console.log(JSON.stringify({ ...stats, sameLegacy, ...(legacy.size ? { legacyByTime, legacyStrict, legacyDropped } : {}), skipped }))
 }
 
 function validate(rows, raw) {

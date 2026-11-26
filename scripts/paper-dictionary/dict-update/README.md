@@ -12,7 +12,7 @@ node "$tool" prepare --work "$work" --paper paper-… --paper paper-…
 
 `prepare` 只写工作目录。`--paper` 可重复，涵盖新增、修订及撤回的卷。省略时使用生产目录和已有分片。生产只读口令取自 `~/.config/eqbank/agent-token`。`scope.json` 的 `exclude` 排除旧批次高二卷，`include` 可显式恢复。`--local <Canonical 包目录>` 可重复，读取其中的 `paper-asset.json`。
 
-首次接入的归档目录默认为 `~/Projects/otter-dict-work`，可用 `--legacy` 覆盖。旧分片现存块哈希全部出现在目标卷时，才用 `occurrences.ndjson.gz` 和 `phrases/hits.ndjson` 归档。来源对不上的卷列在 `skipped`，原分片保留。
+首次接入的归档目录默认为 `~/Projects/otter-dict-work`，可用 `--legacy` 覆盖。按目标卷重算计数。目标 revision 的时间早于备份记录的导出日（2026-11-21 UTC）时，旧义按词条、词形和位置核对后沿用。时间较晚或缺失时，还须核对历史原句。缺原句时用同一块的短语哈希证明。归档计数不完整的卷列在 `skipped`，原分片保留。
 
 ## 2. 判题并应用
 

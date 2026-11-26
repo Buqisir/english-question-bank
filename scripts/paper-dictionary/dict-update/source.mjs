@@ -13,6 +13,14 @@ export const ndjson = text => text.split('\n').filter(line => line.trim()).map(J
 export const tierOf = paper => ({ real: 'gaokao', mock: 'mock' })[paper.type]
 export const rowLocator = row => JSON.stringify([row.groupId, row.paragraphId ?? row.questionId])
 export const validPaperId = id => /^paper-[a-zA-Z0-9-]+$/u.test(id)
+// The archive SCHEMA.md dates exp2.ndjson to 2026-11-21 without a time of day.
+const legacyExportCutoff = Date.parse('2026-11-21T00:00:00Z')
+
+export function predatesLegacyExport(paper) {
+  if (!paper.revisionId) return false
+  const dates = [paper.createdAt, paper.updatedAt].filter(date => date != null)
+  return dates.length > 0 && dates.every(date => typeof date === 'string' && Date.parse(date) < legacyExportCutoff)
+}
 
 export function blocksOf(paper) {
   const blocks = {}
@@ -177,9 +185,9 @@ export function agentReader() {
     const response = await fetch(`https://eqbank.cc/api/agent/v1/${path}`, {
       headers: { Authorization: `Bearer ${token}` },
       redirect: 'error',
-      signal: AbortSignal.timeout(30_000),
+      signal: AbortSignal.timeout(path === 'export' ? 120_000 : 30_000),
     })
     if (!response.ok) throw new Error(`Agent 接口 ${response.status} ${path}`)
-    return response.json()
+    return path === 'export' ? ndjson(await response.text()) : response.json()
   }
 }

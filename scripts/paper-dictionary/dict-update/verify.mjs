@@ -6,7 +6,15 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import { matcher } from './match.mjs'
-import { blocksOf } from './source.mjs'
+import { blocksOf, predatesLegacyExport } from './source.mjs'
+
+const revisionId = 'rev-legacy'
+const createdAt = '2026-11-20T12:00:00Z'
+assert(predatesLegacyExport({ revisionId, createdAt, updatedAt: '2026-11-20T23:59:59Z' }))
+assert(!predatesLegacyExport({ revisionId, createdAt, updatedAt: '2026-11-21T00:00:00Z' }))
+assert(!predatesLegacyExport({ revisionId, createdAt, updatedAt: 'unknown' }))
+assert(!predatesLegacyExport({ revisionId }))
+assert(!predatesLegacyExport({ createdAt }))
 
 const dir = mkdtempSync(join(tmpdir(), 'dict-update-test-'))
 const tool = fileURLToPath(new URL('./index.mjs', import.meta.url))
