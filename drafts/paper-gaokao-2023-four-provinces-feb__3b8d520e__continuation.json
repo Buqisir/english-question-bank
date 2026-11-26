@@ -1,0 +1,140 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "One day in the trees, Squirt met up with a family of gray squirrels. At first he stayed on his own branch and only watched them. Soon he was chasing the young ones up and down the tree. Day after day he stayed out longer, learning from them where to find nuts and how to jump from tree to tree. Still, every evening he came back to the house, chattered for his supper and fell asleep on Kaytlin. She was proud, but she remembered our research. Once Squirt could look after himself, we would have to say goodbye.\n\nOne night, Squirt didn’t come back to our house and it rained hard. Kaytlin and I stood at the doorway with a flashlight, calling his name into the dark. We kept thinking of the weak, shaking baby we had found under the steps. Was he cold? Was he lost again? As soon as the rain stopped the next morning, we hurried out to the trees. High on a branch was a nest of leaves, and inside it sat Squirt, dry and warm, next to the gray squirrels. When he saw Kaytlin, he chattered and ran halfway down to her. Then he stopped and climbed back to his new family. Kaytlin's eyes filled with tears, but she smiled. \"He's home,\" she said quietly. That afternoon she put a few nuts beneath the steps, just in case he came to visit.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "Squirt 已经断奶、开始放回野外，在 Kaytlin 带领下学会爬树、找筑巢材料，但每次玩一会儿还会跑回她身边。没解决的是：他能不能真正独立生活，这一家人又怎样放他走。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "一家人从一开始就打算 \"let him go\"，只是要等他能自己活下去。Kaytlin 出力最多，\"woke in the night for his feeds\"，对他感情最深；Squirt 像个孩子，玩一会儿就 \"run back to Kaytlin for safety\"，还离不开她。"
+        },
+        {
+          "question": "原文是怎么写的？续写该照着怎样写？",
+          "answer": "第一人称，由妈妈“我”讲述，过去时，句子短而平实。原文没有一句人物的直接引语，引号只用在名字 “Squirt.” 上，全靠叙述推进。续写也以叙述为主，最多在转折处留一句很短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "Beneath the steps was a baby red squirrel.",
+          "use": "台阶下是故事开始的地方。雨夜担心时可以想起当初台阶下那只小松鼠，结尾也可以把坚果放回台阶下。"
+        },
+        {
+          "sourceQuote": "we should let him go as soon as he could survive on his own",
+          "use": "这是一家人早就定下的原则。第一段让 Kaytlin 想起它，第二段 Squirt 留在树上时，她就能接受，而不是硬把他带回家。"
+        },
+        {
+          "sourceQuote": "Soon she had him climbing trees and finding nest material.",
+          "use": "她教过他爬树、找筑巢材料，雨后发现他住在树叶搭的窝里，就说明这些本领派上了用场。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段以 \"One day in the trees, Squirt met up with a family of gray squirrels.\" 开头：要写他和灰松鼠一家的相处，这是他走向野外的一步。",
+        "第二段以 \"One night, Squirt didn’t come back to our house and it rained hard.\" 开头，所以第一段结束时，Squirt 必须还是每天回家；“没回家”要到第二段才发生。",
+        "要接上原文事实：一家人一直打算等他能独立就放他走；Kaytlin 照顾他最多，他也最依恋她。",
+        "第一人称“我”（妈妈）、过去时；人物只用“我”、女儿们、Kaytlin 和 Squirt，灰松鼠一家只做他的新伙伴。"
+      ],
+      "thisEssayChooses": "本文让 Squirt 跟着灰松鼠学本领，晚上照样回家；雨夜 Kaytlin 守在门口等他，第二天发现他和灰松鼠住在树上的窝里，跑下来一半又回去了，她含泪接受，在台阶下放了几颗坚果。他最后回不回家、什么时候找到他、Kaytlin 怎样告别都可以换，比如让他雨夜后带着灰松鼠回来看一眼再走。"
+    },
+    "standard": {
+      "essay": "One day in the trees, Squirt met up with a family of gray squirrels. At first he stayed on his own branch and only watched them. Soon he was chasing the young ones up and down the tree. Day after day he stayed out longer, learning from them where to find nuts and how to jump from tree to tree. Still, every evening he came back to the house, chattered for his supper and fell asleep on Kaytlin. She was proud, but she remembered our research. Once Squirt could look after himself, we would have to say goodbye.\n\nOne night, Squirt didn’t come back to our house and it rained hard. Kaytlin and I stood at the doorway with a flashlight, calling his name into the dark. We kept thinking of the weak, shaking baby we had found under the steps. Was he cold? Was he lost again? As soon as the rain stopped the next morning, we hurried out to the trees. High on a branch was a nest of leaves, and inside it sat Squirt, dry and warm, next to the gray squirrels. When he saw Kaytlin, he chattered and ran halfway down to her. Then he stopped and climbed back to his new family. Kaytlin's eyes filled with tears, but she smiled. \"He's home,\" she said quietly. That afternoon she put a few nuts beneath the steps, just in case he came to visit.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写 Squirt 在灰松鼠一家身边一步步学会野外生活，但每晚还回家，为第二段“没回家”留出变化。",
+          "items": [
+            {
+              "quote": "At first he stayed on his own branch and only watched them.",
+              "explain": "先写他胆小、只敢远远看，和原文他玩一会儿就跑回 Kaytlin 身边的性格一致，变化才有起点。"
+            },
+            {
+              "quote": "learning from them where to find nuts and how to jump from tree to tree",
+              "explain": "把“交朋友”落到具体本领上：找吃的、在树间跳。这些正是他能独立生活要会的事，让后面放他走说得通。"
+            },
+            {
+              "quote": "Still, every evening he came back to the house",
+              "explain": "Still 一转，说明他还没离开家。第一段必须停在这里，第二段首句“没回家”才是一件新的事。"
+            },
+            {
+              "quote": "Once Squirt could look after himself, we would have to say goodbye.",
+              "explain": "用自己的话转述原文定下的原则，不照抄原句；埋下伏笔，第二段 Kaytlin 接受他留在树上就不突兀。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "雨夜担心，第二天找到他，看着他回到新家，故事落在放他走上。",
+          "items": [
+            {
+              "quote": "Kaytlin and I stood at the doorway with a flashlight, calling his name into the dark.",
+              "explain": "原文开头 Kaytlin 就是在 doorway 叫“我”，这里母女俩在同一个地方等他。担心通过站着、打手电、喊名字这些动作写出来。"
+            },
+            {
+              "quote": "We kept thinking of the weak, shaking baby we had found under the steps.",
+              "explain": "把担心和原文里那只 weak、shaking 的小松鼠连起来，读者明白她们为什么这么怕：怕他又变回当初的样子。"
+            },
+            {
+              "quote": "he chattered and ran halfway down to her. Then he stopped and climbed back to his new family.",
+              "explain": "跑下来一半又回去，一个动作写出他还认得 Kaytlin，却已经属于树上的家。不用多解释，读者自己看得懂。"
+            },
+            {
+              "quote": "That afternoon she put a few nuts beneath the steps, just in case he came to visit.",
+              "explain": "结尾落在一个具体动作上，又回到故事开始的台阶下。她放手了，但仍然惦记他，不用再加一句大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Day after day he stayed out longer",
+          "function": "写他一点点独立的过程，用时间推进代替一句“他长大了”。"
+        },
+        {
+          "expression": "call sb.’s name into the dark",
+          "function": "写雨夜在门口找人、等人的焦急，动作里带着情绪。"
+        },
+        {
+          "expression": "just in case …",
+          "function": "结尾写放手之后仍有牵挂，话不多，留有余味。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写 Squirt 跟灰松鼠走了、不回家了。",
+          "why": "第二段首句说“一天晚上他没回家”，说明在此之前他每晚都回来。第一段提前写掉，第二段就接不上。"
+        },
+        {
+          "pitfall": "第二段让 Kaytlin 冒雨把 Squirt 抓回家，从此养在屋里。",
+          "why": "原文一家人早就决定等他能独立就放他走，Kaytlin 又一直在教他野外本领。硬把他关回家，和人物的打算相反。"
+        },
+        {
+          "pitfall": "写成满篇对话，或结尾加一句“爱就是放手”之类的道理。",
+          "why": "原文没有一句直接引语，全靠叙述；道理句放到哪个故事后面都成立，不如落在台阶下放坚果这样的具体动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "One day in the trees, Squirt met up with a family of gray squirrels. They were bigger than he was, and at first he froze on his branch, his tail twitching, as if waiting for Kaytlin to tell him what to do. But the young ones soon came over to sniff at him, and before long he was racing after them along the branches. Each day he stayed out a little longer, learning to dig up nuts and leap from tree to tree. Yet as the sun went down, he would still come scampering back to our doorway, chattering for his supper, and curl up on Kaytlin's lap to sleep. Kaytlin was proud of how far he had come, but she remembered what our research had said: once he could look after himself, it would be time to say goodbye.\n\nOne night, Squirt didn’t come back to our house and it rained hard. Kaytlin stood in the doorway long after dark, a flashlight in one hand and his food dish in the other, calling his name into the storm. I stayed up with her. Neither of us could stop picturing the weak, shaking baby we had found beneath our steps that summer. When the rain stopped at first light, we hurried out to the trees. High in the branches was a round nest of leaves and twigs. Peeking out of it, dry and bright-eyed, was Squirt, squeezed between two gray squirrels. Kaytlin called to him. He chattered back, ran halfway down the trunk and stopped. For a long moment he looked at her. Then he turned and scrambled back up to the nest. Kaytlin's chin trembled, but she smiled through her tears. \"He doesn't need us anymore,\" she whispered. That afternoon she left a small pile of nuts beneath the steps, just in case.",
+      "beyondStandard": [
+        {
+          "quote": "he froze on his branch, his tail twitching, as if waiting for Kaytlin to tell him what to do",
+          "explain": "标准版只说他远远看着，这里用 froze、尾巴抖动和 as if 写出他还习惯等 Kaytlin 拿主意，把原文他依赖她的性格写得更具体。"
+        },
+        {
+          "quote": "come scampering back to our doorway",
+          "explain": "scamper 是小动物蹦蹦跳跳地跑，比 come back 更有画面；回到 doorway 也接上原文的地点。"
+        },
+        {
+          "quote": "ran halfway down the trunk and stopped. For a long moment he looked at her.",
+          "explain": "标准版把跑下来和回去连着写，这里多停一拍，让他和 Kaytlin 对视，告别的分量更重，却仍然只用动作。"
+        }
+      ]
+    }
+  }
+}

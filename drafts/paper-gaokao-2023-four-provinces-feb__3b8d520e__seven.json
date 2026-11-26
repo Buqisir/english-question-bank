@@ -1,0 +1,969 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:seven-choices": {
+      "overview": "文章关注过度捕捞从浅水向深海延伸的危害，以种群锐减、繁殖缓慢和体型变小说明深海鱼的困境，并呼吁兼顾生态保护、渔民生计与粮食安全。",
+      "fullTranslationZh": "由于过度捕捞，浅水鱼的数量已严重下降。人们仍然想吃鱼，因此渔业必须寻找其他鱼类来源，尤其是大西洋深水区。这导致许多被捕捞物种的数量急剧下降。\n\n如果要让这些深海鱼存活下来，就必须采取保护措施。对其中五个物种的研究表明，它们的数量下降了87%至98%。这使它们被归入“极度濒危”的类别。如果当前趋势持续下去，许多物种很可能会彻底消失。这些物种已经在我们的海洋里游弋了数亿年。\n\n数量下降发生在不到二十年的时间里，这一事实进一步凸显了问题的严重性。深海鱼需要很长时间才能繁殖，而且通常寿命很长。\n\n不幸的是，它们的繁殖率很低。这类鱼的平均体型也变小了，其中一个物种的平均体型缩小了57%。这一点尤其令人担忧，因为大鱼往往比小鱼繁育更多后代。\n\n渔业没有把这些事实中的任何一点考虑在内。人们一直在捕捞深海物种，仿佛它们是沙丁鱼、鲱鱼那样繁殖迅速的鱼类。这就好比捕杀大象，却把大象当作繁殖速度和兔子一样快的动物。\n\n过度捕捞造成的损害超出了海洋环境的范围。数百万人靠渔业谋生。数十亿人依靠鱼类获取蛋白质。必须采取措施，不仅保护生态系统，还要维持人们的生计并保障粮食安全。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2023-four-provinces-feb:seven-choices:comparison",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+          "sourceText": "It is like killing elephants as if they reproduced at the same rate as rabbits.",
+          "displayText": "It is like killing elephants as if they reproduced at the same rate as rabbits.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:39"
+          ],
+          "translationZh": "这就好比捕杀大象，却把大象当作繁殖速度和兔子一样快的动物。",
+          "analysisZh": "主干是It is like killing elephants，It指前文不顾深海鱼繁殖特点的捕捞做法，like后用动名词短语作比较。as if引出假设，把大象当作像兔子一样繁殖迅速；they指大象，reproduced配合这一不符合实际的假设。作者借熟悉的繁殖差异，说明把深海鱼当作快速繁殖的鱼来捕捞有多不合理。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "It is like killing elephants"
+            },
+            {
+              "start": 29,
+              "end": 50,
+              "quote": "as if they reproduced"
+            },
+            {
+              "start": 51,
+              "end": 78,
+              "quote": "at the same rate as rabbits"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先写捕捞转向深海及数量锐减，再解释深海鱼恢复缓慢而渔业忽视其特点，最后将影响扩展到人的生计与食物保障。",
+        "units": [
+          {
+            "unitId": "unit:group:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+            "heading": "捕捞转向深海，物种面临危险",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+              "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2"
+            ],
+            "summary": "浅水鱼减少推动捕捞转向深海，调查数字说明许多深海物种已面临严重生存危机。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+            "heading": "繁殖特点被忽视，种群难以恢复",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+              "block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+              "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5"
+            ],
+            "summary": "短期内大量减少与繁殖慢、体型变小叠加，渔业却仍按快速繁殖的鱼类来捕捞。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+            "heading": "保护生态，也维护人的生活",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6"
+            ],
+            "summary": "过度捕捞同时威胁就业和食物来源，需要采取综合保护措施。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 70,
+              "quote": "由于过度捕捞，浅水鱼的数量已严重下降。人们仍然想吃鱼，因此渔业必须寻找其他鱼类来源，尤其是大西洋深水区。这导致许多被捕捞物种的数量急剧下降。"
+            },
+            {
+              "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2"
+              ],
+              "start": 72,
+              "end": 186,
+              "quote": "如果要让这些深海鱼存活下来，就必须采取保护措施。对其中五个物种的研究表明，它们的数量下降了87%至98%。这使它们被归入“极度濒危”的类别。如果当前趋势持续下去，许多物种很可能会彻底消失。这些物种已经在我们的海洋里游弋了数亿年。"
+            },
+            {
+              "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:seven-choices:3"
+              ],
+              "start": 188,
+              "end": 245,
+              "quote": "数量下降发生在不到二十年的时间里，这一事实进一步凸显了问题的严重性。深海鱼需要很长时间才能繁殖，而且通常寿命很长。"
+            },
+            {
+              "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:seven-choices:4"
+              ],
+              "start": 247,
+              "end": 318,
+              "quote": "不幸的是，它们的繁殖率很低。这类鱼的平均体型也变小了，其中一个物种的平均体型缩小了57%。这一点尤其令人担忧，因为大鱼往往比小鱼繁育更多后代。"
+            },
+            {
+              "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5"
+              ],
+              "start": 320,
+              "end": 402,
+              "quote": "渔业没有把这些事实中的任何一点考虑在内。人们一直在捕捞深海物种，仿佛它们是沙丁鱼、鲱鱼那样繁殖迅速的鱼类。这就好比捕杀大象，却把大象当作繁殖速度和兔子一样快的动物。"
+            },
+            {
+              "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6"
+              ],
+              "start": 404,
+              "end": 481,
+              "quote": "过度捕捞造成的损害超出了海洋环境的范围。数百万人靠渔业谋生。数十亿人依靠鱼类获取蛋白质。必须采取措施，不仅保护生态系统，还要维持人们的生计并保障粮食安全。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+            "text": "There has been a very serious decline in the numbers of shallow-water fish as a result of overfishing. People still want to eat fish, so the fishing industry must look at other sources, especially the deep waters of the Atlantic. This has resulted in a sharp decline in the numbers of many of the species caught."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+            "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive. Research on five such species shows that numbers have declined by between 87 percent and 98 percent. This puts them in the category of “critically endangered”. Many species could well disappear completely if the present trend continues. These are species that have been swimming in our oceans for hundreds of millions of years."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+            "text": "The problem is emphasized by the fact that the decline in numbers happened in less than twenty years. Deep-sea fish take a long time to reproduce and normally live for many years."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+            "text": "Unfortunately, their reproduction rate is very low. The average size of such fish also declined, with one species showing a 57 percent decline in average size. This is of particular concern, as large fish tend to produce more offspring than small ones."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+            "text": "None of these facts has been taken into account by the fishing industry. The deep-sea species have been caught as if they were the fast-breeding (快速繁殖) fish like sardine and herring. It is like killing elephants as if they reproduced at the same rate as rabbits."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+            "text": "The damage done by overfishing goes beyond the sea environment. Millions of people make a living in the fishing industry. Billions of people rely on fish for protein. Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+                "start": 137,
+                "end": 229,
+                "quote": "the fishing industry must look at other sources, especially the deep waters of the Atlantic."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+                "start": 27,
+                "end": 52,
+                "quote": "因此渔业必须寻找其他鱼类来源，尤其是大西洋深水区。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:36"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+                "start": 230,
+                "end": 312,
+                "quote": "This has resulted in a sharp decline in the numbers of many of the species caught."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+                "start": 52,
+                "end": 70,
+                "quote": "这导致许多被捕捞物种的数量急剧下降。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+                "start": 90,
+                "end": 190,
+                "quote": "Research on five such species shows that numbers have declined by between 87 percent and 98 percent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+                "start": 24,
+                "end": 53,
+                "quote": "对其中五个物种的研究表明，它们的数量下降了87%至98%。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:37"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+                "start": 191,
+                "end": 249,
+                "quote": "This puts them in the category of “critically endangered”."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+                "start": 53,
+                "end": 70,
+                "quote": "这使它们被归入“极度濒危”的类别。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+                "start": 102,
+                "end": 179,
+                "quote": "Deep-sea fish take a long time to reproduce and normally live for many years."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:3",
+                "start": 34,
+                "end": 57,
+                "quote": "深海鱼需要很长时间才能繁殖，而且通常寿命很长。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:38"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+                "start": 0,
+                "end": 51,
+                "quote": "Unfortunately, their reproduction rate is very low."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+                "start": 0,
+                "end": 14,
+                "quote": "不幸的是，它们的繁殖率很低。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "start": 7,
+                "end": 116,
+                "quote": "The deep-sea species have been caught as if they were the fast-breeding (快速繁殖) fish like sardine and herring."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "start": 20,
+                "end": 53,
+                "quote": "人们一直在捕捞深海物种，仿佛它们是沙丁鱼、鲱鱼那样繁殖迅速的鱼类。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:39"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "start": 0,
+                "end": 72,
+                "quote": "None of these facts has been taken into account by the fishing industry."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "start": 0,
+                "end": 20,
+                "quote": "渔业没有把这些事实中的任何一点考虑在内。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+                "start": 129,
+                "end": 239,
+                "quote": "Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+                "start": 44,
+                "end": 77,
+                "quote": "必须采取措施，不仅保护生态系统，还要维持人们的生计并保障粮食安全。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:40"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+                "start": 122,
+                "end": 166,
+                "quote": "Billions of people rely on fish for protein."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+                "start": 30,
+                "end": 44,
+                "quote": "数十亿人依靠鱼类获取蛋白质。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2023-four-provinces-feb:seven-choices:comparison",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:39"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2023-four-provinces-feb:seven-choices:comparison",
+            "sourceRanges": [
+              {
+                "textId": "source-text:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "start": 117,
+                "end": 196,
+                "quote": "It is like killing elephants as if they reproduced at the same rate as rabbits."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+                "paragraphId": "translation-paragraph:block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+                "start": 53,
+                "end": 82,
+                "quote": "这就好比捕杀大象，却把大象当作繁殖速度和兔子一样快的动物。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 40,
+          "secondary": 36,
+          "kind": "shadow",
+          "shadowOf": "A",
+          "shared": [
+            "people",
+            "fish"
+          ],
+          "text": "它的 \"Many people\" 像接空前 \"Millions of people\"。但空后要 \"ensure food security\"，前提是人靠鱼吃饭，不吃就谈不上粮食保障；首段也说 \"People still want to eat fish\"。它是照答案 A 改的：都有 \"people\" 和 \"fish\"，A 说人靠鱼补蛋白质，它改成不吃深海鱼。它的 \"deep-sea fish\" 也像接首段末尾的深水区。",
+          "quotes": [
+            "Many people",
+            "Millions of people",
+            "ensure food security",
+            "People still want to eat fish",
+            "people",
+            "fish",
+            "deep-sea fish"
+          ]
+        },
+        "F": {
+          "target": 36,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "decline"
+          ],
+          "text": "它讲过度捕捞致 \"decline\"，像接首段的 \"overfishing\"。但空前刚说转向 \"the deep waters of the Atlantic\"，这一空要交代转去深海的后果；它泛说 \"ocean wildlife\"，退回首句的话。它是照答案 G 改的：都有 \"decline\"，G 说被捕物种锐减，它改成海洋生物减少。它也像接最后一段，可那段说损害 \"goes beyond the sea environment\"。",
+          "quotes": [
+            "decline",
+            "overfishing",
+            "the deep waters of the Atlantic",
+            "ocean wildlife",
+            "goes beyond the sea environment"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-four-provinces-feb:36": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "shallow-water fish",
+        "overfishing",
+        "look at other sources",
+        "the deep waters of the Atlantic"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+        "beforeQuote": "People still want to eat fish, so the fishing industry must look at other sources, especially the deep waters of the Atlantic.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "渔业转向大西洋深水区捕捞",
+          "relation": "This 指空前渔业转去深水区捕鱼这件事，后面说它带来的后果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the deep waters of the Atlantic",
+          "signalSide": "context-before",
+          "targetText": "many of the species caught",
+          "relation": "捕捞地点换到深水区，被捕的物种就是深海鱼。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a sharp decline",
+          "signalSide": "option",
+          "targetText": "survive",
+          "relation": "先说深海鱼锐减，下一段才谈它们能否活下去。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "survive",
+          "signalSide": "context-after",
+          "targetText": "a sharp decline in the numbers",
+          "relation": "下一段问深海鱼要怎样才能存活，前提是它们已在减少。"
+        }
+      ],
+      "lock": [
+        "the deep waters of the Atlantic",
+        "This has resulted in",
+        "survive"
+      ],
+      "find": {
+        "text": "空前渔业转向 \"the deep waters of the Atlantic\"，下一段开头就说要保护才能 \"survive\"。G 用 \"This has resulted in\" 交代转向的后果：被捕物种锐减。",
+        "quotes": [
+          "the deep waters of the Atlantic",
+          "survive",
+          "This has resulted in"
+        ]
+      },
+      "explain": "首段先说浅水鱼被捕光，渔业只好去深海。这句收住首段：深海鱼也开始锐减。有了这个结果，下一段才谈保护措施。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "首段先说浅水鱼被捕光，渔业只好去深海。这句收住首段：深海鱼也开始锐减。有了这个结果，下一段才谈保护措施。",
+        "matchedClues": [
+          {
+            "contextSide": "look at other sources, especially the deep waters of the Atlantic",
+            "optionSide": "This has resulted in a sharp decline",
+            "relation": "先写捕捞转去深海，再写由此造成的锐减。"
+          },
+          {
+            "contextSide": "if these deep-sea fish are to survive",
+            "optionSide": "many of the species caught",
+            "relation": "被捕物种锐减，下一段才需要谈深海鱼的存活。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "它讲过度捕捞致 \"decline\"，像接首段的 \"overfishing\"。但空前刚说转向 \"the deep waters of the Atlantic\"，这一空要交代转去深海的后果；它泛说 \"ocean wildlife\"，退回首句的话。它是照答案 G 改的：都有 \"decline\"，G 说被捕物种锐减，它改成海洋生物减少。它也像接最后一段，可那段说损害 \"goes beyond the sea environment\"。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:37": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "five such species",
+        "numbers have declined",
+        "between 87 percent and 98 percent",
+        "disappear completely"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+        "beforeQuote": "Research on five such species shows that numbers have declined by between 87 percent and 98 percent.",
+        "afterQuote": "Many species could well disappear completely if the present trend continues."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "numbers have declined by between 87 percent and 98 percent",
+          "relation": "This 指空前数量减少 87% 到 98% 这一结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "option",
+          "targetText": "five such species",
+          "relation": "them 指被研究的五种深海鱼。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "five such species",
+          "signalSide": "context-before",
+          "targetText": "them",
+          "relation": "空前先出现五个物种，them 才有所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "disappear completely",
+          "signalSide": "context-after",
+          "targetText": "critically endangered",
+          "relation": "先定为极度濒危，再说照这样下去会彻底消失，程度一步步加深。"
+        }
+      ],
+      "lock": [
+        "between 87 percent and 98 percent",
+        "This puts them",
+        "disappear completely"
+      ],
+      "find": {
+        "text": "空前给出数字 \"between 87 percent and 98 percent\"，D 的 \"This puts them\" 正指这个降幅和这五种鱼；空后 \"disappear completely\" 是比濒危更进一步的后果。",
+        "quotes": [
+          "between 87 percent and 98 percent",
+          "This puts them",
+          "disappear completely"
+        ]
+      },
+      "explain": "空前只报了数字，这句告诉读者这个数字意味着什么：已经到了极度濒危。空后再往前推一步：趋势不变，就会灭绝。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 也用 This 开头，但空前 \"numbers have declined\" 本身就是下降，再说它导致锐减，等于自己导致自己。",
+          "quotes": [
+            "numbers have declined"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前只报了数字，这句告诉读者这个数字意味着什么：已经到了极度濒危。空后再往前推一步：趋势不变，就会灭绝。",
+        "matchedClues": [
+          {
+            "contextSide": "numbers have declined by between 87 percent and 98 percent",
+            "optionSide": "This puts them in the category of “critically endangered”",
+            "relation": "降幅是归类的依据。"
+          },
+          {
+            "contextSide": "Many species could well disappear completely",
+            "optionSide": "critically endangered",
+            "relation": "从濒危推到灭绝，后果逐步加重。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 也用 This 开头，但空前 \"numbers have declined\" 本身就是下降，再说它导致锐减，等于自己导致自己。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:38": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Deep-sea fish",
+        "a long time to reproduce",
+        "average size of such fish",
+        "produce more offspring"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "The average size of such fish also declined, with one species showing a 57 percent decline in average size."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "Unfortunately, their reproduction rate is very low.",
+          "relation": "空后 also 说体型也在变小，前面要先有一个坏消息，就是繁殖率低。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Unfortunately",
+          "signalSide": "option",
+          "targetText": "also declined",
+          "relation": "Unfortunately 先报一件坏事，空后用 also 再加一件。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "their",
+          "signalSide": "option",
+          "targetText": "Deep-sea fish",
+          "relation": "their 指上一段末尾的深海鱼。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "reproduction rate",
+          "signalSide": "option",
+          "targetText": "take a long time to reproduce",
+          "relation": "reproduction 接上一段的 reproduce，说的是同一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "take a long time to reproduce",
+          "signalSide": "context-before",
+          "targetText": "reproduction rate is very low",
+          "relation": "繁殖要很久，就是繁殖率低。"
+        }
+      ],
+      "lock": [
+        "reproduce",
+        "reproduction rate",
+        "also declined"
+      ],
+      "find": {
+        "text": "上一段末尾说深海鱼 \"take a long time to reproduce\"，C 的 \"reproduction rate\" 接着讲繁殖；空后 \"also declined\" 要前面先有一件坏事，C 的 \"Unfortunately\" 正是。",
+        "quotes": [
+          "take a long time to reproduce",
+          "reproduction rate",
+          "also declined",
+          "Unfortunately"
+        ]
+      },
+      "explain": "上一段说深海鱼繁殖慢、寿命长，这句把它点明为一个不利条件。空后再叠一层：个头也在变小，而大鱼后代更多，雪上加霜。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 \"these facts\" 像指上一段的繁殖特点，但空后 \"also declined\" 要接的是鱼的又一个坏变化，E 说的是渔业的做法。",
+          "quotes": [
+            "these facts",
+            "also declined"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "上一段说深海鱼繁殖慢、寿命长，这句把它点明为一个不利条件。空后再叠一层：个头也在变小，而大鱼后代更多，雪上加霜。",
+        "matchedClues": [
+          {
+            "contextSide": "Deep-sea fish take a long time to reproduce",
+            "optionSide": "their reproduction rate is very low",
+            "relation": "同一事实换个说法，并点明是坏事。"
+          },
+          {
+            "contextSide": "The average size of such fish also declined",
+            "optionSide": "Unfortunately",
+            "relation": "一件坏事之后用 also 再加一件。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 \"these facts\" 像指上一段的繁殖特点，但空后 \"also declined\" 要接的是鱼的又一个坏变化，E 说的是渔业的做法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:39": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "produce more offspring",
+        "have been caught",
+        "as if they were the fast-breeding",
+        "sardine and herring"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": "The deep-sea species have been caught as if they were the fast-breeding (快速繁殖) fish like sardine and herring."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these facts",
+          "signalSide": "option",
+          "targetText": "繁殖慢、个头变小、大鱼后代多",
+          "relation": "these facts 收拢前面讲过的几条繁殖事实。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "produce more offspring",
+          "signalSide": "context-before",
+          "targetText": "these facts",
+          "relation": "上一段末尾的这条事实，是 these facts 里的一条。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the fishing industry",
+          "signalSide": "option",
+          "targetText": "have been caught",
+          "relation": "说渔业没有考虑，空后就讲渔业怎么捕。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "as if they were the fast-breeding",
+          "signalSide": "context-after",
+          "targetText": "None of these facts has been taken into account",
+          "relation": "把繁殖慢的鱼当繁殖快的鱼捕，正是没把这些事实放在心上。"
+        }
+      ],
+      "lock": [
+        "None of these facts",
+        "as if they were the fast-breeding"
+      ],
+      "find": {
+        "text": "上一段末尾还在讲 \"produce more offspring\" 这类事实；空后说深海鱼被当成 \"as if they were the fast-breeding\" 鱼来捕。E 的 \"None of these facts\" 两头都接上。",
+        "quotes": [
+          "produce more offspring",
+          "as if they were the fast-breeding",
+          "None of these facts"
+        ]
+      },
+      "explain": "前面几段摆了繁殖慢、个头小这些事实，这句转到渔业身上：它们一条也没被考虑。空后用沙丁鱼、大象和兔子的对比，说明这种无视有多荒唐。",
+      "distractors": [
+        {
+          "label": "C",
+          "text": "C 讲繁殖率低，像接空后 \"fast-breeding\"，但空后 \"have been caught as if\" 说的是渔业怎么捕，要先有人无视事实。",
+          "quotes": [
+            "fast-breeding",
+            "have been caught as if"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "前面几段摆了繁殖慢、个头小这些事实，这句转到渔业身上：它们一条也没被考虑。空后用沙丁鱼、大象和兔子的对比，说明这种无视有多荒唐。",
+        "matchedClues": [
+          {
+            "contextSide": "large fish tend to produce more offspring than small ones",
+            "optionSide": "these facts",
+            "relation": "these facts 收拢前文的繁殖事实。"
+          },
+          {
+            "contextSide": "have been caught as if they were the fast-breeding fish",
+            "optionSide": "has been taken into account by the fishing industry",
+            "relation": "空后的捕法正是渔业无视事实的表现。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 讲繁殖率低，像接空后 \"fast-breeding\"，但空后 \"have been caught as if\" 说的是渔业怎么捕，要先有人无视事实。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:40": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "goes beyond the sea environment",
+        "Millions of people make a living",
+        "sustain livelihoods",
+        "ensure food security"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+        "beforeQuote": "The damage done by overfishing goes beyond the sea environment. Millions of people make a living in the fishing industry.",
+        "afterQuote": "Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Millions of people",
+          "signalSide": "context-before",
+          "targetText": "Billions of people",
+          "relation": "空前说数百万人靠渔业谋生，A 接着说数十亿人靠鱼吃饭，两句并列。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Billions of people",
+          "signalSide": "option",
+          "targetText": "Millions of people",
+          "relation": "同样的“数字 + people”句式，讲人受影响的另一面。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "protein",
+          "signalSide": "option",
+          "targetText": "food security",
+          "relation": "靠鱼获取蛋白质，对应空后的粮食安全。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "food security",
+          "signalSide": "context-after",
+          "targetText": "rely on fish for protein",
+          "relation": "空后措施要保障粮食安全，前面得有人靠鱼吃饭。"
+        }
+      ],
+      "lock": [
+        "Millions of people",
+        "Billions of people",
+        "food security"
+      ],
+      "find": {
+        "text": "空前 \"Millions of people\" 靠渔业谋生，空后要 \"sustain livelihoods and ensure food security\"。生计已对上，粮食那头要 A：\"Billions of people\" 靠鱼补蛋白质。",
+        "quotes": [
+          "Millions of people",
+          "sustain livelihoods and ensure food security",
+          "Billions of people"
+        ]
+      },
+      "explain": "空前说损害超出海洋，先举渔民的饭碗；这句再举吃鱼的人。空后的措施正好一一对应：保护生态、维持生计、保障粮食。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前说损害超出海洋，先举渔民的饭碗；这句再举吃鱼的人。空后的措施正好一一对应：保护生态、维持生计、保障粮食。",
+        "matchedClues": [
+          {
+            "contextSide": "Millions of people make a living in the fishing industry",
+            "optionSide": "Billions of people rely on fish",
+            "relation": "两句并列，分别讲生计和食物。"
+          },
+          {
+            "contextSide": "ensure food security",
+            "optionSide": "protein",
+            "relation": "靠鱼获取蛋白质，所以要保障粮食安全。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "它的 \"Many people\" 像接空前 \"Millions of people\"。但空后要 \"ensure food security\"，前提是人靠鱼吃饭，不吃就谈不上粮食保障；首段也说 \"People still want to eat fish\"。它是照答案 A 改的：都有 \"people\" 和 \"fish\"，A 说人靠鱼补蛋白质，它改成不吃深海鱼。它的 \"deep-sea fish\" 也像接首段末尾的深水区。"
+        }
+      ]
+    }
+  }
+}

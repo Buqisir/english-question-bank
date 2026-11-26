@@ -1,0 +1,2086 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:cloze": {
+      "overview": "父亲带学习困难的儿子来求医，抱怨孩子不努力、吼也没用。医生让父亲对着镜子描星星，他屡屡画错，又被医生吼骂而发火。医生借此点明儿子一直是这种感受，父亲突然醒悟，深感愧疚。",
+      "fullTranslationZh": "纽约的史密斯医生在一家帮助学习困难儿童的中心工作。一天，一位父亲带着儿子到他的诊室来做测试。\n父亲向史密斯医生讲起儿子的情况：“我儿子学习有困难，连棒球都不会打。他学得不好，是因为他不努力。我为他什么都做了，甚至还冲他吼过。可是什么都不管用。”\n史密斯医生给男孩做完测试后，把他父亲叫了进来。他让父亲坐在一面镜子前，然后给了他一支铅笔和一张纸。纸上有一颗星星。他让父亲只看镜子，用铅笔沿着星星的线条描画。父亲犯了和任何人都会犯的同样的错误。每次他移动铅笔，笔都往错的方向走。父亲的脸涨红了。\n就在这时，医生冲他吼道：“快点！你怎么花这么长时间？这么简单的事你都做不了！你连左右都分不清！”这些话让父亲非常生气。\n“现在你能理解了，是吧？”医生对他说，“你儿子一直就是这种感受。你太常训斥他，所以他不再尝试了。他害怕犯错。”\n突然，父亲全明白了。他低下了头。这时他感到非常愧疚。",
+      "mainLine": {
+        "theme": {
+          "text": "总被训斥的孩子会 afraid of making mistakes、不再尝试，大人要体会孩子的感受。",
+          "quote": "afraid of making mistakes"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+            "text": "父亲带儿子到史密斯医生的诊室做测试。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+            "text": "父亲抱怨儿子学不好、不努力，自己吼过也没用。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+            "text": "医生让父亲对镜描星星，他也总画错，脸涨得通红。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+            "text": "医生趁机像父亲骂儿子那样吼他，父亲被激怒。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+            "text": "医生点明儿子一直这样感受，常挨骂才怕错不试。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+            "text": "父亲突然全明白了，低下头，深感愧疚。"
+          }
+        ],
+        "emotion": "埋怨→窘迫→恼怒→醒悟愧疚"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:cloze:3:4",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+          "sourceText": "He asked the father to look only in the mirror and __47__ the lines of the star with the pencil.",
+          "displayText": "He asked the father to look only in the mirror and follow the lines of the star with the pencil.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:47"
+          ],
+          "translationZh": "他让父亲只看镜子，用铅笔沿着星星的线条描画。",
+          "analysisZh": "主干是 He asked the father to look…，用 ask sb to do 让父亲做事。and 后面的 follow the lines of the star 和 look only in the mirror 并列，前面共用一个 to，所以 follow 用原形。with the pencil 交代用什么描。两件事合起来，就是只许看镜子、不许看纸去描星星，这也是后面总画错的原因。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 46,
+              "quote": "asked the father to look only in the mirror"
+            },
+            {
+              "start": 47,
+              "end": 79,
+              "quote": "and follow the lines of the star"
+            },
+            {
+              "start": 80,
+              "end": 95,
+              "quote": "with the pencil"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:cloze:3:6",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+          "sourceText": "Every time he __49__ the pencil, it went the wrong way.",
+          "displayText": "Every time he moved the pencil, it went the wrong way.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:49"
+          ],
+          "translationZh": "每次他移动铅笔，笔都往错的方向走。",
+          "analysisZh": "主干是后半句 it went the wrong way，it 指铅笔，笔往错的方向走。Every time 在这里起连词作用，相当于 whenever，引出时间状语从句 he moved the pencil。两部分合起来是“一动笔就走错”，说明错不是偶然一次，而是每次都这样。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "Every time he moved the pencil"
+            },
+            {
+              "start": 32,
+              "end": 53,
+              "quote": "it went the wrong way"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:cloze:1"
+              ],
+              "start": 0,
+              "end": 46,
+              "quote": "纽约的史密斯医生在一家帮助学习困难儿童的中心工作。一天，一位父亲带着儿子到他的诊室来做测试。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:cloze:2"
+              ],
+              "start": 47,
+              "end": 122,
+              "quote": "父亲向史密斯医生讲起儿子的情况：“我儿子学习有困难，连棒球都不会打。他学得不好，是因为他不努力。我为他什么都做了，甚至还冲他吼过。可是什么都不管用。”"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:cloze:3"
+              ],
+              "start": 123,
+              "end": 245,
+              "quote": "史密斯医生给男孩做完测试后，把他父亲叫了进来。他让父亲坐在一面镜子前，然后给了他一支铅笔和一张纸。纸上有一颗星星。他让父亲只看镜子，用铅笔沿着星星的线条描画。父亲犯了和任何人都会犯的同样的错误。每次他移动铅笔，笔都往错的方向走。父亲的脸涨红了。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:cloze:4"
+              ],
+              "start": 246,
+              "end": 305,
+              "quote": "就在这时，医生冲他吼道：“快点！你怎么花这么长时间？这么简单的事你都做不了！你连左右都分不清！”这些话让父亲非常生气。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:cloze:5"
+              ],
+              "start": 306,
+              "end": 361,
+              "quote": "“现在你能理解了，是吧？”医生对他说，“你儿子一直就是这种感受。你太常训斥他，所以他不再尝试了。他害怕犯错。”"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:cloze:6"
+              ],
+              "start": 362,
+              "end": 388,
+              "quote": "突然，父亲全明白了。他低下了头。这时他感到非常愧疚。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+            "text": "Dr. Smith of New York works at a center for children who can’t learn well. One day a father brought his son to him for testing at his office."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+            "text": "The father told Dr. Smith about his son. “My son has difficulty in learning and can’t even play baseball. He isn’t doing well because he doesn’t try. I have done everything for him. I have even shouted at him. But nothing helps.”"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+            "text": "After Dr. Smith tested the boy, he called in his father. He asked the father to sit in front of a mirror and then gave him a pencil and a piece of paper. There was a star on the paper. He asked the father to look only in the mirror and follow the lines of the star with the pencil. The father made the same mistakes anyone makes. Every time he moved the pencil, it went the wrong way. The father’s face became red."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+            "text": "At this point the doctor shouted at him, “Hurry up! Why are you taking so long? You can’t do such an easy thing! You don’t know left from right!” These words made the father very angry."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+            "text": "“Now you can understand, can’t you?” The doctor said to him. “Your son has felt just like that all the time. You scolded (训斥) him too often, so he didn’t try any more. He was afraid of making mistakes.”"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+            "text": "Suddenly the father understood everything. He put his face down. Now he felt so sorry."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+                "start": 92,
+                "end": 118,
+                "quote": "brought his son to him for"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 0,
+                "end": 30,
+                "quote": "After Dr. Smith tested the boy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+                "start": 32,
+                "end": 42,
+                "quote": "带着儿子到他的诊室来"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 5,
+                "end": 13,
+                "quote": "给男孩做完测试后"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:41"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+                "start": 119,
+                "end": 126,
+                "quote": "testing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:1",
+                "start": 43,
+                "end": 45,
+                "quote": "测试"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 60,
+                "end": 71,
+                "quote": "in learning"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 105,
+                "end": 121,
+                "quote": "isn’t doing well"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 20,
+                "end": 25,
+                "quote": "学习有困难"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 34,
+                "end": 39,
+                "quote": "他学得不好"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:42"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 53,
+                "end": 63,
+                "quote": "difficulty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 23,
+                "end": 25,
+                "quote": "困难"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 146,
+                "end": 176,
+                "quote": "I have done everything for him"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 178,
+                "end": 204,
+                "quote": "I have even shouted at him"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 48,
+                "end": 56,
+                "quote": "我为他什么都做了"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 57,
+                "end": 64,
+                "quote": "甚至还冲他吼过"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:43"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 222,
+                "end": 227,
+                "quote": "helps"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+                "start": 71,
+                "end": 73,
+                "quote": "管用"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 42,
+                "end": 52,
+                "quote": "his father"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 54,
+                "end": 92,
+                "quote": "He asked the father to sit in front of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 14,
+                "end": 22,
+                "quote": "把他父亲叫了进来"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 23,
+                "end": 29,
+                "quote": "他让父亲坐在"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:44"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 35,
+                "end": 44,
+                "quote": "called in"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 18,
+                "end": 22,
+                "quote": "叫了进来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 77,
+                "end": 94,
+                "quote": "sit in front of a"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 207,
+                "end": 230,
+                "quote": "look only in the mirror"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 27,
+                "end": 29,
+                "quote": "坐在"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 61,
+                "end": 65,
+                "quote": "只看镜子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:45"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 98,
+                "end": 104,
+                "quote": "mirror"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 29,
+                "end": 33,
+                "quote": "一面镜子"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 151,
+                "end": 162,
+                "quote": "There was a"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 242,
+                "end": 263,
+                "quote": "the lines of the star"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 49,
+                "end": 52,
+                "quote": "纸上有"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 71,
+                "end": 76,
+                "quote": "星星的线条"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:46"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 166,
+                "end": 170,
+                "quote": "star"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 52,
+                "end": 56,
+                "quote": "一颗星星"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 242,
+                "end": 263,
+                "quote": "the lines of the star"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 264,
+                "end": 279,
+                "quote": "with the pencil"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 66,
+                "end": 69,
+                "quote": "用铅笔"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 69,
+                "end": 78,
+                "quote": "沿着星星的线条描画"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:47"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 236,
+                "end": 242,
+                "quote": "follow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 69,
+                "end": 71,
+                "quote": "沿着"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 292,
+                "end": 305,
+                "quote": "made the same"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 360,
+                "end": 381,
+                "quote": "it went the wrong way"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "start": 171,
+                "end": 196,
+                "quote": "afraid of making mistakes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 91,
+                "end": 96,
+                "quote": "同样的错误"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 105,
+                "end": 113,
+                "quote": "笔都往错的方向走"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "start": 48,
+                "end": 53,
+                "quote": "他害怕犯错"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:48"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 307,
+                "end": 315,
+                "quote": "mistakes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 94,
+                "end": 96,
+                "quote": "错误"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 327,
+                "end": 340,
+                "quote": "Every time he"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 360,
+                "end": 381,
+                "quote": "it went the wrong way"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 97,
+                "end": 100,
+                "quote": "每次他"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 105,
+                "end": 113,
+                "quote": "笔都往错的方向走"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:49"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 344,
+                "end": 349,
+                "quote": "moved"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 100,
+                "end": 102,
+                "quote": "移动"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 0,
+                "end": 7,
+                "quote": "At this"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 396,
+                "end": 411,
+                "quote": "face became red"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 0,
+                "end": 4,
+                "quote": "就在这时"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 114,
+                "end": 121,
+                "quote": "父亲的脸涨红了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:50"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 8,
+                "end": 13,
+                "quote": "point"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 0,
+                "end": 4,
+                "quote": "就在这时"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 72,
+                "end": 79,
+                "quote": "so long"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 43,
+                "end": 52,
+                "quote": "Hurry up!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 19,
+                "end": 25,
+                "quote": "花这么长时间"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 13,
+                "end": 15,
+                "quote": "快点"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:51"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 64,
+                "end": 70,
+                "quote": "taking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 19,
+                "end": 25,
+                "quote": "花这么长时间"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 81,
+                "end": 101,
+                "quote": "You can’t do such an"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 116,
+                "end": 147,
+                "quote": "You don’t know left from right!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 26,
+                "end": 37,
+                "quote": "这么简单的事你都做不了"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 38,
+                "end": 46,
+                "quote": "你连左右都分不清"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:52"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 101,
+                "end": 105,
+                "quote": "easy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 28,
+                "end": 30,
+                "quote": "简单"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 15,
+                "end": 40,
+                "quote": "the doctor shouted at him"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 162,
+                "end": 188,
+                "quote": "made the father very angry"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 5,
+                "end": 11,
+                "quote": "医生冲他吼道"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 51,
+                "end": 58,
+                "quote": "让父亲非常生气"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:53"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 152,
+                "end": 157,
+                "quote": "words"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+                "start": 48,
+                "end": 51,
+                "quote": "这些话"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "start": 58,
+                "end": 90,
+                "quote": "Your son has felt just like that"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 7,
+                "end": 39,
+                "quote": "the father understood everything"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "start": 20,
+                "end": 31,
+                "quote": "你儿子一直就是这种感受"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 3,
+                "end": 9,
+                "quote": "父亲全明白了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:54"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "start": 13,
+                "end": 23,
+                "quote": "understand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:5",
+                "start": 5,
+                "end": 7,
+                "quote": "理解"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 18,
+                "end": 39,
+                "quote": "understood everything"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 63,
+                "end": 83,
+                "quote": "Now he felt so sorry"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 3,
+                "end": 9,
+                "quote": "父亲全明白了"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 16,
+                "end": 25,
+                "quote": "这时他感到非常愧疚"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:55"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 0,
+                "end": 8,
+                "quote": "Suddenly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+                "start": 0,
+                "end": 2,
+                "quote": "突然"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2023-four-provinces-feb:cloze:3:4",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:47"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:cloze:3:4",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 185,
+                "end": 231,
+                "quote": "He asked the father to look only in the mirror"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 236,
+                "end": 280,
+                "quote": "follow the lines of the star with the pencil"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 57,
+                "end": 65,
+                "quote": "他让父亲只看镜子"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 66,
+                "end": 78,
+                "quote": "用铅笔沿着星星的线条描画"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2023-four-provinces-feb:cloze:3:6",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:49"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:cloze:3:6",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 330,
+                "end": 360,
+                "quote": "Every time he moved the pencil"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 362,
+                "end": 383,
+                "quote": "it went the wrong way"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 97,
+                "end": 104,
+                "quote": "每次他移动铅笔"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+                "start": 105,
+                "end": 113,
+                "quote": "笔都往错的方向走"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-four-provinces-feb:41": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "detail",
+      "context": "父亲带儿子到诊室来做什么，要一件医生给孩子做的事。",
+      "find": {
+        "check": "echo",
+        "text": "第三段开头 After Dr. Smith tested the boy，医生给孩子做的正是测试，testing 复现了这件事。",
+        "quotes": [
+          "After Dr. Smith tested the boy"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "测试",
+        "reason": "父亲带儿子到诊室来做什么，要一件医生给孩子做的事。名词看复现：第三段开头 After Dr. Smith tested the boy，医生给孩子做的正是测试，testing 复现了这件事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "acting",
+          "meaning": "表演；后文 tested the boy 说医生是给孩子做测试，不是让他来演戏。",
+          "quote": "tested the boy"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "teaching",
+          "meaning": "教学；后文 After Dr. Smith tested the boy，医生先做的是测试，不是给孩子上课。",
+          "quote": "After Dr. Smith tested the boy"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "playing",
+          "meaning": "玩耍；这里是 a center for children who can’t learn well，父亲带孩子来看学习问题，不是来玩。",
+          "quote": "a center for children who can’t learn well"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "brought his son to him for",
+          "signalSide": "context-before",
+          "relation": "中文：for 后接带孩子来的目的。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "tested the boy",
+          "signalSide": "context-after",
+          "relation": "中文：医生给男孩做了测试，复现 testing。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:42": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "父亲诉说儿子的问题，学习上要一个负面的情况，和后面学不好同向。",
+      "find": {
+        "check": "collocation",
+        "text": "has ___ in learning 是 have difficulty in 的说法，后面 isn’t doing well 也说他学不好。",
+        "quotes": [
+          "in learning",
+          "isn’t doing well"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "困难",
+        "reason": "父亲诉说儿子的问题，学习上要一个负面的情况，和后面学不好同向。名词看搭配：has ___ in learning 是 have difficulty in 的说法，后面 isn’t doing well 也说他学不好。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confidence",
+          "meaning": "信心；父亲接着说他 isn’t doing well，是在诉苦，不是说孩子学习有信心。",
+          "quote": "isn’t doing well"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "interest",
+          "meaning": "兴趣；后面说他 can’t even play baseball，讲的是做不到，不是有兴趣。",
+          "quote": "can’t even play baseball"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "experience",
+          "meaning": "经验；父亲抱怨他 isn’t doing well，说孩子学习有经验和诉苦对不上。",
+          "quote": "isn’t doing well"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in learning",
+          "signalSide": "context-after",
+          "relation": "中文：have difficulty in learning，学习有困难。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "isn’t doing well",
+          "signalSide": "context-after",
+          "relation": "中文：学得不好，复现学习困难。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:43": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "main",
+      "context": "父亲什么都做了，连吼都吼了，But 一转，要说这些办法全不起作用。",
+      "find": {
+        "check": "collocation",
+        "text": "主语 nothing 指前面 done everything、shouted at him 这些办法，nothing helps 就是都不管用。",
+        "quotes": [
+          "done everything",
+          "shouted at him"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "有帮助",
+        "reason": "父亲什么都做了，连吼都吼了，But 一转，要说这些办法全不起作用。动词看搭配：主语 nothing 指前面 done everything、shouted at him 这些办法，nothing helps 就是都不管用。",
+        "meaning": "起作用"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "returns",
+          "meaning": "返回；nothing returns 是什么都没回来，前面讲的是 shouted at him 这些办法有没有用。",
+          "quote": "shouted at him"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "appears",
+          "meaning": "出现；父亲 done everything for him，要说的是努力没效果，不是什么都没出现。",
+          "quote": "done everything for him"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "remains",
+          "meaning": "剩下；nothing remains 是什么都不剩，接不上前面 I have even shouted at him 的努力。",
+          "quote": "I have even shouted at him"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "But nothing",
+          "signalSide": "context-before",
+          "relation": "中文：nothing 作主语，说这些办法都不起作用。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I have done everything for him",
+          "signalSide": "context-before",
+          "relation": "中文：nothing 回指父亲做过的一切。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:44": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:44",
+      "blankNo": 44,
+      "pos": "phrase",
+      "role": "main",
+      "context": "医生测完孩子，转而要考父亲，要一个把父亲叫进诊室的动作。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后句 He asked the father to sit in front of 镜子，医生要先把父亲叫进来才能安排他，called in 就是叫进来。",
+        "quotes": [
+          "He asked the father to sit in front of"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "召来",
+        "reason": "医生测完孩子，转而要考父亲，要一个把父亲叫进诊室的动作。词组看语境义：后句 He asked the father to sit in front of 镜子，医生要先把父亲叫进来才能安排他，called in 就是叫进来。",
+        "meaning": "把父亲叫进诊室"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "waited for",
+          "meaning": "等待；后面 He asked the father to sit 是医生主动安排父亲，不是在等他。",
+          "quote": "He asked the father to sit"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "searched for",
+          "meaning": "寻找；父亲就是带孩子来的人，医生 asked the father to sit 直接安排他坐下，用不着找。",
+          "quote": "asked the father to sit"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "believed in",
+          "meaning": "信任；后面是让父亲 sit in front of 镜子做测试，讲的是叫他来做事，不是信任他。",
+          "quote": "sit in front of"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his father",
+          "signalSide": "context-after",
+          "relation": "中文：call sb in，把父亲叫进来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "in",
+          "signalSide": "option",
+          "relation": "中文：in 表示进来，call in 是叫进屋。",
+          "targetText": "called in"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:45": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "detail",
+      "context": "父亲要坐在一样东西前面，后文让他只看着它来描图。",
+      "find": {
+        "check": "echo",
+        "text": "后句 look only in the mirror 原词复现，父亲坐的是镜子前。",
+        "quotes": [
+          "look only in the mirror"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "镜子",
+        "reason": "父亲要坐在一样东西前面，后文让他只看着它来描图。名词看复现：后句 look only in the mirror 原词复现，父亲坐的是镜子前。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "television",
+          "meaning": "电视；后文要他 look only in the mirror 描图，坐在电视前用不上。",
+          "quote": "look only in the mirror"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "painting",
+          "meaning": "画；后文要他 look only in the mirror，坐在一幅画前对不上。",
+          "quote": "look only in the mirror"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "desk",
+          "meaning": "书桌；坐在桌前能画画，但后文 look only in the mirror 说他面前要有镜子。",
+          "quote": "look only in the mirror"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "sit in front of a",
+          "signalSide": "context-before",
+          "relation": "中文：坐在某物前，空格是放在父亲面前的东西。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "look only in the mirror",
+          "signalSide": "context-after",
+          "relation": "中文：只看镜子，复现 mirror。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:46": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "纸上印着一样东西，后面父亲要照着镜子描它的线。",
+      "find": {
+        "check": "echo",
+        "text": "后句 the lines of the star 原词复现，纸上画的是一颗星星。",
+        "quotes": [
+          "the lines of the star"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "星形",
+        "reason": "纸上印着一样东西，后面父亲要照着镜子描它的线。名词看复现：后句 the lines of the star 原词复现，纸上画的是一颗星星。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "face",
+          "meaning": "脸；后面要描的是 the lines of the star，纸上画的不是脸。",
+          "quote": "the lines of the star"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "line",
+          "meaning": "线；the lines of the star 说线是星星的边，纸上那样东西是星星。",
+          "quote": "the lines of the star"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "number",
+          "meaning": "数字；后面说 the lines of the star，纸上是星星，不是数字。",
+          "quote": "the lines of the star"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "on the paper",
+          "signalSide": "context-after",
+          "relation": "中文：纸上有的东西。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the lines of the star",
+          "signalSide": "context-after",
+          "relation": "中文：星星的线条，复现 star。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:47": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "父亲看着镜子，用铅笔顺着星星的线条画，要一个沿线描的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 the lines of the star，工具是 with the pencil，拿笔顺着线走就是 follow。",
+        "quotes": [
+          "the lines of the star",
+          "with the pencil"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "沿着……走",
+        "reason": "父亲看着镜子，用铅笔顺着星星的线条画，要一个沿线描的动作。动词看搭配：宾语是 the lines of the star，工具是 with the pencil，拿笔顺着线走就是 follow。",
+        "meaning": "沿线条描画"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "remove",
+          "meaning": "去掉；他是拿着 the pencil 在纸上描线，后面画歪了才算出错，不是把线去掉。",
+          "quote": "the pencil"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cross",
+          "meaning": "划掉；医生让他照着 the lines of the star 画，后面笔 went the wrong way 是描偏了，不是划线。",
+          "quote": "went the wrong way"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cut",
+          "meaning": "剪；他拿的是 the pencil，不是剪刀，剪不了星星的线。",
+          "quote": "the pencil"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the lines of the star",
+          "signalSide": "context-after",
+          "relation": "中文：follow the lines，沿着线条走。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "with the pencil",
+          "signalSide": "context-after",
+          "relation": "中文：用铅笔沿线描画。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:48": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "父亲和别人一样做不好，后面说笔总往错处走，要一个表示出错的名词。",
+      "find": {
+        "check": "echo",
+        "text": "后句 it went the wrong way 说他画错了，末段 afraid of making mistakes 又用了原词。",
+        "quotes": [
+          "it went the wrong way",
+          "afraid of making mistakes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "错误",
+        "reason": "父亲和别人一样做不好，后面说笔总往错处走，要一个表示出错的名词。名词看复现：后句 it went the wrong way 说他画错了，末段 afraid of making mistakes 又用了原词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "decisions",
+          "meaning": "决定；后面说 it went the wrong way，讲的是画错，不是做决定。",
+          "quote": "it went the wrong way"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "choices",
+          "meaning": "选择；对着镜子描星星没有可选的，后句 it went the wrong way 说的是画错。",
+          "quote": "it went the wrong way"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "patterns",
+          "meaning": "图案；后句是笔 went the wrong way，人人都会犯的是错，不是画出同样的图案。",
+          "quote": "went the wrong way"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "made the same",
+          "signalSide": "context-before",
+          "relation": "中文：make mistakes，犯错。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "it went the wrong way",
+          "signalSide": "context-after",
+          "relation": "中文：笔走错方向，就是他犯的错。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:49": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "detail",
+      "context": "每次他让铅笔怎样，笔就往反方向走，要一个让笔动起来的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "后面 it 指铅笔，it went the wrong way 说笔在走，他做的是 moved the pencil。",
+        "quotes": [
+          "it went the wrong way"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "移动",
+        "reason": "每次他让铅笔怎样，笔就往反方向走，要一个让笔动起来的动作。动词看搭配：后面 it 指铅笔，it went the wrong way 说笔在走，他做的是 moved the pencil。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "touched",
+          "meaning": "碰；只碰一下笔不会 went the wrong way，笔要动起来才有方向。",
+          "quote": "went the wrong way"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dropped",
+          "meaning": "掉落；笔掉了谈不上 went the wrong way，他是在描线。",
+          "quote": "went the wrong way"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sharpened",
+          "meaning": "削尖；削笔不会让笔 went the wrong way，这里是描线时的动作。",
+          "quote": "went the wrong way"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the pencil",
+          "signalSide": "context-after",
+          "relation": "中文：move the pencil，移动铅笔。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "it went the wrong way",
+          "signalSide": "context-after",
+          "relation": "中文：笔走向错误方向，说明笔在移动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:50": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "detail",
+      "context": "就在父亲脸涨红的那一刻，医生吼了起来，要一个表示此时的说法。",
+      "find": {
+        "check": "collocation",
+        "text": "和 At this 连用，at this point 是“此时”，接着前句 face became red 的那一刻。",
+        "quotes": [
+          "At this",
+          "face became red"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "时刻",
+        "reason": "就在父亲脸涨红的那一刻，医生吼了起来，要一个表示此时的说法。名词看搭配：和 At this 连用，at this point 是“此时”，接着前句 face became red 的那一刻。",
+        "meaning": "此时"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "speed",
+          "meaning": "速度；at this speed 是以这个速度，前句 face became red 讲的是这一刻的窘态。",
+          "quote": "face became red"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "corner",
+          "meaning": "角落；医生是在父亲 face became red 的时候吼他，这里讲时间不讲地点。",
+          "quote": "face became red"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "end",
+          "meaning": "结尾；测试还没结束，医生正喊 Hurry up! 催他画快点。",
+          "quote": "Hurry up!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "At this",
+          "signalSide": "context-before",
+          "relation": "中文：at this point，此时。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "face became red",
+          "signalSide": "context-before",
+          "relation": "中文：父亲脸涨红，正是这一刻。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:51": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "detail",
+      "context": "医生嫌父亲画得慢，问他为什么用了这么久，要一个耗费时间的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 Hurry up! 催他快，后面接 so long，take so long 是花这么长时间。",
+        "quotes": [
+          "Hurry up!",
+          "so long"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "花费",
+        "reason": "医生嫌父亲画得慢，问他为什么用了这么久，要一个耗费时间的动词。动词看搭配：前面 Hurry up! 催他快，后面接 so long，take so long 是花这么长时间。",
+        "meaning": "花这么长时间"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "staying",
+          "meaning": "停留；staying so long 是待这么久，医生喊 Hurry up! 是嫌他画得慢。",
+          "quote": "Hurry up!"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "preparing",
+          "meaning": "准备；父亲已经在画了，Hurry up! 催的是画得慢，不是准备得久。",
+          "quote": "Hurry up!"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "writing",
+          "meaning": "写；他是在描 the lines of the star，不是在写字。",
+          "quote": "the lines of the star"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "so long",
+          "signalSide": "context-after",
+          "relation": "中文：take so long，花这么久。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Hurry up!",
+          "signalSide": "context-before",
+          "relation": "中文：催他快点，说明嫌他用时太长。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:52": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "医生故意贬低父亲，要说这件事本该很简单，他却做不到。",
+      "find": {
+        "check": "affect",
+        "text": "前面 You can’t do，后面 You don’t know left from right! 都是挖苦，说他连简单的事都做不了。",
+        "quotes": [
+          "You can’t do",
+          "You don’t know left from right!"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "容易的",
+        "reason": "医生故意贬低父亲，要说这件事本该很简单，他却做不到。形容词看情感：前面 You can’t do，后面 You don’t know left from right! 都是挖苦，说他连简单的事都做不了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "important",
+          "meaning": "重要的；医生是在挖苦他 You don’t know left from right!，说事情重要起不到贬低的作用。",
+          "quote": "You don’t know left from right!"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "obvious",
+          "meaning": "明显的；医生贬的是他连这都 can’t do，说事情明显和做不做得到对不上。",
+          "quote": "can’t do"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "exciting",
+          "meaning": "令人兴奋的；医生正吼他 Hurry up!，描星星谈不上让人兴奋。",
+          "quote": "Hurry up!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "You can’t do such an",
+          "signalSide": "context-before",
+          "relation": "中文：such an easy thing，这么简单的事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "You don’t know left from right!",
+          "signalSide": "context-after",
+          "relation": "中文：嘲讽他连左右都分不清，口气是贬低。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:53": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "概括医生刚才吼出的那几句，正是它们把父亲惹火了。",
+      "find": {
+        "check": "echo",
+        "text": "These 回指前面 the doctor shouted at him 吼出的 Hurry up! 等几句，概括成 words。",
+        "quotes": [
+          "the doctor shouted at him",
+          "Hurry up!"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "话",
+        "reason": "概括医生刚才吼出的那几句，正是它们把父亲惹火了。名词看复现：These 回指前面 the doctor shouted at him 吼出的 Hurry up! 等几句，概括成 words。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ideas",
+          "meaning": "想法；the doctor shouted at him 吼出来的是话，不是心里的想法。",
+          "quote": "the doctor shouted at him"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "questions",
+          "meaning": "问题；医生吼的 Hurry up! 是命令，后面两句是挖苦，不全是问题。",
+          "quote": "Hurry up!"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "instructions",
+          "meaning": "指示；医生吼的 You don’t know left from right! 是挖苦，不是指示。",
+          "quote": "You don’t know left from right!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "made the father very angry",
+          "signalSide": "context-after",
+          "relation": "中文：这些话让父亲很生气。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the doctor shouted at him",
+          "signalSide": "context-before",
+          "relation": "中文：医生吼出的几句话，被概括成 words。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:54": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "医生让父亲亲身体会后，点题问他现在明不明白，要一个理解的动作。",
+      "find": {
+        "check": "echo",
+        "text": "后面 Your son has felt just like that 点明儿子的感受，末段 the father understood everything 用了原词。",
+        "quotes": [
+          "Your son has felt just like that",
+          "the father understood everything"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "理解",
+        "reason": "医生让父亲亲身体会后，点题问他现在明不明白，要一个理解的动作。动词看复现：后面 Your son has felt just like that 点明儿子的感受，末段 the father understood everything 用了原词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relax",
+          "meaning": "放松；医生接着讲 Your son has felt just like that，是要他明白儿子的感受，不是让他放松。",
+          "quote": "Your son has felt just like that"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "leave",
+          "meaning": "离开；医生还在解释 Your son has felt just like that，没有让他走。",
+          "quote": "Your son has felt just like that"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promise",
+          "meaning": "承诺；医生要的是父亲明白 Your son has felt just like that，不是要他许诺什么。",
+          "quote": "Your son has felt just like that"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Now you can",
+          "signalSide": "context-before",
+          "relation": "中文：can 后接动词原形，说父亲现在能怎样。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the father understood everything",
+          "signalSide": "context-after",
+          "relation": "中文：末段父亲全明白了，复现 understand。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:55": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:55",
+      "blankNo": 55,
+      "pos": "adverb",
+      "role": "main",
+      "context": "医生一点破，父亲一下子全懂了，这是全文的转折，要说明醒悟来得突然。",
+      "find": {
+        "check": "direction",
+        "text": "后面 understood everything 接着 Now he felt so sorry，听完医生的话他当即醒悟、愧疚，是突然的。",
+        "quotes": [
+          "understood everything",
+          "Now he felt so sorry"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "突然地",
+        "reason": "医生一点破，父亲一下子全懂了，这是全文的转折，要说明醒悟来得突然。副词看走向：后面 understood everything 接着 Now he felt so sorry，听完医生的话他当即醒悟、愧疚，是突然的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Interestingly",
+          "meaning": "有趣的是；父亲 felt so sorry，醒悟时心情沉重，说有趣不合。",
+          "quote": "felt so sorry"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Absolutely",
+          "meaning": "绝对地；它讲程度，和 everything 重复，这里要说的是醒悟来得突然。",
+          "quote": "everything"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Unfortunately",
+          "meaning": "不幸的是；父亲终于 understood everything 是件好事，说不幸与此相反。",
+          "quote": "understood everything"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the father understood everything",
+          "signalSide": "context-after",
+          "relation": "中文：修饰父亲明白过来这个动作。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "he felt so sorry",
+          "signalSide": "context-after",
+          "relation": "中文：他当即愧疚，说明醒悟就在这一刻。"
+        }
+      ]
+    }
+  }
+}

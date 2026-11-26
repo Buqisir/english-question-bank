@@ -1,0 +1,714 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:reading-b": {
+      "overview": "本文介绍法国长大的莎拉·图米回到父亲的祖国突尼斯，用可持续耕作和种植金合欢树的方法对抗撒哈拉沙漠扩张、保护农田的经历和成果。",
+      "fullTranslationZh": "莎拉·图米在法国长大，小时候就梦想成为一名能让世界变得更美好的领导者。从九岁起，她每逢假期就陪突尼斯籍的父亲回到他在该国东部的出生地，这唤醒了她帮助他人的热情。在那里，她为孩子们组织了课后作业小组和各种活动。\n\n图米亲眼目睹了荒漠化的破坏性影响。“十年之内，富裕的农民变得不如从前，再过十年他们就会陷入贫困。我想让撒哈拉沙漠就此止步。”平均降雨量减少、干旱日益严重，导致突尼斯约75%的农业用地正受到荒漠化的威胁。\n\n图米意识到耕作方式必须改变。她相信，只要农民能够适应变化——种植可持续作物、采用新的水处理技术、注重使用天然产品和肥料而不是化学品，小块土地也能带来大收益。\n\n2012年，图米坚定了与沙漠抗争的梦想。她搬到突尼斯，创办了名为“人人金合欢”的项目，把她的可持续农业理念付诸行动。“我想让农村的年轻人明白，他们可以在自己生活的地方创造机会。没有谁比生活在缺水环境中的人更能理解荒漠化和气候变化带来的影响。”\n\n截至2016年9月，20个试点农场已种下13万多棵金合欢树，农民记录的成活率为60%。图米估计，大约需要300万棵金合欢树才能保护突尼斯的农田。她期望到2018年种下100万棵树。在接下来的几年里，图米希望把这个项目推广到阿尔及利亚和摩洛哥。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+          "sourceText": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+          "displayText": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:25"
+          ],
+          "translationZh": "平均降雨量减少、干旱日益严重，导致突尼斯约75%的农业用地正受到荒漠化的威胁。",
+          "analysisZh": "主干是 A decrease … and an increase … have led to …，两个并列名词短语作主语，所以谓语用复数 have。lead to 后面是“名词 + 动名词被动式”：Tunisia’s agricultural lands 是 being threatened 的逻辑主语，意思是农田正受到威胁。先看 have led to 前面找原因，再看后面找结果。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "A decrease in average rainfall"
+            },
+            {
+              "start": 80,
+              "end": 91,
+              "quote": "have led to"
+            },
+            {
+              "start": 149,
+              "end": 184,
+              "quote": "being threatened by desertification"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:3",
+          "sourceText": "She is confident that small land areas can bring large returns if farmers are able to adapt by planting sustainable crops, using new technologies for water treatment and focusing on natural products and fertilisers (肥料) rather than chemicals.",
+          "displayText": "She is confident that small land areas can bring large returns if farmers are able to adapt by planting sustainable crops, using new technologies for water treatment and focusing on natural products and fertilisers (肥料) rather than chemicals.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:26"
+          ],
+          "translationZh": "她相信，只要农民能够适应变化——种植可持续作物、采用新的水处理技术、注重使用天然产品和肥料而不是化学品，小块土地也能带来大收益。",
+          "analysisZh": "主干是 She is confident that …，that 从句说她相信什么：small land areas can bring large returns。if 引出条件“农民能适应”，by 后面三个并列的动名词短语 planting …、using …、focusing … 说怎样适应。rather than 连接的是 natural products and fertilisers 和 chemicals，取前者、舍后者，所以她要的是天然肥料，不是不施肥。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 62,
+              "quote": "small land areas can bring large returns"
+            },
+            {
+              "start": 63,
+              "end": 91,
+              "quote": "if farmers are able to adapt"
+            },
+            {
+              "start": 220,
+              "end": 241,
+              "quote": "rather than chemicals"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-b:1"
+              ],
+              "start": 0,
+              "end": 104,
+              "quote": "莎拉·图米在法国长大，小时候就梦想成为一名能让世界变得更美好的领导者。从九岁起，她每逢假期就陪突尼斯籍的父亲回到他在该国东部的出生地，这唤醒了她帮助他人的热情。在那里，她为孩子们组织了课后作业小组和各种活动。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-b:2"
+              ],
+              "start": 106,
+              "end": 207,
+              "quote": "图米亲眼目睹了荒漠化的破坏性影响。“十年之内，富裕的农民变得不如从前，再过十年他们就会陷入贫困。我想让撒哈拉沙漠就此止步。”平均降雨量减少、干旱日益严重，导致突尼斯约75%的农业用地正受到荒漠化的威胁。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-b:3"
+              ],
+              "start": 209,
+              "end": 287,
+              "quote": "图米意识到耕作方式必须改变。她相信，只要农民能够适应变化——种植可持续作物、采用新的水处理技术、注重使用天然产品和肥料而不是化学品，小块土地也能带来大收益。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+                "block:paper-gaokao-2023-four-provinces-feb:reading-b:5"
+              ],
+              "start": 289,
+              "end": 410,
+              "quote": "2012年，图米坚定了与沙漠抗争的梦想。她搬到突尼斯，创办了名为“人人金合欢”的项目，把她的可持续农业理念付诸行动。“我想让农村的年轻人明白，他们可以在自己生活的地方创造机会。没有谁比生活在缺水环境中的人更能理解荒漠化和气候变化带来的影响。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-b:6"
+              ],
+              "start": 412,
+              "end": 533,
+              "quote": "截至2016年9月，20个试点农场已种下13万多棵金合欢树，农民记录的成活率为60%。图米估计，大约需要300万棵金合欢树才能保护突尼斯的农田。她期望到2018年种下100万棵树。在接下来的几年里，图米希望把这个项目推广到阿尔及利亚和摩洛哥。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-b-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+                "start": 213,
+                "end": 398,
+                "quote": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p2",
+                "start": 62,
+                "end": 100,
+                "quote": "平均降雨量减少、干旱日益严重，导致突尼斯约75%的农业用地正受到荒漠化的威胁"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-b-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:3",
+                "start": 58,
+                "end": 300,
+                "quote": "She is confident that small land areas can bring large returns if farmers are able to adapt by planting sustainable crops, using new technologies for water treatment and focusing on natural products and fertilisers (肥料) rather than chemicals."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p3",
+                "start": 14,
+                "end": 77,
+                "quote": "她相信，只要农民能够适应变化——种植可持续作物、采用新的水处理技术、注重使用天然产品和肥料而不是化学品，小块土地也能带来大收益"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+                "start": 120,
+                "end": 285,
+                "quote": "Her passion to help others was awakened when, from the age of nine, she accompanied her Tunisian father to his birthplace in the east of the country during holidays."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p1",
+                "start": 35,
+                "end": 79,
+                "quote": "从九岁起，她每逢假期就陪突尼斯籍的父亲回到他在该国东部的出生地，这唤醒了她帮助他人的热情"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+                "start": 213,
+                "end": 398,
+                "quote": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p2",
+                "start": 62,
+                "end": 100,
+                "quote": "平均降雨量减少、干旱日益严重，导致突尼斯约75%的农业用地正受到荒漠化的威胁"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
+                "start": 138,
+                "end": 228,
+                "quote": "Toumi estimates that some 3 million acacia trees are needed to protect Tunisia’s farmland."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+                "start": 0,
+                "end": 58,
+                "quote": "In 2012, Toumi consolidated her dream to fight the desert."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p5",
+                "start": 48,
+                "end": 71,
+                "quote": "大约需要300万棵金合欢树才能保护突尼斯的农田"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p4",
+                "start": 0,
+                "end": 19,
+                "quote": "2012年，图米坚定了与沙漠抗争的梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+                "start": 162,
+                "end": 211,
+                "quote": "I wanted to stop the Sahara Desert in its tracks."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+                "start": 0,
+                "end": 58,
+                "quote": "In 2012, Toumi consolidated her dream to fight the desert."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p2",
+                "start": 48,
+                "end": 60,
+                "quote": "我想让撒哈拉沙漠就此止步"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-b-p4",
+                "start": 0,
+                "end": 19,
+                "quote": "2012年，图米坚定了与沙漠抗争的梦想"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写童年探亲点燃图米的助人热情，再写荒漠化威胁农田、她提出改变耕作方式，接着写她创办金合欢项目付诸行动，最后用种树数据和推广计划展示成果。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+            "summary": "童年随父探亲，唤醒图米助人的热情",
+            "function": "交代人物背景和行动起点"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+            "summary": "降雨减少、干旱加重使大片农田面临荒漠化",
+            "function": "提出要解决的问题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:3",
+            "summary": "图米认为改用可持续的耕作方式就能获得好收成",
+            "function": "提出解决思路"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+            "summary": "图米移居突尼斯创办金合欢项目，并鼓励农村青年就地创造机会",
+            "function": "写理念付诸行动"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
+            "summary": "种树已初见成效，并计划扩大规模和范围",
+            "function": "用数据展示成果与前景"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-four-provinces-feb:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出假期去突尼斯的经历在图米身上留下了什么改变。",
+      "stemTranslationZh": "图米假期去突尼斯的经历对她有什么影响？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使她决定离开这个国家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They made her decide to leave the country.",
+            "explanation": "她 2012 年搬去突尼斯（moved to Tunisia）是为了抗击荒漠，原文没说假期旅行让她决定离开哪个国家。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "帮助她更好地理解了父亲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They helped her better understand her father.",
+            "explanation": "原文只说她陪父亲（accompanied her Tunisian father）回他的出生地，没写她因此更理解父亲。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "激发了她帮助他人的热情。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+              "quote": "Her passion to help others was awakened when, from the age of nine, she accompanied her Tunisian father to his birthplace in the east of the country during holidays.",
+              "anchor": "助人热情被唤醒"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "毁掉了她当老师的梦想。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Her passion to help others was awakened",
+            "sourceHighlight": "was awakened",
+            "optionText": "They destroyed her dream of being a teacher.",
+            "optionHighlight": "destroyed her dream",
+            "explanation": "旅行唤醒（awakened）的是她的热情，不是毁掉梦想；她的梦想是当领导者（a leader），办作业小组也不等于想当老师。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+              "quote": "Her passion to help others was awakened",
+              "anchor": "热情被唤醒"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "holiday trips",
+          "sourceRole": "stem",
+          "targetText": "Her passion to help others was awakened when, from the age of nine, she accompanied her Tunisian father to his birthplace in the east of the country during holidays.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+          "relationType": "locationCue",
+          "targetCue": "during holidays",
+          "sourceZh": "假期旅行",
+          "targetCueZh": "在假期里",
+          "answerText": "Her passion to help others was awakened",
+          "note": "题干 holiday trips 对应原文 during holidays。"
+        },
+        {
+          "sourceText": "They fired her enthusiasm for helping others.",
+          "sourceRole": "correctOption",
+          "targetText": "Her passion to help others was awakened",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“点燃热情”（fired her enthusiasm）就是原文的“热情被唤醒”（passion … was awakened），热情的对象都是帮助他人（help others），选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出导致突尼斯农田荒漠化的原因。",
+      "stemTranslationZh": "突尼斯农田荒漠化的主要原因是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 led to 前面的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "降雨少。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+              "quote": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+              "anchor": "降雨减少导致荒漠化"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "土壤污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Soil pollution.",
+            "explanation": "原文提到用天然肥料代替化学品（rather than chemicals），那是改进耕作的办法，没说荒漠化是土壤污染造成的。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "天气寒冷。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cold weather.",
+            "explanation": "原文列出的原因是雨水少、干旱重，说的都是缺水，没有一处提到气温低。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "森林遭破坏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Forest damage.",
+            "explanation": "后文种金合欢树（acacia trees）是为了保护农田，原文没说荒漠化起因是森林被毁。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Tunisia’s farmland",
+          "sourceRole": "stem",
+          "targetText": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+          "relationType": "locationCue",
+          "targetCue": "Tunisia’s agricultural lands",
+          "sourceZh": "突尼斯的农田",
+          "targetCueZh": "突尼斯的农业用地",
+          "answerText": "A decrease in average rainfall",
+          "note": "题干 Tunisia’s farmland 对应原文 Tunisia’s agricultural lands。"
+        },
+        {
+          "sourceText": "Low rainfall.",
+          "sourceRole": "correctOption",
+          "targetText": "A decrease in average rainfall",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“降雨少”（Low rainfall）就是原文的“平均降雨量减少”（a decrease in average rainfall）；同句另一个原因是干旱加重，也是缺雨，四个选项里只有降雨对得上，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清图米创办金合欢项目要解决什么问题。",
+      "stemTranslationZh": "图米为什么在突尼斯创办“人人金合欢”项目？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找种树为了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为年轻人创造工作机会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "they can create opportunities",
+            "optionText": "create job opportunities",
+            "matchType": "exact",
+            "relationNote": "选项借了 create opportunities，可原文是要让农村青年相信自己能在当地创造机会，不是项目替他们安排工作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "quote": "“I want to show young people in rural areas that they can create opportunities where",
+              "anchor": "让青年相信能创造机会"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "帮助孩子们接受基础教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "There she organized homework clubs and activities for children.",
+            "sourceEntity": "homework clubs",
+            "optionText": "To help the children obtain a basic education.",
+            "optionEntity": "a basic education",
+            "explanation": "帮孩子学习的是她小时候假期办的作业小组（homework clubs），金合欢项目做的是种树和改耕作。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "劝说农民不要使用肥料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "focusing on natural products and fertilisers (肥料) rather than chemicals",
+            "sourceHighlight": "natural products and fertilisers (肥料) rather than chemicals",
+            "optionText": "To persuade the farmers not to use fertilizers.",
+            "optionHighlight": "not to use fertilizers",
+            "explanation": "图米主张用天然产品和肥料代替化学品，反对的只是化学品，并不反对施肥。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有助于保护他们的农田。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
+              "quote": "Toumi estimates that some 3 million acacia trees are needed to protect Tunisia’s farmland.",
+              "anchor": "种树保护农田"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "quote": "In 2012, Toumi consolidated her dream to fight the desert.",
+              "anchor": "与沙漠抗争"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Acacias for All",
+          "sourceRole": "stem",
+          "targetText": "She moved to Tunisia, and set up a programme named Acacias for All to put her sustainable farming philosophy into action.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "acacia trees are needed to protect Tunisia’s farmland",
+          "bridgeZh": "这个项目做的事就是种金合欢树",
+          "note": "题干 Acacias for All 原词出现在原文。"
+        },
+        {
+          "sourceText": "To facilitate the protection of their farmland.",
+          "sourceRole": "correctOption",
+          "targetText": "acacia trees are needed to protect Tunisia’s farmland",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "选项的“保护农田”（the protection of their farmland）就是原文的“保护突尼斯的农田”（protect Tunisia’s farmland）；项目大量种树正是在推进这件事，所以说它“有助于”保护农田，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:27": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文围绕的那件事，选出能盖住全文的标题。",
+      "stemTranslationZh": "下列哪项最适合作本文标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-four-provinces-feb:reading-b:2]]荒漠化毁农田，她要 stop the Sahara，[[block:paper-gaokao-2023-four-provinces-feb:reading-b:3]]改耕作，[[block:paper-gaokao-2023-four-provinces-feb:reading-b:6]]种 acacia trees；标题要盖住挡沙漠",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "在突尼斯节约用水",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "using new technologies for water treatment",
+            "sourceHighlight": "water treatment",
+            "optionText": "Saving Water in Tunisia",
+            "optionHighlight": "Saving Water",
+            "explanation": "用水只在改耕作时提到一句新的水处理技术（water treatment），全文的目标是挡住沙漠、保住农田。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "种植本土树种",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "more than 130,000 acacia trees had been planted on 20 pilot farms",
+            "sourceHighlight": "acacia trees had been planted",
+            "optionText": "Planting Trees of Native Species",
+            "optionHighlight": "Planting Trees",
+            "explanation": "种金合欢树只是项目的做法，原文也没说它是本土树种（native species），盖不住前面的荒漠化和改耕作。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "阻挡撒哈拉沙漠",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+              "quote": "I wanted to stop the Sahara Desert in its tracks.",
+              "anchor": "让撒哈拉止步"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "quote": "In 2012, Toumi consolidated her dream to fight the desert.",
+              "anchor": "与沙漠抗争"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在北非消除贫困",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Within 10 years rich farmers became worse off, and in 10 years from now they will be poor.",
+            "sourceHighlight": "they will be poor",
+            "optionText": "Fighting Poverty in North Africa",
+            "optionHighlight": "Fighting Poverty in North Africa",
+            "explanation": "农民变穷（will be poor）是荒漠化造成的后果，图米对抗的是沙漠；项目也只在突尼斯开展，推广到阿尔及利亚和摩洛哥还只是希望。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Holding back the Sahara",
+          "sourceRole": "correctOption",
+          "targetText": "I wanted to stop the Sahara Desert in its tracks.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“阻挡撒哈拉”（Holding back the Sahara）就是图米说的“让撒哈拉沙漠就此止步”（stop the Sahara Desert in its tracks）；从荒漠化的威胁到改耕作、种树，几段写的都是她怎样挡住沙漠、保住农田，这个标题正好把它们都包进去，选 C。"
+        }
+      ]
+    }
+  }
+}

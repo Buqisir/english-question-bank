@@ -1,0 +1,741 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:reading-d": {
+      "overview": "本文介绍斯坦福大学希尔顿的一项研究：她用录音调查5000名说美式英语的人，发现高、低强度两类说话者对同时说话是否算打断看法截然不同。",
+      "fullTranslationZh": "我们都知道那种不愉快的感觉：正聊着有趣的话题，话说到一半就被人打断了。可那真的算打断吗？斯坦福大学凯瑟琳·希尔顿主持的一项新研究表明，答案取决于你问的是谁。\n\n希尔顿使用一组经过控制的录音片段，调查了5000名说美式英语的人，以便更好地了解是什么影响了人们对打断的看法。她让受试者听录音片段，然后回答问题：说话人看起来是否友好、投入，是否在互相倾听，还是在试图打断对方。\n\n希尔顿发现，说美式英语的人有不同的交谈风格。她区分出两个截然不同的群体：高强度说话者和低强度说话者。高强度说话者通常对交谈中的沉默感到不自在，并把同时说话看作投入的表现。低强度说话者则认为同时说话很粗鲁，更喜欢交谈时大家一个接一个地说。\n\n希尔顿说，当受试者听到两人同时说话、但彼此赞同且没有跑题的录音片段时，交谈风格的差异就显现出来了。高强度组表示，人们在表示赞同时同时说话的交谈不算打断，反而显得投入，而且比说话轮次之间有沉默的交谈更友好。相比之下，低强度组则把任何程度的同时说话都看作粗鲁的打断，不管说话人在说什么。\n\n“人们在意被打断，那些小小的打断会对整个交流产生巨大影响，”希尔顿说，“如果我们想了解人与人之间如何互动，弄清打断意味着什么至关重要。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+          "sourceText": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions.",
+          "displayText": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:32"
+          ],
+          "translationZh": "希尔顿使用一组经过控制的录音片段，调查了5000名说美式英语的人，以便更好地了解是什么影响了人们对打断的看法。",
+          "analysisZh": "主干是 Hilton surveyed 5,000 American English speakers，希尔顿调查了 5000 人。句首 Using … clips 是现在分词短语作方式状语，说用什么调查；to better understand … 是不定式作目的状语，说为什么调查。understand 的宾语是 what 引导的宾语从句，what 在从句里作主语，affects 是谓语，people’s perceptions of interruptions 是宾语。",
+          "underlineRanges": [
+            {
+              "start": 46,
+              "end": 93,
+              "quote": "Hilton surveyed 5,000 American English speakers"
+            },
+            {
+              "start": 94,
+              "end": 114,
+              "quote": "to better understand"
+            },
+            {
+              "start": 115,
+              "end": 165,
+              "quote": "what affects people’s perceptions of interruptions"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+          "sourceText": "The high intensity group reported that conversations where people spoke at the same time when expressing agreement were not interruptive but engaged and friendlier than the conversations with moments of silence in between speaking turns.",
+          "displayText": "The high intensity group reported that conversations where people spoke at the same time when expressing agreement were not interruptive but engaged and friendlier than the conversations with moments of silence in between speaking turns.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:35"
+          ],
+          "translationZh": "高强度组表示，人们在表示赞同时同时说话的交谈不算打断，反而显得投入，而且比说话轮次之间有沉默的交谈更友好。",
+          "analysisZh": "主干是 The high intensity group reported that …。that 从句的主语是 conversations，where 引导的定语从句修饰它，when expressing agreement 又限定“同时说话”的场合；从句谓语要跳过这些修饰才找到：were not interruptive but engaged and friendlier。not … but … 先否定再肯定，friendlier than 把这类交谈和中间有沉默的交谈作比较。",
+          "underlineRanges": [
+            {
+              "start": 39,
+              "end": 52,
+              "quote": "conversations"
+            },
+            {
+              "start": 115,
+              "end": 163,
+              "quote": "were not interruptive but engaged and friendlier"
+            },
+            {
+              "start": 164,
+              "end": 210,
+              "quote": "than the conversations with moments of silence"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-d:1"
+              ],
+              "start": 0,
+              "end": 78,
+              "quote": "我们都知道那种不愉快的感觉：正聊着有趣的话题，话说到一半就被人打断了。可那真的算打断吗？斯坦福大学凯瑟琳·希尔顿主持的一项新研究表明，答案取决于你问的是谁。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-d:2"
+              ],
+              "start": 80,
+              "end": 185,
+              "quote": "希尔顿使用一组经过控制的录音片段，调查了5000名说美式英语的人，以便更好地了解是什么影响了人们对打断的看法。她让受试者听录音片段，然后回答问题：说话人看起来是否友好、投入，是否在互相倾听，还是在试图打断对方。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-d:3"
+              ],
+              "start": 187,
+              "end": 305,
+              "quote": "希尔顿发现，说美式英语的人有不同的交谈风格。她区分出两个截然不同的群体：高强度说话者和低强度说话者。高强度说话者通常对交谈中的沉默感到不自在，并把同时说话看作投入的表现。低强度说话者则认为同时说话很粗鲁，更喜欢交谈时大家一个接一个地说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-d:4"
+              ],
+              "start": 307,
+              "end": 448,
+              "quote": "希尔顿说，当受试者听到两人同时说话、但彼此赞同且没有跑题的录音片段时，交谈风格的差异就显现出来了。高强度组表示，人们在表示赞同时同时说话的交谈不算打断，反而显得投入，而且比说话轮次之间有沉默的交谈更友好。相比之下，低强度组则把任何程度的同时说话都看作粗鲁的打断，不管说话人在说什么。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-d:5"
+              ],
+              "start": 450,
+              "end": 518,
+              "quote": "“人们在意被打断，那些小小的打断会对整个交流产生巨大影响，”希尔顿说，“如果我们想了解人与人之间如何互动，弄清打断意味着什么至关重要。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-d-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+                "start": 0,
+                "end": 166,
+                "quote": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p2",
+                "start": 0,
+                "end": 54,
+                "quote": "希尔顿使用一组经过控制的录音片段，调查了5000名说美式英语的人，以便更好地了解是什么影响了人们对打断的看法"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-d-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+                "start": 209,
+                "end": 446,
+                "quote": "The high intensity group reported that conversations where people spoke at the same time when expressing agreement were not interruptive but engaged and friendlier than the conversations with moments of silence in between speaking turns."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p4",
+                "start": 49,
+                "end": 101,
+                "quote": "高强度组表示，人们在表示赞同时同时说话的交谈不算打断，反而显得投入，而且比说话轮次之间有沉默的交谈更友好"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+                "start": 135,
+                "end": 206,
+                "quote": "But was that really an interruption? The answer depends on whom you ask"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+                "start": 94,
+                "end": 165,
+                "quote": "to better understand what affects people’s perceptions of interruptions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p1",
+                "start": 35,
+                "end": 77,
+                "quote": "可那真的算打断吗？斯坦福大学凯瑟琳·希尔顿主持的一项新研究表明，答案取决于你问的是谁"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p2",
+                "start": 33,
+                "end": 54,
+                "quote": "以便更好地了解是什么影响了人们对打断的看法"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+                "start": 167,
+                "end": 347,
+                "quote": "She had participants listen to audio clips and then answer questions about whether the speakers seemed to be friendly and engaged, listening to one another, or trying to interrupt."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p2",
+                "start": 55,
+                "end": 104,
+                "quote": "她让受试者听录音片段，然后回答问题：说话人看起来是否友好、投入，是否在互相倾听，还是在试图打断对方"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+                "start": 447,
+                "end": 599,
+                "quote": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+                "start": 303,
+                "end": 363,
+                "quote": "Low intensity speakers find it rude to talk at the same time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p4",
+                "start": 102,
+                "end": 140,
+                "quote": "相比之下，低强度组则把任何程度的同时说话都看作粗鲁的打断，不管说话人在说什么"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p3",
+                "start": 85,
+                "end": 101,
+                "quote": "低强度说话者则认为同时说话很粗鲁"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+                "start": 138,
+                "end": 256,
+                "quote": "“Breaking apart what an interruption means is essential if we want to understand how humans interact with each other.”"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+                "start": 0,
+                "end": 81,
+                "quote": "Hilton found that American English speakers have different conversational styles."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p5",
+                "start": 35,
+                "end": 68,
+                "quote": "“如果我们想了解人与人之间如何互动，弄清打断意味着什么至关重要。”"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-d-p3",
+                "start": 0,
+                "end": 21,
+                "quote": "希尔顿发现，说美式英语的人有不同的交谈风格"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先从被打断的不快引出“这算不算打断”的问题，再介绍研究方法，接着呈现两类交谈风格及其对同时说话的不同理解，最后引用希尔顿的话说明研究打断的意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+            "summary": "被打断令人不快，但算不算打断因人而异",
+            "function": "设问引出话题和研究"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+            "summary": "希尔顿用录音调查5000人，让受试者听后答题",
+            "function": "介绍研究方法"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+            "summary": "说话者分为高强度和低强度两类，对同时说话看法不同",
+            "function": "呈现主要发现"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+            "summary": "面对同样的同时说话，高强度组觉得投入友好，低强度组觉得粗鲁",
+            "function": "用具体情境展开发现"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+            "summary": "打断影响整个交流，弄清其含义才能理解人际互动",
+            "function": "引用结论，说明研究意义"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-four-provinces-feb:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清希尔顿的研究要回答什么问题。",
+      "stemTranslationZh": "希尔顿的研究关注的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "answer 回答的问题往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "打断对人们意味着什么。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+              "quote": "But was that really an interruption? The answer depends on whom you ask",
+              "anchor": "算不算打断因人而异"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "quote": "to better understand what affects people’s perceptions of interruptions",
+              "anchor": "人们对打断的看法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "打断是好是坏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Whether interruption is good or not.",
+            "explanation": "研究问的是一句插话在不同人听来算不算打断（really an interruption），没去评判打断的好坏。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "怎样避免被打断。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How to avoid getting interrupted.",
+            "explanation": "开头说被打断让人不快（unpleasant feeling），选项顺着想到怎样避免，可研究看的是人们怎样理解打断，没给避免的办法。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "说话人为什么互相打断。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "trying to interrupt",
+            "optionText": "interrupt each other",
+            "matchType": "exact",
+            "relationNote": "选项借了 interrupt，可 trying to interrupt 是受试者要判断的一项：说话人像不像在打断；研究不问打断的动机。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "quote": "She had participants listen to audio clips and then answer questions about whether the speakers seemed to be friendly and engaged, listening to one another, or trying to interrupt.",
+              "anchor": "受试者判断的内容"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Hilton’s research",
+          "sourceRole": "stem",
+          "targetText": "The answer depends on whom you ask, according to new research led by Katherine Hilton from Stanford University.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+          "relationType": "locationCue",
+          "targetCue": "research led by Katherine Hilton",
+          "answerText": "The answer depends on whom you ask",
+          "note": "题干 Hilton’s research 对应原文 research led by Katherine Hilton。"
+        },
+        {
+          "sourceText": "What interruptions mean to people.",
+          "sourceRole": "correctOption",
+          "targetText": "The answer depends on whom you ask",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "选项的“打断对人意味着什么”就是原文说的“算不算打断要看问谁”（depends on whom you ask）：同样的插话，不同的人理解不同；[[block:paper-gaokao-2023-four-provinces-feb:reading-d:2|Using a set of controlled audio clips]]也说调查是为了弄清人们对打断的看法（perceptions of interruptions），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出受试者在研究中要完成的任务。",
+      "stemTranslationZh": "研究的受试者需要做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "录一段音频。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "audio clips",
+            "optionText": "an audio clip",
+            "matchType": "exact",
+            "relationNote": "录音片段（audio clips）是研究者事先备好的，受试者只管听（listen to），不用自己录。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "quote": "Using a set of controlled audio clips (录音片段)",
+              "anchor": "事先控制好的录音"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "回答一些问题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "quote": "She had participants listen to audio clips and then answer questions about whether the speakers seemed to be friendly and engaged, listening to one another, or trying to interrupt.",
+              "anchor": "听录音后答题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "互相倾听。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "listening to one another",
+            "optionText": "Listen to one another.",
+            "matchType": "exact",
+            "relationNote": "listening to one another 是问题里要判断的内容：录音中的说话人是否在互相倾听，不是让受试者彼此倾听。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "quote": "whether the speakers seemed to be friendly and engaged, listening to one another",
+              "anchor": "判断说话人是否互相倾听"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "和朋友聊天。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "friendly",
+            "optionText": "a friend",
+            "matchType": "wordFamily",
+            "relationNote": "friendly 是问说话人是否友好，选项拿它的同族词 friend 编出和朋友聊天；受试者只听录音、答题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "quote": "whether the speakers seemed to be friendly and engaged",
+              "anchor": "判断说话人是否友好"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "participants",
+          "sourceRole": "stem",
+          "targetText": "She had participants listen to audio clips and then answer questions about whether the speakers seemed to be friendly and engaged, listening to one another, or trying to interrupt.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "answer questions",
+          "note": "题干 participants 原词出现在原文。"
+        },
+        {
+          "sourceText": "Answer some questions.",
+          "sourceRole": "correctOption",
+          "targetText": "answer questions",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "原文用的就是 answer questions，选项沿用；受试者先听录音，再回答关于说话人的问题，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出低强度说话者对同时说话的看法。",
+      "stemTranslationZh": "低强度说话者怎么看待同时说话？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它很重要。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "High intensity speakers are generally uncomfortable with moments of silence in conversation and consider talking at the same time a sign of engagement.",
+            "sourceEntity": "High intensity speakers",
+            "optionText": "It’s important.",
+            "optionEntity": "important",
+            "explanation": "把同时说话看作投入（a sign of engagement）的是高强度说话者；低强度组嫌它粗鲁，谈不上看重。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它很有趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "something interesting",
+            "optionText": "interesting",
+            "matchType": "exact",
+            "relationNote": "interesting 出自开头，指我们正在聊的话题有趣，不是低强度组对同时说话的看法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+              "quote": "when we’re talking about something interesting",
+              "anchor": "聊有趣的话题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它效率低。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It’s inefficient.",
+            "explanation": "原文只说他们嫌同时说话粗鲁、喜欢轮流说（one after another），没从效率上评价。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它不礼貌。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "quote": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
+              "anchor": "同时说话是粗鲁的打断"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "quote": "Low intensity speakers find it rude to talk at the same time",
+              "anchor": "认为同时说话粗鲁"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "simultaneous chat",
+          "sourceRole": "stem",
+          "targetText": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+          "relationType": "locationCue",
+          "targetCue": "simultaneous (同时) chat",
+          "answerText": "as a rude interruption",
+          "note": "题干 simultaneous chat 原词出现在原文。"
+        },
+        {
+          "sourceText": "It’s impolite.",
+          "sourceRole": "correctOption",
+          "targetText": "as a rude interruption",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“不礼貌”（impolite）就是原文的“粗鲁”（rude）；[[block:paper-gaokao-2023-four-provinces-feb:reading-d:3|Low intensity speakers find it rude]]也说他们觉得同时说话粗鲁（find it rude），选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:35": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从研究结果和希尔顿的结论推出研究给人的启示。",
+      "stemTranslationZh": "从希尔顿的研究中我们可以得知什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-four-provinces-feb:reading-d:3]]分出 high 和 low 两类人，[[block:paper-gaokao-2023-four-provinces-feb:reading-d:4]]同样的同时说话两组看法相反，[[block:paper-gaokao-2023-four-provinces-feb:reading-d:5]]落到 interact；结论要盖住交流因人而异",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "人际互动是复杂的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+              "quote": "“Breaking apart what an interruption means is essential if we want to understand how humans interact with each other.”",
+              "anchor": "弄懂互动先要拆解打断"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "quote": "Hilton found that American English speakers have different conversational styles.",
+              "anchor": "交谈风格不同"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "交流是生活的基础。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "those small interruptions can have a massive effect on the overall communication",
+            "sourceHighlight": "a massive effect on the overall communication",
+            "optionText": "Communication is the basis of life.",
+            "optionHighlight": "the basis of life",
+            "explanation": "原文只说小小的打断会对整个交流影响很大（a massive effect），没把交流抬到生活根基的高度。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "打断能促进思考。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Interruptions promote thinking.",
+            "explanation": "研究讨论的是同时说话被听成投入还是无礼，原文没说打断能促进思考。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "语言障碍将永远存在。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Language barriers will always exist.",
+            "explanation": "受试者说的都是美式英语（American English speakers），分歧出在交谈风格，不是语言不通，更谈不上永远存在。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Human interaction is complex.",
+          "sourceRole": "correctOption",
+          "targetText": "“Breaking apart what an interruption means is essential if we want to understand how humans interact with each other.”",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“人际互动复杂”是从研究结果推一步得来的：同样是两人同时说话，有人听成投入、友好，有人听成粗鲁的打断；希尔顿也说，要懂得人怎样互动（how humans interact），得先拆开打断的含义，可见互动并不简单，选 A。"
+        }
+      ]
+    }
+  }
+}

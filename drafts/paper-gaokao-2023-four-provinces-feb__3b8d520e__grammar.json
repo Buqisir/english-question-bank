@@ -1,0 +1,1129 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:grammar-fill": {
+      "overview": "政府拨款 500 万美元帮助阿瓦达县约 1000 名无家可归者。一家机构的负责人介绍，他们建“学校之家”，让无家可归者离开街头、学一门手艺；一位当年的学员如今开了空调公司，还免费给他们修了空调。",
+      "fullTranslationZh": "政府已向当地三家不同的非营利组织拨款 500 万美元。这笔钱将在四年内分发，旨在帮助阿瓦达县大约 1000 名无家可归者。\n其中一家机构总部设在伍德布里奇，预计将获得 150 万美元。机构负责人说，他们会把资源集中用于教育无家可归者。“我们可能会用这笔钱再建一所‘学校之家’，”他说，“‘学校之家’就是它听起来的那样：既是学校，又是家。我们已经在全县建了四所‘学校之家’。我们让无家可归者离开街头，并且\n教育他们，这样他们就不必再回到街头。我们教他们做园丁、油漆工、木匠、砌砖工、电工和空调修理工。\n“你都不会相信我们取得了多大的成功。事实上，几周前，我们办公室的空调坏了。我的秘书叫来了一位修理工。让我们惊讶的是，这位\n修理工正是我们最早的无家可归学员之一。他现在拥有自己的空调公司，还有两栋房子、两辆车和一艘船！他手下有十几名员工。他过得比我还好。他免费修好了我们的空调。我想我自己也许该报名上空调课了。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1:2",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+          "sourceText": "The money will __56__ (distribute) over a four-year period and is aimed at helping approximately 1,000 homeless people in the county of Arvada.",
+          "displayText": "The money will be distributed over a four-year period and is aimed at helping approximately 1,000 homeless people in the county of Arvada.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:56"
+          ],
+          "translationZh": "这笔钱将在四年内分发，旨在帮助阿瓦达县大约 1000 名无家可归者。",
+          "analysisZh": "主语 The money 带两个由 and 连接的谓语：will be distributed over a four-year period 说钱怎么发、发多久，is aimed at helping… 说钱用来做什么。两个谓语都是被动，因为钱是被分发、被用于帮助人的。be aimed at 里的 at 是介词，所以后面接 helping。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 29,
+              "quote": "The money will be distributed"
+            },
+            {
+              "start": 54,
+              "end": 77,
+              "quote": "and is aimed at helping"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2:1",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+          "sourceText": "One agency, __57__ (base) in Woodbridge, is expected __58__ (receive) $1.5 million.",
+          "displayText": "One agency, based in Woodbridge, is expected to receive $1.5 million.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:57",
+            "question:paper-gaokao-2023-four-provinces-feb:58"
+          ],
+          "translationZh": "其中一家机构总部设在伍德布里奇，预计将获得 150 万美元。",
+          "analysisZh": "主干是 One agency is expected to receive $1.5 million，这家机构预计将获得 150 万美元。两个逗号之间的 based in Woodbridge 插在主语和谓语之间，补充说明机构设在哪里，读的时候先跳过它找到谓语 is expected。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 10,
+              "quote": "One agency"
+            },
+            {
+              "start": 12,
+              "end": 31,
+              "quote": "based in Woodbridge"
+            },
+            {
+              "start": 33,
+              "end": 55,
+              "quote": "is expected to receive"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 61,
+              "quote": "政府已向当地三家不同的非营利组织拨款 500 万美元。这笔钱将在四年内分发，旨在帮助阿瓦达县大约 1000 名无家可归者。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2"
+              ],
+              "start": 62,
+              "end": 201,
+              "quote": "其中一家机构总部设在伍德布里奇，预计将获得 150 万美元。机构负责人说，他们会把资源集中用于教育无家可归者。“我们可能会用这笔钱再建一所‘学校之家’，”他说，“‘学校之家’就是它听起来的那样：既是学校，又是家。我们已经在全县建了四所‘学校之家’。我们让无家可归者离开街头，并且"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:3"
+              ],
+              "start": 202,
+              "end": 249,
+              "quote": "教育他们，这样他们就不必再回到街头。我们教他们做园丁、油漆工、木匠、砌砖工、电工和空调修理工。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4"
+              ],
+              "start": 250,
+              "end": 310,
+              "quote": "“你都不会相信我们取得了多大的成功。事实上，几周前，我们办公室的空调坏了。我的秘书叫来了一位修理工。让我们惊讶的是，这位"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5"
+              ],
+              "start": 311,
+              "end": 405,
+              "quote": "修理工正是我们最早的无家可归学员之一。他现在拥有自己的空调公司，还有两栋房子、两辆车和一艘船！他手下有十几名员工。他过得比我还好。他免费修好了我们的空调。我想我自己也许该报名上空调课了。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+            "text": "The government has awarded $5 million to three different local nonprofit organizations. The money will be distributed over a four-year period and is aimed at helping approximately 1,000 homeless people in the county of Arvada."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+            "text": "One agency, based in Woodbridge, is expected to receive $1.5 million. The agency director says that they will focus their resources on educating the homeless. “We will probably build another school-home with this money,” he said. “A school-home is exactly what it sounds like. It is a school and a home. We have already built four school-homes throughout the county. We get the homeless off the street, and"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+            "text": "“You wouldn’t believe the success that we have had. In fact, a couple of weeks ago, our office air-conditioning went out. My secretary called a repairman. To our surprise, the"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+            "text": "repairman was one of our first homeless students. He now owns his own air-conditioning business, plus two houses, two cars and a boat! He has a dozen employees. He’s doing better than I am. He fixed our air-conditioning for free. I think I might sign up for the air-conditioning class myself.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 88,
+                "end": 102,
+                "quote": "The money will"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 151,
+                "end": 170,
+                "quote": "is aimed at helping"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 27,
+                "end": 31,
+                "quote": "这笔钱将"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 38,
+                "end": 42,
+                "quote": "旨在帮助"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:56"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 103,
+                "end": 117,
+                "quote": "be distributed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 35,
+                "end": 37,
+                "quote": "分发"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 0,
+                "end": 10,
+                "quote": "One agency"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 26,
+                "end": 39,
+                "quote": "in Woodbridge"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 0,
+                "end": 6,
+                "quote": "其中一家机构"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 8,
+                "end": 15,
+                "quote": "设在伍德布里奇"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:57"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 12,
+                "end": 17,
+                "quote": "based"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 6,
+                "end": 10,
+                "quote": "总部设在"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 41,
+                "end": 52,
+                "quote": "is expected"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 0,
+                "end": 10,
+                "quote": "One agency"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 16,
+                "end": 19,
+                "quote": "预计将"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 0,
+                "end": 6,
+                "quote": "其中一家机构"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:58"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 45,
+                "end": 55,
+                "quote": "to receive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 19,
+                "end": 21,
+                "quote": "获得"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 124,
+                "end": 148,
+                "quote": "focus their resources on"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 166,
+                "end": 179,
+                "quote": "the homeless."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 40,
+                "end": 47,
+                "quote": "把资源集中用于"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:59"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 135,
+                "end": 144,
+                "quote": "educating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 47,
+                "end": 49,
+                "quote": "教育"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 252,
+                "end": 276,
+                "quote": "A school-home is exactly"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 284,
+                "end": 298,
+                "quote": "it sounds like"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 81,
+                "end": 89,
+                "quote": "‘学校之家’就是"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 89,
+                "end": 96,
+                "quote": "它听起来的那样"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:60"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 256,
+                "end": 260,
+                "quote": "what"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 87,
+                "end": 96,
+                "quote": "就是它听起来的那样"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 390,
+                "end": 424,
+                "quote": "We get the homeless off the street"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:3",
+                "start": 0,
+                "end": 15,
+                "quote": "we educate them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 124,
+                "end": 136,
+                "quote": "我们让无家可归者离开街头"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:3",
+                "start": 0,
+                "end": 4,
+                "quote": "教育他们"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:61"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 403,
+                "end": 406,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 137,
+                "end": 139,
+                "quote": "并且"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 29,
+                "end": 53,
+                "quote": "success that we have had"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 7,
+                "end": 17,
+                "quote": "我们取得了多大的成功"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:62"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 22,
+                "end": 25,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 12,
+                "end": 17,
+                "quote": "多大的成功"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 0,
+                "end": 9,
+                "quote": "repairman"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 64,
+                "end": 85,
+                "quote": "a couple of weeks ago"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 125,
+                "end": 156,
+                "quote": "My secretary called a repairman"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 0,
+                "end": 3,
+                "quote": "修理工"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 22,
+                "end": 25,
+                "quote": "几周前"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+                "start": 37,
+                "end": 49,
+                "quote": "我的秘书叫来了一位修理工"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:63"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 10,
+                "end": 13,
+                "quote": "was"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 3,
+                "end": 5,
+                "quote": "正是"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 198,
+                "end": 227,
+                "quote": "He fixed our air-conditioning"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 235,
+                "end": 240,
+                "quote": "free."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 65,
+                "end": 76,
+                "quote": "他免费修好了我们的空调"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:64"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 220,
+                "end": 223,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 66,
+                "end": 68,
+                "quote": "免费"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-four-provinces-feb:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 249,
+                "end": 264,
+                "quote": "I might sign up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 77,
+                "end": 87,
+                "quote": "我想我自己也许该报名"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-four-provinces-feb:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:65"
+            ],
+            "blankId": "blank:paper-gaokao-2023-four-provinces-feb:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 285,
+                "end": 291,
+                "quote": "myself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+                "start": 79,
+                "end": 82,
+                "quote": "我自己"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:56"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 88,
+                "end": 141,
+                "quote": "The money will be distributed over a four-year period"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 146,
+                "end": 201,
+                "quote": "is aimed at helping approximately 1,000 homeless people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 27,
+                "end": 37,
+                "quote": "这笔钱将在四年内分发"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+                "start": 38,
+                "end": 60,
+                "quote": "旨在帮助阿瓦达县大约 1000 名无家可归者"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:57",
+              "question:paper-gaokao-2023-four-provinces-feb:58"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 0,
+                "end": 69,
+                "quote": "One agency, based in Woodbridge, is expected to receive $1.5 million."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+                "start": 0,
+                "end": 30,
+                "quote": "其中一家机构总部设在伍德布里奇，预计将获得 150 万美元。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-four-provinces-feb:56": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "distribute",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "be distributed",
+      "role": null,
+      "similarityProfile": {
+        "route": "modal-passive",
+        "features": []
+      },
+      "reason": "空格作主语 The money 的谓语，前面已有情态动词 will；钱是被分发出去的，要用被动，will 后接 be done，填 be distributed。并列的另一个谓语 is aimed at 也是被动，可以印证。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The money will",
+          "signalSide": "passage",
+          "relation": "主语 money 是被分发的对象，will 后用 be done。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "is aimed at helping",
+          "signalSide": "passage",
+          "relation": "并列谓语同样是被动，钱“被用于”帮助无家可归者。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:57": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "base",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "based",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "句子的主干是 One agency … is expected…，谓语已有，两个逗号之间的部分作后置定语修饰 agency，说明这家机构设在哪里；机构是“被设在”伍德布里奇，be based in 表示总部设在某地，用过去分词 based，相当于 which is based in Woodbridge。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "One agency",
+          "signalSide": "passage",
+          "relation": "空格所在短语修饰 agency，说明它设在哪里。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "in Woodbridge",
+          "signalSide": "passage",
+          "relation": "be based in 某地，总部设在伍德布里奇。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:58": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "receive",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to receive",
+      "role": "subject-complement",
+      "similarityProfile": {
+        "route": "subject-complement-reporting-passive",
+        "features": []
+      },
+      "reason": "谓语是 is expected，空格补充说明主语 agency 预计会怎样，作主语补足语；expect sb to do 变成被动就是 sb is expected to do，所以用不定式 to receive，表示将要获得这笔钱。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "is expected",
+          "signalSide": "passage",
+          "relation": "be expected 后接不定式作主语补足语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "One agency",
+          "signalSide": "passage",
+          "relation": "获得 150 万美元的是这家机构。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:59": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "educate",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "educating",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-preposition",
+        "features": []
+      },
+      "reason": "空格作 focus … on 中介词 on 的宾语，自己还带着宾语 the homeless；介词后的动词要用动名词，填 educating，意思是把资源集中用于教育无家可归者。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "focus their resources on",
+          "signalSide": "passage",
+          "relation": "介词 on 后接动名词作宾语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "the homeless",
+          "signalSide": "passage",
+          "relation": "educating 的宾语是无家可归者。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:60": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "what",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "predicative-clause"
+        ]
+      },
+      "reason": "A school-home is exactly ___ it sounds like 中，系动词 is 后缺表语，后面是从句 it sounds like，而 like 后面也缺宾语；要一个既引导表语从句、又在从句里作 like 宾语的词，用 what，相当于 the thing that。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "it sounds like",
+          "signalSide": "passage",
+          "relation": "从句里介词 like 缺宾语，由 what 充当。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "A school-home is exactly",
+          "signalSide": "passage",
+          "relation": "系动词 is 后缺表语，由整个从句充当。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:61": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接 We get the homeless off the street 和 we educate them 两个完整分句，先让他们离开街头，再教育他们，是顺承递进，用并列连词 and；后面的 so they don’t have to return to the street 是 educate 的目的。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "We get the homeless off the street",
+          "signalSide": "passage",
+          "relation": "前一分句：让无家可归者离开街头。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "we educate them",
+          "signalSide": "passage",
+          "relation": "后一分句：接着教育他们，与前句并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:62": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-postmodified-specific",
+        "features": []
+      },
+      "reason": "空格在名词 success 前作限定词，后面 that we have had 是定语从句，把它限定为“我们已经取得的成功”，特指这份成功，用定冠词 the。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "success that we have had",
+          "signalSide": "passage",
+          "relation": "success 被定语从句限定，表特指。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "that we have had",
+          "signalSide": "passage",
+          "relation": "定语从句修饰 success。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:63": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-narrative-chain",
+        "features": []
+      },
+      "reason": "空格作主语 the repairman 的谓语，后接表语 one of our first homeless students；这件事接在 a couple of weeks ago 空调坏了、秘书叫来修理工之后，是过去发生的一串事，主语单数，用 was。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "repairman",
+          "signalSide": "passage",
+          "relation": "主语是单数的修理工。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "a couple of weeks ago",
+          "signalSide": "passage",
+          "relation": "几周前发生的事，用一般过去时。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "My secretary called a repairman",
+          "signalSide": "passage",
+          "relation": "前句用过去式 called，同一件事接着讲。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:64": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "He fixed our air-conditioning 主谓宾已完整，空格要把 free 接到句子上，说明他修空调不收钱；“免费”说成 for free，填介词 for。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "free",
+          "signalSide": "passage",
+          "relation": "for free，免费。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "He fixed our air-conditioning",
+          "signalSide": "passage",
+          "relation": "说明修空调这件事的条件：不收钱。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:65": {
+      "blankId": "blank:paper-gaokao-2023-four-provinces-feb:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "I",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "myself",
+      "role": null,
+      "similarityProfile": {
+        "route": "reflexive-pronoun",
+        "features": []
+      },
+      "reason": "I might sign up for the air-conditioning class 已经完整，空格不作宾语，而是放在句末强调“我自己”，与主语 I 同指，所以把 I 变成反身代词 myself。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "I might sign up",
+          "signalSide": "passage",
+          "relation": "反身代词与主语 I 同指，强调我自己。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1161 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Excuse me, do you have a fitting room? Yes. It’s on the right-hand side behind that cash desk. Can I bring more than one dress to try on? Sure.",
+      "translationZh": "打扰一下，请问有试衣间吗？有。就在那个收银台后面的右手边。我可以多带几条裙子进去试吗？当然可以。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士在服装店询问试衣间的位置，并问能否多带几条裙子进去试穿。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "打扰一下，请问有试衣间吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "有。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "就在那个收银台后面的右手边。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "我可以多带几条裙子进去试吗？"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "当然可以。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "Oh, I wish I hadn’t borrowed this camera from Larry. I dropped it, and it doesn’t work now. Let’s go downtown and find someone to fix it. Okay.",
+      "translationZh": "唉，真希望我没向拉里借这台相机。我把它摔了，现在用不了了。咱们进城找人修一修吧。好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士把向拉里借来的相机摔坏了，两人决定进城找人修理。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "唉，真希望我没向拉里借这台相机。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我把它摔了，现在用不了了。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "咱们进城找人修一修吧。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "Kate, good news. The company I did a field project for offered me a job at a good starting salary. Wonderful, Bill. Let’s have a party this weekend.",
+      "translationZh": "凯特，有个好消息。我之前给一家公司做过实地项目，现在他们给了我一份工作，起薪还不错。太棒了，比尔。这个周末咱们开个派对吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "未来规划"
+      },
+      "summaryZh": "比尔得到一家公司起薪不错的工作，凯特提议周末开派对庆祝。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "凯特，有个好消息。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我之前给一家公司做过实地项目，现在他们给了我一份工作，起薪还不错。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "太棒了，比尔。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "这个周末咱们开个派对吧。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "I can’t decide where to take my mom to dinner for her birthday. Crest Café, or Blue Plate? Crest Café is better. Or you can try King Lee’s. I had dinner there yesterday. It was fantastic. Okay, I’ll try it. Thanks.",
+      "translationZh": "我拿不定主意带妈妈去哪儿吃生日晚餐。克雷斯特咖啡馆，还是蓝盘子餐厅？克雷斯特咖啡馆好一些。或者你也可以试试金李餐厅。我昨天在那儿吃过晚饭。棒极了。好，我就去那儿试试。谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士为给妈妈过生日挑餐厅，男士推荐了自己昨天去过的金李餐厅。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "我拿不定主意带妈妈去哪儿吃生日晚餐。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "克雷斯特咖啡馆，还是蓝盘子餐厅？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "克雷斯特咖啡馆好一些。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "或者你也可以试试金李餐厅。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我昨天在那儿吃过晚饭。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "棒极了。"
+        },
+        {
+          "id": "listening-text-4:7",
+          "zh": "好，我就去那儿试试。"
+        },
+        {
+          "id": "listening-text-4:8",
+          "zh": "谢谢。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "Oh, Bob, you are wet all over. Where did you go? I went to jog in the park. Didn’t you know there would be a thunderstorm today? I knew there would be a shower, but I didn’t expect it would rain cats and dogs.",
+      "translationZh": "哎呀，鲍勃，你浑身都湿透了。你去哪儿了？我去公园慢跑了。你不知道今天会有雷暴吗？我知道会有阵雨，可没想到雨会下得这么大。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "自然环境"
+      },
+      "summaryZh": "鲍勃去公园慢跑被大雨淋透，他知道有阵雨，却没料到雨这么大。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "哎呀，鲍勃，你浑身都湿透了。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "你去哪儿了？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我去公园慢跑了。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "你不知道今天会有雷暴吗？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "我知道会有阵雨，可没想到雨会下得这么大。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "Oh, dear. I gained five pounds in the last two months. These jeans don’t fit me now. Don’t worry. You still look pretty. But it’s too quick. I eat healthy foods and drink plenty of water. I haven’t done anything differently. What gives? Maybe because of those healthy foods. You know, too much dark chocolate, nuts and fruits can all lead to weight gain. You’re right. I should stop eating them. No need, dear. You can just take more exercise and still enjoy those foods.",
+      "translationZh": "哎呀。这两个月我胖了五磅。这条牛仔裤现在穿不上了。别担心。你还是很漂亮。可是胖得太快了。我吃的是健康食品，水也喝得很多。我跟以前没有什么不一样啊。这是怎么回事？可能就是因为那些健康食品。你知道，黑巧克力、坚果和水果吃多了，都会让人长胖。你说得对。我该不吃它们了。没必要，亲爱的。你多运动运动就行，那些东西照样可以吃。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "妻子两个月胖了五磅，丈夫说是健康零食吃多了，建议她多运动。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "哎呀。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "这两个月我胖了五磅。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "这条牛仔裤现在穿不上了。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "你还是很漂亮。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "可是胖得太快了。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我吃的是健康食品，水也喝得很多。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "我跟以前没有什么不一样啊。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "这是怎么回事？"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "可能就是因为那些健康食品。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "你知道，黑巧克力、坚果和水果吃多了，都会让人长胖。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "你说得对。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "我该不吃它们了。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "没必要，亲爱的。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "你多运动运动就行，那些东西照样可以吃。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "Hello, Joshua. Hi, Maria. I’m sorry we can’t be at your place on time. Yeah, we were wondering where you were. What happened? We seem to have made a wrong turn and got lost. Where are you? Let me see. We passed the National Bank on Elmer Road ten minutes ago, and we’re now on a street with a tall white building. I think it’s Poplar Street. Gee, you really are lost. The best thing to do is to drive back down Elmer Road until you get to Westin Hospital, and then turn right. Drive back down Elmer Road. Yes. After you turn right at the hospital, Cider Street will be the second street on your right. Got it. Thanks. Hopefully we’ll be there by 7:30.",
+      "translationZh": "你好，约书亚。嗨，玛丽亚。抱歉，我们没法准时到你家了。是啊，我们正纳闷你们在哪儿呢。出什么事了？我们好像拐错了弯，迷路了。你们在哪儿？我看看。十分钟前我们经过了埃尔默路上的国家银行，现在在一条有栋白色高楼的街上。我想是白杨街。天哪，你们真是迷路了。最好沿着埃尔默路往回开，开到韦斯汀医院，然后右转。沿着埃尔默路往回开。对。在医院右转以后，右手边第二条街就是赛德街。明白了。谢谢。希望我们七点半能到。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "约书亚开车去玛丽亚家迷了路，打电话道歉，玛丽亚给他指路。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你好，约书亚。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "嗨，玛丽亚。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "抱歉，我们没法准时到你家了。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "是啊，我们正纳闷你们在哪儿呢。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "出什么事了？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "我们好像拐错了弯，迷路了。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "你们在哪儿？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我看看。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "十分钟前我们经过了埃尔默路上的国家银行，现在在一条有栋白色高楼的街上。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "我想是白杨街。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "天哪，你们真是迷路了。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "最好沿着埃尔默路往回开，开到韦斯汀医院，然后右转。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "沿着埃尔默路往回开。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "对。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "在医院右转以后，右手边第二条街就是赛德街。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "希望我们七点半能到。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Excuse me. I’m calling about the ad for the flat. Yeah, it’s still available. Good. The ad says the rent is £950 a month. Could it be £800 if I rent it for a longer period of time? Possible. We can talk about it. By the way, you can find someone to share the rent. You know, it’s a two-bedroom flat. Thank you for the advice. Um, how close is the flat to London College? I have classes every weekday there. It’s about eight blocks from the college, but you can take a number of buses right out in front. Oh. If there’s a busy road out front, is it noisy? Well, it’s a little noisy. But the place is really convenient. There’s a shopping center right across the street. I see. Is it possible for me to drop by and see the flat tomorrow? Sure. You can take number nine bus and get off at the art gallery. Thanks. See you tomorrow.",
+      "translationZh": "打扰一下。我打电话是想问问那则租房广告。好的，房子还没租出去。太好了。广告上说房租是每月 950 英镑。如果我租得长一些，能不能降到 800 英镑？有可能。我们可以商量。顺便说一句，你可以找个人分摊房租。你知道，这是套两居室。谢谢你的建议。嗯，这套房子离伦敦学院有多近？我每个工作日都要去那儿上课。离学院大约八个街区，不过门口就有好几路公交车可以坐。哦。门口要是条繁忙的马路，会不会很吵？嗯，是有点吵。不过这地方真的很方便。街对面就是一家购物中心。明白了。我明天能过去看看房子吗？当然可以。你可以坐九路公交车，在美术馆下车。谢谢。明天见。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士打电话询问租房，谈了租金、离学院的距离和周边环境，约好明天看房。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "打扰一下。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我打电话是想问问那则租房广告。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "好的，房子还没租出去。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "广告上说房租是每月 950 英镑。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "如果我租得长一些，能不能降到 800 英镑？"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "有可能。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "我们可以商量。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "顺便说一句，你可以找个人分摊房租。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "你知道，这是套两居室。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "谢谢你的建议。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "嗯，这套房子离伦敦学院有多近？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我每个工作日都要去那儿上课。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "离学院大约八个街区，不过门口就有好几路公交车可以坐。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "哦。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "门口要是条繁忙的马路，会不会很吵？"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "嗯，是有点吵。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "不过这地方真的很方便。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "街对面就是一家购物中心。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "我明天能过去看看房子吗？"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "当然可以。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "你可以坐九路公交车，在美术馆下车。"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-8:25",
+          "zh": "明天见。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "Oh, so slow. Yeah, it’s a long line. People are buying a lot for the holiday. Would you like to go ahead of me? Really? Thank you so much. My husband is waiting outside the store, and we’re in a hurry. I really appreciate it. That’s okay. If you don’t mind, could you pay it forward by doing something kind for someone else? Sure, I’d love to. I will figure out something nice to do on my way back. By the way, I’m doing it for Random Acts of Kindness Week. Could I tell you something about it? Yes, please. It’s initiated by the local church. We do it from Monday to Thursday. On Monday, we encouraged people to smile more. Tuesday’s challenge was to have lunch with someone we don’t normally eat with. Yesterday, we had the third challenge, volunteering. I helped at a nursing home. Today, we do something for someone in need and ask them to pay it forward. That’s great. I love it. How can I join? Here is the website. Just apply online. It’s simple. Okay. I’ll do it now.",
+      "translationZh": "哎，太慢了。是啊，队排得好长。大家都在为过节买很多东西。你要不要排到我前面去？真的吗？太感谢了。我丈夫在商店外面等着，我们赶时间。真的很感激你。没关系。如果你不介意的话，能不能把这份善意传下去，也为别人做件好事？当然，我很乐意。回去的路上我会想想能做件什么好事。顺便说一下，我这么做是为了“随手行善周”。我能跟你说说这个活动吗？好啊，请讲。它是由当地教会发起的。我们从周一做到周四。周一，我们鼓励人们多微笑。周二的挑战是和平时不一起吃饭的人共进午餐。昨天我们完成了第三个挑战：做志愿服务。我去了一家养老院帮忙。今天，我们要为有需要的人做件事，并请他们把善意传下去。真好。我很喜欢。我怎么参加？这是网址。在网上申请就行。很简单。好的。我现在就申请。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "公益事业"
+      },
+      "summaryZh": "男士在商店排队时让女士先结账，介绍了随手行善周的活动，女士决定网上报名。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "哎，太慢了。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "是啊，队排得好长。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "大家都在为过节买很多东西。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "你要不要排到我前面去？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "真的吗？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "太感谢了。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "我丈夫在商店外面等着，我们赶时间。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "真的很感激你。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "没关系。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "如果你不介意的话，能不能把这份善意传下去，也为别人做件好事？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "当然，我很乐意。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "回去的路上我会想想能做件什么好事。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "顺便说一下，我这么做是为了“随手行善周”。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "我能跟你说说这个活动吗？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "好啊，请讲。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "它是由当地教会发起的。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "我们从周一做到周四。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "周一，我们鼓励人们多微笑。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "周二的挑战是和平时不一起吃饭的人共进午餐。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "昨天我们完成了第三个挑战：做志愿服务。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "我去了一家养老院帮忙。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "今天，我们要为有需要的人做件事，并请他们把善意传下去。"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "真好。"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "我很喜欢。"
+        },
+        {
+          "id": "listening-text-9:25",
+          "zh": "我怎么参加？"
+        },
+        {
+          "id": "listening-text-9:26",
+          "zh": "这是网址。"
+        },
+        {
+          "id": "listening-text-9:27",
+          "zh": "在网上申请就行。"
+        },
+        {
+          "id": "listening-text-9:28",
+          "zh": "很简单。"
+        },
+        {
+          "id": "listening-text-9:29",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-9:30",
+          "zh": "我现在就申请。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Good afternoon, everyone. I’m here to offer you some tips on public speaking. One of the worst mistakes you can make as a public speaker is talking too long. It doesn’t matter if your entire speech was good and the audience came away with information that will change their lives. If you talk too long, they will leave saying, 'That speaker just wouldn’t quit.' Don’t let this happen to you. Say what you have to say, and sit down. Before you do, give them a well-thought-out closing. The last thing you say is generally what the audience remembers most. Just like your opening, your closing doesn’t have to be humorous. It could be challenging, thoughtful, or it could retell your point in a different way. Please, at some time during your talk, ask the audience to do something. Many a great talk went no farther than the walls of the meeting room, because the audience wasn’t moved to action. If you haven’t asked them to do something by now, the closing is your last chance.",
+      "translationZh": "大家下午好。我来给大家讲讲公开演讲的几点建议。作为演讲者，最糟糕的错误之一就是讲得太久。哪怕你整场演讲都很精彩，听众带走的信息能改变他们的人生，也无济于事。如果你讲得太久，他们离场时会说：“那个演讲的人就是不肯停。”别让这种事发生在你身上。把要说的说完，然后坐下。在坐下之前，给听众一个精心设计的结尾。你最后说的话，通常是听众记得最牢的。和开场白一样，结尾也不一定要幽默。它可以有挑战性、引人深思，也可以换一种方式重申你的观点。请在演讲中的某个时候，要求听众去做点什么。许多精彩的演讲没能走出会议室的四面墙，就是因为听众没有被打动去行动。如果到这时你还没要求他们做什么，结尾就是你最后的机会。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "丰富自我"
+      },
+      "summaryZh": "演讲者给出公开演讲的建议：不要讲太久，精心设计结尾，并号召听众行动。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家下午好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我来给大家讲讲公开演讲的几点建议。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "作为演讲者，最糟糕的错误之一就是讲得太久。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "哪怕你整场演讲都很精彩，听众带走的信息能改变他们的人生，也无济于事。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "如果你讲得太久，他们离场时会说：“那个演讲的人就是不肯停。”"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "别让这种事发生在你身上。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "把要说的说完，然后坐下。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "在坐下之前，给听众一个精心设计的结尾。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "你最后说的话，通常是听众记得最牢的。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "和开场白一样，结尾也不一定要幽默。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "它可以有挑战性、引人深思，也可以换一种方式重申你的观点。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "请在演讲中的某个时候，要求听众去做点什么。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "许多精彩的演讲没能走出会议室的四面墙，就是因为听众没有被打动去行动。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "如果到这时你还没要求他们做什么，结尾就是你最后的机会。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士接下来可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "为衣服付款。",
+        "B": "去另一家店。",
+        "C": "试穿几条裙子。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Can I bring more than one dress to try on?"
+      },
+      "reasonZh": "女士问了试衣间在哪，又问能不能多带几条裙子去试（more than one dress to try on），店员说可以，她接下来就去试穿，选 C。"
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士会怎样处理这台相机？",
+      "optionTranslationsZh": {
+        "A": "请人修理。",
+        "B": "把它借给拉里。",
+        "C": "换一台新的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Let’s go downtown and find someone to fix it."
+      },
+      "reasonZh": "相机摔坏用不了，接着说进城找人修（find someone to fix it），对方也答应了，“请人修理”就是这件事，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "拉里是相机的主人，男士是从他那儿借来的（borrowed this camera from Larry），不是要借给他。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士为什么提议开派对？",
+      "optionTranslationsZh": {
+        "A": "比尔涨工资了。",
+        "B": "比尔找到了一份好工作。",
+        "C": "比尔完成了一个项目。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The company I did a field project for offered me a job at a good starting salary."
+      },
+      "reasonZh": "比尔说那家公司给了他一份起薪不错的工作（offered me a job at a good starting salary），“找到一份好工作”就是这个意思，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "起薪（starting salary）是新工作一开始的工资，不是原来的工资涨了。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "project 是比尔以前给这家公司做的实地项目（did a field project for），只是交代是哪家公司，好消息是对方给了他工作。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士会去哪里给妈妈庆祝生日？",
+      "optionTranslationsZh": {
+        "A": "克雷斯特咖啡馆。",
+        "B": "蓝盘子餐厅。",
+        "C": "金李餐厅。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Or you can try King Lee’s."
+      },
+      "reasonZh": "男士推荐金李餐厅（King Lee’s），说自己昨天在那吃过、很棒，女士答应去试（I’ll try it），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "克雷斯特咖啡馆在比较时被认为更好（Crest Café is better），但男士接着又推荐了金李餐厅，女士最后答应去的是后者。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "蓝盘子餐厅只在开头和克雷斯特咖啡馆一起被拿出来比较（Crest Café, or Blue Plate?），后面没人选它。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "两人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一座公园。",
+        "B": "天气。",
+        "C": "鲍勃的宠物。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Didn’t you know there would be a thunderstorm today?"
+      },
+      "reasonZh": "鲍勃浑身湿透，两人说到雷暴（thunderstorm）、阵雨（shower）和倾盆大雨（rain cats and dogs），都围绕天气，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "公园只是鲍勃去慢跑的地方（jog in the park），两人谈的是他为什么被雨淋透。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "rain cats and dogs 是“下倾盆大雨”，不是鲍勃的猫和狗；录音里的 Bob 只是女士在叫他的名字。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "两人最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "医生和病人。",
+        "B": "丈夫和妻子。",
+        "C": "售货员和顾客。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "No need, dear."
+      },
+      "reasonZh": "男士夸女士还是很漂亮（You still look pretty），又亲昵地叫她 dear（No need, dear），还清楚她平时吃什么，像丈夫在宽慰妻子，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士虽然解释了长胖的原因、建议她多运动，但他夸她漂亮、叫她 dear，不是医生对病人说话的口气。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士建议女士做什么？",
+      "optionTranslationsZh": {
+        "A": "多做运动。",
+        "B": "多喝水。",
+        "C": "不吃巧克力。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You can just take more exercise and still enjoy those foods."
+      },
+      "reasonZh": "“多做运动”就是男士说的多锻炼（take more exercise），他还说那些食物照样可以吃，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "多喝水是女士说自己平时的习惯（drink plenty of water），不是男士给的建议。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "不吃巧克力是女士自己想到的办法（I should stop eating them），男士马上说没必要（No need, dear）。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "约书亚为什么打电话？",
+      "optionTranslationsZh": {
+        "A": "征求建议。",
+        "B": "道歉。",
+        "C": "核对时间。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m sorry we can’t be at your place on time."
+      },
+      "reasonZh": "约书亚一开口就为不能准时到玛丽亚家道歉（I’m sorry … on time），后面的问路是玛丽亚问他在哪之后才说起的，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "time 出现在 on time 里，是约书亚说自己没法准时到，他并不是打电话来核对时间。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "约书亚现在在哪里？",
+      "optionTranslationsZh": {
+        "A": "在赛德街。",
+        "B": "在埃尔默路上。",
+        "C": "在白杨街。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I think it’s Poplar Street."
+      },
+      "reasonZh": "约书亚说经过银行后，现在在一条有白色高楼的街上，他认为是白杨街（Poplar Street），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "赛德街（Cider Street）是玛丽亚指路时说的，医院右转后右手第二条街，他还没开到那里。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "埃尔默路是他十分钟前经过国家银行的那条路（on Elmer Road ten minutes ago），现在已经不在那儿了。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "约书亚的目的地是哪里？",
+      "optionTranslationsZh": {
+        "A": "玛丽亚的家。",
+        "B": "国家银行。",
+        "C": "韦斯汀医院。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’m sorry we can’t be at your place on time."
+      },
+      "reasonZh": "约书亚对玛丽亚说没法准时到你家（at your place），your place 就是玛丽亚家，玛丽亚给他指的也是去她家的路，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "国家银行是他十分钟前路过的地方（passed the National Bank），只说明他走到了哪里。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "韦斯汀医院是指路用的地标，开到医院再右转（until you get to Westin Hospital, and then turn right），不是终点。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士希望每月付多少房租？",
+      "optionTranslationsZh": {
+        "A": "400 英镑。",
+        "B": "800 英镑。",
+        "C": "950 英镑。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Could it be £800 if I rent it for a longer period of time?"
+      },
+      "reasonZh": "广告上的房租是 950 英镑，男士问长租能不能降到 800 英镑（Could it be £800），他想付的是 800 英镑，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "950 英镑是广告上的房租（The ad says the rent is £950），男士正是想把它谈到 800 英镑。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "这套房子有什么优点？",
+      "optionTranslationsZh": {
+        "A": "购物方便。",
+        "B": "位于安静的街区。",
+        "C": "紧挨着男士的学院。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "There’s a shopping center right across the street."
+      },
+      "reasonZh": "房东说这地方很方便（really convenient），街对面就是购物中心（a shopping center right across the street），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "房东自己承认门口有点吵（it’s a little noisy），说不上安静。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "college 确实听到了，但房子离伦敦学院大约八个街区（about eight blocks from the college），要坐公交，不是紧挨着。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士明天要做什么？",
+      "optionTranslationsZh": {
+        "A": "另找一套房子。",
+        "B": "搬进这套房子。",
+        "C": "去看看这套房子。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Is it possible for me to drop by and see the flat tomorrow?"
+      },
+      "reasonZh": "男士问明天能不能过去看看房子（drop by and see the flat），房东说可以，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "find 出自房东建议男士找人分摊房租（find someone to share the rent），他明天是去看这套房，不是另找房子。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "租金还要商量（We can talk about it），明天只是去看房，谈不上搬进去。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "两人在哪里？",
+      "optionTranslationsZh": {
+        "A": "在公共汽车上。",
+        "B": "在商店里。",
+        "C": "在教堂里。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "My husband is waiting outside the store, and we’re in a hurry."
+      },
+      "reasonZh": "两人在排长队，大家在为过节买东西（buying a lot for the holiday），女士又说丈夫在商店外面等（waiting outside the store），可见他们在商店里，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "church 是说这项活动由当地教会发起（initiated by the local church），不是两人所在的地方。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士本周的第一个挑战是什么？",
+      "optionTranslationsZh": {
+        "A": "做志愿工作。",
+        "B": "鼓励别人微笑。",
+        "C": "请陌生人吃晚饭。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "On Monday, we encouraged people to smile more."
+      },
+      "reasonZh": "活动从周一开始（from Monday to Thursday），周一是鼓励人们多微笑（encouraged people to smile more），这就是第一个挑战，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "做志愿服务是昨天的第三个挑战（the third challenge, volunteering），不是第一个。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "周二是和平时不一起吃饭的人吃午饭（have lunch with someone），是第二个挑战，也不是请陌生人吃晚饭。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "今天星期几？",
+      "optionTranslationsZh": {
+        "A": "星期二。",
+        "B": "星期三。",
+        "C": "星期四。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yesterday, we had the third challenge, volunteering."
+      },
+      "reasonZh": "周一是第一个挑战，周二是第二个，昨天做的是第三个（Yesterday … the third challenge），昨天是周三，今天就是周四；活动正好做到周四（from Monday to Thursday），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "星期二（Tuesday’s challenge）是第二个挑战的日子，早已过去。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "星期三是做第三个挑战的那天，男士说那是昨天（Yesterday），不是今天。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "提交申请。",
+        "B": "给丈夫打电话。",
+        "C": "为买的东西付款。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ll do it now."
+      },
+      "reasonZh": "男士给了网址，让她在网上申请（Just apply online），女士说现在就办（I’ll do it now），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "husband 出自女士说丈夫在商店外面等（My husband is waiting outside the store），她没说要给他打电话。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "pay 出自 pay it forward，意思是把善意传下去，不是付钱；她最后说马上做的是网上申请。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "根据女士的说法，演讲者应避免做什么？",
+      "optionTranslationsZh": {
+        "A": "说话声音太大。",
+        "B": "语速太快。",
+        "C": "说得太多。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "One of the worst mistakes you can make as a public speaker is talking too long."
+      },
+      "reasonZh": "“说得太多”就是演讲者说的讲得太久（talking too long），她接着又说把要说的说完就坐下（Say what you have to say, and sit down），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "talking too 确实听到了，但后面是 long，说的是讲太久，不是声音太大。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "speaking 出自 tips on public speaking，指公开演讲；录音说的毛病是讲太久（talking too long），没提语速。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "为什么演讲的结尾要精心设计？",
+      "optionTranslationsZh": {
+        "A": "它通常是最被记住的部分。",
+        "B": "它是表明观点的最后机会。",
+        "C": "它和开场白一样重要。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The last thing you say is generally what the audience remembers most."
+      },
+      "reasonZh": "演讲者说最后讲的话通常是听众记得最牢的（what the audience remembers most），和选项说的是同一件事，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "last chance 说的是如果还没请听众行动，结尾就是最后的机会（the closing is your last chance），讲的是号召行动，不是表明观点。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "opening 出自“结尾和开场白一样不必幽默”（Just like your opening … doesn’t have to be humorous），并没有比较两者哪个重要。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "女士建议演讲者在演讲中做什么？",
+      "optionTranslationsZh": {
+        "A": "表现出很强的幽默感。",
+        "B": "激励听众去行动。",
+        "C": "勇敢地迎接挑战。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Please, at some time during your talk, ask the audience to do something."
+      },
+      "reasonZh": "演讲者要大家在讲话中请听众去做点什么（ask the audience to do something），又说听众没被打动去行动（wasn’t moved to action），演讲就走不出会议室，“激励听众去行动”概括了这两句，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音说结尾和开场白一样不一定要幽默（doesn’t have to be humorous），没有建议表现幽默感。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "challenging 是说结尾可以有挑战性（It could be challenging），讲的是结尾的写法，不是让演讲者勇敢迎接挑战。"
+        }
+      ]
+    }
+  }
+}

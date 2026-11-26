@@ -1,0 +1,751 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:reading-c": {
+      "overview": "昆虫学家詹姆斯因野外黑脉金斑蝶太少难以追踪迁徙路线，于是与监狱合作，让服刑人员饲养并标记放飞蝴蝶，既查明了越冬地，也让服刑人员受到触动。",
+      "fullTranslationZh": "多年来，在华盛顿州立大学研究昆虫的戴维·詹姆斯一直想考察西海岸黑脉金斑蝶的迁徙规律。这种蝴蝶的迁徙路线几乎无人知晓，因为它们的种群数量太少，无法追踪。詹姆斯说，研究人员每标记200只黑脉金斑蝶，通常只有一只在旅程终点被找回，而在野外哪怕找到200只来标记都不太可能。了解迁徙路线对保护工作至关重要，可詹姆斯一直无从弄清——直到他接到瓦拉瓦拉的华盛顿州立监狱打来的电话。\n\n这所监狱正在寻找新的活动，以改善长期服刑人员的心理健康。于是詹姆斯开始和服刑人员合作，饲养黑脉金斑蝶，陪它们走完蜕变的全过程。成虫随后被贴上标签，从监狱放飞。五年间，近一万只黑脉金斑蝶从这里飞出。研究人员还在华盛顿州、俄勒冈州和爱达荷州的其他地方又放飞了几千只。\n\n标签上印有电子邮箱地址。第一批蝴蝶飞走后不久，詹姆斯就开始收到目击者发来的消息。这些报告证实，这些蝴蝶在加利福尼亚沿海越冬。其中十二只落在圣克鲁斯的灯塔场州立海滩，还有几只飞到了博利纳斯和莫罗湾。\n\n这项工作帮助研究人员确定种植乳草及其他对西海岸黑脉金斑蝶生命周期至关重要的植物的理想地点。它还激发出一些服刑人员温和的一面。“他们非常担心自己会伤到蝴蝶。”詹姆斯说。看着黑脉金斑蝶变换形态，这些人也深受触动。詹姆斯回忆，服刑人员对他说：“这只蝴蝶变了，也许我们也能改变。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+          "sourceText": "For every 200 monarchs tagged (打标签) by a researcher, only one is usually recovered at the end of its trip, James says, and finding even 200 in the wild to tag is unlikely.",
+          "displayText": "For every 200 monarchs tagged (打标签) by a researcher, only one is usually recovered at the end of its trip, James says, and finding even 200 in the wild to tag is unlikely.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:28"
+          ],
+          "translationZh": "詹姆斯说，研究人员每标记200只黑脉金斑蝶，通常只有一只在旅程终点被找回，而在野外哪怕找到200只来标记都不太可能。",
+          "analysisZh": "这是 and 连接的两个分句，James says 是插入语。前一分句主干是 only one is usually recovered，For every 200 monarchs tagged by a researcher 说比例：每标记 200 只，tagged by … 是过去分词作后置定语。后一分句的主语是动名词短语 finding even 200 in the wild to tag，to tag 修饰 200，表语是 unlikely。even 强调连 200 只都难找，点出样本太少。",
+          "underlineRanges": [
+            {
+              "start": 53,
+              "end": 82,
+              "quote": "only one is usually recovered"
+            },
+            {
+              "start": 123,
+              "end": 158,
+              "quote": "finding even 200 in the wild to tag"
+            },
+            {
+              "start": 159,
+              "end": 170,
+              "quote": "is unlikely"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+          "sourceText": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies.",
+          "displayText": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:31"
+          ],
+          "translationZh": "这项工作帮助研究人员确定种植乳草及其他对西海岸黑脉金斑蝶生命周期至关重要的植物的理想地点。",
+          "analysisZh": "主干是 The work helps researchers identify ideal places，help sb do 结构，帮研究人员确定地点。to plant … 是不定式作定语，修饰 places，说是种植物的地方；that 引导定语从句修饰 milkweed and other vegetation，所以谓语用 are，说明这些植物对蝴蝶的生命周期很重要。life cycle 只是定语从句里的修饰成分，句子的重点是研究帮了忙。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 48,
+              "quote": "The work helps researchers identify ideal places"
+            },
+            {
+              "start": 49,
+              "end": 87,
+              "quote": "to plant milkweed and other vegetation"
+            },
+            {
+              "start": 88,
+              "end": 124,
+              "quote": "that are important to the life cycle"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-c:1"
+              ],
+              "start": 0,
+              "end": 184,
+              "quote": "多年来，在华盛顿州立大学研究昆虫的戴维·詹姆斯一直想考察西海岸黑脉金斑蝶的迁徙规律。这种蝴蝶的迁徙路线几乎无人知晓，因为它们的种群数量太少，无法追踪。詹姆斯说，研究人员每标记200只黑脉金斑蝶，通常只有一只在旅程终点被找回，而在野外哪怕找到200只来标记都不太可能。了解迁徙路线对保护工作至关重要，可詹姆斯一直无从弄清——直到他接到瓦拉瓦拉的华盛顿州立监狱打来的电话。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-c:2"
+              ],
+              "start": 186,
+              "end": 317,
+              "quote": "这所监狱正在寻找新的活动，以改善长期服刑人员的心理健康。于是詹姆斯开始和服刑人员合作，饲养黑脉金斑蝶，陪它们走完蜕变的全过程。成虫随后被贴上标签，从监狱放飞。五年间，近一万只黑脉金斑蝶从这里飞出。研究人员还在华盛顿州、俄勒冈州和爱达荷州的其他地方又放飞了几千只。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-c:3"
+              ],
+              "start": 319,
+              "end": 417,
+              "quote": "标签上印有电子邮箱地址。第一批蝴蝶飞走后不久，詹姆斯就开始收到目击者发来的消息。这些报告证实，这些蝴蝶在加利福尼亚沿海越冬。其中十二只落在圣克鲁斯的灯塔场州立海滩，还有几只飞到了博利纳斯和莫罗湾。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+                "block:paper-gaokao-2023-four-provinces-feb:reading-c:5"
+              ],
+              "start": 419,
+              "end": 555,
+              "quote": "这项工作帮助研究人员确定种植乳草及其他对西海岸黑脉金斑蝶生命周期至关重要的植物的理想地点。它还激发出一些服刑人员温和的一面。“他们非常担心自己会伤到蝴蝶。”詹姆斯说。看着黑脉金斑蝶变换形态，这些人也深受触动。詹姆斯回忆，服刑人员对他说：“这只蝴蝶变了，也许我们也能改变。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-c-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:28"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+                "start": 273,
+                "end": 444,
+                "quote": "For every 200 monarchs tagged (打标签) by a researcher, only one is usually recovered at the end of its trip, James says, and finding even 200 in the wild to tag is unlikely."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p1",
+                "start": 75,
+                "end": 132,
+                "quote": "詹姆斯说，研究人员每标记200只黑脉金斑蝶，通常只有一只在旅程终点被找回，而在野外哪怕找到200只来标记都不太可能"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-c-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+                "start": 0,
+                "end": 159,
+                "quote": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p4",
+                "start": 0,
+                "end": 44,
+                "quote": "这项工作帮助研究人员确定种植乳草及其他对西海岸黑脉金斑蝶生命周期至关重要的植物的理想地点"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+                "start": 396,
+                "end": 443,
+                "quote": "finding even 200 in the wild to tag is unlikely"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+                "start": 232,
+                "end": 271,
+                "quote": "the populations are too small to follow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p1",
+                "start": 113,
+                "end": 132,
+                "quote": "在野外哪怕找到200只来标记都不太可能"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p1",
+                "start": 60,
+                "end": 74,
+                "quote": "它们的种群数量太少，无法追踪"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+                "start": 0,
+                "end": 148,
+                "quote": "The tags included email addresses, and soon after the first butterflies took off, James started receiving messages from people who had spotted them."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+                "start": 445,
+                "end": 495,
+                "quote": "Knowing the route is vital to conservation efforts"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+                "start": 149,
+                "end": 220,
+                "quote": "The butterflies, the reports confirmed, wintered in coastal California."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p3",
+                "start": 0,
+                "end": 39,
+                "quote": "标签上印有电子邮箱地址。第一批蝴蝶飞走后不久，詹姆斯就开始收到目击者发来的消息"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p1",
+                "start": 133,
+                "end": 148,
+                "quote": "了解迁徙路线对保护工作至关重要"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p3",
+                "start": 40,
+                "end": 61,
+                "quote": "这些报告证实，这些蝴蝶在加利福尼亚沿海越冬"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+                "start": 91,
+                "end": 177,
+                "quote": "“This butterfly changed,” James recalls prisoners telling him, “and maybe we can too.”"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+                "start": 30,
+                "end": 90,
+                "quote": "Watching the monarch change their form also touched the men."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p4",
+                "start": 118,
+                "end": 136,
+                "quote": "“这只蝴蝶变了，也许我们也能改变。”"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p4",
+                "start": 83,
+                "end": 103,
+                "quote": "看着黑脉金斑蝶变换形态，这些人也深受触动"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+                "start": 0,
+                "end": 66,
+                "quote": "The work helps researchers identify ideal places to plant milkweed"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+                "start": 160,
+                "end": 222,
+                "quote": "It also brought out the gentler side of some of the prisoners."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p4",
+                "start": 0,
+                "end": 16,
+                "quote": "这项工作帮助研究人员确定种植乳草"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-c-p4",
+                "start": 45,
+                "end": 61,
+                "quote": "它还激发出一些服刑人员温和的一面"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写詹姆斯想研究迁徙却苦于蝴蝶太少，再写他与监狱合作饲养、标记、放飞，接着写目击报告揭示了越冬地点，最后写研究对保护蝴蝶和对服刑人员的双重影响。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+            "summary": "野外蝴蝶太少，迁徙路线难以追踪，直到监狱打来电话",
+            "function": "提出研究难题，引出转机"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:2",
+            "summary": "服刑人员饲养蝴蝶，大批成蝶被标记后放飞",
+            "function": "写合作方式和样本来源"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+            "summary": "标签上的邮箱带来目击报告，证实蝴蝶在加州沿海越冬",
+            "function": "写追踪方法和研究发现"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+            "summary": "研究帮助确定种植地点，也让服刑人员变得温和、相信自己能改变",
+            "function": "总结研究的双重影响"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-four-provinces-feb:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出詹姆斯研究迁徙时遇到的困难。",
+      "stemTranslationZh": "戴维在研究中难以做到的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "获得资金支持。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Gain financial support.",
+            "explanation": "原文没提经费问题；他卡住的地方是蝴蝶太少，后来靠监狱来电才有了办法。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "雇到合格的工作人员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Hire qualified workers.",
+            "explanation": "后来帮他养蝴蝶的是服刑人员（prisoners），原文没说他招不到合格的人手。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "建一个新实验室。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Build a new laboratory.",
+            "explanation": "蝴蝶是在监狱里养大、从监狱放飞的（released from the prison），原文没提建实验室。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "找到足够多的黑脉金斑蝶。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "quote": "finding even 200 in the wild to tag is unlikely",
+              "anchor": "野外难找200只"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "quote": "the populations are too small to follow",
+              "anchor": "种群太少"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "hard",
+          "sourceRole": "stem",
+          "targetText": "For every 200 monarchs tagged (打标签) by a researcher, only one is usually recovered at the end of its trip, James says, and finding even 200 in the wild to tag is unlikely.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "unlikely",
+          "sourceZh": "困难的",
+          "targetCueZh": "不太可能",
+          "answerText": "finding even 200 in the wild to tag is unlikely",
+          "note": "题干 hard 对应原文 unlikely。"
+        },
+        {
+          "sourceText": "Find enough monarchs.",
+          "sourceRole": "correctOption",
+          "targetText": "finding even 200 in the wild to tag is unlikely",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“找够蝴蝶”就是原文的“野外连 200 只可标记的都难找到”（finding even 200 … is unlikely）；[[block:paper-gaokao-2023-four-provinces-feb:reading-c:1|The route the butterflies travel]]说种群太小（too small to follow），也是同一个难处，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从标签的用法和研究目标推出给蝴蝶贴标签的目的。",
+      "stemTranslationZh": "蝴蝶放飞前为什么要贴上标签？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了确保它们的安全。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To guarantee their safety.",
+            "explanation": "怕伤着蝴蝶的是服刑人员（worried … harm），写的是他们变温和，跟贴标签的用意无关。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了让它们飞得更远。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To enable them to fly longer distances.",
+            "explanation": "标签上只有邮箱地址（email addresses），作用是让人报告在哪看到蝴蝶，帮不了蝴蝶飞得更远。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了追踪它们的迁徙路线。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+              "quote": "The tags included email addresses, and soon after the first butterflies took off, James started receiving messages from people who had spotted them.",
+              "anchor": "靠标签收到目击消息"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "quote": "Knowing the route is vital to conservation efforts",
+              "anchor": "弄清路线"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+              "quote": "The butterflies, the reports confirmed, wintered in coastal California.",
+              "anchor": "报告证实越冬地"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了把它们和其他物种区分开。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To distinguish them from other species.",
+            "explanation": "全文只研究黑脉金斑蝶一种，标签用来收集目击报告，原文没提和别的物种区分。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "tagged",
+          "sourceRole": "stem",
+          "targetText": "The tags included email addresses, and soon after the first butterflies took off, James started receiving messages from people who had spotted them.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+          "relationType": "locationCue",
+          "targetCue": "tags",
+          "sourceZh": "贴上标签",
+          "targetCueZh": "标签",
+          "answerText": "James started receiving messages from people who had spotted them",
+          "note": "题干 tagged 对应原文 tags。"
+        },
+        {
+          "sourceText": "To track their travel routes.",
+          "sourceRole": "correctOption",
+          "targetText": "James started receiving messages from people who had spotted them",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“追踪路线”是从原文推一步得来的：标签上有邮箱，各地看到蝴蝶的人发来消息，报告证实它们在加州沿海越冬（wintered in coastal California），蝴蝶飞到哪里就清楚了；而弄清路线（Knowing the route）正是研究的目标，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出让服刑人员相信自己也能改变的那件事。",
+      "stemTranslationZh": "是什么让服刑人员觉得自己能够改变？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "蝴蝶表现出的耐心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "So James began working with prisoners to raise monarchs through the whole process of their transformation.",
+            "sourceEntity": "prisoners",
+            "optionText": "The patience the butterflies showed.",
+            "optionEntity": "the butterflies",
+            "explanation": "陪蝴蝶走完蜕变全过程（through the whole process）要耐心的是养蝶的服刑人员，原文没写蝴蝶有耐心。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "蝴蝶经历的磨难。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The hardship the butterflies underwent.",
+            "explanation": "原文没写蝴蝶吃了什么苦；打动他们的是蝴蝶变换了形态（change their form）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "蝴蝶的蜕变。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+              "quote": "“This butterfly changed,” James recalls prisoners telling him, “and maybe we can too.”",
+              "anchor": "这只蝴蝶变了"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+              "quote": "Watching the monarch change their form also touched the men.",
+              "anchor": "看蝴蝶变换形态"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "詹姆斯对蝴蝶的投入。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“This butterfly changed,” James recalls prisoners telling him, “and maybe we can too.”",
+            "sourceEntity": "This butterfly",
+            "optionText": "The devotion of James to the butterflies.",
+            "optionEntity": "The devotion of James",
+            "explanation": "詹姆斯在这里只是转述的人（James recalls），服刑人员拿来比照自己的是那只变了的蝴蝶。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "they can change",
+          "sourceRole": "stem",
+          "targetText": "“This butterfly changed,” James recalls prisoners telling him, “and maybe we can too.”",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+          "relationType": "locationCue",
+          "targetCue": "maybe we can too",
+          "sourceZh": "他们能改变",
+          "targetCueZh": "也许我们也能",
+          "answerText": "This butterfly changed",
+          "note": "题干 they can change 对应原文 maybe we can too。"
+        },
+        {
+          "sourceText": "The transformation of the butterflies.",
+          "sourceRole": "correctOption",
+          "targetText": "This butterfly changed",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“蝴蝶的蜕变”（transformation）就是他们说的“这只蝴蝶变了”（This butterfly changed）；[[block:paper-gaokao-2023-four-provinces-feb:reading-c:5|Watching the monarch change their form]]也写看着蝴蝶变换形态（change their form）让他们深受触动，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括最后一段写的两方面内容，找出能同时盖住它们的说法。",
+      "stemTranslationZh": "最后一段主要讲什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-four-provinces-feb:reading-c:4]]先说研究帮着定 milkweed 种在哪，再写服刑人员变温和、想改变；段意要盖住研究带来的两方面影响",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这项研究带来的影响。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+              "quote": "The work helps researchers identify ideal places to plant milkweed",
+              "anchor": "帮助确定种植地点"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+              "quote": "It also brought out the gentler side of some of the prisoners.",
+              "anchor": "激发服刑人员温和的一面"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "詹姆斯研究的发现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The butterflies, the reports confirmed, wintered in coastal California.",
+            "sourceEntity": "the reports confirmed",
+            "optionText": "The findings of James’ study.",
+            "optionEntity": "The findings",
+            "explanation": "研究发现蝴蝶在加州沿海越冬，写在[[block:paper-gaokao-2023-four-provinces-feb:reading-c:3]]；[[block:paper-gaokao-2023-four-provinces-feb:reading-c:4]]讲的是这些发现之后带来的用处和改变。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "服刑人员获释。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "released from the prison",
+            "optionText": "The release",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了 released 的名词 release，可原文从监狱放出去的是蝴蝶；[[block:paper-gaokao-2023-four-provinces-feb:reading-c:4]]写服刑人员变温和、想改变，没提他们出狱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:2",
+              "quote": "The adult insects were then tagged and released from the prison.",
+              "anchor": "蝴蝶从监狱放飞"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "蝴蝶的生命周期。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the life cycle of West Coast monarch butterflies",
+            "optionText": "The life cycle of the butterflies",
+            "matchType": "exact",
+            "relationNote": "life cycle 只用来说明乳草等植物对蝴蝶很重要，这一段讲的是研究帮着找种植地，并没介绍蝴蝶的生命周期。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+              "quote": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies.",
+              "anchor": "提到生命周期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The impact of the research.",
+          "sourceRole": "correctOption",
+          "targetText": "The work helps researchers identify ideal places to plant milkweed",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "这一段写的两样都是研究带来的结果：一样落在保护蝴蝶上，帮着找到种乳草的地方（helps researchers identify），一样落在服刑人员身上，让他们变温和（brought out the gentler side）；选项的“研究的影响”把两样都包进去，选 A。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "taskType": "application",
+  "modelAnswer": "This online concert is absolutely fantastic. What makes it special is the mix of East and West. Our students played the erhu and the guzheng, while our British friends performed folk songs with violins. The best part came at the end, when both choirs sang the same song together on screen.\n\nWatching it, I felt proud of our traditional music. I was also amazed that music could bring two schools thousands of kilometers apart so close. I even sang along at my desk!\n\nHowever, I have two suggestions. The sound cut out a few times, so the network should be tested before the show. Besides, subtitles in both Chinese and English would help everyone understand the lyrics. I can't wait for the next concert!",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "身份和读者：我是刚看完线上音乐会的学生，在线上留言板发评论，读者是两校师生和组织者。",
+        "三个要点：音乐会的特点；观看感受；意见建议。",
+        "格式：留言板评论，用题面给的 \"This online concert is absolutely fantastic.\" 开头，不写称呼和署名；词数 80 左右。"
+      ],
+      "thisEssayChooses": "本范文把“特点”落在中西合璧上：我们拉二胡、弹古筝，英国同学用小提琴伴奏唱民歌，最后两校合唱团在屏幕上同唱一首歌；感受写为传统音乐自豪、惊叹音乐拉近距离；建议挑了线上演出最常见的两个问题：断音和听不懂歌词。节目和建议都可以换成你自己想到的，只要具体。"
+    },
+    "standard": {
+      "essay": "This online concert is absolutely fantastic. What makes it special is the mix of East and West. Our students played the erhu and the guzheng, while our British friends performed folk songs with violins. The best part came at the end, when both choirs sang the same song together on screen.\n\nWatching it, I felt proud of our traditional music. I was also amazed that music could bring two schools thousands of kilometers apart so close. I even sang along at my desk!\n\nHowever, I have two suggestions. The sound cut out a few times, so the network should be tested before the show. Besides, subtitles in both Chinese and English would help everyone understand the lyrics. I can't wait for the next concert!",
+      "pointMap": [
+        {
+          "point": "音乐会特点",
+          "quote": "What makes it special is the mix of East and West."
+        },
+        {
+          "point": "观看感受",
+          "quote": "Watching it, I felt proud of our traditional music."
+        },
+        {
+          "point": "意见建议",
+          "quote": "Besides, subtitles in both Chinese and English would help everyone understand the lyrics."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住给定开头，说清这场音乐会特别在哪里。",
+          "items": [
+            {
+              "quote": "What makes it special is the mix of East and West.",
+              "explain": "给定句只说“太棒了”，这句马上回答“棒在哪”：中西合璧。先总说一个特点，后面两句再举节目，读者一眼看到要点。"
+            },
+            {
+              "quote": "Our students played the erhu and the guzheng, while our British friends performed folk songs with violins.",
+              "explain": "用 while 把两校的节目放在一句里对照，二胡古筝对小提琴，“中西合璧”就有了实物，不是一句空话。"
+            },
+            {
+              "quote": "when both choirs sang the same song together on screen",
+              "explain": "最后点出两校隔着屏幕同唱一首歌，这正是“联合线上音乐会”才有的特点，换成普通音乐会就写不出来。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写观看感受：两种情绪，再加一个小动作。",
+          "items": [
+            {
+              "quote": "I felt proud of our traditional music",
+              "explain": "感受落在具体对象上：为自己学校的传统乐器自豪，比只写 I was very happy 真实。"
+            },
+            {
+              "quote": "music could bring two schools thousands of kilometers apart so close",
+              "explain": "第二种感受扣住“线上、跨国”这一点：相隔几千公里，却因音乐靠近。thousands of kilometers apart 放在 schools 后面作修饰，简洁。"
+            },
+            {
+              "quote": "I even sang along at my desk!",
+              "explain": "一个小动作把感受坐实，像真实学生的留言，语气也轻松了一点。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "提出意见建议，每条都有原因或用处，最后收住。",
+          "items": [
+            {
+              "quote": "However, I have two suggestions.",
+              "explain": "前面都在夸，However 一转，先告诉读者下面有两条建议，组织者读起来有数。"
+            },
+            {
+              "quote": "The sound cut out a few times, so the network should be tested before the show.",
+              "explain": "先说问题再说办法，用 so 连起来；被动语态 should be tested 不点名指责谁，在公开留言板上更得体。"
+            },
+            {
+              "quote": "subtitles in both Chinese and English would help everyone understand the lyrics",
+              "explain": "建议之后说清好处：两校观众都能看懂歌词。用 would 语气委婉，是提议而不是命令。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "What makes it special is …",
+          "function": "接在给定的夸奖之后，直接点出音乐会的特点。"
+        },
+        {
+          "expression": "bring … close / thousands of kilometers apart",
+          "function": "写线上跨国活动带来的感受：距离远，心却近。"
+        },
+        {
+          "expression": "… so … should be done / … would help …",
+          "function": "先指出问题再给办法和好处，委婉地向组织者提建议。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "This online concert is absolutely fantastic. For two hours, the two schools took turns on screen, as if talking through music. Our students opened with the erhu and the guzheng, and our British friends answered with folk songs on the violin and guitar. The finale was the real surprise: both choirs sang one song together, switching between English and Chinese line by line.\n\nSitting at my desk, I found myself humming along. I had never realized how proud I am of our traditional instruments, or how easily music can make two schools thousands of kilometers apart feel like next-door neighbors.\n\nIf I may, I'd like to offer two suggestions. Since the sound cut out a few times, a quick network test before the show would make a big difference. Also, subtitles in both languages would let everyone follow the lyrics, not just the tunes. Count me in for the next concert!",
+      "pointMap": [
+        {
+          "point": "音乐会特点",
+          "quote": "For two hours, the two schools took turns on screen, as if talking through music."
+        },
+        {
+          "point": "观看感受",
+          "quote": "Sitting at my desk, I found myself humming along."
+        },
+        {
+          "point": "意见建议",
+          "quote": "Also, subtitles in both languages would let everyone follow the lyrics, not just the tunes."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "as if talking through music",
+          "explain": "标准版说“中西合璧”，这里把两校轮流上场比作用音乐对话，后面 opened with 和 answered with 接着这个比方写，特点更有画面。"
+        },
+        {
+          "quote": "switching between English and Chinese line by line",
+          "explain": "标准版只说同唱一首歌，这里多写一个细节：一句英文一句中文轮着唱，把“两校联合”写得更具体。"
+        },
+        {
+          "quote": "If I may, I'd like to offer two suggestions.",
+          "explain": "比标准版的 I have two suggestions 更客气，在公开留言板上对组织者提意见时分寸更好；结尾 Count me in 又回到学生的轻松口吻。"
+        }
+      ]
+    }
+  }
+}

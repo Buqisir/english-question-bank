@@ -1,0 +1,692 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-four-provinces-feb",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-four-provinces-feb:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-four-provinces-feb:reading-a": {
+      "overview": "这是一则一月亲子活动推荐，介绍动物园灯光秀、梅萨艺术节、家庭冬日节和青少年美术课程四项活动，逐项列出日期、活动内容、地址和票价。",
+      "fullTranslationZh": "一月家庭亲子活动\n\n动物园灯光秀：狂野之光 1月1日—19日\n\n菲尼克斯动物园一年一度的节日灯光秀持续到1月19日，让各个家庭有一次或多次机会游览这座城市的动物园，数百万盏彩灯为节日增添了别样的风采。\n\n狂野之光，菲尼克斯市北加尔文公园大道455号，phoenixzoo.org；会员票11.95美元，普通门票13.95美元。\n\n梅萨市中心艺术节 1月4日—18日\n\n梅萨市中心艺术节展出知名艺术家和新锐艺术家的作品，其中包括创作木制品、金属工艺品、食品、艺术品、摄影作品和礼品的人。\n\n梅萨市中心主街旁的麦克唐纳街，dtmesafest.com，免费入场。\n\n家庭欢乐冬日节 1月4日\n\n沙漠奥德赛水族馆将在其沙漠庭院举办第三届年度家庭欢乐冬日节，届时有真雪供孩子们玩耍。这项免费活动从充气城堡到游乐设施、游戏、雪花手工和脸部彩绘应有尽有，还有当地商贩摆设的各色摊位，现场出售食品和其他商品。\n\n斯科茨代尔市东维亚德文图拉路9500号，odyseainthedesert.com，免费。\n\n青少年美术课程 1月18日—3月7日\n\n梅萨艺术中心将在每周六开设为期八周的青少年艺术课程，通过有趣又有挑战的艺术课，用绘画、素描、综合材料和雕塑等多种艺术材料传授艺术技能和知识，让每个人的课堂都充满思维的激发。\n\n梅萨艺术中心，梅萨市东主街1号，mesaartscenter.com，93美元。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+          "sourceText": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "displayText": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:22"
+          ],
+          "translationZh": "这项免费活动从充气城堡到游乐设施、游戏、雪花手工和脸部彩绘应有尽有，还有当地商贩摆设的各色摊位，现场出售食品和其他商品。",
+          "analysisZh": "主干是 This free event features everything，免费活动“什么都有”。from … to … 列出具体项目；to go with 引出与这些项目相伴的摊位，set up by local sellers 是过去分词短语，说明摊位由当地商贩摆设；句末 with food … for sale 是 with 复合结构，补充摊位上的食品是出售的。free 只修饰 event，管不到后面的食物。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "This free event features everything"
+            },
+            {
+              "start": 133,
+              "end": 156,
+              "quote": "set up by local sellers"
+            },
+            {
+              "start": 158,
+              "end": 196,
+              "quote": "with food and other offerings for sale"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-a-2",
+          "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+          "sourceText": "Mesa Arts Center is hosting an eight-week youth arts course on Saturdays to teach artistic skills and knowledge through fun and challenging art classes in a wide variety of art materials, including painting, drawing, mixed media and sculpture, ensuring mentally stimulating sessions for all.",
+          "displayText": "Mesa Arts Center is hosting an eight-week youth arts course on Saturdays to teach artistic skills and knowledge through fun and challenging art classes in a wide variety of art materials, including painting, drawing, mixed media and sculpture, ensuring mentally stimulating sessions for all.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-four-provinces-feb:23"
+          ],
+          "translationZh": "梅萨艺术中心将在每周六开设为期八周的青少年艺术课程，通过有趣又有挑战的艺术课，用绘画、素描、综合材料和雕塑等多种艺术材料传授艺术技能和知识，让每个人的课堂都充满思维的激发。",
+          "analysisZh": "主干是 Mesa Arts Center is hosting an eight-week youth arts course，艺术中心开一门八周的课。on Saturdays 说上课时间是每周六；to teach … 是目的状语；through … classes 说怎样教，in a wide variety of art materials 说用哪些材料，including 列举具体形式；句末 ensuring … 是现在分词作结果状语，说这样安排带来的效果。eight-week 是复合形容词，交代课程总跨度。",
+          "underlineRanges": [
+            {
+              "start": 17,
+              "end": 59,
+              "quote": "is hosting an eight-week youth arts course"
+            },
+            {
+              "start": 73,
+              "end": 111,
+              "quote": "to teach artistic skills and knowledge"
+            },
+            {
+              "start": 244,
+              "end": 290,
+              "quote": "ensuring mentally stimulating sessions for all"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:1"
+              ],
+              "start": 0,
+              "end": 8,
+              "quote": "一月家庭亲子活动"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:2"
+              ],
+              "start": 10,
+              "end": 30,
+              "quote": "动物园灯光秀：狂野之光 1月1日—19日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:3"
+              ],
+              "start": 32,
+              "end": 100,
+              "quote": "菲尼克斯动物园一年一度的节日灯光秀持续到1月19日，让各个家庭有一次或多次机会游览这座城市的动物园，数百万盏彩灯为节日增添了别样的风采。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:4"
+              ],
+              "start": 102,
+              "end": 163,
+              "quote": "狂野之光，菲尼克斯市北加尔文公园大道455号，phoenixzoo.org；会员票11.95美元，普通门票13.95美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:5"
+              ],
+              "start": 165,
+              "end": 182,
+              "quote": "梅萨市中心艺术节 1月4日—18日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:6"
+              ],
+              "start": 184,
+              "end": 242,
+              "quote": "梅萨市中心艺术节展出知名艺术家和新锐艺术家的作品，其中包括创作木制品、金属工艺品、食品、艺术品、摄影作品和礼品的人。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:7"
+              ],
+              "start": 244,
+              "end": 279,
+              "quote": "梅萨市中心主街旁的麦克唐纳街，dtmesafest.com，免费入场。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:8"
+              ],
+              "start": 281,
+              "end": 293,
+              "quote": "家庭欢乐冬日节 1月4日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:9"
+              ],
+              "start": 295,
+              "end": 397,
+              "quote": "沙漠奥德赛水族馆将在其沙漠庭院举办第三届年度家庭欢乐冬日节，届时有真雪供孩子们玩耍。这项免费活动从充气城堡到游乐设施、游戏、雪花手工和脸部彩绘应有尽有，还有当地商贩摆设的各色摊位，现场出售食品和其他商品。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:10"
+              ],
+              "start": 399,
+              "end": 444,
+              "quote": "斯科茨代尔市东维亚德文图拉路9500号，odyseainthedesert.com，免费。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:11"
+              ],
+              "start": 446,
+              "end": 464,
+              "quote": "青少年美术课程 1月18日—3月7日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:12"
+              ],
+              "start": 466,
+              "end": 552,
+              "quote": "梅萨艺术中心将在每周六开设为期八周的青少年艺术课程，通过有趣又有挑战的艺术课，用绘画、素描、综合材料和雕塑等多种艺术材料传授艺术技能和知识，让每个人的课堂都充满思维的激发。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-four-provinces-feb:reading-a:13"
+              ],
+              "start": 554,
+              "end": 594,
+              "quote": "梅萨艺术中心，梅萨市东主街1号，mesaartscenter.com，93美元。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-a-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+                "start": 150,
+                "end": 360,
+                "quote": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p9",
+                "start": 42,
+                "end": 102,
+                "quote": "这项免费活动从充气城堡到游乐设施、游戏、雪花手工和脸部彩绘应有尽有，还有当地商贩摆设的各色摊位，现场出售食品和其他商品。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-a-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-four-provinces-feb:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+                "start": 0,
+                "end": 291,
+                "quote": "Mesa Arts Center is hosting an eight-week youth arts course on Saturdays to teach artistic skills and knowledge through fun and challenging art classes in a wide variety of art materials, including painting, drawing, mixed media and sculpture, ensuring mentally stimulating sessions for all."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p12",
+                "start": 0,
+                "end": 25,
+                "quote": "梅萨艺术中心将在每周六开设为期八周的青少年艺术课程"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:4",
+                "start": 57,
+                "end": 98,
+                "quote": "$11.95 members, $13.95 general admission."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p4",
+                "start": 38,
+                "end": 60,
+                "quote": "会员票11.95美元，普通门票13.95美元"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+                "start": 0,
+                "end": 149,
+                "quote": "OdySea Aquarium in the Desert is hosting the third annual Family Fun Winterfest in its Desert Courtyard, featuring real snow for the kids to play in."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p9",
+                "start": 30,
+                "end": 41,
+                "quote": "届时有真雪供孩子们玩耍"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2023-four-provinces-feb:reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-four-provinces-feb:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:11",
+                "start": 0,
+                "end": 39,
+                "quote": "Youth Fine Arts Course Jan. 18 – Mar. 7"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+                "start": 28,
+                "end": 59,
+                "quote": "an eight-week youth arts course"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p11",
+                "start": 0,
+                "end": 18,
+                "quote": "青少年美术课程 1月18日—3月7日"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-four-provinces-feb:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-four-provinces-feb:reading-a-p12",
+                "start": 13,
+                "end": 25,
+                "quote": "为期八周的青少年艺术课程"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "总标题之下并列四项活动，每项都按“名称和日期—活动内容—地址、网址和费用”的顺序介绍，便于读者横向比较时间和价钱。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:1",
+            "summary": "点明一月适合全家参加的活动",
+            "function": "总标题，统领全文"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:2",
+            "summary": "灯光秀名称及1月1日至19日的日期",
+            "function": "第一项活动的标题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:3",
+            "summary": "年度节日灯光秀，数百万盏灯增添节日气氛",
+            "function": "介绍灯光秀的亮点"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:4",
+            "summary": "灯光秀地址、网址，会员票与普通票价格",
+            "function": "交代出行和购票信息"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:5",
+            "summary": "艺术节名称及1月4日至18日的日期",
+            "function": "第二项活动的标题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:6",
+            "summary": "艺术节展出多类艺术家的作品",
+            "function": "介绍艺术节的展出内容"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:7",
+            "summary": "艺术节地点、网址，免费入场",
+            "function": "交代出行和费用信息"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:8",
+            "summary": "冬日节名称及1月4日一天的日期",
+            "function": "第三项活动的标题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+            "summary": "真雪、游乐和手工等免费项目，摊位出售食品",
+            "function": "介绍冬日节的项目"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:10",
+            "summary": "冬日节地址、网址，免费",
+            "function": "交代出行和费用信息"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:11",
+            "summary": "美术课程名称及1月18日至3月7日的日期",
+            "function": "第四项活动的标题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+            "summary": "每周六上课，八周内学习多种艺术形式",
+            "function": "介绍课程安排和内容"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:13",
+            "summary": "艺术中心地址、网址，学费93美元",
+            "function": "交代报名和费用信息"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-four-provinces-feb:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "比较灯光秀列出的两档票价，看哪类人买得便宜。",
+      "stemTranslationZh": "怎样才能买到动物园灯光秀的优惠票？",
+      "locateBy": "stem",
+      "locateFindZh": "往下找票价",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "带一位朋友。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Bring a friend.",
+            "explanation": "票价只按会员和普通观众两档来分，没写带朋友同去能少付钱。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "办一张会员卡。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:4",
+              "quote": "$11.95 members, $13.95 general admission.",
+              "anchor": "会员票与普通票"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "参加旅行团。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Join a tour group.",
+            "explanation": "团体出游常有团体价，可这场灯光秀没列团体票，只有会员价和普通门票价。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在网上订票。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Book a ticket online.",
+            "explanation": "地址后面给了网址 phoenixzoo.org，那只是活动网站，没说网上订票更便宜。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "ZooLights show",
+          "sourceRole": "stem",
+          "targetText": "The Phoenix Zoo’s yearly holiday light show is on until Jan. 19, allowing families one or more opportunities to enjoy the city’s zoo, with millions of lights giving an added dimension to the festivities.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:3",
+          "relationType": "locationCue",
+          "targetCue": "holiday light show",
+          "sourceZh": "动物园灯光秀",
+          "targetCueZh": "节日灯光秀",
+          "answerText": "$11.95 members, $13.95 general admission",
+          "bridgeZh": "同一场灯光秀的门票分两种价钱",
+          "note": "题干 ZooLights show 对应原文 holiday light show。"
+        },
+        {
+          "sourceText": "Get a membership.",
+          "sourceRole": "correctOption",
+          "targetText": "$11.95 members, $13.95 general admission.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:4",
+          "relationType": "calculation",
+          "note": "选项的“办会员”对上原文的会员票（members）：会员票 11.95 美元，普通门票（general admission）13.95 美元，13.95－11.95＝2，会员每张少付 2 美元，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在冬日节的介绍里找出游客能体验的项目，并分清免费的是什么。",
+      "stemTranslationZh": "在家庭欢乐冬日节上你可以做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "享用免费食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "This free event",
+            "optionText": "free food",
+            "matchType": "exact",
+            "relationNote": "选项借了 This free event 里的 free，可免费的是活动本身，食物写的是现场出售（for sale）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "quote": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+              "anchor": "免费活动与出售的食物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "体验真雪。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "quote": "OdySea Aquarium in the Desert is hosting the third annual Family Fun Winterfest in its Desert Courtyard, featuring real snow for the kids to play in.",
+              "anchor": "真雪供孩子玩"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "上美术课。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "art classes",
+            "optionText": "art classes",
+            "matchType": "exact",
+            "relationNote": "art classes 出自梅萨艺术中心的青少年美术课程；冬日节里只有雪花手工（snowflake crafts）这类游戏项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+              "quote": "fun and challenging art classes",
+              "anchor": "美术课程的介绍"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "见当地艺术家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The Downtown Mesa Festival of the Arts features the work of established and emerging artists",
+            "sourceEntity": "Downtown Mesa Festival of the Arts",
+            "optionText": "Meet local artists.",
+            "optionEntity": "local artists",
+            "explanation": "艺术家（artists）出现在梅萨市中心艺术节那一项；冬日节里 local 修饰的是摆摊的商贩（local sellers）。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Family Fun Winterfest",
+          "sourceRole": "stem",
+          "targetText": "OdySea Aquarium in the Desert is hosting the third annual Family Fun Winterfest in its Desert Courtyard, featuring real snow for the kids to play in.",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+          "relationType": "locationCue",
+          "answerText": "featuring real snow for the kids to play in",
+          "note": "题干 Family Fun Winterfest 原词出现在原文。"
+        },
+        {
+          "sourceText": "Enjoy real snow.",
+          "sourceRole": "correctOption",
+          "targetText": "featuring real snow for the kids to play in",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 real snow，“享受真雪”就是让孩子们在真雪里玩（for the kids to play in），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-four-provinces-feb:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "读出四项活动的起止日期，比较哪项持续时间最长。",
+      "stemTranslationZh": "哪项活动持续时间最长？",
+      "locateBy": "options",
+      "locateFindZh": "四个活动名后各有日期，逐个算天数比长短",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "动物园灯光秀：狂野之光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "ZooLights: Glow Wild Jan. 1-19",
+            "sourceHighlight": "Jan. 1-19",
+            "optionText": "ZooLights: Glow Wild.",
+            "optionHighlight": "ZooLights: Glow Wild",
+            "explanation": "灯光秀开始得最早（Jan. 1），可 19 日就结束，前后 19 天，不到三周。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "梅萨市中心艺术节。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Downtown Mesa Festival of the Arts Jan. 4-18",
+            "sourceHighlight": "Jan. 4-18",
+            "optionText": "Downtown Mesa Festival of the Arts.",
+            "optionHighlight": "Downtown Mesa Festival of the Arts",
+            "explanation": "艺术节从 1 月 4 日办到 18 日，共 15 天，还没出一月。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "家庭欢乐冬日节。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Family Fun Winterfest Jan. 4",
+            "sourceHighlight": "Jan. 4",
+            "optionText": "Family Fun Winterfest.",
+            "optionHighlight": "Family Fun Winterfest",
+            "explanation": "冬日节项目很多，但日期只有 1 月 4 日一天，是四项里最短的。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "青少年美术课程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:11",
+              "quote": "Youth Fine Arts Course Jan. 18 – Mar. 7",
+              "anchor": "1月18日至3月7日"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+              "quote": "an eight-week youth arts course",
+              "anchor": "为期八周"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Youth Fine Arts Courses.",
+          "sourceRole": "correctOption",
+          "targetText": "Youth Fine Arts Course Jan. 18 – Mar. 7",
+          "targetParagraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:11",
+          "relationType": "calculation",
+          "note": "灯光秀 1 月 1—19 日共 19 天，艺术节 1 月 4—18 日共 15 天，冬日节只有 1 月 4 日一天；美术课程从 1 月 18 日上到 3 月 7 日，正文写明为期八周（eight-week），远长于前三项，选 D。"
+        }
+      ]
+    }
+  }
+}
