@@ -1,0 +1,2497 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jun:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jun:cloze": {
+      "overview": "父亲从抛接幼子中感到孩子对自己的绝对信任和由此而来的责任，讲孩子长大后要用心维护这份信任，再类比到职场：经理也要培养团队信任，好的管理和养育一样是长期投入。",
+      "fullTranslationZh": "小孩子很容易被抛向空中再接住，而且他们很喜欢这样。“再来一次，爸爸，再来一次！”我把 Jacky 抛向天空、又在他落下时接住，他大声喊着。他张开胳膊和腿，就好像在飞一样，兴奋得两眼睁得大大的。他对我的信任是绝对的，这种感觉很美好，但同时也让我有一种巨大的责任感。\n\n我希望 Jacky 永远完全信任我，但我知道，随着他长大，这需要我付出更多努力、作出更明智的判断。信任是亲子关系中如此重要的一部分，是我失去不起的东西。每次我带 Jacky 接触新事物，他肯去做，只是因为他信任我，并且知道自己不会受伤，心里感到安全。例如，教 Jacky 游泳意味着他必须相信：他在大泳池里游泳时，如果狗刨游不动了，我会去救他。\n\n同样，在职场中，信任对强有力的领导也很重要。这是每位经理都应努力在团队中培养的东西。如果人们不信任你，他们就不太可能听从你的指示，心甘情愿地成为忠诚的团队成员。缺乏信任会让人们和你作对，而不是为你效力。至少，这意味着人们不会为你拿出最好的表现。好的管理和好的养育一样，是一种长期的投入。",
+      "mainLine": {
+        "theme": {
+          "text": "亲子和职场都靠信任，赢得信任要长期用心，like good parenting, is a long-term commitment。",
+          "quote": "like good parenting, is a long-term commitment"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+            "text": "爸爸抛接 Jacky，感到孩子完全信任自己，也感到责任重大。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+            "text": "孩子长大后维护信任更费心，有了信任他才敢尝试新事物。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+            "text": "由亲子类比职场，经理要培养团队信任，管理需长期投入。"
+          }
+        ],
+        "emotion": "开心→责任重大→不敢失去信任"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+          "sourceText": "Trust is such an important part of a __43__ relationship that it’s something that I can’t __44__ to lose.",
+          "displayText": "Trust is such an important part of a parent-child relationship that it’s something that I can’t afford to lose.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:43",
+            "question:paper-gaokao-2022-zhejiang-jun:44"
+          ],
+          "translationZh": "信任是亲子关系中如此重要的一部分，是我失去不起的东西。",
+          "analysisZh": "主干是 Trust is such an important part of a parent-child relationship，信任是亲子关系中很重要的一部分。such … that 引出结果，结果句的主干是 it’s something；后面的 that I can’t afford to lose 是定语从句，修饰 something，说明这是我失去不起的东西。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 31,
+              "quote": "such an important part"
+            },
+            {
+              "start": 63,
+              "end": 82,
+              "quote": "that it’s something"
+            },
+            {
+              "start": 83,
+              "end": 110,
+              "quote": "that I can’t afford to lose"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+          "sourceText": "Every time I __45__ Jacky to something new, he’ll do it only because he trusts me and feels __46__ in the knowledge that he won’t get hurt.",
+          "displayText": "Every time I introduce Jacky to something new, he’ll do it only because he trusts me and feels safe in the knowledge that he won’t get hurt.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:45",
+            "question:paper-gaokao-2022-zhejiang-jun:46"
+          ],
+          "translationZh": "每次我带 Jacky 接触新事物，他肯去做，只是因为他信任我，并且知道自己不会受伤，心里感到安全。",
+          "analysisZh": "主干是 he’ll do it，他会去做。句首 Every time 引出时间状语从句，意思是每当我带他接触新事物；only because 引出原因，原因里 trusts me 和 feels safe 由 and 并列；in the knowledge that … 说明他为什么感到安全，that 从句交代 knowledge 的内容：他不会受伤。",
+          "underlineRanges": [
+            {
+              "start": 47,
+              "end": 58,
+              "quote": "he’ll do it"
+            },
+            {
+              "start": 59,
+              "end": 71,
+              "quote": "only because"
+            },
+            {
+              "start": 100,
+              "end": 121,
+              "quote": "in the knowledge that"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:cloze:1"
+              ],
+              "start": 0,
+              "end": 131,
+              "quote": "小孩子很容易被抛向空中再接住，而且他们很喜欢这样。“再来一次，爸爸，再来一次！”我把 Jacky 抛向天空、又在他落下时接住，他大声喊着。他张开胳膊和腿，就好像在飞一样，兴奋得两眼睁得大大的。他对我的信任是绝对的，这种感觉很美好，但同时也让我有一种巨大的责任感。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:cloze:2"
+              ],
+              "start": 133,
+              "end": 305,
+              "quote": "我希望 Jacky 永远完全信任我，但我知道，随着他长大，这需要我付出更多努力、作出更明智的判断。信任是亲子关系中如此重要的一部分，是我失去不起的东西。每次我带 Jacky 接触新事物，他肯去做，只是因为他信任我，并且知道自己不会受伤，心里感到安全。例如，教 Jacky 游泳意味着他必须相信：他在大泳池里游泳时，如果狗刨游不动了，我会去救他。"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:cloze:3"
+              ],
+              "start": 307,
+              "end": 450,
+              "quote": "同样，在职场中，信任对强有力的领导也很重要。这是每位经理都应努力在团队中培养的东西。如果人们不信任你，他们就不太可能听从你的指示，心甘情愿地成为忠诚的团队成员。缺乏信任会让人们和你作对，而不是为你效力。至少，这意味着人们不会为你拿出最好的表现。好的管理和好的养育一样，是一种长期的投入。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+            "text": "Small children are easy to throw up in the air and catch-and they love it. “Again, Daddy, again!” Jacky shouts as I throw him skywards and catch him on the way back down again. He throws his arms and legs out as if he were flying, his eyes wide with excitement. His trust in me is absolute which is quite a nice feeling, but at the same time gives me a huge sense of responsibility."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+            "text": "I hope Jacky will always trust me fully, but I know that, as he gets older, it will need more effort and sound judgment on my part. Trust is such an important part of a parent-child relationship that it’s something that I can’t afford to lose. Every time I introduce Jacky to something new, he’ll do it only because he trusts me and feels safe in the knowledge that he won’t get hurt. For example, teaching Jacky to swim means he has to believe that, when he’s swimming in the big pool, I’ll come to his rescue if his doggy paddle lets him down."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+            "text": "Similarly in the workplace, trust is important for strong leadership. It is something that I every manager should work hard to develop among their team. If people don’t trust you, they’re unlikely to follow your directions and willingly become a loyal (忠诚) team member. A lack of trust can make people work against you rather than for you. At the very least, it means that people are not going to be giving you their best. Good management, like good parenting, is a long-term commitment."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 78,
+                "end": 98,
+                "quote": "Again, Daddy, again!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 26,
+                "end": 39,
+                "quote": "再来一次，爸爸，再来一次！"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:36"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:36",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 66,
+                "end": 70,
+                "quote": "love"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 20,
+                "end": 22,
+                "quote": "喜欢"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 218,
+                "end": 232,
+                "quote": "he were flying"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 80,
+                "end": 82,
+                "quote": "在飞"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:37"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:37",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 209,
+                "end": 214,
+                "quote": "as if"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 78,
+                "end": 80,
+                "quote": "好像"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 78,
+                "end": 98,
+                "quote": "Again, Daddy, again!"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 218,
+                "end": 232,
+                "quote": "he were flying"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 26,
+                "end": 39,
+                "quote": "再来一次，爸爸，再来一次！"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 80,
+                "end": 82,
+                "quote": "在飞"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:38"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:38",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 250,
+                "end": 260,
+                "quote": "excitement"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 85,
+                "end": 87,
+                "quote": "兴奋"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 25,
+                "end": 39,
+                "quote": "trust me fully"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 12,
+                "end": 17,
+                "quote": "完全信任我"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:39"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:39",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 281,
+                "end": 289,
+                "quote": "absolute"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 103,
+                "end": 106,
+                "quote": "绝对的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 296,
+                "end": 316,
+                "quote": "quite a nice feeling"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 318,
+                "end": 338,
+                "quote": "but at the same time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 107,
+                "end": 114,
+                "quote": "这种感觉很美好"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 115,
+                "end": 118,
+                "quote": "但同时"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:40"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:40",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 367,
+                "end": 381,
+                "quote": "responsibility"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 127,
+                "end": 130,
+                "quote": "责任感"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 0,
+                "end": 14,
+                "quote": "Small children"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 90,
+                "end": 120,
+                "quote": "more effort and sound judgment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 0,
+                "end": 3,
+                "quote": "小孩子"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 35,
+                "end": 48,
+                "quote": "更多努力、作出更明智的判断"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:41"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 69,
+                "end": 74,
+                "quote": "older"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 26,
+                "end": 28,
+                "quote": "长大"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 90,
+                "end": 120,
+                "quote": "more effort and sound judgment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 35,
+                "end": 39,
+                "quote": "更多努力"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:42"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 120,
+                "end": 130,
+                "quote": "on my part"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 32,
+                "end": 35,
+                "quote": "我付出"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+                "start": 85,
+                "end": 90,
+                "quote": "Daddy"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 435,
+                "end": 449,
+                "quote": "good parenting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 31,
+                "end": 33,
+                "quote": "爸爸"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 127,
+                "end": 131,
+                "quote": "好的养育"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:43"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 169,
+                "end": 181,
+                "quote": "parent-child"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 52,
+                "end": 54,
+                "quote": "亲子"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 138,
+                "end": 160,
+                "quote": "such an important part"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 226,
+                "end": 233,
+                "quote": "to lose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 57,
+                "end": 65,
+                "quote": "如此重要的一部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:44"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 228,
+                "end": 234,
+                "quote": "afford"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 68,
+                "end": 72,
+                "quote": "失去不起"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 255,
+                "end": 277,
+                "quote": "Jacky to something new"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 89,
+                "end": 92,
+                "quote": "新事物"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:45"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 257,
+                "end": 266,
+                "quote": "introduce"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 87,
+                "end": 89,
+                "quote": "接触"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 356,
+                "end": 373,
+                "quote": "he won’t get hurt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 113,
+                "end": 117,
+                "quote": "不会受伤"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:46"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 339,
+                "end": 343,
+                "quote": "safe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 122,
+                "end": 124,
+                "quote": "安全"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 264,
+                "end": 277,
+                "quote": "something new"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 383,
+                "end": 405,
+                "quote": "teaching Jacky to swim"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 89,
+                "end": 92,
+                "quote": "新事物"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 128,
+                "end": 138,
+                "quote": "教 Jacky 游泳"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:47"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 385,
+                "end": 396,
+                "quote": "For example"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 125,
+                "end": 127,
+                "quote": "例如"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 304,
+                "end": 316,
+                "quote": "he trusts me"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 471,
+                "end": 494,
+                "quote": "I’ll come to his rescue"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 102,
+                "end": 106,
+                "quote": "他信任我"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 166,
+                "end": 171,
+                "quote": "我会去救他"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:48"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 437,
+                "end": 444,
+                "quote": "believe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 144,
+                "end": 146,
+                "quote": "相信"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 7,
+                "end": 43,
+                "quote": "in the workplace, trust is important"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 430,
+                "end": 449,
+                "quote": "like good parenting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 3,
+                "end": 21,
+                "quote": "在职场中，信任对强有力的领导也很重要"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 126,
+                "end": 133,
+                "quote": "和好的养育一样"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:49"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 0,
+                "end": 9,
+                "quote": "Similarly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 0,
+                "end": 2,
+                "quote": "同样"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 86,
+                "end": 99,
+                "quote": "every manager"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 199,
+                "end": 214,
+                "quote": "your directions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 24,
+                "end": 28,
+                "quote": "每位经理"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 60,
+                "end": 64,
+                "quote": "你的指示"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:50"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 58,
+                "end": 68,
+                "quote": "leadership"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 15,
+                "end": 17,
+                "quote": "领导"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 107,
+                "end": 119,
+                "quote": "work hard to"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 127,
+                "end": 143,
+                "quote": "among their team"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 30,
+                "end": 32,
+                "quote": "努力"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 32,
+                "end": 36,
+                "quote": "在团队中"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:51"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 127,
+                "end": 134,
+                "quote": "develop"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 36,
+                "end": 38,
+                "quote": "培养"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 199,
+                "end": 214,
+                "quote": "your directions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 60,
+                "end": 64,
+                "quote": "你的指示"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:52"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 200,
+                "end": 206,
+                "quote": "follow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 58,
+                "end": 60,
+                "quote": "听从"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 145,
+                "end": 170,
+                "quote": "If people don’t trust you"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 296,
+                "end": 312,
+                "quote": "work against you"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 42,
+                "end": 50,
+                "quote": "如果人们不信任你"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 88,
+                "end": 92,
+                "quote": "和你作对"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:53"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 272,
+                "end": 276,
+                "quote": "lack"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 80,
+                "end": 82,
+                "quote": "缺乏"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 401,
+                "end": 415,
+                "quote": "you their best"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 112,
+                "end": 121,
+                "quote": "为你拿出最好的表现"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:54"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 400,
+                "end": 406,
+                "quote": "giving"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 114,
+                "end": 116,
+                "quote": "拿出"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 86,
+                "end": 99,
+                "quote": "every manager"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 430,
+                "end": 449,
+                "quote": "like good parenting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 24,
+                "end": 28,
+                "quote": "每位经理"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 126,
+                "end": 133,
+                "quote": "和好的养育一样"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:55"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+                "start": 428,
+                "end": 438,
+                "quote": "management"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 124,
+                "end": 126,
+                "quote": "管理"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-cloze-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:43",
+              "question:paper-gaokao-2022-zhejiang-jun:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 141,
+                "end": 163,
+                "quote": "such an important part"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 195,
+                "end": 214,
+                "quote": "that it’s something"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 215,
+                "end": 242,
+                "quote": "that I can’t afford to lose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 49,
+                "end": 76,
+                "quote": "信任是亲子关系中如此重要的一部分，是我失去不起的东西。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-cloze-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:45",
+              "question:paper-gaokao-2022-zhejiang-jun:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 291,
+                "end": 302,
+                "quote": "he’ll do it"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 303,
+                "end": 315,
+                "quote": "only because"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+                "start": 344,
+                "end": 365,
+                "quote": "in the knowledge that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 76,
+                "end": 125,
+                "quote": "每次我带 Jacky 接触新事物，他肯去做，只是因为他信任我，并且知道自己不会受伤，心里感到安全。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "开心→责任重大→不敢失去信任"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-zhejiang-jun:36": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:36",
+      "blankNo": 36,
+      "pos": "verb",
+      "role": "detail",
+      "context": "小孩被抛起又接住，这里说孩子对这个游戏的态度，要一个正面的“喜欢”。",
+      "find": {
+        "check": "affect",
+        "text": "后句 Jacky 喊着 Again, Daddy, again!，一遍遍要求再来，说明孩子喜欢被抛接。",
+        "quotes": [
+          "Again, Daddy, again!"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "喜爱",
+        "reason": "小孩被抛起又接住，这里说孩子对这个游戏的态度，要一个正面的“喜欢”。动词看情感：后句 Jacky 喊着 Again, Daddy, again!，一遍遍要求再来，说明孩子喜欢被抛接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "deserve",
+          "meaning": "应得；孩子喊 Again, Daddy, again! 是想再玩一次，不是说自己配得上这个游戏。",
+          "quote": "Again, Daddy, again!"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "miss",
+          "meaning": "想念；游戏正在进行，Jacky 当场喊 Again, Daddy, again!，谈不上想念。",
+          "quote": "Again, Daddy, again!"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "know",
+          "meaning": "知道；know it 只说明孩子了解这件事，接不上 Again, Daddy, again! 的连声要求。",
+          "quote": "Again, Daddy, again!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Small children",
+          "signalSide": "context-before",
+          "targetText": "Small children love it",
+          "relation": "中文：主语是被抛接的小孩，it 指被抛起再接住这件事，要说孩子对它的态度。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Again, Daddy, again!",
+          "signalSide": "context-after",
+          "relation": "中文：孩子连声要求再来，态度是喜欢。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:37": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:37",
+      "blankNo": 37,
+      "pos": "other",
+      "role": "detail",
+      "context": "Jacky 张开手脚的样子像在飞，这里要一个表示“好像”的连接词。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 he were flying 用了虚拟的 were，他并没有真的飞，只是看上去像，接 as if。",
+        "quotes": [
+          "he were flying"
+        ],
+        "posLabel": "连词"
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "好像，仿佛",
+        "reason": "Jacky 张开手脚的样子像在飞，这里要一个表示“好像”的连接词。连词看搭配：空后 he were flying 用了虚拟的 were，他并没有真的飞，只是看上去像，接 as if。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "in case",
+          "meaning": "以防；张开手脚不是为了防备 he were flying 这件事发生。",
+          "quote": "he were flying"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "even though",
+          "meaning": "尽管；even though 后要接真实情况，he were flying 是虚拟，他并没在飞。",
+          "quote": "he were flying"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "so that",
+          "meaning": "以便；他是被爸爸抛起来的，张开手脚不是为了让 he were flying 成为目的。",
+          "quote": "he were flying"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he were flying",
+          "signalSide": "context-after",
+          "targetText": "as if he were flying",
+          "relation": "中文：were 是虚拟语气，和 as if 连用表示“好像在飞”。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:38": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:38",
+      "blankNo": 38,
+      "pos": "noun",
+      "role": "detail",
+      "context": "孩子玩得正开心，睁大眼睛时带着的是一种快乐、激动的情绪。",
+      "find": {
+        "check": "affect",
+        "text": "前面连喊 Again, Daddy, again!，手脚张开像 he were flying，睁大眼睛是因为兴奋。",
+        "quotes": [
+          "Again, Daddy, again!",
+          "he were flying"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "兴奋",
+        "reason": "孩子玩得正开心，睁大眼睛时带着的是一种快乐、激动的情绪。名词看情感：前面连喊 Again, Daddy, again!，手脚张开像 he were flying，睁大眼睛是因为兴奋。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fear",
+          "meaning": "害怕；Jacky 连喊 Again, Daddy, again!，害怕的孩子不会要求再来一次。",
+          "quote": "Again, Daddy, again!"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "doubt",
+          "meaning": "怀疑；后句说 His trust in me，孩子对爸爸是信任，不是怀疑。",
+          "quote": "His trust in me"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "astonishment",
+          "meaning": "惊讶；抛接是他一再要求的游戏（Again, Daddy, again!），并不出乎意料。",
+          "quote": "Again, Daddy, again!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his eyes wide with",
+          "signalSide": "context-before",
+          "targetText": "his eyes wide with excitement",
+          "relation": "中文：with 引出睁大眼睛的原因，要一种情绪。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Again, Daddy, again!",
+          "signalSide": "context-before",
+          "relation": "中文：连声要求再来，情绪是快乐激动的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:39": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:39",
+      "blankNo": 39,
+      "pos": "adjective",
+      "role": "main",
+      "context": "孩子毫无保留地把自己交给爸爸，这里要说这份信任深到“完全”的程度。",
+      "find": {
+        "check": "echo",
+        "text": "下段开头 I hope Jacky will always trust me fully，fully 复现这种完全的信任，对应 absolute。",
+        "quotes": [
+          "trust me fully"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "绝对的",
+        "meaning": "毫无保留的",
+        "reason": "孩子毫无保留地把自己交给爸爸，这里要说这份信任深到“完全”的程度。形容词看复现：下段开头 I hope Jacky will always trust me fully，fully 复现这种完全的信任，对应 absolute。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reasonable",
+          "meaning": "合理的；下段说 trust me fully，讲的是信任有多深，不是合不合理。",
+          "quote": "trust me fully"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "limited",
+          "meaning": "有限的；下段说 trust me fully，信任是完全的，和有限正相反。",
+          "quote": "trust me fully"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "important",
+          "meaning": "重要的；这里说信任到什么程度，下段 trust me fully 对应的是完全，不是重要。",
+          "quote": "trust me fully"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "His trust in me is",
+          "signalSide": "context-before",
+          "targetText": "His trust in me is absolute",
+          "relation": "中文：表语说明孩子对我的信任到了什么程度。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "trust me fully",
+          "signalSide": "context-after",
+          "relation": "中文：fully 与 absolute 同义复现，都是完全。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:40": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:40",
+      "blankNo": 40,
+      "pos": "noun",
+      "role": "main",
+      "context": "but 前是美好的感觉，后面转向另一面：孩子全心信任，爸爸肩上就有了分量。",
+      "find": {
+        "check": "affect",
+        "text": "前半句 quite a nice feeling 是好感受，but at the same time 转向分量重的一面，是责任感。",
+        "quotes": [
+          "quite a nice feeling",
+          "but at the same time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "责任",
+        "meaning": "要护孩子周全的责任感",
+        "reason": "but 前是美好的感觉，后面转向另一面：孩子全心信任，爸爸肩上就有了分量。名词看情感：前半句 quite a nice feeling 是好感受，but at the same time 转向分量重的一面，是责任感。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relief",
+          "meaning": "宽慰；仍是轻松的好感受，接不上 but at the same time 转出的另一面。",
+          "quote": "but at the same time"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "satisfaction",
+          "meaning": "满足；也是好感受，和前面 quite a nice feeling 同向，不需要 but 转折。",
+          "quote": "quite a nice feeling"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "achievement",
+          "meaning": "成就；孩子信任爸爸不是爸爸做成了什么，也接不上 but at the same time 的转折。",
+          "quote": "but at the same time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a huge sense of",
+          "signalSide": "context-before",
+          "targetText": "a huge sense of responsibility",
+          "relation": "中文：a sense of 后接一种感觉，huge 说它很重。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "but at the same time",
+          "signalSide": "context-before",
+          "relation": "中文：but 把前面的美好感觉转到沉重的一面。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:41": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "main",
+      "context": "随着孩子发生某种变化，维护信任要花更多心力，这里要说孩子在成长。",
+      "find": {
+        "check": "echo",
+        "text": "首句写的是 Small children，这里说他以后 gets 怎样，就需要 more effort and sound judgment，是长大。",
+        "quotes": [
+          "Small children",
+          "more effort and sound judgment"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "年龄较大的",
+        "meaning": "长大了",
+        "reason": "随着孩子发生某种变化，维护信任要花更多心力，这里要说孩子在成长。形容词看复现：首句写的是 Small children，这里说他以后 gets 怎样，就需要 more effort and sound judgment，是长大。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "busier",
+          "meaning": "更忙的；孩子更忙推不出爸爸需要 more effort and sound judgment 来维护信任。",
+          "quote": "more effort and sound judgment"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "quieter",
+          "meaning": "更安静的；后文讲孩子要尝试 something new，安不安静与维护信任无关。",
+          "quote": "something new"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "healthier",
+          "meaning": "更健康的；身体更好只会更省心，推不出需要 more effort and sound judgment。",
+          "quote": "more effort and sound judgment"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as he gets",
+          "signalSide": "context-before",
+          "targetText": "as he gets older",
+          "relation": "中文：get 后接形容词比较级，表示随着他变得怎样。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Small children",
+          "signalSide": "context-before",
+          "relation": "中文：开头说的是小孩子，这里写他长大以后。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:42": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:42",
+      "blankNo": 42,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "更多努力和更好的判断由谁来出，这里要说“在我这一方”。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "it will need 的 more effort and sound judgment 要爸爸亲自付出，on my part 就是“就我而言”。",
+        "quotes": [
+          "more effort and sound judgment"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "就我而言",
+        "meaning": "由我来付出",
+        "reason": "更多努力和更好的判断由谁来出，这里要说“在我这一方”。词组看语境义：it will need 的 more effort and sound judgment 要爸爸亲自付出，on my part 就是“就我而言”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "on my behalf",
+          "meaning": "代表我；more effort 是爸爸自己付出，不是别人代表我去做。",
+          "quote": "more effort"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "in my honor",
+          "meaning": "为纪念我；付出 more effort 是为了维护孩子的信任，不是为了向我致敬。",
+          "quote": "more effort"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in my name",
+          "meaning": "以我的名义；这里说爸爸自己要付出 more effort，不是借我的名义做事。",
+          "quote": "more effort"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "more effort and sound judgment",
+          "signalSide": "context-before",
+          "targetText": "more effort and sound judgment on my part",
+          "relation": "中文：on my part 修饰需要付出的努力和判断，说明出自我这一方。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "part",
+          "signalSide": "option",
+          "targetText": "on my part",
+          "relation": "中文：part 指一方，on my part 即在我这一方。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:43": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "这里点明信任所在的关系，就是爸爸和 Jacky 之间的那种关系。",
+      "find": {
+        "check": "topic",
+        "text": "前文是 Daddy 抛接 Jacky，末句又拿 good parenting 作比，说的是亲子关系。",
+        "quotes": [
+          "Daddy",
+          "good parenting"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "亲子的",
+        "reason": "这里点明信任所在的关系，就是爸爸和 Jacky 之间的那种关系。形容词看话题：前文是 Daddy 抛接 Jacky，末句又拿 good parenting 作比，说的是亲子关系。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "long-distance",
+          "meaning": "远距离的；爸爸亲手 catch him，父子就在身边，不是分隔两地。",
+          "quote": "catch him"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "high-risk",
+          "meaning": "高风险的；Trust is such an important part 说信任对关系重要，不是说关系危险。",
+          "quote": "Trust is such an important part"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teacher-student",
+          "meaning": "师生的；虽有 teaching Jacky to swim，教他的是爸爸，仍是父子关系。",
+          "quote": "teaching Jacky to swim"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "relationship",
+          "signalSide": "context-after",
+          "targetText": "a parent-child relationship",
+          "relation": "中文：空格修饰 relationship，说明是哪一种关系。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "good parenting",
+          "signalSide": "context-after",
+          "relation": "中文：parenting 是养育孩子，与亲子关系同属一个话题。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:44": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "信任如此重要，失去它的后果爸爸承担不了，这里要“承受得起”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "such an important part 引出结果，can’t 加 to lose 正是 can’t afford to lose，失去不起。",
+        "quotes": [
+          "such an important part",
+          "to lose"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "承担得起",
+        "meaning": "承受失去的代价",
+        "reason": "信任如此重要，失去它的后果爸爸承担不了，这里要“承受得起”的意思。动词看搭配：such an important part 引出结果，can’t 加 to lose 正是 can’t afford to lose，失去不起。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "choose",
+          "meaning": "选择；can’t choose to lose 是不能选择失去，such an important part 要说的是失去代价太大。",
+          "quote": "such an important part"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wait",
+          "meaning": "等待；can’t wait to lose 是迫不及待想失去，和 such an important part 正相反。",
+          "quote": "such an important part"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "expect",
+          "meaning": "预料；can’t expect to lose 是别指望会失去，没有说出代价太大、承受不起。",
+          "quote": "to lose"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to lose",
+          "signalSide": "context-after",
+          "targetText": "can’t afford to lose",
+          "relation": "中文：afford 后接不定式，can’t afford to do 表示承受不起做某事的后果。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "such an important part",
+          "signalSide": "context-before",
+          "relation": "中文：such … that 表结果，太重要所以失去不起。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:45": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "爸爸带孩子去碰从没碰过的东西，这里要一个“让人初次接触”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是 Jacky to something new，introduce sb to sth 表示让某人初次接触某事。",
+        "quotes": [
+          "Jacky to something new"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "使初次接触",
+        "reason": "爸爸带孩子去碰从没碰过的东西，这里要一个“让人初次接触”的动作。动词看搭配：空后是 Jacky to something new，introduce sb to sth 表示让某人初次接触某事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "attach",
+          "meaning": "附上；attach Jacky to something new 是把孩子绑在新东西上，后文 he’ll do it 说的是去尝试。",
+          "quote": "he’ll do it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "compare",
+          "meaning": "比较；把 Jacky 和新东西作比较，接不上后面 he’ll do it 去做这件事。",
+          "quote": "he’ll do it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "adjust",
+          "meaning": "调整；adjust 是让他去适应，可 he’ll do it 说的是他第一次去做。",
+          "quote": "he’ll do it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Jacky to something new",
+          "signalSide": "context-after",
+          "targetText": "introduce Jacky to something new",
+          "relation": "中文：introduce sb to sth 让某人初次接触某事，宾语和 to 都对得上。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:46": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:46",
+      "blankNo": 46,
+      "pos": "adjective",
+      "role": "main",
+      "context": "孩子肯去尝试，是因为知道不会受伤，心里的感受是踏实、安全。",
+      "find": {
+        "check": "echo",
+        "text": "后面 in the knowledge that he won’t get hurt，不会受伤正是安全的反面说法。",
+        "quotes": [
+          "he won’t get hurt"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "安全的",
+        "reason": "孩子肯去尝试，是因为知道不会受伤，心里的感受是踏实、安全。形容词看复现：后面 in the knowledge that he won’t get hurt，不会受伤正是安全的反面说法。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "happy",
+          "meaning": "开心的；he won’t get hurt 交代的是不会受伤，对应的是安全感，不是开心。",
+          "quote": "he won’t get hurt"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proud",
+          "meaning": "自豪的；孩子只是去尝试新事物，知道 he won’t get hurt，没有值得自豪的成绩。",
+          "quote": "he won’t get hurt"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "grateful",
+          "meaning": "感激的；he won’t get hurt 让孩子放心，不是让他向谁表示感谢。",
+          "quote": "he won’t get hurt"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "feels",
+          "signalSide": "context-before",
+          "targetText": "feels safe",
+          "relation": "中文：feel 是系动词，后接形容词表示感受。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he won’t get hurt",
+          "signalSide": "context-after",
+          "relation": "中文：不会受伤就是安全。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:47": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:47",
+      "blankNo": 47,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "前句泛说孩子尝试新事物靠信任，这句拿学游泳作具体事例，要引出例子。",
+      "find": {
+        "check": "logic",
+        "text": "前面 something new 是概括，后面 teaching Jacky to swim 是其中一件具体的事，用 For example。",
+        "quotes": [
+          "something new",
+          "teaching Jacky to swim"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "例如",
+        "reason": "前句泛说孩子尝试新事物靠信任，这句拿学游泳作具体事例，要引出例子。词组看逻辑：前面 something new 是概括，后面 teaching Jacky to swim 是其中一件具体的事，用 For example。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Above all",
+          "meaning": "最重要的是；teaching Jacky to swim 只是 something new 中的一件，不是最重要的一点。",
+          "quote": "teaching Jacky to swim"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "In addition",
+          "meaning": "此外；teaching Jacky to swim 不是另加的一点，而是说明前一句的实例。",
+          "quote": "teaching Jacky to swim"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "At first",
+          "meaning": "起初；后文 means he has to 讲的是道理，不是事情的先后。",
+          "quote": "means he has to"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "teaching Jacky to swim",
+          "signalSide": "context-after",
+          "relation": "中文：学游泳是前句 something new 的一个具体例子。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "something new",
+          "signalSide": "context-before",
+          "targetText": "something new … For example, teaching Jacky to swim",
+          "relation": "中文：先概括后举例，中间用 For example 连接。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:48": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "学游泳时孩子心里要认定爸爸会来救他，这里要“相信”的意思。",
+      "find": {
+        "check": "echo",
+        "text": "前句 he trusts me，这里 that 从句说 I’ll come to his rescue，信任落实为相信。",
+        "quotes": [
+          "he trusts me",
+          "I’ll come to his rescue"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "相信",
+        "reason": "学游泳时孩子心里要认定爸爸会来救他，这里要“相信”的意思。动词看复现：前句 he trusts me，这里 that 从句说 I’ll come to his rescue，信任落实为相信。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admit",
+          "meaning": "承认；I’ll come to his rescue 还没发生，孩子无从承认，只能相信。",
+          "quote": "I’ll come to his rescue"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suggest",
+          "meaning": "建议；孩子不是向爸爸提建议，前句 he trusts me 说的是他的信任。",
+          "quote": "he trusts me"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "imagine",
+          "meaning": "想象；想象只是设想，前句 he trusts me 要的是确信爸爸会来救他。",
+          "quote": "he trusts me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he has to",
+          "signalSide": "context-before",
+          "targetText": "he has to believe that",
+          "relation": "中文：believe 后接 that 从句，说明相信的内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he trusts me",
+          "signalSide": "context-before",
+          "relation": "中文：trust 与 believe 同义复现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:49": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:49",
+      "blankNo": 49,
+      "pos": "adverb",
+      "role": "main",
+      "context": "由亲子转到职场，说信任在那里也重要，这里要一个表示“同样”的过渡。",
+      "find": {
+        "check": "logic",
+        "text": "前两段讲亲子间的信任，这句 in the workplace, trust is important，末句 like good parenting 点明两者相似。",
+        "quotes": [
+          "in the workplace, trust is important",
+          "like good parenting"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "同样地",
+        "reason": "由亲子转到职场，说信任在那里也重要，这里要一个表示“同样”的过渡。副词看逻辑：前两段讲亲子间的信任，这句 in the workplace, trust is important，末句 like good parenting 点明两者相似。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "However",
+          "meaning": "然而；in the workplace, trust is important 与前文亲子信任重要同向，没有转折。",
+          "quote": "in the workplace, trust is important"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Therefore",
+          "meaning": "因此；亲子需要信任推不出 in the workplace, trust is important，两者是类比不是因果。",
+          "quote": "in the workplace, trust is important"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Fortunately",
+          "meaning": "幸运的是；trust is important 是在讲道理，谈不上幸运。",
+          "quote": "trust is important"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "like good parenting",
+          "signalSide": "context-after",
+          "relation": "中文：末句把管理和养育相比，说明这段是在类比。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "in the workplace",
+          "signalSide": "context-after",
+          "targetText": "Similarly in the workplace",
+          "relation": "中文：Similarly 引出另一个领域里同样的情况。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:50": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "职场里信任撑起的是什么，要一个和带团队有关的名词。",
+      "find": {
+        "check": "topic",
+        "text": "后文 every manager、among their team、your directions 都在讲带团队，信任撑起的是领导。",
+        "quotes": [
+          "every manager",
+          "among their team",
+          "your directions"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "领导能力",
+        "reason": "职场里信任撑起的是什么，要一个和带团队有关的名词。名词看话题：后文 every manager、among their team、your directions 都在讲带团队，信任撑起的是领导。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "affection",
+          "meaning": "喜爱；后文讲 every manager 带团队，信任撑起的是领导，不是感情。",
+          "quote": "every manager"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "determination",
+          "meaning": "决心；决心是个人意志，接不上后文 every manager 带 their team 的话题。",
+          "quote": "every manager"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "friendship",
+          "meaning": "友谊；后文说 your directions 和 loyal team member，是上下级关系，不是友谊。",
+          "quote": "your directions"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "strong",
+          "signalSide": "context-before",
+          "targetText": "strong leadership",
+          "relation": "中文：strong 修饰空格名词，强有力的领导。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "every manager",
+          "signalSide": "context-after",
+          "relation": "中文：经理、团队、指示都属于管理话题。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:51": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "detail",
+      "context": "经理要下功夫让团队里的信任一点点建立起来，这里要“培养”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语 something 指信任，前有 work hard to，后有 among their team，信任要在团队中培养。",
+        "quotes": [
+          "work hard to",
+          "among their team"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "培养",
+        "reason": "经理要下功夫让团队里的信任一点点建立起来，这里要“培养”的意思。动词看搭配：宾语 something 指信任，前有 work hard to，后有 among their team，信任要在团队中培养。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "assess",
+          "meaning": "评估；评估只是衡量已有的信任，用不着 work hard to 去争取。",
+          "quote": "work hard to"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "organize",
+          "meaning": "组织；组织的对象是人或活动，信任不能被 organize among their team。",
+          "quote": "among their team"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understand",
+          "meaning": "理解；理解信任是什么不需要 work hard to 在团队中去做，后文要的是让人信任你。",
+          "quote": "work hard to"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "among their team",
+          "signalSide": "context-after",
+          "targetText": "develop trust among their team",
+          "relation": "中文：develop 的宾语是信任，在团队中培养。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:52": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "员工不信任你，就不太会照你的指示做，这里要“服从、照着做”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 your directions，并列的 willingly become a loyal 说的也是服从，填 follow。",
+        "quotes": [
+          "your directions",
+          "willingly become a loyal"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "听从",
+        "reason": "员工不信任你，就不太会照你的指示做，这里要“服从、照着做”的意思。动词看搭配：宾语是 your directions，并列的 willingly become a loyal 说的也是服从，填 follow。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "repeat",
+          "meaning": "重复；不信任你也能重复 your directions，这与是否成为忠诚成员无关。",
+          "quote": "your directions"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "change",
+          "meaning": "改变；员工改不了 your directions，并列的是愿不愿成为忠诚成员。",
+          "quote": "your directions"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "forget",
+          "meaning": "忘记；忘不忘 your directions 和信不信任你无关，后面说的是愿不愿服从。",
+          "quote": "your directions"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "your directions",
+          "signalSide": "context-after",
+          "targetText": "follow your directions",
+          "relation": "中文：follow 的宾语是指示，听从指示。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:53": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "什么样的信任状况会让人和你作对，这里要表示信任“没有、不足”。",
+      "find": {
+        "check": "echo",
+        "text": "前句 If people don’t trust you，这里 A … of trust 复现不信任，结果才是 work against you。",
+        "quotes": [
+          "If people don’t trust you",
+          "work against you"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "缺乏",
+        "reason": "什么样的信任状况会让人和你作对，这里要表示信任“没有、不足”。名词看复现：前句 If people don’t trust you，这里 A … of trust 复现不信任，结果才是 work against you。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gesture",
+          "meaning": "姿态；a gesture of trust 是表示信任的举动，不会让人 work against you。",
+          "quote": "work against you"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "measure",
+          "meaning": "程度；a measure of trust 是一定程度的信任，推不出 work against you。",
+          "quote": "work against you"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bond",
+          "meaning": "纽带；a bond of trust 是信任关系，和 work against you 正相反。",
+          "quote": "work against you"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of trust",
+          "signalSide": "context-after",
+          "targetText": "A lack of trust",
+          "relation": "中文：a lack of 后接名词，表示缺乏某物。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "If people don’t trust you",
+          "signalSide": "context-before",
+          "relation": "中文：缺乏信任复现前句的不信任你。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:54": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "detail",
+      "context": "员工不会为你拿出最好的表现，这里要和“最好的状态”搭配的“给出”。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是 you their best，give sb one’s best 表示为某人尽全力。",
+        "quotes": [
+          "you their best"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "给予",
+        "meaning": "拿出（全力）",
+        "reason": "员工不会为你拿出最好的表现，这里要和“最好的状态”搭配的“给出”。动词看搭配：空后是 you their best，give sb one’s best 表示为某人尽全力。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "telling",
+          "meaning": "告诉；tell you their best 说不通，their best 是要付出的努力，不是要说的话。",
+          "quote": "you their best"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "selling",
+          "meaning": "卖；sell you their best 把工作变成买卖，原句说的是肯不肯为你尽力。",
+          "quote": "you their best"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sending",
+          "meaning": "寄送；send 后接的是信件物品，you their best 里的 best 是努力，寄不出去。",
+          "quote": "you their best"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "you their best",
+          "signalSide": "context-after",
+          "targetText": "giving you their best",
+          "relation": "中文：give sb one’s best 为某人尽最大努力。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:55": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "末句点题，把职场一方与 good parenting 对应起来，要一个指带团队的词。",
+      "find": {
+        "check": "echo",
+        "text": "本段 every manager 带团队，这里与 like good parenting 相对，manager 复现为 management。",
+        "quotes": [
+          "every manager",
+          "like good parenting"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "管理",
+        "reason": "末句点题，把职场一方与 good parenting 对应起来，要一个指带团队的词。名词看复现：本段 every manager 带团队，这里与 like good parenting 相对，manager 复现为 management。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "personality",
+          "meaning": "性格；本段讲 every manager 怎样赢得信任，不是讲性格。",
+          "quote": "every manager"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "communication",
+          "meaning": "交流；交流只是一部分，与 like good parenting 对应的是整个带团队的管理。",
+          "quote": "like good parenting"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "education",
+          "meaning": "教育；本段讲的是 in the workplace，不是学校教育。",
+          "quote": "in the workplace"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "like good parenting",
+          "signalSide": "context-after",
+          "targetText": "Good management, like good parenting",
+          "relation": "中文：空格与 parenting 并举，是职场里与养育相当的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "every manager",
+          "signalSide": "context-before",
+          "relation": "中文：manager 与 management 词根复现。"
+        }
+      ]
+    }
+  }
+}

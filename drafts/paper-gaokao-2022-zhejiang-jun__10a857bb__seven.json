@@ -1,0 +1,911 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jun:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jun:seven-choices": {
+      "overview": "以孩子给圣诞老人写信为例，说明写作应有真实目的，并随读者和情境调整语言；从家人称呼延伸到即时通信与正式写作的差异。",
+      "fullTranslationZh": "我有一抽屉写给圣诞老人的信。每年孩子们都会写下圣诞愿望清单，礼貌地请求最新的游戏或玩具。随着年龄增长，他们还会提示圣诞老人到哪里买礼物。因此，他们每年都收到了自己想要的东西。\n\n这些信让孩子学到一条宝贵的写作道理：写作有目的。有时是为了达成某件事，有时是为了娱乐、告知或说服。但写作总是有目的的，至少应该如此。当写作似乎毫无目的，也得不到任何有意义的回应时，人就很难对它感到兴奋。\n\n圣诞节是孩子通过写作与别人交流的好时机。当孩子为真实读者、真实目的写作时，就能学会相应选择措辞。你会写“嗨，奶奶和爷爷”，因为你们很亲近；你写“亲爱的圣诞老人”，则因为你与他不熟悉，想表示尊重。\n\n随着技术发展，年轻人比过去任何时候都写得更多。短信、网络消息、玩电子游戏时实时聊天，都意味着他们不断产生书面消息。不过，由于通常是在给家人和朋友写，他们大多使用非正式语言。\n\n这种写作本身没有问题。它适合读者与目的，也完成了任务。但如果这是年轻人唯一会做的写作，就会产生问题。这种写作不会获得学校阅卷者、未来雇主或潜在客户的认可。最出色的沟通者懂得调整语言，使之适合读者。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-seven-choices-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+          "sourceText": "The very best communicators are those who know how to adjust their language to match their audience.",
+          "displayText": "The very best communicators are those who know how to adjust their language to match their audience.",
+          "translationZh": "最出色的沟通者懂得调整语言，使之适合读者。",
+          "analysisZh": "主干是 The very best communicators are those（最出色的沟通者是那些人）。who 引导定语从句修饰 those；从句里 how to adjust their language 作 know 的宾语，to match their audience 表目的。这句收住全文：语言要跟着读者调。",
+          "underlineRanges": [
+            {
+              "quote": "who know how to adjust their language to match their audience",
+              "start": 38,
+              "end": 99
+            }
+          ],
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:33",
+            "question:paper-gaokao-2022-zhejiang-jun:35"
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-seven-choices-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 87,
+              "quote": "我有一抽屉写给圣诞老人的信。每年孩子们都会写下圣诞愿望清单，礼貌地请求最新的游戏或玩具。随着年龄增长，他们还会提示圣诞老人到哪里买礼物。因此，他们每年都收到了自己想要的东西。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2"
+              ],
+              "start": 89,
+              "end": 190,
+              "quote": "这些信让孩子学到一条宝贵的写作道理：写作有目的。有时是为了达成某件事，有时是为了娱乐、告知或说服。但写作总是有目的的，至少应该如此。当写作似乎毫无目的，也得不到任何有意义的回应时，人就很难对它感到兴奋。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3"
+              ],
+              "start": 192,
+              "end": 289,
+              "quote": "圣诞节是孩子通过写作与别人交流的好时机。当孩子为真实读者、真实目的写作时，就能学会相应选择措辞。你会写“嗨，奶奶和爷爷”，因为你们很亲近；你写“亲爱的圣诞老人”，则因为你与他不熟悉，想表示尊重。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4"
+              ],
+              "start": 291,
+              "end": 377,
+              "quote": "随着技术发展，年轻人比过去任何时候都写得更多。短信、网络消息、玩电子游戏时实时聊天，都意味着他们不断产生书面消息。不过，由于通常是在给家人和朋友写，他们大多使用非正式语言。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5"
+              ],
+              "start": 379,
+              "end": 477,
+              "quote": "这种写作本身没有问题。它适合读者与目的，也完成了任务。但如果这是年轻人唯一会做的写作，就会产生问题。这种写作不会获得学校阅卷者、未来雇主或潜在客户的认可。最出色的沟通者懂得调整语言，使之适合读者。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+            "text": "I have a drawer full of letters to Santa. Each year my children would write up their Christmas wish lists. They were polite requests for the latest game or toy. As the children got older, they would give Santa some hints(提示)on where to buy their presents. As a result, each year they received something they wanted."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+            "text": "Those letters taught my children a valuable lesson about writing: It has a purpose. Sometimes our purpose is to achieve something; other times it may be to entertain, inform, or persuade. But it is always purposeful-or at least it should be. And when writing doesn’t seem to have any purpose or get any kind of meaningful response, then it can be hard to get excited about doing it."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+            "text": "Christmas is a great time of year for children to communicate with others through writing. When children write for real audiences and real purposes, they can learn to choose their words accordingly. You write “Hi Nanna and Pop” because you are close to them. You write “Dear Santa” because you don’t know him personally and you want to show him respect."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+            "text": "As technology develops, young people are writing more than they ever have. Texting, online messaging, live chats while playing video games all mean that they are constantly producing written messages. However, because they are usually writing to family and friends, they use informal language most of the time."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+            "text": "There is nothing wrong with this kind of writing. It suits the audience and the purpose and gets the job done. But if this is the only kind of writing young people do, it will cause problems. This type of writing won’t be rewarded by the school examiner, nor by a future employer or a potential client. The very best communicators are those who know how to adjust their language to match their audience."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-seven-choices-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+                "quote": "they would give Santa some hints(提示)on where to buy their presents.",
+                "start": 188,
+                "end": 255
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "我有一抽屉写给圣诞老人的信。每年孩子们都会写下圣诞愿望清单，礼貌地请求最新的游戏或玩具。随着年龄增长，他们还会提示圣诞老人到哪里买礼物。因此，他们每年都收到了自己想要的东西。",
+                "start": 0,
+                "end": 87
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-31",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:31"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:31",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+                "quote": "As a result, each year they received something they wanted.",
+                "start": 256,
+                "end": 315
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "因此，他们每年都收到了自己想要的东西。",
+                "start": 68,
+                "end": 87
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+                "quote": "It has a purpose.",
+                "start": 66,
+                "end": 83
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "quote": "这些信让孩子学到一条宝贵的写作道理：写作有目的。有时是为了达成某件事，有时是为了娱乐、告知或说服。但写作总是有目的的，至少应该如此。当写作似乎毫无目的，也得不到任何有意义的回应时，人就很难对它感到兴奋。",
+                "start": 0,
+                "end": 101
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-32",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:32"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:32",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+                "quote": "But it is always purposeful-or at least it should be.",
+                "start": 188,
+                "end": 241
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "quote": "但写作总是有目的的，至少应该如此。",
+                "start": 49,
+                "end": 66
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+                "quote": "You write “Dear Santa” because you don’t know him personally and you want to show him respect.",
+                "start": 206,
+                "end": 300
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "quote": "圣诞节是孩子通过写作与别人交流的好时机。当孩子为真实读者、真实目的写作时，就能学会相应选择措辞。你会写“嗨，奶奶和爷爷”，因为你们很亲近；你写“亲爱的圣诞老人”，则因为你与他不熟悉，想表示尊重。",
+                "start": 0,
+                "end": 97
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-33",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:33"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:33",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+                "quote": "You write “Hi Nanna and Pop” because you are close to them.",
+                "start": 199,
+                "end": 258
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "quote": "你会写“嗨，奶奶和爷爷”，因为你们很亲近；",
+                "start": 48,
+                "end": 69
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+                "quote": "Texting, online messaging, live chats while playing video games all mean that they are constantly producing written messages.",
+                "start": 7,
+                "end": 132
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "quote": "随着技术发展，年轻人比过去任何时候都写得更多。短信、网络消息、玩电子游戏时实时聊天，都意味着他们不断产生书面消息。不过，由于通常是在给家人和朋友写，他们大多使用非正式语言。",
+                "start": 0,
+                "end": 86
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-34",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:34"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:34",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+                "quote": "As technology develops, young people are writing more than they ever have.",
+                "start": 0,
+                "end": 74
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "quote": "随着技术发展，年轻人比过去任何时候都写得更多。",
+                "start": 0,
+                "end": 23
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+                "quote": "This type of writing won’t be rewarded by the school examiner, nor by a future employer or a potential client.",
+                "start": 118,
+                "end": 228
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "quote": "这种写作本身没有问题。它适合读者与目的，也完成了任务。但如果这是年轻人唯一会做的写作，就会产生问题。这种写作不会获得学校阅卷者、未来雇主或潜在客户的认可。最出色的沟通者懂得调整语言，使之适合读者。",
+                "start": 0,
+                "end": 98
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-35",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:35"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:35",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+                "quote": "But if this is the only kind of writing young people do, it will cause problems.",
+                "start": 111,
+                "end": 191
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "quote": "但如果这是年轻人唯一会做的写作，就会产生问题。",
+                "start": 27,
+                "end": 50
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-seven-choices-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:33",
+              "question:paper-gaokao-2022-zhejiang-jun:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+                "quote": "The very best communicators are those who know how to adjust their language to match their audience.",
+                "start": 229,
+                "end": 329
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "quote": "最出色的沟通者懂得调整语言，使之适合读者。",
+                "start": 77,
+                "end": 98
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先讲孩子写愿望信年年如愿，引出写作要有目的；再用两种称呼说明按读者选词；最后指出年轻人多写非正式消息，只会这一种会吃亏，好的沟通者会看读者调整语言。",
+        "units": [
+          {
+            "unitId": "seven-unit-1",
+            "heading": "真实目的",
+            "summary": "愿望信得到回应，说明写作应有目的。",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+              "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2"
+            ]
+          },
+          {
+            "unitId": "seven-unit-2",
+            "heading": "面向读者",
+            "summary": "称呼因关系亲疏而不同。",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3"
+            ]
+          },
+          {
+            "unitId": "seven-unit-3",
+            "heading": "正式程度",
+            "summary": "即时消息常随意，正式场合要调整。",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+              "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5"
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 35,
+          "secondary": 34,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "young people"
+          ],
+          "text": "它替年轻人辩护，像接空前 \"There is nothing wrong with this kind of writing\"。但空后 \"This type of writing won’t be rewarded\" 已转到坏处，空里得先转折，它还在辩护。它照答案 G 改：都有 \"young people\"，答案说只会这种写作会出问题，它改成并非不会写。放在段首那一空，\"these young people\" 前面无人可指。",
+          "quotes": [
+            "There is nothing wrong with this kind of writing",
+            "This type of writing won’t be rewarded",
+            "young people",
+            "these young people"
+          ]
+        },
+        "C": {
+          "target": 34,
+          "secondary": 31,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "writing"
+          ],
+          "text": "它和空后 \"Texting, online messaging\" 一样讲技术带来的变化，放段首像总起。但 \"they are constantly producing written messages\" 的 they 无人可指，讲的又是写得多。它照答案 F 改：都有 \"writing\"，答案说年轻人写得空前多，它改成纸笔写信的时代可能过去了。它的 \"letter writing\" 也像接圣诞信，可那段讲的是信年年管用。",
+          "quotes": [
+            "Texting, online messaging",
+            "they are constantly producing written messages",
+            "writing",
+            "letter writing"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jun:31": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:31",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "letters to Santa",
+        "Christmas wish lists",
+        "polite requests",
+        "give Santa some hints",
+        "where to buy their presents"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+        "beforeQuote": "As the children got older, they would give Santa some hints(提示)on where to buy their presents.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "As a result",
+          "signalSide": "option",
+          "targetText": "give Santa some hints(提示)on where to buy their presents",
+          "relation": "As a result 把提示买处当原因，引出年年收到想要的礼物这个结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "give Santa some hints",
+          "signalSide": "context-before",
+          "targetText": "received something they wanted",
+          "relation": "提示圣诞老人去哪买，是为了真拿到礼物。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "received something they wanted",
+          "signalSide": "option",
+          "targetText": "Christmas wish lists / polite requests",
+          "relation": "收到想要的东西，回应了愿望清单里的请求。"
+        }
+      ],
+      "lock": [
+        "hints",
+        "As a result",
+        "received something they wanted"
+      ],
+      "find": {
+        "text": "空在段尾，看空前 \"give Santa some hints\"：孩子连去哪买都写明了，后面该有结果。D 用 \"As a result\" 接上，\"received something they wanted\" 就是信奏效了。",
+        "quotes": [
+          "give Santa some hints",
+          "As a result",
+          "received something they wanted"
+        ]
+      },
+      "explain": "整段讲孩子年年写愿望信、越写越会提示，这句给信落个结局：写信真办成了事。下一段 \"Those letters taught my children\" 的道理，正是从这个结局总结出来的。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "整段讲孩子年年写愿望信、越写越会提示，这句给信落个结局：写信真办成了事。下一段 \"Those letters taught my children\" 的道理，正是从这个结局总结出来的。",
+        "matchedClues": [
+          {
+            "contextSide": "Christmas wish lists / give Santa some hints",
+            "optionSide": "each year they received something they wanted",
+            "relation": "先许愿、再提示买处，最后得到礼物，信一步步办成了事。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:32": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:32",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "It has a purpose",
+        "achieve something",
+        "entertain, inform, or persuade",
+        "doesn’t seem to have any purpose",
+        "meaningful response"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+        "beforeQuote": "Sometimes our purpose is to achieve something; other times it may be to entertain, inform, or persuade.",
+        "afterQuote": "And when writing doesn’t seem to have any purpose or get any kind of meaningful response"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "Sometimes our purpose is ...; other times it may be ...",
+          "relation": "But 把空前五花八门的目的收住：目的各不相同，但总得有一个。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "purposeful",
+          "signalSide": "option",
+          "targetText": "purpose",
+          "relation": "purposeful 复现空前空后反复出现的 purpose。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "doesn’t seem to have any purpose",
+          "signalSide": "context-after",
+          "targetText": "or at least it should be",
+          "relation": "“至少应该有”留了口子，空后接着讲看似没目的的写作。"
+        }
+      ],
+      "lock": [
+        "But",
+        "purposeful",
+        "doesn’t seem to have any purpose"
+      ],
+      "find": {
+        "text": "空前列了几种 \"purpose\"，空后 \"doesn’t seem to have any purpose\" 讲没目的的情形。B 用 \"But\" 把各种目的收成总该有，\"or at least it should be\" 正给空后留口。",
+        "quotes": [
+          "purpose",
+          "doesn’t seem to have any purpose",
+          "But",
+          "or at least it should be"
+        ]
+      },
+      "explain": "空前把目的摊成好几种，这句一转收成一条：哪种写作都离不开目的。后半句先让一步，空后就顺势讲反面：写作没目的、没回应，人就提不起劲。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 也以 \"But\" 开头，像在列举后转折。但它的 \"this is the only kind of writing\" 在这里没有可指的写作类型，\"young people\" 也还没出现。",
+          "quotes": [
+            "But",
+            "this is the only kind of writing",
+            "young people"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前把目的摊成好几种，这句一转收成一条：哪种写作都离不开目的。后半句先让一步，空后就顺势讲反面：写作没目的、没回应，人就提不起劲。",
+        "matchedClues": [
+          {
+            "contextSide": "Sometimes our purpose is to achieve something; other times it may be to entertain",
+            "optionSide": "it is always purposeful",
+            "relation": "目的种类不同，有目的这一点不变。"
+          },
+          {
+            "contextSide": "doesn’t seem to have any purpose",
+            "optionSide": "or at least it should be",
+            "relation": "先说应该有目的，空后再讲没有目的时的后果。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 也以 \"But\" 开头，像在列举后转折。但它的 \"this is the only kind of writing\" 在这里没有可指的写作类型，\"young people\" 也还没出现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:33": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:33",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "real audiences",
+        "choose their words accordingly",
+        "You write “Dear Santa”",
+        "don’t know him personally",
+        "show him respect"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+        "beforeQuote": "When children write for real audiences and real purposes, they can learn to choose their words accordingly.",
+        "afterQuote": "You write “Dear Santa” because you don’t know him personally and you want to show him respect."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "You write “Dear Santa” because",
+          "signalSide": "context-after",
+          "targetText": "You write “Hi Nanna and Pop” because",
+          "relation": "两句同一个句式，各举一种称呼和它的理由。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "You write “Hi Nanna and Pop” because",
+          "signalSide": "option",
+          "targetText": "You write “Dear Santa” because",
+          "relation": "E 与空后句式完全平行。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "close to them",
+          "signalSide": "option",
+          "targetText": "don’t know him personally",
+          "relation": "亲近与不熟正好相反，所以称呼一随意一客气。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "choose their words accordingly",
+          "signalSide": "context-before",
+          "targetText": "Hi Nanna and Pop / Dear Santa",
+          "relation": "“相应地选词”由两个称呼的例子落实。"
+        }
+      ],
+      "lock": [
+        "You write",
+        "close to them",
+        "don’t know him personally"
+      ],
+      "find": {
+        "text": "先看空后 \"You write “Dear Santa” because you don’t know him personally\"，是按关系定称呼的例子。E 句式一样，\"because you are close to them\" 正是反面那一例。",
+        "quotes": [
+          "You write “Dear Santa” because you don’t know him personally",
+          "because you are close to them"
+        ]
+      },
+      "explain": "空前说为真实读者写，就会相应挑词。这句和空后合成一对例子：对亲人随意，对不熟的人客气，把 \"accordingly\" 落到称呼的一松一紧上。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说为真实读者写，就会相应挑词。这句和空后合成一对例子：对亲人随意，对不熟的人客气，把 \"accordingly\" 落到称呼的一松一紧上。",
+        "matchedClues": [
+          {
+            "contextSide": "choose their words accordingly",
+            "optionSide": "You write “Hi Nanna and Pop”",
+            "relation": "对亲人用随意称呼，是按读者选词的一个例子。"
+          },
+          {
+            "contextSide": "because you don’t know him personally",
+            "optionSide": "because you are close to them",
+            "relation": "一亲一疏，两例对照。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:34": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:34",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Texting",
+        "online messaging",
+        "live chats while playing video games",
+        "constantly producing written messages",
+        "usually writing to family and friends"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "Texting, online messaging, live chats while playing video games all mean that they are constantly producing written messages."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "they",
+          "signalSide": "context-after",
+          "targetText": "young people",
+          "relation": "空后 they 要有人可指，F 的 young people 给了先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "young people",
+          "signalSide": "option",
+          "targetText": "they are constantly producing written messages",
+          "relation": "young people 是空后 they 的所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Texting, online messaging, live chats",
+          "signalSide": "context-after",
+          "targetText": "As technology develops",
+          "relation": "短信、网聊、游戏聊天都是技术带来的写法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "writing more than they ever have",
+          "signalSide": "option",
+          "targetText": "constantly producing written messages",
+          "relation": "写得比以往多，由不停地写消息来证明。"
+        }
+      ],
+      "lock": [
+        "Texting",
+        "young people",
+        "writing more"
+      ],
+      "find": {
+        "text": "空后 \"Texting, online messaging, live chats\" 都是新技术下的写法，\"they are constantly producing written messages\" 的 they 要有人。F 有 \"young people\"，又说 \"writing more\"。",
+        "quotes": [
+          "Texting, online messaging, live chats",
+          "they are constantly producing written messages",
+          "young people",
+          "writing more"
+        ]
+      },
+      "explain": "段首先下判断：年轻人如今写得空前多。空后用短信、网聊、游戏聊天把“多”举实，再用 \"However\" 转到他们多用非正式语言，为下一段讲问题铺路。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "段首先下判断：年轻人如今写得空前多。空后用短信、网聊、游戏聊天把“多”举实，再用 \"However\" 转到他们多用非正式语言，为下一段讲问题铺路。",
+        "matchedClues": [
+          {
+            "contextSide": "Texting, online messaging, live chats while playing video games",
+            "optionSide": "As technology develops",
+            "relation": "空后列的都是技术发展后的交流方式。"
+          },
+          {
+            "contextSide": "constantly producing written messages",
+            "optionSide": "young people are writing more than they ever have",
+            "relation": "不停写消息，就是写得空前多。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "它和空后 \"Texting, online messaging\" 一样讲技术带来的变化，放段首像总起。但 \"they are constantly producing written messages\" 的 they 无人可指，讲的又是写得多。它照答案 F 改：都有 \"writing\"，答案说年轻人写得空前多，它改成纸笔写信的时代可能过去了。它的 \"letter writing\" 也像接圣诞信，可那段讲的是信年年管用。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:35": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:35",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "There is nothing wrong",
+        "this kind of writing",
+        "gets the job done",
+        "won’t be rewarded",
+        "the school examiner"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+        "beforeQuote": "There is nothing wrong with this kind of writing. It suits the audience and the purpose and gets the job done.",
+        "afterQuote": "This type of writing won’t be rewarded by the school examiner, nor by a future employer or a potential client."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "There is nothing wrong with this kind of writing",
+          "relation": "But 从“这种写法没问题”转到“只会这种就有问题”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this",
+          "signalSide": "option",
+          "targetText": "this kind of writing",
+          "relation": "this 回指空前的 this kind of writing，即非正式写作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "it will cause problems",
+          "signalSide": "option",
+          "targetText": "won’t be rewarded",
+          "relation": "问题由空后具体说出：阅卷人、雇主、客户都不认可。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "won’t be rewarded",
+          "signalSide": "context-after",
+          "targetText": "cause problems",
+          "relation": "得不到认可，就是 problems 的具体样子。"
+        }
+      ],
+      "lock": [
+        "nothing wrong",
+        "But",
+        "won’t be rewarded"
+      ],
+      "find": {
+        "text": "空前 \"There is nothing wrong\" 在肯定，空后 \"won’t be rewarded\" 已是坏处，中间要转折。G 的 \"But\" 转过来，\"cause problems\" 由空后具体说明。",
+        "quotes": [
+          "There is nothing wrong",
+          "won’t be rewarded",
+          "But",
+          "cause problems"
+        ]
+      },
+      "explain": "作者先替非正式写作说句公道话，这句马上划出界限：毛病不在这种写法，而在只会它。空后阅卷人、雇主、客户都不认可，就是问题的具体样子。",
+      "distractors": [
+        {
+          "label": "B",
+          "text": "B 也以 \"But\" 开头，又像接空前 \"the purpose\"。但空前刚说它合目的，再说总该有目的转不过来，也引不出空后 \"won’t be rewarded\"。",
+          "quotes": [
+            "But",
+            "the purpose",
+            "won’t be rewarded"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "作者先替非正式写作说句公道话，这句马上划出界限：毛病不在这种写法，而在只会它。空后阅卷人、雇主、客户都不认可，就是问题的具体样子。",
+        "matchedClues": [
+          {
+            "contextSide": "There is nothing wrong with this kind of writing",
+            "optionSide": "But if this is the only kind of writing",
+            "relation": "先肯定，再限定条件转折。"
+          },
+          {
+            "contextSide": "won’t be rewarded by the school examiner",
+            "optionSide": "it will cause problems",
+            "relation": "空后列出问题的具体后果。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 也以 \"But\" 开头，又像接空前 \"the purpose\"。但空前刚说它合目的，再说总该有目的转不过来，也引不出空后 \"won’t be rewarded\"。"
+        },
+        {
+          "optionLabel": "A",
+          "reason": "它替年轻人辩护，像接空前 \"There is nothing wrong with this kind of writing\"。但空后 \"This type of writing won’t be rewarded\" 已转到坏处，空里得先转折，它还在辩护。它照答案 G 改：都有 \"young people\"，答案说只会这种写作会出问题，它改成并非不会写。放在段首那一空，\"these young people\" 前面无人可指。"
+        }
+      ]
+    }
+  }
+}

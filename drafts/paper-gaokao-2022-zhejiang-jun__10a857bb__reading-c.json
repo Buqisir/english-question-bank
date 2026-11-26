@@ -1,0 +1,781 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jun:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jun:reading-c": {
+      "overview": "文章认为工作并非越拼越好，适度同样出成效：适度练习的人出错最少，过分认真反而表现更差；午饭时社交、留出工作之外的时间能提振情绪、带来新想法，让人更高效。",
+      "fullTranslationZh": "许多人认为，拼尽全力工作是成功的秘诀，但研究发现，在工作中适度同样能取得成效。\n\n在哈佛大学埃伦·兰格领导的一项研究中，研究人员让人们把句子翻译成一种新编造的语言。事先适度练习过这种语言的受试者，比练习过多或完全没练习的人犯的错误更少。在艺术、科学和政治等各个领域，知识水平过高会让人过于依赖看待问题的传统方式。高度的认真尽责与较低的工作表现相关，在那些追求完美得不偿失的简单工作中尤其如此。\n\n我们在工作上待多长时间、怎样利用这些时间，在许多工作场所都受到仔细审视。在办公桌前吃午饭的年轻银行职员很可能被看作积极进取的人，而他那些在会议室里边吃边轻松聊天的同事，却会招来角落办公室里上司的白眼。“来自比我们更看重人际关系的文化的人，一想到独自对着电脑吃饭就会感到震惊，”得克萨斯大学奥斯汀分校的心理学教授阿特·马克曼说。研究表明，社交能提振情绪，让人从新的方向、以新的方式思考，这可能有助于提高午饭后的工作成效。\n\n马克曼还提倡留出脱离手头任务的时间。“成为一个善于思考的人，部分在于去经历一些看似与你眼下的工作无关、却能给你的工作带来新想法的事情，”他说，“此外，大量研究表明，积极的情绪会带来更高的效率和创造力。所以，人们做一些提高生活满意度的事情时，也会让自己在工作中更有成效。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+          "sourceText": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+          "displayText": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:27"
+          ],
+          "translationZh": "事先适度练习过这种语言的受试者，比练习过多或完全没练习的人犯的错误更少。",
+          "analysisZh": "主干是 Subjects made fewer errors than those（受试者比另一些人犯错更少）。Subjects 后面的 who practiced the language moderately beforehand 是定语从句，限定是哪些受试者：事先适度练习的人；than 后的 those 指其他受试者，who practiced extensively or not at all 说明他们练得过多或根本没练。一句话里比了三组人，结论是“适度”那组最好。",
+          "underlineRanges": [
+            {
+              "start": 36,
+              "end": 46,
+              "quote": "moderately"
+            },
+            {
+              "start": 58,
+              "end": 80,
+              "quote": "made fewer errors than"
+            },
+            {
+              "start": 101,
+              "end": 126,
+              "quote": "extensively or not at all"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+          "sourceText": "Part of being a good thinker is experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+          "displayText": "Part of being a good thinker is experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:29"
+          ],
+          "translationZh": "成为一个善于思考的人，部分在于去经历一些看似与你眼下的工作无关、却能给你的工作带来新想法的事情",
+          "analysisZh": "主干是 Part of being a good thinker is experiencing things（成为善于思考的人，部分在于经历一些事），动名词短语分别作主语和表语。things 后面的 that 从句有两个并列谓语，用 but 连接：are seemingly unrelated to what you are working on（看似和手头工作无关）与 give you fresh ideas about your work（却能带来新想法）。seemingly 是关键：只是“看起来”无关，实际有用。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 51,
+              "quote": "Part of being a good thinker is experiencing things"
+            },
+            {
+              "start": 61,
+              "end": 80,
+              "quote": "seemingly unrelated"
+            },
+            {
+              "start": 122,
+              "end": 146,
+              "quote": "but give you fresh ideas"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-c:1"
+              ],
+              "start": 0,
+              "end": 39,
+              "quote": "许多人认为，拼尽全力工作是成功的秘诀，但研究发现，在工作中适度同样能取得成效。"
+            },
+            {
+              "paragraphId": "zh-reading-c-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-c:2",
+                "block:paper-gaokao-2022-zhejiang-jun:reading-c:3"
+              ],
+              "start": 41,
+              "end": 196,
+              "quote": "在哈佛大学埃伦·兰格领导的一项研究中，研究人员让人们把句子翻译成一种新编造的语言。事先适度练习过这种语言的受试者，比练习过多或完全没练习的人犯的错误更少。在艺术、科学和政治等各个领域，知识水平过高会让人过于依赖看待问题的传统方式。高度的认真尽责与较低的工作表现相关，在那些追求完美得不偿失的简单工作中尤其如此。"
+            },
+            {
+              "paragraphId": "zh-reading-c-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-c:4"
+              ],
+              "start": 198,
+              "end": 407,
+              "quote": "我们在工作上待多长时间、怎样利用这些时间，在许多工作场所都受到仔细审视。在办公桌前吃午饭的年轻银行职员很可能被看作积极进取的人，而他那些在会议室里边吃边轻松聊天的同事，却会招来角落办公室里上司的白眼。“来自比我们更看重人际关系的文化的人，一想到独自对着电脑吃饭就会感到震惊，”得克萨斯大学奥斯汀分校的心理学教授阿特·马克曼说。研究表明，社交能提振情绪，让人从新的方向、以新的方式思考，这可能有助于提高午饭后的工作成效。"
+            },
+            {
+              "paragraphId": "zh-reading-c-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-c:5"
+              ],
+              "start": 409,
+              "end": 544,
+              "quote": "马克曼还提倡留出脱离手头任务的时间。“成为一个善于思考的人，部分在于去经历一些看似与你眼下的工作无关、却能给你的工作带来新想法的事情，”他说，“此外，大量研究表明，积极的情绪会带来更高的效率和创造力。所以，人们做一些提高生活满意度的事情时，也会让自己在工作中更有成效。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-c-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+                "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+                "start": 22,
+                "end": 149
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+                "quote": "research has found that moderation(适度) also gets results on the job",
+                "start": 78,
+                "end": 145
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "quote": "事先适度练习过这种语言的受试者，比练习过多或完全没练习的人犯的错误更少。",
+                "start": 41,
+                "end": 77
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "quote": "研究发现，在工作中适度同样能取得成效。",
+                "start": 20,
+                "end": 39
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+                "quote": "The young banker who eats lunch at his desk is probably seen as a go-getter",
+                "start": 107,
+                "end": 182
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+                "quote": "Many people believe that working to the maximum is the secret to success",
+                "start": 0,
+                "end": 72
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-4",
+                "quote": "在办公桌前吃午饭的年轻银行职员很可能被看作积极进取的人",
+                "start": 36,
+                "end": 63
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "quote": "许多人认为，拼尽全力工作是成功的秘诀",
+                "start": 0,
+                "end": 18
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+                "quote": "there is a lot of research showing that a positive mood leads to higher levels of productivity and creativity",
+                "start": 219,
+                "end": 328
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "quote": "大量研究表明，积极的情绪会带来更高的效率和创造力",
+                "start": 75,
+                "end": 99
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+                "quote": "research has found that moderation(适度) also gets results on the job",
+                "start": 78,
+                "end": 145
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+                "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+                "start": 22,
+                "end": 149
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+                "quote": "Markman also promotes off-task time.",
+                "start": 0,
+                "end": 36
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "quote": "研究发现，在工作中适度同样能取得成效。",
+                "start": 20,
+                "end": 39
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "quote": "事先适度练习过这种语言的受试者，比练习过多或完全没练习的人犯的错误更少。",
+                "start": 41,
+                "end": 77
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "quote": "马克曼还提倡留出脱离手头任务的时间。",
+                "start": 0,
+                "end": 18
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+                "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+                "start": 22,
+                "end": 149
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "quote": "事先适度练习过这种语言的受试者，比练习过多或完全没练习的人犯的错误更少。",
+                "start": 41,
+                "end": 77
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+                "quote": "Part of being a good thinker is experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+                "start": 38,
+                "end": 200
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "quote": "成为一个善于思考的人，部分在于去经历一些看似与你眼下的工作无关、却能给你的工作带来新想法的事情",
+                "start": 19,
+                "end": 66
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头用 but 推翻“越拼越成功”的看法，提出适度也出成效；接着用 Langer 的实验和相关研究证明过度有害；再以午饭方式为例说明社交的好处；最后借 Markman 的话提倡留出工作之外的时间。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+            "summary": "很多人以为拼尽全力是成功秘诀，研究却发现适度同样出成效。",
+            "function": "摆出常见看法后转折，提出全文观点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:2",
+            "summary": "介绍 Ellen Langer 的实验：让人把句子译成一种新编的语言。",
+            "function": "引出实验，为下文结果作铺垫。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+            "summary": "适度练习的人出错最少；知识过多会让人死守传统思路，过分认真反而降低工作表现。",
+            "function": "用实验结果和研究发现支持观点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+            "summary": "职场看重工时，桌前吃饭的人被视为拼命三郎；但 Markman 指出社交能提振情绪、激发新思路。",
+            "function": "用午饭的例子说明适度放松的好处。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+            "summary": "Markman 提倡留出脱离任务的时间，看似无关的经历和好心情都能让人更高效、更有创造力。",
+            "function": "进一步论证并收束全文观点。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jun:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂 Ellen Langer 实验里三组受试者的比较，概括出实验结论。",
+      "stemTranslationZh": "Ellen Langer 的研究表明了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读，看三组人谁错得最少",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "做个完美主义者是值得的",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "especially in simple jobs where it doesn’t pay to be a perfectionist",
+            "sourceHighlight": "doesn’t pay",
+            "optionText": "It is worthwhile to be a perfectionist",
+            "optionHighlight": "worthwhile",
+            "explanation": "原文说在简单工作里追求完美不划算（doesn’t pay），选项反说成值得；何况这句并不是 Langer 的实验结果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "quote": "especially in simple jobs where it doesn’t pay to be a perfectionist",
+              "anchor": "追求完美不划算"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "翻译使人知识渊博。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "translate",
+            "optionText": "Translation",
+            "matchType": "wordFamily",
+            "relationNote": "Translation 和[[block:paper-gaokao-2022-zhejiang-jun:reading-c:2|asked people to translate sentences]]的 translate 同根；翻译只是实验让受试者做的任务，实验比的是练习多少和出错多少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:2",
+              "quote": "researchers asked people to translate sentences into a",
+              "anchor": "让人翻译句子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "越简单的工作越需要谨慎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "High conscientiousness is related to lower job performance, especially in simple jobs",
+            "sourceHighlight": "lower job performance",
+            "optionText": "Simpler jobs require greater caution.",
+            "optionHighlight": "require greater caution",
+            "explanation": "原文说在简单工作里过分认真反而表现更差（lower job performance），选项却说简单工作更要小心谨慎。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "quote": "High conscientiousness is related to lower job performance, especially in simple jobs",
+              "anchor": "过分认真表现更差"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "适度的努力产生最好的效果。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+              "anchor": "适度练习错得最少"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+              "quote": "research has found that moderation(适度) also gets results on the job",
+              "anchor": "适度也出成效"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Ellen Langer",
+          "sourceRole": "stem",
+          "targetText": "In a study led by Ellen Langer of Harvard University, researchers asked people to translate sentences into a",
+          "relationType": "locationCue",
+          "answerText": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all",
+          "bridgeZh": "这句只交代实验任务，结果在受试者的表现里",
+          "note": "题干 Ellen Langer 原词出现在原文，落在介绍这项实验的这一句。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:2"
+        },
+        {
+          "sourceText": "Moderate effort produces the best result.",
+          "sourceRole": "correctOption",
+          "targetText": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+          "relationType": "paraphrase",
+          "note": "实验比了三组人：适度练习的（moderately）错得比练得多的和不练的都少（fewer errors）。选项把“适度练习”概括成“适度的努力”，把三组里错得最少说成“效果最好”，也呼应[[block:paper-gaokao-2022-zhejiang-jun:reading-c:1|moderation(适度) also gets results]]，选 D。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:28": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借同句 while 前后两种吃午饭的人的对比，推出 go-getter 的意思。",
+      "stemTranslationZh": "第三段中画线词“go-getter”指的是______的人。",
+      "locateBy": "stem",
+      "locateFindZh": "对照同句 while 后的同事",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "善于应对压力",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "is good at handling pressure",
+            "explanation": "放进去成了“在桌前吃午饭的职员被看作善于应对压力的人”，可原文写的只是他吃饭也不离开工位，没提压力。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为成功而努力工作",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "quote": "The young banker who eats lunch at his desk is probably seen as a go-getter",
+              "anchor": "桌前吃午饭被看作 go-getter"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+              "quote": "Many people believe that working to the maximum is the secret to success",
+              "anchor": "拼尽全力是成功秘诀"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "天生适合干这份工作",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "has a natural talent for his job.",
+            "explanation": "放进去成了“在桌前吃午饭的职员被看作天生适合这份工作”，可吃饭不离工位显出的是肯花时间拼，和天赋无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "与同事相处融洽",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office",
+            "sourceEntity": "his colleagues who chat",
+            "optionText": "gets on well with his co-workers",
+            "optionEntity": "his co-workers",
+            "explanation": "放进去成了“独自在桌前吃饭的人被看作和同事处得好”，可一起聊天吃饭的是他的同事（colleagues who chat），他恰恰没去。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "quote": "his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office",
+              "anchor": "聊天吃饭的同事遭白眼"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "go-getter",
+          "sourceRole": "stem",
+          "targetText": "The young banker who eats lunch at his desk is probably seen as a go-getter, while his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office.",
+          "relationType": "locationCue",
+          "answerText": "who eats lunch at his desk",
+          "note": "题干画线词 go-getter 原词出现在原文，落在比较两种吃午饭方式的这一句。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4"
+        },
+        {
+          "sourceText": "works hard to become successful",
+          "sourceRole": "correctOption",
+          "targetText": "The young banker who eats lunch at his desk is probably seen as a go-getter, while his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office.",
+          "relationType": "paraphrase",
+          "note": "同一句里，连午饭都在办公桌前吃（eats lunch at his desk）的职员被看作 go-getter，而轻松聊天吃饭的同事遭上司白眼（get dirty looks），所以 go-getter 必须是上司眼里拼命干活的人。放回去：在桌前吃午饭的年轻职员很可能被看作为了成功拼命工作的人，选 B。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:29": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完最后一段 Markman 的话，判断哪一项是从中能得出的结论。",
+      "stemTranslationZh": "从最后一段可以推断出什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2022-zhejiang-jun:reading-c:5]]先提倡 off-task time，再说看似无关的经历带来 fresh ideas，又引研究说 positive mood 提升效率和创造力；答案要守住这条因果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "善于思考的人能够启发他人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "good thinker",
+            "optionText": "good thinker",
+            "matchType": "exact",
+            "relationNote": "good thinker 出自[[block:paper-gaokao-2022-zhejiang-jun:reading-c:5|Part of being a good thinker]]，那句说善于思考的人会从看似无关的经历里为自己的工作找到新点子（fresh ideas about your work），没说去启发别人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "quote": "Part of being a good thinker is experiencing things",
+              "anchor": "善于思考的人"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "与工作无关的经历是无用的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+            "sourceHighlight": "give you fresh ideas about your work",
+            "optionText": "Experience unrelated to your job is useless.",
+            "optionHighlight": "useless",
+            "explanation": "原文说看似和手头工作无关的经历恰恰能带来新点子（give you fresh ideas），选项却说这些经历没用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "quote": "seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+              "anchor": "看似无关却带来新点子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "愉快的心情有助于造就富有创造力的头脑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "quote": "there is a lot of research showing that a positive mood leads to higher levels of productivity and creativity",
+              "anchor": "积极情绪带来创造力"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "专注于手头的事能提高效率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "productivity",
+            "optionText": "productivity",
+            "matchType": "exact",
+            "relationNote": "productivity 出自[[block:paper-gaokao-2022-zhejiang-jun:reading-c:5|a positive mood leads to higher levels]]，原文说效率提高靠的是好心情；Markman 提倡的还是暂时离开手头任务（off-task time），不是一味专注。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "quote": "a positive mood leads to higher levels of productivity and creativity",
+              "anchor": "好心情提高效率"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A cheerful mood helps make a creative mind.",
+          "sourceRole": "correctOption",
+          "targetText": "“Also, there is a lot of research showing that a positive mood leads to higher levels of productivity and creativity.",
+          "relationType": "paraphrase",
+          "note": "选项的“愉快的心情”（cheerful mood）就是原文的“积极情绪”（positive mood），“造就有创造力的头脑”对应原文说的“带来更高的创造力”（higher levels of…creativity）；研究结论直接说了，选 C。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:30": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把各段的实验、例子和观点合起来，看全文主张怎样的工作方式。",
+      "stemTranslationZh": "这篇文章似乎在提倡什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2022-zhejiang-jun:reading-c:1]]先说 moderation also gets results，[[block:paper-gaokao-2022-zhejiang-jun:reading-c:3]]适度练习错得最少，[[block:paper-gaokao-2022-zhejiang-jun:reading-c:4]]午饭社交更好，[[block:paper-gaokao-2022-zhejiang-jun:reading-c:5]]提倡 off-task time；答案要盖住“别做过头”",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "不走极端的工作习惯。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1",
+              "quote": "research has found that moderation(适度) also gets results on the job",
+              "anchor": "适度也出成效"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+              "anchor": "适度练习错得最少"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "quote": "Markman also promotes off-task time.",
+              "anchor": "提倡脱离任务的时间"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "工作与家庭之间的平衡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Balance between work and family.",
+            "explanation": "原文讲的放松落在午饭时和同事聊天、工作之外的经历上（off-task time），通篇没提家庭。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "历史悠久的文化传统。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "traditional",
+            "optionText": "traditions",
+            "matchType": "wordFamily",
+            "relationNote": "traditions 和[[block:paper-gaokao-2022-zhejiang-jun:reading-c:3|too attached to traditional ways]]的 traditional 同根，那句说知识太多会让人死守传统思路，是在讲弊端，不是提倡。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "quote": "High levels of knowledge can make people too attached to traditional ways of viewing problems",
+              "anchor": "死守传统思路"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "工作环境中的和睦。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Social interaction has been shown to lift mood(情绪) and get people thinking in new directions",
+            "sourceHighlight": "Social interaction",
+            "optionText": "Harmony in the work environment.",
+            "optionHighlight": "Harmony",
+            "explanation": "[[block:paper-gaokao-2022-zhejiang-jun:reading-c:4|Social interaction has been shown]]说社交能提振情绪、带来新思路，只是用来说明别一刻不停地干的一个例子，全文要提倡的不是同事和睦。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "quote": "Social interaction has been shown to lift mood(情绪) and get people thinking in new directions",
+              "anchor": "社交提振情绪"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Middle-of-the-road work habits.",
+          "sourceRole": "correctOption",
+          "targetText": "Many people believe that working to the maximum is the secret to success, but research has found that moderation(适度) also gets results on the job.",
+          "relationType": "paraphrase",
+          "note": "选项的“不走极端”（Middle-of-the-road）就是原文的“适度”（moderation）。几段讲的都是工作别做过头：练习适度错得最少，知识太多、太较真反而受限，午饭和工作之外的时间该留给社交和放松；“不走极端的工作习惯”正好把这些都包进去，选 A。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:1"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "As they came in my direction, I put on my brightest and happiest smile. An old man in a torn coat was the first to hold out his plate. My hand shook a little as I added the salad, but he smiled back and thanked me quietly. The woman behind him asked if there was any more dressing, so I gave her an extra spoonful of the dressing we had mixed that afternoon. One by one, they moved along the line. Some joked with me about the cold weather, and a little girl said salad was her favorite food. Whenever I got slow, the lady beside me reached over and helped fill the plates, just as she had promised. Before long, I forgot that I had ever been scared. These people were not dangerous at all. They were tired and hungry, and a friendly face meant a lot to them.\n\nI was so happy that I had earned my service hours in this way. After the last plate was served, we washed the pots and wiped the tables. That morning I had come only for the hours I needed to graduate, but now I kept thinking about the faces in the line. Before I left, I asked the lady if the kitchen needed help on weekends. She handed me a sign-up sheet, and I wrote my name down for next Saturday.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "原文停在晚饭刚开始发、“我”看着长长的队伍心里难过。“我”上前之前的害怕——他们会怎样对我、会不会恨我——还没有答案，“我”也还没真正为谁打过一份饭。"
+        },
+        {
+          "question": "“我”想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "“我”来做义工起初只是为了凑够毕业要的服务时数（\"in order to complete the community service hours\"），看见无家可归者会紧张（\"I got a little scared\"），但心软、会替别人难过（\"It saddened me\"）。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第一人称“我”讲过去的事，句子不长，多是叙述加几处心理活动（三个自问的问句）。全文没有一处带引号的直接引语，身边那位女士说的话也是转述（\"said if I needed help, she’d be right there\"）。续写也以转述为主，最多留一句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "I was assigned (分配) to serve the salad with the lady next to me.",
+          "use": "续写里“我”手上的动作就是打沙拉，身边的人就是这位女士，不必另造岗位和帮手。"
+        },
+        {
+          "sourceQuote": "She smiled at me and said if I needed help, she’d be right there",
+          "use": "第一段“我”手忙脚乱时让她伸手帮一把，兑现这句承诺；第二段也可以由她给“我”下一次来的机会。"
+        },
+        {
+          "sourceQuote": "from mixing salad dressing to separating frozen meat",
+          "use": "下午亲手调的沙拉酱可以在发饭时再出现，让“我”的准备工作有了用处。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从“我”挂上最灿烂的笑容迎向队伍写起，要写出“我”怎样面对他们、他们怎样回应，解决原文里“我”的害怕。",
+        "第二段首句说“我”很高兴用这种方式挣到服务时数，所以第一段结束时发饭必须顺利、这段经历对“我”已经有了意义。",
+        "人物只有“我”、身边那位女士和来吃饭的人；第一人称、过去时不变；约 150 词，至少用 5 个原文下划线词语。"
+      ],
+      "thisEssayChooses": "本文让一位穿破外套的老人先回以微笑，再写几个排队的人和“我”说笑，女士在“我”慢下来时帮忙，“我”的害怕就此消失；第二段写收拾、回想，最后报名下周六再来。老人、母亲、小女孩只是队伍里不起名的人，都可以换成别的反应；结尾也可以换成别的具体动作，比如把这天写进服务时数表格。下划线词语在本材料里没有标出，本文尽量用回原文词，如 line、scared、dangerous、torn、dressing、lady。"
+    },
+    "standard": {
+      "essay": "As they came in my direction, I put on my brightest and happiest smile. An old man in a torn coat was the first to hold out his plate. My hand shook a little as I added the salad, but he smiled back and thanked me quietly. The woman behind him asked if there was any more dressing, so I gave her an extra spoonful of the dressing we had mixed that afternoon. One by one, they moved along the line. Some joked with me about the cold weather, and a little girl said salad was her favorite food. Whenever I got slow, the lady beside me reached over and helped fill the plates, just as she had promised. Before long, I forgot that I had ever been scared. These people were not dangerous at all. They were tired and hungry, and a friendly face meant a lot to them.\n\nI was so happy that I had earned my service hours in this way. After the last plate was served, we washed the pots and wiped the tables. That morning I had come only for the hours I needed to graduate, but now I kept thinking about the faces in the line. Before I left, I asked the lady if the kitchen needed help on weekends. She handed me a sign-up sheet, and I wrote my name down for next Saturday.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写第一次面对面打饭：对方的回应一点点把“我”的害怕化掉。",
+          "items": [
+            {
+              "quote": "My hand shook a little as I added the salad, but he smiled back and thanked me quietly.",
+              "explain": "先写手抖，接住原文的 \"I got a little scared\"；再用 but 转到老人回以微笑，转折由一个看得见的回应触发，而不是“我”突然想通。"
+            },
+            {
+              "quote": "the dressing we had mixed that afternoon",
+              "explain": "回收原文下午调沙拉酱的细节，让准备工作在这里派上用场，续写和原文就连上了。"
+            },
+            {
+              "quote": "the lady beside me reached over and helped fill the plates, just as she had promised",
+              "explain": "兑现原文女士那句“需要帮忙我就在”，人物还是原来的人物，没有另造帮手。"
+            },
+            {
+              "quote": "These people were not dangerous at all.",
+              "explain": "直接回答原文的 \"some of them looked so dangerous\"，第一段停在“我”不再害怕，正好让第二段的“高兴”说得通。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "收拾完回想这一天，用一个具体动作收住：报名下次再来。",
+          "items": [
+            {
+              "quote": "That morning I had come only for the hours I needed to graduate",
+              "explain": "呼应开头“为了毕业凑时数”的动机，用过去完成时把前后的“我”对照起来。"
+            },
+            {
+              "quote": "I wrote my name down for next Saturday",
+              "explain": "结尾落在一个动作上，说明“我”以后还会来，比喊一句“我们都要帮助别人”更实在。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "hold out his plate",
+          "function": "写排队打饭的人伸出盘子，一个动作就把场景立起来。"
+        },
+        {
+          "expression": "One by one, they moved along the line.",
+          "function": "把一长串人快速带过，不必一个个写，适合交代队伍往前走。"
+        },
+        {
+          "expression": "Before long, I forgot that I had ever been scared.",
+          "function": "写情绪在一段时间里慢慢变化，接在几个具体回应之后才有说服力。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "让某个流浪者闹事、“我”勇敢化解，或者写成有人认出“我”、送“我”礼物。",
+          "why": "原文的问题是“我”自己的害怕，段首句一给笑容，方向就是对方友好回应；另造冲突或巧遇偏离了原文，也挤掉了打饭这件事本身。"
+        },
+        {
+          "pitfall": "第二段整段都是“这次经历让我明白……我们都应该帮助有需要的人”。",
+          "why": "口号放在任何义工故事后面都成立，不推进任何事；要落在收拾、回想、报名再来这样的具体事上。"
+        },
+        {
+          "pitfall": "第一段就写“我”服务结束、很高兴挣到了时数。",
+          "why": "这是第二段首句的事，提前写掉会让第二段开头重复；第一段只写到打饭顺利、害怕消失为止。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "As they came in my direction, I put on my brightest and happiest smile. The first in line was an old man in a torn, dirty coat. My hand trembled slightly as I scooped salad onto his plate, but to my surprise, his tired face broke into a smile. “Thanks, kid,” he said, and shuffled on. After that, things got easier. A mother with two small children asked whether there was any more dressing, and I proudly gave her an extra spoonful of the dressing I had mixed that afternoon. A few men in the line grumbled about the freezing wind outside, and before I knew it, I was laughing along with them. Whenever the line moved too fast for me, the lady beside me reached over and filled a plate or two without a word, just as she had promised. Somewhere along the way, my fear simply melted away. The people who had looked dangerous from a distance were only worn out and hungry, and what they wanted was a hot meal and a kind face.\n\nI was so happy that I had earned my service hours in this way. When the last plate had been served, we stacked the chairs, scrubbed the pots and wiped down every table until the hall was spotless again. My feet ached, but I hardly noticed. That morning I had come only for the hours on my form; now I kept seeing the old man’s smile and the children’s happy faces. Before I left, I asked the lady whether the kitchen needed help on weekends. She handed me a sign-up sheet, and I wrote my name down for the following Saturday. Walking home in the cold, I felt the hours on my form were the smallest thing I had earned that day.",
+      "beyondStandard": [
+        {
+          "quote": "his tired face broke into a smile",
+          "explain": "broke into a smile 写笑容一下子绽开，比 smiled back 更有画面，也带出老人的疲惫。"
+        },
+        {
+          "quote": "“Thanks, kid,” he said, and shuffled on.",
+          "explain": "全文唯一一句直接引语，放在“我”害怕松动的转折处；shuffled 写出老人拖着脚走开的样子，比 moved on 具体。"
+        },
+        {
+          "quote": "I felt the hours on my form were the smallest thing I had earned that day",
+          "explain": "回到开头凑时数的动机，用“表格上的时数”这个具体物件点出收获，不贴空泛的道理。"
+        }
+      ]
+    }
+  }
+}

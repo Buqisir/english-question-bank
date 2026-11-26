@@ -1,0 +1,608 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jun:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jun:reading-a": {
+      "overview": "作者幼时从意大利来到纽约，在布鲁克林幼儿园的午餐队伍里因不懂英语而无助；多年后她暑期在政府机构为意大利移民当口译，庆幸自己会两种语言，眼界也随之开阔。",
+      "fullTranslationZh": "在我的故乡意大利，人人午餐吃的都是意大利面和比萨。吃这种午餐的人都皮肤白皙，说意大利语。几年后，我和幼儿园的同学在布鲁克林一所学校里排队打午饭，这时我意识到，事情不再那么简单了。我的同学里，有皮肤白皙、长着蓝色大眼睛的孩子，也有深棕色皮肤、黑头发的孩子。食物的种类几乎和学生一样多样。我面前摆着一大排食物，有些我用母语都叫不出名字。我怕挑到很难吃的东西，拼命想问排在我前面的男孩该选什么。不巧的是，我们之间隔着语言的障碍。\n\n虽然幼儿园的经历仿佛已是一个世纪以前的事，但我从中学到的东西会永远留在我心里。过去三个暑假，我一直在纽约的一家政府机构工作。和当年午餐队伍里那个小女孩很像的新移民涌进我们办公室寻求帮助。我常常要给说意大利语的人当翻译。在充当这一重要的沟通纽带时，我常会想起自己学会英语之前拼命想与人交谈的情景。看着年长的意大利人试着用意大利语和不会说这种语言的人交谈，我深感同情。我忽然清楚地意识到，自己能流利地说两种语言是多么幸运。\n\n在纽约这座多元文化的城市，像我这样的学生有幸能与形形色色的人一起工作。在把英语翻译成意大利语的过程中，我了解到一些我以前都不知道其存在的社会项目。这份工作以在教室四壁之内不可能实现的方式开阔了我的眼界。如今走在布鲁克林的街道上，我不再被这座城市的声音和气味弄得不知所措，反而享受它的多样性。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+          "sourceText": "As I served the role of a vital communication link, I was reminded of my desperate struggle to converse before I learned English.",
+          "displayText": "As I served the role of a vital communication link, I was reminded of my desperate struggle to converse before I learned English.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:22"
+          ],
+          "translationZh": "在充当这一重要的沟通纽带时，我常会想起自己学会英语之前拼命想与人交谈的情景。",
+          "analysisZh": "先找主干：I was reminded of my desperate struggle（我想起了自己当年的拼命挣扎）。As 从句交代什么时候想起：在我充当沟通纽带的时候；to converse 说明挣扎着要做什么，就是和人交谈；before I learned English 把这段挣扎放回学英语之前。今天替人传话、当年自己开不了口，两件事在这一句里接上，所以后文那个“小女孩”指的是当年的作者。",
+          "underlineRanges": [
+            {
+              "start": 52,
+              "end": 69,
+              "quote": "I was reminded of"
+            },
+            {
+              "start": 104,
+              "end": 128,
+              "quote": "before I learned English"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+          "sourceText": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+          "displayText": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:23"
+          ],
+          "translationZh": "这份工作以在教室四壁之内不可能实现的方式开阔了我的眼界。",
+          "analysisZh": "主干是 This work expanded my mind（这份工作开阔了我的眼界），This work 指她暑期当口译的工作。in ways 说明以什么方式，后面的 that are impossible inside the four walls of a classroom 是定语从句，修饰 ways：这些方式在教室四壁之内做不到。“教室四壁”代指课堂学习，整句是拿课外的真实工作和课堂作对比。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "This work expanded my mind"
+            },
+            {
+              "start": 44,
+              "end": 91,
+              "quote": "impossible inside the four walls of a classroom"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-a:1"
+              ],
+              "start": 0,
+              "end": 211,
+              "quote": "在我的故乡意大利，人人午餐吃的都是意大利面和比萨。吃这种午餐的人都皮肤白皙，说意大利语。几年后，我和幼儿园的同学在布鲁克林一所学校里排队打午饭，这时我意识到，事情不再那么简单了。我的同学里，有皮肤白皙、长着蓝色大眼睛的孩子，也有深棕色皮肤、黑头发的孩子。食物的种类几乎和学生一样多样。我面前摆着一大排食物，有些我用母语都叫不出名字。我怕挑到很难吃的东西，拼命想问排在我前面的男孩该选什么。不巧的是，我们之间隔着语言的障碍。"
+            },
+            {
+              "paragraphId": "zh-reading-a-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-a:2"
+              ],
+              "start": 213,
+              "end": 422,
+              "quote": "虽然幼儿园的经历仿佛已是一个世纪以前的事，但我从中学到的东西会永远留在我心里。过去三个暑假，我一直在纽约的一家政府机构工作。和当年午餐队伍里那个小女孩很像的新移民涌进我们办公室寻求帮助。我常常要给说意大利语的人当翻译。在充当这一重要的沟通纽带时，我常会想起自己学会英语之前拼命想与人交谈的情景。看着年长的意大利人试着用意大利语和不会说这种语言的人交谈，我深感同情。我忽然清楚地意识到，自己能流利地说两种语言是多么幸运。"
+            },
+            {
+              "paragraphId": "zh-reading-a-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-a:3"
+              ],
+              "start": 424,
+              "end": 569,
+              "quote": "在纽约这座多元文化的城市，像我这样的学生有幸能与形形色色的人一起工作。在把英语翻译成意大利语的过程中，我了解到一些我以前都不知道其存在的社会项目。这份工作以在教室四壁之内不可能实现的方式开阔了我的眼界。如今走在布鲁克林的街道上，我不再被这座城市的声音和气味弄得不知所措，反而享受它的多样性。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+                "quote": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+                "start": 286,
+                "end": 402
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+                "quote": "Everyone who had such a lunch was fair-skinned and spoke Italian.",
+                "start": 74,
+                "end": 139
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-1",
+                "quote": "我的同学里，有皮肤白皙、长着蓝色大眼睛的孩子，也有深棕色皮肤、黑头发的孩子。",
+                "start": 89,
+                "end": 127
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-1",
+                "quote": "吃这种午餐的人都皮肤白皙，说意大利语。",
+                "start": 25,
+                "end": 44
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+                "quote": "as I stood in the lunch line with my kindergarten class in a school in Brooklyn",
+                "start": 159,
+                "end": 238
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+                "quote": "I was reminded of my desperate struggle to converse before I learned English.",
+                "start": 401,
+                "end": 478
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-1",
+                "quote": "我和幼儿园的同学在布鲁克林一所学校里排队打午饭",
+                "start": 48,
+                "end": 71
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "quote": "我常会想起自己学会英语之前拼命想与人交谈的情景",
+                "start": 123,
+                "end": 146
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+                "quote": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+                "start": 215,
+                "end": 307
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+                "quote": "In my English to Italian translations, I’ve learned about social programs that I didn’t know existed.",
+                "start": 113,
+                "end": 214
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-3",
+                "quote": "这份工作以在教室四壁之内不可能实现的方式开阔了我的眼界。",
+                "start": 73,
+                "end": 101
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-3",
+                "quote": "我了解到一些我以前都不知道其存在的社会项目",
+                "start": 51,
+                "end": 72
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+                "quote": "As I served the role of a vital communication link, I was reminded of my desperate struggle to converse before I learned English.",
+                "start": 349,
+                "end": 478
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "quote": "在充当这一重要的沟通纽带时，我常会想起自己学会英语之前拼命想与人交谈的情景。",
+                "start": 109,
+                "end": 147
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+                "quote": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+                "start": 215,
+                "end": 307
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-a",
+                "paragraphId": "zh-reading-a-3",
+                "quote": "这份工作以在教室四壁之内不可能实现的方式开阔了我的眼界。",
+                "start": 73,
+                "end": 101
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写幼时初到布鲁克林、在午餐队伍里因语言不通而无助，再写多年后暑期为意大利移民口译、想起当年并庆幸自己会两种语言，最后写这份工作开阔了眼界，如今她享受这座城市的多元。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+            "summary": "从意大利人人相同的午餐，写到布鲁克林幼儿园里肤色、食物各异，她想问人却隔着语言障碍。",
+            "function": "回忆童年经历，交代后文“小女孩”的来历。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+            "summary": "暑期在政府机构为意大利移民口译，看到移民就想起当年的自己，意识到会两种语言很幸运。",
+            "function": "把今天的工作和童年经历连起来，写出态度的变化。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+            "summary": "这份工作让她了解社会项目、开阔眼界，如今她不再困惑，而是享受城市的多元。",
+            "function": "总结收获，回应开头的困惑。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jun:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者在布鲁克林排队打午饭时发现“事情不再简单”具体指什么。",
+      "stemTranslationZh": "作者进入布鲁克林的学校后意识到了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看哪里不简单",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "时间过得很快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Time passed quickly.",
+            "explanation": "原文只在[[block:paper-gaokao-2022-zhejiang-jun:reading-a:2|feels like a century ago]]说如今回想幼儿园恍如隔世，那是长大后的感受，不是入学时意识到的事。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "英语很难学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "English was hard to learn.",
+            "explanation": "原文说当时隔着语言障碍（the barrier of language），问不了前面的男孩，没说她觉得英语难学。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "食物很难吃。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Fearing that I would pick out something awful",
+            "sourceHighlight": "Fearing",
+            "optionText": "The food was terrible.",
+            "optionHighlight": "terrible",
+            "explanation": "原文只说她怕挑到难吃的（Fearing…something awful），是还没吃时的担心，不是断定食物难吃。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "quote": "Fearing that I would pick out something awful",
+              "anchor": "怕挑到难吃的"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人们差别很大。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "quote": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+              "anchor": "同学长相各不相同"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "quote": "Everyone who had such a lunch was fair-skinned and spoke Italian.",
+              "anchor": "在意大利人人一样"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "school in Brooklyn",
+          "sourceRole": "stem",
+          "targetText": "A few years later, as I stood in the lunch line with my kindergarten class in a school in Brooklyn, I realized things were no longer that simple.",
+          "relationType": "locationCue",
+          "answerText": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair",
+          "bridgeZh": "哪里不再 simple，接着就写同学的肤色发色各不相同",
+          "note": "题干 school in Brooklyn 原词出现在原文，落在她排队打午饭、意识到事情不再简单的这一句。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1"
+        },
+        {
+          "sourceText": "People were very different.",
+          "sourceRole": "correctOption",
+          "targetText": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+          "relationType": "paraphrase",
+          "note": "选项的“人们差别很大”是把同学从白皮肤蓝眼睛到深棕皮肤黑头发（ranged from…to）概括成一句；对照[[block:paper-gaokao-2022-zhejiang-jun:reading-a:1|Everyone who had such a lunch]]，在意大利人人白皙、都说意大利语，所以到这里她才觉得不再简单，选 D。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:22": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据“午餐队伍”这一线索，判断“那个小女孩”回指前文的谁。",
+      "stemTranslationZh": "第二段中的“the little girl”指的是谁？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找谁排在午餐队伍里",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一位意大利老师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Italian",
+            "optionText": "Italian",
+            "matchType": "exact",
+            "relationNote": "选项借用文中反复出现的 Italian（意大利的），可说意大利语的是作者和[[block:paper-gaokao-2022-zhejiang-jun:reading-a:2|interpreter for the Italian-speaking ones]]提到的移民，全文没出现老师。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "quote": "I often had to be an interpreter for the Italian-speaking ones.",
+              "anchor": "为说意大利语的人当翻译"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一名政府官员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "government",
+            "optionText": "government",
+            "matchType": "exact",
+            "relationNote": "government 出自[[block:paper-gaokao-2022-zhejiang-jun:reading-a:2|worked in a government agency]]，说的是作者暑期工作的单位；小女孩出现在午餐队伍里，和机构里的官员无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "quote": "For the past three summers, I have worked in a government agency in New York.",
+              "anchor": "在政府机构工作"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作者本人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "quote": "as I stood in the lunch line with my kindergarten class in a school in Brooklyn",
+              "anchor": "幼时排队打午饭"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "quote": "I was reminded of my desperate struggle to converse before I learned English.",
+              "anchor": "想起自己学英语前的挣扎"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者的同学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I desperately tried to ask the boy ahead of me for a recommendation.",
+            "sourceEntity": "the boy ahead of me",
+            "optionText": "The author’s classmate.",
+            "optionEntity": "classmate",
+            "explanation": "队伍里确实有同学，排在她前面的就是个男孩（the boy ahead of me）；不会说英语、想开口求助的是作者自己。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "quote": "I desperately tried to ask the boy ahead of me for a recommendation.",
+              "anchor": "想问前面的男孩"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the little girl",
+          "sourceRole": "stem",
+          "targetText": "New immigrants much like the little girl in the lunch line flooded our office seeking help.",
+          "relationType": "locationCue",
+          "answerText": "I stood in the lunch line",
+          "bridgeZh": "in the lunch line 回指作者上幼儿园时排队打午饭的情景",
+          "note": "题干 the little girl 原词出现在原文，落在新移民涌进办公室的这一句。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2"
+        },
+        {
+          "sourceText": "The author herself.",
+          "sourceRole": "correctOption",
+          "targetText": "A few years later, as I stood in the lunch line with my kindergarten class in a school in Brooklyn, I realized things were no longer that simple.",
+          "relationType": "paraphrase",
+          "note": "午餐队伍（the lunch line）在前文只出现在[[block:paper-gaokao-2022-zhejiang-jun:reading-a:1|I stood in the lunch line]]，排在队里、因不会英语开不了口的是上幼儿园的作者，所以小女孩必须是当年的她。放回去：涌进办公室的新移民很像当年那个排队打饭、说不出英语的我，选 C。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出暑期口译工作给作者带来的收获，并对上选项的说法。",
+      "stemTranslationZh": "这份暑期工作让作者有什么收获？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它加深了她对学校的热爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It strengthened her love for school.",
+            "explanation": "原文提到教室四壁（the four walls of a classroom）是拿来对比的，说工作给了课堂给不了的见识，没说她因此更爱上学。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它帮她增强了方向感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Walking through the streets of Brooklyn today, I am no longer confused by this city’s sounds and smells.",
+            "sourceEntity": "this city’s sounds and smells",
+            "optionText": "It helped sharpen her sense of direction.",
+            "optionEntity": "sense of direction",
+            "explanation": "[[block:paper-gaokao-2022-zhejiang-jun:reading-a:3|Walking through the streets of Brooklyn]]说她走在街上不再困惑，指的是不再被城市的声音和气味弄懵，不是认路的本事变强。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+              "quote": "I am no longer confused by this city’s sounds and smells",
+              "anchor": "不再被声音和气味弄懵"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它让她看到了真实的世界。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+              "quote": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+              "anchor": "工作开阔了眼界"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+              "quote": "In my English to Italian translations, I’ve learned about social programs that I didn’t know existed.",
+              "anchor": "了解了不知道的社会项目"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它让她实现了童年的梦想。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It made her childhood dream come true.",
+            "explanation": "原文提到童年，只是回忆当年排队打饭说不出话的窘境，没提过任何童年梦想。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the summer job",
+          "sourceRole": "stem",
+          "targetText": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+          "relationType": "locationCue",
+          "targetCue": "This work",
+          "sourceZh": "那份暑期工作",
+          "targetCueZh": "这份工作",
+          "answerText": "This work expanded my mind in ways that are impossible inside the four walls of a classroom",
+          "note": "题干 the summer job 指她暑期在政府机构当口译，原文用 This work 回指这份工作。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3"
+        },
+        {
+          "sourceText": "It opened her eyes to the real world.",
+          "sourceRole": "correctOption",
+          "targetText": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+          "relationType": "paraphrase",
+          "note": "选项的“开阔眼界”就是原文的“拓宽了思维”（expanded my mind），“真实世界”对应教室四壁之外（impossible inside…a classroom）；[[block:paper-gaokao-2022-zhejiang-jun:reading-a:3|I’ve learned about social programs]]说她在翻译中了解到原本不知道的社会项目，正是这种课外见识，选 C。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Michael,\nOur school library has just opened a Group Study Room, and I’d love you to try it out with me.\n\nThe room is on the third floor, right next to the reading room. It is open from 8 a.m. to 9 p.m. on weekdays, so we can go there after class.\n\nInside, there are four round tables, each with a large screen and a whiteboard. We can connect our laptops, share notes and talk freely without disturbing anyone. It’s a perfect place to prepare our history presentation.\n\nShall we meet at the library entrance at 4:30 this Thursday? I’ll book a table online. Let me know if that works for you.\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "你是李华，写信给留学生同学 Michael，交际动作是邀请他一起去体验校图书馆新开的“小组学习室”。",
+        "两个内容要点都要落到句子上：学习室的位置与开放时间；室内设施和功能。约 80 词，可适当增加细节。",
+        "题面要求写信，所以要有称呼和落款，署名 Li Hua；题面没有给定具体称呼和结尾语。"
+      ],
+      "thisEssayChooses": "位置补成“图书馆三楼、阅览室旁边”，时间补成“工作日早 8 点到晚 9 点”，设施补成“四张圆桌，各配大屏和白板”，功能落到“一起准备历史课展示”，这些都可以换成别的合理细节。称呼用 Dear Michael,，结尾用 Yours,；最后约好周四下午 4:30 在图书馆门口见、由我在网上订桌。语气是同学之间热情、随和的邀请。"
+    },
+    "standard": {
+      "essay": "Dear Michael,\nOur school library has just opened a Group Study Room, and I’d love you to try it out with me.\n\nThe room is on the third floor, right next to the reading room. It is open from 8 a.m. to 9 p.m. on weekdays, so we can go there after class.\n\nInside, there are four round tables, each with a large screen and a whiteboard. We can connect our laptops, share notes and talk freely without disturbing anyone. It’s a perfect place to prepare our history presentation.\n\nShall we meet at the library entrance at 4:30 this Thursday? I’ll book a table online. Let me know if that works for you.\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "邀请 Michael 一同体验小组学习室",
+          "quote": "Our school library has just opened a Group Study Room, and I’d love you to try it out with me."
+        },
+        {
+          "point": "位置",
+          "quote": "The room is on the third floor, right next to the reading room."
+        },
+        {
+          "point": "开放时间",
+          "quote": "It is open from 8 a.m. to 9 p.m. on weekdays, so we can go there after class."
+        },
+        {
+          "point": "室内设施",
+          "quote": "Inside, there are four round tables, each with a large screen and a whiteboard."
+        },
+        {
+          "point": "功能",
+          "quote": "We can connect our laptops, share notes and talk freely without disturbing anyone."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "开门见山：先告诉 Michael 有什么新消息，再在同一句里发出邀请。",
+          "items": [
+            {
+              "quote": "has just opened a Group Study Room",
+              "explain": "现在完成时加 just，说明“刚开”，这正是要请他“一同体验”的理由：新地方，一起去看看。"
+            },
+            {
+              "quote": "I’d love you to try it out with me",
+              "explain": "邀请直接放在第一句，Michael 不用读到最后才知道你要他做什么；try it out 就是题面的“体验”，with me 点出“一同”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：位置与开放时间。",
+          "items": [
+            {
+              "quote": "on the third floor, right next to the reading room",
+              "explain": "楼层加参照物，留学生第一次去也能找到；right 强调“紧挨着”。"
+            },
+            {
+              "quote": "from 8 a.m. to 9 p.m. on weekdays",
+              "explain": "开放时间写成具体钟点和日子，比 open all day 这类说法可信、可用。"
+            },
+            {
+              "quote": "so we can go there after class",
+              "explain": "不只报时间，还替读者算好什么时候能去，把信息变成行动的依据。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：先说有什么设施，再说能拿它做什么。",
+          "items": [
+            {
+              "quote": "four round tables, each with a large screen and a whiteboard",
+              "explain": "“each with + 名词”一口气交代每张桌子的配置，句子短而信息全。"
+            },
+            {
+              "quote": "talk freely without disturbing anyone",
+              "explain": "点出小组学习室和普通阅览室的真正区别：可以出声讨论，这就是它的功能。"
+            },
+            {
+              "quote": "It’s a perfect place to prepare our history presentation.",
+              "explain": "把功能落到两人真有的一件事上，给 Michael 一个非去不可的理由，而不是空说“很有用”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "收在下一步：约定时间地点，并给对方留出回复的余地。",
+          "items": [
+            {
+              "quote": "Shall we meet at the library entrance at 4:30 this Thursday?",
+              "explain": "用 Shall we 提具体的时间地点，邀请才能落地，Michael 只要回答行或不行。"
+            },
+            {
+              "quote": "I’ll book a table online.",
+              "explain": "主动揽下预约这件事，让对方没有顾虑。"
+            },
+            {
+              "quote": "Let me know if that works for you.",
+              "explain": "同学之间常用的收尾，留出改时间的余地，比套话 Looking forward to your reply 更像真人说话。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "try it out with me",
+          "function": "把题面的“一同体验”说成地道的口语，用在邀请对方去看一个新地方。"
+        },
+        {
+          "expression": "each with a large screen and a whiteboard",
+          "function": "介绍设施时一句话说清每一处有什么，换成别的房间、展位也能套用。"
+        },
+        {
+          "expression": "Let me know if that works for you.",
+          "function": "提出时间安排后请对方确认，语气随和、给人余地。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Michael,\nGuess what? Our school library has just opened a Group Study Room, and I can’t wait to try it out with you this week.\n\nYou’ll find it on the third floor, just past the reading room. It’s open from 8 a.m. to 9 p.m., Monday to Friday, which means we can drop in after class or in the evening.\n\nThe room is designed for teamwork. Each of its four round tables comes with a big screen and a whiteboard, so we can plug in our laptops, put our ideas up for everyone to see and talk them through without disturbing other readers. It sounds like the ideal place to get our history presentation into shape.\n\nHow about meeting at the library entrance at 4:30 this Thursday afternoon? I’ll book a table online. Text me if another time suits you better.\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "邀请 Michael 一同体验小组学习室",
+          "quote": "Our school library has just opened a Group Study Room, and I can’t wait to try it out with you this week."
+        },
+        {
+          "point": "位置",
+          "quote": "You’ll find it on the third floor, just past the reading room."
+        },
+        {
+          "point": "开放时间",
+          "quote": "It’s open from 8 a.m. to 9 p.m., Monday to Friday, which means we can drop in after class or in the evening."
+        },
+        {
+          "point": "室内设施",
+          "quote": "Each of its four round tables comes with a big screen and a whiteboard"
+        },
+        {
+          "point": "功能",
+          "quote": "so we can plug in our laptops, put our ideas up for everyone to see and talk them through without disturbing other readers."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "Guess what?",
+          "explain": "同学之间先卖个小关子再报消息，比直接陈述更有朋友间说话的味道。"
+        },
+        {
+          "quote": "You’ll find it on the third floor, just past the reading room.",
+          "explain": "从读者的角度说“你会在哪儿找到它”，像在给 Michael 指路，比 The room is on... 更亲切。"
+        },
+        {
+          "quote": "put our ideas up for everyone to see and talk them through",
+          "explain": "用 put up、talk through 两个短语动词写出大屏和白板怎么用，功能更具体，也更地道。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,610 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jun:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jun:reading-b": {
+      "overview": "文章介绍“微型森林”运动：在城镇空地上种出网球场大小的密林。这一概念由日本植物学家首创，后传到印度和欧洲；英国项目专选城市，让居民亲近自然，好处很多。",
+      "fullTranslationZh": "世界各地正在发生一些小小的变化。在路边、在学校操场后面，在城镇里各种无人问津的空地上，一片片只有网球场大小的微型森林正在出现，为野生动物和平时不太容易接触到大自然的当地居民提供了一个好去处。这就是“微型森林”运动，它要证明，生活中最美好的东西确实往往以小巧的形式出现。\n\n微型森林这一概念最早由日本植物学家宫胁博士在20世纪70年代首创。随着他把这一概念分享给其他人，这个想法很快在印度等国流行起来，最终传到欧洲，在法国、比利时和荷兰等地广受欢迎。\n\n那么，它是如何运作的呢？在英国领导微型森林项目的路易丝·哈特利解释说，这一过程首先要找出微型森林能发挥最大影响的地区。“我们关注的是那些往往不太容易接触到大自然的城市地区，”哈特利说，“我们把它看作一个机会，尝试打破人与自然之间日益加深的隔阂。”\n\n一片微型森林至少要有600棵树，这些树种得比普通森林紧密得多，而且不使用化学品或肥料。林中通常有大约30种树，全都是本地树种。这种多样性，再加上微型森林的生长速度可达普通森林的十倍，使它们吸引了大量野生动物。人们还认为，这些地方有助于降低洪水风险、清除大气中的碳、应对气候变化，还能改善当地居民的心理健康。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+          "sourceText": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+          "displayText": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:24"
+          ],
+          "translationZh": "随着他把这一概念分享给其他人，这个想法很快在印度等国流行起来，最终传到欧洲，在法国、比利时和荷兰等地广受欢迎。",
+          "analysisZh": "主干是 the idea soon took off（这个想法很快流行起来），took off 在这里是“迅速走红”，不是“起飞”。As 从句交代背景：随着他把概念分享出去；before eventually reaching Europe 按时间往后接，先在印度等国流行，最后才到欧洲；where 引导的从句修饰 Europe，说明在欧洲哪些国家受欢迎。读懂这条传播路线，就知道它起源于日本而不是欧洲，而且传得很广。",
+          "underlineRanges": [
+            {
+              "start": 48,
+              "end": 70,
+              "quote": "the idea soon took off"
+            },
+            {
+              "start": 100,
+              "end": 133,
+              "quote": "before eventually reaching Europe"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+          "sourceText": "This variety, coupled with the fact that tiny forests grow up to ten times faster than standard forests, means they attract a rich abundance of wildlife.",
+          "displayText": "This variety, coupled with the fact that tiny forests grow up to ten times faster than standard forests, means they attract a rich abundance of wildlife.",
+          "relatedQuestionIds": [],
+          "translationZh": "这种多样性，再加上微型森林的生长速度可达普通森林的十倍，使它们吸引了大量野生动物。",
+          "analysisZh": "主语是 This variety，谓语是 means（意味着、导致），宾语是 they attract a rich abundance of wildlife。中间 coupled with 引出的短语是插入的补充条件，意思是“再加上”；the fact 后面的 that 从句是同位语，说明这个事实是什么：微型森林比普通森林快十倍。整句是“树种多样 + 长得快 → 吸引大量野生动物”的因果。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "This variety"
+            },
+            {
+              "start": 105,
+              "end": 152,
+              "quote": "means they attract a rich abundance of wildlife"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+                "block:paper-gaokao-2022-zhejiang-jun:reading-b:2"
+              ],
+              "start": 0,
+              "end": 134,
+              "quote": "世界各地正在发生一些小小的变化。在路边、在学校操场后面，在城镇里各种无人问津的空地上，一片片只有网球场大小的微型森林正在出现，为野生动物和平时不太容易接触到大自然的当地居民提供了一个好去处。这就是“微型森林”运动，它要证明，生活中最美好的东西确实往往以小巧的形式出现。"
+            },
+            {
+              "paragraphId": "zh-reading-b-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-b:3"
+              ],
+              "start": 136,
+              "end": 224,
+              "quote": "微型森林这一概念最早由日本植物学家宫胁博士在20世纪70年代首创。随着他把这一概念分享给其他人，这个想法很快在印度等国流行起来，最终传到欧洲，在法国、比利时和荷兰等地广受欢迎。"
+            },
+            {
+              "paragraphId": "zh-reading-b-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-b:4"
+              ],
+              "start": 226,
+              "end": 349,
+              "quote": "那么，它是如何运作的呢？在英国领导微型森林项目的路易丝·哈特利解释说，这一过程首先要找出微型森林能发挥最大影响的地区。“我们关注的是那些往往不太容易接触到大自然的城市地区，”哈特利说，“我们把它看作一个机会，尝试打破人与自然之间日益加深的隔阂。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:reading-b:5"
+              ],
+              "start": 351,
+              "end": 504,
+              "quote": "一片微型森林至少要有600棵树，这些树种得比普通森林紧密得多，而且不使用化学品或肥料。林中通常有大约30种树，全都是本地树种。这种多样性，再加上微型森林的生长速度可达普通森林的十倍，使它们吸引了大量野生动物。人们还认为，这些地方有助于降低洪水风险、清除大气中的碳、应对气候变化，还能改善当地居民的心理健康。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+                "quote": "the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands",
+                "start": 145,
+                "end": 306
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+                "quote": "All around the world, there are small changes taking place.",
+                "start": 0,
+                "end": 59
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "quote": "这个想法很快在印度等国流行起来，最终传到欧洲，在法国、比利时和荷兰等地广受欢迎",
+                "start": 48,
+                "end": 87
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "quote": "世界各地正在发生一些小小的变化。",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+                "quote": "We see it as a chance to try to break the growing disconnect between people and nature.",
+                "start": 286,
+                "end": 373
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+                "quote": "We focus on urban areas where access to nature is often not that easy",
+                "start": 199,
+                "end": 268
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-4",
+                "quote": "我们把它看作一个机会，尝试打破人与自然之间日益加深的隔阂。",
+                "start": 93,
+                "end": 122
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-4",
+                "quote": "我们关注的是那些往往不太容易接触到大自然的城市地区",
+                "start": 60,
+                "end": 85
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+                "quote": "the trees are planted much closer together",
+                "start": 60,
+                "end": 102
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-5",
+                "quote": "这些树种得比普通森林紧密得多",
+                "start": 16,
+                "end": 30
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+                "quote": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+                "start": 97,
+                "end": 307
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "quote": "随着他把这一概念分享给其他人，这个想法很快在印度等国流行起来，最终传到欧洲，在法国、比利时和荷兰等地广受欢迎。",
+                "start": 33,
+                "end": 88
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-2",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+                "quote": "This variety, coupled with the fact that tiny forests grow up to ten times faster than standard forests, means they attract a rich abundance of wildlife.",
+                "start": 223,
+                "end": 376
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:reading-b",
+                "paragraphId": "zh-reading-b-5",
+                "quote": "这种多样性，再加上微型森林的生长速度可达普通森林的十倍，使它们吸引了大量野生动物。",
+                "start": 63,
+                "end": 104
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先描写世界各地冒出的微型森林，点明“微型森林”运动；再交代它的起源和传播；接着借英国项目负责人的话说明怎样选址、为何要做；最后介绍林子的种植要求和好处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+            "summary": "世界各地正在发生小小的变化，并开始列举这些变化出现在哪些地方。",
+            "function": "开篇设悬念，引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:2",
+            "summary": "微型森林出现在路边、操场后和城镇空地上，惠及野生动物和居民，这就是微型森林运动。",
+            "function": "点明话题，交代运动的宗旨。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+            "summary": "这一概念由日本植物学家宫胁在20世纪70年代首创，后传到印度，最终在欧洲流行。",
+            "function": "介绍起源和传播。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+            "summary": "Hartley 说英国项目先找影响最大的地区，专挑城市，为的是拉近人与自然。",
+            "function": "说明项目怎样运作、目的是什么。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+            "summary": "微型森林至少600棵树，种得密、不施肥，树种多、长得快，还有防洪、固碳、改善心理健康等好处。",
+            "function": "介绍特点和益处。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jun:24": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "逐项核对微型森林运动的起源、选址、领导者和传播情况，选出与原文相符的一项。",
+      "stemTranslationZh": "关于微型森林运动，我们知道什么？",
+      "locateBy": "options",
+      "locateFindZh": "起源查年代和地点，选址看城市，成效看传播多广",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它已取得显著成功。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+              "quote": "the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands",
+              "anchor": "很快流行并传到欧洲"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+              "quote": "All around the world, there are small changes taking place.",
+              "anchor": "世界各地都在发生"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它由多所学校领导。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "school",
+            "optionText": "schools",
+            "matchType": "exact",
+            "relationNote": "school 出自[[block:paper-gaokao-2022-zhejiang-jun:reading-b:1|behind school playgrounds]]，学校操场后面只是种林子的地点之一；英国的项目由 Hartley 领导（is leading）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+              "quote": "At the side of roads, behind school playgrounds",
+              "anchor": "学校操场后面"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它于20世纪70年代在欧洲兴起。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Tiny forests were first pioneered as a concept in the 1970s by Dr Miyawaki, a Japanese botanist.",
+            "sourceEntity": "a Japanese botanist",
+            "optionText": "It began in Europe in the 1970s.",
+            "optionEntity": "Europe",
+            "explanation": "1970s 没错，但首创者是日本植物学家（a Japanese botanist），欧洲是最后才传到的地方（eventually reaching Europe）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+              "quote": "Tiny forests were first pioneered as a concept in the 1970s by Dr Miyawaki, a Japanese botanist.",
+              "anchor": "日本植物学家首创"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它将推广到农村。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "We focus on urban areas where access to nature is often not that easy",
+            "sourceEntity": "urban areas",
+            "optionText": "It will spread to the countryside.",
+            "optionEntity": "the countryside",
+            "explanation": "原文说项目专挑城市地区（urban areas），林子也种在城镇的路边和空地上，没提要往农村推广。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+              "quote": "We focus on urban areas where access to nature is often not that easy",
+              "anchor": "关注城市地区"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It has achieved notable success.",
+          "sourceRole": "correctOption",
+          "targetText": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+          "relationType": "paraphrase",
+          "note": "选项的“取得显著成功”是把几处合起来概括：先说世界各地都在发生这种变化（All around the world），接着说这个想法很快在印度等国流行（took off），又在欧洲多国广受欢迎（became popular）；从一位植物学家的设想传遍各国，可见成效显著，选 A。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Hartley 自己的话里找出她领导的英国项目想达到什么目的。",
+      "stemTranslationZh": "Hartley 在英国领导的这个项目目的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句接着读她的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "推广生态旅游。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To promote eco-tourism.",
+            "explanation": "林子建在城镇路边和空地上，服务的是附近的居民（local people），原文没提吸引游客。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "改进林业研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To improve forestry research.",
+            "explanation": "原文只提到首创者是一位植物学家；Hartley 的项目是在城里种树、让人接触自然，没说要推进林业研究。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "普及园艺。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "popular",
+            "optionText": "popularise",
+            "matchType": "wordFamily",
+            "relationNote": "popularise 和[[block:paper-gaokao-2022-zhejiang-jun:reading-b:3|where it became popular]]的 popular 同根，那句说的是微型森林在欧洲受欢迎，不是推广园艺。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+              "quote": "where it became popular in places like France, Belgium and the Netherlands",
+              "anchor": "在欧洲受欢迎"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让人们亲近自然。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+              "quote": "We see it as a chance to try to break the growing disconnect between people and nature.",
+              "anchor": "打破人与自然的隔阂"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+              "quote": "We focus on urban areas where access to nature is often not that easy",
+              "anchor": "专挑难以接触自然的城市"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Hartley",
+          "sourceRole": "stem",
+          "targetText": "“We focus on urban areas where access to nature is often not that easy”, says Hartley.",
+          "relationType": "locationCue",
+          "answerText": "break the growing disconnect between people and nature",
+          "bridgeZh": "Hartley 接着说的 it 就指这个项目，a chance 后面是它的用意",
+          "note": "题干 Hartley 原词出现在原文，落在她说明项目专挑哪些地区的这句话上。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4"
+        },
+        {
+          "sourceText": "To get people close to nature.",
+          "sourceRole": "correctOption",
+          "targetText": "We see it as a chance to try to break the growing disconnect between people and nature.",
+          "relationType": "paraphrase",
+          "note": "选项的“让人亲近自然”就是原文的“打破人与自然之间日益加深的隔阂”（break the growing disconnect）；专挑不容易接触自然的城市地区（access to nature），也是为了这个，选 D。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出微型森林里的树在种植方式上与普通森林不同的地方。",
+      "stemTranslationZh": "微型森林里的树有什么特别之处？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们个头很小。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "size",
+            "optionText": "size",
+            "matchType": "exact",
+            "relationNote": "size 出自[[block:paper-gaokao-2022-zhejiang-jun:reading-b:2|barely the size of tennis courts]]，说的是整片林子只有网球场大小，小的是森林面积，不是树。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:2",
+              "quote": "tiny forests barely the size of tennis courts are appearing",
+              "anchor": "林子只有网球场大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们种得很密。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "quote": "the trees are planted much closer together",
+              "anchor": "种得紧密得多"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们是外来物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "species",
+            "optionText": "species",
+            "matchType": "exact",
+            "relationNote": "species 出自[[block:paper-gaokao-2022-zhejiang-jun:reading-b:5|all-native tree species]]，原文说树种全是本地的（all-native），和“外来”正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "quote": "around 30 different kinds of all-native tree species",
+              "anchor": "全是本地树种"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们被大量施肥。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "the trees are planted much closer together and without chemicals or fertilisers",
+            "sourceHighlight": "without chemicals or fertilisers",
+            "optionText": "They are heavily fertilised.",
+            "optionHighlight": "heavily fertilised",
+            "explanation": "原文说种树时不用化学品或肥料（without…fertilisers），选项把“不施肥”写成了“大量施肥”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "quote": "without chemicals or fertilisers",
+              "anchor": "不用化学品或肥料"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the trees",
+          "sourceRole": "stem",
+          "targetText": "In a Tiny Forest, there must be a minimum of 600 trees, and the trees are planted much closer together and without chemicals or fertilisers (肥料).",
+          "relationType": "locationCue",
+          "answerText": "the trees are planted much closer together",
+          "note": "题干 the trees 原词出现在原文，落在说明怎样种树的这一句。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5"
+        },
+        {
+          "sourceText": "They are thickly planted.",
+          "sourceRole": "correctOption",
+          "targetText": "In a Tiny Forest, there must be a minimum of 600 trees, and the trees are planted much closer together and without chemicals or fertilisers (肥料).",
+          "relationType": "paraphrase",
+          "note": "选项的“种得很密”（thickly planted）就是原文的“种得紧密得多”（planted much closer together），选 B。",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5"
+        }
+      ]
+    }
+  }
+}

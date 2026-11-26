@@ -1,0 +1,1100 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2022-zhejiang-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jun:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jun:grammar-fill": {
+      "overview": "盲人怎样欣赏画作？前摄影师 John Olson 的团队把名画做成可触摸的 3D 模型，研究表明触摸也能激活视觉皮层；7 岁失明的少年 Luc 摸到《蒙娜丽莎》的微笑，感到了独立。",
+      "fullTranslationZh": "要理解一幅画，我们被教导去看色彩、构图和光线。可是，一幅画怎样才能被盲人欣赏呢？靠触摸，而这恰恰是美术馆的标牌告诉你不要做的那件事。前摄影师 John Olson 和他的团队把画作变成了纹理完整的 3D 模型。\n\n这些可触摸的画作是向盲人展示艺术的一种方式，因为我们并不只是用眼睛看：我们是用大脑看。神经可塑性（即大脑的适应能力）领域的研究表明，大脑的视觉皮层会因触摸而活跃起来。哈佛大学科学家 Ella Striem-Amit 说，盲人用自己现有的感官辨认形状，方式与有视力的人相似。\n\n如今 13 岁的 Luc Gandarias 在 7 岁时突然失明。当他摸到达芬奇名画《蒙娜丽莎》的 3D 版本时，立刻注意到了她的微笑。他说：“你们看这幅画时看到的东西，我真的能摸出来。”\n\n对 Luc 来说，这意味着独立。“能够看到这幅画并形成自己看法的感觉，就像作为一个盲人又推倒了一堵墙。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-fill-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+          "sourceText": "Blind people recognize shapes with their __60__ (exist) senses, in a way similar to that of __61__ (sight) people, says Ella Striem-Amit, a Harvard scientist.",
+          "displayText": "Blind people recognize shapes with their existing senses, in a way similar to that of sighted people, says Ella Striem-Amit, a Harvard scientist.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:60",
+            "question:paper-gaokao-2022-zhejiang-jun:61"
+          ],
+          "translationZh": "哈佛大学科学家 Ella Striem-Amit 说，盲人用自己现有的感官辨认形状，方式与有视力的人相似。",
+          "analysisZh": "这句话的主干其实在句末：says Ella Striem-Amit，前面整段是她说的内容，a Harvard scientist 是她的同位语。所说内容的主干是 Blind people recognize shapes，with their existing senses 说明靠什么辨认；in a way similar to that of sighted people 说明辨认的方式，that 代替 the way，指有视力的人辨认形状的方式。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 29,
+              "quote": "Blind people recognize shapes"
+            },
+            {
+              "start": 78,
+              "end": 100,
+              "quote": "that of sighted people"
+            },
+            {
+              "start": 102,
+              "end": 123,
+              "quote": "says Ella Striem-Amit"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-fill-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+          "sourceText": "The feeling of being able to see it __65__ to form my opinion is like breaking down another wall as a blind person.",
+          "displayText": "The feeling of being able to see it and to form my opinion is like breaking down another wall as a blind person.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jun:65"
+          ],
+          "translationZh": "“能够看到这幅画并形成自己看法的感觉，就像作为一个盲人又推倒了一堵墙。”",
+          "analysisZh": "主干是 The feeling is like breaking down another wall，这种感觉就像又推倒了一堵墙。of being able to see it and to form my opinion 修饰 feeling，说明是什么感觉，其中 to see it 和 to form my opinion 由 and 并列，都受 being able 支配；like 是介词，后面接动名词 breaking down；as a blind person 说明说话人的身份。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 11,
+              "quote": "The feeling"
+            },
+            {
+              "start": 59,
+              "end": 93,
+              "quote": "is like breaking down another wall"
+            },
+            {
+              "start": 26,
+              "end": 58,
+              "quote": "to see it and to form my opinion"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-fill-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 105,
+              "quote": "要理解一幅画，我们被教导去看色彩、构图和光线。可是，一幅画怎样才能被盲人欣赏呢？靠触摸，而这恰恰是美术馆的标牌告诉你不要做的那件事。前摄影师 John Olson 和他的团队把画作变成了纹理完整的 3D 模型。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2"
+              ],
+              "start": 107,
+              "end": 243,
+              "quote": "这些可触摸的画作是向盲人展示艺术的一种方式，因为我们并不只是用眼睛看：我们是用大脑看。神经可塑性（即大脑的适应能力）领域的研究表明，大脑的视觉皮层会因触摸而活跃起来。哈佛大学科学家 Ella Striem-Amit 说，盲人用自己现有的感官辨认形状，方式与有视力的人相似。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3"
+              ],
+              "start": 245,
+              "end": 340,
+              "quote": "如今 13 岁的 Luc Gandarias 在 7 岁时突然失明。当他摸到达芬奇名画《蒙娜丽莎》的 3D 版本时，立刻注意到了她的微笑。他说：“你们看这幅画时看到的东西，我真的能摸出来。”"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4"
+              ],
+              "start": 342,
+              "end": 394,
+              "quote": "对 Luc 来说，这意味着独立。“能够看到这幅画并形成自己看法的感觉，就像作为一个盲人又推倒了一堵墙。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+            "text": "To understand a painting, we’re taught to look for color, composition, and light. But how can a painting be appreciated by someone who’s blind? Through touch, the one thing gallery signs tell you not to do. John Olson, a former photographer and his team turn paintings into fully textured 3D models."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+            "text": "The tactile(可触知的)paintings work as a way to show art to the blind because we don’t see with just our eyes: We see with our brains. Research in the field of neuroplasticity-the brain’s adaptability-shows that the visual cortex(大脑皮层)is made active by touch. Blind people recognize shapes with their existing senses, in a way similar to that of sighted people, says Ella Striem-Amit, a Harvard scientist."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+            "text": "Luc Gandarias, who’s now thirteen, went blind suddenly at age seven. When he felt a 3D version of Leonardo da Vinci’s “Mona Lisa” he noticed her smile right away. \"I can actually feel what you see when you look at it,” he said."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+            "text": "For Luc, this means independence. \"The feeling of being able to see it and to form my opinion is like breaking down another wall as a blind person.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-fill-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 86,
+                "end": 104,
+                "quote": "how can a painting"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 125,
+                "end": 147,
+                "quote": "by someone who’s blind"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 33,
+                "end": 38,
+                "quote": "被盲人欣赏"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:56"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 105,
+                "end": 119,
+                "quote": "be appreciated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 33,
+                "end": 38,
+                "quote": "被盲人欣赏"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 192,
+                "end": 204,
+                "quote": "tell you not"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 164,
+                "end": 177,
+                "quote": "the one thing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 55,
+                "end": 61,
+                "quote": "告诉你不要做"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:57"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 200,
+                "end": 205,
+                "quote": "to do"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 58,
+                "end": 61,
+                "quote": "不要做"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 218,
+                "end": 238,
+                "quote": "John Olson, a former"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 66,
+                "end": 81,
+                "quote": "前摄影师 John Olson"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:58"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+                "start": 228,
+                "end": 240,
+                "quote": "photographer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 67,
+                "end": 70,
+                "quote": "摄影师"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 44,
+                "end": 55,
+                "quote": "show art to"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 259,
+                "end": 271,
+                "quote": "Blind people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 9,
+                "end": 16,
+                "quote": "向盲人展示艺术"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:59"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 56,
+                "end": 59,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 10,
+                "end": 12,
+                "quote": "盲人"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 315,
+                "end": 321,
+                "quote": "senses"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 115,
+                "end": 120,
+                "quote": "现有的感官"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:60"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 297,
+                "end": 305,
+                "quote": "existing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 115,
+                "end": 118,
+                "quote": "现有的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 332,
+                "end": 350,
+                "quote": "similar to that of"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 259,
+                "end": 271,
+                "quote": "Blind people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 127,
+                "end": 135,
+                "quote": "与有视力的人相似"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:61"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 342,
+                "end": 349,
+                "quote": "sighted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 128,
+                "end": 132,
+                "quote": "有视力的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "start": 62,
+                "end": 71,
+                "quote": "age seven"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "start": 35,
+                "end": 54,
+                "quote": "went blind suddenly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 23,
+                "end": 29,
+                "quote": "在 7 岁时"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:62"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "start": 55,
+                "end": 57,
+                "quote": "at"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 23,
+                "end": 29,
+                "quote": "在 7 岁时"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "start": 73,
+                "end": 85,
+                "quote": "When he felt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 34,
+                "end": 38,
+                "quote": "当他摸到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:63"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:3",
+                "start": 133,
+                "end": 140,
+                "quote": "noticed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 60,
+                "end": 64,
+                "quote": "注意到了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 9,
+                "end": 19,
+                "quote": "this means"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 86,
+                "end": 104,
+                "quote": "to form my opinion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 9,
+                "end": 13,
+                "quote": "这意味着"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:64"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 20,
+                "end": 32,
+                "quote": "independence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 13,
+                "end": 15,
+                "quote": "独立"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 58,
+                "end": 78,
+                "quote": "being able to see it"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 86,
+                "end": 104,
+                "quote": "to form my opinion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 17,
+                "end": 31,
+                "quote": "能够看到这幅画并形成自己看法"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:65"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jun:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 71,
+                "end": 74,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 24,
+                "end": 25,
+                "quote": "并"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-grammar-fill-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:60",
+              "question:paper-gaokao-2022-zhejiang-jun:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 256,
+                "end": 285,
+                "quote": "Blind people recognize shapes"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 334,
+                "end": 356,
+                "quote": "that of sighted people"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:2",
+                "start": 358,
+                "end": 379,
+                "quote": "says Ella Striem-Amit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 83,
+                "end": 136,
+                "quote": "哈佛大学科学家 Ella Striem-Amit 说，盲人用自己现有的感官辨认形状，方式与有视力的人相似。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-grammar-fill-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jun:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 35,
+                "end": 46,
+                "quote": "The feeling"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 94,
+                "end": 128,
+                "quote": "is like breaking down another wall"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:4",
+                "start": 61,
+                "end": 93,
+                "quote": "to see it and to form my opinion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 16,
+                "end": 52,
+                "quote": "“能够看到这幅画并形成自己看法的感觉，就像作为一个盲人又推倒了一堵墙。”"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-zhejiang-jun:56": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "appreciate",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "be appreciated",
+      "role": null,
+      "similarityProfile": {
+        "route": "modal-passive",
+        "features": []
+      },
+      "reason": "空格接在情态动词 can 后，补出问句的谓语；主语 a painting 是被欣赏的对象，by someone who’s blind 点出动作由盲人发出，所以用被动 be appreciated。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "a painting",
+          "signalSide": "passage",
+          "relation": "中文：画是被欣赏的一方，谓语要用被动。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by someone who’s blind",
+          "signalSide": "passage",
+          "relation": "中文：by 引出动作执行者，进一步说明是被动。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "how can",
+          "signalSide": "passage",
+          "relation": "中文：情态动词 can 后接 be 加过去分词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:57": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "do",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to do",
+      "role": "object-complement",
+      "similarityProfile": {
+        "route": "object-complement-general",
+        "features": []
+      },
+      "reason": "还原骨架是 gallery signs tell you not ___ the one thing：空格接在 tell you not 后，说明标牌要 you 别做什么，作 you 的宾语补足语；tell sb not to do sth 用不定式，填 to do，the one thing 正是 do 的对象。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "tell you not",
+          "signalSide": "passage",
+          "relation": "中文：tell 后 you 是宾语，再接 not to do 说明要求对方别做什么。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "the one thing",
+          "signalSide": "passage",
+          "relation": "中文：the one thing 指触摸，是 do 的对象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:58": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "photograph",
+      "facetKey": "grammar-fill.given.conversion.noun-to-noun",
+      "answer": "photographer",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "a former 后缺一个名词，和 John Olson 并列说明他以前的身份；photograph 指照片，指人要加 -er，填 photographer。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "a former",
+          "signalSide": "passage",
+          "relation": "中文：a former 后接指人的可数名词单数，说明从前的职业。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "John Olson",
+          "signalSide": "passage",
+          "relation": "中文：空格说明的是 John Olson 这个人的身份。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:59": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "adjective-class"
+        ]
+      },
+      "reason": "介词 to 后缺宾语，而 blind 是形容词，不能单独作名词用；the 加形容词表示一类人，the blind 就是盲人，与下文的 Blind people 是同一群体，填 the。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "show art to",
+          "signalSide": "passage",
+          "relation": "中文：to 后要接名词性的宾语，指艺术展示给谁。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "blind because",
+          "signalSide": "passage",
+          "relation": "中文：blind 是形容词，前加 the 才能表示盲人这一类人。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "Blind people",
+          "signalSide": "passage",
+          "relation": "中文：下文的 Blind people 说的就是这类人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:60": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "exist",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "existing",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "active-relation"
+        ]
+      },
+      "reason": "空格放在 their 和 senses 之间，作 senses 的前置定语；exist 是不及物动词，感官是本来就存在着的，用现在分词 existing，指盲人现有的其他感官。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "senses",
+          "signalSide": "passage",
+          "relation": "中文：空格修饰 senses，说明是什么样的感官。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "with their",
+          "signalSide": "passage",
+          "relation": "中文：their 和名词之间放的是修饰语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:61": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "sight",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "sighted",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格修饰后面的 people，要用形容词；这里和句首 Blind people 作比较，指有视力的人，名词 sight 加 -ed 构成形容词 sighted。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "people, says",
+          "signalSide": "passage",
+          "relation": "中文：空格修饰 people，要形容词。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "similar to that of",
+          "signalSide": "passage",
+          "relation": "中文：与盲人的方式作比较，比较的另一方是有视力的人。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "Blind people",
+          "signalSide": "passage",
+          "relation": "中文：与 Blind people 相对，要表示看得见。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:62": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "at",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把 age seven 接到 went blind suddenly 上，说明失明发生在什么时候；表示“在几岁时”用 at age seven，填 at。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "age seven",
+          "signalSide": "passage",
+          "relation": "中文：at age 加数字，表示在几岁时。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "went blind suddenly",
+          "signalSide": "passage",
+          "relation": "中文：说明突然失明的时间。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:63": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "notice",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "noticed",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "主句主语 he 后缺谓语，宾语是 her smile；When 从句用 felt 讲他过去摸画的那一次，主句的注意到也是当时的事，用一般过去时 noticed。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "When he felt",
+          "signalSide": "passage",
+          "relation": "中文：从句 felt 是过去时，交代过去那一次的情景。"
+        },
+        {
+          "type": "subject",
+          "signalText": "he",
+          "signalSide": "passage",
+          "relation": "中文：主句主语 he 后缺谓语动词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "went blind suddenly",
+          "signalSide": "passage",
+          "relation": "中文：上一句 went 也是过去时，叙述同一段往事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:64": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "independent",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "independence",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作 means 的宾语，要用名词；independent 是形容词，变成名词 independence，独立。后句说能自己看画、形成自己的看法，正是这种独立。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "this means",
+          "signalSide": "passage",
+          "relation": "中文：mean 后接名词作宾语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to form my opinion",
+          "signalSide": "passage",
+          "relation": "中文：自己形成看法，印证这里说的是独立。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jun:65": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jun:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接 to see it 和 to form my opinion 两个不定式，二者都跟在 being able 后，是并列关系；先看到画、再形成看法，是顺接，填 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "to form my opinion",
+          "signalSide": "passage",
+          "relation": "中文：与前面的 to see it 结构相同，是并列的两个不定式。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "being able to see it",
+          "signalSide": "passage",
+          "relation": "中文：being able 同时支配前后两个不定式。"
+        }
+      ]
+    }
+  }
+}
