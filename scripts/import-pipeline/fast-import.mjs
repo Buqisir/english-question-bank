@@ -50,7 +50,7 @@ import { sourceReferenceProducerVersion } from '../../server/paper-import/source
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
 import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
 import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { buildLocalReviewProjection, hydratedEvidenceBase, importLocalReviewCandidate,
+import { buildLocalReviewProjection, hydratedEvidenceBase, importLocalReviewCandidate, legacyPreviewStatuses,
   loadLocalReviewedListening, reviewManifest, withLocalReviewEvidence } from './review.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 import { NCK1_STAGED_ANALYSIS_FILES } from '../../server/import-review/nck1AnalysisProjection.mjs'
@@ -1871,7 +1871,7 @@ function redoFrom(ctx, name, { retain = file => archive(ctx, file), persist = sa
   persist(ctx)
 }
 
-function assertLocalPreviewOnly(ctx) {
+async function assertLocalPreviewOnly(ctx, readLegacyStatuses) {
   const { steps, data } = ctx.state
   const preview = steps['local-preview']
   const reject = () => fail('已有生产送审或未能确认归属的 Candidate 记录，请走现有 redo / 新 revision 流程')
@@ -1900,24 +1900,41 @@ function assertLocalPreviewOnly(ctx) {
       || !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?\//u.test(evidence.screen?.url || '')) reject()
   }
   const timing = retainedPath('fast/upload-timeline.jsonl')
-  if (!preview.result.localUploadId || !existsSync(timing)) reject()
-  const receipts = new Map([steps['ocr-review']?.result, preview.result]
+  const { localUploadId, revisionId } = preview.result
+  if (localUploadId && !existsSync(timing)) reject()
+  const uploadSteps = [steps['ocr-review'], preview].filter(Boolean)
+  const legacySteps = new Set(uploadSteps.filter(step => !step.result?.localUploadId && step.result?.revisionId))
+  const receipts = new Map(uploadSteps.map(step => step.result)
     .filter(result => result?.localUploadId).map(result => [result.localUploadId, result.revisionId]))
-  for (const line of readFileSync(timing, 'utf8').trim().split('\n').filter(Boolean)) {
-    const { paperId, completed, localReceipt } = JSON.parse(line)
-    if (paperId !== ctx.paperId || completed !== true || !isLocalReviewOrigin(localReceipt?.origin)
+  for (const line of (existsSync(timing) ? readFileSync(timing, 'utf8') : '').trim().split('\n').filter(Boolean)) {
+    const { paperId, completed, localReceipt, startedAt, finishedAt } = JSON.parse(line)
+    if (paperId !== ctx.paperId || completed !== true) reject()
+    if (!localUploadId && localReceipt === undefined && Date.parse(startedAt) <= Date.parse(finishedAt)
+      && legacySteps.delete([...legacySteps].find(step => Date.parse(step.startedAt) <= Date.parse(startedAt)
+        && Date.parse(finishedAt) <= Date.parse(step.finishedAt)))) continue
+    if (!isLocalReviewOrigin(localReceipt?.origin)
       || !localReceipt?.revisionId || receipts.get(localReceipt.uploadId) !== localReceipt.revisionId) reject()
     receipts.delete(localReceipt.uploadId)
   }
-  if (receipts.has(preview.result.localUploadId)) reject()
+  if (receipts.has(localUploadId)) reject()
+  if (!localUploadId) {
+    const url = URL.parse(steps['local-screen']?.result?.url || '')
+    if (!url || !isLocalReviewOrigin(url.origin) || url.searchParams.get('paperId') !== ctx.paperId
+      || url.searchParams.get('reviewRevision') !== revisionId) reject()
+    const [local, production] = await readLegacyStatuses(ctx.paperId, url).catch(() => reject())
+    if (local?.paperId !== ctx.paperId || !local.revisions?.some(revision => revision.id === revisionId
+      && revision.paperId === ctx.paperId && revision.reviewKind === 'candidate' && revision.finalizedAt)
+      || (production !== null && (production?.paperId !== ctx.paperId || !Array.isArray(production.revisions)
+        || production.latestRevisionId === revisionId || production.revisions.some(revision => revision.id === revisionId)))) reject()
+  }
   return { directory, evidence }
 }
 
-export async function reopenLocalPreview(ctx) {
+export async function reopenLocalPreview(ctx, readLegacyStatuses = legacyPreviewStatuses) {
   if (!reviewTarget().local) fail('reopen 只允许本机 Review；生产卷请走现有 redo / 新 revision 流程')
-  return withReviewPaperLock(path.join(ctx.fast, 'review-upload.lock'), () => {
+  return withReviewPaperLock(path.join(ctx.fast, 'review-upload.lock'), async () => {
     ctx.state = readJson(ctx.statePath)
-    const { directory, evidence } = assertLocalPreviewOnly(ctx)
+    const { directory, evidence } = await assertLocalPreviewOnly(ctx, readLegacyStatuses)
     if (Object.values(ctx.state.background).some(job => alive(job.pid))) fail('本卷仍有任务运行，退出后再重开')
     const archivedPath = file => {
       if (file.startsWith(`${ctx.paperDir}${path.sep}`)) return path.join(directory, 'paper', path.relative(ctx.paperDir, file))

@@ -151,7 +151,7 @@ function shippingToken() {
 }
 
 const AGENT_KEYCHAIN_SERVICE = 'eqbank-import-agent'
-let agentSessionCookie = null
+const agentSessionCookies = new Map()
 
 function agentUsername() {
   return String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_USERNAME || '').trim()
@@ -172,10 +172,11 @@ function agentPassword(username) {
 
 // The server accepts the shared Agent bearer token or an import_agent web session for the
 // same Agent routes. A session never carries shipping authority; promotion still needs its token.
-async function agentCredentialHeaders(targetOrigin) {
-  const username = agentUsername()
-  if (process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || !username) return { authorization: `Bearer ${token()}` }
-  if (!agentSessionCookie) {
+async function agentCredentialHeaders(targetOrigin, productionUsername) {
+  const username = productionUsername || agentUsername()
+  if (!productionUsername && (process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || !username)) return { authorization: `Bearer ${token()}` }
+  const key = `${targetOrigin}/${username}`
+  if (!agentSessionCookies.has(key)) {
     const response = await fetch(`${targetOrigin}/api/auth/login`, {
       method: 'POST',
       redirect: 'error',
@@ -188,9 +189,9 @@ async function agentCredentialHeaders(targetOrigin) {
     const session = response.headers.getSetCookie()
       .map((cookie) => /^eqb_session=([^;]+)/u.exec(cookie)?.[1]).find(Boolean)
     if (!session) fail('import_agent login returned no session cookie')
-    agentSessionCookie = `eqb_session=${session}`
+    agentSessionCookies.set(key, `eqb_session=${session}`)
   }
-  return { cookie: agentSessionCookie, origin: targetOrigin }
+  return { cookie: agentSessionCookies.get(key), origin: targetOrigin }
 }
 
 function publicationCapabilityPath(paperId) {
@@ -219,12 +220,12 @@ function exactApprovalIdentity(approval, paperId) {
 async function api(
   pathname,
   init = {},
-  { allowNotFound = false, notFoundValue = null, binary = false, credential = 'agent', rawResponse = false } = {},
+  { allowNotFound = false, notFoundValue = null, binary = false, credential = 'agent', rawResponse = false, connection } = {},
 ) {
-  const targetOrigin = origin()
-  const credentialHeaders = credential === 'shipping'
+  const targetOrigin = connection?.origin ?? origin()
+  const credentialHeaders = connection?.headers ?? (credential === 'shipping'
     ? { authorization: `Bearer ${shippingToken()}` }
-    : await agentCredentialHeaders(targetOrigin)
+    : await agentCredentialHeaders(targetOrigin))
   const response = await fetch(`${targetOrigin}${pathname}`, {
     ...init,
     redirect: 'error',
@@ -256,6 +257,22 @@ async function api(
     throw error
   }
   return body
+}
+
+export async function legacyPreviewStatuses(paperId, screenUrl) {
+  const runtime = path.join(root, 'imports/local-review')
+  const { apiOrigin, appOrigin } = JSON.parse(readFileSync(path.join(runtime, 'state.json'), 'utf8'))
+  if (!isLocalReviewOrigin(apiOrigin) || !isLocalReviewOrigin(appOrigin) || appOrigin !== screenUrl.origin) return []
+  resolveReviewOrigin(root, { ...process.env, QUESTION_BANK_IMPORT_OPS_ORIGIN: apiOrigin })
+  const credential = readFileSync(path.join(runtime, 'secrets/agent.token'), 'utf8').trim()
+  if (!credential) return []
+  const endpoint = `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`
+  const read = connection => api(endpoint, { signal: AbortSignal.timeout(15_000) }, { allowNotFound: true, connection })
+  const local = await read({ origin: apiOrigin, headers: { authorization: `Bearer ${credential}` } })
+  if (!local) return []
+  const production = 'https://eqbank.cc'
+  const headers = await agentCredentialHeaders(production, agentUsername() || 'droid-import')
+  return [local, await read({ origin: production, headers })]
 }
 
 function producerBuildId() {

@@ -109,6 +109,28 @@ test('reopen refuses production attempts and ambiguous upload history without ch
   }
 })
 
+for (const [localFound, productionFound] of [[true, false], [false, false], [true, true]]) {
+  test(`legacy reopen verifies local (${localFound}) and production (${productionFound})`, async t => {
+    const { dir, ctx } = fixture(t)
+    const { paperId } = ctx
+    const { revisionId, target } = previewResult
+    const url = `http://127.0.0.1:51790/?paperId=${paperId}&reviewRevision=${revisionId}`
+    ctx.state.steps['local-preview'] = completed({ revisionId, target })
+    ctx.state.steps['local-screen'] = completed({ url })
+    json(ctx.statePath, ctx.state)
+    json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId, completed: true, startedAt: oldTime, finishedAt: oldTime })
+    const revision = { id: revisionId, paperId, reviewKind: 'candidate', finalizedAt: oldTime }
+    const status = found => ({ paperId, revisions: found ? [revision] : [] })
+    const reopen = () => reopenLocalPreview(ctx, async () => [status(localFound), status(productionFound)])
+    if (localFound && !productionFound) assert((await reopen()).archived)
+    else {
+      const before = snapshot(dir)
+      await assert.rejects(reopen, /未能确认归属/u)
+      assert.deepEqual(snapshot(dir), before)
+    }
+  })
+}
+
 for (const [problem, message] of [['missing', /交接证据文件缺失/u], ['changed', /交接证据文件已变化/u]]) {
   test(`reopen leaves the entire seal in place when a referenced file is ${problem}`, async t => {
     const { dir, ctx } = fixture(t)
