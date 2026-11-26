@@ -1,0 +1,1024 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:seven-choices": {
+      "overview": "文章谈怎样用好语言学习类应用程序：作者提醒应用只是辅助，要从多种来源学习、明确目的并养成习惯、和真人一起学，并以自己学意大利语的经历推荐多种方式结合。",
+      "fullTranslationZh": "应用程序（application 的简称）如今越来越受欢迎，这是有充分理由的。无论是健身、和朋友交流，还是学习语言，它们几乎在你生活的方方面面都能帮上忙。不过，你得知道怎样正确使用它们，才能真正受益。下面是下载语言学习应用之前你应该考虑的几点。\n从多种来源学习（不只是应用程序）\n任何一位有经验的语言学习者都会告诉你，掌握一门外语的美妙之处，在于它为你打开的那个世界。这是一个信息来源丰富多样的世界，从报纸、书籍到电视、广播、音乐，甚至真实的人。用母语的时候，你会把自己局限在一种媒介里吗？大概不会，那么学新语言时又何必这样做呢？\n明确目的，规划习惯\n你是想几周内就说得流利，还是只为锻炼大脑？好的应用程序会帮你围绕自己的时间表安排学习。最好的应用程序会根据你的使用情况自我调整。这些应用程序鼓励你养成习惯，因为一旦成功养成习惯，就能确保你安心、规律地回来接着学。\n让学习社交化\n不，我不是指在网上晒你的学习进度。我说的是真正的社交。我学意大利语进步这么快，要归功于学习伙伴吉姆的支持。找个朋友陪你学。去上夜校。借一本书。买一本书。订一周假期，去语言学校上课。只是别忘了带上手机！\n说句真心话，应用程序、语言学校、吉姆、晚上外出，再加上一两本精选的好书，这样的组合被证明极其有效。我推荐这种做法。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+          "sourceText": "These apps encourage habit building, because the successful formation of a habit ensures your safe and regular return.",
+          "displayText": "These apps encourage habit building, because the successful formation of a habit ensures your safe and regular return.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:38"
+          ],
+          "translationZh": "这些应用程序鼓励你养成习惯，因为一旦成功养成习惯，就能确保你安心、规律地回来接着学。",
+          "analysisZh": "主干是 These apps encourage habit building，These apps 回指空里的 The best apps。because 引出原因状语从句，从句主语是名词短语 the successful formation of a habit（习惯的成功养成），谓语 ensures，宾语 your safe and regular return。名词化的写法把“养成习惯就会按时回来学”压进一个主谓宾里，翻译时可还原成动词。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "These apps encourage habit building"
+            },
+            {
+              "start": 37,
+              "end": 44,
+              "quote": "because"
+            },
+            {
+              "start": 45,
+              "end": 80,
+              "quote": "the successful formation of a habit"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:2",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+          "sourceText": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you.",
+          "displayText": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you.",
+          "relatedQuestionIds": [],
+          "translationZh": "任何一位有经验的语言学习者都会告诉你，掌握一门外语的美妙之处，在于它为你打开的那个世界。",
+          "analysisZh": "主干是 Any seasoned language learner will tell you that…，that 引出宾语从句。从句里主语是 the beauty of mastering a foreign language，系动词 is，表语 the world；which it opens up to you 是定语从句修饰 the world，it 指 a foreign language。这句点出本段主旨：外语打开的是一个多来源的世界，为段尾“别只用一种媒介”铺路。",
+          "underlineRanges": [
+            {
+              "start": 30,
+              "end": 48,
+              "quote": "will tell you that"
+            },
+            {
+              "start": 49,
+              "end": 104,
+              "quote": "the beauty of mastering a foreign language is the world"
+            },
+            {
+              "start": 105,
+              "end": 129,
+              "quote": "which it opens up to you"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "首段先肯定应用程序用处多，随即转到“要会用才受益”，引出三条建议；中间三部分各有一个小标题，分别讲多来源学习、明确目的并养成习惯、和真人一起学；末段用作者自己的组合学法收尾并推荐。",
+        "units": [
+          {
+            "unitId": "unit:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1"
+            ],
+            "summary": "肯定应用程序几乎处处有用，转而提醒要会用才真正受益，引出下载前该考虑的几点。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:2",
+            "heading": "Learn from diverse sources (not just apps)",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:2",
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3"
+            ],
+            "summary": "外语打开的是一个多来源的世界，用母语不会只靠一种媒介，学外语也不该只靠应用。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+            "heading": "Establish your purpose and plan your habits",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:4",
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5"
+            ],
+            "summary": "先想清楚学习目的；好的应用配合你的时间表、按你的使用情况调整，帮你养成规律学习的习惯。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:4",
+            "heading": "Make it social",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:6",
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7"
+            ],
+            "summary": "社交指和真人一起学，不是网上晒进度；作者靠学伴吉姆进步很快，建议找朋友、上夜校、读书、去语言学校。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+            "paragraphIds": [
+              "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8"
+            ],
+            "summary": "作者总结应用、语言学校、学伴、外出和好书的组合非常有效，并推荐这种做法。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 37,
+          "secondary": 36,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"just a tool\" 像在呼应小标题 \"not just apps\"，放在这一段末尾像句总结。但空前 \"Would you\" 是问句，它没作答，也没有把 \"native language\" 的道理搬到外语上。它也像前面那一空的提醒，可它没有 \"However\" 那样的转折，也没提怎么用。",
+          "quotes": [
+            "just a tool",
+            "not just apps",
+            "Would you",
+            "native language",
+            "However"
+          ]
+        },
+        "D": {
+          "target": 40,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "A",
+          "shared": [
+            "I"
+          ],
+          "text": "它和答案 A 一样以 \"I\" 开头表态，像在收尾。但空前管用的是 \"the combination\"，它却只劝人多用 apps，和小标题 \"not just apps\" 相反。它是照答案 A 改的：A 推荐整套组合，它改成尽量多用 app。它的 \"encourage\" 也像接那一空后的 \"These apps encourage\"，可那里空前讲 \"fit your studies around your timetable\"，不是越多越好。",
+          "quotes": [
+            "I",
+            "the combination",
+            "not just apps",
+            "encourage",
+            "These apps encourage",
+            "fit your studies around your timetable"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 122,
+              "quote": "应用程序（application 的简称）如今越来越受欢迎，这是有充分理由的。无论是健身、和朋友交流，还是学习语言，它们几乎在你生活的方方面面都能帮上忙。不过，你得知道怎样正确使用它们，才能真正受益。下面是下载语言学习应用之前你应该考虑的几点。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:2"
+              ],
+              "start": 123,
+              "end": 139,
+              "quote": "从多种来源学习（不只是应用程序）"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3"
+              ],
+              "start": 140,
+              "end": 265,
+              "quote": "任何一位有经验的语言学习者都会告诉你，掌握一门外语的美妙之处，在于它为你打开的那个世界。这是一个信息来源丰富多样的世界，从报纸、书籍到电视、广播、音乐，甚至真实的人。用母语的时候，你会把自己局限在一种媒介里吗？大概不会，那么学新语言时又何必这样做呢？"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:4"
+              ],
+              "start": 266,
+              "end": 275,
+              "quote": "明确目的，规划习惯"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5"
+              ],
+              "start": 276,
+              "end": 382,
+              "quote": "你是想几周内就说得流利，还是只为锻炼大脑？好的应用程序会帮你围绕自己的时间表安排学习。最好的应用程序会根据你的使用情况自我调整。这些应用程序鼓励你养成习惯，因为一旦成功养成习惯，就能确保你安心、规律地回来接着学。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:6"
+              ],
+              "start": 383,
+              "end": 389,
+              "quote": "让学习社交化"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7"
+              ],
+              "start": 390,
+              "end": 490,
+              "quote": "不，我不是指在网上晒你的学习进度。我说的是真正的社交。我学意大利语进步这么快，要归功于学习伙伴吉姆的支持。找个朋友陪你学。去上夜校。借一本书。买一本书。订一周假期，去语言学校上课。只是别忘了带上手机！"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8"
+              ],
+              "start": 491,
+              "end": 548,
+              "quote": "说句真心话，应用程序、语言学校、吉姆、晚上外出，再加上一两本精选的好书，这样的组合被证明极其有效。我推荐这种做法。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+            "text": "Apps (short for applications) are becoming increasingly popular nowadays, and for good reason. They can help you out in just about every area of your life, whether it’s keeping fit, communicating with friends, or even learning a language. However, you need to know how to use them properly to really benefit. Here’s what you should think about before downloading an app for language learning."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+            "text": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you. This is a world of diverse sources（来源）of information, from newspapers and books to TV, radio, music and even real people. Would you limit yourself to one medium in your native language? Probably not, so why do so in your new language?"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+            "text": "Do you want to be fluent in weeks or are you in it for the brain training? The good apps are designed to help you fit your studies around your timetable. The best apps adapt themselves based upon your behavior. These apps encourage habit building, because the successful formation of a habit ensures your safe and regular return."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+            "text": "No, I don’t mean posting your progress online. I mean social for real. I owe the speed of progress I made in Italian to the support from Jim, my partner in study time. Find a friend to accompany you. Take an evening class. Borrow a book. Buy a book. Book a week away and attend a language school. Just don’t forget your phone!"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+            "text": "If I may speak sincerely, the combination of app, language school, Jim, evenings out, and a choice book or two proved extremely effective. I recommend it."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "start": 95,
+                "end": 116,
+                "quote": "They can help you out"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "start": 246,
+                "end": 306,
+                "quote": "Here’s what you should think about before downloading an app"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "start": 58,
+                "end": 76,
+                "quote": "它们几乎在你生活的方方面面都能帮上忙"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "start": 100,
+                "end": 121,
+                "quote": "下面是下载语言学习应用之前你应该考虑的几点"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "start": 253,
+                "end": 316,
+                "quote": "Would you limit yourself to one medium in your native language?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "start": 83,
+                "end": 105,
+                "quote": "用母语的时候，你会把自己局限在一种媒介里吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 75,
+                "end": 153,
+                "quote": "The good apps are designed to help you fit your studies around your timetable."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 161,
+                "end": 196,
+                "quote": "These apps encourage habit building"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 21,
+                "end": 43,
+                "quote": "好的应用程序会帮你围绕自己的时间表安排学习。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 64,
+                "end": 77,
+                "quote": "这些应用程序鼓励你养成习惯"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:6",
+                "start": 2,
+                "end": 16,
+                "quote": "Make it social"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+                "start": 7,
+                "end": 30,
+                "quote": "I mean social for real."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:6",
+                "start": 0,
+                "end": 6,
+                "quote": "让学习社交化"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+                "start": 17,
+                "end": 27,
+                "quote": "我说的是真正的社交。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+                "start": 26,
+                "end": 137,
+                "quote": "the combination of app, language school, Jim, evenings out, and a choice book or two proved extremely effective"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+                "start": 36,
+                "end": 48,
+                "quote": "这样的组合被证明极其有效"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2021-eight-provinces-jan:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:36"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "start": 239,
+                "end": 308,
+                "quote": "However, you need to know how to use them properly to really benefit."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+                "start": 77,
+                "end": 100,
+                "quote": "不过，你得知道怎样正确使用它们，才能真正受益。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2021-eight-provinces-jan:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:37"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "start": 317,
+                "end": 365,
+                "quote": "Probably not, so why do so in your new language?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "start": 105,
+                "end": 125,
+                "quote": "大概不会，那么学新语言时又何必这样做呢？"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2021-eight-provinces-jan:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:38"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 154,
+                "end": 210,
+                "quote": "The best apps adapt themselves based upon your behavior."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 43,
+                "end": 64,
+                "quote": "最好的应用程序会根据你的使用情况自我调整。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2021-eight-provinces-jan:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:39"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+                "start": 0,
+                "end": 46,
+                "quote": "No, I don’t mean posting your progress online."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+                "start": 0,
+                "end": 17,
+                "quote": "不，我不是指在网上晒你的学习进度。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2021-eight-provinces-jan:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:40"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+                "start": 139,
+                "end": 154,
+                "quote": "I recommend it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+                "start": 49,
+                "end": 57,
+                "quote": "我推荐这种做法。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:38"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 161,
+                "end": 279,
+                "quote": "These apps encourage habit building, because the successful formation of a habit ensures your safe and regular return."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+                "start": 64,
+                "end": 106,
+                "quote": "这些应用程序鼓励你养成习惯，因为一旦成功养成习惯，就能确保你安心、规律地回来接着学。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "start": 0,
+                "end": 130,
+                "quote": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+                "start": 0,
+                "end": 44,
+                "quote": "任何一位有经验的语言学习者都会告诉你，掌握一门外语的美妙之处，在于它为你打开的那个世界。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-eight-provinces-jan:36": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "help you out",
+        "just about every area of your life",
+        "Here’s what you should think about",
+        "before downloading an app"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+        "beforeQuote": "They can help you out in just about every area of your life, whether it’s keeping fit, communicating with friends, or even learning a language.",
+        "afterQuote": "Here’s what you should think about before downloading an app for language learning."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "option",
+          "targetText": "They can help you out in just about every area of your life",
+          "relation": "However 把话从 apps 处处有用转到用不好就白用，前面在夸，这里开始提醒。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "option",
+          "targetText": "Apps / They",
+          "relation": "them 指首句的 Apps，也就是空前 They 说的那些应用。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "help you out",
+          "signalSide": "context-before",
+          "targetText": "to really benefit",
+          "relation": "空前 help you out 讲好处，选项 to really benefit 说好处要会用才拿得到，两句一正一转。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Here’s what you should think about",
+          "signalSide": "context-after",
+          "targetText": "know how to use them properly",
+          "relation": "空后要列出用前该考虑的事，正是选项 know how to use them properly 提出的问题。"
+        }
+      ],
+      "lock": [
+        "However",
+        "Here’s what you should think about"
+      ],
+      "find": {
+        "text": "先看空后 \"Here’s what you should think about\"：后面要讲用前该想什么。空前 \"help you out\" 一路在夸，只有 \"However\" 开头的 G 把话转到要会用。",
+        "quotes": [
+          "Here’s what you should think about",
+          "help you out",
+          "However"
+        ]
+      },
+      "explain": "前两句夸 apps 几乎处处帮得上忙，这句一转：好处要会用才拿得到。空后的 Here’s 由此引出全文的几条建议，下面三个小标题就是在回答怎样用好。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "help you out / Here’s what you should think about",
+            "optionSide": "However / know how to use them properly",
+            "relation": "空前讲好处，选项用 However 转到“得会用”，空后据此列出用前要考虑的事。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "前两句夸 apps 几乎处处帮得上忙，这句一转：好处要会用才拿得到。空后的 Here’s 由此引出全文的几条建议，下面三个小标题就是在回答怎样用好。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:37": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:37",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "limit yourself to one medium",
+        "native language",
+        "diverse sources",
+        "from newspapers and books to TV, radio, music and even real people"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+        "beforeQuote": "Would you limit yourself to one medium in your native language?",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "do so",
+          "signalSide": "option",
+          "targetText": "limit yourself to one medium",
+          "relation": "do so 回指空前问句里的 limit yourself to one medium，即只用一种媒介。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "limit yourself to one medium",
+          "signalSide": "context-before",
+          "targetText": "do so",
+          "relation": "空前问句给出 do so 要指的那个做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Probably not",
+          "signalSide": "option",
+          "targetText": "Would you ...?",
+          "relation": "空前是 Would you 一般疑问句，Probably not 直接作答。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "native language",
+          "signalSide": "context-before",
+          "targetText": "new language",
+          "relation": "native language 和选项的 new language 相对，把母语的道理搬到外语上。"
+        }
+      ],
+      "lock": [
+        "Would you",
+        "do so",
+        "native language"
+      ],
+      "find": {
+        "text": "空前是问句 \"Would you\"，要先有回答。E 的 \"Probably not\" 作答，\"do so\" 回指只用一种媒介，\"new language\" 又对上 \"native language\"。",
+        "quotes": [
+          "Would you",
+          "Probably not",
+          "do so",
+          "new language",
+          "native language"
+        ]
+      },
+      "explain": "作者先拿母语反问，这句替读者答出“不会”，再把同一个道理搬到外语上。段尾这一问一答，把小标题 not just apps 落成一句话：学外语也别只盯着一个 app。",
+      "distractors": [
+        {
+          "label": "C",
+          "text": "C 开头的 \"No\" 也像在回答空前的问句，但 \"posting your progress online\" 和 \"one medium\" 毫不相干，接不上母语与外语的对照。",
+          "quotes": [
+            "No",
+            "posting your progress online",
+            "one medium"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Would you limit yourself to one medium in your native language?",
+            "optionSide": "Probably not, so why do so in your new language?",
+            "relation": "问句与回答相接，do so 指 limit yourself to one medium，new language 对 native language。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "作者先拿母语反问，这句替读者答出“不会”，再把同一个道理搬到外语上。段尾这一问一答，把小标题 not just apps 落成一句话：学外语也别只盯着一个 app。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 开头的 \"No\" 也像在回答空前的问句，但 \"posting your progress online\" 和 \"one medium\" 毫不相干，接不上母语与外语的对照。"
+        },
+        {
+          "optionLabel": "B",
+          "reason": "它的 \"just a tool\" 像在呼应小标题 \"not just apps\"，放在这一段末尾像句总结。但空前 \"Would you\" 是问句，它没作答，也没有把 \"native language\" 的道理搬到外语上。它也像前面那一空的提醒，可它没有 \"However\" 那样的转折，也没提怎么用。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:38": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "The good apps",
+        "fit your studies around your timetable",
+        "These apps",
+        "encourage habit building"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:5",
+        "beforeQuote": "The good apps are designed to help you fit your studies around your timetable.",
+        "afterQuote": "These apps encourage habit building, because the successful formation of a habit ensures your safe and regular return."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "These apps",
+          "signalSide": "context-after",
+          "targetText": "The best apps",
+          "relation": "These apps 要回指前面刚说到的一类 app，选项的 The best apps 正好给它先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "The best apps",
+          "signalSide": "option",
+          "targetText": "These apps",
+          "relation": "The best apps 被空后的 These apps 接过去，继续说它们怎样帮人养成习惯。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "The good apps",
+          "signalSide": "context-before",
+          "targetText": "The best apps",
+          "relation": "空前 The good apps，选项 The best apps，从好到最好递进一层。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "adapt themselves based upon your behavior",
+          "signalSide": "option",
+          "targetText": "fit your studies around your timetable",
+          "relation": "空前说 app 配合你的时间表，选项进一步说 app 按你的使用情况自己调整。"
+        }
+      ],
+      "lock": [
+        "The good apps",
+        "The best apps",
+        "These apps"
+      ],
+      "find": {
+        "text": "先看空后 \"These apps\"：空里要先出现一类具体的 app。F 的 \"The best apps\" 接住它，又和空前 \"The good apps\" 递进一层。",
+        "quotes": [
+          "These apps",
+          "The best apps",
+          "The good apps"
+        ]
+      },
+      "explain": "空前说好 app 会配合你的时间表，这句再进一层：最好的 app 还会按你的使用情况自己调整。空后顺势说这类 app 帮你养成习惯，扣住小标题里的 plan your habits。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "The good apps / These apps encourage habit building",
+            "optionSide": "The best apps adapt themselves",
+            "relation": "good 到 best 递进，These apps 回指 The best apps。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前说好 app 会配合你的时间表，这句再进一层：最好的 app 还会按你的使用情况自己调整。空后顺势说这类 app 帮你养成习惯，扣住小标题里的 plan your habits。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:39": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "Make it social",
+        "social for real",
+        "my partner in study time",
+        "Find a friend to accompany you",
+        "Take an evening class"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+        "beforeQuote": "",
+        "afterQuote": "I mean social for real."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "I don’t mean",
+          "signalSide": "option",
+          "targetText": "I mean social for real",
+          "relation": "选项先说“我不是指”，空后接“我是指”，一否一肯，把 social 的意思说清。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "I mean social for real",
+          "signalSide": "context-after",
+          "targetText": "No, I don’t mean",
+          "relation": "for real 强调真正的社交，前面得先有一种不算真社交的理解被排除。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "online",
+          "signalSide": "option",
+          "targetText": "for real",
+          "relation": "网上晒进度与 for real 的面对面相对。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Make it social",
+          "signalSide": "context-before",
+          "targetText": "posting your progress online",
+          "relation": "小标题 social 容易被理解成社交媒体，选项先排除这种理解。"
+        }
+      ],
+      "lock": [
+        "Make it social",
+        "I mean social for real"
+      ],
+      "find": {
+        "text": "先看空后 \"I mean social for real\"：前面要先排除一种不算真社交的理解。C 的 \"I don’t mean\" 正好被它纠正，\"online\" 对 \"for real\"。",
+        "quotes": [
+          "I mean social for real",
+          "I don’t mean",
+          "online",
+          "for real"
+        ]
+      },
+      "explain": "小标题 Make it social 容易让人想到上网晒进度，这句先把这层误解挡掉；空后再说真正的社交，是找学习伙伴、上夜校、去语言学校这些和真人打交道的事。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Make it social / I mean social for real",
+            "optionSide": "No, I don’t mean posting your progress online.",
+            "relation": "先否定网上晒进度，再肯定真正的社交。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "小标题 Make it social 容易让人想到上网晒进度，这句先把这层误解挡掉；空后再说真正的社交，是找学习伙伴、上夜校、去语言学校这些和真人打交道的事。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:40": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "the combination of app, language school, Jim, evenings out",
+        "a choice book or two",
+        "proved extremely effective",
+        "If I may speak sincerely"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+        "beforeQuote": "If I may speak sincerely, the combination of app, language school, Jim, evenings out, and a choice book or two proved extremely effective.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "option",
+          "targetText": "the combination",
+          "relation": "it 指空前的 the combination，即 app 加语言学校、学伴、书的整套做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the combination",
+          "signalSide": "context-before",
+          "targetText": "it",
+          "relation": "空前给出 it 要指的对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "proved extremely effective",
+          "signalSide": "context-before",
+          "targetText": "recommend",
+          "relation": "先说效果极好，再说推荐，前因后果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "recommend",
+          "signalSide": "option",
+          "targetText": "proved extremely effective",
+          "relation": "recommend 是作者亲身验证有效之后的表态。"
+        }
+      ],
+      "lock": [
+        "the combination",
+        "proved extremely effective"
+      ],
+      "find": {
+        "text": "全文最后一空，看空前 \"the combination\" 和 \"proved extremely effective\"：效果好才推荐。A 的 \"it\" 指这整套组合，短短一句表态收尾。",
+        "quotes": [
+          "the combination",
+          "proved extremely effective",
+          "it"
+        ]
+      },
+      "explain": "最后一段把前面的建议合成一套做法，说它亲测有效，这句随即表态推荐，收住全文。推荐的是整套组合而不只是 app，回应开头 However 那句“要会用”的提醒。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the combination ... proved extremely effective",
+            "optionSide": "I recommend it.",
+            "relation": "it 指 the combination，效果好所以推荐。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "最后一段把前面的建议合成一套做法，说它亲测有效，这句随即表态推荐，收住全文。推荐的是整套组合而不只是 app，回应开头 However 那句“要会用”的提醒。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "它和答案 A 一样以 \"I\" 开头表态，像在收尾。但空前管用的是 \"the combination\"，它却只劝人多用 apps，和小标题 \"not just apps\" 相反。它是照答案 A 改的：A 推荐整套组合，它改成尽量多用 app。它的 \"encourage\" 也像接那一空后的 \"These apps encourage\"，可那里空前讲 \"fit your studies around your timetable\"，不是越多越好。"
+        }
+      ]
+    }
+  }
+}

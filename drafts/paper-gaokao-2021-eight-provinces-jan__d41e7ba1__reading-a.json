@@ -1,0 +1,722 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-a": {
+      "overview": "一则大学预科项目（Pre-College Program）的非学分课程介绍：先说明课程由学院专家讲授、结业有反馈和证书、每天上午上课，再列出神经科学、创造力心理学、创意叙事和体育经济学四门课的日期、教师与内容。",
+      "fullTranslationZh": "非学分课程\n大学预科项目开设非学分课程。学生将体验由本学院一些顶尖专家讲授的大学水平课程，并在课程结束时收到对其作业的书面反馈。预科学生在项目结束时还将获得“合格/不合格”的成绩和一份结业证书。\n所有非学分课程每天上午 9:00—11:30 上课，下午或晚上可能另有要求。\n课程：神经科学案例研究\n● 6 月 11 日—7 月 2 日\n● 利娅·勒施（Leah Roesch）\n本课程采用以学生为中心的主动学习方法和真实案例，旨在让学生更全面地了解人脑是如何工作的。\n课程：创造力心理学\n● 6 月 15 日—6 月 28 日\n● 马歇尔·杜克（Marshall Duke）\n为什么有些人如此富有创造力？这是遗传的，还是童年经历造成的？他们和其他人不一样吗？这门广受欢迎的心理学课程重点介绍关于创造力的各种理论。\n课程：创意叙事\n● 6 月 21 日—7 月 3 日\n● 伊迪丝·弗雷尼（Edith Freni）\n这门大学水平的创意叙事课程是一门入门课，介绍出现在各种创意写作形式（如短篇小说和剧本创作）中的多种叙事技巧。\n课程：体育经济学\n● 7 月 19 日—8 月 1 日\n● 克里斯蒂娜·德帕斯夸莱（Christina DePasquale）\n在这门课上，我们将分析体育产业许多有趣的方面，例如体育联盟、票价制定、薪资谈判、歧视问题以及 NCAA（美国大学体育协会）的政策等。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-a:1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+          "sourceText": "Students will experience college-level courses given by some of our college’s leading experts and will receive written feedback（反馈）on their work at the end of the course.",
+          "displayText": "Students will experience college-level courses given by some of our college’s leading experts and will receive written feedback（反馈）on their work at the end of the course.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:21"
+          ],
+          "translationZh": "学生将体验由本学院一些顶尖专家讲授的大学水平课程，并在课程结束时收到对其作业的书面反馈。",
+          "analysisZh": "先找主干：主语 Students 带两个并列谓语，will experience college-level courses（体验大学水平的课程）和 will receive written feedback（收到书面反馈），由 and 连接。given by some of our college’s leading experts 是过去分词短语，后置修饰 courses，说明课程由学院顶尖专家讲授；on their work 说明反馈针对什么，at the end of the course 交代时间。读懂这句就知道：学生是来“体验”大学课程的，还不是大学生。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 24,
+              "quote": "will experience"
+            },
+            {
+              "start": 47,
+              "end": 55,
+              "quote": "given by"
+            },
+            {
+              "start": 98,
+              "end": 110,
+              "quote": "will receive"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:1"
+              ],
+              "start": 0,
+              "end": 5,
+              "quote": "非学分课程"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2"
+              ],
+              "start": 6,
+              "end": 97,
+              "quote": "大学预科项目开设非学分课程。学生将体验由本学院一些顶尖专家讲授的大学水平课程，并在课程结束时收到对其作业的书面反馈。预科学生在项目结束时还将获得“合格/不合格”的成绩和一份结业证书。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:3"
+              ],
+              "start": 98,
+              "end": 136,
+              "quote": "所有非学分课程每天上午 9:00—11:30 上课，下午或晚上可能另有要求。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:4"
+              ],
+              "start": 137,
+              "end": 148,
+              "quote": "课程：神经科学案例研究"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:5"
+              ],
+              "start": 149,
+              "end": 167,
+              "quote": "● 6 月 11 日—7 月 2 日"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:6"
+              ],
+              "start": 168,
+              "end": 188,
+              "quote": "● 利娅·勒施（Leah Roesch）"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:7"
+              ],
+              "start": 189,
+              "end": 233,
+              "quote": "本课程采用以学生为中心的主动学习方法和真实案例，旨在让学生更全面地了解人脑是如何工作的。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:8"
+              ],
+              "start": 234,
+              "end": 243,
+              "quote": "课程：创造力心理学"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:9"
+              ],
+              "start": 244,
+              "end": 263,
+              "quote": "● 6 月 15 日—6 月 28 日"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:10"
+              ],
+              "start": 264,
+              "end": 287,
+              "quote": "● 马歇尔·杜克（Marshall Duke）"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:11"
+              ],
+              "start": 288,
+              "end": 356,
+              "quote": "为什么有些人如此富有创造力？这是遗传的，还是童年经历造成的？他们和其他人不一样吗？这门广受欢迎的心理学课程重点介绍关于创造力的各种理论。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:12"
+              ],
+              "start": 357,
+              "end": 364,
+              "quote": "课程：创意叙事"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:13"
+              ],
+              "start": 365,
+              "end": 383,
+              "quote": "● 6 月 21 日—7 月 3 日"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:14",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:14"
+              ],
+              "start": 384,
+              "end": 406,
+              "quote": "● 伊迪丝·弗雷尼（Edith Freni）"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15"
+              ],
+              "start": 407,
+              "end": 461,
+              "quote": "这门大学水平的创意叙事课程是一门入门课，介绍出现在各种创意写作形式（如短篇小说和剧本创作）中的多种叙事技巧。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:16",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:16"
+              ],
+              "start": 462,
+              "end": 470,
+              "quote": "课程：体育经济学"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:17",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:17"
+              ],
+              "start": 471,
+              "end": 489,
+              "quote": "● 7 月 19 日—8 月 1 日"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:18",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:18"
+              ],
+              "start": 490,
+              "end": 525,
+              "quote": "● 克里斯蒂娜·德帕斯夸莱（Christina DePasquale）"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19"
+              ],
+              "start": 526,
+              "end": 592,
+              "quote": "在这门课上，我们将分析体育产业许多有趣的方面，例如体育联盟、票价制定、薪资谈判、歧视问题以及 NCAA（美国大学体育协会）的政策等。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+                "start": 0,
+                "end": 50,
+                "quote": "The Pre-College Program offers non-credit courses."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+                "start": 51,
+                "end": 97,
+                "quote": "Students will experience college-level courses"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+                "start": 0,
+                "end": 13,
+                "quote": "大学预科项目开设非学分课程"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+                "start": 14,
+                "end": 38,
+                "quote": "学生将体验由本学院一些顶尖专家讲授的大学水平课程"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:9",
+                "start": 0,
+                "end": 19,
+                "quote": "● June 15 – June 28"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:9",
+                "start": 0,
+                "end": 19,
+                "quote": "● 6 月 15 日—6 月 28 日"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:14",
+                "start": 0,
+                "end": 13,
+                "quote": "● Edith Freni"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+                "start": 96,
+                "end": 170,
+                "quote": "storytelling techniques that appear in different forms of creative writing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:14",
+                "start": 0,
+                "end": 22,
+                "quote": "● 伊迪丝·弗雷尼（Edith Freni）"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+                "start": 22,
+                "end": 53,
+                "quote": "出现在各种创意写作形式（如短篇小说和剧本创作）中的多种叙事技巧"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2021-eight-provinces-jan:reading-a:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:21"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-a:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+                "start": 51,
+                "end": 221,
+                "quote": "Students will experience college-level courses given by some of our college’s leading experts and will receive written feedback（反馈）on their work at the end of the course."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+                "start": 14,
+                "end": 58,
+                "quote": "学生将体验由本学院一些顶尖专家讲授的大学水平课程，并在课程结束时收到对其作业的书面反馈。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先总说预科非学分课程能给学生带来什么、何时上课，再逐门列出四门课程的日期、授课教师和内容。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+            "summary": "课程由学院顶尖专家讲授，结束时有书面反馈，项目结束时给成绩和结业证书",
+            "function": "交代项目性质，从 Pre-College 可看出读者对象"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:3",
+            "summary": "所有课程每天上午 9:00—11:30 上课，下午或晚上可能另有安排",
+            "function": "补充统一的上课时间"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:7",
+            "summary": "神经科学案例研究课用主动学习和真实案例讲人脑如何运作",
+            "function": "介绍第一门课的内容"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:11",
+            "summary": "创造力心理学课从几个问题入手，介绍关于创造力的不同理论",
+            "function": "介绍第二门课的内容"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+            "summary": "创意叙事课介绍短篇小说、剧本等创意写作里的叙事技巧",
+            "function": "介绍第三门课的内容"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+            "summary": "体育经济学课分析体育联盟、票价、薪资谈判等体育产业话题",
+            "function": "介绍第四门课的内容"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-eight-provinces-jan:21": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据项目名称和课程性质，推断这则课程介绍是写给谁看的。",
+      "stemTranslationZh": "这篇文章是写给谁看的？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2021-eight-provinces-jan:reading-a:2]]写 Pre-College Program，让学生体验 college-level courses，结业发 certificate；读者得是还没上大学的人",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "普通大众。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Pre-College students will also receive a grade of Satisfactory/Unsatisfactory and a certificate of completion",
+            "sourceEntity": "Pre-College students",
+            "optionText": "The general public.",
+            "optionEntity": "general public",
+            "explanation": "课程要交作业、打成绩、发结业证书，对象是报名的预科学生（Pre-College students），不是随便哪位普通读者。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "quote": "Pre-College students will also receive a grade of Satisfactory/Unsatisfactory and a certificate of completion",
+              "anchor": "预科学生拿成绩和证书"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "大学新生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "college-level courses",
+            "optionText": "College",
+            "matchType": "exact",
+            "relationNote": "选项借了原文反复出现的“大学”（college），可“大学水平的课程”（college-level courses）是说课程难度达到大学程度；项目叫“大学预科”（Pre-College），学生还没进大学，不是大一新生。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "quote": "Students will experience college-level courses",
+              "anchor": "体验大学水平课程"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "教育专家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "leading experts",
+            "optionText": "experts",
+            "matchType": "exact",
+            "relationNote": "“专家”（experts）在原文是给学生上课的学院顶尖专家（leading experts），他们是讲课的人，不是这份介绍要招的读者。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "quote": "given by some of our college’s leading experts",
+              "anchor": "专家授课"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "高中生。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "quote": "The Pre-College Program offers non-credit courses.",
+              "anchor": "大学预科项目"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "quote": "Students will experience college-level courses",
+              "anchor": "体验大学水平课程"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "High school students.",
+          "sourceRole": "correctOption",
+          "targetText": "The Pre-College Program offers non-credit courses.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+          "relationType": "paraphrase",
+          "note": "选项的“高中生”是从“大学预科”（Pre-College）推一步得来的：这个项目让还没上大学的学生先体验大学水平的课程（college-level courses），这样的读者就是快要升大学的高中生，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "对照四门课程的起止日期，找出整段都落在六月里的一门。",
+      "stemTranslationZh": "如果你只在六月有空，可以选哪门课？",
+      "locateBy": "options",
+      "locateFindZh": "四门课各看日期行，找起止都在 June 的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "体育经济学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "● July 19 – August 1",
+            "sourceEntity": "July 19 – August 1",
+            "optionText": "Sports Economics.",
+            "optionEntity": "Sports Economics",
+            "explanation": "体育经济学 7 月 19 日才开课，8 月 1 日结束（July 19 – August 1），整段都在七八月，一天也不在六月。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:17",
+              "quote": "● July 19 – August 1",
+              "anchor": "体育经济学日期"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "创意叙事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "● June 21 – July 3",
+            "sourceHighlight": "July 3",
+            "optionText": "Creative Storytelling.",
+            "optionHighlight": "Creative Storytelling",
+            "explanation": "创意叙事 6 月 21 日开课，却要上到 7 月 3 日（July 3），七月没空就上不完。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:13",
+              "quote": "● June 21 – July 3",
+              "anchor": "创意叙事日期"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "创造力心理学。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:9",
+              "quote": "● June 15 – June 28",
+              "anchor": "创造力心理学日期"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "神经科学案例研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "● June 11 – July 2",
+            "sourceHighlight": "July 2",
+            "optionText": "Case Studies in Neuroscience.",
+            "optionHighlight": "Case Studies in Neuroscience",
+            "explanation": "神经科学案例研究开课最早，在 6 月 11 日，但一直持续到 7 月 2 日（July 2），最后两天落在七月。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:5",
+              "quote": "● June 11 – July 2",
+              "anchor": "神经科学日期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Psychology of Creativity.",
+          "sourceRole": "correctOption",
+          "targetText": "● June 15 – June 28",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:9",
+          "relationType": "locationCue",
+          "note": "创造力心理学从 6 月 15 日上到 6 月 28 日（June 15 – June 28），开课和结课都在六月，只有六月有空也能完整上完，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "由“创意写作”找到对应课程，再看这门课由哪位老师讲授。",
+      "stemTranslationZh": "如果你对创意写作感兴趣，应该选谁的课？",
+      "locateBy": "stem",
+      "locateFindZh": "往前看这门课的授课人",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "利娅·勒施的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "this course is designed to provide a fuller understanding of how the human brain works",
+            "sourceEntity": "how the human brain works",
+            "optionText": "Leah Roesch’s.",
+            "optionEntity": "Leah Roesch",
+            "explanation": "Leah Roesch 教神经科学案例研究，讲的是人脑如何运作（how the human brain works），和写作无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:7",
+              "quote": "this course is designed to provide a fuller understanding of how the human brain works",
+              "anchor": "神经科学课内容"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "伊迪丝·弗雷尼的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:14",
+              "quote": "● Edith Freni",
+              "anchor": "创意叙事课教师"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+              "quote": "storytelling techniques that appear in different forms of creative writing",
+              "anchor": "创意写作里的叙事技巧"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "马歇尔·杜克的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This popular psychology course highlights the different theories of creativity.",
+            "sourceEntity": "theories of creativity",
+            "optionText": "Marshall Duke’s.",
+            "optionEntity": "Marshall Duke",
+            "explanation": "Marshall Duke 的课名里有“创造力”（Creativity），和题干的“创意”（creative）同根，但这门心理学课讲的是关于创造力的理论（theories of creativity），不教写作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:11",
+              "quote": "This popular psychology course highlights the different theories of creativity.",
+              "anchor": "创造力心理学内容"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "克里斯蒂娜·德帕斯夸莱的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In this course we will analyze many interesting aspects of the sports industry",
+            "sourceEntity": "the sports industry",
+            "optionText": "Christina DePasquale’s.",
+            "optionEntity": "Christina DePasquale",
+            "explanation": "Christina DePasquale 教体育经济学，分析体育联盟、票价、薪资谈判等体育产业话题（the sports industry），与写作不沾边。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "quote": "In this course we will analyze many interesting aspects of the sports industry",
+              "anchor": "体育经济学内容"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "creative writing",
+          "sourceRole": "stem",
+          "targetText": "This college-level course in creative storytelling functions as an introduction to a variety of storytelling techniques that appear in different forms of creative writing, such as short fiction and playwriting.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+          "relationType": "locationCue",
+          "answerText": "Edith Freni",
+          "bridgeZh": "这段是创意叙事课的介绍，授课人列在这门课名下",
+          "note": "题干 creative writing 原词出现在原文。"
+        },
+        {
+          "sourceText": "Edith Freni’s.",
+          "sourceRole": "correctOption",
+          "targetText": "● Edith Freni",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:14",
+          "relationType": "locationCue",
+          "note": "选项沿用原文人名 Edith Freni。她的创意叙事课专讲短篇小说、剧本这类创意写作形式里的叙事技巧（storytelling techniques），正合写作兴趣，选 B。"
+        }
+      ]
+    }
+  }
+}

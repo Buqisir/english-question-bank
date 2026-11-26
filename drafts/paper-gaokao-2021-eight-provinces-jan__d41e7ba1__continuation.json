@@ -1,0 +1,140 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "When I was about to say goodbye, the girl asked if I’d had lunch. I told her I hadn’t eaten anything since breakfast. She ran back to the truck and spoke to her mother. A moment later, the woman came over with a paper bag and put it into my hands. I tried to refuse, because they had already done so much for me, but she just smiled and pushed it gently back. The girl explained that her mother always made extra food for the road. I thanked them again and again. Then the father waved, and their little truck pulled back onto the road.\n\nAfter they left, I got into my Jeep and opened the paper bag. Inside were four warm tamales wrapped in a cloth, still smelling of corn and meat. Under them, folded neatly, was my $20 bill. The wife must have slipped it in before she handed me the bag. I sat there for a long time with the money in my hand. This family had stopped when nobody else would, and they had refused to take anything for it. I ate every bite of that lunch by the road. Since that day, I have kept a jack and a few tools in my Jeep, and whenever I see someone stuck by the road, I pull over.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "车已经修好，“我”想塞给男人 20 美元被拒，只好悄悄塞给了他妻子；原文停在小女孩说他们来自墨西哥、要在俄勒冈的果园干几周活。还没解决的是：这家人帮了大忙却不收钱，这份人情怎么收场，以及“我”对“大多数人都不愿帮忙”的失望会不会改变。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "这家人自己也不宽裕（父母要去果园打几周工），却主动停车，用锯木头垫千斤顶、让妻子去买新扳手这些行动帮到底，还 “wouldn’t take it”，可见他们帮人不图回报。“我”着急又感激，想用钱表达谢意，被拒后还 “as quietly as I could” 把钱塞给妻子。"
+        },
+        {
+          "question": "原文是怎么写的？续写该照着怎样写？",
+          "answer": "第一人称“我”回忆，过去时；句子短而平实，多是一个接一个的动作。原文没有一处引号，人物的话全是转述（He conveyed through her that…、Mexico, she said.），描写很少。续写也用“我”的口吻、短句和动作推进，人物的话用转述，不写大段对白和景物描写。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "I tried to put a $20 bill in the man’s hand, but he wouldn’t take it, so instead I went up to the truck and gave it to his wife as quietly as I could.",
+          "use": "这张 20 美元是全文最好用的伏笔：续写可以让它被悄悄放回纸袋，一家人不收钱的态度就靠这个物件说出来。"
+        },
+        {
+          "sourceQuote": "I was sick of the way most people hadn’t bothered to help",
+          "use": "开头“我”对路人的失望，可以在结尾收回：“我”从此也停车帮别人，问题落在一个动作上。"
+        },
+        {
+          "sourceQuote": "They were in Oregon so Mommy and Daddy could work on a fruit farm for the next few weeks.",
+          "use": "一家人靠打零工生活，送午饭、退回钱的分量就更重；第一段可以让卡车开往果园，第二段“我”回想时用上这一点。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从小女孩问“我”吃没吃午饭写起，要写出这一问引出的事：一家人给了“我”一个纸袋（第二段首句的 the paper bag 必须在第一段出现）。",
+        "第二段首句是 After they left，所以第一段结尾时一家人必须已经道别离开，“我”回到自己的车边。",
+        "第二段要写纸袋里有什么、“我”的反应，并接上原文：这家人不肯收钱，“我”曾对路人不愿帮忙很失望。",
+        "人称、时态不变：第一人称、过去时；人物还是“我”、父亲、母亲和小女孩。"
+      ],
+      "thisEssayChooses": "本文让“我”说没吃饭，母亲递来装着自制玉米粽（tamales）的纸袋，“我”推辞不掉；袋里还压着那张 20 美元，说明钱被悄悄退了回来。结尾落在“我”从此车里备着千斤顶、见人抛锚就停车。纸袋里装什么、钱有没有退回、结尾的具体动作都可以换，比如袋里只有三明治，或“我”下车追不上卡车。人物的话全用转述，和原文一致。"
+    },
+    "standard": {
+      "essay": "When I was about to say goodbye, the girl asked if I’d had lunch. I told her I hadn’t eaten anything since breakfast. She ran back to the truck and spoke to her mother. A moment later, the woman came over with a paper bag and put it into my hands. I tried to refuse, because they had already done so much for me, but she just smiled and pushed it gently back. The girl explained that her mother always made extra food for the road. I thanked them again and again. Then the father waved, and their little truck pulled back onto the road.\n\nAfter they left, I got into my Jeep and opened the paper bag. Inside were four warm tamales wrapped in a cloth, still smelling of corn and meat. Under them, folded neatly, was my $20 bill. The wife must have slipped it in before she handed me the bag. I sat there for a long time with the money in my hand. This family had stopped when nobody else would, and they had refused to take anything for it. I ate every bite of that lunch by the road. Since that day, I have kept a jack and a few tools in my Jeep, and whenever I see someone stuck by the road, I pull over.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住小女孩的问题，让一家人送出纸袋、推辞不掉，最后道别离开，把第二段首句需要的“他们走了、纸袋在我手上”都准备好。",
+          "items": [
+            {
+              "quote": "I told her I hadn’t eaten anything since breakfast.",
+              "explain": "用转述直接回答问题，和原文 Mexico, she said 这种不加引号的写法一致；在路边困了近三个小时，没吃饭也合情理。"
+            },
+            {
+              "quote": "the woman came over with a paper bag and put it into my hands",
+              "explain": "第二段首句里的 the paper bag 在这里第一次出现，读者到第二段才知道是哪个袋子。"
+            },
+            {
+              "quote": "I tried to refuse, because they had already done so much for me, but she just smiled and pushed it gently back.",
+              "explain": "“我”推辞、她微笑推回，用动作写出这家人的坚持，不用直接说“她很善良”。"
+            },
+            {
+              "quote": "Then the father waved, and their little truck pulled back onto the road.",
+              "explain": "这一段以一家人开车离开收尾，正好接第二段的 After they left，第一段没有提前写开袋子。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "打开纸袋，发现食物和被退回的 20 美元，写出“我”的触动，再落到“我”从此停车帮人这个动作上，回应开头的失望。",
+          "items": [
+            {
+              "quote": "Under them, folded neatly, was my $20 bill.",
+              "explain": "原文里悄悄塞给妻子的 20 美元在这里回来，一个物件就说明了这家人不收钱，也是全文的转折点。"
+            },
+            {
+              "quote": "The wife must have slipped it in before she handed me the bag.",
+              "explain": "用 must have 做推测，补上钱怎么回到袋里的那一步，因果不跳步。"
+            },
+            {
+              "quote": "This family had stopped when nobody else would",
+              "explain": "把原文开头“大多数人不愿帮忙”和这一家人对比，点出意义，但只说一句，不喊口号。"
+            },
+            {
+              "quote": "whenever I see someone stuck by the road, I pull over",
+              "explain": "结尾落在一个具体动作上：当年没人为“我”停车，现在“我”为别人停车，原文开头的问题有了收场。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I tried to refuse, but she just smiled and pushed it gently back.",
+          "function": "写推辞和坚持赠送的来回，靠动作表现人物，适合各种“送东西、不肯收”的场景。"
+        },
+        {
+          "expression": "X must have slipped it in before …",
+          "function": "用 must have done 推测对方在“我”没看见时做了什么，常用来揭开纸袋、信封里的意外。"
+        },
+        {
+          "expression": "pull over",
+          "function": "原文用 pulled over 写这家人停车帮忙，结尾让“我”也 pull over，同一个动词把前后串起来。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写“我”打开纸袋、看到里面的东西。",
+          "why": "第二段首句才写 opened the paper bag，第一段提前打开，第二段就重复了，段首句也接不上。"
+        },
+        {
+          "pitfall": "让“我”硬把钱塞给这家人，他们最后收下了。",
+          "why": "原文男人 wouldn’t take it，这家人不图回报的态度已经定下，收钱会和原文人物矛盾，也让结局失去分量。"
+        },
+        {
+          "pitfall": "结尾写一句“这件事让我明白了助人为乐的道理”。",
+          "why": "这种话放到任何好人好事故事后都成立；应该落到具体的事上，比如“我”以后也停车帮人，或者“我”留着那张钞票。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "When I was about to say goodbye, the girl asked if I’d had lunch. I laughed and admitted that I hadn’t eaten a thing since breakfast; I had spent the whole morning watching cars rush past my signs. She turned and called something to her mother, who was already climbing into the truck. The woman reached behind the seat, pulled out a brown paper bag and pressed it into my hands. I shook my head and told the girl they had done more than enough for one day. Her mother only smiled and folded my fingers around the bag, the way you would with a stubborn child. The girl giggled and said her mom always packed too much food anyway. I thanked the father one last time, and he patted my shoulder before the little truck rattled off toward the fruit farm.\n\nAfter they left, I got into my Jeep and opened the paper bag. The smell of warm corn filled the car at once. Inside were four homemade tamales, carefully wrapped in a clean cloth, and tucked under them was a folded $20 bill, the very one I had slipped to the wife. She must have put it back before she handed me the bag. I sat behind the wheel and held that bill for a long time. For three hours, cars had rushed past me without slowing down. Then a family who had come all the way from Mexico to pick fruit had stopped, fixed my problem with a log and a small jack, fed me, and still refused to take a cent. I ate every bite of those tamales before I started the engine. These days there is an extra jack in the back of my Jeep, and I never drive past anyone stuck at the side of the road.",
+      "beyondStandard": [
+        {
+          "quote": "I had spent the whole morning watching cars rush past my signs",
+          "explain": "把“没吃饭”的原因和原文路边举牌、无人停车的处境接起来，比标准版只说没吃饭更贴原文。"
+        },
+        {
+          "quote": "folded my fingers around the bag, the way you would with a stubborn child",
+          "explain": "用一个具体动作加一个比方写母亲的坚持，带一点幽默，口吻更像原文那个说话随和的叙述者。"
+        },
+        {
+          "quote": "fixed my problem with a log and a small jack, fed me, and still refused to take a cent",
+          "explain": "把原文里锯木头、借千斤顶的细节一口气串起来，refused to take a cent 比 refused to take anything 更地道，也更有力。"
+        }
+      ]
+    }
+  }
+}

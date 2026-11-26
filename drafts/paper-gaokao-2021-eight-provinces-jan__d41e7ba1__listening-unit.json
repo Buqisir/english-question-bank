@@ -1,0 +1,1121 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Are you coming to the gym?\nNo, I don’t feel like going today. I’ve been busy working the whole day and really need a peaceful time at home.",
+      "translationZh": "你要去健身房吗？\n不去，我今天不想去。我忙着工作了一整天，真想在家清静一会儿。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士忙了一整天，想在家清静休息，于是没有答应男士一起去健身房。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你要去健身房吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "不去，我今天不想去。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我忙着工作了一整天，真想在家清静一会儿。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "You should try this. My aunt made it.\nMmm, delicious. What is it?\nIt’s called couscous. It’s made from wheat. There is some meat on top of it.",
+      "translationZh": "你该尝尝这个。是我姑姑做的。\n嗯，真好吃。这是什么？\n它叫蒸粗麦粉（couscous）。是用小麦做的。上面还放了些肉。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士请女士尝姑姑做的蒸粗麦粉，并介绍它用小麦做成、上面盖着肉。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "你该尝尝这个。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "是我姑姑做的。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "嗯，真好吃。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "这是什么？"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "它叫蒸粗麦粉（couscous）。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "是用小麦做的。"
+        },
+        {
+          "id": "listening-text-2:7",
+          "zh": "上面还放了些肉。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "I’m cooking beef with potatoes. Do you want some?\nNo, thanks. I’m on a diet. I only eat vegetables and fruits.\nOkay. There are some grapes in the fridge. Help yourself.\nThanks.",
+      "translationZh": "我在做牛肉炖土豆。你要来点吗？\n不用了，谢谢。我在节食。我只吃蔬菜和水果。\n好吧。冰箱里有些葡萄。你自己拿吧。\n谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "男士在做牛肉炖土豆，节食的女士只吃蔬果，男士让她自己去冰箱拿葡萄。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "我在做牛肉炖土豆。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你要来点吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "不用了，谢谢。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我在节食。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我只吃蔬菜和水果。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "好吧。"
+        },
+        {
+          "id": "listening-text-3:7",
+          "zh": "冰箱里有些葡萄。"
+        },
+        {
+          "id": "listening-text-3:8",
+          "zh": "你自己拿吧。"
+        },
+        {
+          "id": "listening-text-3:9",
+          "zh": "谢谢。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "Lisa, do you think we should get a new sofa?\nOh, our sofa is a bit old, but perfectly usable. Right now, we need a cupboard in the kitchen much more.",
+      "translationZh": "莉萨，你觉得我们该买个新沙发吗？\n哦，我们的沙发是有点旧了，但完全能用。眼下我们更需要的是厨房里的一个橱柜。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "男士想买新沙发，莉萨认为旧沙发还能用，眼下更需要给厨房添一个橱柜。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "莉萨，你觉得我们该买个新沙发吗？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "哦，我们的沙发是有点旧了，但完全能用。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "眼下我们更需要的是厨房里的一个橱柜。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "Hey, Thomas. How was the movie last night?\nIt was okay. Not exactly a top quality one, but still a welcome surprise. I would give it 3 stars out of four.",
+      "translationZh": "嘿，托马斯。昨晚的电影怎么样？\n还行。算不上顶级佳作，但还是让人惊喜。满分四星的话，我给三星。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "托马斯评价昨晚看的电影：算不上顶级，但令人惊喜，四星里给三星。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "嘿，托马斯。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "昨晚的电影怎么样？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "还行。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "算不上顶级佳作，但还是让人惊喜。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "满分四星的话，我给三星。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "We’d like a table for four, please.\nHave you made a booking?\nNo, we haven’t.\nI’m afraid there will be about a 10 to 15 minute wait.\nThat’s okay. Oh, by the way, we’d prefer a table by the window.\nIn that case, you will probably have to wait longer.\nIt doesn’t matter.\nOkay, I’ll call you when the table is ready. Your name, please?\nIt’s Montague. M 0 N T A G U E. Could we look at the menu while we’re waiting?\nCertainly. Here you are.",
+      "translationZh": "我们想要一张四人桌，谢谢。\n您预订了吗？\n没有。\n恐怕要等大约 10 到 15 分钟。\n没关系。哦，顺便说一下，我们想要靠窗的桌子。\n那样的话，您可能得等更久。\n没关系。\n好的，桌子准备好了我会叫您。请问您贵姓？\n蒙塔古。M-O-N-T-A-G-U-E。我们等的时候能看看菜单吗？\n当然。给您。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士没订座就来餐馆要四人桌，还想靠窗，需要等位，他报了姓名并边等边看菜单。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "我们想要一张四人桌，谢谢。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "您预订了吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "没有。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "恐怕要等大约 10 到 15 分钟。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "没关系。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "哦，顺便说一下，我们想要靠窗的桌子。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那样的话，您可能得等更久。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "没关系。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "好的，桌子准备好了我会叫您。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "请问您贵姓？"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "蒙塔古。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "M-O-N-T-A-G-U-E。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "我们等的时候能看看菜单吗？"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "给您。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "Good evening. What can I do for you?\nHi, I’d like to make a reservation.\nAll right. Is it just for you?\nNo, I need a room for three.\nWould 2 beds be okay?\nYes, that would be fine.\nHow long will you be staying with us?\nWe’ll be staying for 4 nights, starting one week from today.\nOkay, we have a room with 2 queen size beds and a kitchen.\nHow much will it cost?\n$300 per night.\nWow, that’s expensive. Do you have any rooms that cost less?\nWell, we have another room with no kitchen. $200 per night.\nThat’s okay. I’ll take this one.\nOkay, all done. I hope you’ll enjoy your stay.\nThanks.",
+      "translationZh": "晚上好。有什么可以帮您？\n你好，我想订房。\n好的。只有您一个人住吗？\n不是，我需要一间三个人住的房间。\n两张床可以吗？\n可以，那挺好。\n您要住多久？\n我们住 4 晚，从今天起一周后入住。\n好的，我们有一间带两张大号床和厨房的房间。\n要多少钱？\n每晚 300 美元。\n哇，太贵了。有便宜一点的房间吗？\n嗯，我们还有一间没有厨房的。每晚 200 美元。\n那可以。我就要这间。\n好的，都办好了。希望您住得愉快。\n谢谢。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士为三个人预订一周后入住四晚的房间，嫌带厨房的房间贵，改订每晚两百美元的无厨房房间。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "晚上好。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "你好，我想订房。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "只有您一个人住吗？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "不是，我需要一间三个人住的房间。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "两张床可以吗？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "可以，那挺好。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "您要住多久？"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "我们住 4 晚，从今天起一周后入住。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "好的，我们有一间带两张大号床和厨房的房间。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "要多少钱？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "每晚 300 美元。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "哇，太贵了。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "有便宜一点的房间吗？"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "嗯，我们还有一间没有厨房的。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "每晚 200 美元。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "那可以。"
+        },
+        {
+          "id": "listening-text-7:19",
+          "zh": "我就要这间。"
+        },
+        {
+          "id": "listening-text-7:20",
+          "zh": "好的，都办好了。"
+        },
+        {
+          "id": "listening-text-7:21",
+          "zh": "希望您住得愉快。"
+        },
+        {
+          "id": "listening-text-7:22",
+          "zh": "谢谢。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Ah, good morning. Susan Brown, is it?\nYes, good morning.\nOh, I’m John Reeves. I managed the sales department here at Roscoe International. You can call me John.\nOkay, John.\nHave you already been shown round the company?\nYes, I got here at 9 AM, and Tara gave me a tour of the place.\nAnd what did you think?\nIt’s a lot bigger than I thought it would be.\nYes, a lot of people say that. Now we have over 50 people working here. Well, where did you hear about Roscoe International?\nFrom my brother, Michael Brown. He worked for you a couple of years ago, and has always spoken well of you.\nYes, I remember him. You’ll say hi to him from me, won’t you?\nOkay. Sure.",
+      "translationZh": "啊，早上好。是苏珊·布朗吧？\n是的，早上好。\n哦，我是约翰·里夫斯。我在罗斯科国际公司这里管理销售部。你可以叫我约翰。\n好的，约翰。\n已经有人带你参观过公司了吗？\n是的，我早上 9 点到的，塔拉带我把这里转了一圈。\n你觉得怎么样？\n比我想象的大多了。\n是啊，很多人都这么说。现在我们这里有 50 多人上班。那么，你是从哪里听说罗斯科国际公司的？\n从我哥哥迈克尔·布朗那里。他几年前在你们这里工作过，一直说你们的好话。\n是的，我记得他。替我向他问声好，好吗？\n好的。一定。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "销售部的约翰接待来公司的苏珊，苏珊已参观过公司，觉得比想象的大，是哥哥推荐她来的。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "啊，早上好。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "是苏珊·布朗吧？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "是的，早上好。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "哦，我是约翰·里夫斯。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "我在罗斯科国际公司这里管理销售部。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "你可以叫我约翰。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "好的，约翰。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "已经有人带你参观过公司了吗？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "是的，我早上 9 点到的，塔拉带我把这里转了一圈。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "你觉得怎么样？"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "比我想象的大多了。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "是啊，很多人都这么说。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "现在我们这里有 50 多人上班。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "那么，你是从哪里听说罗斯科国际公司的？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "从我哥哥迈克尔·布朗那里。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "他几年前在你们这里工作过，一直说你们的好话。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "是的，我记得他。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "替我向他问声好，好吗？"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "一定。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "Sam, I listened to a lecture last night at the art gallery. And the artist told us that we don’t need to be professional to give our home a new look.\nSo, did the artist say how to do it, exactly? I’m about to decorate my house.\nYes, I have noted down a few of the creative ways he talked about.\nI’d love to hear about them. For example, should I redesign the entrance to my home?\nYeah, it’s important. And it’s the first thing people will see when they visit. It should reflect the design of the rest of your house. Depending on your budget, you might want to give your front door a fresh coat of paint.\nHmm. I’ll consider that Another thing is, I have a big table in my dining room that no one ever sits at.\nYeah. Some people never use their dining tables, so why hold on to them? Replace the big table with a smaller round table.\nThat’s a good idea. The whole family will still be able to sit there, and it won’t feel quite as polished.\nYes, and all these creative ways can be finished on your own, to suit your design style and personal taste.",
+      "translationZh": "萨姆，我昨晚在美术馆听了一场讲座。那位画家告诉我们，不必是专业人士也能让家焕然一新。\n那么，画家具体说了该怎么做吗？我正打算装修房子。\n说了，他讲的几个有创意的办法我都记下来了。\n我很想听听。比如，我该重新设计家门口吗？\n是的，这很重要。而且这是人们来访时看到的第一样东西。它应该和房子其他部分的设计相呼应。看你的预算，你也许可以给前门重新刷一层漆。\n嗯。我会考虑的。还有一件事，我餐厅里有张大桌子，从来没人坐。\n是啊。有些人从来不用餐桌，那为什么还要留着呢？把大桌子换成一张小一点的圆桌吧。\n好主意。全家人照样能坐得下，而且不会显得那么拘谨正式。\n对，而且这些有创意的办法都可以自己完成，合乎你的设计风格和个人品味。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士昨晚听了画家讲座，向准备装修的萨姆转述自己动手翻新家居的办法，如换掉闲置的大餐桌。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "萨姆，我昨晚在美术馆听了一场讲座。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "那位画家告诉我们，不必是专业人士也能让家焕然一新。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "那么，画家具体说了该怎么做吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "我正打算装修房子。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "说了，他讲的几个有创意的办法我都记下来了。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我很想听听。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "比如，我该重新设计家门口吗？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "是的，这很重要。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "而且这是人们来访时看到的第一样东西。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "它应该和房子其他部分的设计相呼应。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "看你的预算，你也许可以给前门重新刷一层漆。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "嗯。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我会考虑的。还有一件事，我餐厅里有张大桌子，从来没人坐。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "有些人从来不用餐桌，那为什么还要留着呢？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "把大桌子换成一张小一点的圆桌吧。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "好主意。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "全家人照样能坐得下，而且不会显得那么拘谨正式。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "对，而且这些有创意的办法都可以自己完成，合乎你的设计风格和个人品味。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Many students ask me about how to understand and enjoy the experience of concert going. So today, I’d like to take some time to talk about it.\nFirst of all, a live concert is totally different from listening to recordings. In a live performance, what is performed, how it sounds, and how the artist feels about the performance. These exist for only a very short moment, and can never be repeated. As an audience responds to the excitement of such moments. Feelings are exchanged between stage and hall.\nYou have many kinds of concerts to choose from, by many kinds of performing groups. Concerts by university performing groups are easily accessible, free or at a relatively low price, and often of high quality. Announcements of such concerts will be found in the newspaper of our university. Performances outside the university are announced in local newspapers. These concerts tend to be more expensive, but discount tickets are often available for students. Though tickets can usually be bought on the day or night of a concert, you have a wider choice if you buy them in advance. At the box office or on the internet.\nIf possible, prepare for a concert by listening to some of the works to be performed, and by reading about the musicians.",
+      "translationZh": "很多学生问我怎样理解和享受去听音乐会的体验。所以今天我想花点时间谈谈这个。\n首先，现场音乐会和听录音完全不同。在现场演出中，演奏的内容、听起来的效果，以及艺术家对这场演出的感受，这些都只存在于极短的一瞬，而且永远无法重复。观众会对这种时刻的激动作出回应，台上和台下彼此交流着情感。\n你有很多种音乐会可以选，由各种各样的演出团体演出。大学演出团体的音乐会很容易去，免费或价格较低，而且常常质量很高。这类音乐会的通知会登在我们大学的报纸上。校外的演出则在当地报纸上发布。这些音乐会往往贵一些，但常有学生折扣票。虽然票通常在音乐会当天白天或晚上也能买到，但提前买选择会更多。可以在售票处或网上买。\n可能的话，听音乐会前先听听一些要演奏的作品，再读一读有关音乐家的介绍。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "音乐领域的概况及其发展"
+      },
+      "summaryZh": "老师向学生讲解如何欣赏现场音乐会：现场体验独一无二，并介绍选场、买票和会前准备。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "很多学生问我怎样理解和享受去听音乐会的体验。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "所以今天我想花点时间谈谈这个。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "首先，现场音乐会和听录音完全不同。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "在现场演出中，演奏的内容、听起来的效果，以及艺术家对这场演出的感受，"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "这些都只存在于极短的一瞬，而且永远无法重复。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "观众会对这种时刻的激动作出回应，"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "台上和台下彼此交流着情感。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "你有很多种音乐会可以选，由各种各样的演出团体演出。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "大学演出团体的音乐会很容易去，免费或价格较低，而且常常质量很高。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "这类音乐会的通知会登在我们大学的报纸上。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "校外的演出则在当地报纸上发布。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "这些音乐会往往贵一些，但常有学生折扣票。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "虽然票通常在音乐会当天白天或晚上也能买到，但提前买选择会更多。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "可以在售票处或网上买。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "可能的话，听音乐会前先听听一些要演奏的作品，再读一读有关音乐家的介绍。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士为什么不去健身房？",
+      "optionTranslationsZh": {
+        "A": "她病了。",
+        "B": "她需要休息。",
+        "C": "她得工作。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ve been busy working the whole day and really need a peaceful time at home."
+      },
+      "reasonZh": "“需要休息”就是女士说的忙了一整天、很想在家清静一下（really need a peaceful time at home），选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的 working 说的是她已经忙了一整天（I’ve been busy working the whole day），活儿已经干完了，不是还得去工作。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一种食物。",
+        "B": "一位近亲。",
+        "C": "一家新餐馆。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s made from wheat."
+      },
+      "reasonZh": "女士尝了说好吃（delicious），男士又介绍它叫 couscous、用小麦做、上面放肉（made from wheat … some meat on top），都在说一种食物，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "姑姑（My aunt）只是做这道菜的人，男士提了一句就转去介绍菜本身。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士可能会吃什么？",
+      "optionTranslationsZh": {
+        "A": "牛肉。",
+        "B": "葡萄。",
+        "C": "土豆。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I only eat vegetables and fruits."
+      },
+      "reasonZh": "女士在节食，只吃蔬菜水果（I only eat vegetables and fruits），男士就让她自己去冰箱拿葡萄（some grapes in the fridge. Help yourself），可见她会吃葡萄，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "牛肉是男士正在做的那道菜（cooking beef with potatoes），女士一开口就谢绝了（No, thanks）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "土豆是和牛肉一起炖的，女士谢绝的正是这道菜（No, thanks），男士随后让她吃的是冰箱里的葡萄。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士的建议是什么？",
+      "optionTranslationsZh": {
+        "A": "修理沙发。",
+        "B": "打扫厨房。",
+        "C": "买一个橱柜。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Right now, we need a cupboard in the kitchen much more."
+      },
+      "reasonZh": "男士问要不要买（get）新沙发，莉萨说眼下更需要厨房里的一个橱柜（we need a cupboard in the kitchen much more），也就是建议先买橱柜，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "莉萨说沙发旧了点但完全能用（perfectly usable），她是不想换沙发，没说要修。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "厨房是要放橱柜的地方（a cupboard in the kitchen），莉萨没说要打扫它。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男士觉得这部电影怎么样？",
+      "optionTranslationsZh": {
+        "A": "顶级佳作。",
+        "B": "中等偏上。",
+        "C": "出奇地差。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I would give it 3 stars out of four."
+      },
+      "reasonZh": "男士说电影还行、令人惊喜，满分四星给三星（3 stars out of four），比一般好又算不上顶级，“中等偏上”是对这几句的概括，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "top quality 出现在否定里（Not exactly a top quality one），男士说的是算不上顶级。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "surprise 是令人高兴的惊喜（a welcome surprise），说电影比预想的好，不是出奇地差。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "说话人在哪里？",
+      "optionTranslationsZh": {
+        "A": "在餐馆。",
+        "B": "在书店。",
+        "C": "在超市。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We’d like a table for four, please."
+      },
+      "reasonZh": "男士要一张四人桌（a table for four），对方问有没有订座、说要等位，男士还要边等边看菜单（look at the menu），可见是在餐馆，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "booking 是订座位（Have you made a booking?），跟书店没有关系。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士现在得做什么？",
+      "optionTranslationsZh": {
+        "A": "签他的名字。",
+        "B": "排队等座。",
+        "C": "给他的朋友打电话。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m afraid there will be about a 10 to 15 minute wait."
+      },
+      "reasonZh": "男士没订座，服务员说要等 10 到 15 分钟（about a 10 to 15 minute wait），他要靠窗还得等更久，所以现在只能等座，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "name 是服务员问他姓什么（Your name, please?），他只是报出 Montague 并拼了一遍，没有签名。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "call 是服务员说桌子好了会叫他（I’ll call you when the table is ready），不是他给朋友打电话。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士打算什么时候入住？",
+      "optionTranslationsZh": {
+        "A": "三天后。",
+        "B": "四天后。",
+        "C": "七天后。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We’ll be staying for 4 nights, starting one week from today."
+      },
+      "reasonZh": "男士说从今天起一周后开始住（starting one week from today），一周是七天，所以七天后入住，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "three 说的是三个人住（a room for three），不是三天后。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "4 说的是一共住四晚（staying for 4 nights），是住多久，不是哪天入住。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士订了哪种房间？",
+      "optionTranslationsZh": {
+        "A": "一张床、带厨房的房间。",
+        "B": "两张床、带厨房的房间。",
+        "C": "两张床、没有厨房的房间。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Well, we have another room with no kitchen."
+      },
+      "reasonZh": "男士先已同意两张床（Would 2 beds be okay? … Yes），嫌带厨房的那间贵，服务员再推荐没有厨房的一间（another room with no kitchen），他说就要这间，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士要的是三人间，已同意两张床（Would 2 beds be okay?），不是一张床；厨房也是他没要的那间才有。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "两张床带厨房是第一间房（2 queen size beds and a kitchen），每晚 300 美元，男士嫌贵（that’s expensive）换掉了。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士要付多少钱？",
+      "optionTranslationsZh": {
+        "A": "400 美元。",
+        "B": "800 美元。",
+        "C": "1200 美元。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "$200 per night."
+      },
+      "reasonZh": "男士订的那间每晚 200 美元（$200 per night），住 4 晚（4 nights），200 × 4 = 800 美元，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "1200 是按第一间房算的：300 × 4 = 1200，可男士嫌每晚 300 美元太贵，没要那间。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "苏珊在这次谈话之前刚做了什么？",
+      "optionTranslationsZh": {
+        "A": "去看望她哥哥。",
+        "B": "给约翰·里夫斯打电话。",
+        "C": "参观了公司。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yes, I got here at 9 AM, and Tara gave me a tour of the place."
+      },
+      "reasonZh": "约翰问她是否已参观过公司，苏珊说 9 点到后塔拉带她转了一圈（Tara gave me a tour of the place），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "哥哥迈克尔（my brother, Michael Brown）是她听说这家公司的来源，她没说去看过他。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "call 是约翰说的“你可以叫我约翰”（You can call me John），是称呼，不是打电话；他们正当面说话。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "苏珊觉得这个地方怎么样？",
+      "optionTranslationsZh": {
+        "A": "很大。",
+        "B": "很有名。",
+        "C": "很拥挤。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s a lot bigger than I thought it would be."
+      },
+      "reasonZh": "苏珊说公司比她想象的大多了（a lot bigger than I thought），选项沿用 big，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "哥哥一直说这里好（has always spoken well of you），那是哥哥对公司的好评，苏珊自己只说了大。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "约翰说有 50 多人上班（over 50 people working here），是顺着她的话讲公司规模，没说挤。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "迈克尔是谁？",
+      "optionTranslationsZh": {
+        "A": "约翰的上司。",
+        "B": "塔拉的丈夫。",
+        "C": "苏珊的哥哥。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "From my brother, Michael Brown."
+      },
+      "reasonZh": "苏珊说她是从哥哥迈克尔那里听说这家公司的（From my brother, Michael Brown），所以迈克尔是苏珊的哥哥，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "迈克尔几年前在约翰这里工作过（He worked for you），是约翰以前的员工，不是上司。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "塔拉只是带苏珊参观的人（Tara gave me a tour），迈克尔是苏珊介绍的自己的哥哥。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士昨晚做了什么？",
+      "optionTranslationsZh": {
+        "A": "她去了学校。",
+        "B": "她听了一场讲座。",
+        "C": "她装修了自己的家。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Sam, I listened to a lecture last night at the art gallery."
+      },
+      "reasonZh": "女士说昨晚在美术馆听了一场讲座（listened to a lecture last night），选项把 lecture 换成 talk，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "要装修的是男士，他说自己正打算装修（I’m about to decorate my house）；女士昨晚是在听画家讲怎样让家焕然一新。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士建议男士怎样处理他的大桌子？",
+      "optionTranslationsZh": {
+        "A": "换掉它。",
+        "B": "请人给它刷漆。",
+        "C": "好好利用它。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Replace the big table with a smaller round table."
+      },
+      "reasonZh": "女士让男士把大桌子换成小圆桌（Replace the big table with a smaller round table），选项沿用 replace，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "刷漆是给前门刷一层新漆（give your front door a fresh coat of paint），说的是门，不是桌子。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士反问既然不用为什么还留着（why hold on to them），意思是别留着，不是要好好利用。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "自己动手装修房子有什么好处？",
+      "optionTranslationsZh": {
+        "A": "省钱。",
+        "B": "合乎个人品味。",
+        "C": "增进家人感情。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "all these creative ways can be finished on your own, to suit your design style and personal taste."
+      },
+      "reasonZh": "女士最后说这些办法都能自己完成，好合你的设计风格和个人品味（to suit your design style and personal taste），选项沿用 suit 和 personal taste，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "预算（Depending on your budget）是在说要不要给前门刷漆，女士没说自己动手能省钱。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "全家照样坐得下（The whole family will still be able to sit there）说的是换小圆桌的好处，不是自己动手装修的好处。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "现场音乐会有什么特别之处？",
+      "optionTranslationsZh": {
+        "A": "整个体验独一无二。",
+        "B": "音质特别出色。",
+        "C": "演出可以录下来。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "These exist for only a very short moment, and can never be repeated."
+      },
+      "reasonZh": "说话人说现场演奏的内容、声音和艺术家的感受只存在一瞬间，永远无法重复（can never be repeated），所以整个体验独一无二，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "sound 出现在 how it sounds 里，说的是声音效果也只存在那一刻，没说音质出色。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音（recordings）是拿来和现场对比的（totally different from listening to recordings），现场演出恰恰无法重复。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "关于大学演出团体的音乐会，说话人说了什么？",
+      "optionTranslationsZh": {
+        "A": "它们很贵。",
+        "B": "它们常常质量很高。",
+        "C": "当地媒体会报道它们。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Concerts by university performing groups are easily accessible, free or at a relatively low price, and often of high quality."
+      },
+      "reasonZh": "说话人说大学团体的音乐会容易去、免费或较便宜，而且常常质量很高（often of high quality），选项沿用原话，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "贵说的是校外的演出（These concerts tend to be more expensive），大学的演出免费或价格较低（free or at a relatively low price）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "当地报纸（local newspapers）登的是校外演出，大学演出的通知登在校报上（the newspaper of our university）。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人建议在音乐会之前做什么？",
+      "optionTranslationsZh": {
+        "A": "听一听要演奏的作品。",
+        "B": "去售票处查看信息。",
+        "C": "读一读有关音乐厅的介绍。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "If possible, prepare for a concert by listening to some of the works to be performed, and by reading about the musicians."
+      },
+      "reasonZh": "说话人建议会前先听一些要演奏的作品（listening to some of the works to be performed），选项沿用原话，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "售票处（At the box office）是说可以在那里提前买票，不是去查信息。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "说话人建议读的是有关音乐家的介绍（reading about the musicians），不是音乐厅。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人是什么身份？",
+      "optionTranslationsZh": {
+        "A": "新闻记者。",
+        "B": "剧院设计师。",
+        "C": "大学老师。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Many students ask me about how to understand and enjoy the experience of concert going."
+      },
+      "reasonZh": "说话人说很多学生来问他（Many students ask me），又说通知登在“我们大学”的报纸上（the newspaper of our university），可见他是大学老师，选 C。"
+    }
+  }
+}

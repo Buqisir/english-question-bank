@@ -1,0 +1,721 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-b": {
+      "overview": "作者想减少自己的碳足迹，却拿不准该买新的环保产品还是二手的传统商品。作者先解释碳足迹分主要和次要两部分，再据此提出：餐具、衣服、家具宜买二手，汽车和电器宜买新的节能型号。",
+      "fullTranslationZh": "在日常生活中，我一直在不断探索减少自己在地球上碳足迹的各种方法。碳足迹衡量的是我们的活动对环境、尤其是对气候变化的影响，它根据我们日常生活中产生的温室气体量来计算。幸运的是，如今做出环保的生活方式选择，比起比如说 20 年前，要容易得多。但最近有一个问题总在我脑子里打转：是买新的环保产品好，还是买用传统方式生产的二手商品好？\n做了一些研究之后，我认定有些东西买新的好，有些东西买二手的好。让我试着解释一下。\n碳足迹由两部分组成：主要碳足迹和次要碳足迹。主要碳足迹衡量的是燃料燃烧直接排放的二氧化碳（CO2），包括家庭能源消耗和交通出行。次要碳足迹衡量的是我们所用产品在整个生命周期中间接排放的二氧化碳——即与产品的生产和分解相关的排放。\n基于这种认识，我们对自己的碳足迹有很大的控制权，也负有很大的责任。像餐具、衣服和家具这类东西属于“次要碳足迹”一类，所以越少越好，我们可以专门去找二手货，以免多出一次生产。然而，对于我们需要的汽车和其他设备，我们可以选择新的节能型号。我在某处听说，电子产品和家用设备 90% 的碳足迹是在它们出厂之后产生的。所以选节能型号似乎最合理。这里主要要考虑的是：制造新产品要耗费多少能源，以及这部分额外的碳排放与产品到你手上之后将产生的足迹相比是否值得。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+          "sourceText": "The main concern here is the amount of energy that goes into the making of new products and whether or not that extra carbon is worth the footprint the product will make once it gets to you.",
+          "displayText": "The main concern here is the amount of energy that goes into the making of new products and whether or not that extra carbon is worth the footprint the product will make once it gets to you.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:27"
+          ],
+          "translationZh": "这里主要要考虑的是：制造新产品要耗费多少能源，以及这部分额外的碳排放与产品到你手上之后将产生的足迹相比是否值得。",
+          "analysisZh": "先找主干：The main concern here is ...，“这里主要考虑的是……”，is 后面跟两个并列的表语，用 and 连接。第一个是 the amount of energy，that goes into the making of new products 是定语从句，说明是“投入到制造新产品中的能源”。第二个是 whether or not 引导的从句：that extra carbon is worth the footprint，“那部分额外的碳是否值得换来那份足迹”。footprint 后面的 the product will make 是省略了关系词的定语从句，once it gets to you 是时间状语从句，两者合起来把这份足迹限定为“产品到你手上之后产生的”，也就是使用中的排放。全句其实在拿制造时多出的碳和使用时省下的碳作比较。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 24,
+              "quote": "The main concern here is"
+            },
+            {
+              "start": 92,
+              "end": 106,
+              "quote": "whether or not"
+            },
+            {
+              "start": 134,
+              "end": 169,
+              "quote": "the footprint the product will make"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1"
+              ],
+              "start": 0,
+              "end": 163,
+              "quote": "在日常生活中，我一直在不断探索减少自己在地球上碳足迹的各种方法。碳足迹衡量的是我们的活动对环境、尤其是对气候变化的影响，它根据我们日常生活中产生的温室气体量来计算。幸运的是，如今做出环保的生活方式选择，比起比如说 20 年前，要容易得多。但最近有一个问题总在我脑子里打转：是买新的环保产品好，还是买用传统方式生产的二手商品好？"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-b:2"
+              ],
+              "start": 164,
+              "end": 204,
+              "quote": "做了一些研究之后，我认定有些东西买新的好，有些东西买二手的好。让我试着解释一下。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3"
+              ],
+              "start": 205,
+              "end": 319,
+              "quote": "碳足迹由两部分组成：主要碳足迹和次要碳足迹。主要碳足迹衡量的是燃料燃烧直接排放的二氧化碳（CO2），包括家庭能源消耗和交通出行。次要碳足迹衡量的是我们所用产品在整个生命周期中间接排放的二氧化碳——即与产品的生产和分解相关的排放。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4"
+              ],
+              "start": 320,
+              "end": 543,
+              "quote": "基于这种认识，我们对自己的碳足迹有很大的控制权，也负有很大的责任。像餐具、衣服和家具这类东西属于“次要碳足迹”一类，所以越少越好，我们可以专门去找二手货，以免多出一次生产。然而，对于我们需要的汽车和其他设备，我们可以选择新的节能型号。我在某处听说，电子产品和家用设备 90% 的碳足迹是在它们出厂之后产生的。所以选节能型号似乎最合理。这里主要要考虑的是：制造新产品要耗费多少能源，以及这部分额外的碳排放与产品到你手上之后将产生的足迹相比是否值得。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+                "start": 341,
+                "end": 397,
+                "quote": "it is much easier to make eco-friendly lifestyle choices"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+                "start": 480,
+                "end": 563,
+                "quote": "is it better to buy new eco-friendly products or used traditionally produced goods?"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:2",
+                "start": 27,
+                "end": 100,
+                "quote": "I have decided that some things are better new and others are better used"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+                "start": 89,
+                "end": 100,
+                "quote": "做出环保的生活方式选择"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+                "start": 136,
+                "end": 163,
+                "quote": "是买新的环保产品好，还是买用传统方式生产的二手商品好？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+                "start": 307,
+                "end": 377,
+                "quote": "the indirect CO2 emissions from the whole lifecycle of products we use"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+                "start": 0,
+                "end": 94,
+                "quote": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+                "start": 64,
+                "end": 96,
+                "quote": "次要碳足迹衡量的是我们所用产品在整个生命周期中间接排放的二氧化碳"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+                "start": 0,
+                "end": 21,
+                "quote": "碳足迹由两部分组成：主要碳足迹和次要碳足迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 106,
+                "end": 276,
+                "quote": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 33,
+                "end": 86,
+                "quote": "像餐具、衣服和家具这类东西属于“次要碳足迹”一类，所以越少越好，我们可以专门去找二手货，以免多出一次生产。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 698,
+                "end": 753,
+                "quote": "the footprint the product will make once it gets to you"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 404,
+                "end": 498,
+                "quote": "electronics and appliances give off 90% of their carbon footprint after they leave the factory"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 201,
+                "end": 216,
+                "quote": "与产品到你手上之后将产生的足迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:27"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 564,
+                "end": 754,
+                "quote": "The main concern here is the amount of energy that goes into the making of new products and whether or not that extra carbon is worth the footprint the product will make once it gets to you."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+                "start": 167,
+                "end": 223,
+                "quote": "这里主要要考虑的是：制造新产品要耗费多少能源，以及这部分额外的碳排放与产品到你手上之后将产生的足迹相比是否值得。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者从减少碳足迹的日常追求引出“买新还是买旧”的问题，先解释碳足迹的两种构成，再据此给出哪些东西买二手、哪些买新的结论。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+            "summary": "作者一直在设法减少碳足迹，并说明碳足迹是什么；最后提出买新的环保产品还是买二手传统商品的问题",
+            "function": "引出话题，提出全文要回答的问题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:2",
+            "summary": "作者给出初步结论：有些东西买新的好，有些买二手的好",
+            "function": "承上启下，预告下文的解释"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+            "summary": "碳足迹分两部分：主要碳足迹来自燃料燃烧的直接排放，次要碳足迹来自产品生产和分解的间接排放",
+            "function": "提供判断依据"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+            "summary": "餐具、衣服、家具属次要碳足迹，宜买二手；汽车和电器出厂后排放多，宜买新的节能型号",
+            "function": "运用上段的区分给出具体建议"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-eight-provinces-jan:24": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文由什么问题引出、最后落到什么建议，概括文章主要讲什么。",
+      "stemTranslationZh": "这篇文章主要讲什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:1]]想 reduce my carbon footprint，问买新还是买旧；[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:3]]分两种足迹；[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:4]]说哪些买 used、哪些买 new；主旨要盖住怎样选",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "买什么设备来节约能源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "However, for the car and the other appliances（设备）that we need we can go with new, energy-saving models.",
+            "sourceHighlight": "new, energy-saving models",
+            "optionText": "What appliances to buy to save energy.",
+            "optionHighlight": "What appliances to buy",
+            "explanation": "买新的节能设备（energy-saving models）只是[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:4]]建议的一半，同段还讲了餐具、衣服、家具要买二手，选项只盖住了电器这一类。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "However, for the car and the other appliances（设备）that we need we can go with new, energy-saving models.",
+              "anchor": "汽车和设备买新的节能型号"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "碳足迹在我们生活中意味着什么。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
+            "sourceHighlight": "A carbon footprint is the measure of influence",
+            "optionText": "What a carbon footprint means in our life.",
+            "optionHighlight": "What a carbon footprint means",
+            "explanation": "碳足迹的定义（the measure of influence）只是铺垫，作者交代它，是为了接着回答该买新的还是买二手的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "quote": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
+              "anchor": "碳足迹的定义"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "如何辨别不同的碳足迹。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+            "sourceHighlight": "two parts",
+            "optionText": "How to identify different carbon footprints.",
+            "optionHighlight": "identify different carbon footprints",
+            "explanation": "[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:3]]确实把碳足迹分成主要和次要两部分（two parts），但这是给后面的购买建议打基础，文章并没有教人怎样辨别它们。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "quote": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+              "anchor": "碳足迹分两部分"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如何做出环保的生活方式选择。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "quote": "it is much easier to make eco-friendly lifestyle choices",
+              "anchor": "做环保的生活选择"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "quote": "is it better to buy new eco-friendly products or used traditionally produced goods?",
+              "anchor": "买新还是买旧"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:2",
+              "quote": "I have decided that some things are better new and others are better used",
+              "anchor": "作者的结论"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How to make eco-friendly lifestyle choices.",
+          "sourceRole": "correctOption",
+          "targetText": "Fortunately, nowadays it is much easier to make eco-friendly lifestyle choices than, let’s say, 20 years ago.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的“做出环保的生活方式选择”（make eco-friendly lifestyle choices）。全文围绕买新还是买旧这一个选择展开：讲清碳足迹的两部分，是为了说明家具衣服该买二手、汽车电器该买新的节能款；“怎样做环保的生活选择”正好把问题和答案都包进去，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:25": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂原文对次要碳足迹的定义，判断它和我们是什么关系。",
+      "stemTranslationZh": "关于次要碳足迹，我们可以知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它与我们消耗燃料有关。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The primary footprint is a measure of our direct emissions（排放）of carbon dioxide (CO2) from the burning of fuels",
+            "sourceEntity": "The primary footprint",
+            "optionText": "It is related to our consumption of fuels.",
+            "optionEntity": "It",
+            "explanation": "燃烧燃料（the burning of fuels）产生的直接排放算在主要碳足迹里，选项把它安到了次要碳足迹头上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "quote": "The primary footprint is a measure of our direct emissions（排放）of carbon dioxide (CO2) from the burning of fuels",
+              "anchor": "主要碳足迹来自燃料"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是在我们购买产品时产生的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "those related to their production and breakdown",
+            "sourceEntity": "production and breakdown",
+            "optionText": "It is made when we are buying the products.",
+            "optionEntity": "buying the products",
+            "explanation": "原文说次要碳足迹来自产品的生产和分解（production and breakdown），购买这个动作本身原文没算进去。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "quote": "those related to their production and breakdown",
+              "anchor": "生产和分解"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的危害比主要碳足迹小。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is less harmful than the primary carbon footprint.",
+            "explanation": "原文只分别说明两种碳足迹怎样计算，没有比较哪一种危害更大或更小。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它虽不是我们直接产生的，却算作我们的碳足迹。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "quote": "the indirect CO2 emissions from the whole lifecycle of products we use",
+              "anchor": "间接排放"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "quote": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+              "anchor": "碳足迹的两部分"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "secondary",
+          "sourceRole": "stem",
+          "targetText": "The secondary footprint is a measure of the indirect CO2 emissions from the whole lifecycle of products we use – those related to their production and breakdown.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "the indirect CO2 emissions from the whole lifecycle of products we use",
+          "note": "题干 secondary 原词出现在原文。"
+        },
+        {
+          "sourceText": "It is counted as ours though not directly made by us.",
+          "sourceRole": "correctOption",
+          "targetText": "The secondary footprint is a measure of the indirect CO2 emissions from the whole lifecycle of products we use – those related to their production and breakdown.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项两层意思各有着落：“不是我们直接产生的”就是“间接排放”（indirect），排放发生在产品的生产和分解环节；“算作我们的”是因为这些是我们所用的产品（products we use），而[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:3|made up of two parts]]说碳足迹本来就包括这一部分，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把作者“哪些买二手、哪些买新”的标准用到选项里的具体物品上。",
+      "stemTranslationZh": "根据作者的观点，下列哪项有助于减少我们的碳足迹？",
+      "locateBy": "options",
+      "locateFindZh": "四个选项各取物品回[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:4]]，看该买 used 还是 new",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使用二手课本。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+              "anchor": "日用品买二手"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "使用又旧又贵的汽车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "However, for the car and the other appliances（设备）that we need we can go with new, energy-saving models.",
+            "sourceHighlight": "new, energy-saving models",
+            "optionText": "Using old and expensive cars.",
+            "optionHighlight": "old",
+            "explanation": "作者恰恰主张汽车选新的节能车型（new, energy-saving models），因为这类东西的碳足迹大多在出厂后的使用中产生。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "However, for the car and the other appliances（设备）that we need we can go with new, energy-saving models.",
+              "anchor": "汽车买新的节能型号"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "买新的但便宜的衣服。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+            "sourceHighlight": "finding used goods",
+            "optionText": "Buying new but cheap clothes.",
+            "optionHighlight": "new",
+            "explanation": "衣服（clothes）被作者列在该找二手货的一类里，选项却说买新的；价钱便不便宜，原文也没谈。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+              "anchor": "衣服买二手"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "买新的木质家具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+            "sourceHighlight": "to avoid the added production",
+            "optionText": "Buying new wooden furniture.",
+            "optionHighlight": "new",
+            "explanation": "家具（furniture）同样该买二手，买新家具正好造成作者想避免的那次额外生产（the added production）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+              "anchor": "家具买二手"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Using second-hand textbooks.",
+          "sourceRole": "correctOption",
+          "targetText": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "原文没提课本，只举了餐具、衣服、家具这类东西（Things like），主张买二手（used goods）以免多一次生产。课本和它们一样，碳排放主要出在生产环节，用的时候不耗能，按同一道理用二手课本能少一份生产排放，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:27": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据画线词所在句的修饰从句，判断这份“足迹”是产品哪个阶段排出的二氧化碳。",
+      "stemTranslationZh": "最后一句中画线的“The footprint”指的是在____过程中产生的二氧化碳。",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 once 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使用产品",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "the footprint the product will make once it gets to you",
+              "anchor": "产品到手后产生的足迹"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "electronics and appliances give off 90% of their carbon footprint after they leave the factory",
+              "anchor": "出厂后排放"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "回收产品",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "recycling the product",
+            "explanation": "放进去就成了“造新品多出的碳，值不值得换来回收产品时的排放”，可从句说的是产品到你手上之后（once it gets to you）产生的，回收原文没提。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "制造产品",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the making of new products",
+            "optionText": "making the product",
+            "matchType": "wordFamily",
+            "relationNote": "“制造”借自同句前半的“制造新产品”（the making of new products），那部分是额外的碳（extra carbon），是拿来和这份足迹作比较的另一方；放进去就成了“制造的碳值不值得换来制造的碳”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "quote": "the amount of energy that goes into the making of new products",
+              "anchor": "制造新产品的能耗"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "运输产品",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "transportation",
+            "optionText": "transporting",
+            "matchType": "wordFamily",
+            "relationNote": "“运输”借自[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:3]]的“交通出行”（transportation），那是主要碳足迹里的燃料排放；本句这份足迹是产品到你手上之后（once it gets to you）才产生的，不是运送途中的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "quote": "including household energy consumption and transportation",
+              "anchor": "交通出行"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The footprint",
+          "sourceRole": "stem",
+          "targetText": "The main concern here is the amount of energy that goes into the making of new products and whether or not that extra carbon is worth the footprint the product will make once it gets to you.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "the footprint the product will make once it gets to you",
+          "note": "题干 The footprint 原词出现在原文。"
+        },
+        {
+          "sourceText": "using the product",
+          "sourceRole": "correctOption",
+          "targetText": "The main concern here is the amount of energy that goes into the making of new products and whether or not that extra carbon is worth the footprint the product will make once it gets to you.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "紧跟其后的从句“产品到你手上之后将产生的”（the product will make once it gets to you）限定了这份足迹，所以它必须是产品到手后、在使用中排出的；[[block:paper-gaokao-2021-eight-provinces-jan:reading-b:4|I heard somewhere that]]说电器九成碳足迹出在出厂之后，也指向使用阶段。放回去：造新品多出的碳，值不值得换来它在使用中留下的排放，选 A。"
+        }
+      ]
+    }
+  }
+}

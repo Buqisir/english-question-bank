@@ -1,0 +1,1063 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:grammar-fill": {
+      "overview": "文章给正在选大学的学生提建议：亲友的意见可以参考，但最终要自己决定；要认真评估每一所录取自己的学校，保持开放心态，不要为了恋情或取悦别人择校，要把自己的教育放在首位。",
+      "fullTranslationZh": "像许多其他学生一样，你身边可能有各种各样的人，包括家人和朋友，在为你选择大学出主意。\n虽然你信任的许多亲戚和同龄人可能会给出非常宝贵的建议，帮助你作出决定，但最终选择权在你，而且只在你。只有你才能充分认识到一所大学的哪些方面会让你真正快乐和满意，所以要把这一点放在心上。\n此外，要充分考虑每一个选项。在作决定的过程中，你很容易让某所学校早早成为领跑者，它甚至可能成为最终的选择——但一定要认真评估每一所录取了你的学校，因为你申请每所学校都有特定的理由。\n一定要保持开放的心态。学生可以换专业，但要记住，某个学期是无法重来的，失去的时间也无法弥补。不要专门为了一段高中时的恋情或者为了让别人开心而去某所学校。一个学生的大学经历是他或她自己的，学生必须把自己的教育放在首位。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-ls-1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+          "sourceText": "It can be easy __59__ (let) a particular school become a front-runner early on __60__ your decision-making process, and it may even become the winning choice – but be sure to carefully evaluate every school __61__ has accepted you, since you had particular reasons for applying to each school.",
+          "displayText": "It can be easy to let a particular school become a front-runner early on in your decision-making process, and it may even become the winning choice – but be sure to carefully evaluate every school that has accepted you, since you had particular reasons for applying to each school.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:59",
+            "question:paper-gaokao-2021-eight-provinces-jan:60",
+            "question:paper-gaokao-2021-eight-provinces-jan:61"
+          ],
+          "translationZh": "在作决定的过程中，你很容易让某所学校早早成为领跑者，它甚至可能成为最终的选择——但一定要认真评估每一所录取了你的学校，因为你申请每所学校都有特定的理由。",
+          "analysisZh": "全句由 and 和 but 连成三层：先是 It can be easy to let a particular school become a front-runner，It 是形式主语，真正的主语是 to let 短语；and 接上 it may even become the winning choice，再推进一步；破折号后 but 转折，提出祈使句 be sure to carefully evaluate every school，that has accepted you 修饰 school。最后 since 引导原因状语从句，说明为什么每所学校都要认真评估。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "It can be easy to let"
+            },
+            {
+              "start": 150,
+              "end": 196,
+              "quote": "but be sure to carefully evaluate every school"
+            },
+            {
+              "start": 220,
+              "end": 252,
+              "quote": "since you had particular reasons"
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-ls-2",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+          "sourceText": "Don’t go to a school __63__ (specific) for a high school relationship __64__ to make someone else happy.",
+          "displayText": "Don’t go to a school specifically for a high school relationship or to make someone else happy.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:63",
+            "question:paper-gaokao-2021-eight-provinces-jan:64"
+          ],
+          "translationZh": "不要专门为了一段高中时的恋情或者为了让别人开心而去某所学校。",
+          "analysisZh": "主干是否定祈使句 Don’t go to a school，specifically 修饰谓语，强调“专门为了”。后面 or 并列两个理由：介词短语 for a high school relationship 和不定式 to make someone else happy，两者都是作者劝读者不要拿来作择校依据的理由。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "Don’t go to a school"
+            },
+            {
+              "start": 34,
+              "end": 94,
+              "quote": "for a high school relationship or to make someone else happy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-grammar-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:1",
+                "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:2"
+              ],
+              "start": 0,
+              "end": 42,
+              "quote": "像许多其他学生一样，你身边可能有各种各样的人，包括家人和朋友，在为你选择大学出主意。"
+            },
+            {
+              "paragraphId": "tr-grammar-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3"
+              ],
+              "start": 43,
+              "end": 135,
+              "quote": "虽然你信任的许多亲戚和同龄人可能会给出非常宝贵的建议，帮助你作出决定，但最终选择权在你，而且只在你。只有你才能充分认识到一所大学的哪些方面会让你真正快乐和满意，所以要把这一点放在心上。"
+            },
+            {
+              "paragraphId": "tr-grammar-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4"
+              ],
+              "start": 136,
+              "end": 226,
+              "quote": "此外，要充分考虑每一个选项。在作决定的过程中，你很容易让某所学校早早成为领跑者，它甚至可能成为最终的选择——但一定要认真评估每一所录取了你的学校，因为你申请每所学校都有特定的理由。"
+            },
+            {
+              "paragraphId": "tr-grammar-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5"
+              ],
+              "start": 227,
+              "end": 335,
+              "quote": "一定要保持开放的心态。学生可以换专业，但要记住，某个学期是无法重来的，失去的时间也无法弥补。不要专门为了一段高中时的恋情或者为了让别人开心而去某所学校。一个学生的大学经历是他或她自己的，学生必须把自己的教育放在首位。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-1",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:1",
+            "text": "Like many other students, you may have various people, including family members and friends, giving input on"
+          },
+          {
+            "textId": "done-3",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+            "text": "While many of your trusted relatives and peers (同龄人) may have very valuable advice that can help you to make the decision, finally the choice is yours and yours alone. Only you can fully realize which aspects of a college will make you truly happy and satisfied, so keep that at the front of your mind."
+          },
+          {
+            "textId": "done-4",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+            "text": "Moreover, fully consider each option. It can be easy to let a particular school become a front-runner early on in your decision-making process, and it may even become the winning choice – but be sure to carefully evaluate every school that has accepted you, since you had particular reasons for applying to each school."
+          },
+          {
+            "textId": "done-5",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+            "text": "Do keep an open mind. Students can change majors, but remember that there’s no re-living a certain semester (学期), and there’s no making up for lost time. Don’t go to a school specifically for a high school relationship or to make someone else happy. A student’s college experience is his or her own, and the student must put his or her education first."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:1",
+                "start": 39,
+                "end": 53,
+                "quote": "various people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-1",
+                "start": 16,
+                "end": 22,
+                "quote": "各种各样的人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+                "start": 62,
+                "end": 66,
+                "quote": "very"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+                "start": 82,
+                "end": 88,
+                "quote": "advice"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-3",
+                "start": 19,
+                "end": 21,
+                "quote": "非常"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-3",
+                "start": 24,
+                "end": 26,
+                "quote": "建议"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+                "start": 233,
+                "end": 241,
+                "quote": "make you"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+                "start": 242,
+                "end": 257,
+                "quote": "truly happy and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-3",
+                "start": 70,
+                "end": 72,
+                "quote": "让你"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-3",
+                "start": 72,
+                "end": 77,
+                "quote": "真正快乐和"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 38,
+                "end": 52,
+                "quote": "It can be easy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 23,
+                "end": 27,
+                "quote": "你很容易"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 124,
+                "end": 152,
+                "quote": "your decision-making process"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 15,
+                "end": 21,
+                "quote": "作决定的过程"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 232,
+                "end": 244,
+                "quote": "every school"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 252,
+                "end": 268,
+                "quote": "has accepted you"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 62,
+                "end": 65,
+                "quote": "每一所"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 65,
+                "end": 70,
+                "quote": "录取了你的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 3,
+                "end": 7,
+                "quote": "keep"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 15,
+                "end": 24,
+                "quote": "open mind"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 3,
+                "end": 5,
+                "quote": "保持"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 8,
+                "end": 10,
+                "quote": "心态"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 164,
+                "end": 178,
+                "quote": "go to a school"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 70,
+                "end": 75,
+                "quote": "去某所学校"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 197,
+                "end": 227,
+                "quote": "for a high school relationship"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 235,
+                "end": 261,
+                "quote": "to make someone else happy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 50,
+                "end": 60,
+                "quote": "为了一段高中时的恋情"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 62,
+                "end": 69,
+                "quote": "为了让别人开心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 282,
+                "end": 300,
+                "quote": "college experience"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 304,
+                "end": 318,
+                "quote": "his or her own"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 81,
+                "end": 85,
+                "quote": "大学经历"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 86,
+                "end": 92,
+                "quote": "他或她自己的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:56"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:56",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:1",
+                "start": 55,
+                "end": 64,
+                "quote": "including"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-1",
+                "start": 23,
+                "end": 25,
+                "quote": "包括"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:57"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:57",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+                "start": 67,
+                "end": 75,
+                "quote": "valuable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-3",
+                "start": 21,
+                "end": 24,
+                "quote": "宝贵的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:58"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:58",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:3",
+                "start": 252,
+                "end": 261,
+                "quote": "satisfied"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-3",
+                "start": 77,
+                "end": 79,
+                "quote": "满意"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:59"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:59",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 53,
+                "end": 59,
+                "quote": "to let"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 27,
+                "end": 28,
+                "quote": "让"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:60"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:60",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 111,
+                "end": 113,
+                "quote": "in"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 14,
+                "end": 22,
+                "quote": "在作决定的过程中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:61"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:61",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 235,
+                "end": 239,
+                "quote": "that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 65,
+                "end": 70,
+                "quote": "录取了你的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:62"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:62",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 8,
+                "end": 10,
+                "quote": "an"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 3,
+                "end": 10,
+                "quote": "保持开放的心态"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:63"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:63",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 175,
+                "end": 187,
+                "quote": "specifically"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 48,
+                "end": 50,
+                "quote": "专门"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:64"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:64",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 219,
+                "end": 221,
+                "quote": "or"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 60,
+                "end": 62,
+                "quote": "或者"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:65"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:65",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 252,
+                "end": 261,
+                "quote": "student’s"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 76,
+                "end": 81,
+                "quote": "一个学生的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-grammar-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:59",
+              "question:paper-gaokao-2021-eight-provinces-jan:60",
+              "question:paper-gaokao-2021-eight-provinces-jan:61"
+            ],
+            "selectedSentenceId": "grammar-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:4",
+                "start": 38,
+                "end": 319,
+                "quote": "It can be easy to let a particular school become a front-runner early on in your decision-making process, and it may even become the winning choice – but be sure to carefully evaluate every school that has accepted you, since you had particular reasons for applying to each school."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-4",
+                "start": 14,
+                "end": 90,
+                "quote": "在作决定的过程中，你很容易让某所学校早早成为领跑者，它甚至可能成为最终的选择——但一定要认真评估每一所录取了你的学校，因为你申请每所学校都有特定的理由。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-grammar-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:63",
+              "question:paper-gaokao-2021-eight-provinces-jan:64"
+            ],
+            "selectedSentenceId": "grammar-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+                "start": 154,
+                "end": 249,
+                "quote": "Don’t go to a school specifically for a high school relationship or to make someone else happy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-grammar-5",
+                "start": 46,
+                "end": 76,
+                "quote": "不要专门为了一段高中时的恋情或者为了让别人开心而去某所学校。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2021-eight-provinces-jan:56": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "include",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "including",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "active-relation"
+        ]
+      },
+      "reason": "句子主干是 you may have various people … giving input on your college decision；空格所在的短语跟在 various people 后面，说明这些人包括谁，可以还原成 who include family members and friends，作 people 的后置定语。people 和 include 是主动关系，用现在分词 including。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "various people",
+          "signalSide": "passage",
+          "relation": "空格短语说明 various people 包括哪些人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:57": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "value",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "valuable",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格夹在 very 和名词 advice 之间，修饰 advice，要用形容词；名词 value 加 -able 变成形容词 valuable（宝贵的），正好受 very 修饰。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "advice",
+          "signalSide": "passage",
+          "relation": "空格修饰名词 advice，要形容词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "very",
+          "signalSide": "passage",
+          "relation": "very 后接形容词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:58": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "satisfy",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "satisfied",
+      "role": "object-complement",
+      "similarityProfile": {
+        "route": "object-complement-participle-state",
+        "features": []
+      },
+      "reason": "从句主干是 which aspects of a college will make you truly happy and ___；make you 后面要宾语补足语说明 you 的状态，空格和 happy 用 and 并列，也表状态。satisfy 意为“使满意”，you 是被满足的一方，用过去分词 satisfied。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "make you",
+          "signalSide": "passage",
+          "relation": "make sb + 宾补，空格说明 you 的状态。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "truly happy and",
+          "signalSide": "passage",
+          "relation": "空格与 happy 并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:59": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "let",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to let",
+      "role": "subject",
+      "similarityProfile": {
+        "route": "subject-infinitive",
+        "features": []
+      },
+      "reason": "It can be easy ___ a particular school become a front-runner 中，It 是形式主语，真正的主语是“让某所学校成为领跑者”这件事，放在 easy 后面，要用不定式 to let。let 后接 a particular school become，是 let sth do 的结构。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "It can be easy",
+          "signalSide": "passage",
+          "relation": "It 作形式主语，真正主语是后面的不定式。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:60": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "in",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格后的 your decision-making process 要靠介词接到前面的 become a front-runner early on 上，说明这件事发生在作决定的过程之中，表示“在……过程中”用 in。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "your decision-making process",
+          "signalSide": "passage",
+          "relation": "介词宾语是作决定的过程，在过程之中用 in。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:61": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引出定语从句修饰先行词 every school，从句 ___ has accepted you 缺主语；先行词指物，又被 every 修饰，用关系代词 that。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "every school",
+          "signalSide": "passage",
+          "relation": "先行词指物，被 every 修饰。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "has accepted you",
+          "signalSide": "passage",
+          "relation": "从句缺主语，由关系代词充当。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:62": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "an",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-structural",
+        "features": [
+          "fixed-indefinite-phrase",
+          "an-vowel-sound"
+        ]
+      },
+      "reason": "keep 的宾语 open mind 是单数可数名词，前面缺冠词；keep an open mind 表示保持开放的心态，open 以元音音素开头，用 an。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "keep",
+          "signalSide": "passage",
+          "relation": "keep an open mind 保持开放心态。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "open mind",
+          "signalSide": "passage",
+          "relation": "单数可数名词前要冠词，open 以元音开头。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:63": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "specific",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "specifically",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "主干 Don’t go to a school 已经完整，空格修饰谓语 go to a school，说明去这所学校是专门为了 for a high school relationship，修饰动作要用副词，specific 变成 specifically（专门地）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "go to a school",
+          "signalSide": "passage",
+          "relation": "空格修饰谓语动作，要副词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:64": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "or",
+      "role": null,
+      "similarityProfile": {
+        "route": "choice",
+        "features": []
+      },
+      "reason": "空格连接两个表目的的成分 for a high school relationship 和 to make someone else happy，二者都是不该选某所学校的理由；在否定的 Don’t 句里表示“或者”，用 or。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "for a high school relationship",
+          "signalSide": "passage",
+          "relation": "与 to make someone else happy 并列，都是去某所学校的理由。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "to make someone else happy",
+          "signalSide": "passage",
+          "relation": "并列的第二个目的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:65": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "student",
+      "facetKey": "grammar-fill.given.noun.genitive",
+      "answer": "student’s",
+      "role": null,
+      "similarityProfile": {
+        "route": "genitive",
+        "features": []
+      },
+      "reason": "空格在 A 之后、college experience 之前，说明是谁的大学经历，要用名词所有格；A 修饰的是 student，后文 his or her own 指的也是这个学生，填 student’s。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "college experience",
+          "signalSide": "passage",
+          "relation": "所有格限定 college experience。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "his or her own",
+          "signalSide": "passage",
+          "relation": "回指这个学生。"
+        }
+      ]
+    }
+  }
+}

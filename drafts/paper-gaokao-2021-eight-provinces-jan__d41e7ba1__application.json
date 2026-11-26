@@ -1,0 +1,143 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear George,\n\nI’m writing to ask for your help. Our school will hold an English poetry recitation contest next month, and I have signed up. Each of us must recite a poem of two to three minutes from memory, and the judges will score us on pronunciation, feeling and stage manner.\n\nSince I have read few English poems, could you recommend one or two for me? I’d prefer a poem that is not too difficult but has strong feelings, so that I can really understand it and move the audience.\n\nBesides, I’d like some tips on reciting. Where should I pause and which words should I stress? How can I show my feelings without overacting?\n\nCould I come to your office this Friday afternoon? Thanks a lot!\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "读者是外教 George，身份是要参加学校英文诗朗诵比赛的李华；交际动作是写邮件求助。",
+        "三个要点都要落到句子上：说明比赛要求、请他推荐英文诗、请教朗诵技巧；约 80 词。",
+        "称呼 Dear George,、首句 I’m writing to ask for your help.、结尾 Yours, 和署名 Li Hua 照题面原样保留，首句接正文第一段。"
+      ],
+      "thisEssayChooses": "比赛要求补成“下个月举行、背诵两到三分钟的诗、按发音情感台风打分”，这些细节可以换成别的合理要求；选诗写明“不太难、感情强”的偏好，技巧问停顿、重读和表达感情两类问题；结尾约周五下午去办公室面谈。语气对老师礼貌、直接，用 could you 和 I’d prefer 提请求。"
+    },
+    "standard": {
+      "essay": "Dear George,\n\nI’m writing to ask for your help. Our school will hold an English poetry recitation contest next month, and I have signed up. Each of us must recite a poem of two to three minutes from memory, and the judges will score us on pronunciation, feeling and stage manner.\n\nSince I have read few English poems, could you recommend one or two for me? I’d prefer a poem that is not too difficult but has strong feelings, so that I can really understand it and move the audience.\n\nBesides, I’d like some tips on reciting. Where should I pause and which words should I stress? How can I show my feelings without overacting?\n\nCould I come to your office this Friday afternoon? Thanks a lot!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明比赛要求",
+          "quote": "Each of us must recite a poem of two to three minutes from memory, and the judges will score us on pronunciation, feeling and stage manner."
+        },
+        {
+          "point": "请他推荐英文诗",
+          "quote": "could you recommend one or two for me?"
+        },
+        {
+          "point": "请教朗诵技巧",
+          "quote": "Besides, I’d like some tips on reciting."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接着给定首句交代为什么求助，并把比赛要求说清楚，为后面的请求定下条件。",
+          "items": [
+            {
+              "quote": "and I have signed up",
+              "explain": "一句话说明“我要参赛”，George 马上明白这封信和他有什么关系。"
+            },
+            {
+              "quote": "recite a poem of two to three minutes from memory",
+              "explain": "把“要求”写成时长和“背诵”这样看得见的条件，后面推荐诗的长短才有依据；不要只写“有一些要求”。"
+            },
+            {
+              "quote": "the judges will score us on pronunciation, feeling and stage manner",
+              "explain": "列出评分的三方面，正好引出第三段要问的技巧，前后呼应。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "提出第一个请求：请他推荐诗，并说明想要什么样的诗。",
+          "items": [
+            {
+              "quote": "Since I have read few English poems",
+              "explain": "先说自己的处境再提请求，理由站在“我确实需要你帮忙”上，请求不显得突兀。"
+            },
+            {
+              "quote": "I’d prefer a poem that is not too difficult but has strong feelings",
+              "explain": "给出选诗标准，George 读完就知道该推荐哪类诗，比只说“推荐一首诗”更好回应。"
+            },
+            {
+              "quote": "so that I can really understand it and move the audience",
+              "explain": "so that 说明这样选的目的，把选诗和比赛打分里的“感情”连起来。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "提出第二个请求：请教朗诵技巧，把问题问具体。",
+          "items": [
+            {
+              "quote": "Besides, I’d like some tips on reciting.",
+              "explain": "Besides 标出这是另一件事，第三个要点一眼就能找到。"
+            },
+            {
+              "quote": "Where should I pause and which words should I stress?",
+              "explain": "把“技巧”拆成停顿和重读两个具体问题，老师可以逐条回答；空泛地问 any advice 很难回。"
+            },
+            {
+              "quote": "without overacting",
+              "explain": "说出自己担心的毛病，问题更真实，也显出确实想过怎么朗诵。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "提出下一步：约时间当面请教，再道谢收住。",
+          "items": [
+            {
+              "quote": "Could I come to your office this Friday afternoon?",
+              "explain": "结尾落在一个具体的时间和地点上，George 只要回答“行”或“换个时间”，比“期待回复”更能推动事情。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "recite a poem from memory",
+          "function": "说明比赛“脱稿背诵”的要求，recite 正是朗诵比赛里“背诵朗读”的意思。"
+        },
+        {
+          "expression": "could you recommend one or two for me?",
+          "function": "向老师提出推荐请求，one or two 给对方留余地，语气礼貌。"
+        },
+        {
+          "expression": "show my feelings without overacting",
+          "function": "请教朗诵时既要有感情又不能夸张，说出这一类比赛最常见的难点。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear George,\n\nI’m writing to ask for your help. Our school is holding an English poetry recitation contest in three weeks, and I’ve signed up, both excited and a little nervous. Each contestant has to recite a poem of two to three minutes by heart, and the judges will score us on pronunciation, emotion and stage presence.\n\nAs most poems I know are Chinese, choosing an English one is my biggest headache. Could you recommend one or two that a high school student can handle? I’d love one with a clear story or strong feelings, so that I can make it my own rather than memorize the words.\n\nI’d also appreciate some tips on delivery. Where should I pause, and which words deserve stress? How can I show emotion naturally instead of overacting, especially when I get nervous?\n\nIf it’s convenient, could I drop by your office this Friday afternoon and recite a few lines for you? Thank you!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明比赛要求",
+          "quote": "Each contestant has to recite a poem of two to three minutes by heart, and the judges will score us on pronunciation, emotion and stage presence."
+        },
+        {
+          "point": "请他推荐英文诗",
+          "quote": "Could you recommend one or two that a high school student can handle?"
+        },
+        {
+          "point": "请教朗诵技巧",
+          "quote": "I’d also appreciate some tips on delivery."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "both excited and a little nervous",
+          "explain": "补一句真实的心情，像学生在跟熟悉的外教说话，也让后面的求助更自然。"
+        },
+        {
+          "quote": "so that I can make it my own rather than memorize the words",
+          "explain": "make it my own 是地道说法，说明想真正读懂并表达这首诗，比标准版的 understand it 更贴朗诵比赛。"
+        },
+        {
+          "quote": "could I drop by your office this Friday afternoon and recite a few lines for you?",
+          "explain": "drop by 比 come to 更口语、更贴近师生关系；提出当面试读几行，下一步更具体，老师也更好指导。"
+        }
+      ]
+    }
+  }
+}

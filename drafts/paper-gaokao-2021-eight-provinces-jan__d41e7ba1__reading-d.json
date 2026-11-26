@@ -1,0 +1,763 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-d": {
+      "overview": "研究人员让三只美洲黑熊在电脑屏幕上挑出点数较多的一组图案。结果显示，熊不只靠彩色面积判断，在点会移动时也有熊似乎真在数数；作者推测，这与熊独自觅食、无法依靠同伴有关。",
+      "fullTranslationZh": "看来，普通的熊正变得越来越聪明。先是发现至少有一只熊会用梳子。现在看来，有些熊还会数数。\n密歇根州奥克兰大学的珍妮弗·冯克（Jennifer Vonk）和佐治亚州立大学的迈克尔·贝兰（Michael Beran）给三只美洲黑熊布置了一项任务：在电脑屏幕上分辨数量较多和较少的两组点。为了得到食物奖励，一只名叫布鲁特斯（Brutus）的熊会用鼻子去碰点更密的那个图案。另外两只，贝拉（Bella）和达斯蒂（Dusty），则用爪子碰屏幕。\n正如研究人员在《动物行为》杂志上所报告的，当彩色圆点不移动、并且点数更多的一组同时占据更大的彩色面积时，熊表现得最好。这可以解释为熊分辨的是彩色区域的大小，而不是真的在数点。然而，即使在点数较少的一组反而占据更大面积的成对图案中，三只熊也能挑出点数较多的那一组。\n移动的图案——每个点沿着各自的路径在屏幕上移动——难度更大。但至少布鲁特斯没有被难倒。即使科学家试图同时移动这些点的彩色总面积来误导他，他似乎仍在数这些移动的点。\n熊具有高度的智力，这并不完全令人意外。它们在觅食时面临许多挑战。然而，它们总是独来独往，因此没有那种有助于动物变聪明的复杂社会系统。那么，也许它们的数学能力之所以发展起来，正是因为它们无法指望同伴帮忙。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+          "sourceText": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "displayText": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:33"
+          ],
+          "translationZh": "正如研究人员在《动物行为》杂志上所报告的，当彩色圆点不移动、并且点数更多的一组同时占据更大的彩色面积时，熊表现得最好。",
+          "analysisZh": "开头的 As the researchers report in Animal Behavior 是“正如……所报告的”，交代信息来源。主干是 the bears did best with patterns，“熊在某些图案上表现最好”。后面两个 where 从句由 and 连接，并列修饰 patterns，说明是哪种图案：一是彩色圆点不动的，二是点更多的一组同时占的彩色面积也更大的；them 指前面的 the coloured dots。读懂两个 where 从句，就知道“容易”需要两个条件同时满足。",
+          "underlineRanges": [
+            {
+              "start": 46,
+              "end": 78,
+              "quote": "the bears did best with patterns"
+            },
+            {
+              "start": 79,
+              "end": 115,
+              "quote": "where the coloured dots did not move"
+            },
+            {
+              "start": 120,
+              "end": 138,
+              "quote": "where more of them"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1"
+              ],
+              "start": 0,
+              "end": 44,
+              "quote": "看来，普通的熊正变得越来越聪明。先是发现至少有一只熊会用梳子。现在看来，有些熊还会数数。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-d:2",
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3"
+              ],
+              "start": 45,
+              "end": 217,
+              "quote": "密歇根州奥克兰大学的珍妮弗·冯克（Jennifer Vonk）和佐治亚州立大学的迈克尔·贝兰（Michael Beran）给三只美洲黑熊布置了一项任务：在电脑屏幕上分辨数量较多和较少的两组点。为了得到食物奖励，一只名叫布鲁特斯（Brutus）的熊会用鼻子去碰点更密的那个图案。另外两只，贝拉（Bella）和达斯蒂（Dusty），则用爪子碰屏幕。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4"
+              ],
+              "start": 218,
+              "end": 349,
+              "quote": "正如研究人员在《动物行为》杂志上所报告的，当彩色圆点不移动、并且点数更多的一组同时占据更大的彩色面积时，熊表现得最好。这可以解释为熊分辨的是彩色区域的大小，而不是真的在数点。然而，即使在点数较少的一组反而占据更大面积的成对图案中，三只熊也能挑出点数较多的那一组。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5"
+              ],
+              "start": 350,
+              "end": 431,
+              "quote": "移动的图案——每个点沿着各自的路径在屏幕上移动——难度更大。但至少布鲁特斯没有被难倒。即使科学家试图同时移动这些点的彩色总面积来误导他，他似乎仍在数这些移动的点。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6"
+              ],
+              "start": 432,
+              "end": 533,
+              "quote": "熊具有高度的智力，这并不完全令人意外。它们在觅食时面临许多挑战。然而，它们总是独来独往，因此没有那种有助于动物变聪明的复杂社会系统。那么，也许它们的数学能力之所以发展起来，正是因为它们无法指望同伴帮忙。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+                "start": 21,
+                "end": 101,
+                "quote": "the task of distinguishing between numerically larger and smaller groups of dots"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+                "start": 172,
+                "end": 229,
+                "quote": "would touch the more heavily dotted pattern with his nose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:2",
+                "start": 76,
+                "end": 95,
+                "quote": "在电脑屏幕上分辨数量较多和较少的两组点"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:2",
+                "start": 123,
+                "end": 137,
+                "quote": "会用鼻子去碰点更密的那个图案"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+                "start": 120,
+                "end": 174,
+                "quote": "where more of them also took up a larger coloured area"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+                "start": 32,
+                "end": 50,
+                "quote": "点数更多的一组同时占据更大的彩色面积"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+                "start": 84,
+                "end": 170,
+                "quote": "They face a lot of challenges when trying to get food. They are, however, always alone"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+                "start": 252,
+                "end": 347,
+                "quote": "Perhaps, then, their maths skill developed because they cannot count on their friends for help."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+                "start": 19,
+                "end": 43,
+                "quote": "它们在觅食时面临许多挑战。然而，它们总是独来独往"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+                "start": 69,
+                "end": 100,
+                "quote": "也许它们的数学能力之所以发展起来，正是因为它们无法指望同伴帮忙"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+                "start": 0,
+                "end": 52,
+                "quote": "The average bear, it seems, is getting ever smarter."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+                "start": 108,
+                "end": 148,
+                "quote": "Now it appears that some can count, too."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+                "start": 0,
+                "end": 83,
+                "quote": "It is not entirely surprising that bears should have a high degree of intelligence."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+                "start": 0,
+                "end": 16,
+                "quote": "看来，普通的熊正变得越来越聪明。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+                "start": 31,
+                "end": 44,
+                "quote": "现在看来，有些熊还会数数。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:33"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+                "start": 0,
+                "end": 175,
+                "quote": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+                "start": 0,
+                "end": 59,
+                "quote": "正如研究人员在《动物行为》杂志上所报告的，当彩色圆点不移动、并且点数更多的一组同时占据更大的彩色面积时，熊表现得最好。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先抛出“熊会数数”的新发现，再介绍实验任务、静止和移动图案下的结果，最后推测熊聪明的原因。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+            "summary": "熊越来越聪明：先发现有熊会用梳子，现在又发现有些熊会数数",
+            "function": "引出话题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:2",
+            "summary": "两位研究者给三只美洲黑熊布置任务",
+            "function": "介绍实验的研究者"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+            "summary": "熊要在屏幕上分辨点多和点少的两组，用鼻子或爪子碰点多的图案换取食物",
+            "function": "介绍实验任务"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+            "summary": "圆点静止且点多面积也大时熊表现最好；点少面积反而大时熊也能挑出点多的一组",
+            "function": "说明静止图案的结果，排除只看面积的解释"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+            "summary": "移动图案更难，但 Brutus 即使面积被故意干扰也似乎在数点",
+            "function": "说明移动图案的结果"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+            "summary": "熊觅食面临挑战又独来独往，也许正因无法依靠同伴才发展出数学能力",
+            "function": "推测熊聪明的原因"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-eight-provinces-jan:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到研究者给熊布置的任务，弄清熊要分辨的是什么。",
+      "stemTranslationZh": "科学家给这三只熊布置了什么任务？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "分辨不同的圆点图案。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "distinguishing",
+            "optionText": "Distinguishing",
+            "matchType": "exact",
+            "relationNote": "选项照搬“分辨”（distinguishing），但任务要分辨的是点数的多少（numerically larger and smaller），只说“不同的图案”就丢掉了比多少这个要求。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "quote": "the task of distinguishing between numerically larger and smaller groups of dots",
+              "anchor": "分辨点的多少"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "辨认圆点的不同颜色。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This could be explained by the bears’ distinguishing the different areas of colour rather than truly counting the dots.",
+            "sourceEntity": "areas of colour",
+            "optionText": "Figuring out different colours of dots.",
+            "optionEntity": "colours of dots",
+            "explanation": "原文提到颜色，是说熊可能靠彩色面积的大小（areas of colour）取巧，任务本身并不是辨认点的颜色。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "quote": "This could be explained by the bears’ distinguishing the different areas of colour rather than truly counting the dots.",
+              "anchor": "彩色面积"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把圆点分进不同颜色的组。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Putting the dots into differently coloured groups.",
+            "explanation": "熊只需用鼻子或爪子去碰屏幕上的图案，原文没有让它们给圆点分组归类。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "挑出点数较多的那一组。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "quote": "the task of distinguishing between numerically larger and smaller groups of dots",
+              "anchor": "分辨点的多少"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "quote": "would touch the more heavily dotted pattern with his nose",
+              "anchor": "碰点更密的图案"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "task",
+          "sourceRole": "stem",
+          "targetText": "American black bears the task of distinguishing between numerically larger and smaller groups of dots（点）on a computer screen.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "distinguishing between numerically larger and smaller groups of dots",
+          "note": "题干 task 原词出现在原文。"
+        },
+        {
+          "sourceText": "Picking out the group with a larger number of dots.",
+          "sourceRole": "correctOption",
+          "targetText": "In return for a food reward one bear, Brutus, would touch the more heavily dotted pattern with his nose.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“挑出点数较多的一组”对应任务里分辨“数量上较多和较少的点组”（numerically larger and smaller）；接着[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:3|In return for a food]]写熊碰点更密的图案（more heavily dotted）才得奖励，可见要挑的是多的那组，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到熊表现最好的图案条件，对上选项。",
+      "stemTranslationZh": "对熊来说，在____时任务更容易。",
+      "locateBy": "stem",
+      "locateFindZh": "看第二个 where 后的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "彩色圆点移动得很慢",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+            "sourceHighlight": "did not move",
+            "optionText": "the coloured dots were moving slowly",
+            "optionHighlight": "moving slowly",
+            "explanation": "熊表现最好时圆点是不动的（did not move）；[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:5]]还说移动的图案更难（more of a challenge）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "quote": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+              "anchor": "圆点不动"
+            },
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "quote": "Moving patterns, where each dot followed its own path around the screen, were more of a challenge.",
+              "anchor": "移动图案更难"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "圆点图案形状规则",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "the dot patterns were regular in shape",
+            "explanation": "原文比较的是点动不动、点数多少和面积大小，没提图案的形状规不规则。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "圆点沿着屏幕上的路径移动",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "path",
+            "optionText": "path",
+            "matchType": "exact",
+            "relationNote": "“沿路径移动”借自[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:5]]的“沿着各自的路径移动”（followed its own path），写的是移动的图案，原文说那种情况更难（more of a challenge），不是更容易。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "quote": "Moving patterns, where each dot followed its own path around the screen, were more of a challenge.",
+              "anchor": "移动图案更难"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "更多的点覆盖更大的彩色面积",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "quote": "where more of them also took up a larger coloured area",
+              "anchor": "点多面积也大"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "easier",
+          "sourceRole": "stem",
+          "targetText": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+          "relationType": "locationCue",
+          "targetCue": "did best",
+          "sourceZh": "更容易",
+          "targetCueZh": "表现最好",
+          "answerText": "more of them also took up a larger coloured area",
+          "note": "题干 easier 对应原文 did best：熊表现最好，任务就更容易。"
+        },
+        {
+          "sourceText": "more dots covered a larger coloured area",
+          "sourceRole": "correctOption",
+          "targetText": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“覆盖”（covered）就是原文的“占据”（took up），them 指彩色圆点，“更多的点占了更大的彩色面积”正是选项所说，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:34": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者对熊智力高的推测原因，把几句话合起来对应选项。",
+      "stemTranslationZh": "什么可以解释熊具有高度的智力？",
+      "locateBy": "stem",
+      "locateFindZh": "往后两句找原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们向其他动物学习技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
+            "sourceHighlight": "cannot count on their friends",
+            "optionText": "They learn skills from other animals.",
+            "optionHighlight": "learn skills from other animals",
+            "explanation": "原文恰恰说熊独来独往，指望不上同伴帮忙（cannot count on their friends），选项却说它们向其他动物学本领。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "quote": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
+              "anchor": "无法指望同伴"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们独自面对生活中的挑战。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "quote": "They face a lot of challenges when trying to get food. They are, however, always alone",
+              "anchor": "觅食有挑战且独来独往"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "quote": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
+              "anchor": "无法指望同伴"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们吃的食物种类繁多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "food",
+            "optionText": "food",
+            "matchType": "exact",
+            "relationNote": "“食物”借自“觅食时”（trying to get food），原文说的是找吃的不容易，没说熊吃的种类多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "quote": "They face a lot of challenges when trying to get food.",
+              "anchor": "觅食有挑战"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们有复杂的社交网络。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "They are, however, always alone, and so do not have the complex social systems that contribute to animal smarts.",
+            "sourceHighlight": "do not have the complex social systems",
+            "optionText": "They have complex social networks.",
+            "optionHighlight": "have complex social networks",
+            "explanation": "原文说熊总是独来独往，没有（do not have）复杂的社会系统，选项把否定去掉了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "quote": "They are, however, always alone, and so do not have the complex social systems that contribute to animal smarts.",
+              "anchor": "没有复杂社会系统"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "high degree of intelligence",
+          "sourceRole": "stem",
+          "targetText": "It is not entirely surprising that bears should have a high degree of intelligence.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+          "relationType": "locationCue",
+          "answerText": "They face a lot of challenges when trying to get food. They are, however, always alone",
+          "bridgeZh": "先说熊聪明不意外，接着交代熊的生存处境作原因",
+          "note": "题干 high degree of intelligence 原词出现在原文。"
+        },
+        {
+          "sourceText": "They face life challenges on their own.",
+          "sourceRole": "correctOption",
+          "targetText": "They face a lot of challenges when trying to get food.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项两层各有着落：“面对生活挑战”是觅食时遇到许多挑战（a lot of challenges）；“独自”是熊总是独来独往（always alone）。[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:6|Perhaps, then, their maths]]再点明原因：指望不上同伴（cannot count on their friends），本事只能自己练。原文用“也许”（Perhaps），这只是可能的解释，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文由新发现、实验到原因推测的展开，选出能盖住全文的标题。",
+      "stemTranslationZh": "哪一项适合作本文的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:1]]说熊 ever smarter，现在 can count；[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:4]][[block:paper-gaokao-2021-eight-provinces-jan:reading-d:5]]用实验结果证明；[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:6]]谈熊为何聪明；标题要盖住新发现与熊的智力",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "熊被教会辨别颜色",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "distinguishing the different areas of colour",
+            "optionText": "Distinguish Colours",
+            "matchType": "wordFamily",
+            "relationNote": "“辨别”和“颜色”都借自[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:4]]的“分辨不同的彩色区域”（distinguishing the different areas of colour），可那句说的是熊也许靠彩色面积取巧；实验要看的是熊会不会数点，原文也没说有人教它们认颜色。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "quote": "This could be explained by the bears’ distinguishing the different areas of colour rather than truly counting the dots.",
+              "anchor": "分辨彩色面积"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "发现熊有智力的新证据",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+              "quote": "The average bear, it seems, is getting ever smarter.",
+              "anchor": "熊越来越聪明"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+              "quote": "Now it appears that some can count, too.",
+              "anchor": "新发现：会数数"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "quote": "It is not entirely surprising that bears should have a high degree of intelligence.",
+              "anchor": "熊有高度智力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "三只熊学会了数数",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "But Brutus, at least, was not defeated.",
+            "sourceHighlight": "Brutus, at least",
+            "optionText": "Three Bears Learned How to Count",
+            "optionHighlight": "Three Bears Learned",
+            "explanation": "原文只说有些熊似乎会数数（it appears），移动图案那一关只提到至少（at least）Brutus 没被难倒，也没说熊是学会的；这个标题说过了头，又只盖住实验，漏掉了[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:6]]的原因推测。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "quote": "But Brutus, at least, was not defeated.",
+              "anchor": "至少 Brutus 没被难倒"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "最聪明的美洲黑熊布鲁特斯",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "He seemed to be counting mobile dots even when the scientists tried to mislead him by moving the total coloured area of the dots at the same time.",
+            "sourceHighlight": "He seemed to be counting mobile dots",
+            "optionText": "The Smartest American Black Bear Brutus",
+            "optionHighlight": "Brutus",
+            "explanation": "Brutus 在移动图案中表现突出，但这只是[[block:paper-gaokao-2021-eight-provinces-jan:reading-d:5]]的一个细节；原文没说它是最聪明的黑熊，全文讲的是熊这类动物的智力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "quote": "He seemed to be counting mobile dots even when the scientists tried to mislead him by moving the total coloured area of the dots at the same time.",
+              "anchor": "Brutus 似乎在数移动的点"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "New Evidence of Bear Intelligence Found",
+          "sourceRole": "correctOption",
+          "targetText": "Now it appears that some can count, too.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "几段说的是同一件事：继会用梳子之后，又有研究发现熊能数数，实验结果是证据，结尾再解释熊为什么这么聪明。选项的“新证据”对上这项实验，“熊的智力”盖住从发现到原因的全部内容，选 B。"
+        }
+      ]
+    }
+  }
+}

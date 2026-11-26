@@ -1,0 +1,2072 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:cloze": {
+      "overview": "十岁的作者在理发店和理发师互开玩笑，随口说留长头发会砸了店的招牌，被新来的助手厉声斥责。他从此不再取笑任何职业，并感激这次教训让他懂得言语的分量。",
+      "fullTranslationZh": "这件事发生在我十岁那年。一个普通的星期天，我去了常去的那家理发店。那天，除了理发师，店里还有一位助手，他是最近才来这家店的。\n于是我坐下来理发。大叔问我想剪多长。我回答说：“就照我爸上次吩咐你的那样剪吧。”\n他笑了。开始理发前，他又加了一句：“要是我给你留长呢？”\n我知道他在开玩笑，所以我也开了个玩笑。我说：“那我可不敢保证你的店会怎么样！”\n我话音刚落，助手就在后面大喊起来：“你怎么敢这么说！你凭什么贬低我们，嗯？”\n我承认那一刻我太害怕了，站在我旁边的大叔也尴尬地看着我。\n从那天起，我彻底不再拿任何人的职业和工作开玩笑。这是我一生中最重要的经历之一，它教会我尊重一个人的职业和工作，无论它们多么微不足道。\n我很感激那位助手当时的回应方式，它让我重新思考自己言语的力量。言语确实会产生影响。",
+      "mainLine": {
+        "theme": {
+          "text": "玩笑话也有分量，要尊重每个人的职业，想想 the power of my words。",
+          "quote": "the power of my words"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+            "text": "十岁那年的周日，我去常去的理发店，店里新来了个助手。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+            "text": "理发师大叔问我剪多长，我说照爸爸上次交代的剪。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
+            "text": "大叔笑着开玩笑，说要不给我留长。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+            "text": "我知道他在说笑，也回了句玩笑，说他的店会出事。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+            "text": "话一出口，助手在背后大声斥责我看不起他们。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+            "text": "我吓坏了，大叔在一旁也很尴尬。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+            "text": "从此我不再拿别人的职业开玩笑，学会尊重每份工作。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+            "text": "我感激助手的回应，懂得了言语的分量。"
+          }
+        ],
+        "emotion": "轻松说笑→害怕难堪→反省→感激"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+          "sourceText": "It is one of the most __51__ incidents in my life, which taught me to __52__ the profession and works of a person, no matter how __53__ they are.",
+          "displayText": "It is one of the most important incidents in my life, which taught me to respect the profession and works of a person, no matter how small they are.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:51",
+            "question:paper-gaokao-2021-eight-provinces-jan:52",
+            "question:paper-gaokao-2021-eight-provinces-jan:53"
+          ],
+          "translationZh": "这是我一生中最重要的经历之一，它教会我尊重一个人的职业和工作，无论它们多么微不足道。",
+          "analysisZh": "主干是 It is one of the most important incidents in my life，It 指上文那次理发店的经历。which 引导非限制性定语从句，修饰 incidents（这件事），说它教会我 respect the profession and works of a person，其中 teach sb to do 是教某人做某事。no matter how small they are 是让步状语从句，they 指前面的 profession and works，意思是无论它们多么不起眼。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 41,
+              "quote": "It is one of the most important incidents"
+            },
+            {
+              "start": 54,
+              "end": 80,
+              "quote": "which taught me to respect"
+            },
+            {
+              "start": 119,
+              "end": 147,
+              "quote": "no matter how small they are"
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+          "sourceText": "I’m __54__ that the assistant responded in a way that made me rethink the power of my words.",
+          "displayText": "I’m grateful that the assistant responded in a way that made me rethink the power of my words.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:54"
+          ],
+          "translationZh": "我很感激那位助手当时的回应方式，它让我重新思考自己言语的力量。",
+          "analysisZh": "主干是 I’m grateful that…，be grateful that 后接让人感激的事：the assistant responded in a way。后一个 that 引导定语从句，修饰 a way，说这种回应方式 made me rethink the power of my words，make sb do 是让某人做某事。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 17,
+              "quote": "I’m grateful that"
+            },
+            {
+              "start": 42,
+              "end": 71,
+              "quote": "in a way that made me rethink"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:1"
+              ],
+              "start": 0,
+              "end": 62,
+              "quote": "这件事发生在我十岁那年。一个普通的星期天，我去了常去的那家理发店。那天，除了理发师，店里还有一位助手，他是最近才来这家店的。"
+            },
+            {
+              "paragraphId": "tr-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:2"
+              ],
+              "start": 63,
+              "end": 103,
+              "quote": "于是我坐下来理发。大叔问我想剪多长。我回答说：“就照我爸上次吩咐你的那样剪吧。”"
+            },
+            {
+              "paragraphId": "tr-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:3"
+              ],
+              "start": 104,
+              "end": 132,
+              "quote": "他笑了。开始理发前，他又加了一句：“要是我给你留长呢？”"
+            },
+            {
+              "paragraphId": "tr-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:4"
+              ],
+              "start": 133,
+              "end": 172,
+              "quote": "我知道他在开玩笑，所以我也开了个玩笑。我说：“那我可不敢保证你的店会怎么样！”"
+            },
+            {
+              "paragraphId": "tr-cloze-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:5"
+              ],
+              "start": 173,
+              "end": 211,
+              "quote": "我话音刚落，助手就在后面大喊起来：“你怎么敢这么说！你凭什么贬低我们，嗯？”"
+            },
+            {
+              "paragraphId": "tr-cloze-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:6"
+              ],
+              "start": 212,
+              "end": 240,
+              "quote": "我承认那一刻我太害怕了，站在我旁边的大叔也尴尬地看着我。"
+            },
+            {
+              "paragraphId": "tr-cloze-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:7"
+              ],
+              "start": 241,
+              "end": 307,
+              "quote": "从那天起，我彻底不再拿任何人的职业和工作开玩笑。这是我一生中最重要的经历之一，它教会我尊重一个人的职业和工作，无论它们多么微不足道。"
+            },
+            {
+              "paragraphId": "tr-cloze-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:cloze:8"
+              ],
+              "start": 308,
+              "end": 349,
+              "quote": "我很感激那位助手当时的回应方式，它让我重新思考自己言语的力量。言语确实会产生影响。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-1",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+            "text": "This happened when I was ten. On a normal Sunday, I went to the barber shop where I always went. That day, along with the barber there was an assistant, who had recently joined the shop."
+          },
+          {
+            "textId": "done-2",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+            "text": "So I sat for the haircut. The uncle asked me how long I wanted it. I answered, “Just do as my dad had instructed you the last time.”"
+          },
+          {
+            "textId": "done-3",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
+            "text": "He smiled. Before starting the haircut, he added, “What if I keep it long?”"
+          },
+          {
+            "textId": "done-4",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+            "text": "I knew he was joking. So I joked too. I said, “I can’t guarantee what would happen to your shop then!”"
+          },
+          {
+            "textId": "done-5",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+            "text": "The moment I said it, the assistant shouted from behind. “How dare you say that! Who are you to take us down, eh?”"
+          },
+          {
+            "textId": "done-6",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+            "text": "I admit I was too scared at that moment and the uncle standing beside me was giving me an awkward look."
+          },
+          {
+            "textId": "done-7",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+            "text": "From that day on, I completely stopped joking about anyone’s profession and works. It is one of the most important incidents in my life, which taught me to respect the profession and works of a person, no matter how small they are."
+          },
+          {
+            "textId": "done-8",
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+            "text": "I’m grateful that the assistant responded in a way that made me rethink the power of my words. Words do make a difference."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+                "start": 107,
+                "end": 151,
+                "quote": "along with the barber there was an assistant"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+                "start": 161,
+                "end": 169,
+                "quote": "recently"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-1",
+                "start": 36,
+                "end": 50,
+                "quote": "除了理发师，店里还有一位助手"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-1",
+                "start": 53,
+                "end": 55,
+                "quote": "最近"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+                "start": 56,
+                "end": 67,
+                "quote": "I wanted it"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
+                "start": 60,
+                "end": 72,
+                "quote": "keep it long"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-2",
+                "start": 12,
+                "end": 15,
+                "quote": "我想剪"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-3",
+                "start": 21,
+                "end": 25,
+                "quote": "给你留长"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+                "start": 82,
+                "end": 103,
+                "quote": "Just do as my dad had"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+                "start": 111,
+                "end": 128,
+                "quote": "you the last time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-2",
+                "start": 24,
+                "end": 30,
+                "quote": "就照我爸上次"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-2",
+                "start": 34,
+                "end": 38,
+                "quote": "那样剪吧"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+                "start": 5,
+                "end": 24,
+                "quote": "sat for the haircut"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
+                "start": 11,
+                "end": 30,
+                "quote": "Before starting the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-2",
+                "start": 3,
+                "end": 8,
+                "quote": "坐下来理发"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-3",
+                "start": 4,
+                "end": 9,
+                "quote": "开始理发前"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+                "start": 9,
+                "end": 22,
+                "quote": "he was joking"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+                "start": 24,
+                "end": 38,
+                "quote": "So I joked too"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-4",
+                "start": 3,
+                "end": 8,
+                "quote": "他在开玩笑"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-4",
+                "start": 9,
+                "end": 18,
+                "quote": "所以我也开了个玩笑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+                "start": 64,
+                "end": 99,
+                "quote": "what would happen to your shop then"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+                "start": 95,
+                "end": 107,
+                "quote": "take us down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-4",
+                "start": 30,
+                "end": 37,
+                "quote": "你的店会怎么样"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-5",
+                "start": 30,
+                "end": 34,
+                "quote": "贬低我们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+                "start": 43,
+                "end": 54,
+                "quote": "from behind"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+                "start": 57,
+                "end": 79,
+                "quote": "How dare you say that!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-5",
+                "start": 9,
+                "end": 12,
+                "quote": "在后面"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-5",
+                "start": 18,
+                "end": 26,
+                "quote": "你怎么敢这么说！"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+                "start": 0,
+                "end": 17,
+                "quote": "I admit I was too"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+                "start": 57,
+                "end": 79,
+                "quote": "How dare you say that!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-6",
+                "start": 0,
+                "end": 8,
+                "quote": "我承认那一刻我太"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-5",
+                "start": 18,
+                "end": 26,
+                "quote": "你怎么敢这么说！"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+                "start": 44,
+                "end": 89,
+                "quote": "the uncle standing beside me was giving me an"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+                "start": 97,
+                "end": 101,
+                "quote": "look"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-6",
+                "start": 12,
+                "end": 21,
+                "quote": "站在我旁边的大叔也"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-6",
+                "start": 24,
+                "end": 27,
+                "quote": "看着我"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 0,
+                "end": 16,
+                "quote": "From that day on"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 27,
+                "end": 41,
+                "quote": "stopped joking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 0,
+                "end": 4,
+                "quote": "从那天起"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 8,
+                "end": 23,
+                "quote": "不再拿任何人的职业和工作开玩笑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 108,
+                "end": 145,
+                "quote": "incidents in my life, which taught me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 34,
+                "end": 43,
+                "quote": "经历之一，它教会我"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 27,
+                "end": 77,
+                "quote": "stopped joking about anyone’s profession and works"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 156,
+                "end": 192,
+                "quote": "the profession and works of a person"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 8,
+                "end": 23,
+                "quote": "不再拿任何人的职业和工作开玩笑"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 45,
+                "end": 54,
+                "quote": "一个人的职业和工作"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 194,
+                "end": 207,
+                "quote": "no matter how"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+                "start": 80,
+                "end": 107,
+                "quote": "Who are you to take us down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 55,
+                "end": 61,
+                "quote": "无论它们多么"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-5",
+                "start": 26,
+                "end": 34,
+                "quote": "你凭什么贬低我们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+                "start": 54,
+                "end": 91,
+                "quote": "made me rethink the power of my words"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-8",
+                "start": 17,
+                "end": 30,
+                "quote": "让我重新思考自己言语的力量"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+                "start": 93,
+                "end": 108,
+                "quote": "Words do make a"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+                "start": 70,
+                "end": 91,
+                "quote": "the power of my words"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-8",
+                "start": 31,
+                "end": 36,
+                "quote": "言语确实会"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-8",
+                "start": 25,
+                "end": 30,
+                "quote": "言语的力量"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:41"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:41",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+                "start": 170,
+                "end": 176,
+                "quote": "joined"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-1",
+                "start": 53,
+                "end": 60,
+                "quote": "最近才来这家店"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:42"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:42",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+                "start": 49,
+                "end": 53,
+                "quote": "long"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-2",
+                "start": 15,
+                "end": 17,
+                "quote": "多长"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:43"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:43",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:2",
+                "start": 102,
+                "end": 112,
+                "quote": "instructed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-2",
+                "start": 30,
+                "end": 32,
+                "quote": "吩咐"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:44"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:44",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
+                "start": 31,
+                "end": 38,
+                "quote": "haircut"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-3",
+                "start": 6,
+                "end": 8,
+                "quote": "理发"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:45"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:45",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+                "start": 2,
+                "end": 6,
+                "quote": "knew"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-4",
+                "start": 1,
+                "end": 3,
+                "quote": "知道"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:46"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:46",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+                "start": 55,
+                "end": 64,
+                "quote": "guarantee"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-4",
+                "start": 28,
+                "end": 30,
+                "quote": "保证"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:47"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:47",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+                "start": 36,
+                "end": 43,
+                "quote": "shouted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-5",
+                "start": 12,
+                "end": 16,
+                "quote": "大喊起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:48"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:48",
+            "sourceRanges": [
+              {
+                "textId": "done-6",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+                "start": 18,
+                "end": 24,
+                "quote": "scared"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-6",
+                "start": 8,
+                "end": 10,
+                "quote": "害怕"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:49"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:49",
+            "sourceRanges": [
+              {
+                "textId": "done-6",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:6",
+                "start": 90,
+                "end": 97,
+                "quote": "awkward"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-6",
+                "start": 21,
+                "end": 24,
+                "quote": "尴尬地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:50"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:50",
+            "sourceRanges": [
+              {
+                "textId": "done-7",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 20,
+                "end": 30,
+                "quote": "completely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 6,
+                "end": 8,
+                "quote": "彻底"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:51"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:51",
+            "sourceRanges": [
+              {
+                "textId": "done-7",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 105,
+                "end": 114,
+                "quote": "important"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 30,
+                "end": 34,
+                "quote": "最重要的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:52"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:52",
+            "sourceRanges": [
+              {
+                "textId": "done-7",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 156,
+                "end": 163,
+                "quote": "respect"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 43,
+                "end": 45,
+                "quote": "尊重"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:53"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:53",
+            "sourceRanges": [
+              {
+                "textId": "done-7",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 216,
+                "end": 221,
+                "quote": "small"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 61,
+                "end": 65,
+                "quote": "微不足道"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:54"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:54",
+            "sourceRanges": [
+              {
+                "textId": "done-8",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+                "start": 4,
+                "end": 12,
+                "quote": "grateful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-8",
+                "start": 2,
+                "end": 4,
+                "quote": "感激"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:55"
+            ],
+            "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:55",
+            "sourceRanges": [
+              {
+                "textId": "done-8",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+                "start": 111,
+                "end": 121,
+                "quote": "difference"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-8",
+                "start": 36,
+                "end": 40,
+                "quote": "产生影响"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-cloze-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:51",
+              "question:paper-gaokao-2021-eight-provinces-jan:52",
+              "question:paper-gaokao-2021-eight-provinces-jan:53"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-7",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+                "start": 83,
+                "end": 231,
+                "quote": "It is one of the most important incidents in my life, which taught me to respect the profession and works of a person, no matter how small they are."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-7",
+                "start": 24,
+                "end": 66,
+                "quote": "这是我一生中最重要的经历之一，它教会我尊重一个人的职业和工作，无论它们多么微不足道。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-cloze-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:54"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-8",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:8",
+                "start": 0,
+                "end": 94,
+                "quote": "I’m grateful that the assistant responded in a way that made me rethink the power of my words."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-cloze-8",
+                "start": 0,
+                "end": 31,
+                "quote": "我很感激那位助手当时的回应方式，它让我重新思考自己言语的力量。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "轻松说笑→害怕难堪→反省→感激"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2021-eight-provinces-jan:41": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "店里除了理发师还多了一个助手，这里要“新来到这家店做事”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "前面说 along with the barber there was an assistant，又有 recently，助手是最近来店里帮工的，joined the shop。",
+        "quotes": [
+          "along with the barber there was an assistant",
+          "recently"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "加入",
+        "meaning": "来店里做事",
+        "reason": "店里除了理发师还多了一个助手，这里要“新来到这家店做事”的意思。动词看搭配：前面说 along with the barber there was an assistant，又有 recently，助手是最近来店里帮工的，joined the shop。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "left",
+          "meaning": "离开；助手此刻正在店里（there was an assistant），不是刚离开这家店。",
+          "quote": "there was an assistant"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "opened",
+          "meaning": "开办；这是我一直去的老店（where I always went），不是助手新开的。",
+          "quote": "where I always went"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "visited",
+          "meaning": "拜访；助手是和理发师一起在店里干活的（along with the barber），不是来访的客人。",
+          "quote": "along with the barber"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the shop",
+          "signalSide": "context-after",
+          "targetText": "joined the shop",
+          "relation": "join 后接所加入的地方，加入这家店。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "recently",
+          "signalSide": "context-before",
+          "relation": "最近才来，说明助手是新加入的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:42": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:42",
+      "blankNo": 42,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "理发师问我头发要剪成什么样，这里要问长短。",
+      "find": {
+        "check": "echo",
+        "text": "下一段大叔又问 What if I keep it long?，前面问的正是 how long，long 原词复现。",
+        "quotes": [
+          "What if I keep it long?"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "长的",
+        "reason": "理发师问我头发要剪成什么样，这里要问长短。形容词看复现：下一段大叔又问 What if I keep it long?，前面问的正是 how long，long 原词复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "much",
+          "meaning": "多少；how much 问的是价钱或数量，后面大叔说 keep it long，谈的是头发长短。",
+          "quote": "keep it long"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "often",
+          "meaning": "经常；how often 问多久剪一次，可我正 sat for the haircut，要定的是这次剪多长。",
+          "quote": "sat for the haircut"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "soon",
+          "meaning": "快；how soon 问多快剪好，我的回答却是照爸爸交代的样子剪（do as my dad had）。",
+          "quote": "do as my dad had"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I wanted it",
+          "signalSide": "context-after",
+          "targetText": "how long I wanted it",
+          "relation": "it 指头发，问想要多长。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "keep it long",
+          "signalSide": "context-after",
+          "relation": "下文大叔说留长，呼应这里的 long。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:43": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "detail",
+      "context": "我让大叔照爸爸上次说的剪，这里要爸爸“交代、吩咐”过他。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是 you the last time，宾语是理发师，do as 要照着做的是爸爸上次的要求，instruct sb 吩咐某人。",
+        "quotes": [
+          "you the last time",
+          "do as"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "吩咐",
+        "reason": "我让大叔照爸爸上次说的剪，这里要爸爸“交代、吩咐”过他。动词看搭配：空后是 you the last time，宾语是理发师，do as 要照着做的是爸爸上次的要求，instruct sb 吩咐某人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "invited",
+          "meaning": "邀请；do as 要照着做一种做法，爸爸邀请理发师给不出可照做的剪法。",
+          "quote": "do as"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "promised",
+          "meaning": "答应；剪法要由爸爸提给理发师，爸爸向他许诺什么，do as 就没有可照做的内容。",
+          "quote": "do as"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "convinced",
+          "meaning": "说服；the last time 爸爸只需交代怎么剪，谈不上要说服理发师。",
+          "quote": "the last time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "you the last time",
+          "signalSide": "context-after",
+          "targetText": "instructed you the last time",
+          "relation": "instruct 后接人，吩咐理发师。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "do as",
+          "signalSide": "context-before",
+          "relation": "照着做的是爸爸上次的吩咐。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:44": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "大叔动剪之前问了句话，这里是他要开始做的那件事。",
+      "find": {
+        "check": "echo",
+        "text": "上一段 So I sat for the haircut，我坐下就是来理发的，这里 Before starting the 后面复现 haircut。",
+        "quotes": [
+          "So I sat for the haircut"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "理发",
+        "reason": "大叔动剪之前问了句话，这里是他要开始做的那件事。名词看复现：上一段 So I sat for the haircut，我坐下就是来理发的，这里 Before starting the 后面复现 haircut。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "discussion",
+          "meaning": "讨论；我坐下是来理发的（sat for the haircut），大叔要开始的是剪头，不是一场讨论。",
+          "quote": "sat for the haircut"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "journey",
+          "meaning": "旅程；我坐在理发店里等着理发（sat for the haircut），没有出行。",
+          "quote": "sat for the haircut"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "training",
+          "meaning": "培训；大叔要给我剪头（sat for the haircut），不是要培训谁。",
+          "quote": "sat for the haircut"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Before starting the",
+          "signalSide": "context-before",
+          "targetText": "Before starting the haircut",
+          "relation": "start 后接要开始做的事，开始理发。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "sat for the haircut",
+          "signalSide": "context-before",
+          "relation": "上一段的 haircut 在这里复现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:45": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "我看出大叔是在说笑，才跟着说笑，这里要“清楚知道”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后句 So I joked too，So 说明我是认定了 he was joking 才跟着开玩笑，要 knew。",
+        "quotes": [
+          "So I joked too",
+          "he was joking"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "知道",
+        "reason": "我看出大叔是在说笑，才跟着说笑，这里要“清楚知道”的意思。动词看搭配：后句 So I joked too，So 说明我是认定了 he was joking 才跟着开玩笑，要 knew。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "agreed",
+          "meaning": "同意；he was joking 是大叔的举动，谈不上我同不同意，后面 So I joked too 要的是我看出来了。",
+          "quote": "So I joked too"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "heard",
+          "meaning": "听说；大叔就在面前对我说话（he added），不用从别人那里听说他在开玩笑。",
+          "quote": "he added"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hoped",
+          "meaning": "希望；So I joked too 说明我已认定他在说笑，不是只盼着他在开玩笑。",
+          "quote": "So I joked too"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he was joking",
+          "signalSide": "context-after",
+          "targetText": "knew he was joking",
+          "relation": "know 后接宾语从句，知道他在开玩笑。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "So I joked too",
+          "signalSide": "context-after",
+          "relation": "因为知道他在开玩笑，所以我也开玩笑。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:46": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "main",
+      "context": "我回敬的玩笑惹出了后面的冲突，这里要说留长头发后“不敢担保”店会怎样。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 what would happen to your shop then，“不敢保证你的店那时会怎样”，是在打趣剪不好会坏了店的名声。",
+        "quotes": [
+          "what would happen to your shop then"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "保证",
+        "reason": "我回敬的玩笑惹出了后面的冲突，这里要说留长头发后“不敢担保”店会怎样。动词看搭配：宾语是 what would happen to your shop then，“不敢保证你的店那时会怎样”，是在打趣剪不好会坏了店的名声。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "forget",
+          "meaning": "忘记；then 指留长头发以后，事情还没发生，说忘不了会怎样说不通。",
+          "quote": "then"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tolerate",
+          "meaning": "容忍；what would happen 是假设的后果，说不能容忍会发生什么接不上这句玩笑。",
+          "quote": "what would happen"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understand",
+          "meaning": "理解；我是在拿 your shop 打趣，不是说自己弄不明白，助手才会怪我 take us down。",
+          "quote": "take us down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "what would happen to your shop then",
+          "signalSide": "context-after",
+          "relation": "guarantee 后接宾语从句，不敢保证店会怎样。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "take us down",
+          "signalSide": "context-after",
+          "relation": "助手听出这句话在贬低他们的店。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:47": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "main",
+      "context": "我的玩笑激怒了助手，这里是转折，要他从背后冲我发作的动作。",
+      "find": {
+        "check": "affect",
+        "text": "空后是 How dare you say that! 和 Who are you to take us down，带感叹号的质问是大声喊出来的。",
+        "quotes": [
+          "How dare you say that!",
+          "Who are you to take us down"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "大喊",
+        "reason": "我的玩笑激怒了助手，这里是转折，要他从背后冲我发作的动作。动词看情感：空后是 How dare you say that! 和 Who are you to take us down，带感叹号的质问是大声喊出来的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "urged",
+          "meaning": "催促；How dare you say that! 是怒斥，不是催我做什么。",
+          "quote": "How dare you say that!"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "laughed",
+          "meaning": "笑；助手质问 How dare you，是被激怒了，不是觉得好笑。",
+          "quote": "How dare you"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "helped",
+          "meaning": "帮忙；from behind 传来的是一句 How dare you say that!，不是帮忙的举动。",
+          "quote": "from behind"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "from behind",
+          "signalSide": "context-after",
+          "targetText": "shouted from behind",
+          "relation": "shout 后接从哪里喊，从背后大喊。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "How dare you say that!",
+          "signalSide": "context-after",
+          "relation": "怒气冲冲的质问，对应大喊。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:48": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:48",
+      "blankNo": 48,
+      "pos": "adjective",
+      "role": "main",
+      "context": "被助手当面怒斥，十岁的我情绪跌到低谷，这里要一个负面的“害怕”。",
+      "find": {
+        "check": "affect",
+        "text": "上一段助手吼出 How dare you say that!，这里 I admit 承认自己当时 too 怎样，是被吓住了。",
+        "quotes": [
+          "How dare you say that!",
+          "I admit"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "害怕的",
+        "reason": "被助手当面怒斥，十岁的我情绪跌到低谷，这里要一个负面的“害怕”。形容词看情感：上一段助手吼出 How dare you say that!，这里 I admit 承认自己当时 too 怎样，是被吓住了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "angry",
+          "meaning": "生气的；挨骂的是开玩笑的我，I admit 承认的是自己的狼狈，后文也只写我反省。",
+          "quote": "I admit"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "proud",
+          "meaning": "骄傲的；刚被骂 How dare you say that!，我不可能得意。",
+          "quote": "How dare you say that!"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curious",
+          "meaning": "好奇的；我刚挨了骂，the uncle standing beside me 也很为难，场面难堪，谈不上好奇。",
+          "quote": "the uncle standing beside me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I was too",
+          "signalSide": "context-before",
+          "targetText": "I was too scared",
+          "relation": "too 后接形容词，说我当时太害怕。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "How dare you say that!",
+          "signalSide": "context-before",
+          "relation": "助手的怒斥让我受了惊吓。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:49": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:49",
+      "blankNo": 49,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "大叔站在旁边看着我，这里要形容他此刻的目光，是负面、难堪的。",
+      "find": {
+        "check": "affect",
+        "text": "同句前半 I was too scared，助手又在发火，站在一旁的大叔 standing beside me 左右为难，只能是尴尬的目光。",
+        "quotes": [
+          "I was too",
+          "standing beside me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "尴尬的",
+        "reason": "大叔站在旁边看着我，这里要形容他此刻的目光，是负面、难堪的。形容词看情感：同句前半 I was too scared，助手又在发火，站在一旁的大叔 standing beside me 左右为难，只能是尴尬的目光。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "anxious",
+          "meaning": "焦虑的；大叔 standing beside me 只是旁观这场冲突，没有要他着急的后果，他是左右为难。",
+          "quote": "standing beside me"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "appealing",
+          "meaning": "吸引人的；I admit I was too 后面说的是我的害怕，大叔此时的目光不会是迷人的。",
+          "quote": "I admit I was too"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "encouraging",
+          "meaning": "鼓励的；我刚说了惹人发火的话（How dare you say that!），大叔不会鼓励我。",
+          "quote": "How dare you say that!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "look",
+          "signalSide": "context-after",
+          "targetText": "an awkward look",
+          "relation": "awkward 修饰 look，尴尬的目光。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "standing beside me",
+          "signalSide": "context-before",
+          "relation": "大叔夹在助手和我之间，处境尴尬。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:50": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:50",
+      "blankNo": 50,
+      "pos": "adverb",
+      "role": "main",
+      "context": "从那天起我的做法变了，这里要说这种改变是彻底的、再没犯过。",
+      "find": {
+        "check": "direction",
+        "text": "前面 From that day on 说的是此后一直，下一句又说这件事 taught me，改变是长久而彻底的，用 completely。",
+        "quotes": [
+          "From that day on",
+          "taught me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "完全地",
+        "reason": "从那天起我的做法变了，这里要说这种改变是彻底的、再没犯过。副词看走向：前面 From that day on 说的是此后一直，下一句又说这件事 taught me，改变是长久而彻底的，用 completely。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "suddenly",
+          "meaning": "突然；From that day on 讲的是此后一直不再，不是突然的一下。",
+          "quote": "From that day on"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "temporarily",
+          "meaning": "暂时地；From that day on 意思是从此以后，和暂时正相反。",
+          "quote": "From that day on"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "regularly",
+          "meaning": "定期地；定期地停止说不通，From that day on 要的是一直不再开这种玩笑。",
+          "quote": "From that day on"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "stopped joking",
+          "signalSide": "context-after",
+          "targetText": "completely stopped joking",
+          "relation": "completely 修饰 stopped，彻底不再。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "From that day on",
+          "signalSide": "context-before",
+          "relation": "从那天起一直如此，说明改变彻底。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:51": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:51",
+      "blankNo": 51,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者给这件事下评价，后面说它教会了我道理，这里要表示意义重大。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 incidents in my life, which taught me，一件教会我做人道理的事是人生中重要的事。",
+        "quotes": [
+          "incidents in my life, which taught me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "重要的",
+        "reason": "作者给这件事下评价，后面说它教会了我道理，这里要表示意义重大。形容词看搭配：空后 incidents in my life, which taught me，一件教会我做人道理的事是人生中重要的事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "exciting",
+          "meaning": "令人兴奋的；我挨了一句 How dare you say that!，这件事带给我的是教训，不是兴奋。",
+          "quote": "How dare you say that!"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "strange",
+          "meaning": "奇怪的；事情起因是我说错了话，可贵在 which taught me，不在奇怪。",
+          "quote": "which taught me"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "interesting",
+          "meaning": "有趣的；这件事让我受了教训（which taught me），重点不在有趣。",
+          "quote": "which taught me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "incidents in my life",
+          "signalSide": "context-after",
+          "targetText": "the most important incidents in my life",
+          "relation": "important 修饰 incidents，人生中重要的经历。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "which taught me",
+          "signalSide": "context-after",
+          "relation": "这件事教会了我道理，可见它重要。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:52": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "main",
+      "context": "点题处，作者从这件事学会该怎样对待别人的职业，和当初取笑相反。",
+      "find": {
+        "check": "echo",
+        "text": "前句 stopped joking about anyone’s profession and works，不再取笑就是尊重，宾语 the profession and works 原样复现。",
+        "quotes": [
+          "stopped joking about anyone’s profession and works",
+          "the profession and works"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "尊重",
+        "reason": "点题处，作者从这件事学会该怎样对待别人的职业，和当初取笑相反。动词看复现：前句 stopped joking about anyone’s profession and works，不再取笑就是尊重，宾语 the profession and works 原样复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "learn",
+          "meaning": "学习；我学到的是怎样对待别人的工作（stopped joking about），不是去学各种手艺。",
+          "quote": "stopped joking about"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "enter",
+          "meaning": "进入；no matter how 说的是不论职业怎样都要善待，不是去从事这些职业。",
+          "quote": "no matter how"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "change",
+          "meaning": "改变；我改变的是自己的态度（stopped joking），不是去改变别人的职业。",
+          "quote": "stopped joking"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the profession and works of a person",
+          "signalSide": "context-after",
+          "targetText": "respect the profession and works of a person",
+          "relation": "respect 后接职业和工作，尊重别人的工作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "stopped joking about anyone’s profession and works",
+          "signalSide": "context-before",
+          "relation": "不再取笑别人的职业，正是尊重的反面复现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:53": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:53",
+      "blankNo": 53,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "no matter how 引出让步，这里要说别人的职业看起来不起眼。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "助手怒问 Who are you to take us down，我是在小看他们的活，no matter how 后要“再不起眼也尊重”，用 small。",
+        "quotes": [
+          "Who are you to take us down",
+          "no matter how"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "小的",
+        "meaning": "微不足道的",
+        "reason": "no matter how 引出让步，这里要说别人的职业看起来不起眼。形容词看语境义：助手怒问 Who are you to take us down，我是在小看他们的活，no matter how 后要“再不起眼也尊重”，用 small。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hard",
+          "meaning": "艰难的；我是小看了理发这份活（take us down），要说的是再不起眼也尊重，不是辛苦。",
+          "quote": "take us down"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "good",
+          "meaning": "好的；no matter how good 是说再好也尊重，好的职业本就不需要让步，语气反了。",
+          "quote": "no matter how"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "complex",
+          "meaning": "复杂的；理发店的活被我看低（take us down），要说的是再简单也尊重，不是复杂。",
+          "quote": "take us down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "they are",
+          "signalSide": "context-after",
+          "targetText": "how small they are",
+          "relation": "they 指职业和工作，它们多么不起眼。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "no matter how",
+          "signalSide": "context-before",
+          "relation": "让步，无论多么不起眼都要尊重。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:54": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "main",
+      "context": "回头看当年的斥责，作者的态度转为正面，情感线的终点。",
+      "find": {
+        "check": "affect",
+        "text": "空后说助手的回应 made me rethink the power of my words，让我受益，所以心存感激。",
+        "quotes": [
+          "made me rethink the power of my words"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "感激的",
+        "reason": "回头看当年的斥责，作者的态度转为正面，情感线的终点。形容词看情感：空后说助手的回应 made me rethink the power of my words，让我受益，所以心存感激。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sorry",
+          "meaning": "遗憾的；助手的回应 made me rethink，是让我受益的事，不必遗憾。",
+          "quote": "made me rethink"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confident",
+          "meaning": "确信的；事情早已发生，用不着确信，作者要表达的是对 made me rethink 的态度。",
+          "quote": "made me rethink"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "embarrassed",
+          "meaning": "难为情的；回想这件事的重点是它 made me rethink，带来的是收获，不是难为情。",
+          "quote": "made me rethink"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’m",
+          "signalSide": "context-before",
+          "targetText": "I’m grateful that",
+          "relation": "be grateful that 后接让自己感激的事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "made me rethink the power of my words",
+          "signalSide": "context-after",
+          "relation": "助手的话让我反思，是一件好事。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:55": {
+      "blankId": "blank:paper-gaokao-2021-eight-provinces-jan:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "结尾点题，说言语确实有分量，要一个表示“起作用、产生影响”的词。",
+      "find": {
+        "check": "collocation",
+        "text": "前句说 the power of my words，Words do make a 后接 difference，make a difference 就是起作用。",
+        "quotes": [
+          "the power of my words",
+          "Words do make a"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "差别",
+        "meaning": "影响",
+        "reason": "结尾点题，说言语确实有分量，要一个表示“起作用、产生影响”的词。名词看搭配：前句说 the power of my words，Words do make a 后接 difference，make a difference 就是起作用。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "mistake",
+          "meaning": "错误；make a mistake 是犯错，可前句讲的是 the power of my words，不是话会出错。",
+          "quote": "the power of my words"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "choice",
+          "meaning": "选择；make a choice 要人来做，主语 Words 不会做选择，也对不上 the power of my words。",
+          "quote": "the power of my words"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "joke",
+          "meaning": "玩笑；作者早已 stopped joking，结尾不会说话语会开玩笑。",
+          "quote": "stopped joking"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Words do make a",
+          "signalSide": "context-before",
+          "targetText": "Words do make a difference",
+          "relation": "make a difference 产生影响。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the power of my words",
+          "signalSide": "context-before",
+          "relation": "言语的力量，就是言语会产生影响。"
+        }
+      ]
+    }
+  }
+}

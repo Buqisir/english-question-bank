@@ -1,0 +1,774 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2021-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2021-eight-provinces-jan:reading-c": {
+      "overview": "文章说明魔术这门娱乐的门道：魔术师靠手上技巧、心理学知识，有时借助机械装置，让观众相信不可能的事，关键在于引开观众的注意；再以杯下藏球和剪断复原两个戏法为例，揭示实际过程。",
+      "fullTranslationZh": "魔术是一种娱乐形式，它建立在假装做不可能之事的基础上。魔术师是受过专门训练的演员。他努力让观众相信，他有能力做违背自然规律的事。\n只要观众没有发现戏法是怎么变的，魔术表演就很有趣。魔术师通常依靠他手上的技巧、他的心理学知识，有时还依靠机械装置。由于魔术表演本来就是为了骗人，运用心理学很重要。魔术师必须让人们注意不到他手上的所有动作，也想不到他道具中的秘密部件。他还必须引导观众得出错误的结论。魔术师的成功取决于这样一个事实：眼睛看到的许多东西并不是要紧的东西。\n两种基本的魔术戏法是让物体看起来凭空出现和让物体看起来消失。把这两种戏法结合起来，能变出一些有趣的效果。例如，魔术师把一个小球放在几个杯子中的一个下面。然后小球似乎从一个杯子跳到另一个杯子，或者变了颜色。实际情况是，魔术师用快速的手部动作或机械装置把一个球藏了起来。这样做的同时，他和观众说着话，并用一只手挥动一块颜色鲜艳的布。观众忙着看布、听魔术师说话，注意不到他的另一只手正在藏球。\n另一个很受欢迎的戏法是把某样东西剪断或烧掉，然后让它完好如初地再次出现。实际情况是，魔术师趁观众看别处时迅速把剪断或烧过的东西藏起来，让它消失。然后他展示另一件没有被剪过或烧过的东西，“神奇地”让它完好如初地出现。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+          "sourceText": "The magician’s success depends on the fact that many things seen by the eye are not the things that matter.",
+          "displayText": "The magician’s success depends on the fact that many things seen by the eye are not the things that matter.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:29"
+          ],
+          "translationZh": "魔术师的成功取决于这样一个事实：眼睛看到的许多东西并不是要紧的东西。",
+          "analysisZh": "先找主干：The magician’s success depends on the fact，“魔术师的成功取决于一个事实”。that 引出同位语从句，说明这个事实是什么：many things are not the things，“许多东西并不是那些东西”。seen by the eye 是过去分词短语，后置修饰 many things，指“眼睛看到的”；that matter 是定语从句，修饰后一个 things，matter 在这里是动词“要紧”。合起来就是：观众盯着看的，往往不是真正起作用的部分，这正是魔术师要引开注意力的原因。",
+          "underlineRanges": [
+            {
+              "start": 23,
+              "end": 47,
+              "quote": "depends on the fact that"
+            },
+            {
+              "start": 60,
+              "end": 75,
+              "quote": "seen by the eye"
+            },
+            {
+              "start": 95,
+              "end": 106,
+              "quote": "that matter"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+          "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+          "sourceText": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+          "displayText": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2021-eight-provinces-jan:29"
+          ],
+          "translationZh": "观众忙着看布、听魔术师说话，注意不到他的另一只手正在藏球。",
+          "analysisZh": "主干是 The audience is too busy ... to notice ...，too ... to ... 表示“太……而不能……”，所以 to notice 带否定意味：观众“没注意到”。busy 后面接两个并列的动名词 watching the cloth 和 listening to the magician’s words，说明观众在忙什么。notice 后的 that 从句是它的宾语，his other hand is hiding the ball 才是真正发生的事。这句把“引开注意力”的效果写得很具体。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 24,
+              "quote": "too busy"
+            },
+            {
+              "start": 82,
+              "end": 91,
+              "quote": "to notice"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1"
+              ],
+              "start": 0,
+              "end": 64,
+              "quote": "魔术是一种娱乐形式，它建立在假装做不可能之事的基础上。魔术师是受过专门训练的演员。他努力让观众相信，他有能力做违背自然规律的事。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2"
+              ],
+              "start": 65,
+              "end": 231,
+              "quote": "只要观众没有发现戏法是怎么变的，魔术表演就很有趣。魔术师通常依靠他手上的技巧、他的心理学知识，有时还依靠机械装置。由于魔术表演本来就是为了骗人，运用心理学很重要。魔术师必须让人们注意不到他手上的所有动作，也想不到他道具中的秘密部件。他还必须引导观众得出错误的结论。魔术师的成功取决于这样一个事实：眼睛看到的许多东西并不是要紧的东西。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3"
+              ],
+              "start": 232,
+              "end": 425,
+              "quote": "两种基本的魔术戏法是让物体看起来凭空出现和让物体看起来消失。把这两种戏法结合起来，能变出一些有趣的效果。例如，魔术师把一个小球放在几个杯子中的一个下面。然后小球似乎从一个杯子跳到另一个杯子，或者变了颜色。实际情况是，魔术师用快速的手部动作或机械装置把一个球藏了起来。这样做的同时，他和观众说着话，并用一只手挥动一块颜色鲜艳的布。观众忙着看布、听魔术师说话，注意不到他的另一只手正在藏球。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4"
+              ],
+              "start": 426,
+              "end": 533,
+              "quote": "另一个很受欢迎的戏法是把某样东西剪断或烧掉，然后让它完好如初地再次出现。实际情况是，魔术师趁观众看别处时迅速把剪断或烧过的东西藏起来，让它消失。然后他展示另一件没有被剪过或烧过的东西，“神奇地”让它完好如初地出现。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+                "start": 0,
+                "end": 94,
+                "quote": "Magic is a form of entertainment that is based on pretending to do things that are impossible."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 309,
+                "end": 423,
+                "quote": "What actually happens is that the magician, employing quick hand movements or a mechanical device, hides one ball."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+                "start": 0,
+                "end": 27,
+                "quote": "魔术是一种娱乐形式，它建立在假装做不可能之事的基础上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+                "start": 317,
+                "end": 450,
+                "quote": "The magician must keep people from noticing all the movements of his hands and from thinking about the secret parts of his equipment."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 517,
+                "end": 648,
+                "quote": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+                "start": 81,
+                "end": 101,
+                "quote": "魔术师必须让人们注意不到他手上的所有动作"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 164,
+                "end": 193,
+                "quote": "观众忙着看布、听魔术师说话，注意不到他的另一只手正在藏球。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 165,
+                "end": 235,
+                "quote": "For example, the magician puts a small ball under one of several cups."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+                "start": 0,
+                "end": 89,
+                "quote": "Another favourite trick is to cut or burn something, and then make it appear whole again."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 52,
+                "end": 76,
+                "quote": "例如，魔术师把一个小球放在几个杯子中的一个下面。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+                "start": 0,
+                "end": 36,
+                "quote": "另一个很受欢迎的戏法是把某样东西剪断或烧掉，然后让它完好如初地再次出现。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2021-eight-provinces-jan:31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+                "start": 95,
+                "end": 137,
+                "quote": "The magician is a specially trained actor."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+                "start": 96,
+                "end": 152,
+                "quote": "The magician usually depends on his skill with his hands"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 353,
+                "end": 383,
+                "quote": "employing quick hand movements"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+                "start": 27,
+                "end": 41,
+                "quote": "魔术师是受过专门训练的演员。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+                "start": 25,
+                "end": 38,
+                "quote": "魔术师通常依靠他手上的技巧"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 108,
+                "end": 132,
+                "quote": "魔术师用快速的手部动作或机械装置把一个球藏了起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:29"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+                "start": 509,
+                "end": 616,
+                "quote": "The magician’s success depends on the fact that many things seen by the eye are not the things that matter."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+                "start": 132,
+                "end": 166,
+                "quote": "魔术师的成功取决于这样一个事实：眼睛看到的许多东西并不是要紧的东西。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2021-eight-provinces-jan:29"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 517,
+                "end": 648,
+                "quote": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+                "start": 164,
+                "end": 193,
+                "quote": "观众忙着看布、听魔术师说话，注意不到他的另一只手正在藏球。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先给魔术下定义，再说明魔术成功依靠什么、为什么心理学重要，最后用两个经典戏法具体展示魔术师怎样引开观众的注意。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+            "summary": "魔术是假装做不可能之事的娱乐，魔术师是受过专门训练的演员",
+            "function": "给魔术下定义，引出话题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+            "summary": "魔术靠手上技巧、心理学知识和机械装置，关键是让观众注意不到手上动作并得出错误结论",
+            "function": "说明魔术成功的原理"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+            "summary": "以杯下小球为例：魔术师边说话边挥布，趁观众分心用另一只手藏球",
+            "function": "举例说明出现与消失的戏法"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+            "summary": "以剪断或烧掉后复原为例：先趁观众看别处藏起原物，再拿出另一件完好的",
+            "function": "再举一例，进一步印证原理"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2021-eight-provinces-jan:28": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文由定义、原理到实例的展开方式，判断作者写这篇文章的目的。",
+      "stemTranslationZh": "作者写这篇文章的主要目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:1]]说 Magic 是什么，[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:2]]讲成功靠什么，[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:3]][[block:paper-gaokao-2021-eight-provinces-jan:reading-c:4]]拆穿 What actually happens；目的要盖住整篇的解说",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "宣传一场魔术表演。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To promote a magic show.",
+            "explanation": "文中没有演出的时间、地点或票价，作者讲的是戏法背后的原理，不是在为哪一场演出做宣传。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "教人们成为魔术师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The magician is a specially trained actor.",
+            "sourceHighlight": "specially trained",
+            "optionText": "To teach people to be magicians.",
+            "optionHighlight": "teach people",
+            "explanation": "原文只提到魔术师受过专门训练（specially trained），讲戏法也只揭示原理，没有给出练习方法或表演步骤，谈不上教人当魔术师。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "quote": "The magician is a specially trained actor.",
+              "anchor": "受过专门训练"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "解释魔术这门艺术。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "quote": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+              "anchor": "魔术的定义"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "quote": "What actually happens is that the magician, employing quick hand movements or a mechanical device, hides one ball.",
+              "anchor": "揭示实际过程"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "赞扬魔术师的才能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The magician usually depends on his skill with his hands, on his knowledge of psychology, and, sometimes, on mechanical devices（机械装置）.",
+            "sourceHighlight": "his skill with his hands",
+            "optionText": "To praise the talents of magicians.",
+            "optionHighlight": "praise the talents",
+            "explanation": "[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:2]]提到手上技巧（skill with his hands），是把它当作变戏法的手段来说明，没有一句赞美的话；全文语气客观，重在拆解原理。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "The magician usually depends on his skill with his hands, on his knowledge of psychology, and, sometimes, on mechanical devices（机械装置）.",
+              "anchor": "魔术师依靠的东西"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To explain the art of magic.",
+          "sourceRole": "correctOption",
+          "targetText": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“解释魔术这门艺术”是对全文的概括。文章从魔术是什么讲起，接着说它靠手法和心理学骗过观众的眼睛，再把两个戏法的实际过程（What actually happens）拆开给人看，处处在说明魔术的门道；“解释”二字正好盖住这些，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出原文所说魔术成功的关键，并把几处具体做法概括成选项的说法。",
+      "stemTranslationZh": "下列哪一项对一个成功的魔术戏法很重要？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看心理学怎么用",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "移动舞台道具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "equipment",
+            "optionText": "equipment",
+            "matchType": "exact",
+            "relationNote": "“道具”（equipment）在原文出现在不让观众去想道具的秘密部件（secret parts of his equipment）里，要的是观众别留意道具，没说成功靠移动舞台道具。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "The magician must keep people from noticing all the movements of his hands and from thinking about the secret parts of his equipment.",
+              "anchor": "别让观众想道具"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "引导观众的注意力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "The magician must keep people from noticing all the movements of his hands and from thinking about the secret parts of his equipment.",
+              "anchor": "让观众注意不到手上动作"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "quote": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+              "anchor": "观众忙着看布"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "运用高科技。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The magician usually depends on his skill with his hands, on his knowledge of psychology, and, sometimes, on mechanical devices（机械装置）.",
+            "sourceHighlight": "sometimes, on mechanical devices",
+            "optionText": "Applying high technology.",
+            "optionHighlight": "high technology",
+            "explanation": "原文只说魔术师有时（sometimes）借助机械装置，算不上高科技，也不是成功的关键。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "The magician usually depends on his skill with his hands, on his knowledge of psychology, and, sometimes, on mechanical devices（机械装置）.",
+              "anchor": "有时用机械装置"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对表演保密。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Magic shows are entertaining as long as the audience does not discover how the tricks are done.",
+            "sourceEntity": "how the tricks are done",
+            "optionText": "Keeping the performance in secret.",
+            "optionEntity": "the performance",
+            "explanation": "原文要瞒住的是戏法怎么变（how the tricks are done），表演本身是当着观众进行的，选项把保密的对象换成了整场表演。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "Magic shows are entertaining as long as the audience does not discover how the tricks are done.",
+              "anchor": "别让观众发现戏法怎么变"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "important",
+          "sourceRole": "stem",
+          "targetText": "Since magic performance is meant to trick people, the use of psychology is important.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "keep people from noticing all the movements of his hands",
+          "bridgeZh": "心理学的用处，就是管住观众看什么、想什么",
+          "note": "题干 important 原词出现在原文。"
+        },
+        {
+          "sourceText": "Directing the audience’s attention.",
+          "sourceRole": "correctOption",
+          "targetText": "The magician must keep people from noticing all the movements of his hands and from thinking about the secret parts of his equipment.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "选项的“引导观众的注意力”是对两处的概括：先是不让观众注意到手上的动作（keep people from noticing），接着[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:3|The audience is too busy]]写观众忙着看布、听说话，没看见另一只手在藏球。把观众的目光引开，戏法才能成功，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:30": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "看最后两段写的是什么内容、和前文是什么关系，判断作者的写法。",
+      "stemTranslationZh": "作者在最后两段中侧重做什么？",
+      "locateBy": "options",
+      "locateFindZh": "四种写法逐个回[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:3]][[block:paper-gaokao-2021-eight-provinces-jan:reading-c:4]]，看是否在讲具体戏法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "举例子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "quote": "For example, the magician puts a small ball under one of several cups.",
+              "anchor": "杯下藏球的例子"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+              "quote": "Another favourite trick is to cut or burn something, and then make it appear whole again.",
+              "anchor": "剪断复原的例子"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "作总结。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Making a summary.",
+            "explanation": "两段都停留在具体戏法的过程上，[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:4]]以拿出另一件完好物品收尾，没有回头归纳全文的观点。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作比较。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Drawing comparisons.",
+            "explanation": "两段各讲一个戏法，只分别说明它实际怎样完成，没有把两个戏法放在一起比较异同。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "解释一个概念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+            "sourceEntity": "Magic",
+            "optionText": "Explaining a concept.",
+            "optionEntity": "a concept",
+            "explanation": "解释概念的是[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:1]]：魔术是建立在假装做不可能之事上的娱乐（a form of entertainment）；最后两段讲的是具体戏法怎么变。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "quote": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+              "anchor": "魔术的定义"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Providing examples.",
+          "sourceRole": "correctOption",
+          "targetText": "For example, the magician puts a small ball under one of several cups.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "最后两段各举一个戏法作例子：先是杯下藏球（For example），接着是剪断或烧掉后复原（Another favourite trick），每个都拆开实际过程，把[[block:paper-gaokao-2021-eight-provinces-jan:reading-c:2]]说的引开注意、让观众得出错误结论变成看得见的场景，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2021-eight-provinces-jan:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "由原文对魔术师训练和手上技巧的描写，推断表演魔术需要什么。",
+      "stemTranslationZh": "从文中我们可以推断出什么？",
+      "locateBy": "options",
+      "locateFindZh": "四项各回原文找依据：价钱、助手、练习、偏爱",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "机械装置很昂贵。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "mechanical devices",
+            "optionText": "Mechanical devices",
+            "matchType": "exact",
+            "relationNote": "“机械装置”（mechanical devices）原文确实提到，但只说魔术师有时借助它，价钱贵不贵一个字也没谈。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "The magician usually depends on his skill with his hands, on his knowledge of psychology, and, sometimes, on mechanical devices（机械装置）.",
+              "anchor": "有时用机械装置"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "大多数魔术师雇用助手。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "employing",
+            "optionText": "employ",
+            "matchType": "wordFamily",
+            "relationNote": "“雇用”（employ）在原文是“运用快速的手部动作”（employing quick hand movements）里的“运用”，说的是用手法；文中描写的戏法都只有魔术师自己动手，原文没提助手。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "quote": "employing quick hand movements or a mechanical device",
+              "anchor": "运用快速手部动作"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "表演魔术需要练习。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "quote": "The magician is a specially trained actor.",
+              "anchor": "受过专门训练"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "quote": "The magician usually depends on his skill with his hands",
+              "anchor": "依靠手上技巧"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "quote": "employing quick hand movements",
+              "anchor": "快速手部动作"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "小物件是魔术师的最爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "favourite",
+            "optionText": "favourite",
+            "matchType": "exact",
+            "relationNote": "“最爱”借自“另一个很受欢迎的戏法”（Another favourite trick），受欢迎的是剪断再复原这个戏法；小球只在杯子戏法里出现过，推不出魔术师偏爱小物件。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+              "quote": "Another favourite trick is to cut or burn something, and then make it appear whole again.",
+              "anchor": "受欢迎的戏法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It takes practice to perform magic.",
+          "sourceRole": "correctOption",
+          "targetText": "The magician is a specially trained actor.",
+          "targetParagraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "原文没直接说要练习，但先写魔术师是受过专门训练的演员（specially trained），接着说他靠手上技巧（skill with his hands）做出快速的手部动作（quick hand movements）。这样的功夫得反复练才能掌握，由此推出表演魔术需要练习，选 C。"
+        }
+      ]
+    }
+  }
+}
