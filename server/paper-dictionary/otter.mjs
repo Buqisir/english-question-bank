@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
-import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
+import { codePointOffset, hashPhraseBlock, locatePhraseOccurrence, normalizePhraseText } from '../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
 import { gaokaoHeadwordVariants } from './gaokao.mjs'
 import { createOtterSearch, normalizeSearch } from './otterSearch.mjs'
@@ -188,8 +188,10 @@ export function openOtterDictionary(rootDir) {
           positions.set(key, null)
           continue
         }
-        const matchKey = occurrenceKey(row.entryId, row.senseId)
-        if (!matches.has(matchKey)) matches.set(matchKey, { entryId: row.entryId, senseId: row.senseId })
+        const matchKey = occurrenceKey(row.entryId, row.senseId, row.blockHash)
+        if (!matches.has(matchKey)) matches.set(matchKey, {
+          entryId: row.entryId, senseId: row.senseId, blockHash: row.blockHash,
+        })
         positions.set(key, matches.get(matchKey))
       }
       return { occurrences, phrases }
@@ -285,6 +287,7 @@ export function openOtterDictionary(rootDir) {
       const positions = shardFor(paperId).occurrences?.get(occurrenceKey(stream.groupId, leafLocator(leaf)))
       const match = positions?.get(occurrenceKey(sentenceNumber, start, end, word.surface))
       if (!match) return null
+      if (match.blockHash && match.blockHash !== hashPhraseBlock(stream.text.slice(leaf.start, leaf.end))) return null
       const entry = entryById(match.entryId)
       return entry?.senses.some(sense => sense.senseId === match.senseId)
         ? { entry, senseId: match.senseId }
