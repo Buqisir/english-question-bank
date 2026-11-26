@@ -109,6 +109,31 @@ test('reopen refuses production attempts and ambiguous upload history without ch
   }
 })
 
+for (const [problem, message] of [['missing', /交接证据文件缺失/u], ['changed', /交接证据文件已变化/u]]) {
+  test(`reopen leaves the entire seal in place when a referenced file is ${problem}`, async t => {
+    const { dir, ctx } = fixture(t)
+    const url = 'http://127.0.0.1:51790/?reviewRevision=rev-local'
+    ctx.state.steps['local-preview'] = completed(previewResult)
+    ctx.state.steps['local-screen'] = completed({ url, tiles: 1 })
+    ctx.state.data.status = 'local_ready'
+    json(ctx.statePath, ctx.state)
+    json(path.join(ctx.fast, 'upload-timeline.jsonl'), localUploadRow(ctx))
+    json(path.join(ctx.paperDir, 'canonical-evidence/candidate-summary.json'), { candidateDigest: 'old-candidate' })
+    const handoff = path.join(ctx.work, 'handoff')
+    const entry = file => ({ path: path.relative(handoff, file), sha256: sha256(readFileSync(file)) })
+    const answer = path.join(handoff, 'qa/answer-key-comparison.json')
+    json(path.join(handoff, 'evidence.json'), { screen: { revisionId: 'rev-local', url },
+      pdfs: [entry(path.join(ctx.paperDir, 'products/answerOnly.pdf'))],
+      checks: { answerTranscription: { files: [entry(answer)] } } })
+    if (problem === 'missing') rmSync(answer)
+    else json(answer, { rebuilt: true })
+    const before = snapshot(dir)
+    await assert.rejects(() => reopenLocalPreview(ctx), message)
+    assert.deepEqual(snapshot(dir), before)
+    assert(!fs.existsSync(path.join(ctx.work, 'superseded')))
+  })
+}
+
 test('read-only fast commands reject redo without creating paper state', t => {
   const paperId = `paper-fast-readonly-redo-${process.pid}`
   const work = path.resolve(import.meta.dirname, '../../imports/ocr-proofread', paperId)

@@ -1919,6 +1919,20 @@ export async function reopenLocalPreview(ctx) {
     ctx.state = readJson(ctx.statePath)
     const { directory, evidence } = assertLocalPreviewOnly(ctx)
     if (Object.values(ctx.state.background).some(job => alive(job.pid))) fail('本卷仍有任务运行，退出后再重开')
+    const archivedPath = file => {
+      if (file.startsWith(`${ctx.paperDir}${path.sep}`)) return path.join(directory, 'paper', path.relative(ctx.paperDir, file))
+      if (file.startsWith(`${ctx.work}${path.sep}`)) return path.join(directory, path.relative(ctx.work, file))
+      fail('交接证据引用了本卷之外的文件')
+    }
+    const entries = [...(evidence?.pdfs ?? []), ...Object.values(evidence?.checks ?? {}).flatMap(check => check.files ?? [])]
+    const evidenceFiles = entries.map(entry => {
+      const file = path.resolve(ctx.work, 'handoff', entry.path)
+      const destination = archivedPath(file)
+      const copies = [file, destination].filter(existsSync)
+      if (!copies.length) fail(`交接证据文件缺失：${entry.path}`)
+      if (copies.some(copy => sha256(readFileSync(copy)) !== entry.sha256)) fail(`交接证据文件已变化：${entry.path}`)
+      return { file, destination }
+    })
     const stateCopy = path.join(directory, 'fast/state.json')
     if (existsSync(stateCopy)) {
       if (!readFileSync(stateCopy).equals(readFileSync(ctx.statePath))) fail('重开归档与现有状态不符，请先对账')
@@ -1926,11 +1940,6 @@ export async function reopenLocalPreview(ctx) {
       mkdirSync(path.dirname(stateCopy), { recursive: true })
       copyFileSync(ctx.statePath, `${stateCopy}.tmp`)
       renameSync(`${stateCopy}.tmp`, stateCopy)
-    }
-    const archivedPath = file => {
-      if (file.startsWith(`${ctx.paperDir}${path.sep}`)) return path.join(directory, 'paper', path.relative(ctx.paperDir, file))
-      if (file.startsWith(`${ctx.work}${path.sep}`)) return path.join(directory, path.relative(ctx.work, file))
-      fail('交接证据引用了本卷之外的文件')
     }
     const retain = file => {
       if (!existsSync(file)) return
@@ -1947,17 +1956,11 @@ export async function reopenLocalPreview(ctx) {
       ...screenFiles.map(file => path.join(qa, file))]) retain(file)
     delete ctx.state.steps.build
     redoFrom(ctx, 'source-references', { retain, persist: () => {
-      for (const entry of [...(evidence?.pdfs ?? []), ...Object.values(evidence?.checks ?? {}).flatMap(check => check.files ?? [])]) {
-        const file = path.resolve(ctx.work, 'handoff', entry.path)
-        const destination = archivedPath(file)
-        const retained = existsSync(destination)
-        const bytes = readFileSync(retained ? destination : file)
-        if (sha256(bytes) !== entry.sha256) fail(`交接证据文件已变化：${entry.path}`)
-        if (!retained) {
-          mkdirSync(path.dirname(destination), { recursive: true })
-          writeFileSync(`${destination}.tmp`, bytes)
-          renameSync(`${destination}.tmp`, destination)
-        }
+      for (const { file, destination } of evidenceFiles) {
+        if (existsSync(destination)) continue
+        mkdirSync(path.dirname(destination), { recursive: true })
+        copyFileSync(file, `${destination}.tmp`)
+        renameSync(`${destination}.tmp`, destination)
       }
       const next = path.join(directory, 'state.reopen.tmp')
       writeJson(next, ctx.state)
