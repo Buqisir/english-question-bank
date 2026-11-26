@@ -1285,7 +1285,7 @@ function statusObservation(raw, paperId, startedAt) {
     || !Object.hasOwn(status, 'latest') || !Object.hasOwn(status, 'latestRevisionId')) fail('UNKNOWN: Review status 不完整或 paperId 不匹配')
   if ((status.latest?.id ?? null) !== (status.latestRevisionId ?? null)
     || (status.latest && !status.revisions.some(revision => revision.id === status.latest.id))
-    || (status.revisions.length > 0 && !status.latest)) fail('UNKNOWN: Review latest 不一致')
+    || (!status.latest && status.revisions.some(item => item?.finalizedAt))) fail('UNKNOWN: Review latest 不一致')
   const started = Date.parse(startedAt)
   if (!Number.isFinite(started)) fail('UNKNOWN: push startedAt 无效')
   const candidates = []
@@ -1871,6 +1871,17 @@ function redoFrom(ctx, name, { retain = file => archive(ctx, file), persist = sa
   persist(ctx)
 }
 
+function localPreviewOwnsSteps(paperId, local, production, legacySteps, preview) {
+  const matches = (status, revision) => status?.paperId === paperId && revision?.paperId === paperId
+  const onlyOcr = production === null || (Array.isArray(production?.revisions)
+    && production.paperId === paperId && production.revisions.every(item => matches(production, item) && item.reviewKind === 'ocr')
+    && (!production.latestRevisionId || production.revisions.some(item => item.id === production.latestRevisionId))
+    && (!production.latest || production.latest.reviewKind === 'ocr' && production.latest.id === production.latestRevisionId))
+  return onlyOcr && Array.isArray(local?.revisions) && legacySteps.every(step => local.revisions.some(item =>
+    matches(local, item) && item.id === step.result.revisionId && item.finalizedAt
+    && item.reviewKind === (step === preview ? 'candidate' : 'ocr')))
+}
+
 async function assertLocalPreviewOnly(ctx, readLegacyStatuses) {
   const { steps, data } = ctx.state
   const preview = steps['local-preview']
@@ -1926,12 +1937,7 @@ async function assertLocalPreviewOnly(ctx, readLegacyStatuses) {
     if (!url || !isLocalReviewOrigin(url.origin) || url.searchParams.get('paperId') !== ctx.paperId
       || url.searchParams.get('reviewRevision') !== revisionId) reject()
     const [local, production] = await readLegacyStatuses(ctx.paperId, url).catch(() => reject())
-    if (local?.paperId !== ctx.paperId || !Array.isArray(local.revisions)
-      || legacySteps.some(step => !local.revisions.some(revision =>
-        revision.id === step.result.revisionId && revision.paperId === ctx.paperId
-        && revision.reviewKind === (step === preview ? 'candidate' : 'ocr') && revision.finalizedAt))
-      || (production !== null && (production?.paperId !== ctx.paperId || !Array.isArray(production.revisions)
-        || production.latestRevisionId || production.latest || production.revisions.length))) reject()
+    if (!localPreviewOwnsSteps(ctx.paperId, local, production, legacySteps, preview)) reject()
   }
   return { directory, evidence }
 }

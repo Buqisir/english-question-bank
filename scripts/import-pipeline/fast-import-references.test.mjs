@@ -110,7 +110,7 @@ test('reopen refuses production attempts and ambiguous upload history without ch
 })
 
 for (const [scenario, allowed] of [['404', true], ['empty', true], ['local missing', false],
-  ['different Candidate ID', false], ['different OCR revision ID', false], ['500', false], ['network error', false]]) {
+  ['different Candidate ID', false], ['different OCR revision ID', true], ['500', false], ['network error', false]]) {
   test(`legacy reopen checks Review status (${scenario})`, async t => {
     const { dir, ctx } = fixture(t)
     const { paperId } = ctx
@@ -167,7 +167,7 @@ test('reopen checks legacy OCR ownership alongside a receipted preview', async t
         if (scenario.startsWith('query failure')) throw new TypeError('fetch failed')
         return [local, production]
       })
-      if (scenario.startsWith('confirmed')) assert((await reopen()).archived)
+      if (scenario.startsWith('confirmed') || scenario.startsWith('production record')) assert((await reopen()).archived)
       else {
         const before = snapshot(dir)
         await assert.rejects(reopen, /未能确认归属/u)
