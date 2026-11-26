@@ -116,10 +116,11 @@ for (const [scenario, allowed] of [['404', true], ['empty', true], ['local missi
     const { paperId } = ctx
     const { revisionId, target } = previewResult
     const url = `http://127.0.0.1:51790/?paperId=${paperId}&reviewRevision=${revisionId}`
-    ctx.state.steps['local-preview'] = completed({ revisionId, target })
+    const previewTime = '2026-01-02T00:00:00.000Z'
+    ctx.state.steps['local-preview'] = { ...completed({ revisionId, target }), startedAt: previewTime, finishedAt: previewTime }
     ctx.state.steps['local-screen'] = completed({ url })
     json(ctx.statePath, ctx.state)
-    json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId, completed: true, startedAt: oldTime, finishedAt: oldTime })
+    json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId, completed: true, startedAt: previewTime, finishedAt: previewTime })
     const revision = { id: revisionId, paperId, reviewKind: 'candidate', finalizedAt: oldTime }
     const reopen = () => reopenLocalPreview(ctx, async () => {
       if (scenario === '500') throw Object.assign(new Error('Review API failed'), { status: 500 })
@@ -139,6 +140,38 @@ for (const [scenario, allowed] of [['404', true], ['empty', true], ['local missi
     }
   })
 }
+
+test('reopen checks legacy OCR ownership alongside a receipted preview', async t => {
+  for (const scenario of ['confirmed', 'unknown OCR', 'production record']) {
+    await t.test(scenario, async t => {
+      const { dir, ctx } = fixture(t)
+      const { paperId } = ctx
+      const url = `http://127.0.0.1:51790/?paperId=${paperId}&reviewRevision=${previewResult.revisionId}`
+      ctx.state.steps['local-preview'] = completed(previewResult)
+      ctx.state.steps['local-screen'] = completed({ url })
+      json(ctx.statePath, ctx.state)
+      const legacyRow = { paperId, completed: true, startedAt: oldTime, finishedAt: oldTime }
+      writeFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'),
+        [legacyRow, localUploadRow(ctx)].map(row => JSON.stringify(row)).join('\n'))
+      const ocr = { id: ctx.state.steps['ocr-review'].result.revisionId, paperId, reviewKind: 'ocr', finalizedAt: oldTime }
+      const candidate = { ...ocr, id: previewResult.revisionId, reviewKind: 'candidate' }
+      const local = { paperId, revisions: scenario === 'unknown OCR' ? [candidate] : [ocr, candidate] }
+      const production = scenario === 'production record'
+        ? { paperId, revisions: [{ ...ocr, id: 'rev-production' }] } : null
+      const reopen = () => reopenLocalPreview(ctx, async (requestedPaper, screenUrl) => {
+        assert.equal(requestedPaper, paperId)
+        assert.equal(screenUrl.href, url)
+        return [local, production]
+      })
+      if (scenario === 'confirmed') assert((await reopen()).archived)
+      else {
+        const before = snapshot(dir)
+        await assert.rejects(reopen, /未能确认归属/u)
+        assert.deepEqual(snapshot(dir), before)
+      }
+    })
+  }
+})
 
 for (const [problem, message] of [['missing', /交接证据文件缺失/u], ['changed', /交接证据文件已变化/u]]) {
   test(`reopen leaves the entire seal in place when a referenced file is ${problem}`, async t => {

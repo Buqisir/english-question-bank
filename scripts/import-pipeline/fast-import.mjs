@@ -1904,26 +1904,35 @@ async function assertLocalPreviewOnly(ctx, readLegacyStatuses) {
   if (localUploadId && !existsSync(timing)) reject()
   const uploadSteps = [steps['ocr-review'], preview].filter(Boolean)
   const legacySteps = new Set(uploadSteps.filter(step => !step.result?.localUploadId && step.result?.revisionId))
+  const legacyRevisions = new Map()
+  if (!localUploadId) legacyRevisions.set(preview, 'candidate')
   const receipts = new Map(uploadSteps.map(step => step.result)
     .filter(result => result?.localUploadId).map(result => [result.localUploadId, result.revisionId]))
   for (const line of (existsSync(timing) ? readFileSync(timing, 'utf8') : '').trim().split('\n').filter(Boolean)) {
     const { paperId, completed, localReceipt, startedAt, finishedAt } = JSON.parse(line)
     if (paperId !== ctx.paperId || completed !== true) reject()
-    if (!localUploadId && localReceipt === undefined && Date.parse(startedAt) <= Date.parse(finishedAt)
-      && legacySteps.delete([...legacySteps].find(step => Date.parse(step.startedAt) <= Date.parse(startedAt)
-        && Date.parse(finishedAt) <= Date.parse(step.finishedAt)))) continue
+    if (localReceipt === undefined && Date.parse(startedAt) <= Date.parse(finishedAt)) {
+      const legacyStep = [...legacySteps].find(step => Date.parse(step.startedAt) <= Date.parse(startedAt)
+        && Date.parse(finishedAt) <= Date.parse(step.finishedAt))
+      if (legacySteps.delete(legacyStep)) {
+        legacyRevisions.set(legacyStep, legacyStep === preview ? 'candidate' : 'ocr')
+        continue
+      }
+    }
     if (!isLocalReviewOrigin(localReceipt?.origin)
       || !localReceipt?.revisionId || receipts.get(localReceipt.uploadId) !== localReceipt.revisionId) reject()
     receipts.delete(localReceipt.uploadId)
   }
   if (receipts.has(localUploadId)) reject()
-  if (!localUploadId) {
+  if (legacyRevisions.size) {
     const url = URL.parse(steps['local-screen']?.result?.url || '')
     if (!url || !isLocalReviewOrigin(url.origin) || url.searchParams.get('paperId') !== ctx.paperId
       || url.searchParams.get('reviewRevision') !== revisionId) reject()
     const [local, production] = await readLegacyStatuses(ctx.paperId, url).catch(() => reject())
-    if (local?.paperId !== ctx.paperId || !local.revisions?.some(revision => revision.id === revisionId
-      && revision.paperId === ctx.paperId && revision.reviewKind === 'candidate' && revision.finalizedAt)
+    if (local?.paperId !== ctx.paperId || !Array.isArray(local.revisions)
+      || [...legacyRevisions].some(([step, kind]) => !local.revisions.some(revision =>
+        revision.id === step.result.revisionId && revision.paperId === ctx.paperId
+        && revision.reviewKind === kind && revision.finalizedAt))
       || (production !== null && (production?.paperId !== ctx.paperId || !Array.isArray(production.revisions)
         || production.latestRevisionId || production.latest || production.revisions.length))) reject()
   }
