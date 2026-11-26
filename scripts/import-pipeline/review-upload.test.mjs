@@ -1,15 +1,18 @@
 import assert from 'node:assert/strict'
+import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { once } from 'node:events'
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
-import { tmpdir } from 'node:os'
+import { hostname, tmpdir } from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
 import { setTimeout as delay } from 'node:timers/promises'
 import { receiveVerifiedUpload } from '../../server/import-ops/receiveVerifiedUpload.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { boundOcrReceipt, matchingOcr } from './review.mjs'
+import { assertSubmissionPaper, boundOcrReceipt, matchingOcr, priorStrandedUploads } from './review.mjs'
+import { finishSubmissionHandoff } from './fast-import.mjs'
+import { withReviewPaperLock } from './review-target.mjs'
 import { reconcileRevision, uploadReviewBundle } from './lib-review-upload.mjs'
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -256,7 +259,7 @@ test('production resumes the frozen manifest through lost PUT and finalize repli
     state: 'uploading', finalizedAt: null, manifest }
   const stranded = { ...revision, id: 'rev-old', bundleDigest: digest('old invalid report') }
   const status = { paperId, latest: null, latestRevisionId: null, revisions: [stranded] }
-  const observe = () => reconcileRevision(status, manifest, 'candidate', null, stranded)
+  const observe = () => reconcileRevision(status, manifest, 'candidate', null, [stranded])
   const missing = new Set(manifest.files.slice(0, 2).map(file => file.path))
   const operations = []
   const api = async (route, init) => {
@@ -305,4 +308,78 @@ test('an absent production OCR needs upload, an exact evidence match reuses its 
   const ocr = { reviewKind: 'ocr', manifest: projection }
   assert.equal(matchingOcr([], projection), undefined)
   assert.equal(matchingOcr([{ ...ocr, manifest: { ...projection, evidenceDigest: digest('other') } }, ocr], projection), ocr)
+})
+
+test('the command paperId binds both OCR and Candidate registration', () => {
+  assertSubmissionPaper('paper-one', { paperId: 'paper-one' })
+  assert.throws(() => assertSubmissionPaper('paper-one', { paperId: 'paper-two' }), /paperId 不一致/)
+})
+
+test('latest finalized reconciliation fills missing screenshots and an unreviewed handoff', async t => {
+  const { dir, manifest: { paperId } } = await fixture(t)
+  const ctx = { paperId, fast: dir, work: dir, statePath: path.join(dir, 'state.json'),
+    state: { steps: { screen: { finishedAt: 'yesterday', result: { skipped: 'offline' } } } } }
+  const pushed = { revisionId: 'rev-final', reconciled: true, target: 'https://example.test' }
+  let captures = 0
+  const capture = async (_, id, qa) => {
+    assert.equal(id, pushed.revisionId)
+    captures++
+    mkdirSync(qa, { recursive: true })
+    writeFileSync(path.join(qa, 'screen-tile-00.png'), '')
+    return { tiles: 1, url: `https://example.test/?paperId=${paperId}&reviewRevision=${id}` }
+  }
+  await finishSubmissionHandoff(ctx, pushed, false, capture)
+  await finishSubmissionHandoff(ctx, pushed, false, capture)
+  assert.equal(captures, 1)
+  const report = readFileSync(path.join(dir, 'handoff/校正报告与预处理完成表.md'), 'utf8')
+  assert.match(report, /rev-final/)
+  assert.match(report, /Screen 和 PDF 待目检/)
+})
+
+test('later lecture upload recognizes the exact stranded Candidate in its production receipts', async t => {
+  const { dir, manifest: { paperId } } = await fixture(t)
+  const origin = 'https://example.test'
+  const originDir = path.join(dir, 'submissions', encodeURIComponent(origin))
+  const frozen = path.join(originDir, '1'.repeat(64))
+  mkdirSync(frozen, { recursive: true })
+  const stranded = { id: 'rev-old', bundleDigest: digest('invalid OCR') }
+  const base = { id: 'rev-replacement', paperId, reviewKind: 'candidate', state: 'approved',
+    bundleDigest: digest('corrected OCR'), finalizedAt: '2026-01-01' }
+  const old = { ...stranded, paperId, reviewKind: 'candidate', state: 'uploading', finalizedAt: null }
+  writeFileSync(path.join(frozen, 'submission.json'), JSON.stringify({ stranded, manifest: base }))
+  writeFileSync(path.join(frozen, 'upload-receipt.json'), JSON.stringify({ origin, paperId, bundleDigest: base.bundleDigest, revisionId: base.id }))
+  const status = { paperId, latestRevisionId: base.id, latest: base, revisions: [base, old] }
+  const observe = target => reconcileRevision(status, { paperId, bundleDigest: digest('lecture') },
+    'candidate', base.id, priorStrandedUploads(originDir, target, paperId))
+  assert.equal(observe(origin), undefined)
+  assert.throws(() => observe('http://localhost'), /UNKNOWN/)
+  rmSync(path.join(frozen, 'upload-receipt.json'))
+  assert.throws(() => observe(origin), /UNKNOWN/)
+  writeFileSync(path.join(dir, 'review-push-attempts.jsonl'), JSON.stringify({ paperId, origin, bundleDigest: base.bundleDigest }))
+  assert.equal(observe(origin), undefined)
+  status.revisions.push({ ...old, id: 'rev-foreign' })
+  assert.throws(() => observe(origin), /UNKNOWN/)
+})
+
+test('only a dead same-host lock owner can be replaced', async t => {
+  const { dir } = await fixture(t)
+  const lock = path.join(dir, 'review.lock')
+  const moduleUrl = new URL('./review-target.mjs', import.meta.url).href
+  const child = spawn(process.execPath, ['--input-type=module', '-e',
+    `import {withReviewPaperLock} from ${JSON.stringify(moduleUrl)}
+     await withReviewPaperLock(process.argv[1], () => { process.send('locked'); return new Promise(() => setInterval(() => {}, 1000)) })`, lock],
+    { stdio: ['ignore', 'ignore', 'inherit', 'ipc'] })
+  t.after(() => { if (child.exitCode === null && !child.signalCode) child.kill() })
+  await once(child, 'message')
+  const file = path.join(lock, 'owner.json'), owner = JSON.parse(readFileSync(file))
+  assert.equal(owner.pid, child.pid)
+  assert.equal(owner.host, hostname())
+  await assert.rejects(() => withReviewPaperLock(lock, assert.fail), /已持锁/)
+  const exited = once(child, 'exit')
+  child.kill('SIGKILL')
+  await exited
+  writeFileSync(file, JSON.stringify({ ...owner, host: 'another-host' }))
+  await assert.rejects(() => withReviewPaperLock(lock, assert.fail), /已持锁/)
+  writeFileSync(file, JSON.stringify(owner))
+  await withReviewPaperLock(lock, () => assert.equal(JSON.parse(readFileSync(file)).pid, process.pid))
 })

@@ -1,15 +1,36 @@
-import { existsSync, mkdirSync, readFileSync, rmdirSync } from 'node:fs'
+import { randomUUID } from 'node:crypto'
+import { hostname } from 'node:os'
+import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 
 export const isLocalReviewOrigin = origin => /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/u.test(origin)
 
 export async function withReviewPaperLock(lock, action) {
   mkdirSync(path.dirname(lock), { recursive: true })
-  try { mkdirSync(lock, { mode: 0o700 }) } catch (error) {
-    if (error.code === 'EEXIST') throw new Error(`本卷 Review 操作已持锁，请先对账：${lock}`)
-    throw error
-  }
-  try { return await action() } finally { rmdirSync(lock) }
+  const held = () => new Error(`本卷 Review 操作已持锁，请先对账：${lock}`)
+  const id = randomUUID()
+  const staging = `${lock}.${id}`
+  mkdirSync(staging, { mode: 0o700 })
+  try {
+    writeFileSync(path.join(staging, 'owner.json'), JSON.stringify({ id, pid: process.pid, host: hostname() }))
+    if (existsSync(lock)) {
+      let owner
+      try { owner = JSON.parse(readFileSync(path.join(lock, 'owner.json'), 'utf8')) } catch { throw held() }
+      if (owner?.host !== hostname() || !Number.isSafeInteger(owner.pid) || owner.pid < 1
+        || !/^[a-f0-9-]{36}$/u.test(owner.id)) throw held()
+      try { process.kill(owner.pid, 0); throw held() } catch (error) {
+        if (error.code !== 'ESRCH') throw held()
+      }
+      // A second reclaimer of this generation cannot rename a new live owner
+      // over the already populated tombstone.
+      renameSync(lock, `${lock}.stale-${owner.id}`)
+    }
+    try { renameSync(staging, lock) } catch (error) {
+      if (['EEXIST', 'ENOTEMPTY'].includes(error.code)) throw held()
+      throw error
+    }
+    try { return await action() } finally { renameSync(lock, staging) }
+  } finally { rmSync(staging, { recursive: true, force: true }) }
 }
 
 // Disk-bound intent survives login-shell environment replacement. This is an

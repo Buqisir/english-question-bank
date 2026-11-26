@@ -26,7 +26,7 @@ function aggregatePutMetrics(timing, metrics) {
   }
 }
 
-export function reconcileRevision(status, manifest, kind, baseline, stranded) {
+export function reconcileRevision(status, manifest, kind, baseline, stranded = []) {
   const unknown = () => { throw new Error('UNKNOWN: Review 归属、基线或修订状态已变化') }
   if (status?.paperId !== manifest.paperId || !Array.isArray(status.revisions)
     || status.latestRevisionId !== (status.latest?.id ?? null)
@@ -38,7 +38,8 @@ export function reconcileRevision(status, manifest, kind, baseline, stranded) {
     if (item.reviewKind === kind && item.bundleDigest === manifest.bundleDigest) {
       if (match || JSON.stringify(item.manifest?.resolvesIssueIds ?? []) !== JSON.stringify(manifest.resolvesIssueIds ?? [])) unknown()
       match = item
-    } else if (item.state === 'uploading' && (item.id !== stranded?.id || item.bundleDigest !== stranded.bundleDigest)) unknown()
+    } else if (item.state === 'uploading' && !(item.reviewKind === 'candidate'
+      && stranded.some(proof => item.id === proof.id && item.bundleDigest === proof.bundleDigest))) unknown()
   }
   if (match?.finalizedAt ? match.id !== status.latestRevisionId : status.latestRevisionId !== baseline) unknown()
   return match

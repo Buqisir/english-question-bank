@@ -1710,16 +1710,37 @@ export async function submit(ctx, args) {
   }
   if (pushed.reconciled) {
     say(`已核对最新送审版本 ${pushed.revisionId}，上传回执已补齐。`)
-    return
   }
-  const qa = path.join(ctx.work, 'handoff/qa')
-  const screen = await step(ctx, localPreview ? 'local-screen' : 'screen', async () => {
+  await finishSubmissionHandoff(ctx, pushed, localPreview)
+}
+
+export async function finishSubmissionHandoff(ctx, pushed, localPreview, capture = screenTiles) {
+  const handoff = path.join(ctx.work, 'handoff')
+  const qa = path.join(handoff, 'qa')
+  const name = localPreview ? 'local-screen' : 'screen'
+  const previous = ctx.state.steps[name]?.result
+  const url = URL.parse(previous?.url || '')
+  const exact = url?.origin === pushed.target && url?.searchParams.get('reviewRevision') === pushed.revisionId && url.searchParams.get('paperId') === ctx.paperId
+    && previous.tiles > 0 && existsSync(qa) && readdirSync(qa).filter(file => /^screen-tile-\d+\.png$/u.test(file)).length === previous.tiles
+  const screen = await step(ctx, name, async () => {
     try {
-      return await screenTiles(ctx, pushed.revisionId, qa)
+      return await capture(ctx, pushed.revisionId, qa)
     } catch (error) {
       return { skipped: tail(error.message, 3) }
     }
-  })
+  }, pushed.reconciled && !exact)
+  if (pushed.reconciled) {
+    const output = path.join(handoff, '校正报告与预处理完成表.md')
+    const evidence = path.join(handoff, 'evidence.json')
+    if (!existsSync(output) || !existsSync(evidence) || readJson(evidence).screen?.revisionId !== pushed.revisionId) {
+      mkdirSync(handoff, { recursive: true })
+      const pending = `# ${ctx.paperId}\n\n已送审版本 ${pushed.revisionId}\n\n${screen.tiles ? `Screen 截图 ${screen.tiles} 张：${screen.url}` : `截图待补：${screen.skipped}`}\n\nScreen 和 PDF 待目检。\n`
+      if (!existsSync(output) || readFileSync(output, 'utf8') !== pending) {
+        archive(ctx, output)
+        writeFileSync(output, pending)
+      }
+    }
+  }
   say(`\n${localPreview ? '已建立本机隔离预览' : '已送审'} ${pushed.revisionId}（${pushed.target}）。`)
   say(`- Screen：${screen.tiles ? `${path.relative(root, qa)}/screen-tile-NN.png（共 ${screen.tiles} 张）${screen.url}` : `未自动截图（${screen.skipped}）`}`)
   say(`抽查 Screen 后运行：fast-import.mjs report ${ctx.paperId}${localPreview ? ' --local-only' : ''} --screen "<抽查了什么>" --pdf "<看了什么>"`)
