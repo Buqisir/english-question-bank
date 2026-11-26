@@ -1,0 +1,139 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. She could hardly believe it. Four laps made a mile, and she had just run all of them. She was not even the last one. Her legs were still shaking, but a smile spread across her face. The mile had not got any shorter. She had simply stopped seeing it as one huge thing and had taken it one small piece at a time. On her way back inside, she looked up at the six floors in front of her and wondered if they could be taken the same way.\n\nParagraph 2: Eva decided to use the same trick to deal with the school building. Instead of trying to remember every floor at once, she gave herself one small goal each day. On Monday, she walked from her locker to the end of the first-floor hallway and noticed the science lab on the left. On Tuesday, she found the cafeteria by following the smell of fresh bread. Later that week, she discovered the library on the third floor. Each new hallway joined one she already knew, just as the tree's shadow had led her to the curve. By the end of the month, Eva no longer pretended that most of the building didn't exist. One afternoon, she even showed a lost classmate the way to the gym.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "原文停在 Eva 靠给自己定小目标，一圈接一圈跑完了四圈。她能不能跑完、成绩如何还没交代；开头那个更大的难题——在六层大楼里认不得路，她只记教室、假装其余地方不存在——也还没解决。"
+        },
+        {
+          "question": "Eva 想要什么、是个什么样的人，从原文哪里看出来？",
+          "answer": "她想在新学校站稳脚跟，可方向感差，遇到大难题先是害怕、想躲：大楼让她只记教室，跑一英里让她以为自己会最后一个。但跑到快撑不住时，她自己想出“mind trick”，把一英里拆成树影、弯道、一圈圈的小目标——她不是没办法，而是需要找到办法。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第三人称讲 Eva 的事，一般过去时，句子以中短句为主。原文有四处引号，其中两处只是引出 “mile” 这个词；人物的话只有两句她心里想的（“It’s just the beginning,”“I’ll come in last for sure.”），共十个词，其余都是叙述和她的感受。描写集中在跑步时的身体反应。续写也以叙述为主，直接引语最多一两句短的。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "she focused on reaching the shadow cast on the track by an oak tree up ahead",
+          "use": "第一段回想自己是怎么跑完的，点出“一次只盯一个近目标”这个办法；第二段把树影、弯道换成大楼里的走廊、楼层。"
+        },
+        {
+          "sourceQuote": "pretend that the rest of the place didn’t exist",
+          "use": "第二段结尾回收：她不再假装其余地方不存在，问题就算真正解决了。"
+        },
+        {
+          "sourceQuote": "there was also a library, a cafeteria, and a gym",
+          "use": "第二段每天的小目标就用这几处地方，内容具体又不编造新地点。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段以教练在终点说“Nice work!”、Eva 很意外开头，要写出她为什么意外：她跑完了全程，而且没有像她以为的那样最后一个到。",
+        "第二段首句说她决定用“同样的办法”对付教学楼，所以第一段结束前，她必须已经明白自己是靠那个“mind trick”跑完的，并把它和大楼联系起来。",
+        "第二段要写她怎样把这个办法用到大楼上，并接上原文的难题：方向感差、楼太大、只记教室。"
+      ],
+      "thisEssayChooses": "本文让 Eva 回头看跑道时想通：一英里没变短，是她一段一段跑完的；回楼时看着六层大楼生出同样的念头。第二段让她每天只认一处地方（实验室、食堂、图书馆），用星期几推进时间，最后以她不再假装其余地方不存在、还给迷路的同学指路收尾。每天认哪里、用什么认路、结尾落在哪件事上，都可以换。"
+    },
+    "standard": {
+      "essay": "Paragraph 1: When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. She could hardly believe it. Four laps made a mile, and she had just run all of them. She was not even the last one. Her legs were still shaking, but a smile spread across her face. The mile had not got any shorter. She had simply stopped seeing it as one huge thing and had taken it one small piece at a time. On her way back inside, she looked up at the six floors in front of her and wondered if they could be taken the same way.\n\nParagraph 2: Eva decided to use the same trick to deal with the school building. Instead of trying to remember every floor at once, she gave herself one small goal each day. On Monday, she walked from her locker to the end of the first-floor hallway and noticed the science lab on the left. On Tuesday, she found the cafeteria by following the smell of fresh bread. Later that week, she discovered the library on the third floor. Each new hallway joined one she already knew, just as the tree's shadow had led her to the curve. By the end of the month, Eva no longer pretended that most of the building didn't exist. One afternoon, she even showed a lost classmate the way to the gym.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写清 Eva 为什么意外，并让她明白自己靠什么跑完，为第二段“同样的办法”铺路。",
+          "items": [
+            {
+              "quote": "Four laps made a mile, and she had just run all of them.",
+              "explain": "接住原文最后一句“then four”，把“四圈”换算成“一英里”，意外的原因就落到实处：她以为跑不完的距离，已经跑完了。"
+            },
+            {
+              "quote": "She was not even the last one",
+              "explain": "回应原文她心里那句“I’ll come in last for sure”，意外又多了一层，而且不用另编情节。"
+            },
+            {
+              "quote": "She had simply stopped seeing it as one huge thing and had taken it one small piece at a time.",
+              "explain": "把原文的“mind trick”用她自己的理解说出来，第二段的“the same trick”指什么，读者就清楚了。"
+            },
+            {
+              "quote": "wondered if they could be taken the same way",
+              "explain": "段尾只让她生出念头，不提前写她怎么认路；“决定去做”留给第二段段首句。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "把“一次只盯一个小目标”用到大楼上，解决原文开头的认路难题。",
+          "items": [
+            {
+              "quote": "she gave herself one small goal each day",
+              "explain": "直接对应跑步时一个接一个的小目标，读者一眼看出这就是“同样的办法”。"
+            },
+            {
+              "quote": "On Monday",
+              "explain": "用 Monday、Tuesday、Later that week 推进时间，几天的进步一句一步，像跑道上一圈接一圈。"
+            },
+            {
+              "quote": "just as the tree's shadow had led her to the curve",
+              "explain": "把走廊和跑道上的树影、弯道对照，点明两件事用的是同一个办法，也回收了原文细节。"
+            },
+            {
+              "quote": "Eva no longer pretended that most of the building didn't exist",
+              "explain": "回收原文“pretend that the rest of the place didn’t exist”，难题怎样被解决，落在她态度的具体变化上。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "take it one small piece at a time",
+          "function": "说把大任务拆成小段一段段完成，正是本题的“trick”，两段都能用上。"
+        },
+        {
+          "expression": "a smile spread across her face",
+          "function": "用看得见的表情写出意外之后的高兴，不必直说“she was very happy”。"
+        },
+        {
+          "expression": "by following the smell of fresh bread",
+          "function": "写她借身边的线索认路，让每天的小目标具体可信。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段只写教练夸奖、Eva 很高兴，没写她意识到自己是靠“mind trick”跑完的。",
+          "why": "第二段首句说“the same trick”，第一段若没交代这个办法，第二段就没有着落。"
+        },
+        {
+          "pitfall": "第一段就写她开始在大楼里认路。",
+          "why": "“决定用同样的办法对付大楼”是第二段首句的事，第一段提前写掉，第二段只能重复。"
+        },
+        {
+          "pitfall": "让新人物（热心学长、老师给地图）帮她解决认路问题。",
+          "why": "原文的线索是她自己想出的办法；靠别人帮忙解决，就和第二段首句“Eva decided”不合，也成了天降的帮助。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. She bent over, hands on her knees, and fought to catch her breath. Had she really done it? She glanced back at the track. Four laps, one whole mile, and she hadn't come in last. In fact, a handful of classmates were still dragging themselves around the far curve. Coach Pitt made a quick note on his clipboard and gave her a nod. Eva's legs still felt like jelly, but a grin crept onto her face. The mile hadn't shrunk at all. She had just refused to look at all of it at once, chasing an oak tree's shadow, then a curve, then one lap after another. As she walked back toward the school, its six stories rising ahead of her, a thought struck her: maybe the building wasn't so different.\n\nParagraph 2: Eva decided to use the same trick to deal with the school building. She stopped staring at the whole maze and picked one small target a day. On Monday, she followed the first-floor hallway from her locker to its very end and noticed that the chemistry lab had a blue door. On Tuesday, the smell of warm pizza led her down the stairs to the cafeteria. By Thursday, she had worked her way up to the third floor, where she found the library tucked behind a row of tall windows. Every new hallway hooked onto one she already knew, the way the shadow had led to the curve and the curve to the first lap. Within a month, the places she had once pretended didn't exist had become familiar. One rainy afternoon, when a lost classmate asked her the way to the gym, Eva smiled and said, “Follow me. It's just two turns from here.”",
+      "beyondStandard": [
+        {
+          "quote": "a handful of classmates were still dragging themselves around the far curve",
+          "explain": "dragging themselves 写出别人跑得很吃力，比标准版只说 not even the last one 更具体，也从侧面衬出 Eva 的意外。"
+        },
+        {
+          "quote": "chasing an oak tree's shadow, then a curve, then one lap after another",
+          "explain": "把原文的树影、弯道、一圈圈连成一串，句子节奏和跑步一样一段接一段，“trick”是什么不用再解释。"
+        },
+        {
+          "quote": "Every new hallway hooked onto one she already knew",
+          "explain": "hooked onto 把走廊一段段“挂”起来的画面写出来，比 joined 更地道、更形象。"
+        }
+      ]
+    }
+  }
+}

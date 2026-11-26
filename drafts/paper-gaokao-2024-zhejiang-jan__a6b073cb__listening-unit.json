@@ -1,0 +1,1023 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: IT Department. How can I assist you?\nW: My computer is giving me a lot of trouble. Could you help me with it, please?\nM: OK, I just need to check on a couple of things.",
+      "translationZh": "男：IT 部门。有什么可以帮您？\n女：我的电脑总出毛病。请问您能帮我看看吗？\n男：好的，我只需要先检查几样东西。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士的电脑出了很多问题，打电话向 IT 部门求助，男士答应先检查几项。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "IT 部门。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我的电脑总出毛病。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "请问您能帮我看看吗？"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "好的，我只需要先检查几样东西。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Hi, I’d like to have this blouse washed and pressed.\nM: OK, but I’m afraid you won’t be able to collect it until next Friday. We’ve been very busy recently.",
+      "translationZh": "女：你好，我想把这件衬衫洗一洗、熨一熨。\n男：好的，不过恐怕您要到下周五才能来取。我们最近非常忙。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士想把一件衬衫拿去洗烫，店员说最近很忙，要到下周五才能取。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "你好，我想把这件衬衫洗一洗、熨一熨。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "好的，不过恐怕您要到下周五才能来取。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我们最近非常忙。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: What a journey! Air travel's more tiring than driving, I’m sure.\nM: I don’t think you’d say that, if you’d just driven 400 miles. Let’s come to Seattle by train next time. It’ll be more relaxing.",
+      "translationZh": "女：这一路可真够呛！我敢说坐飞机比开车还累。\n男：你要是刚开了 400 英里车，就不会这么说了。下次我们坐火车来西雅图吧。那会更轻松些。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人刚坐飞机到西雅图，女士抱怨坐飞机累，男士提议下次坐火车来。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "这一路可真够呛！"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我敢说坐飞机比开车还累。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "你要是刚开了 400 英里车，就不会这么说了。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "下次我们坐火车来西雅图吧。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "那会更轻松些。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "M: Can I have fried rice or noodles for dinner for a change? I don’t feel like steak today.\nW: I’m in a hurry. I can’t cook two different meals today. Tomorrow you can have what you want.\nM: Alright.",
+      "translationZh": "男：晚饭我能换换口味，吃炒饭或面条吗？我今天不想吃牛排。\n女：我赶时间。今天我做不了两样不同的饭。明天你想吃什么都行。\n男：好吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "男士晚饭想换炒饭或面条，女士赶时间做不了两样饭，答应明天再随他。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "晚饭我能换换口味，吃炒饭或面条吗？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我今天不想吃牛排。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我赶时间。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "今天我做不了两样不同的饭。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "明天你想吃什么都行。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "好吧。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: All well, Sophie?\nW: Um. Not great. I’m just so down with writing this report.\nM: Are you almost done with it?\nW: Far from it. And I've got to present it in class tomorrow.",
+      "translationZh": "男：一切都好吗，索菲？\n女：嗯。不太好。写这份报告写得我好郁闷。\n男：你快写完了吗？\n女：还差得远呢。而且我明天就得在课上展示它。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "索菲的报告离写完还早，明天却要在课上展示，她心情很糟。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "一切都好吗，索菲？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "嗯。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "不太好。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "写这份报告写得我好郁闷。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "你快写完了吗？"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "还差得远呢。"
+        },
+        {
+          "id": "listening-text-5:7",
+          "zh": "而且我明天就得在课上展示它。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Richard, why are you taking everything out of your drawer?\nM: I’m looking for a stamp, Sarah.\nW: A stamp? What do you want a stamp for?\nM: I’ve written a letter to Aunt Vera. And I want to put it in the post before midday.\nW: Can't you just email her?\nM: Yeah. But it’s her 70th birthday. Vera will be happy to get a real letter with a real birthday card.",
+      "translationZh": "女：理查德，你为什么把抽屉里的东西全翻出来？\n男：我在找邮票，萨拉。\n女：邮票？你要邮票干什么？\n男：我给薇拉姨妈写了一封信。我想在中午之前把它寄出去。\n女：你就不能给她发封邮件吗？\n男：是可以。但这是她的 70 岁生日。收到一封真正的信和一张真正的生日卡，薇拉会很高兴的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "理查德找邮票，要在中午前给过 70 岁生日的薇拉姨妈寄一封真正的信。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "理查德，你为什么把抽屉里的东西全翻出来？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "我在找邮票，萨拉。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "邮票？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "你要邮票干什么？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我给薇拉姨妈写了一封信。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我想在中午之前把它寄出去。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "你就不能给她发封邮件吗？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "是可以。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "但这是她的 70 岁生日。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "收到一封真正的信和一张真正的生日卡，薇拉会很高兴的。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: Professor Brooks, I’m Vicky Comore in your European History class. Could I speak with you for a few minutes?\nM: Sure. What can I help you with?\nW: Well, I was sick for two weeks. So I didn’t take the midterm exam. Could you give me another test?\nM: Alright. You can take it next Thursday afternoon.\nW: Thank you so much, Professor Brooks. Could I come to you at 3:30 after my English Literature class?\nM: No problem.",
+      "translationZh": "女：布鲁克斯教授，我是您欧洲历史课上的Vicky Comore。我能跟您谈几分钟吗？\n男：当然。有什么需要我帮忙的？\n女：是这样，我病了两个星期。所以没参加期中考试。您能再给我考一次吗？\n男：好吧。你可以下周四下午来考。\n女：太感谢您了，布鲁克斯教授。我上完英国文学课后 3:30 来找您可以吗？\n男：没问题。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "维姬因病错过期中考试，请布鲁克斯教授给她补考，约在下周四下午。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "布鲁克斯教授，我是您欧洲历史课上的Vicky Comore。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "我能跟您谈几分钟吗？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "有什么需要我帮忙的？"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "是这样，我病了两个星期。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "所以没参加期中考试。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "您能再给我考一次吗？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "好吧。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "你可以下周四下午来考。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "太感谢您了，布鲁克斯教授。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我上完英国文学课后 3:30 来找您可以吗？"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "没问题。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "M: Linda, you work on plays and shows but you are not on stage. What do you do?\nW: I’m a costume designer. I help the actors become their characters.\nM: Is it kind of like playing dress-up?\nW: A little bit. But I need to study the play to create the characters’ clothes, not just use my imagination.\nM: How do you do that?\nW: I read the play and do research about the time and place of the story. If the story is set in the past, I might study old magazines or paintings. For plays set now, I sometimes collect pictures of people on the street.\nM: Then what do you do?\nW: I take my ideas and pictures to the director of the show. We talk about whether I’m on the right track. If it’s good, we will hire a tailor to make the costume.\nM: Is it finished then?\nW: Almost. We still need to try it on the actor to make sure everything fits and looks good.\nM: Wow, it takes so many steps to make a costume.\nW: Yes, it does. I work with lots of different people to put it all together.",
+      "translationZh": "男：琳达，你参与戏剧和演出，却不上台。你是做什么的？\n女：我是服装设计师。我帮助演员变成他们的角色。\n男：这有点像玩换装游戏吗？\n女：有一点。但我得研究剧本来设计角色的服装，不能光凭想象。\n男：你怎么做呢？\n女：我会读剧本，研究故事发生的时间和地点。如果故事发生在过去，我可能会研究旧杂志或画作。如果剧情设定在现在，我有时会收集街上行人的照片。\n男：然后呢？\n女：我把我的想法和图片拿给演出的导演。我们讨论我的方向对不对。如果没问题，我们就请裁缝来做这套服装。\n男：那就完成了吗？\n女：差不多。我们还得让演员试穿，确保一切合身、好看。\n男：哇，做一套戏服要这么多步骤。\n女：是啊。我要和许多不同的人合作，才能把这一切完成。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "戏剧"
+      },
+      "summaryZh": "服装设计师琳达介绍工作：研究剧本背景、与导演商量、请裁缝制作、让演员试穿，要与许多人合作。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "琳达，你参与戏剧和演出，却不上台。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "你是做什么的？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "我是服装设计师。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我帮助演员变成他们的角色。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "这有点像玩换装游戏吗？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "有一点。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "但我得研究剧本来设计角色的服装，不能光凭想象。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你怎么做呢？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "我会读剧本，研究故事发生的时间和地点。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "如果故事发生在过去，我可能会研究旧杂志或画作。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "如果剧情设定在现在，我有时会收集街上行人的照片。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "然后呢？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我把我的想法和图片拿给演出的导演。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "我们讨论我的方向对不对。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "如果没问题，我们就请裁缝来做这套服装。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "那就完成了吗？"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "差不多。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "我们还得让演员试穿，确保一切合身、好看。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "哇，做一套戏服要这么多步骤。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "我要和许多不同的人合作，才能把这一切完成。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Hi Kevin. I just got back from the Art Gallery. There’s a wonderful show of abstract art. You should have come with me.\nM: (14)I don’t know. Abstract art seems like children’s painting to me.\nW: Well, if you don’t understand what the artist is trying to communicate, it can seem a little like that.\nM: What did you see then?\nW: There were two paintings that impressed me most. The first was a huge one, which I suppose was a tree, although it could have been anything.\nM: What did you like about it?\nW: Just the way the tree looked. (15)It was like the tree was made of hard metal, and the mix of white and gray made everything look like it was winter, freezing winter.\nM: That’s something. What about the other one?\nW: The second looked like a piece of grassland. All the grass was purple and red, (16)and there was green sky in the background. I looked at it and thought of summer.\nM: Hmm, your description really teaches me something about appreciating abstract art. (17)Maybe I should go and give this show a try this Saturday.\nW: You really should.",
+      "translationZh": "女：嗨，凯文。我刚从美术馆回来。那里有个很棒的抽象艺术展。你真该跟我一起去。\n男：我说不好。在我看来，抽象画就像小孩画的画。\n女：嗯，如果你不明白画家想表达什么，它看起来确实有点像。\n男：那你看到了什么？\n女：有两幅画给我的印象最深。第一幅很大，我猜画的是一棵树，不过它也可能是任何东西。\n男：你喜欢它什么？\n女：就是那棵树的样子。那棵树好像是坚硬的金属做的，白色和灰色交织在一起，让一切看起来像冬天，冰冷的冬天。\n男：真有意思。另一幅呢？\n女：第二幅看起来像一片草地。所有的草都是紫色和红色的，背景是绿色的天空。我看着它就想到了夏天。\n男：嗯，你的描述真让我学到了一些欣赏抽象画的东西。也许这周六我该去看看这个展览。\n女：你真该去。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "绘画领域的代表性作品和人物"
+      },
+      "summaryZh": "女士向觉得抽象画像儿童画的凯文描述画展上的两幅画，凯文决定周六也去看看。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "嗨，凯文。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我刚从美术馆回来。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "那里有个很棒的抽象艺术展。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "你真该跟我一起去。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我说不好。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "在我看来，抽象画就像小孩画的画。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "嗯，如果你不明白画家想表达什么，它看起来确实有点像。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "那你看到了什么？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "有两幅画给我的印象最深。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "第一幅很大，我猜画的是一棵树，不过它也可能是任何东西。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "你喜欢它什么？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "就是那棵树的样子。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "那棵树好像是坚硬的金属做的，白色和灰色交织在一起，让一切看起来像冬天，冰冷的冬天。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "真有意思。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "另一幅呢？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "第二幅看起来像一片草地。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "所有的草都是紫色和红色的，背景是绿色的天空。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我看着它就想到了夏天。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "嗯，你的描述真让我学到了一些欣赏抽象画的东西。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "也许这周六我该去看看这个展览。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "你真该去。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: You are watching the morning news. This is Steven Johnson. Sydney and the New South Wales coast have been hit by heavy rains. Major roads, the airport, trains and buses were all thrown behind schedule as more than a month’s worth of rain fell in just one hour during the morning rush. All traffic into city remains very heavy. Pittwater Road is closed due to a car crash. Consider using Wicks Road instead. A police officer has been hurt assisting drivers in North Ryde. A woman is believed to have broken her leg after a tree fell on her car. The roof of Town Hall Station has fallen in, causing delays for passengers. The rain is expected to be at its heaviest from 9:00 am until 11:00 am. Today a total of up to 200 millimeters of rain is being forecast, along with damaging winds of more than 90 kilometers per hour to follow. All road users are advised to reconsider the need to be on the roads in such wild weather, and reschedule their day and continue on their journey after the rain stops.",
+      "translationZh": "男：您正在收看晨间新闻。我是Steven Johnson。悉尼和新南威尔士州沿海地区遭遇暴雨袭击。早高峰时段，仅一小时就降下了超过一个月的雨量，主要道路、机场、火车和公交车全都延误。所有进城的交通依然非常拥堵。皮特沃特路因一起车祸封闭。请考虑改走威克斯路。一名警察在北赖德协助司机时受伤。据信一名女子在一棵树砸到她的车上后摔断了腿。市政厅车站的屋顶塌落，导致乘客出行延误。预计上午 9 点到 11 点雨势最大。预计今天总降雨量将达 200 毫米，随后还有时速超过 90 公里的破坏性大风。建议所有道路使用者在如此恶劣的天气里重新考虑是否必须上路，调整当天的安排，等雨停后再继续行程。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "自然灾害与防范"
+      },
+      "summaryZh": "晨间新闻播报悉尼遭遇暴雨：交通延误、道路封闭、有人受伤、车站屋顶塌落，建议司机推迟出行。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "您正在收看晨间新闻。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我是Steven Johnson。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "悉尼和新南威尔士州沿海地区遭遇暴雨袭击。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "早高峰时段，仅一小时就降下了超过一个月的雨量，主要道路、机场、火车和公交车全都延误。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "所有进城的交通依然非常拥堵。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "皮特沃特路因一起车祸封闭。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "请考虑改走威克斯路。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "一名警察在北赖德协助司机时受伤。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "据信一名女子在一棵树砸到她的车上后摔断了腿。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "市政厅车站的屋顶塌落，导致乘客出行延误。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "预计上午 9 点到 11 点雨势最大。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "预计今天总降雨量将达 200 毫米，随后还有时速超过 90 公里的破坏性大风。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "建议所有道路使用者在如此恶劣的天气里重新考虑是否必须上路，调整当天的安排，等雨停后再继续行程。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "男士是做什么的？",
+      "optionTranslationsZh": {
+        "A": "一名电脑技术员。",
+        "B": "一名酒店前台接待员。",
+        "C": "一名商店店员。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "IT Department. How can I assist you?"
+      },
+      "reasonZh": "男士接电话先报“IT 部门”（IT Department），女士随即请他帮忙处理电脑故障（My computer is giving me a lot of trouble），可见他是电脑技术员，选 A。"
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "对话发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在杂货店。",
+        "B": "在裁缝店。",
+        "C": "在洗衣店。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’d like to have this blouse washed and pressed"
+      },
+      "reasonZh": "女士要把衬衫拿来洗和熨（washed and pressed），男士说下周五才能来取（collect it），这是在洗衣店，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "裁缝店是做衣服、改衣服的地方，女士要的只是把衬衫洗干净、熨平（washed and pressed）。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人是怎么来西雅图的？",
+      "optionTranslationsZh": {
+        "A": "坐飞机。",
+        "B": "开车。",
+        "C": "坐火车。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "What a journey! Air travel's more tiring than driving"
+      },
+      "reasonZh": "女士一结束旅程就感叹“这一路可真够呛”，接着说坐飞机比开车还累（Air travel's more tiring），说的正是刚坐完的这一趟，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "男士说开 400 英里车（if you'd just driven 400 miles）是假设，意思是开车其实更累，他们这次并没有开车。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "坐火车（by train）是男士对下一次的提议（next time），不是这一次的出行方式。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人今天晚饭吃什么？",
+      "optionTranslationsZh": {
+        "A": "炒饭。",
+        "B": "面条。",
+        "C": "牛排。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I can’t cook two different meals today. Tomorrow you can have what you want."
+      },
+      "reasonZh": "男士说今天不想吃牛排（don’t feel like steak today），想换炒饭或面条；女士说今天做不了两样饭（can’t cook two different meals），明天再随他，男士也答应了，所以今天还是吃牛排，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "炒饭（fried rice）是男士想换的，女士没答应，让他等到明天（Tomorrow you can have what you want）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "面条（noodles）是男士提的另一种选择，同样被推到了明天，男士最后也说了“好吧”（Alright）。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "索菲现在感觉如何？",
+      "optionTranslationsZh": {
+        "A": "困惑。",
+        "B": "担心。",
+        "C": "疲惫。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Far from it. And I've got to present it in class tomorrow."
+      },
+      "reasonZh": "索菲说报告离写完还早（Far from it），明天却要在课上展示（present it in class tomorrow），时间紧、活没完，所以她很担心，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "索菲说的 so down 是心情低落，不是身体累；她烦的是报告没写完、明天就要展示。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士想在中午前做什么？",
+      "optionTranslationsZh": {
+        "A": "寄一封信。",
+        "B": "做一张贺卡。",
+        "C": "写一封电子邮件。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "And I want to put it in the post before midday."
+      },
+      "reasonZh": "男士说想在中午前把信寄出去（put it in the post before midday），“寄信”就是 put it in the post，midday 即题干的中午，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "生日卡（a real birthday card）是要随信寄给薇拉的，男士没说要自己做卡，他翻抽屉找的是邮票（a stamp）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "发邮件（email her）是女士的建议，男士用 But 接着说这是姨妈的 70 岁生日，坚持要寄真正的信。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "是谁过生日？",
+      "optionTranslationsZh": {
+        "A": "理查德的。",
+        "B": "萨拉的。",
+        "C": "薇拉的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "But it’s her 70th birthday."
+      },
+      "reasonZh": "男士说这是“她的 70 岁生日”（her 70th birthday），her 指他写信的对象薇拉姨妈（Aunt Vera），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "理查德（Richard）是女士开口时叫男士的名字，他是给姨妈写信祝寿的人。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "萨拉（Sarah）是男士称呼女士的名字，她只是在问他找邮票做什么。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "布鲁克斯教授教什么课？",
+      "optionTranslationsZh": {
+        "A": "公共演讲。",
+        "B": "欧洲历史。",
+        "C": "英国文学。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m Vicky Comore in your European History class."
+      },
+      "reasonZh": "维姬自我介绍说自己是“您的欧洲历史课”上的学生（your European History class），your 指布鲁克斯教授，选项沿用原词，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "speak 出现在维姬问“能跟您谈几分钟吗”（Could I speak with you），是请求谈话，不是课程名“演讲”。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "英国文学（English Literature）是维姬自己 3:30 前要上的课（my English Literature class），不是教授教的课。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "维姬为什么来找布鲁克斯教授谈话？",
+      "optionTranslationsZh": {
+        "A": "报名参加他的课程。",
+        "B": "请求补考。",
+        "C": "讨论她的作业。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "So I didn’t take the midterm exam. Could you give me another test?"
+      },
+      "reasonZh": "维姬病了两周，没参加期中考试（didn’t take the midterm exam），请教授再给她考一次（give me another test），这就是补考，选 B。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "琳达在戏剧和演出中做什么？",
+      "optionTranslationsZh": {
+        "A": "她给演员提建议。",
+        "B": "她给演员分配角色。",
+        "C": "她设计演员的服装。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’m a costume designer."
+      },
+      "reasonZh": "琳达说自己是服装设计师（costume designer），“设计演员的服装”就是这份工作，后文她也说要为角色设计衣服（create the characters’ clothes），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "她说帮演员变成角色（help the actors become their characters），靠的是给角色做衣服，并没有给演员提建议。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "琳达需要研究什么？",
+      "optionTranslationsZh": {
+        "A": "故事的背景。",
+        "B": "舞台的布置。",
+        "C": "角色的名字。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "do research about the time and place of the story"
+      },
+      "reasonZh": "琳达说要研究故事发生的时间和地点（the time and place of the story），时间加地点就是故事的背景，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "舞台（stage）只出现在男士开头说她不上台（you are not on stage），她研究的不是舞台布置。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "角色（characters）是她要设计服装的对象（the characters’ clothes），她没说要研究角色的名字。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "琳达向谁汇报工作？",
+      "optionTranslationsZh": {
+        "A": "导演。",
+        "B": "编辑。",
+        "C": "摄影师。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I take my ideas and pictures to the director of the show."
+      },
+      "reasonZh": "琳达把自己的想法和图片拿给演出的导演（the director of the show），一起讨论方向对不对，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "图片（pictures）是她收集来做参考的街头人像照片，她是拿着这些图片去见导演，不是向摄影师汇报。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "关于自己的工作，琳达说了什么？",
+      "optionTranslationsZh": {
+        "A": "报酬很高。",
+        "B": "需要团队合作。",
+        "C": "需要经常出差。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I work with lots of different people to put it all together."
+      },
+      "reasonZh": "琳达最后说要和许多不同的人合作才能把服装做成（work with lots of different people），前面和导演商量、请裁缝、让演员试穿都是例子，这就是团队合作，选 B。"
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "凯文认为抽象画怎么样？",
+      "optionTranslationsZh": {
+        "A": "有持久的艺术价值。",
+        "B": "他觉得看不太懂。",
+        "C": "主要吸引小孩。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Abstract art seems like children’s painting to me."
+      },
+      "reasonZh": "凯文说抽象画在他看来像小孩画的（like children’s painting），女士接着说如果不明白画家想表达什么（don’t understand what the artist is trying to communicate）就会这样，可见他看不懂，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "小孩（children’s painting）是凯文打的比方，说抽象画看着像小孩画的，不是说它主要吸引小孩。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "第一幅画给女士什么印象？",
+      "optionTranslationsZh": {
+        "A": "充满希望。",
+        "B": "紧张不安。",
+        "C": "寒冷。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "made everything look like it was winter, freezing winter"
+      },
+      "reasonZh": "女士说那棵树像坚硬的金属，白灰相间，一切看起来像冬天，冰冷的冬天（freezing winter），给人的印象就是寒冷，选 C。"
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "第二幅画的背景用了什么颜色？",
+      "optionTranslationsZh": {
+        "A": "绿色。",
+        "B": "紫色。",
+        "C": "红色。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "there was green sky in the background"
+      },
+      "reasonZh": "女士说背景是绿色的天空（green sky in the background），选项沿用原词，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "紫色（purple）是画里草的颜色（All the grass was purple and red），不是背景的颜色。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "红色（red）同样是在说草（All the grass），背景的天空是绿色的。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "凯文这周六可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "上一节艺术课。",
+        "B": "参观一个展览。",
+        "C": "买一幅抽象画。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Maybe I should go and give this show a try this Saturday."
+      },
+      "reasonZh": "凯文说这周六也许该去看看这个展（give this show a try），this show 指女士刚看过的美术馆抽象艺术展，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "凯文说女士的描述让他学到了怎么欣赏抽象画（teaches me something），是听她讲，不是去上艺术课。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "抽象画（abstract art）是展览的内容，凯文只说去看展（give this show a try），没说要买画。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "皮特沃特路为什么封闭？",
+      "optionTranslationsZh": {
+        "A": "一棵倒下的树。",
+        "B": "一条泛滥的河。",
+        "C": "一起车祸。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Pittwater Road is closed due to a car crash."
+      },
+      "reasonZh": "播报说皮特沃特路因车祸封闭（closed due to a car crash），car crash 就是车祸，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "倒下的树（a tree fell on her car）砸的是一位女士的车，她可能摔断了腿，这和皮特沃特路封闭无关。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "市政厅车站发生了什么？",
+      "optionTranslationsZh": {
+        "A": "一名警察受了伤。",
+        "B": "一名乘客失踪了。",
+        "C": "车站屋顶坏了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The roof of Town Hall Station has fallen in"
+      },
+      "reasonZh": "播报说市政厅车站的屋顶塌落了（The roof … has fallen in），塌落就是屋顶坏了，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "警察受伤（A police officer has been hurt）是在北赖德协助司机时发生的（in North Ryde），不在车站。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "乘客（passengers）是因屋顶塌落而出行延误的人（causing delays for passengers），没说有人失踪。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "道路使用者被建议做什么？",
+      "optionTranslationsZh": {
+        "A": "低速行驶。",
+        "B": "推迟出行。",
+        "C": "遵守交通标志。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "reschedule their day and continue on their journey after the rain stops"
+      },
+      "reasonZh": "播报建议道路使用者调整当天安排，等雨停后再继续行程（reschedule their day … after the rain stops），这就是推迟出行，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的 follow 指随后还会刮大风（winds … to follow），traffic 说的是进城车流拥堵（All traffic into city remains very heavy），都不是叫人遵守交通标志。"
+        }
+      ]
+    }
+  }
+}

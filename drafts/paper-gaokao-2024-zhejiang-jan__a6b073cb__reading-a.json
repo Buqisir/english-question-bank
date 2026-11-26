@@ -1,0 +1,642 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:reading-a": {
+      "overview": "音乐剧《汤姆·索亚：河上历险》随 Tall Stacks 节再度上演。文章介绍剧中情节和改编、作曲团队，两位少年主演的舞台经历，以及儿童剧院为教师准备的学习指南。",
+      "fullTranslationZh": "《汤姆·索亚》音乐剧：一场历险\n\n一部根据马克·吐温名作改编、时长 35 分钟、让人拍手跺脚的音乐剧，随本届 Tall Stacks 节再度上演。\n\n《汤姆·索亚：河上历险》精彩桥段一个不少，刷篱笆、墓地、小岛和山洞都在其中。该剧由乔·麦克多诺改编，戴维·基索作曲。这支本地舞台创作团队为辛辛那提儿童剧院创作了许多原创音乐剧，还为 Ensemble 剧院创作节日家庭音乐剧。\n\n今年，来自伯灵顿的内森·特纳饰演汤姆·索亚，来自米切尔堡的罗比·麦克马思饰演哈克·费恩。\n\n特纳是创意与表演艺术学校的十年级学生，是辛辛那提舞台上的熟面孔。他是儿童剧院的明星演员，曾在《沉睡谷传奇》和《绿野仙踪》中担任主角，又刚刚参演完 Jersey Production 的《拉格泰姆》。\n\n麦克马思是比奇伍德高中的高二学生。《汤姆·索亚》首演时他就在演员阵容里，也是儿童剧院的常客，已有五部剧的演出经历。今年夏天，他参加了肯塔基州州长艺术学校的音乐剧课程。\n\n教师须知：儿童剧院有一份学习指南，展示如何通过《汤姆·索亚》讲授数学和科学。如需下载课程，请访问儿童剧院官方网站。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+          "sourceText": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime.”",
+          "displayText": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime.”",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:22"
+          ],
+          "translationZh": "他是儿童剧院的明星演员，曾在《沉睡谷传奇》和《绿野仙踪》中担任主角，又刚刚参演完 Jersey Production 的《拉格泰姆》。",
+          "analysisZh": "先找主干：He is a star actor … and is fresh from …，主语 He 带两个并列的 is，说他“是明星演员”，又“刚演完一部戏”。中间的 having played leading roles in … 是现在分词短语，补充他此前演过两部剧的主角。be fresh from 意思是“刚从……出来、刚结束……”。整句把他过去和最近的演出叠在一起，说明他舞台经验丰富。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "He is a star actor"
+            },
+            {
+              "start": 42,
+              "end": 69,
+              "quote": "having played leading roles"
+            },
+            {
+              "start": 127,
+              "end": 144,
+              "quote": "and is fresh from"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-a-2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+          "sourceText": "That’s the local stage writing team that creates many of the Children’s Theatre of Cincinnati’s original musicals, along with the holiday family musicals at Ensemble Theatre.",
+          "displayText": "That’s the local stage writing team that creates many of the Children’s Theatre of Cincinnati’s original musicals, along with the holiday family musicals at Ensemble Theatre.",
+          "relatedQuestionIds": [],
+          "translationZh": "这支本地舞台创作团队为辛辛那提儿童剧院创作了许多原创音乐剧，还为 Ensemble 剧院创作节日家庭音乐剧。",
+          "analysisZh": "主干是 That’s the local stage writing team，That 指前一句的改编者和作曲者两人。后面 that creates … 是定语从句，修饰 team，说明这个团队做什么；along with … 再补上它的另一类作品。读的时候先抓“这是一个本地创作团队”，再把两类作品挂到 creates 后面。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "That’s the local stage writing team"
+            },
+            {
+              "start": 36,
+              "end": 48,
+              "quote": "that creates"
+            },
+            {
+              "start": 115,
+              "end": 125,
+              "quote": "along with"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:1"
+              ],
+              "start": 0,
+              "end": 15,
+              "quote": "《汤姆·索亚》音乐剧：一场历险"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:2"
+              ],
+              "start": 17,
+              "end": 73,
+              "quote": "一部根据马克·吐温名作改编、时长 35 分钟、让人拍手跺脚的音乐剧，随本届 Tall Stacks 节再度上演。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:3"
+              ],
+              "start": 75,
+              "end": 187,
+              "quote": "《汤姆·索亚：河上历险》精彩桥段一个不少，刷篱笆、墓地、小岛和山洞都在其中。该剧由乔·麦克多诺改编，戴维·基索作曲。这支本地舞台创作团队为辛辛那提儿童剧院创作了许多原创音乐剧，还为 Ensemble 剧院创作节日家庭音乐剧。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:4"
+              ],
+              "start": 189,
+              "end": 233,
+              "quote": "今年，来自伯灵顿的内森·特纳饰演汤姆·索亚，来自米切尔堡的罗比·麦克马思饰演哈克·费恩。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:5"
+              ],
+              "start": 235,
+              "end": 334,
+              "quote": "特纳是创意与表演艺术学校的十年级学生，是辛辛那提舞台上的熟面孔。他是儿童剧院的明星演员，曾在《沉睡谷传奇》和《绿野仙踪》中担任主角，又刚刚参演完 Jersey Production 的《拉格泰姆》。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:6"
+              ],
+              "start": 336,
+              "end": 419,
+              "quote": "麦克马思是比奇伍德高中的高二学生。《汤姆·索亚》首演时他就在演员阵容里，也是儿童剧院的常客，已有五部剧的演出经历。今年夏天，他参加了肯塔基州州长艺术学校的音乐剧课程。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+                "block:paper-gaokao-2024-zhejiang-jan:reading-a:8"
+              ],
+              "start": 421,
+              "end": 478,
+              "quote": "教师须知：儿童剧院有一份学习指南，展示如何通过《汤姆·索亚》讲授数学和科学。如需下载课程，请访问儿童剧院官方网站。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+                "start": 113,
+                "end": 286,
+                "quote": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p5",
+                "start": 32,
+                "end": 99,
+                "quote": "他是儿童剧院的明星演员，曾在《沉睡谷传奇》和《绿野仙踪》中担任主角，又刚刚参演完 Jersey Production 的《拉格泰姆》。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+                "start": 185,
+                "end": 359,
+                "quote": "That’s the local stage writing team that creates many of the Children’s Theatre of Cincinnati’s original musicals, along with the holiday family musicals at Ensemble Theatre."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p3",
+                "start": 58,
+                "end": 112,
+                "quote": "这支本地舞台创作团队为辛辛那提儿童剧院创作了许多原创音乐剧，还为 Ensemble 剧院创作节日家庭音乐剧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+                "start": 126,
+                "end": 184,
+                "quote": "It is adapted by Joe McDonough, with music by David Kisor."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p3",
+                "start": 50,
+                "end": 57,
+                "quote": "戴维·基索作曲"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+                "start": 113,
+                "end": 239,
+                "quote": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,”"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:6",
+                "start": 112,
+                "end": 174,
+                "quote": "is a Children’s Theatre regular, with five shows to his credit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p5",
+                "start": 32,
+                "end": 65,
+                "quote": "他是儿童剧院的明星演员，曾在《沉睡谷传奇》和《绿野仙踪》中担任主角"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p6",
+                "start": 36,
+                "end": 56,
+                "quote": "也是儿童剧院的常客，已有五部剧的演出经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+                "start": 18,
+                "end": 103,
+                "quote": "Children’s Theatre has a study guide demonstrating how math and science can be taught"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:8",
+                "start": 22,
+                "end": 97,
+                "quote": "For downloadable lessons, visit the official website of Children’s Theatre."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p7",
+                "start": 5,
+                "end": 37,
+                "quote": "儿童剧院有一份学习指南，展示如何通过《汤姆·索亚》讲授数学和科学"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-a-p7",
+                "start": 38,
+                "end": 57,
+                "quote": "如需下载课程，请访问儿童剧院官方网站。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先由标题和导语引出这部音乐剧，接着介绍剧情和主创团队，再分别介绍两位主演的经历，最后向教师推荐配套的学习指南。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:1",
+            "summary": "《汤姆·索亚》音乐剧被称为一场历险",
+            "function": "点明介绍对象。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:2",
+            "summary": "一部 35 分钟的马克·吐温名作改编音乐剧随节庆回归",
+            "function": "导语，交代演出的时长和场合。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+            "summary": "剧中保留经典情节，由 McDonough 改编、Kisor 作曲",
+            "function": "介绍剧情亮点和主创团队。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:4",
+            "summary": "今年 Turner 演汤姆，McMath 演哈克",
+            "function": "由剧目转到演员，引出下面两段。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+            "summary": "Turner 是明星演员，演过多部主角",
+            "function": "具体介绍第一位主演。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:6",
+            "summary": "McMath 参加过首演，已演过五部剧",
+            "function": "具体介绍第二位主演。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+            "summary": "儿童剧院为教师准备了一份学习指南",
+            "function": "转向面向教师的教学资源。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:8",
+            "summary": "指南讲怎样借这部剧教数学和科学，课程可到官网下载",
+            "function": "补全指南内容和获取途径，收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-zhejiang-jan:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在主创团队的介绍里分清谁改编、谁作曲。",
+      "stemTranslationZh": "谁为《汤姆·索亚：河上历险》创作了音乐？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "戴维·基索。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+              "quote": "It is adapted by Joe McDonough, with music by David Kisor.",
+              "anchor": "作曲者"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "乔·麦克多诺。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It is adapted by Joe McDonough, with music by David Kisor.",
+            "sourceEntity": "adapted by Joe McDonough",
+            "optionText": "Joe McDonough.",
+            "optionEntity": "Joe McDonough",
+            "explanation": "Joe McDonough 和作曲者写在同一句里，但他负责的是改编剧本（adapted by），不是作曲。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+              "quote": "It is adapted by Joe McDonough, with music by David Kisor.",
+              "anchor": "负责改编"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "内森·特纳。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This year Nathan Turner of Burlington is Tom Sawyer",
+            "sourceEntity": "Nathan Turner of Burlington is Tom Sawyer",
+            "optionText": "Nathan Turner.",
+            "optionEntity": "Nathan Turner",
+            "explanation": "Nathan Turner 是今年扮演汤姆的演员（is Tom Sawyer），在台上演戏，文中没说他参与作曲。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:4",
+              "quote": "This year Nathan Turner of Burlington is Tom Sawyer",
+              "anchor": "饰演汤姆"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "罗比·麦克马思。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Robbie McMath of Fort Mitchell is Huck Finn.",
+            "sourceEntity": "Robbie McMath of Fort Mitchell is Huck Finn",
+            "optionText": "Robbie McMath.",
+            "optionEntity": "Robbie McMath",
+            "explanation": "Robbie McMath 扮演的是哈克（is Huck Finn），后文只介绍他的演出和学习经历，与写音乐无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:4",
+              "quote": "Robbie McMath of Fort Mitchell is Huck Finn.",
+              "anchor": "饰演哈克"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "music",
+          "sourceRole": "stem",
+          "targetText": "It is adapted by Joe McDonough, with music by David Kisor.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+          "relationType": "locationCue",
+          "answerText": "with music by David Kisor",
+          "note": "题干 music 原词出现在原文。"
+        },
+        {
+          "sourceText": "David Kisor.",
+          "sourceRole": "correctOption",
+          "targetText": "with music by David Kisor",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的名字：with music by 后面就是作曲者 David Kisor，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把两位主演各自的介绍放在一起，找出两人共有的特点。",
+      "stemTranslationZh": "关于这两位演员，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "把两人的学校和演过的剧分别列出，再逐项对照",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们在同一所学校读书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "McMath is a junior at Beechwood High School.",
+            "sourceEntity": "Beechwood High School",
+            "optionText": "They study in the same school.",
+            "optionEntity": "the same school",
+            "explanation": "两人各上各的学校：Turner 在创意与表演艺术学校（School for Creative and Performing Arts），McMath 在比奇伍德高中（Beechwood High School）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:6",
+              "quote": "McMath is a junior at Beechwood High School.",
+              "anchor": "两人学校不同"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们曾在《拉格泰姆》中合作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Ragtime",
+            "optionText": "Ragtime",
+            "matchType": "exact",
+            "relationNote": "Ragtime 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-a:5|He is a star actor]]这句：刚演完《拉格泰姆》的只有 Turner，McMath 的介绍里没有这部剧，谈不上两人合作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "quote": "and is fresh from Jersey Production “Ragtime.”",
+              "anchor": "刚演完《拉格泰姆》的是 Turner"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们都有丰富的舞台经验。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "quote": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,”",
+              "anchor": "Turner 演过多部主角"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:6",
+              "quote": "is a Children’s Theatre regular, with five shows to his credit",
+              "anchor": "McMath 已演五部剧"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们十年前就成了朋友。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They became friends ten years ago.",
+            "explanation": "原文没提两人的交情；“十”只出现在 Turner 读十年级（10th-grader），和认识了多少年无关。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They are experienced on stage.",
+          "sourceRole": "correctOption",
+          "targetText": "having played leading roles",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+          "relationType": "paraphrase",
+          "note": "选项的“舞台经验丰富”（experienced on stage）是把两人的经历合起来概括的：Turner 落在[[block:paper-gaokao-2024-zhejiang-jan:reading-a:5|He is a star actor]]，是明星演员、演过多部主角（leading roles）；McMath 落在[[block:paper-gaokao-2024-zhejiang-jan:reading-a:6|with five shows to his credit]]，是剧院常客、已演过五部剧（five shows）。两人都不是新手，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从写给教师的提示里找出剧院提供的东西，再判断它属于哪一类。",
+      "stemTranslationZh": "儿童剧院为教师提供了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "研究资金。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Research funding.",
+            "explanation": "原文给教师的只有学习指南和可下载的课程，没提给钱资助研究。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "培训机会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Training opportunities.",
+            "explanation": "学习指南（study guide）是教师拿去上课用的材料，原文没说要组织教师参加培训。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "技术支持。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Technical support.",
+            "explanation": "官网（official website）只是下载课程的地方，原文没说剧院提供技术方面的帮助。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "教育资源。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+              "quote": "Children’s Theatre has a study guide demonstrating how math and science can be taught",
+              "anchor": "学习指南"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:8",
+              "quote": "For downloadable lessons, visit the official website of Children’s Theatre.",
+              "anchor": "可下载的课程"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "teachers",
+          "sourceRole": "stem",
+          "targetText": "Note to teachers: Children’s Theatre has a study guide demonstrating how math and science can be taught",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+          "relationType": "locationCue",
+          "answerText": "a study guide demonstrating how math and science can be taught",
+          "note": "题干 teachers 原词出现在原文。"
+        },
+        {
+          "sourceText": "Educational resources.",
+          "sourceRole": "correctOption",
+          "targetText": "a study guide",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项的“教育资源”是把两样东西合起来的总称：教数学和科学的学习指南（a study guide），加上[[block:paper-gaokao-2024-zhejiang-jan:reading-a:8|For downloadable lessons]]里可下载的课程（downloadable lessons），都是给教师上课用的材料，选 D。"
+        }
+      ]
+    }
+  }
+}

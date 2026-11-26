@@ -1,0 +1,1168 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:grammar-fill": {
+      "overview": "文章指出超市多推大包装和多买优惠，让独自购物的人买多了用不完、既吃亏又失望；作者希望超市提供小包装，并介绍有的超市已推出可分开保存的两格包装。",
+      "fullTranslationZh": "大多数超市的货架上摆满了家庭装的这个、多买优惠的那个。然而，如果你是\n一个人购物，为了享受降价而多买并没有意义。要么东西买得太多，重得拿不回家；要么你没法趁新鲜把买的东西用完。\n当然，商店不是慈善机构——它们会用最能让自己赚钱的方式给商品定价。如果大多数顾客乐意大批量购买，那就是商店要推销的东西。但这让单独购物的顾客既花了冤枉钱，又感到失望。\n许多超市不再搞“买一送一”的促销，因为有人批评这类促销会造成浪费。顾客更喜欢单件商品直接降价。不过，虽然一包香肠便宜几分钱也不错，但要是香肠有时能以小包装出售，帮助会更大。就算是最爱吃香肠的人，也不想天天吃。\n如果你的超市卖散装农产品，那买少一点就容易多了。过去两年里，一些超市已经开始用设计成两半、分装两份的包装出售鸡肉或沙拉。这样，你用掉其中一半时，另一半还能保持新鲜。\n谁知道呢，也许一些更有远见的超市还会推出一整套“专为你定制”的小包装，同时附带特别优惠。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+          "sourceText": "Of course, shops are not charities – they price goods in the way __58__ will make them the most money.",
+          "displayText": "Of course, shops are not charities – they price goods in the way that/which will make them the most money.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:58"
+          ],
+          "translationZh": "当然，商店不是慈善机构——它们会用最能让自己赚钱的方式给商品定价。",
+          "analysisZh": "破折号前后是两个分句：shops are not charities 先说商店不是慈善机构，破折号后的分句解释这意味着什么。后一句主干是 they price goods，它们给商品定价；in the way 说按什么方式定价，that/which will make them the most money 是定语从句，修饰 the way，关系词在从句中作主语。make them the most money 是 make sb money 的双宾语结构，让它们赚最多的钱。",
+          "underlineRanges": [
+            {
+              "start": 37,
+              "end": 53,
+              "quote": "they price goods"
+            },
+            {
+              "start": 54,
+              "end": 105,
+              "quote": "in the way that/which will make them the most money"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+          "sourceText": "Over the last two years, some supermarkets __62__ (start) selling chicken or salad in packs __63__ (design) with two halves containing separate portions (份).",
+          "displayText": "Over the last two years, some supermarkets have started selling chicken or salad in packs designed with two halves containing separate portions (份).",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:62",
+            "question:paper-gaokao-2024-zhejiang-jan:63"
+          ],
+          "translationZh": "过去两年里，一些超市已经开始用设计成两半、分装两份的包装出售鸡肉或沙拉。",
+          "analysisZh": "主干是 some supermarkets have started selling chicken or salad，一些超市已经开始卖鸡肉或沙拉；start 后接动名词 selling 作宾语。in packs 说用什么包装来卖，过去分词短语 designed with two halves 修饰 packs；现在分词短语 containing separate portions 又修饰 two halves，说这两半各装一份。修饰一层套一层，读时先抓住 packs，再看它被设计成什么样。",
+          "underlineRanges": [
+            {
+              "start": 25,
+              "end": 80,
+              "quote": "some supermarkets have started selling chicken or salad"
+            },
+            {
+              "start": 84,
+              "end": 114,
+              "quote": "packs designed with two halves"
+            },
+            {
+              "start": 115,
+              "end": 143,
+              "quote": "containing separate portions"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 34,
+              "quote": "大多数超市的货架上摆满了家庭装的这个、多买优惠的那个。然而，如果你是"
+            },
+            {
+              "paragraphId": "zh-grammar-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2"
+              ],
+              "start": 35,
+              "end": 88,
+              "quote": "一个人购物，为了享受降价而多买并没有意义。要么东西买得太多，重得拿不回家；要么你没法趁新鲜把买的东西用完。"
+            },
+            {
+              "paragraphId": "zh-grammar-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3"
+              ],
+              "start": 89,
+              "end": 172,
+              "quote": "当然，商店不是慈善机构——它们会用最能让自己赚钱的方式给商品定价。如果大多数顾客乐意大批量购买，那就是商店要推销的东西。但这让单独购物的顾客既花了冤枉钱，又感到失望。"
+            },
+            {
+              "paragraphId": "zh-grammar-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4"
+              ],
+              "start": 173,
+              "end": 277,
+              "quote": "许多超市不再搞“买一送一”的促销，因为有人批评这类促销会造成浪费。顾客更喜欢单件商品直接降价。不过，虽然一包香肠便宜几分钱也不错，但要是香肠有时能以小包装出售，帮助会更大。就算是最爱吃香肠的人，也不想天天吃。"
+            },
+            {
+              "paragraphId": "zh-grammar-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5"
+              ],
+              "start": 278,
+              "end": 360,
+              "quote": "如果你的超市卖散装农产品，那买少一点就容易多了。过去两年里，一些超市已经开始用设计成两半、分装两份的包装出售鸡肉或沙拉。这样，你用掉其中一半时，另一半还能保持新鲜。"
+            },
+            {
+              "paragraphId": "zh-grammar-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:6"
+              ],
+              "start": 361,
+              "end": 405,
+              "quote": "谁知道呢，也许一些更有远见的超市还会推出一整套“专为你定制”的小包装，同时附带特别优惠。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+            "text": "for one, buying extra to benefit from price reductions doesn’t make sense. Either your shopping is then too heavy to carry home or you can’t use what you’ve bought while it’s still fresh."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+            "text": "Of course, shops are not charities – they price goods in the way that/which will make them the most money. If most of their customers are happy to buy larger quantities, that’s what they’ll promote. But that leaves the solo (单独) customers out of pocket and disappointed."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+            "text": "Many supermarkets are no longer doing “buy one get one free” promotions because of the criticism that they lead to waste. Consumers prefer money off individual items. However, though it’s nice to get a few cents off a pack of sausages, it would help even more if they could sometimes be offered in smaller packs. Even the biggest sausage fan doesn’t want to eat them every day."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+            "text": "If your supermarket sells loose produce, then buying smaller quantities is easier. Over the last two years, some supermarkets have started selling chicken or salad in packs designed with two halves containing separate portions (份). Then, when you use one section, the other stays fresh."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:6",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:6",
+            "text": "Who knows, perhaps some of the more forward-looking ones may yet come out with a whole range of “just for you” pack sizes with special offers as well."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "start": 9,
+                "end": 21,
+                "quote": "buying extra"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "start": 39,
+                "end": 60,
+                "quote": "from price reductions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 13,
+                "end": 15,
+                "quote": "多买"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 10,
+                "end": 12,
+                "quote": "降价"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:56"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "start": 22,
+                "end": 32,
+                "quote": "to benefit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 6,
+                "end": 10,
+                "quote": "为了享受"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "start": 81,
+                "end": 87,
+                "quote": "Either"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "start": 141,
+                "end": 173,
+                "quote": "you can’t use what you’ve bought"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 21,
+                "end": 23,
+                "quote": "要么"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 39,
+                "end": 52,
+                "quote": "你没法趁新鲜把买的东西用完"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:57"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:2",
+                "start": 128,
+                "end": 130,
+                "quote": "or"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 37,
+                "end": 39,
+                "quote": "要么"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 57,
+                "end": 64,
+                "quote": "the way"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 72,
+                "end": 101,
+                "quote": "will make them the most money"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 25,
+                "end": 27,
+                "quote": "方式"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 17,
+                "end": 24,
+                "quote": "最能让自己赚钱"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:58"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 65,
+                "end": 75,
+                "quote": "that/which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 17,
+                "end": 27,
+                "quote": "最能让自己赚钱的方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 166,
+                "end": 172,
+                "quote": "that’s"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 180,
+                "end": 195,
+                "quote": "they’ll promote"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 48,
+                "end": 51,
+                "quote": "那就是"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 53,
+                "end": 56,
+                "quote": "要推销"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:59"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 177,
+                "end": 181,
+                "quote": "what"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 54,
+                "end": 59,
+                "quote": "推销的东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "start": 72,
+                "end": 86,
+                "quote": "because of the"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "start": 106,
+                "end": 129,
+                "quote": "that they lead to waste"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 17,
+                "end": 19,
+                "quote": "因为"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 23,
+                "end": 32,
+                "quote": "这类促销会造成浪费"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:60"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "start": 87,
+                "end": 96,
+                "quote": "criticism"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 21,
+                "end": 23,
+                "quote": "批评"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "start": 225,
+                "end": 243,
+                "quote": "a pack of sausages"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "start": 272,
+                "end": 292,
+                "quote": "they could sometimes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 52,
+                "end": 56,
+                "quote": "一包香肠"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 68,
+                "end": 73,
+                "quote": "香肠有时能"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:61"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+                "start": 284,
+                "end": 294,
+                "quote": "be offered"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 77,
+                "end": 79,
+                "quote": "出售"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 83,
+                "end": 106,
+                "quote": "Over the last two years"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 108,
+                "end": 125,
+                "quote": "some supermarkets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 24,
+                "end": 29,
+                "quote": "过去两年里"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 30,
+                "end": 34,
+                "quote": "一些超市"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:62"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 126,
+                "end": 138,
+                "quote": "have started"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 34,
+                "end": 38,
+                "quote": "已经开始"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 166,
+                "end": 174,
+                "quote": "in packs"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 191,
+                "end": 206,
+                "quote": "with two halves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 50,
+                "end": 52,
+                "quote": "包装"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 42,
+                "end": 44,
+                "quote": "两半"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:63"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 173,
+                "end": 181,
+                "quote": "designed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 39,
+                "end": 42,
+                "quote": "设计成"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 196,
+                "end": 206,
+                "quote": "two halves"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 260,
+                "end": 271,
+                "quote": "one section"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 42,
+                "end": 44,
+                "quote": "两半"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 66,
+                "end": 70,
+                "quote": "其中一半"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:64"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 264,
+                "end": 267,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 72,
+                "end": 75,
+                "quote": "另一半"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 108,
+                "end": 125,
+                "quote": "some supermarkets"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:6",
+                "start": 27,
+                "end": 51,
+                "quote": "the more forward-looking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 30,
+                "end": 34,
+                "quote": "一些超市"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-6",
+                "start": 9,
+                "end": 14,
+                "quote": "更有远见的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:65"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:6",
+                "start": 52,
+                "end": 56,
+                "quote": "ones"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-6",
+                "start": 14,
+                "end": 16,
+                "quote": "超市"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:58"
+            ],
+            "selectedSentenceId": "sentence-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+                "start": 0,
+                "end": 106,
+                "quote": "Of course, shops are not charities – they price goods in the way that/which will make them the most money."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 0,
+                "end": 33,
+                "quote": "当然，商店不是慈善机构——它们会用最能让自己赚钱的方式给商品定价。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:62",
+              "question:paper-gaokao-2024-zhejiang-jan:63"
+            ],
+            "selectedSentenceId": "sentence-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+                "start": 83,
+                "end": 231,
+                "quote": "Over the last two years, some supermarkets have started selling chicken or salad in packs designed with two halves containing separate portions (份)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-5",
+                "start": 24,
+                "end": 60,
+                "quote": "过去两年里，一些超市已经开始用设计成两半、分装两份的包装出售鸡肉或沙拉。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2024-zhejiang-jan:56": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "benefit",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to benefit",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "句子的主语是动名词短语 buying extra，谓语是 doesn’t make sense；空格接在 buying extra 后面作状语，说明多买是为了什么：为了享受降价（benefit from price reductions），表目的用不定式，填 to benefit。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "buying extra",
+          "signalSide": "passage",
+          "relation": "中文：to benefit 说明多买的目的。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "doesn’t make sense",
+          "signalSide": "passage",
+          "relation": "中文：句子已有谓语，空格只能用非谓语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "from price reductions",
+          "signalSide": "passage",
+          "relation": "中文：benefit from 从……中得到好处。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:57": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "or",
+      "role": null,
+      "similarityProfile": {
+        "route": "either-or",
+        "features": []
+      },
+      "reason": "空格连接两个完整的分句 your shopping is then too heavy to carry home 和 you can’t use what you’ve bought…；句首已有 Either，两种结果二者必居其一，用 either…or，填 or。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "Either",
+          "signalSide": "passage",
+          "relation": "中文：与空格搭配成 either…or，要么……要么……。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "you can’t use what you’ve bought",
+          "signalSide": "passage",
+          "relation": "中文：or 后面的第二个分句。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:58": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that/which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格后的 will make them the most money 缺主语，空格引导定语从句修饰先行词 the way，并在从句中作主语；先行词指物，填 that 或 which。这里 the way 在从句里作主语，不是作方式状语，所以不用 in which。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the way",
+          "signalSide": "passage",
+          "relation": "中文：先行词，指商店定价的方式。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "will make them the most money",
+          "signalSide": "passage",
+          "relation": "中文：从句缺主语，由关系词充当。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:59": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "what",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "predicative-clause"
+        ]
+      },
+      "reason": "that’s 后面缺表语，空格引导表语从句；从句 they’ll promote 里 promote 缺宾语，前面又没有先行词，要用既引导从句、又在从句中作宾语的 what，意为“他们要推销的东西”。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "that’s",
+          "signalSide": "passage",
+          "relation": "中文：系动词 is 后面缺表语，由整个从句充当。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "they’ll promote",
+          "signalSide": "passage",
+          "relation": "中文：promote 缺宾语，what 在从句中作宾语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:60": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "criticize",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "criticism",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格前有冠词 the，整个短语作 because of 的宾语，这里要用名词；criticize 的名词形式是 criticism，后面 that they lead to waste 是同位语从句，说明批评的内容。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "because of the",
+          "signalSide": "passage",
+          "relation": "中文：because of 后接名词作宾语，the 限定这个名词。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "that they lead to waste",
+          "signalSide": "passage",
+          "relation": "中文：同位语从句说明批评的具体内容。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:61": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "offer",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "be offered",
+      "role": null,
+      "similarityProfile": {
+        "route": "modal-passive",
+        "features": []
+      },
+      "reason": "if 从句的主语 they 指前文的 a pack of sausages 里的香肠，空格跟在情态动词 could 后面作谓语；香肠是被商家拿来出售的，要用被动，could 后接原形，填 be offered。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a pack of sausages",
+          "signalSide": "passage",
+          "relation": "中文：they 指香肠，是被出售的一方。"
+        },
+        {
+          "type": "subject",
+          "signalText": "they could sometimes",
+          "signalSide": "passage",
+          "relation": "中文：情态动词 could 后面接动词原形。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:62": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "start",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "have started",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "主语 some supermarkets 后面缺谓语；时间状语 Over the last two years 指从两年前一直到现在，用现在完成时；主语是复数，填 have started。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "Over the last two years",
+          "signalSide": "passage",
+          "relation": "中文：过去两年到现在，用现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "some supermarkets",
+          "signalSide": "passage",
+          "relation": "中文：复数主语，助动词用 have。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:63": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "design",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "designed",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "句子的谓语是前一空的 have started，空格修饰前面的名词 packs，说明是什么样的包装；包装是被设计成两半的，与 packs 是被动关系，用过去分词 designed 作后置定语，相当于 packs that are designed with two halves。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "in packs",
+          "signalSide": "passage",
+          "relation": "中文：designed 修饰 packs，包装被设计。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "with two halves",
+          "signalSide": "passage",
+          "relation": "中文：be designed with… 设计成带有……。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:64": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "one-the-other"
+        ]
+      },
+      "reason": "空格和后面的 other 一起作从句主语，谓语是 stays fresh；包装只有两半（two halves），用掉其中一半（one section），剩下的就是确定的另一半，用 one…the other，填 the。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "two halves",
+          "signalSide": "passage",
+          "relation": "中文：总共只有两部分。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "one section",
+          "signalSide": "passage",
+          "relation": "中文：one…the other，两者中的一个和另一个。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:65": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "one",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "ones",
+      "role": null,
+      "similarityProfile": {
+        "route": "one-to-ones",
+        "features": []
+      },
+      "reason": "空格是 some of 后面的中心词，被 the more forward-looking 修饰，用来替代前文的 some supermarkets 里的“超市”；some of 后面要用复数，one 变为 ones。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "some supermarkets",
+          "signalSide": "passage",
+          "relation": "中文：ones 替代的是复数的超市。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "some of the more forward-looking",
+          "signalSide": "passage",
+          "relation": "中文：some of 后接复数名词或代词。"
+        }
+      ]
+    }
+  }
+}

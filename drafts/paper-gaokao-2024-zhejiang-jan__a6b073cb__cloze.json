@@ -1,0 +1,1964 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:cloze": {
+      "overview": "作者在中国西北的火车上结识一位修路青年。他为养家读职校、干重活，却每天坚持自学，能引用爱默生、谈论俄国作家。这次相遇打破了作者的成见，让他明白带着开放心态旅行的收获。",
+      "fullTranslationZh": "在中国西北部沿塔克拉玛干沙漠边缘乘坐 20 小时火车的途中，我与一位当地人有了一次所有旅行者都渴望的相遇：它让人谦卑、给人教益，最重要的是十分美好。一位年轻的中国小伙子在火车上走过来和我搭话。我的这位新朋友几乎不会说英语，于是我高兴地抓住机会练习中文。\n几个小时里，他给我讲他如何读了一所两年制的职业学校，好尽快找到修公路的工作，帮着养家。然而，也许最了不起的是，这个人每天干完繁重的体力活后，还要花几个小时学习。他会眼都不眨地引用一段译成中文的爱默生作品，然后问起美国作家整体的文学影响。我还记得他有一次问：“那你们都学些关于俄国作家的什么呢？”\n对于这位离家从未超过几百英里的修路工，我本来很容易凭自己的成见去看待他。但这位见多识广、自学成才、令人钦佩的人让我没有这样做。短短几个小时里，他让我看到，带着开放的心态去旅行，愿意同各行各业的当地人交往，一个人能收获多少。",
+      "mainLine": {
+        "theme": {
+          "text": "带着开放的心态旅行、乐于与各种人交往，收获会很多，即 traveling with an open mind。",
+          "quote": "with an open mind"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+            "text": "作者在西北的火车上与一位当地青年相遇，借机练中文。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+            "text": "青年为养家读职校修公路，却每天苦读，能谈中外文学。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+            "text": "他打破了作者的成见，让作者明白开放交流的收获。"
+          }
+        ],
+        "emotion": "愉快→钦佩→反省"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+          "sourceText": "In the course of a couple of hours, he __53__ me just how much one can gain from __54__ with an open mind, and a willingness to __55__ with locals from all walks of life.",
+          "displayText": "In the course of a couple of hours, he showed me just how much one can gain from traveling with an open mind, and a willingness to engage with locals from all walks of life.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:53",
+            "question:paper-gaokao-2024-zhejiang-jan:54",
+            "question:paper-gaokao-2024-zhejiang-jan:55"
+          ],
+          "translationZh": "短短几个小时里，他让我看到，带着开放的心态去旅行，愿意同各行各业的当地人交往，一个人能收获多少。",
+          "analysisZh": "主干是 he showed me just how much one can gain，他让我看到一个人能收获多少；how much 引导的从句作 showed 的第二个宾语。from 后接动名词 traveling，说明收获从哪里来。with 后面并列两样东西：an open mind 和 a willingness，不定式 to engage with locals… 修饰 willingness，说愿意做什么。这句把全文收住：作者的收获，来自旅途中敞开心态、和普通当地人交谈。",
+          "underlineRanges": [
+            {
+              "start": 36,
+              "end": 75,
+              "quote": "he showed me just how much one can gain"
+            },
+            {
+              "start": 81,
+              "end": 108,
+              "quote": "traveling with an open mind"
+            },
+            {
+              "start": 114,
+              "end": 149,
+              "quote": "a willingness to engage with locals"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+          "sourceText": "Perhaps most __47__, however, was the fact that this man spent hours studying every day after hard physical labor.",
+          "displayText": "Perhaps most remarkable, however, was the fact that this man spent hours studying every day after hard physical labor.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:47"
+          ],
+          "translationZh": "然而，也许最了不起的是，这个人每天干完繁重的体力活后，还要花几个小时学习。",
+          "analysisZh": "这是表语提前的倒装，还原语序是 the fact … was most remarkable。主语 the fact 后面的 that this man spent hours studying… 是同位语从句，说明这件事的内容；spend hours doing 花几个小时做某事，after hard physical labor 交代时间。把 most remarkable 放到句首，再插入 however，突出这件事最出人意料，与上一句为养家去修路形成对照。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 23,
+              "quote": "Perhaps most remarkable"
+            },
+            {
+              "start": 34,
+              "end": 46,
+              "quote": "was the fact"
+            },
+            {
+              "start": 47,
+              "end": 81,
+              "quote": "that this man spent hours studying"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:cloze:1"
+              ],
+              "start": 0,
+              "end": 126,
+              "quote": "在中国西北部沿塔克拉玛干沙漠边缘乘坐 20 小时火车的途中，我与一位当地人有了一次所有旅行者都渴望的相遇：它让人谦卑、给人教益，最重要的是十分美好。一位年轻的中国小伙子在火车上走过来和我搭话。我的这位新朋友几乎不会说英语，于是我高兴地抓住机会练习中文。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:cloze:2"
+              ],
+              "start": 127,
+              "end": 274,
+              "quote": "几个小时里，他给我讲他如何读了一所两年制的职业学校，好尽快找到修公路的工作，帮着养家。然而，也许最了不起的是，这个人每天干完繁重的体力活后，还要花几个小时学习。他会眼都不眨地引用一段译成中文的爱默生作品，然后问起美国作家整体的文学影响。我还记得他有一次问：“那你们都学些关于俄国作家的什么呢？”"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:cloze:3"
+              ],
+              "start": 275,
+              "end": 386,
+              "quote": "对于这位离家从未超过几百英里的修路工，我本来很容易凭自己的成见去看待他。但这位见多识广、自学成才、令人钦佩的人让我没有这样做。短短几个小时里，他让我看到，带着开放的心态去旅行，愿意同各行各业的当地人交往，一个人能收获多少。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+            "text": "While taking a 20-hour train ride along the edge of the Taklimakan Desert in northwestern China, I had the kind of humbling, educational, and above all else, wonderful encounter with a local that all travelers long for. A young Chinese man approached me on the train. My new friend spoke virtually no English, so I happily took the chance to practice my Chinese."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+            "text": "Over several hours, he would tell me about how he had attended a two-year professional school to quickly find a job building highways in order to help support his family. Perhaps most remarkable, however, was the fact that this man spent hours studying every day after hard physical labor. Without batting an eye, he would quote a translated Emerson passage before asking about the literary influence of American writers as a whole. “And what do you all learn about Russian authors?” I recall him asking at one point."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+            "text": "It would have been easy to rely on my assumptions about this highway builder who had never been more than a few hundred miles from home. But this highly informed, self-educated, and admirable person prevented me doing so. In the course of a couple of hours, he showed me just how much one can gain from traveling with an open mind, and a willingness to engage with locals from all walks of life."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 175,
+                "end": 187,
+                "quote": "with a local"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 217,
+                "end": 236,
+                "quote": "A young Chinese man"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 31,
+                "end": 37,
+                "quote": "与一位当地人"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 74,
+                "end": 84,
+                "quote": "一位年轻的中国小伙子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:41"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 168,
+                "end": 177,
+                "quote": "encounter"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 50,
+                "end": 52,
+                "quote": "相遇"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 217,
+                "end": 236,
+                "quote": "A young Chinese man"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 247,
+                "end": 259,
+                "quote": "on the train"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 74,
+                "end": 84,
+                "quote": "一位年轻的中国小伙子"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 84,
+                "end": 88,
+                "quote": "在火车上"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:42"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 240,
+                "end": 250,
+                "quote": "approached"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 88,
+                "end": 95,
+                "quote": "走过来和我搭话"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 271,
+                "end": 277,
+                "quote": "friend"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 217,
+                "end": 236,
+                "quote": "A young Chinese man"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 101,
+                "end": 103,
+                "quote": "朋友"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 74,
+                "end": 84,
+                "quote": "一位年轻的中国小伙子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:43"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 271,
+                "end": 274,
+                "quote": "new"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 100,
+                "end": 101,
+                "quote": "新"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 278,
+                "end": 304,
+                "quote": "spoke virtually no English"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 335,
+                "end": 357,
+                "quote": "to practice my Chinese"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 103,
+                "end": 110,
+                "quote": "几乎不会说英语"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 121,
+                "end": 125,
+                "quote": "练习中文"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:44"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 332,
+                "end": 338,
+                "quote": "chance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 119,
+                "end": 121,
+                "quote": "机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 61,
+                "end": 91,
+                "quote": "a two-year professional school"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 92,
+                "end": 113,
+                "quote": "to quickly find a job"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 15,
+                "end": 25,
+                "quote": "一所两年制的职业学校"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 27,
+                "end": 31,
+                "quote": "尽快找到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:45"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 54,
+                "end": 62,
+                "quote": "attended"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 13,
+                "end": 15,
+                "quote": "读了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 55,
+                "end": 75,
+                "quote": "this highway builder"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 261,
+                "end": 280,
+                "quote": "hard physical labor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 15,
+                "end": 18,
+                "quote": "修路工"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 62,
+                "end": 68,
+                "quote": "繁重的体力活"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:46"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 116,
+                "end": 124,
+                "quote": "building"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 31,
+                "end": 32,
+                "quote": "修"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 224,
+                "end": 280,
+                "quote": "spent hours studying every day after hard physical labor"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 174,
+                "end": 183,
+                "quote": "admirable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 58,
+                "end": 79,
+                "quote": "每天干完繁重的体力活后，还要花几个小时学习"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 49,
+                "end": 53,
+                "quote": "令人钦佩"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:47"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 184,
+                "end": 194,
+                "quote": "remarkable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 49,
+                "end": 52,
+                "quote": "了不起"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 322,
+                "end": 350,
+                "quote": "a translated Emerson passage"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 282,
+                "end": 304,
+                "quote": "Without batting an eye"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 89,
+                "end": 101,
+                "quote": "一段译成中文的爱默生作品"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 82,
+                "end": 86,
+                "quote": "眼都不眨"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:48"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 323,
+                "end": 328,
+                "quote": "quote"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 87,
+                "end": 89,
+                "quote": "引用"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 375,
+                "end": 393,
+                "quote": "literary influence"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 458,
+                "end": 473,
+                "quote": "Russian authors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 113,
+                "end": 117,
+                "quote": "文学影响"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 137,
+                "end": 141,
+                "quote": "俄国作家"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:49"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 413,
+                "end": 420,
+                "quote": "writers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 108,
+                "end": 110,
+                "quote": "作家"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 485,
+                "end": 508,
+                "quote": "him asking at one point"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 122,
+                "end": 127,
+                "quote": "他有一次问"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:50"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 486,
+                "end": 492,
+                "quote": "recall"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 120,
+                "end": 122,
+                "quote": "记得"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 34,
+                "end": 48,
+                "quote": "my assumptions"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 191,
+                "end": 212,
+                "quote": "prevented me doing so"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 26,
+                "end": 31,
+                "quote": "自己的成见"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 55,
+                "end": 62,
+                "quote": "让我没有这样做"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:51"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 27,
+                "end": 34,
+                "quote": "rely on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 25,
+                "end": 26,
+                "quote": "凭"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 224,
+                "end": 254,
+                "quote": "spent hours studying every day"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 145,
+                "end": 160,
+                "quote": "highly informed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 70,
+                "end": 79,
+                "quote": "还要花几个小时学习"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 39,
+                "end": 43,
+                "quote": "见多识广"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:52"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 163,
+                "end": 176,
+                "quote": "self-educated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 44,
+                "end": 48,
+                "quote": "自学成才"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 260,
+                "end": 289,
+                "quote": "me just how much one can gain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 102,
+                "end": 110,
+                "quote": "一个人能收获多少"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:53"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 261,
+                "end": 267,
+                "quote": "showed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 72,
+                "end": 76,
+                "quote": "让我看到"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 23,
+                "end": 33,
+                "quote": "train ride"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+                "start": 193,
+                "end": 215,
+                "quote": "all travelers long for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 16,
+                "end": 26,
+                "quote": "乘坐 20 小时火车"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 41,
+                "end": 50,
+                "quote": "所有旅行者都渴望的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:54"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 303,
+                "end": 312,
+                "quote": "traveling"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 85,
+                "end": 87,
+                "quote": "旅行"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 349,
+                "end": 383,
+                "quote": "with locals from all walks of life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 90,
+                "end": 99,
+                "quote": "同各行各业的当地人"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:55"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 353,
+                "end": 359,
+                "quote": "engage"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 99,
+                "end": 101,
+                "quote": "交往"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:53",
+              "question:paper-gaokao-2024-zhejiang-jan:54",
+              "question:paper-gaokao-2024-zhejiang-jan:55"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+                "start": 222,
+                "end": 395,
+                "quote": "In the course of a couple of hours, he showed me just how much one can gain from traveling with an open mind, and a willingness to engage with locals from all walks of life."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 63,
+                "end": 111,
+                "quote": "短短几个小时里，他让我看到，带着开放的心态去旅行，愿意同各行各业的当地人交往，一个人能收获多少。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:47"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+                "start": 171,
+                "end": 289,
+                "quote": "Perhaps most remarkable, however, was the fact that this man spent hours studying every day after hard physical labor."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 43,
+                "end": 80,
+                "quote": "然而，也许最了不起的是，这个人每天干完繁重的体力活后，还要花几个小时学习。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "愉快→钦佩→反省"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2024-zhejiang-jan:41": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "首句先概括全文这次经历，要一个说「和当地人碰上、结识」的名词，后文写的就是这件事。",
+      "find": {
+        "check": "echo",
+        "text": "后面 with a local 点出对象，下一句 A young Chinese man 上前搭话，正是这次偶遇，用 encounter 概括。",
+        "quotes": [
+          "with a local",
+          "A young Chinese man"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "偶然相遇",
+        "reason": "首句先概括全文这次经历，要一个说「和当地人碰上、结识」的名词，后文写的就是这件事。名词看复现：后面 with a local 点出对象，下一句 A young Chinese man 上前搭话，正是这次偶遇，用 encounter 概括。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "experiment",
+          "meaning": "实验；后文是 A young Chinese man 在车上和作者聊天，没有谁在做实验。",
+          "quote": "A young Chinese man"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "competition",
+          "meaning": "比赛；这次交往让作者觉得 humbling, educational，两人是聊天交流，不是比赛。",
+          "quote": "humbling, educational"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "appointment",
+          "meaning": "约会，预约；两人是在 on the train 时才认识的，事先并没有约好见面。",
+          "quote": "on the train"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with a local",
+          "signalSide": "context-after",
+          "targetText": "encounter with a local",
+          "relation": "中文：encounter with sb 与某人相遇，对象是一位当地人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "A young Chinese man",
+          "signalSide": "context-after",
+          "relation": "中文：下一句写这位青年上前搭话，就是这次相遇本身。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:42": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "main",
+      "context": "相遇从这里开始：陌生青年主动来到作者身边，要一个「走近、上前搭话」的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "主语 A young Chinese man，宾语 me，地点 on the train，陌生人在车上对作者做的是走过来，后句就成了 friend。",
+        "quotes": [
+          "A young Chinese man",
+          "on the train",
+          "friend"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "走近",
+        "meaning": "上前搭话",
+        "reason": "相遇从这里开始：陌生青年主动来到作者身边，要一个「走近、上前搭话」的动作。动词看搭配：主语 A young Chinese man，宾语 me，地点 on the train，陌生人在车上对作者做的是走过来，后句就成了 friend。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "treated",
+          "meaning": "款待；两人刚在 on the train 碰面，后文只是聊天练中文，没有请客招待。",
+          "quote": "on the train"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "saved",
+          "meaning": "救了；车上没有任何险情，后文只是 practice my Chinese 的愉快交谈。",
+          "quote": "practice my Chinese"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lectured",
+          "meaning": "训斥，说教；刚见面就训人，配不上作者说的 wonderful 相遇。",
+          "quote": "wonderful"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "A young Chinese man",
+          "signalSide": "context-before",
+          "targetText": "A young Chinese man approached me",
+          "relation": "中文：动作的发出者是这位中国青年，他走向作者。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "on the train",
+          "signalSide": "context-after",
+          "relation": "中文：地点在火车上，陌生人上前搭话。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:43": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "指刚在车上认识的那位青年，要说明他是「刚结识的」朋友。",
+      "find": {
+        "check": "echo",
+        "text": "前句 A young Chinese man 才在 on the train 上前搭话，这位 friend 是刚认识的，所以是 new。",
+        "quotes": [
+          "A young Chinese man",
+          "on the train",
+          "friend"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "新结识的",
+        "reason": "指刚在车上认识的那位青年，要说明他是「刚结识的」朋友。形容词看复现：前句 A young Chinese man 才在 on the train 上前搭话，这位 friend 是刚认识的，所以是 new。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "true",
+          "meaning": "真正的；他刚 on the train 认识作者，还谈不上真正的知心朋友。",
+          "quote": "on the train"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "so-called",
+          "meaning": "所谓的；带怀疑和贬义，与作者说的 wonderful 相遇不合。",
+          "quote": "wonderful"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "long-lost",
+          "meaning": "失散多年的；他是 A young Chinese man 在车上初次搭话，不是久别重逢。",
+          "quote": "A young Chinese man"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "friend",
+          "signalSide": "context-after",
+          "targetText": "new friend",
+          "relation": "中文：修饰 friend，说明是什么样的朋友。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "A young Chinese man",
+          "signalSide": "context-before",
+          "relation": "中文：前一句刚写他上前搭话，所以是新朋友。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:44": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "对方几乎不会英语，作者正好可以练中文，要「机会」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 took the，后面 to practice my Chinese，take the chance to do 抓住机会做事；他 spoke virtually no English 正好给了机会。",
+        "quotes": [
+          "took the",
+          "to practice my Chinese",
+          "spoke virtually no English"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "机会",
+        "reason": "对方几乎不会英语，作者正好可以练中文，要「机会」的意思。名词看搭配：前面 took the，后面 to practice my Chinese，take the chance to do 抓住机会做事；他 spoke virtually no English 正好给了机会。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "advice",
+          "meaning": "建议；没有人给作者出主意，是对方 spoke virtually no English 让他顺势练中文。",
+          "quote": "spoke virtually no English"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "trouble",
+          "meaning": "麻烦；作者是 happily 去练中文，是乐意抓住的好事，不是费事去做。",
+          "quote": "happily"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "right",
+          "meaning": "权利；练中文不用谁授权，是对方 spoke virtually no English 带来的机会。",
+          "quote": "spoke virtually no English"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "took the",
+          "signalSide": "context-before",
+          "targetText": "took the chance to practice",
+          "relation": "中文：take the chance to do 抓住机会做某事。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "spoke virtually no English",
+          "signalSide": "context-before",
+          "relation": "中文：对方几乎不会英语，作者只能也正好说中文。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:45": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "青年讲自己的经历，他上过一所两年制职校，要「就读」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 a two-year professional school，目的是 to quickly find a job，是去学校上学学本事。",
+        "quotes": [
+          "a two-year professional school",
+          "to quickly find a job"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "就读",
+        "reason": "青年讲自己的经历，他上过一所两年制职校，要「就读」的意思。动词看搭配：宾语是 a two-year professional school，目的是 to quickly find a job，是去学校上学学本事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "visited",
+          "meaning": "参观；只是参观学校，学不到本事去 to quickly find a job。",
+          "quote": "to quickly find a job"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "financed",
+          "meaning": "资助；他要打工 help support his family，家境困难，谈不上出钱资助学校。",
+          "quote": "help support his family"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "founded",
+          "meaning": "创办；为了 to quickly find a job 去读书的年轻人，不可能是学校的创办者。",
+          "quote": "to quickly find a job"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a two-year professional school",
+          "signalSide": "context-after",
+          "targetText": "attended a two-year professional school",
+          "relation": "中文：attend school 上学，宾语是一所职校。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to quickly find a job",
+          "signalSide": "context-after",
+          "relation": "中文：上学是为了尽快找到工作。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:46": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "说明他找的是什么工作，要一个对 highways 做的体力活动作。",
+      "find": {
+        "check": "echo",
+        "text": "第三段称他 this highway builder，builder 复现了这份工作；后文 hard physical labor 也说明是修路的重活。",
+        "quotes": [
+          "this highway builder",
+          "hard physical labor"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "修建",
+        "reason": "说明他找的是什么工作，要一个对 highways 做的体力活动作。动词看复现：第三段称他 this highway builder，builder 复现了这份工作；后文 hard physical labor 也说明是修路的重活。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "sweeping",
+          "meaning": "清扫；第三段称他 this highway builder，他是修路的人，不是扫路的。",
+          "quote": "this highway builder"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "checking",
+          "meaning": "检查；查路是技术活，原文说他干的是 hard physical labor，又称他 highway builder。",
+          "quote": "hard physical labor"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "guarding",
+          "meaning": "看守；看守公路谈不上 hard physical labor，也和 this highway builder 对不上。",
+          "quote": "this highway builder"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "this highway builder",
+          "signalSide": "context-after",
+          "relation": "中文：builder 与 building 同根复现，他是修路工。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "highways",
+          "signalSide": "context-after",
+          "targetText": "building highways",
+          "relation": "中文：building highways 修建公路。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:47": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "main",
+      "context": "引出他最让作者佩服的一点：干完重活还每天苦读，要一个「了不起」的正面评价。",
+      "find": {
+        "check": "affect",
+        "text": "主语 the fact 的内容是 spent hours studying every day after hard physical labor，第三段又称他 admirable，是佩服。",
+        "quotes": [
+          "the fact",
+          "spent hours studying every day after hard physical labor",
+          "admirable"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "非凡的",
+        "meaning": "令人钦佩",
+        "reason": "引出他最让作者佩服的一点：干完重活还每天苦读，要一个「了不起」的正面评价。形容词看情感：主语 the fact 的内容是 spent hours studying every day after hard physical labor，第三段又称他 admirable，是佩服。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "typical",
+          "meaning": "典型的；干完 hard physical labor 还每天学几个小时，是少见的事，不是典型的。",
+          "quote": "hard physical labor"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "obvious",
+          "meaning": "明显的；however 引出的是让人意外的一面，作者佩服地称他 admirable，不是说显而易见。",
+          "quote": "admirable"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "natural",
+          "meaning": "自然的；说成理所当然，就接不上 however 的转折，重活后苦读并不寻常。",
+          "quote": "however"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "admirable",
+          "signalSide": "context-after",
+          "relation": "中文：第三段称他令人钦佩，评价是正面的佩服。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the fact that",
+          "signalSide": "context-after",
+          "targetText": "most remarkable, however, was the fact",
+          "relation": "中文：表语提前，most remarkable 评价的就是 the fact。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:48": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "他在聊天时张口说出爱默生的一段话，要「引用」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语 a translated Emerson passage，Without batting an eye 说他随口就来，后面接着 asking about 文学，是谈话中引用。",
+        "quotes": [
+          "a translated Emerson passage",
+          "Without batting an eye",
+          "asking about"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "引用",
+        "reason": "他在聊天时张口说出爱默生的一段话，要「引用」的意思。动词看搭配：宾语 a translated Emerson passage，Without batting an eye 说他随口就来，后面接着 asking about 文学，是谈话中引用。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "publish",
+          "meaning": "出版；在火车上聊天时 Without batting an eye 说出的话，谈不上出版作品。",
+          "quote": "Without batting an eye"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "copy",
+          "meaning": "抄写；他是在聊天中 before asking about 文学影响，是嘴上说的，不是动笔抄。",
+          "quote": "before asking about"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "download",
+          "meaning": "下载；两人在车上面对面交谈，a translated Emerson passage 是他张口说出的。",
+          "quote": "a translated Emerson passage"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a translated Emerson passage",
+          "signalSide": "context-after",
+          "targetText": "quote a translated Emerson passage",
+          "relation": "中文：quote a passage 引用一段文字。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Without batting an eye",
+          "signalSide": "context-before",
+          "relation": "中文：眼都不眨，说明他随口就能说出来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:49": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "detail",
+      "context": "他问的是美国文学的影响，要一类「写作的人」。",
+      "find": {
+        "check": "echo",
+        "text": "前面 literary influence 讲文学，Emerson 也是美国作家；后句又问 Russian authors，authors 与 writers 同义复现。",
+        "quotes": [
+          "literary influence",
+          "Emerson",
+          "Russian authors"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "作家",
+        "reason": "他问的是美国文学的影响，要一类「写作的人」。名词看复现：前面 literary influence 讲文学，Emerson 也是美国作家；后句又问 Russian authors，authors 与 writers 同义复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "historians",
+          "meaning": "历史学家；问的是 literary influence，又接着问 Russian authors，说的是文学不是史学。",
+          "quote": "literary influence"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "workers",
+          "meaning": "工人；literary influence 只能来自写作的人，和工人无关。",
+          "quote": "literary influence"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "students",
+          "meaning": "学生；他接着拿来比较的是 Russian authors，前后说的都是作家。",
+          "quote": "Russian authors"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Russian authors",
+          "signalSide": "context-after",
+          "relation": "中文：authors 与 writers 同义，一问美国作家、一问俄国作家。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "literary influence of American",
+          "signalSide": "context-before",
+          "targetText": "literary influence of American writers",
+          "relation": "中文：美国作家的文学影响。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:50": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者在讲述时回想当时的对话，要「记得、回想起」他问过的话。",
+      "find": {
+        "check": "collocation",
+        "text": "后面接 him asking at one point，at one point 指火车上的某个时候，事后叙述说「我记得他问过」。",
+        "quotes": [
+          "him asking at one point"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "回想起",
+        "reason": "作者在讲述时回想当时的对话，要「记得、回想起」他问过的话。动词看搭配：后面接 him asking at one point，at one point 指火车上的某个时候，事后叙述说「我记得他问过」。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "anticipate",
+          "meaning": "预料；问题已经在 at one point 问出来了，是回想旧事，不是事先预料。",
+          "quote": "at one point"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "imagine",
+          "meaning": "想象；前面引号里是他真问过的话，him asking at one point 是真事，不是想象。",
+          "quote": "him asking at one point"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "catch",
+          "meaning": "撞见；catch sb doing 多指撞见别人做不当的事，him asking 提个问题谈不上被撞见。",
+          "quote": "him asking"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "him asking at one point",
+          "signalSide": "context-after",
+          "targetText": "recall him asking",
+          "relation": "中文：recall sb doing 记得某人做过某事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:51": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:51",
+      "blankNo": 51,
+      "pos": "phrase",
+      "role": "main",
+      "context": "第三段先说作者本可以怎样看这位修路工：凭成见判断他，后句再转折。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "宾语是 my assumptions，后句 But … prevented me doing so 说他让作者没这样做，凭成见下判断才需要被拦住。",
+        "quotes": [
+          "my assumptions",
+          "prevented me doing so"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "依赖",
+        "meaning": "凭成见看待",
+        "reason": "第三段先说作者本可以怎样看这位修路工：凭成见判断他，后句再转折。词组看语境义：宾语是 my assumptions，后句 But … prevented me doing so 说他让作者没这样做，凭成见下判断才需要被拦住。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "look into",
+          "meaning": "调查；调查自己的成见是好事，不需要被 prevented me doing so 拦住。",
+          "quote": "prevented me doing so"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "go over",
+          "meaning": "仔细检查；同样是好事，接不上 But 后面他 prevented me doing so 的转折。",
+          "quote": "prevented me doing so"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "deal with",
+          "meaning": "处理；处理成见也用不着被拦住，与 prevented me doing so 对不上。",
+          "quote": "prevented me doing so"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my assumptions",
+          "signalSide": "context-after",
+          "targetText": "rely on my assumptions",
+          "relation": "中文：rely on my assumptions 凭我的成见。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "rely",
+          "signalSide": "option",
+          "targetText": "rely on",
+          "relation": "中文：rely 依靠，on 引出依靠的对象。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:52": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "main",
+      "context": "概括第二段他下班后天天学习的事，要一个说他「靠自学」的词。",
+      "find": {
+        "check": "echo",
+        "text": "第二段写他 spent hours studying every day after hard physical labor，下班后靠自己学，就是 self-educated。",
+        "quotes": [
+          "spent hours studying every day"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "自学的",
+        "reason": "概括第二段他下班后天天学习的事，要一个说他「靠自学」的词。形容词看复现：第二段写他 spent hours studying every day after hard physical labor，下班后靠自己学，就是 self-educated。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "well-behaved",
+          "meaning": "守规矩的；第二段讲的是他 spent hours studying every day，说的是学识，不是表现乖巧。",
+          "quote": "spent hours studying every day"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "multi-skilled",
+          "meaning": "多才多艺的；原文只写他修路和每天 spent hours studying，没提多种技能。",
+          "quote": "spent hours studying"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "warm-hearted",
+          "meaning": "热心的；与它并列的 highly informed 说的是学识，前文讲他自学，不是热心助人。",
+          "quote": "highly informed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "spent hours studying every day",
+          "signalSide": "context-before",
+          "relation": "中文：第二段他每天自己学习，这里用一个词概括。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "highly informed",
+          "signalSide": "context-before",
+          "targetText": "highly informed, self-educated, and admirable person",
+          "relation": "中文：与见多识广并列，修饰 person。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:53": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "全文的结论：他用自己的经历让作者明白一个道理，要「让……看到」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后面接 me just how much one can gain，show sb how much 让人看到有多少；道理是作者从他身上看到的。",
+        "quotes": [
+          "me just how much one can gain"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "表明",
+        "meaning": "让作者明白",
+        "reason": "全文的结论：他用自己的经历让作者明白一个道理，要「让……看到」的意思。动词看搭配：后面接 me just how much one can gain，show sb how much 让人看到有多少；道理是作者从他身上看到的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "asked",
+          "meaning": "问；成了他问作者能收获多少，可作者是被他 prevented me doing so、改变看法的一方。",
+          "quote": "prevented me doing so"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "warned",
+          "meaning": "警告；warn 接的是危险，one can gain 讲的是收获，不是警告。",
+          "quote": "one can gain"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promised",
+          "meaning": "承诺；收获不是他能许诺的，one can gain 是作者从他身上看到的。",
+          "quote": "one can gain"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "me just how much one can gain",
+          "signalSide": "context-after",
+          "targetText": "showed me just how much one can gain",
+          "relation": "中文：show sb how much… 让某人看到有多少。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:54": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "点题：带着开放的心态去做什么会有收获，回到全文的火车旅途，要「旅行」。",
+      "find": {
+        "check": "echo",
+        "text": "首句 train ride 和 all travelers long for 说的都是旅行，全文是旅途中的相遇，traveling 复现这一点。",
+        "quotes": [
+          "train ride",
+          "all travelers long for"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "旅行",
+        "reason": "点题：带着开放的心态去做什么会有收获，回到全文的火车旅途，要「旅行」。动词看复现：首句 train ride 和 all travelers long for 说的都是旅行，全文是旅途中的相遇，traveling 复现这一点。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "reading",
+          "meaning": "阅读；作者的收获来自 train ride 上和当地人的交谈，不是读书。",
+          "quote": "train ride"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "searching",
+          "meaning": "寻找；with an open mind 说的是经历一件事的心态，全文讲的是 train ride，不是去搜寻。",
+          "quote": "train ride"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teaching",
+          "meaning": "教书；作者是被对方 prevented me doing so 改变看法的一方，不是去教别人。",
+          "quote": "prevented me doing so"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "all travelers long for",
+          "signalSide": "context-before",
+          "relation": "中文：首句的旅行者与这里的旅行呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "with an open mind",
+          "signalSide": "context-after",
+          "targetText": "traveling with an open mind",
+          "relation": "中文：traveling with an open mind 带着开放的心态旅行。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:55": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "与开放心态并列，说要愿意和各行各业的当地人怎样相处：去交流往来。",
+      "find": {
+        "check": "collocation",
+        "text": "后接 with locals from all walks of life，engage with sb 与人交往；全文正是作者和 a local 聊天。",
+        "quotes": [
+          "with locals from all walks of life",
+          "a local"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "交往",
+        "reason": "与开放心态并列，说要愿意和各行各业的当地人怎样相处：去交流往来。动词看搭配：后接 with locals from all walks of life，engage with sb 与人交往；全文正是作者和 a local 聊天。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cooperate",
+          "meaning": "合作；cooperate with 要一起做事，作者和 a local 只是在车上聊天。",
+          "quote": "a local"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "side",
+          "meaning": "支持，站在一边；side with 各行各业 all walks of life 的人说不通，也不是聊天交流。",
+          "quote": "all walks of life"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "negotiate",
+          "meaning": "谈判；为谈条件而交涉，作者和 a local 是随意交谈，没有谈判。",
+          "quote": "a local"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with locals from all walks of life",
+          "signalSide": "context-after",
+          "targetText": "engage with locals",
+          "relation": "中文：engage with sb 与某人交往。"
+        }
+      ]
+    }
+  }
+}

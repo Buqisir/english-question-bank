@@ -1,0 +1,136 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Stand Up and Exercise, Everybody!\n\nDo you often spend the ten-minute break sitting at your desk? I'd like to recommend a simple sport for it: rope skipping. All you need is a rope and a little open space, such as the area in front of our teaching building. You can skip alone, skip in pairs, or join a group and take turns jumping over a long rope.\n\nWhy rope skipping? First, it wakes up both your body and your mind after a long class, so you can focus better in the next lesson. Besides, it is cheap, safe and easy to learn, and skipping with classmates is great fun.\n\nSo next break, grab a rope and give it a try!",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "读者是全校同学，以投稿人的身份为校英文报“Sports and Health”栏目写推荐短文，标题已给定，照抄在文首。",
+        "两个要点：介绍一项适合课间开展的运动；说明推荐理由。"
+      ],
+      "thisEssayChooses": "本文推荐跳绳：只要一根绳、一小块空地，十分钟课间来得及。介绍部分写清器材、场地和几种跳法；理由从同学的需要出发，先说课间活动能让下节课更专注，再补便宜、安全、好学、好玩。开头用一个问句招呼读者，结尾请大家下个课间就试，语气像同学之间说话。"
+    },
+    "standard": {
+      "essay": "Stand Up and Exercise, Everybody!\n\nDo you often spend the ten-minute break sitting at your desk? I'd like to recommend a simple sport for it: rope skipping. All you need is a rope and a little open space, such as the area in front of our teaching building. You can skip alone, skip in pairs, or join a group and take turns jumping over a long rope.\n\nWhy rope skipping? First, it wakes up both your body and your mind after a long class, so you can focus better in the next lesson. Besides, it is cheap, safe and easy to learn, and skipping with classmates is great fun.\n\nSo next break, grab a rope and give it a try!",
+      "pointMap": [
+        {
+          "point": "介绍这项运动",
+          "quote": "All you need is a rope and a little open space, such as the area in front of our teaching building."
+        },
+        {
+          "point": "介绍这项运动",
+          "quote": "You can skip alone, skip in pairs, or join a group and take turns jumping over a long rope."
+        },
+        {
+          "point": "说明推荐理由",
+          "quote": "First, it wakes up both your body and your mind after a long class, so you can focus better in the next lesson."
+        },
+        {
+          "point": "说明推荐理由",
+          "quote": "Besides, it is cheap, safe and easy to learn, and skipping with classmates is great fun."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "用课间场景开头，亮出推荐的运动，并完成要点一：介绍跳绳需要什么、在哪跳、怎么跳。",
+          "items": [
+            {
+              "quote": "Do you often spend the ten-minute break sitting at your desk?",
+              "explain": "问的是同学们天天经历的事，读者会先想到自己；“ten-minute break”也扣住题目“课间”。"
+            },
+            {
+              "quote": "I'd like to recommend a simple sport for it: rope skipping.",
+              "explain": "冒号把答案放在句末，读者一眼看到推荐的是什么，中心在开头就交代清楚。"
+            },
+            {
+              "quote": "All you need is a rope and a little open space",
+              "explain": "“All you need is…”直接说门槛有多低，也回答了课间能不能开展的疑问。"
+            },
+            {
+              "quote": "You can skip alone, skip in pairs, or join a group",
+              "explain": "一个人、两个人、一群人三种跳法并列，说明人多人少都能玩，介绍落到具体做法上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点二：从同学的需要给出推荐理由。",
+          "items": [
+            {
+              "quote": "Why rope skipping?",
+              "explain": "用一个短问句开段，告诉读者下面讲理由，段落功能一目了然。"
+            },
+            {
+              "quote": "so you can focus better in the next lesson",
+              "explain": "理由落到读者在意的事：下节课更专注。先说动起来，再说结果，因果不跳步。"
+            },
+            {
+              "quote": "it is cheap, safe and easy to learn",
+              "explain": "三个短形容词一口气接住可能的顾虑：花钱吗、危险吗、难学吗。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "收尾，请读者下个课间就动起来。",
+          "items": [
+            {
+              "quote": "So next break, grab a rope and give it a try!",
+              "explain": "结尾落在一个具体的下一步上，“grab a rope”和“give it a try”都是口语里常说的，比一句“运动有益健康”更能让人行动。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "All you need is …",
+          "function": "介绍一项活动时说明门槛低、准备少，本题里用来说跳绳只要一根绳和一小块地。"
+        },
+        {
+          "expression": "wake up both your body and your mind",
+          "function": "把课间运动的好处说到身体和精神两方面，引出“下节课更专注”。"
+        },
+        {
+          "expression": "give it a try",
+          "function": "推荐类短文结尾邀请读者试一试，语气轻松，像同学之间说话。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Stand Up and Exercise, Everybody!\n\nWhen the bell rings, do most of us simply stay in our seats, still buried in our books? If so, why not try rope skipping, a sport that fits our ten-minute break perfectly? It needs nothing more than a rope and a few square metres of open ground, like the space in front of our teaching building. You can skip on your own to beat your personal record, or team up with friends, two turning a long rope while the others jump in one by one.\n\nWhat makes it worth recommending? After forty minutes of sitting still, it gets your blood flowing and clears your head, so you return to class refreshed rather than sleepy. What's more, it costs almost nothing, carries little risk and lets classmates cheer each other on.\n\nSo bring a rope tomorrow and jump into a more active school day!",
+      "pointMap": [
+        {
+          "point": "介绍这项运动",
+          "quote": "It needs nothing more than a rope and a few square metres of open ground, like the space in front of our teaching building."
+        },
+        {
+          "point": "介绍这项运动",
+          "quote": "You can skip on your own to beat your personal record, or team up with friends, two turning a long rope while the others jump in one by one."
+        },
+        {
+          "point": "说明推荐理由",
+          "quote": "After forty minutes of sitting still, it gets your blood flowing and clears your head, so you return to class refreshed rather than sleepy."
+        },
+        {
+          "point": "说明推荐理由",
+          "quote": "What's more, it costs almost nothing, carries little risk and lets classmates cheer each other on."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "still buried in our books",
+          "explain": "把“坐在座位上”写成埋头书本的画面，用 our 和读者站在一起，比标准版的提问更有同学之间的亲近感。"
+        },
+        {
+          "quote": "two turning a long rope while the others jump in one by one",
+          "explain": "独立主格加 while 对比，把集体跳长绳的分工写得能看见，介绍更具体。"
+        },
+        {
+          "quote": "so you return to class refreshed rather than sleepy",
+          "explain": "refreshed rather than sleepy 把运动前后的状态对照起来，理由比 focus better 更可感。"
+        }
+      ]
+    }
+  }
+}

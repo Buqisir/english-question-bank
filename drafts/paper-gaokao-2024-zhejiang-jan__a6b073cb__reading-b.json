@@ -1,0 +1,793 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:reading-b": {
+      "overview": "作者从自己 2006 年被锁门外、靠街对面电话亭打电话求助拿到备用钥匙的经历说起，写家附近最后一个电话亭改成迷你社区图书馆，以及他因书好又免费而开始从中借书。",
+      "fullTranslationZh": "你上一次使用电话亭是什么时候？我是说真正打电话，而不是躲雨。很久以前了，对吧？我上一次按电话亭本来的用途使用它是在……2006 年。当时我正在伦敦那间又小又旧的合租屋里为我的剧本举行试演。为了打动几位有才华的演员，让他们来为我无偿工作，我在沙发上铺了几条毯子，还点上蜡烛，好让屋子看起来更有点“年轻职场人士”的样子。\n\n我匆忙跑到屋外倒废纸篓，门在我身后砰地关上了。突然间，我被锁在了外面。手机在屋里，好在街对面有个电话亭。于是我打给查号台，被转接到房东太太的管理代理那里，请他们送来一把备用钥匙，刚好赶在演员们到来之前回到屋里。\n\n既然我已经很多年没用过电话亭，我家附近不再有任何公用电话，我也就不该感到意外了。仅存的最后一个刚刚被改成了“迷你社区图书馆”：任何路人都可以从书架上“借”一本书，以后再还回来，或者用自己藏书中的另一本书把它换下。\n\n“图书馆”开放后的几个月里，我都懒得去看一眼，因为我以为里面会塞满俗套的爱情小说。后来我注意到，有人在春季大扫除时把一箱箱各种题材的大部头书放到那里。而且这些书都是免费的。这无可匹敌的价格让我尝试了几十种平时根本不会考虑买的书。我还真发现了一些好书！\n\n如果我哪天又被锁在家门外，可惜我家附近的电话亭再也不能帮我联系上钥匙了。但在我等妻子来解救我的时候，它一定能让我有书解闷。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+          "sourceText": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+          "displayText": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:24"
+          ],
+          "translationZh": "为了打动几位有才华的演员，让他们来为我无偿工作，我在沙发上铺了几条毯子，还点上蜡烛，好让屋子看起来更有点“年轻职场人士”的样子。",
+          "analysisZh": "先找主干：I spread some throws … and lit candles，“我铺了毯子、点了蜡烛”，两个动词共用主语 I。句首 Hoping to impress … 是现在分词短语，交代他这么做时心里的打算；impress sb to do 后面又带出想让演员做的事。句末 to make it seem … 是目的状语，说布置是为了让 it 显得更体面，it 指他举行试演的合租屋。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 17,
+              "quote": "Hoping to impress"
+            },
+            {
+              "start": 76,
+              "end": 96,
+              "quote": "I spread some throws"
+            },
+            {
+              "start": 128,
+              "end": 143,
+              "quote": "to make it seem"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+          "sourceText": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+          "displayText": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:26"
+          ],
+          "translationZh": "仅存的最后一个刚刚被改成了“迷你社区图书馆”：任何路人都可以从书架上“借”一本书，以后再还回来，或者用自己藏书中的另一本书把它换下。",
+          "analysisZh": "冒号前是主干 The last one standing has just been turned into …，one 指公用电话亭，has been turned into 是现在完成时的被动，说它刚被改成图书馆。冒号后解释这个图书馆怎么用：主语 any passer-by 后接 can 带三个并列动作 borrow、return、replace，用 or 连成“借、还、换”三种用法；replace it with … 意思是“用……替换它”。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 47,
+              "quote": "has just been turned into"
+            },
+            {
+              "start": 76,
+              "end": 93,
+              "quote": "any passer-by can"
+            },
+            {
+              "start": 148,
+              "end": 177,
+              "quote": "replace it with another title"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-b:1"
+              ],
+              "start": 0,
+              "end": 158,
+              "quote": "你上一次使用电话亭是什么时候？我是说真正打电话，而不是躲雨。很久以前了，对吧？我上一次按电话亭本来的用途使用它是在……2006 年。当时我正在伦敦那间又小又旧的合租屋里为我的剧本举行试演。为了打动几位有才华的演员，让他们来为我无偿工作，我在沙发上铺了几条毯子，还点上蜡烛，好让屋子看起来更有点“年轻职场人士”的样子。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-b:2"
+              ],
+              "start": 160,
+              "end": 265,
+              "quote": "我匆忙跑到屋外倒废纸篓，门在我身后砰地关上了。突然间，我被锁在了外面。手机在屋里，好在街对面有个电话亭。于是我打给查号台，被转接到房东太太的管理代理那里，请他们送来一把备用钥匙，刚好赶在演员们到来之前回到屋里。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-b:3"
+              ],
+              "start": 267,
+              "end": 373,
+              "quote": "既然我已经很多年没用过电话亭，我家附近不再有任何公用电话，我也就不该感到意外了。仅存的最后一个刚刚被改成了“迷你社区图书馆”：任何路人都可以从书架上“借”一本书，以后再还回来，或者用自己藏书中的另一本书把它换下。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-b:4"
+              ],
+              "start": 375,
+              "end": 500,
+              "quote": "“图书馆”开放后的几个月里，我都懒得去看一眼，因为我以为里面会塞满俗套的爱情小说。后来我注意到，有人在春季大扫除时把一箱箱各种题材的大部头书放到那里。而且这些书都是免费的。这无可匹敌的价格让我尝试了几十种平时根本不会考虑买的书。我还真发现了一些好书！"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-b:5"
+              ],
+              "start": 502,
+              "end": 563,
+              "quote": "如果我哪天又被锁在家门外，可惜我家附近的电话亭再也不能帮我联系上钥匙了。但在我等妻子来解救我的时候，它一定能让我有书解闷。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+                "start": 283,
+                "end": 459,
+                "quote": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p1",
+                "start": 94,
+                "end": 158,
+                "quote": "为了打动几位有才华的演员，让他们来为我无偿工作，我在沙发上铺了几条毯子，还点上蜡烛，好让屋子看起来更有点“年轻职场人士”的样子。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+                "start": 140,
+                "end": 344,
+                "quote": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p3",
+                "start": 40,
+                "end": 106,
+                "quote": "仅存的最后一个刚刚被改成了“迷你社区图书馆”：任何路人都可以从书架上“借”一本书，以后再还回来，或者用自己藏书中的另一本书把它换下。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+                "start": 201,
+                "end": 282,
+                "quote": "I was conducting auditions(试演) for my play in my tiny old shared house in London."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p1",
+                "start": 66,
+                "end": 94,
+                "quote": "当时我正在伦敦那间又小又旧的合租屋里为我的剧本举行试演。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+                "start": 201,
+                "end": 380,
+                "quote": "So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+                "start": 85,
+                "end": 115,
+                "quote": "Suddenly I was locked outside."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p2",
+                "start": 52,
+                "end": 105,
+                "quote": "于是我打给查号台，被转接到房东太太的管理代理那里，请他们送来一把备用钥匙，刚好赶在演员们到来之前回到屋里。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p2",
+                "start": 23,
+                "end": 35,
+                "quote": "突然间，我被锁在了外面。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+                "start": 140,
+                "end": 344,
+                "quote": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+                "start": 147,
+                "end": 253,
+                "quote": "Then I noticed folk conducting spring cleans dropping boxes of voluminous books on various subjects there."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p3",
+                "start": 63,
+                "end": 105,
+                "quote": "任何路人都可以从书架上“借”一本书，以后再还回来，或者用自己藏书中的另一本书把它换下"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p4",
+                "start": 41,
+                "end": 75,
+                "quote": "后来我注意到，有人在春季大扫除时把一箱箱各种题材的大部头书放到那里。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+                "start": 254,
+                "end": 280,
+                "quote": "And these books were free."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+                "start": 404,
+                "end": 441,
+                "quote": "And I’ve discovered some great books!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p4",
+                "start": 75,
+                "end": 86,
+                "quote": "而且这些书都是免费的。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-b-p4",
+                "start": 114,
+                "end": 125,
+                "quote": "我还真发现了一些好书！"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先回忆 2006 年被锁在门外、靠电话亭打电话求助的经历，再写最后一个电话亭改成迷你社区图书馆，接着讲作者从不屑一顾到发现好书，最后幽默地收束：电话亭不能再帮他找钥匙，却能陪他等人。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+            "summary": "作者上一次用电话亭打电话是在 2006 年，当时正在合租屋里布置试演",
+            "function": "用问题引出话题，交代事件背景。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+            "summary": "他倒垃圾时被锁在门外，用街对面的电话亭求助，赶在演员到来前拿到备用钥匙",
+            "function": "讲清那次使用电话亭的经过和原因。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+            "summary": "如今附近已没有公用电话，最后一个电话亭改成了迷你社区图书馆",
+            "function": "由过去转到现在，介绍图书馆及其借书规则。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+            "summary": "他起初懒得去看，后来发现书多、免费又有好书，开始借阅",
+            "function": "写作者态度的转变及原因。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:5",
+            "summary": "电话亭不能再帮他拿钥匙，却能让他在等妻子时有书可读",
+            "function": "呼应开头被锁门外的经历，幽默收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-zhejiang-jan:24": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据铺毯子、点蜡烛这些布置动作，判断画线的 it 指什么。",
+      "stemTranslationZh": "第一段中画线词“it”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "it 指什么，往前一句找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "剧本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I was conducting auditions(试演) for my play in my tiny old shared house in London.",
+            "sourceEntity": "my play",
+            "optionText": "The play.",
+            "optionEntity": "The play",
+            "explanation": "my play 出现在[[block:paper-gaokao-2024-zhejiang-jan:reading-b:1|I was conducting auditions]]这句，但放进去成了“铺毯点烛让剧本看起来更体面”，毯子和蜡烛改变的是屋里的样子，不是剧本。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "quote": "I was conducting auditions(试演) for my play in my tiny old shared house in London.",
+              "anchor": "试演的剧本"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "合租的房子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "quote": "I was conducting auditions(试演) for my play in my tiny old shared house in London.",
+              "anchor": "试演在合租屋里"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "沙发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+            "sourceEntity": "the sofas",
+            "optionText": "The sofa.",
+            "optionEntity": "The sofa",
+            "explanation": "sofas 离 it 最近，但它是复数，和单数 it 对不上；点蜡烛也不是为了装点沙发，而是让整间屋子显得体面。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "quote": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+              "anchor": "毯子铺在沙发上"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "电话亭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The last time I used a phone box for its intended purpose was …2006.",
+            "sourceEntity": "a phone box",
+            "optionText": "The telephone box.",
+            "optionEntity": "The telephone box",
+            "explanation": "电话亭是全文的话题，可这时作者人在家里布置试演，还没去过电话亭；放进去成了“让电话亭看起来更体面”，与铺毯点烛的场景对不上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "quote": "The last time I used a phone box for its intended purpose was …2006.",
+              "anchor": "全文话题是电话亭"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "it",
+          "sourceRole": "stem",
+          "targetText": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "my tiny old shared house in London",
+          "bridgeZh": "it 指他铺毯点烛布置的那处试演场地",
+          "note": "题干画线词 it 原样出现在原文。"
+        },
+        {
+          "sourceText": "The shared house.",
+          "sourceRole": "correctOption",
+          "targetText": "my tiny old shared house in London",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "it 能被铺毯子、点蜡烛布置得“更像年轻职场人士”，又是单数，所以 it 必须是一个地方；试演正是在他的合租小屋（shared house）里举行。放回去：铺毯子、点蜡烛，让合租屋看起来更体面一点，好打动来试演的演员，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "顺着 2006 年那天的经过，找出作者去用电话亭的原因。",
+      "stemTranslationZh": "2006 年作者为什么使用电话亭？",
+      "locateBy": "stem",
+      "locateFindZh": "往下一段读当天经过，看 So 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "打一个紧急电话。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "quote": "So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived.",
+              "anchor": "打电话求助"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "quote": "Suddenly I was locked outside.",
+              "anchor": "被锁门外"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "张贴一则告示。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To put up a notice.",
+            "explanation": "原文没提在电话亭张贴告示；他进电话亭是为了打电话，请人送来备用钥匙。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "躲雨。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "I mean to make an actual phone call-not to shelter from the rain.",
+            "sourceHighlight": "not to shelter from the rain",
+            "optionText": "To shelter from the rain.",
+            "optionHighlight": "shelter from the rain",
+            "explanation": "躲雨是作者开头特意排除的用法（not to shelter from the rain），他要讲的是真正拿电话亭打电话的那一次。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "quote": "I mean to make an actual phone call-not to shelter from the rain.",
+              "anchor": "不是为了躲雨"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "举行试演。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I was conducting auditions(试演) for my play in my tiny old shared house in London.",
+            "sourceEntity": "my tiny old shared house",
+            "optionText": "To hold an audition.",
+            "optionEntity": "hold an audition",
+            "explanation": "试演确有其事（conducting auditions），但地点在他的合租屋里；电话亭是他被锁在门外后才去的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "quote": "I was conducting auditions(试演) for my play in my tiny old shared house in London.",
+              "anchor": "试演在合租屋里"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "2006",
+          "sourceRole": "stem",
+          "targetText": "The last time I used a phone box for its intended purpose was …2006.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived",
+          "bridgeZh": "他被锁在门外，演员又快到了，只好去电话亭求助",
+          "note": "题干 2006 原样出现在原文。"
+        },
+        {
+          "sourceText": "To place an urgent call.",
+          "sourceRole": "correctOption",
+          "targetText": "I called Directory Assistance",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“打电话”就是原文的 called Directory Assistance（打给查号台）；“紧急”来自当时的处境：人被锁在门外（[[block:paper-gaokao-2024-zhejiang-jan:reading-b:2|Suddenly I was locked outside]]），钥匙得赶在演员到来之前送到（before the actors arrived），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂介绍迷你社区图书馆的那句话，看它允许人们怎么用。",
+      "stemTranslationZh": "关于这个“迷你社区图书馆”，我们知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句冒号后的用法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它免费提供电话服务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "free",
+            "optionText": "free",
+            "matchType": "exact",
+            "relationNote": "free 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-b:4|And these books were free]]，免费的是书；电话亭改成图书馆后已经不能打电话，[[block:paper-gaokao-2024-zhejiang-jan:reading-b:5|no longer be able to connect me]]说的就是这一点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "quote": "And these books were free.",
+              "anchor": "免费的是书"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "任何人都可以为它的藏书出一份力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+              "quote": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+              "anchor": "路人可借可换"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "quote": "Then I noticed folk conducting spring cleans dropping boxes of voluminous books on various subjects there.",
+              "anchor": "有人整箱送书"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它很受年轻读者欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is popular among young readers.",
+            "explanation": "原文没提读者的年龄；young 只出现在作者当年想让屋子显得“young professional”，和图书馆无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "书必须在一个月内归还。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+            "sourceHighlight": "return it later",
+            "optionText": "Books must be returned within a month.",
+            "optionHighlight": "must be returned within a month",
+            "explanation": "原文只说借了以后再还（return it later），还可以拿别的书来换，没定任何期限；选项加了“一个月内必须还”的规定。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+              "quote": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+              "anchor": "以后再还"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mini community library",
+          "sourceRole": "stem",
+          "targetText": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection",
+          "note": "题干 mini community library 原词出现在原文。"
+        },
+        {
+          "sourceText": "Anyone can contribute to its collection.",
+          "sourceRole": "correctOption",
+          "targetText": "replace it with another title from their own collection",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "“任何人”就是原文的任何路人（any passer-by），“为藏书出力”就是拿自家的书来换（from their own collection）；[[block:paper-gaokao-2024-zhejiang-jan:reading-b:4|dropping boxes of voluminous books]]里有人整箱送书，也印证人人都能往里添书，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者从懒得看一眼到开始借书的原因。",
+      "stemTranslationZh": "作者为什么开始使用这个“图书馆”？",
+      "locateBy": "stem",
+      "locateFindZh": "This 指什么，往前一句找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他想借一些爱情小说。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "For a few months after the “library” opened, I didn’t bother taking a look, as I had assumed that it would be stuffed full of cheesy love stories.",
+            "sourceHighlight": "I didn’t bother taking a look",
+            "optionText": "He wanted to borrow some love stories.",
+            "optionHighlight": "wanted to borrow some love stories",
+            "explanation": "作者以为里面塞满了俗套的爱情小说（cheesy love stories），所以几个月都懒得去看；爱情小说是他起初不去的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "quote": "For a few months after the “library” opened, I didn’t bother taking a look, as I had assumed that it would be stuffed full of cheesy love stories.",
+              "anchor": "以为全是爱情小说而不去"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他受到一位亲近邻居的鼓励。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "encouraged",
+            "optionText": "encouraged",
+            "matchType": "exact",
+            "relationNote": "encouraged 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-b:4|This unbeatable price-point encouraged me]]，鼓励他的是书不要钱这一点；文中的 folk 只是来送书的人，没人劝他去。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "quote": "This unbeatable price-point encouraged me to experiment with dozens of titles that I would never normally consider buying.",
+              "anchor": "鼓励他的是价格"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他发现那里有很棒的免费书。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "quote": "And these books were free.",
+              "anchor": "书是免费的"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "quote": "And I’ve discovered some great books!",
+              "anchor": "发现好书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他认为那是一个理想的阅读场所。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He thought it was an ideal place for reading.",
+            "explanation": "原文没说电话亭适合坐在里面读书；吸引他的是书本身，既免费又有好书。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "start to use",
+          "sourceRole": "stem",
+          "targetText": "This unbeatable price-point encouraged me to experiment with dozens of titles that I would never normally consider buying.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+          "relationType": "locationCue",
+          "targetCue": "experiment with",
+          "sourceZh": "开始使用",
+          "targetCueZh": "尝试",
+          "answerText": "these books were free",
+          "bridgeZh": "unbeatable price-point 指这些书一分钱不要",
+          "note": "题干 start to use 对应原文 experiment with。"
+        },
+        {
+          "sourceText": "He found there were excellent free books.",
+          "sourceRole": "correctOption",
+          "targetText": "I’ve discovered some great books",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项把两层合在一起：“免费”落在[[block:paper-gaokao-2024-zhejiang-jan:reading-b:4|And these books were free]]（free）；“好书”落在[[block:paper-gaokao-2024-zhejiang-jan:reading-b:4|I’ve discovered some great books]]（great books）。不花钱让他敢试平时不会买的书，试了又发现确实有好书，选 C。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,816 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:reading-c": {
+      "overview": "加拿大艾伯塔省的保险公司出资搞人工播云防冰雹，下风方向的农民担心土地水分被抢走，项目负责人否认会致旱，也有科学家怀疑播云的安全性；由于缺乏科学证据，播云至今照常进行。",
+      "fullTranslationZh": "1991 年 9 月 7 日，加拿大历史上损失最惨重的雹暴袭击了卡尔加里南郊。因此，自 1996 年起，一批保险公司每年在艾伯塔冰雹抑制项目上投入约 200 万美元。飞机向有威胁的风暴云团播撒一种化学剂，让小冰晶在长成危险的冰雹之前就化作雨落下。但艾伯塔中东部的农民——他们位于冰雹项目航线的下风方向——担心播云正把宝贵的水分从他们干渴的土地上偷走。\n\n在那一带务农的诺曼·斯蒂恩旺德多年来一直在公众集会上谈论这个问题。“说到底，省政府是在让保险公司保护卡尔加里—埃德蒙顿城区免受冰雹之害，”斯蒂恩旺德先生说，“可他们却把干旱风险一直推到了东边的萨斯喀彻温省。”\n\n艾伯塔冰雹项目由云物理学家特里·克劳斯管理，他供职于北达科他州法戈市的天气改造公司。“我们只影响空气中总水分很小的一部分，所以不可能造成干旱，”克劳斯博士说，“事实上，我们让地面更湿润，也许还有助于增加下风方向的水分。”\n\n对播云安全性心存怀疑的人之一是查克·多斯韦尔，一位刚从俄克拉何马大学退休的研究科学家。“1999 年，我亲眼看到堪萨斯州一个播过云的风暴云团形成了强烈的龙卷风，”多斯韦尔博士说，“播云会制造致命的风暴，还是会减少下风方向的水分？当然，谁也说不准，可播云还在继续。”\n\n鉴于疑问如此之大，斯蒂恩旺德先生建议：“停止播云才是明智的。”而实际上，疑问却起了相反的作用。由于缺乏有关其影响的科学证据，没有人打赢过针对播云公司的官司。因此，私人气候工程可以在相对安全的法律环境中继续进行。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+          "sourceText": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
+          "displayText": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:28"
+          ],
+          "translationZh": "飞机向有威胁的风暴云团播撒一种化学剂，让小冰晶在长成危险的冰雹之前就化作雨落下。",
+          "analysisZh": "主干是 Airplanes seed threatening storm cells，这里 seed 是动词，意思是“向……播撒（催化剂）”，with a chemical 说撒的是什么。to make small ice crystals fall as rain 是目的状语，用 make sth do 的结构说要让小冰晶化作雨落下；before they can grow into … 是时间状语从句，they 指小冰晶。连起来就是：抢在冰晶长成冰雹之前，先让它变成雨落下。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 38,
+              "quote": "Airplanes seed threatening storm cells"
+            },
+            {
+              "start": 55,
+              "end": 94,
+              "quote": "to make small ice crystals fall as rain"
+            },
+            {
+              "start": 95,
+              "end": 120,
+              "quote": "before they can grow into"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+          "sourceText": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+          "displayText": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:29"
+          ],
+          "translationZh": "但艾伯塔中东部的农民——他们位于冰雹项目航线的下风方向——担心播云正把宝贵的水分从他们干渴的土地上偷走。",
+          "analysisZh": "先跳过两个破折号之间的插入语，主干是 farmers in east-central Alberta … worry that …，“农民担心……”。插入语 downwind of the hail project flights 交代农民的位置在航线下风处，说明他们为什么会受影响。that 引导宾语从句，is being stolen 是现在进行时的被动，by the cloud seeding 点出“偷”走水分的就是播云。句首 But 把话题从项目的做法转到反对的声音。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "But farmers in east-central Alberta"
+            },
+            {
+              "start": 74,
+              "end": 84,
+              "quote": "worry that"
+            },
+            {
+              "start": 107,
+              "end": 122,
+              "quote": "is being stolen"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-c:1"
+              ],
+              "start": 0,
+              "end": 175,
+              "quote": "1991 年 9 月 7 日，加拿大历史上损失最惨重的雹暴袭击了卡尔加里南郊。因此，自 1996 年起，一批保险公司每年在艾伯塔冰雹抑制项目上投入约 200 万美元。飞机向有威胁的风暴云团播撒一种化学剂，让小冰晶在长成危险的冰雹之前就化作雨落下。但艾伯塔中东部的农民——他们位于冰雹项目航线的下风方向——担心播云正把宝贵的水分从他们干渴的土地上偷走。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-c:2"
+              ],
+              "start": 177,
+              "end": 281,
+              "quote": "在那一带务农的诺曼·斯蒂恩旺德多年来一直在公众集会上谈论这个问题。“说到底，省政府是在让保险公司保护卡尔加里—埃德蒙顿城区免受冰雹之害，”斯蒂恩旺德先生说，“可他们却把干旱风险一直推到了东边的萨斯喀彻温省。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-c:3"
+              ],
+              "start": 283,
+              "end": 393,
+              "quote": "艾伯塔冰雹项目由云物理学家特里·克劳斯管理，他供职于北达科他州法戈市的天气改造公司。“我们只影响空气中总水分很小的一部分，所以不可能造成干旱，”克劳斯博士说，“事实上，我们让地面更湿润，也许还有助于增加下风方向的水分。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-c:4"
+              ],
+              "start": 395,
+              "end": 527,
+              "quote": "对播云安全性心存怀疑的人之一是查克·多斯韦尔，一位刚从俄克拉何马大学退休的研究科学家。“1999 年，我亲眼看到堪萨斯州一个播过云的风暴云团形成了强烈的龙卷风，”多斯韦尔博士说，“播云会制造致命的风暴，还是会减少下风方向的水分？当然，谁也说不准，可播云还在继续。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-c:5"
+              ],
+              "start": 529,
+              "end": 634,
+              "quote": "鉴于疑问如此之大，斯蒂恩旺德先生建议：“停止播云才是明智的。”而实际上，疑问却起了相反的作用。由于缺乏有关其影响的科学证据，没有人打赢过针对播云公司的官司。因此，私人气候工程可以在相对安全的法律环境中继续进行。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:28"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+                "start": 235,
+                "end": 377,
+                "quote": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p1",
+                "start": 83,
+                "end": 123,
+                "quote": "飞机向有威胁的风暴云团播撒一种化学剂，让小冰晶在长成危险的冰雹之前就化作雨落下。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+                "start": 378,
+                "end": 546,
+                "quote": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p1",
+                "start": 123,
+                "end": 175,
+                "quote": "但艾伯塔中东部的农民——他们位于冰雹项目航线的下风方向——担心播云正把宝贵的水分从他们干渴的土地上偷走。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+                "start": 235,
+                "end": 377,
+                "quote": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p1",
+                "start": 102,
+                "end": 122,
+                "quote": "让小冰晶在长成危险的冰雹之前就化作雨落下"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+                "start": 378,
+                "end": 546,
+                "quote": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+                "start": 0,
+                "end": 91,
+                "quote": "Given the degree of doubt, Mr. Stienwand suggests,“it would be wise to stop cloud seeding.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p1",
+                "start": 123,
+                "end": 175,
+                "quote": "但艾伯塔中东部的农民——他们位于冰雹项目航线的下风方向——担心播云正把宝贵的水分从他们干渴的土地上偷走。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p5",
+                "start": 9,
+                "end": 31,
+                "quote": "斯蒂恩旺德先生建议：“停止播云才是明智的。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+                "start": 0,
+                "end": 134,
+                "quote": "One doubter about the safety of cloud seeding is Chuck Doswell, a research scientist who just retired from the University of Oklahoma."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+                "start": 319,
+                "end": 375,
+                "quote": "No one really knows, of course, but the seeding goes on."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p4",
+                "start": 0,
+                "end": 22,
+                "quote": "对播云安全性心存怀疑的人之一是查克·多斯韦尔"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p4",
+                "start": 114,
+                "end": 131,
+                "quote": "当然，谁也说不准，可播云还在继续。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+                "start": 277,
+                "end": 349,
+                "quote": "Hence, private climate engineering can proceed in relative legal safety."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+                "start": 140,
+                "end": 276,
+                "quote": "Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit against cloud-seeding companies."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+                "start": 92,
+                "end": 139,
+                "quote": "In practice, doubt has had the opposite effect."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p5",
+                "start": 78,
+                "end": 105,
+                "quote": "因此，私人气候工程可以在相对安全的法律环境中继续进行。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p5",
+                "start": 47,
+                "end": 78,
+                "quote": "由于缺乏有关其影响的科学证据，没有人打赢过针对播云公司的官司。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-c-p5",
+                "start": 31,
+                "end": 47,
+                "quote": "而实际上，疑问却起了相反的作用。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先交代冰雹抑制项目的由来和做法，并引出农民的担忧；接着依次呈现农民代表的批评、项目负责人的辩护和科学家的怀疑；最后指出由于缺乏科学证据，疑问反而让播云在法律上得以继续。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+            "summary": "1991 年雹灾后保险公司出资播云防冰雹，下风方向的农民担心水分被抢走",
+            "function": "交代项目背景和做法，引出争议。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:2",
+            "summary": "农民 Stienwand 批评政府放任保险公司护城，却加重别处的干旱风险",
+            "function": "呈现反对一方的观点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:3",
+            "summary": "项目负责人 Krauss 称播云影响极小，不会致旱，甚至可能增加水分",
+            "function": "呈现项目一方的辩护。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+            "summary": "科学家 Doswell 举亲眼所见的龙卷风，质疑播云的安全性",
+            "function": "补充第三方的怀疑，说明争议尚无定论。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+            "summary": "Stienwand 主张停止播云，但缺乏科学证据使播云公司从未败诉，得以继续",
+            "function": "收束全文，点出疑问反而保护了播云。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-zhejiang-jan:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从项目的具体做法里读出它的目的。",
+      "stemTranslationZh": "这个项目旨在做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看飞机撒药为了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "保持土壤中的水分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "moisture",
+            "optionText": "moisture",
+            "matchType": "exact",
+            "relationNote": "moisture 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-c:1|worry that precious moisture]]：水分是农民担心被播云抢走的东西；项目是保险公司出钱防冰雹，并不以保住土壤水分为目标。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "quote": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+              "anchor": "农民担心水分被抢走"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "阻止冰雹形成。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "quote": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
+              "anchor": "抢在冰雹长成前降雨"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "预报灾害性雹暴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Forecast disastrous hailstorms.",
+            "explanation": "原文没说项目做天气预报；飞机是直接向已经出现的危险风暴云团（threatening storm cells）播撒化学剂。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "调查农业中的化学品使用情况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "chemical",
+            "optionText": "chemical",
+            "matchType": "exact",
+            "relationNote": "chemical 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-c:1|Airplanes seed threatening storm cells]]：化学剂是撒进风暴云里的，不是用在农田上；项目也不做什么调查。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "quote": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
+              "anchor": "化学剂撒进云里"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "project",
+          "sourceRole": "stem",
+          "targetText": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "Hail Suppression Project",
+          "answerText": "to make small ice crystals fall as rain before they can grow into dangerous hailstones",
+          "bridgeZh": "Suppression 意为压制，紧接着写飞机怎样压住冰雹",
+          "note": "题干 project 指原文的项目名 Hail Suppression Project。"
+        },
+        {
+          "sourceText": "Prevent the formation of hailstones.",
+          "sourceRole": "correctOption",
+          "targetText": "before they can grow into dangerous hailstones",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“阻止冰雹形成”就是原文说的让小冰晶在长成冰雹之前（before they can grow into … hailstones）先化作雨落下；项目名里的 Suppression（压制）也是这个意思，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从各方对播云的说法里找出持反对态度的一方。",
+      "stemTranslationZh": "谁反对这个项目？",
+      "locateBy": "stem",
+      "locateFindZh": "看 But 后是谁在担心",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "艾伯塔省中东部的农民。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "quote": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+              "anchor": "农民担心水分被偷"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "Given the degree of doubt, Mr. Stienwand suggests,“it would be wise to stop cloud seeding.”",
+              "anchor": "农民主张停止播云"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "保险公司的管理者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
+            "sourceHighlight": "have spent about $2 million per year",
+            "optionText": "Managers of insurance companies.",
+            "optionHighlight": "Managers of insurance companies",
+            "explanation": "保险公司每年为项目出约 200 万美元（spent about $2 million per year），是出钱支持项目的一方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "quote": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
+              "anchor": "保险公司出资"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "省政府官员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+            "sourceHighlight": "is letting",
+            "optionText": "Provincial government officials.",
+            "optionHighlight": "Provincial government officials",
+            "explanation": "Stienwand 批评省政府放任（is letting）保险公司搞项目，政府是被批评的一方，不是反对项目的人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:2",
+              "quote": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+              "anchor": "政府放任保险公司"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "卡尔加里和埃德蒙顿的居民。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+            "sourceEntity": "the Calgary-Edmonton urban area",
+            "optionText": "Residents of Calgary and Edmonton",
+            "optionEntity": "Residents of Calgary and Edmonton",
+            "explanation": "卡尔加里—埃德蒙顿城区是项目要保护、免遭冰雹（protect … from hail）的地方，那里的居民是受益的一方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:2",
+              "quote": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+              "anchor": "被保护的城区"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "opposed to",
+          "sourceRole": "stem",
+          "targetText": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "worry",
+          "sourceZh": "反对",
+          "targetCueZh": "担心",
+          "answerText": "farmers in east-central Alberta",
+          "note": "题干 opposed to 对应原文 worry。"
+        },
+        {
+          "sourceText": "Farmers in east-central Alberta.",
+          "sourceRole": "correctOption",
+          "targetText": "farmers in east-central Alberta",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 farmers in east-central Alberta：他们担心水分被播云偷走（is being stolen），这一带的农民 Stienwand 还在[[block:paper-gaokao-2024-zhejiang-jan:reading-c:5|Mr. Stienwand suggests]]里直接主张停止播云（stop cloud seeding），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:30": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "看 Doswell 提龙卷风这件亲身见闻是为了支撑什么看法。",
+      "stemTranslationZh": "多斯韦尔博士为什么提到他 1999 年看到的龙卷风？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句看他是什么身份",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "比较不同的播云方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To compare different kinds of seeding methods.",
+            "explanation": "全文只写了一种做法，即飞机向风暴云撒化学剂；Doswell 没有比较不同的播云方法。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "说明大雹暴的形成过程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
+            "sourceEntity": "significant tornadoes",
+            "optionText": "To illustrate the development of big hailstorms.",
+            "optionEntity": "big hailstorms",
+            "explanation": "他看到的是龙卷风（tornadoes），不是雹暴；而且他是借此怀疑播云会引发风暴，不是讲雹暴怎样一步步形成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "quote": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
+              "anchor": "他看到的是龙卷风"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "指出播云可能存在的危险。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "quote": "One doubter about the safety of cloud seeding is Chuck Doswell, a research scientist who just retired from the University of Oklahoma.",
+              "anchor": "怀疑播云安全"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "quote": "No one really knows, of course, but the seeding goes on.",
+              "anchor": "谁也说不准"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "揭示风暴与水分之间的联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "moisture",
+            "optionText": "moisture",
+            "matchType": "exact",
+            "relationNote": "moisture 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-c:4|Does cloud seeding create killer storms]]这个问句：他问播云是会引发风暴还是会减少水分，接着说谁也不知道，并没有讲风暴和水分之间有什么联系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "quote": "Does cloud seeding create killer storms or reduce moisture downwind?",
+              "anchor": "他问会不会减少水分"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "1999",
+          "sourceRole": "stem",
+          "targetText": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "One doubter about the safety of cloud seeding",
+          "bridgeZh": "龙卷风出自播过云的风暴，正是他起疑的依据",
+          "note": "题干 1999 原样出现在原文。"
+        },
+        {
+          "sourceText": "To indicate a possible danger of cloud seeding.",
+          "sourceRole": "correctOption",
+          "targetText": "One doubter about the safety of cloud seeding",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "他先被介绍为怀疑播云安全的人（doubter about the safety），接着举亲眼所见作证：龙卷风正是从播过云的风暴云团里形成的（form from a seeded storm cell）。随后他又说播云会不会制造致命风暴，谁也说不准（No one really knows），所以这只是“可能的”危险，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完最后一段的转折和结果，推出播云公司今后的处境。",
+      "stemTranslationZh": "从最后一段我们可以推断出什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2024-zhejiang-jan:reading-c:5]]先引 Stienwand 主张 stop，再转 opposite effect：没人告赢，播云得以 proceed；要推出公司的处境",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "科学研究已证明斯蒂恩旺德是对的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit against cloud-seeding companies.",
+            "sourceHighlight": "the lack of scientific proof",
+            "optionText": "Scientific studies have proved Stienwand right.",
+            "optionHighlight": "Scientific studies have proved",
+            "explanation": "原文恰恰说缺乏科学证据（lack of scientific proof），没人能证明播云有害，Stienwand 的主张也就没有得到证实。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit against cloud-seeding companies.",
+              "anchor": "缺乏科学证据"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "私人气候工程在加拿大是违法的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Hence, private climate engineering can proceed in relative legal safety.",
+            "sourceHighlight": "relative legal safety",
+            "optionText": "Private climate engineering is illegal in Canada.",
+            "optionHighlight": "illegal",
+            "explanation": "原文说私人气候工程处在相对安全的法律境地（relative legal safety），告它的官司都没打赢，并没说它违法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "Hence, private climate engineering can proceed in relative legal safety.",
+              "anchor": "法律上相对安全"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对播云的疑问已经消失了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Given the degree of doubt, Mr. Stienwand suggests,“it would be wise to stop cloud seeding.”",
+            "sourceHighlight": "Given the degree of doubt",
+            "optionText": "The doubt about cloud seeding has disappeared.",
+            "optionHighlight": "has disappeared",
+            "explanation": "Stienwand 正是因为疑问很大（the degree of doubt）才主张停；opposite effect 说的是疑问反倒让播云公司不会败诉，疑问本身还在。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "Given the degree of doubt, Mr. Stienwand suggests,“it would be wise to stop cloud seeding.”",
+              "anchor": "疑问依然很大"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "播云公司将继续存在下去。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "Hence, private climate engineering can proceed in relative legal safety.",
+              "anchor": "播云得以继续"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit against cloud-seeding companies.",
+              "anchor": "没人打赢官司"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "quote": "In practice, doubt has had the opposite effect.",
+              "anchor": "疑问起了相反作用"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Cloud-seeding companies will continue to exist.",
+          "sourceRole": "correctOption",
+          "targetText": "private climate engineering can proceed in relative legal safety",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "原文没直说公司会继续存在，是推出来的：疑问本该让播云停下，结果却相反（the opposite effect）。因为缺乏科学证据，没人打赢过告播云公司的官司（no one has succeeded），私人气候工程在法律上相对安全，可以继续进行（can proceed）。项目照常做下去，这些公司也就会继续存在，选 D。"
+        }
+      ]
+    }
+  }
+}

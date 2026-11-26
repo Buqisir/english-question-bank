@@ -1,0 +1,973 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:seven-choices": {
+      "overview": "文章谈大学网课：网课日益普及却未必人人适合。作者采访师生，提醒网课时间自由但仍有期限，应排进每周日程，并通过结伴学习、组学习小组和约见教授弥补人际互动的缺失。",
+      "fullTranslationZh": "过去几年里，网络学习已经成为大学生活的重要组成部分。一项调查发现，29%的大学生选修了网课。但是，所有网课都一样好吗？你怎样才能确定网络学习适合自己呢？如果你选修一门网课，怎样做才能确保取得尽可能好的成绩？\n\n我们采访了一些学生和教授，听取他们对网课的建议。网络学习最明显的优点是你可以随时随地学习。但这并不意味着没有截止日期。“我认为很多人忽视的一点是，进度落后是多么容易。”研究生阿曼达·宾德曼说。在选择网上学习之前，想一想你是不是一个能自我激励的学习者，以及课程内容是否有趣到足以让你坚持下去。\n\n被提到最多的建议很简单：把网课排进你的每周日程，就像你对待面授课程那样。亚历克斯·戴维森教授同一门课既有面授也有网课。他指出，他的网课学生最终成绩通常更低。网课很容易被一拖再拖，但你的成绩会因此受影响。一定要安排固定的时间观看讲座、阅读资料并参与网上讨论区的讨论。\n\n人们对网课最主要的抱怨是缺少人与人之间的互动。社交联系往往是学习的重要组成部分。你可以做一些事来缓解这个问题。本科生杰西卡·平克建议和朋友一起选网课，这样你们可以互相督促，保持进度。你也可以在课程讨论区找同学组织学习小组，或者约教授面谈，讨论课程中的概念。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+          "sourceText": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman.",
+          "displayText": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:38"
+          ],
+          "translationZh": "“我认为很多人忽视的一点是，进度落后是多么容易。”研究生阿曼达·宾德曼说。",
+          "analysisZh": "整句是直接引语加倒装的 says graduate student Amanda Bindman，即“某人说”。引号里主干是 I think 加宾语从句；从句主语 a point 带定语从句 that many people lose sight of（人们忽视的那一点），系动词 is 后接 how 引导的表语从句。how easy it can be to fall behind schedule 中 it 是形式主语，真正的主语是 to fall behind schedule，意思是落后进度有多容易。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 16,
+              "quote": "a point"
+            },
+            {
+              "start": 17,
+              "end": 47,
+              "quote": "that many people lose sight of"
+            },
+            {
+              "start": 51,
+              "end": 93,
+              "quote": "how easy it can be to fall behind schedule"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+          "sourceText": "Before choosing to study online, consider whether you’re a self-motivated learner and if the material seems interesting enough to keep you going.",
+          "displayText": "Before choosing to study online, consider whether you’re a self-motivated learner and if the material seems interesting enough to keep you going.",
+          "relatedQuestionIds": [],
+          "translationZh": "在选择网上学习之前，想一想你是不是一个能自我激励的学习者，以及课程内容是否有趣到足以让你坚持下去。",
+          "analysisZh": "主干是祈使句 consider whether... and if...，意为“考虑是否……以及是否……”，两个宾语从句并列。句首 Before choosing to study online 是介词加动名词，交代时间。第二个从句里 interesting enough to keep you going 是“形容词 + enough + 不定式”，意为有趣到足以让你坚持；keep you going 即让你继续下去。",
+          "underlineRanges": [
+            {
+              "start": 33,
+              "end": 41,
+              "quote": "consider"
+            },
+            {
+              "start": 42,
+              "end": 81,
+              "quote": "whether you’re a self-motivated learner"
+            },
+            {
+              "start": 108,
+              "end": 144,
+              "quote": "interesting enough to keep you going"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先提出网课普及但质量和适合度存疑的问题，再借师生建议依次讲清：时间自由不等于没有期限，要把网课排进日程，并设法弥补缺少的人际互动。",
+        "units": [
+          {
+            "unitId": "unit:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1"
+            ],
+            "summary": "网课已成大学生活的重要部分，作者连发三问，引出怎样学好网课。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2"
+            ],
+            "summary": "时间自由是最大优点，但仍有期限、容易落后，选课前要看自己能否自我激励。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3"
+            ],
+            "summary": "最常见的建议是把网课排进每周日程，教授的对比说明拖延会拉低成绩。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+              "block:paper-gaokao-2024-zhejiang-jan:seven-choices:5"
+            ],
+            "summary": "网课缺少人际互动，可结伴选课、组学习小组或约见教授来弥补。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 103,
+              "quote": "过去几年里，网络学习已经成为大学生活的重要组成部分。一项调查发现，29%的大学生选修了网课。但是，所有网课都一样好吗？你怎样才能确定网络学习适合自己呢？如果你选修一门网课，怎样做才能确保取得尽可能好的成绩？"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2"
+              ],
+              "start": 105,
+              "end": 250,
+              "quote": "我们采访了一些学生和教授，听取他们对网课的建议。网络学习最明显的优点是你可以随时随地学习。但这并不意味着没有截止日期。“我认为很多人忽视的一点是，进度落后是多么容易。”研究生阿曼达·宾德曼说。在选择网上学习之前，想一想你是不是一个能自我激励的学习者，以及课程内容是否有趣到足以让你坚持下去。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3"
+              ],
+              "start": 252,
+              "end": 384,
+              "quote": "被提到最多的建议很简单：把网课排进你的每周日程，就像你对待面授课程那样。亚历克斯·戴维森教授同一门课既有面授也有网课。他指出，他的网课学生最终成绩通常更低。网课很容易被一拖再拖，但你的成绩会因此受影响。一定要安排固定的时间观看讲座、阅读资料并参与网上讨论区的讨论。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+                "block:paper-gaokao-2024-zhejiang-jan:seven-choices:5"
+              ],
+              "start": 386,
+              "end": 514,
+              "quote": "人们对网课最主要的抱怨是缺少人与人之间的互动。社交联系往往是学习的重要组成部分。你可以做一些事来缓解这个问题。本科生杰西卡·平克建议和朋友一起选网课，这样你们可以互相督促，保持进度。你也可以在课程讨论区找同学组织学习小组，或者约教授面谈，讨论课程中的概念。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+            "text": "In the past few years, online learning has become a significant part of the university and college experience. A survey found that 29 percent of college students registered for online courses. But are all online courses created equal? How can you be sure that digital learning is right for you? If you take an online course, what can you do to ensure the best possible grade?"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+            "text": "We interviewed students and professors to get their advice about online courses. The most obvious advantage of online learning is that you can study anywhere and anytime. But that doesn’t mean there aren’t deadlines. “I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman. Before choosing to study online, consider whether you’re a self-motivated learner and if the material seems interesting enough to keep you going."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+            "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses. Professor Alex Davidson teaches the same course in person and online. He noted that his online students usually end up with lower grades. It is so easy to let an online course slide, but your grades will suffer as a result. Be sure to schedule set times to watch your lectures, read materials and contribute to online discussion boards."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+            "text": "The chief complaint about online courses is that they lack human interaction. A social connection is often a big part of learning. There are things you can do to ease this problem. Jessica Pink, an undergraduate student, suggests taking online courses with a friend, so you can motivate each other to stay on track. You can also find students on the class discussion board to organize a study group, or schedule"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-zhejiang-jan:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "start": 23,
+                "end": 110,
+                "quote": "online learning has become a significant part of the university and college experience."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "start": 6,
+                "end": 26,
+                "quote": "网络学习已经成为大学生活的重要组成部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-zhejiang-jan:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:36"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "start": 111,
+                "end": 192,
+                "quote": "A survey found that 29 percent of college students registered for online courses."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "start": 26,
+                "end": 46,
+                "quote": "一项调查发现，29%的大学生选修了网课。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-zhejiang-jan:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 0,
+                "end": 80,
+                "quote": "We interviewed students and professors to get their advice about online courses."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 0,
+                "end": 24,
+                "quote": "我们采访了一些学生和教授，听取他们对网课的建议。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-zhejiang-jan:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:37"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "start": 295,
+                "end": 375,
+                "quote": "If you take an online course, what can you do to ensure the best possible grade?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+                "start": 76,
+                "end": 103,
+                "quote": "如果你选修一门网课，怎样做才能确保取得尽可能好的成绩？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-zhejiang-jan:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 178,
+                "end": 273,
+                "quote": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 59,
+                "end": 84,
+                "quote": "“我认为很多人忽视的一点是，进度落后是多么容易。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-zhejiang-jan:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:38"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 171,
+                "end": 216,
+                "quote": "But that doesn’t mean there aren’t deadlines."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 45,
+                "end": 59,
+                "quote": "但这并不意味着没有截止日期。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-zhejiang-jan:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+                "start": 151,
+                "end": 218,
+                "quote": "He noted that his online students usually end up with lower grades."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+                "start": 59,
+                "end": 78,
+                "quote": "他指出，他的网课学生最终成绩通常更低。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-zhejiang-jan:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:39"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+                "start": 144,
+                "end": 213,
+                "quote": "Professor Alex Davidson teaches the same course in person and online."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+                "start": 36,
+                "end": 59,
+                "quote": "亚历克斯·戴维森教授同一门课既有面授也有网课。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-zhejiang-jan:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+                "start": 60,
+                "end": 109,
+                "quote": "There are things you can do to ease this problem."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+                "start": 40,
+                "end": 55,
+                "quote": "你可以做一些事来缓解这个问题。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-zhejiang-jan:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:40"
+            ],
+            "blankId": "blank:paper-gaokao-2024-zhejiang-jan:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+                "start": 0,
+                "end": 77,
+                "quote": "The chief complaint about online courses is that they lack human interaction."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+                "start": 0,
+                "end": 23,
+                "quote": "人们对网课最主要的抱怨是缺少人与人之间的互动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:38"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 178,
+                "end": 311,
+                "quote": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 59,
+                "end": 96,
+                "quote": "“我认为很多人忽视的一点是，进度落后是多么容易。”研究生阿曼达·宾德曼说。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 312,
+                "end": 457,
+                "quote": "Before choosing to study online, consider whether you’re a self-motivated learner and if the material seems interesting enough to keep you going."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+                "start": 96,
+                "end": 145,
+                "quote": "在选择网上学习之前，想一想你是不是一个能自我激励的学习者，以及课程内容是否有趣到足以让你坚持下去。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 38,
+          "secondary": 40,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"motivation\" 像接本段后文的 \"self-motivated learner\"，也像在讲网课的难处。但空前刚夸完 \"anywhere and anytime\"，空后马上说 \"fall behind schedule\"，中间要转到期限和进度，它既没有转折，也没谈时间。放到下一段开头，\"this problem\" 也找不到它说的问题。",
+          "quotes": [
+            "motivation",
+            "self-motivated learner",
+            "anywhere and anytime",
+            "fall behind schedule",
+            "this problem"
+          ]
+        },
+        "C": {
+          "target": 37,
+          "secondary": 36,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "online course"
+          ],
+          "text": "它也是问读者的问句，像接空前 \"How can you be sure\"。但下一段 \"to get their advice\" 要回答怎么做，它只问知不知道。它照答案 F 改：都有 \"online course\"，F 问怎样拿好成绩，它改成问网课算不算教育。它的 \"part of\" 也像接首句 \"a significant part\"，但那一空后的 \"But\" 要转一个事实，不能接问句。",
+          "quotes": [
+            "How can you be sure",
+            "to get their advice",
+            "online course",
+            "part of",
+            "a significant part",
+            "But"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-zhejiang-jan:36": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "online learning",
+        "a significant part",
+        "university and college experience",
+        "all online courses",
+        "created equal"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+        "beforeQuote": "In the past few years, online learning has become a significant part of the university and college experience.",
+        "afterQuote": "But are all online courses created equal?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "context-after",
+          "targetText": "A survey found that 29 percent of college students registered for online courses.",
+          "relation": "But 把前面网课很普及的事实转成追问：选的人多了，网课是否都一样好。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "29 percent of college students",
+          "signalSide": "option",
+          "targetText": "a significant part",
+          "relation": "用调查比例把“相当大的一部分”说成具体数字。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a significant part",
+          "signalSide": "context-before",
+          "targetText": "29 percent of college students",
+          "relation": "空前只下判断，选项里的数字为它作证。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "registered for online courses",
+          "signalSide": "option",
+          "targetText": "online learning",
+          "relation": "选网课的人数对应空前网络学习的普及。"
+        }
+      ],
+      "lock": [
+        "a significant part",
+        "29 percent",
+        "But"
+      ],
+      "find": {
+        "text": "空前说网课已是 \"a significant part\"，要有东西撑腰；G 用 \"29 percent\" 的调查数字作证，空后 \"But\" 才能转去质疑。",
+        "quotes": [
+          "a significant part",
+          "29 percent",
+          "But"
+        ]
+      },
+      "explain": "首句断言网课越来越重要，这句拿调查数据把话说实；先立住“网课很普遍”，空后两个问句才能转过来追问网课是否都一样好、是否适合你。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 也谈 \"online courses\"，但它是抱怨；空后 \"But\" 要从正面事实转向质疑，前面先放抱怨就转不过来。",
+          "quotes": [
+            "online courses",
+            "But"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "首句断言网课越来越重要，这句拿调查数据把话说实；先立住“网课很普遍”，空后两个问句才能转过来追问网课是否都一样好、是否适合你。",
+        "matchedClues": [
+          {
+            "contextSide": "a significant part",
+            "optionSide": "29 percent of college students",
+            "relation": "具体比例证明网课占了不小的分量。"
+          },
+          {
+            "contextSide": "But are all online courses created equal?",
+            "optionSide": "registered for online courses",
+            "relation": "先说选的人多，再用 But 追问质量。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 也谈 \"online courses\"，但它是抱怨；空后 \"But\" 要从正面事实转向质疑，前面先放抱怨就转不过来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:37": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:37",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "are all online courses created equal",
+        "How can you be sure",
+        "right for you",
+        "to get their advice",
+        "interviewed students and professors"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:1",
+        "beforeQuote": "But are all online courses created equal? How can you be sure that digital learning is right for you?",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "How can you be sure",
+          "signalSide": "context-before",
+          "targetText": "what can you do",
+          "relation": "空前已经连问两句，这句接着问，三个问句并列。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "what can you do",
+          "signalSide": "option",
+          "targetText": "to get their advice",
+          "relation": "问该怎么做，下一段采访师生给建议来回答。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "to get their advice",
+          "signalSide": "context-after",
+          "targetText": "what can you do to ensure the best possible grade",
+          "relation": "建议需要一个“怎么办”的问题作对象。"
+        }
+      ],
+      "lock": [
+        "How can you be sure",
+        "what can you do",
+        "to get their advice"
+      ],
+      "find": {
+        "text": "空前连问两句，段尾还在提问；下一段 \"to get their advice\" 要给建议，只有 F 的 \"what can you do\" 问的是怎么做。",
+        "quotes": [
+          "to get their advice",
+          "what can you do"
+        ]
+      },
+      "explain": "前两问质疑网课质量、问它是否适合你，这句把问题落到“怎样拿好成绩”这一具体做法上；下一段采访师生、给出建议，正好回答这一问。这是承上启下。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "前两问质疑网课质量、问它是否适合你，这句把问题落到“怎样拿好成绩”这一具体做法上；下一段采访师生、给出建议，正好回答这一问。这是承上启下。",
+        "matchedClues": [
+          {
+            "contextSide": "How can you be sure that digital learning is right for you?",
+            "optionSide": "If you take an online course, what can you do",
+            "relation": "同为问读者的问句，从“适不适合”推进到“怎么学好”。"
+          },
+          {
+            "contextSide": "to get their advice",
+            "optionSide": "ensure the best possible grade",
+            "relation": "下文的建议就是拿好成绩的办法。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "它也是问读者的问句，像接空前 \"How can you be sure\"。但下一段 \"to get their advice\" 要回答怎么做，它只问知不知道。它照答案 F 改：都有 \"online course\"，F 问怎样拿好成绩，它改成问网课算不算教育。它的 \"part of\" 也像接首句 \"a significant part\"，但那一空后的 \"But\" 要转一个事实，不能接问句。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:38": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "most obvious advantage",
+        "study anywhere and anytime",
+        "lose sight of",
+        "fall behind schedule"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+        "beforeQuote": "The most obvious advantage of online learning is that you can study anywhere and anytime.",
+        "afterQuote": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "you can study anywhere and anytime",
+          "relation": "But 从优点转到要提防的一面。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "anywhere and anytime",
+          "signalSide": "context-before",
+          "targetText": "there aren’t deadlines",
+          "relation": "时间自由容易让人误以为没有期限。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "that",
+          "signalSide": "option",
+          "targetText": "you can study anywhere and anytime",
+          "relation": "that 指空前“随时随地都能学”这件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "deadlines",
+          "signalSide": "option",
+          "targetText": "fall behind schedule",
+          "relation": "有截止日期，才谈得上落后进度。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "fall behind schedule",
+          "signalSide": "context-after",
+          "targetText": "deadlines",
+          "relation": "空后学生的话印证期限一直都在。"
+        }
+      ],
+      "lock": [
+        "anywhere and anytime",
+        "deadlines",
+        "fall behind schedule"
+      ],
+      "find": {
+        "text": "空前夸 \"anywhere and anytime\"，空后却提醒容易 \"fall behind schedule\"；只有 A 用 \"But\" 转过来，又用 \"deadlines\" 接上进度。",
+        "quotes": [
+          "anywhere and anytime",
+          "fall behind schedule",
+          "But",
+          "deadlines"
+        ]
+      },
+      "explain": "空前刚肯定网课时间自由，这句马上提醒自由不等于没有期限；空后研究生说很多人忽视自己多容易落后，正好为“有期限”作证。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前刚肯定网课时间自由，这句马上提醒自由不等于没有期限；空后研究生说很多人忽视自己多容易落后，正好为“有期限”作证。",
+        "matchedClues": [
+          {
+            "contextSide": "study anywhere and anytime",
+            "optionSide": "But that doesn’t mean",
+            "relation": "that 承接时间自由，But 否定由此产生的误解。"
+          },
+          {
+            "contextSide": "fall behind schedule",
+            "optionSide": "deadlines",
+            "relation": "期限和进度是一回事的两面。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "它的 \"motivation\" 像接本段后文的 \"self-motivated learner\"，也像在讲网课的难处。但空前刚夸完 \"anywhere and anytime\"，空后马上说 \"fall behind schedule\"，中间要转到期限和进度，它既没有转折，也没谈时间。放到下一段开头，\"this problem\" 也找不到它说的问题。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:39": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "in person courses",
+        "weekly schedule",
+        "He noted",
+        "his online students",
+        "lower grades"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+        "beforeQuote": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
+        "afterQuote": "He noted that his online students usually end up with lower grades."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "He",
+          "signalSide": "context-after",
+          "targetText": "Professor Alex Davidson",
+          "relation": "He 要指前面出现的一位男性。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Professor Alex Davidson",
+          "signalSide": "option",
+          "targetText": "He / his",
+          "relation": "选项交代这位教授，He 和 his 才有所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "his online students",
+          "signalSide": "context-after",
+          "targetText": "teaches the same course in person and online",
+          "relation": "他得教网课，才有“他的网课学生”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in person and online",
+          "signalSide": "option",
+          "targetText": "in person courses",
+          "relation": "同一门课两种上法，接空前“像对待面授课那样”。"
+        }
+      ],
+      "lock": [
+        "He noted",
+        "his online students",
+        "in person and online"
+      ],
+      "find": {
+        "text": "空后 \"He noted\" 和 \"his online students\" 要先出现一位教网课的男性；只有 D 的 \"Professor Alex Davidson\" 能当这个 He。",
+        "quotes": [
+          "He noted",
+          "his online students",
+          "Professor Alex Davidson"
+        ]
+      },
+      "explain": "空前建议像对待面授课一样给网课排时间，这句请出一位面授、网课都教的教授；同一门课两种上法，他说网课学生成绩更低，才有可比性，也撑住了排时间的建议。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 的 \"A survey found\" 也像在给证据，但空后 \"He noted\" 要一个人当主语，调查不是 He。",
+          "quotes": [
+            "A survey found",
+            "He noted"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前建议像对待面授课一样给网课排时间，这句请出一位面授、网课都教的教授；同一门课两种上法，他说网课学生成绩更低，才有可比性，也撑住了排时间的建议。",
+        "matchedClues": [
+          {
+            "contextSide": "He noted / his online students",
+            "optionSide": "Professor Alex Davidson",
+            "relation": "教授是空后 He 和 his 的先行词。"
+          },
+          {
+            "contextSide": "in person courses",
+            "optionSide": "the same course in person and online",
+            "relation": "面授与网课对照，成绩差异才说得通。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 的 \"A survey found\" 也像在给证据，但空后 \"He noted\" 要一个人当主语，调查不是 He。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:40": {
+      "blankId": "blank:paper-gaokao-2024-zhejiang-jan:40",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "A social connection",
+        "a big part of learning",
+        "ease this problem",
+        "taking online courses with a friend",
+        "organize a study group"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "A social connection is often a big part of learning. There are things you can do to ease this problem."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this problem",
+          "signalSide": "context-after",
+          "targetText": "they lack human interaction",
+          "relation": "this problem 要指前面提到的某个问题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "lack human interaction",
+          "signalSide": "option",
+          "targetText": "this problem",
+          "relation": "缺少人际互动就是要缓解的那个问题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "A social connection",
+          "signalSide": "context-after",
+          "targetText": "human interaction",
+          "relation": "社交联系与人际互动说的是同一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "human interaction",
+          "signalSide": "option",
+          "targetText": "A social connection",
+          "relation": "选项先点出缺什么，空后解释它为何重要。"
+        }
+      ],
+      "lock": [
+        "lack human interaction",
+        "A social connection",
+        "this problem"
+      ],
+      "find": {
+        "text": "空后 \"this problem\" 要前面先有个问题，\"A social connection\" 又说社交重要；E 的 \"lack human interaction\" 正是这个问题。",
+        "quotes": [
+          "this problem",
+          "A social connection",
+          "lack human interaction"
+        ]
+      },
+      "explain": "这句开段点出网课最常遭的抱怨；下一句说明社交为何对学习重要，再往后结伴选课、组学习小组、约见教授，都是在补上缺少的人际互动。段首总起。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "这句开段点出网课最常遭的抱怨；下一句说明社交为何对学习重要，再往后结伴选课、组学习小组、约见教授，都是在补上缺少的人际互动。段首总起。",
+        "matchedClues": [
+          {
+            "contextSide": "A social connection",
+            "optionSide": "human interaction",
+            "relation": "同义复现，空后解释缺互动为何是问题。"
+          },
+          {
+            "contextSide": "this problem",
+            "optionSide": "The chief complaint",
+            "relation": "this problem 回指这条抱怨。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    }
+  }
+}

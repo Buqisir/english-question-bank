@@ -1,0 +1,747 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-zhejiang-jan:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-zhejiang-jan:reading-d": {
+      "overview": "文章由斯坦福棉花糖实验说起，指出成年人每天也面对类似考验：大脑形成于热量和信息都匮乏的年代，如今面对丰足的食物和信息仍本能地被吸引，因此要像控制饮食一样审慎地消费信息。",
+      "fullTranslationZh": "斯坦福棉花糖实验最初是心理学家沃尔特·米歇尔在 20 世纪 60 年代末进行的。一所幼儿园里四到六岁的孩子被安排进一个房间。桌上放着一颗由孩子自己挑选的甜食。每个孩子都被告知，如果能等 15 分钟再吃这颗甜食，就会再得到一颗。然后孩子们被单独留在房间里。日后对这些孩子的跟踪研究显示，能否为得到第二颗甜食而等足时间，与人生中各种形式的成功之间存在关联。\n\n作为成年人，我们每天都面对着某种形式的棉花糖实验。诱惑我们的不是甜食，而是电脑、手机和平板——所有这些把我们与传送各类信息的全球系统连在一起的设备，它们对我们的作用，就像棉花糖对学龄前儿童的作用一样。\n\n我们之所以受甜食诱惑，是因为我们的祖先生活在一个热量匮乏的世界里，我们的大脑对甜食形成了一种反应机制，体现出甜食的价值——一种获得奖赏、得到满足的感觉。但是，随着我们改造了周围的世界，大大降低了获取热量所需的成本和力气，我们的大脑却仍和几千年前一样，这种不匹配正是我们许多人难以抗拒明知不该吃的诱人食物的根本原因。\n\n我们对信息的反应中也有类似的过程。人类作为一个物种，在形成期所处的环境信息匮乏，所以我们的大脑形成了一种珍视新信息的机制。但全球互联极大地改变了我们的信息环境。如今我们不停地遭受新信息的轰炸。因此，正如我们需要更审慎地对待热量摄入一样，我们也需要更审慎地对待信息消费，抵制精神“垃圾食品”的诱惑，以便最有效地管理我们的时间。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+          "sourceText": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+          "displayText": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:33"
+          ],
+          "translationZh": "但是，随着我们改造了周围的世界，大大降低了获取热量所需的成本和力气，我们的大脑却仍和几千年前一样，这种不匹配正是我们许多人难以抗拒明知不该吃的诱人食物的根本原因。",
+          "analysisZh": "先找两个主干：we still have the same brains …（我们的大脑还是老样子）和 this mismatch is at the heart of why …（这种不匹配是……的根本原因），由 and 连接。句首 as we’ve reshaped the world 是“随着”引导的状语从句，dramatically reducing … 是现在分词短语，补充世界怎样被改造：获取热量变得容易了。this mismatch 正好把前面的两边扣在一起：外面的世界变了，大脑没变。why 引导的从句再说出结果：难以抗拒诱人的食物。",
+          "underlineRanges": [
+            {
+              "start": 43,
+              "end": 84,
+              "quote": "dramatically reducing the cost and effort"
+            },
+            {
+              "start": 117,
+              "end": 146,
+              "quote": "we still have the same brains"
+            },
+            {
+              "start": 182,
+              "end": 214,
+              "quote": "this mismatch is at the heart of"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+          "sourceText": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+          "displayText": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-zhejiang-jan:34"
+          ],
+          "translationZh": "因此，正如我们需要更审慎地对待热量摄入一样，我们也需要更审慎地对待信息消费，抵制精神“垃圾食品”的诱惑，以便最有效地管理我们的时间。",
+          "analysisZh": "主干是 we also need to be more thoughtful about our information consumption，“我们也需要更审慎地消费信息”。句首 just as … 引出类比：就像对待热量要更审慎一样。resisting the temptation of … 是现在分词短语，说明审慎的具体做法是抵制诱惑；in order to … 是目的状语，交代这样做为了管好时间。Therefore 表明这是全文由前面类比推出的结论。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 48,
+              "quote": "just as we need to be more thoughtful"
+            },
+            {
+              "start": 80,
+              "end": 148,
+              "quote": "we also need to be more thoughtful about our information consumption"
+            },
+            {
+              "start": 150,
+              "end": 174,
+              "quote": "resisting the temptation"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-d:1"
+              ],
+              "start": 0,
+              "end": 176,
+              "quote": "斯坦福棉花糖实验最初是心理学家沃尔特·米歇尔在 20 世纪 60 年代末进行的。一所幼儿园里四到六岁的孩子被安排进一个房间。桌上放着一颗由孩子自己挑选的甜食。每个孩子都被告知，如果能等 15 分钟再吃这颗甜食，就会再得到一颗。然后孩子们被单独留在房间里。日后对这些孩子的跟踪研究显示，能否为得到第二颗甜食而等足时间，与人生中各种形式的成功之间存在关联。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-d:2"
+              ],
+              "start": 178,
+              "end": 278,
+              "quote": "作为成年人，我们每天都面对着某种形式的棉花糖实验。诱惑我们的不是甜食，而是电脑、手机和平板——所有这些把我们与传送各类信息的全球系统连在一起的设备，它们对我们的作用，就像棉花糖对学龄前儿童的作用一样。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-d:3"
+              ],
+              "start": 280,
+              "end": 437,
+              "quote": "我们之所以受甜食诱惑，是因为我们的祖先生活在一个热量匮乏的世界里，我们的大脑对甜食形成了一种反应机制，体现出甜食的价值——一种获得奖赏、得到满足的感觉。但是，随着我们改造了周围的世界，大大降低了获取热量所需的成本和力气，我们的大脑却仍和几千年前一样，这种不匹配正是我们许多人难以抗拒明知不该吃的诱人食物的根本原因。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-zhejiang-jan:reading-d:4"
+              ],
+              "start": 439,
+              "end": 601,
+              "quote": "我们对信息的反应中也有类似的过程。人类作为一个物种，在形成期所处的环境信息匮乏，所以我们的大脑形成了一种珍视新信息的机制。但全球互联极大地改变了我们的信息环境。如今我们不停地遭受新信息的轰炸。因此，正如我们需要更审慎地对待热量摄入一样，我们也需要更审慎地对待信息消费，抵制精神“垃圾食品”的诱惑，以便最有效地管理我们的时间。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+                "start": 212,
+                "end": 509,
+                "quote": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p3",
+                "start": 76,
+                "end": 157,
+                "quote": "但是，随着我们改造了周围的世界，大大降低了获取热量所需的成本和力气，我们的大脑却仍和几千年前一样，这种不匹配正是我们许多人难以抗拒明知不该吃的诱人食物的根本原因。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2024-zhejiang-jan:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2024-zhejiang-jan:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+                "start": 319,
+                "end": 565,
+                "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p4",
+                "start": 96,
+                "end": 162,
+                "quote": "因此，正如我们需要更审慎地对待热量摄入一样，我们也需要更审慎地对待信息消费，抵制精神“垃圾食品”的诱惑，以便最有效地管理我们的时间。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+                "start": 248,
+                "end": 358,
+                "quote": "Each child was told if they waited for 15 minutes before eating the treat, they would be given a second treat."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p1",
+                "start": 88,
+                "end": 112,
+                "quote": "如果能等 15 分钟再吃这颗甜食，就会再得到一颗"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+                "start": 212,
+                "end": 509,
+                "quote": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p3",
+                "start": 92,
+                "end": 124,
+                "quote": "大大降低了获取热量所需的成本和力气，我们的大脑却仍和几千年前一样"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+                "start": 319,
+                "end": 565,
+                "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p4",
+                "start": 118,
+                "end": 147,
+                "quote": "我们也需要更审慎地对待信息消费，抵制精神“垃圾食品”的诱惑"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2024-zhejiang-jan:35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-zhejiang-jan:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:2",
+                "start": 0,
+                "end": 62,
+                "quote": "As adults we face a version of the marshmallow test every day."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+                "start": 0,
+                "end": 109,
+                "quote": "The Stanford marshmallow(棉花糖) test was originally conducted by psychologist Walter Mischel in the late 1960s."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+                "start": 319,
+                "end": 565,
+                "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p2",
+                "start": 0,
+                "end": 25,
+                "quote": "作为成年人，我们每天都面对着某种形式的棉花糖实验。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p1",
+                "start": 0,
+                "end": 40,
+                "quote": "斯坦福棉花糖实验最初是心理学家沃尔特·米歇尔在 20 世纪 60 年代末进行的。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2024-zhejiang-jan:reading-d-p4",
+                "start": 118,
+                "end": 133,
+                "quote": "我们也需要更审慎地对待信息消费"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先介绍棉花糖实验及其发现，再指出成年人每天面对的是电子设备和信息的诱惑；接着解释人难抗甜食是因为大脑跟不上热量丰足的世界，最后把同样的道理类比到信息上，提出要审慎消费信息。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+            "summary": "Mischel 的棉花糖实验：能等 15 分钟的孩子日后更易成功",
+            "function": "介绍实验，引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:2",
+            "summary": "成年人每天也面对棉花糖测试，诱惑来自各种联网设备和信息",
+            "function": "把实验迁移到成人身上，点明全文主题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+            "summary": "大脑形成于热量匮乏的年代，与如今热量易得的世界不匹配，所以难抗甜食",
+            "function": "用饮食的例子解释诱惑的来源。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+            "summary": "大脑同样珍视新信息，面对信息轰炸，要像对待热量一样审慎消费信息",
+            "function": "由饮食类比到信息，提出建议，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-zhejiang-jan:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从实验规则里找出拿到第二颗甜食的条件。",
+      "stemTranslationZh": "在米歇尔的实验中，孩子们需要做什么才能得到第二颗甜食？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 if 后的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "独自参加一场考试。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "alone",
+            "optionText": "alone",
+            "matchType": "exact",
+            "relationNote": "alone 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-d:1|Then they were left alone in the room]]：孩子被单独留在房里是等待时的安排，原文没让他们考试。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+              "quote": "Then they were left alone in the room.",
+              "anchor": "孩子被单独留下"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对研究人员表示尊重。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Show respect for the researchers.",
+            "explanation": "原文没提要孩子尊重研究人员；能不能拿到第二颗，只看能否忍住 15 分钟不吃。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "和别人分享他们的甜食。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Share their treats with others.",
+            "explanation": "每个孩子面前只有一颗自己挑的甜食（A single sugary treat），又被单独留在房里，原文没提和别人分享。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "推迟十五分钟再吃。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+              "quote": "Each child was told if they waited for 15 minutes before eating the treat, they would be given a second treat.",
+              "anchor": "等 15 分钟再吃"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "a second treat",
+          "sourceRole": "stem",
+          "targetText": "Each child was told if they waited for 15 minutes before eating the treat, they would be given a second treat.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+          "relationType": "locationCue",
+          "answerText": "if they waited for 15 minutes before eating the treat",
+          "note": "题干 a second treat 原词出现在原文。"
+        },
+        {
+          "sourceText": "Delay eating for fifteen minutes.",
+          "sourceRole": "correctOption",
+          "targetText": "waited for 15 minutes before eating the treat",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "选项的“推迟吃”（Delay eating）就是原文的吃之前先等着（waited … before eating），fifteen minutes 就是 15 minutes，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清 this mismatch 指的是哪两样东西对不上。",
+      "stemTranslationZh": "根据第三段，________之间存在不匹配。",
+      "locateBy": "stem",
+      "locateFindZh": "this 指什么，往同句前面找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "热量匮乏的世界与我们的好胃口",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "calorie-poor world",
+            "optionText": "calorie-poor world",
+            "matchType": "exact",
+            "relationNote": "calorie-poor world 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-d:3|our ancestors lived in a calorie-poor world]]：那是祖先生活的世界；对不上的是今天热量易得和大脑没变，原文也没谈胃口好不好。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "quote": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value-a feeling of reward and satisfaction.",
+              "anchor": "那是祖先的世界"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "糖的短缺与我们的营养需求",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+            "sourceHighlight": "dramatically reducing the cost and effort",
+            "optionText": "the shortage of sugar and our nutritional needs",
+            "optionHighlight": "the shortage of sugar",
+            "explanation": "如今获取热量的成本和力气大大降低（reducing the cost and effort），糖并不短缺；原文也没谈营养需求。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "quote": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+              "anchor": "获取热量更容易了"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "充足的食物供应与我们未曾改变的大脑",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "quote": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+              "anchor": "世界变了，大脑没变"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "诱人的食物与我们保持健康的努力",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tempting foods",
+            "optionText": "tempting foods",
+            "matchType": "exact",
+            "relationNote": "tempting foods 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-d:3|struggle to resist tempting foods]]：难以抗拒诱人的食物是这种不匹配造成的结果，不是不匹配的两边；原文也没提健身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "quote": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+              "anchor": "难抗诱人食物是结果"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mismatch",
+          "sourceRole": "stem",
+          "targetText": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago",
+          "note": "题干 mismatch 原词出现在原文。"
+        },
+        {
+          "sourceText": "the rich food supply and our unchanged brains",
+          "sourceRole": "correctOption",
+          "targetText": "we still have the same brains we had thousands of years ago",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的两边都是概括出来的：“食物供应充足”来自获取热量的成本和力气大大降低（reducing the cost and effort），“大脑没变”就是大脑还和几千年前一样（the same brains），选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者最后的建议里概括出读者该怎样对待信息。",
+      "stemTranslationZh": "作者建议读者做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "随时吸收新信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+            "sourceHighlight": "resisting the temptation",
+            "optionText": "Absorb new information readily.",
+            "optionHighlight": "Absorb new information readily",
+            "explanation": "见到新信息就收，正是大脑珍视新信息（prized new information）的老习惯；作者要我们抵制这种诱惑（resisting the temptation），方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+              "anchor": "要抵制诱惑"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "做有选择的信息消费者。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+              "anchor": "审慎消费信息"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "利用多样的信息来源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Use diverse information sources.",
+            "explanation": "原文没劝人多找信息来源；作者担心的恰是新信息太多，我们不停地遭受轰炸（bombarded）。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "保护信息环境。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "information environment",
+            "optionText": "information environment",
+            "matchType": "exact",
+            "relationNote": "information environment 借自[[block:paper-gaokao-2024-zhejiang-jan:reading-d:4|greatly changed our information environment]]：作者只说全球互联改变了信息环境，要改的是我们自己的信息消费，不是去保护这个环境。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "quote": "But global connectivity has greatly changed our information environment.",
+              "anchor": "信息环境被改变"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "suggest",
+          "sourceRole": "stem",
+          "targetText": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+          "relationType": "locationCue",
+          "targetCue": "we also need to",
+          "sourceZh": "建议",
+          "targetCueZh": "我们也需要",
+          "answerText": "be more thoughtful about our information consumption, resisting the temptation of the mental “junk food”",
+          "note": "题干 suggest 对应原文表示建议的 we also need to。"
+        },
+        {
+          "sourceText": "Be selective information consumers.",
+          "sourceRole": "correctOption",
+          "targetText": "be more thoughtful about our information consumption",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“有选择地消费信息”（selective information consumers）是从作者的建议推出的：消费信息要更审慎（more thoughtful），并抵制精神“垃圾食品”（resisting … “junk food”）。抵制就要有取有舍，不是来什么收什么，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-zhejiang-jan:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把儿童实验和成人面对的信息诱惑连起来，选出能盖住全文的标题。",
+      "stemTranslationZh": "下列哪项是本文的最佳标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2024-zhejiang-jan:reading-d:1]]讲孩子的 marshmallow test，[[block:paper-gaokao-2024-zhejiang-jan:reading-d:2]]说成人每天也面对它，[[block:paper-gaokao-2024-zhejiang-jan:reading-d:3]][[block:paper-gaokao-2024-zhejiang-jan:reading-d:4]]由甜食类比到信息；标题要盖住成人版的这场考验",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "少吃多读",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+            "sourceHighlight": "more thoughtful about our information consumption",
+            "optionText": "Eat Less, Read More",
+            "optionHighlight": "Read More",
+            "explanation": "作者要人对热量和信息都更审慎，不是少吃多读；“多读”和抵制精神“垃圾食品”（mental “junk food”）的建议方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+              "anchor": "要审慎消费信息"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "关于早期人类的残酷真相",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value-a feeling of reward and satisfaction.",
+            "sourceHighlight": "our ancestors lived in a calorie-poor world",
+            "optionText": "The Bitter Truth about Early Humans",
+            "optionHighlight": "Early Humans",
+            "explanation": "祖先缺热量只是[[block:paper-gaokao-2024-zhejiang-jan:reading-d:3]]用来解释大脑为何偏爱甜食的背景；全文落在今天的人怎样抵制信息诱惑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "quote": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value-a feeling of reward and satisfaction.",
+              "anchor": "祖先只是背景"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "越晚越好",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Follow-up studies with the children later in life showed a connection between an ability to wait long enough to obtain a second treat and various forms of success.",
+            "sourceHighlight": "an ability to wait long enough",
+            "optionText": "The Later, the Better",
+            "optionHighlight": "The Later, the Better",
+            "explanation": "“越晚越好”只抓住实验里等得住的孩子日后更成功（wait long enough）这一点，没有涉及后文成年人面对信息诱惑的主体内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+              "quote": "Follow-up studies with the children later in life showed a connection between an ability to wait long enough to obtain a second treat and various forms of success.",
+              "anchor": "实验的发现"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "成年人的棉花糖测试",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:2",
+              "quote": "As adults we face a version of the marshmallow test every day.",
+              "anchor": "成人每天面对的测试"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+              "quote": "The Stanford marshmallow(棉花糖) test was originally conducted by psychologist Walter Mischel in the late 1960s.",
+              "anchor": "开头的棉花糖实验"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "quote": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+              "anchor": "审慎消费信息"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The Marshmallow Test for Grownups",
+          "sourceRole": "correctOption",
+          "targetText": "As adults we face a version of the marshmallow test every day.",
+          "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "几段讲的是同一场考验的两个版本：孩子忍着不吃棉花糖，成年人面对电子设备和新信息也得忍住诱惑，后两段解释原因并给出做法。选项用“棉花糖测试”（The Marshmallow Test）接住开头的实验，用“给成年人的”（for Grownups）点出全文真正谈的对象，选 D。"
+        }
+      ]
+    }
+  }
+}
