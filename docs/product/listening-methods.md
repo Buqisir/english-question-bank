@@ -1,6 +1,6 @@
 # 听力做题心法
 
-状态：v1（2026-11-26）。第 1 轮试写 Owner 盲评 15 题全选新写法（`docs/cuts/listening-method/round1-result.md`），采用。正式提示词和校验器待改。
+状态：v1（2026-11-26）。第 1 轮试写 Owner 盲评 15 题全选新写法（`docs/cuts/listening-method/round1-result.md`），采用。正式提示词 `prompts/listening-analysis-v1.md` 和校验器已按本文改（2026-11-26）。
 用途：听力选择题讲解怎么写；也是以后 agent 批量写听力的方法依据。
 依据：外部调研（剑桥、ETS、共通テスト、EBS、反馈研究，原始报告 `docs/cuts/listening-method/research.md`，未引 IAI 材料）和自有语料统计（79 套卷 1580 题 3043 个错项，`docs/cuts/listening-method/corpus-notes.md`）。
 
@@ -66,9 +66,12 @@
 - 讲解和错项里没有禁用词：类型名、「与原文不符」「原文未提及」「本题询问」「题目问」、中点号。
 - 讲解以「选 X」收尾；汉字数中位约 40，上限约 80。
 
-## 五、接下来
+## 五、落在代码里的地方
 
-- 正式提示词 `prompts/listening-analysis-v1.md` 按本文第二、三节改（试写用的候选稿在 `docs/cuts/listening-method/prompt-v2-candidate.md`）。
-- 生成请求里给每个错项带「录音里听到的词」和「必须讲」；校验器加「必须讲」覆盖检查。
+- 「听到的词」的算法：`server/paper-import-ai/listeningHeardOptions.mjs`。生成请求（`buildListeningAnalysisAgentRequest`、`buildListeningAnalysisMessages`）里每题带 `wrongOptions`，校验用的输入不带，照原样。
+- 校验 `validateListeningAnalysisInput`：必须讲的错项没讲，记 `LISTENING_HEARD_OPTION_UNEXPLAINED`。新写的稿（`listening-analysis` 补全步骤、`lecture-redo merge`）直接拦下；已存的旧分析只提醒，不拦，免得旧卷重审被卡住。
 - 导出和网页不用改：错项行已有，格式不变。
+
+## 六、待定
+
 - 二维码（听力 4）：地址用登录页还是新建公开音频页、版式 A 每段一码还是 B 整节一码，Owner 定。

@@ -3,6 +3,7 @@ import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { readTeachingAnalysisPrompt } from './analyzerProviderShell.mjs'
+import { listeningWrongOptions, mustExplainLabels } from './listeningHeardOptions.mjs'
 
 import {
   TOPIC_LABEL_TAXONOMY,
@@ -81,8 +82,17 @@ export function buildListeningAnalysisInput(materialization, { segmentIds = null
   }
 }
 
+// The writer sees, for every wrong option, the words the program found in its transcript and whether
+// it must be explained (docs/product/listening-methods.md §三). Validation recomputes them from source.
+function withWrongOptionHints(input) {
+  for (const material of input.materials) {
+    for (const question of material.questions) question.wrongOptions = listeningWrongOptions(question, material.transcript)
+  }
+  return input
+}
+
 export function buildListeningAnalysisMessages({ materialization, segmentIds = null }) {
-  const input = buildListeningAnalysisInput(materialization, { segmentIds })
+  const input = withWrongOptionHints(buildListeningAnalysisInput(materialization, { segmentIds }))
   const prompt = readTeachingAnalysisPrompt(promptPath)
   return [{
     role: 'system',
@@ -113,7 +123,7 @@ export function buildListeningAnalysisAgentRequest({
   teachingDoctrine,
   sentenceTargets,
 }) {
-  const input = buildListeningAnalysisInput(materialization, { segmentIds })
+  const input = withWrongOptionHints(buildListeningAnalysisInput(materialization, { segmentIds }))
   for (const material of input.materials) {
     if (sentenceTargets) material.sentenceTargets = sentenceTargets[material.segmentId] ?? []
   }
@@ -180,15 +190,20 @@ export function validateListeningAnalysis(analysis, {
   sourceAssetVersion = 1,
   sealed = false,
   getSentenceAlignment,
+  requireHeardDistractors = false,
 } = {}) {
   return validateListeningAnalysisInput(analysis, {
     ...buildListeningAnalysisInput(materialization, { segmentIds }),
     sourceAssetVersion,
-  }, { sealed, getSentenceAlignment })
+  }, { sealed, getSentenceAlignment, requireHeardDistractors })
 }
 
 // The bounded input is also the exact source sent to an isolated worker.
-export function validateListeningAnalysisInput(analysis, input, { sealed = false, getSentenceAlignment } = {}) {
+export function validateListeningAnalysisInput(analysis, input, {
+  sealed = false,
+  getSentenceAlignment,
+  requireHeardDistractors = false,
+} = {}) {
   if (!validateSchema(analysis)) fail(`Listening analysis schema invalid: ${formatSchemaErrors(validateSchema.errors)}`)
   if (analysis.paperId !== input.paperId) fail('Listening analysis paperId does not match the source')
   if (analysis.sourceAssetVersion !== input.sourceAssetVersion) fail('Listening analysis sourceAssetVersion does not match the Review Candidate')
@@ -253,6 +268,20 @@ export function validateListeningAnalysisInput(analysis, input, { sealed = false
     const distractorLabels = (question.distractors || []).map(({ label }) => label)
     if (new Set(distractorLabels).size !== distractorLabels.length) fail(`${questionId} has duplicate distractor labels`)
     if (distractorLabels.includes(question.officialAnswer)) fail(`${questionId} marks the official answer as a distractor`)
+    const unexplained = mustExplainLabels(expected, material.transcript).filter((label) => !distractorLabels.includes(label))
+    if (unexplained.length) {
+      // New drafts must explain options built from heard words; stored analyses only get a reminder.
+      if (requireHeardDistractors) {
+        fail(`${questionId} must explain wrong option(s) ${unexplained.join(', ')} built from words heard in the recording`,
+          'LISTENING_HEARD_OPTION_UNEXPLAINED')
+      }
+      warnings.push({
+        code: 'LISTENING_HEARD_OPTION_UNEXPLAINED',
+        questionId,
+        labels: unexplained,
+        message: `${questionId} wrong option(s) ${unexplained.join(', ')} reuse words heard in the recording but have no distractor`,
+      })
+    }
   }
   if (assignedQuestions.size !== expectedQuestions.size) fail('Listening material question coverage is incomplete')
 

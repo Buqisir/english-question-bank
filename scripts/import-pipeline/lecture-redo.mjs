@@ -207,7 +207,9 @@ function merge(work, only) {
       const target = path.join(bundle, output)
       if (key === NCK1_LISTENING_STAGED_ANALYSIS.key) {
         const effective = projectEffectiveAnswers(before.materialization, before.answerCorrections)
-        const analysis = mergeReviewedListeningAnalysis(effective, listening(sealed, before), { authored: draft })
+        const analysis = mergeReviewedListeningAnalysis(effective, listening(sealed, before), {
+          authored: draft, requireHeardDistractors: true,
+        })
         writeFileSync(target, `${JSON.stringify(analysis, null, 2)}\n`)
       } else {
         writeFileSync(target, bytes)

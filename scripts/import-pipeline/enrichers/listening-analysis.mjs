@@ -59,7 +59,7 @@ function mergeAgentResponse(ctx, { document, aligned, sentenceTargets }, request
   if (response?.paperId !== request.paperId || response.baseRev !== request.baseRev
     || response.inputDigest !== request.inputDigest) throw new Error('Agent 回复的卷、基线或输入摘要不匹配')
   const authored = response.analysis
-  const merged = mergeReviewedListeningAnalysis(document, aligned, { authored })
+  const merged = mergeReviewedListeningAnalysis(document, aligned, { authored, requireHeardDistractors: true })
   for (const [segmentId, material] of Object.entries(authored.materials)) {
     const ids = new Set((sentenceTargets[segmentId] ?? []).map(({ id }) => id))
     if (material.sentences === undefined) continue
