@@ -5,14 +5,13 @@ import { join, resolve } from 'node:path'
 import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
-import { agentReader, blocksOf, json, legacyQuoteKey, localPaper, ndjson, predatesLegacyExport, readLegacy, rowLocator,
+import { agentReader, blocksOf, json, localPaper, ndjson, readLegacy, rowLocator,
   tierOf, validPaperId } from './source.mjs'
 import { matcher, phraseWinners } from './match.mjs'
 import { budget, editorialSense, legacyRecord, makeRecord, normalizedSentenceKey, position, recordRows, reusePicks, sentencesOf,
   UNMARKED, unresolved, verifiedLegacyHit } from './annotations.mjs'
 import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs'
-import { digestJson } from '../../../shared/paper-canonical/stable.mjs'
 
 const { positionals: [command], values: args } = parseArgs({ allowPositionals: true, options: {
   work: { type: 'string' }, data: { type: 'string' }, paper: { type: 'string', multiple: true },
@@ -55,8 +54,6 @@ const counters = () => ({ gaokao: 0, mock: 0 })
 const fingerprint = row => JSON.stringify([row.blockHash, row.sentence, row.start, row.end, row.entryId, row.parts])
 const ref = b => JSON.stringify([b.groupId, b.id])
 const aliases = b => [ref(b), ...(b.aliases ?? []).map(id => ref({ ...b, id }))]
-const hasLegacyBlockHash = (rows, block) => rows.some(row =>
-  entries.get(row.entryId)?.kind === 'phrase' && row.blockHash === block.hash)
 const senseOf = row => entries.get(row.entryId)?.senses.find(sense => sense.senseId === row.senseId)
 const scopeFile = args.scope ? resolve(args.scope) : fileURLToPath(new URL('./scope.json', import.meta.url))
 const scopeAllows = ({ include, exclude }, id) => include.includes(id) || !exclude.includes(id)
@@ -80,18 +77,14 @@ async function targetsFor(local) {
   const versioned = view === 'dictionary'
   let exported
   const exportPapers = () => exported ??= get('export').then(rows => new Map(rows.map(row => [row.paperId, row])))
-    .catch(error => { console.warn(`无法读取归档时间 ${error.message}`); return new Map() })
+    .catch(error => { console.warn(`无法读取生产快照 ${error.message}`); return new Map() })
   return { list, versioned, detail: async (paper, bootstrap = false) => {
-    const snapshot = bootstrap ? (await exportPapers()).get(paper.paperId) : undefined
-    if (snapshot && !versioned && JSON.stringify(targetIdentity(snapshot)) === JSON.stringify(targetIdentity(paper))) {
+    const snapshot = bootstrap && !versioned ? (await exportPapers()).get(paper.paperId) : undefined
+    if (snapshot && JSON.stringify(targetIdentity(snapshot)) === JSON.stringify(targetIdentity(paper))) {
       return snapshot
     }
     const name = `papers/${paper.paperId}`
-    const current = await get(versioned ? `${name}?view=dictionary&revision=${encodeURIComponent(paper.revisionId)}` : name)
-    if (snapshot?.etag && snapshot.etag === digestJson(current)) {
-      return { ...current, updatedAt: current.updatedAt ?? snapshot.updatedAt }
-    }
-    return current
+    return get(versioned ? `${name}?view=dictionary&revision=${encodeURIComponent(paper.revisionId)}` : name)
   } }
 }
 
@@ -151,8 +144,7 @@ async function prepare() {
   const packets = new Map()
   const stats = { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counters() }
   let legacyDropped = 0
-  let legacyByTime = 0
-  let legacyStrict = 0
+  let legacyRetained = 0
   if (rejudge) stats.rejudge = rejudge
   stats.unmarked = 0
   const plan = []
@@ -181,11 +173,6 @@ async function prepare() {
     const oldBlocks = exists(shard(id)) ? old.blocks : {}
     const retainedLegacy = new Set()
     const reviewLegacy = new Set()
-    const sameByTime = bootstrap && paper && predatesLegacyExport(paper)
-    if (bootstrap && paper) {
-      if (sameByTime) legacyByTime++
-      else legacyStrict++
-    }
     const layoutChanged = rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
       Object.entries(current).some(([key, block]) => {
         const previous = oldBlocks[key]
@@ -202,35 +189,25 @@ async function prepare() {
       if (bootstrap) {
         const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
         const labels = Map.groupBy(confirmed, position)
-        const sameBlock = hasLegacyBlockHash(confirmed, block)
         const matchedLabels = new Map()
         const rows = match(id, block).map(row => {
-          const verified = (labels.get(position(row)) ?? []).filter(saved => {
-            if (sameByTime) return verifiedLegacyHit({ ...saved, sentenceText: undefined, blockHash: undefined }, row)
-            const locations = [rowLocator(saved), key]
-            const quotes = [saved.sentenceText ?? undefined, ...locations.map(locator =>
-              old.quotes.get(legacyQuoteKey(locator, saved.entryId, saved.sentence, saved.start, saved.end)))]
-              .filter(text => text !== undefined)
-            if (!quotes.length) for (const locator of locations) {
-              const quote = old.quotes.get(legacyQuoteKey(locator, null, saved.sentence))
-              if (quote !== undefined) quotes.push(quote)
-            }
-            return verifiedLegacyHit({ ...saved, blockHash: undefined }, row) &&
-              (quotes.length ? quotes.every(text => text === row.sentenceText) : sameBlock)
-          })
+          const phrase = entries.get(row.entryId).kind === 'phrase'
+          const verified = (labels.get(position(row)) ?? []).filter(saved =>
+            (!phrase || saved.blockHash === row.blockHash) &&
+            verifiedLegacyHit({ ...saved, sentenceText: undefined, blockHash: undefined }, row))
           if (!verified.length || new Set(verified.map(saved => saved.senseId)).size !== 1) {
             if (labels.has(position(row))) reviewLegacy.add(row)
             stats.hits++
             return row
           }
           const hit = { ...row, pick: verified[0].senseId }
-          matchedLabels.set(hit, verified[0])
+          matchedLabels.set(hit, verified)
           return hit
         })
         const phrases = phraseWinners(rows.filter(row => entries.get(row.entryId).kind === 'phrase'),
           row => Number(row.pick !== undefined))
         for (const row of [...rows.filter(row => entries.get(row.entryId).kind !== 'phrase'), ...phrases]) {
-          if (matchedLabels.has(row)) retainedLegacy.add(matchedLabels.get(row))
+          for (const saved of matchedLabels.get(row) ?? []) retainedLegacy.add(saved)
         }
         blocks[key] = { ...info, wordCounts: {}, talliedPhrases: true }
         changed[key] = { raw, rows, sentences: sentencesOf(raw) }
@@ -269,13 +246,7 @@ async function prepare() {
       }
       const hits = match(id, block)
       const sentences = sentencesOf(raw)
-      let saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash]
-      if (!saved && !previous && old?.legacyRows) {
-        const locations = aliases(block)
-        const restored = old.legacyRows.filter(row => locations.includes(rowLocator(row)))
-        const sameBlock = hasLegacyBlockHash(restored, block)
-        saved = legacyRecord(block, null, restored.filter(row => row.sentenceText || sameBlock), hits)
-      }
+      const saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash]
       const reused = reusePicks(saved, sentences, hits, reanchor)
       const rows = hits.map(row => {
         const prior = reused.get(position(row)) ?? (!previous ? archive[key]?.[fingerprint(row)] : undefined)
@@ -306,7 +277,10 @@ async function prepare() {
     if (bootstrap) {
       // A removed or renamed block still contributes to the old counts.
       before.counts.rows.push(...activeRows.filter(row => !represented.has(row)))
-      if (paper) legacyDropped += activeRows.length - retainedLegacy.size
+      if (paper) {
+        legacyRetained += retainedLegacy.size
+        legacyDropped += activeRows.length - retainedLegacy.size
+      }
       for (const row of before.counts.rows) represented.add(row)
       // Deleted entries have no active counters, but their rows stay in legacyRows.
       for (const block of Object.values(before)) block.rows = block.rows.filter(row => entries.has(row.entryId))
@@ -358,7 +332,7 @@ async function prepare() {
     save(file, body(packet))
   }
   save(work('plan.json'), snapshot)
-  console.log(JSON.stringify({ ...stats, sameLegacy, ...(legacy.size ? { legacyByTime, legacyStrict, legacyDropped } : {}), skipped }))
+  console.log(JSON.stringify({ ...stats, sameLegacy, ...(legacy.size ? { legacyRetained, legacyDropped } : {}), skipped }))
 }
 
 function validate(rows, raw) {

@@ -6,15 +6,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import { matcher } from './match.mjs'
-import { blocksOf, predatesLegacyExport } from './source.mjs'
-
-const revisionId = 'rev-legacy'
-const createdAt = '2026-11-20T12:00:00Z'
-assert(predatesLegacyExport({ revisionId, createdAt, updatedAt: '2026-11-20T23:59:59Z' }))
-assert(!predatesLegacyExport({ revisionId, createdAt, updatedAt: '2026-11-21T00:00:00Z' }))
-assert(!predatesLegacyExport({ revisionId, createdAt, updatedAt: 'unknown' }))
-assert(!predatesLegacyExport({ revisionId }))
-assert(!predatesLegacyExport({ createdAt }))
+import { blocksOf, localPaper } from './source.mjs'
 
 const dir = mkdtempSync(join(tmpdir(), 'dict-update-test-'))
 const tool = fileURLToPath(new URL('./index.mjs', import.meta.url))
@@ -54,9 +46,15 @@ try {
     source: { paperId, groupId: 'g', locator: { paragraph: 1, sentence: 1 } },
     tier: 'mock', entryCanonical: 'pick up', sentence: 'Pick it up.', start: 0, end: 10,
   }) + '\n')
+  paper('Pick it up now.')
+  const stalePhrase = JSON.parse(run('prepare', 'stale-phrase', '--local', dir, '--legacy', dir))
+  assert.equal(stalePhrase.legacyDropped, 1)
+  assert.equal(stalePhrase.pending.mock, 1)
+  paper('Pick it up.')
   const baseline = JSON.parse(run('prepare', 'legacy', '--local', dir, '--legacy', dir))
   assert.equal(baseline.sameLegacy, 1)
   assert.equal(baseline.changed, 1)
+  assert.equal(baseline.legacyRetained, 1)
   assert.equal(baseline.legacyDropped, 0)
   run('apply', 'legacy')
   assert.equal(readFileSync(join(dir, shard), 'utf8'), initialShard)
@@ -172,17 +170,30 @@ try {
       { senseId: 'w:recall#s1', pos: 'v.', glossZh: '回想', counts, examples: [] },
     ] })
   paper('The record shows birds. We recall songs! We record games.')
-  const invalid = JSON.parse(run('prepare', 'invalid-legacy', '--local', dir, '--legacy', dir))
-  assert.equal(invalid.changed, 1)
-  assert.equal(invalid.legacyDropped, 2)
-  assert.equal(invalid.pending.mock, 3)
-  assert.match(readFileSync(join(dir, 'invalid-legacy', packetPath), 'utf8'), /The 【record】 shows birds\./u)
-  answer('invalid-legacy', [{ idx: 0, pick: 'w:record#s2' }])
-  run('apply', 'invalid-legacy')
-  assert(!readFileSync(join(dir, shard), 'utf8').includes(sense))
+  const adoption = JSON.parse(run('prepare', 'adopt-legacy', '--local', dir, '--legacy', dir))
+  assert.equal(adoption.changed, 1)
+  assert.equal(adoption.legacyRetained, 1)
+  assert.equal(adoption.legacyDropped, 1)
+  assert.equal(adoption.pending.mock, 2)
+  run('apply', 'adopt-legacy')
+  const adopted = JSON.parse(readFileSync(join(dir, state), 'utf8'))
+  const target = localPaper(dir)
+  const [targetBlock] = Object.values(blocksOf(target))
+  assert.equal(adopted.target[0], target.revisionId)
+  assert.equal(Object.values(adopted.blocks)[0].rawHash, targetBlock.rawHash)
+  assert.equal(JSON.parse(readFileSync(join(dir, shard), 'utf8').trim()).senseId, sense)
   assert.equal(readWord().counts.mock, 2)
-  assert.equal(readWord().senses[1].counts.mock, 1)
   assert.equal(JSON.parse(readFileSync(join(dir, recall), 'utf8')).counts.mock, 1)
+  paper('The record lists birds. We recall songs! We recall games.')
+  const revised = JSON.parse(run('prepare', 'after-adoption', '--local', dir))
+  assert.equal(revised.pending.mock, 1)
+  assert.match(readFileSync(join(dir, 'after-adoption', packetPath), 'utf8'), /The 【record】 lists birds\./u)
+  answer('after-adoption', [{ idx: 0, pick: 'w:record#s2' }])
+  run('apply', 'after-adoption')
+  assert.equal(readWord().counts.mock, 1)
+  assert.equal(readWord().senses[0].counts.mock, 0)
+  assert.equal(readWord().senses[1].counts.mock, 1)
+  assert.equal(JSON.parse(readFileSync(join(dir, recall), 'utf8')).counts.mock, 2)
   saveRows(spaced)
   writeFileSync(join(dir, state), savedState)
   paper('We  record birds. We record songs! We record games.')
