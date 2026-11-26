@@ -25,17 +25,32 @@ import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePre
 import { writePendingDeclarations } from './pending-declarations.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
+const previewResult = { revisionId: 'rev-local', target: 'local', localUploadId: 'preview-upload' }
+
+function localUploadRow(ctx, { localUploadId, revisionId } = previewResult) {
+  return { paperId: ctx.paperId, startedAt: oldTime, finishedAt: oldTime, completed: true,
+    localReceipt: { uploadId: localUploadId, revisionId, origin: 'http://127.0.0.1:18890' } }
+}
 
 test('reopen archives one local seal and unlocks edits while retaining sealed OCR', async t => {
   const { ctx } = fixture(t)
   const url = 'http://127.0.0.1:51790/?reviewRevision=rev-local'
-  ctx.state.steps['local-preview'] = completed({ revisionId: 'rev-local', target: 'local' })
+  ctx.state.steps['local-preview'] = completed(previewResult)
   ctx.state.steps['local-screen'] = completed({ url, tiles: 1 })
+  ctx.state.steps['ocr-review'].result.localUploadId = 'ocr-upload'
   ctx.state.steps.build = completed({})
   ctx.state.data.status = 'local_ready'
   json(ctx.statePath, ctx.state)
-  json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId: ctx.paperId, startedAt: oldTime, finishedAt: oldTime })
-  json(path.join(ctx.work, 'handoff/evidence.json'), { screen: { revisionId: 'rev-local', url } })
+  writeFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'),
+    [localUploadRow(ctx, ctx.state.steps['ocr-review'].result), localUploadRow(ctx)].map(row => JSON.stringify(row)).join('\n'))
+  const handoff = path.join(ctx.work, 'handoff')
+  const entry = file => ({ path: path.relative(handoff, file), sha256: sha256(readFileSync(file)) })
+  const answer = path.join(handoff, 'qa/answer-key-comparison.json')
+  const answerSignal = path.join(ctx.paperDir, 'signals/ai-answer-check.json')
+  json(answerSignal, { original: true })
+  json(path.join(handoff, 'evidence.json'), { screen: { revisionId: 'rev-local', url },
+    pdfs: [entry(path.join(ctx.paperDir, 'products/answerOnly.pdf'))],
+    checks: { answerTranscription: { files: [entry(answer), entry(answerSignal)] } } })
   json(path.join(ctx.paperDir, 'canonical-evidence/candidate-summary.json'), { candidateDigest: 'old-candidate' })
   const before = snapshot(ctx.work)
   const paper = snapshot(ctx.paperDir)
@@ -55,13 +70,17 @@ test('reopen archives one local seal and unlocks edits while retaining sealed OC
   assert.deepEqual(saved.steps['ocr-review'], ctx.state.steps['ocr-review'])
   await requestedRedo(ctx, 'spelling')
   assert.equal(snapshot(ctx.paperDir)['signals/agent-proofreading-receipt.json'], paper['signals/agent-proofreading-receipt.json'])
-  assert.equal(readFileSync(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json')).toString('hex'),
-    before['handoff/qa/answer-key-comparison.json'])
+  assert.equal(readFileSync(answer).toString('hex'), before['handoff/qa/answer-key-comparison.json'])
+  json(answer, { rebuilt: true })
+  json(answerSignal, { rebuilt: true })
+  const after = snapshot(archived)
+  assert.equal(after['handoff/qa/answer-key-comparison.json'], before['handoff/qa/answer-key-comparison.json'])
+  assert.equal(after['paper/signals/ai-answer-check.json'], paper['signals/ai-answer-check.json'])
 })
 
 test('reopen refuses production attempts and ambiguous upload history without changing the seal', async t => {
   const { dir, ctx } = fixture(t)
-  ctx.state.steps['local-preview'] = completed({ revisionId: 'rev-local', target: 'local' })
+  ctx.state.steps['local-preview'] = completed(previewResult)
   json(ctx.statePath, ctx.state)
   const record = path.join(ctx.fast, 'review-push-attempts.jsonl')
   json(record, { paperId: ctx.paperId, origin: 'https://eqbank.cc' })
@@ -72,9 +91,38 @@ test('reopen refuses production attempts and ambiguous upload history without ch
   }
   await assertRefused()
   rmSync(record)
-  json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId: ctx.paperId,
-    startedAt: '2026-01-02T00:00:00.000Z', finishedAt: '2026-01-02T00:00:01.000Z' })
+  const receipt = localUploadRow(ctx)
+  const { localReceipt, ...historicalRow } = receipt
+  json(path.join(ctx.fast, 'upload-timeline.jsonl'), receipt)
+  json(ctx.statePath, { ...ctx.state, steps: { ...ctx.state.steps,
+    'local-preview': completed({ revisionId: 'rev-local', target: 'local' }) } })
   await assertRefused()
+  ctx.state.steps['local-preview'] = completed(previewResult)
+  json(ctx.statePath, ctx.state)
+  for (const row of [historicalRow,
+    { ...receipt, localReceipt: { ...localReceipt, revisionId: 'rev-other' } },
+    { ...receipt, localReceipt: { ...localReceipt, origin: 'https://eqbank.cc' } },
+    receipt]) {
+    // All rows overlap the valid preview, including the duplicate receipt.
+    writeFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'), `${JSON.stringify(receipt)}\n${JSON.stringify(row)}\n`)
+    await assertRefused()
+  }
+})
+
+test('read-only fast commands reject redo without creating paper state', t => {
+  const paperId = `paper-fast-readonly-redo-${process.pid}`
+  const work = path.resolve(import.meta.dirname, '../../imports/ocr-proofread', paperId)
+  assert(!fs.existsSync(work))
+  t.after(() => rmSync(work, { recursive: true, force: true }))
+  for (const command of ['status', 'plan-ocr-generation']) {
+    for (const redo of [['--redo-from', 'spelling'], ['--redo-from=spelling']]) {
+      const result = spawnSync(process.execPath,
+        [path.join(import.meta.dirname, 'fast-import.mjs'), command, paperId, ...redo], { encoding: 'utf8' })
+      assert.equal(result.status, 1)
+      assert.match(result.stderr, new RegExp(`${command} 不接受 --redo-from`))
+      assert(!fs.existsSync(work))
+    }
+  }
 })
 
 test('pending declarations use source pages and quote existing diagnostics', async t => {

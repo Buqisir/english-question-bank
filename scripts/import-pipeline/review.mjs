@@ -81,7 +81,7 @@ import {
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
-import { hydratedEvidenceBase, resolveReviewOrigin, withReviewPaperLock } from './review-target.mjs'
+import { hydratedEvidenceBase, isLocalReviewOrigin, resolveReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 export { hydratedEvidenceBase } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
@@ -306,8 +306,10 @@ export function loadLocalReviewedListening(paperDir, loaded, candidate) {
 export async function uploadReviewBundle(paperDir, manifest, timelinePath = path.join(
   root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl',
 )) {
+  const destination = origin()
   return uploadBundle({
     paperDir, manifest, api, resolveReviewFile, timelinePath,
+    localOrigin: isLocalReviewOrigin(destination) ? destination : null,
   })
 }
 
@@ -411,7 +413,7 @@ async function pushRevision(paperId) {
   await withReviewPaperLock(path.join(fast, 'review-upload.lock'), async () => {
     const { manifest, projection } = prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
     const destination = origin()
-    if (!/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/u.test(destination)) {
+    if (!isLocalReviewOrigin(destination)) {
       // Preserve direct CLI attempts even if registration or its response is interrupted.
       appendFileSync(path.join(fast, 'review-push-attempts.jsonl'),
         `${JSON.stringify({ paperId, origin: destination, startedAt: new Date().toISOString() })}\n`)
@@ -423,6 +425,7 @@ async function pushRevision(paperId) {
       revisionNumber: finalized.revision.revisionNumber,
       state: finalized.revision.state,
       bundleDigest: finalized.revision.bundleDigest,
+      localUploadId: finalized.localUploadId,
       ...(projection.spellingReviewSummary ? { spellingReview: projection.spellingReviewSummary } : {}),
     }, null, 2))
   })
@@ -940,6 +943,7 @@ async function pushOcrReview(paperId) {
     state: finalized.revision.state,
     reviewKind: 'ocr',
     bundleDigest: finalized.revision.bundleDigest,
+    localUploadId: finalized.localUploadId,
   }, null, 2))
 }
 

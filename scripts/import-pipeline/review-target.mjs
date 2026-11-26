@@ -1,6 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, rmdirSync } from 'node:fs'
 import path from 'node:path'
 
+export const isLocalReviewOrigin = origin => /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/u.test(origin)
+
 export async function withReviewPaperLock(lock, action) {
   mkdirSync(path.dirname(lock), { recursive: true })
   try { mkdirSync(lock, { mode: 0o700 }) } catch (error) {

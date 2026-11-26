@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { randomUUID } from 'node:crypto'
 import { setTimeout as delay } from 'node:timers/promises'
 import { appendTiming } from './lib-timing.mjs'
 
@@ -26,7 +27,7 @@ function aggregatePutMetrics(timing, metrics) {
 }
 
 export async function uploadReviewBundle({
-  paperDir, manifest, api, resolveReviewFile, timelinePath,
+  paperDir, manifest, api, resolveReviewFile, timelinePath, localOrigin,
   concurrency = Number(process.env.QUESTION_BANK_IMPORT_UPLOAD_CONCURRENCY ?? 4),
 }) {
   if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 6) {
@@ -37,6 +38,7 @@ export async function uploadReviewBundle({
     putSeconds: 0, putWallSeconds: 0, putAttempts: 0, putRetries: 0,
     finalizeSeconds: 0, putMode: concurrency === 1 ? 'serial' : 'parallel',
     putConcurrency: concurrency, completed: false }
+  const uploadId = localOrigin && randomUUID()
   try {
     const created = await api('/api/import-agent-reviews/revisions', {
       method: 'POST',
@@ -99,6 +101,10 @@ export async function uploadReviewBundle({
       const result = await api(`${revisionPath}/finalize`, { method: 'POST' })
       if (result.metrics) timing.finalizeMetrics = result.metrics
       timing.completed = true
+      if (uploadId) {
+        timing.localReceipt = { uploadId, origin: localOrigin, revisionId: result.revision?.id }
+        return { ...result, localUploadId: uploadId }
+      }
       return result
     } catch (error) {
       if (error.metrics) timing.finalizeMetrics = error.metrics

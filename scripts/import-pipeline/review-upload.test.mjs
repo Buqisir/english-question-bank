@@ -100,13 +100,26 @@ async function fixture(t, { status = 503, failures = 0, lostResponse = false,
     })
     return body
   }
-  const run = concurrency => uploadReviewBundle({
+  const localOrigin = `http://127.0.0.1:${server.address().port}`
+  const run = (concurrency, retainLocalReceipt = false) => uploadReviewBundle({
     paperDir: dir, manifest, api, resolveReviewFile: path.join,
     timelinePath: path.join(dir, 'timing.jsonl'), concurrency,
+    ...(retainLocalReceipt ? { localOrigin } : {}),
   })
   const timing = () => JSON.parse(readFileSync(path.join(dir, 'timing.jsonl'), 'utf8').trim())
-  return { dir, manifest, run, timing, state, received, attempts }
+  return { dir, manifest, run, timing, state, received, attempts, localOrigin }
 }
+
+test('local HTTP: successful upload returns the ID of its exact loopback receipt', async t => {
+  const f = await fixture(t, { missingPaths: [] })
+  const result = await f.run(1, true)
+  assert.match(result.localUploadId, /^[0-9a-f-]{36}$/u)
+  assert.deepEqual(f.timing().localReceipt,
+    { uploadId: result.localUploadId, origin: f.localOrigin, revisionId: result.revision.id })
+  const failed = await fixture(t, { missingPaths: [], failPhase: 'finalize' })
+  await assert.rejects(failed.run(1, true), /HTTP 503/)
+  assert(!failed.timing().localReceipt)
+})
 
 test('local HTTP: parallel and serial produce identical verified bytes and finalize results', async t => {
   const serial = await fixture(t)

@@ -80,7 +80,15 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
 不把生产 `push` 标为完成。此状态不是送审；换到生产须从 OCR 确认重新建立绑定，
 不能沿用本地收据。广东批次明确决定见 `scripts/import-pipeline/guangdong-source-decisions-20261019.json`。
 本机预览封存后需改卷时，运行 `fast-import.mjs reopen <id>`，将旧封存归档到本卷 `superseded/`，再走 `after-proofread` 和 `finish`。
-已有生产 Candidate 送审记录或归属不明的卷须走现有 redo / 新 revision 流程。
+已有生产 Candidate 送审记录或缺少匹配的本机上传收据时，走现有 redo / 新 revision 流程。
+
+### 批量节奏（2026-11-26）
+
+- 逐页校对时对照原页处理跨页续段、七选五断段、范文与听力卷头交界，直接写现有声明，无需等声明清单提醒。
+- 声明、摘要和 metadata 齐后只跑一次 `finish`。预览后发现问题用 `reopen`。
+- 每批 3 套并行，`finish` 错峰，每次只跑 1 套。ASR 只跑 1 路，生产 `after-proofread`、`submit`、`report` 串行。
+- 交云端写解析后继续导下一批，无需等回推。一卷一分支，保留完整交接包。
+- 剩余磁盘 <5 GB 或待回推积压 ≥6 套时，暂停新批。
 
 ## 送生产
 

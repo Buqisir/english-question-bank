@@ -58,7 +58,7 @@ import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME
   mergeListeningSentenceAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
 import { alignReviewedListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
 import { mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
-import { withReviewPaperLock } from './review-target.mjs'
+import { isLocalReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -620,7 +620,7 @@ export async function runOcrReview(ctx, generationPlan = null, execute = run) {
     writeJson(operationPath, { ...readJson(operationPath), completedAt: new Date().toISOString() })
     rmSync(path.join(ctx.fast, 'ocr-generation.lock'), { recursive: true })
   }
-  return { revisionId }
+  return { revisionId, ...(pushed.localUploadId ? { localUploadId: pushed.localUploadId } : {}) }
 }
 
 async function afterProofread(ctx, args) {
@@ -1700,7 +1700,8 @@ export async function submit(ctx, args) {
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
   const pushed = await step(ctx, localPreview ? 'local-preview' : 'push', async () => {
     const result = await run(ctx, localPreview ? 'local-preview' : 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
-    return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin }
+    return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin,
+      ...(localPreview ? { localUploadId: result.localUploadId } : {}) }
   })
   if (!localPreview && ctx.state.data.feedbackFix) {
     delete ctx.state.data.feedbackFix
@@ -1881,38 +1882,43 @@ function assertLocalPreviewOnly(ctx) {
     || (existsSync(ctx.logs) && readdirSync(ctx.logs).some(file => /^push(?:-[\da-f-]{36})?\.log$/u.test(file)))) reject()
   const initialization = path.join(ctx.paperDir, 'signals/source-intake-initialization.json')
   if (existsSync(initialization) && readJson(initialization).baseRevisionId) reject()
-  if (!preview?.finishedAt || preview.result?.target !== 'local' || !preview.result?.revisionId) {
+  if (!preview?.finishedAt || !Number.isFinite(Date.parse(preview.startedAt))
+    || preview.result?.target !== 'local' || !preview.result?.revisionId) {
     fail('reopen 需要已封存的本机 preview-local 记录')
   }
-  const evidencePath = path.join(ctx.work, 'handoff/evidence.json')
-  if (existsSync(evidencePath)) {
-    const evidence = readJson(evidencePath)
+  const stamp = new Date(preview.startedAt).toISOString().replace(/[:.]/gu, '-')
+  const directory = path.join(ctx.work, 'superseded', `${stamp}-local-preview`)
+  const retainedPath = file => {
+    const active = path.join(ctx.work, file)
+    return existsSync(active) ? active : path.join(directory, file)
+  }
+  const evidencePath = retainedPath('handoff/evidence.json')
+  const evidence = existsSync(evidencePath) ? readJson(evidencePath) : null
+  if (evidence) {
     if (evidence.screen?.revisionId !== preview.result.revisionId
       || evidence.screen?.url !== steps['local-screen']?.result?.url
       || !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?\//u.test(evidence.screen?.url || '')) reject()
   }
-  // Historical direct pushes only wrote this shared timing file. Only rows
-  // accounted for by the known OCR and local preview steps can be archived.
-  const timing = path.join(ctx.fast, 'upload-timeline.jsonl')
-  if (existsSync(timing)) {
-    for (const line of readFileSync(timing, 'utf8').trim().split('\n').filter(Boolean)) {
-      const row = JSON.parse(line)
-      if (row.paperId !== ctx.paperId || ![steps['ocr-review'], preview].some(entry =>
-        Date.parse(entry?.startedAt) <= Date.parse(row.startedAt)
-        && Date.parse(row.startedAt) <= Date.parse(row.finishedAt)
-        && Date.parse(row.finishedAt) <= Date.parse(entry?.finishedAt))) reject()
-    }
+  const timing = retainedPath('fast/upload-timeline.jsonl')
+  if (!preview.result.localUploadId || !existsSync(timing)) reject()
+  const receipts = new Map([steps['ocr-review']?.result, preview.result]
+    .filter(result => result?.localUploadId).map(result => [result.localUploadId, result.revisionId]))
+  for (const line of readFileSync(timing, 'utf8').trim().split('\n').filter(Boolean)) {
+    const { paperId, completed, localReceipt } = JSON.parse(line)
+    if (paperId !== ctx.paperId || completed !== true || !isLocalReviewOrigin(localReceipt?.origin)
+      || !localReceipt?.revisionId || receipts.get(localReceipt.uploadId) !== localReceipt.revisionId) reject()
+    receipts.delete(localReceipt.uploadId)
   }
+  if (receipts.has(preview.result.localUploadId)) reject()
+  return { directory, evidence }
 }
 
 export async function reopenLocalPreview(ctx) {
   if (!reviewTarget().local) fail('reopen 只允许本机 Review；生产卷请走现有 redo / 新 revision 流程')
   return withReviewPaperLock(path.join(ctx.fast, 'review-upload.lock'), () => {
     ctx.state = readJson(ctx.statePath)
-    assertLocalPreviewOnly(ctx)
+    const { directory, evidence } = assertLocalPreviewOnly(ctx)
     if (Object.values(ctx.state.background).some(job => alive(job.pid))) fail('本卷仍有任务运行，退出后再重开')
-    const stamp = new Date(ctx.state.steps['local-preview'].startedAt).toISOString().replace(/[:.]/gu, '-')
-    const directory = path.join(ctx.work, 'superseded', `${stamp}-local-preview`)
     const stateCopy = path.join(directory, 'fast/state.json')
     if (existsSync(stateCopy)) {
       if (!readFileSync(stateCopy).equals(readFileSync(ctx.statePath))) fail('重开归档与现有状态不符，请先对账')
@@ -1921,11 +1927,14 @@ export async function reopenLocalPreview(ctx) {
       copyFileSync(ctx.statePath, `${stateCopy}.tmp`)
       renameSync(`${stateCopy}.tmp`, stateCopy)
     }
+    const archivedPath = file => {
+      if (file.startsWith(`${ctx.paperDir}${path.sep}`)) return path.join(directory, 'paper', path.relative(ctx.paperDir, file))
+      if (file.startsWith(`${ctx.work}${path.sep}`)) return path.join(directory, path.relative(ctx.work, file))
+      fail('交接证据引用了本卷之外的文件')
+    }
     const retain = file => {
       if (!existsSync(file)) return
-      const paperFile = file.startsWith(`${ctx.paperDir}${path.sep}`)
-      const archived = paperFile ? path.join('paper', path.relative(ctx.paperDir, file)) : path.relative(ctx.work, file)
-      const destination = path.join(directory, archived)
+      const destination = archivedPath(file)
       if (existsSync(destination)) fail(`本机归档已有同名副本：${destination}`)
       mkdirSync(path.dirname(destination), { recursive: true })
       renameSync(file, destination)
@@ -1938,6 +1947,18 @@ export async function reopenLocalPreview(ctx) {
       ...screenFiles.map(file => path.join(qa, file))]) retain(file)
     delete ctx.state.steps.build
     redoFrom(ctx, 'source-references', { retain, persist: () => {
+      for (const entry of [...(evidence?.pdfs ?? []), ...Object.values(evidence?.checks ?? {}).flatMap(check => check.files ?? [])]) {
+        const file = path.resolve(ctx.work, 'handoff', entry.path)
+        const destination = archivedPath(file)
+        const retained = existsSync(destination)
+        const bytes = readFileSync(retained ? destination : file)
+        if (sha256(bytes) !== entry.sha256) fail(`交接证据文件已变化：${entry.path}`)
+        if (!retained) {
+          mkdirSync(path.dirname(destination), { recursive: true })
+          writeFileSync(`${destination}.tmp`, bytes)
+          renameSync(`${destination}.tmp`, destination)
+        }
+      }
       const next = path.join(directory, 'state.reopen.tmp')
       writeJson(next, ctx.state)
       renameSync(next, ctx.statePath)
@@ -2328,8 +2349,12 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   const [command, paperId, ...args] = process.argv.slice(2)
   if (command === 'reopen' && args.length) fail('Usage: fast-import.mjs reopen <paperId>')
   const run = () => runCommand(command, paperId, args)
-  if (['prep', 'after-proofread', 'finish', 'listening-redo', 'submit', 'preview-local', 'reopen',
-    'reconcile-push', 'reconcile-ocr-generation', 'report', 'asr-extra'].includes(command)) {
+  const writesState = ['prep', 'after-proofread', 'finish', 'listening-redo', 'submit', 'preview-local', 'reopen',
+    'reconcile-push', 'reconcile-ocr-generation', 'report', 'asr-extra'].includes(command)
+  if (!writesState && args.some(arg => arg === '--redo-from' || arg.startsWith('--redo-from='))) {
+    fail(`${command} 不接受 --redo-from`)
+  }
+  if (writesState) {
     const fast = path.join(workDirectory(paperId), 'fast')
     if (command === 'reopen' && !existsSync(path.join(fast, 'state.json'))) fail('reopen 需要已封存的本机 preview-local 记录')
     await withReviewPaperLock(path.join(fast, 'review-state.lock'), run)
