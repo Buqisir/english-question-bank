@@ -1,0 +1,721 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-c": {
+      "overview": "文章介绍 Jane Jacobs 的城市观：她认为成功的城市社区靠人与人的密切交往，应由本地居民而非专家官员决定发展，并主张纵横紧密的人行道、功能混合与新旧建筑并存，以及能带来活力和安全的高密度。",
+      "fullTranslationZh": "Jane Jacobs 毕生致力于推广一种与众不同的城市构想，尤其关注是什么造就了成功的城市社区。她这一构想的核心是：城市生活应当充满活力、丰富多彩，人们能够在稠密而令人兴奋的城市环境中彼此交往。她更喜欢无序而非有序，步行而非开车，多样而非统一。\n\n在 Jacobs 看来，城市社区是有机的生命体，应当任其自行成长和变化，而不应受制于所谓专家和官员的宏大规划。城市应当是什么样子、又该如何发展，最好的评判者是本地居民自己。Jacobs 认为，城市社区最能理解自己的城市如何运转，因为城市生活正是通过居民之间形形色色的交往创造并维持的。\n\nJacobs 指出，城市的建成形态对城市社区的生活至关重要，尤其是人行道。人们居住的街道应当由纵横交错、排布紧密的人行道构成，让人们能够见面、交谈、相互结识。这样一套复杂却最终让人受益的相遇方式，能帮助人们更好地了解邻居和街区。\n\n在 Jacobs 看来，多样性和空间的混合使用也是这种城市形态的关键要素。城市的商业、办公和居住功能不应彼此分开，而应比邻而设，好让人们更充分地融合在一起。新旧建筑也应当多样并存，建筑如何使用和再利用应由人们的交往来决定。\n\n最后，在有足够多的人居住、工作和交往的地方，城市社区会发展得更好。在她看来，这样的高密度空间是创造力和活力的引擎。这些地方也很安全，因为密度更高意味着街上有更多“眼睛”：熟悉本地情况、密切留意街区动静的店主和居民。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+          "sourceText": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "displayText": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:28"
+          ],
+          "translationZh": "她这一构想的核心是：城市生活应当充满活力、丰富多彩，人们能够在稠密而令人兴奋的城市环境中彼此交往。",
+          "analysisZh": "这是一个倒装句，正常语序是 the idea … is at the heart of her vision，主干就是“这个想法是她构想的核心”。that 引导同位语从句，说明 idea 的内容：城市生活应当充满活力、丰富多彩。whereby 意思是“借此、由此”，引出的部分进一步说明这种城市生活靠什么实现：人们在稠密而令人兴奋的环境中彼此交往。第28题问“最重要的”，对应的正是 At the heart of 后面的这层意思。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 38,
+              "quote": "At the heart of her vision is the idea"
+            },
+            {
+              "start": 95,
+              "end": 147,
+              "quote": "whereby people are able to interact with one another"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+          "sourceText": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood.",
+          "displayText": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:31"
+          ],
+          "translationZh": "这些地方也很安全，因为密度更高意味着街上有更多“眼睛”：熟悉本地情况、密切留意街区动静的店主和居民。",
+          "analysisZh": "主干是 They are also safe places to be：这些地方也很安全，They 指上一句的高密度空间。because 引导原因状语从句，从句里 the higher density means that … 说密度更高意味着街上有更多“眼睛”。冒号后面解释这些“眼睛”是谁：熟悉本地、密切留意街区的店主和居民，who 引导的定语从句修饰 shopkeepers and locals。第31题的 security 正来自句首的 safe 和这个原因。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "They are also safe places to be"
+            },
+            {
+              "start": 33,
+              "end": 65,
+              "quote": "because the higher density means"
+            },
+            {
+              "start": 108,
+              "end": 150,
+              "quote": "shopkeepers and locals who know their area"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1"
+              ],
+              "start": 0,
+              "end": 123,
+              "quote": "Jane Jacobs 毕生致力于推广一种与众不同的城市构想，尤其关注是什么造就了成功的城市社区。她这一构想的核心是：城市生活应当充满活力、丰富多彩，人们能够在稠密而令人兴奋的城市环境中彼此交往。她更喜欢无序而非有序，步行而非开车，多样而非统一。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2"
+              ],
+              "start": 125,
+              "end": 267,
+              "quote": "在 Jacobs 看来，城市社区是有机的生命体，应当任其自行成长和变化，而不应受制于所谓专家和官员的宏大规划。城市应当是什么样子、又该如何发展，最好的评判者是本地居民自己。Jacobs 认为，城市社区最能理解自己的城市如何运转，因为城市生活正是通过居民之间形形色色的交往创造并维持的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3"
+              ],
+              "start": 269,
+              "end": 383,
+              "quote": "Jacobs 指出，城市的建成形态对城市社区的生活至关重要，尤其是人行道。人们居住的街道应当由纵横交错、排布紧密的人行道构成，让人们能够见面、交谈、相互结识。这样一套复杂却最终让人受益的相遇方式，能帮助人们更好地了解邻居和街区。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4"
+              ],
+              "start": 385,
+              "end": 496,
+              "quote": "在 Jacobs 看来，多样性和空间的混合使用也是这种城市形态的关键要素。城市的商业、办公和居住功能不应彼此分开，而应比邻而设，好让人们更充分地融合在一起。新旧建筑也应当多样并存，建筑如何使用和再利用应由人们的交往来决定。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5"
+              ],
+              "start": 498,
+              "end": 605,
+              "quote": "最后，在有足够多的人居住、工作和交往的地方，城市社区会发展得更好。在她看来，这样的高密度空间是创造力和活力的引擎。这些地方也很安全，因为密度更高意味着街上有更多“眼睛”：熟悉本地情况、密切留意街区动静的店主和居民。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:28-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+                "start": 144,
+                "end": 338,
+                "quote": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p1",
+                "start": 49,
+                "end": 98,
+                "quote": "她这一构想的核心是：城市生活应当充满活力、丰富多彩，人们能够在稠密而令人兴奋的城市环境中彼此交往。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:28-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+                "start": 282,
+                "end": 453,
+                "quote": "Jacobs argues that urban communities are best placed to understand how their city functions, because city life is created and sustained through their various interactions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p2",
+                "start": 86,
+                "end": 142,
+                "quote": "Jacobs 认为，城市社区最能理解自己的城市如何运转，因为城市生活正是通过居民之间形形色色的交往创造并维持的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:29-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+                "start": 176,
+                "end": 281,
+                "quote": "The best judges of how a city should be – and how it should develop – are the local residents themselves."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p2",
+                "start": 55,
+                "end": 86,
+                "quote": "城市应当是什么样子、又该如何发展，最好的评判者是本地居民自己。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:30-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+                "start": 115,
+                "end": 258,
+                "quote": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p3",
+                "start": 37,
+                "end": 79,
+                "quote": "人们居住的街道应当由纵横交错、排布紧密的人行道构成，让人们能够见面、交谈、相互结识。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:31-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+                "start": 184,
+                "end": 385,
+                "quote": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p5",
+                "start": 57,
+                "end": 107,
+                "quote": "这些地方也很安全，因为密度更高意味着街上有更多“眼睛”：熟悉本地情况、密切留意街区动静的店主和居民。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+                "start": 144,
+                "end": 338,
+                "quote": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p1",
+                "start": 49,
+                "end": 98,
+                "quote": "她这一构想的核心是：城市生活应当充满活力、丰富多彩，人们能够在稠密而令人兴奋的城市环境中彼此交往。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-c-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+                "start": 184,
+                "end": 385,
+                "quote": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-c-p5",
+                "start": 57,
+                "end": 107,
+                "quote": "这些地方也很安全，因为密度更高意味着街上有更多“眼睛”：熟悉本地情况、密切留意街区动静的店主和居民。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-c-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先点出 Jacobs 城市观的核心是人与人的交往，再说城市应由居民而非专家来决定，随后依次讲人行道、功能混合与建筑多样、高密度这几项城市形态要素，各项都落到促进交往和社区活力上。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+            "summary": "Jacobs 关注怎样的城市社区才算成功，核心是人们在稠密环境中彼此交往",
+            "function": "总起，提出她的城市观及其核心。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+            "summary": "城市社区应自然生长，最好的评判者是本地居民而非专家官员",
+            "function": "说明谁该决定城市的发展。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+            "summary": "人行道很关键，应当纵横交错、排布紧密，方便人们相识",
+            "function": "分述第一个城市形态要素。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+            "summary": "商业、办公和居住应比邻而设，新旧建筑并存",
+            "function": "分述第二个要素：多样与混合使用。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+            "summary": "高密度带来创造力、活力和安全，街上有更多“眼睛”",
+            "function": "分述最后一个要素：高密度。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-eight-provinces-jan:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到 Jacobs 构想的核心是什么。",
+      "stemTranslationZh": "Jacobs 认为对一个成功的城市社区来说，什么最重要？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 whereby 后面",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "高效的公共交通。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Efficient public transport.",
+            "explanation": "说到出行，原文只说她更喜欢步行而不是开车（walking to driving），没谈公共交通效率。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人与人之间密切的互动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "quote": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+              "anchor": "Jacobs 构想的核心"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "quote": "Jacobs argues that urban communities are best placed to understand how their city functions, because city life is created and sustained through their various interactions.",
+              "anchor": "城市生活靠交往创造"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "统一的建筑风格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "She prefers disorder to order, walking to driving, and diversity to uniformity.",
+            "sourceHighlight": "diversity to uniformity",
+            "optionText": "Uniform style of buildings.",
+            "optionHighlight": "Uniform",
+            "explanation": "她偏爱多样而不是统一（diversity to uniformity），[[block:paper-gaokao-2025-eight-provinces-jan:reading-c:4]]还主张新旧建筑并存，选项正好反过来。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "quote": "She prefers disorder to order, walking to driving, and diversity to uniformity.",
+              "anchor": "她偏爱多样而非统一"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "相对庞大的人口。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Finally, urban communities grow better in places where a critical mass of people live, work, and interact.",
+            "sourceHighlight": "a critical mass of people",
+            "optionText": "A comparatively large population.",
+            "optionHighlight": "large population",
+            "explanation": "人足够多（a critical mass of people）是[[block:paper-gaokao-2025-eight-provinces-jan:reading-c:5]]用 Finally 补上的最后一项条件，而且那里看重的仍是人们在其中 interact；原文没把人口多排在第一位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+              "quote": "Finally, urban communities grow better in places where a critical mass of people live, work, and interact.",
+              "anchor": "人足够多的地方社区发展更好"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "most important",
+          "targetText": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+          "targetCue": "At the heart of",
+          "sourceZh": "最重要",
+          "targetCueZh": "核心所在",
+          "answerText": "people are able to interact with one another",
+          "note": "题干 most important 对应原文 At the heart of。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Strong interaction between people.",
+          "targetText": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“人与人之间密切互动”就是原文的人们彼此交往（interact with one another），而且是在稠密的环境里交往；[[block:paper-gaokao-2025-eight-provinces-jan:reading-c:2|city life is created and sustained through their various interactions]]也把城市生活归结到交往上，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Jacobs 认为谁最有资格决定城市怎样发展。",
+      "stemTranslationZh": "Jacobs 认为应该由谁来决定城市的发展？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "本地居民。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "quote": "The best judges of how a city should be – and how it should develop – are the local residents themselves.",
+              "anchor": "本地居民是最好的评判者"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "政府官员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
+            "sourceHighlight": "not be subject to the grand plans of so-called experts and officials",
+            "optionText": "Government officials.",
+            "optionHighlight": "officials",
+            "explanation": "officials 在原文里出现过，可 Jacobs 说社区不该受官员和所谓专家的宏大规划摆布（not be subject to），她反对的正是由官员来定。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "quote": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
+              "anchor": "社区不应受专家和官员的规划摆布"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "城市规划者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
+            "sourceHighlight": "the grand plans of so-called experts",
+            "optionText": "City planners.",
+            "optionHighlight": "planners",
+            "explanation": "规划者对应原文的宏大规划（grand plans）和所谓专家（so-called experts），“所谓”一词已带不屑，Jacobs 主张城市不受他们左右。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "quote": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
+              "anchor": "所谓专家的宏大规划"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "建筑工人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Construction workers.",
+            "explanation": "全文没提建筑工人；[[block:paper-gaokao-2025-eight-provinces-jan:reading-c:4]]谈到建筑，也只说楼怎样使用由人们的交往（people’s interactions）决定。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "make decisions",
+          "targetText": "The best judges of how a city should be – and how it should develop – are the local residents themselves.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+          "targetCue": "The best judges",
+          "sourceZh": "做决定",
+          "targetCueZh": "最好的评判者",
+          "answerText": "are the local residents themselves",
+          "note": "题干 make decisions 对应原文 The best judges。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Local residents.",
+          "targetText": "The best judges of how a city should be – and how it should develop – are the local residents themselves.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+          "relationType": "locationCue",
+          "note": "选项沿用原文的 local residents：城市该怎样、该如何发展（how it should develop），最好的评判者就是本地居民自己，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到 Jacobs 对人行道布局的具体主张。",
+      "stemTranslationZh": "Jacobs 建议人行道应该怎样修建？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "两旁种上植物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Lined with plants.",
+            "explanation": "原文没写人行道边种植物，只说这样的布局让人们能见面、交谈、彼此结识。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "漆上清楚的标志。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Painted with clear signs.",
+            "explanation": "原文讲的是人行道怎样排布，从头到尾没提标志或涂漆。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "紧密相连。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "quote": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+              "anchor": "人行道纵横紧密"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "方便老年人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "old",
+            "optionText": "old",
+            "matchType": "exact",
+            "relationNote": "old 出自 [[block:paper-gaokao-2025-eight-provinces-jan:reading-c:4|a diversity of old and new buildings]]，指的是旧建筑，和老年人无关；人行道部分也没提老人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+              "quote": "There should also be a diversity of old and new buildings, and people’s interactions should determine how buildings get used and reused.",
+              "anchor": "新旧建筑并存"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "sidewalks",
+          "targetText": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+          "answerText": "a tight pattern of crossed sidewalks",
+          "note": "题干 sidewalks 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Tightly connected.",
+          "targetText": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“紧密相连”就是原文的人行道排布紧密（tight pattern）、纵横交错（crossed），选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:31": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂“街上的眼睛”这一比喻，看它给街区带来什么感受。",
+      "stemTranslationZh": "在 Jacobs 看来，“街上的眼睛”带来一种______感。",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 because 前的结论",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "自豪",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "pride",
+            "explanation": "原文写店主和居民熟悉、看护街区，说的是有人照看，没说他们为街区感到自豪。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "舒适",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "comfort",
+            "explanation": "“眼睛”带来的是有人盯着、不出事的安全（safe），原文没谈住得舒不舒服。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "安全",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+              "quote": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood.",
+              "anchor": "街上的眼睛让街区安全"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "紧迫",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "urgency",
+            "explanation": "密切留意（a close watch）听上去紧张，但原文把它当作让街区安全的好事，没有任何事情急着要办。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "eyes on the street",
+          "targetText": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+          "answerText": "They are also safe places to be",
+          "note": "题干 eyes on the street 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "security",
+          "targetText": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“安全”（security）就是原文的安全的地方（safe places）；because 说明安全正来自街上更多的“眼睛”：店主和居民时刻留意街区（maintain a close watch），选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

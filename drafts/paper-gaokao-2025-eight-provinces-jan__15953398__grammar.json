@@ -1,0 +1,1059 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill": {
+      "overview": "文章介绍联合国2010年为六种官方语言设立语言日的目的，阐述语言对国家交往和文明互鉴的意义，并说明联合国中文日和日益普及的中文学习如何增进世界对中国的了解。",
+      "fullTranslationZh": "2010年，联合国全球传播部为联合国六种官方语言分别设立了语言日。其目标有两个：一是庆祝文化多样性，二是促进六种语言的平等使用。\n语言是交流的载体，是国家之间互动的桥梁，也是文明之间相互理解的纽带。同时，一种语言及其独特的书写形式构成了一个民族文化传统的“灵魂”。每一种语言都值得尊重，都应受到平等对待。\n联合国中文日不仅为世界更好地了解中国提供了一个独特的平台，而且促进了世界范围内的语言和文化交流。\n如今，已有70多个国家把中文纳入了本国的教育体系。中文在增进中国与世界其他地区的交流与合作方面发挥着日益重要的作用。随着越来越多的外国人开始学习中文、体验中国文化，世界将更好地了解中国及其丰富的历史、勤劳的人民、通过创新取得的发展以及包容性。中国也将以更加开放的姿态拥抱世界，为国际社会作出新的贡献。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-fill-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+          "sourceText": "The UN Chinese Language Day not only provides a unique platform __61__ the world to better understand China, but also __62__ (promote) language and cultural exchanges in the world.",
+          "displayText": "The UN Chinese Language Day not only provides a unique platform for the world to better understand China, but also promotes language and cultural exchanges in the world.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:61",
+            "question:paper-gaokao-2025-eight-provinces-jan:62"
+          ],
+          "translationZh": "联合国中文日不仅为世界更好地了解中国提供了一个独特的平台，而且促进了世界范围内的语言和文化交流。",
+          "analysisZh": "主干是 The UN Chinese Language Day provides … and promotes …：not only … but also … 连接两个谓语 provides 和 promotes，主语相同。第一个谓语的宾语 a unique platform 后面，for the world to better understand China 作后置定语，说明这个平台的用途，the world 是 to better understand 的逻辑主语。",
+          "underlineRanges": [
+            {
+              "start": 28,
+              "end": 63,
+              "quote": "not only provides a unique platform"
+            },
+            {
+              "start": 64,
+              "end": 104,
+              "quote": "for the world to better understand China"
+            },
+            {
+              "start": 106,
+              "end": 123,
+              "quote": "but also promotes"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-fill-2",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+          "sourceText": "As more and more foreigners start to study the Chinese language and experience Chinese culture, the world will have a better understanding of China and its rich history, its hard-working people, its development through __65__ (innovate), and its inclusiveness.",
+          "displayText": "As more and more foreigners start to study the Chinese language and experience Chinese culture, the world will have a better understanding of China and its rich history, its hard-working people, its development through innovation, and its inclusiveness.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:65"
+          ],
+          "translationZh": "随着越来越多的外国人开始学习中文、体验中国文化，世界将更好地了解中国及其丰富的历史、勤劳的人民、通过创新取得的发展以及包容性。",
+          "analysisZh": "As 引导状语从句，表示“随着……”，从句里 start to study … and experience … 两个动作并列。主句主干是 the world will have a better understanding of …；of 后的宾语是 China 和四个 its 短语，through innovation 修饰 its development，说明发展靠的是创新。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 42,
+              "quote": "As more and more foreigners start to study"
+            },
+            {
+              "start": 96,
+              "end": 141,
+              "quote": "the world will have a better understanding of"
+            },
+            {
+              "start": 195,
+              "end": 229,
+              "quote": "its development through innovation"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-fill-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 64,
+              "quote": "2010年，联合国全球传播部为联合国六种官方语言分别设立了语言日。其目标有两个：一是庆祝文化多样性，二是促进六种语言的平等使用。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2"
+              ],
+              "start": 65,
+              "end": 152,
+              "quote": "语言是交流的载体，是国家之间互动的桥梁，也是文明之间相互理解的纽带。同时，一种语言及其独特的书写形式构成了一个民族文化传统的“灵魂”。每一种语言都值得尊重，都应受到平等对待。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3"
+              ],
+              "start": 153,
+              "end": 201,
+              "quote": "联合国中文日不仅为世界更好地了解中国提供了一个独特的平台，而且促进了世界范围内的语言和文化交流。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4"
+              ],
+              "start": 202,
+              "end": 352,
+              "quote": "如今，已有70多个国家把中文纳入了本国的教育体系。中文在增进中国与世界其他地区的交流与合作方面发挥着日益重要的作用。随着越来越多的外国人开始学习中文、体验中国文化，世界将更好地了解中国及其丰富的历史、勤劳的人民、通过创新取得的发展以及包容性。中国也将以更加开放的姿态拥抱世界，为国际社会作出新的贡献。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+            "text": "In 2010, the UN Department of Global Communications instituted language days for each of the organization’s six official languages. The goal was two-fold: to celebrate cultural diversity as well as to promote the equal use of all six tongues."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+            "text": "Language is the carrier of communication, the bridge of interaction between nations, and the bond of understanding among civilizations. At the same time, a language and its individual written forms make up the “soul” of a nation’s cultural tradition. Every language is worthy of respect and should be treated equally."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+            "text": "The UN Chinese Language Day not only provides a unique platform for the world to better understand China, but also promotes language and cultural exchanges in the world."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+            "text": "Today, more than 70 countries have included the Chinese language in their education systems. Chinese plays an increasingly important role in improving communication and cooperation between China and the rest of the world. As more and more foreigners start to study the Chinese language and experience Chinese culture, the world will have a better understanding of China and its rich history, its hard-working people, its development through innovation, and its inclusiveness. China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-fill-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "start": 193,
+                "end": 214,
+                "quote": "as well as to promote"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 50,
+                "end": 54,
+                "quote": "二是促进"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:56"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "start": 155,
+                "end": 167,
+                "quote": "to celebrate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 42,
+                "end": 44,
+                "quote": "庆祝"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "start": 232,
+                "end": 239,
+                "quote": "all six"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "start": 108,
+                "end": 130,
+                "quote": "six official languages"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 54,
+                "end": 58,
+                "quote": "六种语言"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 18,
+                "end": 24,
+                "quote": "六种官方语言"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:57"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+                "start": 234,
+                "end": 241,
+                "quote": "tongues"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 56,
+                "end": 63,
+                "quote": "语言的平等使用"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "start": 12,
+                "end": 83,
+                "quote": "the carrier of communication, the bridge of interaction between nations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 3,
+                "end": 19,
+                "quote": "交流的载体，是国家之间互动的桥梁"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:58"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "start": 85,
+                "end": 88,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 20,
+                "end": 22,
+                "quote": "也是"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "start": 202,
+                "end": 215,
+                "quote": "forms make up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 48,
+                "end": 53,
+                "quote": "形式构成了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:59"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "start": 184,
+                "end": 191,
+                "quote": "written"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 46,
+                "end": 48,
+                "quote": "书写"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "start": 261,
+                "end": 307,
+                "quote": "Every language is worthy of respect and should"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 67,
+                "end": 77,
+                "quote": "每一种语言都值得尊重"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:60"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:2",
+                "start": 298,
+                "end": 308,
+                "quote": "be treated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 80,
+                "end": 86,
+                "quote": "受到平等对待"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 46,
+                "end": 63,
+                "quote": "a unique platform"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 71,
+                "end": 107,
+                "quote": "the world to better understand China"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 21,
+                "end": 28,
+                "quote": "一个独特的平台"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 9,
+                "end": 18,
+                "quote": "世界更好地了解中国"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:61"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 64,
+                "end": 67,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 8,
+                "end": 11,
+                "quote": "为世界"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 28,
+                "end": 45,
+                "quote": "not only provides"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 0,
+                "end": 27,
+                "quote": "The UN Chinese Language Day"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 6,
+                "end": 8,
+                "quote": "不仅"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 0,
+                "end": 6,
+                "quote": "联合国中文日"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:62"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 115,
+                "end": 123,
+                "quote": "promotes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 31,
+                "end": 34,
+                "quote": "促进了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 101,
+                "end": 140,
+                "quote": "plays an increasingly important role in"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 47,
+                "end": 57,
+                "quote": "发挥着日益重要的作用"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:63"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 141,
+                "end": 150,
+                "quote": "improving"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 28,
+                "end": 30,
+                "quote": "增进"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 188,
+                "end": 205,
+                "quote": "between China and"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 213,
+                "end": 230,
+                "quote": "rest of the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 30,
+                "end": 33,
+                "quote": "中国与"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 33,
+                "end": 39,
+                "quote": "世界其他地区"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:64"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 199,
+                "end": 202,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 35,
+                "end": 39,
+                "quote": "其他地区"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 427,
+                "end": 450,
+                "quote": "its development through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 110,
+                "end": 115,
+                "quote": "取得的发展"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:65"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 441,
+                "end": 451,
+                "quote": "innovation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 108,
+                "end": 110,
+                "quote": "创新"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:61",
+              "question:paper-gaokao-2025-eight-provinces-jan:62"
+            ],
+            "selectedSentenceId": "sentence-grammar-fill-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 28,
+                "end": 63,
+                "quote": "not only provides a unique platform"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 64,
+                "end": 104,
+                "quote": "for the world to better understand China"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:3",
+                "start": 106,
+                "end": 123,
+                "quote": "but also promotes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 0,
+                "end": 48,
+                "quote": "联合国中文日不仅为世界更好地了解中国提供了一个独特的平台，而且促进了世界范围内的语言和文化交流。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:65"
+            ],
+            "selectedSentenceId": "sentence-grammar-fill-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 222,
+                "end": 264,
+                "quote": "As more and more foreigners start to study"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 318,
+                "end": 363,
+                "quote": "the world will have a better understanding of"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+                "start": 417,
+                "end": 451,
+                "quote": "its development through innovation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 58,
+                "end": 121,
+                "quote": "随着越来越多的外国人开始学习中文、体验中国文化，世界将更好地了解中国及其丰富的历史、勤劳的人民、通过创新取得的发展以及包容性。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-eight-provinces-jan:56": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "celebrate",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to celebrate",
+      "role": "predicative",
+      "similarityProfile": {
+        "route": "predicative-nominal-infinitive",
+        "features": []
+      },
+      "reason": "冒号后展开 The goal was two-fold 的两项内容，相当于 The goal was to celebrate … as well as to promote …；空格和 as well as 后的 to promote 并列，一起作 goal 的表语，所以用不定式 to celebrate。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "as well as to promote",
+          "signalSide": "passage",
+          "relation": "中文：as well as 后是不定式 to promote，并列的前一项也要用不定式。"
+        },
+        {
+          "type": "subject",
+          "signalText": "The goal was two-fold",
+          "signalSide": "passage",
+          "relation": "中文：两项内容都是 goal 的具体目标，作 was 的表语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:57": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "tongue",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "tongues",
+      "role": null,
+      "similarityProfile": {
+        "route": "quantity-determiner",
+        "features": []
+      },
+      "reason": "空格是 the equal use of 的宾语名词，前面有 all six 修饰，指的就是前文 six official languages 这六种语言，可数名词要用复数 tongues。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "all six",
+          "signalSide": "passage",
+          "relation": "中文：six 修饰可数名词，名词用复数。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "six official languages",
+          "signalSide": "passage",
+          "relation": "中文：tongue 在这里指语言，回指前文六种官方语言。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:58": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "句子是 Language is A, B, ___ C：the carrier…、the bridge…、the bond… 三个名词短语并列作 is 的表语，三项并列时最后一项前用 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "the carrier of communication, the bridge of interaction between nations",
+          "signalSide": "passage",
+          "relation": "中文：前两项用逗号隔开，第三项 the bond 前要补并列连词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:59": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "write",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "written",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格放在名词 forms 前作前置定语，说明是什么样的形式；形式是被写出来的，write 和 forms 是被动关系，用过去分词 written，written forms 即书写形式。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "forms",
+          "signalSide": "passage",
+          "relation": "中文：空格修饰 forms，forms 是被书写的对象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:60": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "treat",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "be treated",
+      "role": null,
+      "similarityProfile": {
+        "route": "modal-passive",
+        "features": []
+      },
+      "reason": "空格接在 should 后，和 is worthy of respect 并列作 Every language 的谓语；语言是被人平等对待的，要用被动，情态动词后接 be treated。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Every language",
+          "signalSide": "passage",
+          "relation": "中文：主语是语言，treat 的动作由人发出，语言是承受者。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "is worthy of respect and should",
+          "signalSide": "passage",
+          "relation": "中文：and 连接两个谓语，后一个由 should 引出，接动词原形 be。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:61": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格后的 the world to better understand China 要接到 a unique platform 上，说明这是给谁、做什么用的平台；the world 是 to better understand 的逻辑主语，要用 for 引出，构成 for sb to do。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a unique platform",
+          "signalSide": "passage",
+          "relation": "中文：for the world to better understand China 修饰这个平台。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "the world to better understand China",
+          "signalSide": "passage",
+          "relation": "中文：不定式前的逻辑主语 the world 由 for 引出。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:62": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "promote",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "promotes",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "not only provides…, but also ___ 中缺第二个谓语，主语仍是 The UN Chinese Language Day，单数第三人称；时态与并列的 provides 一致，用一般现在时 promotes。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "not only provides",
+          "signalSide": "passage",
+          "relation": "中文：not only … but also 连接两个谓语，后一个和 provides 时态、人称一致。"
+        },
+        {
+          "type": "subject",
+          "signalText": "The UN Chinese Language Day",
+          "signalSide": "passage",
+          "relation": "中文：主语是单数，谓语加 -s。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:63": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "improve",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "improving",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-preposition",
+        "features": []
+      },
+      "reason": "空格接在 plays an increasingly important role in 末尾的介词 in 后作宾语，自己还带着宾语 communication and cooperation，介词后的动词用动名词 improving。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "plays an increasingly important role in",
+          "signalSide": "passage",
+          "relation": "中文：in 是介词，后面的动词要用 -ing 形式。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:64": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "fixed-the-phrase"
+        ]
+      },
+      "reason": "空格在名词 rest 前作限定词，rest 表示“其余部分”，是对 China 以外那部分世界的特指，固定说 the rest of the world。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "rest of the world",
+          "signalSide": "passage",
+          "relation": "中文：the rest of 表示其余的部分，rest 前用 the。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "between China and",
+          "signalSide": "passage",
+          "relation": "中文：between A and B 中 B 是与中国相对的世界其他地区，是特指。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:65": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "innovate",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "innovation",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作介词 through 的宾语，要用名词；innovate 的名词是 innovation，its development through innovation 即通过创新取得的发展。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "its development through",
+          "signalSide": "passage",
+          "relation": "中文：through 是介词，后接名词作宾语。"
+        }
+      ]
+    }
+  }
+}

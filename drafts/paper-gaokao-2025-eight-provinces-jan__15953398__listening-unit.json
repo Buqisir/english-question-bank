@@ -1,0 +1,979 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Thanks for the wonderful meal, Mom, I think I’d better go back to my office. I’ve got a report to write.\nW: Okay, bye, Luke. Drive with care.",
+      "translationZh": "男：谢谢你做的这顿好饭，妈妈。我想我最好回办公室了，我还有一份报告要写。\n女：好的，再见，卢克。开车小心。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "卢克吃完妈妈做的饭，要赶回办公室写报告，妈妈叮嘱他开车小心。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "谢谢你做的这顿好饭，妈妈，我想我最好回办公室了。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我还有一份报告要写。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "好的，再见，卢克。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "开车小心。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Jill and Patty are very close. They seem to get on very well with each other.\nM: Yes, they entered our company the same year and are now working on the same marketing project.",
+      "translationZh": "女：吉尔和帕蒂关系很好，她们俩似乎相处得非常融洽。\n男：是啊，她们同一年进的我们公司，现在又在做同一个营销项目。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "两人谈论同事吉尔和帕蒂：她们同年进公司，关系融洽，正合作同一个项目。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "吉尔和帕蒂关系很好。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "她们俩似乎相处得非常融洽。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "是啊，她们同一年进的我们公司，现在又在做同一个营销项目。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Bob, I’m going to Melbourne with Lisa tomorrow.\nM: Great. Are you going by train? I can drive. you to the station.\nW: No thanks. We decided to fly.",
+      "translationZh": "女：鲍勃，我明天要和丽莎去墨尔本。\n男：太好了。你们坐火车去吗？我可以开车送你去车站。\n女：不用了，谢谢。我们决定坐飞机去。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士明天和丽莎去墨尔本，鲍勃提出开车送她去火车站，她说已决定坐飞机。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "鲍勃，我明天要和丽莎去墨尔本。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "你们坐火车去吗？"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我可以开车"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "送你去车站。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "不用了，谢谢。"
+        },
+        {
+          "id": "listening-text-3:7",
+          "zh": "我们决定坐飞机去。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: You asked stellar to come around 630, didn’t you?\nM: No, I asked her to come over at seven to give you more time to prepare the food.\nW: Okay, it’s 10 to seven. She’ll be here any minute.",
+      "translationZh": "女：你是请斯黛拉六点半左右过来的，对吧？\n男：不，我请她七点过来，好让你有更多时间准备饭菜。\n女：好，现在六点五十了，她随时会到。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "两人在家等客人，男士请她七点到，好让女士多些时间准备饭菜，客人快到了。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你是请斯黛拉六点半左右过来的，对吧？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "不，我请她七点过来，好让你有更多时间准备饭菜。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "好，现在六点五十了。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "她随时会到。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Hey, Susan, it’s so good to see you again. Did you come back to visit your family?\nW: Yes, and no. In fact, I’ve quit my job. I’m planning to stay and start my own restaurant business. Here.",
+      "translationZh": "男：嘿，苏珊，又见到你真好。你是回来看家人的吗？\n女：算是，也不全是。其实我已经辞职了，我打算留下来，在这里自己开餐馆。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "未来规划"
+      },
+      "summaryZh": "苏珊回到家乡，不只是看家人：她已辞职，打算留下来自己开一家餐馆。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "嘿，苏珊，又见到你真好。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "你是回来看家人的吗？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "算是，也不全是。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "其实我已经辞职了。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "我打算留下来，自己开餐馆。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "就在这里。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: here’s a package.\nW: I wonder what this is.\nM: Who is it from Uncle Jason? Aunt Mary?\nW: Let me see it’s from Granny Betty.\nM: Oh, She’s always so generous. Remember the table lamp she sent us last year and the dinner plates.\nW: Look! Steve, this is just what we’ve been wanting, a beautiful vase.\nM: Fantastic.\nW: It’ll be perfect on the coffee table in the living room.\nM: Yes, perfect.",
+      "translationZh": "男：这儿有个包裹。\n女：不知道是什么。\n男：是谁寄的？杰森叔叔？玛丽姑姑？\n女：我看看，是贝蒂奶奶寄的。\n男：哦，她总是这么大方。还记得她去年寄给我们的台灯，还有那些餐盘吗？\n女：看！史蒂夫，这正是我们一直想要的，一只漂亮的花瓶。\n男：太棒了。\n女：放在客厅的茶几上一定很好看。\n男：是啊，正合适。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "夫妻俩收到贝蒂奶奶寄来的包裹，里面是一直想要的花瓶，打算摆在客厅茶几上。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "这儿有个包裹。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "不知道是什么。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "是谁寄的？杰森叔叔？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "玛丽姑姑？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我看看，是贝蒂奶奶寄的。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "哦，她总是这么大方。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "还记得她去年寄给我们的台灯，还有那些餐盘吗？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "看！"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "史蒂夫，这正是我们一直想要的，一只漂亮的花瓶。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "太棒了。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "放在客厅的茶几上一定很好看。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "是啊，正合适。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "M: Kate, what are you writing?\nW: A letter to my sister.\nM: Why not send an email to her? It’s faster.\nW: Well, I love email for the convenience, but I tend to write letters for pleasure, especially for holiday greetings.\nM: You’re right. I prefer handwritten birthday cards too.\nW: And I love getting letters too. Hearing a letter drop through the mailbox is much more exciting than getting an email, even though it’s usually a bill or advertisement in my case.\nM: Oh, that reminds me, I haven’t checked my mailbox for ages.",
+      "translationZh": "男：凯特，你在写什么？\n女：给我妹妹写信。\n男：为什么不给她发邮件呢？那样更快。\n女：嗯，我喜欢邮件的方便，但我写信往往是图个乐趣，尤其是节日问候。\n男：你说得对。我也更喜欢手写的生日卡片。\n女：我也喜欢收信。听到信落进信箱的声音，比收到邮件让人兴奋得多，虽然我收到的通常是账单或广告。\n男：哦，这倒提醒我了，我好久没查看信箱了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "凯特给妹妹写信，说邮件方便，但写信是图乐趣；男士被提醒自己好久没查信箱。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "凯特，你在写什么？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "给我妹妹写信。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "为什么不给她发邮件呢？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "那样更快。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "嗯，我喜欢邮件的方便，但我写信往往是图个乐趣，尤其是节日问候。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "你说得对。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "我也更喜欢手写的生日卡片。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我也喜欢收信。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "听到信落进信箱的声音，比收到邮件让人兴奋得多，虽然我收到的通常是账单或广告。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "哦，这倒提醒我了，我好久没查看信箱了。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "W: Dear listeners I have with me today Robert jents of the International Dark Sky Association. Robert, Welcome to our program.\nM: Thank you. I’m glad to be here.\nW: Would you please tell our listeners why you became an Astronomer?\nM: When I was a little boy, I loved the night sky. I remember I looked up at the stars in the sky and asked, how many are there? How far away are they? Can we visit them? I became an astronomer because I was amazed by their beauty, but now in most big cities, kids can’t see the stars like I did.\nW: So, have you already come up with a solution to this problem?\nM: Yeah, Actually, there is a method that is inexpensive and has immediate benefits. If we shine lights down at the ground instead of up into the sky, and use lower brightness levels, we can preserve the beauty of the night sky.",
+      "translationZh": "女：亲爱的听众朋友们，今天来到我身边的是国际暗夜协会的罗伯特。罗伯特，欢迎来到我们的节目。\n男：谢谢，很高兴来到这里。\n女：能给听众讲讲你为什么成为天文学家吗？\n男：我小时候就喜欢夜空。我记得自己抬头望着天上的星星，问：一共有多少颗？它们有多远？我们能去看看它们吗？我成为天文学家，是因为被星星的美震撼了。可是现在在大多数大城市，孩子们已经不能像我当年那样看到星星了。\n女：那么，你们想出解决这个问题的办法了吗？\n男：是的。其实有一种办法既便宜又能立即见效：如果我们把灯光朝下照向地面，而不是朝上照向天空，并调低亮度，就能保住夜空的美。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人与环境"
+      },
+      "summaryZh": "电台节目里，天文学家罗伯特讲自己因好奇星星入行，并提出让灯光朝下、调低亮度来保护夜空。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "亲爱的听众朋友们，今天来到我身边的是国际暗夜协会的罗伯特。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "罗伯特，欢迎来到我们的节目。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "很高兴来到这里。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "能给听众讲讲你为什么成为天文学家吗？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我小时候就喜欢夜空。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我记得自己抬头望着天上的星星，问：一共有多少颗？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "它们有多远？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "我们能去看看它们吗？"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我成为天文学家，是因为被星星的美震撼了，可是现在在大多数大城市，孩子们已经不能像我当年那样看到星星了。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "那么，你们想出解决这个问题的办法了吗？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "是的，其实有一种办法既便宜又能立即见效。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "如果我们把灯光朝下照向地面，而不是朝上照向天空，并调低亮度，就能保住夜空的美。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: Elena, who had a great influence on your career?\nW: I would say it’s my father. He began to run soccer schools when I was a teenager, so I played soccer with my brother and his friends, but a life in the game was not my plan. So after graduation, I took a job writing technical instructions. It was my first job.\nM: What was that like?\nW: It paid well, but was not very interesting. So when offered a coaching role, I seized it.\nM: Did you have to overcome any challenges to get where you are today?\nW: Well, where to start? I enjoyed a successful college life. Then I progressed through The College system to\nbecome an assistant coach to the national team. I’ve encountered a lot of challenges through the ups and downs of being a coach. It’s particularly hard to face the doubts after losing games.\nM: What achievement are you most proud of?\nW: I’m most proud of helping my team to win all the last seven matches in Italy and Brazil.\nM: What are you planning to do next?\nW: I’ll take on another challenge, possibly coaching in England.",
+      "translationZh": "男：埃琳娜，谁对你的职业影响最大？\n女：我会说是我父亲。我十几岁时他开始办足球学校，所以我和哥哥以及他的朋友们一起踢球，但以足球为生并不在我的计划里。所以毕业后，我找了一份写技术说明书的工作，那是我的第一份工作。\n男：那份工作怎么样？\n女：收入不错，但不太有意思。所以有人请我当教练时，我就抓住了机会。\n男：为了走到今天，你有没有克服什么困难？\n女：嗯，从哪儿说起呢？我的大学生活很成功。后来我在大学体系里一步步做起，成为国家队的助理教练。做教练起起落落，我遇到过很多挑战，尤其难的是输球之后要面对各种质疑。\n男：你最自豪的成就是什么？\n女：我最自豪的是帮助球队在意大利和巴西赢下了最近的全部七场比赛。\n男：你接下来有什么打算？\n女：我会接受新的挑战，可能去英格兰执教。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "足球教练埃琳娜讲父亲对她的影响、从技术写作转行当教练的经历、遇到的挑战和下一步打算。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "埃琳娜，谁对你的职业影响最大？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我会说是我父亲。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我十几岁时他开始办足球学校，所以我和哥哥以及他的朋友们一起踢球，但以足球为生并不在我的计划里。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "所以毕业后，我找了一份写技术说明书的工作。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "那是我的第一份工作。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "那份工作怎么样？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "收入不错，但不太有意思。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "所以有人请我当教练时，我就抓住了机会。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "为了走到今天，你有没有克服什么困难？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "嗯，从哪儿说起呢？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我的大学生活很成功。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "后来我在大学体系里一步步做起，"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "成为国家队的助理教练。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "做教练起起落落，我遇到过很多挑战。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "尤其难的是输球之后要面对各种质疑。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "你最自豪的成就是什么？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "我最自豪的是帮助球队在意大利和巴西赢下了最近的全部七场比赛。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "你接下来有什么打算？"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "我会接受新的挑战，可能去英格兰执教。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Good morning, everyone. I’m Monica from Canada, and I’ll teach you English writing this term. Before we start, I’d like to take a few minutes to let you know something about me. When I was small, I enjoyed spending my summers reading story books instead of playing baseball or taking dance lessons. After I went to school, I took reading time seriously, once I tied one end of a string around a book and the other end around my waist, climbed a tree and sat in the branches reading until dinner time. In college, I thought I might major in journalism or history, but when I took my first literature class, I was deeply attracted to it. The calling to be an English major was in my heart, and I couldn’t imagine spending my study hours without Shakespeare, Chaucer or Lewis by my side. I learned the art of making connections between literature and life and developed a love for writing. After graduation, I taught English in a primary school in Canada for five years. Then I went to Australia and worked as a book editor. Three years ago, I came to China. I’ve been teaching English in middle schools. I love my job, and I’m thankful for the gift of words for the life connection beauty and learning that come from language.",
+      "translationZh": "大家早上好。我是来自加拿大的莫妮卡，这学期教大家英语写作。开始之前，我想花几分钟让大家了解一下我。我小时候喜欢整个夏天读故事书，而不是去打棒球或上舞蹈课。上学以后，我把读书时间看得很重。有一次，我把一根绳子的一头系在书上，另一头系在腰上，爬上树，坐在树枝上一直读到吃晚饭。上大学时，我本以为自己可能会主修新闻或历史，但上了第一堂文学课后，我被文学深深吸引了。做一名英语专业学生成了我内心的召唤，我无法想象学习时身边没有莎士比亚、乔叟或刘易斯。我学会了把文学和生活联系起来，也爱上了写作。毕业后，我在加拿大一所小学教了五年英语。后来我去了澳大利亚，当了图书编辑。三年前我来到中国，一直在中学教英语。我热爱我的工作，感谢文字这份礼物，感谢语言带来的与生活的联结、美和学习。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "新老师莫妮卡自我介绍：从小爱读书，大学学英语，教过书、做过编辑，现在在中国教英语。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家早上好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我是来自加拿大的莫妮卡，这学期教大家英语写作。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "开始之前，我想花几分钟让大家了解一下我。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我小时候喜欢整个夏天读故事书，而不是去打棒球或上舞蹈课。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "上学以后，我把读书时间看得很重，有一次，我把一根绳子的一头系在书上，另一头系在腰上，爬上树，坐在树枝上一直读到吃晚饭。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "上大学时，我本以为自己可能会主修新闻或历史，但上了第一堂文学课后，我被文学深深吸引了。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "做一名英语专业学生成了我内心的召唤，我无法想象学习时身边没有莎士比亚、乔叟或刘易斯。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "我学会了把文学和生活联系起来，也爱上了写作。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "毕业后，我在加拿大一所小学教了五年英语。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "后来我去了澳大利亚，当了图书编辑。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "三年前我来到中国。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "我一直在中学教英语。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "我热爱我的工作，感谢文字这份礼物，感谢语言带来的与生活的联结、美和学习。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "卢克接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "做饭。",
+        "B": "去办公室。",
+        "C": "交报告。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I think I’d better go back to my office."
+      },
+      "reasonZh": "卢克谢过妈妈的饭，说最好回办公室了（go back to my office），选项沿用了 office，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "饭是妈妈做的，卢克是在道谢（Thanks for the wonderful meal），饭已经吃完，不是他接下来要做的事。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "报告是回办公室后还要写的（a report to write），还没写完，谈不上交。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "两位同事。",
+        "B": "男士的工作。",
+        "C": "一个营销项目。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "they entered our company the same year"
+      },
+      "reasonZh": "两人先说吉尔和帕蒂相处融洽（get on very well），又说她们同年进公司（entered our company the same year），整段都在谈这两位同事，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "营销项目（marketing project）是男士说明两人现在一起做的事，谈话的对象始终是吉尔和帕蒂。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士将怎样去墨尔本？",
+      "optionTranslationsZh": {
+        "A": "坐汽车。",
+        "B": "坐火车。",
+        "C": "坐飞机。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We decided to fly."
+      },
+      "reasonZh": "女士最后说她们决定坐飞机（decided to fly），“By air”就是坐飞机，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "坐火车是鲍勃的猜测（Are you going by train?），女士用 No thanks 回绝，接着说要坐飞机。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "开车是鲍勃提出送她去车站（I can drive），女士没接受，而且送站也不是去墨尔本的方式。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人可能在哪里？",
+      "optionTranslationsZh": {
+        "A": "在商店。",
+        "B": "在家里。",
+        "C": "在电影院。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I asked her to come over at seven to give you more time to prepare the food."
+      },
+      "reasonZh": "男士请客人七点过来（come over），好让女士多些时间准备饭菜（prepare the food），女士又说客人随时会到，可见两人在家里等客人上门，选 B。"
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士打算做什么？",
+      "optionTranslationsZh": {
+        "A": "成家。",
+        "B": "加入一家新公司。",
+        "C": "开一家餐馆。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’m planning to stay and start my own restaurant business."
+      },
+      "reasonZh": "苏珊说打算留下来自己开餐馆（start my own restaurant business），选项“开一家餐馆”就是这件事，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "family 出自男士的问话，问她是不是回来看家人（visit your family），不是说她要成家。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "苏珊说的是已经辞职（quit my job），要自己开店，不是去别的公司上班。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "包裹是谁寄来的？",
+      "optionTranslationsZh": {
+        "A": "贝蒂。",
+        "B": "玛丽。",
+        "C": "杰森。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "it’s from Granny Betty."
+      },
+      "reasonZh": "男士先猜了两个人，女士看过后说是贝蒂奶奶寄的（from Granny Betty），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "玛丽姑姑是男士随口猜的人（Aunt Mary?），女士看过包裹后说寄件人是贝蒂奶奶。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "杰森叔叔同样是男士的猜测（Who is it from Uncle Jason?），并不是寄件人。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "说话人会把刚收到的礼物放在哪里？",
+      "optionTranslationsZh": {
+        "A": "厨房里。",
+        "B": "卧室里。",
+        "C": "客厅里。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It’ll be perfect on the coffee table in the living room."
+      },
+      "reasonZh": "女士说花瓶放在客厅的茶几上正合适（in the living room），男士也说 Yes, perfect，选 C。"
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "凯特认为写信怎么样？",
+      "optionTranslationsZh": {
+        "A": "方便。",
+        "B": "令人愉快。",
+        "C": "过时了。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I tend to write letters for pleasure"
+      },
+      "reasonZh": "凯特说她写信往往是图个乐趣（for pleasure），“令人愉快”就是这个意思，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "方便（convenience）是凯特说她喜欢邮件的原因（I love email for the convenience），讲的不是写信。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "凯特对写信的态度是正面的，她还说自己也喜欢收信（I love getting letters too），没有嫌它过时。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "付账单。",
+        "B": "寄明信片。",
+        "C": "查看信箱。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I haven’t checked my mailbox for ages."
+      },
+      "reasonZh": "凯特说到信落进信箱，男士被提醒，说自己好久没查看信箱了（haven’t checked my mailbox for ages），可见他接下来要去看信箱，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "账单是凯特说她信箱里常收到的东西（usually a bill or advertisement），男士没说要付账单。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "send 是男士劝凯特给妹妹发邮件（send an email to her），没有人要寄明信片。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士在做什么？",
+      "optionTranslationsZh": {
+        "A": "做讲座。",
+        "B": "主持节目。",
+        "C": "主持会议。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Robert, Welcome to our program."
+      },
+      "reasonZh": "女士一开口就招呼听众（Dear listeners），又欢迎嘉宾来到节目（Welcome to our program），还替听众提问，她是在主持节目，选 B。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "是什么让罗伯特想成为天文学家？",
+      "optionTranslationsZh": {
+        "A": "父母的鼓励。",
+        "B": "他在大城市的经历。",
+        "C": "他对星星的好奇。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I looked up at the stars in the sky and asked, how many are there?"
+      },
+      "reasonZh": "罗伯特小时候望着星星接连发问：有多少颗、有多远、能不能去（how many are there? … Can we visit them?），这些问题就是对星星的好奇，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "大城市说的是现在（now in most big cities），孩子们看不到星星，这是他要解决的问题，不是他当初入行的原因。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "罗伯特为什么提出这个建议？",
+      "optionTranslationsZh": {
+        "A": "为了减少光污染。",
+        "B": "为了保持地面清洁。",
+        "C": "为了减少能源消耗。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "If we shine lights down at the ground instead of up into the sky, and use lower brightness levels, we can preserve the beauty of the night sky."
+      },
+      "reasonZh": "问题是大城市的孩子看不到星星，办法是灯光朝下照、调低亮度（shine lights down … lower brightness levels），让夜空不再被灯光照亮，这就是减少光污染，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "ground 是说灯光照向地面（shine lights down at the ground），和保持地面清洁无关。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "调低亮度是为了保住夜空的美（preserve the beauty of the night sky），罗伯特没有讲节省能源。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "谁在埃琳娜的职业选择上对她影响很大？",
+      "optionTranslationsZh": {
+        "A": "她哥哥。",
+        "B": "她父亲。",
+        "C": "她的老师。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I would say it’s my father."
+      },
+      "reasonZh": "男士问谁对她的职业影响最大，埃琳娜答是父亲（it’s my father），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "哥哥是她小时候一起踢球的人（played soccer with my brother），影响她的是办足球学校的父亲。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "埃琳娜为什么辞去第一份工作？",
+      "optionTranslationsZh": {
+        "A": "她觉得工作无聊。",
+        "B": "她的工资很低。",
+        "C": "她感到压力大。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It paid well, but was not very interesting."
+      },
+      "reasonZh": "埃琳娜说第一份工作不太有意思（not very interesting），所以一有教练机会就抓住了，“觉得无聊”就是这个意思，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "paid 出自 It paid well，她说的是收入不错，和工资低正相反。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "埃琳娜当助理教练时遇到了什么困难？",
+      "optionTranslationsZh": {
+        "A": "兼顾学习和训练。",
+        "B": "写技术说明书。",
+        "C": "应对别人对她能力的质疑。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It’s particularly hard to face the doubts after losing games."
+      },
+      "reasonZh": "她说当教练尤其难的是输球后要面对质疑（face the doubts after losing games），这些质疑针对的就是她带队的能力，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "写技术说明书（writing technical instructions）是她毕业后的第一份工作，那时还没当教练。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "埃琳娜接下来打算做什么？",
+      "optionTranslationsZh": {
+        "A": "启动一个培训项目。",
+        "B": "在英格兰带一支球队。",
+        "C": "寻找有潜力的足球运动员。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll take on another challenge, possibly coaching in England."
+      },
+      "reasonZh": "她说下一步可能去英格兰执教（possibly coaching in England），教练要带球队，所以是在英格兰和一支球队共事，选 B。"
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "莫妮卡小时候喜欢做什么？",
+      "optionTranslationsZh": {
+        "A": "读故事书。",
+        "B": "打棒球。",
+        "C": "上舞蹈课。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I enjoyed spending my summers reading story books instead of playing baseball or taking dance lessons."
+      },
+      "reasonZh": "莫妮卡说小时候喜欢整个夏天读故事书（reading story books），选项沿用了这个说法，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "打棒球跟在 instead of 后面（instead of playing baseball），是她宁可不做的事。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "上舞蹈课也在 instead of 后面（or taking dance lessons），和打棒球一样是她没选的。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "莫妮卡大学的专业是什么？",
+      "optionTranslationsZh": {
+        "A": "新闻。",
+        "B": "历史。",
+        "C": "英语。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The calling to be an English major was in my heart"
+      },
+      "reasonZh": "她上了第一堂文学课就被吸引，说做英语专业的学生是内心的召唤（The calling to be an English major），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "新闻是她起初以为会选的专业（I thought I might major in journalism），后面一个 but 转到了文学课。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "历史和新闻一样只是起初的设想（journalism or history），上了文学课后她改了主意。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "莫妮卡毕业后马上做了什么？",
+      "optionTranslationsZh": {
+        "A": "她开始旅行。",
+        "B": "她当了老师。",
+        "C": "她创办了一份报纸。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "After graduation, I taught English in a primary school in Canada for five years."
+      },
+      "reasonZh": "她说毕业后在加拿大一所小学教了五年英语（taught English in a primary school），也就是当了老师，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "去澳大利亚（I went to Australia）是教书五年之后的事，而且是去当图书编辑，不是旅行。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "莫妮卡现在在哪里工作？",
+      "optionTranslationsZh": {
+        "A": "在中国。",
+        "B": "在澳大利亚。",
+        "C": "在加拿大。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Three years ago, I came to China. I’ve been teaching English in middle schools."
+      },
+      "reasonZh": "她三年前来到中国（came to China），一直在中学教英语（I’ve been teaching），现在在中国工作，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "澳大利亚是她之前当图书编辑的地方（went to Australia and worked as a book editor），后来才来中国。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "加拿大是她的家乡，也是她毕业后最初教书五年的地方（in Canada for five years），不是现在。"
+        }
+      ]
+    }
+  }
+}

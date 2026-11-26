@@ -1,0 +1,841 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-a": {
+      "overview": "文章是英国东约克郡四处景点的介绍，依次列出 Burnby Hall 花园与博物馆、Goole 博物馆、Sledmere 庄园和 Bridlington 鸟类动物园的地址、电话、特色项目、开放时间和门票价格，供游客比较选择。",
+      "fullTranslationZh": "东约克郡景点\n\nBurnby Hall 花园与博物馆\n\n地址：Pocklington 镇 The Balk，邮编 YO42 2QF\n\n电话：01759 307125\n\n花园布局优美，有两个湖，湖里养着大量鱼类。园内还有 Stewart 博物馆、儿童游乐场、书籍礼品店和茶室。全年都有周日乐队音乐会和各类活动。\n\n开放时间：上午10:00至下午5:30\n\n票价：成人4.65英镑，老年人3.95英镑，儿童2.50英镑\n\nGoole 博物馆\n\n地址：Goole 镇 Carlisle 街，邮编 DN14 5DS\n\n电话：01405 768963\n\n博物馆展示 Goole 镇及其港口丰富多彩的历史，为年轻游客准备了大量可以动手操作的展品。临时展厅举办各类艺术、工艺和地方历史展览，展览每月更换。\n\n开放时间：上午10:00至下午5:00\n\n免费入场\n\nSledmere 庄园\n\n地址：Driffield 的 Sledmere，邮编 YO25 3XG\n\n电话：01377 236637\n\nSledmere 庄园是约克郡最迷人的宅邸之一。我们有一座获过奖的花园、一座军事博物馆、一个儿童游乐区，还有咖啡馆和礼品店。每周四下午有管风琴演奏。\n\n开放时间：上午11:30至下午3:30\n\n票价：成人8.00英镑，老年人6.00英镑，儿童3.00英镑\n\nBridlington 鸟类动物园\n\n地址：东约克郡 Bridlington，邮编 YO15 3QF\n\n电话：01262 673653\n\n这座家庭经营的动物园坐落在美丽的林地之中，每天都有小猪赛跑表演。园里还有各种鸟类和其他动物，能让一家人度过充满乐趣的一天。\n\n开放时间：上午10:00至下午5:00\n\n票价：成人4.50英镑，老年人4.00英镑，儿童3.50英镑",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+          "sourceText": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month.",
+          "displayText": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:21"
+          ],
+          "translationZh": "临时展厅举办各类艺术、工艺和地方历史展览，展览每月更换。",
+          "analysisZh": "主干是 The temporary exhibition gallery has exhibitions：临时展厅有展览。a wide range of 修饰展览，说种类多；art, craft and local history 三个名词并列作定语，说明展什么。句末 which change every month 是定语从句，修饰 exhibitions，交代展览每月一换，这正是“临时”的意思，第21题就靠这句找到 Goole 博物馆。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "The temporary exhibition gallery has"
+            },
+            {
+              "start": 98,
+              "end": 122,
+              "quote": "which change every month"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:1"
+              ],
+              "start": 0,
+              "end": 6,
+              "quote": "东约克郡景点"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:2"
+              ],
+              "start": 8,
+              "end": 26,
+              "quote": "Burnby Hall 花园与博物馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:3"
+              ],
+              "start": 28,
+              "end": 65,
+              "quote": "地址：Pocklington 镇 The Balk，邮编 YO42 2QF"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:4"
+              ],
+              "start": 67,
+              "end": 82,
+              "quote": "电话：01759 307125"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:5"
+              ],
+              "start": 84,
+              "end": 154,
+              "quote": "花园布局优美，有两个湖，湖里养着大量鱼类。园内还有 Stewart 博物馆、儿童游乐场、书籍礼品店和茶室。全年都有周日乐队音乐会和各类活动。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:6"
+              ],
+              "start": 156,
+              "end": 175,
+              "quote": "开放时间：上午10:00至下午5:30"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:7"
+              ],
+              "start": 177,
+              "end": 207,
+              "quote": "票价：成人4.65英镑，老年人3.95英镑，儿童2.50英镑"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:8"
+              ],
+              "start": 209,
+              "end": 218,
+              "quote": "Goole 博物馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:9"
+              ],
+              "start": 220,
+              "end": 253,
+              "quote": "地址：Goole 镇 Carlisle 街，邮编 DN14 5DS"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:10"
+              ],
+              "start": 255,
+              "end": 270,
+              "quote": "电话：01405 768963"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11"
+              ],
+              "start": 272,
+              "end": 345,
+              "quote": "博物馆展示 Goole 镇及其港口丰富多彩的历史，为年轻游客准备了大量可以动手操作的展品。临时展厅举办各类艺术、工艺和地方历史展览，展览每月更换。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:12"
+              ],
+              "start": 347,
+              "end": 366,
+              "quote": "开放时间：上午10:00至下午5:00"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:13"
+              ],
+              "start": 368,
+              "end": 372,
+              "quote": "免费入场"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:14"
+              ],
+              "start": 374,
+              "end": 385,
+              "quote": "Sledmere 庄园"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:15"
+              ],
+              "start": 387,
+              "end": 422,
+              "quote": "地址：Driffield 的 Sledmere，邮编 YO25 3XG"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:16"
+              ],
+              "start": 424,
+              "end": 439,
+              "quote": "电话：01377 236637"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17"
+              ],
+              "start": 441,
+              "end": 515,
+              "quote": "Sledmere 庄园是约克郡最迷人的宅邸之一。我们有一座获过奖的花园、一座军事博物馆、一个儿童游乐区，还有咖啡馆和礼品店。每周四下午有管风琴演奏。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:18"
+              ],
+              "start": 517,
+              "end": 536,
+              "quote": "开放时间：上午11:30至下午3:30"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p19",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:19"
+              ],
+              "start": 538,
+              "end": 568,
+              "quote": "票价：成人8.00英镑，老年人6.00英镑，儿童3.00英镑"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p20",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:20"
+              ],
+              "start": 570,
+              "end": 587,
+              "quote": "Bridlington 鸟类动物园"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p21",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:21"
+              ],
+              "start": 589,
+              "end": 620,
+              "quote": "地址：东约克郡 Bridlington，邮编 YO15 3QF"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p22",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:22"
+              ],
+              "start": 622,
+              "end": 637,
+              "quote": "电话：01262 673653"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p23",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23"
+              ],
+              "start": 639,
+              "end": 700,
+              "quote": "这座家庭经营的动物园坐落在美丽的林地之中，每天都有小猪赛跑表演。园里还有各种鸟类和其他动物，能让一家人度过充满乐趣的一天。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p24",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:24"
+              ],
+              "start": 702,
+              "end": 721,
+              "quote": "开放时间：上午10:00至下午5:00"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p25",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-a:25"
+              ],
+              "start": 723,
+              "end": 753,
+              "quote": "票价：成人4.50英镑，老年人4.00英镑，儿童3.50英镑"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:21-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:8",
+                "start": 0,
+                "end": 12,
+                "quote": "Goole Museum"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p8",
+                "start": 0,
+                "end": 9,
+                "quote": "Goole 博物馆"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:21-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+                "start": 128,
+                "end": 251,
+                "quote": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p11",
+                "start": 45,
+                "end": 73,
+                "quote": "临时展厅举办各类艺术、工艺和地方历史展览，展览每月更换。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:22-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+                "start": 161,
+                "end": 206,
+                "quote": "Organ music is played on Thursday afternoons."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p17",
+                "start": 62,
+                "end": 74,
+                "quote": "每周四下午有管风琴演奏。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:23-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:25",
+                "start": 0,
+                "end": 51,
+                "quote": "Prices: Adults £4.50, Seniors £4.00, Children £3.50"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p25",
+                "start": 0,
+                "end": 30,
+                "quote": "票价：成人4.50英镑，老年人4.00英镑，儿童3.50英镑"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+                "start": 128,
+                "end": 251,
+                "quote": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-a-p11",
+                "start": 45,
+                "end": 73,
+                "quote": "临时展厅举办各类艺术、工艺和地方历史展览，展览每月更换。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-a-1"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "总标题点出东约克郡景点，随后四个景点各占一栏，每栏都按名称、地址、电话、特色介绍、开放时间、票价的顺序排列，便于读者横向对比。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:1",
+            "summary": "东约克郡的景点",
+            "function": "总标题，交代地区和主题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:2",
+            "summary": "Burnby Hall 花园与博物馆",
+            "function": "引出第一个景点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:3",
+            "summary": "Burnby Hall 的地址",
+            "function": "提供到访信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:4",
+            "summary": "Burnby Hall 的电话",
+            "function": "提供联系方式。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:5",
+            "summary": "双湖花园和鱼群，另有博物馆、游乐场、茶室，全年有周日音乐会和活动",
+            "function": "介绍第一个景点的特色项目。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:6",
+            "summary": "上午10:00至下午5:30开放",
+            "function": "交代开放时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:7",
+            "summary": "成人4.65英镑，儿童2.50英镑",
+            "function": "列出门票价格。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:8",
+            "summary": "Goole 博物馆",
+            "function": "引出第二个景点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:9",
+            "summary": "Goole 博物馆的地址",
+            "function": "提供到访信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:10",
+            "summary": "Goole 博物馆的电话",
+            "function": "提供联系方式。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+            "summary": "展示小镇和港口历史，有动手展品，临时展厅每月换展",
+            "function": "介绍第二个景点的特色项目。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:12",
+            "summary": "上午10:00至下午5:00开放",
+            "function": "交代开放时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:13",
+            "summary": "免费入场",
+            "function": "说明门票情况。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:14",
+            "summary": "Sledmere 庄园",
+            "function": "引出第三个景点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:15",
+            "summary": "Sledmere 庄园的地址",
+            "function": "提供到访信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:16",
+            "summary": "Sledmere 庄园的电话",
+            "function": "提供联系方式。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+            "summary": "获奖花园、军事博物馆、游乐区，周四下午有管风琴演奏",
+            "function": "介绍第三个景点的特色项目。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:18",
+            "summary": "上午11:30至下午3:30开放",
+            "function": "交代开放时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:19",
+            "summary": "成人8.00英镑，儿童3.00英镑",
+            "function": "列出门票价格。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:20",
+            "summary": "Bridlington 鸟类动物园",
+            "function": "引出第四个景点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:21",
+            "summary": "Bridlington 动物园的地址",
+            "function": "提供到访信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:22",
+            "summary": "Bridlington 动物园的电话",
+            "function": "提供联系方式。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23",
+            "summary": "林地中的家庭动物园，每天有小猪赛跑表演，还有各种鸟和动物",
+            "function": "介绍第四个景点的特色项目。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:24",
+            "summary": "上午10:00至下午5:00开放",
+            "function": "交代开放时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:25",
+            "summary": "成人4.50英镑，老年人4.00英镑，儿童3.50英镑",
+            "function": "列出门票价格。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-eight-provinces-jan:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到写临时展览的那一句，再看它属于哪个景点。",
+      "stemTranslationZh": "哪个景点举办临时展览？",
+      "locateBy": "stem",
+      "locateFindZh": "往上看这一栏的景点名",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Goole 博物馆。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:8",
+              "quote": "Goole Museum",
+              "anchor": "第二个景点的名称"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+              "quote": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month.",
+              "anchor": "Goole 博物馆的临时展厅"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Burnby Hall 花园与博物馆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Burnby Hall Gardens & Museum.",
+            "explanation": "这处名字里也有 Museum，园内还有 Stewart Museum，但介绍只写全年有周日音乐会和活动（events），没提临时展览。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Sledmere 庄园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Sledmere House.",
+            "explanation": "Sledmere 庄园有一座军事博物馆（a military museum），定期项目只写了周四下午的管风琴演奏，没有临时展览。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Bridlington 鸟类动物园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Bridlington Bird & Animal Park.",
+            "explanation": "动物园每天有的是小猪赛跑表演（shows of pig racing），是表演不是展览，介绍里也没有展厅。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "temporary",
+          "targetText": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+          "answerText": "Goole Museum",
+          "bridgeZh": "这段介绍写在 Goole Museum 这一栏下",
+          "note": "题干 temporary 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Goole Museum.",
+          "targetText": "Goole Museum",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:8",
+          "relationType": "locationCue",
+          "note": "选项沿用这一栏的景点名 Goole Museum；临时展厅（temporary exhibition gallery）只出现在它的介绍里，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到 Sledmere 庄园那一栏，看它列出的项目里游客能做什么。",
+      "stemTranslationZh": "游客在 Sledmere 庄园可以做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读它列出的项目",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "给各种各样的动物喂食。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "animals",
+            "optionText": "animals",
+            "matchType": "exact",
+            "relationNote": "animals 出自 [[block:paper-gaokao-2025-eight-provinces-jan:reading-a:23]] Bridlington 动物园的介绍，而且那里只说园里有各种鸟和其他动物，没说能喂食；Sledmere 庄园没有动物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23",
+              "quote": "We also have a range of birds and other animals to offer a fun-filled day out for families.",
+              "anchor": "Bridlington 动物园的鸟和动物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在周日观看乐队音乐会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "band concert",
+            "optionText": "band concert",
+            "matchType": "exact",
+            "relationNote": "周日乐队音乐会（Sunday band concerts）是 [[block:paper-gaokao-2025-eight-provinces-jan:reading-a:5]] Burnby Hall 花园的项目，Sledmere 庄园的音乐是周四的管风琴。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:5",
+              "quote": "Sunday band concerts and events are available throughout the year.",
+              "anchor": "Burnby Hall 的周日音乐会"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "探索这座小镇的历史。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "history of the town",
+            "optionText": "history of the town",
+            "matchType": "exact",
+            "relationNote": "探索小镇历史照搬的是 [[block:paper-gaokao-2025-eight-provinces-jan:reading-a:11]] Goole 博物馆的介绍，那里展示 Goole 镇和港口的历史；Sledmere 庄园只有一座军事博物馆。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+              "quote": "The museum explores the colourful history of the town and port of Goole, with plenty of hands-on exhibits for younger visitors.",
+              "anchor": "Goole 博物馆展示小镇历史"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在周四欣赏管风琴音乐。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+              "quote": "Organ music is played on Thursday afternoons.",
+              "anchor": "Sledmere 庄园的管风琴演奏"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Sledmere House",
+          "targetText": "Sledmere House is one of Yorkshire’s most attractive houses.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+          "answerText": "Organ music is played on Thursday afternoons.",
+          "bridgeZh": "这句先介绍庄园，后面接着列它有哪些设施和活动",
+          "note": "题干 Sledmere House 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Enjoy organ music on Thursday.",
+          "targetText": "Organ music is played on Thursday afternoons.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 organ music 和 Thursday，把“周四下午有管风琴演奏”（is played）换成游客这一方的“欣赏”（Enjoy），选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "先找到 Bridlington 动物园这一栏，再在它的价目行里找儿童票价。",
+      "stemTranslationZh": "Bridlington 鸟类动物园的儿童票价是多少？",
+      "locateBy": "stem",
+      "locateFindZh": "往下读到本栏的 Prices",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "2.50英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "£2.50",
+            "optionText": "£2.50",
+            "matchType": "exact",
+            "relationNote": "£2.50 也是儿童票价，但它在 [[block:paper-gaokao-2025-eight-provinces-jan:reading-a:7]] Burnby Hall 花园那一栏，不是 Bridlington 动物园的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:7",
+              "quote": "Prices: Adults £4.65, Seniors £3.95, Children £2.50",
+              "anchor": "Burnby Hall 的票价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "3.00英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "£3.00",
+            "optionText": "£3.00",
+            "matchType": "exact",
+            "relationNote": "£3.00 是 [[block:paper-gaokao-2025-eight-provinces-jan:reading-a:19]] Sledmere 庄园的儿童票价，看错了栏目才会选它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:19",
+              "quote": "Prices: Adults £8.00, Seniors £6.00, Children £3.00",
+              "anchor": "Sledmere 庄园的票价"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "3.50英镑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:25",
+              "quote": "Prices: Adults £4.50, Seniors £4.00, Children £3.50",
+              "anchor": "Bridlington 动物园的票价"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "4.00英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "£4.00",
+            "optionText": "£4.00",
+            "matchType": "exact",
+            "relationNote": "£4.00 就在同一栏价目行里，但它跟在 Seniors 后面，是老年人票价，不是儿童票价。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:25",
+              "quote": "Prices: Adults £4.50, Seniors £4.00, Children £3.50",
+              "anchor": "Bridlington 的老年人票价"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Bridlington Bird & Animal Park",
+          "targetText": "Bridlington Bird & Animal Park",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:20",
+          "answerText": "Children £3.50",
+          "bridgeZh": "这是本栏的景点名，下面的价目行就是它的票价",
+          "note": "题干景点名 Bridlington Bird & Animal Park 原词出现在这一栏的标题。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "£3.50.",
+          "targetText": "Children £3.50",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:25",
+          "relationType": "locationCue",
+          "note": "选项的 £3.50 就是这一栏价目行里儿童（Children）后面的数字，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

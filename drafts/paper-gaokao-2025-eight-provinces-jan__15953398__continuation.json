@@ -1,0 +1,135 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: I hurried into the theater, only to find there were even more bikers inside. They filled the lobby, laughing loudly in their leather jackets. My legs felt weak, and for a moment I thought about turning around. But going back meant walking those dark streets alone, so I held my wallet tightly and bought a ticket. Inside the hall, the only empty seat was between two of the biggest men. To my surprise, one of them picked up his helmet from the seat so that I could sit down. I smiled politely, but my heart was still pounding as the lights went down.\n\nParagraph 2: When the film began, I realized that the bikers were an animal rescue group. On the screen, the same men were riding their motorcycles across the country, carrying small dogs in boxes from crowded shelters to new homes. The man next to me appeared in one scene, gently holding a shaking puppy. I felt ashamed of judging them only by their looks. When the lights came on, I told him how much I admired their work. I opened my wallet and put all my cash into the donation box. Then, hearing that my hotel was only five blocks away, he and two friends offered to walk me back. For the first time that evening, the dark streets did not scare me.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "停在“我”决定先躲进影院、盼着散场时机车手已经走了。她对这群机车手的害怕还没消除，夜里一个人怎么走回酒店也还悬着。"
+        },
+        {
+          "question": "“我”想要什么，是什么样的人？从原文哪里看出来？",
+          "answer": "她爱动物，\"I felt an urge to go to this fundraising event\"，同事不陪也 \"decided to brave it\"，说明她怕归怕，还是想去。她说 \"most are nice people\"，对机车手并无成见，只是一个女人深夜独处让她紧张，害怕是处境造成的。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第一人称“我”用过去时讲述，句子中等长短；全文没有一处引号，人物的话和想法都用叙述和两个自问句 \"Was I at the right theater?\" 写出；描写只集中在机车手的块头和她的心跳。续写也以叙述和心理活动为主，不写或极少写直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "I gathered up my wallet and room key",
+          "use": "钱包可以用两次：第一段紧紧攥着它壮胆，第二段把钱包里的钱捐进募捐箱，让这次募捐放映真正落到“我”的行动上。"
+        },
+        {
+          "sourceQuote": "all wearing insignia",
+          "use": "门外看到的徽章到了银幕上再出现一次，“我”由此认出他们，这样揭开身份有原文的伏笔，不是凭空交代。"
+        },
+        {
+          "sourceQuote": "only about five blocks from the hotel",
+          "use": "结尾机车手陪“我”走完这五个街区，回收原文“夜里独自走路”的担心。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段以段首句一开头，写“我”冲进影院后发现里面机车手更多时的反应，一直写到电影开场前。",
+        "第二段首句说开场后“我”才明白他们是动物救助团体，所以第一段不能提前揭开他们的身份，“我”的紧张要留到第二段。",
+        "第二段要写出“我”认出他们之后看法和心情的变化，并接上原文的事实：她爱动物、来参加的是募捐放映、担心夜里独自走回酒店。"
+      ],
+      "thisEssayChooses": "本文让一个机车手给“我”挪开座位上的头盔，先留下他们并不凶的小伏笔；第二段让他们出现在纪录片里，“我”把钱包里的钱都捐了，最后由机车手陪“我”走回酒店。揭开身份的方式（比如放映后主持人介绍）和结尾的行动（比如报名做志愿者）都可以换，只要由原文人物推动、因果说得通。"
+    },
+    "standard": {
+      "essay": "Paragraph 1: I hurried into the theater, only to find there were even more bikers inside. They filled the lobby, laughing loudly in their leather jackets. My legs felt weak, and for a moment I thought about turning around. But going back meant walking those dark streets alone, so I held my wallet tightly and bought a ticket. Inside the hall, the only empty seat was between two of the biggest men. To my surprise, one of them picked up his helmet from the seat so that I could sit down. I smiled politely, but my heart was still pounding as the lights went down.\n\nParagraph 2: When the film began, I realized that the bikers were an animal rescue group. On the screen, the same men were riding their motorcycles across the country, carrying small dogs in boxes from crowded shelters to new homes. The man next to me appeared in one scene, gently holding a shaking puppy. I felt ashamed of judging them only by their looks. When the lights came on, I told him how much I admired their work. I opened my wallet and put all my cash into the donation box. Then, hearing that my hotel was only five blocks away, he and two friends offered to walk me back. For the first time that evening, the dark streets did not scare me.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写“我”在更多机车手面前的害怕和硬着头皮留下，到灯光熄灭为止，身份不揭开。",
+          "items": [
+            {
+              "quote": "But going back meant walking those dark streets alone, so I held my wallet tightly and bought a ticket.",
+              "explain": "留下来的理由来自原文：回去就要一个人走夜路，这正是她最怕的事。攥紧钱包这个动作把紧张写成看得见的样子，比直接写 \"I was very afraid\" 更具体。"
+            },
+            {
+              "quote": "one of them picked up his helmet from the seat so that I could sit down",
+              "explain": "给第二段埋个伏笔：机车手并不凶。只写动作不写评价，读者和“我”一样还拿不准，第二段的揭开才有分量。"
+            },
+            {
+              "quote": "but my heart was still pounding as the lights went down",
+              "explain": "借原文 \"my heart was pounding\" 的说法，说明害怕还没过去；\"the lights went down\" 正好把时间推到电影开场，接上第二段首句。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "在电影里认出机车手，从害怕转为敬佩，用捐款和被护送回酒店收住全文。",
+          "items": [
+            {
+              "quote": "carrying small dogs in boxes from crowded shelters to new homes",
+              "explain": "具体写出他们救的是什么、怎么救：用摩托车把狗从收容所送到新家，和原文纪录片讲的 \"save abandoned dogs across the country\" 对上。"
+            },
+            {
+              "quote": "I felt ashamed of judging them only by their looks.",
+              "explain": "情绪由银幕上的画面触发，一句话点明“我”看法的转变，不展开说教。"
+            },
+            {
+              "quote": "I opened my wallet and put all my cash into the donation box.",
+              "explain": "用原文出现过的钱包完成一个动作，把“爱动物”和“募捐活动”落到实处。"
+            },
+            {
+              "quote": "he and two friends offered to walk me back",
+              "explain": "结尾回到原文开头的担心：夜里一个人走回酒店。由机车手陪她回去，问题由原文人物解决，结尾停在具体的事上，不贴大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "My legs felt weak",
+          "function": "用身体反应写害怕，比 \"I was scared\" 更能让读者看到她的处境。"
+        },
+        {
+          "expression": "To my surprise, ...",
+          "function": "引出和预想相反的小动作，在恐惧里埋下转折的伏笔。"
+        },
+        {
+          "expression": "I felt ashamed of judging them only by their looks.",
+          "function": "一句话说清看法转变的原因，适合故事里“误会解开”的那一刻。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写出机车手是救助团体，或让“我”提前猜到。",
+          "why": "第二段首句说的是电影开场后“我”才明白，第一段揭开了，第二段就成了重复，也和段首句矛盾。"
+        },
+        {
+          "pitfall": "写机车手闹事、吓唬“我”，或者“我”报警、逃跑。",
+          "why": "第二段首句已定下他们是动物救助团体，前面写成坏人前后矛盾；原文的“我”也说过多数机车手是好人，害怕只是处境所致。"
+        },
+        {
+          "pitfall": "结尾写一句“不要以貌取人”式的大道理，或让主持人、新人物出来解决问题。",
+          "why": "原文悬着的是“我”的害怕和夜里怎么回酒店，结尾应由原文的人用具体行动收住；新人物会抢走机车手的戏。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: I hurried into the theater, only to find there were even more bikers inside. Dozens of them packed the lobby, their leather vests creaking as they moved and their laughter bouncing off the walls. I froze by the door. Every part of me wanted to turn and run, but the thought of the empty streets outside kept my feet where they were. Clutching my wallet, I slipped into the ticket line. Inside the hall, the only free seat I could find was squeezed between two of the largest men I had ever seen. As I hesitated, one of them lifted his helmet off the seat, set it on his knees and nodded for me to sit down. I perched on the edge of the chair, ready to leave the moment anything went wrong.\n\nParagraph 2: When the film began, I realized that the bikers were an animal rescue group. The same insignia I had noticed outside flashed across the screen as rows of motorcycles roared down country highways, each with a dog in a box strapped behind the rider. They were driving abandoned dogs from overcrowded shelters to families hundreds of miles away. Then the man beside me appeared, cradling a trembling puppy against his huge chest. My face burned. I had been afraid of the very people I had come to support. When the lights came up, I turned to him and admitted that I had nearly run back to my hotel because of his club. He laughed and said they heard that a lot. I emptied my wallet into the donation box, and when he learned I was walking back alone, he and two of his friends insisted on coming with me. Those five blocks had never felt so safe.",
+      "beyondStandard": [
+        {
+          "quote": "their leather vests creaking as they moved and their laughter bouncing off the walls",
+          "explain": "用两个独立主格把声音写进来，皮背心的吱响和满墙的笑声让“人多、块头大”有了画面，和原文对机车手的外貌描写是同一种写法。"
+        },
+        {
+          "quote": "The same insignia I had noticed outside flashed across the screen",
+          "explain": "直接借用原文的 insignia，让“我”靠门外见过的徽章认出他们，揭开身份有了原文的伏笔，比标准版的 \"the same men\" 更有说服力。"
+        },
+        {
+          "quote": "I had been afraid of the very people I had come to support.",
+          "explain": "用 the very people 把“怕的人”和“要支持的人”扣在一起，一句话写出讽刺和惭愧，比 \"I felt ashamed\" 更像母语作者的说法。"
+        }
+      ]
+    }
+  }
+}

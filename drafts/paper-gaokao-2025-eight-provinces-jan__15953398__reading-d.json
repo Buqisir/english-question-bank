@@ -1,0 +1,746 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-d": {
+      "overview": "文章介绍一项关于运动与学习时机的研究：72名成年人先做电脑学习测试，部分人在测试后立即或四小时后骑车锻炼，两天后测回忆，结果四小时后运动的人记得最准。作者也指出原因和最佳运动强度尚无定论。",
+      "fullTranslationZh": "想学一门新语言，或在大学考试中拿 A 吗？以往的研究表明，运动有助于刺激大脑中把新信息转换为长期记忆的区域。一项新研究在此基础上更进一步，找到了运动最能促进学习的最佳时间。\n\n过去的研究发现，运动会释放能改善脑力的生化物质。Radboud 大学和爱丁堡大学的科学家在此基础上开展了一项研究，以确定运动在什么时候对学习最有益。\n\n参与者是72名健康的成年男女，他们先被要求完成一项考查视觉和空间学习能力的电脑测试。测试之后，所有受试者都观看了自然纪录片，但其中三分之二的人还进行了运动。运动者中有一半在测试后立即在健身自行车上进行35分钟的循环训练。另一半做同样的运动，但直到测试四小时后才开始。\n\n两天后，所有参与者回到实验室接受回忆测试，并连上磁共振成像仪器，以评估他们的大脑活动。在电脑测试四小时后运动的参与者，对所学内容回忆得最准确。他们的脑电波也显示出更稳定的活动水平，说明他们的大脑在回忆所学内容时负担更轻。\n\n根据这项研究，为促进学习，最佳的运动时间是学习后四小时。但这是为什么呢？这是研究人员尚未回答的一个问题。另一个尚未解答的问题是，多大强度的运动最能促进学习。我跑过的马拉松足够多，足以证明一个事实：在高强度锻炼期间和之后，我的大脑一点也不灵光。不过研究人员也指出，轻度锻炼可能无法给大脑足够的生化刺激来促进学习。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+          "sourceText": "Building upon past research that found exercise releases biochemicals that improve mental function, scientists at Radboud University and the University of Edinburgh conducted a study to determine when exercise was most beneficial to learning.",
+          "displayText": "Building upon past research that found exercise releases biochemicals that improve mental function, scientists at Radboud University and the University of Edinburgh conducted a study to determine when exercise was most beneficial to learning.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:32"
+          ],
+          "translationZh": "过去的研究发现，运动会释放能改善脑力的生化物质。Radboud 大学和爱丁堡大学的科学家在此基础上开展了一项研究，以确定运动在什么时候对学习最有益。",
+          "analysisZh": "主干在逗号后：scientists … conducted a study，科学家开展了一项研究。at Radboud University and the University of Edinburgh 交代是哪里的科学家。句首 Building upon past research 是现在分词短语作状语，说研究建立在以往成果上，research 后面的 that 从句说明那项成果：运动释放能改善脑力的生化物质。句末 to determine when exercise was most beneficial to learning 是目的状语，说明研究要弄清的是运动在什么时候对学习最有益，第32题的答案就在这里。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "Building upon past research"
+            },
+            {
+              "start": 165,
+              "end": 182,
+              "quote": "conducted a study"
+            },
+            {
+              "start": 183,
+              "end": 241,
+              "quote": "to determine when exercise was most beneficial to learning"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+          "sourceText": "Their brainwaves also showed more consistent levels of activity, indicating that their brains were less taxed to remember what they had learned.",
+          "displayText": "Their brainwaves also showed more consistent levels of activity, indicating that their brains were less taxed to remember what they had learned.",
+          "relatedQuestionIds": [],
+          "translationZh": "他们的脑电波也显示出更稳定的活动水平，说明他们的大脑在回忆所学内容时负担更轻。",
+          "analysisZh": "主干是 Their brainwaves showed more consistent levels of activity：他们的脑电波显示出更稳定的活动水平。逗号后的 indicating 是现在分词作结果状语，引出由此得出的结论，that 从句是 indicating 的宾语。从句里 be taxed 意为“负担重、吃力”，less taxed to remember 就是回忆起来更不费力；what they had learned 作 remember 的宾语。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "Their brainwaves also showed"
+            },
+            {
+              "start": 65,
+              "end": 80,
+              "quote": "indicating that"
+            },
+            {
+              "start": 99,
+              "end": 121,
+              "quote": "less taxed to remember"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1"
+              ],
+              "start": 0,
+              "end": 86,
+              "quote": "想学一门新语言，或在大学考试中拿 A 吗？以往的研究表明，运动有助于刺激大脑中把新信息转换为长期记忆的区域。一项新研究在此基础上更进一步，找到了运动最能促进学习的最佳时间。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2"
+              ],
+              "start": 88,
+              "end": 162,
+              "quote": "过去的研究发现，运动会释放能改善脑力的生化物质。Radboud 大学和爱丁堡大学的科学家在此基础上开展了一项研究，以确定运动在什么时候对学习最有益。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3"
+              ],
+              "start": 164,
+              "end": 297,
+              "quote": "参与者是72名健康的成年男女，他们先被要求完成一项考查视觉和空间学习能力的电脑测试。测试之后，所有受试者都观看了自然纪录片，但其中三分之二的人还进行了运动。运动者中有一半在测试后立即在健身自行车上进行35分钟的循环训练。另一半做同样的运动，但直到测试四小时后才开始。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4"
+              ],
+              "start": 299,
+              "end": 409,
+              "quote": "两天后，所有参与者回到实验室接受回忆测试，并连上磁共振成像仪器，以评估他们的大脑活动。在电脑测试四小时后运动的参与者，对所学内容回忆得最准确。他们的脑电波也显示出更稳定的活动水平，说明他们的大脑在回忆所学内容时负担更轻。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5"
+              ],
+              "start": 411,
+              "end": 566,
+              "quote": "根据这项研究，为促进学习，最佳的运动时间是学习后四小时。但这是为什么呢？这是研究人员尚未回答的一个问题。另一个尚未解答的问题是，多大强度的运动最能促进学习。我跑过的马拉松足够多，足以证明一个事实：在高强度锻炼期间和之后，我的大脑一点也不灵光。不过研究人员也指出，轻度锻炼可能无法给大脑足够的生化刺激来促进学习。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:32-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+                "start": 199,
+                "end": 320,
+                "quote": "A new study has taken this information one step further and found the best time when exercise can help maximize learning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p1",
+                "start": 54,
+                "end": 86,
+                "quote": "一项新研究在此基础上更进一步，找到了运动最能促进学习的最佳时间。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:32-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+                "start": 183,
+                "end": 241,
+                "quote": "to determine when exercise was most beneficial to learning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p2",
+                "start": 57,
+                "end": 73,
+                "quote": "以确定运动在什么时候对学习最有益"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:33-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+                "start": 146,
+                "end": 250,
+                "quote": "After the test, all of the subjects watched nature documentaries, but two-thirds of them also exercised."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p3",
+                "start": 42,
+                "end": 78,
+                "quote": "测试之后，所有受试者都观看了自然纪录片，但其中三分之二的人还进行了运动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:34-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+                "start": 0,
+                "end": 158,
+                "quote": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p4",
+                "start": 0,
+                "end": 43,
+                "quote": "两天后，所有参与者回到实验室接受回忆测试，并连上磁共振成像仪器，以评估他们的大脑活动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:35-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+                "start": 261,
+                "end": 373,
+                "quote": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p5",
+                "start": 78,
+                "end": 121,
+                "quote": "我跑过的马拉松足够多，足以证明一个事实：在高强度锻炼期间和之后，我的大脑一点也不灵光。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+                "start": 0,
+                "end": 242,
+                "quote": "Building upon past research that found exercise releases biochemicals that improve mental function, scientists at Radboud University and the University of Edinburgh conducted a study to determine when exercise was most beneficial to learning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p2",
+                "start": 0,
+                "end": 74,
+                "quote": "过去的研究发现，运动会释放能改善脑力的生化物质。Radboud 大学和爱丁堡大学的科学家在此基础上开展了一项研究，以确定运动在什么时候对学习最有益。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-d-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+                "start": 291,
+                "end": 435,
+                "quote": "Their brainwaves also showed more consistent levels of activity, indicating that their brains were less taxed to remember what they had learned."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-d-p4",
+                "start": 71,
+                "end": 110,
+                "quote": "他们的脑电波也显示出更稳定的活动水平，说明他们的大脑在回忆所学内容时负担更轻。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-d-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章从运动有助记忆的已有研究引出新研究的问题：什么时候运动最有利于学习。接着交代研究背景、实验分组和两天后的测试结果，最后给出结论“学习后四小时运动最好”，并指出原因和运动强度两个问题尚待研究。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+            "summary": "已有研究表明运动有助记忆，新研究进一步找学习后运动的最佳时间",
+            "function": "引入话题，提出新研究的方向。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+            "summary": "研究人员在以往成果基础上，要确定运动何时对学习最有益",
+            "function": "交代研究背景和目的。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+            "summary": "72人先做电脑测试，全员看纪录片，三分之二分两组在不同时间骑车",
+            "function": "介绍实验过程和分组。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+            "summary": "两天后测回忆，四小时后运动的一组记得最准，大脑负担更轻",
+            "function": "报告实验结果。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+            "summary": "结论是学习后四小时运动最好，但原因和运动强度仍待研究",
+            "function": "总结结论，指出尚未解决的问题。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-eight-provinces-jan:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出这项新研究要弄清的问题。",
+      "stemTranslationZh": "这项新研究旨在探究什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "运动在什么时候对学习最有益。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+              "quote": "A new study has taken this information one step further and found the best time when exercise can help maximize learning.",
+              "anchor": "新研究找运动的最佳时间"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+              "quote": "to determine when exercise was most beneficial to learning",
+              "anchor": "研究目的"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "哪些生化物质对健康有益。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "biochemicals",
+            "optionText": "biochemicals",
+            "matchType": "exact",
+            "relationNote": "biochemicals 出自 [[block:paper-gaokao-2025-eight-provinces-jan:reading-d:2]]，那是以往研究的发现，说运动释放的生化物质能改善脑力；新研究只是以此为基础，并不研究它们对健康的作用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+              "quote": "past research that found exercise releases biochemicals that improve mental function",
+              "anchor": "以往研究发现的生化物质"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "脑电波应该怎样测量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "brainwaves",
+            "optionText": "brainwaves",
+            "matchType": "exact",
+            "relationNote": "脑电波（brainwaves）在[[block:paper-gaokao-2025-eight-provinces-jan:reading-d:4]]只是用来看结果的数据，说明大脑回忆时负担更轻；研究并不探讨怎样测量它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+              "quote": "Their brainwaves also showed more consistent levels of activity, indicating that their brains were less taxed to remember what they had learned.",
+              "anchor": "脑电波显示的结果"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "大脑的哪个区域最活跃。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "areas of the brain",
+            "optionText": "area of the brain",
+            "matchType": "wordFamily",
+            "relationNote": "area 来自 [[block:paper-gaokao-2025-eight-provinces-jan:reading-d:1|Previous studies have shown]]里的 areas of the brain，那是以往研究说运动能刺激的脑区；新研究关心的是运动时机，不比较哪个脑区最活跃。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+              "quote": "Previous studies have shown that exercise can help stimulate the areas of the brain that convert (转换) new information into long-term memory.",
+              "anchor": "以往研究提到的脑区"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "new study",
+          "targetText": "A new study has taken this information one step further and found the best time when exercise can help maximize learning.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+          "answerText": "the best time when exercise can help maximize learning",
+          "note": "题干 new study 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "When exercise is best for learning.",
+          "targetText": "A new study has taken this information one step further and found the best time when exercise can help maximize learning.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "选项的“运动在什么时候最有利于学习”就是原文的运动最能促进学习的最佳时间（the best time … maximize learning）；[[block:paper-gaokao-2025-eight-provinces-jan:reading-d:2|to determine when exercise was most beneficial to learning]]也写明了研究目的，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "分清实验中全体参与者都做的事和只有部分人做的事。",
+      "stemTranslationZh": "实验中所有参与者都被要求做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 but 前面，后半只说部分人",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "骑自行车锻炼。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "After the test, all of the subjects watched nature documentaries, but two-thirds of them also exercised.",
+            "sourceHighlight": "two-thirds of them also exercised",
+            "optionText": "Train on bicycles.",
+            "optionHighlight": "Train on bicycles",
+            "explanation": "骑健身车（an exercise bike）的只是运动的那三分之二（two-thirds），另外三分之一只看纪录片，不是所有人都骑车。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "quote": "After the test, all of the subjects watched nature documentaries, but two-thirds of them also exercised.",
+              "anchor": "只有三分之二的人运动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "做数学练习。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Do mathematics exercises.",
+            "explanation": "测试考的是视觉和空间学习（visual and spatial learning），没提数学；文中的 exercise 指体育锻炼，不是练习题。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "玩电脑游戏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "computer",
+            "optionText": "computer",
+            "matchType": "exact",
+            "relationNote": "大家确实都用了电脑，但做的是一项考查视觉和空间学习的电脑测试（a computer test），不是玩游戏。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "quote": "Participants – 72 healthy male and female adults – were first asked to perform a computer test that challenged their visual and spatial learning.",
+              "anchor": "参与者先做电脑测试"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "观看关于自然的影片。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "quote": "After the test, all of the subjects watched nature documentaries, but two-thirds of them also exercised.",
+              "anchor": "所有受试者都看了自然纪录片"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "all the participants",
+          "targetText": "After the test, all of the subjects watched nature documentaries, but two-thirds of them also exercised.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+          "targetCue": "all of the subjects",
+          "sourceZh": "所有参与者",
+          "targetCueZh": "所有受试者",
+          "answerText": "all of the subjects watched nature documentaries",
+          "note": "题干 all the participants 对应原文 all of the subjects。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Watch films about nature.",
+          "targetText": "After the test, all of the subjects watched nature documentaries, but two-thirds of them also exercised.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“看关于自然的影片”（films about nature）就是原文的看自然纪录片（nature documentaries），主语正是所有受试者，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出参与者两天后回实验室的目的。",
+      "stemTranslationZh": "参与者为什么在两天后回到实验室？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 for 后的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "做体检。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+            "sourceEntity": "MRI (磁共振成像) machines",
+            "optionText": "To do a medical examination.",
+            "optionEntity": "a medical examination",
+            "explanation": "磁共振成像仪器（MRI machines）让人联想到医院检查，但原文说接上它是为了看回忆时的大脑活动（assess their brain activity），不是检查身体。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+              "quote": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+              "anchor": "用 MRI 评估大脑活动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "让自己的记忆接受测试。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+              "quote": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+              "anchor": "两天后回实验室做回忆测试"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把锻炼情况记录下来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To get their workouts recorded.",
+            "explanation": "两天后测的是回忆和大脑活动，原文没说要记录他们锻炼的情况。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "完成之前的任务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To finish their previous tasks.",
+            "explanation": "电脑测试和锻炼两天前就已做完（After the test），回实验室是做新的回忆测试，不是补完旧任务。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "two days later",
+          "targetText": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+          "answerText": "returned to the lab for a recall test",
+          "note": "题干 two days later 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "To have their memory tested.",
+          "targetText": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“测记忆”就是原文的回忆测试（a recall test）：让人回想两天前学过的内容，测的正是记忆，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:35": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读懂作者用自己跑马拉松的体会说明了什么。",
+      "stemTranslationZh": "作者跑马拉松的经历可能证明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 prove 后面的内容",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这项研究的结论是可靠的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The findings of the study are reliable.",
+            "explanation": "作者的体会接在[[block:paper-gaokao-2025-eight-provinces-jan:reading-d:5|Another question left unanswered]]之后，谈的是尚未弄清的运动强度，并不是替研究的结论作证。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "长跑运动员通常很聪明。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+            "sourceHighlight": "anything but sharp",
+            "optionText": "Long-distance runners are often smart.",
+            "optionHighlight": "often smart",
+            "explanation": "anything but sharp 意为“绝不灵光”，作者说自己跑完后脑子很迟钝，选项却说长跑者聪明，方向反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "quote": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+              "anchor": "作者跑完后脑子不灵"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "关于马拉松的研究还不够。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "marathons",
+            "optionText": "marathon",
+            "matchType": "wordFamily",
+            "relationNote": "marathons 是作者自己跑过的比赛，用来说明累的时候脑子不灵；研究人员还没弄清的是最佳运动强度（the level of exercise），不是马拉松研究太少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "quote": "Another question left unanswered is the level of exercise that might best improve learning.",
+              "anchor": "尚未解答的运动强度问题"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "剧烈运动未必能让大脑更敏锐",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "quote": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+              "anchor": "作者跑马拉松的体会"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "marathon",
+          "targetText": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+          "targetCue": "marathons",
+          "sourceZh": "马拉松",
+          "targetCueZh": "多场马拉松",
+          "answerText": "my brain is anything but sharp during or after a tough workout",
+          "note": "题干 marathon 对应原文 marathons。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Hard exercise may not sharpen the brain",
+          "targetText": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“剧烈运动”对应原文的艰苦锻炼（a tough workout），“未必让大脑更灵”对应大脑一点也不灵光（anything but sharp）。作者只说自己如此，选项用 may not 收住，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

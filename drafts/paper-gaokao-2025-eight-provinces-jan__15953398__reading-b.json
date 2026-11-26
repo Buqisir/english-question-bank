@@ -1,0 +1,745 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:reading-b": {
+      "overview": "文章回忆邮递员 Jim Johnson：他在社区送信三十多年，熟悉每家每户，常帮邻居做分外事；退休时邻居的狗 Butch 陪他走完最后的邮路，各家含泪道别。作者借此说明社区与邮递员之间的深厚情谊。",
+      "fullTranslationZh": "邮递员 Jim Johnson 是 Wilmington 市中心以北那片绿树成荫的 Westmoreland、Westhaven 和 Westover Hills 街区里家喻户晓的人物，他送去的远不止是邮件。他叫得出所有孩子和他们宠物的名字；他帮人把买的东西搬进屋；他留意哪家的门没锁，给人出园艺上的主意，还教会了不少小男孩投曲线球。不忙这些的时候，Jim 就在一片片棋盘般的绿草坪间奔跑，确保本地邮政兑现每天的承诺。\n\n尽管如今邮政常遭诟病，人们对本地邮政的信任依然存在。在许多社区，每当救命的药品、贺卡、社保支票、大学录取通知书，甚至账单，出现在各家门前的信箱里，这份信任就又一次赢得了。\n\n干了三十多年之后，Jim 迎来了工作的最后几天，他过得和平常的任何一天差不多。他开着方方正正的邮车来到 North DuPont 路，这是一天中第一个非正式的停靠点。Butch 是一位邻居家的狗，它像以往每一天一样在那里等着。也像以往每一天一样，它跳上副驾驶座，他们出发了。在这条邮路上，Jim 和 Butch 早已形影不离。如今，狗和邮递员将一起“退休”了。每到一站，Jim 都接受那些早已成了他家人的住户的临别祝福。有泪水，有欢笑，还有满载温暖回忆的拥抱。\n\n自 Jim 离开那条邮路已经过去33年了，但我们仍会想起社区与邮递员之间建立起来的深厚情谊。这就是邮政对我们的意义。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+          "sourceText": "Jim Johnson, a mail carrier, was an institution in the leafy Westmoreland, Westhaven and Westover Hills neighborhoods, just north of downtown Wilmington, where he delivered much more than the mail.",
+          "displayText": "Jim Johnson, a mail carrier, was an institution in the leafy Westmoreland, Westhaven and Westover Hills neighborhoods, just north of downtown Wilmington, where he delivered much more than the mail.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:24",
+            "question:paper-gaokao-2025-eight-provinces-jan:27"
+          ],
+          "translationZh": "邮递员 Jim Johnson 是 Wilmington 市中心以北那片绿树成荫的 Westmoreland、Westhaven 和 Westover Hills 街区里家喻户晓的人物，他送去的远不止是邮件。",
+          "analysisZh": "主干是 Jim Johnson was an institution：Jim Johnson 是（社区里的）一块招牌，institution 在这里指大家都熟悉、离不开的人物。a mail carrier 是插在中间的同位语，交代身份。in the leafy … neighborhoods 说在哪里，just north of downtown Wilmington 再补充这些街区的位置。where 引导的定语从句修饰 neighborhoods，说他在这里送去的远不止邮件，这一点由下一句列出的分外事展开。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 11,
+              "quote": "Jim Johnson"
+            },
+            {
+              "start": 29,
+              "end": 47,
+              "quote": "was an institution"
+            },
+            {
+              "start": 154,
+              "end": 196,
+              "quote": "where he delivered much more than the mail"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+          "sourceText": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "displayText": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "relatedQuestionIds": [],
+          "translationZh": "在许多社区，每当救命的药品、贺卡、社保支票、大学录取通知书，甚至账单，出现在各家门前的信箱里，这份信任就又一次赢得了。",
+          "analysisZh": "主干是 that trust is won every day：这份信任每天都在赢得，that trust 指上一句说的人们对本地邮政的信任。when 引导时间状语从句，从句主语很长，是一串并列的邮件名称 life-saving medicine, greeting cards … college acceptance letters，两个破折号之间的 even the bills 是补充，谓语直到 appear in mailboxes 才出现。读时先找到 appear，就能看清是这些东西送到信箱时赢得了信任。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 48,
+              "quote": "that trust is won every day"
+            },
+            {
+              "start": 49,
+              "end": 53,
+              "quote": "when"
+            },
+            {
+              "start": 162,
+              "end": 181,
+              "quote": "appear in mailboxes"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1"
+              ],
+              "start": 0,
+              "end": 209,
+              "quote": "邮递员 Jim Johnson 是 Wilmington 市中心以北那片绿树成荫的 Westmoreland、Westhaven 和 Westover Hills 街区里家喻户晓的人物，他送去的远不止是邮件。他叫得出所有孩子和他们宠物的名字；他帮人把买的东西搬进屋；他留意哪家的门没锁，给人出园艺上的主意，还教会了不少小男孩投曲线球。不忙这些的时候，Jim 就在一片片棋盘般的绿草坪间奔跑，确保本地邮政兑现每天的承诺。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2"
+              ],
+              "start": 211,
+              "end": 296,
+              "quote": "尽管如今邮政常遭诟病，人们对本地邮政的信任依然存在。在许多社区，每当救命的药品、贺卡、社保支票、大学录取通知书，甚至账单，出现在各家门前的信箱里，这份信任就又一次赢得了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3"
+              ],
+              "start": 298,
+              "end": 528,
+              "quote": "干了三十多年之后，Jim 迎来了工作的最后几天，他过得和平常的任何一天差不多。他开着方方正正的邮车来到 North DuPont 路，这是一天中第一个非正式的停靠点。Butch 是一位邻居家的狗，它像以往每一天一样在那里等着。也像以往每一天一样，它跳上副驾驶座，他们出发了。在这条邮路上，Jim 和 Butch 早已形影不离。如今，狗和邮递员将一起“退休”了。每到一站，Jim 都接受那些早已成了他家人的住户的临别祝福。有泪水，有欢笑，还有满载温暖回忆的拥抱。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4"
+              ],
+              "start": 530,
+              "end": 588,
+              "quote": "自 Jim 离开那条邮路已经过去33年了，但我们仍会想起社区与邮递员之间建立起来的深厚情谊。这就是邮政对我们的意义。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:24-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+                "start": 198,
+                "end": 392,
+                "quote": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p1",
+                "start": 104,
+                "end": 167,
+                "quote": "他叫得出所有孩子和他们宠物的名字；他帮人把买的东西搬进屋；他留意哪家的门没锁，给人出园艺上的主意，还教会了不少小男孩投曲线球。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:24-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+                "start": 154,
+                "end": 196,
+                "quote": "where he delivered much more than the mail"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p1",
+                "start": 93,
+                "end": 103,
+                "quote": "他送去的远不止是邮件"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:25-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+                "start": 0,
+                "end": 94,
+                "quote": "Though the postal service is often disparaged now, the trust in local postal service lives on."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p2",
+                "start": 0,
+                "end": 26,
+                "quote": "尽管如今邮政常遭诟病，人们对本地邮政的信任依然存在。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:26-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+                "start": 473,
+                "end": 561,
+                "quote": "At every stop, Jim accepted the parting good wishes of families that had become his own."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p3",
+                "start": 180,
+                "end": 210,
+                "quote": "每到一站，Jim 都接受那些早已成了他家人的住户的临别祝福。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:26-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+                "start": 562,
+                "end": 628,
+                "quote": "There were tears and laughter, and hugs filled with warm memories."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p3",
+                "start": 210,
+                "end": 230,
+                "quote": "有泪水，有欢笑，还有满载温暖回忆的拥抱。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:27-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+                "start": 0,
+                "end": 137,
+                "quote": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p4",
+                "start": 0,
+                "end": 46,
+                "quote": "自 Jim 离开那条邮路已经过去33年了，但我们仍会想起社区与邮递员之间建立起来的深厚情谊。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2025-eight-provinces-jan:27-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+                "start": 0,
+                "end": 47,
+                "quote": "Jim Johnson, a mail carrier, was an institution"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p1",
+                "start": 0,
+                "end": 92,
+                "quote": "邮递员 Jim Johnson 是 Wilmington 市中心以北那片绿树成荫的 Westmoreland、Westhaven 和 Westover Hills 街区里家喻户晓的人物"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:24",
+              "question:paper-gaokao-2025-eight-provinces-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+                "start": 0,
+                "end": 197,
+                "quote": "Jim Johnson, a mail carrier, was an institution in the leafy Westmoreland, Westhaven and Westover Hills neighborhoods, just north of downtown Wilmington, where he delivered much more than the mail."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p1",
+                "start": 0,
+                "end": 104,
+                "quote": "邮递员 Jim Johnson 是 Wilmington 市中心以北那片绿树成荫的 Westmoreland、Westhaven 和 Westover Hills 街区里家喻户晓的人物，他送去的远不止是邮件。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-b-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+                "start": 95,
+                "end": 300,
+                "quote": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-eight-provinces-jan:reading-b-p2",
+                "start": 26,
+                "end": 85,
+                "quote": "在许多社区，每当救命的药品、贺卡、社保支票、大学录取通知书，甚至账单，出现在各家门前的信箱里，这份信任就又一次赢得了。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-eight-provinces-jan:reading-b-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先写 Jim 在社区里远不止送信，再由他引出人们对本地邮政的信任，接着回到他退休前最后几天和 Butch 同行、与各家道别的场景，最后点明社区与邮递员之间的情谊就是邮政的意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+            "summary": "Jim 熟悉每家每户，帮邻居做许多分外事，也尽职送信",
+            "function": "人物引入，用一连串具体小事刻画他的为人。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+            "summary": "邮政虽常遭批评，人们对本地邮政的信任依然还在",
+            "function": "由个人上升到邮政整体，点出信任这一主题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+            "summary": "退休前最后几天，Butch 陪他送信，各家含泪道别",
+            "function": "回到人物，写退休时的送别场景。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+            "summary": "33年后人们仍记得社区与邮递员的情谊",
+            "function": "收束全文，点明邮政对社区的意义。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-eight-provinces-jan:24": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把首段列出的一件件小事合起来，概括 Jim 的性格。",
+      "stemTranslationZh": "从第一段我们可以了解到 Jim Johnson 的什么特点？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:1]]先说他送的远不止信，再列 knew the kids、carried in、gardening advice；答案要概括这些帮人的事",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他思想开明。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He’s open-minded.",
+            "explanation": "本段写的全是他替邻居做的事，没写他怎样对待新想法或不同意见。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他眼光敏锐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+            "sourceHighlight": "took note of unlocked doors",
+            "optionText": "He’s sharp-eyed.",
+            "optionHighlight": "sharp-eyed",
+            "explanation": "留意没锁的门（took note of unlocked doors）只是他照应邻居的一件事，其余几件是帮忙、出主意、陪孩子，说的不是眼力好。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "quote": "he took note of unlocked doors",
+              "anchor": "Jim 留意没锁的门"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他热心肠。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "quote": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+              "anchor": "Jim 为邻居做的分外事"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "quote": "where he delivered much more than the mail",
+              "anchor": "Jim 送去的远不止邮件"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他意志坚强。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He’s strong-willed.",
+            "explanation": "[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:1|running across a checkerboard of green lawns]]写他在草坪间奔跑、按时送到邮件，说的是勤快尽职；原文没写他遇到困难后坚持下去。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He’s warm-hearted.",
+          "targetText": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "原文没直接说他热心，只列了他做的分外事：叫得出孩子和宠物的名字（knew all the kids）、帮人把东西搬进屋、留意没锁的门、出园艺主意、教男孩投球。由此推出他乐于助人、待人热情，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:25": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借 Though 前后的对照，推出 disparaged 的褒贬和意思。",
+      "stemTranslationZh": "第2段画线词 disparaged 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 Though 引出的对照",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "被拒绝。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Refused.",
+            "explanation": "放进去成了“尽管如今邮政常被拒绝”，谁拒绝它、拒绝什么都没有着落，后半句的信任也无从对照。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "受批评。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+              "quote": "Though the postal service is often disparaged now, the trust in local postal service lives on.",
+              "anchor": "Though 前后的对照"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "被调查。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Investigated.",
+            "explanation": "放进去成了“尽管如今邮政常被调查”，调查本身不带褒贬，和后半句“信任仍在”形不成 Though 要的对立；全文也没提调查。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "被暂停。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Suspended.",
+            "explanation": "放进去成了“尽管如今邮政常被暂停”，可[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:2|appear in mailboxes in front of the houses]]说信件每天照常送进各家信箱，服务并没有停。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "disparaged",
+          "targetText": "Though the postal service is often disparaged now, the trust in local postal service lives on.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+          "answerText": "the trust in local postal service lives on",
+          "note": "题干画线词 disparaged 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Criticized.",
+          "targetText": "Though the postal service is often disparaged now, the trust in local postal service lives on.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "Though 让前后两半相反：后半说人们对本地邮政的信任依然还在（the trust … lives on），所以 disparaged 必须是和“信任”相对的贬义说法。放回去：尽管如今邮政常遭批评，人们对它的信任仍在，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在写最后几天的段落里，找出 Jim 送信之外做的事。",
+      "stemTranslationZh": "在工作的最后几天，Jim 除了日常送信还做了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他在每一站的情形",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他开车把 Butch 送回主人家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Butch",
+            "optionText": "Butch",
+            "matchType": "exact",
+            "relationNote": "Butch 确实是邻居家的狗，但原文写它每天自己跳上副驾座跟他送信，最后还要和他一起“退休”（ride off to retirement together），没说送它回主人家。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "quote": "Butch, a dog who belonged to one of the neighbors, was waiting just like every day before.",
+              "anchor": "Butch 是邻居家的狗"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他给朋友们送了礼物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He sent presents to his friends.",
+            "explanation": "原文是各家把临别祝福送给他（accepted the parting good wishes），方向是别人给他，也没提任何礼物。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他筹备了一场退休聚会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "retirement",
+            "optionText": "retirement",
+            "matchType": "exact",
+            "relationNote": "retirement 出自 [[block:paper-gaokao-2025-eight-provinces-jan:reading-b:3|ride off to retirement together]]，说的是他和 Butch 一同退休；最后几天他照常跑邮路、在各站道别，没提办聚会。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "quote": "Now, the dog and the mailman would ride off to retirement together.",
+              "anchor": "狗和邮递员一起退休"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他和邻居们道了别。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "quote": "At every stop, Jim accepted the parting good wishes of families that had become his own.",
+              "anchor": "Jim 接受各家的临别祝福"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "quote": "There were tears and laughter, and hugs filled with warm memories.",
+              "anchor": "道别时的泪水与拥抱"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "final days",
+          "targetText": "After more than three decades, Jim approached his final days on the job much like any other.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+          "answerText": "At every stop, Jim accepted the parting good wishes of families that had become his own",
+          "bridgeZh": "这句引出最后几天，后文按一天的路线写各站发生的事",
+          "note": "题干 final days 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "He said goodbye to the neighbors.",
+          "targetText": "At every stop, Jim accepted the parting good wishes of families that had become his own.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“和邻居道别”就是原文的接受各家的临别祝福（parting good wishes）；这些人家（families）正是他邮路上的邻居，接着还有泪水、欢笑和拥抱，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:27": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文围绕谁、落在哪里，判断作者写这篇文章的目的。",
+      "stemTranslationZh": "作者写这篇文章的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:1]]写 Jim 远不止送信，[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:3]]写各家 tears and laughter 送别，[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:4]]说 33 years 后仍记得；目的要盖住对他的怀念",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "纪念一位受人尊敬的邮递员。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+              "quote": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
+              "anchor": "33年后仍记得 Jim"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "quote": "Jim Johnson, a mail carrier, was an institution",
+              "anchor": "Jim 是街区里的知名人物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "记录一段难忘的经历。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "There were tears and laughter, and hugs filled with warm memories.",
+            "sourceHighlight": "warm memories",
+            "optionText": "To record an unforgettable experience.",
+            "optionHighlight": "an unforgettable experience",
+            "explanation": "选项只抓住[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:3]]退休送别的场面，而全文写的是 Jim 三十多年里和社区的情谊，也不是作者自己的一次经历。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "quote": "There were tears and laughter, and hugs filled with warm memories.",
+              "anchor": "送别时的温暖回忆"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为邮政服务筹集资金。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To raise funds for the postal service.",
+            "explanation": "全文没提募捐；[[block:paper-gaokao-2025-eight-provinces-jan:reading-b:2]]谈邮政，说的是人们对本地邮政的信任（trust）依然还在。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "呼吁社区和睦。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "community",
+            "optionText": "community",
+            "matchType": "exact",
+            "relationNote": "community 出自 [[block:paper-gaokao-2025-eight-provinces-jan:reading-b:4|the deep bond established between community and letter carrier]]，作者是在回忆社区与邮递员早已结下的情谊，没有号召人们去营造和睦。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+              "quote": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
+              "anchor": "社区与邮递员的情谊"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To remember a respected mail carrier.",
+          "targetText": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
+          "targetParagraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "几段都围绕 Jim 展开：他是街区里人人熟悉的人物（an institution），帮邻居做各种分外事，退休时各家含泪送别，33年后作者仍记得这份情谊（still reminded）。选项的“纪念一位受人尊敬的邮递员”正好把这些包进去，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

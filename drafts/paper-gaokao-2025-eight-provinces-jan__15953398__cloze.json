@@ -1,0 +1,1917 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:cloze": {
+      "overview": "作者常在卡拉奇的海滨公园看一位老妇人喂鸽子。一天老人的项链掉在地上，作者起身去捡，一只鸽子却抢先叼起项链送到她腿上，两人都又惊又喜。",
+      "fullTranslationZh": "我喜欢去当地的公园看日落，那是卡拉奇的一片海滨。在那里，我总能看到同一位老妇人在喂鸽子。这些鸟数量通常在十到十五只左右，她甚至还没来得及从手提包里拿出那袋米，它们就已经聚到她身边。每天都是如此，这是她日常习惯的一部分。\n我发现，看着她如此热情地做这件平常的事，既让人平静，又很美好。\n这天傍晚，老妇人来到她平常喂鸟的地方。但当她走近长凳准备坐下时，她的项链掉到了地上。\n我正坐在附近的草地上等太阳落山。看到这一幕，我站起身想帮她捡回来。然而，我还没走到，鸽群中的一只鸽子就叼起项链，飞到长凳上，把项链丢在她的腿上。\n我简直不敢相信自己的眼睛。老妇人也很惊讶，独自轻声笑了起来。我脸上带着大大的笑容，开心地继续看日落。",
+      "mainLine": {
+        "theme": {
+          "text": "日常小事里藏着美好，老人喂鸽 both calming and beautiful，鸽子衔还项链更添惊喜。",
+          "quote": "both calming and beautiful"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+            "text": "作者常在海边公园看日落，总见一位老妇人喂鸽子。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+            "text": "作者觉得看她热情地做这件小事，既平静又美好。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+            "text": "这天老人照常来喂鸟，走近长凳时项链掉在地上。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+            "text": "作者起身去捡，一只鸽子抢先叼起项链放到她腿上。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+            "text": "作者和老人都惊讶不已，作者笑着继续看日落。"
+          }
+        ],
+        "emotion": "平静欣赏→着急想帮→惊讶不已→开心满足"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+          "sourceText": "I found that __45__ her perform this ordinary task with such __46__ was both calming and beautiful.",
+          "displayText": "I found that watching her perform this ordinary task with such enthusiasm was both calming and beautiful.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:45",
+            "question:paper-gaokao-2025-eight-provinces-jan:46"
+          ],
+          "translationZh": "我发现，看着她如此热情地做这件平常的事，既让人平静，又很美好。",
+          "analysisZh": "主干是 I found that…，that 引导 found 的宾语从句。从句主语是动名词短语 watching her perform this ordinary task with such enthusiasm，其中 watch sb do 表示看着某人做某事，with such enthusiasm 修饰 perform；从句谓语 was 后接 both calming and beautiful 作表语，说出作者的感受。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 52,
+              "quote": "watching her perform this ordinary task"
+            },
+            {
+              "start": 74,
+              "end": 104,
+              "quote": "was both calming and beautiful"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+          "sourceText": "__50__, before I reached it, one of the pigeons from the __51__ picked up the necklace, __52__ to the bench, and dropped it on her lap.",
+          "displayText": "However, before I reached it, one of the pigeons from the group picked up the necklace, flew to the bench, and dropped it on her lap.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:50",
+            "question:paper-gaokao-2025-eight-provinces-jan:51",
+            "question:paper-gaokao-2025-eight-provinces-jan:52"
+          ],
+          "translationZh": "然而，我还没走到，鸽群中的一只鸽子就叼起项链，飞到长凳上，把项链丢在她的腿上。",
+          "analysisZh": "主干是 one of the pigeons picked up…, flew…, and dropped…：主语是 one of the pigeons from the group，三个谓语按先后排开，写出鸽子叼起、飞去、放下的连续动作。However 表转折，before I reached it 是时间状语，交代鸽子抢在作者前面。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 28,
+              "quote": "before I reached it"
+            },
+            {
+              "start": 30,
+              "end": 63,
+              "quote": "one of the pigeons from the group"
+            },
+            {
+              "start": 64,
+              "end": 132,
+              "quote": "picked up the necklace, flew to the bench, and dropped it on her lap"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:cloze:1"
+              ],
+              "start": 0,
+              "end": 109,
+              "quote": "我喜欢去当地的公园看日落，那是卡拉奇的一片海滨。在那里，我总能看到同一位老妇人在喂鸽子。这些鸟数量通常在十到十五只左右，她甚至还没来得及从手提包里拿出那袋米，它们就已经聚到她身边。每天都是如此，这是她日常习惯的一部分。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:cloze:2"
+              ],
+              "start": 110,
+              "end": 141,
+              "quote": "我发现，看着她如此热情地做这件平常的事，既让人平静，又很美好。"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:cloze:3"
+              ],
+              "start": 142,
+              "end": 184,
+              "quote": "这天傍晚，老妇人来到她平常喂鸟的地方。但当她走近长凳准备坐下时，她的项链掉到了地上。"
+            },
+            {
+              "paragraphId": "zh-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:cloze:4"
+              ],
+              "start": 185,
+              "end": 257,
+              "quote": "我正坐在附近的草地上等太阳落山。看到这一幕，我站起身想帮她捡回来。然而，我还没走到，鸽群中的一只鸽子就叼起项链，飞到长凳上，把项链丢在她的腿上。"
+            },
+            {
+              "paragraphId": "zh-cloze-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:cloze:5"
+              ],
+              "start": 258,
+              "end": 308,
+              "quote": "我简直不敢相信自己的眼睛。老妇人也很惊讶，独自轻声笑了起来。我脸上带着大大的笑容，开心地继续看日落。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+            "text": "I liked to go and watch the sunset at my local park, which was a seaside area in Karachi. There, I would always see the same elderly lady feeding the pigeons（鸽子）. The birds, usually around 10 to 15 in number, would gather around her before she even had a chance to take the bag of rice out from her handbag. It was the same each day, part of her routine."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+            "text": "I found that watching her perform this ordinary task with such enthusiasm was both calming and beautiful."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+            "text": "On this particular evening, the lady arrived at her usual spot to feed the birds. But, as she approached the bench（长凳） to sit down, her necklace（项链） fell to the ground."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+            "text": "I was sitting on the grass nearby waiting for the sun to set. Noticing that, I got up to get it back for her. However, before I reached it, one of the pigeons from the group picked up the necklace, flew to the bench, and dropped it on her lap."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+            "text": "I couldn’t believe my eyes. The old lady, also surprised, began laughing quietly to herself. I was left with a huge smile on my face and happily went back to watching the sunset."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+                "start": 64,
+                "end": 81,
+                "quote": "to feed the birds"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 269,
+                "end": 284,
+                "quote": "the bag of rice"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 13,
+                "end": 15,
+                "quote": "喂鸟"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 75,
+                "end": 78,
+                "quote": "那袋米"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:41"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 138,
+                "end": 145,
+                "quote": "feeding"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 40,
+                "end": 41,
+                "quote": "喂"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 181,
+                "end": 196,
+                "quote": "around 10 to 15"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 52,
+                "end": 59,
+                "quote": "十到十五只左右"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:42"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 201,
+                "end": 207,
+                "quote": "number"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 47,
+                "end": 49,
+                "quote": "数量"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 232,
+                "end": 253,
+                "quote": "before she even had a"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 261,
+                "end": 288,
+                "quote": "to take the bag of rice out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 61,
+                "end": 65,
+                "quote": "甚至还没"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 73,
+                "end": 78,
+                "quote": "拿出那袋米"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:43"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 255,
+                "end": 261,
+                "quote": "chance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 65,
+                "end": 68,
+                "quote": "来得及"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 307,
+                "end": 331,
+                "quote": "It was the same each day"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 90,
+                "end": 96,
+                "quote": "每天都是如此"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:44"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 346,
+                "end": 353,
+                "quote": "routine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 100,
+                "end": 104,
+                "quote": "日常习惯"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "start": 20,
+                "end": 50,
+                "quote": "her perform this ordinary task"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 97,
+                "end": 115,
+                "quote": "I would always see"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 12,
+                "end": 19,
+                "quote": "做这件平常的事"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 28,
+                "end": 33,
+                "quote": "我总能看到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:45"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "start": 13,
+                "end": 21,
+                "quote": "watching"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 4,
+                "end": 6,
+                "quote": "看着"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "start": 77,
+                "end": 98,
+                "quote": "calming and beautiful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 20,
+                "end": 30,
+                "quote": "既让人平静，又很美好"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:46"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "start": 63,
+                "end": 73,
+                "quote": "enthusiasm"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 9,
+                "end": 12,
+                "quote": "热情地"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 307,
+                "end": 331,
+                "quote": "It was the same each day"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 90,
+                "end": 96,
+                "quote": "每天都是如此"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:47"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+                "start": 52,
+                "end": 57,
+                "quote": "usual"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 11,
+                "end": 13,
+                "quote": "平常"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+                "start": 116,
+                "end": 127,
+                "quote": "to sit down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 26,
+                "end": 30,
+                "quote": "准备坐下"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:48"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+                "start": 94,
+                "end": 104,
+                "quote": "approached"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 22,
+                "end": 24,
+                "quote": "走近"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 0,
+                "end": 26,
+                "quote": "I was sitting on the grass"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 86,
+                "end": 108,
+                "quote": "to get it back for her"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 2,
+                "end": 10,
+                "quote": "坐在附近的草地上"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 26,
+                "end": 32,
+                "quote": "想帮她捡回来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:49"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 79,
+                "end": 85,
+                "quote": "got up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 23,
+                "end": 26,
+                "quote": "站起身"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 118,
+                "end": 137,
+                "quote": "before I reached it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 36,
+                "end": 41,
+                "quote": "我还没走到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:50"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 110,
+                "end": 117,
+                "quote": "However"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 33,
+                "end": 35,
+                "quote": "然而"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+                "start": 208,
+                "end": 231,
+                "quote": "would gather around her"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 84,
+                "end": 89,
+                "quote": "聚到她身边"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:51"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 168,
+                "end": 173,
+                "quote": "group"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 42,
+                "end": 44,
+                "quote": "鸽群"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 223,
+                "end": 244,
+                "quote": "dropped it on her lap"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 62,
+                "end": 71,
+                "quote": "把项链丢在她的腿上"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:52"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 198,
+                "end": 202,
+                "quote": "flew"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 56,
+                "end": 58,
+                "quote": "飞到"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 18,
+                "end": 25,
+                "quote": "my eyes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 7,
+                "end": 12,
+                "quote": "自己的眼睛"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:53"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 11,
+                "end": 18,
+                "quote": "believe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 5,
+                "end": 7,
+                "quote": "相信"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 18,
+                "end": 25,
+                "quote": "my eyes"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 54,
+                "end": 76,
+                "quote": "began laughing quietly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 7,
+                "end": 12,
+                "quote": "自己的眼睛"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 23,
+                "end": 29,
+                "quote": "轻声笑了起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:54"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 47,
+                "end": 56,
+                "quote": "surprised"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 18,
+                "end": 20,
+                "quote": "惊讶"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 102,
+                "end": 130,
+                "quote": "with a huge smile on my face"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 31,
+                "end": 40,
+                "quote": "脸上带着大大的笑容"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:55"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:5",
+                "start": 99,
+                "end": 103,
+                "quote": "left"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 33,
+                "end": 35,
+                "quote": "带着"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:45",
+              "question:paper-gaokao-2025-eight-provinces-jan:46"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "start": 13,
+                "end": 52,
+                "quote": "watching her perform this ordinary task"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:2",
+                "start": 74,
+                "end": 104,
+                "quote": "was both calming and beautiful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 0,
+                "end": 31,
+                "quote": "我发现，看着她如此热情地做这件平常的事，既让人平静，又很美好。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:50",
+              "question:paper-gaokao-2025-eight-provinces-jan:51",
+              "question:paper-gaokao-2025-eight-provinces-jan:52"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 119,
+                "end": 138,
+                "quote": "before I reached it"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 140,
+                "end": 173,
+                "quote": "one of the pigeons from the group"
+              },
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+                "start": 174,
+                "end": 242,
+                "quote": "picked up the necklace, flew to the bench, and dropped it on her lap"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 33,
+                "end": 72,
+                "quote": "然而，我还没走到，鸽群中的一只鸽子就叼起项链，飞到长凳上，把项链丢在她的腿上。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "平静欣赏→着急想帮→惊讶不已→开心满足"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-eight-provinces-jan:41": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者每次都看到老妇人和鸽子在一起，这里要她天天对鸽子做的那件事。",
+      "find": {
+        "check": "echo",
+        "text": "第三段说她来到老地方 to feed the birds，前面她还带着 the bag of rice，她做的就是喂鸽子。",
+        "quotes": [
+          "to feed the birds",
+          "the bag of rice"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "喂食",
+        "reason": "作者每次都看到老妇人和鸽子在一起，这里要她天天对鸽子做的那件事。动词看复现：第三段说她来到老地方 to feed the birds，前面她还带着 the bag of rice，她做的就是喂鸽子。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "pursuing",
+          "meaning": "追赶；鸽子是 would gather around her，主动围到她身边，不用她追。",
+          "quote": "would gather around her"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "training",
+          "meaning": "训练；她拿出的是 the bag of rice，是来喂鸟的，下文也说 to feed the birds。",
+          "quote": "to feed the birds"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "collecting",
+          "meaning": "收集；她是拿米 to feed the birds，不是把鸽子收拢带走。",
+          "quote": "to feed the birds"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the pigeons",
+          "signalSide": "context-after",
+          "targetText": "feeding the pigeons",
+          "relation": "中文：动作的对象是鸽子，要一个能对鸽子做的日常动作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "to feed the birds",
+          "signalSide": "context-after",
+          "relation": "中文：第三段 feed 原词复现，说明她来公园就是喂鸟。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:42": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "前面给出十到十五这个数，这里要说的是鸟的多少。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 around 10 to 15 是在数鸟的只数，in number 就是“数量上有十到十五只”。",
+        "quotes": [
+          "around 10 to 15"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "数量",
+        "reason": "前面给出十到十五这个数，这里要说的是鸟的多少。名词看搭配：前面 around 10 to 15 是在数鸟的只数，in number 就是“数量上有十到十五只”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "age",
+          "meaning": "年龄；usually around 10 to 15 前面的主语是 The birds，数的是有几只，不是几岁。",
+          "quote": "usually around 10 to 15"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "size",
+          "meaning": "大小；around 10 to 15 是个数目，鸽子个头不能用十到十五来量。",
+          "quote": "around 10 to 15"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "weight",
+          "meaning": "重量；would gather around her 说的是一群鸟围上来，十到十五数的是只数。",
+          "quote": "would gather around her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "around 10 to 15",
+          "signalSide": "context-before",
+          "targetText": "around 10 to 15 in number",
+          "relation": "中文：十到十五是数目，in number 说明这是鸟的数量。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:43": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "detail",
+      "context": "鸟来得太快，她还没来得及掏米，这里要“机会、工夫”一类的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "before she even had a 后接 to take the bag of rice out，even 说鸟来得太快，她连掏米的工夫都没有。",
+        "quotes": [
+          "before she even had a",
+          "to take the bag of rice out"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "机会",
+        "meaning": "来得及做的工夫",
+        "reason": "鸟来得太快，她还没来得及掏米，这里要“机会、工夫”一类的意思。名词看搭配：before she even had a 后接 to take the bag of rice out，even 说鸟来得太快，她连掏米的工夫都没有。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wish",
+          "meaning": "愿望；她带米本就是来喂鸟的，before she even had a 说的是时间上来不及，不是想不想。",
+          "quote": "before she even had a"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "plan",
+          "meaning": "计划；掏米喂鸟是 It was the same each day 的老习惯，用不着计划，这里说的是来不及。",
+          "quote": "It was the same each day"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reason",
+          "meaning": "理由；鸟一来就该掏米，不缺理由，before she even had a 强调的是鸟来得快。",
+          "quote": "before she even had a"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to take the bag of rice out",
+          "signalSide": "context-after",
+          "targetText": "had a chance to take the bag of rice out",
+          "relation": "中文：have a chance to do 表示来得及做某事，后面的不定式就是她来不及做的事。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "before she even had a",
+          "signalSide": "context-before",
+          "relation": "中文：before 加 even 说明鸟在她动手之前就到了。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:44": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "main",
+      "context": "前面说天天都一样，这里要一个名词把天天喂鸽子这件事概括成她的日常。",
+      "find": {
+        "check": "echo",
+        "text": "It was the same each day 说天天重复，下段又叫它 this ordinary task，概括成 routine。",
+        "quotes": [
+          "It was the same each day",
+          "this ordinary task"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "日常惯例",
+        "reason": "前面说天天都一样，这里要一个名词把天天喂鸽子这件事概括成她的日常。名词看复现：It was the same each day 说天天重复，下段又叫它 this ordinary task，概括成 routine。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "job",
+          "meaning": "工作；It was the same each day 讲的是她天天重复的习惯，她喂鸟不是谋生的差事。",
+          "quote": "It was the same each day"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "project",
+          "meaning": "项目；项目有起止，It was the same each day 说的是天天照做的习惯。",
+          "quote": "It was the same each day"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dream",
+          "meaning": "梦想；喂鸽子是她已经天天在做的 this ordinary task，不是还没实现的梦想。",
+          "quote": "this ordinary task"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "It was the same each day",
+          "signalSide": "context-before",
+          "relation": "中文：天天如此，正是 routine（日常惯例）的意思。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "part of her",
+          "signalSide": "context-before",
+          "targetText": "part of her routine",
+          "relation": "中文：part of her routine 指她日常生活中的一部分。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:45": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者在一旁看着这一幕，这里要作者对老人做这件事的反应：看。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是 her perform this ordinary task，前文又说 I would always see，作者是在看她做事。",
+        "quotes": [
+          "her perform this ordinary task",
+          "I would always see"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "观看",
+        "reason": "作者在一旁看着这一幕，这里要作者对老人做这件事的反应：看。动词看搭配：空后是 her perform this ordinary task，前文又说 I would always see，作者是在看她做事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "helping",
+          "meaning": "帮助；作者只是 I would always see 老人喂鸟，旁观而已，没有动手帮忙。",
+          "quote": "I would always see"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "making",
+          "meaning": "使，让；I would always see 说明作者是旁观者，喂鸟是她自己的习惯，不是作者让她做的。",
+          "quote": "I would always see"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hearing",
+          "meaning": "听见；perform this ordinary task 是喂鸟的动作，要用眼睛看，前文也说 I would always see。",
+          "quote": "I would always see"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her perform this ordinary task",
+          "signalSide": "context-after",
+          "targetText": "watching her perform this ordinary task",
+          "relation": "中文：watch sb do 表示看着某人做某事，her 是被看的人，perform 是她做的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I would always see",
+          "signalSide": "context-before",
+          "relation": "中文：第一段的 see 说明作者一直是看的人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:46": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "作者觉得这件平常小事又平静又美，这里要她做事时投入的那份劲头。",
+      "find": {
+        "check": "affect",
+        "text": "一件 ordinary task 能让作者觉得 calming and beautiful，是因为她做得投入，用 enthusiasm。",
+        "quotes": [
+          "ordinary task",
+          "calming and beautiful"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "热情",
+        "reason": "作者觉得这件平常小事又平静又美，这里要她做事时投入的那份劲头。名词看情感：一件 ordinary task 能让作者觉得 calming and beautiful，是因为她做得投入，用 enthusiasm。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confidence",
+          "meaning": "自信；喂鸽子只是件 ordinary task，谈不上要自信，作者欣赏的是她的投入。",
+          "quote": "ordinary task"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "flexibility",
+          "meaning": "灵活；她做这件事 the same each day，天天一样，说不上灵活。",
+          "quote": "the same each day"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "precision",
+          "meaning": "精确；撒米喂鸟不讲究精确，让作者觉得 calming and beautiful 的是她做事的热情。",
+          "quote": "calming and beautiful"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "calming and beautiful",
+          "signalSide": "context-after",
+          "relation": "中文：作者的感受是正面的，说明老人做这件事的状态也让人愉快。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "with such",
+          "signalSide": "context-before",
+          "targetText": "with such enthusiasm",
+          "relation": "中文：with such enthusiasm 表示如此热情地，修饰 perform this ordinary task。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:47": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "她天天都来，这里要说她到的是平常那个地方。",
+      "find": {
+        "check": "echo",
+        "text": "第一段 It was the same each day，她天天在同一处喂鸟，这天去的自然是平时的老地方。",
+        "quotes": [
+          "It was the same each day"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "通常的",
+        "meaning": "平时常去的",
+        "reason": "她天天都来，这里要说她到的是平常那个地方。形容词看复现：第一段 It was the same each day，她天天在同一处喂鸟，这天去的自然是平时的老地方。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "original",
+          "meaning": "原来的；暗示她换过地方，但 It was the same each day 说她天天在同一处。",
+          "quote": "It was the same each day"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "parking",
+          "meaning": "停车的；她来这里是 to feed the birds，不是停车。",
+          "quote": "to feed the birds"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hiding",
+          "meaning": "藏身的；她喂鸟时鸽子 would gather around her，是在开阔处，用不着藏。",
+          "quote": "would gather around her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "It was the same each day",
+          "signalSide": "context-before",
+          "relation": "中文：天天一样，说明她去的是惯常的地方。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "spot to feed the birds",
+          "signalSide": "context-after",
+          "targetText": "her usual spot to feed the birds",
+          "relation": "中文：usual spot 指她平时喂鸟的老地方。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:48": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她要坐下，先得走到长凳跟前，这里要“走近”的动作。",
+      "find": {
+        "check": "action-sequence",
+        "text": "先 arrived at 老地方，再对 the bench 做这个动作，然后 to sit down，中间是走近长凳。",
+        "quotes": [
+          "the bench",
+          "to sit down"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "靠近",
+        "meaning": "走近",
+        "reason": "她要坐下，先得走到长凳跟前，这里要“走近”的动作。动词看动作顺序：先 arrived at 老地方，再对 the bench 做这个动作，然后 to sit down，中间是走近长凳。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "repaired",
+          "meaning": "修理；她对长凳做的事后面接 to sit down，是要坐下，不是来修凳子的。",
+          "quote": "to sit down"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "shared",
+          "meaning": "共用；全句只有她一个人 to sit down，并没有和谁合坐一张凳子。",
+          "quote": "to sit down"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "supported",
+          "meaning": "支撑；坐下之前缺的是走过去这一步，to sit down 要先走近长凳。",
+          "quote": "to sit down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the bench",
+          "signalSide": "context-after",
+          "targetText": "approached the bench",
+          "relation": "中文：approach the bench 表示走近长凳，宾语是她要坐的地方。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to sit down",
+          "signalSide": "context-after",
+          "relation": "中文：走近是为了坐下，动作先后一致。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:49": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:49",
+      "blankNo": 49,
+      "pos": "phrase",
+      "role": "main",
+      "context": "作者原本坐着，看到项链掉了想去捡，先要有个起身的动作。",
+      "find": {
+        "check": "action-sequence",
+        "text": "前面 I was sitting on the grass，后面 to get it back for her，从坐着到去捡，中间是起身。",
+        "quotes": [
+          "I was sitting on the grass",
+          "to get it back for her"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "站起来",
+        "reason": "作者原本坐着，看到项链掉了想去捡，先要有个起身的动作。词组看动作顺序：前面 I was sitting on the grass，后面 to get it back for her，从坐着到去捡，中间是起身。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "slipped in",
+          "meaning": "溜进去；作者在露天草地上，要做的是 to get it back for her，用不着溜进哪里。",
+          "quote": "to get it back for her"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ran away",
+          "meaning": "跑开；作者是想 to get it back for her，跑开和帮她捡回项链正相反。",
+          "quote": "to get it back for her"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "turned around",
+          "meaning": "转身；只转个身仍坐在 grass 上，捡不到项链，to get it back for her 要先站起来。",
+          "quote": "to get it back for her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I was sitting on the grass",
+          "signalSide": "context-before",
+          "relation": "中文：作者原来坐在草地上，要去捡东西得先站起来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "up",
+          "signalSide": "option",
+          "targetText": "got up",
+          "relation": "中文：up 表示向上，get up 即起身。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:50": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:50",
+      "blankNo": 50,
+      "pos": "adverb",
+      "role": "main",
+      "context": "作者正要去捡，结果却是鸽子抢先捡起，事情出乎意料地转了向。",
+      "find": {
+        "check": "logic",
+        "text": "前句作者起身 to get it back for her，后句却是鸽子 picked up the necklace，前后相反，用转折。",
+        "quotes": [
+          "to get it back for her",
+          "picked up the necklace"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "然而",
+        "reason": "作者正要去捡，结果却是鸽子抢先捡起，事情出乎意料地转了向。副词看逻辑：前句作者起身 to get it back for her，后句却是鸽子 picked up the necklace，前后相反，用转折。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Afterwards",
+          "meaning": "后来；before I reached it 说鸽子是在作者赶到之前动作的，不是事后。",
+          "quote": "before I reached it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Gradually",
+          "meaning": "逐渐；鸽子 picked up the necklace 是一下子的动作，谈不上逐渐。",
+          "quote": "picked up the necklace"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Fortunately",
+          "meaning": "幸运的是；before I reached it 接的是作者没来得及，要的是转折，不是庆幸。",
+          "quote": "before I reached it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "before I reached it",
+          "signalSide": "context-after",
+          "relation": "中文：作者还没赶到，事情已被鸽子做了，和他的打算相反。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "picked up the necklace",
+          "signalSide": "context-after",
+          "relation": "中文：捡项链的是鸽子，不是作者，前后形成转折。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:51": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "前文说鸽子有十几只围着她，这里要指那一群鸽子。",
+      "find": {
+        "check": "echo",
+        "text": "第一段 The birds 有十到十五只，would gather around her，是一群，用 group 指回这群鸽子。",
+        "quotes": [
+          "would gather around her"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "群",
+        "meaning": "围着她的那群鸽子",
+        "reason": "前文说鸽子有十几只围着她，这里要指那一群鸽子。名词看复现：第一段 The birds 有十到十五只，would gather around her，是一群，用 group 指回这群鸽子。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sea",
+          "meaning": "海；鸽子是 would gather around her 的那些，不是从海里来的。",
+          "quote": "would gather around her"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tree",
+          "meaning": "树；前文鸽子 would gather around her，聚在她身边，不是落在树上。",
+          "quote": "would gather around her"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pair",
+          "meaning": "一对；前文说鸽子 around 10 to 15，不是两只。",
+          "quote": "around 10 to 15"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "would gather around her",
+          "signalSide": "context-before",
+          "relation": "中文：鸽子聚成一群围着她，group 复现这群鸟。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "one of the pigeons from the",
+          "signalSide": "context-before",
+          "targetText": "one of the pigeons from the group",
+          "relation": "中文：one of the pigeons from the group 表示鸽群中的一只。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:52": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "main",
+      "context": "鸽子叼起项链送到长凳上，这里要它过去的方式：飞。",
+      "find": {
+        "check": "action-sequence",
+        "text": "picked up the necklace 之后到 the bench，再 dropped it on her lap，叼着东西落到人腿上，是飞过去。",
+        "quotes": [
+          "picked up the necklace",
+          "dropped it on her lap"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "飞",
+        "reason": "鸽子叼起项链送到长凳上，这里要它过去的方式：飞。动词看动作顺序：picked up the necklace 之后到 the bench，再 dropped it on her lap，叼着东西落到人腿上，是飞过去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "walked",
+          "meaning": "走；鸽子最后 dropped it on her lap，落到坐着的人腿上，得从空中飞过去。",
+          "quote": "dropped it on her lap"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "stuck",
+          "meaning": "粘住；stuck to the bench 是粘在凳上，可它随后 dropped it on her lap，并没有粘住。",
+          "quote": "dropped it on her lap"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pointed",
+          "meaning": "指向；鸽子不是在指方向，它把项链 dropped it on her lap，是真的到了长凳上。",
+          "quote": "dropped it on her lap"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to the bench",
+          "signalSide": "context-after",
+          "targetText": "flew to the bench",
+          "relation": "中文：flew to the bench 表示飞到长凳上。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "dropped it on her lap",
+          "signalSide": "context-after",
+          "relation": "中文：从上方把项链丢到腿上，说明鸽子是飞过去的。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:53": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "鸽子送回项链太出人意料，这里要作者看到后吃惊得不敢信的反应。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 my eyes，不敢相信自己的眼睛即难以置信；后句 The old lady, also 说老人同样吃惊。",
+        "quotes": [
+          "my eyes",
+          "The old lady, also"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "相信",
+        "reason": "鸽子送回项链太出人意料，这里要作者看到后吃惊得不敢信的反应。动词看搭配：宾语是 my eyes，不敢相信自己的眼睛即难以置信；后句 The old lady, also 说老人同样吃惊。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lift",
+          "meaning": "抬起；不敢抬眼与后文 a huge smile on my face 的开心对不上。",
+          "quote": "a huge smile on my face"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cover",
+          "meaning": "遮住；作者正亲眼看着这一幕，后句 The old lady, also 说两人都是吃惊，不是要遮眼。",
+          "quote": "The old lady, also"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "close",
+          "meaning": "闭上；作者正盯着这一幕，后来还 went back to watching the sunset，并没有闭眼。",
+          "quote": "went back to watching the sunset"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my eyes",
+          "signalSide": "context-after",
+          "targetText": "believe my eyes",
+          "relation": "中文：couldn’t believe my eyes 表示不敢相信亲眼所见。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "The old lady, also",
+          "signalSide": "context-after",
+          "relation": "中文：also 说明老人和作者一样吃惊。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:54": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "main",
+      "context": "老人和作者一样被鸽子的举动惊到，这里要“惊讶”。",
+      "find": {
+        "check": "affect",
+        "text": "also 接前句作者不敢相信 my eyes 的吃惊，老人也一样，随后 began laughing quietly。",
+        "quotes": [
+          "my eyes",
+          "began laughing quietly"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "惊讶的",
+        "reason": "老人和作者一样被鸽子的举动惊到，这里要“惊讶”。形容词看情感：also 接前句作者不敢相信 my eyes 的吃惊，老人也一样，随后 began laughing quietly。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "satisfied",
+          "meaning": "满意的；also 接的是作者不敢相信 my eyes 的吃惊，不是满意。",
+          "quote": "my eyes"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "annoyed",
+          "meaning": "恼怒的；她随后 began laughing quietly to herself，是开心，不是生气。",
+          "quote": "began laughing quietly to herself"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "frightened",
+          "meaning": "害怕的；鸽子是把项链送还给她，她 began laughing quietly，没有受惊吓。",
+          "quote": "began laughing quietly"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "The old lady, also",
+          "signalSide": "context-before",
+          "relation": "中文：also 把老人的感受和作者的吃惊连在一起。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "began laughing quietly",
+          "signalSide": "context-after",
+          "relation": "中文：惊讶之后笑出声，是又惊又喜。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:55": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "detail",
+      "context": "这一幕过去，作者脸上还挂着笑，这里要“事后留下某种状态”。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 with 接的是 a huge smile on my face，was left with 表示事后留下这份笑容。",
+        "quotes": [
+          "a huge smile on my face"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "留下",
+        "reason": "这一幕过去，作者脸上还挂着笑，这里要“事后留下某种状态”。动词看搭配：空后 with 接的是 a huge smile on my face，was left with 表示事后留下这份笑容。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "caught",
+          "meaning": "抓住；was caught with 指被人当场撞见带着什么，与作者 happily went back 的轻松不搭。",
+          "quote": "happily went back"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hit",
+          "meaning": "击中；笑容不是打到人身上的东西，a huge smile 只能是事后留在脸上的。",
+          "quote": "a huge smile"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "met",
+          "meaning": "遇见；was met with 指得到别人的回应，而 on my face 的笑是作者自己的。",
+          "quote": "on my face"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with a huge smile on my face",
+          "signalSide": "context-after",
+          "targetText": "was left with a huge smile",
+          "relation": "中文：be left with 表示事后留下某种状态，这里留下的是笑容。"
+        }
+      ]
+    }
+  }
+}

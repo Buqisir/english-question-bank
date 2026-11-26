@@ -1,0 +1,121 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Beth,\n\nGlad to know that you want to learn to play table tennis. I think it's a great choice. It's easy to start, it doesn't cost much, and it keeps both your body and your mind active. Besides, almost everyone in China plays it, so it will also help you make friends here.\n\nAs for a coach, I'd like to recommend Mr. Wang, our school's PE teacher. He used to play for the city team, and he is very patient with beginners. He gives lessons in the school gym every Tuesday and Thursday after class. Since he speaks good English, you won't have any trouble following him.\n\nIf you're interested, I can take you to meet him this Thursday. Just let me know!\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "读者是想学乒乓球、写信向你求教的留学生朋友 Beth，身份是她的中国朋友李华，回信语气亲切随意。",
+        "两个要点都要写到：先表示支持她学乒乓球，再给她推荐一位教练。",
+        "称呼 \"Dear Beth,\"、首句 \"Glad to know that you want to learn to play table tennis.\"、结尾 \"Yours,\" 和署名已给出，照抄在原位置。"
+      ],
+      "thisEssayChooses": "本文用“好上手、花费少、能交朋友”三条理由表示支持，推荐的教练是学校体育老师王老师，补了他打过市队、对新手耐心、每周二四上课、会说英语这些细节，最后主动约她周四一起去见老师。教练是谁、理由选哪几条、约在哪天都可以换，但要具体、对一个留学生说得通。"
+    },
+    "standard": {
+      "essay": "Dear Beth,\n\nGlad to know that you want to learn to play table tennis. I think it's a great choice. It's easy to start, it doesn't cost much, and it keeps both your body and your mind active. Besides, almost everyone in China plays it, so it will also help you make friends here.\n\nAs for a coach, I'd like to recommend Mr. Wang, our school's PE teacher. He used to play for the city team, and he is very patient with beginners. He gives lessons in the school gym every Tuesday and Thursday after class. Since he speaks good English, you won't have any trouble following him.\n\nIf you're interested, I can take you to meet him this Thursday. Just let me know!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "表示支持",
+          "quote": "I think it's a great choice."
+        },
+        {
+          "point": "推荐教练",
+          "quote": "As for a coach, I'd like to recommend Mr. Wang, our school's PE teacher."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接着给定首句表态支持，并给出三条理由。",
+          "items": [
+            {
+              "quote": "I think it's a great choice.",
+              "explain": "紧跟首句一句话亮明态度，Beth 一读就知道你是支持的，第一个要点在开头就完成了。"
+            },
+            {
+              "quote": "It's easy to start, it doesn't cost much, and it keeps both your body and your mind active.",
+              "explain": "三个短分句并列，分别说好上手、花钱少、对身心都有好处，理由站在初学者的角度，比只说 \"It's interesting\" 更有说服力。"
+            },
+            {
+              "quote": "so it will also help you make friends here",
+              "explain": "最后一条理由扣住她留学生的身份：在中国会打乒乓球就容易交到朋友，这是专门写给 Beth 的理由，换一个读者就不成立。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "推荐教练，并说清为什么适合她、去哪儿找他。",
+          "items": [
+            {
+              "quote": "As for a coach, I'd like to recommend Mr. Wang, our school's PE teacher.",
+              "explain": "As for 一句转入第二个要点，段首就交代推荐谁、他是什么人，读者不用往下猜。"
+            },
+            {
+              "quote": "He used to play for the city team, and he is very patient with beginners.",
+              "explain": "两条推荐理由一条讲水平、一条讲态度，正好回应初学者最担心的两件事：教得好不好，会不会嫌我笨。"
+            },
+            {
+              "quote": "Since he speaks good English, you won't have any trouble following him.",
+              "explain": "提前接住留学生可能有的顾虑：听不懂中文讲解。用 Since 交代原因，因果一步到位。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "给出下一步，收住全信。",
+          "items": [
+            {
+              "quote": "If you're interested, I can take you to meet him this Thursday.",
+              "explain": "结尾落在一个具体的行动上：哪天、谁带她去见谁。Beth 读完只需回一句“好”，比 \"Hope my advice helps\" 这类客套更像朋友之间的回信。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "As for a coach, I'd like to recommend ...",
+          "function": "从表态转到推荐教练，一句话完成转段和点题。"
+        },
+        {
+          "expression": "you won't have any trouble ...",
+          "function": "替对方打消顾虑，用在推荐人或推荐方法时都很自然。"
+        },
+        {
+          "expression": "If you're interested, I can ...",
+          "function": "给出可以马上答应的下一步，让回信有来有往。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Beth,\n\nGlad to know that you want to learn to play table tennis. You couldn't have picked a better sport! It needs little more than a paddle and a ball, yet it sharpens your reactions and gives you a good workout. What's more, table tennis is almost a national sport in China, so it's a natural way to get to know people here. I'll be cheering you on.\n\nWhen it comes to a coach, Mr. Wang, our PE teacher, is the person I'd turn to. A former player on the city team, he is good at breaking every stroke down into simple steps, which is exactly what a beginner needs. He runs a class in the school gym every Tuesday and Thursday after school, and since his English is good, nothing will get lost in translation.\n\nWhy not come along this Thursday so I can introduce you to him? Can't wait to see you at the table!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "表示支持",
+          "quote": "You couldn't have picked a better sport!"
+        },
+        {
+          "point": "表示支持",
+          "quote": "I'll be cheering you on."
+        },
+        {
+          "point": "推荐教练",
+          "quote": "When it comes to a coach, Mr. Wang, our PE teacher, is the person I'd turn to."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "You couldn't have picked a better sport!",
+          "explain": "用“不可能选得更好了”来表达支持，比 \"I think it's a great choice.\" 语气更热情，是朋友之间常说的地道说法。"
+        },
+        {
+          "quote": "he is good at breaking every stroke down into simple steps, which is exactly what a beginner needs",
+          "explain": "标准版只说老师有耐心，这里写出他具体怎么教：把每个动作拆成简单的几步，再用 which 从句点明这正是新手需要的，推荐理由更具体。"
+        },
+        {
+          "quote": "nothing will get lost in translation",
+          "explain": "用 get lost in translation 说不会因为语言不通听不懂，比 \"you won't have any trouble\" 更俏皮，也更贴近和外国朋友聊天的口吻。"
+        }
+      ]
+    }
+  }
+}

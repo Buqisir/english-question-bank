@@ -1,0 +1,987 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2025-eight-provinces-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-eight-provinces-jan:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-eight-provinces-jan:seven-choices": {
+      "overview": "大学美术馆招募“美术馆之友”会员的宣传页，用四个问句小标题依次回答：会员是哪些人，入会为什么重要，会员能享受哪些机会和权益，以及怎样填表、在线或到店加入。",
+      "fullTranslationZh": "加入美术馆之友，找到适合你的位置\n\n● 谁是大学美术馆之友？\n\n美术馆之友是我们的邻居，来自本地社区，也来自更远的地方。他们中有家庭、学生、学者，也有校友。美术馆之友有着各种年龄、兴趣、能力和文化背景。他们因共同热爱艺术、热爱这所大学而走到一起，也因渴望成为一个文化群体的一员而团结在一起。美术馆之友关心并积极参与美术馆的各项活动。美术馆之友都是艺术爱好者——\n\n就像你一样。\n\n● 会员资格为什么重要？\n\n作为美术馆之友，你的会员资格每年为美术馆提供必不可少的支持，帮助美术馆的教育项目持续保持卓越和多样。加入美术馆之友，你就是在帮助确保美术馆始终是一个温馨的地方，让所有来访者都能在这里体验、欣赏、热爱艺术，共同得到滋养。\n\n● 美术馆之友会员享有哪些权益？\n\n美术馆之友会员资格是你通往许多机会的入口。成为大学美术馆之友，你也就成了一项悠久传统的一部分。你不仅会积极参与美术馆的各项活动，还会获得特别的机会，与志同道合的人分享你对艺术的热爱。美术馆之友会收到美术馆每季度出版的杂志，还会受邀参加展览开幕式、讲座、旅行活动和热闹的社交聚会。\n\n● 怎样加入美术馆之友？\n\n成为美术馆之友很容易。只需填好会员申请表，把它连同年度会费装进随附的信封寄回，就可以马上开始享受会员权益。你也可以选择在 artmuseum.edu/support/become-a-member 在线加入，或在参观美术馆商店时办理。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-seven-choices-1",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+          "sourceText": "Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals.",
+          "displayText": "Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:38"
+          ],
+          "translationZh": "你不仅会积极参与美术馆的各项活动，还会获得特别的机会，与志同道合的人分享你对艺术的热爱。",
+          "analysisZh": "主干是 Not only will you be participating…, but you also will receive special opportunities。Not only 放在句首，前一分句部分倒装，助动词 will 提到 you 前面；but 后的分句恢复正常语序。to share your love of art 是不定式作定语，说明是什么样的机会；with other like-minded individuals 交代和谁分享。整句把空里总说的 many opportunities 拆成参与和分享两层。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "Not only will you be"
+            },
+            {
+              "start": 71,
+              "end": 96,
+              "quote": "but you also will receive"
+            },
+            {
+              "start": 119,
+              "end": 144,
+              "quote": "to share your love of art"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-seven-choices-2",
+          "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6",
+          "sourceText": "By joining the Friends, you help to guarantee that the Museum remains a welcoming place of shared enrichment for all visitors to experience, to enjoy, and to love.",
+          "displayText": "By joining the Friends, you help to guarantee that the Museum remains a welcoming place of shared enrichment for all visitors to experience, to enjoy, and to love.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-eight-provinces-jan:37"
+          ],
+          "translationZh": "加入美术馆之友，你就是在帮助确保美术馆始终是一个温馨的地方，让所有来访者都能在这里体验、欣赏、热爱艺术，共同得到滋养。",
+          "analysisZh": "主干是 you help to guarantee that…；By joining the Friends 是方式状语，说明怎样帮。that 引导宾语从句，从句主干是 the Museum remains a welcoming place；of shared enrichment 修饰 place，for all visitors to experience, to enjoy, and to love 是带逻辑主语的不定式，三个 to 并列说明来访者在这里做什么。这句话回答了会员为什么重要：会员的支持让美术馆对所有人保持开放。",
+          "underlineRanges": [
+            {
+              "start": 24,
+              "end": 50,
+              "quote": "you help to guarantee that"
+            },
+            {
+              "start": 51,
+              "end": 87,
+              "quote": "the Museum remains a welcoming place"
+            },
+            {
+              "start": 109,
+              "end": 162,
+              "quote": "for all visitors to experience, to enjoy, and to love"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-seven-choices-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 16,
+              "quote": "加入美术馆之友，找到适合你的位置"
+            },
+            {
+              "paragraphId": "zh-seven-choices-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:2"
+              ],
+              "start": 18,
+              "end": 30,
+              "quote": "● 谁是大学美术馆之友？"
+            },
+            {
+              "paragraphId": "zh-seven-choices-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3"
+              ],
+              "start": 32,
+              "end": 180,
+              "quote": "美术馆之友是我们的邻居，来自本地社区，也来自更远的地方。他们中有家庭、学生、学者，也有校友。美术馆之友有着各种年龄、兴趣、能力和文化背景。他们因共同热爱艺术、热爱这所大学而走到一起，也因渴望成为一个文化群体的一员而团结在一起。美术馆之友关心并积极参与美术馆的各项活动。美术馆之友都是艺术爱好者——"
+            },
+            {
+              "paragraphId": "zh-seven-choices-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:4"
+              ],
+              "start": 182,
+              "end": 188,
+              "quote": "就像你一样。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5"
+              ],
+              "start": 190,
+              "end": 202,
+              "quote": "● 会员资格为什么重要？"
+            },
+            {
+              "paragraphId": "zh-seven-choices-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6"
+              ],
+              "start": 204,
+              "end": 313,
+              "quote": "作为美术馆之友，你的会员资格每年为美术馆提供必不可少的支持，帮助美术馆的教育项目持续保持卓越和多样。加入美术馆之友，你就是在帮助确保美术馆始终是一个温馨的地方，让所有来访者都能在这里体验、欣赏、热爱艺术，共同得到滋养。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:7"
+              ],
+              "start": 315,
+              "end": 331,
+              "quote": "● 美术馆之友会员享有哪些权益？"
+            },
+            {
+              "paragraphId": "zh-seven-choices-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8"
+              ],
+              "start": 333,
+              "end": 472,
+              "quote": "美术馆之友会员资格是你通往许多机会的入口。成为大学美术馆之友，你也就成了一项悠久传统的一部分。你不仅会积极参与美术馆的各项活动，还会获得特别的机会，与志同道合的人分享你对艺术的热爱。美术馆之友会收到美术馆每季度出版的杂志，还会受邀参加展览开幕式、讲座、旅行活动和热闹的社交聚会。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:9"
+              ],
+              "start": 474,
+              "end": 486,
+              "quote": "● 怎样加入美术馆之友？"
+            },
+            {
+              "paragraphId": "zh-seven-choices-10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10"
+              ],
+              "start": 488,
+              "end": 605,
+              "quote": "成为美术馆之友很容易。只需填好会员申请表，把它连同年度会费装进随附的信封寄回，就可以马上开始享受会员权益。你也可以选择在 artmuseum.edu/support/become-a-member 在线加入，或在参观美术馆商店时办理。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+            "text": "Friends are our neighbors from the local communities and beyond. They are families, students, scholars, and alumni (校友). Friends are people of all ages, interests, abilities, and cultural backgrounds Friends are united by a shared love for the arts and for the university, and by a desire to be part of a cultural community. Friends are interested and active in the life of the Art Museum. Friends are art lovers—"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5",
+            "text": "● Why does membership matter?"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+            "text": "Friends membership is your entry to many opportunities. When you become a Friend of the University Art Museum, you also become part of a great tradition. Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals. Friends receive a subscription to the Museum’s quarterly magazine, and they get invitations to exhibition openings, lectures, travel opportunities, and lively social gatherings."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+            "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+            "text": "Becoming a Friend is easy. Simply complete the membership form, return it with your annual membership fee in the attached envelope, and begin enjoying your benefits immediately. If you prefer, you may join online at artmuseum.edu/support/become-a-member, or when you visit the Museum Store."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-seven-choices-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+                "start": 74,
+                "end": 114,
+                "quote": "families, students, scholars, and alumni"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "start": 28,
+                "end": 46,
+                "quote": "他们中有家庭、学生、学者，也有校友。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:36"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:36",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+                "start": 121,
+                "end": 199,
+                "quote": "Friends are people of all ages, interests, abilities, and cultural backgrounds"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "start": 46,
+                "end": 69,
+                "quote": "美术馆之友有着各种年龄、兴趣、能力和文化背景。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6",
+                "start": 13,
+                "end": 62,
+                "quote": "your membership provides essential annual support"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 8,
+                "end": 29,
+                "quote": "你的会员资格每年为美术馆提供必不可少的支持"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:37"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:37",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5",
+                "start": 2,
+                "end": 28,
+                "quote": "Why does membership matter"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "start": 2,
+                "end": 12,
+                "quote": "会员资格为什么重要？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "start": 63,
+                "end": 104,
+                "quote": "you also become part of a great tradition"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 31,
+                "end": 46,
+                "quote": "你也就成了一项悠久传统的一部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:38"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:38",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "start": 0,
+                "end": 54,
+                "quote": "Friends membership is your entry to many opportunities"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 0,
+                "end": 21,
+                "quote": "美术馆之友会员资格是你通往许多机会的入口。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "start": 295,
+                "end": 319,
+                "quote": "and they get invitations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 111,
+                "end": 117,
+                "quote": "还会受邀参加"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:39"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:39",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "start": 335,
+                "end": 400,
+                "quote": "Friends receive a subscription to the Museum’s quarterly magazine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 91,
+                "end": 110,
+                "quote": "美术馆之友会收到美术馆每季度出版的杂志"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+                "start": 35,
+                "end": 76,
+                "quote": "return it with your annual membership fee"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-10",
+                "start": 21,
+                "end": 38,
+                "quote": "把它连同年度会费装进随附的信封寄回"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:40"
+            ],
+            "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:40",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+                "start": 27,
+                "end": 62,
+                "quote": "Simply complete the membership form"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-10",
+                "start": 11,
+                "end": 20,
+                "quote": "只需填好会员申请表"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:38"
+            ],
+            "selectedSentenceId": "sentence-seven-choices-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+                "start": 106,
+                "end": 286,
+                "quote": "Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 47,
+                "end": 91,
+                "quote": "你不仅会积极参与美术馆的各项活动，还会获得特别的机会，与志同道合的人分享你对艺术的热爱。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-eight-provinces-jan:37"
+            ],
+            "selectedSentenceId": "sentence-seven-choices-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6",
+                "start": 156,
+                "end": 319,
+                "quote": "By joining the Friends, you help to guarantee that the Museum remains a welcoming place of shared enrichment for all visitors to experience, to enjoy, and to love."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 50,
+                "end": 109,
+                "quote": "加入美术馆之友，你就是在帮助确保美术馆始终是一个温馨的地方，让所有来访者都能在这里体验、欣赏、热爱艺术，共同得到滋养。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "标题邀请读者加入，正文用四个问句小标题组织：先说会员是谁，再说入会的意义，接着列会员权益，最后讲加入办法，由“认识组织”一步步推到“马上行动”。",
+        "units": [
+          {
+            "unitId": "seven-unit-1",
+            "heading": "Join the Friends and find the place that’s right for you",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:1"
+            ],
+            "summary": "总标题，邀请读者加入。"
+          },
+          {
+            "unitId": "seven-unit-2",
+            "heading": "Who are the Friends of the University Art Museum?",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:2",
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:4"
+            ],
+            "summary": "会员身份各不相同，却因热爱艺术和大学聚在一起，最后落到“就像你一样”。"
+          },
+          {
+            "unitId": "seven-unit-3",
+            "heading": "Why does membership matter?",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5",
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6"
+            ],
+            "summary": "会员每年的支持帮助美术馆维持教育项目，让它对所有来访者保持开放。"
+          },
+          {
+            "unitId": "seven-unit-4",
+            "heading": "What benefits do members of the Friends enjoy?",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:7",
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8"
+            ],
+            "summary": "先总说会员是通往许多机会的入口，再列参与、交流、季刊和各类邀请。"
+          },
+          {
+            "unitId": "seven-unit-5",
+            "heading": "How do I join the Friends?",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:9",
+              "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10"
+            ],
+            "summary": "填表寄回即可，也可以在线或到美术馆商店办理。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 37,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它也是不带问号的问句，像能填进这个小标题；\"the Friends\" 和最后一个小标题 \"How do I join the Friends?\" 是一个模子。但标题下面讲的是 \"your membership provides essential annual support\"，在说会员有什么用，全段没讲怎样了解这个组织。",
+          "quotes": [
+            "the Friends",
+            "How do I join the Friends?",
+            "your membership provides essential annual support"
+          ]
+        },
+        "D": {
+          "target": 38,
+          "secondary": 40,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"benefits\" 和小标题 \"What benefits do members of the Friends enjoy?\" 同词，像段首总起。但 \"then\" 要前面先有一步，段首前面什么都没有；空后 \"you also become part of a great tradition\" 在接着说好处，它却只叫人去看权益清单。它的 \"then\" 也像加入步骤，可那一空空后 \"return it\" 的 it 在它里面找不到所指。",
+          "quotes": [
+            "benefits",
+            "What benefits do members of the Friends enjoy?",
+            "then",
+            "you also become part of a great tradition",
+            "return it"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-eight-provinces-jan:36": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "neighbors from the local communities and beyond",
+        "families, students, scholars, and alumni",
+        "united by a shared love",
+        "art lovers"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:3",
+        "beforeQuote": "They are families, students, scholars, and alumni (校友).",
+        "afterQuote": "Friends are united by a shared love for the arts and for the university"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "families, students, scholars, and alumni",
+          "signalSide": "context-before",
+          "targetText": "all ages, interests, abilities, and cultural backgrounds",
+          "relation": "空前一一列出身份，G 用年龄、兴趣、能力、背景把“各不相同”说全。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "all ages, interests, abilities, and cultural backgrounds",
+          "signalSide": "option",
+          "targetText": "families, students, scholars, and alumni",
+          "relation": "选项承接空前的身份清单，再从更多方面说会员彼此不同。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "united by a shared love",
+          "signalSide": "context-after",
+          "targetText": "all ages, interests, abilities, and cultural backgrounds",
+          "relation": "空后说他们因共同爱好团结在一起，和 G 的各不相同形成“不同却相聚”的对照。"
+        }
+      ],
+      "lock": [
+        "families, students, scholars, and alumni",
+        "all ages",
+        "united"
+      ],
+      "find": {
+        "text": "空前 \"families, students, scholars, and alumni\" 在列会员身份，空后 \"united by a shared love\" 说他们因爱好相聚。中间要一句再说他们多么不同，G 的 \"all ages\" 接得上，还开头就是 Friends are。",
+        "quotes": [
+          "families, students, scholars, and alumni",
+          "united by a shared love",
+          "all ages"
+        ]
+      },
+      "explain": "这句把空前几种身份推开成年龄、兴趣、能力、背景都不同，先把“差别大”说足；空后再说这样不同的人因爱艺术聚到一起，对照更鲜明。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "F 也以 \"Friends receive\" 开头，像这段一连串 Friends are 中的一句。但这段答的是会员是谁，订杂志是权益，放这里接不上空后 \"united\"。",
+          "quotes": [
+            "Friends receive",
+            "united"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "这句把空前几种身份推开成年龄、兴趣、能力、背景都不同，先把“差别大”说足；空后再说这样不同的人因爱艺术聚到一起，对照更鲜明。",
+        "matchedClues": [
+          {
+            "contextSide": "families, students, scholars, and alumni / united by a shared love",
+            "optionSide": "people of all ages, interests, abilities, and cultural backgrounds",
+            "relation": "选项把空前的身份清单扩展为各方面的差异，为空后“因共同爱好团结”做铺垫。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 也以 \"Friends receive\" 开头，像这段一连串 Friends are 中的一句。但这段答的是会员是谁，订杂志是权益，放这里接不上空后 \"united\"。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:37": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:37",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "your membership provides essential annual support",
+        "help sustain the continued excellence",
+        "By joining the Friends",
+        "help to guarantee"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "membership",
+          "signalSide": "option",
+          "targetText": "your membership provides essential annual support",
+          "relation": "标题里的 membership 就是下面一段的主语 your membership。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your membership provides essential annual support",
+          "signalSide": "context-after",
+          "targetText": "Why does membership matter",
+          "relation": "下面一段说会员给美术馆的支持，正回答“会员为什么重要”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "help to guarantee",
+          "signalSide": "context-after",
+          "targetText": "matter",
+          "relation": "“帮助确保”美术馆对所有人开放，说的是入会的意义，对应 matter。"
+        }
+      ],
+      "lock": [
+        "membership",
+        "matter"
+      ],
+      "find": {
+        "text": "小标题空先跳过，读完下面一段再回来。那段说会员每年给美术馆支持，在讲入会有什么用；只有 A 的 \"membership\" 和 \"matter\" 问的正是这个。",
+        "quotes": [
+          "membership",
+          "matter"
+        ]
+      },
+      "explain": "全文四个问句小标题依次问是谁、为什么、有什么、怎么办。这一处夹在“是谁”和“有什么权益”之间，问的是入会的意义，下面一段用会员支持教育项目来回答。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "全文四个问句小标题依次问是谁、为什么、有什么、怎么办。这一处夹在“是谁”和“有什么权益”之间，问的是入会的意义，下面一段用会员支持教育项目来回答。",
+        "matchedClues": [
+          {
+            "contextSide": "your membership provides essential annual support / help to guarantee",
+            "optionSide": "Why does membership matter",
+            "relation": "下面一段讲会员支持的作用，标题问会员为什么重要，问答相应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "它也是不带问号的问句，像能填进这个小标题；\"the Friends\" 和最后一个小标题 \"How do I join the Friends?\" 是一个模子。但标题下面讲的是 \"your membership provides essential annual support\"，在说会员有什么用，全段没讲怎样了解这个组织。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:38": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "What benefits",
+        "you also become part of a great tradition",
+        "special opportunities",
+        "invitations to exhibition openings"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+        "beforeQuote": "",
+        "afterQuote": "When you become a Friend of the University Art Museum, you also become part of a great tradition."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "Friends membership is your entry to many opportunities",
+          "relation": "空后的 also 表示在前一句之外再加一层，前面要先有一句总说好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "many opportunities",
+          "signalSide": "option",
+          "targetText": "What benefits / special opportunities",
+          "relation": "选项用 many opportunities 总答小标题的 benefits，下文再说 special opportunities。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "What benefits",
+          "signalSide": "context-before",
+          "targetText": "many opportunities",
+          "relation": "小标题问会员有哪些权益，段首这句先给总答案。"
+        }
+      ],
+      "lock": [
+        "What benefits",
+        "many opportunities",
+        "also"
+      ],
+      "find": {
+        "text": "小标题问 \"What benefits\"，段首先要一句总答。空后 \"you also become part of a great tradition\" 的 also 说前面已讲过一项好处，E 的 \"many opportunities\" 正好是那句总说。",
+        "quotes": [
+          "What benefits",
+          "you also become part of a great tradition",
+          "many opportunities"
+        ]
+      },
+      "explain": "这句先给小标题一个笼统的回答：入会就是拿到许多机会；后面几句再一层层拆开，从成为传统的一部分，到参与和分享，再到杂志和各种邀请。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "F 也讲会员得到什么，像在答小标题。但它只是一项具体权益，空后 \"also\" 要前面先总说；F 该和 \"and they get invitations\" 并列。",
+          "quotes": [
+            "also",
+            "and they get invitations"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "这句先给小标题一个笼统的回答：入会就是拿到许多机会；后面几句再一层层拆开，从成为传统的一部分，到参与和分享，再到杂志和各种邀请。",
+        "matchedClues": [
+          {
+            "contextSide": "What benefits / you also become part of a great tradition",
+            "optionSide": "your entry to many opportunities",
+            "relation": "选项总答权益问题，空后 also 在此基础上再加一层好处。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 也讲会员得到什么，像在答小标题。但它只是一项具体权益，空后 \"also\" 要前面先总说；F 该和 \"and they get invitations\" 并列。"
+        },
+        {
+          "optionLabel": "D",
+          "reason": "它的 \"benefits\" 和小标题 \"What benefits do members of the Friends enjoy?\" 同词，像段首总起。但 \"then\" 要前面先有一步，段首前面什么都没有；空后 \"you also become part of a great tradition\" 在接着说好处，它却只叫人去看权益清单。它的 \"then\" 也像加入步骤，可那一空空后 \"return it\" 的 it 在它里面找不到所指。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:39": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "special opportunities",
+        "invitations to exhibition openings",
+        "lectures, travel opportunities",
+        "lively social gatherings"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+        "beforeQuote": "Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals.",
+        "afterQuote": "and they get invitations to exhibition openings, lectures, travel opportunities, and lively social gatherings."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "they",
+          "signalSide": "context-after",
+          "targetText": "Friends",
+          "relation": "空后 they 要回指一个复数主语，F 的 Friends 正好是它。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Friends",
+          "signalSide": "option",
+          "targetText": "they",
+          "relation": "选项主语 Friends 给空后 they 提供所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "and",
+          "signalSide": "context-after",
+          "targetText": "Friends receive / they get",
+          "relation": "and 连接两个并列分句：receive 杂志，get 邀请。"
+        }
+      ],
+      "lock": [
+        "they get invitations",
+        "Friends receive"
+      ],
+      "find": {
+        "text": "空后 \"and they get invitations\" 要前面有个复数主语，还要同样讲收到什么。F 的 \"Friends receive\" 正接：they 指 Friends，receive 和 get 并列。",
+        "quotes": [
+          "and they get invitations",
+          "Friends receive"
+        ]
+      },
+      "explain": "空前还在笼统地说分享机会，这句开始落到看得见的权益：先是季刊，空后再接各类活动邀请，把会员权益从抽象说到具体。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 也在讲会员的好处，但它的主语 \"Friends membership\" 是单数，空后 \"they get invitations\" 的 they 回指不了它。",
+          "quotes": [
+            "Friends membership",
+            "they get invitations"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前还在笼统地说分享机会，这句开始落到看得见的权益：先是季刊，空后再接各类活动邀请，把会员权益从抽象说到具体。",
+        "matchedClues": [
+          {
+            "contextSide": "and they get invitations",
+            "optionSide": "Friends receive a subscription",
+            "relation": "they 回指 Friends，receive 与 get 构成并列，一起列出具体权益。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 也在讲会员的好处，但它的主语 \"Friends membership\" 是单数，空后 \"they get invitations\" 的 they 回指不了它。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-eight-provinces-jan:40": {
+      "blankId": "blank:paper-gaokao-2025-eight-provinces-jan:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Becoming a Friend is easy",
+        "return it",
+        "annual membership fee",
+        "attached envelope"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+        "beforeQuote": "Becoming a Friend is easy.",
+        "afterQuote": "return it with your annual membership fee in the attached envelope, and begin enjoying your benefits immediately."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "context-after",
+          "targetText": "the membership form",
+          "relation": "空后 return it 的 it 要指一样能寄回的东西，就是表格。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the membership form",
+          "signalSide": "option",
+          "targetText": "return it",
+          "relation": "选项给 it 提供所指：填好的会员表格。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "easy",
+          "signalSide": "context-before",
+          "targetText": "Simply",
+          "relation": "空前说加入很容易，Simply 接着说只需一步。"
+        }
+      ],
+      "lock": [
+        "easy",
+        "the membership form",
+        "return it"
+      ],
+      "find": {
+        "text": "空后 \"return it with your annual membership fee\" 是一串步骤，it 要指前面一样能寄回的东西。C 的 \"the membership form\" 给了 it 所指，\"Simply\" 又接空前 \"easy\"。",
+        "quotes": [
+          "return it with your annual membership fee",
+          "the membership form",
+          "Simply",
+          "easy"
+        ]
+      },
+      "explain": "空前先说加入很容易，这句给出第一步，和空后寄回、开始享受连成三个祈使动作：填表、寄回、享受，正好证明“容易”。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前先说加入很容易，这句给出第一步，和空后寄回、开始享受连成三个祈使动作：填表、寄回、享受，正好证明“容易”。",
+        "matchedClues": [
+          {
+            "contextSide": "Becoming a Friend is easy / return it",
+            "optionSide": "Simply complete the membership form",
+            "relation": "Simply 呼应 easy，form 是 it 的所指，三个祈使动作连成加入步骤。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    }
+  }
+}
