@@ -65,17 +65,16 @@ const quantityUnit = /^(?:cents?|dollars?|pounds?|euros?|yen|yuan|percent|degree
 
 function recordingUnits(text) {
   const words = units(text)
-  const spans = [...text.matchAll(/(?<![\p{L}\p{N}])(?:[−+-]\s*[$£€¢]?\s*|[$£€¢]\s*[−+-]?\s*)?\d+(?:[.,:]\s*\d+)*\s*%?/gu)]
-  for (const { 0: raw, index: start } of spans.reverse()) {
-    const end = start + raw.trimEnd().length
+  const spans = [...text.matchAll(/(?<![\p{L}\p{N}])(?<prefix>(?:[−+-]\s*[\p{Sc}%‰‱°]?\s*|[\p{Sc}%‰‱°]\s*[−+-]?\s*)?)(?<number>\d+(?:[.,:]\s*\d+)*)(?:\s*(?<suffix>[\p{Sc}%‰‱°]))?/gu)]
+  for (const { 0: raw, index: start, groups: { prefix, number, suffix = '' } } of spans.reverse()) {
+    const end = start + raw.length
     const first = words.findIndex(word => word.end > start)
     if (first < 0 || words[first].start < start || words[first].end > end) continue
     const last = words.findIndex((word, index) => index > first && word.end > end)
     const count = (last < 0 ? words.length : last) - first
-    const prefix = raw.match(/^[^0-9]+/u)?.[0].replace(/\s+/gu, '').replace('−', '-') ?? ''
-    const parts = prefix ? units(raw.replace(/^[^0-9]+/u, '')) : words.slice(first, first + count)
-    const token = prefix + parts.map(word => word.token).join(' ') + (raw.endsWith('%') ? '%' : '')
-    words.splice(first, count, { token, start, end, quantity: !raw.endsWith('%') })
+    const parts = prefix ? units(number) : words.slice(first, first + count)
+    const token = prefix.replace(/\s+/gu, '').replace('−', '-') + parts.map(word => word.token).join(' ') + suffix
+    words.splice(first, count, { token, start, end, quantity: true })
   }
   for (let index = words.length - 1; index > 0; index--) {
     const unit = words[index]

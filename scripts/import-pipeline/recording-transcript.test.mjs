@@ -53,7 +53,8 @@ test('recording merge compares and replaces the whole signed amount', async () =
   const reading = amount => ({ '01': sentence(amount).split(' ')
     .map((text, start) => ({ text, start, end: start + 0.5 })) })
   for (const [before, after] of [['−10', '10'], ['€10', '£10'],
-    ['€ −10 euros', '£ +10 pounds'], ['10 cents', '20 cents'], ['10%', '10']]) {
+    ['€ −10 euros', '£ +10 pounds'], ['10 cents', '20 cents'], ['10%', '10'],
+    ['50¢', '50'], ['10¢', '10%'], ['10 %', '10 ¢'], ['¥10', '10€'], ['10‰', '10‱']]) {
     const result = await mergeReadings(group, { apple: reading(before), 'parakeet-v2': reading(after) },
       async () => ({ text: sentence(after) }))
     assert.equal(result.text, normalizeRecordingTranscript(sentence(after)))
