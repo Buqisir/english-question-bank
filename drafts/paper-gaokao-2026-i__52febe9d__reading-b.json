@@ -1,0 +1,812 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-i:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-i:reading-b": {
+      "overview": "作者让习惯用屏幕查词的儿子第一次翻纸质词典，儿子惊叹词多；她由此想起自己那本记满学词记号、后来被偷的第一本词典，最终领悟到学习方式可以不同，真正要紧的是想去认识的好奇心和求知欲。",
+      "fullTranslationZh": "不久前，我上五年级的儿子凯文问我一本小说里一个词的意思。“查一下。”我答道。“可是我的屏幕时间用完了。”他说。我意味深长地看了看书架，上面至少放着三本词典，凯文夸张地叹了口气。“你就不能用你的手机查吗？”他问。我突然意识到，他竟然连词典都不会用。\n\n我拿下一本词典，和他一起看了几分钟，然后把它交给他。他试了几次才找到要查的那个词。他一边翻页，一边睁大眼睛不停地说：“怎么会有这么多词？”过了一会儿，他看着我问：“妈妈，这些词你都认识吗？”我笑了。“这些词我肯定不是都认识，”我说，“但这正是它成为我最喜欢的书之一的原因。”\n\n我的第一本词典是十三岁生日时收到的礼物。我决定要尽可能多地学词，开始用铅笔给查过的每个词条做记号，以此衡量自己的进步。这些铅笔记号我一做就是好几年；去上大学时，我把那本词典装进了行李箱。\n\n凯文想看看那本词典。我心里隐隐一痛。那本词典在我大一结束时被偷了。“真可惜，”他说，“不过就算没有那本书，你还是认识那些词。”我意识到，的确如此。就算没有那本书，我也读完了大学后面的三年。说到底，让我走到那一步的并不是那本词典——真的不是。\n\n现在我明白了，虽然儿子的学习方式可能和我不同，但他仍然在学习。关键不在于词语本身，也不在于我们用什么方式学，而在于想要认识它们的那份渴望，那份好奇心和求知欲。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+          "sourceText": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+          "displayText": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:27"
+          ],
+          "translationZh": "关键不在于词语本身，也不在于我们用什么方式学，而在于想要认识它们的那份渴望，那份好奇心和求知欲。",
+          "analysisZh": "骨架是 It’s not about A or B, but C：不在于 A 或 B，而在于 C。It 泛指“学习这件事的关键”。not about 后面是两样被否定的东西：the words themselves（词本身）和 how we learn them（怎么学，how 引导宾语从句）。but 后面才是作者认定的重点，三个名词短语并列：the wanting to know them（想认识它们的渴望，wanting 是动名词作名词用）、the curiosity、the appetite，后两个是对 wanting 的进一步说明。第 27 题的答案就从 but 后这三样归纳出来。",
+          "underlineRanges": [
+            {
+              "start": 5,
+              "end": 14,
+              "quote": "not about"
+            },
+            {
+              "start": 58,
+              "end": 86,
+              "quote": "but the wanting to know them"
+            },
+            {
+              "start": 88,
+              "end": 118,
+              "quote": "the curiosity and the appetite"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+          "sourceText": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "displayText": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:26"
+          ],
+          "translationZh": "我决定要尽可能多地学词，开始用铅笔给查过的每个词条做记号，以此衡量自己的进步。",
+          "analysisZh": "主语 I 带两个并列谓语：decided that … 和 started marking …，用 and 连接。decided 后的 that 从句说出决心：learn as many words as I could，as many … as I could 是“尽可能多”。started marking every entry 说她怎么做，entry 是词典的词条，I looked up 是省略了 that 的定语从句，修饰 entry；with a pencil 说用什么做记号；末尾 to measure my progress 是不定式表目的。正是这个目的让词典成了她努力的见证（第 26 题）。",
+          "underlineRanges": [
+            {
+              "start": 62,
+              "end": 89,
+              "quote": "started marking every entry"
+            },
+            {
+              "start": 90,
+              "end": 101,
+              "quote": "I looked up"
+            },
+            {
+              "start": 116,
+              "end": 138,
+              "quote": "to measure my progress"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-i:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-b:1"
+              ],
+              "start": 0,
+              "end": 123,
+              "quote": "不久前，我上五年级的儿子凯文问我一本小说里一个词的意思。“查一下。”我答道。“可是我的屏幕时间用完了。”他说。我意味深长地看了看书架，上面至少放着三本词典，凯文夸张地叹了口气。“你就不能用你的手机查吗？”他问。我突然意识到，他竟然连词典都不会用。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-b:2"
+              ],
+              "start": 125,
+              "end": 262,
+              "quote": "我拿下一本词典，和他一起看了几分钟，然后把它交给他。他试了几次才找到要查的那个词。他一边翻页，一边睁大眼睛不停地说：“怎么会有这么多词？”过了一会儿，他看着我问：“妈妈，这些词你都认识吗？”我笑了。“这些词我肯定不是都认识，”我说，“但这正是它成为我最喜欢的书之一的原因。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-b:3"
+              ],
+              "start": 264,
+              "end": 357,
+              "quote": "我的第一本词典是十三岁生日时收到的礼物。我决定要尽可能多地学词，开始用铅笔给查过的每个词条做记号，以此衡量自己的进步。这些铅笔记号我一做就是好几年；去上大学时，我把那本词典装进了行李箱。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-b:4"
+              ],
+              "start": 359,
+              "end": 479,
+              "quote": "凯文想看看那本词典。我心里隐隐一痛。那本词典在我大一结束时被偷了。“真可惜，”他说，“不过就算没有那本书，你还是认识那些词。”我意识到，的确如此。就算没有那本书，我也读完了大学后面的三年。说到底，让我走到那一步的并不是那本词典——真的不是。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-b:5"
+              ],
+              "start": 481,
+              "end": 560,
+              "quote": "现在我明白了，虽然儿子的学习方式可能和我不同，但他仍然在学习。关键不在于词语本身，也不在于我们用什么方式学，而在于想要认识它们的那份渴望，那份好奇心和求知欲。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+                "start": 115,
+                "end": 152,
+                "quote": "“But my screen time is off,” he said."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p1",
+                "start": 38,
+                "end": 55,
+                "quote": "“可是我的屏幕时间用完了。”他说。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+                "start": 262,
+                "end": 304,
+                "quote": "“Can’t you just use your phone?” he asked."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p1",
+                "start": 88,
+                "end": 105,
+                "quote": "“你就不能用你的手机查吗？”他问。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+                "start": 160,
+                "end": 253,
+                "quote": "While going through the pages, he kept saying, wide-eyed: “How can there be this many words?”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p2",
+                "start": 41,
+                "end": 69,
+                "quote": "他一边翻页，一边睁大眼睛不停地说：“怎么会有这么多词？”"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+                "start": 254,
+                "end": 331,
+                "quote": "After a while, he looked at me and asked, “Do you know all these words, Mom?”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p2",
+                "start": 69,
+                "end": 95,
+                "quote": "过了一会儿，他看着我问：“妈妈，这些词你都认识吗？”"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-5",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+                "start": 58,
+                "end": 197,
+                "quote": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p3",
+                "start": 20,
+                "end": 59,
+                "quote": "我决定要尽可能多地学词，开始用铅笔给查过的每个词条做记号，以此衡量自己的进步。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-6",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+                "start": 198,
+                "end": 320,
+                "quote": "I continued to make these pencil marks for years, and when I went off to college, I packed that dictionary in my suitcase."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p3",
+                "start": 59,
+                "end": 73,
+                "quote": "这些铅笔记号我一做就是好几年"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-7",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+                "start": 89,
+                "end": 208,
+                "quote": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p5",
+                "start": 31,
+                "end": 79,
+                "quote": "关键不在于词语本身，也不在于我们用什么方式学，而在于想要认识它们的那份渴望，那份好奇心和求知欲。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-8",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+                "start": 89,
+                "end": 208,
+                "quote": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p5",
+                "start": 31,
+                "end": 79,
+                "quote": "关键不在于词语本身，也不在于我们用什么方式学，而在于想要认识它们的那份渴望，那份好奇心和求知欲。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-b-1"
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-b-9",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+                "start": 58,
+                "end": 197,
+                "quote": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-b-p3",
+                "start": 20,
+                "end": 59,
+                "quote": "我决定要尽可能多地学词，开始用铅笔给查过的每个词条做记号，以此衡量自己的进步。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-b-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "从儿子不会用词典的一件小事写起，经过母子一起查词，转入作者对自己第一本词典的回忆，最后由儿子的一句话引出作者对学习的领悟。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+            "summary": "儿子问词义，被叫去查词典时推说屏幕时间用完、想用手机，作者发现他不会用词典。",
+            "function": "引出事件，点出孩子习惯用屏幕查词。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+            "summary": "母子一起查词典，儿子惊叹词多，作者说正因不全认识才喜欢这本书。",
+            "function": "写查词的经过和儿子的反应。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+            "summary": "作者 13 岁得到第一本词典，多年在查过的词条上做铅笔记号，上大学也带着它。",
+            "function": "插入回忆，写词典记录了她的学词努力。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+            "summary": "那本词典大一时被偷，儿子说她仍认识那些词，作者意识到撑她读完大学的并不是词典。",
+            "function": "由回忆回到现在，为结尾的领悟做铺垫。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+            "summary": "作者明白儿子学法不同也在学，关键是想认识词的好奇心和求知欲。",
+            "function": "点明主旨，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-i:24": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Kevin 被叫去查词典时的推托，推出他平时靠什么查词义。",
+      "stemTranslationZh": "凯文平时通常怎样弄清一个词的意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后两句看他怎么推托",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使用电子设备。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "quote": "“But my screen time is off,” he said.",
+              "anchor": "推说屏幕时间用完"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "quote": "“Can’t you just use your phone?” he asked.",
+              "anchor": "问能不能用手机"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "查阅纸质词典。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Suddenly it occurred to me that he did not even know how to use a dictionary.",
+            "sourceHighlight": "did not even know how to use a dictionary",
+            "optionText": "Consult a paper dictionary.",
+            "optionHighlight": "Consult a paper dictionary",
+            "explanation": "书架上的词典是妈妈指给他看的，作者随即发现他连词典都不会用（did not even know how to use），查纸质词典恰恰不是他的习惯。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "quote": "Suddenly it occurred to me that he did not even know how to use a dictionary.",
+              "anchor": "不会用词典"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "根据上下文猜。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Guess from the context.",
+            "explanation": "Kevin 遇到生词是直接问妈妈，被叫去查又想用手机，原文没写他靠上下文猜词义。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "求助于他的英语老师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Not long ago, my fifth-grade son Kevin asked me about the meaning of a word in a novel.",
+            "sourceEntity": "me",
+            "optionText": "Turn to his English teacher.",
+            "optionEntity": "his English teacher",
+            "explanation": "他问词义问的是妈妈（asked me），文中从头到尾没有出现英语老师。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "quote": "Not long ago, my fifth-grade son Kevin asked me about the meaning of a word in a novel.",
+              "anchor": "问妈妈词义"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the meaning of a word",
+          "sourceRole": "stem",
+          "targetText": "Not long ago, my fifth-grade son Kevin asked me about the meaning of a word in a novel.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "But my screen time is off",
+          "bridgeZh": "叫他查词，他先想到的是屏幕时间，可见平时查词靠屏幕",
+          "note": "题干 the meaning of a word 原词出现在开头 Kevin 问词义的一句。"
+        },
+        {
+          "sourceText": "Use electronic devices.",
+          "sourceRole": "correctOption",
+          "targetText": "“But my screen time is off,” he said.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“电子设备”（electronic devices）把两处合在一起：先是他推说屏幕时间用完了（screen time is off），接着问妈妈能不能用手机查（use your phone）；查词第一反应就是屏幕，又不会用词典，由此推出他平时靠电子设备查词，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:25": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Kevin 翻词典时的神情和话语，读出他当时的感受。",
+      "stemTranslationZh": "凯文在词典里查这个词时有什么感受？",
+      "locateBy": "stem",
+      "locateFindZh": "看冒号后他反复说的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "恼火的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I looked pointedly at the bookshelf that held at least three dictionaries, and Kevin sighed（叹气）dramatically.",
+            "sourceEntity": "Kevin sighed（叹气）dramatically",
+            "optionText": "Annoyed.",
+            "optionEntity": "Annoyed",
+            "explanation": "他夸张地叹气（sighed dramatically）是妈妈指着书架、还没开始查的时候；真翻起词典来，他是睁大眼睛问怎么有这么多词。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "quote": "I looked pointedly at the bookshelf that held at least three dictionaries, and Kevin sighed（叹气）dramatically.",
+              "anchor": "查词前叹气"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "失望的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“That’s so sad,” he said, “but you still know all those words, even without the book.”",
+            "sourceEntity": "That’s so sad",
+            "optionText": "Disappointed.",
+            "optionEntity": "Disappointed",
+            "explanation": "Kevin 说 That’s so sad（真可惜）是后来听说妈妈的词典被偷时的话，不是他查词时的感受。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "quote": "“That’s so sad,” he said, “but you still know all those words, even without the book.”",
+              "anchor": "听说词典被偷"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "受到鼓舞的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Encouraged.",
+            "explanation": "查词时他只是惊叹词多、追问妈妈是否全认识；原文没写有人鼓励他，也没写他因此受到鼓舞。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "惊讶的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "quote": "While going through the pages, he kept saying, wide-eyed: “How can there be this many words?”",
+              "anchor": "睁大眼睛惊叹词多"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "quote": "After a while, he looked at me and asked, “Do you know all these words, Mom?”",
+              "anchor": "追问妈妈是否全认识"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "looking up the word",
+          "sourceRole": "stem",
+          "targetText": "While going through the pages, he kept saying, wide-eyed: “How can there be this many words?”",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:2",
+          "relationType": "locationCue",
+          "targetCue": "going through the pages",
+          "sourceZh": "查这个词",
+          "targetCueZh": "翻着词典页",
+          "answerText": "wide-eyed: “How can there be this many words?”",
+          "note": "题干 looking up the word 说查词的时候，对应原文 going through the pages。"
+        },
+        {
+          "sourceText": "Astonished.",
+          "sourceRole": "correctOption",
+          "targetText": "While going through the pages, he kept saying, wide-eyed: “How can there be this many words?”",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“惊讶”（Astonished）是从神情和话语一起推出的：他睁大了眼睛（wide-eyed），嘴里不停地问怎么会有这么多词（this many words），选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:26": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从作者怎样使用第一本词典，看出这本词典对她意味着什么。",
+      "stemTranslationZh": "关于作者的第一本词典，我们可以了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看她怎么用它",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它帮助她读完了大学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "And it wasn’t, ultimately, the dictionary that got me there – not really.",
+            "sourceHighlight": "it wasn’t, ultimately, the dictionary that got me there",
+            "optionText": "It helped her through college.",
+            "optionHighlight": "helped her through college",
+            "explanation": "她确实把词典带进了大学，可大一结束就被偷了；作者明说让她读完大学的并不是词典（it wasn’t … the dictionary that got me there）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "quote": "And it wasn’t, ultimately, the dictionary that got me there – not really.",
+              "anchor": "让她走到那一步的不是词典"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它被当作礼物送给了凯文。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I had my first dictionary as a gift for my 13th birthday.",
+            "sourceEntity": "my 13th birthday",
+            "optionText": "It was given to Kevin as a gift.",
+            "optionEntity": "Kevin",
+            "explanation": "gift 原文有，但那是作者 13 岁生日时自己收到的礼物；这本词典大一时就被偷了，Kevin 想看都看不到。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "quote": "I had my first dictionary as a gift for my 13th birthday.",
+              "anchor": "13 岁生日礼物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它见证了她的努力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "quote": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+              "anchor": "查过的词条做记号衡量进步"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "quote": "I continued to make these pencil marks for years, and when I went off to college, I packed that dictionary in my suitcase.",
+              "anchor": "记号一做好几年"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它是一本珍贵的限量版。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It was a valuable limited edition.",
+            "explanation": "作者为词典被偷心口一疼（a small pain in my chest），是因为它陪了她多年；原文没说这本词典值钱，更没说是限量版。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "first dictionary",
+          "sourceRole": "stem",
+          "targetText": "I had my first dictionary as a gift for my 13th birthday.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "started marking every entry I looked up with a pencil to measure my progress",
+          "bridgeZh": "得到词典后她立志多学词，进度就记在这本书上",
+          "note": "题干 first dictionary 原词出现在作者回忆 13 岁生日的一句。"
+        },
+        {
+          "sourceText": "It bore witness to her efforts.",
+          "sourceRole": "correctOption",
+          "targetText": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“见证她的努力”（bore witness to her efforts）是一步推出来的：她在查过的每个词条上用铅笔做记号来衡量进步（marking every entry … to measure my progress），接着一做好几年（for years），词典上留下的正是她学词的努力，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从结尾作者的领悟里，归纳她认为学习真正要紧的是什么。",
+      "stemTranslationZh": "关于学习，作者逐渐认识到了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句，看 but 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "开始学习永远不会太晚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is never too late to start.",
+            "explanation": "文中学词的是五年级的儿子和 13 岁时的作者，作者没有谈起步早晚，更没说多晚开始都不迟。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "动力才是真正重要的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+              "quote": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+              "anchor": "不在词本身和学法，而在想认识的渴望"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "孩子需要榜样。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Children need role models.",
+            "explanation": "作者陪儿子翻词典，但她最后领悟的是儿子学法不同也照样在学（he is still learning），没说孩子需要有人做榜样。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "词典仍然是有用的工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "It’s not about the words themselves or how we learn them",
+            "sourceHighlight": "how we learn them",
+            "optionText": "Dictionaries are still a useful tool.",
+            "optionHighlight": "still a useful tool",
+            "explanation": "词典贯穿全文，但作者最后说关键不在用什么方式学（not about … how we learn them），儿子不用词典也在学，她没有落到词典仍有用上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+              "quote": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+              "anchor": "关键不在学的方式"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "come to realize",
+          "sourceRole": "stem",
+          "targetText": "Now I understand that although my son may be learning differently, he is still learning.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:5",
+          "relationType": "locationCue",
+          "targetCue": "Now I understand",
+          "sourceZh": "逐渐认识到",
+          "targetCueZh": "现在我明白了",
+          "answerText": "but the wanting to know them, the curiosity and the appetite",
+          "bridgeZh": "她接着用“不是……而是……”说出学习真正看重什么",
+          "note": "题干 come to realize 对应原文 Now I understand。"
+        },
+        {
+          "sourceText": "Motivation is what really matters.",
+          "sourceRole": "correctOption",
+          "targetText": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项的“动力”（Motivation）是 but 后三样东西的总称：想认识这些词的渴望（the wanting to know them）、好奇心（the curiosity）和求知欲（the appetite），都是让人想学的那股劲；词本身和学法被 not about 排在一边，所以真正要紧的是动力，选 B。"
+        }
+      ]
+    }
+  }
+}

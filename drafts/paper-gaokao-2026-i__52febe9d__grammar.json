@@ -1,0 +1,999 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-i:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-i:grammar-fill": {
+      "overview": "文章介绍中国大集的开集日期与历史。早年人们定期聚集交换生活所需，如今赶集也成了品尝小吃、观看表演、交流近况和选购新鲜果蔬的机会。",
+      "fullTranslationZh": "大集就是大型露天集市，通常在农历的特定日子举行，例如日期尾数为五或七的日子。春节、中秋节等中国传统节日以及其他地方节庆期间，也常举办大集。大集的具体日期和举办频率因地区而异。\n\n大集源于古人交换物品的民间习俗，可追溯到汉代。由于当时交通和通信不发达，各家各户很难获得日常必需品。为了解决这个问题，人们在固定日子到指定地点聚集，用手头多余的东西换取所需物品。\n\n大集除了供人买卖，也给大家提供了交往和娱乐的机会。逢集的日子，远近的人都涌进集市。街头小吃的香味把人们吸引过来，大家在卖热气腾腾的饺子和热汤面的摊位前排队。人们边吃东西、边看街头表演，还互相聊天，分享各自生活中的故事。回家前，他们把从当地农户那里买来的新鲜水果和蔬菜装满购物袋，价格比超市里的便宜得多。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2026-i:grammar-fill:3:3",
+          "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+          "sourceText": "__62__ (draw) by the aroma (香味) of street food, people line up in front of stands __63__ serve steaming dumplings and hot noodle soup.",
+          "displayText": "Drawn by the aroma (香味) of street food, people line up in front of stands that / which serve steaming dumplings and hot noodle soup.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:62",
+            "question:paper-gaokao-2026-i:63"
+          ],
+          "translationZh": "街头小吃的香味把人们吸引过来，大家在卖热气腾腾的饺子和热汤面的摊位前排队。",
+          "analysisZh": "主干是 people line up，写人们排起了队。句首的 Drawn by 短语交代他们被什么吸引，in front of stands 则说明队排在哪里。stands 后的定语从句再说明，这些摊位卖的是热饺子和热汤面。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 38,
+              "quote": "Drawn by the aroma (香味) of street food"
+            },
+            {
+              "start": 40,
+              "end": 54,
+              "quote": "people line up"
+            },
+            {
+              "start": 87,
+              "end": 131,
+              "quote": "serve steaming dumplings and hot noodle soup"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2026-i:grammar-fill:3:5",
+          "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+          "sourceText": "Before __64__ (head) home, they fill their shopping bags with fresh fruit and vegetables from local farmers, at prices significantly __65__ (cheap) than those found in supermarkets.",
+          "displayText": "Before heading home, they fill their shopping bags with fresh fruit and vegetables from local farmers, at prices significantly cheaper than those found in supermarkets.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:64",
+            "question:paper-gaokao-2026-i:65"
+          ],
+          "translationZh": "回家前，他们把从当地农户那里买来的新鲜水果和蔬菜装满购物袋，价格比超市里的便宜得多。",
+          "analysisZh": "主干是 they fill their shopping bags with fresh fruit and vegetables，写人们用新鲜果蔬装满购物袋。Before 短语交代时间，from local farmers 交代果蔬的来处。后半句补充价格，those 回指 prices，把两处买果蔬的价格放在同一尺度上比较。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "Before heading home"
+            },
+            {
+              "start": 21,
+              "end": 50,
+              "quote": "they fill their shopping bags"
+            },
+            {
+              "start": 127,
+              "end": 167,
+              "quote": "cheaper than those found in supermarkets"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2026-i:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 87,
+              "quote": "大集就是大型露天集市，通常在农历的特定日子举行，例如日期尾数为五或七的日子。春节、中秋节等中国传统节日以及其他地方节庆期间，也常举办大集。大集的具体日期和举办频率因地区而异。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:grammar-fill:2"
+              ],
+              "start": 89,
+              "end": 178,
+              "quote": "大集源于古人交换物品的民间习俗，可追溯到汉代。由于当时交通和通信不发达，各家各户很难获得日常必需品。为了解决这个问题，人们在固定日子到指定地点聚集，用手头多余的东西换取所需物品。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:grammar-fill:3"
+              ],
+              "start": 180,
+              "end": 331,
+              "quote": "大集除了供人买卖，也给大家提供了交往和娱乐的机会。逢集的日子，远近的人都涌进集市。街头小吃的香味把人们吸引过来，大家在卖热气腾腾的饺子和热汤面的摊位前排队。人们边吃东西、边看街头表演，还互相聊天，分享各自生活中的故事。回家前，他们把从当地农户那里买来的新鲜水果和蔬菜装满购物袋，价格比超市里的便宜得多。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+            "text": "Daji, or big open-air fairs, typically take place on specific dates of the lunar calendar, for example, on dates with five or seven as the last digit. It is also common for them to be held during traditional Chinese holidays such as the Spring Festival and the Mid-Autumn Festival, as well as other local festivals. The exact dates and frequency of daji vary from region to region."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+            "text": "Daji originated from the ancient folk custom of trading goods, which dates back to the Han Dynasty. As transportation and communication were underdeveloped at that time, it was very difficult for households to obtain daily necessities. As a solution, people gathered at specific locations on set days to trade their surplus (剩余的) items for what they needed."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+            "text": "In addition to being venues for buying and selling, daji are occasions for socializing and entertainment. People from near and far crowd into these markets on daji days. Drawn by the aroma (香味) of street food, people line up in front of stands that / which serve steaming dumplings and hot noodle soup. While eating and enjoying street performances, they chat with each other and share stories of their daily lives. Before heading home, they fill their shopping bags with fresh fruit and vegetables from local farmers, at prices significantly cheaper than those found in supermarkets."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 151,
+                "end": 177,
+                "quote": "It is also common for them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 62,
+                "end": 68,
+                "quote": "也常举办大集"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:56"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 178,
+                "end": 188,
+                "quote": "to be held"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 62,
+                "end": 68,
+                "quote": "也常举办大集"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 319,
+                "end": 338,
+                "quote": "The exact dates and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 77,
+                "end": 81,
+                "quote": "举办频率"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:57"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 336,
+                "end": 345,
+                "quote": "frequency"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:1",
+                "start": 77,
+                "end": 81,
+                "quote": "举办频率"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 90,
+                "end": 101,
+                "quote": "Han Dynasty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 20,
+                "end": 22,
+                "quote": "汉代"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:58"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 83,
+                "end": 86,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 20,
+                "end": 22,
+                "quote": "汉代"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 166,
+                "end": 178,
+                "quote": "at that time"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 106,
+                "end": 138,
+                "quote": "transportation and communication"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 25,
+                "end": 35,
+                "quote": "当时交通和通信不发达"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:59"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 136,
+                "end": 140,
+                "quote": "were"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 25,
+                "end": 35,
+                "quote": "当时交通和通信不发达"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 220,
+                "end": 232,
+                "quote": "obtain daily"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 44,
+                "end": 49,
+                "quote": "日常必需品"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:60"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 223,
+                "end": 234,
+                "quote": "necessities"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 44,
+                "end": 49,
+                "quote": "日常必需品"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 318,
+                "end": 340,
+                "quote": "to trade their surplus"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 74,
+                "end": 88,
+                "quote": "用手头多余的东西换取所需物品"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:61"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 336,
+                "end": 339,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:2",
+                "start": 74,
+                "end": 88,
+                "quote": "用手头多余的东西换取所需物品"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 218,
+                "end": 232,
+                "quote": "people line up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 41,
+                "end": 55,
+                "quote": "街头小吃的香味把人们吸引过来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:62"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 170,
+                "end": 175,
+                "quote": "Drawn"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 41,
+                "end": 55,
+                "quote": "街头小吃的香味把人们吸引过来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 259,
+                "end": 303,
+                "quote": "serve steaming dumplings and hot noodle soup"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 59,
+                "end": 74,
+                "quote": "卖热气腾腾的饺子和热汤面的摊位"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:63"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 244,
+                "end": 256,
+                "quote": "that / which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 59,
+                "end": 74,
+                "quote": "卖热气腾腾的饺子和热汤面的摊位"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 418,
+                "end": 424,
+                "quote": "Before"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 109,
+                "end": 112,
+                "quote": "回家前"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:64"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 423,
+                "end": 430,
+                "quote": "heading"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 109,
+                "end": 112,
+                "quote": "回家前"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 566,
+                "end": 598,
+                "quote": "than those found in supermarkets"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 530,
+                "end": 550,
+                "quote": "prices significantly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 141,
+                "end": 150,
+                "quote": "比超市里的便宜得多"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:65"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 543,
+                "end": 550,
+                "quote": "cheaper"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 141,
+                "end": 150,
+                "quote": "比超市里的便宜得多"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2026-i:grammar-fill:3:3",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:62",
+              "question:paper-gaokao-2026-i:63"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2026-i:grammar-fill:3:3",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 170,
+                "end": 302,
+                "quote": "Drawn by the aroma (香味) of street food, people line up in front of stands that / which serve steaming dumplings and hot noodle soup."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 41,
+                "end": 78,
+                "quote": "街头小吃的香味把人们吸引过来，大家在卖热气腾腾的饺子和热汤面的摊位前排队。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2026-i:grammar-fill:3:5",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:64",
+              "question:paper-gaokao-2026-i:65"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2026-i:grammar-fill:3:5",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 416,
+                "end": 584,
+                "quote": "Before heading home, they fill their shopping bags with fresh fruit and vegetables from local farmers, at prices significantly cheaper than those found in supermarkets."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:grammar-fill:3",
+                "start": 109,
+                "end": 151,
+                "quote": "回家前，他们把从当地农户那里买来的新鲜水果和蔬菜装满购物袋，价格比超市里的便宜得多。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2026-i:56": {
+      "blankId": "blank:paper-gaokao-2026-i:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "hold",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to be held",
+      "role": "subject",
+      "similarityProfile": {
+        "route": "subject-passive-infinitive",
+        "features": []
+      },
+      "reason": "句首 It 是形式主语，真正的主语是后面 for them 引出的不定式，空格要用不定式。them 指大集，大集是被人举办的，所以用被动式 to be held。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "It is also common for them",
+          "signalSide": "passage",
+          "relation": "It 是形式主语，真正的主语是后面的 for them to do。"
+        },
+        {
+          "type": "subject",
+          "signalText": "them",
+          "signalSide": "passage",
+          "relation": "them 指大集，与 hold 是被动关系。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:57": {
+      "blankId": "blank:paper-gaokao-2026-i:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "frequent",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "frequency",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格和 dates 由 and 连接，一起作句子的主语，前面有 The exact 修饰，要用名词。形容词 frequent 的名词是 frequency，和 dates 一起说大集的日期和频率因地而异。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "The exact dates and",
+          "signalSide": "passage",
+          "relation": "and 前是名词 dates，空格与它并列，也要名词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "vary from region to region",
+          "signalSide": "passage",
+          "relation": "谓语 vary 的主语是日期和频率两项。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:58": {
+      "blankId": "blank:paper-gaokao-2026-i:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "proper-name-class"
+        ]
+      },
+      "reason": "空格在 back to 之后、Han Dynasty 之前，要补出限定朝代名的词。英语里朝代名前用定冠词，说 the Han Dynasty，填 the。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "Han Dynasty",
+          "signalSide": "passage",
+          "relation": "朝代名前要用定冠词 the。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:59": {
+      "blankId": "blank:paper-gaokao-2026-i:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "As 从句缺谓语：主语是 transportation and communication，underdeveloped 作表语，空格填系动词 be 的变化形式。at that time 指汉代，用过去时；两个并列主语是复数，填 were。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "at that time",
+          "signalSide": "passage",
+          "relation": "at that time 指上文的汉代，用过去时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "transportation and communication",
+          "signalSide": "passage",
+          "relation": "and 连接两个主语，谓语用复数。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:60": {
+      "blankId": "blank:paper-gaokao-2026-i:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "necessity",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "necessities",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作 obtain 的宾语，被 daily 修饰，要用名词。这里泛指各家各户需要的种种日用品，necessity 表示「必需品」时可数，用复数 necessities。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "obtain daily",
+          "signalSide": "passage",
+          "relation": "空格作 obtain 的宾语，daily 修饰它。"
+        },
+        {
+          "type": "subject",
+          "signalText": "households",
+          "signalSide": "passage",
+          "relation": "各家各户需要的必需品不止一样，用复数。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:61": {
+      "blankId": "blank:paper-gaokao-2026-i:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把 what they needed 接到 trade 上：trade 的宾语已经是 their surplus items，换来的东西要靠介词引出；「用 A 换 B」是 trade A for B，填 for。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "to trade their surplus",
+          "signalSide": "passage",
+          "relation": "trade 的宾语是多余物品，换来的东西用 for 引出。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "what they needed",
+          "signalSide": "passage",
+          "relation": "for 后接换来的东西：他们需要的物品。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:62": {
+      "blankId": "blank:paper-gaokao-2026-i:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "draw",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Drawn",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-passive",
+        "features": []
+      },
+      "reason": "主句是 people line up，空格所在的短语作状语，交代人们为什么来排队。draw 的逻辑主语是 people，人是被香味吸引的，by 引出吸引他们的东西，用过去分词 Drawn，句首大写。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "people line up",
+          "signalSide": "passage",
+          "relation": "主句主语 people 是被吸引的一方。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by the aroma",
+          "signalSide": "passage",
+          "relation": "by 引出动作的发出者，表被动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:63": {
+      "blankId": "blank:paper-gaokao-2026-i:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that / which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句，修饰前面的 stands；从句 serve steaming dumplings and hot noodle soup 缺主语。先行词 stands 指物，用 that 或 which 作从句主语。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "in front of stands",
+          "signalSide": "passage",
+          "relation": "先行词 stands 指物。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "serve steaming dumplings and hot noodle soup",
+          "signalSide": "passage",
+          "relation": "从句缺主语，由关系词充当。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:64": {
+      "blankId": "blank:paper-gaokao-2026-i:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "head",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "heading",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-preposition",
+        "features": []
+      },
+      "reason": "Before 在这里是介词，空格作 Before 的宾语，所以用动名词 heading。回家的人就是主句主语 they，head home 表示「回家」。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "Before",
+          "signalSide": "passage",
+          "relation": "介词 Before 后接动名词作宾语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "they fill their shopping bags",
+          "signalSide": "passage",
+          "relation": "回家的人就是主句主语 they。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:65": {
+      "blankId": "blank:paper-gaokao-2026-i:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "cheap",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "cheaper",
+      "role": null,
+      "similarityProfile": {
+        "route": "comparative",
+        "features": [
+          "than-marker",
+          "degree-modifier",
+          "semantic-comparison"
+        ]
+      },
+      "reason": "空格修饰 prices，说集市上的价格怎么样；后面的 than those found in supermarkets 拿它和超市价格比，要用比较级。significantly 修饰比较级，说明差得多，填 cheaper。",
+      "evidence": [
+        {
+          "type": "comparison",
+          "signalText": "than those found in supermarkets",
+          "signalSide": "passage",
+          "relation": "than 引出比较对象，those 指超市里的价格。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "at prices significantly",
+          "signalSide": "passage",
+          "relation": "significantly 修饰比较级，说明便宜得多。"
+        }
+      ]
+    }
+  }
+}

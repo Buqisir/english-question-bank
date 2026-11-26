@@ -1,0 +1,766 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-i:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-i:reading-c": {
+      "overview": "纽约市每年大量植树，但新研究发现，占多数的橡树和枫香树释放的异戊二烯会与车辆等排放的污染物反应生成臭氧，危害呼吸健康；研究者提醒新种树要注意树种，公园管理局则主张从改变以车为中心的生活入手，并保留老橡树。",
+      "fullTranslationZh": "按照长期以来扩大绿地的举措，纽约市每年都要种下数万棵树。树木能提供树荫、降低地表温度、吸收数量惊人的空气中的碳、清除微小的污染物，还能为野生动物提供栖息地，更不用说单纯的美景。\n\n不过，一项新研究指出，事情也可能出岔子。目前占全市树木大多数的橡树和枫香树，会产生大量名为异戊二烯的化学物质。异戊二烯本身无害，但它会迅速与车辆、建筑和工业排放的污染性氮氧化物发生反应，形成近地面臭氧——这是引发许多呼吸问题的一个主要因素。\n\n这项研究由哥伦比亚大学气候学院和其他机构的科学家开展。研究发现，如果纽约市在新种树木时沿用过去的树种格局，未来几十年曼哈顿的异戊二烯产量将增加约 140%，由此造成的夏季臭氧水平将上升多达 30%。\n\n“我们完全赞成多种树。树木带来了那么多好处，”研究合著者罗伊辛·科曼说，“但如果我们不小心，就可能让空气质量变得更糟。”\n\n公园管理局对这个问题并非一无所知。几年前，该局的一些研究人员开展过一项研究，得出的结论是城市树木确实会释放异戊二烯。“我们没有把这件事看得很严重，”公园管理局高级科学家诺文·奥扬说。她说，不应该把树木当成敌人。“只要我们重新思考以汽车为中心的生活方式，想种什么树都可以，”她说。\n\n“我们不会去砍任何高大的老橡树，”奥扬说，公园管理局也不会完全停止种植新的橡树。“你得想想，如果那样做，会失去什么。”她指出，橡树是关键物种，为本地的昆虫、鸟类和其他动物提供食物和栖息地。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+          "sourceText": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+          "displayText": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:28"
+          ],
+          "translationZh": "异戊二烯本身无害，但它会迅速与车辆、建筑和工业排放的污染性氮氧化物发生反应，形成近地面臭氧——这是引发许多呼吸问题的一个主要因素。",
+          "analysisZh": "主干是 isoprene interacts rapidly with polluting nitrogen oxides：异戊二烯迅速与污染性氮氧化物反应。句首 Harmless by itself 是形容词短语作状语，说异戊二烯单独存在时无害，和后面的“反应后生成臭氧”形成对照。released by vehicles, buildings and industry 是过去分词短语，修饰 nitrogen oxides，交代这些污染物从哪来。to form ground-level ozone 是不定式表结果，破折号后的 a major factor in many breathing problems 是 ozone 的同位语，说明臭氧的危害。树“间接”伤害健康（第 28 题）就靠这一句的先后两层。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "Harmless by itself"
+            },
+            {
+              "start": 29,
+              "end": 77,
+              "quote": "interacts rapidly with polluting nitrogen oxides"
+            },
+            {
+              "start": 154,
+              "end": 195,
+              "quote": "a major factor in many breathing problems"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+          "sourceText": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "displayText": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:29"
+          ],
+          "translationZh": "这项研究由哥伦比亚大学气候学院和其他机构的科学家开展。研究发现，如果纽约市在新种树木时沿用过去的树种格局，未来几十年曼哈顿的异戊二烯产量将增加约 140%，由此造成的夏季臭氧水平将上升多达 30%。",
+          "analysisZh": "主干是 The research … found that …。两个逗号之间的 carried out by scientists at … 是过去分词短语，插在主谓之间说明研究由谁开展。found 后的 that 从句里，先是 if 条件：the city maintains past species patterns in new plantings（新种树时沿用过去的树种格局）；再是两个结果，用 and 并列：isoprene production … will go up by about 140%，以及 resulting summer ozone levels (will go up) as much as 30%，后一个结果省略了谓语 will go up。条件句点出问题出在“照旧选树种”，第 29 题的建议正是由此反推。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 39,
+              "quote": "carried out by scientists"
+            },
+            {
+              "start": 106,
+              "end": 166,
+              "quote": "if the city maintains past species patterns in new plantings"
+            },
+            {
+              "start": 249,
+              "end": 293,
+              "quote": "resulting summer ozone levels as much as 30%"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-i:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-c:1"
+              ],
+              "start": 0,
+              "end": 88,
+              "quote": "按照长期以来扩大绿地的举措，纽约市每年都要种下数万棵树。树木能提供树荫、降低地表温度、吸收数量惊人的空气中的碳、清除微小的污染物，还能为野生动物提供栖息地，更不用说单纯的美景。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-c:2"
+              ],
+              "start": 90,
+              "end": 210,
+              "quote": "不过，一项新研究指出，事情也可能出岔子。目前占全市树木大多数的橡树和枫香树，会产生大量名为异戊二烯的化学物质。异戊二烯本身无害，但它会迅速与车辆、建筑和工业排放的污染性氮氧化物发生反应，形成近地面臭氧——这是引发许多呼吸问题的一个主要因素。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-c:3"
+              ],
+              "start": 212,
+              "end": 311,
+              "quote": "这项研究由哥伦比亚大学气候学院和其他机构的科学家开展。研究发现，如果纽约市在新种树木时沿用过去的树种格局，未来几十年曼哈顿的异戊二烯产量将增加约 140%，由此造成的夏季臭氧水平将上升多达 30%。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-c:4"
+              ],
+              "start": 313,
+              "end": 373,
+              "quote": "“我们完全赞成多种树。树木带来了那么多好处，”研究合著者罗伊辛·科曼说，“但如果我们不小心，就可能让空气质量变得更糟。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-c:5"
+              ],
+              "start": 375,
+              "end": 514,
+              "quote": "公园管理局对这个问题并非一无所知。几年前，该局的一些研究人员开展过一项研究，得出的结论是城市树木确实会释放异戊二烯。“我们没有把这件事看得很严重，”公园管理局高级科学家诺文·奥扬说。她说，不应该把树木当成敌人。“只要我们重新思考以汽车为中心的生活方式，想种什么树都可以，”她说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-c:6"
+              ],
+              "start": 516,
+              "end": 610,
+              "quote": "“我们不会去砍任何高大的老橡树，”奥扬说，公园管理局也不会完全停止种植新的橡树。“你得想想，如果那样做，会失去什么。”她指出，橡树是关键物种，为本地的昆虫、鸟类和其他动物提供食物和栖息地。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+                "start": 202,
+                "end": 398,
+                "quote": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p2",
+                "start": 55,
+                "end": 120,
+                "quote": "异戊二烯本身无害，但它会迅速与车辆、建筑和工业排放的污染性氮氧化物发生反应，形成近地面臭氧——这是引发许多呼吸问题的一个主要因素。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+                "start": 0,
+                "end": 294,
+                "quote": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p3",
+                "start": 32,
+                "end": 52,
+                "quote": "如果纽约市在新种树木时沿用过去的树种格局"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:4",
+                "start": 105,
+                "end": 165,
+                "quote": "“But if we’re not careful, we could make air quality worse.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p4",
+                "start": 36,
+                "end": 60,
+                "quote": "“但如果我们不小心，就可能让空气质量变得更糟。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+                "start": 52,
+                "end": 164,
+                "quote": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p5",
+                "start": 17,
+                "end": 58,
+                "quote": "几年前，该局的一些研究人员开展过一项研究，得出的结论是城市树木确实会释放异戊二烯。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-5",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+                "start": 309,
+                "end": 403,
+                "quote": "“We could plant any trees we want to, if we just rethink our car-centric lifestyle,” she said."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p5",
+                "start": 105,
+                "end": 139,
+                "quote": "“只要我们重新思考以汽车为中心的生活方式，想种什么树都可以，”她说。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-6",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+                "start": 202,
+                "end": 398,
+                "quote": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p2",
+                "start": 55,
+                "end": 120,
+                "quote": "异戊二烯本身无害，但它会迅速与车辆、建筑和工业排放的污染性氮氧化物发生反应，形成近地面臭氧——这是引发许多呼吸问题的一个主要因素。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-c-1"
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-c-7",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+                "start": 0,
+                "end": 294,
+                "quote": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-c-p3",
+                "start": 0,
+                "end": 99,
+                "quote": "这项研究由哥伦比亚大学气候学院和其他机构的科学家开展。研究发现，如果纽约市在新种树木时沿用过去的树种格局，未来几十年曼哈顿的异戊二烯产量将增加约 140%，由此造成的夏季臭氧水平将上升多达 30%。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-c-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写纽约植树的种种好处，再用 though 一转引出新研究发现的隐患，接着用研究数据和合著者的话说明风险，最后写公园管理局的回应：问题早已知道，办法在减少对汽车的依赖，老橡树不会砍。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+            "summary": "纽约每年种数万棵树，树木有遮荫、降温、吸碳、除污、提供栖息地等好处。",
+            "function": "交代背景，先说植树的好处。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+            "summary": "新研究指出，占多数的橡树和枫香树产生大量异戊二烯，它与污染物反应生成危害呼吸的臭氧。",
+            "function": "转折，提出问题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+            "summary": "若新种树沿用过去的树种格局，曼哈顿未来几十年异戊二烯将增约 140%，夏季臭氧增多达 30%。",
+            "function": "用研究数据说明问题的严重程度。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-c:4",
+            "summary": "合著者 Commane 赞成多种树，但提醒不小心会让空气变差。",
+            "function": "引研究者的话，表明态度。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+            "summary": "公园管理局早知树会释放异戊二烯，高级科学家 Auyeung 认为树不是敌人，反思以车为中心的生活就能随意种树。",
+            "function": "写管理部门的回应和主张。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-c:6",
+            "summary": "Auyeung 表示不会砍老橡树，也不会停种新橡树，因为橡树是为本地动物提供食物和栖息地的关键物种。",
+            "function": "补充管理部门的立场及理由，收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-i:28": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "顺着橡树和枫香树产生的物质往下读，推出它们对人有什么影响。",
+      "stemTranslationZh": "关于橡树和枫香树，这项新研究暗示了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看这种物质会引出什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们影响其他树木的生长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They affect the growth of other trees.",
+            "explanation": "原文说这两种树占全市树木的大多数（account for a majority），只是讲数量多，没说它们影响别的树生长。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们吸收的碳比预想的少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "absorb a surprising amount of airborne carbon",
+            "sourceHighlight": "a surprising amount",
+            "optionText": "They absorb less carbon than expected.",
+            "optionHighlight": "less carbon than expected",
+            "explanation": "吸碳出自开头讲树木好处的一句，说树吸收的碳多得出人意料（a surprising amount），选项改成比预想少；新研究也不是冲着吸碳来的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "quote": "They provide shade, lower surface temperatures, absorb a surprising amount of airborne carbon, remove tiny pollutants, and provide wildlife habitat along with just plain beauty.",
+              "anchor": "树木的好处"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们间接危害人们的健康。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+              "quote": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+              "anchor": "异戊二烯本身无害，反应后生成危害呼吸的臭氧"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们使当地气温缓慢升高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "lower surface temperatures",
+            "sourceHighlight": "lower",
+            "optionText": "They raise the local temperature slowly.",
+            "optionHighlight": "raise",
+            "explanation": "原文说树能降低地表温度（lower surface temperatures），选项改成升温；研究担心的是臭氧，不是气温。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "quote": "They provide shade, lower surface temperatures, absorb a surprising amount of airborne carbon, remove tiny pollutants, and provide wildlife habitat along with just plain beauty.",
+              "anchor": "树木能降温"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "oaks and sweetgums",
+          "sourceRole": "stem",
+          "targetText": "Oaks and sweetgums, which currently account for a majority of the city’s trees, produce huge amounts of a chemical substance called isoprene.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+          "bridgeZh": "这些树产出异戊二烯，危害出在它和污染物反应之后",
+          "note": "题干 oaks and sweetgums 原词出现在新研究讲树种的一句。"
+        },
+        {
+          "sourceText": "They harm people’s health indirectly.",
+          "sourceRole": "correctOption",
+          "targetText": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "选项的两层意思各有着落：“间接”是因为异戊二烯本身无害（Harmless by itself），要先和车辆、建筑、工业排出的氮氧化物反应生成臭氧；“危害健康”是臭氧会引发呼吸问题（breathing problems）。树并不直接伤人，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:29": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把 Commane 的提醒和研究发现的条件连起来，推出她会给出的建议。",
+      "stemTranslationZh": "根据他们的研究，科曼可能会提出以下哪项建议？",
+      "locateBy": "stem",
+      "locateFindZh": "看 But 后，再回前段找“不小心”指什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "砍掉产生异戊二烯的树。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "“We’re all for planting more trees.",
+            "sourceHighlight": "all for planting more trees",
+            "optionText": "Cutting down the isoprene-producing trees.",
+            "optionHighlight": "Cutting down",
+            "explanation": "Commane 开口就说完全赞成多种树（all for planting more trees），砍树和她的态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:4",
+              "quote": "“We’re all for planting more trees.",
+              "anchor": "赞成多种树"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "暂停植树几十年。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "decades",
+            "optionText": "decades",
+            "matchType": "exact",
+            "relationNote": "decades 借自研究的预测 in coming decades（未来几十年），说的是异戊二烯会增多；Commane 赞成多种树，没说停种。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "quote": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+              "anchor": "未来几十年的预测"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "改变新种树木的树种。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "quote": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+              "anchor": "新种树若沿用过去的树种格局"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:4",
+              "quote": "“But if we’re not careful, we could make air quality worse.”",
+              "anchor": "不小心会让空气变差"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "清除现有树木释放的异戊二烯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "if the city maintains past species patterns in new plantings",
+            "sourceEntity": "new plantings",
+            "optionText": "Removing isoprene released by existing trees.",
+            "optionEntity": "existing trees",
+            "explanation": "研究担心的是新种的树（new plantings）照旧选树种会多出异戊二烯，没谈现有的树，也没说要清除已释放的异戊二烯。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "quote": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+              "anchor": "研究针对新种树"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Commane",
+          "sourceRole": "stem",
+          "targetText": "They bring so many good things,” said study coauthor Róisín Commane.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "if the city maintains past species patterns in new plantings",
+          "bridgeZh": "But 后她提醒不小心会伤空气，不小心指照旧种老树种",
+          "note": "题干 Commane 原词出现在她讲话后的署名处。"
+        },
+        {
+          "sourceText": "Changing the species of trees in new plantings.",
+          "sourceRole": "correctOption",
+          "targetText": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项是从研究的条件句反推出来的建议：研究说新种树若沿用过去的树种格局（maintains past species patterns in new plantings），异戊二烯会增约 140%；Commane 要人小心的正是这一点，反过来就是新种树换树种，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:30": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借公园管理局早年研究的结论，推出画线短语 oblivious to 的意思。",
+      "stemTranslationZh": "第 5 段中画线短语“oblivious to”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看该局早就做过什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对……坦诚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Honest about.",
+            "explanation": "放进去成了“公园管理局对这个问题并非坦诚”，可后文是该局自己讲出早年的研究结论，没有隐瞒什么。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "没有意识到……。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "quote": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene.",
+              "anchor": "几年前就研究出树会释放异戊二烯"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "与……有关。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene.",
+            "sourceHighlight": "some of its researchers",
+            "optionText": "Related to.",
+            "optionHighlight": "Related to",
+            "explanation": "放进去成了“公园管理局和这个问题无关”，可接着写的正是该局的研究人员（some of its researchers）早就研究过这件事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "quote": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene.",
+              "anchor": "该局自己做过研究"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对……乐观。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Optimistic about.",
+            "explanation": "放进去成了“公园管理局对这个问题并不乐观”，可接下来讲的是该局早有研究结论，说的是知不知道，不是乐不乐观。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "oblivious to",
+          "sourceRole": "stem",
+          "targetText": "The Parks Department is not oblivious to the issue.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "concluded that city trees did release isoprene",
+          "bridgeZh": "该局的研究人员几年前就查出树会放异戊二烯",
+          "note": "画线短语 oblivious to 原词在公园管理局一段的开头。"
+        },
+        {
+          "sourceText": "Unaware of.",
+          "sourceRole": "correctOption",
+          "targetText": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "该局几年前就研究出城市树木确实释放异戊二烯（did release isoprene），所以 not oblivious to 必须是“早就知道”，oblivious to 本身就是“没意识到”。放回去：公园管理局并非没意识到这个问题，它自己的研究早有结论，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Auyeung 的条件句，推出她会主张人们怎样做。",
+      "stemTranslationZh": "奥扬可能会提倡什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读她的话，看 if 后的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "减少日常生活中的汽车使用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "quote": "“We could plant any trees we want to, if we just rethink our car-centric lifestyle,” she said.",
+              "anchor": "反思以车为中心的生活方式"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为动物提供新的栖息地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "habitat",
+            "optionText": "habitats",
+            "matchType": "wordFamily",
+            "relationNote": "habitats 借自 habitat：Auyeung 说橡树为本地鸟兽提供食物和栖息地（food and habitat），这是不砍老橡树的理由，不是要另建新栖息地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:6",
+              "quote": "Oaks are keystone species, she pointed out, providing food and habitat for native insects, birds and other animals.",
+              "anchor": "橡树提供栖息地"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "控制人口增长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Controlling population growth.",
+            "explanation": "她要人反思的是以车为中心的生活方式（car-centric lifestyle），不是人太多；全文没谈人口增长。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对这个问题做更多研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "researchers",
+            "optionText": "research",
+            "matchType": "wordFamily",
+            "relationNote": "research 借自 researchers：该局几年前就有研究人员查过这件事，Auyeung 给的办法是改变生活方式，没说要再做研究。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "quote": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene.",
+              "anchor": "几年前的研究"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Auyeung",
+          "sourceRole": "stem",
+          "targetText": "“We didn’t make a big deal of that,” said Novem Auyeung, a Parks Department senior scientist.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "if we just rethink our car-centric lifestyle",
+          "bridgeZh": "她接着替树说话，把矛头转向人的生活方式",
+          "note": "题干 Auyeung 原词出现在她第一次讲话后的署名处。"
+        },
+        {
+          "sourceText": "Reducing car use in daily life.",
+          "sourceRole": "correctOption",
+          "targetText": "“We could plant any trees we want to, if we just rethink our car-centric lifestyle,” she said.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“少用车”是从她的条件句推出来的：只要反思以车为中心的生活方式（rethink our car-centric lifestyle），想种什么树都行。异戊二烯要和车辆排放的氮氧化物反应才生成臭氧，少开车就断了这一环，所以她会提倡减少用车，选 A。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1774 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-i:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-i:cloze": {
+      "overview": "作者离开俄亥俄州的小镇到外地求学，起初因同学的好奇成了稀罕人物。临近大学三年级结束，他读懂了家乡的慢节奏与邻里情，也更盼望回去。",
+      "fullTranslationZh": "我在俄亥俄州东北部的一座小镇长大。到宾夕法尼亚州中部上学后，我很快意识到，大家对俄亥俄州知之甚少。虽然我家离学校只有三个半小时的路程，但大多数同学觉得俄亥俄州完全是另一个世界。“你得坐飞机回家吗？你家住在农场吗？”这样的问题一个接一个。在他们眼里，我是个稀罕人物。\n\n年纪越大，我就越感激自己的小镇出身。当然，我和朋友们以前也爱抱怨，待在这个偏远的地方有多无聊。然而，大学三年级快读完时，我确信，正是离开了小镇，我才懂得我们其实有多爱它，也明白了我们究竟爱它什么。\n\n那里生活节奏慢，人们看重彼此间的联系。你和邻居的交往远不止聊几句，很多时候，他们就像你家里人一样。这种生活方式很大程度上离不开户外活动和对小镇方方面面的熟悉。用心感受当下，留意周围环境，是当地文化很重要的一部分。\n\n大学生活一天天过去，我越来越盼着回到自己的小镇。我感激自己成长中的这段经历，也知道，无论下一次历险把我带到哪里，我都相信，小镇留给我的东西会指引我走对路。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2026-i:cloze:2:2",
+          "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+          "sourceText": "Sure, my friends and I loved to __46__ about how bored we were in the middle of nowhere; __47__, as I finish up my junior year of college, I’m convinced that it took __48__ our small town to realize how much we actually loved it and what exactly we loved about it.",
+          "displayText": "Sure, my friends and I loved to complain about how bored we were in the middle of nowhere; however, as I finish up my junior year of college, I’m convinced that it took leaving our small town to realize how much we actually loved it and what exactly we loved about it.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:46",
+            "question:paper-gaokao-2026-i:47",
+            "question:paper-gaokao-2026-i:48"
+          ],
+          "translationZh": "当然，我和朋友们以前也爱抱怨，待在这个偏远的地方有多无聊。然而，大学三年级快读完时，我确信，正是离开了小镇，我才懂得我们其实有多爱它，也明白了我们究竟爱它什么。",
+          "analysisZh": "分号前讲作者和朋友以前爱抱怨小镇无聊，分号后主干是 I’m convinced，讲作者现在确信什么。as 引出大学三年级快结束这一时间背景。that 从句写明他确信的事：离开小镇后才明白两个问题，即他们有多爱它，以及究竟爱它什么。",
+          "underlineRanges": [
+            {
+              "start": 91,
+              "end": 98,
+              "quote": "however"
+            },
+            {
+              "start": 142,
+              "end": 191,
+              "quote": "I’m convinced that it took leaving our small town"
+            },
+            {
+              "start": 203,
+              "end": 267,
+              "quote": "how much we actually loved it and what exactly we loved about it"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2026-i:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2026-i:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:cloze:1"
+              ],
+              "start": 0,
+              "end": 132,
+              "quote": "我在俄亥俄州东北部的一座小镇长大。到宾夕法尼亚州中部上学后，我很快意识到，大家对俄亥俄州知之甚少。虽然我家离学校只有三个半小时的路程，但大多数同学觉得俄亥俄州完全是另一个世界。“你得坐飞机回家吗？你家住在农场吗？”这样的问题一个接一个。在他们眼里，我是个稀罕人物。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:cloze:2"
+              ],
+              "start": 134,
+              "end": 232,
+              "quote": "年纪越大，我就越感激自己的小镇出身。当然，我和朋友们以前也爱抱怨，待在这个偏远的地方有多无聊。然而，大学三年级快读完时，我确信，正是离开了小镇，我才懂得我们其实有多爱它，也明白了我们究竟爱它什么。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:cloze:3"
+              ],
+              "start": 234,
+              "end": 340,
+              "quote": "那里生活节奏慢，人们看重彼此间的联系。你和邻居的交往远不止聊几句，很多时候，他们就像你家里人一样。这种生活方式很大程度上离不开户外活动和对小镇方方面面的熟悉。用心感受当下，留意周围环境，是当地文化很重要的一部分。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:cloze:4"
+              ],
+              "start": 342,
+              "end": 419,
+              "quote": "大学生活一天天过去，我越来越盼着回到自己的小镇。我感激自己成长中的这段经历，也知道，无论下一次历险把我带到哪里，我都相信，小镇留给我的东西会指引我走对路。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:cloze:1",
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+            "text": "I grew up in a little town in northeast Ohio. The realization of how little people knew about Ohio came quickly after I went to school in central Pennsylvania. Though I lived only three and a half hours away, most of my classmates thought of Ohio as a whole different world. “Do you have to fly home? Do you live on a farm?” The questions were never-ending. I was a novelty in their eyes."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:cloze:2",
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+            "text": "As I grow older, I’m more and more thankful for my small town roots. Sure, my friends and I loved to complain about how bored we were in the middle of nowhere; however, as I finish up my junior year of college, I’m convinced that it took leaving our small town to realize how much we actually loved it and what exactly we loved about it."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:cloze:3",
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+            "text": "The pace of life is slow and people value connecting to each other. You do more than just talk to your neighbors – in a lot of cases, they’re truly an extension of your family. Much of this lifestyle centers around being outside and knowing the ins and outs of the town; being present and mindful of your surroundings is a critical part of the culture."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-i:cloze:4",
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+            "text": "As I move through my college years, I look forward to the visits to my little hometown. I am grateful for the experience that I had growing up and know that wherever my next adventure takes me, I can trust my small town roots to lead me in the right direction."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 57,
+                "end": 93,
+                "quote": "of how little people knew about Ohio"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 31,
+                "end": 36,
+                "quote": "很快意识到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:41"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 50,
+                "end": 61,
+                "quote": "realization"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 31,
+                "end": 36,
+                "quote": "很快意识到"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 177,
+                "end": 204,
+                "quote": "three and a half hours away"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 56,
+                "end": 63,
+                "quote": "只有三个半小时"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:42"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 175,
+                "end": 179,
+                "quote": "only"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 56,
+                "end": 63,
+                "quote": "只有三个半小时"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 273,
+                "end": 297,
+                "quote": "Do you have to fly home?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 107,
+                "end": 112,
+                "quote": "这样的问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:43"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 329,
+                "end": 338,
+                "quote": "questions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 107,
+                "end": 112,
+                "quote": "这样的问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 247,
+                "end": 270,
+                "quote": "a whole different world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 127,
+                "end": 131,
+                "quote": "稀罕人物"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:44"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+                "start": 366,
+                "end": 373,
+                "quote": "novelty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:1",
+                "start": 127,
+                "end": 131,
+                "quote": "稀罕人物"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 42,
+                "end": 65,
+                "quote": "for my small town roots"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 8,
+                "end": 17,
+                "quote": "感激自己的小镇出身"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:45"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 35,
+                "end": 43,
+                "quote": "thankful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 8,
+                "end": 17,
+                "quote": "感激自己的小镇出身"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 106,
+                "end": 129,
+                "quote": "about how bored we were"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 30,
+                "end": 32,
+                "quote": "抱怨"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:46"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 101,
+                "end": 109,
+                "quote": "complain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 30,
+                "end": 32,
+                "quote": "抱怨"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 266,
+                "end": 295,
+                "quote": "how much we actually loved it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 47,
+                "end": 49,
+                "quote": "然而"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:47"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 160,
+                "end": 167,
+                "quote": "however"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 47,
+                "end": 49,
+                "quote": "然而"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 179,
+                "end": 204,
+                "quote": "my junior year of college"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 66,
+                "end": 71,
+                "quote": "离开了小镇"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:48"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 238,
+                "end": 245,
+                "quote": "leaving"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 66,
+                "end": 71,
+                "quote": "离开了小镇"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 43,
+                "end": 67,
+                "quote": "connecting to each other"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 10,
+                "end": 12,
+                "quote": "看重"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:49"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 36,
+                "end": 41,
+                "quote": "value"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 10,
+                "end": 12,
+                "quote": "看重"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 159,
+                "end": 173,
+                "quote": "of your family"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 40,
+                "end": 48,
+                "quote": "就像你家里人一样"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:50"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 151,
+                "end": 160,
+                "quote": "extension"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 40,
+                "end": 48,
+                "quote": "就像你家里人一样"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 195,
+                "end": 223,
+                "quote": "centers around being outside"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 49,
+                "end": 55,
+                "quote": "这种生活方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:51"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 190,
+                "end": 199,
+                "quote": "lifestyle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 49,
+                "end": 55,
+                "quote": "这种生活方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 236,
+                "end": 264,
+                "quote": "the ins and outs of the town"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 88,
+                "end": 92,
+                "quote": "周围环境"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:52"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+                "start": 305,
+                "end": 317,
+                "quote": "surroundings"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:3",
+                "start": 88,
+                "end": 92,
+                "quote": "周围环境"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+                "start": 45,
+                "end": 77,
+                "quote": "the visits to my little hometown"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+                "start": 11,
+                "end": 18,
+                "quote": "越来越盼着回到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:53"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+                "start": 38,
+                "end": 53,
+                "quote": "look forward to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+                "start": 11,
+                "end": 18,
+                "quote": "越来越盼着回到"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+                "start": 108,
+                "end": 129,
+                "quote": "that I had growing up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+                "start": 29,
+                "end": 37,
+                "quote": "成长中的这段经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:54"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+                "start": 110,
+                "end": 120,
+                "quote": "experience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+                "start": 29,
+                "end": 37,
+                "quote": "成长中的这段经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-i:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+                "start": 214,
+                "end": 247,
+                "quote": "to lead me in the right direction"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+                "start": 57,
+                "end": 76,
+                "quote": "都相信，小镇留给我的东西会指引我走对路"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-i:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:55"
+            ],
+            "blankId": "blank:paper-gaokao-2026-i:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+                "start": 200,
+                "end": 205,
+                "quote": "trust"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:4",
+                "start": 57,
+                "end": 76,
+                "quote": "都相信，小镇留给我的东西会指引我走对路"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2026-i:cloze:2:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:46",
+              "question:paper-gaokao-2026-i:47",
+              "question:paper-gaokao-2026-i:48"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2026-i:cloze:2:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+                "start": 69,
+                "end": 337,
+                "quote": "Sure, my friends and I loved to complain about how bored we were in the middle of nowhere; however, as I finish up my junior year of college, I’m convinced that it took leaving our small town to realize how much we actually loved it and what exactly we loved about it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2026-i:cloze:2",
+                "start": 18,
+                "end": 98,
+                "quote": "当然，我和朋友们以前也爱抱怨，待在这个偏远的地方有多无聊。然而，大学三年级快读完时，我确信，正是离开了小镇，我才懂得我们其实有多爱它，也明白了我们究竟爱它什么。"
+              }
+            ]
+          }
+        ]
+      },
+      "mainLine": {
+        "theme": {
+          "text": "离开小镇才懂得自己有多爱它，在小镇长大的根会 lead me in the right direction。",
+          "quote": "lead me in the right direction"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
+            "text": "作者到外州上学，发现同学对俄亥俄所知甚少，自己成了稀罕人。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+            "text": "年纪渐长，作者从当年嫌小镇无聊转为感激，离开后才懂得爱它。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:3",
+            "text": "作者讲爱小镇什么：节奏慢，邻里亲如家人，人们留心身边。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+            "text": "作者盼着回乡，感激成长经历，相信小镇的根会为他指路。"
+          }
+        ],
+        "emotion": "意外→嫌小镇无聊→感激→盼望回乡"
+      },
+      "affectiveArc": "意外→嫌小镇无聊→感激→盼望回乡"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2026-i:41": {
+      "blankId": "blank:paper-gaokao-2026-i:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "开篇写作者到外地上学后的第一个发现，要一个表示「意识到」的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 of how little people knew about Ohio 是察觉到的内容，came quickly after I went to school 说明到校后很快就察觉了。",
+        "quotes": [
+          "of how little people knew about Ohio",
+          "came quickly after I went to school"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "意识到，认识到",
+        "reason": "开篇写作者到外地上学后的第一个发现，要一个表示「意识到」的名词。名词看搭配：空后 of how little people knew about Ohio 是察觉到的内容，came quickly after I went to school 说明到校后很快就察觉了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fantasy",
+          "meaning": "幻想；how little people knew 是作者到校后亲眼碰到的事实，不是凭空想象。",
+          "quote": "how little people knew"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "prejudice",
+          "meaning": "偏见；后面 how little people knew about Ohio 说的是同学了解太少，作者是察觉这点，不是抱有成见。",
+          "quote": "how little people knew about Ohio"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "expectation",
+          "meaning": "预期；came quickly after I went to school 说明是到校后才发现的，不是事先的预想。",
+          "quote": "came quickly after I went to school"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of how little people knew about Ohio",
+          "signalSide": "context-after",
+          "targetText": "realization of how little people knew about Ohio",
+          "relation": "中文：of 后面是察觉到的内容。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "came quickly after I went to school",
+          "signalSide": "context-after",
+          "relation": "中文：到校后很快「来了」这个认识。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:42": {
+      "blankId": "blank:paper-gaokao-2026-i:42",
+      "blankNo": 42,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "离家的距离和「另一个世界」形成反差，要一个强调距离很近的词。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "Though 引出让步：离家 three and a half hours away，同学却当成 a whole different world，要强调路程短。",
+        "quotes": [
+          "Though",
+          "three and a half hours away",
+          "a whole different world"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "仅仅，只",
+        "reason": "离家的距离和「另一个世界」形成反差，要一个强调距离很近的词。副词看语境义：Though 引出让步：离家 three and a half hours away，同学却当成 a whole different world，要强调路程短。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "indeed",
+          "meaning": "确实；indeed 只是确认有这段距离，强调不出 three and a half hours away 其实很近。",
+          "quote": "three and a half hours away"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "still",
+          "meaning": "仍然；前文说的是作者 grew up 的地方离学校有多远，谈不上距离「仍然」没变。",
+          "quote": "grew up"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "even",
+          "meaning": "甚至；even 会把路程说成远得出奇，和 Though 后面 a whole different world 的反差对不上。",
+          "quote": "a whole different world"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "three and a half hours away",
+          "signalSide": "context-after",
+          "targetText": "only three and a half hours away",
+          "relation": "中文：副词修饰后面的路程，强调只有这么远。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Though",
+          "signalSide": "context-before",
+          "relation": "中文：Though 让步，前半句要说近，后半句才转出「另一个世界」。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:43": {
+      "blankId": "blank:paper-gaokao-2026-i:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "detail",
+      "context": "前面连着两个问句，这里要一个名词把它们概括起来。",
+      "find": {
+        "check": "echo",
+        "text": "前面 Do you have to fly home? 和 Do you live on a farm? 都是同学的提问，用 questions 概括。",
+        "quotes": [
+          "Do you have to fly home?",
+          "Do you live on a farm?"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "问题，提问",
+        "reason": "前面连着两个问句，这里要一个名词把它们概括起来。名词看复现：前面 Do you have to fly home? 和 Do you live on a farm? 都是同学的提问，用 questions 概括。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tests",
+          "meaning": "测试；Do you live on a farm? 是同学好奇打听，不是考作者的测试。",
+          "quote": "Do you live on a farm?"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "games",
+          "meaning": "游戏；Do you have to fly home? 是在打听作者怎么回家，不是做游戏。",
+          "quote": "Do you have to fly home?"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "debates",
+          "meaning": "辩论；同学只是一句句问 Do you live on a farm?，双方没有各执一词地争论。",
+          "quote": "Do you live on a farm?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Do you have to fly home?",
+          "signalSide": "context-before",
+          "relation": "中文：前面的问句被概括为「这些问题」。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "were never-ending",
+          "signalSide": "context-after",
+          "targetText": "questions were never-ending",
+          "relation": "中文：问题一个接一个，没完没了。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:44": {
+      "blankId": "blank:paper-gaokao-2026-i:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "main",
+      "context": "同学把俄亥俄当成另一个世界、问个不停，这里概括作者在他们眼中是什么人。",
+      "find": {
+        "check": "echo",
+        "text": "前面同学把俄亥俄看成 a whole different world，又问个 never-ending，作者在 their eyes 是个新鲜人物。",
+        "quotes": [
+          "a whole different world",
+          "never-ending",
+          "their eyes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "新奇的人或事",
+        "meaning": "稀罕人物",
+        "reason": "同学把俄亥俄当成另一个世界、问个不停，这里概括作者在他们眼中是什么人。名词看复现：前面同学把俄亥俄看成 a whole different world，又问个 never-ending，作者在 their eyes 是个新鲜人物。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "success",
+          "meaning": "成功者；同学问的是 Do you live on a farm? 这类好奇的话，说的是作者来自哪里，不是有没有成就。",
+          "quote": "Do you live on a farm?"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "victim",
+          "meaning": "受害者；同学只是好奇地问 Do you have to fly home?，作者并没有被伤害。",
+          "quote": "Do you have to fly home?"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "problem",
+          "meaning": "麻烦；同学觉得俄亥俄是 a whole different world，是对作者好奇，不是嫌他麻烦。",
+          "quote": "a whole different world"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "a whole different world",
+          "signalSide": "context-before",
+          "relation": "中文：来自「另一个世界」的人，在别人眼里很新奇。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "in their eyes",
+          "signalSide": "context-after",
+          "targetText": "a novelty in their eyes",
+          "relation": "中文：在他们眼里是个稀罕人物。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:45": {
+      "blankId": "blank:paper-gaokao-2026-i:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "main",
+      "context": "年纪渐长，作者对小镇出身由抱怨转为珍惜，这是情感的转折点，要正面的情感词。",
+      "find": {
+        "check": "affect",
+        "text": "后面 how much we actually loved it，末段又说 I am grateful for，都是正面感激，还能接 for。",
+        "quotes": [
+          "how much we actually loved it",
+          "I am grateful for"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "感激的",
+        "reason": "年纪渐长，作者对小镇出身由抱怨转为珍惜，这是情感的转折点，要正面的情感词。形容词看情感：后面 how much we actually loved it，末段又说 I am grateful for，都是正面感激，还能接 for。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hopeful",
+          "meaning": "抱有希望的；my small town roots 是已有的出身，谈不上盼望，末段说的是 I am grateful for。",
+          "quote": "I am grateful for"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suitable",
+          "meaning": "合适的；这里讲的是 how much we actually loved it 这份感情，不是评价出身是否适合。",
+          "quote": "how much we actually loved it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reliable",
+          "meaning": "可靠的；说作者对出身「可靠」讲不通，人怎么样才可靠与后文 how much we actually loved it 的感情不搭。",
+          "quote": "how much we actually loved it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for my small town roots",
+          "signalSide": "context-after",
+          "targetText": "thankful for my small town roots",
+          "relation": "中文：be thankful for 对……心怀感激。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I am grateful for",
+          "signalSide": "context-after",
+          "relation": "中文：末段的 grateful 与这里同向。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2026-i:46": {
+      "blankId": "blank:paper-gaokao-2026-i:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者坦白自己和朋友当年对小镇的不满，要一个「发牢骚」类的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 about how bored we were in the middle of nowhere，嫌地方无聊又接 about，是 complain about。",
+        "quotes": [
+          "about how bored we were in the middle of nowhere"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "抱怨",
+        "reason": "作者坦白自己和朋友当年对小镇的不满，要一个「发牢骚」类的动词。动词看搭配：空后 about how bored we were in the middle of nowhere，嫌地方无聊又接 about，是 complain about。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dream",
+          "meaning": "梦想；dream about 接盼着的事，而 how bored we were 是不满，不是梦想。",
+          "quote": "how bored we were"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "lie",
+          "meaning": "说谎；Sure 承认的是当年确实 how bored we were，不是在撒谎。",
+          "quote": "how bored we were"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hear",
+          "meaning": "听说；觉得无聊的是 my friends and I 自己，不是从别人那里听来的。",
+          "quote": "my friends and I"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "about how bored we were",
+          "signalSide": "context-after",
+          "targetText": "complain about how bored we were",
+          "relation": "中文：complain about 抱怨某事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "in the middle of nowhere",
+          "signalSide": "context-after",
+          "relation": "中文：偏僻、无聊，是负面的感受。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:47": {
+      "blankId": "blank:paper-gaokao-2026-i:47",
+      "blankNo": 47,
+      "pos": "adverb",
+      "role": "main",
+      "context": "分号前是当年的抱怨，分号后是现在确信爱它，态度翻了过来，要一个转折词。",
+      "find": {
+        "check": "logic",
+        "text": "分号前 loved to complain，分号后 how much we actually loved it，从嫌弃到喜爱，前后相反，用转折。",
+        "quotes": [
+          "loved to",
+          "how much we actually loved it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "然而",
+        "reason": "分号前是当年的抱怨，分号后是现在确信爱它，态度翻了过来，要一个转折词。副词看逻辑：分号前 loved to complain，分号后 how much we actually loved it，从嫌弃到喜爱，前后相反，用转折。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "therefore",
+          "meaning": "因此；当年嫌 how bored we were 推不出现在爱小镇，前后不是因果。",
+          "quote": "how bored we were"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "instead",
+          "meaning": "反而，代替；前面 loved to 抱怨是承认过的事，后半句不是拿别的做法取代它，而是态度转变。",
+          "quote": "loved to"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "otherwise",
+          "meaning": "否则；otherwise 引出相反条件下的后果，放在 how bored we were 和 I’m convinced 之间接不上。",
+          "quote": "I’m convinced"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "how much we actually loved it",
+          "signalSide": "context-after",
+          "relation": "中文：现在的爱和当年的抱怨相反。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "how bored we were",
+          "signalSide": "context-before",
+          "relation": "中文：分号前的态度是嫌无聊。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:48": {
+      "blankId": "blank:paper-gaokao-2026-i:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者要说正是哪件事让他看清自己爱小镇，这是全文点题的动作，要一个「离开」义的动词。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "首段 I went to school in central Pennsylvania，此刻又在 finish up my junior year of college，正是离开小镇。",
+        "quotes": [
+          "I went to school in central Pennsylvania",
+          "finish up my junior year of college"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "离开",
+        "reason": "作者要说正是哪件事让他看清自己爱小镇，这是全文点题的动作，要一个「离开」义的动词。动词看语境义：首段 I went to school in central Pennsylvania，此刻又在 finish up my junior year of college，正是离开小镇。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "touring",
+          "meaning": "游览；作者是 went to school in central Pennsylvania，去外地上学，不是在小镇里观光。",
+          "quote": "went to school in central Pennsylvania"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "changing",
+          "meaning": "改变；作者没有改造小镇，下段写的 The pace of life is slow 还是小镇原样。",
+          "quote": "The pace of life is slow"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "protecting",
+          "meaning": "保护；作者正在外地 finish up my junior year of college，看清爱小镇靠的是离开，不是守护。",
+          "quote": "finish up my junior year of college"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "our small town",
+          "signalSide": "context-after",
+          "targetText": "leaving our small town",
+          "relation": "中文：动作的对象是小镇，离开小镇。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my junior year of college",
+          "signalSide": "context-before",
+          "relation": "中文：作者在外地读大学，人已离开小镇。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:49": {
+      "blankId": "blank:paper-gaokao-2026-i:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "这里开始讲小镇可爱在哪里，要说人们对彼此交往持看重的态度。",
+      "find": {
+        "check": "affect",
+        "text": "后句 You do more than just talk to your neighbors，邻居亲如一家，可见人们看重交往，用 value。",
+        "quotes": [
+          "You do more than just talk to your neighbors"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "重视",
+        "reason": "这里开始讲小镇可爱在哪里，要说人们对彼此交往持看重的态度。动词看情感：后句 You do more than just talk to your neighbors，邻居亲如一家，可见人们看重交往，用 value。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "admit",
+          "meaning": "承认；connecting to each other 是好事，不是要认下的错，后面写的是邻居亲如 family。",
+          "quote": "family"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fear",
+          "meaning": "害怕；后面说 You do more than just talk to your neighbors，人们乐于交往，不是怕交往。",
+          "quote": "You do more than just talk to your neighbors"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "remember",
+          "meaning": "记得；The pace of life is slow 一句是现在时，讲小镇如今的样子，不是回忆从前的交往。",
+          "quote": "The pace of life is slow"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "connecting to each other",
+          "signalSide": "context-after",
+          "targetText": "value connecting to each other",
+          "relation": "中文：value doing 重视做某事，宾语是彼此往来。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "more than just talk to your neighbors",
+          "signalSide": "context-after",
+          "relation": "中文：邻里关系亲密，态度是正面的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:50": {
+      "blankId": "blank:paper-gaokao-2026-i:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "detail",
+      "context": "邻居不只是聊天的对象，要说他们和你家是什么关系，像家的一部分。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "空前 more than just talk to your neighbors，空后 of your family，邻居亲到像家里人，是家庭的延伸。",
+        "quotes": [
+          "more than just talk to your neighbors",
+          "of your family"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "延伸部分",
+        "meaning": "家庭的一部分",
+        "reason": "邻居不只是聊天的对象，要说他们和你家是什么关系，像家的一部分。名词看语境义：空前 more than just talk to your neighbors，空后 of your family，邻居亲到像家里人，是家庭的延伸。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "advantage",
+          "meaning": "优势；邻居成了「家的优势」说不通，前面 more than just talk to your neighbors 讲的是亲近程度。",
+          "quote": "more than just talk to your neighbors"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "example",
+          "meaning": "例子；邻居不是家庭的一个例子，truly 强调的是他们真像家里人。",
+          "quote": "truly"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honor",
+          "meaning": "荣耀；这里讲的是 your neighbors 和你多亲近，不是说邻居给家里争光。",
+          "quote": "your neighbors"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of your family",
+          "signalSide": "context-after",
+          "targetText": "an extension of your family",
+          "relation": "中文：an extension of your family 家庭的延伸。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "more than just talk to your neighbors",
+          "signalSide": "context-before",
+          "relation": "中文：和邻居不只是聊几句，关系很近。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:51": {
+      "blankId": "blank:paper-gaokao-2026-i:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "this 把前面节奏慢、邻里亲近概括成一个名词，说的是小镇的生活方式。",
+      "find": {
+        "check": "echo",
+        "text": "this 回指前面 The pace of life is slow 和邻里往来，后面 being outside 也是日常生活，概括为 lifestyle。",
+        "quotes": [
+          "this",
+          "The pace of life is slow",
+          "being outside"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "生活方式",
+        "reason": "this 把前面节奏慢、邻里亲近概括成一个名词，说的是小镇的生活方式。名词看复现：this 回指前面 The pace of life is slow 和邻里往来，后面 being outside 也是日常生活，概括为 lifestyle。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "landscape",
+          "meaning": "风景；this 回指的是 connecting to each other 这种人的生活，不是景色。",
+          "quote": "connecting to each other"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "procedure",
+          "meaning": "程序，步骤；The pace of life is slow 说的是日常过日子，不是办事步骤。",
+          "quote": "The pace of life is slow"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "personality",
+          "meaning": "性格；this 概括的是 The pace of life 和户外活动这些全镇人的日常，不是某人的性格。",
+          "quote": "The pace of life"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "The pace of life is slow",
+          "signalSide": "context-before",
+          "relation": "中文：this 回指的生活节奏和邻里往来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "centers around being outside",
+          "signalSide": "context-after",
+          "targetText": "lifestyle centers around being outside",
+          "relation": "中文：这种生活方式以户外活动为中心。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:52": {
+      "blankId": "blank:paper-gaokao-2026-i:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "detail",
+      "context": "being present and mindful of 后面要说留心什么，指身边的环境。",
+      "find": {
+        "check": "echo",
+        "text": "前半句 being outside and knowing the ins and outs of the town，讲熟悉户外和小镇，留心的就是周围环境。",
+        "quotes": [
+          "being outside and knowing the ins and outs of the town"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "周围环境",
+        "reason": "being present and mindful of 后面要说留心什么，指身边的环境。名词看复现：前半句 being outside and knowing the ins and outs of the town，讲熟悉户外和小镇，留心的就是周围环境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "findings",
+          "meaning": "研究结果；前文是 knowing the ins and outs of the town，讲熟悉小镇，不是研究成果。",
+          "quote": "knowing the ins and outs of the town"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "belongings",
+          "meaning": "随身物品；前文是 being outside 和熟悉小镇，留心的是周围，不是自己的东西。",
+          "quote": "being outside"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "greetings",
+          "meaning": "问候；前面讲 the ins and outs of the town，留心的是小镇环境，不是打招呼。",
+          "quote": "the ins and outs of the town"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "mindful of your",
+          "signalSide": "context-before",
+          "targetText": "mindful of your surroundings",
+          "relation": "中文：mindful of 留心……，后接要留心的对象。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the ins and outs of the town",
+          "signalSide": "context-before",
+          "relation": "中文：熟悉小镇里外，对应留心周围环境。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:53": {
+      "blankId": "blank:paper-gaokao-2026-i:53",
+      "blankNo": 53,
+      "pos": "phrase",
+      "role": "main",
+      "context": "大学几年过去，作者对回小镇探望的态度，承接前文的爱，要一个「盼着」的意思。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前段 how much we actually loved it，后句 I am grateful for，作者盼着 the visits to my little hometown。",
+        "quotes": [
+          "how much we actually loved it",
+          "I am grateful for",
+          "the visits to my little hometown"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "盼望，期待",
+        "reason": "大学几年过去，作者对回小镇探望的态度，承接前文的爱，要一个「盼着」的意思。词组看语境义：前段 how much we actually loved it，后句 I am grateful for，作者盼着 the visits to my little hometown。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "give up",
+          "meaning": "放弃；后句作者说 I am grateful for 小镇给他的一切，不会放弃回乡探望。",
+          "quote": "I am grateful for"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "put off",
+          "meaning": "推迟；作者在讲 how much we actually loved it，推迟回乡和这份爱相反。",
+          "quote": "how much we actually loved it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "face up to",
+          "meaning": "勇敢面对；回 my little hometown 是作者爱做的事，不是要硬着头皮面对的难事。",
+          "quote": "my little hometown"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the visits to my little hometown",
+          "signalSide": "context-after",
+          "targetText": "look forward to the visits",
+          "relation": "中文：盼着回小镇探望。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "look",
+          "signalSide": "option",
+          "targetText": "look forward to",
+          "relation": "中文：look forward to 向前看，即盼望。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2026-i:54": {
+      "blankId": "blank:paper-gaokao-2026-i:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者感激的是在小镇成长时拥有的东西，要一个概括这段成长的名词。",
+      "find": {
+        "check": "echo",
+        "text": "首句 I grew up in a little town，这里 that I had growing up 呼应它，在小镇长大的整段日子就是经历。",
+        "quotes": [
+          "I grew up in a little town",
+          "that I had growing up"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "经历",
+        "reason": "作者感激的是在小镇成长时拥有的东西，要一个概括这段成长的名词。名词看复现：首句 I grew up in a little town，这里 that I had growing up 呼应它，在小镇长大的整段日子就是经历。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confidence",
+          "meaning": "自信；后面说靠 my small town roots 指路，感激的是整段出身，不只是一份自信。",
+          "quote": "my small town roots"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reputation",
+          "meaning": "名声；作者感激的是在小镇长大的日子 that I had growing up，不是自己的名气。",
+          "quote": "that I had growing up"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "opportunity",
+          "meaning": "机会；前文写的 The pace of life is slow 是长年的小镇生活，不是某一次机会。",
+          "quote": "The pace of life is slow"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that I had growing up",
+          "signalSide": "context-after",
+          "targetText": "experience that I had growing up",
+          "relation": "中文：定语从句修饰空格，成长中有过的经历。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I grew up in a little town",
+          "signalSide": "context-before",
+          "relation": "中文：首句的成长背景在这里收拢。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:55": {
+      "blankId": "blank:paper-gaokao-2026-i:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "结尾作者相信小镇的根会给他指路，这是点题的一步，要一个「信赖」义的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语 my small town roots 后接 to lead me in the right direction，相信它会引路，是 trust sb to do。",
+        "quotes": [
+          "my small town roots",
+          "to lead me in the right direction"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "信赖",
+        "meaning": "相信它会引路",
+        "reason": "结尾作者相信小镇的根会给他指路，这是点题的一步，要一个「信赖」义的动词。动词看搭配：宾语 my small town roots 后接 to lead me in the right direction，相信它会引路，是 trust sb to do。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "inspire",
+          "meaning": "激励；被激励的该是人，这里宾语是 my small town roots，成了我去激励小镇的根。",
+          "quote": "my small town roots"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remind",
+          "meaning": "提醒；成了我提醒 my small town roots 去引路，谁指引谁颠倒了。",
+          "quote": "my small town roots"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "challenge",
+          "meaning": "挑战，质疑；前面刚说 I am grateful for，作者是信它，不会去质疑它。",
+          "quote": "I am grateful for"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to lead me in the right direction",
+          "signalSide": "context-after",
+          "targetText": "trust my small town roots to lead me",
+          "relation": "中文：trust sb/sth to do 相信……会做某事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I am grateful for",
+          "signalSide": "context-before",
+          "relation": "中文：前面是感激，态度正面。"
+        }
+      ]
+    }
+  }
+}

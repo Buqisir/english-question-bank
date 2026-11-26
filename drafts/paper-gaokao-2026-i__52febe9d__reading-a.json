@@ -1,0 +1,789 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-i:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-i:reading-a": {
+      "overview": "这是洛杉矶 SoFi 体育场本月的观赛指南：列出四场橄榄球比赛的对阵和时间，介绍从街对面到稍远处的四家酒店，并说明按指定区域、凭手机电子停车证停车的规则。",
+      "fullTranslationZh": "SoFi 体育场本月活动\n\nSoFi 体育场坐落在洛杉矶中心，是体育迷的首选去处。这里的日程总是排满了引人注目的赛事活动。\n\n近期橄榄球赛事\n\n洛杉矶公羊队对阵达拉斯牛仔队\n\n8月9日，星期六，下午4:00\n\n洛杉矶闪电队对阵新奥尔良圣徒队\n\n8月10日，星期日，下午5:00\n\n洛杉矶公羊队对阵洛杉矶闪电队\n\n8月16日，星期六，下午4:00\n\n洛杉矶公羊队对阵休斯敦德州人队\n\n8月24日，星期日，下午1:25\n\n周边酒店\n\n来 SoFi 体育场观看赛事时，步行一小段或乘车不远，就能到达几家舒适雅致的酒店。就在街对面，Sonder Lüm 酒店提供宽敞的客房和屋顶泳池。一英里外的洛杉矶 H 酒店设计时尚，是赛事间隙舒适下榻的理想之选。想要舒适与便利兼得的人，可以选择洛杉矶机场万丽酒店，开车一小段路就到。如果你愿意再开远一点，洛杉矶丽思卡尔顿酒店有豪华客房和丰富的休闲设施，正好把比赛日变成一次美好的周末度假。\n\n停车\n\nSoFi 体育场要求你严格停在分配给你的区域，来宾必须从彩色编码电子停车证上标明的那个入口进入。如果走错入口，你会被要求掉头并改道，所以要提前规划。每个停车区由多个停车场组成，用来高效疏导整个场馆路网的交通。务必在到达前把停车证下载到智能手机上。进入正确的区域后，停车工作人员会直接引导你到车位。想和朋友停在一起的人，所有车辆必须持有同一区域的停车证并且一起到达——车位不能预留。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+          "sourceText": "SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass.",
+          "displayText": "SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:23"
+          ],
+          "translationZh": "SoFi 体育场要求你严格停在分配给你的区域，来宾必须从彩色编码电子停车证上标明的那个入口进入。",
+          "analysisZh": "这是 and 连起来的两个分句，各有一条规定。前一句主干 SoFi Stadium requires you to park，require sb to do 是“要求某人做”，strictly in your assigned zone 说停在哪：分配给你的区域，assigned 是“被分配的”，区域不由你挑。后一句主干 guests must enter through the exact gate，后面的 indicated on their … parking pass 是过去分词短语修饰 gate，说明是停车证上标明的那个入口。两条规定都离不开停车证，这也是第 23 题的背景。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 33,
+              "quote": "requires you to park"
+            },
+            {
+              "start": 46,
+              "end": 64,
+              "quote": "your assigned zone"
+            },
+            {
+              "start": 111,
+              "end": 162,
+              "quote": "indicated on their color-coded digital parking pass"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-a-2",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+          "sourceText": "If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities – perfect for turning a game day into a great weekend escape.",
+          "displayText": "If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities – perfect for turning a game day into a great weekend escape.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:22"
+          ],
+          "translationZh": "如果你愿意再开远一点，洛杉矶丽思卡尔顿酒店有豪华客房和丰富的休闲设施，正好把比赛日变成一次美好的周末度假。",
+          "analysisZh": "主干是 the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities，promise 在这里是“有望提供、保证有”。句首 If 从句给出条件：愿意再开远一点（drive a little further），further 是 far 的比较级，暗示它比前面几家都远。破折号后的 perfect for … 是形容词短语，补充说明这些设施适合做什么：turning a game day into a great weekend escape，turn A into B 是“把 A 变成 B”。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 43,
+              "quote": "drive a little further"
+            },
+            {
+              "start": 74,
+              "end": 98,
+              "quote": "promises luxurious rooms"
+            },
+            {
+              "start": 134,
+              "end": 169,
+              "quote": "perfect for turning a game day into"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-i:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:1"
+              ],
+              "start": 0,
+              "end": 12,
+              "quote": "SoFi 体育场本月活动"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:2"
+              ],
+              "start": 14,
+              "end": 61,
+              "quote": "SoFi 体育场坐落在洛杉矶中心，是体育迷的首选去处。这里的日程总是排满了引人注目的赛事活动。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:3"
+              ],
+              "start": 63,
+              "end": 70,
+              "quote": "近期橄榄球赛事"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p4",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:1:1"
+              ],
+              "start": 72,
+              "end": 86,
+              "quote": "洛杉矶公羊队对阵达拉斯牛仔队"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p5",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:1:2"
+              ],
+              "start": 88,
+              "end": 103,
+              "quote": "8月9日，星期六，下午4:00"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p6",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:2:1"
+              ],
+              "start": 105,
+              "end": 120,
+              "quote": "洛杉矶闪电队对阵新奥尔良圣徒队"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p7",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:2:2"
+              ],
+              "start": 122,
+              "end": 138,
+              "quote": "8月10日，星期日，下午5:00"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p8",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:3:1"
+              ],
+              "start": 140,
+              "end": 154,
+              "quote": "洛杉矶公羊队对阵洛杉矶闪电队"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p9",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:3:2"
+              ],
+              "start": 156,
+              "end": 172,
+              "quote": "8月16日，星期六，下午4:00"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p10",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:4:1"
+              ],
+              "start": 174,
+              "end": 189,
+              "quote": "洛杉矶公羊队对阵休斯敦德州人队"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p11",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:4:2"
+              ],
+              "start": 191,
+              "end": 207,
+              "quote": "8月24日，星期日，下午1:25"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:5"
+              ],
+              "start": 209,
+              "end": 213,
+              "quote": "周边酒店"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:6"
+              ],
+              "start": 215,
+              "end": 409,
+              "quote": "来 SoFi 体育场观看赛事时，步行一小段或乘车不远，就能到达几家舒适雅致的酒店。就在街对面，Sonder Lüm 酒店提供宽敞的客房和屋顶泳池。一英里外的洛杉矶 H 酒店设计时尚，是赛事间隙舒适下榻的理想之选。想要舒适与便利兼得的人，可以选择洛杉矶机场万丽酒店，开车一小段路就到。如果你愿意再开远一点，洛杉矶丽思卡尔顿酒店有豪华客房和丰富的休闲设施，正好把比赛日变成一次美好的周末度假。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:7"
+              ],
+              "start": 411,
+              "end": 413,
+              "quote": "停车"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-a:8"
+              ],
+              "start": 415,
+              "end": 605,
+              "quote": "SoFi 体育场要求你严格停在分配给你的区域，来宾必须从彩色编码电子停车证上标明的那个入口进入。如果走错入口，你会被要求掉头并改道，所以要提前规划。每个停车区由多个停车场组成，用来高效疏导整个场馆路网的交通。务必在到达前把停车证下载到智能手机上。进入正确的区域后，停车工作人员会直接引导你到车位。想和朋友停在一起的人，所有车辆必须持有同一区域的停车证并且一起到达——车位不能预留。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:1:1",
+                "start": 0,
+                "end": 33,
+                "quote": "Los Angeles Rams v Dallas Cowboys"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p4",
+                "start": 0,
+                "end": 14,
+                "quote": "洛杉矶公羊队对阵达拉斯牛仔队"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:3:1",
+                "start": 0,
+                "end": 39,
+                "quote": "Los Angeles Rams v Los Angeles Chargers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p8",
+                "start": 0,
+                "end": 14,
+                "quote": "洛杉矶公羊队对阵洛杉矶闪电队"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:4:1",
+                "start": 0,
+                "end": 33,
+                "quote": "Los Angeles Rams v Houston Texans"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p10",
+                "start": 0,
+                "end": 15,
+                "quote": "洛杉矶公羊队对阵休斯敦德州人队"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+                "start": 118,
+                "end": 201,
+                "quote": "Right across the street, Sonder Lüm Hotel offers spacious rooms and a rooftop pool."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p13",
+                "start": 41,
+                "end": 73,
+                "quote": "就在街对面，Sonder Lüm 酒店提供宽敞的客房和屋顶泳池。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-5",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+                "start": 377,
+                "end": 451,
+                "quote": "Make sure to download your parking pass to your smartphone before arrival."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p15",
+                "start": 104,
+                "end": 123,
+                "quote": "务必在到达前把停车证下载到智能手机上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-6",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+                "start": 0,
+                "end": 163,
+                "quote": "SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p15",
+                "start": 0,
+                "end": 48,
+                "quote": "SoFi 体育场要求你严格停在分配给你的区域，来宾必须从彩色编码电子停车证上标明的那个入口进入。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-7",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+                "start": 0,
+                "end": 163,
+                "quote": "SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p15",
+                "start": 0,
+                "end": 48,
+                "quote": "SoFi 体育场要求你严格停在分配给你的区域，来宾必须从彩色编码电子停车证上标明的那个入口进入。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-a-1"
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-a-8",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+                "start": 424,
+                "end": 617,
+                "quote": "If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities – perfect for turning a game day into a great weekend escape."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-a-p13",
+                "start": 141,
+                "end": 194,
+                "quote": "如果你愿意再开远一点，洛杉矶丽思卡尔顿酒店有豪华客房和丰富的休闲设施，正好把比赛日变成一次美好的周末度假。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-a-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用一句话介绍体育场，再分三个栏目给观赛者实用信息：本月赛程表、由近到远的周边酒店、停车规定。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:1",
+            "summary": "体育场本月的活动。",
+            "function": "总标题，交代这是一份活动指南。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:2",
+            "summary": "SoFi 体育场位于洛杉矶中心，赛事日程排得很满。",
+            "function": "开篇介绍场馆，引出下面三个栏目。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:3",
+            "summary": "近期的橄榄球赛事。",
+            "function": "栏目标题，下接四场比赛的对阵和时间表。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:5",
+            "summary": "体育场周边的酒店。",
+            "function": "栏目标题，引出住宿信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+            "summary": "四家酒店按离体育场由近到远介绍：街对面、一英里外、开车一小段、再开远一点。",
+            "function": "给出住宿选择及各自的距离和特色。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:7",
+            "summary": "停车安排。",
+            "function": "栏目标题，引出停车规定。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+            "summary": "须按分配区域和停车证上的入口进场，到达前把停车证下载到手机，想和朋友停一起须同区并同时到达。",
+            "function": "列出停车的具体规则和提醒。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-i:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "数出赛程表里每支球队的出场次数，比出最多的一队。",
+      "stemTranslationZh": "本月哪支球队将在该体育场比赛场次最多？",
+      "locateBy": "options",
+      "locateFindZh": "四个队名逐个回赛程表数出场次",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "达拉斯牛仔队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Dallas Cowboys",
+            "optionText": "Dallas Cowboys",
+            "matchType": "exact",
+            "relationNote": "牛仔队（Dallas Cowboys）在赛程表里只出现一次，是 8 月 9 日对公羊队那场，共 1 场。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:1:1",
+              "quote": "Los Angeles Rams v Dallas Cowboys",
+              "anchor": "8 月 9 日对阵"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "洛杉矶公羊队。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:1:1",
+              "quote": "Los Angeles Rams v Dallas Cowboys",
+              "anchor": "8 月 9 日对阵"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:3:1",
+              "quote": "Los Angeles Rams v Los Angeles Chargers",
+              "anchor": "8 月 16 日对阵"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:4:1",
+              "quote": "Los Angeles Rams v Houston Texans",
+              "anchor": "8 月 24 日对阵"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "洛杉矶闪电队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Los Angeles Chargers",
+            "optionText": "Los Angeles Chargers",
+            "matchType": "exact",
+            "relationNote": "闪电队（Los Angeles Chargers）和公羊队同带 Los Angeles，出场 2 场：10 日对圣徒队、16 日对公羊队，还差一场。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:2:1",
+              "quote": "Los Angeles Chargers v New Orleans Saints",
+              "anchor": "8 月 10 日对阵"
+            },
+            {
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:3:1",
+              "quote": "Los Angeles Rams v Los Angeles Chargers",
+              "anchor": "8 月 16 日对阵"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "新奥尔良圣徒队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "New Orleans Saints",
+            "optionText": "New Orleans Saints",
+            "matchType": "exact",
+            "relationNote": "圣徒队（New Orleans Saints）只在 8 月 10 日对闪电队那场出现，本月只打 1 场。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:2:1",
+              "quote": "Los Angeles Chargers v New Orleans Saints",
+              "anchor": "8 月 10 日对阵"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Los Angeles Rams.",
+          "sourceRole": "correctOption",
+          "targetText": "Los Angeles Rams v Dallas Cowboys",
+          "targetParagraphId": "cell:paper-gaokao-2026-i:reading-a:ocr-916a21169272a7ae:1:1",
+          "relationType": "calculation",
+          "note": "公羊队（Los Angeles Rams）在四行对阵里出现三次：8 月 9 日、16 日、24 日各一场，1+1+1=3 场；闪电队 2 场，牛仔队和圣徒队各 1 场，3 场最多，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "找出四家酒店各自离体育场多远，再比出最近的一家。",
+      "stemTranslationZh": "哪家酒店离体育场最近？",
+      "locateBy": "options",
+      "locateFindZh": "四家酒店各找距离说法：街对面、一英里、开车，比远近",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Sonder Lüm 酒店。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "quote": "Right across the street, Sonder Lüm Hotel offers spacious rooms and a rooftop pool.",
+              "anchor": "就在街对面"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "洛杉矶丽思卡尔顿酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Ritz-Carlton Los Angeles",
+            "optionText": "Ritz-Carlton Los Angeles",
+            "matchType": "exact",
+            "relationNote": "丽思卡尔顿（Ritz-Carlton Los Angeles）设施最豪华，但要愿意再开远一点（drive a little further）才到，是四家里最远的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "quote": "If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities – perfect for turning a game day into a great weekend escape.",
+              "anchor": "再开远一点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "洛杉矶 H 酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "H Hotel Los Angeles",
+            "optionText": "H Hotel Los Angeles",
+            "matchType": "exact",
+            "relationNote": "H 酒店（H Hotel Los Angeles）在一英里外（A mile away），比隔一条街的 Sonder Lüm 远。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "quote": "A mile away, the H Hotel Los Angeles, with its stylish design, is ideal for a nice stay between events.",
+              "anchor": "一英里外"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "洛杉矶机场万丽酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Renaissance Los Angeles Airport Hotel",
+            "optionText": "Renaissance Los Angeles Airport Hotel",
+            "matchType": "exact",
+            "relationNote": "万丽酒店（Renaissance Los Angeles Airport Hotel）主打舒适又便利，但要开一小段车（a short drive away）才到，不如街对面近。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "quote": "For those seeking both comfort and convenience, the Renaissance Los Angeles Airport Hotel is just a short drive away.",
+              "anchor": "开车一小段"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Sonder Lüm Hotel.",
+          "sourceRole": "correctOption",
+          "targetText": "Right across the street, Sonder Lüm Hotel offers spacious rooms and a rooftop pool.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "选项的 Sonder Lüm 就在街对面（Right across the street），过马路就到；H 酒店在一英里外，另两家都要开车，所以它最近，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在停车规定里找出停车前必须先办好的那件事。",
+      "stemTranslationZh": "如果你想在体育场停车，需要做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "给停车工作人员打电话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "parking staff",
+            "optionText": "parking staff",
+            "matchType": "exact",
+            "relationNote": "停车工作人员（parking staff）是在你进对区域后主动引你去车位（guide you directly to a space），没要你先打电话。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "quote": "Upon entering the correct zone, parking staff will guide you directly to a space.",
+              "anchor": "进区后有人引导"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "预付停车费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Prepay the parking fee.",
+            "explanation": "停车一栏讲的是区域、入口、停车证和同行车辆，一句没提停车费，更没说要预付。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "取得停车证。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "quote": "Make sure to download your parking pass to your smartphone before arrival.",
+              "anchor": "到达前下载停车证"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "quote": "SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass.",
+              "anchor": "凭停车证上标明的入口进场"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "选择一个停车区域。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "SoFi Stadium requires you to park strictly in your assigned zone",
+            "sourceHighlight": "your assigned zone",
+            "optionText": "Choose a parking zone.",
+            "optionHighlight": "Choose",
+            "explanation": "停车区域是分配好的（your assigned zone），而且要严格停在里面，不由你自己挑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "quote": "SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass.",
+              "anchor": "严格停在分配的区域"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "need to do",
+          "sourceRole": "stem",
+          "targetText": "Make sure to download your parking pass to your smartphone before arrival.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-a:8",
+          "relationType": "locationCue",
+          "targetCue": "Make sure to",
+          "sourceZh": "需要做",
+          "targetCueZh": "务必",
+          "answerText": "download your parking pass",
+          "note": "题干 need to do 问必须做的事，对应原文提要求的 Make sure to。"
+        },
+        {
+          "sourceText": "Obtain a parking pass.",
+          "sourceRole": "correctOption",
+          "targetText": "Make sure to download your parking pass to your smartphone before arrival.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-a:8",
+          "relationType": "paraphrase",
+          "note": "选项的“取得停车证”（Obtain a parking pass）就是原文的“到达前把停车证下载到手机”（download your parking pass）：电子停车证下载下来就拿到了手，选 C。"
+        }
+      ]
+    }
+  }
+}

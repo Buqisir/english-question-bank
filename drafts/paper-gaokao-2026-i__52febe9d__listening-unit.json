@@ -1,0 +1,2179 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Do I need a card to enter the building?\nW: Yes, you’ll get your card this afternoon. Now let me show you around and say hello to everyone, and then we’ll talk about your job duties.",
+      "translationZh": "男：我进这栋楼需要用门禁卡吗？\n女：需要，你今天下午会拿到门禁卡。现在我先带你四处看看，跟大家打个招呼，然后我们再聊聊你的工作职责。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "女士带新员工熟悉办公环境，随后将介绍他的岗位职责。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "en": "Do I need a card to enter the building?",
+          "zh": "我进这栋楼需要用门禁卡吗？",
+          "speaker": "M",
+          "utf16Start": 3,
+          "utf16End": 42,
+          "passes": [
+            {
+              "start": 204.84,
+              "end": 207.78
+            },
+            {
+              "start": 221.88,
+              "end": 224.82
+            }
+          ]
+        },
+        {
+          "id": "listening-text-1:2",
+          "en": "Yes, you’ll get your card this afternoon.",
+          "zh": "需要，你今天下午会拿到门禁卡。",
+          "speaker": "W",
+          "utf16Start": 46,
+          "utf16End": 87,
+          "passes": [
+            {
+              "start": 207.84,
+              "end": 211.56
+            },
+            {
+              "start": 224.88,
+              "end": 228.6
+            }
+          ]
+        },
+        {
+          "id": "listening-text-1:3",
+          "en": "Now let me show you around and say hello to everyone, and then we’ll talk about your job duties.",
+          "zh": "现在我先带你四处看看，跟大家打个招呼，然后我们再聊聊你的工作职责。",
+          "speaker": "W",
+          "utf16Start": 88,
+          "utf16End": 184,
+          "passes": [
+            {
+              "start": 211.98,
+              "end": 220.08
+            },
+            {
+              "start": 228.9,
+              "end": 237.12
+            }
+          ],
+          "questionNumbers": [
+            1
+          ]
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Would you like some more roast beef? It’s the chef’s signature dish.\nM: No thanks. It’s really good, but I can’t manage any more.",
+      "translationZh": "女：你要再来点烤牛肉吗？这是主厨的招牌菜。\n男：不了，谢谢。真的很好吃，可我实在吃不下了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士请男士再吃些招牌烤牛肉，男士觉得好吃，但已经吃饱了。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "en": "Would you like some more roast beef?",
+          "zh": "你要再来点烤牛肉吗？",
+          "speaker": "W",
+          "utf16Start": 3,
+          "utf16End": 39,
+          "passes": [
+            {
+              "start": 254.16,
+              "end": 256.74
+            },
+            {
+              "start": 266.46,
+              "end": 269.16
+            }
+          ]
+        },
+        {
+          "id": "listening-text-2:2",
+          "en": "It’s the chef’s signature dish.",
+          "zh": "这是主厨的招牌菜。",
+          "speaker": "W",
+          "utf16Start": 40,
+          "utf16End": 71,
+          "passes": [
+            {
+              "start": 256.8,
+              "end": 259.08
+            },
+            {
+              "start": 269.22,
+              "end": 271.32
+            }
+          ],
+          "questionNumbers": [
+            2
+          ]
+        },
+        {
+          "id": "listening-text-2:3",
+          "en": "No thanks.",
+          "zh": "不了，谢谢。",
+          "speaker": "M",
+          "utf16Start": 75,
+          "utf16End": 85,
+          "passes": [
+            {
+              "start": 259.14,
+              "end": 260.82
+            },
+            {
+              "start": 271.74,
+              "end": 273.36
+            }
+          ]
+        },
+        {
+          "id": "listening-text-2:4",
+          "en": "It’s really good, but I can’t manage any more.",
+          "zh": "真的很好吃，可我实在吃不下了。",
+          "speaker": "M",
+          "utf16Start": 86,
+          "utf16End": 132,
+          "passes": [
+            {
+              "start": 260.88,
+              "end": 265.02
+            },
+            {
+              "start": 273.42,
+              "end": 277.02
+            }
+          ]
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Hey! Look at this one in the newspaper: Fishermen fishing in Lake Victoria in Tanzania.\nM: Wow, that’s awesome! I like the unique atmosphere caught by the photographer.",
+      "translationZh": "女：嘿！看看报纸上这张照片，坦桑尼亚维多利亚湖上，渔民正在捕鱼。\n男：哇，太棒了！我喜欢摄影师捕捉到的那种独特氛围。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人看报纸上的捕鱼照片，男士欣赏摄影师捕捉到的独特氛围。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "en": "Hey!",
+          "zh": "嘿！",
+          "speaker": "W",
+          "utf16Start": 3,
+          "utf16End": 7,
+          "passes": [
+            {
+              "start": 294.54,
+              "end": 296.04
+            },
+            {
+              "start": 310.2,
+              "end": 311.7
+            }
+          ]
+        },
+        {
+          "id": "listening-text-3:2",
+          "en": "Look at this one in the newspaper: Fishermen fishing in Lake Victoria in Tanzania.",
+          "zh": "看看报纸上这张照片，坦桑尼亚维多利亚湖上，渔民正在捕鱼。",
+          "speaker": "W",
+          "utf16Start": 8,
+          "utf16End": 90,
+          "passes": [
+            {
+              "start": 296.04,
+              "end": 302.4
+            },
+            {
+              "start": 311.7,
+              "end": 318.06
+            }
+          ]
+        },
+        {
+          "id": "listening-text-3:3",
+          "en": "Wow, that’s awesome!",
+          "zh": "哇，太棒了！",
+          "speaker": "M",
+          "utf16Start": 94,
+          "utf16End": 114,
+          "passes": [
+            {
+              "start": 302.46,
+              "end": 304.74
+            },
+            {
+              "start": 318.12,
+              "end": 320.4
+            }
+          ]
+        },
+        {
+          "id": "listening-text-3:4",
+          "en": "I like the unique atmosphere caught by the photographer.",
+          "zh": "我喜欢摄影师捕捉到的那种独特氛围。",
+          "speaker": "M",
+          "utf16Start": 115,
+          "utf16End": 171,
+          "passes": [
+            {
+              "start": 304.86,
+              "end": 308.64
+            },
+            {
+              "start": 320.46,
+              "end": 324.36
+            }
+          ],
+          "questionNumbers": [
+            3
+          ]
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: It’s almost midnight, Max. You’ve got a long drive tomorrow.\nM: Okay. Another 15 minutes from my travel blog and I’ll be done.",
+      "translationZh": "女：马克斯，都快半夜了。你明天还要开很久的车呢。\n男：好吧。再给我十五分钟，我就能写完旅行博客。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "夜深了，女士提醒马克斯次日要开很久的车，马克斯想先写完博客。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "en": "It’s almost midnight, Max.",
+          "zh": "马克斯，都快半夜了。",
+          "speaker": "W",
+          "utf16Start": 3,
+          "utf16End": 29,
+          "passes": [
+            {
+              "start": 341.7,
+              "end": 344.28
+            },
+            {
+              "start": 353.76,
+              "end": 356.4
+            }
+          ]
+        },
+        {
+          "id": "listening-text-4:2",
+          "en": "You’ve got a long drive tomorrow.",
+          "zh": "你明天还要开很久的车呢。",
+          "speaker": "W",
+          "utf16Start": 30,
+          "utf16End": 63,
+          "passes": [
+            {
+              "start": 344.34,
+              "end": 346.74
+            },
+            {
+              "start": 356.46,
+              "end": 358.86
+            }
+          ],
+          "questionNumbers": [
+            4
+          ]
+        },
+        {
+          "id": "listening-text-4:3",
+          "en": "Okay.",
+          "zh": "好吧。",
+          "speaker": "M",
+          "utf16Start": 67,
+          "utf16End": 72,
+          "passes": [
+            {
+              "start": 346.92,
+              "end": 348.36
+            },
+            {
+              "start": 358.98,
+              "end": 360.42
+            }
+          ]
+        },
+        {
+          "id": "listening-text-4:4",
+          "en": "Another 15 minutes from my travel blog and I’ll be done.",
+          "zh": "再给我十五分钟，我就能写完旅行博客。",
+          "speaker": "M",
+          "utf16Start": 73,
+          "utf16End": 129,
+          "passes": [
+            {
+              "start": 348.42,
+              "end": 352.26
+            },
+            {
+              "start": 360.48,
+              "end": 364.5
+            }
+          ]
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Hello Mr. Waterman. This is Sarah Jones. I’m stuck on the highway. There’s a serious accident. I’m afraid I can’t arrive before noon. Could we meet this afternoon?\nM: OK. I’ll see my doctor at one and will be available after two.",
+      "translationZh": "女：您好，沃特曼先生。我是萨拉·琼斯。我在高速公路上被堵住了。这里发生了一起严重事故。恐怕我中午之前到不了。我们能改到今天下午见面吗？\n男：好。我一点要去看医生，两点以后有空。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "萨拉因交通事故被堵在高速公路上，致电把会面改到下午。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "en": "Hello Mr. Waterman.",
+          "zh": "您好，沃特曼先生。",
+          "speaker": "W",
+          "utf16Start": 3,
+          "utf16End": 22,
+          "passes": [
+            {
+              "start": 381.36,
+              "end": 383.64
+            },
+            {
+              "start": 402.06,
+              "end": 404.28
+            }
+          ]
+        },
+        {
+          "id": "listening-text-5:2",
+          "en": "This is Sarah Jones.",
+          "zh": "我是萨拉·琼斯。",
+          "speaker": "W",
+          "utf16Start": 23,
+          "utf16End": 43,
+          "passes": [
+            {
+              "start": 383.7,
+              "end": 385.38
+            },
+            {
+              "start": 404.34,
+              "end": 405.96
+            }
+          ]
+        },
+        {
+          "id": "listening-text-5:3",
+          "en": "I’m stuck on the highway.",
+          "zh": "我在高速公路上被堵住了。",
+          "speaker": "W",
+          "utf16Start": 44,
+          "utf16End": 69,
+          "passes": [
+            {
+              "start": 385.44,
+              "end": 387.24
+            },
+            {
+              "start": 406.02,
+              "end": 407.82
+            }
+          ]
+        },
+        {
+          "id": "listening-text-5:4",
+          "en": "There’s a serious accident.",
+          "zh": "这里发生了一起严重事故。",
+          "speaker": "W",
+          "utf16Start": 70,
+          "utf16End": 97,
+          "passes": [
+            {
+              "start": 387.3,
+              "end": 389.1
+            },
+            {
+              "start": 407.88,
+              "end": 409.74
+            }
+          ]
+        },
+        {
+          "id": "listening-text-5:5",
+          "en": "I’m afraid I can’t arrive before noon.",
+          "zh": "恐怕我中午之前到不了。",
+          "speaker": "W",
+          "utf16Start": 98,
+          "utf16End": 136,
+          "passes": [
+            {
+              "start": 389.22,
+              "end": 392.4
+            },
+            {
+              "start": 409.8,
+              "end": 413.04
+            }
+          ]
+        },
+        {
+          "id": "listening-text-5:6",
+          "en": "Could we meet this afternoon?",
+          "zh": "我们能改到今天下午见面吗？",
+          "speaker": "W",
+          "utf16Start": 137,
+          "utf16End": 166,
+          "passes": [
+            {
+              "start": 392.52,
+              "end": 394.86
+            },
+            {
+              "start": 413.16,
+              "end": 415.32
+            }
+          ],
+          "questionNumbers": [
+            5
+          ]
+        },
+        {
+          "id": "listening-text-5:7",
+          "en": "OK.",
+          "zh": "好。",
+          "speaker": "M",
+          "utf16Start": 170,
+          "utf16End": 173,
+          "passes": [
+            {
+              "start": 395.1,
+              "end": 396.54
+            },
+            {
+              "start": 415.56,
+              "end": 417
+            }
+          ]
+        },
+        {
+          "id": "listening-text-5:8",
+          "en": "I’ll see my doctor at one and will be available after two.",
+          "zh": "我一点要去看医生，两点以后有空。",
+          "speaker": "M",
+          "utf16Start": 174,
+          "utf16End": 232,
+          "passes": [
+            {
+              "start": 396.66,
+              "end": 400.26
+            },
+            {
+              "start": 417.06,
+              "end": 420.9
+            }
+          ]
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Lisa, you’re English, but you live here. What do you love about Copenhagen?\nW: It has everything big cities offer – cafes, theaters, museums – but it is still relaxing and manageable. Unlike London, you don't feel constant pressure here.\nM: Was this lifestyle why you first came?\nW: No, I originally came for a 3-month project at a law firm. After finishing it, they offered me a permanent job. I took it and stayed.",
+      "translationZh": "男：莉萨，你是英格兰人，却住在这里。你喜欢哥本哈根的哪些地方？\n女：咖啡馆、剧院、博物馆，大城市有的它都有，可在这里生活依然轻松，日常事务也好打理。和伦敦相比，你在这里不会时时觉得有压力。\n男：当初你是因为这里的生活方式才来的吗？\n女：不是，我最初是来一家律师事务所做一个为期三个月的项目。项目做完后，他们给了我一份长期工作。我接受了，就留了下来。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "莉萨因短期项目来到哥本哈根，后来接受长期工作，也喜欢上当地轻松的生活。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "en": "Lisa, you’re English, but you live here.",
+          "zh": "莉萨，你是英格兰人，却住在这里。",
+          "speaker": "M",
+          "utf16Start": 3,
+          "utf16End": 43,
+          "passes": [
+            {
+              "start": 489.12,
+              "end": 493.26
+            },
+            {
+              "start": 527.16,
+              "end": 531.18
+            }
+          ]
+        },
+        {
+          "id": "listening-text-6:2",
+          "en": "What do you love about Copenhagen?",
+          "zh": "你喜欢哥本哈根的哪些地方？",
+          "speaker": "M",
+          "utf16Start": 44,
+          "utf16End": 78,
+          "passes": [
+            {
+              "start": 493.38,
+              "end": 496.08
+            },
+            {
+              "start": 531.3,
+              "end": 534.06
+            }
+          ]
+        },
+        {
+          "id": "listening-text-6:3",
+          "en": "It has everything big cities offer – cafes, theaters, museums – but it is still relaxing and manageable.",
+          "zh": "咖啡馆、剧院、博物馆，大城市有的它都有，可在这里生活依然轻松，日常事务也好打理。",
+          "speaker": "W",
+          "utf16Start": 82,
+          "utf16End": 186,
+          "passes": [
+            {
+              "start": 496.14,
+              "end": 506.28
+            },
+            {
+              "start": 534.18,
+              "end": 544.14
+            }
+          ]
+        },
+        {
+          "id": "listening-text-6:4",
+          "en": "Unlike London, you don't feel constant pressure here.",
+          "zh": "和伦敦相比，你在这里不会时时觉得有压力。",
+          "speaker": "W",
+          "utf16Start": 187,
+          "utf16End": 240,
+          "passes": [
+            {
+              "start": 506.34,
+              "end": 510.78
+            },
+            {
+              "start": 544.26,
+              "end": 548.52
+            }
+          ],
+          "questionNumbers": [
+            6
+          ]
+        },
+        {
+          "id": "listening-text-6:5",
+          "en": "Was this lifestyle why you first came?",
+          "zh": "当初你是因为这里的生活方式才来的吗？",
+          "speaker": "M",
+          "utf16Start": 244,
+          "utf16End": 282,
+          "passes": [
+            {
+              "start": 510.84,
+              "end": 513.78
+            },
+            {
+              "start": 548.7,
+              "end": 551.58
+            }
+          ]
+        },
+        {
+          "id": "listening-text-6:6",
+          "en": "No, I originally came for a 3-month project at a law firm.",
+          "zh": "不是，我最初是来一家律师事务所做一个为期三个月的项目。",
+          "speaker": "W",
+          "utf16Start": 286,
+          "utf16End": 344,
+          "passes": [
+            {
+              "start": 514.02,
+              "end": 519.6
+            },
+            {
+              "start": 551.88,
+              "end": 557.52
+            }
+          ],
+          "questionNumbers": [
+            7
+          ]
+        },
+        {
+          "id": "listening-text-6:7",
+          "en": "After finishing it, they offered me a permanent job.",
+          "zh": "项目做完后，他们给了我一份长期工作。",
+          "speaker": "W",
+          "utf16Start": 345,
+          "utf16End": 397,
+          "passes": [
+            {
+              "start": 519.66,
+              "end": 523.44
+            },
+            {
+              "start": 557.58,
+              "end": 561.3
+            }
+          ]
+        },
+        {
+          "id": "listening-text-6:8",
+          "en": "I took it and stayed.",
+          "zh": "我接受了，就留了下来。",
+          "speaker": "W",
+          "utf16Start": 398,
+          "utf16End": 419,
+          "passes": [
+            {
+              "start": 523.5,
+              "end": 525.84
+            },
+            {
+              "start": 561.36,
+              "end": 563.46
+            }
+          ]
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Garden Hotel. May I help you?\nM: Hello, this is Mike Lee from Gilbert Company. We’d like to book a dinner for next Tuesday.\nW: Certainly, Mr. Lee. Could you let me know how many guests you’re expecting and if you have a specific budget in mind?\nM: Yes, we’re expecting 20 people, and we’re aiming for £30 per person.\nW: Understood. Is this for a special occasion?\nM: Yes, it’s to honor a staff member who is retiring next month.\nW: That sounds lovely. What time would you like the dinner to start?\nM: At 6:30 p.m.\nW: OK. Would you like a detailed menu with prices?\nM: Yes. Could you email it to mikelee@gilbert.com?\nW: No problem. I’m on it.",
+      "translationZh": "女：这里是花园酒店。有什么可以帮您？\n男：您好，我是吉尔伯特公司的迈克·李。我们想预订下周二的晚宴。\n女：没问题，李先生。您预计有多少位客人？有没有想好预算？\n男：有，我们预计有二十人，预算是每人三十英镑左右。\n女：明白了。这次是为了什么特别的场合吗？\n男：是的，我们想向一位下个月退休的员工致意。\n女：听起来真不错。您想让晚宴几点开始？\n男：晚上六点半。\n女：好的。您需要一份标有价格的详细菜单吗？\n男：需要。您能把菜单发到 mikelee@gilbert.com 吗？\n女：没问题。我这就办。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "李先生为同事预订退休晚宴，和酒店确认人数、人均预算及开席时间。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "en": "Garden Hotel.",
+          "zh": "这里是花园酒店。",
+          "speaker": "W",
+          "utf16Start": 3,
+          "utf16End": 16,
+          "passes": [
+            {
+              "start": 602.72,
+              "end": 603.65
+            },
+            {
+              "start": 659.62,
+              "end": 662.14
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:2",
+          "en": "May I help you?",
+          "zh": "有什么可以帮您？",
+          "speaker": "W",
+          "utf16Start": 17,
+          "utf16End": 32,
+          "passes": [
+            {
+              "start": 603.65,
+              "end": 604.58
+            },
+            {
+              "start": 662.14,
+              "end": 663.12
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:3",
+          "en": "Hello, this is Mike Lee from Gilbert Company.",
+          "zh": "您好，我是吉尔伯特公司的迈克·李。",
+          "speaker": "M",
+          "utf16Start": 36,
+          "utf16End": 81,
+          "passes": [
+            {
+              "start": 604.58,
+              "end": 611.44
+            },
+            {
+              "start": 663.84,
+              "end": 667.1
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:4",
+          "en": "We’d like to book a dinner for next Tuesday.",
+          "zh": "我们想预订下周二的晚宴。",
+          "speaker": "M",
+          "utf16Start": 82,
+          "utf16End": 126,
+          "passes": [
+            {
+              "start": 612.22,
+              "end": 614.56
+            },
+            {
+              "start": 667.86,
+              "end": 670.28
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:5",
+          "en": "Certainly, Mr. Lee.",
+          "zh": "没问题，李先生。",
+          "speaker": "W",
+          "utf16Start": 130,
+          "utf16End": 149,
+          "passes": [
+            {
+              "start": 614.56,
+              "end": 617.24
+            },
+            {
+              "start": 670.28,
+              "end": 673.02
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:6",
+          "en": "Could you let me know how many guests you’re expecting and if you have a specific budget in mind?",
+          "zh": "您预计有多少位客人？有没有想好预算？",
+          "speaker": "W",
+          "utf16Start": 150,
+          "utf16End": 247,
+          "passes": [
+            {
+              "start": 617.24,
+              "end": 622.8
+            },
+            {
+              "start": 673.02,
+              "end": 678.68
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:7",
+          "en": "Yes, we’re expecting 20 people, and we’re aiming for £30 per person.",
+          "zh": "有，我们预计有二十人，预算是每人三十英镑左右。",
+          "speaker": "M",
+          "utf16Start": 251,
+          "utf16End": 319,
+          "passes": [
+            {
+              "start": 623.7,
+              "end": 629.68
+            },
+            {
+              "start": 679.48,
+              "end": 685.46
+            }
+          ],
+          "questionNumbers": [
+            8
+          ]
+        },
+        {
+          "id": "listening-text-7:8",
+          "en": "Understood.",
+          "zh": "明白了。",
+          "speaker": "W",
+          "utf16Start": 323,
+          "utf16End": 334,
+          "passes": [
+            {
+              "start": 630.52,
+              "end": 631.2
+            },
+            {
+              "start": 686.32,
+              "end": 686.96
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:9",
+          "en": "Is this for a special occasion?",
+          "zh": "这次是为了什么特别的场合吗？",
+          "speaker": "W",
+          "utf16Start": 335,
+          "utf16End": 366,
+          "passes": [
+            {
+              "start": 631.96,
+              "end": 633.6
+            },
+            {
+              "start": 687.74,
+              "end": 689.38
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:10",
+          "en": "Yes, it’s to honor a staff member who is retiring next month.",
+          "zh": "是的，我们想向一位下个月退休的员工致意。",
+          "speaker": "M",
+          "utf16Start": 370,
+          "utf16End": 431,
+          "passes": [
+            {
+              "start": 634.42,
+              "end": 638.92
+            },
+            {
+              "start": 690.2,
+              "end": 694.72
+            }
+          ],
+          "questionNumbers": [
+            9
+          ]
+        },
+        {
+          "id": "listening-text-7:11",
+          "en": "That sounds lovely.",
+          "zh": "听起来真不错。",
+          "speaker": "W",
+          "utf16Start": 435,
+          "utf16End": 454,
+          "passes": [
+            {
+              "start": 639.66,
+              "end": 640.78
+            },
+            {
+              "start": 695.38,
+              "end": 696.64
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:12",
+          "en": "What time would you like the dinner to start?",
+          "zh": "您想让晚宴几点开始？",
+          "speaker": "W",
+          "utf16Start": 455,
+          "utf16End": 500,
+          "passes": [
+            {
+              "start": 641.54,
+              "end": 643.68
+            },
+            {
+              "start": 697.38,
+              "end": 699.48
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:13",
+          "en": "At 6:30 p.m.",
+          "zh": "晚上六点半。",
+          "speaker": "M",
+          "utf16Start": 504,
+          "utf16End": 516,
+          "passes": [
+            {
+              "start": 644.52,
+              "end": 646.22
+            },
+            {
+              "start": 700.28,
+              "end": 702
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:14",
+          "en": "OK.",
+          "zh": "好的。",
+          "speaker": "W",
+          "utf16Start": 520,
+          "utf16End": 523,
+          "passes": [
+            {
+              "start": 646.22,
+              "end": 647.26
+            },
+            {
+              "start": 702,
+              "end": 703.02
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:15",
+          "en": "Would you like a detailed menu with prices?",
+          "zh": "您需要一份标有价格的详细菜单吗？",
+          "speaker": "W",
+          "utf16Start": 524,
+          "utf16End": 567,
+          "passes": [
+            {
+              "start": 647.96,
+              "end": 650.08
+            },
+            {
+              "start": 703.78,
+              "end": 705.84
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:16",
+          "en": "Yes.",
+          "zh": "需要。",
+          "speaker": "M",
+          "utf16Start": 571,
+          "utf16End": 575,
+          "passes": [
+            {
+              "start": 651.12,
+              "end": 651.47
+            },
+            {
+              "start": 706.88,
+              "end": 707.23
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:17",
+          "en": "Could you email it to mikelee@gilbert.com?",
+          "zh": "您能把菜单发到 mikelee@gilbert.com 吗？",
+          "speaker": "M",
+          "utf16Start": 576,
+          "utf16End": 618,
+          "passes": [
+            {
+              "start": 652,
+              "end": 655.3
+            },
+            {
+              "start": 707.8,
+              "end": 711.14
+            }
+          ],
+          "questionNumbers": [
+            10
+          ]
+        },
+        {
+          "id": "listening-text-7:18",
+          "en": "No problem.",
+          "zh": "没问题。",
+          "speaker": "W",
+          "utf16Start": 622,
+          "utf16End": 633,
+          "passes": [
+            {
+              "start": 656.52,
+              "end": 657.06
+            },
+            {
+              "start": 712.18,
+              "end": 712.82
+            }
+          ]
+        },
+        {
+          "id": "listening-text-7:19",
+          "en": "I’m on it.",
+          "zh": "我这就办。",
+          "speaker": "W",
+          "utf16Start": 634,
+          "utf16End": 644,
+          "passes": [
+            {
+              "start": 657.5,
+              "end": 658.36
+            },
+            {
+              "start": 713.28,
+              "end": 714.42
+            }
+          ]
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Dear listeners, the song we’ve just heard was made with an AI version of Jenny’s singing voice.\nM: Yeah. Earlier this year, Jenny announced that she’d let anybody make a song using her AI voice as long as they were entitled and shared their profits with her. And in just a few weeks, more than 300 new songs were created using her AI voice.\nW: Incredible! Just imagine, Jenny may have been at home, drinking a glass of wine, while her AI clone voice worked hard to sing her songs. This could be an attractive new business model for a pop star.\nM: Indeed. But some of our listeners called to say they want to hear Jenny’s real voice. Now let’s play one of her greatest hits – Show Me Your Love.",
+      "translationZh": "女：各位听众，我们刚才听到的那首歌，是用人工智能仿制的珍妮歌声制作的。\n男：对。今年早些时候，珍妮宣布，只要获得授权并与她分享收益，任何人都可以用她的人工智能声音制作歌曲。短短几周，就有人用她的人工智能声音制作了三百多首新歌。\n女：太不可思议了！想象一下，珍妮可能正坐在家里喝着葡萄酒，她的人工智能克隆声音却在卖力地唱她的歌。对流行歌星来说，这有望成为一种很有吸引力的新商业模式。\n男：确实。不过，有些听众打电话来说想听珍妮本人唱歌。现在让我们播放她最受欢迎的歌曲之一《让我看看你的爱》。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "科学与技术",
+        "subtopic": "信息技术创新"
+      },
+      "summaryZh": "电台主持人谈论珍妮授权他人用人工智能仿制的歌声创作歌曲并与她分成。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "en": "Dear listeners, the song we’ve just heard was made with an AI version of Jenny’s singing voice.",
+          "zh": "各位听众，我们刚才听到的那首歌，是用人工智能仿制的珍妮歌声制作的。",
+          "speaker": "W",
+          "utf16Start": 3,
+          "utf16End": 98,
+          "passes": [
+            {
+              "start": 760.08,
+              "end": 768.06
+            },
+            {
+              "start": 816.42,
+              "end": 823.92
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:2",
+          "en": "Yeah.",
+          "zh": "对。",
+          "speaker": "M",
+          "utf16Start": 102,
+          "utf16End": 107,
+          "passes": [
+            {
+              "start": 768.12,
+              "end": 769.14
+            },
+            {
+              "start": 824.04,
+              "end": 825.24
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:3",
+          "en": "Earlier this year, Jenny announced that she’d let anybody make a song using her AI voice as long as they were entitled and shared their profits with her.",
+          "zh": "今年早些时候，珍妮宣布，只要获得授权并与她分享收益，任何人都可以用她的人工智能声音制作歌曲。",
+          "speaker": "M",
+          "utf16Start": 108,
+          "utf16End": 261,
+          "passes": [
+            {
+              "start": 769.2,
+              "end": 779.88
+            },
+            {
+              "start": 825.3,
+              "end": 836.04
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:4",
+          "en": "And in just a few weeks, more than 300 new songs were created using her AI voice.",
+          "zh": "短短几周，就有人用她的人工智能声音制作了三百多首新歌。",
+          "speaker": "M",
+          "utf16Start": 262,
+          "utf16End": 343,
+          "passes": [
+            {
+              "start": 779.94,
+              "end": 787.32
+            },
+            {
+              "start": 836.1,
+              "end": 843.36
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:5",
+          "en": "Incredible!",
+          "zh": "太不可思议了！",
+          "speaker": "W",
+          "utf16Start": 347,
+          "utf16End": 358,
+          "passes": [
+            {
+              "start": 787.44,
+              "end": 788.82
+            },
+            {
+              "start": 843.66,
+              "end": 845.28
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:6",
+          "en": "Just imagine, Jenny may have been at home, drinking a glass of wine, while her AI clone voice worked hard to sing her songs.",
+          "zh": "想象一下，珍妮可能正坐在家里喝着葡萄酒，她的人工智能克隆声音却在卖力地唱她的歌。",
+          "speaker": "W",
+          "utf16Start": 359,
+          "utf16End": 483,
+          "passes": [
+            {
+              "start": 788.88,
+              "end": 798.6
+            },
+            {
+              "start": 845.34,
+              "end": 854.4
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:7",
+          "en": "This could be an attractive new business model for a pop star.",
+          "zh": "对流行歌星来说，这有望成为一种很有吸引力的新商业模式。",
+          "speaker": "W",
+          "utf16Start": 484,
+          "utf16End": 546,
+          "passes": [
+            {
+              "start": 798.78,
+              "end": 802.74
+            },
+            {
+              "start": 854.7,
+              "end": 858.9
+            }
+          ],
+          "questionNumbers": [
+            11,
+            12
+          ]
+        },
+        {
+          "id": "listening-text-8:8",
+          "en": "Indeed.",
+          "zh": "确实。",
+          "speaker": "M",
+          "utf16Start": 550,
+          "utf16End": 557,
+          "passes": [
+            {
+              "start": 802.86,
+              "end": 804.3
+            },
+            {
+              "start": 859.14,
+              "end": 860.7
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:9",
+          "en": "But some of our listeners called to say they want to hear Jenny’s real voice.",
+          "zh": "不过，有些听众打电话来说想听珍妮本人唱歌。",
+          "speaker": "M",
+          "utf16Start": 558,
+          "utf16End": 635,
+          "passes": [
+            {
+              "start": 804.36,
+              "end": 809.7
+            },
+            {
+              "start": 860.7,
+              "end": 865.86
+            }
+          ]
+        },
+        {
+          "id": "listening-text-8:10",
+          "en": "Now let’s play one of her greatest hits – Show Me Your Love.",
+          "zh": "现在让我们播放她最受欢迎的歌曲之一《让我看看你的爱》。",
+          "speaker": "M",
+          "utf16Start": 636,
+          "utf16End": 696,
+          "passes": [
+            {
+              "start": 810.18,
+              "end": 814.92
+            },
+            {
+              "start": 865.98,
+              "end": 871.08
+            }
+          ],
+          "questionNumbers": [
+            13
+          ]
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: Dr. Evans, you just said that these ancient texts are actually the recipes from ancient Babylonia. Can you tell us more?\nW: Ancient Babylonia is home to many of the things that we use in our cooking today. I bet about 50% of the energy you need every day comes from vegetables or animals that originated in this area.\nM: Why have these texts taken so long to come to light?\nW: These ancient texts have been known since the 1920s, but were thought to be medical texts. In the 1940s, Mary Hussey, an American scholar, suggested that they might be about food. But people didn’t believe her until French author Jean Bottéro in the 1980s was asked to write an article about cooking in the past. He had heard about the texts, so he went to Yale University and found out that they were indeed about food.",
+      "translationZh": "男：埃文斯博士，您刚才说这些古代文献实际上是古巴比伦的食谱。您能多介绍一点吗？\n女：我们今天做饭用的许多食材都源自古巴比伦。我估计，你每天所需的能量大约有一半来自动植物食材，它们原产于这一地区。\n男：为什么过了这么久，人们才弄清这些文献的来头？\n女：人们从二十世纪二十年代就知道这些古文献，但一直把它们当作医学文献。二十世纪四十年代，美国学者玛丽·赫西提出，它们可能与食物有关。但人们当时并不相信她，直到二十世纪八十年代，法国作家让·博泰罗受邀写一篇关于古代烹饪的文章。他听说过这些文献，于是去了耶鲁大学，发现它们果然是关于食物的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "物质文化遗产"
+      },
+      "summaryZh": "访谈介绍古巴比伦食材的影响，以及古代文献如何从误认的医书被辨认为食谱。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "en": "Dr. Evans, you just said that these ancient texts are actually the recipes from ancient Babylonia.",
+          "zh": "埃文斯博士，您刚才说这些古代文献实际上是古巴比伦的食谱。",
+          "speaker": "M",
+          "utf16Start": 3,
+          "utf16End": 101,
+          "passes": [
+            {
+              "start": 916.62,
+              "end": 925.02
+            },
+            {
+              "start": 983.76,
+              "end": 992.1
+            }
+          ]
+        },
+        {
+          "id": "listening-text-9:2",
+          "en": "Can you tell us more?",
+          "zh": "您能多介绍一点吗？",
+          "speaker": "M",
+          "utf16Start": 102,
+          "utf16End": 123,
+          "passes": [
+            {
+              "start": 925.02,
+              "end": 926.34
+            },
+            {
+              "start": 992.16,
+              "end": 993.54
+            }
+          ]
+        },
+        {
+          "id": "listening-text-9:3",
+          "en": "Ancient Babylonia is home to many of the things that we use in our cooking today.",
+          "zh": "我们今天做饭用的许多食材都源自古巴比伦。",
+          "speaker": "W",
+          "utf16Start": 127,
+          "utf16End": 208,
+          "passes": [
+            {
+              "start": 926.46,
+              "end": 932.28
+            },
+            {
+              "start": 993.66,
+              "end": 999.36
+            }
+          ],
+          "questionNumbers": [
+            14
+          ]
+        },
+        {
+          "id": "listening-text-9:4",
+          "en": "I bet about 50% of the energy you need every day comes from vegetables or animals that originated in this area.",
+          "zh": "我估计，你每天所需的能量大约有一半来自动植物食材，它们原产于这一地区。",
+          "speaker": "W",
+          "utf16Start": 209,
+          "utf16End": 320,
+          "passes": [
+            {
+              "start": 932.64,
+              "end": 942.72
+            },
+            {
+              "start": 999.78,
+              "end": 1010.1
+            }
+          ]
+        },
+        {
+          "id": "listening-text-9:5",
+          "en": "Why have these texts taken so long to come to light?",
+          "zh": "为什么过了这么久，人们才弄清这些文献的来头？",
+          "speaker": "M",
+          "utf16Start": 324,
+          "utf16End": 376,
+          "passes": [
+            {
+              "start": 943.5,
+              "end": 947.64
+            },
+            {
+              "start": 1010.58,
+              "end": 1014.48
+            }
+          ]
+        },
+        {
+          "id": "listening-text-9:6",
+          "en": "These ancient texts have been known since the 1920s, but were thought to be medical texts.",
+          "zh": "人们从二十世纪二十年代就知道这些古文献，但一直把它们当作医学文献。",
+          "speaker": "W",
+          "utf16Start": 380,
+          "utf16End": 470,
+          "passes": [
+            {
+              "start": 948,
+              "end": 955.26
+            },
+            {
+              "start": 1015.08,
+              "end": 1022.16
+            }
+          ],
+          "questionNumbers": [
+            15
+          ]
+        },
+        {
+          "id": "listening-text-9:7",
+          "en": "In the 1940s, Mary Hussey, an American scholar, suggested that they might be about food.",
+          "zh": "二十世纪四十年代，美国学者玛丽·赫西提出，它们可能与食物有关。",
+          "speaker": "W",
+          "utf16Start": 471,
+          "utf16End": 559,
+          "passes": [
+            {
+              "start": 955.26,
+              "end": 963.9
+            },
+            {
+              "start": 1022.4,
+              "end": 1030.44
+            }
+          ]
+        },
+        {
+          "id": "listening-text-9:8",
+          "en": "But people didn’t believe her until French author Jean Bottéro in the 1980s was asked to write an article about cooking in the past.",
+          "zh": "但人们当时并不相信她，直到二十世纪八十年代，法国作家让·博泰罗受邀写一篇关于古代烹饪的文章。",
+          "speaker": "W",
+          "utf16Start": 560,
+          "utf16End": 692,
+          "passes": [
+            {
+              "start": 963.9,
+              "end": 973.8
+            },
+            {
+              "start": 1030.62,
+              "end": 1040.94
+            }
+          ]
+        },
+        {
+          "id": "listening-text-9:9",
+          "en": "He had heard about the texts, so he went to Yale University and found out that they were indeed about food.",
+          "zh": "他听说过这些文献，于是去了耶鲁大学，发现它们果然是关于食物的。",
+          "speaker": "W",
+          "utf16Start": 693,
+          "utf16End": 800,
+          "passes": [
+            {
+              "start": 974.34,
+              "end": 982.2
+            },
+            {
+              "start": 1041.42,
+              "end": 1049.1
+            }
+          ],
+          "questionNumbers": [
+            16
+          ]
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: Before we begin today’s experiment, let’s review the lab rules. First, safety glasses must be worn at all times, even if you’re only watching. Second, never mix chemicals unless the instructions tell you to do so. Today, we’re using a strong acid, which can cause serious burns if it touches your skin. If any chemical container is knocked over, don’t panic; tell me immediately and I’ll handle the cleanup. Also, keep your hair tied back and avoid wearing loose clothes. We will work in pairs. One person will handle the tools while the other records the data. Switch roles after every three trials to ensure everyone gets practice. Remember, the goal is accurate data, not speed. If you finish early, do not start a new experiment; instead, clean your workspace thoroughly. Any questions? No? Alright. Let’s have a safe and productive class.",
+      "translationZh": "男：开始今天的实验前，我们先复习一下实验室的规定。第一，必须全程佩戴护目镜，即使只在一旁观看也一样。第二，除非说明明确要求，否则绝不要混合化学品。今天我们会用到一种强酸，碰到皮肤可能造成严重灼伤。如果碰翻了化学品容器，先别慌，立刻告诉我，我会处理清理工作。另外，把头发扎起来，别穿宽松的衣服。大家两人一组。一个人操作工具，另一个人记录数据。每做三次试验就交换分工，好让每个人都有机会练习。记住，我们追求的是数据准确，速度放在其次。提前做完的同学，把自己的实验台彻底清理干净，别开始新的实验。有问题吗？没有吗？好。希望这堂实验课安全又有收获。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "老师讲解实验安全规则、两人分工与轮换方式，以及做完实验后的清理要求。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "en": "Before we begin today’s experiment, let’s review the lab rules.",
+          "zh": "开始今天的实验前，我们先复习一下实验室的规定。",
+          "speaker": "M",
+          "utf16Start": 3,
+          "utf16End": 66,
+          "passes": [
+            {
+              "start": 1100.22,
+              "end": 1104.84
+            },
+            {
+              "start": 1174.8,
+              "end": 1179.78
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:2",
+          "en": "First, safety glasses must be worn at all times, even if you’re only watching.",
+          "zh": "第一，必须全程佩戴护目镜，即使只在一旁观看也一样。",
+          "speaker": "M",
+          "utf16Start": 67,
+          "utf16End": 145,
+          "passes": [
+            {
+              "start": 1104.9,
+              "end": 1111.32
+            },
+            {
+              "start": 1179.84,
+              "end": 1186.62
+            }
+          ],
+          "questionNumbers": [
+            17
+          ]
+        },
+        {
+          "id": "listening-text-10:3",
+          "en": "Second, never mix chemicals unless the instructions tell you to do so.",
+          "zh": "第二，除非说明明确要求，否则绝不要混合化学品。",
+          "speaker": "M",
+          "utf16Start": 146,
+          "utf16End": 216,
+          "passes": [
+            {
+              "start": 1111.38,
+              "end": 1117.62
+            },
+            {
+              "start": 1186.68,
+              "end": 1192.5
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:4",
+          "en": "Today, we’re using a strong acid, which can cause serious burns if it touches your skin.",
+          "zh": "今天我们会用到一种强酸，碰到皮肤可能造成严重灼伤。",
+          "speaker": "M",
+          "utf16Start": 217,
+          "utf16End": 305,
+          "passes": [
+            {
+              "start": 1117.74,
+              "end": 1125.36
+            },
+            {
+              "start": 1192.74,
+              "end": 1200.12
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:5",
+          "en": "If any chemical container is knocked over, don’t panic; tell me immediately and I’ll handle the cleanup.",
+          "zh": "如果碰翻了化学品容器，先别慌，立刻告诉我，我会处理清理工作。",
+          "speaker": "M",
+          "utf16Start": 306,
+          "utf16End": 410,
+          "passes": [
+            {
+              "start": 1125.42,
+              "end": 1133.58
+            },
+            {
+              "start": 1200.42,
+              "end": 1208.64
+            }
+          ],
+          "questionNumbers": [
+            18
+          ]
+        },
+        {
+          "id": "listening-text-10:6",
+          "en": "Also, keep your hair tied back and avoid wearing loose clothes.",
+          "zh": "另外，把头发扎起来，别穿宽松的衣服。",
+          "speaker": "M",
+          "utf16Start": 411,
+          "utf16End": 474,
+          "passes": [
+            {
+              "start": 1133.64,
+              "end": 1138.62
+            },
+            {
+              "start": 1208.7,
+              "end": 1213.86
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:7",
+          "en": "We will work in pairs.",
+          "zh": "大家两人一组。",
+          "speaker": "M",
+          "utf16Start": 475,
+          "utf16End": 497,
+          "passes": [
+            {
+              "start": 1138.68,
+              "end": 1140.78
+            },
+            {
+              "start": 1213.92,
+              "end": 1215.6
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:8",
+          "en": "One person will handle the tools while the other records the data.",
+          "zh": "一个人操作工具，另一个人记录数据。",
+          "speaker": "M",
+          "utf16Start": 498,
+          "utf16End": 564,
+          "passes": [
+            {
+              "start": 1140.84,
+              "end": 1145.34
+            },
+            {
+              "start": 1215.66,
+              "end": 1221.18
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:9",
+          "en": "Switch roles after every three trials to ensure everyone gets practice.",
+          "zh": "每做三次试验就交换分工，好让每个人都有机会练习。",
+          "speaker": "M",
+          "utf16Start": 565,
+          "utf16End": 636,
+          "passes": [
+            {
+              "start": 1145.46,
+              "end": 1151.28
+            },
+            {
+              "start": 1221.24,
+              "end": 1226.28
+            }
+          ],
+          "questionNumbers": [
+            19
+          ]
+        },
+        {
+          "id": "listening-text-10:10",
+          "en": "Remember, the goal is accurate data, not speed.",
+          "zh": "记住，我们追求的是数据准确，速度放在其次。",
+          "speaker": "M",
+          "utf16Start": 637,
+          "utf16End": 684,
+          "passes": [
+            {
+              "start": 1151.52,
+              "end": 1156.62
+            },
+            {
+              "start": 1226.46,
+              "end": 1231.62
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:11",
+          "en": "If you finish early, do not start a new experiment; instead, clean your workspace thoroughly.",
+          "zh": "提前做完的同学，把自己的实验台彻底清理干净，别开始新的实验。",
+          "speaker": "M",
+          "utf16Start": 685,
+          "utf16End": 778,
+          "passes": [
+            {
+              "start": 1156.68,
+              "end": 1165.02
+            },
+            {
+              "start": 1231.68,
+              "end": 1240.2
+            }
+          ],
+          "questionNumbers": [
+            20
+          ]
+        },
+        {
+          "id": "listening-text-10:12",
+          "en": "Any questions?",
+          "zh": "有问题吗？",
+          "speaker": "M",
+          "utf16Start": 779,
+          "utf16End": 793,
+          "passes": [
+            {
+              "start": 1165.14,
+              "end": 1167.24
+            },
+            {
+              "start": 1240.26,
+              "end": 1241.76
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:13",
+          "en": "No?",
+          "zh": "没有吗？",
+          "speaker": "M",
+          "utf16Start": 794,
+          "utf16End": 797,
+          "passes": [
+            {
+              "start": 1167.48,
+              "end": 1168.32
+            },
+            {
+              "start": 1241.94,
+              "end": 1243.32
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:14",
+          "en": "Alright.",
+          "zh": "好。",
+          "speaker": "M",
+          "utf16Start": 798,
+          "utf16End": 806,
+          "passes": [
+            {
+              "start": 1168.32,
+              "end": 1169.88
+            },
+            {
+              "start": 1243.32,
+              "end": 1244.94
+            }
+          ]
+        },
+        {
+          "id": "listening-text-10:15",
+          "en": "Let’s have a safe and productive class.",
+          "zh": "希望这堂实验课安全又有收获。",
+          "speaker": "M",
+          "utf16Start": 807,
+          "utf16End": 846,
+          "passes": [
+            {
+              "start": 1169.88,
+              "end": 1173.12
+            },
+            {
+              "start": 1244.94,
+              "end": 1248.18
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "这位男士是什么人？",
+      "optionTranslationsZh": {
+        "A": "一位企业客户。",
+        "B": "一位求职者。",
+        "C": "一名新员工。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Now let me show you around and say hello to everyone, and then we’ll talk about your job duties."
+      },
+      "reasonZh": "女士要带他四处看看、和大家打招呼（say hello to everyone），再谈他的工作职责（your job duties），这是新人入职第一天的安排，可见他是新员工，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "工作（job）出现在“你的工作职责”（your job duties）里，女士是要给已经入职的他讲岗位分工，他不是来应聘的求职者。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "这段对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在办公室。",
+        "B": "在餐厅。",
+        "C": "在杂货店。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It’s the chef’s signature dish."
+      },
+      "reasonZh": "女士请男士再来点烤牛肉（some more roast beef），还说这是主厨的招牌菜（the chef’s signature dish），有主厨、有招牌菜，可见是在餐厅，选 B。"
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "两人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一张照片。",
+        "B": "一位渔民。",
+        "C": "一个国家。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I like the unique atmosphere caught by the photographer."
+      },
+      "reasonZh": "女士让男士看报上的一幅（this one in the newspaper），男士称赞摄影师捕捉到的氛围（caught by the photographer），可见两人在谈一张照片，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "渔民（Fishermen）是照片里拍到的人，两人评论的是整张照片的氛围，不是某位渔民。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "坦桑尼亚（Tanzania）只是交代照片拍在哪里，两人谈的不是这个国家。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士建议马克斯做什么？",
+      "optionTranslationsZh": {
+        "A": "去睡觉。",
+        "B": "小心开车。",
+        "C": "更新博客。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You’ve got a long drive tomorrow."
+      },
+      "reasonZh": "女士说快半夜了（almost midnight），明天还要开很久的车（a long drive tomorrow），把这两件事摆在一起，是劝马克斯赶紧去睡，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "开车（drive）是明天的长途，女士提它是为了劝他今晚早睡，并没有叮嘱他小心驾驶。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "写博客是马克斯自己想再花 15 分钟做完的事（Another 15 minutes from my travel blog），不是女士的建议。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "萨拉为什么打电话？",
+      "optionTranslationsZh": {
+        "A": "请病假。",
+        "B": "提出投诉。",
+        "C": "推迟一次会面。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Could we meet this afternoon?"
+      },
+      "reasonZh": "“推迟会面”就是萨拉说的中午前到不了、改到下午见（can’t arrive before noon … meet this afternoon），她打电话是为了改时间，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "看医生（see my doctor）的是接电话的沃特曼先生，他说一点看医生，是在交代自己两点后才有空，萨拉并没有请病假。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "在莉萨看来，哥本哈根和伦敦有什么不同？",
+      "optionTranslationsZh": {
+        "A": "生活压力更小。",
+        "B": "城市规划更好。",
+        "C": "旅游景点更多。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Unlike London, you don't feel constant pressure here."
+      },
+      "reasonZh": "“生活压力更小”就是莉萨说的和伦敦不同，在这里不会一直感到压力（don't feel constant pressure），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的“大城市”（big cities）是说哥本哈根有大城市的各种设施，莉萨拿来和伦敦比的是压力，不是城市规划。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "博物馆（museums）是莉萨列举的大城市设施，用来说哥本哈根样样都有，不是它和伦敦的区别。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "莉萨最初为什么来到哥本哈根？",
+      "optionTranslationsZh": {
+        "A": "寻找一份长期工作。",
+        "B": "做一个短期项目。",
+        "C": "参观一家著名博物馆。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "No, I originally came for a 3-month project at a law firm."
+      },
+      "reasonZh": "“短期项目”就是莉萨说的最初为一个三个月的项目而来（a 3-month project），三个月就是短期，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "长期工作（a permanent job）是项目做完后律所才给她的（After finishing it），不是她当初来的原因。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "博物馆（museums）是她前面列举的城市设施，和她当初为什么来哥本哈根无关。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "这次晚宴的总预算是多少？",
+      "optionTranslationsZh": {
+        "A": "200 英镑。",
+        "B": "300 英镑。",
+        "C": "600 英镑。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "we’re expecting 20 people, and we’re aiming for £30 per person."
+      },
+      "reasonZh": "总预算要用人数乘人均：20 人（20 people），每人 30 英镑（£30 per person），20 × 30 = 600 英镑，选 C。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "这次晚宴是为庆祝什么？",
+      "optionTranslationsZh": {
+        "A": "一名员工退休。",
+        "B": "一款新产品发布。",
+        "C": "一家分公司开业。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "it’s to honor a staff member who is retiring next month."
+      },
+      "reasonZh": "“一名员工退休”就是李先生说的晚宴为下个月退休的一位员工而办（a staff member who is retiring），选 A。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士接下来会为李先生做什么？",
+      "optionTranslationsZh": {
+        "A": "为他点餐。",
+        "B": "把账单拿给他。",
+        "C": "给他发邮件，附上菜单。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Could you email it to mikelee@gilbert.com?"
+      },
+      "reasonZh": "把两句合起来：李先生请女士把带价格的菜单发到他的邮箱（email it to …），女士答应马上去办（I’m on it），选 C。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "珍妮从事什么职业？",
+      "optionTranslationsZh": {
+        "A": "人工智能工程师。",
+        "B": "流行歌手。",
+        "C": "电台主持人。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "This could be an attractive new business model for a pop star."
+      },
+      "reasonZh": "节目谈的是用珍妮的歌声做歌（Jenny’s singing voice），女士又把她的做法说成流行歌星的新商业模式（for a pop star），可见她是流行歌手，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "人工智能（AI）是用来仿制她歌声的技术（her AI voice），珍妮是被仿制声音的歌手，不是做人工智能的工程师。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "电台主持人是正在说话的这两位（Dear listeners），珍妮是他们节目里谈论的歌手。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士怎么看珍妮的做法？",
+      "optionTranslationsZh": {
+        "A": "可能引发法律问题。",
+        "B": "会让社区受益。",
+        "C": "可能成为赚钱的生意。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "This could be an attractive new business model for a pop star."
+      },
+      "reasonZh": "“可能是赚钱的生意”就是女士说的这可能成为一种有吸引力的新商业模式（an attractive new business model），前面还交代了用她声音的人要和她分收益（shared their profits），选 C。"
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "播放一首歌。",
+        "B": "联系一位听众。",
+        "C": "推荐一档节目。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Now let’s play one of her greatest hits – Show Me Your Love."
+      },
+      "reasonZh": "男士直接说现在来播放（let’s play）她的一首热门歌曲，选项沿用了“播放”，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "听众（listeners）是之前打电话来的人（some of our listeners called），男士只是转述他们想听珍妮真声，并没说要去联系谁。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的“秀”（Show）出现在歌名《Show Me Your Love》里，男士是要播放这首歌，不是推荐一档节目。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "关于古巴比伦，埃文斯说了什么？",
+      "optionTranslationsZh": {
+        "A": "当地能源丰富。",
+        "B": "当地有多种语言。",
+        "C": "那里是多种食材的原产地。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Ancient Babylonia is home to many of the things that we use in our cooking today."
+      },
+      "reasonZh": "“多种食物的发源地”就是埃文斯说的今天烹饪用的很多东西都源自古巴比伦（home to many of the things … in our cooking），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "能量（energy）说的是人每天所需能量约一半来自原产于这里的动植物，讲的是食物，不是这里能源丰富。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "录音里的“是……的家园”（home to）说的是烹饪用的东西起源于此，不是那里有多种语言。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "起初，人们以为这些古代文献是关于什么的？",
+      "optionTranslationsZh": {
+        "A": "烹饪。",
+        "B": "医学。",
+        "C": "教育。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "These ancient texts have been known since the 1920s, but were thought to be medical texts."
+      },
+      "reasonZh": "“医学”就是录音里说的这些文献起初被当作医学文献（were thought to be medical texts），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "讲烹饪是博泰罗后来才查明的（they were indeed about food），人们起初并不这样看，而是把它们当成医学文献。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "关于法国作家让·博泰罗，我们知道什么？",
+      "optionTranslationsZh": {
+        "A": "他证实了玛丽·赫西的看法。",
+        "B": "他在耶鲁大学教历史。",
+        "C": "他是第一个翻译这些文献的人。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "He had heard about the texts, so he went to Yale University and found out that they were indeed about food."
+      },
+      "reasonZh": "把两处合起来：赫西提出文献可能与食物有关（might be about food），当时没人信；博泰罗去耶鲁查证，发现果然是讲食物（indeed about food），证明她对了，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "耶鲁大学（Yale University）是博泰罗专程去查看这些文献的地方（he went to Yale University），不是他教书的学校。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音说的是他查明了文献的内容（found out that they were indeed about food），不是他最先翻译了这些文献。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "做实验时，学生必须佩戴什么？",
+      "optionTranslationsZh": {
+        "A": "宽松的衣服。",
+        "B": "护目镜。",
+        "C": "防水帽。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "First, safety glasses must be worn at all times, even if you’re only watching."
+      },
+      "reasonZh": "“护目镜”就是老师说的必须一直戴着的安全眼镜（safety glasses），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "宽松的衣服（loose clothes）老师是要大家别穿（avoid wearing loose clothes），不是必须穿。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "如果碰翻了化学品容器，学生应该做什么？",
+      "optionTranslationsZh": {
+        "A": "报告老师。",
+        "B": "把现场清理干净。",
+        "C": "查看说明。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "If any chemical container is knocked over, don’t panic; tell me immediately and I’ll handle the cleanup."
+      },
+      "reasonZh": "“报告老师”就是老师说的碰翻容器后马上告诉我（tell me immediately），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "清理（the cleanup）老师说由他自己来处理（I’ll handle the cleanup），学生要做的只是报告。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "说明（the instructions）出现在混合化学品那条规定里（unless the instructions tell you），和碰翻容器后怎么办无关。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "学生为什么要交换分工？",
+      "optionTranslationsZh": {
+        "A": "加快实验速度。",
+        "B": "再次核对最终结果。",
+        "C": "让每个人都有同样的练习机会。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Switch roles after every three trials to ensure everyone gets practice."
+      },
+      "reasonZh": "“人人有同等练习机会”就是老师说的轮换是为了保证每个人都得到练习（ensure everyone gets practice），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "速度（speed）老师说的恰好相反：要的是数据准确，不是快（accurate data, not speed）。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "如果提前做完，学生应该做什么？",
+      "optionTranslationsZh": {
+        "A": "分析数据。",
+        "B": "清理自己的实验台。",
+        "C": "开始一项新实验。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If you finish early, do not start a new experiment; instead, clean your workspace thoroughly."
+      },
+      "reasonZh": "“清理实验台”就是老师说的提前做完就把工作台彻底清理干净（clean your workspace），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "数据（data）出现在分组分工里，一人操作、一人记录数据（records the data），不是做完后的安排。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "老师明确说别开始新实验（do not start a new experiment），而是（instead）把工作台清理干净。"
+        }
+      ]
+    }
+  }
+}

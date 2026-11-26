@@ -1,0 +1,135 @@
+{
+ "taskType": "continuation",
+ "modelAnswer": "Paragraph 1: Daniel and Rachel suggested that Emily continue her journey by train. There was a small station in town, Daniel explained, and a train left for Toronto every morning. Emily hesitated. What about her car? Rachel told her not to worry: once the roads were cleared, Daniel would pull it out of the ditch with his truck. Emily let out a long breath and thanked them again and again. The next morning they drove her to the station, and Rachel handed her a bag of sandwiches. Emily waved through the train window until the two of them disappeared into the snow. By evening, she was in Toronto with her boyfriend.\n\nParagraph 2: Three days later, Emily returned to get her car. Daniel and Rachel met her at the station and drove her to their house. Her car was parked in the driveway, free of snow, without a scratch on it. Daniel had pulled it out the morning after the storm and even checked the engine. She had arrived as a lost stranger, and these two kind people had saved her Christmas. Before heading home, she took the couple back to the little cafe. This time, Emily bought the hot chocolates. She promised to visit them again, and she added with a laugh that next time she would listen to the weather warnings.",
+ "continuationAnalysis": {
+  "schemaVersion": "continuation-analysis-v3",
+  "reading": {
+   "questions": [
+    {
+     "question": "原文停在哪里，什么问题还没解决？",
+     "answer": "原文停在咖啡馆里：Emily 向这对夫妇讲了自己的困境，离多伦多还有约一百英里，车完全陷住，整个圣诞计划可能泡汤。她怎么去多伦多、车怎么办，都还没有着落。"
+    },
+    {
+     "question": "Emily 和这对夫妇想要什么、是什么样的人，从原文哪里看出来？",
+     "answer": "Emily 一心要赶到多伦多和男友过圣诞，出发前没把暴风雪警告当回事，遇险后又会自己想办法（把车弄出来、在车里过夜）。Daniel 和 Rachel 见到陌生人的车被困就停下来，Rachel 说话 with genuine warmth，又请她喝热巧克力、耐心听她讲，是会主动、实在地帮人的人。"
+    },
+    {
+     "question": "原文是怎么写的？续写照着怎样写？",
+     "answer": "第三人称、一般过去时，跟着 Emily 讲；句子中等长短，动作一个接一个。原文没有一处引号，Rachel 说的话全用转述（Rachel asked if…、told her…、said they could…）；描写很少，只点到 blinding whiteout 这类关键环境。续写也以转述为主，少写描写，靠动作推进。"
+    }
+   ],
+   "sourceLinks": [
+    {
+     "sourceQuote": "her car slid into a ditch",
+     "use": "车还在沟里，第一段要交代车由谁、怎样弄出来，第二段 Emily 才能回来取车。"
+    },
+    {
+     "sourceQuote": "the couple bought Emily a hot chocolate",
+     "use": "结尾可以让 Emily 回到同一家咖啡馆，这次由她请这对夫妇喝热巧克力，用一个动作回报对方。"
+    },
+    {
+     "sourceQuote": "Although she had heard warnings about an approaching snowstorm, she didn’t give it much thought.",
+     "use": "开头她没把天气警告当回事，结尾可以让她笑着说下次会听天气警告，表明她从这次经历里学到了东西。"
+    }
+   ]
+  },
+  "taskCard": {
+   "taskRequires": [
+    "第一段从这对夫妇建议坐火车写起，要写到 Emily 接受建议、坐火车离开，车留在当地。",
+    "第二段首句说三天后她回来取车，所以第一段结束时车必须还留在这个镇上，而且有人会照看或处理它。",
+    "要接上原文事实：车陷在沟里，离多伦多约一百英里，她是赶去和男友过圣诞的。"
+   ],
+   "thisEssayChooses": "本文让 Daniel 答应等路通了用自己的卡车把车拉出来，夫妇俩留 Emily 过夜、第二天送她上火车，她当晚到多伦多。第二段写车已被拉出、检查好，Emily 带夫妇回到那家咖啡馆请他们喝热巧克力，并笑说下次会听天气警告。车由谁处理、她怎样答谢都可以换，比如找修车行拖车、给夫妇寄礼物，只要和原文的人物和处境对得上。"
+  },
+  "standard": {
+   "essay": "Paragraph 1: Daniel and Rachel suggested that Emily continue her journey by train. There was a small station in town, Daniel explained, and a train left for Toronto every morning. Emily hesitated. What about her car? Rachel told her not to worry: once the roads were cleared, Daniel would pull it out of the ditch with his truck. Emily let out a long breath and thanked them again and again. The next morning they drove her to the station, and Rachel handed her a bag of sandwiches. Emily waved through the train window until the two of them disappeared into the snow. By evening, she was in Toronto with her boyfriend.\n\nParagraph 2: Three days later, Emily returned to get her car. Daniel and Rachel met her at the station and drove her to their house. Her car was parked in the driveway, free of snow, without a scratch on it. Daniel had pulled it out the morning after the storm and even checked the engine. She had arrived as a lost stranger, and these two kind people had saved her Christmas. Before heading home, she took the couple back to the little cafe. This time, Emily bought the hot chocolates. She promised to visit them again, and she added with a laugh that next time she would listen to the weather warnings.",
+   "notes": [
+    {
+     "paragraph": 1,
+     "role": "把“坐火车”这个建议落实下来：说清怎么坐、车怎么办，再让 Emily 上车、到达多伦多，为第二段回来取车留好车。",
+     "items": [
+      {
+       "quote": "There was a small station in town, Daniel explained",
+       "explain": "用转述交代建议的具体内容，和原文转述 Rachel 说话的写法一致，也让“坐火车”变得可行。"
+      },
+      {
+       "quote": "What about her car?",
+       "explain": "用一句很短的自问写出 Emily 的顾虑，她不愿丢下车，这正是第二段要回来取车的原因。"
+      },
+      {
+       "quote": "once the roads were cleared, Daniel would pull it out of the ditch with his truck",
+       "explain": "接住原文的 ditch，交代车怎么处理；“等路通了”符合暴风雪刚过的处境，不是天降的帮助。"
+      },
+      {
+       "quote": "By evening, she was in Toronto with her boyfriend.",
+       "explain": "一句话收住原文开头的目标：赶去多伦多和男友过圣诞，不展开和本题无关的团聚场面。"
+      }
+     ]
+    },
+    {
+     "paragraph": 2,
+     "role": "写取车：交代车的结果，再用回到咖啡馆这个动作答谢夫妇，收住整个故事。",
+     "items": [
+      {
+       "quote": "Daniel had pulled it out the morning after the storm and even checked the engine",
+       "explain": "用过去完成时补出三天里发生的事，兑现第一段的承诺；even 一词点出他做得比答应的还多。"
+      },
+      {
+       "quote": "This time, Emily bought the hot chocolates.",
+       "explain": "和原文 the couple bought Emily a hot chocolate 对照，这次换她请客，用一个动作表达感谢，不用空喊口号。"
+      },
+      {
+       "quote": "next time she would listen to the weather warnings",
+       "explain": "回到开头她不听暴风雪警告的错误，用一句玩笑写出她的变化，结尾落在具体的事上。"
+      }
+     ]
+    }
+   ],
+   "expressions": [
+    {
+     "expression": "let out a long breath",
+     "function": "用一个动作写出 Emily 悬着的心终于放下，比直接说 she felt relieved 更具体。"
+    },
+    {
+     "expression": "pull … out of the ditch",
+     "function": "本题处理被困车辆最直接的说法，第一段承诺、第二段兑现都能用上。"
+    },
+    {
+     "expression": "This time, … bought the hot chocolates.",
+     "function": "用 This time 和原文的请客对照，写出角色互换的答谢。"
+    }
+   ],
+   "pitfalls": [
+    {
+     "pitfall": "第一段就写 Emily 回来取车，或让她开着车离开。",
+     "why": "第二段首句是“三天后回来取车”，第一段结束时车必须还留在镇上；提前写掉就和段首句冲突。"
+    },
+    {
+     "pitfall": "让一个新出现的警察、修车师傅或路人来解决问题，还给他起名字。",
+     "why": "原文的帮助者是 Daniel 和 Rachel，新人物会抢走他们的戏，也像天降的帮助；车的问题最好由这对夫妇来处理。"
+    },
+    {
+     "pitfall": "续写里写满引号对话，或结尾写一句“善良让世界更美好”之类的大道理。",
+     "why": "原文没有一处直接引语，满篇对话和原文不是一种写法；口号式结尾可以贴到任何故事后面，不如落到请喝热巧克力这样具体的动作上。"
+    }
+   ]
+  },
+  "advanced": {
+   "essay": "Paragraph 1: Daniel and Rachel suggested that Emily continue her journey by train. The little station at the edge of town was still open, Daniel explained, and the first train to Toronto left at seven. Emily glanced at the window, where snow was still swirling. “But my car…” Rachel patted her hand and told her that Daniel would pull it out with his truck as soon as the snowplows had been through. “It’ll be waiting for you,” she said. Emily let out a long breath, and the knot in her stomach finally loosened. The couple insisted she spend the rest of the night on their sofa. At dawn they drove her to the station, and Rachel pressed a bag of warm muffins into her hands. As the train rolled away, Emily kept waving until the two figures on the platform faded into the white. By evening, she was stepping off the train in Toronto, straight into her boyfriend’s arms.\n\nParagraph 2: Three days later, Emily returned to get her car. This time the sky was a clear, cold blue, and the road that had nearly swallowed her looked almost harmless. Daniel and Rachel were waiting at the station. When they turned into their driveway, Emily stopped short. There sat her car, brushed clean of snow, without a single scratch. Daniel had dug it out the morning after the storm and even checked the engine. Emily tried to pay him for his trouble, but he just shook his head and smiled. Instead, she took the couple back to the little cafe and, this time, ordered three hot chocolates herself. Holding the warm cup in both hands, she promised to visit them every Christmas. “And next time,” she added with a laugh, “I’ll listen to the weather report.”",
+   "beyondStandard": [
+    {
+     "quote": "“But my car…”",
+     "explain": "只留一句没说完的直接引语，写出 Emily 心里最放不下的事；全文引号很少，仍和原文以转述为主的写法协调。"
+    },
+    {
+     "quote": "the road that had nearly swallowed her looked almost harmless",
+     "explain": "用三天前后同一条路的对比写出风暴已过、心境已变，swallowed 一词又让人想起她陷在雪里的那一夜。"
+    },
+    {
+     "quote": "Emily tried to pay him for his trouble, but he just shook his head and smiled.",
+     "explain": "用“她想付钱、他摇头笑”一来一回的动作写出两人的关系，比标准版多了一层，也自然引出她改用请喝热巧克力来答谢。"
+    }
+   ]
+  }
+ }
+}

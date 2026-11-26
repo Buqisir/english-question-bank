@@ -1,0 +1,777 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-i:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-i:reading-d": {
+      "overview": "剑桥心理学家让 187 名美术馆参观者分组看陶土作品，一组给作品的美打分，一组只做图物配对。结果打分组抽象思维得分更高，有艺术爱好者更明显；情绪测量显示这并非因为更快乐，而是源于对美的投入。",
+      "fullTranslationZh": "剑桥大学的一个心理学家团队开展了一项实验，比较只是看看艺术品和主动判断它有多美，对认知分别有什么影响。\n\n研究邀请 187 人在一场手工陶土作品展期间参观凯特尔庭院美术馆。参与者被随机分成两组：“美感”组要主动思考所看的每件作品，再给它的美打分；对照组只需把作品的线描图和实物配对。随后，所有参与者都接受测试，看他们怎样处理信息，处理方式偏实际还是偏抽象。\n\n从全体参与者来看，美感组的抽象思维平均得分比对照组高近 14%。参与者被告知这项研究关注的是认知过程，同时也被问到兴趣爱好，约一半人说自己有艺术方面的爱好。在这些人中，效果更大：“美感”组中有艺术爱好的人，抽象思维平均得分比对照组中有艺术爱好的人高出 25% 以上。\n\n研究还通过询问参与者完成美术馆任务时的感受，测量了他们的情绪状态。从全体参与者来看，美感组报告的“带来转变、超越自我的感受”——比如感动、豁然开朗、受到启发——平均比对照组高 23%。但重要的是，美感组并没有报告比对照组更快乐，这说明影响抽象思维的是对美的投入，而不是这段体验带来的整体好心情。\n\n“我们在屏幕上做事时，通常用非常具体的方式思考，”研究的资深作者西蒙娜·施纳尔说，“放空自己、任思绪漫游变得越来越少见了，可恰恰在那种时候，我们的思考方式能让心智开阔起来。欣赏艺术之美，也许是开启抽象认知过程的理想方式。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+          "sourceText": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience.",
+          "displayText": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:34"
+          ],
+          "translationZh": "但重要的是，美感组并没有报告比对照组更快乐，这说明影响抽象思维的是对美的投入，而不是这段体验带来的整体好心情。",
+          "analysisZh": "主干是 the beauty group did not report feeling any happier than the control group：美感组没有报告比对照组更快乐。句首 Importantly, however 提醒这是转折后的关键发现。suggesting that … 是现在分词短语，表示由前面这个事实推出的结论。that 从句里用强调句 it was … that …，强调的是 the engagement with beauty（对美的投入）；rather than any overall positivity 把另一种解释（整体的好心情）排除掉。测情绪的用意（第 34 题）就在这一句。",
+          "underlineRanges": [
+            {
+              "start": 39,
+              "end": 73,
+              "quote": "did not report feeling any happier"
+            },
+            {
+              "start": 114,
+              "end": 181,
+              "quote": "it was the engagement with beauty that influenced abstract thinking"
+            },
+            {
+              "start": 183,
+              "end": 217,
+              "quote": "rather than any overall positivity"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-i:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+          "sourceText": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+          "displayText": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-i:33"
+          ],
+          "translationZh": "在这些人中，效果更大：“美感”组中有艺术爱好的人，抽象思维平均得分比对照组中有艺术爱好的人高出 25% 以上。",
+          "analysisZh": "冒号前 Among those, the effect was greater 先下结论：those 指前一句说的有艺术爱好的那一半人，在他们中间效果更大。冒号后具体说明，主干是 those … scored over 25% higher … than those …，比较的两边都是有艺术爱好的人，区别只在组别：with an artistic hobby in the “beauty” group 和 with an artistic hobby in the control group 都是后置定语。over 25% higher 比全体的 almost 14% 大，这正是 greater 的含义（第 33 题）。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 35,
+              "quote": "the effect was greater"
+            },
+            {
+              "start": 88,
+              "end": 121,
+              "quote": "scored over 25% higher on average"
+            },
+            {
+              "start": 144,
+              "end": 198,
+              "quote": "than those with an artistic hobby in the control group"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-i:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-d:1"
+              ],
+              "start": 0,
+              "end": 51,
+              "quote": "剑桥大学的一个心理学家团队开展了一项实验，比较只是看看艺术品和主动判断它有多美，对认知分别有什么影响。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-d:2"
+              ],
+              "start": 53,
+              "end": 178,
+              "quote": "研究邀请 187 人在一场手工陶土作品展期间参观凯特尔庭院美术馆。参与者被随机分成两组：“美感”组要主动思考所看的每件作品，再给它的美打分；对照组只需把作品的线描图和实物配对。随后，所有参与者都接受测试，看他们怎样处理信息，处理方式偏实际还是偏抽象。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-d:3"
+              ],
+              "start": 180,
+              "end": 313,
+              "quote": "从全体参与者来看，美感组的抽象思维平均得分比对照组高近 14%。参与者被告知这项研究关注的是认知过程，同时也被问到兴趣爱好，约一半人说自己有艺术方面的爱好。在这些人中，效果更大：“美感”组中有艺术爱好的人，抽象思维平均得分比对照组中有艺术爱好的人高出 25% 以上。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-d:4"
+              ],
+              "start": 315,
+              "end": 462,
+              "quote": "研究还通过询问参与者完成美术馆任务时的感受，测量了他们的情绪状态。从全体参与者来看，美感组报告的“带来转变、超越自我的感受”——比如感动、豁然开朗、受到启发——平均比对照组高 23%。但重要的是，美感组并没有报告比对照组更快乐，这说明影响抽象思维的是对美的投入，而不是这段体验带来的整体好心情。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-i:reading-d:5"
+              ],
+              "start": 464,
+              "end": 575,
+              "quote": "“我们在屏幕上做事时，通常用非常具体的方式思考，”研究的资深作者西蒙娜·施纳尔说，“放空自己、任思绪漫游变得越来越少见了，可恰恰在那种时候，我们的思考方式能让心智开阔起来。欣赏艺术之美，也许是开启抽象认知过程的理想方式。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+                "start": 116,
+                "end": 361,
+                "quote": "Participants were randomly divided into two groups: the “beauty” group was asked to actively consider and then rate the beauty of each object they viewed, while the control group just matched a line drawing of the object with the artwork itself."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p2",
+                "start": 44,
+                "end": 69,
+                "quote": "“美感”组要主动思考所看的每件作品，再给它的美打分"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+                "start": 287,
+                "end": 486,
+                "quote": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p3",
+                "start": 89,
+                "end": 132,
+                "quote": "“美感”组中有艺术爱好的人，抽象思维平均得分比对照组中有艺术爱好的人高出 25% 以上"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+                "start": 0,
+                "end": 131,
+                "quote": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p3",
+                "start": 9,
+                "end": 31,
+                "quote": "美感组的抽象思维平均得分比对照组高近 14%"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+                "start": 337,
+                "end": 575,
+                "quote": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p4",
+                "start": 92,
+                "end": 147,
+                "quote": "但重要的是，美感组并没有报告比对照组更快乐，这说明影响抽象思维的是对美的投入，而不是这段体验带来的整体好心情。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-5",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
+                "start": 250,
+                "end": 343,
+                "quote": "Admiring the beauty of art may be the ideal way to initiate the abstract cognitive processes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p5",
+                "start": 86,
+                "end": 110,
+                "quote": "欣赏艺术之美，也许是开启抽象认知过程的理想方式。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-6",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+                "start": 0,
+                "end": 131,
+                "quote": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p3",
+                "start": 9,
+                "end": 31,
+                "quote": "美感组的抽象思维平均得分比对照组高近 14%"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-7",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+                "start": 337,
+                "end": 575,
+                "quote": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p4",
+                "start": 92,
+                "end": 147,
+                "quote": "但重要的是，美感组并没有报告比对照组更快乐，这说明影响抽象思维的是对美的投入，而不是这段体验带来的整体好心情。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-d-1"
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2026-i:reading-d-8",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+                "start": 287,
+                "end": 486,
+                "quote": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-i:reading-d-p3",
+                "start": 78,
+                "end": 133,
+                "quote": "在这些人中，效果更大：“美感”组中有艺术爱好的人，抽象思维平均得分比对照组中有艺术爱好的人高出 25% 以上。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-i:reading-d-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段交代实验目的，接着依次写实验做法、抽象思维的结果、情绪测量的结果及其说明，最后引研究者的话点出欣赏艺术之美能开启抽象思维。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-d:1",
+            "summary": "剑桥心理学家做实验，比较只看艺术和主动判断其美对认知的不同影响。",
+            "function": "交代研究目的，引出全文。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+            "summary": "187 人在美术馆看陶土作品，美感组给每件作品的美打分，对照组做线描图配对，之后都测信息处理方式。",
+            "function": "介绍实验过程。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+            "summary": "美感组抽象思维平均高近 14%，有艺术爱好者中差距超过 25%。",
+            "function": "报告主要结果。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+            "summary": "美感组的感动、受启发等感受高 23%，但并不更快乐，说明起作用的是对美的投入。",
+            "function": "用情绪测量排除另一种解释。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
+            "summary": "资深作者 Schnall 说人们在屏幕前思维具体，欣赏艺术之美可能是开启抽象思维的理想方式。",
+            "function": "引专家的话，点明研究意义。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-i:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在实验分组的说明里找出美感组的任务，并和对照组的任务分开。",
+      "stemTranslationZh": "美感组被要求对陶土作品做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 while 前，后半句是对照组",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "画出它们的轮廓。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "line drawing",
+            "optionText": "Draw",
+            "matchType": "wordFamily",
+            "relationNote": "Draw 借自对照组的任务 a line drawing：对照组是拿现成的线描图和实物配对，不是自己画轮廓，美感组更没画。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+              "quote": "Participants were randomly divided into two groups: the “beauty” group was asked to actively consider and then rate the beauty of each object they viewed, while the control group just matched a line drawing of the object with the artwork itself.",
+              "anchor": "对照组的任务"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "给每件作品打分。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+              "quote": "Participants were randomly divided into two groups: the “beauty” group was asked to actively consider and then rate the beauty of each object they viewed, while the control group just matched a line drawing of the object with the artwork itself.",
+              "anchor": "美感组给每件作品的美打分"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "比较它们的价格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Compare their prices.",
+            "explanation": "美感组要考虑并评定的是作品美不美，实验里根本没有出现价格。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把每件作品仿制一件。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Make a copy of each piece.",
+            "explanation": "原文的 each object 是给每件作品打分，选项借“每件”改成每件仿做一件；参与者只是参观，没人动手做陶器。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "asked to",
+          "sourceRole": "stem",
+          "targetText": "Participants were randomly divided into two groups: the “beauty” group was asked to actively consider and then rate the beauty of each object they viewed, while the control group just matched a line drawing of the object with the artwork itself.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "rate the beauty of each object they viewed",
+          "note": "题干 asked to 原词出现在讲两组分别做什么的一句。"
+        },
+        {
+          "sourceText": "Give each piece a rating.",
+          "sourceRole": "correctOption",
+          "targetText": "Participants were randomly divided into two groups: the “beauty” group was asked to actively consider and then rate the beauty of each object they viewed, while the control group just matched a line drawing of the object with the artwork itself.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "原文说美感组要给看过的每件作品的美打分（rate the beauty of each object），选项把动词 rate 变成名词 a rating，each piece 就是 each object，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把全体的组间差距和有艺术爱好者的组间差距放在一起比，找出平均分最高的一类人。",
+      "stemTranslationZh": "哪类参与者在测试中的平均得分最高？",
+      "locateBy": "stem",
+      "locateFindZh": "看冒号后，再对照全体的差距",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "美感组，有艺术爱好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "quote": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+              "anchor": "有爱好的美感组高出 25% 以上"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "quote": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
+              "anchor": "全体美感组高近 14%"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "美感组，没有艺术爱好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Among those, the effect was greater",
+            "sourceHighlight": "Among those",
+            "optionText": "Beauty group, without an artistic hobby.",
+            "optionHighlight": "without an artistic hobby",
+            "explanation": "美感组没错，但效果更大的是有艺术爱好的那一半人（Among those, the effect was greater），选项丢掉了“有爱好”这个条件。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "quote": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+              "anchor": "有爱好者中效果更大"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对照组，有艺术爱好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+            "sourceEntity": "in the “beauty” group",
+            "optionText": "Control group, with an artistic hobby.",
+            "optionEntity": "Control group",
+            "explanation": "有艺术爱好的对照组正是被比下去的一方，有爱好的美感组比它高出 25% 以上（over 25% higher）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "quote": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+              "anchor": "有爱好者的组间比较"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对照组，没有艺术爱好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
+            "sourceHighlight": "scored almost 14% higher",
+            "optionText": "Control group, without an artistic hobby.",
+            "optionHighlight": "Control group",
+            "explanation": "全体比较时对照组就比美感组低近 14%（almost 14% higher），没有爱好的对照组两样优势都不沾，不可能最高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "quote": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
+              "anchor": "全体的组间比较"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "highest score",
+          "sourceRole": "stem",
+          "targetText": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:3",
+          "relationType": "locationCue",
+          "targetCue": "scored over 25% higher",
+          "sourceZh": "得分最高",
+          "targetCueZh": "得分高出 25% 以上",
+          "answerText": "those with an artistic hobby in the “beauty” group scored over 25% higher on average",
+          "note": "题干 highest score 比的是得分高低，对应原文 scored over 25% higher。"
+        },
+        {
+          "sourceText": "Beauty group, with an artistic hobby.",
+          "sourceRole": "correctOption",
+          "targetText": "Among those, the effect was greater: those with an artistic hobby in the “beauty” group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的两个条件来自两处比较：先看全体，美感组平均比对照组高近 14%（almost 14% higher）；接着在有艺术爱好的人里，美感组又比对照组高出 25% 以上（over 25% higher）。美感组本就领先，有爱好的领先更多，所以平均分最高，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:34": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从情绪测量得出的结论，倒推研究者为什么要测参与者的情绪。",
+      "stemTranslationZh": "为什么要测量参与者的情绪状态？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读到 however 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了了解他们对艺术的态度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To discover their attitudes towards art.",
+            "explanation": "测情绪问的是完成展厅任务时的感受（their feelings while completing the gallery task），不是他们怎么看艺术。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了确定他们具体的思维模式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "All participants were then tested on how they process information, and whether it’s in a more practical or abstract way.",
+            "sourceEntity": "tested on how they process information",
+            "optionText": "To identify their specific thinking patterns.",
+            "optionEntity": "their specific thinking patterns",
+            "explanation": "思维方式由另一项测试测出（tested on how they process information）；测情绪是另一回事，用来解释思维得分为什么不同。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+              "quote": "All participants were then tested on how they process information, and whether it’s in a more practical or abstract way.",
+              "anchor": "另一项思维测试"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了检验任务的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "task",
+            "optionText": "tasks",
+            "matchType": "wordFamily",
+            "relationNote": "tasks 借自 the gallery task（展厅任务）：研究问的是做这项任务时有什么感受，没有比较任务难不难。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+              "quote": "Emotional states of participants were also measured by asking about their feelings while completing the gallery task.",
+              "anchor": "询问做任务时的感受"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了确定测试结果背后的因素。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+              "quote": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience.",
+              "anchor": "并不更快乐，起作用的是对美的投入"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "emotional states",
+          "sourceRole": "stem",
+          "targetText": "Emotional states of participants were also measured by asking about their feelings while completing the gallery task.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience",
+          "bridgeZh": "测情绪就是要分清得高分靠美感还是靠好心情",
+          "note": "题干 emotional states 原词出现在情绪测量一段的开头。"
+        },
+        {
+          "sourceText": "To determine factors behind the test results.",
+          "sourceRole": "correctOption",
+          "targetText": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项是从测出的结论倒推出的用意：美感组并不比对照组更快乐（did not report feeling any happier），由此断定影响抽象思维的是对美的投入，不是好心情（rather than any overall positivity）。测情绪就是为了找出得分差异背后的原因，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-i:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究关于欣赏艺术得出的主要结论。",
+      "stemTranslationZh": "关于欣赏艺术，这项研究的主要发现是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它能加深情感联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It enhances emotional ties.",
+            "explanation": "emotional 借自情绪状态（Emotional states）的测量，那测的是个人感受，用来解释结果；原文没说欣赏艺术能加深人与人的情感联系。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它需要批判性思维能力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It needs critical thinking skills.",
+            "explanation": "研究看的是欣赏艺术带来什么，不是欣赏艺术需要什么能力；美感组只需考虑并给美打分。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它能带来积极的感受。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "the beauty group did not report feeling any happier than the control group",
+            "sourceHighlight": "did not report feeling any happier",
+            "optionText": "It creates positive feelings.",
+            "optionHighlight": "positive feelings",
+            "explanation": "被打动、受启发的感受确实高了 23%，但美感组并不更快乐（did not report feeling any happier），研究要说明的恰恰是起作用的不是好心情。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+              "quote": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience.",
+              "anchor": "并不更快乐"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它能促进抽象思维。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
+              "quote": "Admiring the beauty of art may be the ideal way to initiate the abstract cognitive processes.",
+              "anchor": "欣赏艺术之美能开启抽象认知"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "quote": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
+              "anchor": "美感组抽象思维平均高近 14%"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "appreciation of art",
+          "sourceRole": "stem",
+          "targetText": "Admiring the beauty of art may be the ideal way to initiate the abstract cognitive processes.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:5",
+          "relationType": "locationCue",
+          "targetCue": "Admiring the beauty of art",
+          "sourceZh": "欣赏艺术",
+          "targetCueZh": "欣赏艺术之美",
+          "answerText": "initiate the abstract cognitive processes",
+          "note": "题干 appreciation of art 对应 Schnall 话里的 Admiring the beauty of art。"
+        },
+        {
+          "sourceText": "It encourages abstract thinking.",
+          "sourceRole": "correctOption",
+          "targetText": "Admiring the beauty of art may be the ideal way to initiate the abstract cognitive processes.",
+          "targetParagraphId": "block:paper-gaokao-2026-i:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“促进抽象思维”（encourages abstract thinking）就是 Schnall 说的欣赏艺术之美能开启抽象认知过程（initiate the abstract cognitive processes）；实验数据也一样，美感组抽象思维平均高近 14%，选 D。"
+        }
+      ]
+    }
+  }
+}

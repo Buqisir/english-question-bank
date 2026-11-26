@@ -1,0 +1,983 @@
+{
+ "schemaVersion": "seven-choices-analysis-v1",
+ "paperId": "paper-gaokao-2026-i",
+ "sourceAssetVersion": 1,
+ "targetGroups": [
+  "group:paper-gaokao-2026-i:seven-choices"
+ ],
+ "meta": {
+  "generatedBy": "external-ai",
+  "promptVersion": "seven-choices-analysis-v1",
+  "reviewStatus": "reviewed"
+ },
+ "groups": {
+  "group:paper-gaokao-2026-i:seven-choices": {
+   "overview": "文章介绍人工智能如何改变博物馆：它让参观更个性化、更有互动，帮助及早发现并修复文物破损，按不同人群定制学习体验，同时也带来算法公平和隐私保护等伦理挑战。",
+   "fullTranslationZh": "博物馆曾经是充满历史气息的安静场所，如今却洋溢着数字技术带来的兴奋。借助机器学习和先进的算法，这些机构正在为参观者打造个性化的参观旅程，保护脆弱的藏品，并揭示隐藏的故事。简而言之，人工智能正在方方面面重新定义博物馆。\n\n人工智能把一次普通的博物馆参观变成了个性化、互动式的探险。智能推荐引擎分析展品受欢迎程度、参观者以往的行为等数据，推荐特定的展品和活动，让每一次参观都独特而充满惊喜。此外，人工智能驱动的虚拟导览员正在取代传统导游。这些数字助手与参观者进行生动的对话，提供贴合情境的见解，加深参观者的理解，满足他们的好奇心。\n\n除了与参观者互动，人工智能在保护珍贵艺术品方面也发挥着至关重要的作用。由于博物馆的展品会随着时间推移自然破损，及早发现至关重要。人工智能可以帮助识别最细微的破损迹象，比如裂纹或褪色，而这些往往是肉眼看不见的。这种能力让及时修复成为可能。此外，通过预测今后的破损规律，人工智能帮助博物馆采取预防措施，改进保护策略。\n\n人工智能还大大提升了博物馆的教育价值，对儿童和家庭来说尤其如此。它能针对不同的年龄段和学习风格量身定制学习体验。例如，由人工智能驱动的互动展品可以根据使用者的喜好和反应调整内容和难度。这种适应能力确保复杂的历史概念对年轻人来说变得易懂而有趣。\n\n展望未来，人工智能的快速发展既带来了令人兴奋的可能，也带来了伦理方面的挑战。博物馆正在与人工智能伦理学家合作，开发公平的算法。收集参观者数据还引发了隐私问题。应当制定严格的政策来保护参观者的信息。",
+   "selectedLongSentences": [
+    {
+     "sentenceId": "sentence-seven-choices-1",
+     "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+     "sourceText": "Smart recommendation engines analyze data such as exhibit popularity and visitors’ past behavior to suggest specific exhibits and events, making each visit unique and surprising.",
+     "displayText": "Smart recommendation engines analyze data such as exhibit popularity and visitors’ past behavior to suggest specific exhibits and events, making each visit unique and surprising.",
+     "relatedQuestionIds": [
+      "question:paper-gaokao-2026-i:37"
+     ],
+     "translationZh": "智能推荐引擎分析展品受欢迎程度、参观者以往的行为等数据，推荐特定的展品和活动，让每一次参观都独特而充满惊喜。",
+     "analysisZh": "主干是 Smart recommendation engines analyze data，谁做什么一目了然。such as 引出 data 的两个例子：展品热度和参观者以往的行为；to suggest specific exhibits and events 是不定式，说分析数据的目的；句末 making each visit unique and surprising 是现在分词短语，表示这样做带来的结果，make 后接宾语 each visit 和形容词补足语。读法：先抓“引擎分析数据”，再接“为了推荐”，最后接“结果每次参观都独特”。",
+     "underlineRanges": [
+      {
+       "start": 0,
+       "end": 41,
+       "quote": "Smart recommendation engines analyze data"
+      },
+      {
+       "start": 97,
+       "end": 136,
+       "quote": "to suggest specific exhibits and events"
+      },
+      {
+       "start": 138,
+       "end": 177,
+       "quote": "making each visit unique and surprising"
+      }
+     ]
+    },
+    {
+     "sentenceId": "sentence-seven-choices-2",
+     "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+     "sourceText": "AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye.",
+     "displayText": "AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye.",
+     "relatedQuestionIds": [
+      "question:paper-gaokao-2026-i:38"
+     ],
+     "translationZh": "人工智能可以帮助识别最细微的破损迹象，比如裂纹或褪色，而这些往往是肉眼看不见的。",
+     "analysisZh": "主干是 AI can help identify the slightest signs of decay，help 后面直接接动词原形 identify。such as cracks or discoloration 举例说明是哪些迹象；逗号后的 which are often invisible to the human eye 是非限制性定语从句，which 指前面这些细微的破损迹象，说明它们肉眼往往看不见。正因为人眼看不出、AI 看得出，后面那句 This capability 才有了明确的所指。",
+     "underlineRanges": [
+      {
+       "start": 0,
+       "end": 49,
+       "quote": "AI can help identify the slightest signs of decay"
+      },
+      {
+       "start": 84,
+       "end": 126,
+       "quote": "which are often invisible to the human eye"
+      }
+     ]
+    }
+   ],
+   "discourseStructure": {
+    "summary": "首段总说 AI 正在全方位改变博物馆，中间三段分讲参观体验、文物保护、教育价值，末段转向未来的伦理挑战和对策。",
+    "units": [
+     {
+      "unitId": "seven-unit-1",
+      "paragraphIds": [
+       "block:paper-gaokao-2026-i:seven-choices:1"
+      ],
+      "summary": "博物馆借助算法变了样，总说 AI 全方位重塑博物馆。"
+     },
+     {
+      "unitId": "seven-unit-2",
+      "paragraphIds": [
+       "block:paper-gaokao-2026-i:seven-choices:2"
+      ],
+      "summary": "智能推荐和虚拟导览员让参观个性化、可互动。"
+     },
+     {
+      "unitId": "seven-unit-3",
+      "paragraphIds": [
+       "block:paper-gaokao-2026-i:seven-choices:3"
+      ],
+      "summary": "AI 发现肉眼看不见的破损，便于及时修复，还能预测破损、提前预防。"
+     },
+     {
+      "unitId": "seven-unit-4",
+      "paragraphIds": [
+       "block:paper-gaokao-2026-i:seven-choices:4"
+      ],
+      "summary": "AI 按年龄和学习方式定制内容，让孩子看懂历史。"
+     },
+     {
+      "unitId": "seven-unit-5",
+      "paragraphIds": [
+       "block:paper-gaokao-2026-i:seven-choices:5"
+      ],
+      "summary": "AI 带来算法公平和隐私等伦理问题，需要制定政策保护信息。"
+     }
+    ]
+   },
+   "extraOptions": {
+    "E": {
+     "target": 39,
+     "secondary": 36,
+     "kind": "shadow",
+     "shadowOf": "D",
+     "shared": [
+      "learning"
+     ],
+     "text": "它的 \"spaces for learning\" 像接空前 \"educational value\"，都说能学东西。但空后 \"For instance\" 举的是 AI 展品 \"adjust their content\"，前面得先说 AI 怎样因人调整，它没提 AI。它照答案 D 改：都有 learning，D 说 AI 定制学习体验，它改成博物馆也是学习场所。以 \"Museums\" 开头也像收首段，但首段讲的是 AI 带来的变化。",
+     "quotes": [
+      "spaces for learning",
+      "educational value",
+      "For instance",
+      "adjust their content",
+      "Museums"
+     ]
+    },
+    "G": {
+     "target": 38,
+     "secondary": null,
+     "kind": "shadow",
+     "shadowOf": "A",
+     "shared": [
+      "this"
+     ],
+     "text": "它的 \"image recognition\" 像接空前 \"invisible to the human eye\"，说 AI 替人眼看。但空前已说 \"AI can help identify\"，再说 \"changing this\" 是重复；空后 \"Moreover\" 要再添一项好处，它没给出好处。它照答案 A 改：都有 this，A 说这种能力带来及时修复，它改成用图像识别分析展品。",
+     "quotes": [
+      "image recognition",
+      "invisible to the human eye",
+      "AI can help identify",
+      "changing this",
+      "Moreover"
+     ]
+    }
+   },
+   "teachingContent": {
+    "schemaVersion": "objective-teaching-content-v1",
+    "sourceTextId": "source-group:paper-gaokao-2026-i:seven-choices",
+    "sourceAssetVersion": 1,
+    "translation": {
+     "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+     "legacyField": "fullTranslationZh",
+     "paragraphs": [
+      {
+       "paragraphId": "zh-seven-choices-1",
+       "sourceParagraphIds": [
+        "block:paper-gaokao-2026-i:seven-choices:1"
+       ],
+       "start": 0,
+       "end": 108,
+       "quote": "博物馆曾经是充满历史气息的安静场所，如今却洋溢着数字技术带来的兴奋。借助机器学习和先进的算法，这些机构正在为参观者打造个性化的参观旅程，保护脆弱的藏品，并揭示隐藏的故事。简而言之，人工智能正在方方面面重新定义博物馆。"
+      },
+      {
+       "paragraphId": "zh-seven-choices-2",
+       "sourceParagraphIds": [
+        "block:paper-gaokao-2026-i:seven-choices:2"
+       ],
+       "start": 110,
+       "end": 263,
+       "quote": "人工智能把一次普通的博物馆参观变成了个性化、互动式的探险。智能推荐引擎分析展品受欢迎程度、参观者以往的行为等数据，推荐特定的展品和活动，让每一次参观都独特而充满惊喜。此外，人工智能驱动的虚拟导览员正在取代传统导游。这些数字助手与参观者进行生动的对话，提供贴合情境的见解，加深参观者的理解，满足他们的好奇心。"
+      },
+      {
+       "paragraphId": "zh-seven-choices-3",
+       "sourceParagraphIds": [
+        "block:paper-gaokao-2026-i:seven-choices:3"
+       ],
+       "start": 265,
+       "end": 421,
+       "quote": "除了与参观者互动，人工智能在保护珍贵艺术品方面也发挥着至关重要的作用。由于博物馆的展品会随着时间推移自然破损，及早发现至关重要。人工智能可以帮助识别最细微的破损迹象，比如裂纹或褪色，而这些往往是肉眼看不见的。这种能力让及时修复成为可能。此外，通过预测今后的破损规律，人工智能帮助博物馆采取预防措施，改进保护策略。"
+      },
+      {
+       "paragraphId": "zh-seven-choices-4",
+       "sourceParagraphIds": [
+        "block:paper-gaokao-2026-i:seven-choices:4"
+       ],
+       "start": 423,
+       "end": 544,
+       "quote": "人工智能还大大提升了博物馆的教育价值，对儿童和家庭来说尤其如此。它能针对不同的年龄段和学习风格量身定制学习体验。例如，由人工智能驱动的互动展品可以根据使用者的喜好和反应调整内容和难度。这种适应能力确保复杂的历史概念对年轻人来说变得易懂而有趣。"
+      },
+      {
+       "paragraphId": "zh-seven-choices-5",
+       "sourceParagraphIds": [
+        "block:paper-gaokao-2026-i:seven-choices:5"
+       ],
+       "start": 546,
+       "end": 644,
+       "quote": "展望未来，人工智能的快速发展既带来了令人兴奋的可能，也带来了伦理方面的挑战。博物馆正在与人工智能伦理学家合作，开发公平的算法。收集参观者数据还引发了隐私问题。应当制定严格的政策来保护参观者的信息。"
+      }
+     ]
+    },
+    "completedSourceTexts": [
+     {
+      "textId": "completed-block:paper-gaokao-2026-i:seven-choices:1",
+      "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+      "text": "Museums, once quiet places filled with history, are now full of digital excitement. By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories. In short, AI is redefining the museum in all respects."
+     },
+     {
+      "textId": "completed-block:paper-gaokao-2026-i:seven-choices:2",
+      "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+      "text": "AI transforms a standard museum trip into a personalized and interactive adventure. Smart recommendation engines analyze data such as exhibit popularity and visitors’ past behavior to suggest specific exhibits and events, making each visit unique and surprising. Furthermore, AI-powered virtual guides are replacing traditional tour guides. These digital assistants engage visitors in dynamic conversations and offer context-sensitive insights that deepen understanding and satisfy curiosity."
+     },
+     {
+      "textId": "completed-block:paper-gaokao-2026-i:seven-choices:3",
+      "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+      "text": "Beyond visitor interaction, AI plays a crucial role in preserving priceless artworks. Since the exhibits in museums sustain natural decay (破损) over time, early detection is vital. AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye. This capability allows for timely restoration. Moreover, by predicting future decay patterns, AI helps museums take preventive measures and improve preservation strategies."
+     },
+     {
+      "textId": "completed-block:paper-gaokao-2026-i:seven-choices:4",
+      "paragraphId": "block:paper-gaokao-2026-i:seven-choices:4",
+      "text": "AI also significantly enhances the educational value of museums, particularly for children and families. It tailors learning experiences to different age groups and learning styles. For instance, interactive exhibits powered by AI can adjust their content and difficulty level based on the user’s preferences and responses. This adaptability ensures that complex historical concepts become accessible and engaging for young minds."
+     },
+     {
+      "textId": "completed-block:paper-gaokao-2026-i:seven-choices:5",
+      "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+      "text": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges. Museums are working together with AI ethicists to develop fair algorithms. Visitor data collection also raises privacy issues. Strict policies should be established to protect visitors’ information."
+     }
+    ],
+    "annotations": [
+     {
+      "annotationId": "evidence-seven-choices-36",
+      "kind": "answer-evidence",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:36"
+      ],
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+        "start": 163,
+        "end": 264,
+        "quote": "creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories"
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-1",
+        "start": 53,
+        "end": 84,
+        "quote": "为参观者打造个性化的参观旅程，保护脆弱的藏品，并揭示隐藏的故事"
+       }
+      ]
+     },
+     {
+      "annotationId": "insertion-seven-choices-36",
+      "kind": "answer-insertion",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:36"
+      ],
+      "blankId": "blank:paper-gaokao-2026-i:36",
+      "sourceRanges": [
+       {
+        "textId": "completed-block:paper-gaokao-2026-i:seven-choices:1",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+        "start": 266,
+        "end": 320,
+        "quote": "In short, AI is redefining the museum in all respects."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-1",
+        "start": 85,
+        "end": 108,
+        "quote": "简而言之，人工智能正在方方面面重新定义博物馆。"
+       }
+      ]
+     },
+     {
+      "annotationId": "evidence-seven-choices-37",
+      "kind": "answer-evidence",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:37"
+      ],
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+        "start": 270,
+        "end": 294,
+        "quote": "These digital assistants"
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-2",
+        "start": 107,
+        "end": 113,
+        "quote": "这些数字助手"
+       }
+      ]
+     },
+     {
+      "annotationId": "insertion-seven-choices-37",
+      "kind": "answer-insertion",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:37"
+      ],
+      "blankId": "blank:paper-gaokao-2026-i:37",
+      "sourceRanges": [
+       {
+        "textId": "completed-block:paper-gaokao-2026-i:seven-choices:2",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+        "start": 263,
+        "end": 340,
+        "quote": "Furthermore, AI-powered virtual guides are replacing traditional tour guides."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-2",
+        "start": 83,
+        "end": 107,
+        "quote": "此外，人工智能驱动的虚拟导览员正在取代传统导游。"
+       }
+      ]
+     },
+     {
+      "annotationId": "evidence-seven-choices-38",
+      "kind": "answer-evidence",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:38"
+      ],
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+        "start": 192,
+        "end": 229,
+        "quote": "identify the slightest signs of decay"
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-3",
+        "start": 72,
+        "end": 82,
+        "quote": "识别最细微的破损迹象"
+       }
+      ]
+     },
+     {
+      "annotationId": "insertion-seven-choices-38",
+      "kind": "answer-insertion",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:38"
+      ],
+      "blankId": "blank:paper-gaokao-2026-i:38",
+      "sourceRanges": [
+       {
+        "textId": "completed-block:paper-gaokao-2026-i:seven-choices:3",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+        "start": 308,
+        "end": 354,
+        "quote": "This capability allows for timely restoration."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-3",
+        "start": 104,
+        "end": 118,
+        "quote": "这种能力让及时修复成为可能。"
+       }
+      ]
+     },
+     {
+      "annotationId": "evidence-seven-choices-39",
+      "kind": "answer-evidence",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:39"
+      ],
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:4",
+        "start": 165,
+        "end": 206,
+        "quote": "adjust their content and difficulty level"
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-4",
+        "start": 84,
+        "end": 91,
+        "quote": "调整内容和难度"
+       }
+      ]
+     },
+     {
+      "annotationId": "insertion-seven-choices-39",
+      "kind": "answer-insertion",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:39"
+      ],
+      "blankId": "blank:paper-gaokao-2026-i:39",
+      "sourceRanges": [
+       {
+        "textId": "completed-block:paper-gaokao-2026-i:seven-choices:4",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:4",
+        "start": 105,
+        "end": 181,
+        "quote": "It tailors learning experiences to different age groups and learning styles."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-4",
+        "start": 32,
+        "end": 56,
+        "quote": "它能针对不同的年龄段和学习风格量身定制学习体验。"
+       }
+      ]
+     },
+     {
+      "annotationId": "evidence-seven-choices-40",
+      "kind": "answer-evidence",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:40"
+      ],
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+        "start": 233,
+        "end": 262,
+        "quote": "protect visitors’ information"
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-5",
+        "start": 89,
+        "end": 97,
+        "quote": "保护参观者的信息"
+       }
+      ]
+     },
+     {
+      "annotationId": "insertion-seven-choices-40",
+      "kind": "answer-insertion",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:40"
+      ],
+      "blankId": "blank:paper-gaokao-2026-i:40",
+      "sourceRanges": [
+       {
+        "textId": "completed-block:paper-gaokao-2026-i:seven-choices:5",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+        "start": 185,
+        "end": 236,
+        "quote": "Visitor data collection also raises privacy issues."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-5",
+        "start": 63,
+        "end": 79,
+        "quote": "收集参观者数据还引发了隐私问题。"
+       }
+      ]
+     },
+     {
+      "annotationId": "structure-sentence-seven-choices-1",
+      "kind": "sentence-structure",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:37"
+      ],
+      "selectedSentenceId": "sentence-seven-choices-1",
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+        "start": 84,
+        "end": 262,
+        "quote": "Smart recommendation engines analyze data such as exhibit popularity and visitors’ past behavior to suggest specific exhibits and events, making each visit unique and surprising."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-2",
+        "start": 29,
+        "end": 83,
+        "quote": "智能推荐引擎分析展品受欢迎程度、参观者以往的行为等数据，推荐特定的展品和活动，让每一次参观都独特而充满惊喜。"
+       }
+      ]
+     },
+     {
+      "annotationId": "structure-sentence-seven-choices-2",
+      "kind": "sentence-structure",
+      "questionIds": [
+       "question:paper-gaokao-2026-i:38"
+      ],
+      "selectedSentenceId": "sentence-seven-choices-2",
+      "sourceRanges": [
+       {
+        "textId": "source-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+        "start": 180,
+        "end": 307,
+        "quote": "AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye."
+       }
+      ],
+      "translationRanges": [
+       {
+        "textId": "translation-group:paper-gaokao-2026-i:seven-choices",
+        "paragraphId": "zh-seven-choices-3",
+        "start": 64,
+        "end": 104,
+        "quote": "人工智能可以帮助识别最细微的破损迹象，比如裂纹或褪色，而这些往往是肉眼看不见的。"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "questions": {
+  "question:paper-gaokao-2026-i:36": {
+   "blankId": "blank:paper-gaokao-2026-i:36",
+   "positionFacet": "seven-choices.position.paragraph-end",
+   "roleFacet": "seven-choices.role.summary",
+   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+   "supportingMechanismFacets": [
+    "seven-choices.cohesion.lexical.topic-field-alignment"
+   ],
+   "topicClues": [
+    "digital excitement",
+    "machine learning and advanced algorithms",
+    "personalized visitor journeys",
+    "protecting delicate collections",
+    "revealing hidden stories"
+   ],
+   "contextEvidence": {
+    "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+    "beforeQuote": "By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories.",
+    "afterQuote": ""
+   },
+   "mechanismSignals": [
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+     "signalText": "In short",
+     "signalSide": "option",
+     "targetText": "creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories",
+     "relation": "In short 表示“总之”，把空前列出的几项变化收成一句。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "all respects",
+     "signalSide": "option",
+     "targetText": "personalized visitor journeys / protecting delicate collections / revealing hidden stories",
+     "relation": "all respects 概括空前参观、保护、讲故事这几个方面。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "protecting delicate collections",
+     "signalSide": "context-before",
+     "targetText": "redefining the museum",
+     "relation": "空前逐项列出博物馆被改变的地方，是答案要总结的内容。"
+    }
+   ],
+   "lock": [
+    "In short",
+    "all respects"
+   ],
+   "find": {
+    "text": "空在段尾，空前一口气列了 \"personalized visitor journeys\"、\"protecting delicate collections\" 等几件事，该收一句；C 的 \"In short\" 正是总结，\"all respects\" 把几方面都盖住。",
+    "quotes": [
+     "personalized visitor journeys",
+     "protecting delicate collections",
+     "In short",
+     "all respects"
+    ]
+   },
+   "explain": "首段先说博物馆靠算法在参观、保护藏品、讲故事上都变了样，这句一句话收住这些变化；后面几段再分头讲参观、文物保护、教育和伦理，正好一一展开。",
+   "distractors": [],
+   "optionFit": {
+    "correctOptionLabel": "C",
+    "fitSummary": "首段先说博物馆靠算法在参观、保护藏品、讲故事上都变了样，这句一句话收住这些变化；后面几段再分头讲参观、文物保护、教育和伦理，正好一一展开。",
+    "matchedClues": [
+     {
+      "contextSide": "creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories",
+      "optionSide": "In short",
+      "relation": "空前是并列的几项具体变化，In short 把它们归成一个结论。"
+     },
+     {
+      "contextSide": "machine learning and advanced algorithms",
+      "optionSide": "AI is redefining the museum",
+      "relation": "空前说的机器学习和算法就是 AI，答案点明是 AI 在改变博物馆。"
+     }
+    ]
+   },
+   "keyDistractors": []
+  },
+  "question:paper-gaokao-2026-i:37": {
+   "blankId": "blank:paper-gaokao-2026-i:37",
+   "positionFacet": "seven-choices.position.paragraph-middle",
+   "roleFacet": "seven-choices.role.cohesion",
+   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+   "supportingMechanismFacets": [
+    "seven-choices.cohesion.grammatical.referential-cohesion"
+   ],
+   "topicClues": [
+    "personalized and interactive adventure",
+    "Smart recommendation engines",
+    "These digital assistants",
+    "dynamic conversations",
+    "context-sensitive insights"
+   ],
+   "contextEvidence": {
+    "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+    "beforeQuote": "Smart recommendation engines analyze data such as exhibit popularity and visitors’ past behavior to suggest specific exhibits and events, making each visit unique and surprising.",
+    "afterQuote": "These digital assistants engage visitors in dynamic conversations"
+   },
+   "mechanismSignals": [
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+     "signalText": "Furthermore",
+     "signalSide": "option",
+     "targetText": "Smart recommendation engines",
+     "relation": "Furthermore 表示递进，在空前的智能推荐之外再添一种 AI 手段。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "Smart recommendation engines",
+     "signalSide": "context-before",
+     "targetText": "AI-powered virtual guides",
+     "relation": "空前讲第一种 AI 工具，答案接着讲第二种。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+     "signalText": "These digital assistants",
+     "signalSide": "context-after",
+     "targetText": "AI-powered virtual guides",
+     "relation": "These digital assistants 回指答案里的虚拟导览员。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+     "signalText": "virtual guides",
+     "signalSide": "option",
+     "targetText": "These digital assistants",
+     "relation": "virtual guides 是空后 These digital assistants 的先行词。"
+    }
+   ],
+   "lock": [
+    "These digital assistants",
+    "virtual guides"
+   ],
+   "find": {
+    "text": "先看空后 \"These digital assistants\"：空里要先出现一种数字助手。只有 F 的 \"virtual guides\" 能被它指回，\"Furthermore\" 又接上空前的 \"Smart recommendation engines\"。",
+    "quotes": [
+     "These digital assistants",
+     "virtual guides",
+     "Furthermore",
+     "Smart recommendation engines"
+    ]
+   },
+   "explain": "空前讲第一种个性化手段：智能推荐。这句用递进再添一种：虚拟导览员；空后接着说这些导览员能和参观者对话、答疑，把它的本事讲具体。",
+   "distractors": [
+    {
+     "label": "D",
+     "text": "D 的 \"tailors\" 像接空前 \"making each visit unique\"，都在讲因人而异；但空后 \"These digital assistants\" 要指一种助手，D 里没有。",
+     "quotes": [
+      "tailors",
+      "making each visit unique",
+      "These digital assistants"
+     ]
+    }
+   ],
+   "optionFit": {
+    "correctOptionLabel": "F",
+    "fitSummary": "空前讲第一种个性化手段：智能推荐。这句用递进再添一种：虚拟导览员；空后接着说这些导览员能和参观者对话、答疑，把它的本事讲具体。",
+    "matchedClues": [
+     {
+      "contextSide": "These digital assistants",
+      "optionSide": "AI-powered virtual guides",
+      "relation": "空后的“这些数字助手”就是答案里由 AI 驱动的虚拟导览员。"
+     },
+     {
+      "contextSide": "engage visitors in dynamic conversations",
+      "optionSide": "replacing traditional tour guides",
+      "relation": "和参观者对话、给讲解，正是导游的活，说明它在取代导游。"
+     }
+    ]
+   },
+   "keyDistractors": [
+    {
+     "optionLabel": "D",
+     "reason": "D 的 \"tailors\" 像接空前 \"making each visit unique\"，都在讲因人而异；但空后 \"These digital assistants\" 要指一种助手，D 里没有。"
+    }
+   ]
+  },
+  "question:paper-gaokao-2026-i:38": {
+   "blankId": "blank:paper-gaokao-2026-i:38",
+   "positionFacet": "seven-choices.position.paragraph-middle",
+   "roleFacet": "seven-choices.role.bridge",
+   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+   "supportingMechanismFacets": [
+    "seven-choices.cohesion.grammatical.logical-connector",
+    "seven-choices.cohesion.lexical.topic-field-alignment"
+   ],
+   "topicClues": [
+    "preserving priceless artworks",
+    "early detection is vital",
+    "the slightest signs of decay",
+    "cracks or discoloration",
+    "preventive measures"
+   ],
+   "contextEvidence": {
+    "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+    "beforeQuote": "Since the exhibits in museums sustain natural decay (破损) over time, early detection is vital. AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye.",
+    "afterQuote": "Moreover, by predicting future decay patterns, AI helps museums take preventive measures and improve preservation strategies."
+   },
+   "mechanismSignals": [
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+     "signalText": "This capability",
+     "signalSide": "option",
+     "targetText": "identify the slightest signs of decay",
+     "relation": "This capability 指空前 AI 识别细微破损的本事。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+     "signalText": "identify the slightest signs of decay",
+     "signalSide": "context-before",
+     "targetText": "This capability",
+     "relation": "空前这项本事是 This capability 的所指。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "early detection is vital",
+     "signalSide": "context-before",
+     "targetText": "timely restoration",
+     "relation": "及早发现之所以要紧，是为了能及时修复。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+     "signalText": "Moreover",
+     "signalSide": "context-after",
+     "targetText": "timely restoration / preventive measures",
+     "relation": "Moreover 在“及时修复”之后再加一项好处：提前预防。"
+    }
+   ],
+   "lock": [
+    "This capability",
+    "identify the slightest signs of decay",
+    "timely restoration"
+   ],
+   "find": {
+    "text": "先看空后 \"Moreover\"：要再加一项好处，空里得先有一项。A 的 \"This capability\" 指空前 \"identify the slightest signs of decay\"，\"timely restoration\" 就是好处。",
+    "quotes": [
+     "Moreover",
+     "This capability",
+     "identify the slightest signs of decay",
+     "timely restoration"
+    ]
+   },
+   "explain": "空前说要及早发现，AI 能看出肉眼看不见的裂纹；这句说发现了就能及时修，补救已有的损坏；空后再说 AI 能预测今后的损坏，从补救走到预防。",
+   "distractors": [],
+   "optionFit": {
+    "correctOptionLabel": "A",
+    "fitSummary": "空前说要及早发现，AI 能看出肉眼看不见的裂纹；这句说发现了就能及时修，补救已有的损坏；空后再说 AI 能预测今后的损坏，从补救走到预防。",
+    "matchedClues": [
+     {
+      "contextSide": "identify the slightest signs of decay",
+      "optionSide": "This capability",
+      "relation": "答案用 This capability 回指空前的识别能力。"
+     },
+     {
+      "contextSide": "early detection is vital",
+      "optionSide": "timely restoration",
+      "relation": "早发现的意义落在及时修复上。"
+     },
+     {
+      "contextSide": "take preventive measures",
+      "optionSide": "timely restoration",
+      "relation": "空后的预防和答案的修复一前一后，Moreover 把两者并起来。"
+     }
+    ]
+   },
+   "keyDistractors": [
+    {
+     "optionLabel": "G",
+     "reason": "它的 \"image recognition\" 像接空前 \"invisible to the human eye\"，说 AI 替人眼看。但空前已说 \"AI can help identify\"，再说 \"changing this\" 是重复；空后 \"Moreover\" 要再添一项好处，它没给出好处。它照答案 A 改：都有 this，A 说这种能力带来及时修复，它改成用图像识别分析展品。"
+    }
+   ]
+  },
+  "question:paper-gaokao-2026-i:39": {
+   "blankId": "blank:paper-gaokao-2026-i:39",
+   "positionFacet": "seven-choices.position.paragraph-middle",
+   "roleFacet": "seven-choices.role.bridge",
+   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+   "supportingMechanismFacets": [
+    "seven-choices.cohesion.grammatical.referential-cohesion"
+   ],
+   "topicClues": [
+    "educational value",
+    "children and families",
+    "interactive exhibits",
+    "adjust their content and difficulty level",
+    "This adaptability"
+   ],
+   "contextEvidence": {
+    "paragraphId": "block:paper-gaokao-2026-i:seven-choices:4",
+    "beforeQuote": "AI also significantly enhances the educational value of museums, particularly for children and families.",
+    "afterQuote": "For instance, interactive exhibits powered by AI can adjust their content and difficulty level based on the user’s preferences and responses."
+   },
+   "mechanismSignals": [
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+     "signalText": "For instance",
+     "signalSide": "context-after",
+     "targetText": "It tailors learning experiences",
+     "relation": "For instance 引出例子，例子要证明的正是答案说的因人定制。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "adjust their content and difficulty level",
+     "signalSide": "context-after",
+     "targetText": "tailors",
+     "relation": "按用户调内容和难度，就是 tailors 的具体做法。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "tailors",
+     "signalSide": "option",
+     "targetText": "adjust their content and difficulty level",
+     "relation": "tailors（量身定制）被空后的例子坐实。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+     "signalText": "It",
+     "signalSide": "option",
+     "targetText": "AI",
+     "relation": "It 指空前句首的 AI。"
+    }
+   ],
+   "lock": [
+    "For instance",
+    "adjust their content and difficulty level",
+    "tailors"
+   ],
+   "find": {
+    "text": "先看空后 \"For instance\"：例子是展品 \"adjust their content and difficulty level\"，空里要说因人调整。D 的 \"tailors\" 正是这个意思，\"It\" 又指空前的 AI。",
+    "quotes": [
+     "For instance",
+     "adjust their content and difficulty level",
+     "tailors",
+     "It"
+    ]
+   },
+   "explain": "空前先说 AI 让博物馆对孩子和家庭更有教育意义，这句说怎么做到：按年龄和学习方式定制；空后用能自动调难度的互动展品举例，再说孩子因此看得懂。",
+   "distractors": [],
+   "optionFit": {
+    "correctOptionLabel": "D",
+    "fitSummary": "空前先说 AI 让博物馆对孩子和家庭更有教育意义，这句说怎么做到：按年龄和学习方式定制；空后用能自动调难度的互动展品举例，再说孩子因此看得懂。",
+    "matchedClues": [
+     {
+      "contextSide": "children and families",
+      "optionSide": "different age groups",
+      "relation": "空前点到孩子和家庭，答案说照顾不同年龄段。"
+     },
+     {
+      "contextSide": "adjust their content and difficulty level based on the user’s preferences",
+      "optionSide": "tailors learning experiences",
+      "relation": "例子里的按用户调整，正是答案的量身定制。"
+     }
+    ]
+   },
+   "keyDistractors": [
+    {
+     "optionLabel": "E",
+     "reason": "它的 \"spaces for learning\" 像接空前 \"educational value\"，都说能学东西。但空后 \"For instance\" 举的是 AI 展品 \"adjust their content\"，前面得先说 AI 怎样因人调整，它没提 AI。它照答案 D 改：都有 learning，D 说 AI 定制学习体验，它改成博物馆也是学习场所。以 \"Museums\" 开头也像收首段，但首段讲的是 AI 带来的变化。"
+    }
+   ]
+  },
+  "question:paper-gaokao-2026-i:40": {
+   "blankId": "blank:paper-gaokao-2026-i:40",
+   "positionFacet": "seven-choices.position.paragraph-middle",
+   "roleFacet": "seven-choices.role.bridge",
+   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+   "supportingMechanismFacets": [
+    "seven-choices.cohesion.lexical.topic-field-alignment"
+   ],
+   "topicClues": [
+    "ethical (伦理的) challenges",
+    "AI ethicists",
+    "fair algorithms",
+    "Strict policies",
+    "protect visitors’ information"
+   ],
+   "contextEvidence": {
+    "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+    "beforeQuote": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges. Museums are working together with AI ethicists to develop fair algorithms.",
+    "afterQuote": "Strict policies should be established to protect visitors’ information."
+   },
+   "mechanismSignals": [
+    {
+     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+     "signalText": "also",
+     "signalSide": "option",
+     "targetText": "fair algorithms",
+     "relation": "also 表示在算法公平之外，还有第二个伦理难题。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "ethical",
+     "signalSide": "context-before",
+     "targetText": "privacy issues",
+     "relation": "空前说有伦理挑战，隐私问题就是其中一种。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "privacy issues",
+     "signalSide": "option",
+     "targetText": "protect visitors’ information",
+     "relation": "答案提出隐私问题，空后给出保护信息的对策。"
+    },
+    {
+     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+     "signalText": "protect visitors’ information",
+     "signalSide": "context-after",
+     "targetText": "Visitor data collection / privacy issues",
+     "relation": "空后要保护的“参观者信息”，就是答案里收集的参观者数据。"
+    }
+   ],
+   "lock": [
+    "privacy issues",
+    "protect visitors’ information"
+   ],
+   "find": {
+    "text": "先看空后 \"protect visitors’ information\"：要保护信息，空里得先有信息方面的问题。B 的 \"privacy issues\" 正是，\"also\" 接上空前的 \"ethical\" 挑战。",
+    "quotes": [
+     "protect visitors’ information",
+     "privacy issues",
+     "also",
+     "ethical"
+    ]
+   },
+   "explain": "空前说 AI 带来伦理难题，博物馆先在算法公平上下功夫；这句再点出第二个难题：收集数据涉及隐私；空后给出对策：定严格的规矩保护信息。",
+   "distractors": [],
+   "optionFit": {
+    "correctOptionLabel": "B",
+    "fitSummary": "空前说 AI 带来伦理难题，博物馆先在算法公平上下功夫；这句再点出第二个难题：收集数据涉及隐私；空后给出对策：定严格的规矩保护信息。",
+    "matchedClues": [
+     {
+      "contextSide": "ethical (伦理的) challenges",
+      "optionSide": "privacy issues",
+      "relation": "隐私问题是伦理挑战的一种。"
+     },
+     {
+      "contextSide": "protect visitors’ information",
+      "optionSide": "Visitor data collection",
+      "relation": "空后要保护的信息就是答案说的参观者数据。"
+     }
+    ]
+   },
+   "keyDistractors": []
+  }
+ }
+}

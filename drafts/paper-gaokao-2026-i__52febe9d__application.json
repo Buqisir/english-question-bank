@@ -1,0 +1,146 @@
+{
+ "taskType": "application",
+ "modelAnswer": "Ranking My College Life Essentials\n\nCollege will give us much more freedom, so how we use our time matters. My ranking is sleep first, study second and socializing third.\n\nSleep comes first because everything else depends on it. In senior high, I often stayed up late before exams, only to sit in class the next day unable to focus.\n\nStudy ranks second, since learning is why we go to college. After a good night's sleep, one focused hour achieves more than three tired ones.\n\nSocializing comes third, but it still matters. Friendships grow naturally in study groups and clubs, so we need not chase them at the cost of sleep. Put sleep and study first, and good friends will follow.",
+ "applicationAnalysis": {
+  "schemaVersion": "application-analysis-v4",
+  "taskCard": {
+   "taskRequires": [
+    "读者是校英文报“Opinion”栏目的读者，即本校同学；文体是投稿短文，用题目给定的标题 Ranking My College Life Essentials。",
+    "要点：对未来大学生活中的学习、社交、睡眠按重要性排序，并说明理由；词数 80 左右。"
+   ],
+   "thisEssayChooses": "本范文把睡眠排第一、学习第二、社交第三，用“睡眠是其他两件事的基础”串起三条理由；补了自己高中熬夜复习效果差的经历做证据，语气是同学之间平和地讲道理。也可以把学习或社交排第一，只要理由具体、讲清三者的先后。"
+  },
+  "standard": {
+   "essay": "Ranking My College Life Essentials\n\nCollege will give us much more freedom, so how we use our time matters. My ranking is sleep first, study second and socializing third.\n\nSleep comes first because everything else depends on it. In senior high, I often stayed up late before exams, only to sit in class the next day unable to focus.\n\nStudy ranks second, since learning is why we go to college. After a good night's sleep, one focused hour achieves more than three tired ones.\n\nSocializing comes third, but it still matters. Friendships grow naturally in study groups and clubs, so we need not chase them at the cost of sleep. Put sleep and study first, and good friends will follow.",
+   "pointMap": [
+    {
+     "point": "对学习、社交、睡眠按重要性排序",
+     "quote": "My ranking is sleep first, study second and socializing third."
+    },
+    {
+     "point": "阐述睡眠排第一的理由",
+     "quote": "Sleep comes first because everything else depends on it."
+    },
+    {
+     "point": "阐述学习排第二的理由",
+     "quote": "Study ranks second, since learning is why we go to college."
+    },
+    {
+     "point": "阐述社交排第三的理由",
+     "quote": "Friendships grow naturally in study groups and clubs, so we need not chase them at the cost of sleep."
+    }
+   ],
+   "notes": [
+    {
+     "paragraph": 1,
+     "role": "交代大学时间要自己安排这一背景，开门亮出排序，读者第一段就知道作者的立场。",
+     "items": [
+      {
+       "quote": "so how we use our time matters",
+       "explain": "先说大学自由多、时间怎么用很要紧，排序这件事就有了来由，不是凭空排名。"
+      },
+      {
+       "quote": "My ranking is sleep first, study second and socializing third.",
+       "explain": "一句话按 first、second、third 给出完整排序，后面三段照这个顺序展开，阅卷人一眼对得上要点。"
+      }
+     ]
+    },
+    {
+     "paragraph": 2,
+     "role": "讲睡眠为什么排第一：学习和社交都要靠它。",
+     "items": [
+      {
+       "quote": "everything else depends on it",
+       "explain": "理由不停在“睡觉很重要”，而是说另外两件事都靠它，把三者的关系讲出来，排第一才站得住。"
+      },
+      {
+       "quote": "only to sit in class the next day unable to focus",
+       "explain": "用自己高中熬夜复习的经历作证据；only to 表示“结果却”，把熬夜换来的反效果说清楚。"
+      }
+     ]
+    },
+    {
+     "paragraph": 3,
+     "role": "讲学习为什么排第二：它是上大学的目的，但要睡足了才学得好。",
+     "items": [
+      {
+       "quote": "learning is why we go to college",
+       "explain": "从“上大学为了什么”给理由，同学读者都认同，不必再多论证。"
+      },
+      {
+       "quote": "one focused hour achieves more than three tired ones",
+       "explain": "用“一小时顶三小时”的对比把睡眠和学习连起来，也解释了学习为什么排在睡眠后面。"
+      }
+     ]
+    },
+    {
+     "paragraph": 4,
+     "role": "讲社交为什么排第三，先接住“社交不重要吗”的顾虑，再给读者一个能照着做的顺序。",
+     "items": [
+      {
+       "quote": "but it still matters",
+       "explain": "排最后容易被读成“社交没用”，先补一句，避免读者误会，立场更客观。"
+      },
+      {
+       "quote": "Friendships grow naturally in study groups and clubs",
+       "explain": "理由具体：朋友在学习小组和社团里自然就交到了，所以不必为社交牺牲睡眠，排第三说得通。"
+      },
+      {
+       "quote": "Put sleep and study first, and good friends will follow.",
+       "explain": "“祈使句 + and”表示“只要……就……”，结尾落回排序本身，读者知道该怎么安排时间，不是空喊口号。"
+      }
+     ]
+    }
+   ],
+   "expressions": [
+    {
+     "expression": "My ranking is A first, B second and C third.",
+     "function": "排序类观点题开头直接可用：一句话给出完整名次，读者马上知道全文顺序。"
+    },
+    {
+     "expression": "… comes first / ranks second / comes third",
+     "function": "三段段首各用一个说法交代名次，读者看段首就能跟上顺序，也不用三次都说 is the most important。"
+    },
+    {
+     "expression": "at the cost of sleep",
+     "function": "“以牺牲睡眠为代价”，在本题里把社交和睡眠的取舍说清楚，正好说明社交为什么排在睡眠后面。"
+    }
+   ]
+  },
+  "advanced": {
+   "essay": "Ranking My College Life Essentials\n\nCollege will hand us more freedom than ever, and with it a question: where should our time go? My answer is sleep first, study second and socializing third.\n\nSleep tops my list because it supports everything else. Last term I often stayed up past midnight before exams, only to sit through the next morning's classes in a fog. Rest is not wasted time; it makes our waking hours count.\n\nStudy comes a close second, since learning is why we go to college. With no teacher checking our homework daily, we must use our time well, and a rested mind gets more done in one hour than a tired one does in three.\n\nSocializing ranks third, but it still matters. Friendships often grow out of study groups and clubs, so there is no need to trade sleep for late-night chats. Get the first two right, and the third will follow.",
+   "pointMap": [
+    {
+     "point": "对学习、社交、睡眠按重要性排序",
+     "quote": "My answer is sleep first, study second and socializing third."
+    },
+    {
+     "point": "阐述睡眠排第一的理由",
+     "quote": "Sleep tops my list because it supports everything else."
+    },
+    {
+     "point": "阐述学习排第二的理由",
+     "quote": "Study comes a close second, since learning is why we go to college."
+    },
+    {
+     "point": "阐述社交排第三的理由",
+     "quote": "Friendships often grow out of study groups and clubs, so there is no need to trade sleep for late-night chats."
+    }
+   ],
+   "beyondStandard": [
+    {
+     "quote": "and with it a question: where should our time go?",
+     "explain": "用设问把排序问题抛给读者，更像专栏文章在和同学对话，开头比标准版更抓人。"
+    },
+    {
+     "quote": "in a fog",
+     "explain": "“脑子像在雾里”，比 unable to focus 更形象，读者能想见熬夜后的状态，又是地道的日常说法。"
+    },
+    {
+     "quote": "Rest is not wasted time; it makes our waking hours count.",
+     "explain": "先否定“睡觉浪费时间”这种常见想法，再说睡眠让醒着的时间有价值，替读者把顾虑接住，理由更有说服力。"
+    }
+   ]
+  }
+ }
+}
