@@ -144,8 +144,13 @@ bank.prepare(`INSERT INTO canonical_paper_publications
   VALUES (?, 'v1', 1, ?, 1, '2026-01-01 00:00:00')`)
   .run(publishedId, ref.publicationDigest)
 bank.close()
-jsonFile(path.join(assets, publishedId, 'latest/paper-asset.json'), pubAsset)
-jsonFile(path.join(assets, publishedId, 'latest/import-meta.json'), { paper: { year: 2026, paperName: '正式测试卷' } })
+jsonFile(path.join(versionDir, 'paper-asset.json'), pubAsset)
+jsonFile(path.join(versionDir, 'import-meta.json'), { paper: { year: 2026, paperName: '正式测试卷' } })
+const otherAsset = structuredClone(pubAsset)
+otherAsset.paper.title = '其他版本'
+otherAsset.content.groups[`group-${publishedId}`].passage.paragraphs[0].text = 'Different text.'
+jsonFile(path.join(assets, publishedId, 'latest/paper-asset.json'), otherAsset)
+jsonFile(path.join(assets, publishedId, 'latest/import-meta.json'), { paper: { year: 2025, paperName: '其他版本' } })
 jsonFile(path.join(assets, publishedId, 'latest/canonical-paper-publication-ref-v1.json'), ref)
 const publicationTime = new Date('2026-01-01T00:00:00Z')
 utimesSync(path.join(assets, publishedId, 'latest/canonical-paper-publication-ref-v1.json'), publicationTime, publicationTime)

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs'
+import { normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 
 export const UNMARKED = 'UNMARKED'
 export const unresolved = pick => ['NONE', 'UNSURE', UNMARKED].includes(pick)
@@ -7,6 +8,14 @@ const parts = row => row.parts?.length === 1 && row.parts[0][0] === row.start &&
   ? undefined : row.parts
 export const position = row => JSON.stringify([row.entryId, row.sentence, row.start, row.end, parts(row)])
 const sentenceKey = row => JSON.stringify([row.sentenceText, row.entryId, row.start, row.end, parts(row)])
+export function normalizedSentenceKey(row) {
+  const quote = normalizePhraseText(row.sentenceText)
+  const span = ([a, b]) => [quote.starts.indexOf(a), quote.ends.indexOf(b)]
+  const [start, end] = span([row.start, row.end])
+  const ranges = parts(row)?.map(span)
+  if (start < 0 || end <= start || ranges?.some(([a, b]) => a < 0 || b <= a)) return null
+  return sentenceKey({ ...row, sentenceText: quote.text, start, end, parts: ranges })
+}
 
 export const sentencesOf = raw => splitSentences(raw).map(({ text }) => text.trim())
 export const recordRows = record => record.rows.map(row =>
@@ -14,14 +23,26 @@ export const recordRows = record => record.rows.map(row =>
 const compact = ({ sentenceText, ...row }) => row
 export const makeRecord = (sentences, rows) => ({ sentences, rows: rows.map(compact) })
 
-export function reusePicks(previous, sentences, rows) {
+export function reusePicks(previous, sentences, rows, reanchor = false) {
   if (!previous) return new Map()
-  const oldCount = Map.groupBy(previous.sentences, text => text)
-  const newCount = Map.groupBy(sentences, text => text)
-  const old = new Map(recordRows(previous).filter(row => oldCount.get(row.sentenceText)?.length === 1)
-    .map(row => [sentenceKey(row), row.pick]))
-  return new Map(rows.filter(row => newCount.get(row.sentenceText)?.length === 1 && old.has(sentenceKey(row)))
-    .map(row => [position(row), old.get(sentenceKey(row))]))
+  const text = value => reanchor ? normalizePhraseText(value).text : value
+  const key = reanchor ? normalizedSentenceKey : sentenceKey
+  const oldCount = Map.groupBy(previous.sentences, text)
+  const newCount = Map.groupBy(sentences, text)
+  const old = Map.groupBy(recordRows(previous).filter(row => row.sentenceText &&
+    oldCount.get(text(row.sentenceText))?.length === 1), key)
+  const current = Map.groupBy(rows.filter(row => newCount.get(text(row.sentenceText))?.length === 1), key)
+  return new Map([...current].flatMap(([k, matches]) => {
+    const saved = old.get(k)
+    return k && matches.length === 1 && saved?.length === 1 ? [[position(matches[0]), saved[0].pick]] : []
+  }))
+}
+
+export function verifiedLegacyHit(old, row) {
+  return position(old) === position(row) && old.surface === row.surface &&
+    (old.sentenceText == null || old.sentenceText === row.sentenceText) &&
+    (!old.blockHash || old.blockHash === row.blockHash) &&
+    [...row.sentenceText].slice(old.start, old.end).join('') === old.surface
 }
 
 export function legacyRecord(block, hits, confirmed, matches) {
@@ -30,8 +51,7 @@ export function legacyRecord(block, hits, confirmed, matches) {
   const labels = Map.groupBy(confirmed, position)
   const rows = matches.flatMap(row => {
     const key = position(row)
-    const candidates = (labels.get(key) ?? []).filter(old => old.surface === row.surface &&
-      (!old.sentenceText || old.sentenceText === row.sentenceText))
+    const candidates = (labels.get(key) ?? []).filter(old => verifiedLegacyHit(old, row))
     const senses = new Set(candidates.map(old => old.senseId))
     if (senses.size === 1) return [{ ...row, pick: senses.values().next().value }]
     if (!labels.has(key) && wordPositions.has(key)) return [{ ...row, pick: UNMARKED }]

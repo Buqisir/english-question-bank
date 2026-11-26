@@ -100,7 +100,7 @@ try {
       writeFileSync(path.join(base, 'versions/v1/canonical/canonical-paper-plan-v1.json'), JSON.stringify({
         paperId: id, slotBindings: ids.map(groupId => ({ state: 'bound', groupRef: { groupId } })),
       }))
-      writeFileSync(path.join(base, 'latest/paper-asset.json'), JSON.stringify({
+      writeFileSync(path.join(base, 'versions/v1/paper-asset.json'), JSON.stringify({
         paper: { paperId: id }, content: {
           groups: Object.fromEntries(ids.map(groupId => [groupId, { groupId, title: `from-${id}` }])),
           blocks: ids.map(groupId => ({ type: 'group', groupId })),

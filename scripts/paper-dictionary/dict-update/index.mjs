@@ -8,9 +8,10 @@ import { parseArgs } from 'node:util'
 import { agentReader, blocksOf, json, legacyHashMatches, localPaper, ndjson, readLegacy, rowLocator,
   tierOf, validPaperId } from './source.mjs'
 import { matcher, phraseWinners } from './match.mjs'
-import { budget, editorialSense, legacyRecord, makeRecord, position, recordRows, reusePicks, sentencesOf,
-  UNMARKED, unresolved } from './annotations.mjs'
-import { locatePhraseOccurrence, normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
+import { budget, editorialSense, legacyRecord, makeRecord, normalizedSentenceKey, position, recordRows, reusePicks, sentencesOf,
+  UNMARKED, unresolved, verifiedLegacyHit } from './annotations.mjs'
+import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
+import { splitSentences } from '../../../shared/paper-selection/segmentation.mjs'
 
 const { positionals: [command], values: args } = parseArgs({ allowPositionals: true, options: {
   work: { type: 'string' }, data: { type: 'string' }, paper: { type: 'string', multiple: true },
@@ -57,6 +58,17 @@ const senseOf = row => entries.get(row.entryId)?.senses.find(sense => sense.sens
 const scopeFile = args.scope ? resolve(args.scope) : fileURLToPath(new URL('./scope.json', import.meta.url))
 const scopeAllows = ({ include, exclude }, id) => include.includes(id) || !exclude.includes(id)
 const targetIdentity = paper => paper ? [paper.revisionId ?? null, paper.status, paper.type] : null
+function rawChanged(previous, block, saved) {
+  if (previous.rawHash) return previous.rawHash !== block.rawHash
+  if (!saved) return false
+  const sentences = splitSentences(block.raw)
+  return JSON.stringify(saved.sentences) !== JSON.stringify(sentences.map(({ text }) => text.trim())) ||
+    saved.rows.some(({ sentence, sentenceStart }) => {
+      const source = sentences[sentence - 1]
+      return source && sentenceStart != null && sentenceStart !== codePointOffset(block.raw,
+        source.start + source.text.length - source.text.trimStart().length)
+    })
+}
 
 async function targetsFor(local) {
   if (local) return { list: local.map(path => localPaper(path)), versioned: true }
@@ -78,7 +90,7 @@ async function prepare() {
   assert(!args.local || !selected.size, '--local 和 --paper 分开使用')
   const local = args.local?.map(path => resolve(path))
   const { list, versioned, detail } = await targetsFor(local)
-  assert(list.length && new Set(list.map(p => p.paperId)).size === list.length, '试卷清单为空或有重复 ID')
+  assert((versioned || list.length) && new Set(list.map(p => p.paperId)).size === list.length, '试卷清单无版本或有重复 ID')
   const available = new Map(list.map(p => [p.paperId, p]))
   const ids = args.local ? [...available.keys()] : selected.size ? [...selected] :
     [...new Set([...available.keys(), ...paperIds()])]
@@ -91,7 +103,16 @@ async function prepare() {
   for (const id of targets) {
     const summary = available.get(id)
     const bootstrap = exists(shard(id)) && !exists(state(id))
-    if (!summary || (!scopeAllows(scope, id) && !bootstrap)) continue
+    if (!summary || !scopeAllows(scope, id)) {
+      if (bootstrap && !rejudge) {
+        const rows = readShard(id)
+        const blocks = Object.fromEntries(rows.map(row =>
+          [rowLocator(row), { groupId: row.groupId, id: row.paragraphId ?? row.questionId, locator: {} }]))
+        blocks.counts = { locator: {}, wordCounts: {} }
+        legacy.set(id, { blocks, rows, unavailable: true })
+      }
+      continue
+    }
     if (rejudge && !exists(shard(id))) continue
     if (!rejudge && exists(state(id)) && versioned && exists(shard(id)) &&
         JSON.stringify(json(dir(state(id))).target) === JSON.stringify(targetIdentity(summary))) continue
@@ -106,7 +127,11 @@ async function prepare() {
     if (bootstrap) {
       const blocks = blocksOf(paper)
       const rows = readShard(id)
-      if (!legacyHashMatches(rows, blocks)) { skipped[id] = '旧分片块哈希与目标卷不符'; continue }
+      if (!legacyHashMatches(rows, blocks) &&
+          rows.some(row => row.blockHash || entries.get(row.entryId)?.kind === 'phrase')) {
+        skipped[id] = '旧分片块哈希与目标卷不符'
+        continue
+      }
       sameLegacy++
       legacy.set(id, { blocks, rows })
     }
@@ -141,17 +166,30 @@ async function prepare() {
     const archive = old?.archive ?? {}
     const records = old?.records ?? {}
     const oldBlocks = exists(shard(id)) ? old.blocks : {}
-    if (bootstrap) for (const [key, block] of Object.entries(oldBlocks)) {
+    const unsafeLegacy = new Map()
+    if (bootstrap && !old.unavailable) for (const [key, block] of Object.entries(oldBlocks)) {
       const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
+      const hits = match(id, block)
+      const verified = new Map(hits.map(row => [position(row), row]))
       for (const row of confirmed) {
+        const word = entries.get(row.entryId).kind !== 'phrase'
+        if (word && !(verified.has(position(row)) && verifiedLegacyHit(row, verified.get(position(row))))) {
+          if (!unsafeLegacy.has(key)) unsafeLegacy.set(key, new Set())
+          unsafeLegacy.get(key).add(row.entryId)
+          continue
+        }
         if (row.blockHash && row.sentenceText) (archive[key] ??= {})[fingerprint(row)] = row.senseId
       }
       const byHash = records[key] ??= {}
-      byHash[block.hash] = legacyRecord(block, old.legacyHits[key], confirmed, match(id, block))
+      byHash[block.hash] = legacyRecord(block, old.legacyHits[key], confirmed, hits)
     }
-    if (rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
-      Object.entries(current).some(([key, block]) => oldBlocks[key]?.hash !== block.hash ||
-        ref(oldBlocks[key]) !== ref(block)))) {
+    const layoutChanged = rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
+      Object.entries(current).some(([key, block]) => {
+        const previous = oldBlocks[key]
+        return previous?.hash !== block.hash || rawChanged(previous, block, records[key]?.[previous.hash]) ||
+          ref(previous) !== ref(block)
+      }))
+    if (rejudge && (unsafeLegacy.size || layoutChanged)) {
       skipped[id] = '目标卷面已变，先执行常规更新'
       continue
     }
@@ -169,7 +207,9 @@ async function prepare() {
           if (sentences) byHash[previous.hash] = { sentences, rows }
         }
       }
-      if (previous?.hash === block.hash) {
+      const sameHash = previous?.hash === block.hash
+      const reanchor = sameHash && rawChanged(previous, block, records[key]?.[previous.hash])
+      if (sameHash && !reanchor && (!unsafeLegacy.has(key) || rejudge)) {
         blocks[key] = { ...info, wordCounts: previous.wordCounts ?? {}, talliedPhrases: previous.talliedPhrases }
         if (rejudge) {
           const record = records[key]?.[block.hash]
@@ -189,21 +229,34 @@ async function prepare() {
       }
       const hits = match(id, block)
       const sentences = sentencesOf(raw)
-      const saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash]
-      const reused = reusePicks(saved, sentences, hits)
-      const rows = hits.map(row => {
+      const restored = !previous && old?.legacyRows
+        ? old.legacyRows.filter(row => aliases(block).includes(rowLocator(row))) : []
+      const saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash] ??
+        (restored.length ? legacyRecord(block, null, restored, hits) : undefined)
+      const repair = unsafeLegacy.has(key)
+      const reused = repair ? new Map(saved.rows.map(row => [position(row), row.pick])) :
+        reusePicks(saved, sentences, hits, reanchor)
+      const rows = hits.flatMap(row => {
         const prior = reused.get(position(row)) ?? (!previous ? archive[key]?.[fingerprint(row)] : undefined)
+        if (sameHash && repair) {
+          if (unsafeLegacy.get(key).has(row.entryId) && (prior === undefined || unresolved(prior))) return [row]
+          return prior === undefined ? [] : [{ ...row, pick: prior }]
+        }
         const entry = entries.get(row.entryId)
-        if (prior !== undefined) return { ...row, pick: prior }
+        if (prior !== undefined) return [{ ...row, pick: prior }]
+        if (reanchor) return [{ ...row, pick: UNMARKED }]
         stats.hits++
         if (entry.kind !== 'phrase' && entry.senses.length === 1) {
           stats.automatic++
-          return { ...row, pick: entry.senses[0].senseId }
+          return [{ ...row, pick: entry.senses[0].senseId }]
         }
-        return row
+        return [row]
       })
-      blocks[key] = { ...info, wordCounts: {}, talliedPhrases: true }
-      changed[key] = { raw, rows, sentences }
+      const keepWordCounts = Boolean(sameHash && (repair || reanchor))
+      const wordCounts = keepWordCounts ? Object.fromEntries(Object.entries(previous.wordCounts ?? {})
+        .filter(([entryId]) => entries.get(entryId).kind !== 'phrase')) : {}
+      blocks[key] = { ...info, wordCounts, talliedPhrases: true }
+      changed[key] = { raw, rows, sentences, keepWordCounts, reanchor }
     }
     const removed = Object.keys(oldBlocks).filter(key => !blocks[key])
     const moved = Object.keys(blocks).filter(key => oldBlocks[key] && (
@@ -271,7 +324,7 @@ function validate(rows, raw) {
 async function apply() {
   const { plan, packets, local, scopeFile, versioned } = json(work('plan.json'))
   assert(versioned, '生产目标版本接口尚未部署，这批只可 dry-run')
-  const { list, versioned: verified } = await targetsFor(local)
+  const { list, versioned: verified, detail } = await targetsFor(local)
   assert(verified, '无法复核目标版本')
   const available = new Map(list.map(paper => [paper.paperId, paper]))
   const scope = json(scopeFile)
@@ -300,7 +353,8 @@ async function apply() {
     assert(!deferred.length || json(staged).every(([file, , after]) => read(dir(file)) === after),
       `已暂存批次的目标版本变化，保留现场 ${deferred.join(', ')}`)
   } else {
-    const changes = buildChanges(accepted, picks)
+    const changes = await buildChanges(accepted, picks,
+      list.filter(paper => tierOf(paper) && scopeAllows(scope, paper.paperId)), detail)
     save(work('applied-papers.json'), body(accepted.map(p => p.id)))
     save(staged, body(changes))
   }
@@ -317,7 +371,7 @@ async function apply() {
   console.log(JSON.stringify({ files: changes.length, deferred }))
 }
 
-function buildChanges(plan, picks) {
+async function buildChanges(plan, picks, available, detail) {
   const changes = []
   const queue = []
   const touched = new Map()
@@ -370,7 +424,9 @@ function buildChanges(plan, picks) {
             row => Number(!unresolved(row.pick)))
           for (const row of [...words, ...phrases]) {
             row.counted = true
-            block.wordCounts[row.entryId] = (block.wordCounts[row.entryId] ?? 0) + 1
+            if (!edit.keepWordCounts || entries.get(row.entryId).kind === 'phrase') {
+              block.wordCounts[row.entryId] = (block.wordCounts[row.entryId] ?? 0) + 1
+            }
           }
           const previousRows = new Map(record.rows.map(row => [position(row), row]))
           byHash[block.hash] = makeRecord(edit.sentences, updates.map(row => {
@@ -396,6 +452,7 @@ function buildChanges(plan, picks) {
     change(shard(p.id), p.tier ? lineBody(rows) : null)
     saveState()
   }
+  await addReplacementExamples(available, detail, updated, current)
   for (const entry of entries.values()) {
     const before = entryBefore.get(entry.entryId) ?? JSON.stringify(entry)
     for (const sense of entry.senses) {
@@ -415,9 +472,16 @@ function buildChanges(plan, picks) {
             ...(moved ? { [b.kind === 'paragraph' ? 'paragraphId' : 'questionId']: b.id } : {}) }
           return true
         }
-        const same = (current.get(sense.senseId) ?? []).filter(item => item.paper === p &&
-          item.row.sentenceText === example.text && p.before[item.key]?.aliases.includes(source) &&
-          (!example.target || (example.target.start === item.row.start && example.target.end === item.row.end)))
+        const same = (current.get(sense.senseId) ?? []).filter(({ paper, row, key }) => {
+          if (paper !== p || !p.before[key]?.aliases.includes(source)) return false
+          if (p.changed[key]?.reanchor && example.target) {
+            const anchor = normalizedSentenceKey({ sentenceText: example.text, entryId: row.entryId,
+              ...example.target, parts: example.parts ?? example.highlightRanges })
+            return anchor && anchor === normalizedSentenceKey(row)
+          }
+          return row.sentenceText === example.text &&
+            (!example.target || (example.target.start === row.start && example.target.end === row.end))
+        })
         if (same.length !== 1) return false
         const refreshed = toExample(same[0])
         Object.assign(example, refreshed, { exampleId: example.exampleId })
@@ -464,6 +528,52 @@ function buildChanges(plan, picks) {
       adjust(row.entryId, row.senseId, 1)
       if (!talliedPhrases && entries.get(row.entryId).kind === 'phrase') adjust(row.entryId, null, 1)
     }
+  }
+}
+
+async function addReplacementExamples(available, detail, updated, current) {
+  const withdrawn = new Set([...updated.values()].filter(paper => !paper.tier).map(paper => paper.id))
+  if (!withdrawn.size) return
+  const wanted = new Map()
+  for (const entry of entries.values()) for (const sense of entry.senses) {
+    if (sense.examples.some(example => withdrawn.has(example.source.paperId))) {
+      wanted.set(sense.senseId, new Set(sense.examples.filter(example => !updated.has(example.source.paperId))
+        .map(example => example.text)))
+    }
+  }
+  if (!wanted.size) return
+  const match = matcher(entries)
+  for (const summary of [...available].sort((a, b) => tierOf(a).localeCompare(tierOf(b)))) {
+    const id = summary.paperId
+    if (updated.has(id) || !exists(shard(id))) continue
+    if (exists(state(id)) &&
+        JSON.stringify(json(dir(state(id))).target) !== JSON.stringify(targetIdentity(summary))) continue
+    const rows = readShard(id).filter(row => wanted.has(row.senseId) && wanted.get(row.senseId).size < 3)
+    if (!rows.length) continue
+    let paper
+    try { paper = detail ? await detail(summary) : summary }
+    catch (error) {
+      console.warn(`补位跳过 ${id} ${error.message}`)
+      continue
+    }
+    if (paper.paperId !== id || JSON.stringify(targetIdentity(paper)) !== JSON.stringify(targetIdentity(summary))) continue
+    const locations = new Map(Object.values(blocksOf(paper)).flatMap(block =>
+      aliases(block).map(locator => [locator, block])))
+    for (const [locator, savedRows] of Map.groupBy(rows, rowLocator)) {
+      const block = locations.get(locator)
+      if (!block) continue
+      const candidates = new Map(match(id, block).map(row => [position(row), row]))
+      for (const saved of savedRows) {
+        const row = candidates.get(position(saved))
+        const seen = wanted.get(saved.senseId)
+        if (!row || !verifiedLegacyHit(saved, row) || seen.size >= 3 || seen.has(row.sentenceText)) continue
+        seen.add(row.sentenceText)
+        const examples = current.get(saved.senseId) ?? []
+        examples.push({ row, paper: { id, title: paper.title, tier: tierOf(paper) }, block })
+        current.set(saved.senseId, examples)
+      }
+    }
+    if ([...wanted.values()].every(seen => seen.size >= 3)) break
   }
 }
 

@@ -19,7 +19,7 @@ export function listCanonicalPaperCatalog({ db, rootDir, paperId = null }) {
       const plan = JSON.parse(readFileSync(path.join(rootDir, ref.paper_id, 'versions', ref.version_name, 'canonical/canonical-paper-plan-v1.json')))
       if (plan.paperId !== ref.paper_id) continue
       const groupIds = plan.slotBindings.filter(slot => slot.state === 'bound').map(slot => slot.groupRef.groupId)
-      const asset = JSON.parse(readFileSync(resolvePaperAssetReadPaths(rootDir, ref.paper_id).assetPath))
+      const asset = JSON.parse(readFileSync(resolvePaperAssetReadPaths(rootDir, ref.paper_id, ref.version_name).assetPath))
       if (asset.paper?.paperId !== ref.paper_id || groupIds.some(id => asset.content?.groups?.[id]?.groupId !== id)) continue
       const blockIds = asset.content.blocks.filter(block => block.type === 'group').map(block => block.groupId)
       if (!groupIds.length || blockIds.length !== groupIds.length || new Set(blockIds).size !== groupIds.length || blockIds.some(id => !groupIds.includes(id))) continue

@@ -39,20 +39,20 @@ export function listAgentPapers(context, reviewStore, { dictionary = false } = {
   }
   finally { db.close() }
   const papers = published.map(({ paperId, asset, sourceType, publishedAt, versionName, publicationDigest }) => {
-    const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId)
+    const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId, versionName)
     let meta
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
-    const versionDir = path.join(context.paperAssetsDir, paperId, 'versions', versionName)
     // Rollback replaces the current ref but keeps the old version's original creation date.
     const publishedAtMs = Date.parse(publishedAt.includes('T') ? publishedAt : `${publishedAt.replace(' ', 'T')}Z`)
     let updatedAt = publishedAtMs
     try {
-      updatedAt = Math.max(updatedAt, statSync(path.join(baseDir, 'canonical-paper-publication-ref-v1.json')).mtimeMs)
+      updatedAt = Math.max(updatedAt, statSync(path.join(context.paperAssetsDir, paperId, 'latest',
+        'canonical-paper-publication-ref-v1.json')).mtimeMs)
     } catch { /* Keep the indexed publication timestamp. */ }
     return { ...paperEntry(paperId, asset, { ...meta, sourceType: meta?.sourceType ?? sourceType }),
       status: 'published', updatedAt: new Date(updatedAt).toISOString(),
       ...(dictionary ? { revisionId: publicationDigest, publishedAt: publishedAtMs } : {}),
-      readSource: () => publishedAgentSource(versionDir, publicationDigest) }
+      readSource: () => publishedAgentSource(baseDir, publicationDigest) }
   })
   const publishedById = new Map(papers.map(paper => [paper.paperId, paper]))
   if (reviewStore) {

@@ -24,7 +24,8 @@ export function blocksOf(paper) {
       const hash = hashPhraseBlock(raw)
       const key = JSON.stringify([groupId, kind, stableId])
       assert(!blocks[key], `块 ID 重复 ${paper.paperId} ${key}`)
-      blocks[key] = { kind, raw, hash, locator, groupId, id }
+      const rawHash = createHash('sha256').update(raw).digest('hex')
+      blocks[key] = { kind, raw, hash, rawHash, locator, groupId, id }
     }
     group.passage?.paragraphs?.forEach((p, index) =>
       add('paragraph', p.paragraphId ?? p.blockId ?? `paragraph:${index + 1}`,
@@ -73,9 +74,10 @@ export async function readLegacy(directory, candidates, entries) {
     p.legacyHits = {}
   }
   const archivedBlock = (p, key) => p.legacyHits[key] ??= {
-    sentences: splitSentences(p.blocks[key].raw).map(({ text }) => text.trim()), words: [], phrases: [],
+    sentences: splitSentences(p.blocks[key]?.raw).map(({ text }) => text.trim()), words: [], phrases: [],
   }
-  const find = (p, source) => p.byLocator.get(legacyLocator(source.groupId, source.locator)) ??
+  const find = (p, source) => p.unavailable ? legacyLocator(source.groupId, source.locator) :
+    p.byLocator.get(legacyLocator(source.groupId, source.locator)) ??
     (source.locator.option && p.byLocator.get(legacyLocator(source.groupId, { optionBank: source.locator.option })))
   for await (const { source, tier, hits } of lines(join(directory, 'occurrences.ndjson.gz'), true)) {
     const p = candidates.get(source.paperId)
@@ -83,7 +85,7 @@ export async function readLegacy(directory, candidates, entries) {
     p.tier = tier
     const key = find(p, source)
     if (!key) { p.incomplete = true; continue }
-    const block = p.blocks[key]
+    const block = p.blocks[p.unavailable ? 'counts' : key]
     const counts = block.wordCounts ??= {}
     for (const [headword, spans] of Object.entries(hits)) {
       const id = wordIds.get(headword)
@@ -101,6 +103,11 @@ export async function readLegacy(directory, candidates, entries) {
     if (!key) { p.incomplete = true; continue }
     const archived = archivedBlock(p, key)
     archived.phrases.push({ entryCanonical, sentence, start, end, parts, locator: source.locator })
+  }
+  for (const p of candidates.values()) {
+    if (!p.unavailable) continue
+    const words = Map.groupBy(p.rows.filter(row => entries.get(row.entryId)?.kind === 'word'), row => row.entryId)
+    p.incomplete = [...words].some(([id, rows]) => (p.blocks.counts.wordCounts[id] ?? 0) < rows.length)
   }
 }
 

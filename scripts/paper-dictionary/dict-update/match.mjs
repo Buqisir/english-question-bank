@@ -3,8 +3,8 @@ import { indexPhraseOccurrence, locatePhraseOccurrence,
   normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 import { isStandardSearchForm } from '../../../server/paper-dictionary/store.mjs'
 
-const fold = text => normalizePhraseText(text).text.toLowerCase()
-const tokens = text => [...text.matchAll(/\p{L}[\p{L}\p{M}\p{N}]*(?:['‘’-][\p{L}\p{M}\p{N}]+)*(?:['’](?<=s['’]))?|\p{N}+|[^\s]/gu)]
+const fold = text => normalizePhraseText(text).text.toLowerCase().replace(/^([ap])\.\s*m\.?$/u, '$1.m.')
+const tokens = text => [...text.matchAll(/[ap]\.\s*m\.?(?!\.?[\p{L}\p{M}\p{N}])|\p{L}[\p{L}\p{M}\p{N}]*(?:['‘’-][\p{L}\p{M}\p{N}]+)*(?:['’](?<=s['’]))?|\p{N}+|[^\s]/giu)]
 const slotWord = /^[\p{Script=Latin}\d][\p{Script=Latin}\p{M}\d'-]*$/u
 const possessive = /^(?:my|your|his|her|its|our|their|one's|.+(?:'s|s'))$/u
 const empty = /\b(?:grammar-fill)\b/u
