@@ -6,6 +6,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import { matcher } from './match.mjs'
+import { reanchorLegacy } from './legacyAnchors.mjs'
 import { blocksOf, localPaper } from './source.mjs'
 
 const dir = mkdtempSync(join(tmpdir(), 'dict-update-test-'))
@@ -169,12 +170,12 @@ try {
     version: 1, counts, unassignedCounts: counts, senses: [
       { senseId: 'w:recall#s1', pos: 'v.', glossZh: '回想', counts, examples: [] },
     ] })
-  paper('The record shows birds. We recall songs! We record games.')
+  paper('The record shows birds. We recall songs! We play games.')
   const adoption = JSON.parse(run('prepare', 'adopt-legacy', '--local', dir, '--legacy', dir))
   assert.equal(adoption.changed, 1)
   assert.equal(adoption.legacyRetained, 1)
   assert.equal(adoption.legacyDropped, 1)
-  assert.equal(adoption.pending.mock, 2)
+  assert.equal(adoption.pending.mock, 1)
   run('apply', 'adopt-legacy')
   const adopted = JSON.parse(readFileSync(join(dir, state), 'utf8'))
   const target = localPaper(dir)
@@ -182,7 +183,7 @@ try {
   assert.equal(adopted.target[0], target.revisionId)
   assert.equal(Object.values(adopted.blocks)[0].rawHash, targetBlock.rawHash)
   assert.equal(JSON.parse(readFileSync(join(dir, shard), 'utf8').trim()).senseId, sense)
-  assert.equal(readWord().counts.mock, 2)
+  assert.equal(readWord().counts.mock, 1)
   assert.equal(JSON.parse(readFileSync(join(dir, recall), 'utf8')).counts.mock, 1)
   paper('The record lists birds. We recall songs! We recall games.')
   const revised = JSON.parse(run('prepare', 'after-adoption', '--local', dir))
@@ -207,6 +208,24 @@ try {
   ] }))
   assert.deepEqual(matcher(new Map([[abbreviation.entryId, abbreviation]]))(paperId, abbrBlock).map(row => row.surface),
     ['a.m.', 'a. m.'])
+
+  const friend = { entryId: 'w:friend', headword: 'friend', lists: ['3000'], variants: [],
+    forms: [{ form: 'friends', tags: [] }] }
+  const testEntries = new Map([[friend.entryId, friend]])
+  const [testBlock] = Object.values(blocksOf({ paperId, groups: [
+    { groupId: 'friend', passage: { paragraphs: [{ text: 'His friends’ invitation. My friends left. Other friends stayed.' }] } },
+  ] }))
+  const legacy = [{ entryId: friend.entryId, sentence: 1, start: 9, end: 16, surface: 'friends', senseId: 'friend-1' },
+    { entryId: friend.entryId, sentence: 2, start: 1, end: 8, surface: 'friends', senseId: 'friend-2' }]
+  const anchored = reanchorLegacy(paperId, testBlock, legacy, matcher(testEntries)(paperId, testBlock), testEntries)
+  assert.deepEqual([...anchored.assigned].map(([row, [saved]]) => [row.sentence, row.start, saved.senseId]),
+    [[1, 4, 'friend-1'], [2, 3, 'friend-2']])
+  const friends = { ...friend, entryId: 'w:friends', headword: 'friends', forms: [] }
+  testEntries.set(friends.entryId, friends)
+  const transferred = reanchorLegacy(paperId, testBlock, [legacy[1]], matcher(testEntries)(paperId, testBlock), testEntries)
+  assert.equal(transferred.assigned.size, 0)
+  assert.equal(transferred.reasons.get(legacy[1]), 'changedEntry')
+  assert.deepEqual([...transferred.review].map(row => [row.entryId, row.sentence]), [['w:friends', 2]])
 
   const otherDir = join(dir, 'other')
   mkdirSync(otherDir)

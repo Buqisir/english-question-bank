@@ -8,6 +8,7 @@ import { parseArgs } from 'node:util'
 import { agentReader, blocksOf, json, localPaper, ndjson, readLegacy, rowLocator,
   tierOf, validPaperId } from './source.mjs'
 import { matcher, phraseWinners } from './match.mjs'
+import { reanchorLegacy } from './legacyAnchors.mjs'
 import { budget, editorialSense, legacyRecord, makeRecord, normalizedSentenceKey, position, recordRows, reusePicks, sentencesOf,
   UNMARKED, unresolved, verifiedLegacyHit } from './annotations.mjs'
 import { codePointOffset, locatePhraseOccurrence, normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
@@ -145,6 +146,8 @@ async function prepare() {
   const stats = { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counters() }
   let legacyDropped = 0
   let legacyRetained = 0
+  let legacyReanchored = 0
+  const legacyReasons = {}
   if (rejudge) stats.rejudge = rejudge
   stats.unmarked = 0
   const plan = []
@@ -173,6 +176,7 @@ async function prepare() {
     const oldBlocks = exists(shard(id)) ? old.blocks : {}
     const retainedLegacy = new Set()
     const reviewLegacy = new Set()
+    const missedLegacy = new Map()
     const layoutChanged = rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
       Object.entries(current).some(([key, block]) => {
         const previous = oldBlocks[key]
@@ -188,29 +192,40 @@ async function prepare() {
       const { raw, ...info } = block
       if (bootstrap) {
         const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
-        const labels = Map.groupBy(confirmed, position)
-        const matchedLabels = new Map()
-        const rows = match(id, block).map(row => {
-          const phrase = entries.get(row.entryId).kind === 'phrase'
-          const verified = (labels.get(position(row)) ?? []).filter(saved =>
-            (!phrase || saved.blockHash === row.blockHash) &&
-            verifiedLegacyHit({ ...saved, sentenceText: undefined, blockHash: undefined }, row))
+        const matches = match(id, block)
+        const originalPositions = new Set(matches.map(position))
+        const { rows, assigned, reasons, review } = reanchorLegacy(id, block, confirmed, matches, entries)
+        for (const [saved, reason] of reasons) missedLegacy.set(saved, reason)
+        for (const row of rows) {
+          const verified = assigned.get(row) ?? []
           if (!verified.length || new Set(verified.map(saved => saved.senseId)).size !== 1) {
-            if (labels.has(position(row))) reviewLegacy.add(row)
+            if (review.has(row) || verified.length) reviewLegacy.add(row)
+            for (const saved of verified) missedLegacy.set(saved, 'conflictingSense')
             stats.hits++
-            return row
+          } else {
+            row.pick = verified[0].senseId
           }
-          const hit = { ...row, pick: verified[0].senseId }
-          matchedLabels.set(hit, verified)
-          return hit
-        })
+        }
         const phrases = phraseWinners(rows.filter(row => entries.get(row.entryId).kind === 'phrase'),
           row => Number(row.pick !== undefined))
+        const legacyMoves = {}
         for (const row of [...rows.filter(row => entries.get(row.entryId).kind !== 'phrase'), ...phrases]) {
-          for (const saved of matchedLabels.get(row) ?? []) retainedLegacy.add(saved)
+          if (row.pick === undefined) continue
+          const anchored = position(row)
+          for (const saved of assigned.get(row) ?? []) {
+            retainedLegacy.add(saved)
+            if (position(saved) !== anchored || !originalPositions.has(anchored) || saved.surface !== row.surface) {
+              legacyReanchored++
+              const previousAnchors = legacyMoves[anchored] ??= []
+              previousAnchors.push([rowLocator(saved), saved.sentence, saved.start, saved.end])
+            }
+          }
+        }
+        for (const row of rows) if (row.pick !== undefined && !phrases.includes(row) && entries.get(row.entryId).kind === 'phrase') {
+          for (const saved of assigned.get(row) ?? []) missedLegacy.set(saved, 'phraseOverlap')
         }
         blocks[key] = { ...info, wordCounts: {}, talliedPhrases: true }
-        changed[key] = { raw, rows, sentences: sentencesOf(raw) }
+        changed[key] = { raw, rows, sentences: sentencesOf(raw), legacyMoves }
         continue
       }
       if (previous && !records[key]?.[previous.hash]) {
@@ -280,6 +295,10 @@ async function prepare() {
       if (paper) {
         legacyRetained += retainedLegacy.size
         legacyDropped += activeRows.length - retainedLegacy.size
+        for (const row of activeRows) if (!retainedLegacy.has(row)) {
+          const reason = missedLegacy.get(row) ?? (entries.has(row.entryId) ? 'missingBlock' : 'removedEntry')
+          legacyReasons[reason] = (legacyReasons[reason] ?? 0) + 1
+        }
       }
       for (const row of before.counts.rows) represented.add(row)
       // Deleted entries have no active counters, but their rows stay in legacyRows.
@@ -332,7 +351,8 @@ async function prepare() {
     save(file, body(packet))
   }
   save(work('plan.json'), snapshot)
-  console.log(JSON.stringify({ ...stats, sameLegacy, ...(legacy.size ? { legacyRetained, legacyDropped } : {}), skipped }))
+  console.log(JSON.stringify({ ...stats, sameLegacy,
+    ...(legacy.size ? { legacyRetained, legacyReanchored, legacyDropped, legacyReasons } : {}), skipped }))
 }
 
 function validate(rows, raw) {
@@ -496,6 +516,9 @@ async function buildChanges(plan, picks, available, detail) {
         }
         const same = (current.get(sense.senseId) ?? []).filter(({ paper, row, key }) => {
           if (paper !== p || !p.before[key]?.aliases.includes(source)) return false
+          const moved = p.changed[key]?.legacyMoves?.[position(row)]
+          if (moved?.some(([locator, sentence, start, end]) => locator === source &&
+            sentence === example.source.locator.sentence && start === example.target?.start && end === example.target?.end)) return true
           if (p.changed[key]?.reanchor && example.target) {
             const anchor = normalizedSentenceKey({ sentenceText: example.text, entryId: row.entryId,
               ...example.target, parts: example.parts ?? example.highlightRanges })
