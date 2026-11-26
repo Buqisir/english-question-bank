@@ -267,12 +267,15 @@ export async function legacyPreviewStatuses(paperId, screenUrl) {
   const credential = readFileSync(path.join(runtime, 'secrets/agent.token'), 'utf8').trim()
   if (!credential) return []
   const endpoint = `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`
-  const read = connection => api(endpoint, { signal: AbortSignal.timeout(15_000) }, { allowNotFound: true, connection })
+  const notFound = Symbol('Review paper not found')
+  const read = connection => api(endpoint, { signal: AbortSignal.timeout(15_000) },
+    { allowNotFound: true, notFoundValue: notFound, connection })
   const local = await read({ origin: apiOrigin, headers: { authorization: `Bearer ${credential}` } })
-  if (!local) return []
+  if (!local || local === notFound) return []
   const production = 'https://eqbank.cc'
   const headers = await agentCredentialHeaders(production, agentUsername() || 'droid-import')
-  return [local, await read({ origin: production, headers })]
+  const status = await read({ origin: production, headers })
+  return [local, status === notFound ? null : status ?? undefined]
 }
 
 function producerBuildId() {

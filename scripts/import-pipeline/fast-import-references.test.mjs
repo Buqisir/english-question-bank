@@ -109,8 +109,9 @@ test('reopen refuses production attempts and ambiguous upload history without ch
   }
 })
 
-for (const [localFound, productionFound] of [[true, false], [false, false], [true, true]]) {
-  test(`legacy reopen verifies local (${localFound}) and production (${productionFound})`, async t => {
+for (const [scenario, allowed] of [['404', true], ['empty', true], ['local missing', false],
+  ['different Candidate ID', false], ['different OCR revision ID', false], ['500', false], ['network error', false]]) {
+  test(`legacy reopen checks Review status (${scenario})`, async t => {
     const { dir, ctx } = fixture(t)
     const { paperId } = ctx
     const { revisionId, target } = previewResult
@@ -120,9 +121,17 @@ for (const [localFound, productionFound] of [[true, false], [false, false], [tru
     json(ctx.statePath, ctx.state)
     json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId, completed: true, startedAt: oldTime, finishedAt: oldTime })
     const revision = { id: revisionId, paperId, reviewKind: 'candidate', finalizedAt: oldTime }
-    const status = found => ({ paperId, revisions: found ? [revision] : [] })
-    const reopen = () => reopenLocalPreview(ctx, async () => [status(localFound), status(productionFound)])
-    if (localFound && !productionFound) assert((await reopen()).archived)
+    const reopen = () => reopenLocalPreview(ctx, async () => {
+      if (scenario === '500') throw Object.assign(new Error('Review API failed'), { status: 500 })
+      if (scenario === 'network error') throw new TypeError('fetch failed')
+      const local = { paperId, revisions: scenario === 'local missing' ? [] : [revision] }
+      // legacyPreviewStatuses maps only the Review not-found response to null.
+      if (scenario === '404') return [local, null]
+      const revisions = scenario.startsWith('different')
+        ? [{ ...revision, id: 'rev-production', reviewKind: scenario.includes('OCR') ? 'ocr' : 'candidate' }] : []
+      return [local, { paperId, revisions }]
+    })
+    if (allowed) assert((await reopen()).archived)
     else {
       const before = snapshot(dir)
       await assert.rejects(reopen, /未能确认归属/u)

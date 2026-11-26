@@ -1925,7 +1925,7 @@ async function assertLocalPreviewOnly(ctx, readLegacyStatuses) {
     if (local?.paperId !== ctx.paperId || !local.revisions?.some(revision => revision.id === revisionId
       && revision.paperId === ctx.paperId && revision.reviewKind === 'candidate' && revision.finalizedAt)
       || (production !== null && (production?.paperId !== ctx.paperId || !Array.isArray(production.revisions)
-        || production.latestRevisionId === revisionId || production.revisions.some(revision => revision.id === revisionId)))) reject()
+        || production.latestRevisionId || production.latest || production.revisions.length))) reject()
   }
   return { directory, evidence }
 }
