@@ -1,0 +1,963 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jan:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jan:grammar-fill": {
+      "overview": "佐治亚理工学院教授 Kim Cobb 等一批学者因气候变化减少乘飞机出行，推动会议提供远程参与机会。Cobb 请主办方允许她远程演讲，不行就谢绝邀请，去年飞行因此减少了四分之三。",
+      "fullTranslationZh": "Kim Cobb 是亚特兰大佐治亚理工学院的一名教授，她属于人数不多但不断增长的一小批学者，这些学者正因气候变化而减少乘飞机出行。去参加会议、讲座、研讨会之类的活动（而且常常是坐飞机去）被视为科学家们相聚、交流信息的重要方式。但 Cobb 和其他人现在正质疑这种看法，他们推动会议提供更多远程参与的机会，并改变个人行为，为应对气候变化危机尽自己的一份力。例如，自两年前这项倡议发起以来，在一个名为 No Fly Climate Sci 的网站上，大约 200 名学者（其中许多是气候科学家）已承诺尽可能少坐飞机。\n就 Cobb 本人而言，她开始询问邀请她演讲的会议组织者，她能否以远程方式演讲；大约四分之三的时候，对方都同意了。如果答复是不行，她就谢绝邀请。去年，这种做法让 Cobb 乘飞机出行减少了 75%，她打算继续这样做。“这样做相当有收获，”她说，“是一个非常积极的改变。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+          "sourceText": "But Cobb and others __58__ (be) now questioning that idea pushing conferences to provide more chances to participate remotely and __59__ (change) their personal behavior to do their part in dealing with the climate change crisis.",
+          "displayText": "But Cobb and others are now questioning that idea pushing conferences to provide more chances to participate remotely and changing their personal behavior to do their part in dealing with the climate change crisis.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:58",
+            "question:paper-gaokao-2022-zhejiang-jan:59"
+          ],
+          "translationZh": "但 Cobb 和其他人现在正质疑这种看法，他们推动会议提供更多远程参与的机会，并改变个人行为，为应对气候变化危机尽自己的一份力。",
+          "analysisZh": "主干是 Cobb and others are now questioning that idea，他们正在质疑旧看法。后面 pushing conferences to provide more chances… 和 changing their personal behavior… 由 and 连接，交代他们具体怎么做：一是推动会议，二是改变自己。to participate remotely 修饰 chances，说明是什么机会；to do their part 说明改变行为的目的，in dealing with the climate change crisis 说明在哪件事上出力。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 49,
+              "quote": "Cobb and others are now questioning that idea"
+            },
+            {
+              "start": 50,
+              "end": 69,
+              "quote": "pushing conferences"
+            },
+            {
+              "start": 122,
+              "end": 154,
+              "quote": "changing their personal behavior"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+          "sourceText": "Cobb, for her part, started to ask conference organizers who invited her to speak __62__ she could do so remotely; about three-quarters of __63__ time, they agreed.",
+          "displayText": "Cobb, for her part, started to ask conference organizers who invited her to speak whether/if she could do so remotely; about three-quarters of the time, they agreed.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:62",
+            "question:paper-gaokao-2022-zhejiang-jan:63"
+          ],
+          "translationZh": "就 Cobb 本人而言，她开始询问邀请她演讲的会议组织者，她能否以远程方式演讲；大约四分之三的时候，对方都同意了。",
+          "analysisZh": "分号前的主干是 Cobb started to ask conference organizers whether she could do so remotely，ask 后先接人，再接问的内容。who invited her to speak 是定语从句，修饰 organizers，夹在两个宾语之间，读时要跳过它找到 whether 从句；do so 指代前面的 speak。分号后主干是 they agreed，about three-quarters of the time 交代同意的比例。",
+          "underlineRanges": [
+            {
+              "start": 20,
+              "end": 56,
+              "quote": "started to ask conference organizers"
+            },
+            {
+              "start": 57,
+              "end": 81,
+              "quote": "who invited her to speak"
+            },
+            {
+              "start": 82,
+              "end": 117,
+              "quote": "whether/if she could do so remotely"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 256,
+              "quote": "Kim Cobb 是亚特兰大佐治亚理工学院的一名教授，她属于人数不多但不断增长的一小批学者，这些学者正因气候变化而减少乘飞机出行。去参加会议、讲座、研讨会之类的活动（而且常常是坐飞机去）被视为科学家们相聚、交流信息的重要方式。但 Cobb 和其他人现在正质疑这种看法，他们推动会议提供更多远程参与的机会，并改变个人行为，为应对气候变化危机尽自己的一份力。例如，自两年前这项倡议发起以来，在一个名为 No Fly Climate Sci 的网站上，大约 200 名学者（其中许多是气候科学家）已承诺尽可能少坐飞机。"
+            },
+            {
+              "paragraphId": "zh-grammar-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2"
+              ],
+              "start": 257,
+              "end": 392,
+              "quote": "就 Cobb 本人而言，她开始询问邀请她演讲的会议组织者，她能否以远程方式演讲；大约四分之三的时候，对方都同意了。如果答复是不行，她就谢绝邀请。去年，这种做法让 Cobb 乘飞机出行减少了 75%，她打算继续这样做。“这样做相当有收获，”她说，“是一个非常积极的改变。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+            "text": "Kim Cobb, a professor at the Georgia Institute of Technology in Atlanta, is one of a small but growing minority of academics who/that are cutting back on their air travel because of climate change. Travelling to conferences, lectures, workshops, and the like – frequently by plane – is viewed/has been viewed as important for scientists to get together and exchange information. But Cobb and others are now questioning that idea pushing conferences to provide more chances to participate remotely and changing their personal behavior to do their part in dealing with the climate change crisis. On a website called No Fly Climate Sci, for example, roughly 200 academics - many of them climate scientists have promised to fly as little as possible since the effort started two years ago."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+            "text": "Cobb, for her part, started to ask conference organizers who invited her to speak whether/if she could do so remotely; about three-quarters of the time, they agreed. When the answer was no, she declined the invitation. That approach brought Cobb’s air travel last year down by 75%, and she plans to continue the practice. “It has been fairly rewarding.” she says, “a really positive change.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 103,
+                "end": 124,
+                "quote": "minority of academics"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 40,
+                "end": 45,
+                "quote": "一小批学者"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:56"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 125,
+                "end": 133,
+                "quote": "who/that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 46,
+                "end": 50,
+                "quote": "这些学者"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 196,
+                "end": 256,
+                "quote": "Travelling to conferences, lectures, workshops, and the like"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 65,
+                "end": 82,
+                "quote": "去参加会议、讲座、研讨会之类的活动"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:57"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 283,
+                "end": 308,
+                "quote": "is viewed/has been viewed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 93,
+                "end": 96,
+                "quote": "被视为"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 369,
+                "end": 384,
+                "quote": "Cobb and others"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 115,
+                "end": 124,
+                "quote": "Cobb 和其他人"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:58"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 399,
+                "end": 402,
+                "quote": "are"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 126,
+                "end": 129,
+                "quote": "正质疑"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 423,
+                "end": 453,
+                "quote": "pushing conferences to provide"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 136,
+                "end": 142,
+                "quote": "推动会议提供"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:59"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 501,
+                "end": 509,
+                "quote": "changing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 153,
+                "end": 155,
+                "quote": "改变"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 663,
+                "end": 676,
+                "quote": "200 academics"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 226,
+                "end": 233,
+                "quote": "200 名学者"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:60"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 647,
+                "end": 654,
+                "quote": "roughly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 223,
+                "end": 225,
+                "quote": "大约"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 757,
+                "end": 795,
+                "quote": "since the effort started two years ago"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 180,
+                "end": 192,
+                "quote": "自两年前这项倡议发起以来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:61"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 703,
+                "end": 716,
+                "quote": "have promised"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 245,
+                "end": 248,
+                "quote": "已承诺"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 20,
+                "end": 56,
+                "quote": "started to ask conference organizers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 13,
+                "end": 17,
+                "quote": "开始询问"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:62"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 82,
+                "end": 92,
+                "quote": "whether/if"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 30,
+                "end": 32,
+                "quote": "能否"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 115,
+                "end": 138,
+                "quote": "about three-quarters of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 40,
+                "end": 46,
+                "quote": "大约四分之三"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:63"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 143,
+                "end": 146,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 42,
+                "end": 49,
+                "quote": "四分之三的时候"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 189,
+                "end": 205,
+                "quote": "she declined the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 65,
+                "end": 69,
+                "quote": "她就谢绝"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:64"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 207,
+                "end": 217,
+                "quote": "invitation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 69,
+                "end": 71,
+                "quote": "邀请"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 290,
+                "end": 299,
+                "quote": "she plans"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 99,
+                "end": 102,
+                "quote": "她打算"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:65"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 296,
+                "end": 307,
+                "quote": "to continue"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 102,
+                "end": 104,
+                "quote": "继续"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:58",
+              "question:paper-gaokao-2022-zhejiang-jan:59"
+            ],
+            "selectedSentenceId": "sentence-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:1",
+                "start": 383,
+                "end": 428,
+                "quote": "Cobb and others are now questioning that idea"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 113,
+                "end": 133,
+                "quote": "但 Cobb 和其他人现在正质疑这种看法"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:62",
+              "question:paper-gaokao-2022-zhejiang-jan:63"
+            ],
+            "selectedSentenceId": "sentence-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:grammar-fill:2",
+                "start": 20,
+                "end": 56,
+                "quote": "started to ask conference organizers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 12,
+                "end": 39,
+                "quote": "她开始询问邀请她演讲的会议组织者，她能否以远程方式演讲"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-zhejiang-jan:56": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "who/that",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "human",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句修饰先行词 academics，从句 ___ are cutting back on their air travel 缺主语；先行词指人，填 who 或 that。从句谓语用复数 are，也说明它修饰的是 academics，而不是 minority。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "minority of academics",
+          "signalSide": "passage",
+          "relation": "中文：先行词 academics 指人，从句修饰这些学者。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "are cutting back on their air travel",
+          "signalSide": "passage",
+          "relation": "中文：从句只有谓语，缺主语，由关系词充当。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:57": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "view",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is viewed/has been viewed",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "句子缺谓语：主语是动名词短语 Travelling to conferences, lectures, workshops, and the like，两个破折号之间的 frequently by plane 是插入语。动名词短语作主语按单数算，出行是「被看作」重要的，view 用被动；这里说的是一般看法，填 is viewed，答案也接受表示一直以来如此的 has been viewed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Travelling to conferences, lectures, workshops, and the like",
+          "signalSide": "passage",
+          "relation": "中文：动名词短语作主语，谓语用单数。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "as important",
+          "signalSide": "passage",
+          "relation": "中文：be viewed as 被看作……，主语是被看的一方。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:58": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "句子主干是 Cobb and others ___ now questioning that idea，空格和 questioning 一起构成谓语；now 表示此刻正在发生，用现在进行时，主语 Cobb and others 是复数，be 用 are。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Cobb and others",
+          "signalSide": "passage",
+          "relation": "中文：并列主语，复数。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "now questioning",
+          "signalSide": "passage",
+          "relation": "中文：now 加 questioning，构成现在进行时。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:59": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "change",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "changing",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "and 前是 pushing conferences to provide more chances…，and 后的 change their personal behavior 与它并列，两个短语一起作状语，说明 Cobb and others 正以哪些行动质疑旧看法。逻辑主语都是 Cobb and others，主动关系，与 pushing 保持一致，填 changing。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "pushing conferences to provide",
+          "signalSide": "passage",
+          "relation": "中文：and 前的 -ing 短语，并列项要同形。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Cobb and others",
+          "signalSide": "passage",
+          "relation": "中文：两个 -ing 短语的逻辑主语，主动发出动作。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:60": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "rough",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "roughly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-adverb-number-quantity",
+        "features": []
+      },
+      "reason": "空格修饰后面的数词 200，说明学者人数是个约数；修饰数词要用副词，rough 变为 roughly，意为「大约」。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "200 academics",
+          "signalSide": "passage",
+          "relation": "中文：被修饰的是数词 200。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:61": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "promise",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "have promised",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "这句缺谓语：主语是 roughly 200 academics，破折号后的 many of them climate scientists 是插入说明；since the effort started two years ago 表示从两年前延续到现在，用现在完成时，主语复数，填 have promised。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "since the effort started two years ago",
+          "signalSide": "passage",
+          "relation": "中文：since 引出起点，动作延续到现在，用现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "200 academics",
+          "signalSide": "passage",
+          "relation": "中文：主语是复数的学者。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:62": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "whether/if",
+      "role": null,
+      "similarityProfile": {
+        "route": "whether-if",
+        "features": [
+          "object-clause"
+        ]
+      },
+      "reason": "ask 后已有间接宾语 conference organizers（who invited her to speak 修饰它），空格引导的 she could do so remotely 作 ask 的直接宾语；从句不缺成分，问的是「能不能」远程演讲，填 whether 或 if。后面 they agreed 和 the answer was no 也说明这是个是否问题。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "started to ask conference organizers",
+          "signalSide": "passage",
+          "relation": "中文：ask sb + 宾语从句，从句是问的内容。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "she could do so remotely",
+          "signalSide": "passage",
+          "relation": "中文：从句成分完整，缺的是表示「是否」的连接词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:63": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "quantity-proportion"
+        ]
+      },
+      "reason": "空格限定名词 time，about three-quarters of ___ time 说的是她提出请求的那些时候里有四分之三对方同意；表示「……的时候里占多少」用 of the time，填 the。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "about three-quarters of",
+          "signalSide": "passage",
+          "relation": "中文：分数加 of，后面是确定的整体。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "time, they agreed",
+          "signalSide": "passage",
+          "relation": "中文：time 指她提出请求的那些时候。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:64": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "invite",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "invitation",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作 declined 的宾语，前面有冠词 the，要用名词；invite 的名词是 invitation，她谢绝的正是前文组织者 invited her to speak 发来的邀请。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "she declined the",
+          "signalSide": "passage",
+          "relation": "中文：冠词 the 后要名词，作 declined 的宾语。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "invited her to speak",
+          "signalSide": "passage",
+          "relation": "中文：前文的邀请，这里用名词回指。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:65": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "continue",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to continue",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-verb-to-infinitive",
+        "features": []
+      },
+      "reason": "plans 后缺宾语，空格连同 the practice 一起作 plans 的宾语；plan 后接不定式表示打算做某事，填 to continue。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "she plans",
+          "signalSide": "passage",
+          "relation": "中文：plan to do 打算做某事。"
+        }
+      ]
+    }
+  }
+}

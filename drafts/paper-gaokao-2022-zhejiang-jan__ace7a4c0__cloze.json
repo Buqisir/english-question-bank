@@ -1,0 +1,2351 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jan:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jan:cloze": {
+      "overview": "七十四岁的 Burdeyney 女士饱受眼疾困扰，发现许多同病者默默忍受。得知以色列一项干细胞眼科研究后，她看到希望，与朋友一起为项目筹款，并呼吁人们正视问题、积极行动。",
+      "fullTranslationZh": "去年，Beverley Burdeyney 满七十四岁时，眼睛开始出问题，尤其是干涩和不适。\n\n“我当时简直是在经历一段可怕的日子，”Burdeyney 女士在多伦多的家中说，“我感到那么无助、那么不安，因为我的生活质量受到了影响。”\n\nBurdeyney 女士和一些有类似问题的朋友聊过，发现她们大多在默默忍受。“没人愿意谈这件事，因为它看起来是那么微不足道，”她说，“可是受折磨的人越来越多，生活正在受到损害。”\n\n后来，Burdeyney 女士得知以色列特拉维夫大学有一个眼科研究项目的计划。研究团队包括加拿大医生 Allan Slomovic，他在利用干细胞护理眼睛方面做出了开创性的工作。看到一线希望，Burdeyney 女士开始和朋友、多伦多商人 Meyer Zeifman 一起为这个项目筹款。到目前为止，她已经筹到 11 万美元，预计还会有 4 万美元到位。\n\n“我在努力让越来越多的人明白，问题是有解决办法的，”Burdeyney 女士说。她受过护士培训，退休后仍在做私人健身教练。“我说，问题不在年老，只在忽视。不要停在原地不动，要为它做点什么。”\n\nBurdeyney 女士还说，她希望为这个研究项目做更多事。“我只想把光明带进人们的眼睛，而这只是个开始。还有很长的路要走。”",
+      "mainLine": {
+        "theme": {
+          "text": "眼睛出了问题不该归咎年老、默默忍受，而要正视并行动起来，即 do something about it。",
+          "quote": "do something about it"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:2",
+            "text": "七十四岁的她开始出现眼睛干涩不适的毛病。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+            "text": "她说这段经历很糟，生活质量受影响，感到无助不安。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+            "text": "她发现同病的朋友都在默默忍受，生活受到损害。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+            "text": "她得知一项眼科研究，看到希望，和朋友为它筹款。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+            "text": "她想让人们明白问题有办法，呼吁别停步、要行动。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+            "text": "她还想为项目多出力，说这只是开始，路还很长。"
+          }
+        ],
+        "emotion": "无助不安→看到希望→积极行动→满怀期待"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+          "sourceText": "The research team __44__ Canadian doctor Allan Slomovic, who has done __45__ work on eye care using stem cells.",
+          "displayText": "The research team included Canadian doctor Allan Slomovic, who has done ground-breaking work on eye care using stem cells.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:44",
+            "question:paper-gaokao-2022-zhejiang-jan:45"
+          ],
+          "translationZh": "研究团队包括加拿大医生 Allan Slomovic，他在利用干细胞护理眼睛方面做出了开创性的工作。",
+          "analysisZh": "主干是 The research team included Canadian doctor Allan Slomovic，团队包括这位医生；逗号后 who 引导非限制性定语从句，补充他做过什么：has done ground-breaking work；on eye care 说明工作领域，using stem cells 说明所用方法。正因为有这位专家的开创性工作，她才看到希望。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 57,
+              "quote": "The research team included Canadian doctor Allan Slomovic"
+            },
+            {
+              "start": 59,
+              "end": 92,
+              "quote": "who has done ground-breaking work"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+          "sourceText": "“I’m trying to get more and more people to __49__ that there are solutions(解决办法),” said Ms. Burdeyney, a trained nurse who is still working as a personal trainer after __50__.",
+          "displayText": "“I’m trying to get more and more people to understand that there are solutions(解决办法),” said Ms. Burdeyney, a trained nurse who is still working as a personal trainer after retirement.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:49",
+            "question:paper-gaokao-2022-zhejiang-jan:50"
+          ],
+          "translationZh": "“我在努力让越来越多的人明白，问题是有解决办法的，”Burdeyney 女士说。她受过护士培训，退休后仍在做私人健身教练。",
+          "analysisZh": "引号里是她的话，主干是 I’m trying to get more and more people to understand…，get sb to do 表示让某人做某事；that there are solutions 是 understand 的宾语从句。引号后 said Ms. Burdeyney 是倒装的说话人；a trained nurse 是她的同位语，who 引导的定语从句修饰 nurse，after retirement 交代她退休后仍在工作。",
+          "underlineRanges": [
+            {
+              "start": 15,
+              "end": 53,
+              "quote": "get more and more people to understand"
+            },
+            {
+              "start": 54,
+              "end": 78,
+              "quote": "that there are solutions"
+            },
+            {
+              "start": 107,
+              "end": 143,
+              "quote": "a trained nurse who is still working"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:cloze:2"
+              ],
+              "start": 0,
+              "end": 46,
+              "quote": "去年，Beverley Burdeyney 满七十四岁时，眼睛开始出问题，尤其是干涩和不适。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:cloze:3"
+              ],
+              "start": 48,
+              "end": 117,
+              "quote": "“我当时简直是在经历一段可怕的日子，”Burdeyney 女士在多伦多的家中说，“我感到那么无助、那么不安，因为我的生活质量受到了影响。”"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:cloze:4"
+              ],
+              "start": 119,
+              "end": 208,
+              "quote": "Burdeyney 女士和一些有类似问题的朋友聊过，发现她们大多在默默忍受。“没人愿意谈这件事，因为它看起来是那么微不足道，”她说，“可是受折磨的人越来越多，生活正在受到损害。”"
+            },
+            {
+              "paragraphId": "zh-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:cloze:5"
+              ],
+              "start": 210,
+              "end": 387,
+              "quote": "后来，Burdeyney 女士得知以色列特拉维夫大学有一个眼科研究项目的计划。研究团队包括加拿大医生 Allan Slomovic，他在利用干细胞护理眼睛方面做出了开创性的工作。看到一线希望，Burdeyney 女士开始和朋友、多伦多商人 Meyer Zeifman 一起为这个项目筹款。到目前为止，她已经筹到 11 万美元，预计还会有 4 万美元到位。"
+            },
+            {
+              "paragraphId": "zh-cloze-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:cloze:6"
+              ],
+              "start": 389,
+              "end": 484,
+              "quote": "“我在努力让越来越多的人明白，问题是有解决办法的，”Burdeyney 女士说。她受过护士培训，退休后仍在做私人健身教练。“我说，问题不在年老，只在忽视。不要停在原地不动，要为它做点什么。”"
+            },
+            {
+              "paragraphId": "zh-cloze-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:cloze:7"
+              ],
+              "start": 486,
+              "end": 549,
+              "quote": "Burdeyney 女士还说，她希望为这个研究项目做更多事。“我只想把光明带进人们的眼睛，而这只是个开始。还有很长的路要走。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:2",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:2",
+            "text": "When Beverley Burdeyney turned seventy four last year, she started having problems with her eyes, notably dryness and discomfort."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+            "text": "“I was simply going through a terrible experience,” Ms.Burdeyney said at her home in Toronto. “I felt so helpless and insecure because the quality of my life was affected.”"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+            "text": "Ms. Burdeyney talked to some friends who had similar problems and discovered that they were largely suffering in silence. “Nobody chooses to talk about it because it seems so insignificant,” she said. “But more and more are suffering and lives are being compromised.”"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+            "text": "Eventually, Ms. Burdeyney learned about plans for an eye research program at Tel Aviv University in Israel. The research team included Canadian doctor Allan Slomovic, who has done ground-breaking work on eye care using stem cells. Seeing a ray of hope, Ms. Burdeyney began raising money for the project with a friend, Toronto businessman Meyer Zeifman. So far she has raised $ 110,000 with another $40,000 expected."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+            "text": "“I’m trying to get more and more people to understand that there are solutions(解决办法),” said Ms. Burdeyney, a trained nurse who is still working as a personal trainer after retirement. “I say there is no old age, there’s only neglect（忽视）. Don’t stand still, do something about it.”"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+            "text": "Ms. Burdeyney added that she is hoping to do more for the research project. “I just want to bring light into people’s eyes and this is just the beginning. There is still a long way to go”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 192,
+                "end": 200,
+                "quote": "eye care"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 73,
+                "end": 77,
+                "quote": "护理眼睛"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:36"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:36",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:2",
+                "start": 92,
+                "end": 96,
+                "quote": "eyes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 29,
+                "end": 31,
+                "quote": "眼睛"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+                "start": 21,
+                "end": 42,
+                "quote": "a terrible experience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 12,
+                "end": 17,
+                "quote": "可怕的日子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:37"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:37",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+                "start": 14,
+                "end": 27,
+                "quote": "going through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 8,
+                "end": 10,
+                "quote": "经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 229,
+                "end": 244,
+                "quote": "lives are being"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 79,
+                "end": 87,
+                "quote": "生活正在受到损害"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:38"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:38",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:3",
+                "start": 153,
+                "end": 157,
+                "quote": "life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 58,
+                "end": 60,
+                "quote": "生活"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 81,
+                "end": 108,
+                "quote": "they were largely suffering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 28,
+                "end": 37,
+                "quote": "她们大多在默默忍受"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:39"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:39",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 45,
+                "end": 52,
+                "quote": "similar"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 16,
+                "end": 18,
+                "quote": "类似"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 121,
+                "end": 152,
+                "quote": "Nobody chooses to talk about it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 39,
+                "end": 47,
+                "quote": "没人愿意谈这件事"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:40"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:40",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 113,
+                "end": 120,
+                "quote": "silence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 33,
+                "end": 35,
+                "quote": "默默"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 193,
+                "end": 224,
+                "quote": "But more and more are suffering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 67,
+                "end": 78,
+                "quote": "可是受折磨的人越来越多"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:41"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 175,
+                "end": 188,
+                "quote": "insignificant"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 57,
+                "end": 61,
+                "quote": "微不足道"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 197,
+                "end": 224,
+                "quote": "more and more are suffering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 69,
+                "end": 78,
+                "quote": "受折磨的人越来越多"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:42"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:4",
+                "start": 254,
+                "end": 265,
+                "quote": "compromised"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 85,
+                "end": 87,
+                "quote": "损害"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "start": 55,
+                "end": 75,
+                "quote": "the research project"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-6",
+                "start": 19,
+                "end": 25,
+                "quote": "这个研究项目"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:43"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 66,
+                "end": 73,
+                "quote": "program"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 33,
+                "end": 35,
+                "quote": "项目"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 132,
+                "end": 162,
+                "quote": "Canadian doctor Allan Slomovic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 45,
+                "end": 65,
+                "quote": "加拿大医生 Allan Slomovic"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:44"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 126,
+                "end": 134,
+                "quote": "included"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 43,
+                "end": 45,
+                "quote": "包括"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 219,
+                "end": 239,
+                "quote": "Seeing a ray of hope"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 89,
+                "end": 95,
+                "quote": "看到一线希望"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:45"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 180,
+                "end": 195,
+                "quote": "ground-breaking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 82,
+                "end": 85,
+                "quote": "开创性"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 349,
+                "end": 373,
+                "quote": "she has raised $ 110,000"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 151,
+                "end": 162,
+                "quote": "已经筹到 11 万美元"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:46"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 281,
+                "end": 286,
+                "quote": "money"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 141,
+                "end": 143,
+                "quote": "筹款"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 349,
+                "end": 363,
+                "quote": "she has raised"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 150,
+                "end": 155,
+                "quote": "她已经筹到"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:47"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 353,
+                "end": 359,
+                "quote": "So far"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 144,
+                "end": 149,
+                "quote": "到目前为止"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 374,
+                "end": 394,
+                "quote": "with another $40,000"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 165,
+                "end": 174,
+                "quote": "还会有 4 万美元"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:48"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 406,
+                "end": 414,
+                "quote": "expected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 163,
+                "end": 165,
+                "quote": "预计"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 50,
+                "end": 74,
+                "quote": "that there are solutions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 15,
+                "end": 24,
+                "quote": "问题是有解决办法的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:49"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 43,
+                "end": 53,
+                "quote": "understand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 12,
+                "end": 14,
+                "quote": "明白"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 126,
+                "end": 139,
+                "quote": "still working"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 51,
+                "end": 60,
+                "quote": "仍在做私人健身教练"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:50"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 172,
+                "end": 182,
+                "quote": "retirement"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 48,
+                "end": 50,
+                "quote": "退休"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 207,
+                "end": 227,
+                "quote": "there’s only neglect"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 72,
+                "end": 76,
+                "quote": "只在忽视"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:51"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 207,
+                "end": 210,
+                "quote": "age"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 69,
+                "end": 71,
+                "quote": "年老"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 253,
+                "end": 274,
+                "quote": "do something about it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 86,
+                "end": 93,
+                "quote": "要为它做点什么"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:52"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 250,
+                "end": 255,
+                "quote": "still"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 79,
+                "end": 85,
+                "quote": "停在原地不动"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 83,
+                "end": 101,
+                "quote": "said Ms. Burdeyney"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 26,
+                "end": 39,
+                "quote": "Burdeyney 女士说"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:53"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "start": 14,
+                "end": 19,
+                "quote": "added"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-6",
+                "start": 12,
+                "end": 14,
+                "quote": "还说"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "start": 106,
+                "end": 124,
+                "quote": "into people’s eyes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-6",
+                "start": 37,
+                "end": 44,
+                "quote": "带进人们的眼睛"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:54"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "start": 98,
+                "end": 103,
+                "quote": "light"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-6",
+                "start": 35,
+                "end": 37,
+                "quote": "光明"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "start": 154,
+                "end": 185,
+                "quote": "There is still a long way to go"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-6",
+                "start": 53,
+                "end": 61,
+                "quote": "还有很长的路要走"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:55"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:7",
+                "start": 144,
+                "end": 153,
+                "quote": "beginning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-6",
+                "start": 50,
+                "end": 52,
+                "quote": "开始"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:44",
+              "question:paper-gaokao-2022-zhejiang-jan:45"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+                "start": 108,
+                "end": 165,
+                "quote": "The research team included Canadian doctor Allan Slomovic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 66,
+                "end": 88,
+                "quote": "他在利用干细胞护理眼睛方面做出了开创性的工作"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:49",
+              "question:paper-gaokao-2022-zhejiang-jan:50"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+                "start": 15,
+                "end": 53,
+                "quote": "get more and more people to understand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 40,
+                "end": 60,
+                "quote": "她受过护士培训，退休后仍在做私人健身教练"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-zhejiang-jan:36": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:36",
+      "blankNo": 36,
+      "pos": "noun",
+      "role": "main",
+      "context": "开篇交代她身上哪个部位出了毛病，后文的研究和筹款都围绕这个部位展开。",
+      "find": {
+        "check": "echo",
+        "text": "后文 an eye research 和 eye care 一再出现 eye，出问题的部位是眼睛。",
+        "quotes": [
+          "an eye research",
+          "eye care"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "眼睛",
+        "reason": "开篇交代她身上哪个部位出了毛病，后文的研究和筹款都围绕这个部位展开。名词看复现：后文 an eye research 和 eye care 一再出现 eye，出问题的部位是眼睛。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "throat",
+          "meaning": "喉咙；她后来支持的是 eye research，毛病不在喉咙。",
+          "quote": "eye research"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "skin",
+          "meaning": "皮肤；皮肤也会干，但后文研究的是 eye care，部位是眼睛。",
+          "quote": "eye care"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lungs",
+          "meaning": "肺；她最后说要 bring light into people’s eyes，说的是眼睛不是肺。",
+          "quote": "into people’s eyes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "eye care",
+          "signalSide": "context-after",
+          "relation": "中文：后文的眼科护理说明出问题的是眼睛。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "dryness and discomfort",
+          "signalSide": "context-after",
+          "targetText": "problems with her eyes, notably dryness and discomfort",
+          "relation": "中文：干涩和不适是眼睛的典型症状。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:37": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:37",
+      "blankNo": 37,
+      "pos": "phrase",
+      "role": "main",
+      "context": "她回忆患病时的处境，要「正在经受」一段糟糕经历的意思。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "宾语是 a terrible experience，后句又说 felt so helpless，她当时还在受苦，是正在经历。",
+        "quotes": [
+          "a terrible experience",
+          "felt so helpless"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "经历，经受",
+        "reason": "她回忆患病时的处境，要「正在经受」一段糟糕经历的意思。词组看语境义：宾语是 a terrible experience，后句又说 felt so helpless，她当时还在受苦，是正在经历。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "getting over",
+          "meaning": "从中恢复；她当时 felt so helpless，还没走出来，谈不上克服。",
+          "quote": "felt so helpless"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "holding on",
+          "meaning": "坚持住；后面直接接 a terrible experience 说不通，她讲的是无助而非坚持。",
+          "quote": "a terrible experience"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "passing down",
+          "meaning": "传给后人；a terrible experience 是她自己遭受的，不是往下传的东西。",
+          "quote": "a terrible experience"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a terrible experience",
+          "signalSide": "context-after",
+          "targetText": "going through a terrible experience",
+          "relation": "中文：经历一段可怕的日子。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:38": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:38",
+      "blankNo": 38,
+      "pos": "noun",
+      "role": "detail",
+      "context": "眼疾让她无助不安，这里要的是因此受影响的那样东西。",
+      "find": {
+        "check": "echo",
+        "text": "下一段 lives are being 受损与这里呼应，the quality of my 后填 life，即生活质量。",
+        "quotes": [
+          "lives are being",
+          "the quality of my"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "生活",
+        "reason": "眼疾让她无助不安，这里要的是因此受影响的那样东西。名词看复现：下一段 lives are being 受损与这里呼应，the quality of my 后填 life，即生活质量。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "story",
+          "meaning": "故事；让她 helpless and insecure 的是日子过不好，不是故事好坏。",
+          "quote": "helpless and insecure"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "treatment",
+          "meaning": "治疗；她到后文 Seeing a ray of hope 才找到出路，此时还谈不上治疗。",
+          "quote": "Seeing a ray of hope"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "relationship",
+          "meaning": "关系；下一段接着讲的是 lives are being 受损，说的是生活而非人际关系。",
+          "quote": "lives are being"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the quality of my",
+          "signalSide": "context-before",
+          "targetText": "the quality of my life",
+          "relation": "中文：生活质量。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "lives are being",
+          "signalSide": "context-after",
+          "relation": "中文：后文的 lives 复现 life。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:39": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:39",
+      "blankNo": 39,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "她去找的是和自己有同样毛病的朋友，要「相同、相似」的意思。",
+      "find": {
+        "check": "echo",
+        "text": "后面说 they were largely suffering，和她一样在受苦，她的 problems 在朋友身上重现，是相似的问题。",
+        "quotes": [
+          "they were largely suffering"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "类似的",
+        "reason": "她去找的是和自己有同样毛病的朋友，要「相同、相似」的意思。形容词看复现：后面说 they were largely suffering，和她一样在受苦，她的 problems 在朋友身上重现，是相似的问题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "various",
+          "meaning": "各种各样的；后面 Nobody chooses to talk about it 的 it 指同一种病，不是各种问题。",
+          "quote": "Nobody chooses to talk about it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "personal",
+          "meaning": "个人的；她找朋友是看谁也这样，后面 they were largely suffering 说的是同病。",
+          "quote": "they were largely suffering"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "special",
+          "meaning": "特别的；她要说明的是 more and more are suffering，问题普遍而不特别。",
+          "quote": "more and more are suffering"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "they were largely suffering",
+          "signalSide": "context-after",
+          "relation": "中文：朋友们和她一样在受苦，问题相似。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "problems",
+          "signalSide": "context-after",
+          "targetText": "similar problems",
+          "relation": "中文：类似的问题。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:40": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:40",
+      "blankNo": 40,
+      "pos": "noun",
+      "role": "main",
+      "context": "朋友们是怎样忍受病痛的：后句说没人谈这事，要「不出声」的意思。",
+      "find": {
+        "check": "echo",
+        "text": "后句 Nobody chooses to talk about it 说没人开口，这层意思复现到前面，就是默默受苦。",
+        "quotes": [
+          "Nobody chooses to talk about it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "沉默",
+        "meaning": "默默忍受",
+        "reason": "朋友们是怎样忍受病痛的：后句说没人谈这事，要「不出声」的意思。名词看复现：后句 Nobody chooses to talk about it 说没人开口，这层意思复现到前面，就是默默受苦。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "turn",
+          "meaning": "依次；后句 Nobody chooses to talk about it 讲的是不说出来，不是轮流受苦。",
+          "quote": "Nobody chooses to talk about it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "peace",
+          "meaning": "安宁地；她们 were largely suffering，谈不上安宁，后句讲的是没人开口。",
+          "quote": "were largely suffering"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "vain",
+          "meaning": "徒劳地；她们并非在努力做什么，后句 Nobody chooses to talk about it 是闭口不谈。",
+          "quote": "Nobody chooses to talk about it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Nobody chooses to talk about it",
+          "signalSide": "context-after",
+          "relation": "中文：没人谈论，就是沉默。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "suffering in",
+          "signalSide": "context-before",
+          "targetText": "suffering in silence",
+          "relation": "中文：默默忍受。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:41": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "说没人谈的原因，又被后句 But 翻过去，要一个「看似不要紧」的意思。",
+      "find": {
+        "check": "affect",
+        "text": "后句 But more and more are suffering 强调受苦的人越来越多，But 前面就是看似小事，取 insignificant。",
+        "quotes": [
+          "But more and more are suffering"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "微不足道的",
+        "reason": "说没人谈的原因，又被后句 But 翻过去，要一个「看似不要紧」的意思。形容词看情感：后句 But more and more are suffering 强调受苦的人越来越多，But 前面就是看似小事，取 insignificant。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unbearable",
+          "meaning": "难以忍受的；But more and more are suffering 是翻过来强调严重，前面应是看似不严重。",
+          "quote": "But more and more are suffering"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "abnormal",
+          "meaning": "反常的；病越反常越会说出来，接不上 Nobody chooses to talk about it 的原因。",
+          "quote": "Nobody chooses to talk about it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disturbing",
+          "meaning": "令人不安的；But more and more are suffering 是转去强调严重，前面若已令人不安就不成转折。",
+          "quote": "But more and more are suffering"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "But more and more are suffering",
+          "signalSide": "context-after",
+          "relation": "中文：But 后说严重，前面是看似不严重。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "it seems so",
+          "signalSide": "context-before",
+          "targetText": "it seems so insignificant",
+          "relation": "中文：看起来那么微不足道。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:42": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "受苦的人越来越多，她们的生活正受到怎样的影响：要「受损」这一负面意思。",
+      "find": {
+        "check": "collocation",
+        "text": "和前面 more and more are suffering 并列，又呼应上一段 was affected，lives 被损害。",
+        "quotes": [
+          "more and more are suffering",
+          "was affected"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "危及，损害",
+        "reason": "受苦的人越来越多，她们的生活正受到怎样的影响：要「受损」这一负面意思。动词看搭配：和前面 more and more are suffering 并列，又呼应上一段 was affected，lives 被损害。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "forgotten",
+          "meaning": "被遗忘；lives 呼应上一段 was affected，说的是生活受影响，不是被人忘记。",
+          "quote": "was affected"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "substituted",
+          "meaning": "被替代；生活换不掉，与 more and more are suffering 并列的是受损。",
+          "quote": "more and more are suffering"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "separated",
+          "meaning": "被分开；与 more and more are suffering 并列，说生活被分开讲不通。",
+          "quote": "more and more are suffering"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lives are being",
+          "signalSide": "context-before",
+          "targetText": "lives are being compromised",
+          "relation": "中文：生活正受到损害。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "was affected",
+          "signalSide": "context-before",
+          "relation": "中文：上一段生活质量受影响。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:43": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "她得知的眼科研究计划，后来成了她的希望，这里要「研究项目」这类名词。",
+      "find": {
+        "check": "echo",
+        "text": "后文 for the project 和末段 the research project 都指这项研究，同义复现，填 program。",
+        "quotes": [
+          "for the project",
+          "the research project"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "项目，计划",
+        "reason": "她得知的眼科研究计划，后来成了她的希望，这里要「研究项目」这类名词。名词看复现：后文 for the project 和末段 the research project 都指这项研究，同义复现，填 program。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "course",
+          "meaning": "课程；她后来筹款 for the project，课程用不着研究团队和筹款。",
+          "quote": "for the project"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "paper",
+          "meaning": "论文；末段说的是 the research project，要为之筹款的是项目而非一篇论文。",
+          "quote": "the research project"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "conference",
+          "meaning": "会议；后文 The research team 在做研究，她筹款 for the project，不是一场会。",
+          "quote": "for the project"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "the research project",
+          "signalSide": "context-after",
+          "relation": "中文：末段 project 复现 program。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "an eye research",
+          "signalSide": "context-before",
+          "targetText": "an eye research program",
+          "relation": "中文：一个眼科研究项目。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:44": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "detail",
+      "context": "研究团队和这位加拿大医生是什么关系：要「把他算在里面」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "主语 The research team，宾语 Canadian doctor Allan Slomovic，团队里有这位医生，是 included。",
+        "quotes": [
+          "The research team",
+          "Canadian doctor Allan Slomovic"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "包括",
+        "reason": "研究团队和这位加拿大医生是什么关系：要「把他算在里面」的意思。动词看搭配：主语 The research team，宾语 Canadian doctor Allan Slomovic，团队里有这位医生，是 included。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "informed",
+          "meaning": "通知；后面介绍他 has done 开创性的工作，是说团队里有这位专家，不是通知他。",
+          "quote": "has done"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "doubted",
+          "meaning": "怀疑；紧接着是 Seeing a ray of hope，团队若怀疑这位医生，她就看不到希望。",
+          "quote": "Seeing a ray of hope"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dismissed",
+          "meaning": "解雇；后文 Seeing a ray of hope 说她看到希望，团队解雇专家与此相反。",
+          "quote": "Seeing a ray of hope"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The research team",
+          "signalSide": "context-before",
+          "targetText": "The research team included Canadian doctor Allan Slomovic",
+          "relation": "中文：团队成员包括这位医生。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:45": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "评价这位医生用干细胞护眼的工作，要一个能让人看到希望的正面评价。",
+      "find": {
+        "check": "affect",
+        "text": "紧接着 Seeing a ray of hope，她因这位医生的工作看到希望，工作应是开创性的。",
+        "quotes": [
+          "Seeing a ray of hope"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "开创性的",
+        "reason": "评价这位医生用干细胞护眼的工作，要一个能让人看到希望的正面评价。形容词看情感：紧接着 Seeing a ray of hope，她因这位医生的工作看到希望，工作应是开创性的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "part-time",
+          "meaning": "兼职的；工作兼不兼职与疗效无关，带不来 Seeing a ray of hope。",
+          "quote": "Seeing a ray of hope"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "controversial",
+          "meaning": "有争议的；有争议的研究难让她 Seeing a ray of hope，并马上去筹款。",
+          "quote": "Seeing a ray of hope"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "voluntary",
+          "meaning": "志愿的；是否志愿与成果无关，撑不起后面的 Seeing a ray of hope。",
+          "quote": "Seeing a ray of hope"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "Seeing a ray of hope",
+          "signalSide": "context-after",
+          "relation": "中文：看到希望，说明工作有突破。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "work on eye care",
+          "signalSide": "context-after",
+          "targetText": "ground-breaking work on eye care",
+          "relation": "中文：在眼部护理上的开创性工作。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:46": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "main",
+      "context": "看到希望后她为项目做的第一件事，要她为项目筹集的东西。",
+      "find": {
+        "check": "echo",
+        "text": "下句 she has raised $ 110,000，raise 的对象是钱，前面 raising 后也是钱。",
+        "quotes": [
+          "she has raised $ 110,000"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "钱",
+        "reason": "看到希望后她为项目做的第一件事，要她为项目筹集的东西。名词看复现：下句 she has raised $ 110,000，raise 的对象是钱，前面 raising 后也是钱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "standards",
+          "meaning": "标准；下句 she has raised $ 110,000 说她筹到的是钱，不是提高标准。",
+          "quote": "she has raised $ 110,000"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "awareness",
+          "meaning": "意识；raise awareness 能搭配，但下句 she has raised $ 110,000 说明她筹的是钱。",
+          "quote": "she has raised $ 110,000"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "questions",
+          "meaning": "问题；raise questions 是提出问题，下句 she has raised $ 110,000 说的是钱。",
+          "quote": "she has raised $ 110,000"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "she has raised $ 110,000",
+          "signalSide": "context-after",
+          "relation": "中文：后句的金额说明筹的是钱。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "began raising",
+          "signalSide": "context-before",
+          "targetText": "began raising money",
+          "relation": "中文：开始筹款。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:47": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:47",
+      "blankNo": 47,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "交代她截至目前的筹款成果，要表示「到现在为止」的时间短语。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后面用现在完成时 she has raised，再加 with another 一笔待到位的钱，是截至目前的累计，So far。",
+        "quotes": [
+          "she has raised",
+          "with another"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "到目前为止",
+        "reason": "交代她截至目前的筹款成果，要表示「到现在为止」的时间短语。词组看语境义：后面用现在完成时 she has raised，再加 with another 一笔待到位的钱，是截至目前的累计，So far。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "As ever",
+          "meaning": "一如既往；她才 began raising 不久，后面是到现在的累计结果，谈不上一贯如此。",
+          "quote": "began raising"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "In return",
+          "meaning": "作为回报；前句只说她 began raising，后面是筹款的累计结果，不是谁的回报。",
+          "quote": "began raising"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Once again",
+          "meaning": "再一次；前句刚说她 began raising，这是开头以来的累计，不是又一次。",
+          "quote": "began raising"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she has raised",
+          "signalSide": "context-after",
+          "targetText": "So far she has raised",
+          "relation": "中文：到目前为止已筹到，用现在完成时。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:48": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "已到手的钱前面说过了，这另一笔钱还没到账，要「预计会有」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "with another 引出另一笔钱，和已经 has raised 的数目对照，是还没到手、预计能筹到。",
+        "quotes": [
+          "with another",
+          "has raised"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "预期，预料",
+        "meaning": "预计能筹到",
+        "reason": "已到手的钱前面说过了，这另一笔钱还没到账，要「预计会有」的意思。动词看搭配：with another 引出另一笔钱，和已经 has raised 的数目对照，是还没到手、预计能筹到。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wasted",
+          "meaning": "浪费；她在为研究筹款，has raised 是成果，with another 接着说的不是浪费的钱。",
+          "quote": "has raised"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donated",
+          "meaning": "捐赠的；捐到手的钱已算在 has raised 里，with another 这笔是还没到的。",
+          "quote": "with another"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "earned",
+          "meaning": "挣得；她是 began raising 为项目筹款，不是自己挣钱。",
+          "quote": "began raising"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with another $40,000",
+          "signalSide": "context-before",
+          "targetText": "with another $40,000 expected",
+          "relation": "中文：还有四万美元预计到位。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:49": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "她现在要做的是让更多人对「有解决办法」这件事有认识，要「明白」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "get more and more people to 后接动词，宾语从句 that there are solutions 是要人们懂的道理，是 understand。",
+        "quotes": [
+          "get more and more people to",
+          "that there are solutions"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "明白，理解",
+        "reason": "她现在要做的是让更多人对「有解决办法」这件事有认识，要「明白」的意思。动词看搭配：get more and more people to 后接动词，宾语从句 that there are solutions 是要人们懂的道理，是 understand。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "imagine",
+          "meaning": "想象；有解决办法是事实，她要人们知道它，而非去想象 that there are solutions。",
+          "quote": "that there are solutions"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confirm",
+          "meaning": "证实；她在宣传，要大家知道 that there are solutions，不是让众人去证实。",
+          "quote": "that there are solutions"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remember",
+          "meaning": "记住；前文 Nobody chooses to talk about it，人们本不知道，谈不上记住。",
+          "quote": "Nobody chooses to talk about it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that there are solutions",
+          "signalSide": "context-after",
+          "targetText": "understand that there are solutions",
+          "relation": "中文：明白问题有解决办法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:50": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "detail",
+      "context": "她七十多岁仍在当健身教练，要一个按理该停止工作的人生阶段。",
+      "find": {
+        "check": "collocation",
+        "text": "still working 的 still 表示「仍然」，加上开头 turned seventy four，是退休后还在干。",
+        "quotes": [
+          "still working",
+          "turned seventy four"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "退休",
+        "reason": "她七十多岁仍在当健身教练，要一个按理该停止工作的人生阶段。名词看搭配：still working 的 still 表示「仍然」，加上开头 turned seventy four，是退休后还在干。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "childbirth",
+          "meaning": "分娩；她已 turned seventy four，生完孩子还工作体现不出 still 的「仍然」。",
+          "quote": "turned seventy four"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "graduation",
+          "meaning": "毕业；毕业后工作是常事，用不着 still working 来强调仍然。",
+          "quote": "still working"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "marriage",
+          "meaning": "结婚；婚后工作也是常态，still working 强调的是年纪大了还在干。",
+          "quote": "still working"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "still working",
+          "signalSide": "context-before",
+          "targetText": "still working as a personal trainer after retirement",
+          "relation": "中文：退休后仍在工作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "turned seventy four",
+          "signalSide": "context-before",
+          "relation": "中文：开头交代她七十四岁。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:51": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "她反驳「人老了眼睛自然坏」，要一个和 neglect 对举的原因：年老。",
+      "find": {
+        "check": "echo",
+        "text": "old 后的名词和 there’s only neglect 对举，开头 turned seventy four 交代年纪，是 old age。",
+        "quotes": [
+          "there’s only neglect",
+          "turned seventy four"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "年龄",
+        "meaning": "年老",
+        "reason": "她反驳「人老了眼睛自然坏」，要一个和 neglect 对举的原因：年老。名词看复现：old 后的名词和 there’s only neglect 对举，开头 turned seventy four 交代年纪，是 old age。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "time",
+          "meaning": "时间；old time 是旧时光，和 there’s only neglect 对举的应是病因，即年纪。",
+          "quote": "there’s only neglect"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "rule",
+          "meaning": "规则；old rule 是老规矩，不是眼病的成因，与 there’s only neglect 对不上。",
+          "quote": "there’s only neglect"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tale",
+          "meaning": "故事；old tale 是老故事，和 there’s only neglect 对举不成，她说的是年纪。",
+          "quote": "there’s only neglect"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "there is no old",
+          "signalSide": "context-before",
+          "targetText": "there is no old age",
+          "relation": "中文：没有什么年老的问题。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "there’s only neglect",
+          "signalSide": "context-after",
+          "relation": "中文：与忽视对举的是年老。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:52": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "main",
+      "context": "和后半句 do something about it 相对，要「停着不动、什么也不做」的意思。",
+      "find": {
+        "check": "echo",
+        "text": "后半句 do something about it 要人行动，Don’t stand 否定的正是它的反面，站着不动。",
+        "quotes": [
+          "do something about it",
+          "Don’t stand"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "静止的",
+        "meaning": "停滞不前",
+        "reason": "和后半句 do something about it 相对，要「停着不动、什么也不做」的意思。形容词看复现：后半句 do something about it 要人行动，Don’t stand 否定的正是它的反面，站着不动。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "straight",
+          "meaning": "笔直的；站直和后面 do something about it 构不成对照。",
+          "quote": "do something about it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "firm",
+          "meaning": "坚定的；stand firm 是好事，不该被 Don’t stand 否定。",
+          "quote": "Don’t stand"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "alone",
+          "meaning": "独自的；stand alone 是孤立，与 do something about it 相对的是不动。",
+          "quote": "do something about it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "do something about it",
+          "signalSide": "context-after",
+          "relation": "中文：行动与不动相反。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Don’t stand",
+          "signalSide": "context-before",
+          "targetText": "Don’t stand still",
+          "relation": "中文：别停在原地不动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:53": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "detail",
+      "context": "前面她已说了一番话，这里接着再讲一个心愿，要「补充说」的意思。",
+      "find": {
+        "check": "echo",
+        "text": "上一段 said Ms. Burdeyney 已经说过话，这里又引出 she is hoping to do more，是接着补充。",
+        "quotes": [
+          "said Ms. Burdeyney",
+          "she is hoping to do more"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "补充说",
+        "reason": "前面她已说了一番话，这里接着再讲一个心愿，要「补充说」的意思。动词看复现：上一段 said Ms. Burdeyney 已经说过话，这里又引出 she is hoping to do more，是接着补充。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "commented",
+          "meaning": "评论；后面 she is hoping to do more 是她自己的打算，不是对别的事发表评论。",
+          "quote": "she is hoping to do more"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "learned",
+          "meaning": "得知；she is hoping to do more 是她自己的心愿，用不着从别处得知。",
+          "quote": "she is hoping to do more"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reminded",
+          "meaning": "提醒；提醒后要接被提醒的人，这里直接接 that she is hoping to do more。",
+          "quote": "she is hoping to do more"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "said Ms. Burdeyney",
+          "signalSide": "context-before",
+          "relation": "中文：前面已说过，这里是补充。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "that she is hoping to do more",
+          "signalSide": "context-after",
+          "targetText": "added that she is hoping to do more",
+          "relation": "中文：补充说她希望做更多。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:54": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "她最终的心愿和眼疾相关，要让人们的眼睛重新看得见的东西。",
+      "find": {
+        "check": "collocation",
+        "text": "into people’s eyes 落在眼睛上，她支持的是 eye research，带进眼睛的是光明。",
+        "quotes": [
+          "into people’s eyes",
+          "eye research"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "光，光亮",
+        "meaning": "光明",
+        "reason": "她最终的心愿和眼疾相关，要让人们的眼睛重新看得见的东西。名词看搭配：into people’s eyes 落在眼睛上，她支持的是 eye research，带进眼睛的是光明。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "joy",
+          "meaning": "快乐；她支持的是 eye research，治眼病要带进眼里的是光明。",
+          "quote": "eye research"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "color",
+          "meaning": "颜色；她支持 eye research 是为了治眼病，把颜色带进眼睛说不通。",
+          "quote": "eye research"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "beauty",
+          "meaning": "美；into people’s eyes 接在眼科研究后，要带进的是光明而非美。",
+          "quote": "into people’s eyes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into people’s eyes",
+          "signalSide": "context-after",
+          "targetText": "bring light into people’s eyes",
+          "relation": "中文：把光明带进人们的眼睛。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "eye research",
+          "signalSide": "context-before",
+          "relation": "中文：眼科研究，治眼病让人看得见。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:55": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "后句说路还很长，这里要说她做的事才刚「起步」。",
+      "find": {
+        "check": "echo",
+        "text": "just the 后接名词，后句 There is still a long way to go 说还有很远要走，这只是开始。",
+        "quotes": [
+          "There is still a long way to go"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "开始",
+        "reason": "后句说路还很长，这里要说她做的事才刚「起步」。名词看复现：just the 后接名词，后句 There is still a long way to go 说还有很远要走，这只是开始。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "future",
+          "meaning": "未来；后句 There is still a long way to go 说的是刚起步，just the future 说不通。",
+          "quote": "There is still a long way to go"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "truth",
+          "meaning": "真相；后句 There is still a long way to go 讲的是进程，不是真相。",
+          "quote": "There is still a long way to go"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "meaning",
+          "meaning": "意义；后句 There is still a long way to go 讲事情才开头，不是讲意义。",
+          "quote": "There is still a long way to go"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "There is still a long way to go",
+          "signalSide": "context-after",
+          "relation": "中文：路还很长，说明才刚开始。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "this is just the",
+          "signalSide": "context-before",
+          "targetText": "this is just the beginning",
+          "relation": "中文：这只是个开始。"
+        }
+      ]
+    }
+  }
+}

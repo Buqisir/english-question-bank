@@ -1,0 +1,1107 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Professor Jackson, could I talk to you about my paper sometime today?\nW: Sure. When the class is over, I need to go to the lab first. And then I’ll be at the cafeteria at about 12:30. Let’s meet there.\nM: Okay. Thanks, Professor Jackson.",
+      "translationZh": "男：杰克逊教授，今天什么时候我能和您谈谈我的论文吗？\n女：当然可以。下课后我得先去一趟实验室。然后大约 12:30 我会在餐厅。我们就在那儿见吧。\n男：好的。谢谢您，杰克逊教授。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "学生想找教授谈论文，教授说先去实验室，约他十二点半在餐厅见面。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "杰克逊教授，今天什么时候我能和您谈谈我的论文吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "当然可以。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "下课后我得先去一趟实验室。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "然后大约 12:30 我会在餐厅。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "我们就在那儿见吧。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-1:7",
+          "zh": "谢谢您，杰克逊教授。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: What are you cooking? It smells delicious!\nW: I’m making a carrot cake.\nM: Nice! I see a roast chicken and an apple pie over there, too.\nW: The chicken is for dinner, and the pie is for Jeff. He has to take something to school tomorrow.",
+      "translationZh": "男：你在做什么菜？闻起来真香！\n女：我在做胡萝卜蛋糕。\n男：不错！我看见那边还有一只烤鸡和一个苹果派。\n女：烤鸡是晚饭吃的，派是给杰夫的。他明天得带点东西去学校。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "男士看到厨房里的蛋糕、烤鸡和苹果派，女士说明各自的用途，派给杰夫带去学校。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "你在做什么菜？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "闻起来真香！"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我在做胡萝卜蛋糕。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "不错！"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我看见那边还有一只烤鸡和一个苹果派。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "烤鸡是晚饭吃的，派是给杰夫的。"
+        },
+        {
+          "id": "listening-text-2:7",
+          "zh": "他明天得带点东西去学校。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: This neighborhood really needs a library. How can we get one?\nM: I think we should have a meeting to talk about it.",
+      "translationZh": "女：这个社区真的需要一座图书馆。我们怎样才能建起一座呢？\n男：我觉得我们应该开个会讨论一下。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "社区生活"
+      },
+      "summaryZh": "女士觉得社区需要一座图书馆，男士建议先开会商量怎么争取。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "这个社区真的需要一座图书馆。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我们怎样才能建起一座呢？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我觉得我们应该开个会讨论一下。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Hi, Jim. How’s your new job going?\nM: It’s very exciting, and I’m really learning a lot. But it’s also quite tiring. I feel like a good break this weekend.",
+      "translationZh": "女：嗨，吉姆。新工作怎么样？\n男：很让人兴奋，我也确实学到了很多。不过也挺累的。这个周末我想好好休息一下。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "吉姆说新工作让人兴奋、学到很多，但也很累，周末想好好休息。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "嗨，吉姆。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "新工作怎么样？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "很让人兴奋，我也确实学到了很多。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "不过也挺累的。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "这个周末我想好好休息一下。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Amanda, what skill would you like to develop?\nW: Well, I want to learn to play the guitar. I love writing songs, you know. And I think it would be lovely if I could play my own music and entertain people.",
+      "translationZh": "男：阿曼达，你想培养什么技能？\n女：嗯，我想学弹吉他。你知道的，我喜欢写歌。我觉得要是能弹奏自己的音乐给大家带来欢乐，那就太好了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "丰富自我"
+      },
+      "summaryZh": "阿曼达想学吉他，因为她爱写歌，希望能弹自己的音乐给别人听。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "阿曼达，你想培养什么技能？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "嗯，我想学弹吉他。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "你知道的，我喜欢写歌。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "我觉得要是能弹奏自己的音乐给大家带来欢乐，那就太好了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Hello, City Bank. Can I help you?\nW: Hi. I’m calling for information on opening a savings account. (6)\nM: Have you had any accounts in our bank before?\nW: No, I don’t think so.\nM: Then you’ll have to go in person to one of our branches and talk to a clerk there.\nW: I see. Is there a bank near Brown College?\nM: We have one branch at 135 Dudley Road and one at 512 Kingfield Street. (7)\nW: I think I will go to the one on Dudley. (7) Thank you.",
+      "translationZh": "男：您好，城市银行。有什么可以帮您？\n女：你好。我打电话是想咨询开储蓄账户的事。\n男：您以前在我们银行开过账户吗？\n女：没有，应该没有。\n男：那您得亲自去我们的一家支行，找那里的职员办理。\n女：明白了。布朗学院附近有你们的银行吗？\n男：我们在达德利路 135 号有一家支行，在金菲尔德街 512 号还有一家。\n女：我想我会去达德利路那家。谢谢你。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士打电话咨询开储蓄账户，得知需到支行办理，选定去达德利路那家。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "您好，城市银行。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "你好。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我打电话是想咨询开储蓄账户的事。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "您以前在我们银行开过账户吗？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "没有，应该没有。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那您得亲自去我们的一家支行，找那里的职员办理。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "布朗学院附近有你们的银行吗？"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "我们在达德利路 135 号有一家支行，在金菲尔德街 512 号还有一家。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "我想我会去达德利路那家。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "谢谢你。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Good morning, Frank Sampson’s.\nM: Good morning, this is Peter Clifford from Smart Tech. Could I speak to Mr. Smith please? (10)\nW: I’m sorry. Mr. Smith is having a meeting right now. Would you like to leave a message or call back later?\nM: What time is the meeting over? (9)\nW: Well, it started at one o’clock, and it usually lasts about two hours. (9)\nM: All right. In that case, could you please tell him to check his email? I’ve sent him an important document. I’m waiting for his reply.\nW: Certainly. Anything else, sir?\nM: Yes, I’d like to know what would be the best time for us to meet before Friday. I must meet him this week. Please tell him to include the time in his reply.\nW: Do you want to meet him in our office or in your office, sir?\nM: Oh, either is fine.\nW: All right, sir. I’ll tell him when he’s back.",
+      "translationZh": "女：早上好，弗兰克·桑普森公司。\n男：早上好，我是智能科技公司的彼得·克利福德。请问能找史密斯先生接电话吗？\n女：抱歉。史密斯先生现在正在开会。您要留个口信，还是稍后再打来？\n男：会议什么时候结束？\n女：嗯，会议一点开始，通常要开两个小时左右。\n男：好的。那样的话，能请您告诉他查一下邮件吗？我给他发了一份重要文件。我在等他回复。\n女：没问题。还有别的事吗，先生？\n男：有，我想知道周五之前我们什么时候见面最合适。这周我一定要见到他。请让他在回复里写上时间。\n女：您想在我们办公室还是您的办公室见他，先生？\n男：哦，哪边都行。\n女：好的，先生。他回来我就告诉他。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "彼得打电话找史密斯先生，对方在开会，他请秘书转告查邮件并约本周见面时间。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "早上好，弗兰克·桑普森公司。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "早上好，我是智能科技公司的彼得·克利福德。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "请问能找史密斯先生接电话吗？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "抱歉。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "史密斯先生现在正在开会。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "您要留个口信，还是稍后再打来？"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "会议什么时候结束？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "嗯，会议一点开始，通常要开两个小时左右。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "那样的话，能请您告诉他查一下邮件吗？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我给他发了一份重要文件。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "我在等他回复。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "还有别的事吗，先生？"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "有，我想知道周五之前我们什么时候见面最合适。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "这周我一定要见到他。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "请让他在回复里写上时间。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "您想在我们办公室还是您的办公室见他，先生？"
+        },
+        {
+          "id": "listening-text-7:19",
+          "zh": "哦，哪边都行。"
+        },
+        {
+          "id": "listening-text-7:20",
+          "zh": "好的，先生。"
+        },
+        {
+          "id": "listening-text-7:21",
+          "zh": "他回来我就告诉他。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "M: Hi, Annie. That’s a very lovely bunch of flowers.\nW: It’s for my sister. It’s her graduation day today. (11)\nM: It must have cost you a fortune.\nW: I paid 60 dollars for it, but it’s worth it. Jane worked very hard for her degree over the last four years. Today is a very important day for her, and I want it to be special.\nM: That’s very nice of you. I wish it were our graduation day too.\nW: Another three years and we’ll be done too.\nM: Where are they going to hold the graduation ceremony?\nW: In the conference hall at 2:00 p.m. It’ll be a big ceremony.\nM: I guess you should be there early. Otherwise, you won’t get a seat.\nW: Yes, I’ll try to find a seat close to the stage. I want to take some good pictures of my sister.\nM: Have fun, Annie. Give Jane my best wishes.\nW: Thanks. Bye, Steve.",
+      "translationZh": "男：嗨，安妮。这束花真漂亮。\n女：是送给我姐姐的。今天是她的毕业日。\n男：这一定花了你不少钱吧。\n女：我花了 60 美元，不过很值。简过去四年为了拿到学位非常努力。今天对她来说是很重要的日子，我想让这一天特别一些。\n男：你真好。真希望今天也是我们的毕业日。\n女：再过三年我们也毕业了。\n男：他们打算在哪里举行毕业典礼？\n女：下午两点在会议厅。典礼会很隆重。\n男：我想你应该早点去。不然就没座位了。\n女：是的，我会尽量找个靠近舞台的座位。我想给姐姐拍几张好照片。\n男：玩得开心，安妮。代我向简表示祝贺。\n女：谢谢。再见，史蒂夫。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "安妮买花去参加姐姐简的毕业典礼，同学史蒂夫建议她早点去占座。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "嗨，安妮。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "这束花真漂亮。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "是送给我姐姐的。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "今天是她的毕业日。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "这一定花了你不少钱吧。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我花了 60 美元，不过很值。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "简过去四年为了拿到学位非常努力。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "今天对她来说是很重要的日子，我想让这一天特别一些。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "你真好。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "真希望今天也是我们的毕业日。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "再过三年我们也毕业了。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "他们打算在哪里举行毕业典礼？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "下午两点在会议厅。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "典礼会很隆重。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "我想你应该早点去。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "不然就没座位了。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "是的，我会尽量找个靠近舞台的座位。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "我想给姐姐拍几张好照片。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "玩得开心，安妮。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "代我向简表示祝贺。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "再见，史蒂夫。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Oh, I can’t believe it! (14) Peter, I haven’t seen you for ages. (14) (15) (17) How are you?\nM: Hi, Laura. (14) Nice to meet you here. I’m pretty good. How about you?\nW: I’m fine. It’s really great to see you. Do you have time to sit down?\nM: I was leaving, but I can join you for a few minutes.\nW: Great. So tell me, how’s your family?\nM: Well, it keeps getting bigger. We have four kids now, all boys. (15)\nW: Four boys? I suppose they keep you busy.\nM: They sure do. The baby is only one month old, so Sally is not working right now. And what’s new with you and Jim?\nW: Believe it or not, he’s home with the kids.\nM: You’re kidding!\nW: No, I’m not. Jim chose to work from home so we could spend less on child care. (16) I love it because he does all the shopping and cleaning.\nM: Good point. Yikes! It’s already 12:30. I have to go now. I have an important meeting this afternoon. (17) Tell Jim I said hi, and I’ll call you so we can have dinner sometime.\nW: Great. And say hi to Sally and the kids. See you.\nM: See you.",
+      "translationZh": "女：哦，真不敢相信！彼得，我好久没见到你了。你好吗？\n男：嗨，劳拉。真高兴在这儿碰见你。我挺好的。你呢？\n女：我很好。见到你真高兴。你有时间坐一会儿吗？\n男：我正要走，不过可以陪你坐几分钟。\n女：太好了。那跟我说说，你家里怎么样？\n男：嗯，人越来越多了。我们现在有四个孩子，全是男孩。\n女：四个男孩？我猜他们让你忙得团团转吧。\n男：确实如此。老小才一个月大，所以萨莉现在没上班。你和吉姆有什么新鲜事？\n女：信不信由你，他在家带孩子。\n男：开玩笑吧！\n女：没开玩笑。吉姆选择在家工作，这样我们就能少花些托儿费用。我很喜欢这样，因为购物和打扫都是他包了。\n男：有道理。哎呀！已经 12:30 了。我得走了。今天下午我有个重要的会。替我向吉姆问好，我会给你打电话，找时间一起吃顿饭。\n女：好的。也替我向萨莉和孩子们问好。再见。\n男：再见。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "劳拉偶遇老友彼得，两人聊各自家庭近况，彼得因下午开会匆匆告别。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "哦，真不敢相信！"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "彼得，我好久没见到你了。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "你好吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "嗨，劳拉。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "真高兴在这儿碰见你。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我挺好的。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "我很好。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "见到你真高兴。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "你有时间坐一会儿吗？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我正要走，不过可以陪你坐几分钟。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "那跟我说说，你家里怎么样？"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "嗯，人越来越多了。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "我们现在有四个孩子，全是男孩。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "四个男孩？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "我猜他们让你忙得团团转吧。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "确实如此。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "老小才一个月大，所以萨莉现在没上班。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "你和吉姆有什么新鲜事？"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "信不信由你，他在家带孩子。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "开玩笑吧！"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "没开玩笑。"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "吉姆选择在家工作，这样我们就能少花些托儿费用。"
+        },
+        {
+          "id": "listening-text-9:25",
+          "zh": "我很喜欢这样，因为购物和打扫都是他包了。"
+        },
+        {
+          "id": "listening-text-9:26",
+          "zh": "有道理。"
+        },
+        {
+          "id": "listening-text-9:27",
+          "zh": "哎呀！"
+        },
+        {
+          "id": "listening-text-9:28",
+          "zh": "已经 12:30 了。"
+        },
+        {
+          "id": "listening-text-9:29",
+          "zh": "我得走了。"
+        },
+        {
+          "id": "listening-text-9:30",
+          "zh": "今天下午我有个重要的会。"
+        },
+        {
+          "id": "listening-text-9:31",
+          "zh": "替我向吉姆问好，我会给你打电话，找时间一起吃顿饭。"
+        },
+        {
+          "id": "listening-text-9:32",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-9:33",
+          "zh": "也替我向萨莉和孩子们问好。"
+        },
+        {
+          "id": "listening-text-9:34",
+          "zh": "再见。"
+        },
+        {
+          "id": "listening-text-9:35",
+          "zh": "再见。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Good evening, everyone. I’m Jennifer Green. Thanks for joining us. In today’s edition of Perfect Life, our guest is Brock Bastian, (19) a social psychologist from the University of Melbourne. Professor Bastian’s research focuses on pain, happiness, and morality. Recently, he published a book on the role of pain in promoting pleasure. The title of the book is The Other Side of Happiness. In this book, he argues that as we seek to escape pain or sorrow, we are weakening ourselves and may lose our adaptive ability to deal with pain in the future. Painful experiences are in fact vital for our development and how we face the unavoidable challenges ahead. And they play a key role in helping us develop our ability to feel truly happy. Now, let’s welcome Professor Bastian to talk about his ideas in the book.",
+      "translationZh": "女：大家晚上好。我是詹妮弗·格林。感谢收看。在今天这一期《完美生活》中，我们的嘉宾是布罗克·巴斯蒂安，墨尔本大学的一位社会心理学家。巴斯蒂安教授的研究聚焦于痛苦、幸福和道德。最近，他出版了一本书，讲痛苦在增进快乐中所起的作用。书名是《幸福的另一面》。在这本书中，他认为，当我们一味设法逃避痛苦或悲伤时，我们是在削弱自己，将来可能失去应对痛苦的适应能力。痛苦的经历其实对我们的成长、对我们如何面对前方无法回避的挑战至关重要。它们还在帮助我们培养真正感到幸福的能力方面起着关键作用。现在，让我们欢迎巴斯蒂安教授来谈谈他在书中的观点。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "积极的生活态度"
+      },
+      "summaryZh": "主持人介绍心理学家巴斯蒂安及其新书，书中认为痛苦经历对成长和幸福很重要。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家晚上好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我是詹妮弗·格林。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "感谢收看。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "在今天这一期《完美生活》中，我们的嘉宾是布罗克·巴斯蒂安，墨尔本大学的一位社会心理学家。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "巴斯蒂安教授的研究聚焦于痛苦、幸福和道德。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "最近，他出版了一本书，讲痛苦在增进快乐中所起的作用。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "书名是《幸福的另一面》。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "在这本书中，他认为，当我们一味设法逃避痛苦或悲伤时，我们是在削弱自己，将来可能失去应对痛苦的适应能力。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "痛苦的经历其实对我们的成长、对我们如何面对前方无法回避的挑战至关重要。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "它们还在帮助我们培养真正感到幸福的能力方面起着关键作用。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "现在，让我们欢迎巴斯蒂安教授来谈谈他在书中的观点。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "说话人打算在哪里见面？",
+      "optionTranslationsZh": {
+        "A": "在实验室。",
+        "B": "在餐厅。",
+        "C": "在教室。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll be at the cafeteria at about 12:30. Let’s meet there."
+      },
+      "reasonZh": "教授说下课先去实验室，然后 12:30 左右在餐厅，接着说“就在那儿见”（Let’s meet there），there 指餐厅，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "实验室（lab）是教授下课后要先去办事的地方，见面约在之后的餐厅。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "杰夫明天要带什么去学校？",
+      "optionTranslationsZh": {
+        "A": "一个苹果派。",
+        "B": "一个胡萝卜蛋糕。",
+        "C": "一只烤鸡。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "the pie is for Jeff. He has to take something to school tomorrow."
+      },
+      "reasonZh": "女士说派是给杰夫的（the pie is for Jeff），紧接着说他明天得带东西去学校，可见他带的是苹果派，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "胡萝卜蛋糕（carrot cake）是女士正在做的，她没说给杰夫。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "烤鸡（roast chicken）是做来当晚饭的（for dinner），不带去学校。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "拜访邻居。",
+        "B": "建一座图书馆。",
+        "C": "参加会议。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "This neighborhood really needs a library. How can we get one?"
+      },
+      "reasonZh": "女士说社区需要一座图书馆，问怎样才能弄到（How can we get one），男士接着出主意，两人谈的都是争取建图书馆，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "开会（have a meeting）是男士为争取图书馆提出的办法，两人谈的是图书馆这件事，不是去参加某个会。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "吉姆这个周末可能做什么？",
+      "optionTranslationsZh": {
+        "A": "完成一个项目。",
+        "B": "上一门课。",
+        "C": "休息一下。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I feel like a good break this weekend."
+      },
+      "reasonZh": "吉姆说新工作挺累，这个周末想好好歇一歇（a good break），“休息一下”就是 break 的意思，选 C。"
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "阿曼达为什么想学弹吉他？",
+      "optionTranslationsZh": {
+        "A": "为了录制流行歌曲",
+        "B": "为了演奏她自己的音乐。",
+        "C": "为了成为吉他老师。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "it would be lovely if I could play my own music and entertain people."
+      },
+      "reasonZh": "阿曼达说要是能弹奏自己的音乐给人们助兴就好了（play my own music … entertain people），选项沿用了 my own music，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的歌（songs）是她自己写的歌（writing songs），她没说要录制流行歌曲。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士想做什么？",
+      "optionTranslationsZh": {
+        "A": "开一个银行账户。",
+        "B": "注销一张信用卡。",
+        "C": "取一些钱。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’m calling for information on opening a savings account."
+      },
+      "reasonZh": "女士打电话就是咨询开储蓄账户（opening a savings account），选项把储蓄账户说成银行账户，选 A。"
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士会去哪里？",
+      "optionTranslationsZh": {
+        "A": "布朗学院。",
+        "B": "达德利路。",
+        "C": "金菲尔德街。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I think I will go to the one on Dudley."
+      },
+      "reasonZh": "男士给了两家支行，女士说去达德利路那家（the one on Dudley），即达德利路 135 号，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "布朗学院（Brown College）是女士问附近有没有支行时提的参照地点，她要去的是支行。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "金菲尔德街（Kingfield Street）是男士报的另一家支行，女士没有选它。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士是做什么的？",
+      "optionTranslationsZh": {
+        "A": "她是秘书。",
+        "B": "她是经理。",
+        "C": "她是推销员。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Mr. Smith is having a meeting right now. Would you like to leave a message or call back later?"
+      },
+      "reasonZh": "女士接电话报公司名，替史密斯先生说明他在开会、问对方要不要留言（leave a message），最后答应转告，这是秘书的工作，选 A。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "会议大概几点结束？",
+      "optionTranslationsZh": {
+        "A": "1:00。",
+        "B": "2:00。",
+        "C": "3:00。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "it started at one o’clock, and it usually lasts about two hours."
+      },
+      "reasonZh": "会议一点开始（at one o’clock），通常开两小时左右（about two hours），1:00 + 2 小时 = 3:00，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "1:00 是会议开始的时间，不是结束时间。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "“两”是会议持续的时长（two hours），不是钟点，要加在一点上。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士想在周五之前做什么？",
+      "optionTranslationsZh": {
+        "A": "见史密斯先生。",
+        "B": "写一份文件。",
+        "C": "搬到新办公室。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’d like to know what would be the best time for us to meet before Friday. I must meet him this week."
+      },
+      "reasonZh": "男士说想知道周五前什么时候见面最合适（meet before Friday），还说这周必须见到他，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "文件（document）是男士已经发给史密斯的（I’ve sent him an important document），不是还要写。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "办公室（office）是女士问在哪边见面，男士说哪边都行（either is fine），没有说搬办公室。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "今天是谁的毕业日？",
+      "optionTranslationsZh": {
+        "A": "安妮的。",
+        "B": "史蒂夫的。",
+        "C": "简的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It’s for my sister. It’s her graduation day today."
+      },
+      "reasonZh": "安妮说花送姐姐，今天是她的毕业日（her graduation day），接着说简为学位苦读四年，可见毕业的是姐姐简，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "安妮自己还要再过三年才毕业（Another three years and we’ll be done too）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "史蒂夫说真希望今天也是他们的毕业日（I wish it were our graduation day too），说明今天不是他毕业。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士建议女士做什么？",
+      "optionTranslationsZh": {
+        "A": "早点到。",
+        "B": "坐在舞台附近。",
+        "C": "拍些照片。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I guess you should be there early. Otherwise, you won’t get a seat."
+      },
+      "reasonZh": "男士建议她早点去（should be there early），不然没座位，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "拍照（take some good pictures）是安妮自己想做的事，不是男士的建议。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "坐在舞台附近（close to the stage）也是安妮自己接着说的打算，男士只建议她早到。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "说话人之间是什么关系？",
+      "optionTranslationsZh": {
+        "A": "兄妹。",
+        "B": "同事（都是老师）。",
+        "C": "同学。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Another three years and we’ll be done too."
+      },
+      "reasonZh": "男士希望今天也是“我们的”毕业日，安妮说再过三年“我们”也毕业了（we’ll be done too），两人同一届毕业，是同学，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的姐姐（sister）是安妮的姐姐简，男士让安妮代他祝贺简（Give Jane my best wishes），他和安妮不是兄妹。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "对话开始时劳拉的语气如何？",
+      "optionTranslationsZh": {
+        "A": "焦虑的。",
+        "B": "后悔的。",
+        "C": "惊讶的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Oh, I can’t believe it!"
+      },
+      "reasonZh": "劳拉一开口就说真不敢相信（I can’t believe it），又说好久没见彼得了（for ages），是意外碰见老朋友的惊讶，选 C。"
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "关于彼得我们知道什么？",
+      "optionTranslationsZh": {
+        "A": "他找到了一份新工作。",
+        "B": "他有四个孩子。",
+        "C": "他有一座大房子。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We have four kids now, all boys."
+      },
+      "reasonZh": "彼得说他们现在有四个孩子，全是男孩（four kids … all boys），选项把 kids 说成 children，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 new 是彼得问劳拉和吉姆有什么新鲜事（what’s new with you and Jim），不是说他有新工作。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "“越来越大”（keeps getting bigger）说的是他家人口变多，不是房子大。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "吉姆为什么选择在家工作？",
+      "optionTranslationsZh": {
+        "A": "为了照顾孩子。",
+        "B": "为了多睡会儿。",
+        "C": "为了陪伴妻子。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Jim chose to work from home so we could spend less on child care."
+      },
+      "reasonZh": "吉姆在家工作是为了少花托儿费（spend less on child care），前面劳拉也说他在家带孩子（he’s home with the kids），可见是为了照看孩子，选 A。"
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "彼得今天下午要做什么？",
+      "optionTranslationsZh": {
+        "A": "举办晚宴。",
+        "B": "给萨莉打电话。",
+        "C": "参加会议。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I have an important meeting this afternoon."
+      },
+      "reasonZh": "彼得说他今天下午有个重要的会（an important meeting this afternoon），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "晚饭（dinner）是彼得说以后打电话约劳拉找时间一起吃（have dinner sometime），不是今天下午，也不是办晚宴。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "彼得说的是以后给劳拉打电话（I’ll call you），萨莉是他妻子，劳拉只是让他代向萨莉问好。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "詹妮弗·格林在做什么？",
+      "optionTranslationsZh": {
+        "A": "上一堂课。",
+        "B": "介绍一位演讲人。",
+        "C": "推荐一本书。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Now, let’s welcome Professor Bastian to talk about his ideas in the book."
+      },
+      "reasonZh": "詹妮弗先介绍嘉宾巴斯蒂安的身份、研究和新书，最后请大家欢迎他来讲（let’s welcome Professor Bastian），她是在介绍演讲人，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "书（book）是介绍嘉宾时提到的他的新作，整段话是为了请嘉宾上场，不是在推荐这本书。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "巴斯蒂安教授的书是关于什么的？",
+      "optionTranslationsZh": {
+        "A": "逃离不快的旅行。",
+        "B": "痛苦经历的益处。",
+        "C": "培养阅读能力的方法。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Painful experiences are in fact vital for our development"
+      },
+      "reasonZh": "书中认为痛苦经历对成长至关重要（vital for our development），还能帮人培养真正感到幸福的能力，合起来就是痛苦经历的益处，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的 develop … ability 说的是培养真正感到幸福的能力（develop our ability to feel truly happy），和阅读无关。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "书里说的逃避（escape pain or sorrow）是一味躲开痛苦会削弱自己，不是讲逃离不快的旅行。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "巴斯蒂安教授接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "分享他的故事。",
+        "B": "讨论他的计划。",
+        "C": "阐述他的观点。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "talk about his ideas in the book."
+      },
+      "reasonZh": "主持人最后请巴斯蒂安来谈谈书中的观点（talk about his ideas），“阐述观点”就是谈 ideas，选 C。"
+    }
+  }
+}

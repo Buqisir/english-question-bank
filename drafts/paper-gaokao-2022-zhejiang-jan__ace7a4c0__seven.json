@@ -1,0 +1,1032 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jan:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jan:seven-choices": {
+      "overview": "作者自称和别人一样每天只有24小时，却能过得高效又轻松。文章分四条小标题给出建议：挑最重要的事，把各种活动合在一起，做主动的学习者，放轻松并庆祝每一点进步。",
+      "fullTranslationZh": "我和你一样，每天只有24小时，但我作了具体选择，使自己每天都能充分利用时间，并仍然快乐轻松。也许这些建议能帮助你充分利用时间。\n\n挑最重要的事。\n\n对生活中有意义的事作出选择。把时间用在你觉得有趣且有成效的事情上。我选择当顾问，因为我喜欢与公司合作，却不想过大公司首席执行官的生活。我的选择基于自己想要的生活方式。\n\n把活动结合起来。\n\n许多人为了兼顾朋友、家人、工作和娱乐等而苦恼。别再试图在它们之间一一平衡时间。寻找把这些事结合起来享受的方法。围绕工作环境中的人建立社交生活，寻找志趣相投的同事，围绕你爱的人和活动发展事业。\n\n做主动的学习者。\n\n你也许认为学习会占更多时间，但实际上总有新方法可以节省日常事务的时间，让你腾出精力做最重要的事。始终寻找能在这里或那里省回一小时的新办法。\n\n放轻松。\n\n多数情况下，几件事没做完并不会让世界末日到来。庆祝进步，不断改进，让生活快乐而有成效。这就是为什么各类效率手册都重视列清单。每完成一件事都是小小胜利，积少成多。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-seven-choices-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+          "sourceText": "You would think learning takes more time from you, but actually there are always new ways of doing things that can save you time on daily tasks, freeing you up for the most important.",
+          "displayText": "You would think learning takes more time from you, but actually there are always new ways of doing things that can save you time on daily tasks, freeing you up for the most important.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:34"
+          ],
+          "translationZh": "你也许认为学习会占用你更多时间，但实际上总有新的做事方法能为你省下日常事务的时间，让你腾出手来做最重要的事。",
+          "analysisZh": "这句由 but 连起两层：前面 You would think 后接省略 that 的宾语从句 learning takes more time from you，说的是一般人的想法；后面 there are always new ways of doing things 是主干，作者用 actually 纠正前面的想法。that can save you time on daily tasks 是定语从句，修饰 ways；句末 freeing you up for the most important 是现在分词短语，说明省下时间带来的结果，the most important 又回扣“挑最重要的事”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 15,
+              "quote": "You would think"
+            },
+            {
+              "start": 64,
+              "end": 105,
+              "quote": "there are always new ways of doing things"
+            },
+            {
+              "start": 145,
+              "end": 182,
+              "quote": "freeing you up for the most important"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-seven-choices-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+          "sourceText": "Find people in your company who share common interests and develop your career (职业) around the people and activities you love.",
+          "displayText": "Find people in your company who share common interests and develop your career (职业) around the people and activities you love.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:33"
+          ],
+          "translationZh": "在公司里找到志趣相投的人，并围绕你喜爱的人和活动来发展你的事业。",
+          "analysisZh": "这是两个祈使句用 and 并列：Find people ... 和 develop your career ...，主语都是省略的 you。who share common interests 是定语从句，修饰 people，说明要找什么样的同事；around the people and activities you love 说明围绕什么发展事业，其中 you love 是省略关系词的定语从句。整句把社交、兴趣和工作放进同一个圈子，正是“合并活动”的具体做法。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "Find people in your company"
+            },
+            {
+              "start": 28,
+              "end": 54,
+              "quote": "who share common interests"
+            },
+            {
+              "start": 59,
+              "end": 83,
+              "quote": "develop your career (职业)"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-seven-choices-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 63,
+              "quote": "我和你一样，每天只有24小时，但我作了具体选择，使自己每天都能充分利用时间，并仍然快乐轻松。也许这些建议能帮助你充分利用时间。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:2"
+              ],
+              "start": 65,
+              "end": 72,
+              "quote": "挑最重要的事。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3"
+              ],
+              "start": 74,
+              "end": 157,
+              "quote": "对生活中有意义的事作出选择。把时间用在你觉得有趣且有成效的事情上。我选择当顾问，因为我喜欢与公司合作，却不想过大公司首席执行官的生活。我的选择基于自己想要的生活方式。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:4"
+              ],
+              "start": 159,
+              "end": 167,
+              "quote": "把活动结合起来。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5"
+              ],
+              "start": 169,
+              "end": 264,
+              "quote": "许多人为了兼顾朋友、家人、工作和娱乐等而苦恼。别再试图在它们之间一一平衡时间。寻找把这些事结合起来享受的方法。围绕工作环境中的人建立社交生活，寻找志趣相投的同事，围绕你爱的人和活动发展事业。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:6"
+              ],
+              "start": 266,
+              "end": 274,
+              "quote": "做主动的学习者。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7"
+              ],
+              "start": 276,
+              "end": 345,
+              "quote": "你也许认为学习会占更多时间，但实际上总有新方法可以节省日常事务的时间，让你腾出精力做最重要的事。始终寻找能在这里或那里省回一小时的新办法。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:8"
+              ],
+              "start": 347,
+              "end": 351,
+              "quote": "放轻松。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9"
+              ],
+              "start": 353,
+              "end": 433,
+              "quote": "多数情况下，几件事没做完并不会让世界末日到来。庆祝进步，不断改进，让生活快乐而有成效。这就是为什么各类效率手册都重视列清单。每完成一件事都是小小胜利，积少成多。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
+            "text": "I have the same 24 hours in a day as you do, but I have made specific choices that allow me to make the most of every day and still feel happy and relaxed. Perhaps these tips will help you make the most of your time."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
+            "text": "Make choices about what is meaningful in your life. Focus on spending time that for you is fun and productive. I chose the life of an adviser because I like to work with companies, but don’t want the life of a big company CEO. My choices are based on the lifestyle I want."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+            "text": "Many people go crazy trying to figure out how to spend time with friends, family, work, play, etc. Stop trying to balance time between them all. Find ways to enjoy them in a combined manner. Build your social life around people in your work environment. Find people in your company who share common interests and develop your career (职业) around the people and activities you love."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:6",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:6",
+            "text": "Be an active learner."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+            "text": "The world won’t come to an end in most cases just because you left a few things undone. Celebrate progress and keep refining（改进）toward a happy productive existence. This is why making lists is important in any productivity handbook. Every completion is a small victory that adds up in a big way."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "insertion-seven-choices-31",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:31"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:31",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
+                "quote": "Perhaps these tips will help you make the most of your time.",
+                "start": 156,
+                "end": 216
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "也许这些建议能帮助你充分利用时间。",
+                "start": 46,
+                "end": 63
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-32",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:32"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:32",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
+                "quote": "Make choices about what is meaningful in your life.",
+                "start": 0,
+                "end": 51
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "quote": "对生活中有意义的事作出选择。",
+                "start": 0,
+                "end": 14
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-33",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:33"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:33",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+                "quote": "Stop trying to balance time between them all.",
+                "start": 99,
+                "end": 144
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "quote": "别再试图在它们之间一一平衡时间。",
+                "start": 23,
+                "end": 39
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-34",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:34"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:34",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:6",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:6",
+                "quote": "Be an active learner.",
+                "start": 0,
+                "end": 21
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "quote": "做主动的学习者。",
+                "start": 0,
+                "end": 8
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-35",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:35"
+            ],
+            "blankId": "blank:paper-gaokao-2022-zhejiang-jan:35",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+                "quote": "This is why making lists is important in any productivity handbook.",
+                "start": 165,
+                "end": 232
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-9",
+                "quote": "这就是为什么各类效率手册都重视列清单。",
+                "start": 43,
+                "end": 62
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
+                "quote": "make the most of every day",
+                "start": 95,
+                "end": 121
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "quote": "使自己每天都能充分利用时间",
+                "start": 24,
+                "end": 37
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:2",
+                "quote": "Pick the most important.",
+                "start": 0,
+                "end": 24
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
+                "quote": "My choices are based on the lifestyle I want.",
+                "start": 182,
+                "end": 227
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "quote": "挑最重要的事。",
+                "start": 0,
+                "end": 7
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "quote": "我的选择基于自己想要的生活方式。",
+                "start": 67,
+                "end": 83
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+                "quote": "Find ways to enjoy them in a combined manner.",
+                "start": 106,
+                "end": 151
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "quote": "寻找把这些事结合起来享受的方法。",
+                "start": 39,
+                "end": 55
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+                "quote": "learning takes more time from you",
+                "start": 16,
+                "end": 49
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-7",
+                "quote": "你也许认为学习会占更多时间",
+                "start": 0,
+                "end": 13
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+                "quote": "Celebrate progress",
+                "start": 88,
+                "end": 106
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+                "quote": "Every completion is a small victory",
+                "start": 172,
+                "end": 207
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-9",
+                "quote": "庆祝进步",
+                "start": 23,
+                "end": 27
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-9",
+                "quote": "每完成一件事都是小小胜利",
+                "start": 62,
+                "end": 74
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-seven-choices-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+                "quote": "You would think learning takes more time from you, but actually there are always new ways of doing things that can save you time on daily tasks, freeing you up for the most important.",
+                "start": 0,
+                "end": 183
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-7",
+                "quote": "你也许认为学习会占更多时间，但实际上总有新方法可以节省日常事务的时间，让你腾出精力做最重要的事。",
+                "start": 0,
+                "end": 48
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-seven-choices-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+                "quote": "Find people in your company who share common interests and develop your career (职业) around the people and activities you love.",
+                "start": 215,
+                "end": 341
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "quote": "寻找志趣相投的同事，围绕你爱的人和活动发展事业。",
+                "start": 71,
+                "end": 95
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段用作者自己的做法引出“这些建议”，后面四块各由一句短小标题领起、一段话展开：先讲取舍，再讲合并，再讲学习省时，最后讲放下未完成的事、看重积累。",
+        "units": [
+          {
+            "unitId": "seven-unit-1",
+            "heading": "引出建议",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1"
+            ],
+            "summary": "作者同样只有24小时，靠具体的选择每天过得充实又轻松，由此引出下面几条建议。"
+          },
+          {
+            "unitId": "seven-unit-2",
+            "heading": "挑最重要的事",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:2",
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3"
+            ],
+            "summary": "按自己想要的生活方式做选择，用作者选做顾问、不做大公司总裁的经历作例子。"
+          },
+          {
+            "unitId": "seven-unit-3",
+            "heading": "把活动合在一起",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:4",
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5"
+            ],
+            "summary": "不必在朋友、家人、工作、娱乐之间来回平衡，而是围绕工作圈子建立社交，把爱好和事业结合。"
+          },
+          {
+            "unitId": "seven-unit-4",
+            "heading": "做主动的学习者",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:6",
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7"
+            ],
+            "summary": "学习看似费时，其实新方法能省下日常事务的时间，所以要一直找省时的新办法。"
+          },
+          {
+            "unitId": "seven-unit-5",
+            "heading": "放轻松",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:8",
+              "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9"
+            ],
+            "summary": "几件事没做完天不会塌，要庆祝进步；列清单让每完成一项都成为一次小胜利。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 34,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它和其他小标题一样是短祈使句，又像在概括下一段的 \"save you time on daily tasks\"。但下一段开头先说 \"learning takes more time\"，省时间靠的是学新方法，不是做得更快；最后一段的 \"Lighten up\" 还劝人放松，赶快不是作者的主张。",
+          "quotes": [
+            "save you time on daily tasks",
+            "learning takes more time",
+            "Lighten up"
+          ]
+        },
+        "E": {
+          "target": 32,
+          "secondary": 31,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"greater joy\" 像在接空后 \"fun and productive\"，都说做事开心。但小标题是 \"Pick the most important\"，空后又说 \"My choices are based on the lifestyle I want\"，这一段讲的是挑选，原文没提擅长什么。放到首段末尾，它像接 \"happy and relaxed\"，却引不出后面的几条建议。",
+          "quotes": [
+            "greater joy",
+            "fun and productive",
+            "Pick the most important",
+            "My choices are based on the lifestyle I want",
+            "happy and relaxed"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jan:31": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:31",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "the same 24 hours in a day",
+        "made specific choices",
+        "make the most of every day",
+        "happy and relaxed"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
+        "beforeQuote": "but I have made specific choices that allow me to make the most of every day and still feel happy and relaxed.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these tips",
+          "signalSide": "option",
+          "targetText": "Pick the most important. / Combine your activities. / Lighten up.",
+          "relation": "these tips 指后文几条小标题建议，空在首段末尾，正好把读者带到这些建议上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make the most of every day",
+          "signalSide": "context-before",
+          "targetText": "make the most of your time",
+          "relation": "作者先说自己每天过得充实，选项把同一说法转到读者身上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make the most of your time",
+          "signalSide": "option",
+          "targetText": "make the most of every day",
+          "relation": "原词复现，从“我”的做法过渡到“你”的收获。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Pick the most important",
+          "signalSide": "context-after",
+          "targetText": "these tips",
+          "relation": "空后紧接第一条小标题，就是 these tips 的第一条。"
+        }
+      ],
+      "lock": [
+        "make the most of",
+        "these tips",
+        "Pick the most important"
+      ],
+      "find": {
+        "text": "空前作者说自己能 \"make the most of every day\"，空后紧跟小标题 \"Pick the most important\"。F 复现 \"make the most of\"，\"these tips\" 正好指下面几条建议。",
+        "quotes": [
+          "make the most of every day",
+          "Pick the most important",
+          "make the most of",
+          "these tips"
+        ]
+      },
+      "explain": "首段前面讲的是作者自己：时间一样多，却过得充实又轻松。这句把话头转向读者，答应把这些做法当建议告诉你，下面每个小标题就是一条建议。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "首段前面讲的是作者自己：时间一样多，却过得充实又轻松。这句把话头转向读者，答应把这些做法当建议告诉你，下面每个小标题就是一条建议。",
+        "matchedClues": [
+          {
+            "contextSide": "make the most of every day",
+            "optionSide": "make the most of your time",
+            "relation": "同一说法从作者自己转到读者身上。"
+          },
+          {
+            "contextSide": "Pick the most important. / Combine your activities.",
+            "optionSide": "these tips",
+            "relation": "these tips 预告后文几条小标题建议。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:32": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:32",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Pick the most important",
+        "fun and productive",
+        "I chose the life of an adviser",
+        "My choices are based on the lifestyle I want"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "Focus on spending time that for you is fun and productive. I chose the life of an adviser because I like to work with companies, but don’t want the life of a big company CEO. My choices are based on the lifestyle I want."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Pick the most important",
+          "signalSide": "context-before",
+          "targetText": "what is meaningful in your life",
+          "relation": "小标题说挑最重要的，选项说对有意义的事做选择，是同一个意思。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Make choices",
+          "signalSide": "option",
+          "targetText": "I chose / My choices",
+          "relation": "段首说做选择，后面作者用自己 chose 做顾问、My choices 举例。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "My choices are based on the lifestyle I want",
+          "signalSide": "context-after",
+          "targetText": "Make choices about what is meaningful",
+          "relation": "段末收回到“选择”，和段首这句首尾呼应。"
+        }
+      ],
+      "lock": [
+        "Pick the most important",
+        "Make choices",
+        "My choices"
+      ],
+      "find": {
+        "text": "小标题 \"Pick the most important\" 要求挑选；空后作者讲自己 \"I chose\" 做顾问，又说 \"My choices are based on\" 想要的生活。只有 D 说 \"Make choices\"。",
+        "quotes": [
+          "Pick the most important",
+          "I chose",
+          "My choices are based on",
+          "Make choices"
+        ]
+      },
+      "explain": "这句是段首总起，把小标题“挑最重要的”说成一条做法：按什么对你有意义来取舍。后面先讲时间该花在哪，再拿作者选做顾问、不当大公司总裁作例子。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "这句是段首总起，把小标题“挑最重要的”说成一条做法：按什么对你有意义来取舍。后面先讲时间该花在哪，再拿作者选做顾问、不当大公司总裁作例子。",
+        "matchedClues": [
+          {
+            "contextSide": "Pick the most important",
+            "optionSide": "what is meaningful in your life",
+            "relation": "最重要的就是对你有意义的。"
+          },
+          {
+            "contextSide": "I chose ... / My choices are based on the lifestyle I want",
+            "optionSide": "Make choices",
+            "relation": "段首提出做选择，后文用作者自己的选择举例。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "它的 \"greater joy\" 像在接空后 \"fun and productive\"，都说做事开心。但小标题是 \"Pick the most important\"，空后又说 \"My choices are based on the lifestyle I want\"，这一段讲的是挑选，原文没提擅长什么。放到首段末尾，它像接 \"happy and relaxed\"，却引不出后面的几条建议。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:33": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:33",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "go crazy trying to figure out",
+        "spend time with friends, family, work, play",
+        "enjoy them in a combined manner",
+        "Build your social life around people in your work environment"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+        "beforeQuote": "Many people go crazy trying to figure out how to spend time with friends, family, work, play, etc.",
+        "afterQuote": "Find ways to enjoy them in a combined manner."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them all",
+          "signalSide": "option",
+          "targetText": "friends, family, work, play",
+          "relation": "them all 指空前列出的朋友、家人、工作、娱乐。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "friends, family, work, play",
+          "signalSide": "context-before",
+          "targetText": "them all",
+          "relation": "空前先列出这几样，选项才有 them all 可指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "go crazy trying to figure out",
+          "signalSide": "context-before",
+          "targetText": "Stop trying to balance time",
+          "relation": "空前说人们为分配时间发愁，选项劝人别再这样硬平衡。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in a combined manner",
+          "signalSide": "context-after",
+          "targetText": "balance time between them",
+          "relation": "空后给出替代办法：不分开平衡，而是合在一起享受。"
+        }
+      ],
+      "lock": [
+        "go crazy trying",
+        "them all",
+        "in a combined manner"
+      ],
+      "find": {
+        "text": "空前说人们 \"go crazy trying\" 在朋友、家人、工作、娱乐间分时间；空后 \"in a combined manner\" 是另一种办法。C 的 \"them all\" 指那几样，劝人别再硬平衡。",
+        "quotes": [
+          "go crazy trying",
+          "in a combined manner",
+          "them all"
+        ]
+      },
+      "explain": "空前摆出很多人的苦恼：几样事都想顾到，时间怎么分都不够。这句先叫停分开平衡的做法，空后再给出新办法：把它们合在一起享受，正对上小标题“合并活动”。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 像在劝人从这几样里挑重要的，但空后 \"Find ways to enjoy them in a combined manner\" 要的是几样都顾上，不是取舍。",
+          "quotes": [
+            "Find ways to enjoy them in a combined manner"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前摆出很多人的苦恼：几样事都想顾到，时间怎么分都不够。这句先叫停分开平衡的做法，空后再给出新办法：把它们合在一起享受，正对上小标题“合并活动”。",
+        "matchedClues": [
+          {
+            "contextSide": "friends, family, work, play",
+            "optionSide": "them all",
+            "relation": "them all 回指空前列举的几样事。"
+          },
+          {
+            "contextSide": "Find ways to enjoy them in a combined manner",
+            "optionSide": "Stop trying to balance time between them all",
+            "relation": "先否定分开平衡，再给出合并的办法。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 像在劝人从这几样里挑重要的，但空后 \"Find ways to enjoy them in a combined manner\" 要的是几样都顾上，不是取舍。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:34": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:34",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "learning takes more time from you",
+        "new ways of doing things",
+        "save you time on daily tasks",
+        "Always be looking for a new way"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:6",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "learner",
+          "signalSide": "option",
+          "targetText": "learning",
+          "relation": "小标题的 learner 和下一段开头的 learning 同根复现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "learning takes more time",
+          "signalSide": "context-after",
+          "targetText": "Be an active learner",
+          "relation": "下一段先替读者说出顾虑：学习要花时间，再说学习反而省时间。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "new ways of doing things",
+          "signalSide": "context-after",
+          "targetText": "active learner",
+          "relation": "不断找新方法，就是主动去学。"
+        }
+      ],
+      "lock": [
+        "learning",
+        "new ways of doing things"
+      ],
+      "find": {
+        "text": "小标题空，先读下一段。开头说 \"learning takes more time\"，接着讲总有 \"new ways of doing things\" 能省时间。B 的 \"learner\" 和 \"learning\" 同根。",
+        "quotes": [
+          "learning takes more time",
+          "new ways of doing things",
+          "learner",
+          "learning"
+        ]
+      },
+      "explain": "这句是第三条建议的小标题。下一段先打消“学习费时间”的顾虑，再说学到新方法反而能省下时间去做最重要的事，所以劝人主动去学。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "这句是第三条建议的小标题。下一段先打消“学习费时间”的顾虑，再说学到新方法反而能省下时间去做最重要的事，所以劝人主动去学。",
+        "matchedClues": [
+          {
+            "contextSide": "learning takes more time from you",
+            "optionSide": "learner",
+            "relation": "同根词复现，下一段讲的就是学习。"
+          },
+          {
+            "contextSide": "Always be looking for a new way",
+            "optionSide": "active",
+            "relation": "一直主动找新办法，就是做主动的学习者。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "它和其他小标题一样是短祈使句，又像在概括下一段的 \"save you time on daily tasks\"。但下一段开头先说 \"learning takes more time\"，省时间靠的是学新方法，不是做得更快；最后一段的 \"Lighten up\" 还劝人放松，赶快不是作者的主张。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:35": {
+      "blankId": "blank:paper-gaokao-2022-zhejiang-jan:35",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "left a few things undone",
+        "Celebrate progress",
+        "a happy productive existence",
+        "Every completion is a small victory"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+        "beforeQuote": "Celebrate progress and keep refining（改进）toward a happy productive existence.",
+        "afterQuote": "Every completion is a small victory that adds up in a big way."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "This is why",
+          "signalSide": "option",
+          "targetText": "Celebrate progress",
+          "relation": "This is why 把空前“要庆祝进步”当作原因，引出列清单为什么重要。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Celebrate progress",
+          "signalSide": "context-before",
+          "targetText": "This",
+          "relation": "This 指的就是庆祝每一点进步这个道理。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "making lists",
+          "signalSide": "option",
+          "targetText": "Every completion",
+          "relation": "清单上一项项划掉，才有空后的“每完成一项”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Every completion",
+          "signalSide": "context-after",
+          "targetText": "making lists",
+          "relation": "空后用“每完成一项都是小胜利”说明列清单的好处。"
+        }
+      ],
+      "lock": [
+        "Celebrate progress",
+        "This is why",
+        "Every completion"
+      ],
+      "find": {
+        "text": "空前 \"Celebrate progress\"，空后 \"Every completion is a small victory\"。G 用 \"This is why\" 承接庆祝进步，\"making lists\" 又让后句的每次完成有了着落。",
+        "quotes": [
+          "Celebrate progress",
+          "Every completion is a small victory",
+          "This is why",
+          "making lists"
+        ]
+      },
+      "explain": "空前劝人别为没做完的事焦虑，要庆祝进步。这句说清单正是为此而设；空后接着解释：清单上每完成一项都是一次小胜利，积少成多。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前劝人别为没做完的事焦虑，要庆祝进步。这句说清单正是为此而设；空后接着解释：清单上每完成一项都是一次小胜利，积少成多。",
+        "matchedClues": [
+          {
+            "contextSide": "Celebrate progress",
+            "optionSide": "This is why",
+            "relation": "前面的道理是原因，列清单是由此得出的做法。"
+          },
+          {
+            "contextSide": "Every completion is a small victory",
+            "optionSide": "making lists",
+            "relation": "清单让每一次完成看得见。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    }
+  }
+}

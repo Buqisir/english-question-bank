@@ -1,0 +1,136 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Para 1. We started to meet regularly to draw up our plans. At first he did most of the talking, and I just took notes. But I had decided not to give up, so I went to the library and read about the stress teenagers face. At our third meeting, I suggested a questionnaire about stress and sleep for the students in our school. He thought for a moment and nodded. It was the first time he had accepted one of my ideas. He even let me write some of the questions.\n\nPara 2. One day I got word that he was admitted to hospital for a serious disease. My first thought was about our project, but I felt bad about it at once. After school I went to see him with a pile of answered questionnaires. He looked pale and worried, and he told me quietly that he was afraid he would hold me back now. I told him not to worry: I would do the statistical analysis, and he could check it from his bed. For the next two weeks, I visited him every other day, and we worked through the numbers together. He was patient with my mistakes, and slowly he began to smile. On presentation day, I presented our findings to the class. When Dr. Henderson gave us an A, I knew it belonged to both of us.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "两人谈了很久，总算定下研究青少年心理健康的题目，但“我”连这个题目具体指什么都不太清楚。他一直看不上“我”，两人还没真正合作；整学期的项目还在前面，成绩又要两人共享。"
+        },
+        {
+          "question": "两个人物各想要什么、是什么样的人，从哪里看出来？",
+          "answer": "他好胜、严肃、只看成绩：总想拿 A，觉得“我”会拖他后腿（hold him back），宁可一个人做。“我”自知比不过他，却不肯认输：想过退课，又因为不想让他看到自己 chickening out 而决定坚持到底。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第一人称“我”讲述，一般过去时；句子中等长短，多写“我”的感受和判断。全文没有一处引号，人物的话和态度都用叙述和转述交代，描写很少。续写也以转述为主，至多留一两个词的直接引用。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "hold him back",
+          "use": "原文是他怕“我”拖累他；第二段可以反过来让病床上的他担心自己会拖累“我”，两人的位置一换，关系的变化就看得出来。"
+        },
+        {
+          "sourceQuote": "Whatever grade the team received would be shared by both students.",
+          "use": "成绩共享是两人非合作不可的理由；结尾可以落在拿到的那个成绩属于两个人。"
+        },
+        {
+          "sourceQuote": "He looked at me as though I weren’t there.",
+          "use": "他起初对“我”视而不见；续写写他第一次认真看“我”的笔记、采纳“我”的想法，就是在回应这一句。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段以 Para 1. We started to meet regularly to draw up our plans. 开头，写两人定期见面做计划；第二段以 Para 2. One day I got word that he was admitted to hospital for a serious disease. 开头。",
+        "第二段首句要求：第一段结束时他还没有住院，项目也还没做完；“我”是从别人那里听说他住院的。",
+        "必须接上的原文事实：项目要提出假说、做实验、做统计分析、展示结果，成绩两人共享；“我”已决定坚持到底；题目是青少年心理健康。",
+        "人称、时态不变：第一人称“我”，一般过去时；人物仍是“我”、他和 Dr. Henderson。"
+      ],
+      "thisEssayChooses": "本文让“我”先在第一段靠自己查资料、提出问卷调查，赢得他的第一次认可；第二段“我”带着问卷去医院，接下统计分析，他在病床上帮忙核对，最后“我”替两人做展示、拿到 A。问卷、隔天探望、成绩结尾都是可以换的选择，比如也可以让两人一起准备展示、等他出院后再交报告。"
+    },
+    "standard": {
+      "essay": "Para 1. We started to meet regularly to draw up our plans. At first he did most of the talking, and I just took notes. But I had decided not to give up, so I went to the library and read about the stress teenagers face. At our third meeting, I suggested a questionnaire about stress and sleep for the students in our school. He thought for a moment and nodded. It was the first time he had accepted one of my ideas. He even let me write some of the questions.\n\nPara 2. One day I got word that he was admitted to hospital for a serious disease. My first thought was about our project, but I felt bad about it at once. After school I went to see him with a pile of answered questionnaires. He looked pale and worried, and he told me quietly that he was afraid he would hold me back now. I told him not to worry: I would do the statistical analysis, and he could check it from his bed. For the next two weeks, I visited him every other day, and we worked through the numbers together. He was patient with my mistakes, and slowly he began to smile. On presentation day, I presented our findings to the class. When Dr. Henderson gave us an A, I knew it belonged to both of us.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写两人开始合作：“我”从只会记笔记，到拿出自己的想法并被他接受，关系第一次松动。",
+          "items": [
+            {
+              "quote": "At first he did most of the talking, and I just took notes.",
+              "explain": "先接住原文的状态：他强势、“我”插不上话。At first 也预告后面会有变化。"
+            },
+            {
+              "quote": "But I had decided not to give up",
+              "explain": "接回原文 I decided to stick to it no matter what，“我”的行动由原文给的决心推动，不是突然变强。"
+            },
+            {
+              "quote": "It was the first time he had accepted one of my ideas.",
+              "explain": "把变化落在一件看得见的事上：他点头采纳问卷。用 the first time … had done 点出这是转折，但只写到“接受一个想法”，没有一下子变成好朋友，给第二段留下空间。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "他住院后，“我”主动接下项目，两人在病房里真正合作，最后一起拿到成绩。",
+          "items": [
+            {
+              "quote": "My first thought was about our project, but I felt bad about it at once.",
+              "explain": "先写一个真实的念头再写自责，人物不是一听消息就无私，转变更可信。"
+            },
+            {
+              "quote": "he was afraid he would hold me back now",
+              "explain": "借原文的 hold him back，却把位置调换：以前他怕“我”拖累他，现在他怕自己拖累“我”。用转述而不是引号，和原文写法一致。"
+            },
+            {
+              "quote": "I would do the statistical analysis, and he could check it from his bed",
+              "explain": "用回原文的项目步骤 statistical analysis，分工具体，问题由两个人物自己解决，没有靠老师或别人出手。"
+            },
+            {
+              "quote": "When Dr. Henderson gave us an A, I knew it belonged to both of us.",
+              "explain": "结尾落在一个具体的成绩上，又回扣原文“成绩两人共享”，不必再加一句大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "do most of the talking",
+          "function": "一句话写出他在讨论中占上风、“我”插不上话的局面。"
+        },
+        {
+          "expression": "hold sb back",
+          "function": "原文里的说法，续写反过来用，写出两人位置的变化。"
+        },
+        {
+          "expression": "work through the numbers together",
+          "function": "把“一起做统计分析”写成具体的动作，合作就看得见。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写两人成了好朋友，甚至把项目做完了。",
+          "why": "第二段才写他住院，项目和关系都要在那之后才有着落；第一段写满，第二段就无事可做。"
+        },
+        {
+          "pitfall": "让 Dr. Henderson 给“我”换搭档，或让别的同学来帮忙解决问题。",
+          "why": "这是天降的帮助。原文的问题是“我”和他合不来，要由这两个人自己的行动来解决。"
+        },
+        {
+          "pitfall": "病房一幕写成抱头痛哭，他说一大段道歉和人生感悟。",
+          "why": "原文一句引号都没有，情绪靠叙述交代；转变应落在问卷、数据这些具体的事上，而不是一番大道理。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Para 1. We started to meet regularly to draw up our plans. At first he did all the talking, firing out ideas faster than I could write them down, while I simply nodded along. But I had promised myself I wouldn't chicken out, so I spent two evenings in the library reading about how stress affects teenagers. At our third meeting, I took a deep breath and suggested a questionnaire for the students in our school. He stared at my notes for a long moment. Then, to my surprise, he pushed his own plan aside and asked me to write the questions. It was a small thing, but it was the first time he had looked at me as if I were really there.\n\nPara 2. One day I got word that he was admitted to hospital for a serious disease. My first worry was the project, and I felt ashamed of it at once. That afternoon I went to the hospital with a stack of completed questionnaires under my arm. He was lying in bed, paler than I had ever seen him, and the first thing he said was that he was sorry he might hold me back now. I told him the grade was the last thing he should worry about: I would do the statistical analysis, and he could check every number. For the next two weeks I turned up every other day with my laptop. He corrected my mistakes, patiently this time, and between the charts he admitted that he had always been terrified of getting anything less than an A. On presentation day I stood alone in front of the class, but I said \"we\" in every sentence. When Dr. Henderson handed back our report with an A on it, I took a photo and sent it to him.",
+      "beyondStandard": [
+        {
+          "quote": "firing out ideas faster than I could write them down",
+          "explain": "标准版只说他话多，这里用 firing out 和“我记都记不过来”写出他的强势，画面更具体，也更像原文叙述者略带自嘲的口吻。"
+        },
+        {
+          "quote": "as if I were really there",
+          "explain": "回扣原文 He looked at me as though I weren’t there，用同一个说法反着写，“他第一次正眼看我”就不用另外解释。"
+        },
+        {
+          "quote": "but I said \"we\" in every sentence",
+          "explain": "标准版说替两人做展示，这里用一个细节写出“我”心里已把他当搭档：一个人站在台上，嘴里说的都是“我们”。"
+        }
+      ]
+    }
+  }
+}

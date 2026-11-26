@@ -1,0 +1,683 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jan:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jan:reading-b": {
+      "overview": "本文评介技术史学家克莱因的新书《动力缔造者》：书中把电力时代看作蒸汽时代的第二阶段，从瓦特写到莫尔斯、贝尔、爱迪生和特斯拉，并借虚构人物内德串起美国一个人一生经历的两场革命。",
+      "fullTranslationZh": "美国凭借技术跃升为全球强国，而长期以来，这种技术的命脉一直是电力。电力提供了远距离通信和能源，创造了现代世界。然而，正确地理解，电力时代只不过是蒸汽时代的第二阶段，而蒸汽时代早在一个世纪前就开始了。\n\n“奇怪的是，还没有人把蒸汽革命和电力革命的历史合在一起写过，”莫里·克莱因在他的《动力缔造者：蒸汽、电力和发明现代美国的人》一书中写道。克莱因是一位著名的技术史学家，他讲述的故事十分生动，有时读起来就像一部小说。\n\n故事始于 18 世纪最后几年的苏格兰，瓦特在那里完善了“改变世界的机器”。克莱因写道：“蒸汽机不是美国发明的，但美国人一旦掌握了它的诀窍，就把它用到了比任何人都多的地方。”\n\n与此同时，在整个 19 世纪里，电力从仅仅令人好奇的新鲜事物变成了基本必需品。莫尔斯发明了一种通过电磁电路发送信息的电码。随后贝尔让电报有了声音。爱迪生完善了白炽灯泡，把电灯带进了美国家庭。\n\n最重要的是，爱迪生认识到成功取决于大规模电气化，他在纽约市证明了这一点。在特斯拉的帮助下，威斯汀豪斯的公司开发出一套使用交流电的系统，它很快成为电力输送的主要形式。\n\n为了搭建故事框架，克莱因塑造了内德这个人物，他是一位虚构的见证者，在一个人的一生中见证了蒸汽革命和电力革命给美国带来的进步。这种手法有助于把冗长的叙述变得有趣。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+          "sourceText": "Yet properly understood, the age of electricity is merely the second stage in the age of steam, which began a century earlier.",
+          "displayText": "Yet properly understood, the age of electricity is merely the second stage in the age of steam, which began a century earlier.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:24"
+          ],
+          "translationZh": "然而，正确地理解，电力时代只不过是蒸汽时代的第二阶段，而蒸汽时代早在一个世纪前就开始了。",
+          "analysisZh": "先找主干：the age of electricity is merely the second stage，电力时代只是第二阶段。in the age of steam 说是谁的第二阶段。句首 properly understood 是过去分词短语，意思是“如果正确理解的话”，Yet 把它和上文对电力的赞美转开。逗号后的 which 引导非限制性定语从句，修饰 the age of steam，交代蒸汽时代早一百年开始。began a century earlier 的主语是蒸汽时代，不是电力时代。",
+          "underlineRanges": [
+            {
+              "start": 25,
+              "end": 74,
+              "quote": "the age of electricity is merely the second stage"
+            },
+            {
+              "start": 96,
+              "end": 125,
+              "quote": "which began a century earlier"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+          "sourceText": "America did not invent the steam engine, but once they grasped its passwords they put it to more uses than anyone else.",
+          "displayText": "America did not invent the steam engine, but once they grasped its passwords they put it to more uses than anyone else.",
+          "relatedQuestionIds": [],
+          "translationZh": "蒸汽机不是美国发明的，但美国人一旦掌握了它的诀窍，就把它用到了比任何人都多的地方。",
+          "analysisZh": "but 连接前后两个分句。前一句 America did not invent the steam engine，先让一步：蒸汽机不是美国发明的。后一句主干是 they put it to more uses，美国人把它用到了更多地方；put sth. to use 意为“使用”。once 引导条件状语从句，passwords 在这里比喻“诀窍”。than anyone else 是比较对象。整句的重点在 but 之后：美国强在把蒸汽机用得最广。",
+          "underlineRanges": [
+            {
+              "start": 8,
+              "end": 39,
+              "quote": "did not invent the steam engine"
+            },
+            {
+              "start": 45,
+              "end": 76,
+              "quote": "once they grasped its passwords"
+            },
+            {
+              "start": 82,
+              "end": 118,
+              "quote": "put it to more uses than anyone else"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:1"
+              ],
+              "start": 0,
+              "end": 99,
+              "quote": "美国凭借技术跃升为全球强国，而长期以来，这种技术的命脉一直是电力。电力提供了远距离通信和能源，创造了现代世界。然而，正确地理解，电力时代只不过是蒸汽时代的第二阶段，而蒸汽时代早在一个世纪前就开始了。"
+            },
+            {
+              "paragraphId": "zh-reading-b-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:2"
+              ],
+              "start": 101,
+              "end": 207,
+              "quote": "“奇怪的是，还没有人把蒸汽革命和电力革命的历史合在一起写过，”莫里·克莱因在他的《动力缔造者：蒸汽、电力和发明现代美国的人》一书中写道。克莱因是一位著名的技术史学家，他讲述的故事十分生动，有时读起来就像一部小说。"
+            },
+            {
+              "paragraphId": "zh-reading-b-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:3"
+              ],
+              "start": 209,
+              "end": 295,
+              "quote": "故事始于 18 世纪最后几年的苏格兰，瓦特在那里完善了“改变世界的机器”。克莱因写道：“蒸汽机不是美国发明的，但美国人一旦掌握了它的诀窍，就把它用到了比任何人都多的地方。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:4"
+              ],
+              "start": 297,
+              "end": 392,
+              "quote": "与此同时，在整个 19 世纪里，电力从仅仅令人好奇的新鲜事物变成了基本必需品。莫尔斯发明了一种通过电磁电路发送信息的电码。随后贝尔让电报有了声音。爱迪生完善了白炽灯泡，把电灯带进了美国家庭。"
+            },
+            {
+              "paragraphId": "zh-reading-b-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:5"
+              ],
+              "start": 394,
+              "end": 476,
+              "quote": "最重要的是，爱迪生认识到成功取决于大规模电气化，他在纽约市证明了这一点。在特斯拉的帮助下，威斯汀豪斯的公司开发出一套使用交流电的系统，它很快成为电力输送的主要形式。"
+            },
+            {
+              "paragraphId": "zh-reading-b-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+                "block:paper-gaokao-2022-zhejiang-jan:reading-b:7"
+              ],
+              "start": 478,
+              "end": 558,
+              "quote": "为了搭建故事框架，克莱因塑造了内德这个人物，他是一位虚构的见证者，在一个人的一生中见证了蒸汽革命和电力革命给美国带来的进步。这种手法有助于把冗长的叙述变得有趣。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+                "start": 254,
+                "end": 323,
+                "quote": "the age of electricity is merely the second stage in the age of steam"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+                "start": 20,
+                "end": 96,
+                "quote": "no one has put together a history of both the steam and electric revolutions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 64,
+                "end": 81,
+                "quote": "电力时代只不过是蒸汽时代的第二阶段"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 6,
+                "end": 29,
+                "quote": "还没有人把蒸汽革命和电力革命的历史合在一起写过"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+                "start": 0,
+                "end": 71,
+                "quote": "the steam and electric revolutions in America during one man’s lifetime"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+                "start": 11,
+                "end": 105,
+                "quote": "over the course of the 19th century, electricity went from mere curiosity to a basic necessity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-6",
+                "start": 33,
+                "end": 61,
+                "quote": "在一个人的一生中见证了蒸汽革命和电力革命给美国带来的进步"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-4",
+                "start": 5,
+                "end": 38,
+                "quote": "在整个 19 世纪里，电力从仅仅令人好奇的新鲜事物变成了基本必需品"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+                "start": 99,
+                "end": 207,
+                "quote": "writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+                "start": 249,
+                "end": 312,
+                "quote": "spins a narrative so lively that at times it reads like a novel"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+                "start": 73,
+                "end": 147,
+                "quote": "It’s a technique that helps turn a long narrative into an interesting one."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 31,
+                "end": 67,
+                "quote": "莫里·克莱因在他的《动力缔造者：蒸汽、电力和发明现代美国的人》一书中写道"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 83,
+                "end": 105,
+                "quote": "他讲述的故事十分生动，有时读起来就像一部小说"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-6",
+                "start": 62,
+                "end": 80,
+                "quote": "这种手法有助于把冗长的叙述变得有趣。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+                "start": 229,
+                "end": 355,
+                "quote": "Yet properly understood, the age of electricity is merely the second stage in the age of steam, which began a century earlier."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 55,
+                "end": 99,
+                "quote": "然而，正确地理解，电力时代只不过是蒸汽时代的第二阶段，而蒸汽时代早在一个世纪前就开始了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-2",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+                "start": 142,
+                "end": 261,
+                "quote": "America did not invent the steam engine, but once they grasped its passwords they put it to more uses than anyone else."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "start": 44,
+                "end": 85,
+                "quote": "蒸汽机不是美国发明的，但美国人一旦掌握了它的诀窍，就把它用到了比任何人都多的地方。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先提出本书的核心观点：电力时代是蒸汽时代的第二阶段；接着介绍作者克莱因和这本书，概述书中从瓦特的蒸汽机到爱迪生、特斯拉推广电力的内容，最后评价作者用虚构人物内德串起故事的写法。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+            "summary": "美国凭技术崛起，电力创造了现代世界，但电力时代只是蒸汽时代的第二阶段。",
+            "function": "提出全书观点，引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+            "summary": "引克莱因的话说还没人把两场革命合写成史，介绍书名和作者，称其叙述生动如小说。",
+            "function": "介绍所评的书和作者，并作评价。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+            "summary": "故事始于 18 世纪末瓦特完善蒸汽机，美国虽非发明者却把它用得最广。",
+            "function": "概述书中蒸汽革命部分。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+            "summary": "19 世纪电力从新奇变为必需，莫尔斯、贝尔、爱迪生相继推进。",
+            "function": "概述书中电力革命部分。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:5",
+            "summary": "爱迪生在纽约推行大规模电气化，威斯汀豪斯的公司借特斯拉之力推广交流电。",
+            "function": "继续概述电力推广。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+            "summary": "克莱因塑造虚构人物内德，作为两场革命所带来进步的见证者。",
+            "function": "介绍本书搭建故事框架的写法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+            "summary": "接上句说内德的一生经历了这两场革命，并评价这一手法让长篇叙述变得有趣。",
+            "function": "评价写法，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jan:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出书中怎样看待电力时代与蒸汽时代的关系。",
+      "stemTranslationZh": "克莱因如何理解电力时代？",
+      "locateBy": "stem",
+      "locateFindZh": "看 Yet 后的正确理解",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它与蒸汽时代紧密相连。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+              "quote": "the age of electricity is merely the second stage in the age of steam",
+              "anchor": "电力时代是蒸汽时代的第二阶段"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "quote": "no one has put together a history of both the steam and electric revolutions",
+              "anchor": "两场革命该合起来写"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它开始得比人们正确认为的要早。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "began a century earlier",
+            "optionText": "began earlier",
+            "matchType": "exact",
+            "relationNote": "began a century earlier 的主语是 which，指蒸汽时代：蒸汽时代比电力时代早一百年开始；选项把“开始得早”安到了电力时代头上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+              "quote": "Yet properly understood, the age of electricity is merely the second stage in the age of steam, which began a century earlier.",
+              "anchor": "蒸汽时代早一百年"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是一段很少有人研究的历史时期。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "It is curious that no one has put together a history of both the steam and electric revolutions",
+            "sourceHighlight": "a history of both",
+            "optionText": "It is a little-studied period of history.",
+            "optionHighlight": "a little-studied period",
+            "explanation": "克莱因只说没人把蒸汽和电力两场革命合起来写成一部历史（a history of both），不是说电力时代本身少有人研究。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "quote": "It is curious that no one has put together a history of both the steam and electric revolutions",
+              "anchor": "没人合写两场革命"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它迟早会结束。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It will come to an end sooner or later.",
+            "explanation": "原文只说电力创造了现代世界、是蒸汽时代的第二阶段，没谈电力时代会不会结束。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the age of electricity",
+          "sourceRole": "stem",
+          "targetText": "Yet properly understood, the age of electricity is merely the second stage in the age of steam, which began a century earlier.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "the age of electricity is merely the second stage in the age of steam",
+          "note": "题干 the age of electricity 原词出现在原文。"
+        },
+        {
+          "sourceText": "It is closely linked to the steam age.",
+          "sourceRole": "correctOption",
+          "targetText": "the age of electricity is merely the second stage in the age of steam",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“与蒸汽时代紧密相连”（closely linked）概括了原文的“只是蒸汽时代的第二阶段”（the second stage in the age of steam）：电力时代是蒸汽时代的延续。克莱因也说两场革命该合写成一部史（a history of both），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:25": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "由内德一生见证两场革命，结合电力革命发生的年代，推出他生活的时期。",
+      "stemTranslationZh": "关于内德，可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "读完整句，再回看两场革命的年代",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他出生在纽约市。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "New York City",
+            "optionText": "New York City",
+            "matchType": "exact",
+            "relationNote": "New York City 出自[[block:paper-gaokao-2022-zhejiang-jan:reading-b:5|which he showed in New York City]]，是爱迪生展示大规模电气化的地方，和内德在哪里出生无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:5",
+              "quote": "Most importantly, Edison realized that success depended on mass electrification, which he showed in New York City.",
+              "anchor": "爱迪生在纽约展示"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他写了许多越来越精彩的故事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "To frame his story, Klein creates the character of Ned",
+            "sourceEntity": "Klein",
+            "optionText": "He wrote many increasing stories,",
+            "optionEntity": "He",
+            "explanation": "写故事的是克莱因（To frame his story），内德是他为串起故事虚构出来的人物，身份是见证者，不是作者。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+              "quote": "To frame his story, Klein creates the character of Ned",
+              "anchor": "克莱因塑造内德"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他创办了一家电力公司。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "With help from Tesla, Westinghouse’s firm developed a system using alternating current",
+            "sourceEntity": "Westinghouse’s firm",
+            "optionText": "He created an electricity company.",
+            "optionEntity": "He",
+            "explanation": "原文提到的电力公司是威斯汀豪斯的公司（Westinghouse’s firm）；内德只是虚构的见证者（a fictional witness），没开过公司。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:5",
+              "quote": "With help from Tesla, Westinghouse’s firm developed a system using alternating current",
+              "anchor": "威斯汀豪斯的公司"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他主要生活在 19 世纪。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+              "quote": "the steam and electric revolutions in America during one man’s lifetime",
+              "anchor": "一生见证两场革命"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+              "quote": "over the course of the 19th century, electricity went from mere curiosity to a basic necessity",
+              "anchor": "电力革命在 19 世纪"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Ned",
+          "sourceRole": "stem",
+          "targetText": "To frame his story, Klein creates the character of Ned, a fictional witness to the progress brought about by",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+          "relationType": "locationCue",
+          "answerText": "during one man’s lifetime",
+          "bridgeZh": "内德见证的两场革命，都在他一个人的一生之内",
+          "note": "题干 Ned 原词出现在原文。"
+        },
+        {
+          "sourceText": "He lived mainly in the 19th century.",
+          "sourceRole": "correctOption",
+          "targetText": "the steam and electric revolutions in America during one man’s lifetime",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+          "relationType": "paraphrase",
+          "note": "原文没写内德生活在哪个世纪，要推一步：他一生见证了美国的蒸汽和电力革命（during one man’s lifetime），而[[block:paper-gaokao-2022-zhejiang-jan:reading-b:4|over the course of the 19th century]]写电力正是在 19 世纪成为必需品的，由此推出他主要生活在 19 世纪，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据全文介绍并评价一本书的写法，判断文章体裁。",
+      "stemTranslationZh": "这篇文章是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2022-zhejiang-jan:reading-b:2]]报书名、夸 reads like a novel，[[block:paper-gaokao-2022-zhejiang-jan:reading-b:3]]起概述书中史实，[[block:paper-gaokao-2022-zhejiang-jan:reading-b:7]]评 technique；要盖住介绍加评价",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一篇传记。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "a history of both the steam and electric revolutions",
+            "sourceEntity": "a history",
+            "optionText": "A biography.",
+            "optionEntity": "biography",
+            "explanation": "书写的是两场革命的历史（a history），涉及瓦特、爱迪生等许多人；贯穿全书的内德还是虚构的（fictional），不是给某个真人立传。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "quote": "a history of both the steam and electric revolutions",
+              "anchor": "两场革命的历史"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一篇书评。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "quote": "writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America",
+              "anchor": "介绍书名和作者"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "quote": "spins a narrative so lively that at times it reads like a novel",
+              "anchor": "评价叙述生动"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+              "quote": "It’s a technique that helps turn a long narrative into an interesting one.",
+              "anchor": "评价写法"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一篇短篇小说。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "story",
+            "optionText": "story",
+            "matchType": "exact",
+            "relationNote": "story 出自[[block:paper-gaokao-2022-zhejiang-jan:reading-b:3|The story begins]]，指克莱因书里讲的历史；reads like a novel 也只是夸这本书读着像小说，本文本身是在介绍这本书。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+              "quote": "The story begins in the last years of the 18th century in Scotland",
+              "anchor": "书中的故事"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇科学报告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A science report.",
+            "explanation": "文中没有实验、数据或研究结论，谈的是一位技术史学家（historian of technology）写的历史书。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A book review.",
+          "sourceRole": "correctOption",
+          "targetText": "Klein, a noted historian of technology, spins a narrative so lively that at times it reads like a novel.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "全文围绕克莱因的一本书展开：介绍书名和作者，概述书里从瓦特到爱迪生、特斯拉的内容，又评价它叙述生动（so lively）、借虚构人物让长篇叙述变得有趣（interesting）。既介绍又评价一本书，正是书评，选 B。"
+        }
+      ]
+    }
+  }
+}

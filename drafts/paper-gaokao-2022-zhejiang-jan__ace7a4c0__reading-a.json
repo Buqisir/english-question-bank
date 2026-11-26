@@ -1,0 +1,653 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jan:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jan:reading-a": {
+      "overview": "梅丽贝丝原是房地产公司的办公室经理，公司在金融危机中破产后，她因开车把一条走失的狗送到丹佛而做起宠物运送。这份工作收入不错，满足了她继承自父亲的漫游癖，她总是独自上路。",
+      "fullTranslationZh": "近十年来，梅丽贝丝一直是一名个体宠物运送专员。她的宠物运送工作诞生于 21 世纪头十年末期的金融危机。那场经济衰退冲击了她担任办公室经理长达十年的房地产公司。公司破产了，她只好另找工作。一天，她在家附近开车时，看见一条狗在路上游荡，显然是走丢了。她把狗带回了家，她住在丹佛的姐姐答应收养它。那里无疑是个充满爱的家，却远在 1600 英里之外。梅丽贝丝没多久就决定亲自开车把狗送过去。这是她奔赴新工作的第一次公路旅行。\n\n梅丽贝丝的宠物运送服务也满足了她的漫游癖。她自豪地说，这份工作带她去过美国除蒙大拿、华盛顿和俄勒冈以外的每一个州。如果她想去一个新地方，只要在那里找一只有运送需求的宠物就行。她无论什么天气都上路。她曾在怀俄明州顶着每小时 55 英里的大风开车，也经历过亚拉巴马州的洪水和暴风雨，以及堪萨斯州白茫茫一片、什么都看不清的天气。\n\n她说，这种漫游癖是从父亲那里继承来的。她一岁时，父亲把全家从加拿大搬到了加利福尼亚，因为他想让一家人一起探索一个新地方。她高中一毕业就离开了家，远离父母，到加州海岸外的卡塔利娜岛生活，在那里享受着航海和越野骑行的日子。\n\n事实证明，宠物运送的收入相当不错，税前每年约 3 万美元。她夏天不工作，因为即使开着空调，车里对动物来说也会热得难受。秋天一到，她就坐立不安——那熟悉的漫游癖又回来了。不过，这是一种她必须独自响应的召唤。梅丽贝丝说：“我在路上的时候，就沉浸在自己的世界里。我一向性格独立，而且我强烈地觉得自己必须帮助动物。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:4",
+          "sourceText": "As soon as she graduated from high school she left home to live on Catalina Island off the Californian coast, away from her parents, where she enjoyed a life of sailing and off-road biking.",
+          "displayText": "As soon as she graduated from high school she left home to live on Catalina Island off the Californian coast, away from her parents, where she enjoyed a life of sailing and off-road biking.",
+          "relatedQuestionIds": [],
+          "translationZh": "她高中一毕业就离开了家，远离父母，到加州海岸外的卡塔利娜岛生活，在那里享受着航海和越野骑行的日子。",
+          "analysisZh": "先找主干：she left home，她离开了家。to live on Catalina Island 说离家去做什么，off the Californian coast 交代岛在加州海岸外。As soon as 引导的从句放在句首，说一毕业就走。away from her parents 是插入的补充，强调远离父母。where 引导非限制性定语从句，修饰 Catalina Island，说她在岛上过着航海、越野骑行的生活。这句用她年轻时的经历，印证漫游癖是从小就有的。",
+          "underlineRanges": [
+            {
+              "start": 42,
+              "end": 82,
+              "quote": "she left home to live on Catalina Island"
+            },
+            {
+              "start": 110,
+              "end": 131,
+              "quote": "away from her parents"
+            },
+            {
+              "start": 133,
+              "end": 138,
+              "quote": "where"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+          "sourceText": "She doesn’t work in summer, as it would be unpleasantly hot for the animals in the car, even with air conditioning.",
+          "displayText": "She doesn’t work in summer, as it would be unpleasantly hot for the animals in the car, even with air conditioning.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:23"
+          ],
+          "translationZh": "她夏天不工作，因为即使开着空调，车里对动物来说也会热得难受。",
+          "analysisZh": "主干很短：She doesn’t work in summer，她夏天不接活。as 引导原因状语从句，说明为什么停工；从句里的 would 是假设语气，意思是“要是夏天跑车，就会热”。even with air conditioning 表示让步：就算开空调也不行。读懂这句，就知道她并不是一年到头都在工作。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "She doesn’t work in summer"
+            },
+            {
+              "start": 28,
+              "end": 30,
+              "quote": "as"
+            },
+            {
+              "start": 88,
+              "end": 114,
+              "quote": "even with air conditioning"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-a:1"
+              ],
+              "start": 0,
+              "end": 208,
+              "quote": "近十年来，梅丽贝丝一直是一名个体宠物运送专员。她的宠物运送工作诞生于 21 世纪头十年末期的金融危机。那场经济衰退冲击了她担任办公室经理长达十年的房地产公司。公司破产了，她只好另找工作。一天，她在家附近开车时，看见一条狗在路上游荡，显然是走丢了。她把狗带回了家，她住在丹佛的姐姐答应收养它。那里无疑是个充满爱的家，却远在 1600 英里之外。梅丽贝丝没多久就决定亲自开车把狗送过去。这是她奔赴新工作的第一次公路旅行。"
+            },
+            {
+              "paragraphId": "zh-reading-a-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+                "block:paper-gaokao-2022-zhejiang-jan:reading-a:3"
+              ],
+              "start": 210,
+              "end": 371,
+              "quote": "梅丽贝丝的宠物运送服务也满足了她的漫游癖。她自豪地说，这份工作带她去过美国除蒙大拿、华盛顿和俄勒冈以外的每一个州。如果她想去一个新地方，只要在那里找一只有运送需求的宠物就行。她无论什么天气都上路。她曾在怀俄明州顶着每小时 55 英里的大风开车，也经历过亚拉巴马州的洪水和暴风雨，以及堪萨斯州白茫茫一片、什么都看不清的天气。"
+            },
+            {
+              "paragraphId": "zh-reading-a-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-a:4"
+              ],
+              "start": 373,
+              "end": 482,
+              "quote": "她说，这种漫游癖是从父亲那里继承来的。她一岁时，父亲把全家从加拿大搬到了加利福尼亚，因为他想让一家人一起探索一个新地方。她高中一毕业就离开了家，远离父母，到加州海岸外的卡塔利娜岛生活，在那里享受着航海和越野骑行的日子。"
+            },
+            {
+              "paragraphId": "zh-reading-a-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-a:5"
+              ],
+              "start": 484,
+              "end": 638,
+              "quote": "事实证明，宠物运送的收入相当不错，税前每年约 3 万美元。她夏天不工作，因为即使开着空调，车里对动物来说也会热得难受。秋天一到，她就坐立不安——那熟悉的漫游癖又回来了。不过，这是一种她必须独自响应的召唤。梅丽贝丝说：“我在路上的时候，就沉浸在自己的世界里。我一向性格独立，而且我强烈地觉得自己必须帮助动物。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+                "start": 263,
+                "end": 318,
+                "quote": "The firm went broke and left her looking for a new job."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+                "start": 163,
+                "end": 262,
+                "quote": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-1",
+                "start": 79,
+                "end": 93,
+                "quote": "公司破产了，她只好另找工作。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-1",
+                "start": 51,
+                "end": 79,
+                "quote": "那场经济衰退冲击了她担任办公室经理长达十年的房地产公司。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+                "start": 63,
+                "end": 142,
+                "quote": "It has taken her to every state in the US except Montana, Washington and Oregon"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+                "start": 162,
+                "end": 251,
+                "quote": "If she wants to visit a new place, she will simply find a pet with transport needs there."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "start": 27,
+                "end": 56,
+                "quote": "这份工作带她去过美国除蒙大拿、华盛顿和俄勒冈以外的每一个州"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "start": 57,
+                "end": 87,
+                "quote": "如果她想去一个新地方，只要在那里找一只有运送需求的宠物就行。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+                "start": 276,
+                "end": 316,
+                "quote": "It’s a call she must heed alone, though."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+                "start": 382,
+                "end": 419,
+                "quote": "I’ve always been independent-spirited"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-4",
+                "start": 84,
+                "end": 102,
+                "quote": "不过，这是一种她必须独自响应的召唤。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-4",
+                "start": 128,
+                "end": 135,
+                "quote": "我一向性格独立"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-1",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:4",
+                "start": 187,
+                "end": 376,
+                "quote": "As soon as she graduated from high school she left home to live on Catalina Island off the Californian coast, away from her parents, where she enjoyed a life of sailing and off-road biking."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-3",
+                "start": 60,
+                "end": 109,
+                "quote": "她高中一毕业就离开了家，远离父母，到加州海岸外的卡塔利娜岛生活，在那里享受着航海和越野骑行的日子。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+                "start": 89,
+                "end": 204,
+                "quote": "She doesn’t work in summer, as it would be unpleasantly hot for the animals in the car, even with air conditioning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-4",
+                "start": 29,
+                "end": 59,
+                "quote": "她夏天不工作，因为即使开着空调，车里对动物来说也会热得难受。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先讲梅丽贝丝因公司破产、送一条走失的狗而入行，再讲这份工作满足了她跑遍各地的漫游癖，接着追溯这种性格源自父亲，最后交代收入、工作季节和她独自上路、热爱动物的个性。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+            "summary": "金融危机中公司破产，梅丽贝丝失业；她开车把一条走失的狗送到 1600 英里外的姐姐家，由此开始宠物运送工作。",
+            "function": "交代人物和入行的起因。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+            "summary": "宠物运送满足了她的漫游癖，带她跑遍了几乎所有州，想去哪里就找那里的活儿，任何天气都上路。",
+            "function": "引出 wanderlust，说明这份工作的吸引力。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:3",
+            "summary": "接上句列举她在堪萨斯等地遇到的洪水、暴风雨和白茫茫的恶劣天气。",
+            "function": "补完上段所列的恶劣天气。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:4",
+            "summary": "她说漫游癖遗传自父亲：父亲举家迁往加州，她高中毕业后也离家去岛上生活。",
+            "function": "追溯漫游癖的来源。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+            "summary": "这份工作税前年收入约 3 万美元，她夏天停工、秋天又想上路，总是独自出行，并自称独立、一心帮助动物。",
+            "function": "交代工作的收入和节奏，以她本人的话收束人物性格。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jan:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出梅丽贝丝不再做办公室经理、另谋工作的直接原因。",
+      "stemTranslationZh": "梅丽贝丝为什么换了工作？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她想在离家近的地方工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "near her home",
+            "optionText": "near her home",
+            "matchType": "exact",
+            "relationNote": "near her home 出自[[block:paper-gaokao-2022-zhejiang-jan:reading-a:1|while driving near her home]]，只是她开车遇见走失小狗的地方；她的第一单反而要开到 1600 英里外（1,600 miles away）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "quote": "One day, while driving near her home, she saw a dog wandering on the road, clearly lost.",
+              "anchor": "在家附近发现走失的狗"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她厌倦了在办公室工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "office",
+            "optionText": "office",
+            "matchType": "exact",
+            "relationNote": "office 出自她当了十年的办公室经理（office manager）；原文只说公司破产后她只得另找工作，没说她厌倦坐办公室。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "quote": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
+              "anchor": "原来的职位"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她姐姐让她搬到丹佛去。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "She took it home, and her sister in Denver agreed to take it.",
+            "sourceEntity": "agreed to take it",
+            "optionText": "Her sister asked her to move to Denver.",
+            "optionEntity": "asked her to move to Denver",
+            "explanation": "姐姐答应收养的是那条走失的狗（agreed to take it），去丹佛的是狗；梅丽贝丝只是开车送它过去，没人叫她搬家。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "quote": "She took it home, and her sister in Denver agreed to take it.",
+              "anchor": "姐姐收养狗"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她原来的雇主倒闭了。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "quote": "The firm went broke and left her looking for a new job.",
+              "anchor": "公司破产，她只得另找工作"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "quote": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
+              "anchor": "她原来工作的公司"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "change her job",
+          "sourceRole": "stem",
+          "targetText": "The firm went broke and left her looking for a new job.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+          "relationType": "locationCue",
+          "targetCue": "looking for a new job",
+          "sourceZh": "换工作",
+          "targetCueZh": "找新工作",
+          "answerText": "The firm went broke",
+          "note": "题干 change her job 对应原文 looking for a new job。"
+        },
+        {
+          "sourceText": "Her former employer was out of business.",
+          "sourceRole": "correctOption",
+          "targetText": "The firm went broke",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "选项的“倒闭”（out of business）就是原文的“破产”（went broke），“前雇主”就是她当了十年办公室经理的那家房地产公司（the real estate firm），选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:22": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 wanderlust 后面写她跑过哪些地方，推出这个词的意思。",
+      "stemTranslationZh": "第二段中的“wanderlust”一词意为想要____的愿望。",
+      "locateBy": "stem",
+      "locateFindZh": "往后读，看 It 带她去了哪里",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "赚钱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It turns out that pet transporting pays quite well at about $30,000 per year before tax.",
+            "sourceEntity": "pays quite well",
+            "optionText": "make money.",
+            "optionEntity": "make money",
+            "explanation": "放进去成了“送宠物满足了她赚钱的愿望”，可本段接着写的是跑遍各州、去新地方；收入（pays quite well）到[[block:paper-gaokao-2022-zhejiang-jan:reading-a:5]]才说。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "quote": "It turns out that pet transporting pays quite well at about $30,000 per year before tax.",
+              "anchor": "收入"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "尝试各种工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "For nearly a decade now, Merebeth has been a self-employed pet transport specialist.",
+            "sourceEntity": "a self-employed pet transport specialist",
+            "optionText": "try various jobs.",
+            "optionEntity": "various jobs",
+            "explanation": "放进去成了“送宠物满足了她尝试各种工作的愿望”，可她近十年只干送宠物这一行（For nearly a decade now），本段写的是去各地，不是换工作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "quote": "For nearly a decade now, Merebeth has been a self-employed pet transport specialist.",
+              "anchor": "近十年一直做这一行"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "亲近大自然。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "She travels in all weathers.",
+            "sourceEntity": "all weathers",
+            "optionText": "be close to nature.",
+            "optionEntity": "nature",
+            "explanation": "放进去成了“送宠物满足了她亲近自然的愿望”；本段的大风、洪水、白茫茫的天气（all weathers）是她上路要熬过的，不是她想要的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+              "quote": "She travels in all weathers.",
+              "anchor": "任何天气都上路"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "去不同的地方旅行。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+              "quote": "It has taken her to every state in the US except Montana, Washington and Oregon",
+              "anchor": "跑遍几乎所有州"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+              "quote": "If she wants to visit a new place, she will simply find a pet with transport needs there.",
+              "anchor": "想去新地方就找那里的活儿"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "wanderlust",
+          "sourceRole": "stem",
+          "targetText": "Merebeth’s pet delivery service also satisfies her wanderlust.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+          "relationType": "locationCue",
+          "answerText": "It has taken her to every state in the US",
+          "bridgeZh": "It 指送宠物生意，它满足 wanderlust 的办法就是带她四处跑",
+          "note": "题干 wanderlust 原词出现在原文。"
+        },
+        {
+          "sourceText": "travel to different places.",
+          "sourceRole": "correctOption",
+          "targetText": "It has taken her to every state in the US except Montana, Washington and Oregon",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+          "relationType": "paraphrase",
+          "note": "选项的“去不同的地方”概括了两件事：先是送宠物带她跑遍几乎每个州（every state），接着是想去新地方（visit a new place）就找那里的活儿，所以 wanderlust 必须是想四处走的愿望。放回去：送宠物满足了她到各地旅行的愿望，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项逐一带回她谈收入、工作季节和独自上路的段落核对。",
+      "stemTranslationZh": "关于梅丽贝丝的新工作，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "全年、免税、靠自己三点回[[block:paper-gaokao-2022-zhejiang-jan:reading-a:5]]逐句找对应",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她有机会见到珍稀动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She has chances to see rare animals.",
+            "explanation": "原文只说她运送有托运需求的宠物（a pet with transport needs），第一单是路边走失的狗，没提珍稀动物。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她一年到头都在努力工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "She doesn’t work in summer, as it would be unpleasantly hot for the animals in the car, even with air conditioning.",
+            "sourceHighlight": "doesn’t work in summer",
+            "optionText": "She works hard throughout the year.",
+            "optionHighlight": "throughout the year",
+            "explanation": "原文说夏天车里太热，她夏天不接活（doesn’t work in summer），秋天才又上路，并非全年都在干。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "quote": "She doesn’t work in summer, as it would be unpleasantly hot for the animals in the car, even with air conditioning.",
+              "anchor": "夏天不工作"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她始终依靠自己。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "quote": "It’s a call she must heed alone, though.",
+              "anchor": "必须独自响应"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "quote": "I’ve always been independent-spirited",
+              "anchor": "一向独立"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她挣的是基本工资，而且免税。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tax",
+            "optionText": "tax-free",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 tax-free 借了原文的 before tax（税前）：约 3 万美元是交税前的数目，收入还相当不错（pays quite well），既不是基本工资，也不免税。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "quote": "It turns out that pet transporting pays quite well at about $30,000 per year before tax.",
+              "anchor": "税前收入"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She relies on herself the whole time.",
+          "sourceRole": "correctOption",
+          "targetText": "It’s a call she must heed alone, though.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+          "relationType": "paraphrase",
+          "note": "选项的“始终靠自己”（relies on herself）合了两处：先是秋天上路的召唤她只能独自响应（heed alone），接着她自称一向独立（independent-spirited），上路时就在自己的世界里，选 C。"
+        }
+      ]
+    }
+  }
+}

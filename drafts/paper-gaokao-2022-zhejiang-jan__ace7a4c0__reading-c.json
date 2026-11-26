@@ -1,0 +1,770 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-zhejiang-jan:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-zhejiang-jan:reading-c": {
+      "overview": "瑞典一项研究跟踪 191 名中年女性四十年，发现心血管体能好的女性日后患失智症的比例远低于体能一般或较差者；研究者也提醒这只是关联，样本较小，结论还需更多研究验证。",
+      "fullTranslationZh": "经常锻炼的好处早已有充分记载，而如今这份不断加长的清单上又多了一项新好处。新的研究人员发现，身体素质好的中年女性日后患失智症的可能性能降低近 90%，即便患病，发病时间也比不太爱运动的女性晚十年。\n\n首席研究员、瑞典哥德堡大学的海伦娜·霍德博士说：“这些发现令人振奋，因为提高人们中年时的心血管健康水平，有可能推迟甚至预防他们患上失智症。”\n\n在这项研究中，191 名平均年龄 50 岁的女性进行了骑自行车运动测试，一直骑到筋疲力尽，以测量她们心血管能力的峰值。测得的平均峰值负荷为 103 瓦。\n\n共有 40 名女性达到高体能水平的标准，即 120 瓦或以上。共有 92 名女性属于中等体能组；59 名女性属于低体能组，其标准是峰值负荷不超过 80 瓦，或因高血压、胸痛或其他心血管问题而被中止运动测试。\n\n此后四十年里，这些女性接受了六次失智症检测。在此期间，有 44 名女性患上了失智症。高体能女性中有 5% 患上失智症，而中等体能女性和低体能女性的这一比例分别为 25% 和 32%。\n\n“不过，这项研究并没有证明心血管健康与失智症之间存在因果关系，只表明二者有关联。还需要更多研究，来看提高体能是否能对失智风险产生积极影响，并探究一生中什么阶段保持高体能水平最为重要。”她也承认，参与研究的女性人数相对较少，而且全部来自瑞典，因此研究结果可能不适用于其他人群。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+          "sourceText": "New researchers found that middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia(失智症) in later life, and if they did, it came on a decade later than less sporty women.",
+          "displayText": "New researchers found that middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia(失智症) in later life, and if they did, it came on a decade later than less sporty women.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:30"
+          ],
+          "translationZh": "新的研究人员发现，身体素质好的中年女性日后患失智症的可能性能降低近 90%，即便患病，发病时间也比不太爱运动的女性晚十年。",
+          "analysisZh": "主干是 New researchers found that…，研究者发现了一件事。that 后的宾语从句由 and 分成两层。第一层主语是 middle-aged women，who were physically fit 限定是“体能好的”中年女性，谓语 could be nearly 90 percent less likely to develop dementia 说患病可能性低近九成。第二层 if they did 里的 did 代替 develop dementia，意思是“即便患了病”；it came on a decade later 说发病晚十年，than less sporty women 交代和谁比。这句就是全文的核心发现。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 26,
+              "quote": "found that"
+            },
+            {
+              "start": 45,
+              "end": 68,
+              "quote": "who were physically fit"
+            },
+            {
+              "start": 152,
+              "end": 163,
+              "quote": "if they did"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:6",
+          "sourceText": "She also admitted that a relatively small number of women were studied, all of whom were from Sweden, so the results might not be applicable to other groups.",
+          "displayText": "She also admitted that a relatively small number of women were studied, all of whom were from Sweden, so the results might not be applicable to other groups.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-zhejiang-jan:29"
+          ],
+          "translationZh": "她也承认，参与研究的女性人数相对较少，而且全部来自瑞典，因此研究结果可能不适用于其他人群。",
+          "analysisZh": "主干是 She also admitted that…，她还承认了一件事。that 从句里先说 a relatively small number of women were studied，被研究的女性人数较少；all of whom were from Sweden 是“介词 + 关系代词”引导的非限制性定语从句，whom 指这些女性，说她们全来自瑞典。so 引出结果：结论可能不适用于其他人群。这句是研究者交代的局限，不等于说研究结果不好。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "She also admitted that"
+            },
+            {
+              "start": 72,
+              "end": 83,
+              "quote": "all of whom"
+            },
+            {
+              "start": 102,
+              "end": 140,
+              "quote": "so the results might not be applicable"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-c:1"
+              ],
+              "start": 0,
+              "end": 98,
+              "quote": "经常锻炼的好处早已有充分记载，而如今这份不断加长的清单上又多了一项新好处。新的研究人员发现，身体素质好的中年女性日后患失智症的可能性能降低近 90%，即便患病，发病时间也比不太爱运动的女性晚十年。"
+            },
+            {
+              "paragraphId": "zh-reading-c-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-c:2"
+              ],
+              "start": 100,
+              "end": 170,
+              "quote": "首席研究员、瑞典哥德堡大学的海伦娜·霍德博士说：“这些发现令人振奋，因为提高人们中年时的心血管健康水平，有可能推迟甚至预防他们患上失智症。”"
+            },
+            {
+              "paragraphId": "zh-reading-c-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-c:3"
+              ],
+              "start": 172,
+              "end": 248,
+              "quote": "在这项研究中，191 名平均年龄 50 岁的女性进行了骑自行车运动测试，一直骑到筋疲力尽，以测量她们心血管能力的峰值。测得的平均峰值负荷为 103 瓦。"
+            },
+            {
+              "paragraphId": "zh-reading-c-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-c:4"
+              ],
+              "start": 250,
+              "end": 353,
+              "quote": "共有 40 名女性达到高体能水平的标准，即 120 瓦或以上。共有 92 名女性属于中等体能组；59 名女性属于低体能组，其标准是峰值负荷不超过 80 瓦，或因高血压、胸痛或其他心血管问题而被中止运动测试。"
+            },
+            {
+              "paragraphId": "zh-reading-c-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-c:5"
+              ],
+              "start": 355,
+              "end": 446,
+              "quote": "此后四十年里，这些女性接受了六次失智症检测。在此期间，有 44 名女性患上了失智症。高体能女性中有 5% 患上失智症，而中等体能女性和低体能女性的这一比例分别为 25% 和 32%。"
+            },
+            {
+              "paragraphId": "zh-reading-c-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-zhejiang-jan:reading-c:6"
+              ],
+              "start": 448,
+              "end": 585,
+              "quote": "“不过，这项研究并没有证明心血管健康与失智症之间存在因果关系，只表明二者有关联。还需要更多研究，来看提高体能是否能对失智风险产生积极影响，并探究一生中什么阶段保持高体能水平最为重要。”她也承认，参与研究的女性人数相对较少，而且全部来自瑞典，因此研究结果可能不适用于其他人群。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-c-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+                "start": 0,
+                "end": 52,
+                "quote": "The benefits of regular exercise are well documented"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+                "start": 57,
+                "end": 108,
+                "quote": "there’s a new bonus to add to the ever-growing list"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 0,
+                "end": 14,
+                "quote": "经常锻炼的好处早已有充分记载"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 18,
+                "end": 36,
+                "quote": "这份不断加长的清单上又多了一项新好处"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+                "start": 106,
+                "end": 157,
+                "quote": "to measure their peak（最大值的） cardiovascular capacity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-3",
+                "start": 45,
+                "end": 58,
+                "quote": "以测量她们心血管能力的峰值"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+                "start": 0,
+                "end": 84,
+                "quote": "These women were then tested for dementia six times over the following four decades."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "start": 0,
+                "end": 22,
+                "quote": "此后四十年里，这些女性接受了六次失智症检测。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+                "start": 137,
+                "end": 237,
+                "quote": "middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+                "start": 139,
+                "end": 297,
+                "quote": "Five percent of the highly fit women developed dementia, compared to 25 percent of the women with medium fitness and 32 percent of the women with low fitness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 46,
+                "end": 74,
+                "quote": "身体素质好的中年女性日后患失智症的可能性能降低近 90%"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "start": 42,
+                "end": 91,
+                "quote": "高体能女性中有 5% 患上失智症，而中等体能女性和低体能女性的这一比例分别为 25% 和 32%。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-1",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+                "start": 110,
+                "end": 324,
+                "quote": "New researchers found that middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia(失智症) in later life, and if they did, it came on a decade later than less sporty women."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 37,
+                "end": 98,
+                "quote": "新的研究人员发现，身体素质好的中年女性日后患失智症的可能性能降低近 90%，即便患病，发病时间也比不太爱运动的女性晚十年。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-2",
+            "questionIds": [
+              "question:paper-gaokao-2022-zhejiang-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:6",
+                "start": 315,
+                "end": 472,
+                "quote": "She also admitted that a relatively small number of women were studied, all of whom were from Sweden, so the results might not be applicable to other groups."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-6",
+                "start": 92,
+                "end": 137,
+                "quote": "她也承认，参与研究的女性人数相对较少，而且全部来自瑞典，因此研究结果可能不适用于其他人群。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先抛出新发现：体能好的中年女性日后更不容易患失智症；接着引首席研究员的话说明意义，再介绍研究方法、分组标准和四十年的追踪结果，最后由研究者指出这只是关联、样本有限，尚需更多研究。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+            "summary": "锻炼的好处又添一项：体能好的中年女性患失智症的可能性低近九成，发病也晚十年。",
+            "function": "提出研究发现，引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+            "summary": "霍德博士称这一发现令人振奋，提高中年心血管体能可能推迟甚至预防失智症。",
+            "function": "借研究者之口说明发现的意义。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+            "summary": "191 名平均 50 岁的女性做骑车测试，测心血管能力峰值，平均为 103 瓦。",
+            "function": "介绍研究方法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+            "summary": "按测试结果把女性分为高、中、低三个体能组，并给出各组标准和人数。",
+            "function": "说明分组标准。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+            "summary": "此后四十年做了六次检测，高体能组患病率 5%，远低于中、低体能组的 25% 和 32%。",
+            "function": "用数据呈现研究结果。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:6",
+            "summary": "研究者提醒研究只显示关联、不证明因果，样本小且都来自瑞典，还需更多研究。",
+            "function": "指出研究局限，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-zhejiang-jan:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清“不断加长的清单”上列的是什么。",
+      "stemTranslationZh": "第一段提到的不断加长的清单上是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 前说的是什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "锻炼的积极作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "quote": "The benefits of regular exercise are well documented",
+              "anchor": "锻炼的好处"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "quote": "there’s a new bonus to add to the ever-growing list",
+              "anchor": "又添一项好处"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "适合中年人的运动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "middle-aged",
+            "optionText": "middle-aged",
+            "matchType": "exact",
+            "relationNote": "middle-aged 出自[[block:paper-gaokao-2022-zhejiang-jan:reading-c:1|middle-aged women who were physically fit]]，指研究对象是中年女性；清单上列的是锻炼的好处，不是适合中年人的运动项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "quote": "New researchers found that middle-aged women who were physically fit",
+              "anchor": "研究对象"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "关于疾病的实验研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "New researchers found that middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia",
+            "sourceEntity": "New researchers found",
+            "optionText": "Experimental studies on diseases.",
+            "optionEntity": "Experimental studies",
+            "explanation": "研究（researchers found）只是发现新好处的途径；要加进清单的是研究得出的那一项好处（a new bonus），不是研究本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "quote": "New researchers found that middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia",
+              "anchor": "新研究的发现"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "爱运动的女性比男性有优势。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "sporty women",
+            "optionText": "sporty women",
+            "matchType": "exact",
+            "relationNote": "sporty women 出自 less sporty women，比的是体能好的女性和不太爱运动的女性；全文研究的都是女性，没拿女性和男性比。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "quote": "it came on a decade later than less sporty women",
+              "anchor": "与不爱运动的女性比"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "ever-growing list",
+          "sourceRole": "stem",
+          "targetText": "The benefits of regular exercise are well documented but there’s a new bonus to add to the ever-growing list.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "The benefits of regular exercise",
+          "note": "题干 ever-growing list 原词出现在原文。"
+        },
+        {
+          "sourceText": "Positive effects of doing exercises.",
+          "sourceRole": "correctOption",
+          "targetText": "The benefits of regular exercise",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“积极作用”（Positive effects）就是原文的“好处”（benefits），说的都是锻炼；新发现是又一项好处（a new bonus），加进的正是这份好处清单，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究人员安排骑车测试的目的。",
+      "stemTranslationZh": "研究人员为什么让这些女性做骑自行车运动？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 to 后的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了预测她们的最大心率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "to measure their peak（最大值的） cardiovascular capacity",
+            "sourceEntity": "cardiovascular capacity",
+            "optionText": "To predict their maximum heart rate.",
+            "optionEntity": "maximum heart rate",
+            "explanation": "选项借 peak（最大值）说成“最大心率”；原文测的是心血管能力的峰值，结果用瓦（watts）表示，没提心率。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+              "quote": "to measure their peak（最大值的） cardiovascular capacity",
+              "anchor": "测心血管能力峰值"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了评估她们的心血管能力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+              "quote": "to measure their peak（最大值的） cardiovascular capacity",
+              "anchor": "测量心血管能力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了改变她们的锻炼习惯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To change their habits of working out",
+            "explanation": "骑车是一次骑到筋疲力尽（until they were exhausted）的测试，用来给体能分组；原文没说要改变她们的锻炼习惯。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了查出她们潜在的健康问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "problems",
+            "optionText": "problems",
+            "matchType": "exact",
+            "relationNote": "problems 出自[[block:paper-gaokao-2022-zhejiang-jan:reading-c:4|or other cardiovascular problems]]，那是部分人测试被中止的原因，她们因此归入低体能组；测试本身是为了测体能，不是查病。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+              "quote": "having their exercise tests stopped because of high blood pressure, chest pain or other cardiovascular problems",
+              "anchor": "测试被中止的原因"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "bicycle exercise",
+          "sourceRole": "stem",
+          "targetText": "For the study, 191 women with an average age of 50 took a bicycle exercise test until they were exhausted to measure their peak（最大值的） cardiovascular capacity.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "to measure their peak（最大值的） cardiovascular capacity",
+          "note": "题干 bicycle exercise 原词出现在原文。"
+        },
+        {
+          "sourceText": "To assess their cardiovascular capacity",
+          "sourceRole": "correctOption",
+          "targetText": "to measure their peak（最大值的） cardiovascular capacity",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“评估”（assess）就是原文的“测量”（measure），对象都是心血管能力（cardiovascular capacity），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:29": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把四个选项分别带回研究目的、过程和评价核对，选出原文能推出的一项。",
+      "stemTranslationZh": "关于霍德博士的研究，我们知道什么？",
+      "locateBy": "options",
+      "locateFindZh": "目的、退出、耗时、满意度分别回研究经过和霍德原话核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它旨在找到治疗失智症的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia",
+            "sourceEntity": "delay or even prevent",
+            "optionText": "It aimed to find a cure for dementia.",
+            "optionEntity": "find a cure",
+            "explanation": "霍德只说提高中年体能有可能推迟甚至预防失智（delay or even prevent），研究看的是体能和患病的关联，不是找治疗办法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "quote": "could delay or even prevent them from developing dementia",
+              "anchor": "推迟或预防"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "数据收集是一个漫长的过程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+              "quote": "These women were then tested for dementia six times over the following four decades.",
+              "anchor": "四十年内检测六次"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有些参与者退出了研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "having their exercise tests stopped because of high blood pressure, chest pain or other cardiovascular problems",
+            "sourceEntity": "exercise tests stopped",
+            "optionText": "Some participants withdrew from it.",
+            "optionEntity": "withdrew from it",
+            "explanation": "被中止的只是部分人的那次骑车测试（exercise tests stopped），她们照样算进低体能组，40、92、59 人加起来正好 191 人，原文没说有人退出。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+              "quote": "having their exercise tests stopped because of high blood pressure, chest pain or other cardiovascular problems",
+              "anchor": "测试被中止"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "结果远不能令人满意。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "These findings are exciting",
+            "sourceHighlight": "exciting",
+            "optionText": "The results were far from satisfactory.",
+            "optionHighlight": "far from satisfactory",
+            "explanation": "霍德称这些发现令人振奋（exciting）；她承认样本少、只限瑞典女性，是说结论未必能推广，不是说结果不好。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "quote": "These findings are exciting",
+              "anchor": "发现令人振奋"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Data collection was a lengthy process.",
+          "sourceRole": "correctOption",
+          "targetText": "These women were then tested for dementia six times over the following four decades.",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "原文没直接说“漫长”，要推一步：此后四十年里（over the following four decades）对这些女性做了六次失智检测（six times），数据要几十年才收齐，可见收集过程很漫长（lengthy），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-zhejiang-jan:30": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从全文围绕的研究发现中选出最贴切的标题。",
+      "stemTranslationZh": "下列哪一项是本文的最佳标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2022-zhejiang-jan:reading-c:1]]报 physically fit 女性少患失智，[[block:paper-gaokao-2022-zhejiang-jan:reading-c:3]]至[[block:paper-gaokao-2022-zhejiang-jan:reading-c:5]]分组比患病率，[[block:paper-gaokao-2022-zhejiang-jan:reading-c:6]]说只是 association；标题要盖住体能好、失智少",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "越来越多的女性通过锻炼预防失智症",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "More Women Are Exercising to Prevent Dementia",
+            "explanation": "原文研究的是体能水平和失智的关联，没说有越来越多的女性为防失智而锻炼。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "中年女性需要多锻炼",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia",
+            "sourceHighlight": "it’s possible",
+            "optionText": "Middle-Aged Women Need to Do More Exercise",
+            "optionHighlight": "Need to Do More Exercise",
+            "explanation": "霍德只说提高中年体能有可能（it’s possible）推迟失智，还强调需要更多研究；选项把这种可能写成了“必须多锻炼”的号召。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "quote": "it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia",
+              "anchor": "只是有可能"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "体能好的女性更不容易患失智症",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "quote": "middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia",
+              "anchor": "核心发现"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+              "quote": "Five percent of the highly fit women developed dementia, compared to 25 percent of the women with medium fitness and 32 percent of the women with low fitness.",
+              "anchor": "分组数据"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "骑自行车能提高女性的心血管健康水平",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "bicycle",
+            "optionText": "Biking",
+            "matchType": "wordFamily",
+            "relationNote": "Biking 来自[[block:paper-gaokao-2022-zhejiang-jan:reading-c:3|took a bicycle exercise test]]，骑车只是测体能的手段（to measure），原文没说骑车能提高心血管健康水平。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+              "quote": "took a bicycle exercise test until they were exhausted to measure their peak（最大值的） cardiovascular capacity",
+              "anchor": "骑车测试"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Fit Women Are Less Likely to Develop Dementia",
+          "sourceRole": "correctOption",
+          "targetText": "middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia",
+          "targetParagraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "几段讲的都是同一个发现：先报出体能好的中年女性患失智的可能低近九成，再用分组数据印证（5% 对 25%、32%），最后提醒这只是关联。选项的“体能好的女性更不易患失智”（Less Likely to Develop Dementia）正好盖住这一结论，选 C。"
+        }
+      ]
+    }
+  }
+}

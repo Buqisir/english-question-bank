@@ -1,0 +1,139 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Chris,\nHow are you doing back in Ireland? I often think of the China-Ireland Cultural Festival, where we first met.\n\nI still remember the evening you taught me an Irish folk dance. I kept stepping on your feet, but you just laughed. In return, I showed you how to write your name in Chinese with a brush.\n\nThe festival meant a lot to me. Through our talks, I learned about Irish music and history. Better still, I am no longer afraid of speaking English with people from abroad.\n\nI hope we can keep in touch. Shall we have a video chat once a month? If you come to China again, I'll show you around.\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "身份和读者：李华写邮件给在“中国-爱尔兰文化节”上认识、现已回国的爱尔兰朋友 Chris。",
+        "三个要点：回忆活动经历；分享个人收获；希望保持联系。",
+        "格式：书信邮件，自己写称呼和署名；词数 80 左右，可适当增加细节。"
+      ],
+      "thisEssayChooses": "本范文把“活动经历”落在一件互相教的小事上：他教我跳爱尔兰民间舞，我教他用毛笔写中文名字；收获写成了解爱尔兰音乐和历史、敢开口说英语；结尾提议每月视频一次。语气是朋友之间的亲切随意。这些细节都可以换成你自己的经历。"
+    },
+    "standard": {
+      "essay": "Dear Chris,\nHow are you doing back in Ireland? I often think of the China-Ireland Cultural Festival, where we first met.\n\nI still remember the evening you taught me an Irish folk dance. I kept stepping on your feet, but you just laughed. In return, I showed you how to write your name in Chinese with a brush.\n\nThe festival meant a lot to me. Through our talks, I learned about Irish music and history. Better still, I am no longer afraid of speaking English with people from abroad.\n\nI hope we can keep in touch. Shall we have a video chat once a month? If you come to China again, I'll show you around.\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "回忆活动经历",
+          "quote": "I still remember the evening you taught me an Irish folk dance."
+        },
+        {
+          "point": "分享个人收获",
+          "quote": "Through our talks, I learned about Irish music and history."
+        },
+        {
+          "point": "希望保持联系",
+          "quote": "I hope we can keep in touch."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "问候朋友，点出两人在文化节相识，引出回忆。",
+          "items": [
+            {
+              "quote": "How are you doing back in Ireland?",
+              "explain": "先关心对方回国后的近况，朋友之间这样开头比直接说“我写信是为了……”更自然，也照应了题面“他已回国”。"
+            },
+            {
+              "quote": "the China-Ireland Cultural Festival, where we first met",
+              "explain": "用 where 从句把活动名称和“我们在这里认识”合成一句，一句话交代清楚两人的关系从哪里开始。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "回忆活动经历：写一件具体的小事，而不是笼统地说“玩得很开心”。",
+          "items": [
+            {
+              "quote": "I still remember the evening you taught me an Irish folk dance.",
+              "explain": "把回忆落到一个具体的晚上、一件具体的事，读者马上能想起那个场景；the evening 后面直接接定语从句，省掉了 when。"
+            },
+            {
+              "quote": "I kept stepping on your feet, but you just laughed.",
+              "explain": "一个小尴尬加上对方的反应，有画面、有情绪，朋友读了会笑，比“we had a good time”有温度。"
+            },
+            {
+              "quote": "In return, I showed you how to write your name in Chinese with a brush.",
+              "explain": "In return 说明这是一来一往的交流：他教我舞蹈，我教他书法，正好扣住“中爱文化节”的文化交流。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "分享个人收获：知识上的收获和自己的变化各一句。",
+          "items": [
+            {
+              "quote": "The festival meant a lot to me.",
+              "explain": "先用一句短句总说收获，再分两层展开，读者一眼看出这一段在讲什么。"
+            },
+            {
+              "quote": "Better still, I am no longer afraid of speaking English with people from abroad.",
+              "explain": "Better still 把第二个收获往上推一层：从“知道了什么”到“我变成了什么样”，收获写得更真实。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "希望保持联系，并给出具体的联系办法。",
+          "items": [
+            {
+              "quote": "Shall we have a video chat once a month?",
+              "explain": "光说“保持联系”是空话，这一问给出了具体做法和频率，Chris 读完可以直接回答好不好。"
+            },
+            {
+              "quote": "If you come to China again, I'll show you around.",
+              "explain": "再发出一个邀请，让联系不止停在网上，结尾落在两人以后还能做的事上。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I still remember the … (when) you …",
+          "function": "回忆共同经历时，引出一个具体的时刻或场景。"
+        },
+        {
+          "expression": "mean a lot to me",
+          "function": "概括一段经历对自己的意义，接着再说具体收获。"
+        },
+        {
+          "expression": "keep in touch / Shall we …?",
+          "function": "表达保持联系的愿望，并用商量的口吻提出具体办法。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Chris,\nIt has been a month since you flew back to Ireland, and I still miss the days we spent at the China-Ireland Cultural Festival.\n\nI can never forget the evening you taught me an Irish folk dance. I kept stepping on your feet, yet you just laughed it off. The next day it was my turn to be the teacher: I helped you write your name in Chinese with a brush, and you proudly hung it up.\n\nThose few days taught me more than any textbook. Your stories about Irish music and history made a faraway country feel close. More importantly, I am no longer shy about speaking English with people from abroad.\n\nLet's not lose touch. How about a video chat once a month? I'd love to hear about your life, and if you ever come to China, I'll be your guide.\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "回忆活动经历",
+          "quote": "I can never forget the evening you taught me an Irish folk dance."
+        },
+        {
+          "point": "分享个人收获",
+          "quote": "Your stories about Irish music and history made a faraway country feel close."
+        },
+        {
+          "point": "希望保持联系",
+          "quote": "Let's not lose touch."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "The next day it was my turn to be the teacher",
+          "explain": "标准版用 In return 交代互教，这里用“轮到我当老师”接住上一句他教我跳舞，角色一换，交流的来回更有画面；后面他把字骄傲地挂出来，又写出了对方的反应。"
+        },
+        {
+          "quote": "made a faraway country feel close",
+          "explain": "标准版只说学到了音乐和历史，这里说出这些故事对自己的影响：遥远的国家变得亲近，收获从知识落到感受上。"
+        },
+        {
+          "quote": "Let's not lose touch.",
+          "explain": "朋友之间更口语的说法，比标准版的 I hope we can keep in touch 更亲近；后面再用 How about … 提办法，语气轻松不生硬。"
+        }
+      ]
+    }
+  }
+}
