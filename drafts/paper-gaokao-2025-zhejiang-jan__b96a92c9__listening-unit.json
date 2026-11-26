@@ -1,0 +1,1099 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: What are all these boxes for?\nM: I’m looking for a new apartment.\nW: Why?\nM: Well, just for a change. And the rent is too high.",
+      "translationZh": "女：这些箱子都是干什么用的？\n男：我在找新公寓。\n女：为什么？\n男：嗯，就是想换换环境。而且房租太贵了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男子屋里堆满箱子，他说正在找新公寓，一是想换环境，二是房租太高。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "这些箱子都是干什么用的？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我在找新公寓。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "为什么？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "嗯，就是想换换环境。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "而且房租太贵了。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Wow, Jennifer got her new book published last month. I learned it from the morning paper today.\nM: Yes, I know, it’s based on her teaching experience in Africa last year.",
+      "translationZh": "女：哇，Jennifer 上个月出了新书。我今天在晨报上看到的。\n男：对，我知道，书是根据她去年在非洲教书的经历写的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "传记"
+      },
+      "summaryZh": "两人聊起 Jennifer 上个月出版的新书，这本书取材于她去年在非洲的教学经历。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "哇，Jennifer 上个月出了新书。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我今天在晨报上看到的。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "对，我知道，书是根据她去年在非洲教书的经历写的。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Jim. Have you seen Bob?\nM: Not since he left my office an hour ago. Why?\nW: He’s supposed to be at the airport now to pick up Mr Anderson, but he’s nowhere to be found.",
+      "translationZh": "女：Jim。你看见 Bob 了吗？\n男：一小时前他离开我办公室以后就没见过。怎么了？\n女：他现在应该在机场接 Anderson 先生，可哪儿都找不到他。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "女子到处找 Bob：他本该此刻在机场接 Anderson 先生，人却不见了。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "Jim。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你看见 Bob 了吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "一小时前他离开我办公室以后就没见过。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "怎么了？"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "他现在应该在机场接 Anderson 先生，可哪儿都找不到他。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Slow down a bit, John, keep it under 65 we don’t want to be pulled over by the police.\nM: Okay. I just wanted to get to the service station sooner. I’m kind of hungry.",
+      "translationZh": "女：开慢点，John，车速保持在65以下，我们可不想被警察拦下来。\n男：好的。我只是想早点到服务站。我有点饿了。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "安全常识"
+      },
+      "summaryZh": "女子提醒开车的 John 减速，别被警察拦下；John 说自己饿了，想早点到服务站。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "开慢点，John，车速保持在65以下，我们可不想被警察拦下来。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我只是想早点到服务站。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我有点饿了。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: I found the gas bill in the mailbox.\nM: How much is it?\nW: About a hundred and fifty? Oh, it was due last Friday.\nM: Don’t worry, I’ll take care of it tomorrow.",
+      "translationZh": "女：我在信箱里看到了煤气费账单。\n男：多少钱？\n女：大概一百五十吧？哦，上周五就到期了。\n男：别担心，我明天去处理。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女子在信箱里发现煤气费账单，已过上周五的期限，男子说明天去处理。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "我在信箱里看到了煤气费账单。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "多少钱？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "大概一百五十吧？"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "哦，上周五就到期了。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "别担心，我明天去处理。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Hello, Steve, how is your training going?\nM: Great. My coach has a really good swim program for me and I think I’m in first class condition.\nW: Do you have to get up very early?\nM: Well, I don’t like training early in the morning, so I start at 10.\nW: I see. What about lunch then?\nM: I don’t have lunch. Lunch makes me sleepy. I train all through the day until three.",
+      "translationZh": "女：你好，Steve，训练进行得怎么样？\n男：很棒。教练给我制定了一套很好的游泳训练计划，我觉得自己状态一流。\n女：你得很早起床吗？\n男：嗯，我不喜欢一大早训练，所以我十点开始。\n女：明白了。那午饭呢？\n男：我不吃午饭。吃午饭会让我犯困。我一直练到下午三点。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "游泳运动员 Steve 说训练很顺利、状态一流，他每天十点开始训练，不吃午饭，一直练到三点。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你好，Steve，训练进行得怎么样？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "很棒。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "教练给我制定了一套很好的游泳训练计划，我觉得自己状态一流。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "你得很早起床吗？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "嗯，我不喜欢一大早训练，所以我十点开始。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那午饭呢？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "我不吃午饭。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "吃午饭会让我犯困。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "我一直练到下午三点。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Good evening everyone, I’m Fiona. With us tonight is Mark, a famous local artist. Thanks for joining us, Mark.\nM: Thank you Fiona.\nW: Have you done live drawing before? Is there more pressure to draw in front of an audience?\nM: Yes, I have done live drawing before. It’s always fun. I often draw pictures in pubs and people always come\nover for a look and a chat.\nW: I know that you’ve drawn pictures on many things, including maps and the covers of books and magazines.\nWhat’s something you haven’t drawn on yet but really want to?\nM: I’d like to draw on personal diaries people have kept over the years and draw the owner on it.\nW: Fantastic. Could you also tell us where your inspirations come from?\nM: Most are from the people I’ve met and talked to when I was travelling. I always dreamed of traveling around the\nworld and creating a series of drawings about different cities in the world.",
+      "translationZh": "女：大家晚上好，我是 Fiona。今晚来到现场的是本地著名画家 Mark。谢谢你来参加，Mark。\n男：谢谢你，Fiona。\n女：你以前做过现场绘画吗？当着观众的面画画，压力会更大吗？\n男：是的，我以前做过现场绘画。这总是很有趣。我常在酒吧里画画，人们总会过来看看、聊上几句。\n女：我知道你在很多东西上画过画，包括地图，还有书和杂志的封面。有什么东西是你还没画过、但特别想画的？\n男：我想在人们多年来记的私人日记上作画，并把日记的主人画在上面。\n女：太棒了。你还能告诉我们，你的灵感来自哪里吗？\n男：大多来自我旅行时遇到并交谈过的人。我一直梦想着环游世界，创作一组描绘世界各地不同城市的画。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "绘画领域的代表性作品和人物"
+      },
+      "summaryZh": "主持人采访画家 Mark，他谈到现场作画的乐趣、想在私人日记上作画的愿望，以及旅途中的灵感来源。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "大家晚上好，我是 Fiona。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "今晚来到现场的是本地著名画家 Mark。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "谢谢你来参加，Mark。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "谢谢你，Fiona。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "你以前做过现场绘画吗？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "当着观众的面画画，压力会更大吗？"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "是的，我以前做过现场绘画。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "这总是很有趣。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "我常在酒吧里画画，人们总会"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "过来看看、聊上几句。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我知道你在很多东西上画过画，包括地图，还有书和杂志的封面。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "有什么东西是你还没画过、但特别想画的？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我想在人们多年来记的私人日记上作画，并把日记的主人画在上面。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "太棒了。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "你还能告诉我们，你的灵感来自哪里吗？"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "大多来自我旅行时遇到并交谈过的人。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "我一直梦想着环游"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "世界，创作一组描绘世界各地不同城市的画。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Hello, this is Car’s Commercial Cleaning. May I help you?\nM: Yes, I’m calling to ask about the cleaner position. Is it still available?\nW: Yes, it is. We mainly work with small stores in the area and the job is to clean the store front windows.\nM: I know you said that in the ad. Do I need work experience?\nW: No, we offer on-the-job paid training. As a company car is provided, you must have a driver’s license and a good driving record. You also need to have a smart phone for communication.\nM: Sure thing. Can I ask about the pay?\nW: Certainly, it’s ten to twelve dollars per hour plus tips.\nM: OK do you have other requirements?\nW: Our employees must be dependable and be able to lift heavy things and stand long hours at a time.\nM: No problem.\nW: Good. Can you come tomorrow afternoon at two for an interview?\nM: OK.",
+      "translationZh": "女：你好，这里是 Car 商业清洁公司。有什么可以帮您？\n男：是的，我打电话想问一下清洁工的职位。这个职位还招人吗？\n女：是的，还招。我们主要为本地区的小商店服务，工作是清洁店面橱窗。\n男：我知道，你们在广告里说过。我需要工作经验吗？\n女：不需要，我们提供带薪的在岗培训。因为公司会提供车，你必须有驾照，而且驾驶记录良好。你还需要有一部智能手机用来联系。\n男：没问题。能问一下工资吗？\n女：当然，每小时十到十二美元，外加小费。\n男：好的，你们还有别的要求吗？\n女：我们的员工必须可靠，能搬重物，还能一次站很长时间。\n男：没问题。\n女：很好。你明天下午两点能来面试吗？\n男：好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "男子来电询问店面橱窗清洁工作，对方说明培训、用车、手机、工资和体力要求，并约他面试。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "你好，这里是 Car 商业清洁公司。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "是的，我打电话想问一下清洁工的职位。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "这个职位还招人吗？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "是的，还招。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我们主要为本地区的小商店服务，工作是清洁店面橱窗。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我知道，你们在广告里说过。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "我需要工作经验吗？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "不需要，我们提供带薪的在岗培训。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "因为公司会提供车，你必须有驾照，而且驾驶记录良好。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "你还需要有一部智能手机用来联系。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "能问一下工资吗？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "当然，每小时十到十二美元，外加小费。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "好的，你们还有别的要求吗？"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "我们的员工必须可靠，能搬重物，还能一次站很长时间。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "很好。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "你明天下午两点能来面试吗？"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "M: Good morning. Can I help you?\nW: Yes, I’ve got a reservation. My name is Hilary Langley.\nM: Just a moment, please. How do you spell your last name?\nW: L A N G L E Y, Langley.\nM: Well, I’m sorry, but we don’t seem to have a reservation for you.\nW: There must be some mistake. I’m attending a conference in the city and my secretary told me that the\nconference organizer made the reservation for me.\nM: I see. No, I’m sorry. You are not booked in here.\nW: Well, but can you find me a single room anyway?\nM: I’m afraid there’s nothing available at the moment.\nW: Look, I really need a room here. Can I talk to your manager?\nM: The manager is away on business, but well, I may be able to help you if you could wait and prepare to check in\nafter two in the afternoon, we’ll have some rooms at that time.\nW: That’d be very kind of you. Could you give me a call when you have a room available? I’ll just wander around\nand have some coffee.\nM: Certainly. Would you please give me your phone number?\nW: Sure. Here’s my card. Thanks.",
+      "translationZh": "男：早上好。有什么可以帮您？\n女：是的，我预订了房间。我叫 Hilary Langley。\n男：请稍等。您的姓怎么拼？\n女：L-A-N-G-L-E-Y，Langley。\n男：嗯，很抱歉，我们这里好像没有您的预订。\n女：一定是哪里弄错了。我来这座城市参加一个会议，我的秘书告诉我，会议组织方已经替我预订了。\n男：明白了。不，很抱歉。您没有在我们这里订房。\n女：那不管怎样，您能给我找一间单人房吗？\n男：恐怕现在没有空房。\n女：听我说，我真的需要在这里住。我能和你们经理谈谈吗？\n男：经理出差了，不过嗯，如果您愿意等一等，准备好在下午两点以后入住，我或许能帮上忙，那时我们会有一些空房。\n女：那真是太好了。有空房时您能给我打个电话吗？我就随便逛逛，喝点咖啡。\n男：当然。请您留个电话号码好吗？\n女：好的。这是我的名片。谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女子到前台登记，却查不到会议方替她订的房；接待员请她下午两点后再来入住，她先去喝咖啡。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "早上好。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "是的，我预订了房间。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "我叫 Hilary Langley。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "请稍等。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "您的姓怎么拼？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "L-A-N-G-L-E-Y，Langley。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "嗯，很抱歉，我们这里好像没有您的预订。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "一定是哪里弄错了。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我来这座城市参加一个会议，我的秘书告诉我，"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "会议组织方已经替我预订了。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "不，很抱歉。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "您没有在我们这里订房。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "那不管怎样，您能给我找一间单人房吗？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "恐怕现在没有空房。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "听我说，我真的需要在这里住。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我能和你们经理谈谈吗？"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "经理出差了，不过嗯，如果您愿意等一等，准备好"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "在下午两点以后入住，我或许能帮上忙，那时我们会有一些空房。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "那真是太好了。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "有空房时您能给我打个电话吗？"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "我就随便逛逛，"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "喝点咖啡。"
+        },
+        {
+          "id": "listening-text-9:25",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-9:26",
+          "zh": "请您留个电话号码好吗？"
+        },
+        {
+          "id": "listening-text-9:27",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-9:28",
+          "zh": "这是我的名片。"
+        },
+        {
+          "id": "listening-text-9:29",
+          "zh": "谢谢。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Good evening. I’m honored to have my voice heard to make a difference in the lives of those little birds that\nshare our city. My name is Christina. I’m an enthusiastic bird watcher. Because we cut down too many trees in the\nnearby areas, many birds now find places within the city to live. The most common is the area behind the large advertisement boards on the poles. It’s a natural choice for the birds because the poles are similar to trees, tall and\nfar from dangers on the ground. The surprising thing is that there are likely more than five or six kinds of birds\nliving together at each place. While trying to learn more about these birds, I find that there have not been any\nconsistent studies or monitoring of them. Their eating habits, adaptation to life in the city, diseases, death rate and\nsuch other information are not available. I’d like to suggest that a programme be started to study these birds. It\ncould be convenient to employ bird watchers to do the initial studies.",
+      "translationZh": "晚上好。我很荣幸能发出自己的声音，为那些与我们共享这座城市的小鸟带来一些改变。我叫 Christina。我是一名热心的观鸟爱好者。由于我们在附近地区砍伐了太多树木，许多鸟现在到城里来找地方栖身。最常见的地方是电线杆上大型广告牌的背后。这对鸟来说是很自然的选择，因为电线杆和树很像，又高，又远离地面上的危险。令人惊讶的是，每个这样的地方很可能有五六种以上的鸟生活在一起。在试着进一步了解这些鸟时，我发现一直没有对它们进行过持续的研究或监测。它们的饮食习惯、对城市生活的适应、疾病、死亡率以及其他这类信息都无从获得。我想建议启动一个项目来研究这些鸟。可以请观鸟爱好者来做最初的研究，这样会比较方便。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "人与动植物"
+      },
+      "summaryZh": "观鸟者 Christina 说树木被砍使许多鸟迁入城市，栖身在广告牌后，她建议启动项目研究这些鸟。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "晚上好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我很荣幸能发出自己的声音，为那些"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "与我们共享这座城市的小鸟带来一些改变。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我叫 Christina。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "我是一名热心的观鸟爱好者。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "由于我们在"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "附近地区砍伐了太多树木，许多鸟现在到城里来找地方栖身。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "最常见的地方是电线杆上大型广告牌的背后。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "这对鸟来说是很自然的选择，因为电线杆和树很像，又高，"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "又远离地面上的危险。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "令人惊讶的是，每个这样的地方很可能有五六种以上的鸟"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "生活在一起。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "在试着进一步了解这些鸟时，我发现一直没有"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "对它们进行过持续的研究或监测。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "它们的饮食习惯、对城市生活的适应、疾病、死亡率以及"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "其他这类信息都无从获得。"
+        },
+        {
+          "id": "listening-text-10:17",
+          "zh": "我想建议启动一个项目来研究这些鸟。"
+        },
+        {
+          "id": "listening-text-10:18",
+          "zh": "可以"
+        },
+        {
+          "id": "listening-text-10:19",
+          "zh": "请观鸟爱好者来做最初的研究，这样会比较方便。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "男子打算做什么？",
+      "optionTranslationsZh": {
+        "A": "找工作。",
+        "B": "搬到新住处。",
+        "C": "重新摆放家具。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m looking for a new apartment."
+      },
+      "reasonZh": "女子问一屋子箱子做什么用，男子答 “I’m looking for a new apartment.”，后面又说想换换环境、房租太高。打包箱子加上找新公寓，说明他准备搬家，就是 B 的 Move to a new place。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男子说的是 looking for a new apartment，找的是房子，不是工作，不要只抓住 looking for 就选。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一本新书。",
+        "B": "一份晨报。",
+        "C": "一位非洲教师。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Jennifer got her new book published last month"
+      },
+      "reasonZh": "女子开头就说 “Jennifer got her new book published last month”，男子接着说 “it’s based on her teaching experience in Africa”，it 还是指这本书。两人从头到尾谈的是这本新书，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "the morning paper 只是女子得知消息的地方（I learned it from the morning paper），不是谈话内容。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "Africa 只是她教书的地点；Jennifer 是在非洲教过书，原文没说她是非洲人，而且两人谈的是书。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女子现在可能是什么感受？",
+      "optionTranslationsZh": {
+        "A": "后悔的。",
+        "B": "焦急的。",
+        "C": "困惑的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "He’s supposed to be at the airport now to pick up Mr Anderson, but he’s nowhere to be found."
+      },
+      "reasonZh": "女子说 Bob 的情况：“He’s supposed to be at the airport now to pick up Mr Anderson, but he’s nowhere to be found.”接人的时间就是现在，负责接机的人却找不到，她到处打听 Bob 的下落，可以推出她很着急，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "Regretful 是为自己做过的事后悔，女子没有说自己做错了什么，她是在找人。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "对话发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在餐馆里。",
+        "B": "在警察局里。",
+        "C": "在车里。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "keep it under 65 we don’t want to be pulled over by the police"
+      },
+      "reasonZh": "女子让 John “Slow down a bit”，还说 “keep it under 65 we don’t want to be pulled over by the police”。65 是车速，pulled over 是被警察拦车，说明 John 正在开车，两人在车里，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男子说 I’m kind of hungry，想 get to the service station sooner，饭还没吃上，人也不在餐馆。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "police 只出现在「不想被警察拦下」里，他们正是为了不碰上警察才减速。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男子明天要做什么？",
+      "optionTranslationsZh": {
+        "A": "付账单。",
+        "B": "查看信箱。",
+        "C": "修理煤气灶。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ll take care of it tomorrow"
+      },
+      "reasonZh": "女子说信箱里有 gas bill，而且 “it was due last Friday”，已经过了缴费期限。男子答 “I’ll take care of it tomorrow”，it 指这张账单，处理过期账单就是去缴费，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女子已经说 “I found the gas bill in the mailbox.”，账单已从信箱取出，不用再查。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "gas bill 是煤气费账单，对话里没有说什么东西坏了，不要被 gas 带到煤气灶上。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "Steve 认为自己的训练怎么样？",
+      "optionTranslationsZh": {
+        "A": "令人失望。",
+        "B": "还可以。",
+        "C": "非常好。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I think I’m in first class condition"
+      },
+      "reasonZh": "女子问训练怎么样，Steve 先答 “Great.”，又说教练的计划 “really good”，“I think I’m in first class condition”。first class 是一流，评价很高，对应 C 的 Excellent。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "Acceptable 只是还过得去，比 Great、first class 弱得多。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "Steve 每天训练多长时间？",
+      "optionTranslationsZh": {
+        "A": "三小时。",
+        "B": "五小时。",
+        "C": "十小时。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I train all through the day until three"
+      },
+      "reasonZh": "Steve 先说 “so I start at 10”，十点开始；又说不吃午饭，“I train all through the day until three”，一直练到下午三点。从上午十点到下午三点是 5 个小时，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "three 是结束的时刻（下午三点），不是练了三小时。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "10 是开始的时刻（上午十点），不是练了十小时。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "Mark 怎么评价现场绘画？",
+      "optionTranslationsZh": {
+        "A": "它令人愉快。",
+        "B": "它压力很大。",
+        "C": "它有创造性。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s always fun."
+      },
+      "reasonZh": "主持人问现场作画压力是不是更大，Mark 回答 “Yes, I have done live drawing before. It’s always fun.”，fun 就是好玩、令人愉快，对应 A 的 enjoyable。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "pressure 是主持人提问里的词，Mark 的回答说的是 always fun，没有接这个“压力”。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "Mark 想尝试在什么新东西上作画？",
+      "optionTranslationsZh": {
+        "A": "杂志。",
+        "B": "日记。",
+        "C": "地图。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’d like to draw on personal diaries"
+      },
+      "reasonZh": "主持人问他还没画过但很想画的东西，Mark 答 “I’d like to draw on personal diaries people have kept over the years”，想画的新载体是私人日记，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "magazines 出现在主持人说的 “you’ve drawn pictures on many things, including maps and the covers of books and magazines”，是已经画过的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "maps 也在这份已经画过的清单里，不是新东西。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "Mark 的灵感来自哪里？",
+      "optionTranslationsZh": {
+        "A": "他的梦。",
+        "B": "他的父母。",
+        "C": "他的旅行。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Most are from the people I’ve met and talked to when I was travelling."
+      },
+      "reasonZh": "Mark 说灵感 “Most are from the people I’ve met and talked to when I was travelling.”，大多来自旅行时遇到、交谈过的人。把这句话概括一下，就是来自他的旅行，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "后面 “I always dreamed of traveling around the world” 里的 dreamed 是梦想要环游世界，说的是愿望，不是灵感来自梦。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男子对什么职位感兴趣？",
+      "optionTranslationsZh": {
+        "A": "橱窗清洁工。",
+        "B": "店员。",
+        "C": "健身教练。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "the job is to clean the store front windows"
+      },
+      "reasonZh": "男子打电话问 “the cleaner position”，对方解释 “the job is to clean the store front windows”。清洁店面橱窗的清洁工，就是 A 的 Window cleaner。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "这份工作是为 small stores 擦橱窗，服务对象是商店，并不是在店里卖东西。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "公司为这份工作提供什么？",
+      "optionTranslationsZh": {
+        "A": "一辆公司用车。",
+        "B": "一部智能手机。",
+        "C": "一台录像机。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "As a company car is provided"
+      },
+      "reasonZh": "女子说 “As a company car is provided, you must have a driver’s license”，is provided 说明车由公司提供，所以要求应聘者有驾照，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "手机那句是 “You also need to have a smart phone for communication”，是应聘者自己要有的，不是公司给的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "driving record 是驾驶记录，不是录像设备，别被 record 带偏。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "做这份工作需要什么？",
+      "optionTranslationsZh": {
+        "A": "电脑技能。",
+        "B": "体力。",
+        "C": "工作经验。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "be able to lift heavy things and stand long hours at a time"
+      },
+      "reasonZh": "问到其他要求时，女子说员工必须 “be able to lift heavy things and stand long hours at a time”。能搬重物、能一次站很久，都要靠身体好、有力气，所以是 B 的 Physical strength。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "男子问 “Do I need work experience?”，女子答 “No, we offer on-the-job paid training.”，不需要经验。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男子是做什么的？",
+      "optionTranslationsZh": {
+        "A": "他是接待员。",
+        "B": "他是秘书。",
+        "C": "他是服务员。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You are not booked in here."
+      },
+      "reasonZh": "女子来登记预订，男子问她的姓怎么拼、查预订记录，说 “You are not booked in here.”，又说下午两点以后 “we’ll have some rooms”。查订房、安排入住是酒店前台的工作，所以他是接待员，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "secretary 是女子提到的自己的秘书（my secretary told me），不是男子的身份。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男子为什么向女子道歉？",
+      "optionTranslationsZh": {
+        "A": "他给她指错了路。",
+        "B": "没有她的预订。",
+        "C": "她的名字被拼错了。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "we don’t seem to have a reservation for you"
+      },
+      "reasonZh": "男子查完后说 “Well, I’m sorry, but we don’t seem to have a reservation for you.”，sorry 后面紧接着的就是道歉的原因：查不到她的预订，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "男子问 “How do you spell your last name?” 只是为了核对，女子拼出 L A N G L E Y 后，并没有人说名字拼错了。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男子给女子的建议是什么？",
+      "optionTranslationsZh": {
+        "A": "晚些时候再来。",
+        "B": "和经理谈谈。",
+        "C": "推迟会议。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I may be able to help you if you could wait and prepare to check in"
+      },
+      "reasonZh": "男子说 “I may be able to help you if you could wait and prepare to check in”，接着说 “after two in the afternoon, we’ll have some rooms at that time”。现在没房，下午两点后才有，他的意思是让她晚些时候再来入住，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "想找经理的是女子（Can I talk to your manager?），男子回答 “The manager is away on business”，经理出差了，谈不成。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女子接下来可能做什么？",
+      "optionTranslationsZh": {
+        "A": "整理房间。",
+        "B": "打电话。",
+        "C": "去喝咖啡。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "and have some coffee"
+      },
+      "reasonZh": "女子请男子有房时给她打电话，然后说 “I’ll just wander around and have some coffee.”，接下来她要四处逛逛、喝点咖啡，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "电话是女子请男子打给她（Could you give me a call），她自己并不打电话。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "为什么许多鸟住在城市里？",
+      "optionTranslationsZh": {
+        "A": "它们容易找到食物。",
+        "B": "它们喜欢有人陪伴。",
+        "C": "它们失去了自然栖息地。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Because we cut down too many trees"
+      },
+      "reasonZh": "Christina 说 “Because we cut down too many trees in the nearby areas, many birds now find places within the city to live.”。树被砍光，鸟原来住的地方没有了，只好进城找地方住，这就是 C 说的失去了自然栖息地。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "演讲中提到 eating habits 时说的是这类信息 are not available，并没有说城里更容易找到吃的。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "Christina 觉得什么令人惊讶？",
+      "optionTranslationsZh": {
+        "A": "这些鸟面临严重的危险。",
+        "B": "不同种类的鸟生活在一起。",
+        "C": "一些鸟被电线杆吸引。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The surprising thing is that there are likely more than five or six kinds of birds"
+      },
+      "reasonZh": "她说 “The surprising thing is that there are likely more than five or six kinds of birds living together at each place.”，每处可能有五六种以上的鸟住在一起，正是 B 说的不同种类的鸟一起生活。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "鸟选电线杆这件事，她说的是 “It’s a natural choice for the birds”，是很自然的选择，不是令她惊讶的事。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "dangers 出现在 “far from dangers on the ground”，说的是高杆远离地面危险，不是鸟正面临危险。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "Christina 对这些鸟提出了什么建议？",
+      "optionTranslationsZh": {
+        "A": "把它们赶走。",
+        "B": "定期喂它们。",
+        "C": "对它们进行研究。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’d like to suggest that a programme be started to study these birds."
+      },
+      "reasonZh": "她先说一直没有 “consistent studies or monitoring of them”，然后提出 “I’d like to suggest that a programme be started to study these birds.”，建议启动项目研究这些鸟，还建议请观鸟者做最初的研究，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "eating habits 是她说目前还不清楚、需要研究的信息，不是建议去喂它们。"
+        }
+      ]
+    }
+  }
+}

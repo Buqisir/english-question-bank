@@ -1,0 +1,720 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-zhejiang-jan:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-zhejiang-jan:reading-a": {
+      "overview": "一份图书馆馆际互借服务说明，依次交代谁能使用、要等多久、借期规则、到馆通知与取件方式，最后用表格列出三类出借图书馆的借书费和文章、章节费。",
+      "fullTranslationZh": "馆际互借（ILL）让教师、学生和员工能借到本馆已被借出或没有收藏的图书，还能获取本馆馆藏文章和书籍章节的电子副本。\n\n谁可以借阅？\n\n在校学生、教师（包括退休教师）和员工可以通过 ILL 申请借阅资料。往届学生、访客借阅者和收费借书证持有者不能使用馆际互借服务。\n\n需要多长时间？\n\n文章通常在 1—2 天内送达，图书需要 5—10 天。不过，获取稀有、新近出版或需求量大的资料可能需要更长时间。为加快办理进度，请确保你通过 ILL 申请表提交的信息准确无误。\n\n借期\n\n借期由出借馆规定，所有到期日都标注在标签上。出借馆可以召回已借出的资料。出借馆规定的任何限制也会在标签上注明。通过 ILL 借到的实体资料一律不能续借。\n\n通知与取件方式\n\n实体资料到馆后，我们会用电子邮件通知你。资料须到本校的一个图书馆领取，也就是你在 ILL 申请表中选定的那一个。文章或书籍章节可以获取时，你也会收到电子邮件通知。获取文章或章节时，点击邮件中的链接并登录你的 ILL 账户。进入账户后，选择“已收电子文章”（Electronic Articles Received）。\n\n馆际互借收费\n\n图书馆类型｜借书费｜文章/章节费\n\n非营利图书馆｜15 美元｜10 美元\n\n营利性图书馆｜20 美元｜12 美元\n\n国际图书馆｜25 美元｜15 美元",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+          "sourceText": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
+          "displayText": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
+          "relatedQuestionIds": [],
+          "translationZh": "馆际互借（ILL）让教师、学生和员工能借到本馆已被借出或没有收藏的图书，还能获取本馆馆藏文章和书籍章节的电子副本。",
+          "analysisZh": "先抓主干 ILL provides teachers, students and staff with access…，provide sb with sth 意为「给某人提供某物」，这里提供的是 access（获取的途径）。access to 后面接两样东西，用 as well as 连起来：一是 books that are checked out or not owned by our own libraries，that 引导的定语从句里，checked out（已被借走）和 not owned（本馆没有）用 or 并列，说明哪两种书要靠馆际互借；二是 digitized copies of articles and book chapters，即文章和章节的电子副本。全文后面讲等待时间、取件方式，也都按「实体书」和「文章、章节」这两类分开说。",
+          "underlineRanges": [
+            {
+              "start": 24,
+              "end": 76,
+              "quote": "provides teachers, students and staff with access to"
+            },
+            {
+              "start": 83,
+              "end": 116,
+              "quote": "that are checked out or not owned"
+            },
+            {
+              "start": 139,
+              "end": 149,
+              "quote": "as well as"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+          "sourceText": "However, obtaining items that are rare, recently published or in high demand may take longer.",
+          "displayText": "However, obtaining items that are rare, recently published or in high demand may take longer.",
+          "relatedQuestionIds": [],
+          "translationZh": "不过，获取稀有、新近出版或需求量大的资料可能需要更长时间。",
+          "analysisZh": "这句的主语不是 items，而是动名词短语 obtaining items（获取资料），谓语是 may take longer。that 引导的定语从句修饰 items，从句里 rare、recently published、in high demand 三个表语并列，说明哪几类资料会更慢。句首 However 接上一句「文章 1—2 天、图书 5—10 天」，提醒那只是通常情况。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 24,
+              "quote": "obtaining items"
+            },
+            {
+              "start": 77,
+              "end": 92,
+              "quote": "may take longer"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:1"
+              ],
+              "start": 0,
+              "end": 57,
+              "quote": "馆际互借（ILL）让教师、学生和员工能借到本馆已被借出或没有收藏的图书，还能获取本馆馆藏文章和书籍章节的电子副本。"
+            },
+            {
+              "paragraphId": "zh-reading-a-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:2"
+              ],
+              "start": 59,
+              "end": 65,
+              "quote": "谁可以借阅？"
+            },
+            {
+              "paragraphId": "zh-reading-a-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:3"
+              ],
+              "start": 67,
+              "end": 131,
+              "quote": "在校学生、教师（包括退休教师）和员工可以通过 ILL 申请借阅资料。往届学生、访客借阅者和收费借书证持有者不能使用馆际互借服务。"
+            },
+            {
+              "paragraphId": "zh-reading-a-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:4"
+              ],
+              "start": 133,
+              "end": 140,
+              "quote": "需要多长时间？"
+            },
+            {
+              "paragraphId": "zh-reading-a-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:5"
+              ],
+              "start": 142,
+              "end": 230,
+              "quote": "文章通常在 1—2 天内送达，图书需要 5—10 天。不过，获取稀有、新近出版或需求量大的资料可能需要更长时间。为加快办理进度，请确保你通过 ILL 申请表提交的信息准确无误。"
+            },
+            {
+              "paragraphId": "zh-reading-a-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:6"
+              ],
+              "start": 232,
+              "end": 234,
+              "quote": "借期"
+            },
+            {
+              "paragraphId": "zh-reading-a-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:7"
+              ],
+              "start": 236,
+              "end": 312,
+              "quote": "借期由出借馆规定，所有到期日都标注在标签上。出借馆可以召回已借出的资料。出借馆规定的任何限制也会在标签上注明。通过 ILL 借到的实体资料一律不能续借。"
+            },
+            {
+              "paragraphId": "zh-reading-a-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:8"
+              ],
+              "start": 314,
+              "end": 321,
+              "quote": "通知与取件方式"
+            },
+            {
+              "paragraphId": "zh-reading-a-9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:9"
+              ],
+              "start": 323,
+              "end": 481,
+              "quote": "实体资料到馆后，我们会用电子邮件通知你。资料须到本校的一个图书馆领取，也就是你在 ILL 申请表中选定的那一个。文章或书籍章节可以获取时，你也会收到电子邮件通知。获取文章或章节时，点击邮件中的链接并登录你的 ILL 账户。进入账户后，选择“已收电子文章”（Electronic Articles Received）。"
+            },
+            {
+              "paragraphId": "zh-reading-a-10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-a:10"
+              ],
+              "start": 483,
+              "end": 489,
+              "quote": "馆际互借收费"
+            },
+            {
+              "paragraphId": "zh-reading-a-11",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:1:1",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:1:2",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:1:3"
+              ],
+              "start": 491,
+              "end": 507,
+              "quote": "图书馆类型｜借书费｜文章/章节费"
+            },
+            {
+              "paragraphId": "zh-reading-a-12",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:2:1",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:2:2",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:2:3"
+              ],
+              "start": 509,
+              "end": 527,
+              "quote": "非营利图书馆｜15 美元｜10 美元"
+            },
+            {
+              "paragraphId": "zh-reading-a-13",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:3:1",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:3:2",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:3:3"
+              ],
+              "start": 529,
+              "end": 547,
+              "quote": "营利性图书馆｜20 美元｜12 美元"
+            },
+            {
+              "paragraphId": "zh-reading-a-14",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:1",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:2",
+                "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:3"
+              ],
+              "start": 549,
+              "end": 566,
+              "quote": "国际图书馆｜25 美元｜15 美元"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+                "start": 0,
+                "end": 87,
+                "quote": "Current students, teachers (including retired) and staff can request items through ILL."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-3",
+                "start": 0,
+                "end": 34,
+                "quote": "在校学生、教师（包括退休教师）和员工可以通过 ILL 申请借阅资料。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+                "start": 91,
+                "end": 151,
+                "quote": "Borrowed items are subject to recall by the lending library."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-7",
+                "start": 22,
+                "end": 36,
+                "quote": "出借馆可以召回已借出的资料。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:3",
+                "start": 0,
+                "end": 3,
+                "quote": "$15"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:1",
+                "start": 0,
+                "end": 23,
+                "quote": "International Libraries"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:1:3",
+                "start": 0,
+                "end": 20,
+                "quote": "Article/Chapter Cost"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-14",
+                "start": 12,
+                "end": 17,
+                "quote": "15 美元"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-14",
+                "start": 0,
+                "end": 5,
+                "quote": "国际图书馆"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-11",
+                "start": 10,
+                "end": 16,
+                "quote": "文章/章节费"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-1",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+                "start": 0,
+                "end": 217,
+                "quote": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-1",
+                "start": 0,
+                "end": 57,
+                "quote": "馆际互借（ILL）让教师、学生和员工能借到本馆已被借出或没有收藏的图书，还能获取本馆馆藏文章和书籍章节的电子副本。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-2",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+                "start": 70,
+                "end": 163,
+                "quote": "However, obtaining items that are rare, recently published or in high demand may take longer."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-a",
+                "paragraphId": "zh-reading-a-5",
+                "start": 27,
+                "end": 56,
+                "quote": "不过，获取稀有、新近出版或需求量大的资料可能需要更长时间。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一句说明馆际互借能借什么，随后用五个小标题分块：谁能借、要多久、借期、通知与取件、收费，收费部分用表格按图书馆类型和资料类型给出价格。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+            "summary": "馆际互借可借到本馆借出或没有的图书，也可获取文章和章节的电子副本。",
+            "function": "开篇说明服务内容，引出下文各项规则。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:2",
+            "summary": "谁可以借阅。",
+            "function": "分区标题，引出使用资格。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+            "summary": "在校学生、教师（含退休）和员工可用；往届学生、访客、收费证持有者不可用。",
+            "function": "列出可用和不可用的人群。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:4",
+            "summary": "需要多长时间。",
+            "function": "分区标题，引出等待时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+            "summary": "文章 1—2 天，图书 5—10 天，特殊资料更久；信息准确可加快办理。",
+            "function": "说明等待时间及提速办法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:6",
+            "summary": "借期。",
+            "function": "分区标题，引出借期规则。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+            "summary": "借期和限制由出借馆定并标在标签上，出借馆可召回，实体资料不能续借。",
+            "function": "说明借阅期间要遵守的规则。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:8",
+            "summary": "通知与取件方式。",
+            "function": "分区标题，引出通知和取件。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
+            "summary": "实体资料到馆邮件通知，到所选本校图书馆自取；电子文章凭邮件链接登录账户获取。",
+            "function": "分别说明两类资料怎样拿到手。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:10",
+            "summary": "馆际互借收费，下接收费表。",
+            "function": "分区标题，引出费用表格。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-zhejiang-jan:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在“谁能借”一节里分清可用人群和被排除的人群。",
+      "stemTranslationZh": "谁可以使用馆际互借服务？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "往届学生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+            "sourceHighlight": "not available to former students",
+            "optionText": "Former students.",
+            "optionHighlight": "Former students",
+            "explanation": "选项里的 former students 原文确实有，但它出现在后一句 Interlibrary loan is not available to former students, guest borrowers or fee-card holders 里，往届学生恰恰是被排除、不能使用的人；能用的是 current students（在校学生）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+              "quote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+              "anchor": "Who Can Borrow? 第二句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "访客借阅者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+            "sourceHighlight": "not available to",
+            "optionText": "Guest borrowers.",
+            "optionHighlight": "Guest borrowers",
+            "explanation": "guest borrowers 名字里带 borrowers（借阅者），看着像能借，但原文把它和往届学生、收费证持有者一起列在 not available to 后面，访客借阅者不能使用这项服务。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+              "quote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+              "anchor": "Who Can Borrow? 第二句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "退休教师。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+              "quote": "Current students, teachers (including retired) and staff can request items through ILL.",
+              "anchor": "Who Can Borrow? 第一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "收费借书证持有者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+            "sourceHighlight": "not available to former students, guest borrowers or fee-card holders",
+            "optionText": "Fee-card holders.",
+            "optionHighlight": "Fee-card holders",
+            "explanation": "容易以为交了费就能用，但原文把 fee-card holders 列在 not available to 的名单最后，收费借书证持有者同样不能使用馆际互借。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+              "quote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+              "anchor": "Who Can Borrow? 第二句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "can use",
+          "sourceRole": "stem",
+          "targetText": "Current students, teachers (including retired) and staff can request items through ILL.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+          "relationType": "locationCue",
+          "targetCue": "can request items",
+          "answerText": "teachers (including retired)",
+          "note": "题干 can use 对应 Who Can Borrow? 下第一句的 can request items，这句列的就是能用的人。"
+        },
+        {
+          "sourceText": "Retired teachers.",
+          "sourceRole": "correctOption",
+          "targetText": "teachers (including retired)",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "原文 teachers (including retired) 说教师包括已退休的，选项把括号里的 retired 提到前面，改写成 Retired teachers。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四条借书做法分别放回借期、取件和收费三部分，找出原文规定的那一条。",
+      "stemTranslationZh": "通过馆际互借借一本纸质书，要遵守的一条规定是什么？",
+      "locateBy": "options",
+      "locateFindZh": "续借和召回回借期一节，取件看通知一节，收费查表",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为送书额外付费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pay an extra fee for delivery.",
+            "explanation": "收费表只按图书馆类型列出借书费和文章、章节费；书到了是自己去选定的本校图书馆取，原文没说送书还要另付钱。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在到期日前续借。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "No renewals（续借）are allowed for physical items borrowed through ILL.",
+            "sourceHighlight": "No renewals（续借）are allowed",
+            "optionText": "Renew it before the due date.",
+            "optionHighlight": "Renew it",
+            "explanation": "due date 在借期一节确实出现过，容易顺着想到续借；但同一节最后一句说 No renewals are allowed for physical items，纸质书是实体资料，根本不能续借。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+              "quote": "No renewals（续借）are allowed for physical items borrowed through ILL.",
+              "anchor": "Length of Loans 末句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "到出借馆取书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Items are picked up at one of our libraries – the one you selected in the ILL Request Form.",
+            "sourceEntity": "one of our libraries",
+            "optionText": "Pick it up at the lending library.",
+            "optionEntity": "the lending library",
+            "explanation": "the lending library 在借期一节反复出现，指把书借出来的外馆；取书地点在通知一节写明是 one of our libraries，即你在申请表里选的本校图书馆，不是出借馆。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
+              "quote": "Items are picked up at one of our libraries – the one you selected in the ILL Request Form.",
+              "anchor": "Notification/ Delivery Options 第二句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "书被召回时归还。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+              "quote": "Borrowed items are subject to recall by the lending library.",
+              "anchor": "Length of Loans 第三句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Return it when it is recalled.",
+          "sourceRole": "correctOption",
+          "targetText": "Borrowed items are subject to recall by the lending library.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "be subject to recall 意为「随时可能被召回」。出借馆一召回，借书人就得把书还回去，选项 Return it when it is recalled 正是这条规定换个角度说。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在收费表里同时对准图书馆类型和资料类型，取出单价再乘以数量。",
+      "stemTranslationZh": "从国际图书馆获取两篇文章要付多少钱？",
+      "locateBy": "options",
+      "locateFindZh": "横看 International Libraries 行，竖取文章列单价乘 2",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "15 美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "$15",
+            "sourceHighlight": "$15",
+            "optionText": "$15.",
+            "optionHighlight": "$15",
+            "explanation": "15 美元是国际图书馆一篇文章的价格，题目要的是两篇，只取了单价，没有乘以 2。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "20 美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Non-Profit Libraries",
+            "sourceEntity": "Non-Profit Libraries",
+            "optionText": "$20.",
+            "optionEntity": "$20",
+            "explanation": "20 美元是按非营利图书馆的文章价 10 美元乘 2 算出来的（表里营利性图书馆的借书费也正好是 20 美元），图书馆那一行看错了，题目问的是国际图书馆。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "24 美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "For-Profit Libraries",
+            "sourceEntity": "For-Profit Libraries",
+            "optionText": "$24.",
+            "optionEntity": "$24",
+            "explanation": "24 美元是营利性图书馆的文章价 12 美元乘 2，运算对了，但取的是营利性图书馆那一行，不是国际图书馆。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "30 美元。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:3",
+              "quote": "$15",
+              "anchor": "收费表国际图书馆行·文章/章节费"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:1",
+              "quote": "International Libraries",
+              "anchor": "收费表国际图书馆行"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:1:3",
+              "quote": "Article/Chapter Cost",
+              "anchor": "收费表表头"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "$30.",
+          "sourceRole": "correctOption",
+          "targetText": "$15",
+          "targetParagraphId": "cell:paper-gaokao-2025-zhejiang-jan:reading-a:ocr-916a21169272a7ae:4:3",
+          "relationType": "calculation",
+          "note": "题干 an international library 对应表中 International Libraries 这一行，articles 对应 Article/Chapter Cost 这一列，交叉处是 $15，即一篇 15 美元；两篇就是 15 × 2 = 30 美元。注意不要取同一行的 Loan Cost（25 美元），那是借书的费用。"
+        }
+      ]
+    }
+  }
+}

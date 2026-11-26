@@ -1,0 +1,1043 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-zhejiang-jan:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-zhejiang-jan:grammar-fill": {
+      "overview": "服装租赁在澳大利亚兴起。租赁店主 Tanya 说，顾客看重有独特衣服可穿、又不塞满衣柜；她的店为女性提供平价租衣，还计划为出国参加婚礼等旅行者推出长租的精简衣橱。",
+      "fullTranslationZh": "时尚在经济和环境两方面的代价，催生了一种新的穿衣方式，这种方式在澳大利亚也开始流行起来。由于如今人们选择穿更多的衣服、而每件穿的次数更少，服装租赁服务越来越受欢迎。\n\n“我觉得这个主意棒极了，”经营一家服装租赁店的 Tanya Perilli 说，“如今的顾客不在意衣服是二手的，而是把注意力放在这样一点上：他们有独特的衣服可穿，而且不会把自己的衣柜塞得满满的，也不会给垃圾填埋场添负担。”\n\nTanya 的店向女性提供时装供她们租用，而不必直接买下，为一次性活动的着装提供了更便宜的解决办法。这个概念当然不新——男士租用好西装已有几十年了——但对女性顾客来说，它才刚刚兴起。这种“服装即服务”的模式顺应了社会向共享经济发展的更大趋势。\n\nTanya 还把目光从特殊场合的礼服投向较休闲的服装，她打算把这些衣服打包成精简衣橱，以更长的租期提供给旅行者，比如前往国外参加婚礼的人。“我真心想让这种方式适合人们如今的生活，我也知道，这并不总是意味着在一个特别的周末过后的周一就把裙子还回来。”她说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-fill-1",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+          "sourceText": "Customers today look past the fact that something is secondhand and focus instead __58__ the fact that they have something unique to wear __59__ are not overstuffing their own wardrobes（衣柜）or contributing to landfill.",
+          "displayText": "Customers today look past the fact that something is secondhand and focus instead on the fact that they have something unique to wear and are not overstuffing their own wardrobes（衣柜）or contributing to landfill.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:58",
+            "question:paper-gaokao-2025-zhejiang-jan:59"
+          ],
+          "translationZh": "如今的顾客不在意衣服是二手的，而是把注意力放在这样一点上：他们有独特的衣服可穿，而且不会把自己的衣柜塞得满满的，也不会给垃圾填埋场添负担。",
+          "analysisZh": "主干是 Customers look past the fact ... and focus on the fact ...，两个并列谓语一个是「不去在意」，一个是「转而关注」。两个 the fact 后面各跟一个 that 从句，说明这个事实是什么：前一个是衣服是二手的，后一个里又有 have ... and are not overstuffing ... 两个并列谓语，or 再把两个被否定的动作连起来。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 34,
+              "quote": "look past the fact"
+            },
+            {
+              "start": 68,
+              "end": 93,
+              "quote": "focus instead on the fact"
+            },
+            {
+              "start": 94,
+              "end": 133,
+              "quote": "that they have something unique to wear"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-fill-2",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+          "sourceText": "Tanya is also looking beyond special-occasion dresses to less formal clothing, __63__ she plans to package as capsule wardrobes and offer to travellers, such as those headed to weddings abroad, with a longer-term rental period.",
+          "displayText": "Tanya is also looking beyond special-occasion dresses to less formal clothing, which she plans to package as capsule wardrobes and offer to travellers, such as those headed to weddings abroad, with a longer-term rental period.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:63"
+          ],
+          "translationZh": "Tanya 还把目光从特殊场合的礼服投向较休闲的服装，她打算把这些衣服打包成精简衣橱，以更长的租期提供给旅行者，比如前往国外参加婚礼的人。",
+          "analysisZh": "主干是 Tanya is looking beyond A to B，目光越过特殊场合的礼服，投向较休闲的服装。which 引出的从句补充说明 clothing：she plans to package ... and offer to travellers，package 和 offer 两个动作的对象都是 which 所指的衣服。such as those headed to weddings abroad 举例说明是哪些旅行者，with a longer-term rental period 说明以什么条件提供。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 77,
+              "quote": "looking beyond special-occasion dresses to less formal clothing"
+            },
+            {
+              "start": 79,
+              "end": 105,
+              "quote": "which she plans to package"
+            },
+            {
+              "start": 152,
+              "end": 191,
+              "quote": "such as those headed to weddings abroad"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-fill-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 82,
+              "quote": "时尚在经济和环境两方面的代价，催生了一种新的穿衣方式，这种方式在澳大利亚也开始流行起来。由于如今人们选择穿更多的衣服、而每件穿的次数更少，服装租赁服务越来越受欢迎。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2"
+              ],
+              "start": 84,
+              "end": 195,
+              "quote": "“我觉得这个主意棒极了，”经营一家服装租赁店的 Tanya Perilli 说，“如今的顾客不在意衣服是二手的，而是把注意力放在这样一点上：他们有独特的衣服可穿，而且不会把自己的衣柜塞得满满的，也不会给垃圾填埋场添负担。”"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3"
+              ],
+              "start": 197,
+              "end": 318,
+              "quote": "Tanya 的店向女性提供时装供她们租用，而不必直接买下，为一次性活动的着装提供了更便宜的解决办法。这个概念当然不新——男士租用好西装已有几十年了——但对女性顾客来说，它才刚刚兴起。这种“服装即服务”的模式顺应了社会向共享经济发展的更大趋势。"
+            },
+            {
+              "paragraphId": "zh-grammar-fill-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4"
+              ],
+              "start": 320,
+              "end": 447,
+              "quote": "Tanya 还把目光从特殊场合的礼服投向较休闲的服装，她打算把这些衣服打包成精简衣橱，以更长的租期提供给旅行者，比如前往国外参加婚礼的人。“我真心想让这种方式适合人们如今的生活，我也知道，这并不总是意味着在一个特别的周末过后的周一就把裙子还回来。”她说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+            "text": "The price of fashion – economically and environmentally – has led to the rise of a new way of dressing, and it’s beginning to take off in Australia, too. As people now choose to wear more clothes fewer times, clothing rental services have become increasingly popular."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+            "text": "“I think it’s an amazing idea,” says Tanya Perilli, who owns a clothing rental shop. “Customers today look past the fact that something is secondhand and focus instead on the fact that they have something unique to wear and are not overstuffing their own wardrobes（衣柜）or contributing to landfill.”"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+            "text": "Tanya’s shop offers fashion clothes for women to rent rather than purchase them outright, providing a less expensive solution to one-time event dressing. The concept is certainly not new – men have been renting good suits for decades – but for female shoppers, it is just taking off. This clothing-as-service model follows the broader societal movement towards shared economies."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+            "text": "Tanya is also looking beyond special-occasion dresses to less formal clothing, which she plans to package as capsule wardrobes and offer to travellers, such as those headed to weddings abroad, with a longer-term rental period. “I really want to make this work for people’s lives today, and I know that doesn’t always mean returning a dress on the Monday after a special weekend,” she says."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-fill-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+                "start": 88,
+                "end": 107,
+                "quote": "new way of dressing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 20,
+                "end": 26,
+                "quote": "新的穿衣方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:56"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+                "start": 81,
+                "end": 82,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 18,
+                "end": 20,
+                "quote": "一种"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+                "start": 201,
+                "end": 206,
+                "quote": "fewer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 66,
+                "end": 68,
+                "quote": "更少"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:57"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:1",
+                "start": 202,
+                "end": 207,
+                "quote": "times"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-1",
+                "start": 64,
+                "end": 66,
+                "quote": "次数"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "start": 154,
+                "end": 167,
+                "quote": "focus instead"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 56,
+                "end": 58,
+                "quote": "而是"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:58"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "start": 168,
+                "end": 170,
+                "quote": "on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 58,
+                "end": 64,
+                "quote": "把注意力放在"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "start": 194,
+                "end": 223,
+                "quote": "have something unique to wear"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "start": 231,
+                "end": 251,
+                "quote": "are not overstuffing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 72,
+                "end": 80,
+                "quote": "有独特的衣服可穿"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 83,
+                "end": 96,
+                "quote": "不会把自己的衣柜塞得满满的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:59"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "start": 220,
+                "end": 223,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 81,
+                "end": 83,
+                "quote": "而且"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 36,
+                "end": 45,
+                "quote": "for women"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 60,
+                "end": 80,
+                "quote": "rather than purchase"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 8,
+                "end": 15,
+                "quote": "向女性提供时装"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 21,
+                "end": 28,
+                "quote": "而不必直接买下"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:60"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 46,
+                "end": 53,
+                "quote": "to rent"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 15,
+                "end": 20,
+                "quote": "供她们租用"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 106,
+                "end": 122,
+                "quote": "a less expensive"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 138,
+                "end": 164,
+                "quote": "to one-time event dressing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 41,
+                "end": 45,
+                "quote": "更便宜的"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 30,
+                "end": 38,
+                "quote": "一次性活动的着装"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:61"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 117,
+                "end": 125,
+                "quote": "solution"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 45,
+                "end": 49,
+                "quote": "解决办法"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 166,
+                "end": 177,
+                "quote": "The concept"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 50,
+                "end": 54,
+                "quote": "这个概念"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:62"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+                "start": 166,
+                "end": 168,
+                "quote": "is"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-3",
+                "start": 54,
+                "end": 58,
+                "quote": "当然不新"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 57,
+                "end": 77,
+                "quote": "less formal clothing"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 86,
+                "end": 106,
+                "quote": "she plans to package"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 20,
+                "end": 26,
+                "quote": "较休闲的服装"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 27,
+                "end": 42,
+                "quote": "她打算把这些衣服打包成精简衣橱"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:63"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 79,
+                "end": 84,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 31,
+                "end": 35,
+                "quote": "这些衣服"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 281,
+                "end": 292,
+                "quote": "lives today"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 83,
+                "end": 88,
+                "quote": "如今的生活"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:64"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 264,
+                "end": 272,
+                "quote": "people’s"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 81,
+                "end": 83,
+                "quote": "人们"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-fill-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 310,
+                "end": 329,
+                "quote": "doesn’t always mean"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 95,
+                "end": 102,
+                "quote": "并不总是意味着"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-grammar-fill-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:65"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 322,
+                "end": 331,
+                "quote": "returning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 119,
+                "end": 122,
+                "quote": "还回来"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:58",
+              "question:paper-gaokao-2025-zhejiang-jan:59"
+            ],
+            "selectedSentenceId": "sentence-grammar-fill-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:2",
+                "start": 86,
+                "end": 303,
+                "quote": "Customers today look past the fact that something is secondhand and focus instead __58__ the fact that they have something unique to wear __59__ are not overstuffing their own wardrobes（衣柜）or contributing to landfill."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-2",
+                "start": 41,
+                "end": 110,
+                "quote": "如今的顾客不在意衣服是二手的，而是把注意力放在这样一点上：他们有独特的衣服可穿，而且不会把自己的衣柜塞得满满的，也不会给垃圾填埋场添负担。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-grammar-fill-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:63"
+            ],
+            "selectedSentenceId": "sentence-grammar-fill-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:4",
+                "start": 0,
+                "end": 227,
+                "quote": "Tanya is also looking beyond special-occasion dresses to less formal clothing, __63__ she plans to package as capsule wardrobes and offer to travellers, such as those headed to weddings abroad, with a longer-term rental period."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-fill-4",
+                "start": 0,
+                "end": 69,
+                "quote": "Tanya 还把目光从特殊场合的礼服投向较休闲的服装，她打算把这些衣服打包成精简衣橱，以更长的租期提供给旅行者，比如前往国外参加婚礼的人。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-zhejiang-jan:56": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-first-mention",
+        "features": [
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "句子说时尚的代价 has led to the rise of ___ new way of dressing。way 是单数可数名词，这里第一次出现，指「一种」新的穿衣方式，所以要不定冠词；紧跟的 new 以辅音音素开头，用 a。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "new way of dressing",
+          "signalSide": "passage",
+          "relation": "中文：单数可数名词 way 第一次出现，泛指一种新方式。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:57": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "time",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "times",
+      "role": null,
+      "similarityProfile": {
+        "route": "quantity-determiner",
+        "features": []
+      },
+      "reason": "As 从句说人们 choose to wear more clothes fewer ___，意思是衣服穿得多了，每件穿的次数却少了。time 在这里表示「次数」，是可数名词；前面的 fewer 只修饰可数名词复数，所以填 times。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "fewer",
+          "signalSide": "passage",
+          "relation": "中文：fewer 后接可数名词复数。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "more clothes",
+          "signalSide": "passage",
+          "relation": "中文：more clothes 与 fewer times 一多一少对照。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:58": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "on",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "这一句的主干是 Customers look past the fact ... and focus instead ___ the fact ...。focus on 表示「把注意力放在……上」，中间的 instead 只是插进来表示「转而」，不影响 focus 和 on 的搭配，填 on。前面 look past the fact 是不去在意，后面 focus on the fact 是转而关注，正好一前一后对照。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "focus instead",
+          "signalSide": "passage",
+          "relation": "中文：focus on，instead 插在中间。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "look past the fact",
+          "signalSide": "passage",
+          "relation": "中文：与 focus on the fact 并列对照。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:59": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "第二个 the fact 后面的 that 从句主语是 they，后面跟着两个谓语：have something unique to wear 和 are not overstuffing their own wardrobes。这是顾客得到的两个好处，顺着往下加，用 and 把两个谓语连起来。后面的 or 连接的是 overstuffing 和 contributing 两个被否定的动作，与这一空不是一回事。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "they have",
+          "signalSide": "passage",
+          "relation": "中文：they 同时是两个谓语的主语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "are not overstuffing",
+          "signalSide": "passage",
+          "relation": "中文：第二个谓语，与 have 并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:60": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "rent",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to rent",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-future",
+        "features": []
+      },
+      "reason": "这句的谓语是 offers，rent 不能再作谓语。for women ___ 是「for + 人 + 不定式」，说明这些 fashion clothes 是供女性去租的，用 to rent 修饰 clothes；后面 rather than purchase 用的也是动词原形，和 rent 一起接在 to 后面，进一步说明这里是不定式。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "offers fashion clothes",
+          "signalSide": "passage",
+          "relation": "中文：offers 是谓语，空格修饰 clothes。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "for women",
+          "signalSide": "passage",
+          "relation": "中文：for + 人 + to do，指明由谁来租。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "rather than purchase",
+          "signalSide": "passage",
+          "relation": "中文：purchase 用原形，与 rent 同接在 to 后。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:61": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "solve",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "solution",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "providing a less expensive ___ to one-time event dressing 中，providing 后面要一个宾语，前面又有冠词 a 和形容词 less expensive，所以这里要名词。solve 的名词是 solution，solution to sth 就是「……的解决办法」；冠词 a 说明用单数。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "a less expensive",
+          "signalSide": "passage",
+          "relation": "中文：冠词加形容词，后面要接名词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to one-time event dressing",
+          "signalSide": "passage",
+          "relation": "中文：solution to sth，……的解决办法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:62": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "这句缺谓语，主语是单数的 The concept，所以用 is。作者是在评价这个概念现在怎么样（并不新），后面 but 一句 it is just taking off 也用现在时，所以用一般现在时。破折号中间的 men have been renting good suits for decades 只是插进来的补充，不影响主语。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The concept",
+          "signalSide": "passage",
+          "relation": "中文：单数主语，谓语用 is。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "it is just taking off",
+          "signalSide": "passage",
+          "relation": "中文：but 后同样用现在时说当下的情况。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:63": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-object-predicative",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "逗号前的主句已经完整，逗号后的 ___ she plans to package as capsule wardrobes and offer to travellers 是另一个主谓结构，而 package 和 offer 都缺宾语，缺的正是前面的 less formal clothing。关系词指物，在从句里作宾语，又跟在逗号后面，所以用 which，不能用 that。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "less formal clothing",
+          "signalSide": "passage",
+          "relation": "中文：先行词，指物。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "she plans to package",
+          "signalSide": "passage",
+          "relation": "中文：package 后缺宾语，由关系词补上。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:64": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "people",
+      "facetKey": "grammar-fill.given.noun.genitive",
+      "answer": "people’s",
+      "role": null,
+      "similarityProfile": {
+        "route": "genitive",
+        "features": []
+      },
+      "reason": "for ___ lives today 中，lives 是名词，前面要说明是「谁的」生活，所以 people 要变成所有格。people 本身已是复数，但不以 s 结尾，直接加 ’s，写作 people’s。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "lives today",
+          "signalSide": "passage",
+          "relation": "中文：lives 前面要一个表示所属的词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:65": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "return",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "returning",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-form-changes-meaning",
+        "features": []
+      },
+      "reason": "that doesn’t always mean ___ a dress on the Monday ... 中，mean 后面缺宾语。mean doing 是「意味着要做」，mean to do 是「打算做」；这里说长租不一定意味着周末一过、周一就得把裙子还回去，是前一种意思，填 returning。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "doesn’t always mean",
+          "signalSide": "passage",
+          "relation": "中文：mean doing 表示意味着。"
+        }
+      ]
+    }
+  }
+}

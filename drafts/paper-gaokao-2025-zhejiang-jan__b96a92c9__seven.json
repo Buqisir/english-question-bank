@@ -1,0 +1,1026 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-zhejiang-jan:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-zhejiang-jan:seven-choices": {
+      "overview": "文章谈怎样更有效地沟通。作者先指出贪多是常见错误、好信息往往简单，再给出四条建议：说受众关心的事、少说废话、让受众参与、选对传递方式，最后说沟通能力要花时间培养。",
+      "fullTranslationZh": "沟通中最常见的错误之一，就是想一下子做太多。最好的信息往往很简单。无论是书面的、口头的、正式的还是非正式的沟通，如果意思没有清楚地传达出去，就毫无价值。既清楚又简短，同时还能保持吸引力、把听众需要知道的内容都讲到，这是一种高水平的沟通技巧。\n\n下面是一些值得遵循的建议，可以帮你更有效地沟通。\n\n● 心里装着你的受众。\n\n当你根据受众的兴趣调整沟通内容时，他们自然会更感兴趣、更投入。直接谈对他们重要的事。这会激发他们理解信息、与信息互动的愿望。\n\n● 一个词能说清，就别用十个。\n\n即使是最投入、最用心的受众，最终也会厌倦。让信息简单清楚，别人就更容易理解。作为讲话的人，你早就知道自己要说什么。然而，他们是第一次听。所以要保持简单。\n\n● 让受众参与进来。\n\n如果你当过老师、经理、培训师或教练，你就会知道，学习新知识最好的方法莫过于把它教给别人。请受众贡献自己的想法，或者让他们承担一部分任务，向别人解释新的概念和政策。让他们主持讨论和会议，以培养他们的沟通能力。\n\n● 想好传递信息的最佳方式。\n\n如果你要传达的信息并不紧急，可以考虑发一封电子邮件。书面沟通能让受众有更多时间去查看、思考，并在之后提出问题。它还能给他们留下一份方便日后翻看的记录。\n\n培养有效的沟通能力需要时间，但效果值得你付出努力。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-seven-choices-1",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+          "sourceText": "Being clear and brief – while maintaining interest and including everything your listeners need to know – is a high-level communication skill.",
+          "displayText": "Being clear and brief – while maintaining interest and including everything your listeners need to know – is a high-level communication skill.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:36"
+          ],
+          "translationZh": "既清楚又简短，同时还能保持吸引力、把听众需要知道的内容都讲到，这是一种高水平的沟通技巧。",
+          "analysisZh": "主干是 Being clear and brief is a high-level communication skill，动名词短语 Being clear and brief 作主语，is 是谓语。两个破折号之间是插入成分：while 后面接 maintaining interest 和 including everything 两个并列的动作，说明“清楚简短”的同时还要做到这两点；your listeners need to know 是省略了 that 的定语从句，修饰 everything。读的时候先跳过破折号，主干一眼就清楚。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Being clear and brief"
+            },
+            {
+              "start": 106,
+              "end": 141,
+              "quote": "is a high-level communication skill"
+            },
+            {
+              "start": 65,
+              "end": 103,
+              "quote": "everything your listeners need to know"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-seven-choices-2",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:8",
+          "sourceText": "If you’ve ever worked as an instructor, manager, trainer or coach, you’ll know that there are few better ways to learn new information than to teach it.",
+          "displayText": "If you’ve ever worked as an instructor, manager, trainer or coach, you’ll know that there are few better ways to learn new information than to teach it.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:39"
+          ],
+          "translationZh": "如果你当过老师、经理、培训师或教练，你就会知道，学习新知识最好的方法莫过于把它教给别人。",
+          "analysisZh": "主句是 you’ll know that…，前面 If 引出条件“如果你当过这些角色”。know 后面的 that 从句是知道的内容：there are few better ways … than to teach it，字面是“比教别人更好的学习方法很少”，用 few + 比较级表示“教别人几乎是最好的学法”。句末的 it 指 new information。这句话为后面请受众出主意、讲解、主持做铺垫。",
+          "underlineRanges": [
+            {
+              "start": 67,
+              "end": 83,
+              "quote": "you’ll know that"
+            },
+            {
+              "start": 94,
+              "end": 151,
+              "quote": "few better ways to learn new information than to teach it"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先总说沟通要清楚简短，再用四个小标题分条给建议，最后一句收尾鼓励。",
+        "units": [
+          {
+            "unitId": "seven-unit-1",
+            "heading": "总论",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:2"
+            ],
+            "summary": "指出贪多是常见错误，提出好信息要简单，并引出下面的建议。"
+          },
+          {
+            "unitId": "seven-unit-2",
+            "heading": "Keep your audience in mind.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:3",
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4"
+            ],
+            "summary": "按受众的兴趣说话，直接谈他们在意的事。"
+          },
+          {
+            "unitId": "seven-unit-3",
+            "heading": "Don’t use ten words when one will do.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:5",
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6"
+            ],
+            "summary": "讲话人熟悉内容，听众却是第一次听，所以要简单。"
+          },
+          {
+            "unitId": "seven-unit-4",
+            "heading": "Get the audience involved.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:7",
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:8"
+            ],
+            "summary": "请受众出主意、参与讲解、主持讨论。"
+          },
+          {
+            "unitId": "seven-unit-5",
+            "heading": "Consider the best method to deliver your message.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:9",
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10"
+            ],
+            "summary": "不急的信息可以发邮件，既给受众时间，又留下记录。"
+          },
+          {
+            "unitId": "seven-unit-6",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-zhejiang-jan:seven-choices:11"
+            ],
+            "summary": "培养沟通能力要花时间，但值得。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": null,
+          "secondary": null,
+          "kind": "topic",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它和全文话题有关，但哪一空都接不上。它是祈使句，最像小标题那一空，可小标题后面讲的是 \"Ask the audience to contribute their ideas\"，请受众出力，和耐心等待无关；全文只在结尾说 \"takes time\"，那里没有空。",
+          "quotes": [
+            "Ask the audience to contribute their ideas",
+            "takes time"
+          ]
+        },
+        "E": {
+          "target": 39,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"what your listeners offer\" 和那一空后面的 \"contribute their ideas\" 都在说受众出主意，看着很贴。但那一空是小标题，要像 \"Keep your audience in mind\" 那样是一句祈使建议；它是陈述句，只说你会吃惊，盖不住后面 \"take a role\"、\"lead discussions\" 这些做法。",
+          "quotes": [
+            "what your listeners offer",
+            "contribute their ideas",
+            "Keep your audience in mind",
+            "take a role",
+            "lead discussions"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-seven-choices-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 120,
+              "quote": "沟通中最常见的错误之一，就是想一下子做太多。最好的信息往往很简单。无论是书面的、口头的、正式的还是非正式的沟通，如果意思没有清楚地传达出去，就毫无价值。既清楚又简短，同时还能保持吸引力、把听众需要知道的内容都讲到，这是一种高水平的沟通技巧。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:2"
+              ],
+              "start": 122,
+              "end": 146,
+              "quote": "下面是一些值得遵循的建议，可以帮你更有效地沟通。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:3"
+              ],
+              "start": 148,
+              "end": 159,
+              "quote": "● 心里装着你的受众。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4"
+              ],
+              "start": 161,
+              "end": 223,
+              "quote": "当你根据受众的兴趣调整沟通内容时，他们自然会更感兴趣、更投入。直接谈对他们重要的事。这会激发他们理解信息、与信息互动的愿望。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:5"
+              ],
+              "start": 225,
+              "end": 240,
+              "quote": "● 一个词能说清，就别用十个。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6"
+              ],
+              "start": 242,
+              "end": 318,
+              "quote": "即使是最投入、最用心的受众，最终也会厌倦。让信息简单清楚，别人就更容易理解。作为讲话的人，你早就知道自己要说什么。然而，他们是第一次听。所以要保持简单。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:7"
+              ],
+              "start": 320,
+              "end": 330,
+              "quote": "● 让受众参与进来。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:8"
+              ],
+              "start": 332,
+              "end": 435,
+              "quote": "如果你当过老师、经理、培训师或教练，你就会知道，学习新知识最好的方法莫过于把它教给别人。请受众贡献自己的想法，或者让他们承担一部分任务，向别人解释新的概念和政策。让他们主持讨论和会议，以培养他们的沟通能力。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:9"
+              ],
+              "start": 437,
+              "end": 451,
+              "quote": "● 想好传递信息的最佳方式。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10"
+              ],
+              "start": 453,
+              "end": 528,
+              "quote": "如果你要传达的信息并不紧急，可以考虑发一封电子邮件。书面沟通能让受众有更多时间去查看、思考，并在之后提出问题。它还能给他们留下一份方便日后翻看的记录。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:seven-choices:11"
+              ],
+              "start": 530,
+              "end": 555,
+              "quote": "培养有效的沟通能力需要时间，但效果值得你付出努力。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+            "text": "One of the most common mistakes in communication is trying to do too much. The best messages are often simple. There’s no value in delivering any kind of communication, whether written, spoken, formal, or informal, if the message doesn’t come across clearly. Being clear and brief – while maintaining interest and including everything your listeners need to know – is a high-level communication skill."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+            "text": "Your audience will naturally be more interested and engaged when you tailor your communications to their interests. Speak directly to what matters to them. This will engage their desire to understand and interact with the information."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+            "text": "Even the most engaged and committed audience will eventually get bored. Keeping your message simple and clear will make it easier for people to understand. As the speaker, you already know what you’re going to say. However, they’re hearing it for the first time. Keep it simple."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:7",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:7",
+            "text": "● Get the audience involved."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+            "text": "If the information you’re communicating isn’t urgent, consider sending an email. Written communication will give your audience more time to review it, think it over, and follow up with questions. It will also give them a handy record to refer back to."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-seven-choices-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+                "start": 52,
+                "end": 73,
+                "quote": "trying to do too much"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "start": 14,
+                "end": 21,
+                "quote": "想一下子做太多"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:36"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:36",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+                "start": 75,
+                "end": 110,
+                "quote": "The best messages are often simple."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "start": 22,
+                "end": 33,
+                "quote": "最好的信息往往很简单。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+                "start": 69,
+                "end": 114,
+                "quote": "tailor your communications to their interests"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "start": 2,
+                "end": 15,
+                "quote": "根据受众的兴趣调整沟通内容"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:37"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:37",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+                "start": 116,
+                "end": 155,
+                "quote": "Speak directly to what matters to them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "start": 31,
+                "end": 42,
+                "quote": "直接谈对他们重要的事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+                "start": 163,
+                "end": 210,
+                "quote": "However, they’re hearing it for the first time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 57,
+                "end": 68,
+                "quote": "然而，他们是第一次听。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:38"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:38",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+                "start": 156,
+                "end": 214,
+                "quote": "As the speaker, you already know what you’re going to say."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 38,
+                "end": 57,
+                "quote": "作为讲话的人，你早就知道自己要说什么。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:8",
+                "start": 153,
+                "end": 195,
+                "quote": "Ask the audience to contribute their ideas"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 44,
+                "end": 54,
+                "quote": "请受众贡献自己的想法"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:39"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:39",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:7",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:7",
+                "start": 2,
+                "end": 28,
+                "quote": "Get the audience involved."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-7",
+                "start": 0,
+                "end": 10,
+                "quote": "● 让受众参与进来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-seven-choices-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+                "start": 81,
+                "end": 136,
+                "quote": "Written communication will give your audience more time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-10",
+                "start": 26,
+                "end": 39,
+                "quote": "书面沟通能让受众有更多时间"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-seven-choices-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:40"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:40",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+                "start": 196,
+                "end": 251,
+                "quote": "It will also give them a handy record to refer back to."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-10",
+                "start": 55,
+                "end": 75,
+                "quote": "它还能给他们留下一份方便日后翻看的记录。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:36"
+            ],
+            "selectedSentenceId": "sentence-seven-choices-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+                "start": 230,
+                "end": 372,
+                "quote": "Being clear and brief – while maintaining interest and including everything your listeners need to know – is a high-level communication skill."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-1",
+                "start": 76,
+                "end": 120,
+                "quote": "既清楚又简短，同时还能保持吸引力、把听众需要知道的内容都讲到，这是一种高水平的沟通技巧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-seven-choices-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:39"
+            ],
+            "selectedSentenceId": "sentence-seven-choices-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:8",
+                "start": 0,
+                "end": 152,
+                "quote": "If you’ve ever worked as an instructor, manager, trainer or coach, you’ll know that there are few better ways to learn new information than to teach it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+                "paragraphId": "zh-seven-choices-8",
+                "start": 0,
+                "end": 44,
+                "quote": "如果你当过老师、经理、培训师或教练，你就会知道，学习新知识最好的方法莫过于把它教给别人。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-zhejiang-jan:36": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "trying to do too much",
+        "come across clearly",
+        "clear and brief",
+        "high-level communication skill"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+        "beforeQuote": "One of the most common mistakes in communication is trying to do too much.",
+        "afterQuote": "There’s no value in delivering any kind of communication, whether written, spoken, formal, or informal, if the message doesn’t come across clearly. Being clear and brief"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "too much",
+          "signalSide": "context-before",
+          "targetText": "simple",
+          "relation": "空前说的错误是 too much（贪多），答案用 simple 给出相反的正确做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "simple",
+          "signalSide": "option",
+          "targetText": "too much / clear and brief",
+          "relation": "simple 一头反驳空前的 too much，一头被空后的 clear and brief 具体化。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "clear and brief",
+          "signalSide": "context-after",
+          "targetText": "The best messages are often simple",
+          "relation": "空后把“简单”说成“清楚而简短”，是对答案的展开。"
+        }
+      ],
+      "lock": [
+        "too much",
+        "clear and brief"
+      ],
+      "find": {
+        "text": "空前 \"trying to do too much\" 是错误做法，空里该说正确做法；空后 \"clear and brief\" 讲的就是简单，只有 C 说 \"simple\"。",
+        "quotes": [
+          "trying to do too much",
+          "clear and brief",
+          "simple"
+        ]
+      },
+      "explain": "空前先点出贪多这个毛病，这句马上亮出相反的原则：好信息要简单。空后先说意思传达不清就没有价值，再把简单说成清楚而简短，为后面的几条建议定下调子。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前先点出贪多这个毛病，这句马上亮出相反的原则：好信息要简单。空后先说意思传达不清就没有价值，再把简单说成清楚而简短，为后面的几条建议定下调子。",
+        "matchedClues": [
+          {
+            "contextSide": "trying to do too much",
+            "optionSide": "simple",
+            "relation": "答案的 simple 与空前“贪多”的错误正好相反。"
+          },
+          {
+            "contextSide": "clear and brief",
+            "optionSide": "The best messages are often simple",
+            "relation": "空后的“清楚简短”是对“简单”的具体说法。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:37": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Keep your audience in mind",
+        "tailor your communications",
+        "their interests",
+        "engage their desire"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+        "beforeQuote": "when you tailor your communications to their interests.",
+        "afterQuote": "This will engage their desire to understand and interact with the information."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "Speak directly to what matters to them",
+          "relation": "空后 This 需要前面有一个具体做法可指，就是答案这条建议。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "option",
+          "targetText": "Your audience",
+          "relation": "答案里的 them 指受众，和空前 their 指同一群人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "what matters to them",
+          "signalSide": "option",
+          "targetText": "their interests",
+          "relation": "“对他们重要的事”换个说法就是空前的“他们的兴趣”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "their interests",
+          "signalSide": "context-before",
+          "targetText": "what matters to them",
+          "relation": "空前先说按兴趣调整，答案把它变成一句直接的建议。"
+        }
+      ],
+      "lock": [
+        "their interests",
+        "This"
+      ],
+      "find": {
+        "text": "空后 \"This will engage\" 的 This 要指一个做法；空前讲 \"their interests\"，D 的 \"what matters to them\" 正好接上。",
+        "quotes": [
+          "This will engage",
+          "their interests",
+          "what matters to them"
+        ]
+      },
+      "explain": "空前讲投其所好受众会更投入，这句把道理变成一句能照着做的建议；空后用 This 回指这条建议，说它能激发受众想弄懂信息的愿望。",
+      "distractors": [
+        {
+          "label": "B",
+          "text": "B 放这里，空后 \"interact with the information\" 像是在说参与；但空前讲的是 \"their interests\"，要的是投其所好，不是让受众动手。",
+          "quotes": [
+            "interact with the information",
+            "their interests"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前讲投其所好受众会更投入，这句把道理变成一句能照着做的建议；空后用 This 回指这条建议，说它能激发受众想弄懂信息的愿望。",
+        "matchedClues": [
+          {
+            "contextSide": "their interests",
+            "optionSide": "what matters to them",
+            "relation": "答案换个说法重述了受众的兴趣。"
+          },
+          {
+            "contextSide": "This will engage their desire",
+            "optionSide": "Speak directly to what matters to them",
+            "relation": "This 回指答案这条建议。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 放这里，空后 \"interact with the information\" 像是在说参与；但空前讲的是 \"their interests\"，要的是投其所好，不是让受众动手。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:38": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "simple and clear",
+        "easier for people to understand",
+        "hearing it for the first time",
+        "Keep it simple"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+        "beforeQuote": "Keeping your message simple and clear will make it easier for people to understand.",
+        "afterQuote": "However, they’re hearing it for the first time. Keep it simple."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "you already know / they’re hearing it for the first time",
+          "relation": "However 前后要是相反的两方：讲话人早就知道，听众第一次听。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "already know",
+          "signalSide": "option",
+          "targetText": "for the first time",
+          "relation": "“早就知道”和空后“第一次听”正好相对。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "they’re",
+          "signalSide": "context-after",
+          "targetText": "people",
+          "relation": "they 指空前的 people，即听的人，与答案中的 you（讲话人）分成两方。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "As the speaker",
+          "signalSide": "option",
+          "targetText": "they’re hearing it",
+          "relation": "答案点出讲话人一方，空后转到听的一方。"
+        }
+      ],
+      "lock": [
+        "However",
+        "for the first time"
+      ],
+      "find": {
+        "text": "空后 \"However, they’re hearing it for the first time\" 要前面有相反的一方，G 的 \"already know\" 正好是讲话人早知道。",
+        "quotes": [
+          "However, they’re hearing it for the first time",
+          "already know"
+        ]
+      },
+      "explain": "空前说信息简单才好懂，这句和空后组成一组对比来说明原因：你自己对内容很熟，听的人却是头一回听，所以最后才落到保持简单。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前说信息简单才好懂，这句和空后组成一组对比来说明原因：你自己对内容很熟，听的人却是头一回听，所以最后才落到保持简单。",
+        "matchedClues": [
+          {
+            "contextSide": "for the first time",
+            "optionSide": "already know",
+            "relation": "讲话人早就知道，听众第一次听，两边形成对比。"
+          },
+          {
+            "contextSide": "they’re hearing it",
+            "optionSide": "As the speaker",
+            "relation": "答案说讲话的一方，空后说听的一方。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:39": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Ask the audience to contribute their ideas",
+        "take a role",
+        "Allow them to lead discussions",
+        "teach it"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:7",
+        "headingAnchor": "●",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the audience",
+          "signalSide": "option",
+          "targetText": "Ask the audience",
+          "relation": "答案的 the audience 就是下段要去“请”的那群人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "involved",
+          "signalSide": "option",
+          "targetText": "contribute their ideas / take a role / lead discussions",
+          "relation": "involved 把下段出主意、承担讲解、主持讨论这几件事概括成“参与”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Ask the audience",
+          "signalSide": "context-after",
+          "targetText": "Get the audience involved",
+          "relation": "下段第一条做法就是请受众出力。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Allow them to lead discussions",
+          "signalSide": "context-after",
+          "targetText": "involved",
+          "relation": "让受众主持讨论，也是让他们参与。"
+        }
+      ],
+      "lock": [
+        "Ask the audience",
+        "lead discussions"
+      ],
+      "find": {
+        "text": "先跳过，做完后面几段再回来。下段 \"Ask the audience to contribute their ideas\"、\"Allow them to lead discussions\" 都是让受众出力，B 的 \"involved\" 能把它们都盖住。",
+        "quotes": [
+          "Ask the audience to contribute their ideas",
+          "Allow them to lead discussions",
+          "involved"
+        ]
+      },
+      "explain": "这是一条建议的小标题，和 \"Keep your audience in mind\" 一样是祈使句。下段先说教别人是最好的学法，再列出请受众出主意、讲解、主持，都是让受众参与的具体做法。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 也是祈使句，像小标题；但下段讲 \"contribute their ideas\"、\"lead discussions\"，是让受众动手，不是说他们关心的事。",
+          "quotes": [
+            "contribute their ideas",
+            "lead discussions"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "这是一条建议的小标题，和 \"Keep your audience in mind\" 一样是祈使句。下段先说教别人是最好的学法，再列出请受众出主意、讲解、主持，都是让受众参与的具体做法。",
+        "matchedClues": [
+          {
+            "contextSide": "Ask the audience to contribute their ideas",
+            "optionSide": "Get the audience involved",
+            "relation": "请受众出主意就是让他们参与。"
+          },
+          {
+            "contextSide": "Allow them to lead discussions and meetings",
+            "optionSide": "involved",
+            "relation": "主持讨论和会议也是参与。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 也是祈使句，像小标题；但下段讲 \"contribute their ideas\"、\"lead discussions\"，是让受众动手，不是说他们关心的事。"
+        },
+        {
+          "optionLabel": "E",
+          "reason": "它的 \"what your listeners offer\" 和那一空后面的 \"contribute their ideas\" 都在说受众出主意，看着很贴。但那一空是小标题，要像 \"Keep your audience in mind\" 那样是一句祈使建议；它是陈述句，只说你会吃惊，盖不住后面 \"take a role\"、\"lead discussions\" 这些做法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:40": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "consider sending an email",
+        "Written communication",
+        "more time to review it",
+        "follow up with questions"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+        "beforeQuote": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "will give your audience more time",
+          "relation": "also 表示在空前那条好处之外再加一条。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "Written communication",
+          "relation": "It 指空前的 Written communication。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "option",
+          "targetText": "your audience",
+          "relation": "them 指空前的 your audience。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "will give your audience",
+          "signalSide": "context-before",
+          "targetText": "will also give them",
+          "relation": "空前 will give，答案 will also give，同一个句式再加一层。"
+        }
+      ],
+      "lock": [
+        "Written communication",
+        "also"
+      ],
+      "find": {
+        "text": "空前 \"Written communication will give your audience more time\"，F 用 It 指书面沟通，用 \"also give them\" 再补一个好处。",
+        "quotes": [
+          "Written communication will give your audience more time",
+          "also give them"
+        ]
+      },
+      "explain": "空前说邮件让受众有时间看、想、再提问，这句再补一个好处：留下一份能随时翻看的记录。两个好处放在一起，说明不急的事为什么适合写邮件。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前说邮件让受众有时间看、想、再提问，这句再补一个好处：留下一份能随时翻看的记录。两个好处放在一起，说明不急的事为什么适合写邮件。",
+        "matchedClues": [
+          {
+            "contextSide": "Written communication will give your audience more time",
+            "optionSide": "It will also give them",
+            "relation": "It、them、also 分别接上书面沟通、受众和前一个好处。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    }
+  }
+}

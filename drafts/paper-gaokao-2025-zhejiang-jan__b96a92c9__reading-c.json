@@ -1,0 +1,784 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-zhejiang-jan:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-zhejiang-jan:reading-c": {
+      "overview": "文章介绍正在全球流行的矩阵种植：它源于二战后德国规划者对低维护公园绿地的需求，经荷兰设计师奥多夫推广，看似野生实则精心规划，既省人力又有益生态。",
+      "fullTranslationZh": "一种新颖的园艺设计方法正在全球越来越受欢迎。这种方法被称为矩阵种植，目标是让大自然在花园里承担更多重活，甚至承担一部分设计工作。它不用化肥和电动工具，所依据的原则简洁而巧妙：像大自然那样打理花园。\n\n这一理念诞生于二战后，当时德国城市规划者想用一种可复制、只需极少维护的方式种植大片公园绿地。规划者设计出了可以模块化使用的植物组合。在矩阵花园里，生长需求相近的植物被种在一起，使它们在地上地下共同生长，形成一个节约用水、抑制杂草的互助生态系统。\n\n荷兰园艺家兼设计师皮特·奥多夫的花园让这种风格流行起来。他在植物组合中加入艺术韵味，玩转色彩与形态，兼顾四季景致，并满足野生动物的需要。这些花园一年四季都很美，邀你欣赏最细微之处，从微风中草叶的沙沙声，到造型奇特的种穗那雕塑般的姿态。\n\n要显得这么自然，得花很多心思。矩阵花园看上去野生，其实经过精心规划，首先考虑的是植物的生长需求。在“对的植物种在对的地方”这一理念指导下，它们把喜欢相同土壤、日照和气候条件的植物搭配在一起，并按照它们的生长规律进行布置。\n\n无论对园丁还是对地球，好处都很可观。人为投入大大减少后，花园的生态得以良好发展。建成的矩阵花园不需要我们给大多数花园提供的那种“生命维持”：施肥、分株、定期浇水。与传统花园地块相比，它们能增加碳吸收，减少雨水径流，并显著改善栖息环境、提高生物多样性。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+          "sourceText": "In a matrix garden, plants with similar cultural needs are grouped so that they will grow together above and below ground, forming a cooperative ecosystem that conserves water and discourages weeds.",
+          "displayText": "In a matrix garden, plants with similar cultural needs are grouped so that they will grow together above and below ground, forming a cooperative ecosystem that conserves water and discourages weeds.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:29"
+          ],
+          "translationZh": "在矩阵花园里，生长需求相近的植物被种在一起，使它们在地上地下共同生长，形成一个节约用水、抑制杂草的互助生态系统。",
+          "analysisZh": "主干是被动句 plants … are grouped（植物被组合在一起），with similar cultural needs 修饰 plants，这里的 cultural needs 指栽培上的需求（土壤、光照等），不是「文化需求」。so that 引导目的状语从句：这样分组是为了让它们 grow together above and below ground。现在分词短语 forming a cooperative ecosystem 说明这样生长带来的结果，后面 that 引导的定语从句里 conserves water 和 discourages weeds 并列。节水、抑草是这种种法的效果，不是当初提出这个理念的原因。",
+          "underlineRanges": [
+            {
+              "start": 20,
+              "end": 66,
+              "quote": "plants with similar cultural needs are grouped"
+            },
+            {
+              "start": 67,
+              "end": 74,
+              "quote": "so that"
+            },
+            {
+              "start": 123,
+              "end": 154,
+              "quote": "forming a cooperative ecosystem"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+          "sourceText": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "displayText": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:28"
+          ],
+          "translationZh": "它不用化肥和电动工具，所依据的原则简洁而巧妙：像大自然那样打理花园。",
+          "analysisZh": "主干是 it’s based on an elegantly simple principle（它基于一条简洁巧妙的原则），it 指矩阵种植。句首 Eschewing fertilizers and power tools 是现在分词短语作状语，逻辑主语也是 it。冒号后的不定式 to garden more like nature does 解释这条原则，does 代替 gardens。既然原则是像大自然那样打理，句首它对化肥和电动工具的做法只能是避开不用。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Eschewing fertilizers"
+            },
+            {
+              "start": 42,
+              "end": 85,
+              "quote": "it’s based on an elegantly simple principle"
+            },
+            {
+              "start": 87,
+              "end": 118,
+              "quote": "to garden more like nature does"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-c:1"
+              ],
+              "start": 0,
+              "end": 98,
+              "quote": "一种新颖的园艺设计方法正在全球越来越受欢迎。这种方法被称为矩阵种植，目标是让大自然在花园里承担更多重活，甚至承担一部分设计工作。它不用化肥和电动工具，所依据的原则简洁而巧妙：像大自然那样打理花园。"
+            },
+            {
+              "paragraphId": "zh-reading-c-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-c:2"
+              ],
+              "start": 100,
+              "end": 222,
+              "quote": "这一理念诞生于二战后，当时德国城市规划者想用一种可复制、只需极少维护的方式种植大片公园绿地。规划者设计出了可以模块化使用的植物组合。在矩阵花园里，生长需求相近的植物被种在一起，使它们在地上地下共同生长，形成一个节约用水、抑制杂草的互助生态系统。"
+            },
+            {
+              "paragraphId": "zh-reading-c-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-c:3"
+              ],
+              "start": 224,
+              "end": 341,
+              "quote": "荷兰园艺家兼设计师皮特·奥多夫的花园让这种风格流行起来。他在植物组合中加入艺术韵味，玩转色彩与形态，兼顾四季景致，并满足野生动物的需要。这些花园一年四季都很美，邀你欣赏最细微之处，从微风中草叶的沙沙声，到造型奇特的种穗那雕塑般的姿态。"
+            },
+            {
+              "paragraphId": "zh-reading-c-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-c:4"
+              ],
+              "start": 343,
+              "end": 453,
+              "quote": "要显得这么自然，得花很多心思。矩阵花园看上去野生，其实经过精心规划，首先考虑的是植物的生长需求。在“对的植物种在对的地方”这一理念指导下，它们把喜欢相同土壤、日照和气候条件的植物搭配在一起，并按照它们的生长规律进行布置。"
+            },
+            {
+              "paragraphId": "zh-reading-c-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-c:5"
+              ],
+              "start": 455,
+              "end": 580,
+              "quote": "无论对园丁还是对地球，好处都很可观。人为投入大大减少后，花园的生态得以良好发展。建成的矩阵花园不需要我们给大多数花园提供的那种“生命维持”：施肥、分株、定期浇水。与传统花园地块相比，它们能增加碳吸收，减少雨水径流，并显著改善栖息环境、提高生物多样性。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+                "start": 313,
+                "end": 344,
+                "quote": "to garden more like nature does"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+                "start": 138,
+                "end": 259,
+                "quote": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 87,
+                "end": 97,
+                "quote": "像大自然那样打理花园"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "start": 40,
+                "end": 81,
+                "quote": "建成的矩阵花园不需要我们给大多数花园提供的那种“生命维持”：施肥、分株、定期浇水。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+                "start": 0,
+                "end": 164,
+                "quote": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "start": 0,
+                "end": 46,
+                "quote": "这一理念诞生于二战后，当时德国城市规划者想用一种可复制、只需极少维护的方式种植大片公园绿地。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+                "start": 75,
+                "end": 154,
+                "quote": "adding artistic flavors to the planting mixes while playing with color and form"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+                "start": 222,
+                "end": 288,
+                "quote": "Beautiful year-round, they invite you to enjoy the smallest detail"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-3",
+                "start": 28,
+                "end": 49,
+                "quote": "他在植物组合中加入艺术韵味，玩转色彩与形态"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-3",
+                "start": 68,
+                "end": 89,
+                "quote": "这些花园一年四季都很美，邀你欣赏最细微之处"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+                "start": 0,
+                "end": 78,
+                "quote": "A novel design approach to gardening has been gaining in popularity worldwide."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+                "start": 313,
+                "end": 344,
+                "quote": "to garden more like nature does"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+                "start": 48,
+                "end": 108,
+                "quote": "While matrix gardens appear wild, they are carefully planned"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 0,
+                "end": 22,
+                "quote": "一种新颖的园艺设计方法正在全球越来越受欢迎。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 87,
+                "end": 97,
+                "quote": "像大自然那样打理花园"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-4",
+                "start": 15,
+                "end": 33,
+                "quote": "矩阵花园看上去野生，其实经过精心规划"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-1",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+                "start": 232,
+                "end": 430,
+                "quote": "In a matrix garden, plants with similar cultural needs are grouped so that they will grow together above and below ground, forming a cooperative ecosystem that conserves water and discourages weeds."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "start": 66,
+                "end": 122,
+                "quote": "在矩阵花园里，生长需求相近的植物被种在一起，使它们在地上地下共同生长，形成一个节约用水、抑制杂草的互助生态系统。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-2",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+                "start": 226,
+                "end": 345,
+                "quote": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-c",
+                "paragraphId": "zh-reading-c-1",
+                "start": 64,
+                "end": 98,
+                "quote": "它不用化肥和电动工具，所依据的原则简洁而巧妙：像大自然那样打理花园。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段点出矩阵种植这一新潮流及其核心原则，第二段讲它的起源和种法，第三段讲奥多夫如何让它流行，第四段说明野生外表下的精心规划，末段总结它对园丁和地球的好处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+            "summary": "矩阵种植在全球流行，主张让自然多出力，不用化肥和电动工具，像自然那样打理花园。",
+            "function": "引出话题，点明核心原则。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+            "summary": "理念源于二战后德国规划者想低维护地种大片公园；需求相近的植物合种，形成节水抑草的生态系统。",
+            "function": "交代起源和基本种法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+            "summary": "奥多夫的花园加入艺术元素，四季皆美，让这种风格流行开来。",
+            "function": "介绍代表人物和花园的美感。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+            "summary": "矩阵花园看似野生，其实按“对的植物种在对的地方”精心规划。",
+            "function": "澄清“自然”背后的设计。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+            "summary": "人为投入大减，不需施肥浇水，还能固碳、减径流、增加生物多样性。",
+            "function": "总结好处，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-zhejiang-jan:28": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借冒号后的原则和末段的说法，推出 Eschewing 在这里的意思。",
+      "stemTranslationZh": "第一段中画线词 Eschewing 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看冒号后的原则",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "用完。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Running out of.",
+            "explanation": "「用完」意味着本来一直在用，只是用光了。可冒号后的原则是 to garden more like nature does，让自然多出力，是主动不用这些人工手段，原文没提用光的事。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "避开，不用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "quote": "to garden more like nature does",
+              "anchor": "首段末句冒号后"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "quote": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
+              "anchor": "末段第三句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "忍受。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Putting up with.",
+            "explanation": "「忍受」化肥和电动工具，说明还在用、只是勉强接受。这和 to garden more like nature does 主张少靠人力不相容，原文也没有流露出勉强接受的意思。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "利用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
+            "sourceHighlight": "should not need the life support",
+            "optionText": "Taking advantage of.",
+            "optionHighlight": "Taking advantage of",
+            "explanation": "利用化肥和电动工具正是普通花园的做法。这一句的原则是像自然那样打理，末段又说建成的矩阵花园 should not need the life support we give most gardens，排在第一项的就是 fertilizer，矩阵种植对化肥是不用，不是利用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "quote": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
+              "anchor": "末段第三句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Eschewing",
+          "sourceRole": "stem",
+          "targetText": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "to garden more like nature does",
+          "note": "题干 Eschewing 原词就是首段末句的句首词。"
+        },
+        {
+          "sourceText": "Keeping away from.",
+          "sourceRole": "correctOption",
+          "targetText": "to garden more like nature does",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "同一句冒号后说原则是 to garden more like nature does，大自然本来就不用化肥和电动工具；上一句也说要让 nature 多干 heavy lifting。所以 Eschewing fertilizers and power tools 是「避开化肥和电动工具」，末段说建成的矩阵花园 should not need the life support we give most gardens，头一项就是 fertilizer，也印证了这一点。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出矩阵种植理念诞生时规划者想解决的问题，与它后来带来的效果区分开。",
+      "stemTranslationZh": "为什么会提出矩阵种植这一理念？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 sought 后的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了控制大花园里的杂草。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "discourages weeds",
+            "optionText": "control weeds in large gardens",
+            "matchType": "exact",
+            "relationNote": "weeds 出现在第二段末句，说的是植物合种后形成的生态系统 conserves water and discourages weeds，这是矩阵花园建成后的效果。理念诞生时，规划者想要的是用少维护的方式种大片公园绿地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+              "quote": "In a matrix garden, plants with similar cultural needs are grouped so that they will grow together above and below ground, forming a cooperative ecosystem that conserves water and discourages weeds.",
+              "anchor": "第二段末句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了引进外来植物品种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To bring in foreign species of plants.",
+            "explanation": "German、Dutch 只是交代规划者和设计师的国籍，原文没有说要引进外来植物。第四段反而强调按土壤、日照、气候挑选合适的植物。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了节约土壤和水资源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "conserves water",
+            "optionText": "conserve soil and water resources",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 conserve 来自第二段末句的 conserves water，那是植物合种后的效果：能节约用水。原文没说要保护土壤，而且节水是结果，不是当初提出这个理念的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+              "quote": "In a matrix garden, plants with similar cultural needs are grouped so that they will grow together above and below ground, forming a cooperative ecosystem that conserves water and discourages weeds.",
+              "anchor": "第二段末句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了建设低维护的公园绿地。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+              "quote": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance.",
+              "anchor": "第二段首句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "introduced",
+          "sourceRole": "stem",
+          "targetText": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+          "relationType": "locationCue",
+          "targetCue": "was born",
+          "answerText": "plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance",
+          "note": "题干 introduced 对应第二段首句的 was born，问的就是这个理念为什么诞生。"
+        },
+        {
+          "sourceText": "To develop low-maintenance parkland.",
+          "sourceRole": "correctOption",
+          "targetText": "a reproducible way that would need minimal maintenance",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "规划者 sought to plant large areas of parkland，而且要 in a reproducible way that would need minimal maintenance：想种大片公园绿地，还要只需极少维护。low-maintenance 就是 need minimal maintenance，parkland 是原词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从第三段对奥多夫花园的描写，概括出这些花园给人的整体印象。",
+      "stemTranslationZh": "下列哪一项最能描述皮特·奥多夫的花园？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "传统的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "traditional garden plots",
+            "optionText": "Traditional",
+            "matchType": "exact",
+            "relationNote": "traditional 出现在末段 Compared to traditional garden plots，指被拿来对比的传统花园。矩阵种植在首段被称为 A novel design approach，奥多夫的花园正是让这种新风格流行起来的代表，并不传统。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "quote": "Compared to traditional garden plots, they increase carbon absorption, reduce stormwater runoff and boost habitat and biodiversity significantly.",
+              "anchor": "末段末句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "样子古怪的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "odd-looking seed heads",
+            "optionText": "Odd-looking",
+            "matchType": "exact",
+            "relationNote": "odd-looking 在第三段只修饰 seed heads，说的是造型奇特的种穗像雕塑一样值得细看，是被欣赏的细节之一，不是说整个花园样子古怪。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+              "quote": "from the sound of grasses in the gentle wind to the sculpture of odd-looking seed heads",
+              "anchor": "第三段末句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有品位的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+              "quote": "adding artistic flavors to the planting mixes while playing with color and form",
+              "anchor": "第三段首句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+              "quote": "Beautiful year-round, they invite you to enjoy the smallest detail",
+              "anchor": "第三段末句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "受到妥善保护的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Well-protected.",
+            "explanation": "第三段说这些花园 serving the needs of wildlife，是花园为野生动物提供所需，原文没有说花园本身受到保护。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Piet Oudolf’s gardens",
+          "sourceRole": "stem",
+          "targetText": "Dutch plantsman and designer Piet Oudolf’s gardens popularized this style, adding artistic flavors to the planting mixes while playing with color and form, including four-season interest and serving the needs of wildlife.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "adding artistic flavors to the planting mixes",
+          "note": "题干 Piet Oudolf’s gardens 原词出现在第三段首句。"
+        },
+        {
+          "sourceText": "Tasteful.",
+          "sourceRole": "correctOption",
+          "targetText": "adding artistic flavors to the planting mixes while playing with color and form",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "原文没直接用 tasteful，要把描写合起来概括：加入 artistic flavors、讲究 color and form、Beautiful year-round、连草声和种穗都值得细品，这样的花园有美感、有格调，即 Tasteful（有品位的）。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "理清全文从新潮流到起源、推广、设计再到好处的脉络，选出能概括全文的标题。",
+      "stemTranslationZh": "下列哪一项适合作本文标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2025-zhejiang-jan:reading-c:1]]说 novel approach 正流行，[[block:paper-gaokao-2025-zhejiang-jan:reading-c:4]]说 appear wild 实为规划，[[block:paper-gaokao-2025-zhejiang-jan:reading-c:5]]列好处；标题要盖住这股像自然的新潮流",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "园艺的未来是“野生”的",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "quote": "A novel design approach to gardening has been gaining in popularity worldwide.",
+              "anchor": "首段首句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "quote": "to garden more like nature does",
+              "anchor": "首段末句冒号后"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+              "quote": "While matrix gardens appear wild, they are carefully planned",
+              "anchor": "第四段第二句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "大自然平等对待一切生命",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Nature treats all lives as EQUALS",
+            "explanation": "全文讲的是一种像自然那样、少人为干预的园艺方法，虽然提到 serving the needs of wildlife 和 biodiversity，但没有讨论大自然是否平等对待所有生命。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "矩阵花园需要更多照料",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "With human inputs dramatically reduced, the garden’s ecology can develop well.",
+            "sourceHighlight": "human inputs dramatically reduced",
+            "optionText": "Matrix gardens need more CARE",
+            "optionHighlight": "need more CARE",
+            "explanation": "第四段的 It takes a lot of thought 说的是前期规划要费心思；建成以后，末段说 human inputs dramatically reduced，也不需要施肥、分株、定期浇水，日常照料反而少了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "quote": "With human inputs dramatically reduced, the garden’s ecology can develop well.",
+              "anchor": "末段第二句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "老式花园地块创造奇迹",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Compared to traditional garden plots, they increase carbon absorption, reduce stormwater runoff and boost habitat and biodiversity significantly.",
+            "sourceEntity": "they",
+            "optionText": "Old garden plots work WONDERS",
+            "optionEntity": "Old garden plots",
+            "explanation": "末段拿矩阵花园和 traditional garden plots 作比较，增加碳吸收、减少雨水径流、提高生物多样性这些好处的主语 they 是矩阵花园；传统老式花园是被比下去的一方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "quote": "Compared to traditional garden plots, they increase carbon absorption, reduce stormwater runoff and boost habitat and biodiversity significantly.",
+              "anchor": "末段末句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The future of gardening",
+          "sourceRole": "correctOption",
+          "targetText": "A novel design approach to gardening has been gaining in popularity worldwide.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "首段说这种 novel design approach 正在全球 gaining in popularity，一种越来越流行的新做法，代表了园艺的发展方向，对应 The future of gardening。"
+        },
+        {
+          "sourceText": "WILD",
+          "sourceRole": "correctOption",
+          "targetText": "While matrix gardens appear wild, they are carefully planned",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "WILD 对应全文反复强调的特点：to garden more like nature does，花园 appear wild，看上去像野生的。标题用大写的 WILD 点出这一点，同时盖住了起源、设计和好处各段。"
+        }
+      ]
+    }
+  }
+}

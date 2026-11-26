@@ -1,0 +1,1846 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-zhejiang-jan:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-zhejiang-jan:cloze": {
+      "overview": "布鲁塞尔教师 Ribeiro 爱做饭，通过 Bookalokal 网站每周两次在家为付费的陌生客人办晚宴。她借此尝试新菜、结识新人，享受餐馆没有的自由与惊喜，也坦言筹备辛苦，并说平台向所有爱尝鲜的人开放。",
+      "fullTranslationZh": "Manuela Ribeiro 有一种健康的瘾，那就是烹饪。几个月前，这位30岁的教师决定，是时候好好利用自己的这项爱好了。她在 Bookalokal 网站上注册，如今每周两次把陌生人请进她在布鲁塞尔的公寓，举办晚餐聚会。\n\nRibeiro 每人收费35欧元，通常是一顿可持续三小时之久的三道菜晚餐。对 Ribeiro 来说，这已成为一个绝佳的平台，让她得以追求自己的爱好：采购食材、尝试新菜谱、举办晚餐聚会。\n\n“这是分享我对美食的热爱、结识新朋友的好机会。”Ribeiro 说。有时她会做传统的巴西菜，向故乡致敬；有时她则把晚餐的各道菜与自己最爱的啤酒搭配。\n\n这个平台让 Ribeiro 能够非常自由地实现梦想；与之相对的是餐馆：那里的服务缺少人情味，菜单事先就知道，人们也预料这顿饭不会有什么惊喜。\n\n“但这也是很大的挑战，因为有时筹办一场活动就要花上好几天。”Ribeiro 说，“这个平台不只是留给专业厨师的，也属于那些愿意发现新体验的人。”",
+      "mainLine": {
+        "theme": {
+          "text": "家宴平台不只属于专业厨师，爱下厨、愿意 discover new experiences 的普通人也能借它分享热爱。",
+          "quote": "discover new experiences"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+            "text": "教师 Ribeiro 爱做饭，在网站注册后每周两次请陌生人来家里吃饭。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+            "text": "她按人收费，平台成了她买食材、试新菜、办晚宴的舞台。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+            "text": "她借家宴分享对美食的热爱、结识新人，菜式也常换花样。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+            "text": "与餐馆相比，家宴更自由、更有人情味，也更有惊喜。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+            "text": "她坦言筹备很辛苦，并说平台向所有愿意尝鲜的人开放。"
+          }
+        ],
+        "emotion": "",
+        "thread": {
+          "text": "她把 cooking（做饭）这份 hobby（爱好）搬进家里，请 strangers（陌生人）上门，好 meet（结识）新人；as opposed to 餐馆，家宴自由，虽是 challenge（挑战），平台也不只 reserved（留给）专业厨师。",
+          "blankNos": [
+            41,
+            42,
+            43,
+            47,
+            50,
+            53,
+            55
+          ]
+        }
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+          "sourceText": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as __50__ to a restaurant where the service is __51__, the menu is known in advance, and the meal is expected to be no __52__.",
+          "displayText": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as opposed to a restaurant where the service is impersonal, the menu is known in advance, and the meal is expected to be no surprise.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:50",
+            "question:paper-gaokao-2025-zhejiang-jan:51",
+            "question:paper-gaokao-2025-zhejiang-jan:52"
+          ],
+          "translationZh": "这个平台让 Ribeiro 能够非常自由地实现梦想；与之相对的是餐馆：那里的服务缺少人情味，菜单事先就知道，人们也预料这顿饭不会有什么惊喜。",
+          "analysisZh": "主干是 The platform has enabled Ribeiro to realise her dream，平台让她能实现梦想；with a great deal of freedom 说实现的方式很自由。as opposed to a restaurant 引出拿来对照的餐馆，where 后面三个并列小句分别说餐馆的服务、菜单和人们的预期。合起来是：家宴自由，餐馆处处是定好的。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 53,
+              "quote": "has enabled Ribeiro to realise her dream"
+            },
+            {
+              "start": 84,
+              "end": 110,
+              "quote": "as opposed to a restaurant"
+            },
+            {
+              "start": 111,
+              "end": 142,
+              "quote": "where the service is impersonal"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+          "sourceText": "For Ribeiro, it has become a perfect platform for __45__ her hobby of buying food, __46__ new recipes and holding dinner parties.",
+          "displayText": "For Ribeiro, it has become a perfect platform for pursuing her hobby of buying food, trying out new recipes and holding dinner parties.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:45",
+            "question:paper-gaokao-2025-zhejiang-jan:46"
+          ],
+          "translationZh": "对 Ribeiro 来说，这已成为一个绝佳的平台，让她得以追求自己的爱好：采购食材、尝试新菜谱、举办晚餐聚会。",
+          "analysisZh": "主干是 it has become a perfect platform，it 指她在网站上办收费家宴这件事。for pursuing her hobby 说明平台的用处；of 后面三个并列的 -ing 短语 buying food、trying out new recipes、holding dinner parties，具体说出这份爱好包括哪几件事。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 45,
+              "quote": "it has become a perfect platform"
+            },
+            {
+              "start": 46,
+              "end": 68,
+              "quote": "for pursuing her hobby"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:cloze:1"
+              ],
+              "start": 0,
+              "end": 111,
+              "quote": "Manuela Ribeiro 有一种健康的瘾，那就是烹饪。几个月前，这位30岁的教师决定，是时候好好利用自己的这项爱好了。她在 Bookalokal 网站上注册，如今每周两次把陌生人请进她在布鲁塞尔的公寓，举办晚餐聚会。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:cloze:2"
+              ],
+              "start": 113,
+              "end": 205,
+              "quote": "Ribeiro 每人收费35欧元，通常是一顿可持续三小时之久的三道菜晚餐。对 Ribeiro 来说，这已成为一个绝佳的平台，让她得以追求自己的爱好：采购食材、尝试新菜谱、举办晚餐聚会。"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:cloze:3"
+              ],
+              "start": 207,
+              "end": 281,
+              "quote": "“这是分享我对美食的热爱、结识新朋友的好机会。”Ribeiro 说。有时她会做传统的巴西菜，向故乡致敬；有时她则把晚餐的各道菜与自己最爱的啤酒搭配。"
+            },
+            {
+              "paragraphId": "zh-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:cloze:4"
+              ],
+              "start": 283,
+              "end": 353,
+              "quote": "这个平台让 Ribeiro 能够非常自由地实现梦想；与之相对的是餐馆：那里的服务缺少人情味，菜单事先就知道，人们也预料这顿饭不会有什么惊喜。"
+            },
+            {
+              "paragraphId": "zh-cloze-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:cloze:5"
+              ],
+              "start": 355,
+              "end": 427,
+              "quote": "“但这也是很大的挑战，因为有时筹办一场活动就要花上好几天。”Ribeiro 说，“这个平台不只是留给专业厨师的，也属于那些愿意发现新体验的人。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+            "text": "Manuela Ribeiro has a healthy addiction. It’s cooking. A few months ago, the 30-year-old teacher decided it was time to put her hobby to good use. She signed up on the website Bookalokal, and now welcomes strangers into her Brussels flat twice a week for dinner parties."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+            "text": "Ribeiro charges €35 per person for what is usually a three-course meal that can last up to three hours. For Ribeiro, it has become a perfect platform for pursuing her hobby of buying food, trying out new recipes and holding dinner parties."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+            "text": "“It’s a great opportunity to share my passion for food and to meet new people,” said Ribeiro. Sometimes she prepares traditional Brazilian dishes in honor of her native home; other times she pairs dinner courses with her favorite beers."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+            "text": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as opposed to a restaurant where the service is impersonal, the menu is known in advance, and the meal is expected to be no surprise."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+            "text": "“But it’s also a great challenge, for it can sometimes take days to organise a single event,” Ribeiro said. “This platform is not only reserved for professional cooks, but also for those willing to discover new experiences.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "start": 20,
+                "end": 39,
+                "quote": "a healthy addiction"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 160,
+                "end": 184,
+                "quote": "her hobby of buying food"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 19,
+                "end": 23,
+                "quote": "健康的瘾"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 74,
+                "end": 78,
+                "quote": "采购食材"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:41"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "start": 46,
+                "end": 53,
+                "quote": "cooking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 27,
+                "end": 29,
+                "quote": "烹饪"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 160,
+                "end": 184,
+                "quote": "her hobby of buying food"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 68,
+                "end": 73,
+                "quote": "自己的爱好"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:42"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "start": 128,
+                "end": 133,
+                "quote": "hobby"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 58,
+                "end": 60,
+                "quote": "爱好"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 69,
+                "end": 79,
+                "quote": "new people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 15,
+                "end": 18,
+                "quote": "新朋友"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:43"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+                "start": 205,
+                "end": 214,
+                "quote": "strangers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 89,
+                "end": 92,
+                "quote": "陌生人"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 15,
+                "end": 29,
+                "quote": "€35 per person"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 12,
+                "end": 16,
+                "quote": "35欧元"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:44"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 8,
+                "end": 15,
+                "quote": "charges"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 10,
+                "end": 12,
+                "quote": "收费"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 160,
+                "end": 184,
+                "quote": "her hobby of buying food"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 68,
+                "end": 73,
+                "quote": "自己的爱好"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:45"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 154,
+                "end": 162,
+                "quote": "pursuing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 66,
+                "end": 68,
+                "quote": "追求"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 193,
+                "end": 204,
+                "quote": "new recipes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 81,
+                "end": 84,
+                "quote": "新菜谱"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:46"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 189,
+                "end": 199,
+                "quote": "trying out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 79,
+                "end": 81,
+                "quote": "尝试"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 69,
+                "end": 79,
+                "quote": "new people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 15,
+                "end": 18,
+                "quote": "新朋友"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:47"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 62,
+                "end": 66,
+                "quote": "meet"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 13,
+                "end": 15,
+                "quote": "结识"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 119,
+                "end": 147,
+                "quote": "traditional Brazilian dishes"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 155,
+                "end": 170,
+                "quote": "her native home"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 39,
+                "end": 45,
+                "quote": "传统的巴西菜"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 47,
+                "end": 49,
+                "quote": "故乡"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:48"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 146,
+                "end": 157,
+                "quote": "in honor of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 49,
+                "end": 51,
+                "quote": "致敬"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 210,
+                "end": 233,
+                "quote": "with her favorite beers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 66,
+                "end": 71,
+                "quote": "最爱的啤酒"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:49"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+                "start": 191,
+                "end": 196,
+                "quote": "pairs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 71,
+                "end": 73,
+                "quote": "搭配"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 59,
+                "end": 82,
+                "quote": "a great deal of freedom"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 139,
+                "end": 167,
+                "quote": "the menu is known in advance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 16,
+                "end": 20,
+                "quote": "非常自由"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 46,
+                "end": 53,
+                "quote": "菜单事先就知道"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:50"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 87,
+                "end": 94,
+                "quote": "opposed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 26,
+                "end": 30,
+                "quote": "与之相对"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 139,
+                "end": 167,
+                "quote": "the menu is known in advance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 46,
+                "end": 53,
+                "quote": "菜单事先就知道"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:51"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 132,
+                "end": 142,
+                "quote": "impersonal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 40,
+                "end": 45,
+                "quote": "缺少人情味"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 139,
+                "end": 167,
+                "quote": "the menu is known in advance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 46,
+                "end": 53,
+                "quote": "菜单事先就知道"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:52"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 208,
+                "end": 216,
+                "quote": "surprise"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 67,
+                "end": 69,
+                "quote": "惊喜"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "start": 52,
+                "end": 61,
+                "quote": "take days"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 25,
+                "end": 28,
+                "quote": "好几天"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:53"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "start": 23,
+                "end": 32,
+                "quote": "challenge"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 8,
+                "end": 10,
+                "quote": "挑战"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "start": 72,
+                "end": 86,
+                "quote": "a single event"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 17,
+                "end": 21,
+                "quote": "一场活动"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:54"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "start": 68,
+                "end": 76,
+                "quote": "organise"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 15,
+                "end": 17,
+                "quote": "筹办"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "start": 137,
+                "end": 159,
+                "quote": "for professional cooks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 50,
+                "end": 54,
+                "quote": "专业厨师"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:55"
+            ],
+            "blankId": "blank:paper-gaokao-2025-zhejiang-jan:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+                "start": 135,
+                "end": 143,
+                "quote": "reserved"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 48,
+                "end": 50,
+                "quote": "留给"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:50",
+              "question:paper-gaokao-2025-zhejiang-jan:51",
+              "question:paper-gaokao-2025-zhejiang-jan:52"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+                "start": 0,
+                "end": 217,
+                "quote": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as opposed to a restaurant where the service is impersonal, the menu is known in advance, and the meal is expected to be no surprise."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 0,
+                "end": 70,
+                "quote": "这个平台让 Ribeiro 能够非常自由地实现梦想；与之相对的是餐馆：那里的服务缺少人情味，菜单事先就知道，人们也预料这顿饭不会有什么惊喜。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:45",
+              "question:paper-gaokao-2025-zhejiang-jan:46"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+                "start": 104,
+                "end": 239,
+                "quote": "For Ribeiro, it has become a perfect platform for pursuing her hobby of buying food, trying out new recipes and holding dinner parties."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 37,
+                "end": 92,
+                "quote": "对 Ribeiro 来说，这已成为一个绝佳的平台，让她得以追求自己的爱好：采购食材、尝试新菜谱、举办晚餐聚会。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-zhejiang-jan:41": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "前句说她有一种健康的瘾，这里点明这瘾究竟是哪一件事，全文都围绕它展开。",
+      "find": {
+        "check": "topic",
+        "text": "后文她买 food、试 new recipes、办 dinner parties，全是厨房里的事，四个里只有 cooking 属于这个话题。",
+        "quotes": [
+          "new recipes",
+          "dinner parties"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "前句说她有一种健康的瘾，这里点明这瘾究竟是哪一件事，全文都围绕它展开。名词看话题：后文她买 food、试 new recipes、办 dinner parties，全是厨房里的事，四个里只有 cooking 属于这个话题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reading",
+          "meaning": "阅读；后文她忙的是 buying food 和试新菜谱，都是做饭的事，不是读书。",
+          "quote": "buying food"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "traveling",
+          "meaning": "旅行；她是把客人请 into her Brussels flat，在自己家里待客，不是外出旅行。",
+          "quote": "into her Brussels flat"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teaching",
+          "meaning": "教书；teacher 是她的本职，这份瘾要靠办 dinner parties 来满足，指的不是教书。",
+          "quote": "dinner parties"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a healthy addiction",
+          "signalSide": "context-before",
+          "relation": "中文：It 指前句的 addiction，空里要说出这份瘾是什么。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "new recipes",
+          "signalSide": "context-after",
+          "relation": "中文：新菜谱属于做饭这个话题。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:42": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "她决定把某样东西派上用场，这东西就是前面说的那份做饭的瘾，要一个指爱好的词。",
+      "find": {
+        "check": "echo",
+        "text": "第二段 her hobby of buying food 原词复现，说明她拿去好好利用的正是这份爱好。",
+        "quotes": [
+          "her hobby of buying food"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她决定把某样东西派上用场，这东西就是前面说的那份做饭的瘾，要一个指爱好的词。名词看复现：第二段 her hobby of buying food 原词复现，说明她拿去好好利用的正是这份爱好。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "energy",
+          "meaning": "精力；第二段说平台成全的是 her hobby of buying food，派上用场的是爱好，不是精力。",
+          "quote": "her hobby of buying food"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "education",
+          "meaning": "所受教育；她虽是教师，后文用平台做的是 holding dinner parties，和学历无关。",
+          "quote": "holding dinner parties"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "money",
+          "meaning": "钱；她不是拿钱去投资，反倒是向客人收 €35 per person。",
+          "quote": "€35 per person"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "her hobby of buying food",
+          "signalSide": "context-after",
+          "relation": "中文：后文原词 hobby 复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to good use",
+          "signalSide": "context-after",
+          "targetText": "put her hobby to good use",
+          "relation": "中文：put sth to good use 是把某物好好利用起来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:43": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "她通过网站把人请到家里吃饭，要说明来的是什么人：素不相识的客人。",
+      "find": {
+        "check": "echo",
+        "text": "第三段她说办家宴是为了认识 new people，来的人原本不认识，new people 正是对答案的复现。",
+        "quotes": [
+          "new people"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "她通过网站把人请到家里吃饭，要说明来的是什么人：素不相识的客人。名词看复现：第三段她说办家宴是为了认识 new people，来的人原本不认识，new people 正是对答案的复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "coworkers",
+          "meaning": "同事；她是在 the website Bookalokal 上招客，来的是网上报名的人，不是同事。",
+          "quote": "the website Bookalokal"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "students",
+          "meaning": "学生；她虽是教师，客人是为 dinner parties 付钱来吃饭的，不是来上课的。",
+          "quote": "dinner parties"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "relatives",
+          "meaning": "亲戚；向亲戚每人收钱说不通，她自己也说是为了认识 new people。",
+          "quote": "new people"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into her Brussels flat",
+          "signalSide": "context-after",
+          "targetText": "welcomes strangers into her Brussels flat",
+          "relation": "中文：welcome sb into her flat，把人请进家门。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "new people",
+          "signalSide": "context-after",
+          "relation": "中文：new people 与 strangers 同义复现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:44": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她和每位客人之间的钱怎么算，这里要「向人收费」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是下厨的 Ribeiro，宾语是 €35 per person，for 引出所付的那顿饭，charge 正是向每人收这笔钱。",
+        "quotes": [
+          "€35 per person"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "她和每位客人之间的钱怎么算，这里要「向人收费」的意思。动词看搭配：主语是下厨的 Ribeiro，宾语是 €35 per person，for 引出所付的那顿饭，charge 正是向每人收这笔钱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "pays",
+          "meaning": "付钱；她是端出 three-course meal 的主人，这笔饭钱该由客人付给她。",
+          "quote": "three-course meal"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "owes",
+          "meaning": "欠钱；她是提供 three-course meal 的一方，谈不上欠客人钱。",
+          "quote": "three-course meal"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "raises",
+          "meaning": "提高；句中 usually 说的是平常一顿饭的情况，€35 是她的常规价，不是涨价。",
+          "quote": "usually"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "€35 per person",
+          "signalSide": "context-after",
+          "targetText": "charges €35 per person",
+          "relation": "中文：charge + 金额 + per person，按人收费。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:45": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "平台对她的爱好起什么作用，要「投入去做、追求」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 her hobby，平台让她能一直去做喜欢的事，pursue her hobby 是常见搭配。",
+        "quotes": [
+          "her hobby"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "平台对她的爱好起什么作用，要「投入去做、追求」的意思。动词看搭配：宾语是 her hobby，平台让她能一直去做喜欢的事，pursue her hobby 是常见搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "choosing",
+          "meaning": "挑选；爱好早已定下就是做饭，a perfect platform 是让她去做，不是去挑。",
+          "quote": "a perfect platform"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "discussing",
+          "meaning": "讨论；后面列的 holding dinner parties 等都是动手做的事，不是谈论爱好。",
+          "quote": "holding dinner parties"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "changing",
+          "meaning": "改变；平台成全的是她原有的 hobby of buying food，不是让她换爱好。",
+          "quote": "hobby of buying food"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her hobby",
+          "signalSide": "context-after",
+          "targetText": "pursuing her hobby",
+          "relation": "中文：pursue a hobby，投入做自己喜欢的事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:46": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:46",
+      "blankNo": 46,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "和买食材、办晚宴并列，是她对新菜谱做的事，要「试着做做看」。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "宾语是 new recipes，new 说明是没做过的菜谱，对新菜谱自然是先试着做，try out 即试用、试做。",
+        "quotes": [
+          "new recipes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "和买食材、办晚宴并列，是她对新菜谱做的事，要「试着做做看」。词组看语境义：宾语是 new recipes，new 说明是没做过的菜谱，对新菜谱自然是先试着做，try out 即试用、试做。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "passing on",
+          "meaning": "传给别人；这里列的是她自己 buying food、办晚宴的爱好，不是把菜谱转给别人。",
+          "quote": "buying food"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "going over",
+          "meaning": "复习、仔细查看；new recipes 是她没做过的，谈不上温习，爱好也要动手做。",
+          "quote": "new recipes"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "taking down",
+          "meaning": "记下；与 holding dinner parties 并列的应是下厨的动作，不是抄写菜谱。",
+          "quote": "holding dinner parties"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "new recipes",
+          "signalSide": "context-after",
+          "targetText": "trying out new recipes",
+          "relation": "中文：try out new recipes，试做新菜谱。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "trying out",
+          "relation": "中文：out 表示做出来看效果，try out 是试一试。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:47": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "main",
+      "context": "与分享热爱并列，是家宴给她的第二个好处，要「结识」新人。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 new people，又呼应第一段把客人请 into her Brussels flat，meet new people 就是结识新朋友。",
+        "quotes": [
+          "new people",
+          "into her Brussels flat"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "与分享热爱并列，是家宴给她的第二个好处，要「结识」新人。动词看搭配：宾语是 new people，又呼应第一段把客人请 into her Brussels flat，meet new people 就是结识新朋友。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hire",
+          "meaning": "雇用；来的是付 €35 per person 吃饭的客人，不是她雇来干活的人。",
+          "quote": "€35 per person"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "help",
+          "meaning": "帮助；她说的好处是 share my passion for food，客人是来吃饭的，不是来受她帮助。",
+          "quote": "share my passion for food"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "train",
+          "meaning": "培训；她在家办的是 dinner parties，不是教人做菜的培训班。",
+          "quote": "dinner parties"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "new people",
+          "signalSide": "context-after",
+          "targetText": "meet new people",
+          "relation": "中文：meet new people，结识新朋友。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:48": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:48",
+      "blankNo": 48,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "她做家乡菜和故乡是什么关系，要「为了纪念、向……致敬」的意思。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "做的是 traditional Brazilian dishes，后面接 her native home，做家乡菜是向故乡致意，in honor of 正合。",
+        "quotes": [
+          "traditional Brazilian dishes",
+          "her native home"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "她做家乡菜和故乡是什么关系，要「为了纪念、向……致敬」的意思。词组看语境义：做的是 traditional Brazilian dishes，后面接 her native home，做家乡菜是向故乡致意，in honor of 正合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "in addition to",
+          "meaning": "除……之外；菜之外再加一个故乡说不通，her native home 不是一道菜。",
+          "quote": "her native home"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "in return for",
+          "meaning": "作为……的回报；做 traditional Brazilian dishes 是带着家乡味待客，不是在报答故乡。",
+          "quote": "traditional Brazilian dishes"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in line with",
+          "meaning": "与……一致；说菜与故乡一致不通，her native home 是她怀念的地方，不是要遵守的标准。",
+          "quote": "her native home"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her native home",
+          "signalSide": "context-after",
+          "targetText": "in honor of her native home",
+          "relation": "中文：in honor of her native home，向故乡致敬。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "honor",
+          "signalSide": "option",
+          "targetText": "in honor of",
+          "relation": "中文：honor 意为敬意。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:49": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "detail",
+      "context": "把晚餐各道菜和她爱喝的啤酒放在一起上，要「搭配」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后面是 dinner courses with her favorite beers，A with B 的结构锁定 pair A with B，即菜配酒。",
+        "quotes": [
+          "dinner courses with her favorite beers"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "把晚餐各道菜和她爱喝的啤酒放在一起上，要「搭配」的意思。动词看搭配：后面是 dinner courses with her favorite beers，A with B 的结构锁定 pair A with B，即菜配酒。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "replaces",
+          "meaning": "用……代替；那就是拿 her favorite beers 顶替正餐，晚宴不会只喝酒不上菜。",
+          "quote": "her favorite beers"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tastes",
+          "meaning": "品尝；她是做菜的主人，品尝 dinner courses 接不上后面带出啤酒的 with。",
+          "quote": "dinner courses"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "orders",
+          "meaning": "点菜；她是自己下厨的主人，dinner courses 由她来做，用不着点。",
+          "quote": "dinner courses"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with her favorite beers",
+          "signalSide": "context-after",
+          "targetText": "pairs dinner courses with her favorite beers",
+          "relation": "中文：pair A with B，把 A 和 B 搭配起来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:50": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:50",
+      "blankNo": 50,
+      "pos": "phrase",
+      "role": "main",
+      "context": "前面夸家宴自由，后面列餐馆的种种固定，要一个引出对照的说法。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前面 a great deal of freedom，后面餐馆 the menu is known in advance，一松一紧，as opposed to 表示与之相对。",
+        "quotes": [
+          "a great deal of freedom",
+          "the menu is known in advance"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "前面夸家宴自由，后面列餐馆的种种固定，要一个引出对照的说法。词组看语境义：前面 a great deal of freedom，后面餐馆 the menu is known in advance，一松一紧，as opposed to 表示与之相对。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "related",
+          "meaning": "与……相关；餐馆 the menu is known in advance，与家宴的自由是对立的，不止相关。",
+          "quote": "the menu is known in advance"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "subject",
+          "meaning": "受……支配；说她的自由受制于 a restaurant 不通，家宴和餐馆是两回事。",
+          "quote": "a restaurant"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "vital",
+          "meaning": "对……至关重要；说自由对餐馆至关重要，与后面餐馆 the menu is known in advance 相反。",
+          "quote": "the menu is known in advance"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to a restaurant",
+          "signalSide": "context-after",
+          "targetText": "as opposed to a restaurant",
+          "relation": "中文：as opposed to a restaurant，与餐馆相对。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "opposed",
+          "signalSide": "option",
+          "targetText": "as opposed to",
+          "relation": "中文：opposed 意为相对立的，与 as、to 连成 as opposed to。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:51": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:51",
+      "blankNo": 51,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "餐馆服务是拿来反衬家宴的缺点，要说它少了家宴里人与人的亲近。",
+      "find": {
+        "check": "affect",
+        "text": "它与 the menu is known in advance 并列，都在反衬 a great deal of freedom，要贬义词；家宴讲认识 new people，餐馆缺的是人情味。",
+        "quotes": [
+          "the menu is known in advance",
+          "a great deal of freedom",
+          "new people"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "餐馆服务是拿来反衬家宴的缺点，要说它少了家宴里人与人的亲近。形容词看情感：它与 the menu is known in advance 并列，都在反衬 a great deal of freedom，要贬义词；家宴讲认识 new people，餐馆缺的是人情味。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "invaluable",
+          "meaning": "极其宝贵；餐馆是拿来反衬 a great deal of freedom 的，夸它服务好就对照不起来。",
+          "quote": "a great deal of freedom"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unsuitable",
+          "meaning": "不合适；作者没说餐馆服务不妥，比的是家宴里结识 new people 的人情味。",
+          "quote": "new people"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unprofessional",
+          "meaning": "不专业；并列的 the menu is known in advance 批评的是刻板，不是服务水平差。",
+          "quote": "the menu is known in advance"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the service is",
+          "signalSide": "context-before",
+          "targetText": "the service is impersonal",
+          "relation": "中文：形容词作表语，说明 the service 是什么样。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the menu is known in advance",
+          "signalSide": "context-after",
+          "relation": "中文：并列的这句在说餐馆刻板，空里也是缺点。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:52": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "detail",
+      "context": "人们对餐馆这顿饭的预期，要说它全在意料之中、没有新鲜感。",
+      "find": {
+        "check": "echo",
+        "text": "并列的 the menu is known in advance 说菜单早就知道，这顿饭自然谈不上意外，两处说的是一回事。",
+        "quotes": [
+          "the menu is known in advance"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "人们对餐馆这顿饭的预期，要说它全在意料之中、没有新鲜感。名词看复现：并列的 the menu is known in advance 说菜单早就知道，这顿饭自然谈不上意外，两处说的是一回事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "end",
+          "meaning": "尽头；说饭没完没了，接不上并列的 known in advance 讲的“事先可知”。",
+          "quote": "known in advance"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "need",
+          "meaning": "需要；说这顿饭没有必要，与并列的 known in advance 讲的“全在预料中”不搭。",
+          "quote": "known in advance"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "problem",
+          "meaning": "问题；no problem 是夸餐馆靠谱，而这三项是反衬 a great deal of freedom 的缺点。",
+          "quote": "a great deal of freedom"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is expected to be no",
+          "signalSide": "context-before",
+          "targetText": "is expected to be no surprise",
+          "relation": "中文：be expected to be no surprise，在意料之中。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "known in advance",
+          "signalSide": "context-before",
+          "relation": "中文：事先知道与毫无意外意思相同。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:53": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "But 一转，从家宴的好处转到难处，要一个负面的词概括筹备的辛苦。",
+      "find": {
+        "check": "affect",
+        "text": "But 把前文的自由和乐趣翻过来，for 后面的 take days to 给出原因：几天才办成一场，是件难事。",
+        "quotes": [
+          "But",
+          "take days to"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "But 一转，从家宴的好处转到难处，要一个负面的词概括筹备的辛苦。名词看情感：But 把前文的自由和乐趣翻过来，for 后面的 take days to 给出原因：几天才办成一场，是件难事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lesson",
+          "meaning": "教训；for 后面讲的是 take days 筹备的辛苦，不是她从错误里学到什么。",
+          "quote": "take days"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "pleasure",
+          "meaning": "乐趣；But 表转折，前文都在讲乐趣，后面接 take days 的辛苦，不能再说乐趣。",
+          "quote": "take days"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "success",
+          "meaning": "成功；几天才弄好 a single event 讲的是费劲，不是成果。",
+          "quote": "a single event"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "also a great",
+          "signalSide": "context-before",
+          "targetText": "a great challenge",
+          "relation": "中文：a great challenge，很大的挑战。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "But",
+          "signalSide": "context-before",
+          "relation": "中文：But 转向难处。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "take days",
+          "signalSide": "context-after",
+          "relation": "中文：要花好几天，说明很费劲。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:54": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "detail",
+      "context": "主人要花好几天才能对一场活动做完的事，要「筹备、组织」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 a single event，做这件事的是办家宴的主人，又要 take days，organise an event 即筹办活动。",
+        "quotes": [
+          "a single event",
+          "take days"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "主人要花好几天才能对一场活动做完的事，要「筹备、组织」的意思。动词看搭配：宾语是 a single event，做这件事的是办家宴的主人，又要 take days，organise an event 即筹办活动。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "celebrate",
+          "meaning": "庆祝；花好几天庆祝不算难处，接不上 But 转出的辛苦。",
+          "quote": "But"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "record",
+          "meaning": "记录；她的活是端出 three-course meal，费几天的不会是给活动做记录。",
+          "quote": "three-course meal"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "attend",
+          "meaning": "参加；她是 welcomes 客人进门的主人，不是去参加活动的客人。",
+          "quote": "welcomes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a single event",
+          "signalSide": "context-after",
+          "targetText": "organise a single event",
+          "relation": "中文：organise an event，筹办活动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:55": {
+      "blankId": "blank:paper-gaokao-2025-zhejiang-jan:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "全文收尾，说平台给谁用：不只给专业厨师，要「专门留给」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后面 for professional cooks 与 but also for those 对举，be reserved for 即专属于，not only 说平台不只属于专业厨师。",
+        "quotes": [
+          "for professional cooks",
+          "but also for those"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "全文收尾，说平台给谁用：不只给专业厨师，要「专门留给」的意思。动词看搭配：后面 for professional cooks 与 but also for those 对举，be reserved for 即专属于，not only 说平台不只属于专业厨师。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "selected",
+          "meaning": "被挑选的；说平台被选给专业厨师不通，后半句讲的是平台也向 those willing to discover new experiences 开放。",
+          "quote": "those willing to discover new experiences"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "evaluated",
+          "meaning": "被评价；平台不是由 professional cooks 来打分，这句讲的是平台向谁开放。",
+          "quote": "professional cooks"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "requested",
+          "meaning": "被要求的；说平台是专业厨师要来的，接不上 willing to discover new experiences 的人也能用。",
+          "quote": "willing to discover new experiences"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for professional cooks",
+          "signalSide": "context-after",
+          "targetText": "reserved for professional cooks",
+          "relation": "中文：be reserved for sb，专门留给某人。"
+        }
+      ]
+    }
+  }
+}

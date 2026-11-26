@@ -1,0 +1,20 @@
+{
+  "taskType": "application",
+  "modelAnswer": "My Views on Filming Short Videos on Campus\n\nHello, everyone. Today I'd like to share my views on filming short videos on campus.\n\nNowadays, some students like to film short videos with their phones at school. In my opinion, this can be a good thing. Recording club activities or sports meets helps us keep happy memories and share our school life with family and friends. However, some students film others without asking, and some spend too much time on it, which may affect their studies.\n\nHere are my suggestions. First, always ask for permission before filming anyone. Second, film only in your free time, never during class. Finally, think twice before posting anything online.\n\nLet's make every video something we are all happy to see. Thank you!",
+  "reviewCard": {
+    "schemaVersion": "application-review-card-v2",
+    "form": "英语课“一分钟演讲”的演讲稿；保留题给标题，正文面向全班口头讲出，不写成书信。",
+    "topic": "部分同学在校园里用手机拍短视频这一现象。",
+    "purpose": "说清自己怎么看这一现象，并给同学几条拍视频时能照着做的建议。",
+    "person": "用 I 表达个人看法，用 you、we 和同学说话，提建议时用祈使句或 Let's。",
+    "tense": "以一般现在时为主，描述现象、讲看法和提建议都用现在时，影响可用 may。",
+    "points": [
+      "陈述看法：表明立场并给出理由，可以肯定拍视频能记录校园生活，也指出不经同意拍人、占用学习时间等问题。",
+      "提出建议：针对前面说的问题给出可做的办法，如拍人前先征得同意、只在课余拍、发到网上前多想一想。"
+    ],
+    "reader": "英语课上听演讲的同学，老师也在场。",
+    "relationship": "同学之间平等交流，语气友好真诚，只谈做法，不指责拍视频的同学。",
+    "readerNeeds": "听完能知道拍视频有什么好处和问题，并清楚自己拍的时候该注意哪几点。",
+    "value": "让同学拍视频时既能留住校园回忆，又尊重别人、不耽误学习。"
+  }
+}

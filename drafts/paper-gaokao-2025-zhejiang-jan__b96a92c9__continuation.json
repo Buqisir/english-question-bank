@@ -1,0 +1,830 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "When Mr. and Mrs. Green got home, Kevin went to talk to them. He told them everything, including the man’s words about his father’s watch. “He kept trying to lift a floorboard,” Kevin added. Mr. Green thought for a moment. “Let’s go and see.” Kevin led him to the board the man had touched, and Mr. Green pulled it up carefully. Under it lay a dusty box with an old silver watch inside.\n\nKevin and Mr. Green took the watch they had found to the police station. Before seeing it, the man was asked to describe it. “Silver, with a crack across the glass,” he said. It matched exactly. Holding the watch tightly, he said quietly, “My father hid it there before we moved.” Since nothing had been taken, Mr. Green asked the police to let him go. “Sorry, kid. I should have knocked on the door,” the man told Kevin. Kevin smiled with relief. Walking back to Mrs. Hill’s house, he decided he had had enough excitement for one day.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "12 岁的 Kevin 被托给邻居照看，看到有人从窗户跳进对面 Green 夫妇家。他先报警，又拿着树枝冲进去阻止；那人说这里曾是他家、来找父亲的手表，警察赶到后把他抓走了。",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "Suddenly, the man jumped through an open window into the house."
+          },
+          {
+            "source": "material",
+            "excerpt": "Kevin grabbed Mrs. Hill’s home phone and called the police"
+          },
+          {
+            "source": "material",
+            "excerpt": "It was my home. My parents used to live here and my father’s watch was here"
+          },
+          {
+            "source": "material",
+            "excerpt": "They pursued and arrested the man."
+          }
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文停在 Kevin 回到 Hill 太太家，开始怀疑自己做得对不对：那人的话听起来挺可信。手表是否真在屋里、那人是否说了实话，原文都没有交代。",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "Somehow he wasn’t sure he had done the right thing."
+          },
+          {
+            "source": "material",
+            "excerpt": "“What if he has told the truth?”"
+          },
+          {
+            "source": "material",
+            "excerpt": "The man’s words sounded pretty convincing."
+          }
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第三人称，镜头始终跟着 Kevin，能写他的想法（如他心里问自己那人会不会说了实话）。",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "“What if he has told the truth?” he thought to himself."
+          }
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "同一天白天，Kevin 的父母和 Green 夫妇都不在家；地点是 Hill 太太家和街对面 Green 家。",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "His mother was at work, and his father had been away on business."
+          },
+          {
+            "source": "material",
+            "excerpt": "The couple had both gone to work"
+          },
+          {
+            "source": "material",
+            "excerpt": "Mrs. Hill’s front window faced Mr. and Mrs. Green’s house across the street."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Kevin",
+          "role": "主人公，12 岁男孩",
+          "establishedTraits": [
+            {
+              "statement": "平时守规矩，但心里想找点刺激、偶尔想冒险。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "He never got into trouble, though sometimes he wanted to do risky things."
+                },
+                {
+                  "source": "material",
+                  "excerpt": "hoped something exciting would happen"
+                }
+              ]
+            },
+            {
+              "statement": "遇事先报警，又怕那人在警察到之前得手，于是自己冲了进去，说明他有胆量也有正义感。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "called the police"
+                },
+                {
+                  "source": "material",
+                  "excerpt": "Kevin decided to do something"
+                }
+              ]
+            },
+            {
+              "statement": "事后会反省，不因为人被抓就认定自己全对。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "Somehow he wasn’t sure he had done the right thing."
+                }
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "想弄清那人是不是说了实话，确认自己有没有冤枉人。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "“What if he has told the truth?”"
+                }
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "回到 Hill 太太家，心里不踏实，被那人的话动摇了。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Kevin went back to Mrs. Hill’s house."
+              },
+              {
+                "source": "material",
+                "excerpt": "The man’s words sounded pretty convincing."
+              }
+            ]
+          }
+        },
+        {
+          "name": "the man",
+          "role": "闯进 Green 家的陌生男子",
+          "establishedTraits": [
+            {
+              "statement": "看到只是个瘦小男孩就松了口气，还耐心解释，一直想撬起一块地板。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "when he saw the skinny boy he breathed a sigh of relief"
+                },
+                {
+                  "source": "material",
+                  "excerpt": "trying to lift a floorboard"
+                }
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "他自己说是来找父亲留在这里的手表。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "my father’s watch was here"
+                }
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "听到警笛慌忙跳窗逃走，被警察追上逮捕。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "The man stood up in a panic"
+              },
+              {
+                "source": "material",
+                "excerpt": "They pursued and arrested the man."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mr. and Mrs. Green",
+          "role": "房子的现主人",
+          "establishedTraits": [
+            {
+              "statement": "原文只交代他们白天都去上班了，没写性格。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "The couple had both gone to work"
+                }
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "原文没有写他们的想法；按段首句，他们回家后会听 Kevin 讲这件事。",
+              "evidence": [
+                {
+                  "source": "paragraph1Starter",
+                  "excerpt": "When Mr. and Mrs. Green got home, Kevin went to talk to them."
+                }
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "事发时不在家，还不知道家里出了事。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "it was strange that someone was over there"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mrs. Hill",
+          "role": "照看 Kevin 的老邻居",
+          "establishedTraits": [
+            {
+              "statement": "事发时在睡觉，没有参与。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "Mrs. Hill was asleep."
+                }
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "原文没有写她的打算，她只是负责照看 Kevin。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "he was left in the care of Mrs. Hill"
+                }
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "Kevin 回到她家，原文没写她是否醒来。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Kevin went back to Mrs. Hill’s house."
+              }
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": [
+            "Kevin",
+            "the man"
+          ],
+          "currentRelation": {
+            "statement": "Kevin 把他当小偷拦下并报警，可那人的解释让 Kevin 怀疑自己可能错怪了他。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "“Stop right there! You must leave right now!”"
+              },
+              {
+                "source": "material",
+                "excerpt": "“What if he has told the truth?”"
+              }
+            ]
+          }
+        },
+        {
+          "participants": [
+            "Kevin",
+            "Mr. and Mrs. Green"
+          ],
+          "currentRelation": {
+            "statement": "街对面的邻居，Kevin 替不在家的他们拦人、报警。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Mrs. Hill’s front window faced Mr. and Mrs. Green’s house across the street."
+              }
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "Kevin 无聊，盼着出点刺激的事。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Kevin sighed（叹息）and hoped something exciting would happen."
+              }
+            ]
+          },
+          "effect": {
+            "statement": "他注意到窗外的动静，看到有人进了对面空着的房子。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "a movement outside caught his eye"
+              }
+            ]
+          }
+        },
+        {
+          "cause": {
+            "statement": "他担心警察来之前那人就得手。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Thinking that the man might get away with whatever he wanted before the police arrived"
+              }
+            ]
+          },
+          "effect": {
+            "statement": "他拿着树枝跳窗进去拦人。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Grabbing a branch from a cut-down tree, he jumped in through the window."
+              }
+            ]
+          }
+        },
+        {
+          "cause": {
+            "statement": "那人解释自己在找父亲的手表，说得很可信。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "my father’s watch was here"
+              },
+              {
+                "source": "material",
+                "excerpt": "The man’s words sounded pretty convincing."
+              }
+            ]
+          },
+          "effect": {
+            "statement": "人被抓后，Kevin 反而开始怀疑自己做得对不对。",
+            "evidence": [
+              {
+                "source": "material",
+                "excerpt": "Somehow he wasn’t sure he had done the right thing."
+              }
+            ]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "那人到底有没有说实话：屋里是不是真有他父亲的手表，他是不是被冤枉成了小偷。",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "“What if he has told the truth?”"
+          },
+          {
+            "source": "material",
+            "excerpt": "trying to lift a floorboard"
+          }
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "那人一直想撬起一块地板，手表可能就藏在地板下面。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "trying to lift a floorboard"
+            }
+          ]
+        },
+        {
+          "statement": "他说父母以前住在这里、父亲的手表在这里，这能解释他为什么进这栋房子。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "My parents used to live here and my father’s watch was here"
+            }
+          ]
+        },
+        {
+          "statement": "Kevin 本来盼着刺激的事，结尾可以回到这一点，写他对“刺激”有了新的感受。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "hoped something exciting would happen"
+            }
+          ]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "原文的问题是 Kevin 怕自己错怪了人。较稳妥的落点是：遇事不只凭第一印象，要去弄清真相。这个方向由原文推出，不是原文明说。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "Somehow he wasn’t sure he had done the right thing."
+          },
+          {
+            "source": "material",
+            "excerpt": "“What if he has told the truth?”"
+          }
+        ]
+      },
+      "sourceStyle": {
+        "statement": "第三人称过去时，句子短、节奏快，以动作推进；对话少而短，心理活动只用一两句点到。",
+        "evidence": [
+          {
+            "source": "material",
+            "excerpt": "He rushed out of Mrs. Hill’s house and crossed the street quickly."
+          },
+          {
+            "source": "material",
+            "excerpt": "“What if he has told the truth?” he thought to himself."
+          }
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-greens-home-talk",
+          "statement": "Green 夫妇回到家后，Kevin 去和他们谈这件事。",
+          "evidence": [
+            {
+              "source": "paragraph1Starter",
+              "excerpt": "When Mr. and Mrs. Green got home, Kevin went to talk to them."
+            }
+          ]
+        },
+        {
+          "id": "hc-watch-found",
+          "statement": "到第二段开头时，Kevin 和 Green 先生已经一起找到了一块手表。",
+          "evidence": [
+            {
+              "source": "paragraph2Starter",
+              "excerpt": "Kevin and Mr. Green took the watch they had found"
+            }
+          ]
+        },
+        {
+          "id": "hc-to-police",
+          "statement": "第二段里，Kevin 和 Green 先生把手表送到警察局。",
+          "evidence": [
+            {
+              "source": "paragraph2Starter",
+              "excerpt": "took the watch they had found to the police station"
+            }
+          ]
+        },
+        {
+          "id": "hc-man-arrested",
+          "statement": "那人已经被警察抓走，第一段里他不在现场。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "They pursued and arrested the man."
+            }
+          ]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "手表很可能就藏在那人想撬开的地板下面。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "trying to lift a floorboard"
+            },
+            {
+              "source": "paragraph2Starter",
+              "excerpt": "the watch they had found"
+            }
+          ]
+        },
+        {
+          "statement": "手表找到后，可以用它来核实那人的话是不是真的。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "“What if he has told the truth?”"
+            },
+            {
+              "source": "paragraph2Starter",
+              "excerpt": "took the watch they had found to the police station"
+            }
+          ]
+        },
+        {
+          "statement": "结尾可以回到 Kevin 盼刺激这一点。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "hoped something exciting would happen"
+            }
+          ]
+        }
+      ],
+      "openChoices": [
+        "Kevin 用什么话说服 Green 夫妇去找手表",
+        "Green 夫妇是否知道这栋房子原来的主人",
+        "在警察局用什么办法确认手表属于那人",
+        "那人最后是否被放走、Green 先生是否原谅他",
+        "Mrs. Green 和 Mrs. Hill 在后文是否出场"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-greens-away",
+          "statement": "不能写 Green 夫妇事发时在家或目睹了闯入，他们白天都去上班了。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "The couple had both gone to work"
+            }
+          ]
+        },
+        {
+          "id": "fc-man-free",
+          "statement": "不能让那人在第一段自己回到 Green 家，他已经被警察逮捕。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "They pursued and arrested the man."
+            }
+          ]
+        },
+        {
+          "id": "fc-kevin-certain",
+          "statement": "不能写 Kevin 一开始就确信那人说的是实话或假话，原文结尾他正拿不准。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "Somehow he wasn’t sure he had done the right thing."
+            }
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "Green 夫妇下班回家，还不知道家里的事；Kevin 心里装着疑问去找他们。",
+            "evidence": [
+              {
+                "source": "paragraph1Starter",
+                "excerpt": "When Mr. and Mrs. Green got home"
+              },
+              {
+                "source": "material",
+                "excerpt": "“What if he has told the truth?”"
+              }
+            ]
+          },
+          "starterFunction": {
+            "statement": "让 Kevin 把事情告诉房主，把“那人是否说了实话”的疑问交给能进屋查看的人。",
+            "evidence": [
+              {
+                "source": "paragraph1Starter",
+                "excerpt": "Kevin went to talk to them"
+              }
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-tell",
+              "statement": "Kevin 向 Green 夫妇讲出发生的事，包括那人关于手表的说法。",
+              "evidence": [
+                {
+                  "source": "paragraph1Starter",
+                  "excerpt": "Kevin went to talk to them"
+                },
+                {
+                  "source": "material",
+                  "excerpt": "my father’s watch was here"
+                }
+              ]
+            },
+            {
+              "id": "p1-search",
+              "statement": "Kevin 和 Green 先生一起在屋里找手表。",
+              "evidence": [
+                {
+                  "source": "paragraph2Starter",
+                  "excerpt": "Kevin and Mr. Green took the watch they had found"
+                }
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-watch",
+              "statement": "第一段结束时，Kevin 和 Green 先生已经找到手表，但还没出发去警察局。",
+              "evidence": [
+                {
+                  "source": "paragraph2Starter",
+                  "excerpt": "the watch they had found"
+                },
+                {
+                  "source": "paragraph2Starter",
+                  "excerpt": "took the watch they had found to the police station"
+                }
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "他们可以在那人想撬的地板下找到手表。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "trying to lift a floorboard"
+                }
+              ]
+            },
+            {
+              "statement": "Green 先生可以先犹豫、再同意去查看，因为闯入的毕竟是陌生人。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "it was strange that someone was over there"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "手表已经找到，Kevin 和 Green 先生带着它去警察局，那人还被扣在那里。",
+            "evidence": [
+              {
+                "source": "paragraph2Starter",
+                "excerpt": "Kevin and Mr. Green took the watch they had found to the police station."
+              },
+              {
+                "source": "material",
+                "excerpt": "They pursued and arrested the man."
+              }
+            ]
+          },
+          "starterFunction": {
+            "statement": "把手表带到警察局，让它成为判断那人有没有说实话的依据。",
+            "evidence": [
+              {
+                "source": "paragraph2Starter",
+                "excerpt": "took the watch they had found to the police station"
+              }
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-check",
+              "statement": "在警察局用手表核实那人的说法。",
+              "evidence": [
+                {
+                  "source": "paragraph2Starter",
+                  "excerpt": "to the police station"
+                },
+                {
+                  "source": "material",
+                  "excerpt": "“What if he has told the truth?”"
+                }
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-answer",
+              "statement": "第二段结束时，Kevin 心里的疑问要有答案：那人有没有说实话。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "“What if he has told the truth?”"
+                }
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "那人可以先说出手表的样子，再和找到的手表对上。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "my father’s watch was here"
+                }
+              ]
+            },
+            {
+              "statement": "结尾可以写 Kevin 对盼望的“刺激”有了新感受。",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "hoped something exciting would happen"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "cl-doubt-resolved",
+          "statement": "要回答 Kevin 的疑问，交代那人说的是真是假，以及 Kevin 怎么看自己做的事。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "Somehow he wasn’t sure he had done the right thing."
+            },
+            {
+              "source": "material",
+              "excerpt": "“What if he has told the truth?”"
+            }
+          ]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择“那人说的是实话”这条路：Kevin 把经过告诉 Green 夫妇，和 Green 先生在地板下找到手表；到警察局后，那人先说出手表的样子，对上了，Green 先生请警察放人，Kevin 放下心来。",
+      "routeRationale": [
+        {
+          "statement": "那人一直想撬地板，段首句又说他们找到了手表，两条合起来，最自然的是手表就在地板下。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "trying to lift a floorboard"
+            },
+            {
+              "source": "paragraph2Starter",
+              "excerpt": "the watch they had found"
+            }
+          ]
+        },
+        {
+          "statement": "Kevin 的疑问是那人会不会说了实话，让手表帮他核实，正好回答这个疑问。",
+          "evidence": [
+            {
+              "source": "material",
+              "excerpt": "“What if he has told the truth?”"
+            }
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "Kevin 拿不准自己是不是错怪了人，Green 夫妇一回来，他就去找他们。",
+          "action": "Kevin 讲出经过和手表的说法，提到那人一直在撬地板；Green 先生同意去看，亲手撬起那块地板。",
+          "result": "地板下有一个落满灰的盒子，里面是一块旧银表。",
+          "sourceEvidence": [
+            {
+              "source": "material",
+              "excerpt": "trying to lift a floorboard"
+            },
+            {
+              "source": "paragraph1Starter",
+              "excerpt": "Kevin went to talk to them"
+            }
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {
+                "source": "material",
+                "excerpt": "trying to lift a floorboard"
+              },
+              "payoff": "那人想撬的地板正是藏表的地方，原文这个动作在这里有了交代。"
+            }
+          ],
+          "bridge": "段末停在找到手表，第二段段首“took the watch they had found”就能直接接上。"
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "手表找到了，但它是不是那人父亲的还要核实。",
+          "action": "警察先让那人描述手表，他说出银色、表面有道裂痕，和实物对上；因为家里没丢东西，Green 先生请警察放了他，那人向 Kevin 道歉。",
+          "result": "那人说的是实话，Kevin 的疑问解开了，他松了口气。",
+          "sourceEvidence": [
+            {
+              "source": "material",
+              "excerpt": "“What if he has told the truth?”"
+            },
+            {
+              "source": "material",
+              "excerpt": "My parents used to live here and my father’s watch was here"
+            }
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {
+                "source": "material",
+                "excerpt": "hoped something exciting would happen"
+              },
+              "payoff": "结尾 Kevin 觉得这一天的刺激已经够了，呼应开头他盼着出点刺激的事。"
+            }
+          ],
+          "ending": "Kevin 走回 Hill 太太家，觉得这一天的刺激已经够了。",
+          "emotionChanges": [
+            {
+              "trigger": "那人说出的样子和手表对上了",
+              "from": "拿不准、怕自己冤枉了人",
+              "to": "放心",
+              "visibleAction": "Kevin 松了口气，笑了"
+            }
+          ],
+          "relationshipChanges": [
+            {
+              "participants": [
+                "Kevin",
+                "the man"
+              ],
+              "from": "拦人的人和被当成小偷的人",
+              "to": "互相理解",
+              "cause": "手表证明了那人的话，他也承认自己不该翻窗进去"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        "也可以写那人说了谎，手表其实属于 Green 家，Kevin 由此确认自己没做错。",
+        "也可以让 Green 夫妇认出这栋房子的旧主人姓什么，从而相信那人的话。"
+      ],
+      "qualityRisks": [
+        "第一段不要写到去警察局，那是第二段的事。",
+        "不要让警察或 Green 先生一句话就宣布真相，最好用手表本身来核实。"
+      ]
+    }
+  }
+}

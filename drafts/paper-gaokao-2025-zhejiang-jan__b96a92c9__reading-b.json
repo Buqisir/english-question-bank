@@ -1,0 +1,754 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-zhejiang-jan:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-zhejiang-jan:reading-b": {
+      "overview": "作者小时候总被告诫别吃胖，和食物的关系因此受损多年。女儿说自己太胖后，她借心理学教授马基的建议反思：在饮食上父母少说为好，定时提供健康食物，吃什么、吃多少交给孩子。",
+      "fullTranslationZh": "小时候，总有人告诉我什么不能吃。“你可不想长胖吧”这句话在我整个童年里反复出现。它真的搞乱了我和食物的关系——我花了好多年才走出来。正因为如此，我很注意不把孩子的体重和他们作为人的价值联系在一起。我鼓励女儿选择健康的零食，也常常劝她别再吃第二份甜点。可是有一天，我听到她说“我觉得我太胖了”，心一下子沉了下去。这让我怀疑，给她零食方面的建议是不是无意中产生了负面影响。\n\n心理学教授夏洛特·马基认为，食物是为人父母少说反而更好的少数话题之一。“育儿中有很多事情值得和孩子好好聊聊，但我不认为食物是其中之一，”她说，“谈食物只会让孩子产生一些不一定健康的担忧和不安。”\n\n相反，她建议采用营养专家熟知的一个理念，叫作“责任分工”：父母在固定时间给孩子提供多种以健康为主的食物，由孩子自己决定想吃什么、吃多少——即便这意味着他们偶尔吃的饼干比胡萝卜多。\n\n让孩子想吃什么就吃什么，也能让他们体会到自己选择带来的自然后果。“孩子说‘我肚子疼’的时候，你可以说：‘嗯，你吃了很多含糖的东西，要是换些别的吃，可能会舒服点。’”马基说，“让他们觉得自己对这件事有一定的掌控权。”\n\n我一直在尝试这些方法，发现当我管得少一些时，孩子们确实会做出更好的选择。“喂养是一场持久战，”马基说，“家里有什么食物，影响很大。就算他们不吃，他们也看在眼里。然后突然有一天，他们就开窍了。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+          "sourceText": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "displayText": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:25",
+            "question:paper-gaokao-2025-zhejiang-jan:26"
+          ],
+          "translationZh": "相反，她建议采用营养专家熟知的一个理念，叫作“责任分工”：父母在固定时间给孩子提供多种以健康为主的食物，由孩子自己决定想吃什么、吃多少——即便这意味着他们偶尔吃的饼干比胡萝卜多。",
+          "analysisZh": "主干很短：she recommends applying a well-known concept，recommend doing 是「建议做某事」。concept 后面先用 among nutrition experts 说明它在营养专家中有名，再用过去分词 called the “Division of Responsibility” 给出名字。where 引导的定语从句解释这个「分工」，被 and 分成两半：parents provide … at fixed times 是父母负责的部分，the kids themselves decide what and how much they want to consume 是孩子负责的部分，decide 后接 what and how much 引导的宾语从句。破折号后的 even if 是让步补充：哪怕偶尔饼干吃得比胡萝卜多，也照样让孩子自己决定。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 53,
+              "quote": "she recommends applying a well-known concept"
+            },
+            {
+              "start": 125,
+              "end": 140,
+              "quote": "parents provide"
+            },
+            {
+              "start": 209,
+              "end": 253,
+              "quote": "the kids themselves decide what and how much"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+          "sourceText": "According to Charlotte Markey, a professor of psychology, food is one of the rare subjects where, as parents, saying less is more.",
+          "displayText": "According to Charlotte Markey, a professor of psychology, food is one of the rare subjects where, as parents, saying less is more.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-zhejiang-jan:25"
+          ],
+          "translationZh": "心理学教授夏洛特·马基认为，食物是为人父母少说反而更好的少数话题之一。",
+          "analysisZh": "主干是 food is one of the rare subjects（食物是少有的话题之一）。a professor of psychology 是 Charlotte Markey 的同位语，交代她的身份。where 引导定语从句修饰 subjects，从句的主语是动名词 saying less，谓语是 is more，中间插入的 as parents 表示「作为父母」。saying less is more 字面是「说得少就是多」，意思是少说反而效果更好，这句话定下了 Markey 对饮食话题的基本态度。",
+          "underlineRanges": [
+            {
+              "start": 58,
+              "end": 90,
+              "quote": "food is one of the rare subjects"
+            },
+            {
+              "start": 110,
+              "end": 129,
+              "quote": "saying less is more"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-b:1"
+              ],
+              "start": 0,
+              "end": 184,
+              "quote": "小时候，总有人告诉我什么不能吃。“你可不想长胖吧”这句话在我整个童年里反复出现。它真的搞乱了我和食物的关系——我花了好多年才走出来。正因为如此，我很注意不把孩子的体重和他们作为人的价值联系在一起。我鼓励女儿选择健康的零食，也常常劝她别再吃第二份甜点。可是有一天，我听到她说“我觉得我太胖了”，心一下子沉了下去。这让我怀疑，给她零食方面的建议是不是无意中产生了负面影响。"
+            },
+            {
+              "paragraphId": "zh-reading-b-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-b:2"
+              ],
+              "start": 186,
+              "end": 283,
+              "quote": "心理学教授夏洛特·马基认为，食物是为人父母少说反而更好的少数话题之一。“育儿中有很多事情值得和孩子好好聊聊，但我不认为食物是其中之一，”她说，“谈食物只会让孩子产生一些不一定健康的担忧和不安。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-b:3"
+              ],
+              "start": 285,
+              "end": 374,
+              "quote": "相反，她建议采用营养专家熟知的一个理念，叫作“责任分工”：父母在固定时间给孩子提供多种以健康为主的食物，由孩子自己决定想吃什么、吃多少——即便这意味着他们偶尔吃的饼干比胡萝卜多。"
+            },
+            {
+              "paragraphId": "zh-reading-b-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-b:4"
+              ],
+              "start": 376,
+              "end": 483,
+              "quote": "让孩子想吃什么就吃什么，也能让他们体会到自己选择带来的自然后果。“孩子说‘我肚子疼’的时候，你可以说：‘嗯，你吃了很多含糖的东西，要是换些别的吃，可能会舒服点。’”马基说，“让他们觉得自己对这件事有一定的掌控权。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-zhejiang-jan:reading-b:5"
+              ],
+              "start": 485,
+              "end": 581,
+              "quote": "我一直在尝试这些方法，发现当我管得少一些时，孩子们确实会做出更好的选择。“喂养是一场持久战，”马基说，“家里有什么食物，影响很大。就算他们不吃，他们也看在眼里。然后突然有一天，他们就开窍了。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+                "start": 129,
+                "end": 218,
+                "quote": "It really messed up my relationship with food – something that took me years to overcome."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+                "start": 53,
+                "end": 128,
+                "quote": "“You don’t want to get fat” was on constant repeat throughout my childhood."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+                "start": 219,
+                "end": 309,
+                "quote": "Because of this, I’m careful not to connect what my kids weigh with their worth as people."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 40,
+                "end": 66,
+                "quote": "它真的搞乱了我和食物的关系——我花了好多年才走出来。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 16,
+                "end": 40,
+                "quote": "“你可不想长胖吧”这句话在我整个童年里反复出现。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 66,
+                "end": 98,
+                "quote": "正因为如此，我很注意不把孩子的体重和他们作为人的价值联系在一起。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+                "start": 58,
+                "end": 129,
+                "quote": "food is one of the rare subjects where, as parents, saying less is more"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+                "start": 132,
+                "end": 247,
+                "quote": "There are so many things in parenting that are good to talk through, but I’m not convinced that food is one of them"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+                "start": 261,
+                "end": 347,
+                "quote": "It just creates some worries and insecurities in kids that aren’t necessarily healthy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 14,
+                "end": 34,
+                "quote": "食物是为人父母少说反而更好的少数话题之一"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 36,
+                "end": 66,
+                "quote": "育儿中有很多事情值得和孩子好好聊聊，但我不认为食物是其中之一"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 72,
+                "end": 96,
+                "quote": "谈食物只会让孩子产生一些不一定健康的担忧和不安。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+                "start": 209,
+                "end": 274,
+                "quote": "the kids themselves decide what and how much they want to consume"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "start": 52,
+                "end": 67,
+                "quote": "由孩子自己决定想吃什么、吃多少"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+                "start": 0,
+                "end": 115,
+                "quote": "I’ve been trying out these strategies and I’ve found that when I’m less restrictive, they do make better decisions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-5",
+                "start": 0,
+                "end": 36,
+                "quote": "我一直在尝试这些方法，发现当我管得少一些时，孩子们确实会做出更好的选择。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-1",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:25",
+              "question:paper-gaokao-2025-zhejiang-jan:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+                "start": 0,
+                "end": 342,
+                "quote": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "start": 0,
+                "end": 89,
+                "quote": "相反，她建议采用营养专家熟知的一个理念，叫作“责任分工”：父母在固定时间给孩子提供多种以健康为主的食物，由孩子自己决定想吃什么、吃多少——即便这意味着他们偶尔吃的饼干比胡萝卜多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-2",
+            "questionIds": [
+              "question:paper-gaokao-2025-zhejiang-jan:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+                "start": 0,
+                "end": 130,
+                "quote": "According to Charlotte Markey, a professor of psychology, food is one of the rare subjects where, as parents, saying less is more."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-zhejiang-jan:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 0,
+                "end": 35,
+                "quote": "心理学教授夏洛特·马基认为，食物是为人父母少说反而更好的少数话题之一。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先讲自己童年被管饮食的伤害和女儿说自己太胖带来的担忧，再引专家 Markey 的观点：饮食上少说、实行父母和孩子的责任分工、让孩子体会选择的后果；最后作者以亲身尝试的效果收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+            "summary": "作者童年常被告诫别吃胖，伤了她和食物的关系；女儿说自己太胖，让她担心自己的零食建议起了反作用。",
+            "function": "以个人经历引出话题和困惑。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+            "summary": "Markey 认为饮食问题上父母少说为好，多谈会让孩子不安。",
+            "function": "引出专家观点，回应作者的困惑。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+            "summary": "Markey 推荐“责任分工”：父母定时提供多样健康的食物，孩子自己决定吃什么、吃多少。",
+            "function": "给出具体做法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:4",
+            "summary": "让孩子自主选择，也能让他们承受选择的自然后果，从而有掌控感。",
+            "function": "进一步说明这种做法的好处。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+            "summary": "作者尝试后发现少限制反而让孩子选得更好；Markey 说喂养是持久战，家里备什么食物很重要。",
+            "function": "用实践效果和专家补充收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-zhejiang-jan:24": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完首段作者的童年回忆和眼下的做法，推出她对自己当年被管饮食的看法。",
+      "stemTranslationZh": "从第一段可以推断出作者的什么情况？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2025-zhejiang-jan:reading-b:1]]先说总被叮嘱别吃胖，这 messed up 她和食物的关系，于是对女儿换种做法；答案要说出她对当年喂养的态度",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她为孩子们的体重而烦恼。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "what my kids weigh",
+            "optionText": "her kids’ weight",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 weight 来自原文 weigh，但原句是 I’m careful not to connect what my kids weigh with their worth as people，她是刻意不把孩子的体重和价值挂钩。后来让她心里一沉的是女儿自己说太胖，她担心的是自己的零食建议起了反作用，不是孩子的体重。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "quote": "Because of this, I’m careful not to connect what my kids weigh with their worth as people.",
+              "anchor": "首段第四句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她对自己小时候被喂养的方式持批评态度。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "quote": "It really messed up my relationship with food – something that took me years to overcome.",
+              "anchor": "首段第三句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "quote": "“You don’t want to get fat” was on constant repeat throughout my childhood.",
+              "anchor": "首段第二句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "quote": "Because of this, I’m careful not to connect what my kids weigh with their worth as people.",
+              "anchor": "首段第四句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她对做饭很感兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She is interested in making food.",
+            "explanation": "首段谈的是该吃什么、不该吃什么，以及孩子的零食和甜点，作者没有提到自己喜欢下厨做饭。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她对自己吃什么很挑剔。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I encourage my daughter to make healthy snack choices",
+            "sourceEntity": "my daughter",
+            "optionText": "She is particular about what she eats.",
+            "optionEntity": "she",
+            "explanation": "首段里被管着吃什么的人是女儿：作者鼓励女儿选健康零食、劝女儿别吃第二份甜点。至于作者自己，原文只说小时候常被大人告诫 what not to eat，没说她现在对自己的饮食很挑剔。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "quote": "I encourage my daughter to make healthy snack choices and often dissuade（劝阻）her from a second dessert.",
+              "anchor": "首段第五句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She is critical of the way she was fed.",
+          "sourceRole": "correctOption",
+          "targetText": "It really messed up my relationship with food – something that took me years to overcome.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "原文没有直接说「我批评」，要自己跨一步：她说小时候没完没了地听 “You don’t want to get fat”，这 really messed up 了她和食物的关系，花了好多年才 overcome；接着又说 Because of this，她刻意不在孩子身上重复。把自己受的伤害说出来、还决心不让孩子再经历，说明她不认同当年被喂养的方式。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:25": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "拿四种做法去对照 Markey 的主张，找出她会反对的那一种。",
+      "stemTranslationZh": "马基会反对下列哪种做法？",
+      "locateBy": "options",
+      "locateFindZh": "拿四种做法去比她说的 less is more 和责任分工",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "允许孩子偶尔吃饼干。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "occasionally eating more cookies than carrots",
+            "optionText": "eat cookies occasionally",
+            "matchType": "exact",
+            "relationNote": "cookies 和 occasionally 都是第三段原词，原句是 even if that means occasionally eating more cookies than carrots：实行责任分工时，哪怕孩子偶尔饼干吃得比胡萝卜多，也由孩子自己决定。这是 Markey 能接受的代价，不是她反对的事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "quote": "even if that means occasionally eating more cookies than carrots",
+              "anchor": "第三段破折号后"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在固定时间给孩子提供各种食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "parents provide a variety of mostly healthy foods to their kids at fixed times",
+            "sourceHighlight": "at fixed times",
+            "optionText": "Offering various foods to kids at fixed times.",
+            "optionHighlight": "at fixed times",
+            "explanation": "这正是第三段 Markey 推荐的责任分工里父母负责的那一半：parents provide a variety of mostly healthy foods to their kids at fixed times。她主张这样做，不会反对。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "quote": "parents provide a variety of mostly healthy foods to their kids at fixed times",
+              "anchor": "第三段 where 从句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "向孩子讲解吃零食的风险。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "quote": "food is one of the rare subjects where, as parents, saying less is more",
+              "anchor": "第二段首句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "quote": "There are so many things in parenting that are good to talk through, but I’m not convinced that food is one of them",
+              "anchor": "第二段 Markey 的话"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "quote": "It just creates some worries and insecurities in kids that aren’t necessarily healthy.",
+              "anchor": "第二段末句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "吃饭时和孩子聊学校的事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "There are so many things in parenting that are good to talk through",
+            "sourceHighlight": "good to talk through",
+            "optionText": "Talking with kids about school at mealtimes.",
+            "optionHighlight": "Talking with kids about school",
+            "explanation": "Markey 只是不主张和孩子多谈食物，她紧接着说 There are so many things in parenting that are good to talk through。饭桌上聊学校，聊的不是食物，原文并没有反对；把「少谈食物」扩大成「吃饭时少说话」就读过头了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "quote": "There are so many things in parenting that are good to talk through",
+              "anchor": "第二段 Markey 的话"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Explaining to kids the risks of taking snacks.",
+          "sourceRole": "correctOption",
+          "targetText": "food is one of the rare subjects where, as parents, saying less is more",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "给孩子讲零食的风险，就是在饮食这件事上多说。Markey 认为饮食是 saying less is more 的话题，还说谈这些 just creates some worries and insecurities in kids，所以这种做法正是她不赞成的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在“责任分工”的定义里分清父母管什么、孩子管什么。",
+      "stemTranslationZh": "根据“责任分工”原则，孩子应该做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "自己决定饮食。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "quote": "the kids themselves decide what and how much they want to consume",
+              "anchor": "第三段 and 后半句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "和其他孩子分享食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Share their food with other kids.",
+            "explanation": "责任分工只在父母和自家孩子之间分：父母定时提供食物，孩子决定吃什么、吃多少。原文没有提到和别的孩子分享食物。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把给他们的东西吃光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "parents provide a variety of mostly healthy foods",
+            "optionText": "what is provided for them",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 provided 来自原文 provide，但 provide 在原文是父母的职责：提供多种健康食物。吃多少由孩子自己定（what and how much），并不要求把提供的食物吃完。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "quote": "parents provide a variety of mostly healthy foods to their kids at fixed times",
+              "anchor": "第三段 where 从句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "帮父母洗碗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Help their parents do the dishes.",
+            "explanation": "Division of Responsibility 听起来像分配家务，但原文讲的是吃饭上的分工：父母管提供什么、什么时候提供，孩子管吃什么、吃多少，没有提洗碗。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Division of Responsibility",
+          "sourceRole": "stem",
+          "targetText": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "the kids themselves decide what and how much they want to consume",
+          "note": "题干 Division of Responsibility 原词出现在第三段，where 从句就是它的具体内容。"
+        },
+        {
+          "sourceText": "Make diet decisions on their own.",
+          "sourceRole": "correctOption",
+          "targetText": "the kids themselves decide what and how much they want to consume",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "on their own 对应 themselves，make diet decisions 对应 decide what and how much they want to consume：吃什么、吃多少由孩子自己定。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-zhejiang-jan:27": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者试用这些方法后的结果，判断她对方法的评价。",
+      "stemTranslationZh": "作者认为自己一直在用的这些方法怎么样？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "代价高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Costly.",
+            "explanation": "原文没有提到这些方法要花多少钱。末段的 The food you have available makes a huge difference 说的是家里摆着什么食物很关键，不是花费大。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "复杂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Complex.",
+            "explanation": "作者做的其实是少说、少限制（less restrictive），原文没说操作复杂。Feeding is a long game 指喂养要耐心等效果慢慢出来，不是方法难办。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "可行。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "quote": "I’ve been trying out these strategies and I’ve found that when I’m less restrictive, they do make better decisions.",
+              "anchor": "末段首句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "自相矛盾。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Contradictory.",
+            "explanation": "作者试过后发现 they do make better decisions，方法和效果是一致的，原文没说这些方法自相矛盾。前后不同的只是她自己：从常劝女儿少吃甜点，变成管得更少。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "strategies",
+          "sourceRole": "stem",
+          "targetText": "I’ve been trying out these strategies and I’ve found that when I’m less restrictive, they do make better decisions.",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "when I’m less restrictive, they do make better decisions",
+          "note": "题干 strategies 原词出现在末段首句，题干 has been following 对应 I’ve been trying out。"
+        },
+        {
+          "sourceText": "Workable.",
+          "sourceRole": "correctOption",
+          "targetText": "when I’m less restrictive, they do make better decisions",
+          "targetParagraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "作者照着做了，结果是管得少了孩子反而选得更好，do 还加强了语气：「确实」更好。方法试过见效，说明她认为这些方法行得通，即 Workable。"
+        }
+      ]
+    }
+  }
+}
