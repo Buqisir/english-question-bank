@@ -125,7 +125,8 @@ for (const [scenario, allowed] of [['404', true], ['empty', true], ['local missi
     const reopen = () => reopenLocalPreview(ctx, async () => {
       if (scenario === '500') throw Object.assign(new Error('Review API failed'), { status: 500 })
       if (scenario === 'network error') throw new TypeError('fetch failed')
-      const local = { paperId, revisions: scenario === 'local missing' ? [] : [revision] }
+      const ocr = { ...revision, id: ctx.state.steps['ocr-review'].result.revisionId, reviewKind: 'ocr' }
+      const local = { paperId, revisions: scenario === 'local missing' ? [ocr] : [ocr, revision] }
       // legacyPreviewStatuses maps only the Review not-found response to null.
       if (scenario === '404') return [local, null]
       const revisions = scenario.startsWith('different')
@@ -142,7 +143,9 @@ for (const [scenario, allowed] of [['404', true], ['empty', true], ['local missi
 }
 
 test('reopen checks legacy OCR ownership alongside a receipted preview', async t => {
-  for (const scenario of ['confirmed', 'unknown OCR', 'production record']) {
+  for (const [scenario, hasLegacyRow] of [['confirmed', true], ['unknown OCR', true], ['production record', true],
+    ['confirmed without OCR timeline', false], ['production record without OCR timeline', false],
+    ['query failure without OCR timeline', false]]) {
     await t.test(scenario, async t => {
       const { dir, ctx } = fixture(t)
       const { paperId } = ctx
@@ -151,19 +154,20 @@ test('reopen checks legacy OCR ownership alongside a receipted preview', async t
       ctx.state.steps['local-screen'] = completed({ url })
       json(ctx.statePath, ctx.state)
       const legacyRow = { paperId, completed: true, startedAt: oldTime, finishedAt: oldTime }
-      writeFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'),
-        [legacyRow, localUploadRow(ctx)].map(row => JSON.stringify(row)).join('\n'))
+      const rows = hasLegacyRow ? [legacyRow, localUploadRow(ctx)] : [localUploadRow(ctx)]
+      writeFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'), rows.map(row => JSON.stringify(row)).join('\n'))
       const ocr = { id: ctx.state.steps['ocr-review'].result.revisionId, paperId, reviewKind: 'ocr', finalizedAt: oldTime }
       const candidate = { ...ocr, id: previewResult.revisionId, reviewKind: 'candidate' }
       const local = { paperId, revisions: scenario === 'unknown OCR' ? [candidate] : [ocr, candidate] }
-      const production = scenario === 'production record'
+      const production = scenario.startsWith('production record')
         ? { paperId, revisions: [{ ...ocr, id: 'rev-production' }] } : null
       const reopen = () => reopenLocalPreview(ctx, async (requestedPaper, screenUrl) => {
         assert.equal(requestedPaper, paperId)
         assert.equal(screenUrl.href, url)
+        if (scenario.startsWith('query failure')) throw new TypeError('fetch failed')
         return [local, production]
       })
-      if (scenario === 'confirmed') assert((await reopen()).archived)
+      if (scenario.startsWith('confirmed')) assert((await reopen()).archived)
       else {
         const before = snapshot(dir)
         await assert.rejects(reopen, /未能确认归属/u)
@@ -179,9 +183,11 @@ for (const [problem, message] of [['missing', /交接证据文件缺失/u], ['ch
     const url = 'http://127.0.0.1:51790/?reviewRevision=rev-local'
     ctx.state.steps['local-preview'] = completed(previewResult)
     ctx.state.steps['local-screen'] = completed({ url, tiles: 1 })
+    ctx.state.steps['ocr-review'].result.localUploadId = 'ocr-upload'
     ctx.state.data.status = 'local_ready'
     json(ctx.statePath, ctx.state)
-    json(path.join(ctx.fast, 'upload-timeline.jsonl'), localUploadRow(ctx))
+    writeFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'),
+      [localUploadRow(ctx, ctx.state.steps['ocr-review'].result), localUploadRow(ctx)].map(row => JSON.stringify(row)).join('\n'))
     json(path.join(ctx.paperDir, 'canonical-evidence/candidate-summary.json'), { candidateDigest: 'old-candidate' })
     const handoff = path.join(ctx.work, 'handoff')
     const entry = file => ({ path: path.relative(handoff, file), sha256: sha256(readFileSync(file)) })
