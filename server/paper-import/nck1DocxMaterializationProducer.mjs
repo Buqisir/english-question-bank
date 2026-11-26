@@ -2,7 +2,7 @@ import { nationalLegacyProfile, materializationSlotSpecs, profileHeadingSpecs, v
 import { answerGridPairs as parseAnswerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { execFileSync } from 'node:child_process'
 
-import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
+import { extractDocxDocumentStructure, extractDocxDocumentParagraphs } from '../paper-canonical/docxSourceAdapter.mjs'
 import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { WRITING_SAMPLE_LABEL } from './sourceReferenceWritingRules.mjs'
@@ -11,6 +11,8 @@ export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
   'nck1-docx-materialization-producer-v22'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+export const RECORDING_TRANSCRIPT_ID = 'recording-transcript'
+export const RECORDING_TRANSCRIPT_TITLE = '听力原文（据录音 ASR 整理）'
 // A number enclosed by underscores is a complete blank, even when OCR kept
 // only one leading stroke. Do not leave that stroke in the surrounding prose.
 const BLANK = /(?<![\p{L}\p{N}_])_+\d{1,3}_+|(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
@@ -1598,7 +1600,7 @@ function closesWritingSampleWordCount(answerBody, index, answerDocumentId) {
   })
 }
 
-function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues, listeningSource = null, listeningMarker }) {
+function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues, listeningSource = null, recordingTranscript, listeningMarker }) {
   if (listeningSource) answerBody = listeningSource.body
   // OCR may split a fixed broadcast across a heading and two printed lines.
   // Match the complete anchored cue; retain each original item and locator in the partition.
@@ -1737,6 +1739,29 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   })
   const runIsOrdered = markers.length === 10
     && markers.every((marker, index) => marker.number === index + 1)
+  if (recordingTranscript) {
+    if (markers.length || answerBody.some(item => LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text)))) {
+      throw new Error('存在印刷听力原文标记，请使用原页物化')
+    }
+    const paragraphs = extractDocxDocumentParagraphs(recordingTranscript.bytes).map(item => item.text)
+    if (paragraphs[0] !== RECORDING_TRANSCRIPT_TITLE || paragraphs.length !== 14 || longRanges.length !== 5) {
+      throw new Error('录音转写需要完整的 Text 1–10 及原题范围')
+    }
+    const transcript = paragraphs.slice(4).map((line, index) => {
+      const n = index + 1
+      const questionNumbers = n <= 5 ? [n] : longRanges[index - 5].questionNumbers
+      const prefix = `Text ${n} | 题号：${questionNumbers.join(',')} | 据录音整理 | `
+      if (!line.startsWith(prefix) || !line.slice(prefix.length).trim()) throw new Error(`录音转写缺失或题号不符 · Text ${n}`)
+      return { segmentId: `listening-text-${n}`, questionNumbers, text: line.slice(prefix.length),
+        source: { kind: 'docx_part', documentId: recordingTranscript.documentId, part: 'word/document.xml',
+          selector: `(/w:document/w:body//w:p)[${index + 5}]` } }
+    })
+    return { materialization: { state: 'captured', questions, answers, transcript,
+      timing: section1Once ? [{ kind: 'section1_playback', passes: 1,
+        source: sourceLocator(questionDocumentId, section1Once.sourceIndex) }] : [] },
+    partition: { disposition: 'recording_transcript', heading: null, precedingContentBoundary: null,
+      openingPreamble: [], segments: [], trailingItems: [] } }
+  }
   if (!runIsOrdered) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
       `Expected one unique ordered Text 1-10 run; found ${markers.map((marker) => marker.number).join(',') || 'none'}`,
@@ -2358,6 +2383,7 @@ export function produceNck1MaterializationFromStructures({
   mediaInventory = [],
   mediaFiles = [],
   listeningSource = null,
+  recordingTranscript = null,
   writingRoleDeclarations = null,
   profileId = 'nck1',
 }) {
@@ -2621,7 +2647,7 @@ export function produceNck1MaterializationFromStructures({
         paperId, questionBody: body, readingStart, answerBody, answerMap: listeningAnswerMap,
         questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
         coverageDocumentId: sourceCoverage.documentId, issues,
-        listeningSource, listeningMarker: sectionMarkers.listening,
+        listeningSource, recordingTranscript, listeningMarker: sectionMarkers.listening,
       })
   const listening = listeningResult.materialization
   // Writing samples are optional. Keep their source/reason in

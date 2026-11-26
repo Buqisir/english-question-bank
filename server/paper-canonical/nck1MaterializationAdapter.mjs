@@ -566,7 +566,8 @@ function validateDocxParagraphBoundaries(materialization, documentsById, listeni
     try {
       const paragraphs = extractDocxDocumentParagraphs(documentsById.get(document.documentId).bytes)
       const text = paragraphs.map(paragraph => paragraph.text)
-      if (text[0] !== '非官方听力稿及答案（据录音 ASR 整理）'
+      const recording = document.documentId === 'recording-transcript' && text[0] === '听力原文（据录音 ASR 整理）'
+      if ((!recording && text[0] !== '非官方听力稿及答案（据录音 ASR 整理）')
         || !listeningAudio || text[1] !== `录音 SHA-256：${listeningAudio.sha256}`
         || !/^ASR attempt：\S.*$/u.test(text[2] || '')
         || !/^evidence\.json：sha256:[a-f0-9]{64}；摘要：.+$/u.test(text[3] || '')) {
@@ -582,9 +583,15 @@ function validateDocxParagraphBoundaries(materialization, documentsById, listeni
         return matches[0].text
       }
       for (const [index, segment] of (materialization.listening.transcript || []).entries()) {
-        if (resolve(segment.source) !== `Text ${index + 1} | 题号：${segment.questionNumbers.join(',')} | 非官方，据录音整理 | ${segment.text}`) {
+        const label = recording ? '据录音整理' : '非官方，据录音整理'
+        if (resolve(segment.source) !== `Text ${index + 1} | 题号：${segment.questionNumbers.join(',')} | ${label} | ${segment.text}`) {
           throw new Error('Unofficial transcript text or question binding differs from its DOCX paragraph')
         }
+      }
+      if (recording) {
+        if (text.length !== 14 || materialization.listening.answers.some(answer => answer.provenance === 'unofficial'
+          || answer.authority.documentId === document.documentId)) throw new Error('录音转写只提供十段原文，听力答案仍须绑定原答案来源')
+        continue
       }
       for (const answer of materialization.listening.answers || []) {
         const prefix = `${answer.canonicalNumber}. ${answer.value} | 非官方，据录音整理 | ASR 行号：`

@@ -1,5 +1,6 @@
 import {
   produceNck1MaterializationFromStructures,
+  RECORDING_TRANSCRIPT_ID,
   splitNck1CombinedSourceStructure,
 } from './nck1DocxMaterializationProducer.mjs'
 import {
@@ -72,11 +73,13 @@ export function nck1OcrProducerVersion(confirmation) {
 export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = nck1OcrProducerVersion(confirmation),
   writingRoleDeclarations = null, profileId = 'nck1', profileVersion } = {}) {
   const formatProfileBinding = importFormatBinding(profileId, profileVersion)
+  const recording = documents.find(document => document.documentId === RECORDING_TRANSCRIPT_ID && document.role === 'unofficial_listening')
   return digestJson({
     producerVersion,
     sourceSetDigest: nck1OcrSourceSetDigest(documents),
     evidenceDigest: evidence?.evidenceDigest || null,
     confirmationDigest: confirmation ? digestJson(confirmation) : null,
+    ...(recording ? { recordingTranscriptDigest: recording.sha256 } : {}),
     // Declarations change the producer output; an input bearing none keeps the
     // exact historical digest so retained receipts and caches stay valid.
     ...(writingRoleDeclarations?.length ? { writingRoleDeclarations } : {}),
@@ -237,6 +240,8 @@ export function produceNck1OcrMaterialization({
     reviewSchemaVersion: 'nck1-ocr-materialization-review-v1',
     sourceDigest: nck1OcrProducerSourceDigest(documents, { evidence, confirmation, writingRoleDeclarations, profileId, profileVersion }),
     writingRoleDeclarations,
+    recordingTranscript: documents.find(document => document.documentId === RECORDING_TRANSCRIPT_ID
+      && document.role === 'unofficial_listening'),
     profileId,
   })
   produced.materialization.issues = produced.materialization.issues.map((item) =>

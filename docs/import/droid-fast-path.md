@@ -23,6 +23,7 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
   （FluidAudio Core ML 6-bit，模型 `~/.cache/eqbank/asr-trial/fluid-model/`，运行器 `fluid-runner/`）
   两台本地引擎各自独立听录音，不拿原文稿当提示；两台一致即按录音更正原文稿，有分歧的那几秒再交
   OpenAI `gpt-transcribe`。faster-whisper 不再用于原文稿核对，现有切段复核路径换掉之前照旧。
+  答案卷未印听力原文时，可在 `after-proofread` 加 `--audio-transcript <cuts.json>`，已物化的卷另加 `--redo-from materialize`。切点文件包含 `paperId`、`playbackAudioSha256` 和十条 `groups`，每条给出 `segmentId`（`listening-text-1` 至 `listening-text-10`）、`questionNumbers` 和一次播放的 `playback: {startSeconds, endSeconds}`。
   2024 全国甲卷实测（约 623 秒录音，Owner 亲耳核对过的 5 处三台都认对）：Parakeet v2 转写 7 秒
   （首次加载 40 秒）、峰值约 100 MiB；Apple 59 秒；faster-whisper 303 秒、峰值约 1 GiB。
 - ASR（包括 VAD / 非 VAD 和 `asr-extra`）跨卷、跨 worktree 共用 `~/.cache/eqbank/asr-slots` 系统文件锁，整机默认同时只转写 1 个，其余后台排队，进程退出或崩溃自动释放；所有调用统一设置 `EQB_ASR_CONCURRENCY` 可调并发，`EQB_ASR_LOCK_DIR` 可覆盖锁目录（同机调用须保持一致）。

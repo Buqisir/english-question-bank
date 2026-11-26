@@ -7,7 +7,7 @@
 // agent judgement is required. Finished steps are skipped on rerun.
 //
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
-//   after-proofread <paperId> [--issues-resolved] [--redo-from materialize --profile-version 17]
+//   after-proofread <paperId> [--audio-transcript <cuts.json>] [--issues-resolved] [--redo-from materialize --profile-version 17]
 //   finish <paperId> [--large-complete-page-limit 13] [--large-no-listening-page-limit 11] [--economy-page-limit 9] through frozen PDFs and their contact sheets
 //   reopen <paperId>                 archive a sealed local preview so it can be edited
 //   listening-redo <paperId> --feedback-fix <issueId>   hydrated Candidate, listening only
@@ -43,6 +43,7 @@ import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE, expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { segmentListening } from './listening-segment.mjs'
+import { stageRecordingTranscript } from './recording-transcript.mjs'
 import { comparePageAnswers } from './lib-answer-key-comparison.mjs'
 import { writePendingDeclarations } from './pending-declarations.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
@@ -625,6 +626,10 @@ export async function runOcrReview(ctx, generationPlan = null, execute = run) {
 
 async function afterProofread(ctx, args) {
   const generationPlan = option(args, '--ocr-generation-plan')
+  const audioTranscript = option(args, '--audio-transcript')
+  if (audioTranscript && (!hasListening(ctx) || ctx.state.steps.materialize?.finishedAt)) {
+    fail('录音转写需要听力音频；已物化时请加 --redo-from materialize')
+  }
   const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
   if (existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
     || (existsSync(operationPath) && !readJson(operationPath).completedAt)) {
@@ -643,6 +648,7 @@ async function afterProofread(ctx, args) {
   await step(ctx, 'compile', () => run(ctx, 'compile', cli('ocr-proofread.mjs', 'compile', ctx.paperId)))
   await step(ctx, 'ocr-review', () => runOcrReview(ctx, generationPlan))
   await step(ctx, 'materialize', async () => {
+    if (audioTranscript) await stageRecordingTranscript(ctx.paperDir, audioTranscript)
     await run(ctx, 'materialize', cli('universal-nck1.mjs', 'materialize', ctx.paperId))
     return { issues: (readJson(materializationPath(ctx)).issues || []).length }
   })
@@ -2361,6 +2367,10 @@ export async function invalidateExplanationFigureDownstream(paperId, expectedMat
 
 async function runCommand(command, paperId, args) {
   const ctx = context(paperId)
+  if (args.includes('--audio-transcript') && (command !== 'after-proofread'
+    || !option(args, '--audio-transcript') || option(args, '--audio-transcript').startsWith('--'))) {
+    fail('--audio-transcript <cuts.json> 仅用于 after-proofread')
+  }
   if (args.includes('--profile-version') && (command !== 'after-proofread'
     || option(args, '--redo-from') !== 'materialize' || args.includes('--feedback-fix')
     || !option(args, '--profile-version') || option(args, '--profile-version').startsWith('--'))) {

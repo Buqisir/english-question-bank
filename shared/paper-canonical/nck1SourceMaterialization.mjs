@@ -1260,7 +1260,10 @@ function validateListening(listening, documents, sourceCoverage, issues) {
       transcriptQuestionNumbers.push(...segment.questionNumbers)
       validateLocator(segment.source, `$.listening.transcript[${index}].source`, documents, issues)
       const unofficial = listening.answers.some(answer => answer?.provenance === 'unofficial')
-      if ((documents.get(segment.source?.documentId)?.role === 'unofficial_listening') !== unofficial
+      const supplemental = documents.get(segment.source?.documentId)?.role === 'unofficial_listening'
+      const recording = supplemental && segment.source.documentId === 'recording-transcript'
+        && segment.source.kind === 'docx_part' && !unofficial
+      if ((!recording && supplemental !== unofficial)
         || (unofficial && (segment.source?.kind !== 'docx_part'
           || segment.source.documentId !== listening.answers[0]?.authority?.documentId))) {
         issues.push(issue('MATERIALIZATION_LISTENING_TRANSCRIPT_INVALID', `$.listening.transcript[${index}]`, 'Unofficial transcripts must bind the same supplemental DOCX as the answers'))
