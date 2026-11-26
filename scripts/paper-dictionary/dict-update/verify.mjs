@@ -33,7 +33,7 @@ try {
   run('apply', 'first')
   assert.equal(readFileSync(join(dir, entry), 'utf8'), initial)
   assert.deepEqual(JSON.parse(run('prepare', 'same', '--local', dir)),
-    { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counts, sameLegacy: 0, skipped: {} })
+    { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counts, unmarked: 0, sameLegacy: 0, skipped: {} })
   const shard = `occurrences/${paperId}.ndjson`
   const state = `update/${paperId}.json`
   const initialShard = readFileSync(join(dir, shard), 'utf8')
@@ -86,6 +86,49 @@ try {
   run('apply', 'exclude')
   assert.deepEqual(JSON.parse(readFileSync(join(dir, entry), 'utf8')).counts, counts)
   assert.throws(() => readFileSync(join(dir, shard)), { code: 'ENOENT' })
+  const word = 'entries/w-record.json'
+  const readWord = () => JSON.parse(readFileSync(join(dir, word), 'utf8'))
+  const sense = 'w:record#s1'
+  const answer = (batch, rows) => {
+    mkdirSync(join(dir, batch, 'out/mock'), { recursive: true })
+    writeFileSync(join(dir, batch, 'out/mock/w-record.ndjson'), rows.map(row => `${JSON.stringify(row)}\n`).join(''))
+  }
+  write(word, { entryId: 'w:record', headword: 'record', kind: 'word', lists: ['3000'], variants: [], forms: [],
+    version: 1, counts, unassignedCounts: counts, senses: [
+      { senseId: sense, pos: 'v.', glossZh: '录制', counts, examples: [] },
+      { senseId: 'w:record#s2', pos: 'n.', glossZh: '记录', counts, examples: [] },
+    ] })
+  paper('We record birds. We record songs. We record games.')
+  const budget = JSON.parse(run('prepare', 'word', '--local', dir))
+  assert.equal(budget.pending.mock, 2)
+  assert.equal(budget.unmarked, 1)
+  answer('word', [{ idx: 0, pick: sense }, { idx: 1, pick: 'NONE' }])
+  run('apply', 'word')
+  assert.equal(readWord().counts.mock, 3)
+  const wordHash = JSON.parse(readFileSync(join(dir, shard), 'utf8')).blockHash
+  const pinned = readWord().senses[0].examples[0].exampleId
+  paper('We record birds. We record songs! We record games.')
+  assert.equal(JSON.parse(run('prepare', 'punctuation', '--local', dir)).pending.mock, 1)
+  const packetPath = 'packets/mock/w-record.json'
+  const packet = JSON.parse(readFileSync(join(dir, 'punctuation', packetPath), 'utf8'))
+  assert.deepEqual(packet.sentences, [{ idx: 0, text: 'We 【record】 songs!' }])
+  run('apply', 'punctuation')
+  assert.equal(readWord().senses[0].examples[0].exampleId, pinned)
+  const retained = JSON.parse(readFileSync(join(dir, shard), 'utf8'))
+  assert.equal(retained.senseId, sense)
+  assert.notEqual(retained.blockHash, wordHash)
+  assert.equal(JSON.parse(run('prepare', 'rejudge', '--local', dir, '--entry', 'w:record')).pending.mock, 2)
+  answer('rejudge', [{ idx: 0, pick: 'NONE', newSense: { pos: 'v.', glossZh: '把声音录下来' } }])
+  run('apply', 'rejudge')
+  run('check', 'rejudge')
+  const edited = readWord()
+  assert.equal(edited.counts.mock, 3)
+  assert.equal(edited.unassignedCounts.mock, 1)
+  assert.equal(edited.senses[0].counts.mock, 1)
+  assert.equal(edited.senses[0].examples[0].exampleId, pinned)
+  const added = edited.senses.at(-1)
+  assert.equal(added.examples[0].text, 'We record songs!')
+  assert.equal(JSON.parse(readFileSync(join(dir, 'editorial-senses.json'), 'utf8'))[added.senseId].glossZh, added.glossZh)
 } finally {
   rmSync(dir, { recursive: true })
 }

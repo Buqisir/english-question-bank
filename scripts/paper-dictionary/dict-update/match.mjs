@@ -93,13 +93,13 @@ function matchPattern(pattern, items, at, step = 0, fixed = []) {
 
 const envelope = row => [row.sentenceStart + row.start, row.sentenceStart + row.end]
 const overlap = ([a, b], [c, d]) => a < d && c < b
-export function phraseWinners(rows) {
+export function phraseWinners(rows, priority = () => 0) {
   const accepted = []
   const parts = row => row.parts ?? [[row.start, row.end]]
   const length = row => parts(row).reduce((sum, [a, b]) => sum + b - a, 0)
   const words = row => parts(row).reduce((sum, [a, b]) =>
     sum + [...row.sentenceText].slice(a, b).join('').split(/\s+/u).length, 0)
-  for (const row of [...rows].sort((a, b) => words(b) - words(a) || length(b) - length(a) ||
+  for (const row of [...rows].sort((a, b) => priority(b) - priority(a) || words(b) - words(a) || length(b) - length(a) ||
     envelope(a)[0] - envelope(b)[0] || envelope(a)[1] - envelope(b)[1] || a.entryId.localeCompare(b.entryId))) {
     if (!accepted.some(previous => overlap(envelope(previous), envelope(row)))) accepted.push(row)
   }

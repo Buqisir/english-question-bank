@@ -8,11 +8,14 @@ import { parseArgs } from 'node:util'
 import { agentReader, blocksOf, json, legacyHashMatches, localPaper, ndjson, readLegacy, rowLocator,
   tierOf, validPaperId } from './source.mjs'
 import { matcher, phraseWinners } from './match.mjs'
+import { budget, editorialSense, legacyRecord, makeRecord, position, recordRows, reusePicks, sentencesOf,
+  UNMARKED, unresolved } from './annotations.mjs'
 import { locatePhraseOccurrence, normalizePhraseText } from '../../../shared/paper-dictionary/phraseOccurrence.mjs'
 
 const { positionals: [command], values: args } = parseArgs({ allowPositionals: true, options: {
   work: { type: 'string' }, data: { type: 'string' }, paper: { type: 'string', multiple: true },
   local: { type: 'string', multiple: true }, legacy: { type: 'string' }, scope: { type: 'string' },
+  entry: { type: 'string' },
 } })
 assert(['prepare', 'apply', 'check'].includes(command) && args.work, '用法见 dict-update/README.md')
 const data = args.data ?? fileURLToPath(new URL('../../../server/paper-dictionary/otter-data/', import.meta.url))
@@ -21,6 +24,8 @@ const work = name => join(args.work, name)
 const shard = id => join('occurrences', `${id}.ndjson`)
 const state = id => join('update', `${id}.json`)
 const exists = file => existsSync(dir(file))
+const editorialFile = 'editorial-senses.json'
+const editorial = exists(editorialFile) ? json(dir(editorialFile)) : {}
 const digest = text => createHash('sha256').update(text).digest('hex')
 const body = value => `${JSON.stringify(value, null, 2)}\n`
 const lineBody = rows => rows.map(row => `${JSON.stringify(row)}\n`).join('')
@@ -67,6 +72,8 @@ async function targetsFor(local) {
 async function prepare() {
   assert(!existsSync(work('changes.json')), '这批已经进入 apply，新批次请使用新的 --work')
   const selected = new Set(args.paper ?? [])
+  const rejudge = args.entry
+  if (rejudge) assert(entries.has(rejudge), `未知词条 ${rejudge}`)
   for (const id of selected) assert(validPaperId(id), `卷 ID 无效 ${id}`)
   assert(!args.local || !selected.size, '--local 和 --paper 分开使用')
   const local = args.local?.map(path => resolve(path))
@@ -85,7 +92,8 @@ async function prepare() {
     const summary = available.get(id)
     const bootstrap = exists(shard(id)) && !exists(state(id))
     if (!summary || (!scopeAllows(scope, id) && !bootstrap)) continue
-    if (exists(state(id)) && versioned && exists(shard(id)) &&
+    if (rejudge && !exists(shard(id))) continue
+    if (!rejudge && exists(state(id)) && versioned && exists(shard(id)) &&
         JSON.stringify(json(dir(state(id))).target) === JSON.stringify(targetIdentity(summary))) continue
     let paper
     try { paper = detail ? await detail(summary) : summary }
@@ -107,6 +115,8 @@ async function prepare() {
   const match = matcher(entries)
   const packets = new Map()
   const stats = { added: 0, changed: 0, withdrawn: 0, hits: 0, automatic: 0, pending: counters() }
+  if (rejudge) stats.rejudge = rejudge
+  stats.unmarked = 0
   const plan = []
   for (const id of targets) {
     assert(validPaperId(id), `卷 ID 无效 ${id}`)
@@ -115,6 +125,7 @@ async function prepare() {
     const old = exists(state(id)) ? json(dir(state(id))) : legacy.get(id)
     const included = scopeAllows(scope, id)
     const paper = included ? papers.get(id) : null
+    if (rejudge && !paper) continue
     if (included && summary && !paper) continue
     if (!paper && !exists(shard(id))) continue
     const bootstrap = legacy.has(id)
@@ -128,21 +139,60 @@ async function prepare() {
     const blocks = {}
     const changed = {}
     const archive = old?.archive ?? {}
+    const records = old?.records ?? {}
     const oldBlocks = exists(shard(id)) ? old.blocks : {}
     if (bootstrap) for (const [key, block] of Object.entries(oldBlocks)) {
-      for (const row of aliases(block).flatMap(locator => at.get(locator) ?? [])) {
+      const confirmed = aliases(block).flatMap(locator => at.get(locator) ?? [])
+      for (const row of confirmed) {
         if (row.blockHash && row.sentenceText) (archive[key] ??= {})[fingerprint(row)] = row.senseId
       }
+      const byHash = records[key] ??= {}
+      byHash[block.hash] = legacyRecord(block, old.legacyHits[key], confirmed, match(id, block))
+    }
+    if (rejudge && !bootstrap && (Object.keys(current).length !== Object.keys(oldBlocks).length ||
+      Object.entries(current).some(([key, block]) => oldBlocks[key]?.hash !== block.hash ||
+        ref(oldBlocks[key]) !== ref(block)))) {
+      skipped[id] = '目标卷面已变，先执行常规更新'
+      continue
     }
     for (const [key, block] of Object.entries(current)) {
       const previous = oldBlocks[key]
       const { raw, ...info } = block
+      if (previous && !records[key]?.[previous.hash]) {
+        const byHash = records[key] ??= {}
+        const confirmed = aliases(previous).flatMap(locator => at.get(locator) ?? [])
+        if (previous.hash === block.hash) {
+          byHash[previous.hash] = legacyRecord(block, old.legacyHits?.[key], confirmed, match(id, block))
+        } else {
+          const rows = confirmed.filter(row => row.sentenceText).map(row => ({ ...row, pick: row.senseId }))
+          const sentences = old.legacyHits?.[key]?.sentences
+          if (sentences) byHash[previous.hash] = { sentences, rows }
+        }
+      }
       if (previous?.hash === block.hash) {
-        blocks[key] = { ...info, wordCounts: previous.wordCounts ?? {} }
+        blocks[key] = { ...info, wordCounts: previous.wordCounts ?? {}, talliedPhrases: previous.talliedPhrases }
+        if (rejudge) {
+          const record = records[key]?.[block.hash]
+          const pending = new Map((record ? recordRows(record) : [])
+            .filter(row => row.entryId === rejudge && unresolved(row.pick) &&
+              (entries.get(rejudge).kind !== 'phrase' || row.counted))
+            .map(row => [position(row), row]))
+          if (pending.size) {
+            const rows = match(id, block).flatMap(row => {
+              const old = pending.get(position(row))
+              return old?.sentenceText === row.sentenceText ? [{ ...row, counted: old.counted }] : []
+            })
+            if (rows.length) changed[key] = { raw, rows }
+          }
+        }
         continue
       }
-      const rows = match(id, block).map(row => {
-        const prior = archive[key]?.[fingerprint(row)]
+      const hits = match(id, block)
+      const sentences = sentencesOf(raw)
+      const saved = records[key]?.[block.hash] ?? records[key]?.[previous?.hash]
+      const reused = reusePicks(saved, sentences, hits)
+      const rows = hits.map(row => {
+        const prior = reused.get(position(row)) ?? (!previous ? archive[key]?.[fingerprint(row)] : undefined)
         const entry = entries.get(row.entryId)
         if (prior !== undefined) return { ...row, pick: prior }
         stats.hits++
@@ -150,9 +200,27 @@ async function prepare() {
           stats.automatic++
           return { ...row, pick: entry.senses[0].senseId }
         }
+        return row
+      })
+      blocks[key] = { ...info, wordCounts: {}, talliedPhrases: true }
+      changed[key] = { raw, rows, sentences }
+    }
+    const removed = Object.keys(oldBlocks).filter(key => !blocks[key])
+    const moved = Object.keys(blocks).filter(key => oldBlocks[key] && (
+      ref(blocks[key]) !== ref(oldBlocks[key]) || JSON.stringify(blocks[key].locator) !== JSON.stringify(oldBlocks[key].locator)))
+    const existed = exists(shard(id))
+    const before = Object.fromEntries(Object.entries(oldBlocks).map(([key, b]) =>
+      [key, { locator: ref(b), aliases: aliases(b), wordCounts: b.wordCounts ?? {}, talliedPhrases: b.talliedPhrases,
+        rows: aliases(b).flatMap(locator => at.get(locator) ?? []) }]))
+    const represented = new Set(Object.values(before).flatMap(b => b.rows))
+    if (represented.size !== activeRows.length) { skipped[id] = '旧分片存在无法定位的命中'; continue }
+    const edits = Object.values(changed).flatMap(edit => edit.rows)
+    const selectedRows = new Set(rejudge ? edits : budget(edits, tierOf(paper ?? {}), entries))
+    for (const row of edits) {
+      if (selectedRows.has(row)) {
         const packetKey = `${tierOf(paper)}/${names.get(row.entryId).split('/').at(-1)}`
         if (!packets.has(packetKey)) {
-          const { entryId, headword, senses } = entry
+          const { entryId, headword, senses } = entries.get(row.entryId)
           packets.set(packetKey, { entryId, headword, senses: senses.map(({ senseId, pos, glossZh, note }) =>
             ({ senseId, pos, glossZh, note })), sentences: [] })
         }
@@ -162,27 +230,17 @@ async function prepare() {
         const idx = sentences.length
         sentences.push({ idx, text: marked })
         stats.pending[tierOf(paper)]++
-        return { ...row, packetKey, idx }
-      })
-      blocks[key] = { ...info, wordCounts: {} }
-      changed[key] = { raw, rows }
+        Object.assign(row, { packetKey, idx })
+      } else if (row.pick === undefined) row.pick = UNMARKED
+      if (row.pick === UNMARKED) stats.unmarked++
     }
-    const removed = Object.keys(oldBlocks).filter(key => !blocks[key])
-    const moved = Object.keys(blocks).filter(key => oldBlocks[key] && (
-      ref(blocks[key]) !== ref(oldBlocks[key]) || JSON.stringify(blocks[key].locator) !== JSON.stringify(oldBlocks[key].locator)))
-    const existed = exists(shard(id))
-    const before = Object.fromEntries(Object.entries(oldBlocks).map(([key, b]) =>
-      [key, { locator: ref(b), aliases: aliases(b), wordCounts: b.wordCounts ?? {},
-        rows: aliases(b).flatMap(locator => at.get(locator) ?? []) }]))
-    const represented = new Set(Object.values(before).flatMap(b => b.rows))
-    if (represented.size !== activeRows.length) { skipped[id] = '旧分片存在无法定位的命中'; continue }
     const metadataOnly = Boolean(paper && existed && !removed.length && !Object.keys(changed).length &&
       !moved.length && old.tier === tierOf(paper))
     if (!paper) stats.withdrawn++
     else if (!existed) stats.added++
     else if (!metadataOnly) stats.changed++
     else if (!bootstrap && JSON.stringify(old.target) === JSON.stringify(targetIdentity(summary))) continue
-    plan.push({ id, title: paper?.title, target: targetIdentity(summary), included, metadataOnly,
+    plan.push({ id, title: paper?.title, target: targetIdentity(summary), included, metadataOnly, rejudge, records,
       legacyHits: old?.legacyHits, legacyRows: old?.legacyRows ?? (bootstrap ? activeRows : undefined),
       tier: paper && tierOf(paper),
       oldTier: old?.tier, before, blocks, changed, archive,
@@ -225,12 +283,16 @@ async function apply() {
   const picks = new Map()
   for (const key of packets.filter(key => needed.has(key))) {
     const packet = json(work(`packets/${key}`))
-    const answers = ndjson(readFileSync(work(`out/${key.replace(/\.json$/u, '.ndjson')}`), 'utf8'))
-    assert.equal(answers.length, packet.sentences.length, `答卷题数不符 ${key}`)
-    answers.forEach(({ idx, pick }, i) => {
-      assert(idx === i && (['NONE', 'UNSURE'].includes(pick) ||
+    const answers = new Map()
+    for (const answer of ndjson(read(work(`out/${key.replace(/\.json$/u, '.ndjson')}`)) ?? '')) {
+      const { idx, pick, newSense } = answer
+      assert(Number.isInteger(idx) && packet.sentences[idx]?.idx === idx && !answers.has(idx) &&
+        (['NONE', 'UNSURE'].includes(pick) ||
         entries.get(packet.entryId).senses.some(sense => sense.senseId === pick)), `无效答卷 ${key} ${idx}`)
-    })
+      assert(newSense === undefined || (pick === 'NONE' && newSense && typeof newSense === 'object' &&
+        !Array.isArray(newSense)), `新义需要从 NONE 回填 ${key} ${idx}`)
+      answers.set(idx, answer)
+    }
     picks.set(key, answers)
   }
   const staged = work('changes.json')
@@ -261,6 +323,8 @@ function buildChanges(plan, picks) {
   const touched = new Map()
   const current = new Map()
   const updated = new Map()
+  const editorialBefore = JSON.stringify(editorial)
+  const entryBefore = new Map()
   const change = (file, after, base = read(dir(file))) => {
     if (base !== after) changes.push([file, base === null ? null : digest(base), after])
   }
@@ -270,33 +334,61 @@ function buildChanges(plan, picks) {
       return text === null ? null : digest(text)
     }), p.base, `准备后分片已变化 ${p.id}`)
     const saveState = () => change(state(p.id), body({ target: p.target, tier: p.tier, blocks: p.blocks,
-      archive: p.archive, legacyHits: p.legacyHits, legacyRows: p.legacyRows }))
+      archive: p.archive, records: p.records, legacyHits: p.legacyHits, legacyRows: p.legacyRows }))
     if (p.metadataOnly) { saveState(); continue }
     for (const b of Object.values(p.before)) count(b, p.oldTier, -1)
     const rows = []
     for (const [key, block] of Object.entries(p.blocks)) {
       const edit = p.changed[key]
       const previous = p.before[key]
-      const blockRows = edit ? [] : previous.rows.map(row => ref(block) === previous.locator ? row :
+      let exampleRows
+      const blockRows = edit && !p.rejudge ? [] : previous.rows.map(row => ref(block) === previous.locator ? row :
         ({ ...row, [block.kind === 'paragraph' ? 'paragraphId' : 'questionId']: block.id }))
       if (edit) {
-        const annotations = p.archive[key] ??= {}
-        for (const { packetKey, idx, pick = picks.get(packetKey)?.[idx]?.pick, ...row } of edit.rows) {
-          annotations[fingerprint(row)] = pick
-          const phrase = entries.get(row.entryId).kind === 'phrase'
-          if (!phrase) block.wordCounts[row.entryId] = (block.wordCounts[row.entryId] ?? 0) + 1
+        const byHash = p.records[key] ??= {}
+        const record = byHash[block.hash] ??= { rows: [], sentences: edit.sentences }
+        const replacements = new Map()
+        for (const { packetKey, idx, pick: prior, counted, ...row } of edit.rows) {
+          const answer = picks.get(packetKey)?.get(idx)
+          if (p.rejudge && !answer) continue
+          let pick = prior ?? answer?.pick ?? UNMARKED
+          if (answer?.newSense) pick = addEditorialSense(row, answer.newSense)
           if (pick === 'NONE') queue.push({ ...row, tier: p.tier })
-          if (!['NONE', 'UNSURE'].includes(pick)) blockRows.push({ ...row, senseId: pick })
+          replacements.set(position(row), { ...row, pick, counted })
         }
-        const winners = phraseWinners(blockRows.filter(row => entries.get(row.entryId).kind === 'phrase'))
-        blockRows.splice(0, blockRows.length, ...blockRows.filter(row => entries.get(row.entryId).kind !== 'phrase'), ...winners)
-        validate(blockRows, edit.raw)
+        const updates = [...replacements.values()]
+        if (p.rejudge) {
+          byHash[block.hash] = makeRecord(record.sentences, record.rows.map(row => {
+            const next = replacements.get(position(row))
+            if (!next) return row
+            const history = [...row.history ?? [], row.pick]
+            return { ...next, history }
+          }))
+        } else {
+          const words = updates.filter(row => entries.get(row.entryId).kind !== 'phrase')
+          const phrases = phraseWinners(updates.filter(row => entries.get(row.entryId).kind === 'phrase'),
+            row => Number(!unresolved(row.pick)))
+          for (const row of [...words, ...phrases]) {
+            row.counted = true
+            block.wordCounts[row.entryId] = (block.wordCounts[row.entryId] ?? 0) + 1
+          }
+          const previousRows = new Map(record.rows.map(row => [position(row), row]))
+          byHash[block.hash] = makeRecord(edit.sentences, updates.map(row => {
+            const old = previousRows.get(position(row))
+            const history = old && old.pick !== row.pick ? [...old.history ?? [], old.pick] : old?.history
+            return { ...row, history }
+          }))
+        }
+        exampleRows = updates.filter(row => (row.counted || p.rejudge) && !unresolved(row.pick))
+          .map(({ pick, counted, ...row }) => ({ ...row, senseId: pick }))
+        blockRows.push(...exampleRows)
+        validate(p.rejudge ? exampleRows : blockRows, edit.raw)
       }
       count({ ...block, rows: blockRows }, p.tier, 1)
       rows.push(...blockRows)
-      for (const row of blockRows.filter(row => row.sentenceText)) {
+      for (const row of (p.rejudge ? exampleRows ?? [] : blockRows).filter(row => row.sentenceText)) {
         const examples = current.get(row.senseId) ?? []
-        examples.push({ row, paper: p, block })
+        examples.push({ row, paper: p, block, key })
         current.set(row.senseId, examples)
       }
     }
@@ -305,11 +397,11 @@ function buildChanges(plan, picks) {
     saveState()
   }
   for (const entry of entries.values()) {
-    const before = JSON.stringify(entry)
+    const before = entryBefore.get(entry.entryId) ?? JSON.stringify(entry)
     for (const sense of entry.senses) {
       sense.examples = sense.examples.filter(example => {
         const p = updated.get(example.source.paperId)
-        if (!p) return true
+        if (!p || p.rejudge) return true
         const { paragraphId, questionId, optionBank, option } = example.source.locator
         const id = paragraphId ?? (optionBank ? `option-bank:${optionBank}` :
           option && !questionId?.includes('#option=') ? `${questionId}#option=${option}` : questionId)
@@ -324,8 +416,8 @@ function buildChanges(plan, picks) {
           return true
         }
         const same = (current.get(sense.senseId) ?? []).filter(item => item.paper === p &&
-          normalizePhraseText(item.row.sentenceText).text === normalizePhraseText(example.text).text &&
-          (ref(item.block) === source || item.block.kind === 'option' || item.block.kind === 'bank'))
+          item.row.sentenceText === example.text && p.before[item.key]?.aliases.includes(source) &&
+          (!example.target || (example.target.start === item.row.start && example.target.end === item.row.end)))
         if (same.length !== 1) return false
         const refreshed = toExample(same[0])
         Object.assign(example, refreshed, { exampleId: example.exampleId })
@@ -343,10 +435,23 @@ function buildChanges(plan, picks) {
       change(names.get(entry.entryId), body(entry))
     }
   }
+  if (editorialBefore !== JSON.stringify(editorial)) change(editorialFile, body(editorial))
   save(work('new-senses.ndjson'), lineBody(queue))
   return changes
 
-  function count({ wordCounts, rows }, tier, sign) {
+  function addEditorialSense(row, draft) {
+    const entry = entries.get(row.entryId)
+    const id = editorialSense(draft, entry, editorial, spec =>
+      `${row.entryId}#s-new-${digest(JSON.stringify(spec)).slice(0, 16)}`)
+    if (!entry.senses.some(sense => sense.senseId === id)) {
+      if (!entryBefore.has(row.entryId)) entryBefore.set(row.entryId, JSON.stringify(entry))
+      const { entryId, ...sense } = editorial[id]
+      entry.senses.push({ ...sense, counts: counters(), origin: 'dictionary', folded: true, examples: [] })
+    }
+    return id
+  }
+
+  function count({ wordCounts, rows, talliedPhrases }, tier, sign) {
     const adjust = (id, key, n) => {
       if (!touched.has(id)) touched.set(id, new Map())
       const byKey = touched.get(id)
@@ -357,7 +462,7 @@ function buildChanges(plan, picks) {
     for (const row of rows) {
       assert(senseOf(row), `无效义项引用 ${row.senseId}`)
       adjust(row.entryId, row.senseId, 1)
-      if (entries.get(row.entryId).kind === 'phrase') adjust(row.entryId, null, 1)
+      if (!talliedPhrases && entries.get(row.entryId).kind === 'phrase') adjust(row.entryId, null, 1)
     }
   }
 }
@@ -398,10 +503,12 @@ if (command === 'check') {
     assert(row.paperId === id && senseOf(row), `无效分片引用 ${id} ${row.senseId}`)
   }
   const applied = new Set(json(work('applied-papers.json')))
-  for (const { id, changed } of plan.filter(p => applied.has(p.id))) {
+  for (const { id, changed, rejudge } of plan.filter(p => applied.has(p.id))) {
     const byLocator = Map.groupBy(readShard(id), rowLocator)
     for (const { raw, rows } of Object.values(changed)) if (rows.length) {
-      validate(byLocator.get(rowLocator(rows[0])) ?? [], raw)
+      const indexed = byLocator.get(rowLocator(rows[0])) ?? []
+      const targets = new Set(rows.map(position))
+      validate(rejudge ? indexed.filter(row => row.entryId === rejudge && targets.has(position(row))) : indexed, raw)
     }
   }
   console.log('分片引用、变动块短语定位与重叠检查通过')

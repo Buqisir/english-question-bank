@@ -16,7 +16,11 @@ node "$tool" prepare --work "$work" --paper paper-… --paper paper-…
 
 ## 2. 判题并应用
 
-派 Light 判 `packets/mock/*.json`，Medium 判 `packets/gaokao/*.json`。每包只判断 `【】` 内的目标词或短语。短语隔开的固定成分按选中范围读取。将每个题包的答案按原顺序写入对应的 `out/<tier>/<同名>.ndjson`，每题一行 `{"idx":0,"pick":"w:address#s2"}`。各义项都不适用填 `NONE`，上下文不足填 `UNSURE`。
+派 Light 判 `packets/mock/*.json`，Medium 判 `packets/gaokao/*.json`。真题和短语全判，模拟每词每卷最多 2 处，优先不同句子。只判断 `【】` 内的目标词或短语。答案写入 `out/<tier>/<同名>.ndjson`，每题一行 `{"idx":0,"pick":"w:address#s2"}`。各义项都不适用填 `NONE`，上下文不足填 `UNSURE`。允许部分回填，未答和预算外的词计入总数，留作未标。
+
+用新工作目录执行 `prepare --entry w:address --work "$work"` 可重判同版卷里此词的 `NONE`、`UNSURE` 和未标命中。已确认的命中保持原样。重判短语使用已经计入总数的未分义命中。
+
+Medium 确认 `NONE` 的用例足够明确时，可在这题答案附新义，如 `{"idx":0,"pick":"NONE","newSense":{"pos":"v.","glossZh":"登记住址"}}`。可附 `note` 和已有的 `pronunciationId`。永久 ID、编辑定义写入 `otter-data/editorial-senses.json`，应用时同时更新词条。已应用的 `NONE` 可用定向重判回填。
 
 ```sh
 node "$tool" apply --work "$work"
