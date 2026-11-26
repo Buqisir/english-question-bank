@@ -466,11 +466,28 @@ test('after-proofread forwards explicit body width to figure-sizes on resume', t
   assert.match(readFileSync(path.join(work, 'fast/logs/figure-sizes.log'), 'utf8'),
     /--body-width-ratio 0\.785894/u)
   assert.match(readFileSync(path.join(work, 'pending-declarations.md'), 'utf8'), /当前诊断未发现待声明项/u)
+  const signal = path.join(paperDir, 'signals/ai-answer-check.json')
+  const answerReport = path.join(work, 'handoff/qa/answer-key-comparison.json')
+  const submittedState = JSON.parse(readFileSync(statePath))
+  submittedState.steps.push = completed({ revisionId: 'rev-submitted' })
+  json(statePath, submittedState)
+  json(signal, { ok: true, candidateDigest: 'original' })
+  const signalBytes = readFileSync(signal)
+  const reportBytes = readFileSync(answerReport)
+  const materializationBytes = readFileSync(materializationPath)
+  json(materializationPath, { ...JSON.parse(materializationBytes), answers: [{ canonicalNumber: 21, value: 'A' }] })
+  const resumed = run([])
+  assert.equal(resumed.status, 0, resumed.stderr)
+  assert.deepEqual(readFileSync(signal), signalBytes)
+  assert.deepEqual(readFileSync(answerReport), reportBytes)
+  assert.deepEqual(JSON.parse(readFileSync(statePath)).steps['answer-check'], submittedState.steps['answer-check'])
+  delete submittedState.steps.push
+  json(statePath, submittedState)
+  writeFileSync(materializationPath, materializationBytes)
+
   const sourceFlags = path.join(work, 'source-flags')
   json(path.join(sourceFlags, 'answer-p01.json'), { answers: { 21: 'A' } })
   json(path.join(sourceFlags, 'answer-p02.json'), { answers: { 21: 'B' } })
-  const signal = path.join(paperDir, 'signals/ai-answer-check.json')
-  json(signal, { ok: true })
   const blocked = run([])
   assert.equal(blocked.status, 2, blocked.stderr)
   assert.match(blocked.stderr, /抄录冲突 21.*材料化漏题 21/u)
@@ -991,6 +1008,19 @@ for (const stale of [true, false]) test(`direct submit rejects ${stale ? 'old' :
     })
   }
   assert.deepEqual(snapshot(dir), before)
+})
+
+test('submit and local preview reject current answer failures despite completed PDF QA', async t => {
+  const { dir, ctx } = fixture(t)
+  assert(ctx.state.steps['pdf-qa'].finishedAt)
+  for (const key of ['conflicts', 'missing', 'mismatches', 'omitted']) {
+    json(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json'), { [key]: [21] })
+    const before = snapshot(dir)
+    for (const args of [[], ['--local-preview']]) {
+      await assert.rejects(() => submit(ctx, args), /答案核对未通过.*answer-key-comparison\.json/u)
+    }
+    assert.deepEqual(snapshot(dir), before)
+  }
 })
 
 for (const name of downstream.slice(1)) {

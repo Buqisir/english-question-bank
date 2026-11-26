@@ -482,12 +482,16 @@ function applySubtitlesAndCheckWatermarks(ctx) {
   return { subtitles: edits.length, watermarksChecked: flags.flatMap((flag) => flag.watermarks || []).length }
 }
 
+const answerComparisonPath = ctx => path.join(ctx.work, 'handoff/qa/answer-key-comparison.json')
+const hasAnswerComparisonFailures = report =>
+  ['conflicts', 'missing', 'mismatches', 'omitted'].some(key => report[key]?.length)
+
 function answerCheck(ctx) {
   const comparison = comparePageAnswers(readJson(materializationPath(ctx)), readFlags(ctx))
   const { compared, conflicts, missing, mismatches, omitted } = comparison
-  writeJson(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json'), {
+  writeJson(answerComparisonPath(ctx), {
     paperId: ctx.paperId, method: 'proofreader-page-transcription-vs-answerKey', ...comparison })
-  if (conflicts.length || missing.length || mismatches.length || omitted.length) {
+  if (hasAnswerComparisonFailures(comparison)) {
     archive(ctx, path.join(ctx.paperDir, 'signals/ai-answer-check.json'))
     delete ctx.state.steps['answer-check']
     save(ctx)
@@ -684,7 +688,10 @@ async function afterProofread(ctx, args) {
     await run(ctx, 'verify-spelling', cli('review.mjs', 'verify-spelling', ctx.paperId))
     return { unchanged: built.unchanged, correct: built.correct, uncertain: built.uncertain, mechanical: built.mechanical }
   })
-  const comparison = answerCheck(ctx)
+  // A completed submission keeps its original verification evidence.
+  const push = ctx.state.steps.push
+  const reuseSubmittedAnswers = push?.finishedAt && push.result?.revisionId && ctx.state.steps['answer-check']?.finishedAt
+  const comparison = reuseSubmittedAnswers ? null : answerCheck(ctx)
   const verified = await step(ctx, 'verify', async () => {
     const result = await run(ctx, 'verify', cli('universal-nck1.mjs', 'verify', ctx.paperId))
     return { sourceDigest: result.sourceDigest, candidateDigest: result.candidateDigest, groups: result.groups, assertions: result.assertions }
@@ -1649,6 +1656,10 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
 // The Candidate upload. Under the batch submission rule it runs only after PDF QA found nothing
 // blocking; `--resolves` carries Owner issues fixed by this revision.
 export async function submit(ctx, args) {
+  const answerReport = answerComparisonPath(ctx)
+  if (existsSync(answerReport) && hasAnswerComparisonFailures(readJson(answerReport))) {
+    throw new Stop(`答案核对未通过，见 ${path.relative(root, answerReport)}。对照原页处理后重跑 after-proofread。`)
+  }
   const resolves = option(args, '--resolves')
   if (args.includes('--rebind-rejected-issue')) {
     if (args.includes('--local-preview')) fail('rebind-rejected-issue 不允许 local-preview')
