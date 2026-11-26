@@ -1,0 +1,705 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-zhejiang-jan:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-zhejiang-jan:reading-a": {
+      "overview": "一则暑期“探索者营”招生广告：面向5至13岁儿童，7月分三周、每周一至周五全天开营，可按周报名，写明费用和退款截止日，并介绍每日课程安排、活动内容和师资。",
+      "fullTranslationZh": "探索者营\n\n•面向5至13岁儿童的全日制营地。\n\n•7月8日至26日，周一至周五，上午9点至下午4点。\n\n第1周 | 7月8日至12日\n\n第2周 | 7月15日至19日\n\n第3周 | 7月22日至26日\n\n•可报名一周，也可报名多周。\n\n•费用：每周365美元。\n\n•取消报名并获得全额退款的最后一天是6月15日。\n\n营地安排\n\n每个年龄组每天的活动分为两个主题时段。营员上午上三小时围绕上午主题的课（上午9点至中午12点），之后午休一小时，接着再上三小时围绕下午主题的课（下午至4点）。全天穿插点心时间。所有营员都应自带袋装午餐和点心。\n\n营地内容\n\n探索者营每节课都组织引人入胜的艺术、历史和科学类活动，内容围绕一系列主题，强调主动学习、探索，最重要的是乐趣！所有营地课程都配有适合相应年龄的活动，并针对孩子们多种多样的学习方式量身设计。\n\n营地人员\n\n根据年龄组不同，工作人员与儿童的比例在1:4到1:7之间。指导老师都是充满热情的教育工作者，是各自领域的专家，并且接受过培训和背景审查。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+          "sourceText": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+          "displayText": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:23"
+          ],
+          "translationZh": "营员上午上三小时围绕上午主题的课（上午9点至中午12点），之后午休一小时，接着再上三小时围绕下午主题的课（下午至4点）。",
+          "analysisZh": "主干是 Campers have A and B：营员有“上午三小时的课”和“一小时午休”两样安排。两处 engaging with … 都是现在分词短语，分别修饰前面的 class，说明这节课围绕什么主题。逗号后的 followed by another three-hour class 是过去分词短语，补充说明午休之后还有一节三小时的课。顺着时间读下来就是：上午三小时课 → 午休一小时 → 下午三小时课，算一天的课时就靠这条时间线。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "Campers have"
+            },
+            {
+              "start": 87,
+              "end": 113,
+              "quote": "and a one-hour lunch break"
+            },
+            {
+              "start": 115,
+              "end": 151,
+              "quote": "followed by another three-hour class"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:1"
+              ],
+              "start": 0,
+              "end": 4,
+              "quote": "探索者营"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:2"
+              ],
+              "start": 6,
+              "end": 23,
+              "quote": "•面向5至13岁儿童的全日制营地。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:3"
+              ],
+              "start": 25,
+              "end": 51,
+              "quote": "•7月8日至26日，周一至周五，上午9点至下午4点。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:4"
+              ],
+              "start": 53,
+              "end": 67,
+              "quote": "第1周 | 7月8日至12日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:5"
+              ],
+              "start": 69,
+              "end": 84,
+              "quote": "第2周 | 7月15日至19日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:6"
+              ],
+              "start": 86,
+              "end": 101,
+              "quote": "第3周 | 7月22日至26日"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:7"
+              ],
+              "start": 103,
+              "end": 117,
+              "quote": "•可报名一周，也可报名多周。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:8"
+              ],
+              "start": 119,
+              "end": 131,
+              "quote": "•费用：每周365美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:9"
+              ],
+              "start": 133,
+              "end": 157,
+              "quote": "•取消报名并获得全额退款的最后一天是6月15日。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:10"
+              ],
+              "start": 159,
+              "end": 163,
+              "quote": "营地安排"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:11"
+              ],
+              "start": 165,
+              "end": 269,
+              "quote": "每个年龄组每天的活动分为两个主题时段。营员上午上三小时围绕上午主题的课（上午9点至中午12点），之后午休一小时，接着再上三小时围绕下午主题的课（下午至4点）。全天穿插点心时间。所有营员都应自带袋装午餐和点心。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:12"
+              ],
+              "start": 271,
+              "end": 275,
+              "quote": "营地内容"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:13"
+              ],
+              "start": 277,
+              "end": 371,
+              "quote": "探索者营每节课都组织引人入胜的艺术、历史和科学类活动，内容围绕一系列主题，强调主动学习、探索，最重要的是乐趣！所有营地课程都配有适合相应年龄的活动，并针对孩子们多种多样的学习方式量身设计。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:14"
+              ],
+              "start": 373,
+              "end": 377,
+              "quote": "营地人员"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-a:15"
+              ],
+              "start": 379,
+              "end": 447,
+              "quote": "根据年龄组不同，工作人员与儿童的比例在1:4到1:7之间。指导老师都是充满热情的教育工作者，是各自领域的专家，并且接受过培训和背景审查。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2023-zhejiang-jan:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+                "start": 61,
+                "end": 258,
+                "quote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p11",
+                "start": 19,
+                "end": 79,
+                "quote": "营员上午上三小时围绕上午主题的课（上午9点至中午12点），之后午休一小时，接着再上三小时围绕下午主题的课（下午至4点）。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+                "start": 0,
+                "end": 78,
+                "quote": "•The last day to cancel registration and receive a full refund(退款) is June 15."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p9",
+                "start": 0,
+                "end": 24,
+                "quote": "•取消报名并获得全额退款的最后一天是6月15日。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+                "start": 0,
+                "end": 60,
+                "quote": "The day is divided into two thematic sessions per age group."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:15",
+                "start": 63,
+                "end": 89,
+                "quote": "depending on the age group"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p11",
+                "start": 0,
+                "end": 19,
+                "quote": "每个年龄组每天的活动分为两个主题时段。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p15",
+                "start": 0,
+                "end": 7,
+                "quote": "根据年龄组不同"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+                "start": 61,
+                "end": 258,
+                "quote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm)."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+                "start": 0,
+                "end": 39,
+                "quote": "•Monday – Friday, July 8–26, 9am – 4pm."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p11",
+                "start": 19,
+                "end": 79,
+                "quote": "营员上午上三小时围绕上午主题的课（上午9点至中午12点），之后午休一小时，接着再上三小时围绕下午主题的课（下午至4点）。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-a-p3",
+                "start": 0,
+                "end": 26,
+                "quote": "•7月8日至26日，周一至周五，上午9点至下午4点。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "广告先用几条要点交代营地对象、开营时间、三周安排、报名方式、费用和退款截止日，再分三部分介绍每日安排、活动内容和工作人员。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:2",
+            "summary": "营地面向5至13岁儿童，全天开营",
+            "function": "交代营地对象，读者先判断孩子是否符合年龄。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+            "summary": "7月8日至26日，周一至周五，每天9点到4点",
+            "function": "给出开营日期和每天的时间，是计算课时的依据之一。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:7",
+            "summary": "可报名一周或多周",
+            "function": "说明报名方式，与上面三周的分周安排相配合。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:8",
+            "summary": "每周费用365美元",
+            "function": "交代收费标准。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+            "summary": "6月15日是取消报名并全额退款的最后一天",
+            "function": "给出退款期限，提醒家长在截止日前决定。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+            "summary": "每个年龄组一天两个三小时主题课，中间午休一小时，需自带午餐和点心",
+            "function": "说明每天的课程安排和饮食要求。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
+            "summary": "课程涵盖艺术、历史、科学活动，强调主动学习、探索和乐趣，并按年龄设计",
+            "function": "介绍活动内容和特点，吸引家长报名。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:15",
+            "summary": "师生比随年龄组在1:4到1:7之间，老师专业且经过培训和背景审查",
+            "function": "介绍师资，让家长放心。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-zhejiang-jan:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到退款截止日，再判断哪个日期还在期限之内。",
+      "stemTranslationZh": "在下列哪个日期取消报名可以获得全额退款？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "6月12日。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+              "quote": "•The last day to cancel registration and receive a full refund(退款) is June 15.",
+              "anchor": "退款截止日"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "6月22日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "•The last day to cancel registration and receive a full refund(退款) is June 15.",
+            "sourceHighlight": "The last day",
+            "optionText": "June 22.",
+            "optionHighlight": "June 22",
+            "explanation": "6月15日是最后一天（The last day），6月22日已经过了截止日一周，这时取消拿不到全额退款。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+              "quote": "•The last day to cancel registration and receive a full refund(退款) is June 15.",
+              "anchor": "退款截止日"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "7月19日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Week 2 | July 15-19",
+            "sourceEntity": "July 15-19",
+            "optionText": "July 19.",
+            "optionEntity": "July 19",
+            "explanation": "19日取自[[block:paper-gaokao-2023-zhejiang-jan:reading-a:5]]第二周的结束日（July 15-19），那时营地已开营一周多，比退款截止日6月15日晚了一个多月。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:5",
+              "quote": "Week 2 | July 15-19",
+              "anchor": "第二周日期"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "7月26日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "July 8–26",
+            "sourceEntity": "July 8–26",
+            "optionText": "July 26.",
+            "optionEntity": "July 26",
+            "explanation": "7月26日是整个营期的最后一天（July 8–26），营都结束了，和退款期限无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+              "quote": "•Monday – Friday, July 8–26, 9am – 4pm.",
+              "anchor": "营期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "full refund",
+          "sourceRole": "stem",
+          "targetText": "•The last day to cancel registration and receive a full refund(退款) is June 15.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+          "relationType": "locationCue",
+          "answerText": "The last day to cancel registration and receive a full refund(退款) is June 15",
+          "note": "题干 full refund 原词出现在原文。"
+        },
+        {
+          "sourceText": "June 12.",
+          "sourceRole": "correctOption",
+          "targetText": "is June 15",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+          "relationType": "calculation",
+          "note": "原文只给出截止日：6月15日是能全额退款的最后一天（The last day），在这天及以前取消都行；四个日期里只有6月12日早于6月15日，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从营地安排里找出营员分组的依据。",
+      "stemTranslationZh": "营员是如何被分成不同组的？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "按性别。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By gender.",
+            "explanation": "广告从头到尾没提男孩女孩分开；说到分组只用年龄组（age group）这个说法。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "按国籍。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By nationality.",
+            "explanation": "原文没提营员来自哪些国家；对营员的要求只有年龄5至13岁（aged 5–13）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "按兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The day is divided into two thematic sessions per age group.",
+            "sourceEntity": "thematic sessions",
+            "optionText": "By interest.",
+            "optionEntity": "interest",
+            "explanation": "选项借“主题时段”（thematic sessions）猜成按兴趣分组；可主题是用来划分一天的上午、下午两段，每个年龄组都上这两段，营员并没有按兴趣挑组。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "quote": "The day is divided into two thematic sessions per age group.",
+              "anchor": "主题时段"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "按年龄。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "quote": "The day is divided into two thematic sessions per age group.",
+              "anchor": "按年龄组安排"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:15",
+              "quote": "depending on the age group",
+              "anchor": "师生比随年龄组变化"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "divided",
+          "sourceRole": "stem",
+          "targetText": "The day is divided into two thematic sessions per age group.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+          "relationType": "locationCue",
+          "answerText": "per age group",
+          "note": "题干 divided 原词出现在原文。"
+        },
+        {
+          "sourceText": "By age.",
+          "sourceRole": "correctOption",
+          "targetText": "per age group",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+          "relationType": "paraphrase",
+          "note": "选项的“按年龄”（By age）就是原文的“每个年龄组”（per age group）：活动按年龄组安排，[[block:paper-gaokao-2023-zhejiang-jan:reading-a:15|depending on the age group]]里师生比也随年龄组变化，可见营员按年龄分组，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把每天的课时和一周上课的天数找齐，算出一周的总课时。",
+      "stemTranslationZh": "如果你只报名一周，总共要上多少小时的课？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "15。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+            "sourceHighlight": "another three-hour class",
+            "optionText": "15.",
+            "optionHighlight": "15",
+            "explanation": "15是只算上午那节课：3小时×5天；漏了午休后还有另一节三小时的课（another three-hour class）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "quote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+              "anchor": "每天两节课"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "21。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+            "sourceHighlight": "another three-hour class",
+            "optionText": "21.",
+            "optionHighlight": "21",
+            "explanation": "21是每天只算一节三小时课、一周按7天算（3×7）；其实每天有两节课，而且只在周一到周五（Monday – Friday）开营。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "quote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+              "anchor": "每天两节课"
+            },
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+              "quote": "•Monday – Friday, July 8–26, 9am – 4pm.",
+              "anchor": "周一至周五"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "30。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "quote": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+              "anchor": "每天两节三小时课"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+              "quote": "•Monday – Friday, July 8–26, 9am – 4pm.",
+              "anchor": "周一至周五开营"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "42。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "•Monday – Friday, July 8–26, 9am – 4pm.",
+            "sourceHighlight": "Monday – Friday",
+            "optionText": "42.",
+            "optionHighlight": "42",
+            "explanation": "每天6小时算对了，却把一周算成7天（6×7=42）；营地只在周一到周五（Monday – Friday）上课，周末不开。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+              "quote": "•Monday – Friday, July 8–26, 9am – 4pm.",
+              "anchor": "周一至周五"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "hours of class",
+          "sourceRole": "stem",
+          "targetText": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+          "relationType": "locationCue",
+          "targetCue": "three-hour morning class",
+          "sourceZh": "上课的小时数",
+          "targetCueZh": "三小时的上午课",
+          "answerText": "a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class",
+          "note": "题干 hours of class 对应原文 three-hour morning class。"
+        },
+        {
+          "sourceText": "30.",
+          "sourceRole": "correctOption",
+          "targetText": "another three-hour class",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+          "relationType": "calculation",
+          "note": "30是两处数字合起来算出的：每天上午、下午各一节三小时课（three-hour … class），共6小时，中间一小时午休（lunch break）不算；[[block:paper-gaokao-2023-zhejiang-jan:reading-a:3|Monday – Friday]]说一周上5天，6×5=30，选 C。"
+        }
+      ]
+    }
+  }
+}

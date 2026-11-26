@@ -1,0 +1,1104 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-zhejiang-jan:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-zhejiang-jan:grammar-fill": {
+      "overview": "文章介绍北京胡同的由来与格局：胡同一词源于蒙古语“水井”；明朝以紫禁城为中心按等级分区，官商宅院宽敞华丽，平民住处简朴；胡同承载历史，体现平民文化。",
+      "fullTranslationZh": "在中国的王朝时期，帝王们规划了北京城，并按照社会等级来安排居住区。“胡同”一词在蒙古语中最初意为“水井”，最早出现在元朝。\n明朝时，城市的中心是紫禁城，内城和外城以同心圆的形式将它环绕。社会等级较高的市民被允许住在离圆心更近的地方。这些高官和富商的大型四合院常常以雕刻精美、彩绘华丽的房梁和柱子为特色。他们的四合院形成的胡同整齐有序，两旁是宽敞的宅院和带围墙的花园。离中心更远的地方住着平民和劳工。他们的四合院规模小得多，设计和装饰也更简单，胡同也更窄。\n胡同代表着北京城一种重要的文化元素。由于北京作为中国首都的悠久历史，几乎每条胡同都有自己的故事，有些甚至与历史事件有关。与紫禁城、颐和园和天坛所代表的宫廷生活和上层文化不同，胡同反映的是北京普通百姓的文化。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-1",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+          "sourceText": "In the Ming Dynasty, the center was the Forbidden City, __58__ (surround) in concentric(同心的) circles by the Inner City and Outer City.",
+          "displayText": "In the Ming Dynasty, the center was the Forbidden City, surrounded in concentric(同心的) circles by the Inner City and Outer City.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:58"
+          ],
+          "translationZh": "明朝时，城市的中心是紫禁城，内城和外城以同心圆的形式将它环绕。",
+          "analysisZh": "主干是 the center was the Forbidden City：城市的中心是紫禁城。句首 In the Ming Dynasty 交代时间。逗号后的 surrounded … 补充说明紫禁城，in concentric circles 说环绕的方式是一圈套一圈，by the Inner City and Outer City 说是被谁环绕。读出“中心是紫禁城，外面一圈圈是内城和外城”，下文“越靠近中心等级越高”才好理解。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 54,
+              "quote": "the center was the Forbidden City"
+            },
+            {
+              "start": 56,
+              "end": 93,
+              "quote": "surrounded in concentric(同心的) circles"
+            },
+            {
+              "start": 94,
+              "end": 126,
+              "quote": "by the Inner City and Outer City"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-2",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+          "sourceText": "Thanks to Beijing's long history __63__ capital of China, almost every hutong has its stories, and some are even associated with historic __64__ (event).",
+          "displayText": "Thanks to Beijing's long history as capital of China, almost every hutong has its stories, and some are even associated with historic events.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:63",
+            "question:paper-gaokao-2023-zhejiang-jan:64"
+          ],
+          "translationZh": "由于北京作为中国首都的悠久历史，几乎每条胡同都有自己的故事，有些甚至与历史事件有关。",
+          "analysisZh": "句首 Thanks to … 是原因状语，as capital of China 修饰 long history，说明这是北京作为首都的历史。后面是 and 连接的两个分句：almost every hutong has its stories 说几乎每条胡同都有故事；some are even associated with historic events 里的 some 指一些胡同，even 表示更进一步，有的还和历史事件相连。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 52,
+              "quote": "Thanks to Beijing's long history as capital of China"
+            },
+            {
+              "start": 54,
+              "end": 89,
+              "quote": "almost every hutong has its stories"
+            },
+            {
+              "start": 95,
+              "end": 140,
+              "quote": "some are even associated with historic events"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 61,
+              "quote": "在中国的王朝时期，帝王们规划了北京城，并按照社会等级来安排居住区。“胡同”一词在蒙古语中最初意为“水井”，最早出现在元朝。"
+            },
+            {
+              "paragraphId": "zh-grammar-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2"
+              ],
+              "start": 62,
+              "end": 227,
+              "quote": "明朝时，城市的中心是紫禁城，内城和外城以同心圆的形式将它环绕。社会等级较高的市民被允许住在离圆心更近的地方。这些高官和富商的大型四合院常常以雕刻精美、彩绘华丽的房梁和柱子为特色。他们的四合院形成的胡同整齐有序，两旁是宽敞的宅院和带围墙的花园。离中心更远的地方住着平民和劳工。他们的四合院规模小得多，设计和装饰也更简单，胡同也更窄。"
+            },
+            {
+              "paragraphId": "zh-grammar-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3"
+              ],
+              "start": 228,
+              "end": 331,
+              "quote": "胡同代表着北京城一种重要的文化元素。由于北京作为中国首都的悠久历史，几乎每条胡同都有自己的故事，有些甚至与历史事件有关。与紫禁城、颐和园和天坛所代表的宫廷生活和上层文化不同，胡同反映的是北京普通百姓的文化。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+            "text": "During China's dynastic period, emperors planned the city of Beijing and arranged the residential areas according to social classes. The term “hutong”, originally meaning “water well” in Mongolian, appeared first during the Yuan Dynasty."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+            "text": "In the Ming Dynasty, the center was the Forbidden City, surrounded in concentric(同心的) circles by the Inner City and Outer City. Citizens of higher social classes were permitted to live closer to the center of the circles. The large siheyuan of these high-ranking officials and wealthy merchants often featured beautifully carved and painted roof beams and pillars(柱子).The hutongs they formed were orderly, lined by spacious homes and walled gardens. Farther from the center lived the commoners and laborers. Their siheyuan were far smaller in scale and simpler/more simple in design and decoration, and the hutongs were narrower."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+            "text": "Hutongs represent an important cultural element of the city of Beijing. Thanks to Beijing's long history as capital of China, almost every hutong has its stories, and some are even associated with historic events. In contrast to the court life and upper-class culture represented by the Forbidden City, the Summer Palace, and the Temple of Heaven, the hutongs reflect the culture of grassroots Beijingers."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "start": 41,
+                "end": 68,
+                "quote": "planned the city of Beijing"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "start": 76,
+                "end": 106,
+                "quote": "arranged the residential areas"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 12,
+                "end": 18,
+                "quote": "规划了北京城"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 20,
+                "end": 32,
+                "quote": "按照社会等级来安排居住区"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:56"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "start": 69,
+                "end": 72,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 19,
+                "end": 20,
+                "quote": "并"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "start": 173,
+                "end": 193,
+                "quote": "meaning “water well”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 46,
+                "end": 52,
+                "quote": "意为“水井”"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:57"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:1",
+                "start": 152,
+                "end": 162,
+                "quote": "originally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 44,
+                "end": 46,
+                "quote": "最初"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 36,
+                "end": 54,
+                "quote": "the Forbidden City"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 101,
+                "end": 133,
+                "quote": "by the Inner City and Outer City"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 10,
+                "end": 13,
+                "quote": "紫禁城"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 14,
+                "end": 19,
+                "quote": "内城和外城"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:58"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 56,
+                "end": 66,
+                "quote": "surrounded"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 26,
+                "end": 30,
+                "quote": "将它环绕"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 135,
+                "end": 168,
+                "quote": "Citizens of higher social classes"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 185,
+                "end": 199,
+                "quote": "to live closer"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 0,
+                "end": 19,
+                "quote": "In the Ming Dynasty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 31,
+                "end": 40,
+                "quote": "社会等级较高的市民"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 43,
+                "end": 53,
+                "quote": "住在离圆心更近的地方"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 0,
+                "end": 3,
+                "quote": "明朝时"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:59"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 162,
+                "end": 176,
+                "quote": "were permitted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 40,
+                "end": 43,
+                "quote": "被允许"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 230,
+                "end": 248,
+                "quote": "The large siheyuan"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 357,
+                "end": 379,
+                "quote": "roof beams and pillars"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 54,
+                "end": 67,
+                "quote": "这些高官和富商的大型四合院"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 80,
+                "end": 85,
+                "quote": "房梁和柱子"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:60"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 301,
+                "end": 309,
+                "quote": "featured"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 69,
+                "end": 88,
+                "quote": "以雕刻精美、彩绘华丽的房梁和柱子为特色"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 446,
+                "end": 470,
+                "quote": "homes and walled gardens"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 111,
+                "end": 120,
+                "quote": "宅院和带围墙的花园"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:61"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 415,
+                "end": 423,
+                "quote": "spacious"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 108,
+                "end": 111,
+                "quote": "宽敞的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 550,
+                "end": 570,
+                "quote": "far smaller in scale"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 472,
+                "end": 495,
+                "quote": "Farther from the center"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 143,
+                "end": 148,
+                "quote": "规模小得多"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 121,
+                "end": 129,
+                "quote": "离中心更远的地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:62"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 553,
+                "end": 572,
+                "quote": "simpler/more simple"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 155,
+                "end": 158,
+                "quote": "更简单"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 92,
+                "end": 104,
+                "quote": "long history"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 112,
+                "end": 128,
+                "quote": "capital of China"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 29,
+                "end": 33,
+                "quote": "悠久历史"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 24,
+                "end": 28,
+                "quote": "中国首都"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:63"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 105,
+                "end": 107,
+                "quote": "as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 22,
+                "end": 24,
+                "quote": "作为"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 185,
+                "end": 209,
+                "quote": "associated with historic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 57,
+                "end": 59,
+                "quote": "有关"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:64"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 206,
+                "end": 212,
+                "quote": "events"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 53,
+                "end": 57,
+                "quote": "历史事件"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 395,
+                "end": 419,
+                "quote": "of grassroots Beijingers"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 226,
+                "end": 279,
+                "quote": "In contrast to the court life and upper-class culture"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 93,
+                "end": 99,
+                "quote": "北京普通百姓"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 75,
+                "end": 84,
+                "quote": "宫廷生活和上层文化"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:65"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 368,
+                "end": 371,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 93,
+                "end": 102,
+                "quote": "北京普通百姓的文化"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:58"
+            ],
+            "selectedSentenceId": "sentence-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:2",
+                "start": 0,
+                "end": 134,
+                "quote": "In the Ming Dynasty, the center was the Forbidden City, __58__ (surround) in concentric(同心的) circles by the Inner City and Outer City."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 0,
+                "end": 31,
+                "quote": "明朝时，城市的中心是紫禁城，内城和外城以同心圆的形式将它环绕。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:63",
+              "question:paper-gaokao-2023-zhejiang-jan:64"
+            ],
+            "selectedSentenceId": "sentence-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+                "start": 72,
+                "end": 225,
+                "quote": "Thanks to Beijing's long history __63__ capital of China, almost every hutong has its stories, and some are even associated with historic __64__ (event)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 18,
+                "end": 60,
+                "quote": "由于北京作为中国首都的悠久历史，几乎每条胡同都有自己的故事，有些甚至与历史事件有关。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-zhejiang-jan:56": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "主语 emperors 后面有两个谓语 planned the city of Beijing 和 arranged the residential areas，空格要把这两个并列谓语连起来；先规划城市、再按等级安排住区，是顺承关系，填 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "planned the city of Beijing",
+          "signalSide": "passage",
+          "relation": "中文：第一个谓语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "arranged the residential areas",
+          "signalSide": "passage",
+          "relation": "中文：第二个谓语，与 planned 并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:57": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "original",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "originally",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-non-finite",
+        "features": []
+      },
+      "reason": "空格修饰后面的分词 meaning，说明“胡同”一词“最初”的意思；修饰动词性的 meaning 要用副词，original 变为 originally。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "meaning “water well”",
+          "signalSide": "passage",
+          "relation": "中文：被修饰的是分词 meaning。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:58": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "surround",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "surrounded",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "这句的谓语是 was，空格引出的短语补充说明 the Forbidden City，作后置定语；紫禁城是“被”内城和外城环绕，by 引出环绕它的一方，用过去分词 surrounded，相当于 which was surrounded。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the Forbidden City",
+          "signalSide": "passage",
+          "relation": "中文：被修饰的名词，紫禁城被环绕。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by the Inner City and Outer City",
+          "signalSide": "passage",
+          "relation": "中文：by 引出动作的执行者，表被动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:59": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "permit",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were permitted",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "空格是这句的谓语，主语 Citizens of higher social classes 是“被允许”住得离中心更近的一方，permit sb to do 要变成被动；讲的是明朝的城市布局，前句用 was，所以用一般过去时，主语是复数，填 were permitted。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Citizens of higher social classes",
+          "signalSide": "passage",
+          "relation": "中文：复数主语，是被允许的一方。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "In the Ming Dynasty",
+          "signalSide": "passage",
+          "relation": "中文：讲明朝的事，用过去时。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to live closer",
+          "signalSide": "passage",
+          "relation": "中文：permit sb to do 的被动 be permitted to do。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:60": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "feature",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "featured",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "主语 The large siheyuan of these high-ranking officials and wealthy merchants 后缺谓语，宾语是 beautifully carved and painted roof beams and pillars，feature 作“以……为特色”；描写的仍是明朝的宅院，和前句的 were permitted 一致用过去式 featured。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The large siheyuan",
+          "signalSide": "passage",
+          "relation": "中文：主语，谓语要和它搭配。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "roof beams and pillars",
+          "signalSide": "passage",
+          "relation": "中文：feature 的宾语，说明宅院的特色。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "In the Ming Dynasty",
+          "signalSide": "passage",
+          "relation": "中文：本段讲明朝，用过去时。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:61": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "space",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "spacious",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格放在名词 homes 前作定语，和 walled gardens 里的 walled 一样说明宅院的样子；修饰名词要用形容词，space 变为 spacious（宽敞的）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "homes",
+          "signalSide": "passage",
+          "relation": "中文：被修饰的名词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "walled gardens",
+          "signalSide": "passage",
+          "relation": "中文：并列的“修饰语 + 名词”结构。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:62": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "simple",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "simpler/more simple",
+      "role": null,
+      "similarityProfile": {
+        "route": "comparative",
+        "features": [
+          "parallel-comparative",
+          "semantic-comparison"
+        ]
+      },
+      "reason": "空格和 smaller 由 and 并列，都作 were 的表语，说平民的四合院和前面高官富商的大宅相比怎么样；smaller 已是比较级，simple 也要用比较级 simpler（或 more simple）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "far smaller in scale and",
+          "signalSide": "passage",
+          "relation": "中文：并列的比较级 smaller。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "Farther from the center",
+          "signalSide": "passage",
+          "relation": "中文：与靠近中心的大宅对比。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:63": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "as",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格后的 capital of China 是名词短语，要靠介词接到 long history 上，说明这段历史是北京“作为”中国首都的历史，用表示身份的 as。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "long history",
+          "signalSide": "passage",
+          "relation": "中文：说明是作为首都的历史。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "capital of China",
+          "signalSide": "passage",
+          "relation": "中文：表示身份的名词短语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:64": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "event",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "events",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作介词 with 的宾语，被 historic 修饰；event 是可数名词，前面没有 a，这里泛指与一些胡同相关的历史事件，用复数 events。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "associated with historic",
+          "signalSide": "passage",
+          "relation": "中文：with 后接名词作宾语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "some",
+          "signalSide": "passage",
+          "relation": "中文：some 指一些胡同，关联的事件不止一件。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:65": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-postmodified-specific",
+        "features": []
+      },
+      "reason": "空格在名词 culture 前作限定词，culture 后有 of grassroots Beijingers 限定，特指北京平民百姓的文化，与前面的 the court life and upper-class culture 相对，用定冠词 the。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "of grassroots Beijingers",
+          "signalSide": "passage",
+          "relation": "中文：of 短语限定 culture，特指。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "In contrast to the court life and upper-class culture",
+          "signalSide": "passage",
+          "relation": "中文：与宫廷和上层文化对比。"
+        }
+      ]
+    }
+  }
+}

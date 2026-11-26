@@ -1,0 +1,2037 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-zhejiang-jan:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-zhejiang-jan:cloze": {
+      "overview": "作者来到埃塞俄比亚的哈伦纳森林，看养蜂人 Ziyad 用火把和绳子爬上 20 米高的树取野蜜；他熏烟时遭蜂群攻击滑回地面，原来凉夏推迟了孵化，采得太早，只能等待时机。",
+      "fullTranslationZh": "我出发走进哈伦纳森林时，太阳正开始西沉。我要去亲眼看一场独特的采蜜。在埃塞俄比亚东南部这里，手工雕刻的蜂箱被安放在树梢上。爬上去取蜜很难，而且常常很危险。\n我跟着养蜂人 Ziyad 穿过一大片草地，然后走进茂密的丛林。Ziyad 开始做准备。他收集了几把潮湿的树叶，用绳子捆好，再点燃这一束叶子做成火把。接着，他把绳子一头系在腰上，另一头绕在树干上，开始往上爬。每隔几分钟，他就停下来把绳子沿树干往上挪一段。\n终于，Ziyad 接近了离地约 20 米高的蜂箱。他坐在一根树枝上，一点点朝蜂箱挪过去，把火把的烟吹进蜂箱上的一个小洞。突然，Ziyad 发出一声尖叫。几秒钟之内，他就顺着树干滑了下来，回到了地面。\n现在采蜜还太早。凉爽的夏天推迟了孵化。幼蜂还在蜂巢里。成年蜜蜂被激怒了，在 Ziyad 从树上逃下来时一直攻击他。他只好等待合适的时机再爬上去。",
+      "mainLine": {
+        "theme": {
+          "text": "在高高的树梢取野蜜又难又险，还得等对时机，即 Reaching them to get the honey is difficult。",
+          "quote": "Reaching them to get the honey is difficult"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+            "text": "作者进入哈伦纳森林，去看在树梢取蜜这件难而险的事。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+            "text": "跟着 Ziyad 进林，他做好火把，系上绳子一步步往树上爬。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+            "text": "终于接近蜂箱，他熏烟时突然惨叫，几秒内滑回地面。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+            "text": "原来采得太早，幼蜂未出、蜂群发怒，只能等合适时机。"
+          }
+        ],
+        "emotion": "期待→紧张→惊吓→无奈等待"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+          "sourceText": "Then, with one end of a rope tied to his waist and the other end around the trunk of a tree, Ziyad began __47__.",
+          "displayText": "Then, with one end of a rope tied to his waist and the other end around the trunk of a tree, Ziyad began climbing.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:47"
+          ],
+          "translationZh": "接着，他把绳子一头系在腰上，另一头绕在树干上，开始往上爬。",
+          "analysisZh": "主干在句末：Ziyad began climbing，Ziyad 开始爬树。前面的 with 结构交代他爬树时的状态：with 后的宾语 one end of a rope 带着过去分词 tied to his waist，表示绳子一头“被系在”腰上；and 并列的 the other end around the trunk of a tree 省去了 tied，介词短语直接说另一头绕在树干上。读懂这个 with 结构，就明白绳子是一头连人、一头绕树，后面他才会每隔几分钟把绳子往上挪。",
+          "underlineRanges": [
+            {
+              "start": 6,
+              "end": 46,
+              "quote": "with one end of a rope tied to his waist"
+            },
+            {
+              "start": 51,
+              "end": 91,
+              "quote": "the other end around the trunk of a tree"
+            },
+            {
+              "start": 93,
+              "end": 113,
+              "quote": "Ziyad began climbing"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+          "sourceText": "Reaching them to get the honey is difficult——and often __43__.",
+          "displayText": "Reaching them to get the honey is difficult——and often dangerous.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:43"
+          ],
+          "translationZh": "爬上去取蜜很难，而且常常很危险。",
+          "analysisZh": "主语是动名词短语 Reaching them，them 指放在树梢上的蜂箱；to get the honey 是目的，说爬上去是为了取蜜。谓语 is 后接表语 difficult，破折号后 and often dangerous 补上第二个表语，often 说明危险时常发生。这句先点出全文的难和险，后文 Ziyad 爬树、被蜂攻击都是在印证它。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 13,
+              "quote": "Reaching them"
+            },
+            {
+              "start": 31,
+              "end": 43,
+              "quote": "is difficult"
+            },
+            {
+              "start": 45,
+              "end": 64,
+              "quote": "and often dangerous"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:cloze:1"
+              ],
+              "start": 0,
+              "end": 77,
+              "quote": "我出发走进哈伦纳森林时，太阳正开始西沉。我要去亲眼看一场独特的采蜜。在埃塞俄比亚东南部这里，手工雕刻的蜂箱被安放在树梢上。爬上去取蜜很难，而且常常很危险。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:cloze:2"
+              ],
+              "start": 78,
+              "end": 204,
+              "quote": "我跟着养蜂人 Ziyad 穿过一大片草地，然后走进茂密的丛林。Ziyad 开始做准备。他收集了几把潮湿的树叶，用绳子捆好，再点燃这一束叶子做成火把。接着，他把绳子一头系在腰上，另一头绕在树干上，开始往上爬。每隔几分钟，他就停下来把绳子沿树干往上挪一段。"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:cloze:3"
+              ],
+              "start": 205,
+              "end": 304,
+              "quote": "终于，Ziyad 接近了离地约 20 米高的蜂箱。他坐在一根树枝上，一点点朝蜂箱挪过去，把火把的烟吹进蜂箱上的一个小洞。突然，Ziyad 发出一声尖叫。几秒钟之内，他就顺着树干滑了下来，回到了地面。"
+            },
+            {
+              "paragraphId": "zh-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:cloze:4"
+              ],
+              "start": 305,
+              "end": 377,
+              "quote": "现在采蜜还太早。凉爽的夏天推迟了孵化。幼蜂还在蜂巢里。成年蜜蜂被激怒了，在 Ziyad 从树上逃下来时一直攻击他。他只好等待合适的时机再爬上去。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+            "text": "The sun was beginning to sink as I set off into the Harenna Forest. I was on my way to witness a unique honey harvest. Here, in south-east Ethiopia, hand-carved beehives(蜂箱) are placed in the treetops. Reaching them to get the honey is difficult——and often dangerous."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+            "text": "I followed beekeeper Ziyad over a wide stretch of grassland before entering a thick jungle. Ziyad began preparations. He gathered handfuls of damp tree leaves, wrapped them with string, and lit the bunch to create a torch(火把). Then, with one end of a rope tied to his waist and the other end around the trunk of a tree, Ziyad began climbing. He stopped every few minutes to move the rope higher up the tree trunk."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+            "text": "Finally, Ziyad got close to the hive which was around 20 meters above the ground. Sitting on a branch, he inched towards it and blew smoke from his torch into a tiny hole in the hive. Suddenly, Ziyad let out a sharp cry. Within seconds, he’d slid down the trunk and was back on the ground."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+            "text": "It was too early to collect the honey. A cool summer had delayed hatching. Baby bees were still in the honeycombs(蜂巢). The adult bees were angry and kept attacking as Ziyad escaped from the tree. He had to wait for the right moment to go back up."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "start": 94,
+                "end": 116,
+                "quote": "a unique honey harvest"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 9,
+                "end": 24,
+                "quote": "beekeeper Ziyad"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 26,
+                "end": 33,
+                "quote": "一场独特的采蜜"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 3,
+                "end": 12,
+                "quote": "养蜂人 Ziyad"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:41"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "start": 87,
+                "end": 94,
+                "quote": "witness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 23,
+                "end": 26,
+                "quote": "亲眼看"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 298,
+                "end": 317,
+                "quote": "the trunk of a tree"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 46,
+                "end": 79,
+                "quote": "around 20 meters above the ground"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 93,
+                "end": 95,
+                "quote": "树干"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 12,
+                "end": 21,
+                "quote": "离地约 20 米高"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:42"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "start": 192,
+                "end": 200,
+                "quote": "treetops"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 57,
+                "end": 59,
+                "quote": "树梢"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "start": 233,
+                "end": 242,
+                "quote": "difficult"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 149,
+                "end": 163,
+                "quote": "kept attacking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 66,
+                "end": 68,
+                "quote": "很难"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 51,
+                "end": 56,
+                "quote": "一直攻击他"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:43"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "start": 257,
+                "end": 266,
+                "quote": "dangerous"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 73,
+                "end": 76,
+                "quote": "很危险"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 9,
+                "end": 24,
+                "quote": "beekeeper Ziyad"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 25,
+                "end": 57,
+                "quote": "over a wide stretch of grassland"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 3,
+                "end": 12,
+                "quote": "养蜂人 Ziyad"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 13,
+                "end": 20,
+                "quote": "穿过一大片草地"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:44"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 2,
+                "end": 10,
+                "quote": "followed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 1,
+                "end": 3,
+                "quote": "跟着"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 126,
+                "end": 154,
+                "quote": "handfuls of damp tree leaves"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 156,
+                "end": 180,
+                "quote": "wrapped them with string"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 47,
+                "end": 54,
+                "quote": "几把潮湿的树叶"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 55,
+                "end": 60,
+                "quote": "用绳子捆好"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:45"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 121,
+                "end": 129,
+                "quote": "gathered"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 44,
+                "end": 47,
+                "quote": "收集了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 203,
+                "end": 220,
+                "quote": "to create a torch"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 127,
+                "end": 152,
+                "quote": "blew smoke from his torch"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 69,
+                "end": 73,
+                "quote": "做成火把"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 44,
+                "end": 51,
+                "quote": "把火把的烟吹进"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:46"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 190,
+                "end": 193,
+                "quote": "lit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 62,
+                "end": 64,
+                "quote": "点燃"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 255,
+                "end": 272,
+                "quote": "tied to his waist"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 387,
+                "end": 411,
+                "quote": "higher up the tree trunk"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 83,
+                "end": 87,
+                "quote": "系在腰上"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 117,
+                "end": 123,
+                "quote": "沿树干往上挪"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:47"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 332,
+                "end": 340,
+                "quote": "climbing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 99,
+                "end": 102,
+                "quote": "往上爬"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 237,
+                "end": 254,
+                "quote": "one end of a rope"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 298,
+                "end": 317,
+                "quote": "the trunk of a tree"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 79,
+                "end": 81,
+                "quote": "绳子"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 93,
+                "end": 95,
+                "quote": "树干"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:48"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 383,
+                "end": 387,
+                "quote": "rope"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 115,
+                "end": 117,
+                "quote": "绳子"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 342,
+                "end": 367,
+                "quote": "stopped every few minutes"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 14,
+                "end": 35,
+                "quote": "got close to the hive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 103,
+                "end": 108,
+                "quote": "每隔几分钟"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 9,
+                "end": 12,
+                "quote": "接近了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:49"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 0,
+                "end": 7,
+                "quote": "Finally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 0,
+                "end": 2,
+                "quote": "终于"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 81,
+                "end": 100,
+                "quote": "Sitting on a branch"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 112,
+                "end": 122,
+                "quote": "towards it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 26,
+                "end": 33,
+                "quote": "坐在一根树枝上"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 37,
+                "end": 40,
+                "quote": "朝蜂箱"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:50"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 106,
+                "end": 112,
+                "quote": "inched"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 34,
+                "end": 43,
+                "quote": "一点点朝蜂箱挪过去"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 220,
+                "end": 234,
+                "quote": "Within seconds"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 262,
+                "end": 284,
+                "quote": "was back on the ground"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 76,
+                "end": 81,
+                "quote": "几秒钟之内"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 93,
+                "end": 98,
+                "quote": "回到了地面"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:51"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+                "start": 242,
+                "end": 251,
+                "quote": "slid down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 84,
+                "end": 92,
+                "quote": "顺着树干滑了下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 54,
+                "end": 65,
+                "quote": "had delayed"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 74,
+                "end": 112,
+                "quote": "Baby bees were still in the honeycombs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 13,
+                "end": 16,
+                "quote": "推迟了"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 19,
+                "end": 26,
+                "quote": "幼蜂还在蜂巢里"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:52"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 11,
+                "end": 16,
+                "quote": "early"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 4,
+                "end": 7,
+                "quote": "还太早"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 40,
+                "end": 65,
+                "quote": "A cool summer had delayed"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 74,
+                "end": 112,
+                "quote": "Baby bees were still in the honeycombs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 8,
+                "end": 16,
+                "quote": "凉爽的夏天推迟了"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 19,
+                "end": 26,
+                "quote": "幼蜂还在蜂巢里"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:53"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 65,
+                "end": 73,
+                "quote": "hatching"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 16,
+                "end": 18,
+                "quote": "孵化"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 149,
+                "end": 163,
+                "quote": "kept attacking"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 173,
+                "end": 194,
+                "quote": "escaped from the tree"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 51,
+                "end": 56,
+                "quote": "一直攻击他"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 44,
+                "end": 50,
+                "quote": "从树上逃下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:54"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 139,
+                "end": 144,
+                "quote": "angry"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 31,
+                "end": 35,
+                "quote": "被激怒了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 54,
+                "end": 65,
+                "quote": "had delayed"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 206,
+                "end": 224,
+                "quote": "wait for the right"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 13,
+                "end": 16,
+                "quote": "推迟了"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 60,
+                "end": 65,
+                "quote": "等待合适的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:55"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+                "start": 225,
+                "end": 231,
+                "quote": "moment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 65,
+                "end": 67,
+                "quote": "时机"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:47"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+                "start": 226,
+                "end": 338,
+                "quote": "Then, with one end of a rope tied to his waist and the other end around the trunk of a tree, Ziyad began __47__."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 74,
+                "end": 103,
+                "quote": "接着，他把绳子一头系在腰上，另一头绕在树干上，开始往上爬。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:43"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+                "start": 199,
+                "end": 261,
+                "quote": "Reaching them to get the honey is difficult——and often __43__."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 61,
+                "end": 77,
+                "quote": "爬上去取蜜很难，而且常常很危险。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "期待→紧张→惊吓→无奈等待"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-zhejiang-jan:41": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者是来看采蜜的外来者，这里要「亲眼看到」一场采蜜的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 a unique honey harvest，后文动手采蜜的是 beekeeper Ziyad，作者只在一旁看，用 witness。",
+        "quotes": [
+          "a unique honey harvest",
+          "beekeeper Ziyad"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "目睹",
+        "reason": "作者是来看采蜜的外来者，这里要「亲眼看到」一场采蜜的意思。动词看搭配：宾语是 a unique honey harvest，后文动手采蜜的是 beekeeper Ziyad，作者只在一旁看，用 witness。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "share",
+          "meaning": "分享；a unique honey harvest 是一场采蜜活动，不是能分给别人的东西。",
+          "quote": "a unique honey harvest"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "collect",
+          "meaning": "收集；后文爬树取蜜的是 beekeeper Ziyad，作者只是跟着看，不是自己去采。",
+          "quote": "beekeeper Ziyad"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "celebrate",
+          "meaning": "庆祝；后文写 to collect the honey 的艰险经过，最后没采成，没有庆祝的场面。",
+          "quote": "to collect the honey"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a unique honey harvest",
+          "signalSide": "context-after",
+          "relation": "中文：要看的是一场采蜜活动，作者是旁观者。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "beekeeper Ziyad",
+          "signalSide": "context-after",
+          "relation": "中文：动手采蜜的是养蜂人，作者只是看。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:42": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "交代蜂箱放在哪里，要一个高处的位置，后文才会写爬树取蜜。",
+      "find": {
+        "check": "echo",
+        "text": "后文 the trunk of a tree 和 around 20 meters above the ground 说蜂箱在高高的树上，对上 treetops。",
+        "quotes": [
+          "the trunk of a tree",
+          "around 20 meters above the ground"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "树梢",
+        "reason": "交代蜂箱放在哪里，要一个高处的位置，后文才会写爬树取蜜。名词看复现：后文 the trunk of a tree 和 around 20 meters above the ground 说蜂箱在高高的树上，对上 treetops。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "courtyards",
+          "meaning": "院子；蜂箱在 Harenna Forest 深处，要爬到离地 20 米处去够，不在院子里。",
+          "quote": "Harenna Forest"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fields",
+          "meaning": "田地；他们穿过草地后 entering a thick jungle，蜂箱在林中高处，不在田里。",
+          "quote": "entering a thick jungle"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "caves",
+          "meaning": "山洞；蜂箱 around 20 meters above the ground，要顺着树干往上够，不在山洞里。",
+          "quote": "around 20 meters above the ground"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "hand-carved beehives",
+          "signalSide": "context-before",
+          "relation": "中文：被安放的是蜂箱，要说它放在什么地方。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "around 20 meters above the ground",
+          "signalSide": "context-after",
+          "relation": "中文：蜂箱离地 20 米，复现高处的位置。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:43": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "取蜜不只是难，还要更进一步的负面特点，为后文 Ziyad 被蜂攻击埋下伏笔。",
+      "find": {
+        "check": "affect",
+        "text": "and often 接在 difficult 后同向递进，后文 a sharp cry 和 kept attacking 正是危险的表现。",
+        "quotes": [
+          "difficult",
+          "a sharp cry",
+          "kept attacking"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "危险的",
+        "reason": "取蜜不只是难，还要更进一步的负面特点，为后文 Ziyad 被蜂攻击埋下伏笔。形容词看情感：and often 接在 difficult 后同向递进，后文 a sharp cry 和 kept attacking 正是危险的表现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "urgent",
+          "meaning": "紧急的；后文说 He had to wait for the right 时机，取蜜急不得，并不紧急。",
+          "quote": "He had to wait for the right"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "expensive",
+          "meaning": "昂贵的；后文写的是爬树和蜜蜂 kept attacking，难在人身风险，不在花钱。",
+          "quote": "kept attacking"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pointless",
+          "meaning": "毫无意义的；作者专程来看这场 unique honey harvest，取蜜并不是白费力气。",
+          "quote": "unique honey harvest"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Reaching them to get the honey is",
+          "signalSide": "context-before",
+          "relation": "中文：主语是爬上去取蜜这件事，表语说它怎么样。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "difficult",
+          "signalSide": "context-before",
+          "relation": "中文：and often 与 difficult 同向，都是负面。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "kept attacking",
+          "signalSide": "context-after",
+          "relation": "中文：蜜蜂攻击人，证实取蜜危险。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:44": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者和养蜂人一起穿过草地进林子，要「跟着走」一类的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 beekeeper Ziyad，over a wide stretch of grassland 是一路走过的路线，作者跟在他后面走。",
+        "quotes": [
+          "beekeeper Ziyad",
+          "over a wide stretch of grassland"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "跟随",
+        "reason": "作者和养蜂人一起穿过草地进林子，要「跟着走」一类的动作。动词看搭配：宾语是 beekeeper Ziyad，over a wide stretch of grassland 是一路走过的路线，作者跟在他后面走。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "searched",
+          "meaning": "搜寻；作者和 Ziyad 是一同 entering a thick jungle，不是在草地上找他。",
+          "quote": "entering a thick jungle"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recognised",
+          "meaning": "认出；认出一个人用不着走 over a wide stretch of grassland 这样一段路。",
+          "quote": "over a wide stretch of grassland"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "invited",
+          "meaning": "邀请；over a wide stretch of grassland 是一路走过的路线，邀请不是一路走着做的动作。",
+          "quote": "over a wide stretch of grassland"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "beekeeper Ziyad",
+          "signalSide": "context-after",
+          "relation": "中文：跟随的对象是养蜂人。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "over a wide stretch of grassland",
+          "signalSide": "context-after",
+          "relation": "中文：跟着走过一大片草地。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:45": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "做火把的第一步，要「弄来」一把把湿树叶的动作。",
+      "find": {
+        "check": "action-sequence",
+        "text": "后面紧接 wrapped them with string，先把 handfuls of damp tree leaves 收拢到手里，才能捆。",
+        "quotes": [
+          "wrapped them with string",
+          "handfuls of damp tree leaves"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "收集",
+        "reason": "做火把的第一步，要「弄来」一把把湿树叶的动作。动词看动作顺序：后面紧接 wrapped them with string，先把 handfuls of damp tree leaves 收拢到手里，才能捆。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cleaned",
+          "meaning": "清洗；树叶是要捆起来 to create a torch，用不着先洗。",
+          "quote": "to create a torch"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dropped",
+          "meaning": "扔下；扔掉的树叶没法接着 wrapped them with string 捆成一束。",
+          "quote": "wrapped them with string"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "checked",
+          "meaning": "检查；只是看看不拿在手里，接不上后面 wrapped them with string 把叶子捆起来。",
+          "quote": "wrapped them with string"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "handfuls of damp tree leaves",
+          "signalSide": "context-after",
+          "relation": "中文：收集的是一把把湿树叶。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "wrapped them with string",
+          "signalSide": "context-after",
+          "relation": "中文：收好后再用绳子捆。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:46": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "捆好的一束叶子要变成火把，要「点着」的意思。",
+      "find": {
+        "check": "action-sequence",
+        "text": "to create a torch 是这一步的结果，后文 blew smoke from his torch 也说明火把点着了在冒烟。",
+        "quotes": [
+          "to create a torch",
+          "blew smoke from his torch"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "点燃",
+        "reason": "捆好的一束叶子要变成火把，要「点着」的意思。动词看动作顺序：to create a torch 是这一步的结果，后文 blew smoke from his torch 也说明火把点着了在冒烟。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "shook",
+          "meaning": "摇动；摇一摇叶子成不了火把，后文 blew smoke 要靠点火才有烟。",
+          "quote": "blew smoke"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "measured",
+          "meaning": "测量；量叶子做不出后文能 blew smoke 的火把。",
+          "quote": "blew smoke"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "decorated",
+          "meaning": "装饰；火把是用来 blew smoke from his torch 熏蜂的，不需要装饰。",
+          "quote": "blew smoke from his torch"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the bunch",
+          "signalSide": "context-after",
+          "relation": "中文：点燃的是这一束叶子。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to create a torch",
+          "signalSide": "context-after",
+          "relation": "中文：点着了才成火把。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:47": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "main",
+      "context": "绳子系好后，他开始往树上去，这是取蜜的关键一步，要「爬」的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "绳子 tied to his waist，另一头绕着树干，后文 higher up the tree trunk 说明他在往上爬。",
+        "quotes": [
+          "tied to his waist",
+          "higher up the tree trunk"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "攀爬",
+        "reason": "绳子系好后，他开始往树上去，这是取蜜的关键一步，要「爬」的动作。动词看搭配：绳子 tied to his waist，另一头绕着树干，后文 higher up the tree trunk 说明他在往上爬。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "jumping",
+          "meaning": "跳；后文他 stopped every few minutes 把绳子往上挪，是一点点往上，不是跳。",
+          "quote": "stopped every few minutes"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "talking",
+          "meaning": "说话；系好绳子后接着写 higher up the tree trunk 的动作，不是在说话。",
+          "quote": "higher up the tree trunk"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "testing",
+          "meaning": "测试；他每隔几分钟就把绳子挪 higher up the tree trunk，已经在往上走，不是试验。",
+          "quote": "higher up the tree trunk"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "around the trunk of a tree",
+          "signalSide": "context-before",
+          "relation": "中文：绳子绕在树干上，是爬树的保护。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "higher up the tree trunk",
+          "signalSide": "context-after",
+          "relation": "中文：一路往树干高处去。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:48": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "detail",
+      "context": "他每隔几分钟把某样东西沿树干往上挪，要护着他爬树的那件东西。",
+      "find": {
+        "check": "echo",
+        "text": "前句 one end of a rope 绕在 the trunk of a tree 上，能沿树干往上挪的就是这根 rope。",
+        "quotes": [
+          "one end of a rope",
+          "the trunk of a tree"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "绳子",
+        "reason": "他每隔几分钟把某样东西沿树干往上挪，要护着他爬树的那件东西。名词看复现：前句 one end of a rope 绕在 the trunk of a tree 上，能沿树干往上挪的就是这根 rope。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hives",
+          "meaning": "蜂箱；蜂箱固定在 around 20 meters above the ground 处，他还没够到。",
+          "quote": "around 20 meters above the ground"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "leaves",
+          "meaning": "树叶；叶子已经 wrapped them with string 做成火把，绕在树干上的是绳子。",
+          "quote": "wrapped them with string"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "honey",
+          "meaning": "蜂蜜；蜂蜜还在蜂箱里，后文说没能 to collect the honey，谈不上挪动它。",
+          "quote": "to collect the honey"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "one end of a rope",
+          "signalSide": "context-before",
+          "relation": "中文：前句的 rope 在这里复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "higher up the tree trunk",
+          "signalSide": "context-after",
+          "relation": "中文：沿树干往上挪的是绳子。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:49": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:49",
+      "blankNo": 49,
+      "pos": "adverb",
+      "role": "main",
+      "context": "一路停停爬爬之后才到蜂箱旁，要「经过一番工夫才」的意思。",
+      "find": {
+        "check": "direction",
+        "text": "前面 stopped every few minutes 一点点往上挪，后面 got close to the hive，过程长，用 Finally。",
+        "quotes": [
+          "stopped every few minutes",
+          "got close to the hive"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "终于",
+        "reason": "一路停停爬爬之后才到蜂箱旁，要「经过一番工夫才」的意思。副词看走向：前面 stopped every few minutes 一点点往上挪，后面 got close to the hive，过程长，用 Finally。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Surprisingly",
+          "meaning": "令人惊讶地；他就是冲着蜂箱爬的，got close to the hive 在意料之中。",
+          "quote": "got close to the hive"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Naturally",
+          "meaning": "自然地；20 米高还要 stopped every few minutes，接近蜂箱来之不易，不是理所当然。",
+          "quote": "stopped every few minutes"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Immediately",
+          "meaning": "立刻；前面是 every few minutes 停一停的慢慢爬，不是一下子就到了。",
+          "quote": "every few minutes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "got close to the hive",
+          "signalSide": "context-after",
+          "relation": "中文：修饰接近蜂箱这个结果。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "stopped every few minutes",
+          "signalSide": "context-before",
+          "relation": "中文：前面一路慢慢爬，引出“终于”。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:50": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "坐在高处的树枝上靠近蜂箱，要小心地慢慢挪过去的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "Sitting on a branch 坐在 20 米高的树枝上，towards it 指朝蜂箱移动，只能一点点挪。",
+        "quotes": [
+          "Sitting on a branch",
+          "towards it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "缓慢移动",
+        "reason": "坐在高处的树枝上靠近蜂箱，要小心地慢慢挪过去的意思。动词看搭配：Sitting on a branch 坐在 20 米高的树枝上，towards it 指朝蜂箱移动，只能一点点挪。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "backed",
+          "meaning": "后退；他是要 towards it 凑近蜂箱吹烟，往后退方向反了。",
+          "quote": "towards it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dived",
+          "meaning": "俯冲；他 Sitting on a branch 在 20 米高处，往前猛冲会掉下去，也没法凑近吹烟。",
+          "quote": "Sitting on a branch"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "shouted",
+          "meaning": "喊叫；后面紧接 blew smoke from his torch，是凑近蜂箱吹烟，不是朝它喊。",
+          "quote": "blew smoke from his torch"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "towards it",
+          "signalSide": "context-after",
+          "relation": "中文：朝蜂箱一点点挪过去。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Sitting on a branch",
+          "signalSide": "context-before",
+          "relation": "中文：坐在高处树枝上，只能小心慢挪。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:51": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:51",
+      "blankNo": 51,
+      "pos": "phrase",
+      "role": "main",
+      "context": "惨叫后几秒内他就回到地面，要「从树干上下来」的意思，采蜜在这里受挫。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "Within seconds 说快，was back on the ground 说到了地面，宾语是 the trunk，是顺着树干滑下来。",
+        "quotes": [
+          "Within seconds",
+          "was back on the ground",
+          "the trunk"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "滑下",
+        "meaning": "顺着树干滑回地面",
+        "reason": "惨叫后几秒内他就回到地面，要「从树干上下来」的意思，采蜜在这里受挫。词组看语境义：Within seconds 说快，was back on the ground 说到了地面，宾语是 the trunk，是顺着树干滑下来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cut off",
+          "meaning": "砍断；他是被蜇后逃回 the ground，几秒内砍不断树干，也帮不上逃。",
+          "quote": "the ground"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "gone up",
+          "meaning": "爬上；后面说 was back on the ground，他是回到地面，方向相反。",
+          "quote": "was back on the ground"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "held onto",
+          "meaning": "抓住；抓着树干就还在树上，接不上 was back on the ground。",
+          "quote": "was back on the ground"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "was back on the ground",
+          "signalSide": "context-after",
+          "relation": "中文：结果是回到地面。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Within seconds",
+          "signalSide": "context-before",
+          "relation": "中文：几秒之内，下得很快。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "down",
+          "signalSide": "option",
+          "targetText": "slid down",
+          "relation": "中文：down 表示向下，回到地面。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:52": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "main",
+      "context": "交代没采成的原因，时间上不对，后句说幼蜂还在巢里，要「太早」。",
+      "find": {
+        "check": "echo",
+        "text": "后文 had delayed 和 Baby bees were still in the honeycombs 都说时候没到，对上 early。",
+        "quotes": [
+          "had delayed",
+          "Baby bees were still in the honeycombs"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "早的",
+        "reason": "交代没采成的原因，时间上不对，后句说幼蜂还在巢里，要「太早」。形容词看复现：后文 had delayed 和 Baby bees were still in the honeycombs 都说时候没到，对上 early。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "high",
+          "meaning": "高的；他已经爬到蜂箱边，问题不在高度，后句讲的是 had delayed 时间推迟。",
+          "quote": "had delayed"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fast",
+          "meaning": "快的；后文 had delayed 和 still 说的是时机未到，与快慢无关。",
+          "quote": "had delayed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "close",
+          "meaning": "近的；后句 Baby bees were still in the honeycombs 讲的是时间没到，不是距离。",
+          "quote": "Baby bees were still in the honeycombs"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to collect the honey",
+          "signalSide": "context-after",
+          "relation": "中文：too ... to collect，太早而不能采蜜。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "had delayed",
+          "signalSide": "context-after",
+          "relation": "中文：推迟了，说明时候还早。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:53": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "凉夏推迟了一件事，结果幼蜂还在巢里，要蜂卵「孵出」的意思。",
+      "find": {
+        "check": "topic",
+        "text": "下句 Baby bees were still in the honeycombs，讲的是小蜂出生长大，被推迟的是 hatching。",
+        "quotes": [
+          "Baby bees were still in the honeycombs"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "孵化",
+        "reason": "凉夏推迟了一件事，结果幼蜂还在巢里，要蜂卵「孵出」的意思。名词看话题：下句 Baby bees were still in the honeycombs，讲的是小蜂出生长大，被推迟的是 hatching。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "training",
+          "meaning": "训练；这里说的是 Baby bees 还没长成，蜜蜂谈不上受训练。",
+          "quote": "Baby bees"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sowing",
+          "meaning": "播种；下句讲的是蜂巢里的 Baby bees，不是庄稼。",
+          "quote": "Baby bees"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "trading",
+          "meaning": "交易；下句 Baby bees were still in the honeycombs 讲蜂的生长，不是买卖。",
+          "quote": "Baby bees were still in the honeycombs"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "A cool summer had delayed",
+          "signalSide": "context-before",
+          "relation": "中文：凉夏推迟的是孵化。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Baby bees",
+          "signalSide": "context-after",
+          "relation": "中文：幼蜂与孵化同属蜜蜂生长。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:54": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "main",
+      "context": "成年蜜蜂一直追着人蜇，要一个和攻击相配的负面情绪。",
+      "find": {
+        "check": "affect",
+        "text": "and 连着 kept attacking，前后同向，追着攻击说明蜜蜂在发怒，Ziyad 只好 escaped from the tree。",
+        "quotes": [
+          "kept attacking",
+          "escaped from the tree"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "生气的",
+        "reason": "成年蜜蜂一直追着人蜇，要一个和攻击相配的负面情绪。形容词看情感：and 连着 kept attacking，前后同向，追着攻击说明蜜蜂在发怒，Ziyad 只好 escaped from the tree。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "curious",
+          "meaning": "好奇的；好奇不会 kept attacking 一路追着人蜇。",
+          "quote": "kept attacking"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hungry",
+          "meaning": "饥饿的；饿与 kept attacking 追着逃走的 Ziyad 搭不上，攻击是冲着他来的。",
+          "quote": "kept attacking"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bored",
+          "meaning": "厌烦的；厌烦的蜜蜂不会 kept attacking 追着人蜇。",
+          "quote": "kept attacking"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The adult bees were",
+          "signalSide": "context-before",
+          "relation": "中文：描述成年蜜蜂的状态。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "kept attacking",
+          "signalSide": "context-after",
+          "relation": "中文：一直攻击，情绪是发怒。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:55": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "现在采太早，只能等合适的「时候」再上去，回应前面时间不对。",
+      "find": {
+        "check": "echo",
+        "text": "前面 had delayed 和 Baby bees were still 都说时候未到，wait for the right 后要等的是 moment。",
+        "quotes": [
+          "had delayed",
+          "Baby bees were still",
+          "wait for the right"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "时刻",
+        "meaning": "合适的时机",
+        "reason": "现在采太早，只能等合适的「时候」再上去，回应前面时间不对。名词看复现：前面 had delayed 和 Baby bees were still 都说时候未到，wait for the right 后要等的是 moment。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "equipment",
+          "meaning": "装备；他回不去不是缺工具，而是 Baby bees were still in the honeycombs，时候未到。",
+          "quote": "Baby bees were still in the honeycombs"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "person",
+          "meaning": "人；要上树的还是 Ziyad，卡住他的是 had delayed 推迟的时间，不是换人。",
+          "quote": "had delayed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "order",
+          "meaning": "命令；没人指挥 Ziyad，阻碍他的是 had delayed 的季节，他等的是时机。",
+          "quote": "had delayed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wait for the right",
+          "signalSide": "context-before",
+          "relation": "中文：等待合适的时机。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "had delayed",
+          "signalSide": "context-before",
+          "relation": "中文：时间被推迟，所以要等时机。"
+        }
+      ]
+    }
+  }
+}

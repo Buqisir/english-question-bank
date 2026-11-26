@@ -1,0 +1,975 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-zhejiang-jan:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-zhejiang-jan:seven-choices": {
+      "overview": "文章介绍如何让国内火车旅行更舒适愉快，围绕提前订票、借助旅行代理人、自带毯子、提前到站和享受途中时光给出实用建议。",
+      "fullTranslationZh": "随着油价上涨，机场安检队伍排得比以往更长，何不把下一次国内度假安排成火车旅行呢？与其他出行方式相比，坐火车舒适又轻松。下面是一些建议，帮助你尽可能愉快地乘火车出游。\n\n提前计划。大多数长途列车，尤其是卧铺，很快就会售罄。在繁忙的夏季月份，情况尤其如此。不过，无论何时出行，最好至少提前90天预订。\n\n找旅行代理人。可以考虑把旅行计划交给旅行代理人，让他再次核对所有细节、提出建议，然后办理实际预订。好的代理人有时能帮你找到打折车票。他还可能帮你订到紧挨餐车的卧铺。这样，你就不必为了每天三顿饭，在行驶的火车上穿过好几节车厢。\n\n带一条毯子。乘坐火车时，即使是过夜行程，也不会免费提供毯子。车厢里的温度往往很难控制。尤其在夏天，空调会让车厢变得相当冷。\n\n早点到。大多数列车每天只开一班，有的每周只开三班，所以错过自己的那班车可能是件糟糕的事。你可能要等超过24小时才能赶上下一班。注意：时刻表上列的是发车时间，不是到站时间。\n\n玩得开心。火车旅行不适合没耐心的人。读本书、织织毛衣、做做填字游戏，或者只是看看窗外不断展开的景色。看风景时若想计算速度，就用3600（一小时的秒数）除以行驶一英里（两根里程标之间的距离）所花的秒数。如果火车行驶一英里用了53秒，那么你的时速就是67.92英里。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+          "sourceText": "Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations.",
+          "displayText": "Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:37"
+          ],
+          "translationZh": "可以考虑把旅行计划交给旅行代理人，让他再次核对所有细节、提出建议，然后办理实际预订。",
+          "analysisZh": "主干是祈使句 Consider doing，意为“考虑做某事”。Consider 后接 turning 和 letting 两个并列动作：交出旅行计划，让代理人处理细节。letting him 后的 double-check、make 和 handle 是三个并列的动词原形，都说明让代理人做什么；then 表明核对和建议之后再实际预订。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 8,
+              "quote": "Consider"
+            },
+            {
+              "start": 9,
+              "end": 56,
+              "quote": "turning your travel plan over to a travel agent"
+            },
+            {
+              "start": 61,
+              "end": 85,
+              "quote": "letting him double-check"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "开篇说明火车旅行的吸引力，随后用五个小标题依次安排出发前的准备、乘车注意事项及途中消遣。",
+        "units": [
+          {
+            "unitId": "unit:block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+            "heading": "出行选择",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1"
+            ],
+            "summary": "提出乘火车进行国内度假的选择，并引出提高舒适度的建议。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+            "heading": "提前预订",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2"
+            ],
+            "summary": "长途列车和卧铺容易售罄，旺季尤其如此，建议至少提前90天预订。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+            "heading": "借助旅行代理人",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3"
+            ],
+            "summary": "由代理人核对细节、寻找折扣票并安排靠近餐车的卧铺。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+            "heading": "自备毯子",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4"
+            ],
+            "summary": "车上不免费供毯，车厢又可能过冷，出发前应自备毯子。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+            "heading": "提前到站",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5"
+            ],
+            "summary": "列车班次有限，错过后可能久等，要提前到站并看清发车时间。"
+          },
+          {
+            "unitId": "unit:block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+            "heading": "享受旅程",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6"
+            ],
+            "summary": "用读书、手工、游戏或看风景享受乘车时间，还可计算列车速度。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 82,
+              "quote": "随着油价上涨，机场安检队伍排得比以往更长，何不把下一次国内度假安排成火车旅行呢？与其他出行方式相比，坐火车舒适又轻松。下面是一些建议，帮助你尽可能愉快地乘火车出游。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2"
+              ],
+              "start": 84,
+              "end": 148,
+              "quote": "提前计划。大多数长途列车，尤其是卧铺，很快就会售罄。在繁忙的夏季月份，情况尤其如此。不过，无论何时出行，最好至少提前90天预订。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3"
+              ],
+              "start": 150,
+              "end": 262,
+              "quote": "找旅行代理人。可以考虑把旅行计划交给旅行代理人，让他再次核对所有细节、提出建议，然后办理实际预订。好的代理人有时能帮你找到打折车票。他还可能帮你订到紧挨餐车的卧铺。这样，你就不必为了每天三顿饭，在行驶的火车上穿过好几节车厢。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4"
+              ],
+              "start": 264,
+              "end": 325,
+              "quote": "带一条毯子。乘坐火车时，即使是过夜行程，也不会免费提供毯子。车厢里的温度往往很难控制。尤其在夏天，空调会让车厢变得相当冷。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5"
+              ],
+              "start": 327,
+              "end": 412,
+              "quote": "早点到。大多数列车每天只开一班，有的每周只开三班，所以错过自己的那班车可能是件糟糕的事。你可能要等超过24小时才能赶上下一班。注意：时刻表上列的是发车时间，不是到站时间。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6"
+              ],
+              "start": 414,
+              "end": 545,
+              "quote": "玩得开心。火车旅行不适合没耐心的人。读本书、织织毛衣、做做填字游戏，或者只是看看窗外不断展开的景色。看风景时若想计算速度，就用3600（一小时的秒数）除以行驶一英里（两根里程标之间的距离）所花的秒数。如果火车行驶一英里用了53秒，那么你的时速就是67.92英里。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+            "text": "Plan ahead. Most long-distance trains, especially the sleeping car accommodations, sell out very quickly. That's particularly true during busy summer months. But no matter when you travel, it's a good idea to make your reservations at least 90 days in advance."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+            "text": "Use a travel agent. Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations. A good one can sometimes find you discounted tickets. He may also book you in a sleeping car that's right next to the diner. Then you won’t have to walk through several cars on a moving train three times a day for your meals."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+            "text": "Bring a blanket. When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one. The temperature on rail cars is often hard to control. In the summer in particular, the air conditioning can make them quite cold."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+            "text": "Arrive early. Most trains operate just once a day and some run only three times a week, so missing yours can be a disaster. You might have to wait longer than 24 hours to catch the next one. Note: The times listed on the schedules are departure times, not arrival times."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+            "text": "Have fun. Train trips aren't for impatient types. Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window. To calculate your speed as you do, divide 3,600 (the number of seconds in an hour) by the number of seconds it takes you to travel one mile (the distance between two mileposts). If it takes the train 53 seconds to travel one mile, you’re going 67.92 mph."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-zhejiang-jan:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+                "start": 12,
+                "end": 105,
+                "quote": "Most long-distance trains, especially the sleeping car accommodations, sell out very quickly."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+                "start": 5,
+                "end": 26,
+                "quote": "大多数长途列车，尤其是卧铺，很快就会售罄。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-zhejiang-jan:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:36"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+                "start": 106,
+                "end": 157,
+                "quote": "That's particularly true during busy summer months."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+                "start": 26,
+                "end": 42,
+                "quote": "在繁忙的夏季月份，情况尤其如此。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-zhejiang-jan:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "start": 243,
+                "end": 343,
+                "quote": "Then you won’t have to walk through several cars on a moving train three times a day for your meals."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "start": 82,
+                "end": 112,
+                "quote": "这样，你就不必为了每天三顿饭，在行驶的火车上穿过好几节车厢。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-zhejiang-jan:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:37"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "start": 236,
+                "end": 306,
+                "quote": "He may also book you in a sleeping car that's right next to the diner."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "start": 66,
+                "end": 82,
+                "quote": "他还可能帮你订到紧挨餐车的卧铺。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-zhejiang-jan:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+                "start": 140,
+                "end": 215,
+                "quote": "In the summer in particular, the air conditioning can make them quite cold."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+                "start": 43,
+                "end": 61,
+                "quote": "尤其在夏天，空调会让车厢变得相当冷。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-zhejiang-jan:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:38"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+                "start": 133,
+                "end": 187,
+                "quote": "The temperature on rail cars is often hard to control."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+                "start": 30,
+                "end": 43,
+                "quote": "车厢里的温度往往很难控制。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-zhejiang-jan:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+                "start": 14,
+                "end": 123,
+                "quote": "Most trains operate just once a day and some run only three times a week, so missing yours can be a disaster."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+                "start": 4,
+                "end": 44,
+                "quote": "大多数列车每天只开一班，有的每周只开三班，所以错过自己的那班车可能是件糟糕的事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-zhejiang-jan:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:39"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+                "start": 124,
+                "end": 190,
+                "quote": "You might have to wait longer than 24 hours to catch the next one."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+                "start": 44,
+                "end": 63,
+                "quote": "你可能要等超过24小时才能赶上下一班。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-zhejiang-jan:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+                "start": 17,
+                "end": 111,
+                "quote": "Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+                "start": 18,
+                "end": 50,
+                "quote": "读本书、织织毛衣、做做填字游戏，或者只是看看窗外不断展开的景色。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-zhejiang-jan:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:40"
+            ],
+            "blankId": "blank:paper-gaokao-2023-zhejiang-jan:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+                "start": 10,
+                "end": 49,
+                "quote": "Train trips aren't for impatient types."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+                "start": 5,
+                "end": 18,
+                "quote": "火车旅行不适合没耐心的人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:37"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "start": 20,
+                "end": 181,
+                "quote": "Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+                "start": 7,
+                "end": 49,
+                "quote": "可以考虑把旅行计划交给旅行代理人，让他再次核对所有细节、提出建议，然后办理实际预订。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 40,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "A",
+          "shared": [
+            "train"
+          ],
+          "text": "它的 \"views\" 像接空后 \"watch the world unfold outside the window\"，也像在说车上的乐趣。但空后先列 \"Read a book, knit\"，都是消磨时间的事，和窗外风景无关，前面要先交代车程长、得有耐心。它是照答案 A 改的：都有 \"train\"，A 说火车旅行不适合急性子，它改成两边都能看风景。",
+          "quotes": [
+            "views",
+            "watch the world unfold outside the window",
+            "Read a book, knit",
+            "train"
+          ]
+        },
+        "F": {
+          "target": 37,
+          "secondary": 36,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"the cost\" 像接空前 \"discounted tickets\"，都在讲省钱。但空后 \"Then\" 说的是不用为 \"for your meals\" 穿过几节车厢，要先有铺位挨着餐车，F 只谈价钱，接不上；\"one bedroom\" 也没有比较对象。它的 \"bedroom\" 还像接 \"the sleeping car accommodations\"，可那一空后面的 \"But no matter when you travel\" 要转的是出行时间。",
+          "quotes": [
+            "the cost",
+            "discounted tickets",
+            "Then",
+            "for your meals",
+            "one bedroom",
+            "bedroom",
+            "the sleeping car accommodations",
+            "But no matter when you travel"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-zhejiang-jan:36": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "long-distance trains",
+        "sleeping car accommodations",
+        "sell out very quickly",
+        "make your reservations",
+        "90 days in advance"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+        "headingAnchor": "Plan ahead.",
+        "beforeQuote": "Most long-distance trains, especially the sleeping car accommodations, sell out very quickly.",
+        "afterQuote": "But no matter when you travel, it's a good idea to make your reservations at least 90 days in advance."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That's",
+          "signalSide": "option",
+          "targetText": "sell out very quickly",
+          "relation": "That 指空前卧铺很快售罄这件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "sell out very quickly",
+          "signalSide": "context-before",
+          "targetText": "That's particularly true",
+          "relation": "先有售罄这件事，That 才有所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "during busy summer months",
+          "signalSide": "option",
+          "targetText": "no matter when you travel",
+          "relation": "先把售罄最严重的时段限定在夏季旺季。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But no matter when you travel",
+          "signalSide": "context-after",
+          "targetText": "during busy summer months",
+          "relation": "But 把只讲夏季的话放开：不论哪个时间出行都要早订。"
+        }
+      ],
+      "lock": [
+        "sell out very quickly",
+        "That's particularly true",
+        "But no matter when you travel"
+      ],
+      "find": {
+        "text": "空后 \"But no matter when you travel\" 要前面先把话限定在某个时段。D 的 \"That's particularly true\" 指空前 \"sell out very quickly\"，又落在夏季旺季，正好让 But 放开。",
+        "quotes": [
+          "But no matter when you travel",
+          "That's particularly true",
+          "sell out very quickly"
+        ]
+      },
+      "explain": "空前说卧铺卖得快，这句补一句旺季最紧张；空后用 But 转回来，提前 90 天订票的建议就不只适用于夏天，而是任何时候都适用。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 \"the next one\" 像接空前车票售罄，只好等下一班。但空后 \"no matter when you travel\" 要转的是出行时段，E 没提任何时段。",
+          "quotes": [
+            "the next one",
+            "no matter when you travel"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前说卧铺卖得快，这句补一句旺季最紧张；空后用 But 转回来，提前 90 天订票的建议就不只适用于夏天，而是任何时候都适用。",
+        "matchedClues": [
+          {
+            "contextSide": "sell out very quickly",
+            "optionSide": "That's particularly true",
+            "relation": "That 承接售罄，并强调某个时段更严重。"
+          },
+          {
+            "contextSide": "But no matter when you travel",
+            "optionSide": "during busy summer months",
+            "relation": "先说夏季，再用 But 扩大到任何时间。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 \"the next one\" 像接空前车票售罄，只好等下一班。但空后 \"no matter when you travel\" 要转的是出行时段，E 没提任何时段。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:37": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "travel agent",
+        "handle the actual reservations",
+        "discounted tickets",
+        "walk through several cars",
+        "for your meals"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+        "headingAnchor": "Use a travel agent.",
+        "beforeQuote": "A good one can sometimes find you discounted tickets.",
+        "afterQuote": "Then you won’t have to walk through several cars on a moving train three times a day for your meals."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "find you discounted tickets",
+          "relation": "also 在找折扣票之外再加一项代理人能办的事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "He",
+          "signalSide": "option",
+          "targetText": "A good one",
+          "relation": "He 指空前那位好的旅行代理人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "context-after",
+          "targetText": "right next to the diner",
+          "relation": "Then 引出铺位挨着餐车带来的结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "right next to the diner",
+          "signalSide": "option",
+          "targetText": "for your meals",
+          "relation": "铺位挨着餐车，吃饭就不用走远。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "for your meals",
+          "signalSide": "context-after",
+          "targetText": "the diner",
+          "relation": "空后为吃饭穿过车厢，对应选项里的餐车。"
+        }
+      ],
+      "lock": [
+        "He may also",
+        "right next to the diner",
+        "for your meals"
+      ],
+      "find": {
+        "text": "空后 \"Then\" 说不必为 \"for your meals\" 穿过几节车厢，前面得先把铺位安排在餐车旁。G 的 \"right next to the diner\" 正是，\"He may also\" 又接上空前代理人订折扣票。",
+        "quotes": [
+          "Then",
+          "for your meals",
+          "right next to the diner",
+          "He may also"
+        ]
+      },
+      "explain": "空前列出代理人的一项好处：找折扣票。这句用 also 再加一项：订紧挨餐车的卧铺。空后的 Then 交代这样安排的方便：一天三顿饭都不用走远。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前列出代理人的一项好处：找折扣票。这句用 also 再加一项：订紧挨餐车的卧铺。空后的 Then 交代这样安排的方便：一天三顿饭都不用走远。",
+        "matchedClues": [
+          {
+            "contextSide": "A good one can sometimes find you discounted tickets",
+            "optionSide": "He may also book you",
+            "relation": "同一个代理人，再多做一件事。"
+          },
+          {
+            "contextSide": "walk through several cars ... for your meals",
+            "optionSide": "right next to the diner",
+            "relation": "挨着餐车，所以不用穿车厢去吃饭。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "它的 \"the cost\" 像接空前 \"discounted tickets\"，都在讲省钱。但空后 \"Then\" 说的是不用为 \"for your meals\" 穿过几节车厢，要先有铺位挨着餐车，F 只谈价钱，接不上；\"one bedroom\" 也没有比较对象。它的 \"bedroom\" 还像接 \"the sleeping car accommodations\"，可那一空后面的 \"But no matter when you travel\" 要转的是出行时间。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:38": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Bring a blanket",
+        "a blanket for free",
+        "an overnight one",
+        "the air conditioning",
+        "quite cold"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+        "headingAnchor": "Bring a blanket.",
+        "beforeQuote": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
+        "afterQuote": "In the summer in particular, the air conditioning can make them quite cold."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "context-after",
+          "targetText": "rail cars",
+          "relation": "them 指选项里的车厢。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "rail cars",
+          "signalSide": "option",
+          "targetText": "them",
+          "relation": "先出现车厢，空后的 them 才有所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "temperature",
+          "signalSide": "option",
+          "targetText": "quite cold",
+          "relation": "先说温度难控，再举空调太冷的例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "quite cold",
+          "signalSide": "context-after",
+          "targetText": "hard to control",
+          "relation": "冷是温度失控的一种表现。"
+        }
+      ],
+      "lock": [
+        "temperature",
+        "rail cars",
+        "make them quite cold"
+      ],
+      "find": {
+        "text": "空后 \"make them quite cold\" 说车厢被空调弄得很冷，前面要先有温度问题。C 的 \"temperature\" 对上 \"quite cold\"，\"rail cars\" 又给 them 一个所指。",
+        "quotes": [
+          "make them quite cold",
+          "temperature",
+          "quite cold",
+          "rail cars"
+        ]
+      },
+      "explain": "空前说车上不免费发毯子，这句给出自带毯子的理由：车厢温度不好控制。空后再举夏天空调太冷为例，把理由落到实处。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 的 \"during busy summer months\" 像引出空后的夏天，但空后已用 \"In the summer in particular\" 单说夏天，D 再说就重复了，D 的 That 也没有可指的事。",
+          "quotes": [
+            "during busy summer months",
+            "In the summer in particular"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前说车上不免费发毯子，这句给出自带毯子的理由：车厢温度不好控制。空后再举夏天空调太冷为例，把理由落到实处。",
+        "matchedClues": [
+          {
+            "contextSide": "the air conditioning can make them quite cold",
+            "optionSide": "The temperature on rail cars is often hard to control",
+            "relation": "先总说温度难控，再举空调太冷的例子。"
+          },
+          {
+            "contextSide": "you won't be provided with a blanket for free",
+            "optionSide": "hard to control",
+            "relation": "温度难控，所以要自带毯子。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 的 \"during busy summer months\" 像引出空后的夏天，但空后已用 \"In the summer in particular\" 单说夏天，D 再说就重复了，D 的 That 也没有可指的事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:39": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Arrive early",
+        "just once a day",
+        "three times a week",
+        "missing yours",
+        "a disaster"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+        "headingAnchor": "Arrive early.",
+        "beforeQuote": "Most trains operate just once a day and some run only three times a week, so missing yours can be a disaster.",
+        "afterQuote": "Note: The times listed on the schedules are departure times, not arrival times."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the next one",
+          "signalSide": "option",
+          "targetText": "yours",
+          "relation": "one 指火车，接空前错过的那班车。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "missing yours",
+          "signalSide": "context-before",
+          "targetText": "the next one",
+          "relation": "先有错过的那一班，才说下一班。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "once a day",
+          "signalSide": "context-before",
+          "targetText": "longer than 24 hours",
+          "relation": "一天只有一班，错过就要等一天以上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "longer than 24 hours",
+          "signalSide": "option",
+          "targetText": "just once a day",
+          "relation": "等待时间由班次推出。"
+        }
+      ],
+      "lock": [
+        "once a day",
+        "missing yours",
+        "the next one"
+      ],
+      "find": {
+        "text": "空前说多数车 \"once a day\"，\"missing yours\" 会很糟。E 的 \"the next one\" 指下一班车，\"longer than 24 hours\" 正是一天一班算出来的后果。",
+        "quotes": [
+          "once a day",
+          "missing yours",
+          "the next one",
+          "longer than 24 hours"
+        ]
+      },
+      "explain": "空前只说错过车很糟，这句把糟在哪里说具体：可能要等一天多。空后再提醒时刻表写的是发车时间，同样是在劝人早点到站。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前只说错过车很糟，这句把糟在哪里说具体：可能要等一天多。空后再提醒时刻表写的是发车时间，同样是在劝人早点到站。",
+        "matchedClues": [
+          {
+            "contextSide": "Most trains operate just once a day",
+            "optionSide": "longer than 24 hours",
+            "relation": "一天一班，错过就要等一天以上。"
+          },
+          {
+            "contextSide": "missing yours can be a disaster",
+            "optionSide": "wait longer than 24 hours to catch the next one",
+            "relation": "把“很糟”说成具体的等待时间。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:40": {
+      "blankId": "blank:paper-gaokao-2023-zhejiang-jan:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Have fun.",
+        "Read a book",
+        "knit",
+        "do a crossword puzzle",
+        "watch the world unfold outside the window"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+        "headingAnchor": "Have fun.",
+        "beforeQuote": "Have fun.",
+        "afterQuote": "Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "impatient types",
+          "signalSide": "option",
+          "targetText": "Read a book, knit, do a crossword puzzle",
+          "relation": "先说急性子受不了漫长车程，后面才教怎么打发时间。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Read a book",
+          "signalSide": "context-after",
+          "targetText": "aren't for impatient types",
+          "relation": "读书、编织都是熬过长车程的办法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "do a crossword puzzle",
+          "signalSide": "context-after",
+          "targetText": "impatient",
+          "relation": "又一种消磨时间的方式。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Have fun.",
+          "signalSide": "context-before",
+          "targetText": "Train trips",
+          "relation": "小标题要人在车上找乐子，先说火车旅行需要耐心。"
+        }
+      ],
+      "lock": [
+        "impatient types",
+        "Read a book"
+      ],
+      "find": {
+        "text": "空后 \"Read a book, knit, do a crossword puzzle\" 都是消磨长时间的办法，前面要先说车程长、得耐住性子。A 的 \"impatient types\" 给出这个理由。",
+        "quotes": [
+          "Read a book, knit, do a crossword puzzle",
+          "impatient types"
+        ]
+      },
+      "explain": "小标题要人在车上玩得开心，这句先交代难处：火车慢，急性子坐不住。后面列读书、编织、看风景，连算车速都成了消遣。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "小标题要人在车上玩得开心，这句先交代难处：火车慢，急性子坐不住。后面列读书、编织、看风景，连算车速都成了消遣。",
+        "matchedClues": [
+          {
+            "contextSide": "Read a book, knit, do a crossword puzzle",
+            "optionSide": "aren't for impatient types",
+            "relation": "车程长需要耐心，才要找事打发时间。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "它的 \"views\" 像接空后 \"watch the world unfold outside the window\"，也像在说车上的乐趣。但空后先列 \"Read a book, knit\"，都是消磨时间的事，和窗外风景无关，前面要先交代车程长、得有耐心。它是照答案 A 改的：都有 \"train\"，A 说火车旅行不适合急性子，它改成两边都能看风景。"
+        }
+      ]
+    }
+  }
+}

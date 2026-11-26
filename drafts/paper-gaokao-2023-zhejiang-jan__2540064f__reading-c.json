@@ -1,0 +1,755 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-zhejiang-jan:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-zhejiang-jan:reading-c": {
+      "overview": "文章从辩论程序 Project Debater 击败人类冠军说起，借专家之口指出机器能拼接语句却不懂自己在说什么，进而对比人与机器对意义的不同处理，说明意义源于社会互动，人工智能终结不了人类的思想传统。",
+      "fullTranslationZh": "机器如今不仅能在国际象棋上打败你，还能在辩论中胜过你。上周，在旧金山的一场公开辩论中，一个名叫 Project Debater 的软件程序击败了它的人类对手，其中包括以色列前全国辩论冠军 Noa Ovadia。\n\nProject Debater 虽然出色，却也有一些弱点。它从自己的文献库和预先构建的论点中提取句子，再把它们串在一起。这可能导致一些人类绝不会犯的错误。这类小毛病无疑会被消除，但它们也指向一个根本问题。正如美国西北大学电气工程与计算机科学教授 Kristian Hammond 所说：“这个系统在任何阶段都不知道自己在说什么。”\n\nHammond 所说的是意义的问题，而意义正是区分最不聪明的人和最聪明的机器的核心。计算机处理的是符号。它的程序规定了一套规则，把一串符号转换成另一串符号。但程序并不规定这些符号是什么意思。事实上，对计算机来说，意义无关紧要。人类在思考、交谈、阅读和写作时，也在处理符号。但对人类来说，意义就是一切。我们交流时，交流的是意义。重要的不只是一串符号的外表，还有它的内在；不只是符号怎样排列，还有它们是什么意思。\n\n意义是在社会互动的过程中产生的，而不是在计算中产生的，正是这种互动塑造了我们头脑中符号的内容。赋予意义的规则不仅存在于我们的头脑之中，也存在于头脑之外，存在于社会之中，存在于社会记忆、社会习俗和社会关系之中。正是这一点把人类和机器区分开来。这也就是为什么，无论 Project Debater 看起来多么令人惊叹，始于苏格拉底和孔子的思想传统都不会终结于人工智能。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+          "sourceText": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
+          "displayText": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:30"
+          ],
+          "translationZh": "Hammond 所说的是意义的问题，而意义正是区分最不聪明的人和最聪明的机器的核心。",
+          "analysisZh": "这是 and 连接的两个分句。前一句主干是 What Hammond is referring to is the question of meaning：What 引导的主语从句“Hammond 所指的东西”作主语，is 后是表语“意义的问题”，把上一段 Hammond 的话落到 meaning 上。后一句主干是 meaning is central to …，to 后的 what distinguishes A from B 是宾语从句，A、B 分别是“最不聪明的人”和“最聪明的机器”，两个最高级对照着说：再笨的人也懂意义，再聪明的机器也不懂。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 55,
+              "quote": "What Hammond is referring to is the question of meaning"
+            },
+            {
+              "start": 61,
+              "end": 82,
+              "quote": "meaning is central to"
+            },
+            {
+              "start": 88,
+              "end": 171,
+              "quote": "distinguishes the least intelligent of humans from the most intelligent of machines"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+          "sourceText": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+          "displayText": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:31"
+          ],
+          "translationZh": "意义是在社会互动的过程中产生的，而不是在计算中产生的，正是这种互动塑造了我们头脑中符号的内容。",
+          "analysisZh": "主干是 Meaning emerges through a process of social interaction，“意义通过社会互动的过程产生”。not of computation 与 of social interaction 并列对比，省略了 a process，意思是“不是通过计算的过程”。逗号后的 interaction 是同位语，重复前面的 social interaction，再用 that 从句说明这种互动“塑造了我们头脑中符号的内容”。这一句回答了意义从哪里来，是全段的观点句。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 55,
+              "quote": "Meaning emerges through a process of social interaction"
+            },
+            {
+              "start": 57,
+              "end": 75,
+              "quote": "not of computation"
+            },
+            {
+              "start": 77,
+              "end": 127,
+              "quote": "interaction that shapes the content of the symbols"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-c:1"
+              ],
+              "start": 0,
+              "end": 105,
+              "quote": "机器如今不仅能在国际象棋上打败你，还能在辩论中胜过你。上周，在旧金山的一场公开辩论中，一个名叫 Project Debater 的软件程序击败了它的人类对手，其中包括以色列前全国辩论冠军 Noa Ovadia。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+                "block:paper-gaokao-2023-zhejiang-jan:reading-c:3"
+              ],
+              "start": 107,
+              "end": 272,
+              "quote": "Project Debater 虽然出色，却也有一些弱点。它从自己的文献库和预先构建的论点中提取句子，再把它们串在一起。这可能导致一些人类绝不会犯的错误。这类小毛病无疑会被消除，但它们也指向一个根本问题。正如美国西北大学电气工程与计算机科学教授 Kristian Hammond 所说：“这个系统在任何阶段都不知道自己在说什么。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-c:4"
+              ],
+              "start": 274,
+              "end": 478,
+              "quote": "Hammond 所说的是意义的问题，而意义正是区分最不聪明的人和最聪明的机器的核心。计算机处理的是符号。它的程序规定了一套规则，把一串符号转换成另一串符号。但程序并不规定这些符号是什么意思。事实上，对计算机来说，意义无关紧要。人类在思考、交谈、阅读和写作时，也在处理符号。但对人类来说，意义就是一切。我们交流时，交流的是意义。重要的不只是一串符号的外表，还有它的内在；不只是符号怎样排列，还有它们是什么意思。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-c:5"
+              ],
+              "start": 480,
+              "end": 662,
+              "quote": "意义是在社会互动的过程中产生的，而不是在计算中产生的，正是这种互动塑造了我们头脑中符号的内容。赋予意义的规则不仅存在于我们的头脑之中，也存在于头脑之外，存在于社会之中，存在于社会记忆、社会习俗和社会关系之中。正是这一点把人类和机器区分开来。这也就是为什么，无论 Project Debater 看起来多么令人惊叹，始于苏格拉底和孔子的思想传统都不会终结于人工智能。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2023-zhejiang-jan:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+                "start": 0,
+                "end": 172,
+                "quote": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p3",
+                "start": 0,
+                "end": 42,
+                "quote": "Hammond 所说的是意义的问题，而意义正是区分最不聪明的人和最聪明的机器的核心。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2023-zhejiang-jan:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+                "start": 0,
+                "end": 141,
+                "quote": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p4",
+                "start": 0,
+                "end": 47,
+                "quote": "意义是在社会互动的过程中产生的，而不是在计算中产生的，正是这种互动塑造了我们头脑中符号的内容。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+                "start": 0,
+                "end": 83,
+                "quote": "A machine can now not only beat you at chess, it can also outperform you in debate."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+                "start": 84,
+                "end": 265,
+                "quote": "Last week. in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p1",
+                "start": 17,
+                "end": 26,
+                "quote": "还能在辩论中胜过你"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p1",
+                "start": 69,
+                "end": 104,
+                "quote": "击败了它的人类对手，其中包括以色列前全国辩论冠军 Noa Ovadia"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+                "start": 160,
+                "end": 217,
+                "quote": "This can lead to the kinds of errors no human would make."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+                "start": 218,
+                "end": 306,
+                "quote": "Such wrinkles will no doubt be ironed out. yet they also point to a fundamental problem."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p2",
+                "start": 60,
+                "end": 77,
+                "quote": "这可能导致一些人类绝不会犯的错误。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p2",
+                "start": 77,
+                "end": 102,
+                "quote": "这类小毛病无疑会被消除，但它们也指向一个根本问题。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+                "start": 422,
+                "end": 469,
+                "quote": "There's never a stage at which the system knows"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:3",
+                "start": 0,
+                "end": 23,
+                "quote": "what it's talking about"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+                "start": 0,
+                "end": 55,
+                "quote": "What Hammond is referring to is the question of meaning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p2",
+                "start": 143,
+                "end": 165,
+                "quote": "“这个系统在任何阶段都不知道自己在说什么。”"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p3",
+                "start": 0,
+                "end": 17,
+                "quote": "Hammond 所说的是意义的问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+                "start": 0,
+                "end": 141,
+                "quote": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-c-p4",
+                "start": 0,
+                "end": 47,
+                "quote": "意义是在社会互动的过程中产生的，而不是在计算中产生的，正是这种互动塑造了我们头脑中符号的内容。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用辩论程序战胜人类冠军引出话题，再转向它不懂自己在说什么这一根本问题；接着对比机器只按规则处理符号、人类看重符号的意义，最后指出意义源于社会互动，人工智能取代不了人类的思想传统。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+            "summary": "辩论程序在公开辩论中击败了以色列前全国冠军等人类对手",
+            "function": "用醒目的比赛结果引出话题，先展示机器的能力。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+            "summary": "程序靠拼接现成句子辩论，会出错，而且根本不懂自己在说什么",
+            "function": "由优点转向弱点，借专家的话提出全文要讨论的根本问题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+            "summary": "计算机只按规则转换符号，不管意义；人类交流的恰恰是意义",
+            "function": "解释专家所说的问题，用人机对比说明意义是关键区别。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+            "summary": "意义源于社会互动，因此人工智能不会终结人类的思想传统",
+            "function": "说明意义的来源，并收束到人与机器的根本区别。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-zhejiang-jan:28": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者点出被击败的对手是谁，是为了说明什么。",
+      "stemTranslationZh": "作者为什么在第一段提到 Noa Ovadia？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句找它要证明的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了解释一个软件程序的用途。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a software program",
+            "optionText": "a software program",
+            "matchType": "exact",
+            "relationNote": "选项照搬原文的 a software program；原文用它交代 Project Debater 是什么，接着写的是它赢了谁，没讲这个程序拿来做什么。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "quote": "Last week. in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion.",
+              "anchor": "程序击败人类对手"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了展示 Project Debater 有多聪明。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "quote": "A machine can now not only beat you at chess, it can also outperform you in debate.",
+              "anchor": "机器辩论胜过人"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "quote": "Last week. in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion.",
+              "anchor": "击败前全国冠军"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了介绍 Project Debater 的设计者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Last week. in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion.",
+            "sourceEntity": "its human opponents",
+            "optionText": "To introduce the designer of Project Debater.",
+            "optionEntity": "the designer",
+            "explanation": "Noa Ovadia 列在程序的人类对手（its human opponents）里，是输给它的辩手，不是造它的人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "quote": "Last week. in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion.",
+              "anchor": "人类对手"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了强调比赛的公平性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To emphasize the fairness of the competition.",
+            "explanation": "原文只交代比赛在旧金山公开举行（a public debate）、程序赢了谁，没谈规则或评判公不公平。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Noa Ovadia",
+          "sourceRole": "stem",
+          "targetText": "Last week. in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "it can also outperform you in debate",
+          "bridgeZh": "连前全国冠军都输给它，正好证明机器辩论能胜过人",
+          "note": "题干 Noa Ovadia 原词出现在原文。"
+        },
+        {
+          "sourceText": "To show the cleverness of Project Debater.",
+          "sourceRole": "correctOption",
+          "targetText": "it can also outperform you in debate",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“聪明”（cleverness）概括的是作者对程序的评价：能在辩论中胜过人（outperform you in debate），[[block:paper-gaokao-2023-zhejiang-jan:reading-c:2|Brilliant though it is]]也直说它出色。点出对手是前全国冠军，就是让这份聪明看得见，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:29": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "顺着 Such 往前找，确定 wrinkles 指的是前面说的什么。",
+      "stemTranslationZh": "第二段画线词“wrinkles”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "Such 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "论点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "arguments",
+            "optionText": "Arguments",
+            "matchType": "exact",
+            "relationNote": "Arguments 借自[[block:paper-gaokao-2023-zhejiang-jan:reading-c:2|prebuilt arguments]]，那是程序拼句子用的现成论点；放进去成了“这类论点无疑会被消除”，可要消除的是拼出来的毛病。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "quote": "It takes sentences from its library of documents and prebuilt arguments and strings them together.",
+              "anchor": "现成论点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "疑虑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Doubts.",
+            "explanation": "放进去成了“这类疑虑无疑会被消除”，可前文没人表示怀疑，紧挨着说的是程序会犯的错误（errors）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "错误。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "quote": "This can lead to the kinds of errors no human would make.",
+              "anchor": "人不会犯的错误"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "quote": "Such wrinkles will no doubt be ironed out. yet they also point to a fundamental problem.",
+              "anchor": "这类毛病会被消除"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "差异。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This can lead to the kinds of errors no human would make.",
+            "sourceEntity": "errors",
+            "optionText": "Differences.",
+            "optionEntity": "Differences",
+            "explanation": "“人不会犯”（no human would make）确实带出人和机器的不同，可 Such 接的是错误本身；放进去成了“这类差异会被消除”，和后面说还有根本问题（a fundamental problem）相冲突。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "quote": "Such wrinkles will no doubt be ironed out. yet they also point to a fundamental problem.",
+              "anchor": "根本问题"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "wrinkles",
+          "sourceRole": "stem",
+          "targetText": "Such wrinkles will no doubt be ironed out. yet they also point to a fundamental problem.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "the kinds of errors no human would make",
+          "bridgeZh": "Such wrinkles 回指程序拼接句子造成的 errors",
+          "note": "题干画线词 wrinkles 原样出现在原文。"
+        },
+        {
+          "sourceText": "Errors.",
+          "sourceRole": "correctOption",
+          "targetText": "the kinds of errors no human would make",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "wrinkles 本义是“皱纹”，这里说它们无疑会被消除（ironed out），所以它必须是程序身上能改掉的毛病。放回去：程序拼句子犯下的这类错误，迟早会被修正，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂 Hammond 的话和作者紧接着的解释，找出程序做不到的事。",
+      "stemTranslationZh": "根据 Hammond 的说法，Project Debater 做不到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "制定规则。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "rules",
+            "optionText": "rules",
+            "matchType": "exact",
+            "relationNote": "rules 借自[[block:paper-gaokao-2023-zhejiang-jan:reading-c:4|Its program specifies a set of rules]]：程序按规则把一串符号变成另一串，说的是它照规则办事却不懂意思；Hammond 没提它会不会定规则。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "quote": "Its program specifies a set of rules to transform one string of symbols into another.",
+              "anchor": "程序规定的规则"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "理解意义。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "quote": "There's never a stage at which the system knows",
+              "anchor": "Hammond 的话"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:3",
+              "quote": "what it's talking about",
+              "anchor": "Hammond 的话（续）"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "quote": "What Hammond is referring to is the question of meaning",
+              "anchor": "作者点明是意义问题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "流利地交谈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "talking",
+            "optionText": "Talk",
+            "matchType": "wordFamily",
+            "relationNote": "Talk 借自 Hammond 话里的 talking about；他说的是系统不知道自己在说什么，不是说它说不流利——它刚在辩论中赢了人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:3",
+              "quote": "what it's talking about.\"",
+              "anchor": "Hammond 的话"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "识别难词。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Identify difficult words.",
+            "explanation": "原文没提难词；Hammond 说的是系统不懂自己说的话是什么意思，和认不认得某个词无关。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Hammond",
+          "sourceRole": "stem",
+          "targetText": "As Kristian Hammond, professor of electrical engineering and computer science at Northwestern University, put it: \"There's never a stage at which the system knows",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "There's never a stage at which the system knows",
+          "note": "题干 Hammond 原词出现在原文。"
+        },
+        {
+          "sourceText": "Comprehend meaning.",
+          "sourceRole": "correctOption",
+          "targetText": "the question of meaning",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项两层各有落点：“理解”对应 Hammond 说系统从来不知道自己在说什么（never … knows what it's talking about）；“意义”出自[[block:paper-gaokao-2023-zhejiang-jan:reading-c:4|What Hammond is referring to]]，作者点明他指的是意义问题（the question of meaning）。会拼句子不等于懂意思，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完最后一段，抓住这一段的观点句。",
+      "stemTranslationZh": "从最后一段我们可以了解到什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-zhejiang-jan:reading-c:5]]先讲 meaning 从何而来，再说规则也在 society 里，最后据此说 AI 终结不了人的传统；答案要说出意义靠什么产生",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "社会互动是理解符号的关键。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+              "quote": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+              "anchor": "意义源于社会互动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人脑还有尚待开发的潜力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The human brain has potential yet to be developed.",
+            "explanation": "这一段提到头脑，是说赋予意义的规则不只在头脑里（not just inside our heads），还在社会中；没谈大脑还有什么潜力没开发。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "古代哲学家为辩手树立了好榜样。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "And that's why, however astonishing Project Debater may seem, the tradition that began with Socrates and Confucius will not end with artificial intelligence.",
+            "sourceEntity": "the tradition that began with Socrates and Confucius",
+            "optionText": "Ancient philosophers set good examples for debaters.",
+            "optionEntity": "good examples for debaters",
+            "explanation": "选项借苏格拉底和孔子（Socrates and Confucius）编出“给辩手树榜样”；原文提他们，是说由他们开启的人类思想传统不会被人工智能终结。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+              "quote": "And that's why, however astonishing Project Debater may seem, the tradition that began with Socrates and Confucius will not end with artificial intelligence.",
+              "anchor": "思想传统"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人工智能确保人类拥有光明的未来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Artificial intelligence ensures humans a bright future.",
+            "explanation": "原文提人工智能，是说人的思想传统不会因它而终结（will not end with artificial intelligence），强调机器替代不了人，没说它能给人类带来美好未来。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Social interaction is key to understanding symbols.",
+          "sourceRole": "correctOption",
+          "targetText": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“理解符号的关键”（key to understanding symbols）概括的是这一段的观点：意义靠社会互动产生（emerges through … social interaction），互动塑造头脑里符号的内容（shapes the content of the symbols）。后面说规则在社会中、人因此不同于机器，都由这一点展开，选 A。"
+        }
+      ]
+    }
+  }
+}

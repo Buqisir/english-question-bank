@@ -1,0 +1,807 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-zhejiang-jan:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-zhejiang-jan:reading-d": {
+      "overview": "文章介绍太阳能电站建设的新做法：过去开发商只图快省，在板下铺石喷药、损害土壤；InSPIRE 项目倡导低影响开发，把板下空间变成传粉昆虫的栖息地，从而改良土壤、减少碳排放。",
+      "fullTranslationZh": "据太阳能产业协会称，过去十年里已安装的太阳能板数量迅速增长，而且为了实现气候目标，它还得增长得更快。但这些增长都要占用大量空间；尽管越来越多的人接受太阳能这一理念，却很少有人愿意在自己附近安装大型太阳能板。\n\n太阳能开发商想尽可能快、尽可能省钱地装好太阳能板，所以他们没怎么考虑在板子下面放什么。他们往往最后在那片地上铺满小石子，再用化学药剂来控制杂草。结果，许多社区，尤其是农业地区的社区，把太阳能电站看成土壤的破坏者。\n\n“太阳能项目需要做好邻居，”创新场地准备与减少环境影响（InSPIRE）项目负责人 Jordan Macknick 说，“它们需要成为土地的保护者，并为农业经济做出贡献。”InSPIRE 正在研究“低影响”太阳能开发的切实可行的方法，这种开发注重以对土地更友好的方式建设和运营太阳能电站。最简单的低影响太阳能策略之一，是为传粉昆虫提供栖息地。\n\n过去二三十年间，栖息地丧失、农药使用和气候变化导致传粉昆虫数量急剧下降，这已经损害了美国的农业经济。超过28个州通过了与传粉昆虫栖息地保护和农药使用相关的法律。保护组织为家庭花园、企业、学校、城市发布了传粉昆虫友好指南——现在也有了针对太阳能电站的指南。\n\n过去几年里，许多太阳能电站开发商把太阳能板下方的空间改造成了各种传粉昆虫的庇护所，从而改良了土壤，减少了碳排放。“这些对传粉昆虫友好的太阳能电站能对这片土地上发生的一切产生宝贵的影响，”Macknick 说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+          "sourceText": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+          "displayText": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:33"
+          ],
+          "translationZh": "InSPIRE 正在研究“低影响”太阳能开发的切实可行的方法，这种开发注重以对土地更友好的方式建设和运营太阳能电站。",
+          "analysisZh": "主干是 InSPIRE is investigating practical approaches to … development，“InSPIRE 正在研究……开发的切实方法”，approaches to 后接名词表示“做某事的方法”。逗号后 which 引导非限制性定语从句，解释什么是“低影响”开发：focuses on 后的两个动名词 establishing and operating 共用宾语 solar farms，in a way that is kinder to the land 说明方式，that 从句修饰 way。读懂 which 后这层解释，就知道 InSPIRE 要让电站对土地更友好。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 45,
+              "quote": "InSPIRE is investigating practical approaches"
+            },
+            {
+              "start": 81,
+              "end": 136,
+              "quote": "which focuses on establishing and operating solar farms"
+            },
+            {
+              "start": 137,
+              "end": 172,
+              "quote": "in a way that is kinder to the land"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+          "sourceText": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "displayText": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-zhejiang-jan:34"
+          ],
+          "translationZh": "过去二三十年间，栖息地丧失、农药使用和气候变化导致传粉昆虫数量急剧下降，这已经损害了美国的农业经济。",
+          "analysisZh": "主干是 Habitat loss, pesticide use, and climate change have caused dramatic declines：三个并列主语共同导致传粉昆虫数量急剧下降，in pollinator populations 说明是什么在下降，over the past couple of decades 交代时间。句末 which 引导非限制性定语从句，指代前面“数量下降”这整件事，说它损害了美国农业经济。这一句交代了后面各州立法保护传粉昆虫的原因。",
+          "underlineRanges": [
+            {
+              "start": 48,
+              "end": 103,
+              "quote": "have caused dramatic declines in pollinator populations"
+            },
+            {
+              "start": 137,
+              "end": 184,
+              "quote": "which has damaged the U.S. agricultural economy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-d:1"
+              ],
+              "start": 0,
+              "end": 103,
+              "quote": "据太阳能产业协会称，过去十年里已安装的太阳能板数量迅速增长，而且为了实现气候目标，它还得增长得更快。但这些增长都要占用大量空间；尽管越来越多的人接受太阳能这一理念，却很少有人愿意在自己附近安装大型太阳能板。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-d:2"
+              ],
+              "start": 105,
+              "end": 211,
+              "quote": "太阳能开发商想尽可能快、尽可能省钱地装好太阳能板，所以他们没怎么考虑在板子下面放什么。他们往往最后在那片地上铺满小石子，再用化学药剂来控制杂草。结果，许多社区，尤其是农业地区的社区，把太阳能电站看成土壤的破坏者。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-d:3",
+                "block:paper-gaokao-2023-zhejiang-jan:reading-d:4"
+              ],
+              "start": 213,
+              "end": 384,
+              "quote": "“太阳能项目需要做好邻居，”创新场地准备与减少环境影响（InSPIRE）项目负责人 Jordan Macknick 说，“它们需要成为土地的保护者，并为农业经济做出贡献。”InSPIRE 正在研究“低影响”太阳能开发的切实可行的方法，这种开发注重以对土地更友好的方式建设和运营太阳能电站。最简单的低影响太阳能策略之一，是为传粉昆虫提供栖息地。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-d:5"
+              ],
+              "start": 386,
+              "end": 513,
+              "quote": "过去二三十年间，栖息地丧失、农药使用和气候变化导致传粉昆虫数量急剧下降，这已经损害了美国的农业经济。超过28个州通过了与传粉昆虫栖息地保护和农药使用相关的法律。保护组织为家庭花园、企业、学校、城市发布了传粉昆虫友好指南——现在也有了针对太阳能电站的指南。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-zhejiang-jan:reading-d:6"
+              ],
+              "start": 515,
+              "end": 619,
+              "quote": "过去几年里，许多太阳能电站开发商把太阳能板下方的空间改造成了各种传粉昆虫的庇护所，从而改良了土壤，减少了碳排放。“这些对传粉昆虫友好的太阳能电站能对这片土地上发生的一切产生宝贵的影响，”Macknick 说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2023-zhejiang-jan:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+                "start": 26,
+                "end": 199,
+                "quote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p3",
+                "start": 86,
+                "end": 144,
+                "quote": "InSPIRE 正在研究“低影响”太阳能开发的切实可行的方法，这种开发注重以对土地更友好的方式建设和运营太阳能电站。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-sentence-group:paper-gaokao-2023-zhejiang-jan:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-zhejiang-jan:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+                "start": 0,
+                "end": 185,
+                "quote": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p4",
+                "start": 0,
+                "end": 50,
+                "quote": "过去二三十年间，栖息地丧失、农药使用和气候变化导致传粉昆虫数量急剧下降，这已经损害了美国的农业经济。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+                "start": 234,
+                "end": 344,
+                "quote": "The result is that many communities, especially in farming regions, see solar farms as destroyers of the soil."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+                "start": 139,
+                "end": 233,
+                "quote": "Often, they'll end up filling the area with small stones and using chemicals to control weeds."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p2",
+                "start": 72,
+                "end": 106,
+                "quote": "结果，许多社区，尤其是农业地区的社区，把太阳能电站看成土壤的破坏者。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p2",
+                "start": 43,
+                "end": 72,
+                "quote": "他们往往最后在那片地上铺满小石子，再用化学药剂来控制杂草。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+                "start": 26,
+                "end": 199,
+                "quote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:3",
+                "start": 170,
+                "end": 209,
+                "quote": "\"They need to be protectors of the land"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p3",
+                "start": 86,
+                "end": 144,
+                "quote": "InSPIRE 正在研究“低影响”太阳能开发的切实可行的方法，这种开发注重以对土地更友好的方式建设和运营太阳能电站。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p3",
+                "start": 61,
+                "end": 73,
+                "quote": "它们需要成为土地的保护者"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+                "start": 186,
+                "end": 277,
+                "quote": "Over 28 states have passed laws related to pollinator habitat protection and pesticide use."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+                "start": 0,
+                "end": 185,
+                "quote": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p4",
+                "start": 50,
+                "end": 80,
+                "quote": "超过28个州通过了与传粉昆虫栖息地保护和农药使用相关的法律。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p4",
+                "start": 0,
+                "end": 35,
+                "quote": "过去二三十年间，栖息地丧失、农药使用和气候变化导致传粉昆虫数量急剧下降"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-question:paper-gaokao-2023-zhejiang-jan:35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-zhejiang-jan:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
+                "start": 0,
+                "end": 204,
+                "quote": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+                "start": 26,
+                "end": 199,
+                "quote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+                "start": 234,
+                "end": 344,
+                "quote": "The result is that many communities, especially in farming regions, see solar farms as destroyers of the soil."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p5",
+                "start": 0,
+                "end": 56,
+                "quote": "过去几年里，许多太阳能电站开发商把太阳能板下方的空间改造成了各种传粉昆虫的庇护所，从而改良了土壤，减少了碳排放。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p3",
+                "start": 86,
+                "end": 116,
+                "quote": "InSPIRE 正在研究“低影响”太阳能开发的切实可行的方法"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-zhejiang-jan:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-zhejiang-jan:reading-d-p2",
+                "start": 72,
+                "end": 106,
+                "quote": "结果，许多社区，尤其是农业地区的社区，把太阳能电站看成土壤的破坏者。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先指出太阳能板装得越来越多、却不受当地欢迎，再说明开发商不顾板下土地、被视为毁土者；接着介绍 InSPIRE 倡导的低影响开发和为传粉昆虫提供栖息地的思路，交代传粉昆虫锐减及各方保护措施，最后写这种新做法带来的好处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+            "summary": "太阳能板安装量快速增长，但很少有人愿意板子装在自己附近",
+            "function": "交代背景，点出太阳能发展遇到的空间与接受度问题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+            "summary": "开发商只图快省，在板下铺石子、喷药，被视为土壤的破坏者",
+            "function": "说明传统做法的问题，引出改变的必要。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:3",
+            "summary": "InSPIRE 项目主张低影响开发，为传粉昆虫提供栖息地是最简单的策略",
+            "function": "提出解决办法，是全文的转折点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+            "summary": "传粉昆虫数量锐减，各州立法、保护组织出指南加以保护",
+            "function": "说明保护传粉昆虫的必要，为太阳能电站的新做法提供依据。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
+            "summary": "许多电站把板下变成传粉昆虫的庇护所，改良土壤、减少碳排放",
+            "function": "写新做法的成效，呼应开头的问题。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-zhejiang-jan:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到开发商没有顾及的事，再看它带来了什么后果。",
+      "stemTranslationZh": "太阳能开发商常常忽视什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读到 result 看后果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对太阳能需求的下降。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "According to the Solar Energy Industry Association, the number of solar panels installed(安装) has grown rapidly in the past decade, and it has to grow even faster to meet climate goals.",
+            "sourceHighlight": "has grown rapidly",
+            "optionText": "The decline in the demand for solar energy.",
+            "optionHighlight": "The decline in the demand",
+            "explanation": "原文说太阳能板安装量十年来快速增长（has grown rapidly），还得增长得更快，谈不上需求下降，更不是开发商忽视的事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "quote": "According to the Solar Energy Industry Association, the number of solar panels installed(安装) has grown rapidly in the past decade, and it has to grow even faster to meet climate goals.",
+              "anchor": "安装量快速增长"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "安装太阳能板带来的负面影响。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "quote": "The result is that many communities, especially in farming regions, see solar farms as destroyers of the soil.",
+              "anchor": "被视为土壤破坏者"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "quote": "Often, they'll end up filling the area with small stones and using chemicals to control weeds.",
+              "anchor": "铺石子、喷药"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "建设太阳能电站不断上涨的人工成本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The rising labor cost of building solar farms.",
+            "explanation": "原文只说开发商想又快又省地装板（quickly and cheaply），没提人工成本在涨。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "太阳能技术的最新进展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The most recent advances in solar technology.",
+            "explanation": "原文没谈太阳能技术有什么新进展；开发商没多考虑的是板子下面放什么（what they put under them）。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "ignore",
+          "sourceRole": "stem",
+          "targetText": "Solar developers want to put up panels as quickly and cheaply as possible, so they haven't given much thought to what they put under them.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "haven't given much thought",
+          "sourceZh": "忽视",
+          "targetCueZh": "没怎么考虑",
+          "answerText": "see solar farms as destroyers of the soil",
+          "bridgeZh": "正因不考虑板下放什么，才铺石子、喷药，伤了土地",
+          "note": "题干 ignore 对应原文 haven't given much thought。"
+        },
+        {
+          "sourceText": "The negative impact of installing solar panels.",
+          "sourceRole": "correctOption",
+          "targetText": "see solar farms as destroyers of the soil",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“负面影响”（negative impact）概括了这些后果：铺石子、用化学药剂除草，让农业地区的社区把电站看成土壤的破坏者（destroyers of the soil）。开发商没考虑的正是装板会给土地带来什么，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 InSPIRE 项目研究的方向，概括它要达到的目标。",
+      "stemTranslationZh": "InSPIRE 旨在做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 which 后对它的解释",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "提高当地农场的生产率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the agricultural economy.",
+            "sourceEntity": "the agricultural economy",
+            "optionText": "Improve the productivity of local farms.",
+            "optionEntity": "the productivity of local farms",
+            "explanation": "Macknick 说太阳能项目要为农业经济出力（contribute to the agricultural economy），这是对电站的要求；InSPIRE 研究的是电站怎样建才对土地更友好，不是提高农场产量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+              "quote": "the agricultural economy.",
+              "anchor": "农业经济"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "发明控制杂草的新方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "control weeds",
+            "optionText": "controlling weeds",
+            "matchType": "wordFamily",
+            "relationNote": "controlling weeds 借自[[block:paper-gaokao-2023-zhejiang-jan:reading-d:2|using chemicals to control weeds]]：用化学药剂除草正是开发商伤害土地的做法，InSPIRE 要换掉这种做法，不是去发明除草新办法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "quote": "Often, they'll end up filling the area with small stones and using chemicals to control weeds.",
+              "anchor": "喷药除草"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "让太阳能项目对环境友好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+              "quote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+              "anchor": "低影响开发"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:3",
+              "quote": "\"They need to be protectors of the land",
+              "anchor": "做土地的保护者"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在农村地区推广太阳能的使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Promote the use of solar energy in rural areas.",
+            "explanation": "原文提到农业地区（farming regions），是说那里的人把电站看成毁土者；InSPIRE 关心的是电站怎样建得对土地友好，没说要在农村推广太阳能。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "InSPIRE",
+          "sourceRole": "stem",
+          "targetText": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "\"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land",
+          "note": "题干 InSPIRE 原词出现在原文。"
+        },
+        {
+          "sourceText": "Make solar projects environmentally friendly.",
+          "sourceRole": "correctOption",
+          "targetText": "in a way that is kinder to the land",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“对环境友好”（environmentally friendly）就是原文的“低影响”（low-impact）、“对土地更友好”（kinder to the land）；项目负责人也说太阳能项目要做土地的保护者（[[block:paper-gaokao-2023-zhejiang-jan:reading-d:3|protectors of the land]]），选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂法律涉及的内容，判断立法的目的。",
+      "stemTranslationZh": "第四段提到的法律的目的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "保护传粉昆虫。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "quote": "Over 28 states have passed laws related to pollinator habitat protection and pesticide use.",
+              "anchor": "法律内容"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "quote": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+              "anchor": "传粉昆虫锐减"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "限制太阳能开发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Conservation organizations put out pollinator-friendliness guidelines for home gardens, businesses, schools, cities——and now there are guidelines for solar farms.",
+            "sourceEntity": "guidelines for solar farms",
+            "optionText": "To restrict solar development.",
+            "optionEntity": "restrict solar development",
+            "explanation": "和太阳能电站有关的是保护组织出的指南（guidelines for solar farms），教电站怎样对传粉昆虫友好；法律管的是栖息地和农药，没说要限制太阳能开发。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "quote": "Conservation organizations put out pollinator-friendliness guidelines for home gardens, businesses, schools, cities——and now there are guidelines for solar farms.",
+              "anchor": "电站指南"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "使经济多样化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "economy",
+            "optionText": "economy",
+            "matchType": "exact",
+            "relationNote": "economy 借自[[block:paper-gaokao-2023-zhejiang-jan:reading-d:5|agricultural economy]]：传粉昆虫减少拖累了农业经济，这是立法的背景；法律本身是保护传粉昆虫，没说要让经济多样化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "quote": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+              "anchor": "农业经济受损"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "确保能源供应。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To ensure the supply of energy.",
+            "explanation": "法律管的是传粉昆虫的栖息地和农药使用，原文没把它和能源供应联系起来。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "laws",
+          "sourceRole": "stem",
+          "targetText": "Over 28 states have passed laws related to pollinator habitat protection and pesticide use.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "related to pollinator habitat protection and pesticide use",
+          "note": "题干 laws 原词出现在原文。"
+        },
+        {
+          "sourceText": "To conserve pollinators.",
+          "sourceRole": "correctOption",
+          "targetText": "pollinator habitat protection and pesticide use",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "法律涉及保护传粉昆虫栖息地和管控农药（habitat protection and pesticide use），而栖息地丧失和农药正是[[block:paper-gaokao-2023-zhejiang-jan:reading-d:5|caused dramatic declines in pollinator populations]]里传粉昆虫锐减的原因，可见立法是为了保护传粉昆虫，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-zhejiang-jan:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "抓住全文从问题到新做法的主线，选出能盖住全文的标题。",
+      "stemTranslationZh": "下列哪一项是本文的最佳标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-zhejiang-jan:reading-d:2]]电站被看成 destroyers of the soil，[[block:paper-gaokao-2023-zhejiang-jan:reading-d:4]]提出 low-impact 开发，[[block:paper-gaokao-2023-zhejiang-jan:reading-d:6]]板下成了传粉昆虫的家；标题要盖住电站建法的新变化",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "传粉昆虫：去还是留",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
+            "sourceEntity": "pollinators",
+            "optionText": "Pollinators: To Leave or to Stay",
+            "optionEntity": "To Leave or to Stay",
+            "explanation": "传粉昆虫是电站新做法里受益的一方；文中说它们数量锐减（dramatic declines）、电站给它们安家，没讨论它们是去是留。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
+              "quote": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
+              "anchor": "为传粉昆虫安家"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "太阳能：未来的希望",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "According to the Solar Energy Industry Association, the number of solar panels installed(安装) has grown rapidly in the past decade, and it has to grow even faster to meet climate goals.",
+            "sourceHighlight": "to meet climate goals",
+            "optionText": "Solar Energy: Hope for the Future",
+            "optionHighlight": "Hope for the Future",
+            "explanation": "开头说太阳能要更快增长以实现气候目标（meet climate goals），只是引子；全文讲的是电站怎样建才不伤土地，没去论证太阳能是未来的希望。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "quote": "According to the Solar Energy Industry Association, the number of solar panels installed(安装) has grown rapidly in the past decade, and it has to grow even faster to meet climate goals.",
+              "anchor": "引出话题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "InSPIRE：农业领域的领跑者",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+            "sourceEntity": "InSPIRE",
+            "optionText": "InSPIRE: A Leader in Agriculture",
+            "optionEntity": "A Leader in Agriculture",
+            "explanation": "InSPIRE 只在[[block:paper-gaokao-2023-zhejiang-jan:reading-d:3]]出现，是研究低影响太阳能开发的项目，不是农业领域的领头者；用它作标题也盖不住[[block:paper-gaokao-2023-zhejiang-jan:reading-d:6]]各地开发商的新做法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+              "quote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+              "anchor": "InSPIRE 的研究"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "太阳能电站：一种新发展",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
+              "quote": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
+              "anchor": "板下变成传粉昆虫庇护所"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+              "quote": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+              "anchor": "低影响开发"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "quote": "The result is that many communities, especially in farming regions, see solar farms as destroyers of the soil.",
+              "anchor": "旧做法的问题"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Solar Farms: A New Development",
+          "sourceRole": "correctOption",
+          "targetText": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
+          "targetParagraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "几段讲的都是太阳能电站建法的变化：从铺石喷药、被当成毁土者，到提倡低影响开发，再到把板下变成传粉昆虫的庇护所、改良土壤。选项的“太阳能电站”（Solar Farms）点出对象，“新发展”（A New Development）正好盖住这条从旧做法到新做法的线，选 D。"
+        }
+      ]
+    }
+  }
+}

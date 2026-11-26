@@ -1,0 +1,131 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph1: A few weeks later, I went to the farm again. This time I came to help my friends pick blackberries. Before joining them, I walked over to the old milking house. The broken window had been fixed, and the cloth I had stuffed into the hole was gone. I stood by the door for a while, watching the bushes and listening for that squeaking call, but I heard nothing except the wind. Maybe she had forgotten me, I thought. After all, she was just a tiny bird. We spent the whole afternoon picking berries, and when the sun began to set, I said good-bye to my friends and walked slowly to my car.\n\nParagraph 2: I was just about to leave when the hummingbird appeared. She flew straight to me and hovered in front of my face, her wings humming. I stood still, hardly daring to breathe. Just as before, she looked into my eyes, tilting her head this way and that. My friends hurried over and watched in silence. Then she let out a short squeak, circled above our heads once and flew off toward the milking house. I sat in my car for a long moment with a big smile on my face. Last time, someone had said she came to say good-bye. This time, I was sure she had come back to say hello.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "原文停在蜂鸟飞来向“我”告别、有人说 \"She must have come to say good-bye.\" 之后。没解决的是：“我”和这只蜂鸟之间的联系会不会就此结束，再来农场时还能不能见到她。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "“我”心细、肯花时间照顾小动物：看到蜂鸟被困就进去救，堵上破窗、关好门，还替她摘掉蛛网，想带她去车边喝水。蜂鸟两次停在“我”面前看着“我”，说明她认得“我”。"
+        },
+        {
+          "question": "原文是怎么写的？续写照着怎样写？",
+          "answer": "第一人称“我”用过去时讲，句子多是中短句，按动作一步步推进；全文只有结尾一处直接引语，其余都是叙述。描写集中在蜂鸟的动作和眼睛上。续写也以叙述为主，最多留一句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "They promised to fix the window.",
+          "use": "第一段回到农场时可以先去看那扇窗：窗修好了，说明朋友守了承诺，也自然引出“我”在找那只鸟。"
+        },
+        {
+          "sourceQuote": "turning her head from side to side",
+          "use": "蜂鸟再次出现时，用相近的动作（换个说法，不整句照抄）让读者认出是同一只鸟。"
+        },
+        {
+          "sourceQuote": "She must have come to say good-bye.",
+          "use": "结尾可以回应这句话：上次是来告别，这次是回来打招呼，故事首尾扣上。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段以 \"Paragraph1: A few weeks later, I went to the farm again.\" 开头，写几周后“我”再到农场。",
+        "第二段以 \"Paragraph 2: I was just about to leave when the hummingbird appeared.\" 开头，所以第一段结束时“我”还没见到蜂鸟，而且正准备离开。",
+        "第二段要写蜂鸟出现后发生了什么，并接上原文里她看着“我”、发出叫声、来去很快这些习性。"
+      ],
+      "thisEssayChooses": "本文让“我”这次来帮朋友摘黑莓，先去看修好的窗，找不到鸟有点失落，傍晚走向车子准备离开；第二段蜂鸟飞来停在面前看“我”，叫一声后飞走，结尾把 good-bye 改成 hello。来农场的理由、失落的程度、蜂鸟最后飞去哪里都可以换。"
+    },
+    "standard": {
+      "essay": "Paragraph1: A few weeks later, I went to the farm again. This time I came to help my friends pick blackberries. Before joining them, I walked over to the old milking house. The broken window had been fixed, and the cloth I had stuffed into the hole was gone. I stood by the door for a while, watching the bushes and listening for that squeaking call, but I heard nothing except the wind. Maybe she had forgotten me, I thought. After all, she was just a tiny bird. We spent the whole afternoon picking berries, and when the sun began to set, I said good-bye to my friends and walked slowly to my car.\n\nParagraph 2: I was just about to leave when the hummingbird appeared. She flew straight to me and hovered in front of my face, her wings humming. I stood still, hardly daring to breathe. Just as before, she looked into my eyes, tilting her head this way and that. My friends hurried over and watched in silence. Then she let out a short squeak, circled above our heads once and flew off toward the milking house. I sat in my car for a long moment with a big smile on my face. Last time, someone had said she came to say good-bye. This time, I was sure she had come back to say hello.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "回到农场，找鸟没找到，把“我”一步步带到准备离开的状态。",
+          "items": [
+            {
+              "quote": "The broken window had been fixed",
+              "explain": "接上原文朋友 \"promised to fix the window\"。过去完成时说明窗在“我”来之前就修好了，也交代蜂鸟不会再被困。"
+            },
+            {
+              "quote": "listening for that squeaking call, but I heard nothing except the wind",
+              "explain": "用原文里蜂鸟的叫声写“我”在等她，but 一转说什么也没听到。失落是由这件事引出来的，不用直接写 I was sad。"
+            },
+            {
+              "quote": "I said good-bye to my friends and walked slowly to my car",
+              "explain": "第一段停在“走向车子”，正好让第二段首句 \"I was just about to leave\" 接上；slowly 带出一点不舍。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "蜂鸟出现，重演原文的“对视”，最后回应告别那句话收尾。",
+          "items": [
+            {
+              "quote": "Just as before, she looked into my eyes, tilting her head this way and that.",
+              "explain": "Just as before 提醒读者这是同一只鸟；tilting her head this way and that 换说法写原文的转头动作，借了细节又不照抄。"
+            },
+            {
+              "quote": "My friends hurried over and watched in silence.",
+              "explain": "原文的朋友只做旁观者，in silence 呼应原文 \"all were speechless\"，不让他们抢戏。"
+            },
+            {
+              "quote": "This time, I was sure she had come back to say hello.",
+              "explain": "把原文的 say good-bye 改成 say hello，故事落在一句具体的话上，不另贴人生道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "hardly daring to breathe",
+          "function": "写“我”怕惊走蜂鸟、屏住呼吸，用动作写出紧张和期待。"
+        },
+        {
+          "expression": "listen for ...",
+          "function": "“留意听某个声音”，写盼着蜂鸟出现时很好用，和 listen to 不同。"
+        },
+        {
+          "expression": "with a big smile on my face",
+          "function": "用表情收住喜悦，不必直接写 I was very happy。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就让蜂鸟出现，或写“我”已经开车走了。",
+          "why": "第二段首句说 \"I was just about to leave when the hummingbird appeared\"，第一段结束时蜂鸟还不能出现，“我”也必须还没走。"
+        },
+        {
+          "pitfall": "让蜂鸟落在手上、带“我”去找鸟窝，或写成会说话、会报恩的童话。",
+          "why": "原文的蜂鸟只是飞近、对视、叫一声，写成神奇情节就和原文不协同，因果也站不住。"
+        },
+        {
+          "pitfall": "大段对话，或结尾贴一句“我们要保护动物”。",
+          "why": "原文只有结尾一句直接引语，续写满篇引号就不是同一种写法；口号式结尾不推进任何事。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph1: A few weeks later, I went to the farm again. This time my friends had asked me to help with the blackberry harvest. Before heading into the bushes, I couldn't resist taking a look at the old milking house. The broken pane had been replaced, and the piece of cloth I had pushed into the hole was gone. Standing in the doorway, I searched the bushes and the sky for a flash of green, half hoping to hear that familiar squeak. Nothing. Only a few bees buzzed over the ripe berries. \"She's probably forgotten all about you,\" my friend teased when he caught me looking around. I laughed along, but I felt a little silly, and a little disappointed. By sunset our baskets were full, and I carried mine down the path to my car.\n\nParagraph 2: I was just about to leave when the hummingbird appeared. She shot past my shoulder and stopped dead in the air in front of me, her wings a soft blur. I froze with the car key in my hand. Slowly she drifted closer, until she was hovering just inches from my nose, and studied me with those bright eyes, tilting her head this way and that. My friends set down their baskets and stood perfectly still. Then, as if satisfied, she gave one sharp little squeak, made a quick circle above our heads and darted off over the roof of the milking house. For a while, nobody spoke. I climbed into the car, but I didn't start the engine right away. Last time, she had come to say good-bye. This time, I was sure, she had come back just to say hello.",
+      "beyondStandard": [
+        {
+          "quote": "I searched the bushes and the sky for a flash of green, half hoping to hear that familiar squeak.",
+          "explain": "search ... for a flash of green 把“找鸟”写成具体画面；half hoping 写出不太抱希望又忍不住期待的心情，比标准版更细。"
+        },
+        {
+          "quote": "stopped dead in the air in front of me, her wings a soft blur",
+          "explain": "stopped dead 和 a soft blur 写出蜂鸟急停、悬停时翅膀快得看不清的样子，动词更准，画面更像真的。"
+        },
+        {
+          "quote": "Then, as if satisfied, she gave one sharp little squeak",
+          "explain": "as if satisfied 只写“我”看到的样子，不替鸟说话；比标准版多了一层对蜂鸟来意的猜测，为结尾的 hello 做铺垫。"
+        }
+      ]
+    }
+  }
+}

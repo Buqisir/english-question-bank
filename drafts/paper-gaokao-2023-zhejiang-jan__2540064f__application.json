@@ -1,0 +1,121 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Getting to Know the Plants Around Us\n\nLast Saturday, over forty students joined a plant-discovery activity organized by the Student Union.\n\nLed by our biology teacher, we were divided into small groups and walked around the school garden. Each group used a plant-identifying app to learn the names of the trees and flowers we pass every day. We then made name cards with QR codes and hung them on the trees, so that other students can scan them and learn more.\n\nFor me, the activity was an eye-opener. I had walked past the tree beside the library for two years without knowing it was a ginkgo. Now I realize that nature is right around us, as long as we take a closer look.",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "身份和读者：我是上周末参加了学生会“认识你身边的植物”活动的学生，为校英文报写报道，读者是全校师生。",
+        "两个要点：活动的过程；收获与感想。",
+        "格式：新闻报道，用题面给的标题 \"Getting to Know the Plants Around Us\"，不写称呼和署名；词数 80 左右。"
+      ],
+      "thisEssayChooses": "本范文把过程写成三步：分组逛校园、用识花软件认植物、给树挂带二维码的名牌；收获落在一件小事上：天天路过的那棵树原来是银杏。人数、老师带队、二维码名牌都是补充的合理细节，可以换成你自己的活动安排，只要具体。"
+    },
+    "standard": {
+      "essay": "Getting to Know the Plants Around Us\n\nLast Saturday, over forty students joined a plant-discovery activity organized by the Student Union.\n\nLed by our biology teacher, we were divided into small groups and walked around the school garden. Each group used a plant-identifying app to learn the names of the trees and flowers we pass every day. We then made name cards with QR codes and hung them on the trees, so that other students can scan them and learn more.\n\nFor me, the activity was an eye-opener. I had walked past the tree beside the library for two years without knowing it was a ginkgo. Now I realize that nature is right around us, as long as we take a closer look.",
+      "pointMap": [
+        {
+          "point": "活动的过程",
+          "quote": "Each group used a plant-identifying app to learn the names of the trees and flowers we pass every day."
+        },
+        {
+          "point": "收获与感想",
+          "quote": "Now I realize that nature is right around us, as long as we take a closer look."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "导语：一句话交代时间、人物、组织者和活动，读者马上知道报道什么。",
+          "items": [
+            {
+              "quote": "Last Saturday, over forty students joined",
+              "explain": "新闻开头先给时间和人数，具体的数字让报道像真事。题目没给人数，这里是合理补充。"
+            },
+            {
+              "quote": "organized by the Student Union",
+              "explain": "过去分词短语作后置定语，顺带交代组织者，不用再另写一句 The activity was organized by...。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写活动过程，按先后讲三件事：分组走、用软件认、做名牌。",
+          "items": [
+            {
+              "quote": "Led by our biology teacher, we were divided into small groups",
+              "explain": "过去分词 Led by 开头交代谁带队，主句接着说怎么分组，一句里放进两层信息。"
+            },
+            {
+              "quote": "the trees and flowers we pass every day",
+              "explain": "定语从句 we pass every day 点出这些植物天天见却叫不出名，为最后一段的感想埋下伏笔。"
+            },
+            {
+              "quote": "so that other students can scan them and learn more",
+              "explain": "so that 交代做名牌的目的：没来的同学也能受益。报道写给全校看，这一句照顾到了读者。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "写收获与感想：先讲一件具体小事，再说由此明白的道理。",
+          "items": [
+            {
+              "quote": "the activity was an eye-opener",
+              "explain": "eye-opener 是“让人大开眼界的事”，一个名词就说出总体感受，比 very meaningful 具体。"
+            },
+            {
+              "quote": "I had walked past the tree beside the library for two years without knowing it was a ginkgo.",
+              "explain": "过去完成时说明“活动之前一直这样”；路过两年都不认识，这个小例子比空说“我学到很多”更有说服力。"
+            },
+            {
+              "quote": "as long as we take a closer look",
+              "explain": "感想落回活动本身：自然就在身边，只要多看一眼。这句只有这次活动撑得起，不是随处可贴的升华。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "organized by the Student Union",
+          "function": "报道开头交代组织者，后置定语省掉一个句子。"
+        },
+        {
+          "expression": "so that other students can ...",
+          "function": "说明活动安排的目的，让过程不只是流水账。"
+        },
+        {
+          "expression": "an eye-opener",
+          "function": "概括收获时用，表示这次经历让人有新认识。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Getting to Know the Plants Around Us\n\nLast Saturday morning, over forty students gathered in the school garden for a plant-discovery activity organized by the Student Union.\n\nGuided by our biology teacher, we split into small groups and set off on a \"plant hunt\" around the campus. Armed with magnifying glasses and a plant-identifying app, we examined leaves, smelled flowers and took notes on what we found. Before noon, each group had made name cards with QR codes and tied them to the trees, so that anyone passing by can scan them and learn more.\n\nFor me, the activity was an eye-opener. I had walked past the tree beside the library for two years without knowing it was a ginkgo, one of the oldest tree species on earth. These days, I find myself calling out the names of plants on my way to class. It turns out that nature has been right beside us all along.",
+      "pointMap": [
+        {
+          "point": "活动的过程",
+          "quote": "Armed with magnifying glasses and a plant-identifying app, we examined leaves, smelled flowers and took notes on what we found."
+        },
+        {
+          "point": "收获与感想",
+          "quote": "It turns out that nature has been right beside us all along."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "set off on a \"plant hunt\" around the campus",
+          "explain": "把逛校园说成一场“植物寻宝”，set off on 写出出发的劲头，报道读起来更有现场感。"
+        },
+        {
+          "quote": "Armed with magnifying glasses and a plant-identifying app, we examined leaves, smelled flowers and took notes",
+          "explain": "过去分词 Armed with 交代工具，后面三个并列动作写清大家具体做了什么，比标准版的“用软件查名字”更细。"
+        },
+        {
+          "quote": "These days, I find myself calling out the names of plants on my way to class.",
+          "explain": "find myself doing 写出不知不觉的变化：收获不只停在活动当天，而是进了日常生活。"
+        }
+      ]
+    }
+  }
+}

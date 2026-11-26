@@ -1,0 +1,1071 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2023-zhejiang-jan",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Billy needs some beans for his science project at school. Maybe we can stop by a store on our way home.\nW: Let’s go to Greens. It’s just around the corner.\nM: Okay.",
+      "translationZh": "男：Billy 学校的科学作业需要一些豆子。也许我们可以在回家路上顺道去趟商店。\n女：我们去 Greens 吧。它就在拐角处。\n男：好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "Billy 做科学作业要用豆子，两人决定回家路上去附近的 Greens 商店买。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "Billy 学校的科学作业需要一些豆子。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "也许我们可以在回家路上顺道去趟商店。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我们去 Greens 吧。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "它就在拐角处。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Hi, Stephen, guess who I saw at the city library? Andy Clarkes – the leading actor in The Good Lawyer – the famous TV series.\nM: What was he doing there? His popularity has slipped since the final season of the show.",
+      "translationZh": "女：嗨，Stephen，猜猜我在市图书馆看见谁了？Andy Clarkes，就是那部著名电视剧《好律师》的主演。\n男：他在那儿做什么？自从那部剧最后一季播完，他的人气就下滑了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "女士在市图书馆碰见电视剧《好律师》的主演，男士说他的人气已经下滑。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "嗨，Stephen，猜猜我在市图书馆看见谁了？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "Andy Clarkes，就是那部著名电视剧《好律师》的主演。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "他在那儿做什么？"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "自从那部剧最后一季播完，他的人气就下滑了。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: It seems as if everybody is talking about Jason’s retirement.\nM: Yes, his office is filled with gifts. I gave him a T-shirt with a baseball pattern on it.\nW: That’s nice. I’ll get him something this afternoon. Hope it’s not late.",
+      "translationZh": "女：好像大家都在谈论 Jason 退休的事。\n男：是啊，他的办公室堆满了礼物。我送了他一件印着棒球图案的 T 恤。\n女：真不错。我今天下午也去给他买点东西。希望还不算晚。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "同事 Jason 退休，办公室堆满礼物，男士送了 T 恤，女士打算下午也去买份礼物。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "好像大家都在谈论 Jason 退休的事。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "是啊，他的办公室堆满了礼物。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我送了他一件印着棒球图案的 T 恤。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "真不错。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我今天下午也去给他买点东西。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "希望还不算晚。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Did you go to Cooper’s last night?\nM: No, was there anything special?\nW: Yes, the employees dressed up as movie characters, and every customer received a discount card.\nM: That was interesting.",
+      "translationZh": "女：你昨晚去 Cooper’s 了吗？\n男：没有，有什么特别的吗？\n女：有啊，店员们都打扮成电影角色，每位顾客还得到一张折扣卡。\n男：真有意思。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "Cooper’s 昨晚店员扮成电影角色，每位顾客都拿到折扣卡，男士没去。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你昨晚去 Cooper’s 了吗？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "没有，有什么特别的吗？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "有啊，店员们都打扮成电影角色，每位顾客还得到一张折扣卡。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "真有意思。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Oh, the road is jammed with traffic again. We are going to be late for work.\nM: Let’s make a U-turn at the next crossroads and try another way.",
+      "translationZh": "女：哎呀，路上又堵车了。我们上班要迟到了。\n男：我们在下一个十字路口掉头，换条路走吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "上班路上又遇堵车，女士担心迟到，男士提议在下个路口掉头换条路。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "哎呀，路上又堵车了。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "我们上班要迟到了。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我们在下一个十字路口掉头，换条路走吧。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Do you think Janet could make it?\nM: I’m sure she can. Have you tried calling her?\nW: Yes, of course. But I can’t get through. The flight has already been called twice. What are we going to do? Board without her? I should have reminded her at the office yesterday. She may have totally forgotten it.\nM: Take it easy, Sarah. Let me call her home number. Oh, there she is.",
+      "translationZh": "女：你觉得 Janet 能赶上吗？\n男：我肯定她能。你试过给她打电话吗？\n女：当然打过。可是打不通。航班已经广播两次了。我们该怎么办？不等她就登机吗？我昨天在办公室应该提醒她的。她可能完全忘了这件事。\n男：别着急，Sarah。我打她家里的电话试试。哦，她来了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "航班已两次广播登机，Sarah 打不通 Janet 的电话很着急，最后 Janet 赶到了。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你觉得 Janet 能赶上吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "我肯定她能。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "你试过给她打电话吗？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "当然打过。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "可是打不通。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "航班已经广播两次了。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我们该怎么办？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "不等她就登机吗？"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我昨天在办公室应该提醒她的。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "她可能完全忘了这件事。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "别着急，Sarah。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "我打她家里的电话试试。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "哦，她来了。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Welcome to our program, Miss Johnson. Congratulations on winning the Teacher of the Year award.\nW: Thank you, Peter. I’m more than happy to be here.\nM: What inspired you to be a teacher, Miss Johnson?\nW: Well, I’ve always loved to learn, but I’ve enjoyed teaching others even more. It’s in the family.\nM: Could you tell us what the best part about your job is?\nW: Getting to know all of the different kids and communicating with them. I have always loved kids. So, I will always enjoy that part of my job.\nM: Then, what do you hope to achieve by being a teacher?\nW: My goal is to help my students develop awareness of their strengths, weaknesses, and learning needs, and to enable them to learn throughout their lives.\nM: That sounds great.",
+      "translationZh": "男：欢迎来到我们的节目，Johnson 小姐。祝贺你获得年度教师奖。\n女：谢谢你，Peter。我非常高兴来到这里。\n男：是什么激励你成为一名教师的，Johnson 小姐？\n女：嗯，我一直热爱学习，但我更喜欢教别人。这是家里传下来的。\n男：你能告诉我们你工作中最好的部分是什么吗？\n女：认识各种各样的孩子，并和他们交流。我一直很喜欢孩子。所以我会一直享受工作中的这一部分。\n男：那么，你希望通过当老师实现什么？\n女：我的目标是帮助学生认识到自己的长处、短处和学习需求，并让他们能够终身学习。\n男：听起来很棒。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "年度教师 Johnson 小姐接受采访，谈从教的原因、最喜欢的工作内容和培养学生终身学习的目标。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "欢迎来到我们的节目，Johnson 小姐。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "祝贺你获得年度教师奖。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "谢谢你，Peter。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我非常高兴来到这里。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "是什么激励你成为一名教师的，Johnson 小姐？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "嗯，我一直热爱学习，但我更喜欢教别人。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "这是家里传下来的。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "你能告诉我们你工作中最好的部分是什么吗？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "认识各种各样的孩子，并和他们交流。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "我一直很喜欢孩子。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "所以我会一直享受工作中的这一部分。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "那么，你希望通过当老师实现什么？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我的目标是帮助学生认识到自己的长处、短处和学习需求，并让他们能够终身学习。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "听起来很棒。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Ethan, have you thought about getting your own house?\nM: Yeah. But I’m convinced my parents love having me back. What about you?\nW: Um... Not sure yet. Right now, I enjoy getting my meals cooked for me every day.\nM: Do you pay a contribution to the house?\nW: Of course, I do. But it’s still much less than I would pay to live in my own flat. Right?\nM: Obviously.\nW: The only thing I don’t like is that my mom wants to know every part of my life. Becky, what are you doing tomorrow? Where? With whom? The same questions every day.\nM: Moms are like that. They ask because they care. You’ve got to be patient with them. My parents ask those questions too, but I may not move out soon. The thought of leaving them fills me with fear. What if one of them falls over? What if they both have a fall together?\nW: That would be terrible.",
+      "translationZh": "女：Ethan，你考虑过买一套自己的房子吗？\n男：想过。可我相信我爸妈很喜欢我搬回家住。你呢？\n女：嗯……还不确定。现在我很享受每天有人给我做好饭。\n男：你给家里交生活费吗？\n女：当然交。不过这还是比我自己租公寓住要少得多。对吧？\n男：那当然。\n女：我唯一不喜欢的是，我妈想知道我生活的每一件事。“Becky，你明天要做什么？去哪儿？和谁一起？”每天都是同样的问题。\n男：妈妈们都是这样的。她们问是因为关心你。你得对她们有耐心。我爸妈也问这些问题，但我可能不会很快搬出去。一想到要离开他们，我就很害怕。万一他们中有一个摔倒了怎么办？万一他们俩一起摔倒了怎么办？\n女：那就太糟糕了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "Becky 和 Ethan 都住父母家，Becky 享受有人做饭但嫌妈妈问太多，Ethan 担心父母独居会摔倒。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "Ethan，你考虑过买一套自己的房子吗？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "想过。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "可我相信我爸妈很喜欢我搬回家住。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "嗯……"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "还不确定。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "现在我很享受每天有人给我做好饭。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你给家里交生活费吗？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "当然交。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "不过这还是比我自己租公寓住要少得多。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "对吧？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "那当然。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我唯一不喜欢的是，我妈想知道我生活的每一件事。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "“Becky，你明天要做什么？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "去哪儿？"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "和谁一起？”"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "每天都是同样的问题。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "妈妈们都是这样的。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "她们问是因为关心你。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "你得对她们有耐心。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "我爸妈也问这些问题，但我可能不会很快搬出去。"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "一想到要离开他们，我就很害怕。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "万一他们中有一个摔倒了怎么办？"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "万一他们俩一起摔倒了怎么办？"
+        },
+        {
+          "id": "listening-text-8:25",
+          "zh": "那就太糟糕了。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: It’s a pretty good conference, huh?\nM: Yeah. All speakers are well-known and knowledgeable in the subject matter. Did you listen to John Miller’s speech on how to avoid business risks this morning?\nW: No, I missed that one. I went to a speech at Alan Brown Hall. The speaker was David Thompson.\nM: Oh, that should be a good one, too. I attended his lecture last year. By the way, there will be a workshop this afternoon on how to motivate employees. Are you interested?\nW: Sure. I was promoted to the position of manager a few months ago. And I have to manage a staff of 12 people. It can be quite a difficult situation sometimes. That’s why I am here today.\nM: Same here. I only have seven people reporting to me. Yet, sometimes I feel like pulling my hair out. I need to find a way to create harmony within my department.",
+      "translationZh": "女：这次会议挺不错的，是吧？\n男：是啊。所有演讲人都很有名，在这个领域也很有学识。今天上午 John Miller 关于如何规避商业风险的演讲你听了吗？\n女：没有，我错过了那场。我去了 Alan Brown 厅的一场演讲。主讲人是 David Thompson。\n男：哦，那场应该也不错。我去年听过他的讲座。顺便说一下，今天下午有一个关于如何激励员工的研讨会。你有兴趣吗？\n女：当然。几个月前我被提拔为经理。我要管理 12 名员工。有时情况会很难办。这就是我今天来这里的原因。\n男：我也一样。我手下只有七个人。可有时我还是急得想抓狂。我得想办法让部门里和和睦睦的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "两位新任经理在会上聊听过的演讲，都觉得带团队不易，打算去听下午激励员工的研讨会。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "这次会议挺不错的，是吧？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "所有演讲人都很有名，在这个领域也很有学识。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "今天上午 John Miller 关于如何规避商业风险的演讲你听了吗？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "没有，我错过了那场。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我去了 Alan Brown 厅的一场演讲。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "主讲人是 David Thompson。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "哦，那场应该也不错。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我去年听过他的讲座。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "顺便说一下，今天下午有一个关于如何激励员工的研讨会。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "你有兴趣吗？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "几个月前我被提拔为经理。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "我要管理 12 名员工。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "有时情况会很难办。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "这就是我今天来这里的原因。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "我也一样。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我手下只有七个人。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "可有时我还是急得想抓狂。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "我得想办法让部门里和和睦睦的。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Welcome to Star Fitness Club. I’m Tina Harrison. Before you start, I’d like to offer you some tips. We all know that regular exercise is important, but few of us know how to exercise properly. I’ve seen many people make the same workout mistakes in this place. One mistake people often make is sticking to the same routine. It is not good for building up your muscles. I'd like to suggest that you change your routine every other month. What’s more, you can try different kinds of workouts, such as jogging, biking, or swimming. This can help keep your whole body in shape. Another mistake most people make is to work out intensely almost every day. You need to give your body a break, and allow time for the muscles to grow. It is not the harder the better. Two hard workout days every week is enough. If you really hate to skip a day, you can plan easy exercises on other days. However, experts’ suggestion is that you take one day off completely each week.",
+      "translationZh": "女：欢迎来到星光健身俱乐部。我是 Tina Harrison。在你们开始之前，我想给大家一些建议。我们都知道规律锻炼很重要，但很少有人知道怎样正确锻炼。在这里，我见过很多人犯同样的健身错误。人们常犯的一个错误是一直坚持同一套训练。这不利于增长肌肉。我建议你们每隔一个月换一次训练计划。此外，你们可以尝试不同种类的运动，比如慢跑、骑车或游泳。这有助于让全身保持良好状态。大多数人犯的另一个错误是几乎每天都高强度训练。你需要让身体休息，给肌肉留出生长的时间。并不是越累越好。每周两天高强度训练就够了。如果你实在不想空一天，可以在其他日子安排轻松的运动。不过，专家的建议是每周完全休息一天。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "健身俱乐部的 Tina 提醒新来者两个常见错误：一直练同一套，以及几乎天天高强度训练。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "欢迎来到星光健身俱乐部。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我是 Tina Harrison。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "在你们开始之前，我想给大家一些建议。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我们都知道规律锻炼很重要，但很少有人知道怎样正确锻炼。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "在这里，我见过很多人犯同样的健身错误。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "人们常犯的一个错误是一直坚持同一套训练。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "这不利于增长肌肉。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "我建议你们每隔一个月换一次训练计划。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "此外，你们可以尝试不同种类的运动，比如慢跑、骑车或游泳。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "这有助于让全身保持良好状态。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "大多数人犯的另一个错误是几乎每天都高强度训练。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "你需要让身体休息，给肌肉留出生长的时间。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "并不是越累越好。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "每周两天高强度训练就够了。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "如果你实在不想空一天，可以在其他日子安排轻松的运动。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "不过，专家的建议是每周完全休息一天。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "说话人接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "拜访一位朋友。",
+        "B": "去接 Billy。",
+        "C": "买些豆子。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Billy needs some beans for his science project at school. Maybe we can stop by a store on our way home."
+      },
+      "reasonZh": "男士说 Billy 做科学作业要用豆子（needs some beans），提议回家路上顺道去商店（stop by a store），女士说去附近的 Greens，接下来就是去买豆子，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "Billy 是要用豆子做作业的人，男士说的是给他买豆子（Billy needs some beans），没说要去接他。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "Andy Clarks 是谁？",
+      "optionTranslationsZh": {
+        "A": "一名公共图书馆管理员。",
+        "B": "一名电视演员。",
+        "C": "一位著名律师。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "the leading actor in The Good Lawyer – the famous TV series"
+      },
+      "reasonZh": "女士说他是著名电视剧《好律师》的主演（the leading actor … the famous TV series），“电视演员”把演员和电视剧合在一起说，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "图书馆（the city library）只是女士碰见他的地方，不是他的职业。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "律师（Lawyer）是剧名《好律师》（The Good Lawyer）里的词，著名（famous）形容的是这部电视剧，他是演这部剧的演员。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "给 Jason 的礼物。",
+        "B": "一场棒球比赛。",
+        "C": "女士的退休。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "his office is filled with gifts"
+      },
+      "reasonZh": "男士说 Jason 的办公室堆满礼物（filled with gifts），自己送了件 T 恤，女士也打算下午给他买点东西（get him something），两人谈的都是送 Jason 的礼物，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "棒球（baseball）只是男士送的 T 恤上的图案（a baseball pattern），没人谈比赛。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "要退休的是 Jason（Jason’s retirement），不是女士，女士是打算给他买礼物的人。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "昨晚 Cooper’s 有什么活动？",
+      "optionTranslationsZh": {
+        "A": "一场电影放映。",
+        "B": "一场生日派对。",
+        "C": "一次促销活动。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "the employees dressed up as movie characters, and every customer received a discount card"
+      },
+      "reasonZh": "女士说店员扮成电影角色，每位顾客都拿到一张折扣卡（received a discount card），商店这样招揽顾客、发折扣，是一次促销，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "电影（movie）是店员装扮的角色（dressed up as movie characters），店里并没有放电影。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人遇到了什么问题？",
+      "optionTranslationsZh": {
+        "A": "他们上班迟到了。",
+        "B": "他们遇上了堵车。",
+        "C": "他们迷路了。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "the road is jammed with traffic again"
+      },
+      "reasonZh": "女士说路上又堵车了（jammed with traffic），“遇上堵车”就是眼下的麻烦，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说的是快要迟到了（are going to be late），迟到还没发生，是堵车可能带来的后果。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "另一条路（try another way）是男士提议掉头绕开堵车，他们并没有认不得路。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "说话人在哪里？",
+      "optionTranslationsZh": {
+        "A": "在家里。",
+        "B": "在办公室。",
+        "C": "在机场。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The flight has already been called twice."
+      },
+      "reasonZh": "女士说航班已经广播两次了（The flight has already been called twice），还问要不要不等她就登机（Board without her），可见两人在机场候机，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "家（call her home number）是男士要拨 Janet 家里的电话，不是他们所在的地方。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "办公室（at the office yesterday）是女士后悔昨天在办公室没提醒 Janet，说的是昨天的地点。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "Sara 听起来怎么样？",
+      "optionTranslationsZh": {
+        "A": "焦急的。",
+        "B": "惊讶的。",
+        "C": "感激的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "What are we going to do? Board without her?"
+      },
+      "reasonZh": "Sarah 打不通 Janet 的电话，接连问怎么办、要不要不等她登机（What are we going to do），男士还劝她别急（Take it easy），可见她很焦急，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "最后看到 Janet 来了（Oh, there she is）的是男士，Sarah 之前一直在着急。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "是什么让 Johnson 小姐选择教师这个职业？",
+      "optionTranslationsZh": {
+        "A": "来自家人的压力。",
+        "B": "她对这份工作的热爱。",
+        "C": "一位老师的鼓励。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ve always loved to learn, but I’ve enjoyed teaching others even more"
+      },
+      "reasonZh": "她说自己一直爱学习，但更喜欢教别人（enjoyed teaching others even more），“对这份工作的热爱”就是喜欢教书，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "家里（It’s in the family）说的是爱教书在她家一脉相承，她没说家人逼她。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "老师（to be a teacher）是主持人问她为什么当老师，她没提到哪位老师鼓励过她。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "Johnson 小姐认为她工作中最好的部分是什么？",
+      "optionTranslationsZh": {
+        "A": "和孩子们在一起。",
+        "B": "赢得别人的尊重。",
+        "C": "学习不同的东西。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Getting to know all of the different kids and communicating with them."
+      },
+      "reasonZh": "她说最好的部分是认识各种各样的孩子、和他们交流（Getting to know … kids and communicating with them），“和孩子们在一起”概括了这两件事，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "获奖（winning the Teacher of the Year award）是主持人祝贺她得了年度教师奖，她没说赢得尊重。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "不同的（different kids）说的是孩子各不相同；爱学习（loved to learn）是她讲自己当老师的缘由，都不是工作中最好的部分。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "Johnson 小姐希望她的学生成为什么样的人？",
+      "optionTranslationsZh": {
+        "A": "终身学习者。",
+        "B": "有创造力的思考者。",
+        "C": "善于沟通的人。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "to enable them to learn throughout their lives"
+      },
+      "reasonZh": "她的目标之一是让学生能够一辈子学习（learn throughout their lives），这就是“终身学习者”，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "交流（communicating with them）是她自己和孩子们打交道，是她喜欢的工作内容，不是对学生的期望。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "Becky 喜欢和父母住在一起的哪一点？",
+      "optionTranslationsZh": {
+        "A": "他们有一座大房子。",
+        "B": "他们给她做饭。",
+        "C": "他们支付她的全部开销。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I enjoy getting my meals cooked for me every day"
+      },
+      "reasonZh": "Becky 说现在很享受每天有人给她做好饭（getting my meals cooked for me），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "房子（getting your own house）是 Becky 问 Ethan 想不想买自己的房子，没人说父母家大。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "Becky 说她交了生活费（pay a contribution），只是比自己租房少得多（much less），开销并不是父母全付。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "关于 Becky 的妈妈，Ethan 建议 Becky 怎么做？",
+      "optionTranslationsZh": {
+        "A": "要有耐心。",
+        "B": "多陪伴她。",
+        "C": "表达感激。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You’ve got to be patient with them."
+      },
+      "reasonZh": "Ethan 说妈妈们问这问那是因为关心，劝 Becky 对她们要有耐心（be patient with them），选 A。"
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "Ethan 为什么担心父母自己住？",
+      "optionTranslationsZh": {
+        "A": "他们可能会孤单。",
+        "B": "他们可能会相处不好。",
+        "C": "他们可能会遇到紧急情况。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "What if one of them falls over? What if they both have a fall together?"
+      },
+      "reasonZh": "Ethan 说一想到离开父母就害怕，怕他们有人摔倒，甚至两人一起摔倒（falls over … have a fall together），摔倒是没人在身边时的突发紧急情况，选 C。"
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士今天上午听了谁的演讲？",
+      "optionTranslationsZh": {
+        "A": "John Miller 的。",
+        "B": "David Thompson 的。",
+        "C": "Allan Brown 的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The speaker was David Thompson."
+      },
+      "reasonZh": "男士问她上午听没听 John Miller 的演讲，她说错过了，去听了 Alan Brown 厅的一场，主讲人是 David Thompson（The speaker was David Thompson），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "John Miller 的演讲是男士问起的，女士说她错过了（I missed that one）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "Alan Brown 是演讲所在大厅的名字（Alan Brown Hall），不是演讲人。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "下午的研讨会是关于什么的？",
+      "optionTranslationsZh": {
+        "A": "知识经济。",
+        "B": "风险评估。",
+        "C": "员工激励。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "there will be a workshop this afternoon on how to motivate employees"
+      },
+      "reasonZh": "男士说下午的研讨会讲怎样激励员工（how to motivate employees），“员工激励”就是这个主题，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "有学识（knowledgeable）是男士夸演讲人在这个领域懂得多，和知识经济无关。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "风险（avoid business risks）是上午 John Miller 演讲的话题，不是下午研讨会的内容。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "关于自己的工作，女士说了什么？",
+      "optionTranslationsZh": {
+        "A": "它有时很有挑战性。",
+        "B": "它真的很有趣。",
+        "C": "它将会很有回报。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It can be quite a difficult situation sometimes."
+      },
+      "reasonZh": "她说当经理要管 12 个人，有时情况很难办（quite a difficult situation sometimes），“有挑战性”就是难办，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "感兴趣（Are you interested）是男士问她想不想去研讨会，不是在说她的工作有趣。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士和女士都想做什么？",
+      "optionTranslationsZh": {
+        "A": "申请一个新职位。",
+        "B": "给员工涨工资。",
+        "C": "提高管理能力。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I need to find a way to create harmony within my department."
+      },
+      "reasonZh": "女士说管 12 个人有时很难，这正是她来参会的原因；男士说他也一样（Same here），要想办法让部门和睦（create harmony within my department），两人都想把手下的人管好，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "职位（promoted to the position of manager）是女士几个月前已经升任的经理职位，她没说要申请新的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "员工（a staff of 12 people）是女士说自己要管的人数，两人都没提涨工资。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人可能是做什么的？",
+      "optionTranslationsZh": {
+        "A": "她是一名医生。",
+        "B": "她是一名健身教练。",
+        "C": "她是一名游泳教练。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Welcome to Star Fitness Club."
+      },
+      "reasonZh": "她在星光健身俱乐部迎接来客（Welcome to Star Fitness Club），开练前给大家讲锻炼要领（offer you some tips），可见她是健身教练，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "游泳（swimming）只是她举的几种运动之一（jogging, biking, or swimming），她讲的是整体健身。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "一个常见的健身错误是什么？",
+      "optionTranslationsZh": {
+        "A": "只专注于增长肌肉。",
+        "B": "做太多种类的运动。",
+        "C": "一直做同一套训练。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "One mistake people often make is sticking to the same routine."
+      },
+      "reasonZh": "她说人们常犯的一个错误是一直坚持同一套训练（sticking to the same routine），选项说的就是这件事，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "肌肉（building up your muscles）是说老练同一套不利于长肌肉，肌肉是受影响的结果，不是错误本身。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "她反而建议尝试不同种类的运动（try different kinds of workouts），多换项目是建议，不是错误。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人建议人们多久做一次高强度训练？",
+      "optionTranslationsZh": {
+        "A": "一周一次。",
+        "B": "一周两次。",
+        "C": "一周三次。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Two hard workout days every week is enough."
+      },
+      "reasonZh": "她说每周两天高强度训练就够了（Two hard workout days every week），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "每周一天（one day off completely each week）是专家建议每周完全休息一天，不是训练的次数。"
+        }
+      ]
+    }
+  }
+}
