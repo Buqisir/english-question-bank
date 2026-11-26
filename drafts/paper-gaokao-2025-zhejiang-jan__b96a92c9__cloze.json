@@ -41,19 +41,7 @@
             "text": "她坦言筹备很辛苦，并说平台向所有愿意尝鲜的人开放。"
           }
         ],
-        "emotion": "",
-        "thread": {
-          "text": "她把 cooking（做饭）这份 hobby（爱好）搬进家里，请 strangers（陌生人）上门，好 meet（结识）新人；as opposed to 餐馆，家宴自由，虽是 challenge（挑战），平台也不只 reserved（留给）专业厨师。",
-          "blankNos": [
-            41,
-            42,
-            43,
-            47,
-            50,
-            53,
-            55
-          ]
-        }
+        "emotion": ""
       },
       "selectedLongSentences": [
         {
@@ -1077,7 +1065,8 @@
       },
       "correctFit": {
         "optionLabel": "C",
-        "reason": "前句说她有一种健康的瘾，这里点明这瘾究竟是哪一件事，全文都围绕它展开。名词看话题：后文她买 food、试 new recipes、办 dinner parties，全是厨房里的事，四个里只有 cooking 属于这个话题。"
+        "reason": "前句说她有一种健康的瘾，这里点明这瘾究竟是哪一件事，全文都围绕它展开。名词看话题：后文她买 food、试 new recipes、办 dinner parties，全是厨房里的事，四个里只有 cooking 属于这个话题。",
+        "dictMeaning": "烹饪"
       },
       "distractorGlosses": [
         {
@@ -1130,7 +1119,8 @@
       },
       "correctFit": {
         "optionLabel": "A",
-        "reason": "她决定把某样东西派上用场，这东西就是前面说的那份做饭的瘾，要一个指爱好的词。名词看复现：第二段 her hobby of buying food 原词复现，说明她拿去好好利用的正是这份爱好。"
+        "reason": "她决定把某样东西派上用场，这东西就是前面说的那份做饭的瘾，要一个指爱好的词。名词看复现：第二段 her hobby of buying food 原词复现，说明她拿去好好利用的正是这份爱好。",
+        "dictMeaning": "爱好"
       },
       "distractorGlosses": [
         {
@@ -1183,7 +1173,8 @@
       },
       "correctFit": {
         "optionLabel": "D",
-        "reason": "她通过网站把人请到家里吃饭，要说明来的是什么人：素不相识的客人。名词看复现：第三段她说办家宴是为了认识 new people，来的人原本不认识，new people 正是对答案的复现。"
+        "reason": "她通过网站把人请到家里吃饭，要说明来的是什么人：素不相识的客人。名词看复现：第三段她说办家宴是为了认识 new people，来的人原本不认识，new people 正是对答案的复现。",
+        "dictMeaning": "陌生人"
       },
       "distractorGlosses": [
         {
@@ -1236,7 +1227,8 @@
       },
       "correctFit": {
         "optionLabel": "B",
-        "reason": "她和每位客人之间的钱怎么算，这里要「向人收费」的意思。动词看搭配：主语是下厨的 Ribeiro，宾语是 €35 per person，for 引出所付的那顿饭，charge 正是向每人收这笔钱。"
+        "reason": "她和每位客人之间的钱怎么算，这里要「向人收费」的意思。动词看搭配：主语是下厨的 Ribeiro，宾语是 €35 per person，for 引出所付的那顿饭，charge 正是向每人收这笔钱。",
+        "dictMeaning": "收费"
       },
       "distractorGlosses": [
         {
@@ -1283,7 +1275,8 @@
       },
       "correctFit": {
         "optionLabel": "A",
-        "reason": "平台对她的爱好起什么作用，要「投入去做、追求」的意思。动词看搭配：宾语是 her hobby，平台让她能一直去做喜欢的事，pursue her hobby 是常见搭配。"
+        "reason": "平台对她的爱好起什么作用，要「投入去做、追求」的意思。动词看搭配：宾语是 her hobby，平台让她能一直去做喜欢的事，pursue her hobby 是常见搭配。",
+        "dictMeaning": "从事"
       },
       "distractorGlosses": [
         {
@@ -1330,7 +1323,9 @@
       },
       "correctFit": {
         "optionLabel": "B",
-        "reason": "和买食材、办晚宴并列，是她对新菜谱做的事，要「试着做做看」。词组看语境义：宾语是 new recipes，new 说明是没做过的菜谱，对新菜谱自然是先试着做，try out 即试用、试做。"
+        "reason": "和买食材、办晚宴并列，是她对新菜谱做的事，要「试着做做看」。词组看语境义：宾语是 new recipes，new 说明是没做过的菜谱，对新菜谱自然是先试着做，try out 即试用、试做。",
+        "dictMeaning": "试用",
+        "meaning": "尝试做"
       },
       "distractorGlosses": [
         {
@@ -1386,7 +1381,8 @@
       },
       "correctFit": {
         "optionLabel": "C",
-        "reason": "与分享热爱并列，是家宴给她的第二个好处，要「结识」新人。动词看搭配：宾语是 new people，又呼应第一段把客人请 into her Brussels flat，meet new people 就是结识新朋友。"
+        "reason": "与分享热爱并列，是家宴给她的第二个好处，要「结识」新人。动词看搭配：宾语是 new people，又呼应第一段把客人请 into her Brussels flat，meet new people 就是结识新朋友。",
+        "dictMeaning": "结识"
       },
       "distractorGlosses": [
         {
@@ -1434,7 +1430,9 @@
       },
       "correctFit": {
         "optionLabel": "C",
-        "reason": "她做家乡菜和故乡是什么关系，要「为了纪念、向……致敬」的意思。词组看语境义：做的是 traditional Brazilian dishes，后面接 her native home，做家乡菜是向故乡致意，in honor of 正合。"
+        "reason": "她做家乡菜和故乡是什么关系，要「为了纪念、向……致敬」的意思。词组看语境义：做的是 traditional Brazilian dishes，后面接 her native home，做家乡菜是向故乡致意，in honor of 正合。",
+        "dictMeaning": "为纪念",
+        "meaning": "向故乡致敬"
       },
       "distractorGlosses": [
         {
@@ -1489,7 +1487,9 @@
       },
       "correctFit": {
         "optionLabel": "D",
-        "reason": "把晚餐各道菜和她爱喝的啤酒放在一起上，要「搭配」的意思。动词看搭配：后面是 dinner courses with her favorite beers，A with B 的结构锁定 pair A with B，即菜配酒。"
+        "reason": "把晚餐各道菜和她爱喝的啤酒放在一起上，要「搭配」的意思。动词看搭配：后面是 dinner courses with her favorite beers，A with B 的结构锁定 pair A with B，即菜配酒。",
+        "dictMeaning": "使配对",
+        "meaning": "搭配"
       },
       "distractorGlosses": [
         {
@@ -1537,7 +1537,8 @@
       },
       "correctFit": {
         "optionLabel": "A",
-        "reason": "前面夸家宴自由，后面列餐馆的种种固定，要一个引出对照的说法。词组看语境义：前面 a great deal of freedom，后面餐馆 the menu is known in advance，一松一紧，as opposed to 表示与之相对。"
+        "reason": "前面夸家宴自由，后面列餐馆的种种固定，要一个引出对照的说法。词组看语境义：前面 a great deal of freedom，后面餐馆 the menu is known in advance，一松一紧，as opposed to 表示与之相对。",
+        "dictMeaning": "与之相对照"
       },
       "distractorGlosses": [
         {
@@ -1594,7 +1595,8 @@
       },
       "correctFit": {
         "optionLabel": "B",
-        "reason": "餐馆服务是拿来反衬家宴的缺点，要说它少了家宴里人与人的亲近。形容词看情感：它与 the menu is known in advance 并列，都在反衬 a great deal of freedom，要贬义词；家宴讲认识 new people，餐馆缺的是人情味。"
+        "reason": "餐馆服务是拿来反衬家宴的缺点，要说它少了家宴里人与人的亲近。形容词看情感：它与 the menu is known in advance 并列，都在反衬 a great deal of freedom，要贬义词；家宴讲认识 new people，餐馆缺的是人情味。",
+        "dictMeaning": "缺乏人情味的"
       },
       "distractorGlosses": [
         {
@@ -1648,7 +1650,8 @@
       },
       "correctFit": {
         "optionLabel": "A",
-        "reason": "人们对餐馆这顿饭的预期，要说它全在意料之中、没有新鲜感。名词看复现：并列的 the menu is known in advance 说菜单早就知道，这顿饭自然谈不上意外，两处说的是一回事。"
+        "reason": "人们对餐馆这顿饭的预期，要说它全在意料之中、没有新鲜感。名词看复现：并列的 the menu is known in advance 说菜单早就知道，这顿饭自然谈不上意外，两处说的是一回事。",
+        "dictMeaning": "意外的事"
       },
       "distractorGlosses": [
         {
@@ -1702,7 +1705,9 @@
       },
       "correctFit": {
         "optionLabel": "D",
-        "reason": "But 一转，从家宴的好处转到难处，要一个负面的词概括筹备的辛苦。名词看情感：But 把前文的自由和乐趣翻过来，for 后面的 take days to 给出原因：几天才办成一场，是件难事。"
+        "reason": "But 一转，从家宴的好处转到难处，要一个负面的词概括筹备的辛苦。名词看情感：But 把前文的自由和乐趣翻过来，for 后面的 take days to 给出原因：几天才办成一场，是件难事。",
+        "dictMeaning": "挑战",
+        "meaning": "费心费力的难事"
       },
       "distractorGlosses": [
         {
@@ -1762,7 +1767,9 @@
       },
       "correctFit": {
         "optionLabel": "D",
-        "reason": "主人要花好几天才能对一场活动做完的事，要「筹备、组织」的意思。动词看搭配：宾语是 a single event，做这件事的是办家宴的主人，又要 take days，organise an event 即筹办活动。"
+        "reason": "主人要花好几天才能对一场活动做完的事，要「筹备、组织」的意思。动词看搭配：宾语是 a single event，做这件事的是办家宴的主人，又要 take days，organise an event 即筹办活动。",
+        "dictMeaning": "组织",
+        "meaning": "筹办"
       },
       "distractorGlosses": [
         {
@@ -1810,7 +1817,8 @@
       },
       "correctFit": {
         "optionLabel": "B",
-        "reason": "全文收尾，说平台给谁用：不只给专业厨师，要「专门留给」的意思。动词看搭配：后面 for professional cooks 与 but also for those 对举，be reserved for 即专属于，not only 说平台不只属于专业厨师。"
+        "reason": "全文收尾，说平台给谁用：不只给专业厨师，要「专门留给」的意思。动词看搭配：后面 for professional cooks 与 but also for those 对举，be reserved for 即专属于，not only 说平台不只属于专业厨师。",
+        "dictMeaning": "专门留给"
       },
       "distractorGlosses": [
         {

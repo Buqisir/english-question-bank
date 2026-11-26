@@ -828,6 +828,10 @@
         {
           "label": "B",
           "explanationZh": "pressure 是主持人提问里的词，Mark 的回答说的是 always fun，没有接这个“压力”。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里 Mark 只说现场作画 always fun，没有谈它有没有创造性；C 只是套了 It’s 开头的句式。"
         }
       ]
     },
@@ -1022,6 +1026,10 @@
       },
       "reasonZh": "女子请男子有房时给她打电话，然后说 “I’ll just wander around and have some coffee.”，接下来她要四处逛逛、喝点咖啡，选 C。",
       "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里反复出现 room，说的都是订房间、等空房，没人说要收拾房间。"
+        },
         {
           "label": "B",
           "explanationZh": "电话是女子请男子打给她（Could you give me a call），她自己并不打电话。"

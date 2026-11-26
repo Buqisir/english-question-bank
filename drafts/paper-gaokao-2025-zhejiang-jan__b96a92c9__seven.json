@@ -899,13 +899,12 @@
       ],
       "lock": [
         "Ask the audience",
-        "lead discussions"
+        "contribute their ideas"
       ],
       "find": {
-        "text": "先跳过，做完后面几段再回来。下段 \"Ask the audience to contribute their ideas\"、\"Allow them to lead discussions\" 都是让受众出力，B 的 \"involved\" 能把它们都盖住。",
+        "text": "先跳过，做完后面几段再回来。下段第一句 \"Ask the audience to contribute their ideas or to take a role\" 是请受众出主意、承担讲解，B 的 \"involved\" 正好把这些做法概括成「参与」。",
         "quotes": [
-          "Ask the audience to contribute their ideas",
-          "Allow them to lead discussions",
+          "Ask the audience to contribute their ideas or to take a role",
           "involved"
         ]
       },
@@ -913,10 +912,10 @@
       "distractors": [
         {
           "label": "D",
-          "text": "D 也是祈使句，像小标题；但下段讲 \"contribute their ideas\"、\"lead discussions\"，是让受众动手，不是说他们关心的事。",
+          "text": "D 也是祈使句，像小标题；但下段讲 \"contribute their ideas\"、\"take a role\"，是让受众动手，不是说他们关心的事。",
           "quotes": [
             "contribute their ideas",
-            "lead discussions"
+            "take a role"
           ]
         }
       ],
@@ -939,7 +938,7 @@
       "keyDistractors": [
         {
           "optionLabel": "D",
-          "reason": "D 也是祈使句，像小标题；但下段讲 \"contribute their ideas\"、\"lead discussions\"，是让受众动手，不是说他们关心的事。"
+          "reason": "D 也是祈使句，像小标题；但下段讲 \"contribute their ideas\"、\"take a role\"，是让受众动手，不是说他们关心的事。"
         },
         {
           "optionLabel": "E",
