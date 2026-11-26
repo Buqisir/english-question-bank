@@ -1,0 +1,747 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:reading-c": {
+      "overview": "伦敦一家慈善组织让养老院老人照料母鸡，以减少孤独、改善身心健康；80岁的露丝讲述养鸡带给她的乐趣和成就感，项目正推广到全国，参与机构的负责人也纷纷表示欢迎。",
+      "fullTranslationZh": "伦敦养老院的老年居民正被分到母鸡来照料，以免他们感到孤独。\n\n这个项目由当地一家慈善组织构想出来，目的是减少孤独感、改善老年人的身心健康。它也被用来帮助患有痴呆症（一种严重的精神疾病）的病人。养老院的工作人员报告说，在养了母鸡的地方，药物的使用减少了。\n\n参与项目的人当中有80岁的露丝·泽维尔。她说：“我年轻时养过鸡，每天早上上学前都得给它们准备早饭。”\n\n“我很喜欢这个项目。早上我坐着轮椅下去把母鸡放出来，晚上再下去看看它们是否已经回窝睡觉了。”\n\n“有个不一样的关注点真好。人们一直带着孩子进来看母鸡，居民们也会来坐在外面看它们。我很享受这些创意活动，做了些有用的事，感觉棒极了。”\n\n现在东北部20家养老院里有700位老人在照料母鸡，这家慈善组织也已获得资金支持，要把项目推广到全国。\n\n温迪·威尔逊是彭福尔德街60号的特别护理经理，那里是最早开始这个项目的地方之一。她说：“居民们非常欢迎这个项目的设想和创意活动。我们期待这个项目能给这里的人带来益处和乐趣。”\n\n“诺丁山之路”的负责人林恩·刘易斯说：“我们很高兴参与这个项目。它会通过共同的兴趣和创意活动，真正把我们的居民联系在一起。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-c-1",
+          "paragraphId": "reading-c-7",
+          "sourceText": "Wendy Wilson, extra care manager at 60 Penfold Street, one of the first to embark on the project, said",
+          "displayText": "Wendy Wilson, extra care manager at 60 Penfold Street, one of the first to embark on the project, said",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:30"
+          ],
+          "translationZh": "温迪·威尔逊是彭福尔德街60号的特别护理经理，那里是最早开始这个项目的地方之一。她说",
+          "analysisZh": "主干是 Wendy Wilson … said：温迪·威尔逊说。中间两个逗号隔开的成分都是同位语：extra care manager at 60 Penfold Street 说她的身份；one of the first to embark on the project 紧跟在 60 Penfold Street 后面，补充说明这个地方是最早 embark on 这个项目的之一。不定式 to embark on the project 修饰 the first，“最早……的”提示 embark on 是能分先后的动作，第30题就靠这个线索。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "Wendy Wilson"
+            },
+            {
+              "start": 55,
+              "end": 96,
+              "quote": "one of the first to embark on the project"
+            },
+            {
+              "start": 98,
+              "end": 102,
+              "quote": "said"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-c-2",
+          "paragraphId": "reading-c-6",
+          "sourceText": "There are now 700 elderly people looking after hens in 20 care homes in the North East, and the charity has been given financial support to roll it out countrywide.",
+          "displayText": "There are now 700 elderly people looking after hens in 20 care homes in the North East, and the charity has been given financial support to roll it out countrywide.",
+          "relatedQuestionIds": [],
+          "translationZh": "现在东北部20家养老院里有700位老人在照料母鸡，这家慈善组织也已获得资金支持，要把项目推广到全国。",
+          "analysisZh": "这是 and 连接的两个分句。前一句是 There are 句型，主干 There are 700 elderly people，looking after hens 是现在分词短语，修饰 people，说这些老人在做什么，in 20 care homes in the North East 交代地点。后一句主干 the charity has been given financial support，是现在完成时的被动语态；to roll it out countrywide 是不定式表目的，it 指这个项目，roll out 意为推广。前句讲现有规模，后句讲下一步扩大。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 32,
+              "quote": "There are now 700 elderly people"
+            },
+            {
+              "start": 92,
+              "end": 136,
+              "quote": "the charity has been given financial support"
+            },
+            {
+              "start": 137,
+              "end": 163,
+              "quote": "to roll it out countrywide"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-i:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p1",
+              "sourceParagraphIds": [
+                "reading-c-1"
+              ],
+              "start": 0,
+              "end": 29,
+              "quote": "伦敦养老院的老年居民正被分到母鸡来照料，以免他们感到孤独。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p2",
+              "sourceParagraphIds": [
+                "reading-c-2"
+              ],
+              "start": 31,
+              "end": 126,
+              "quote": "这个项目由当地一家慈善组织构想出来，目的是减少孤独感、改善老年人的身心健康。它也被用来帮助患有痴呆症（一种严重的精神疾病）的病人。养老院的工作人员报告说，在养了母鸡的地方，药物的使用减少了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p3",
+              "sourceParagraphIds": [
+                "reading-c-3"
+              ],
+              "start": 128,
+              "end": 178,
+              "quote": "参与项目的人当中有80岁的露丝·泽维尔。她说：“我年轻时养过鸡，每天早上上学前都得给它们准备早饭。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p4",
+              "sourceParagraphIds": [
+                "reading-c-4"
+              ],
+              "start": 180,
+              "end": 226,
+              "quote": "“我很喜欢这个项目。早上我坐着轮椅下去把母鸡放出来，晚上再下去看看它们是否已经回窝睡觉了。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p5",
+              "sourceParagraphIds": [
+                "reading-c-5"
+              ],
+              "start": 228,
+              "end": 295,
+              "quote": "“有个不一样的关注点真好。人们一直带着孩子进来看母鸡，居民们也会来坐在外面看它们。我很享受这些创意活动，做了些有用的事，感觉棒极了。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p6",
+              "sourceParagraphIds": [
+                "reading-c-6"
+              ],
+              "start": 297,
+              "end": 347,
+              "quote": "现在东北部20家养老院里有700位老人在照料母鸡，这家慈善组织也已获得资金支持，要把项目推广到全国。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p7",
+              "sourceParagraphIds": [
+                "reading-c-7"
+              ],
+              "start": 349,
+              "end": 436,
+              "quote": "温迪·威尔逊是彭福尔德街60号的特别护理经理，那里是最早开始这个项目的地方之一。她说：“居民们非常欢迎这个项目的设想和创意活动。我们期待这个项目能给这里的人带来益处和乐趣。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p8",
+              "sourceParagraphIds": [
+                "reading-c-8"
+              ],
+              "start": 438,
+              "end": 500,
+              "quote": "“诺丁山之路”的负责人林恩·刘易斯说：“我们很高兴参与这个项目。它会通过共同的兴趣和创意活动，真正把我们的居民联系在一起。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:28-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-2",
+                "start": 0,
+                "end": 113,
+                "quote": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p2",
+                "start": 0,
+                "end": 38,
+                "quote": "这个项目由当地一家慈善组织构想出来，目的是减少孤独感、改善老年人的身心健康。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:29-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-5",
+                "start": 148,
+                "end": 235,
+                "quote": "I’m enjoying the creative activities, and it feels great to have done something useful."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p5",
+                "start": 41,
+                "end": 66,
+                "quote": "我很享受这些创意活动，做了些有用的事，感觉棒极了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:30-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-7",
+                "start": 55,
+                "end": 96,
+                "quote": "one of the first to embark on the project"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p7",
+                "start": 23,
+                "end": 39,
+                "quote": "那里是最早开始这个项目的地方之一"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:31-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-7",
+                "start": 105,
+                "end": 180,
+                "quote": "Residents really welcome the idea of the project and the creative sessions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p7",
+                "start": 44,
+                "end": 64,
+                "quote": "居民们非常欢迎这个项目的设想和创意活动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:31-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-8",
+                "start": 54,
+                "end": 100,
+                "quote": "We are happy to be taking part in the project."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p8",
+                "start": 20,
+                "end": 32,
+                "quote": "我们很高兴参与这个项目。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-7",
+                "start": 0,
+                "end": 102,
+                "quote": "Wendy Wilson, extra care manager at 60 Penfold Street, one of the first to embark on the project, said"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p7",
+                "start": 0,
+                "end": 42,
+                "quote": "温迪·威尔逊是彭福尔德街60号的特别护理经理，那里是最早开始这个项目的地方之一。她说"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-c-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "reading-c-6",
+                "start": 0,
+                "end": 164,
+                "quote": "There are now 700 elderly people looking after hens in 20 care homes in the North East, and the charity has been given financial support to roll it out countrywide."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-c-p6",
+                "start": 0,
+                "end": 50,
+                "quote": "现在东北部20家养老院里有700位老人在照料母鸡，这家慈善组织也已获得资金支持，要把项目推广到全国。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-c-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一句交代新闻事件：伦敦养老院让老人照料母鸡以免孤独；接着说明项目的发起者、目的和效果；然后用露丝的亲身讲述展示项目给老人带来的变化；再交代项目的规模和推广计划；最后引用两位机构负责人的话，说明项目广受欢迎。",
+        "paragraphs": [
+          {
+            "paragraphId": "reading-c-1",
+            "summary": "伦敦养老院让老人照料母鸡，以免他们孤独",
+            "function": "导语，交代新闻事件。"
+          },
+          {
+            "paragraphId": "reading-c-2",
+            "summary": "项目由慈善组织发起，旨在减少孤独、改善健康，还帮助痴呆症病人，用药减少",
+            "function": "说明项目的目的和效果。"
+          },
+          {
+            "paragraphId": "reading-c-3",
+            "summary": "80岁的露丝参加了项目，她年轻时就养过鸡",
+            "function": "引出亲历者，交代她的养鸡经历。"
+          },
+          {
+            "paragraphId": "reading-c-4",
+            "summary": "露丝每天早晚坐轮椅去放鸡、看鸡",
+            "function": "借露丝的话写她怎样参与项目。"
+          },
+          {
+            "paragraphId": "reading-c-5",
+            "summary": "露丝觉得生活有了新焦点，享受创意活动，做了有用的事很开心",
+            "function": "借露丝的话写项目带给她的感受。"
+          },
+          {
+            "paragraphId": "reading-c-6",
+            "summary": "已有20家养老院的700位老人参与，项目将推广到全国",
+            "function": "交代项目规模和推广计划。"
+          },
+          {
+            "paragraphId": "reading-c-7",
+            "summary": "最早开始项目的养老院经理说居民非常欢迎，期待项目带来益处",
+            "function": "引用参与者评价，说明项目受欢迎。"
+          },
+          {
+            "paragraphId": "reading-c-8",
+            "summary": "另一机构负责人很高兴参与，相信项目能把居民联系起来",
+            "function": "再引用一方评价，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-i:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出慈善组织发起养鸡项目是为了什么。",
+      "stemTranslationZh": "这个项目的目的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 to 后的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "确保养老院里和睦相处。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To ensure harmony in care homes.",
+            "explanation": "负责人提到项目能把居民联系起来（connect our residents），那是期待的好处；原文写的目的是减少孤独、改善健康，没提保证院里和睦。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为老年人提供兼职工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To provide part-time jobs for the aged.",
+            "explanation": "老人照料母鸡是为了有事可做、不再孤单，原文没提给他们报酬或工作岗位。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为医学研究筹款。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "medicine",
+            "optionText": "medical",
+            "matchType": "wordFamily",
+            "relationNote": "medical 借自 medicine，原文是说养鸡后用药减少了；后文的资金支持（financial support）是给慈善组织推广项目的，不是为医学研究筹钱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-c-2",
+              "quote": "Staff in care homes have reported a reduction in the use of medicine where hens are in use.",
+              "anchor": "用药减少"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "增进老年人的福祉。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-c-2",
+              "quote": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
+              "anchor": "项目的目的"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the project",
+          "targetText": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
+          "targetParagraphId": "reading-c-2",
+          "answerText": "to reduce loneliness and improve elderly people’s wellbeing",
+          "note": "题干 the project 原词出现在这一句，这句交代项目是谁、为什么发起的。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "To promote the elderly people’s welfare.",
+          "targetText": "to reduce loneliness and improve elderly people’s wellbeing",
+          "targetParagraphId": "reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项的“增进老人福祉”（promote … welfare）就是原文的“改善老人身心健康”（improve elderly people’s wellbeing），减少孤独也包含在内，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读露丝自己的话，概括项目给她带来了什么感受。",
+      "stemTranslationZh": "这个项目对露丝·泽维尔有什么影响？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读她的话，看最后的感受",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她学会了新的生活技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I used to keep hens when I was younger",
+            "sourceEntity": "used to keep hens",
+            "optionText": "She has learned new life skills.",
+            "optionEntity": "new life skills",
+            "explanation": "露丝说自己年轻时就养过鸡（used to keep hens），喂鸡、放鸡对她是老本事，不是新学的生活技能。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-c-3",
+              "quote": "I used to keep hens when I was younger",
+              "anchor": "年轻时养过鸡"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她获得了成就感。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-c-5",
+              "quote": "I’m enjoying the creative activities, and it feels great to have done something useful.",
+              "anchor": "做了有用的事很开心"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她恢复了记忆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It is also being used to help patients suffering from dementia, a serious illness of the mind.",
+            "sourceEntity": "patients suffering from dementia",
+            "optionText": "She has recovered her memory.",
+            "optionEntity": "She",
+            "explanation": "痴呆症（dementia）出自[[reading-c-2|It is also being]]，说项目也用来帮助这类病人；原文没说露丝患病，更没说她恢复了记忆。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-c-2",
+              "quote": "It is also being used to help patients suffering from dementia, a serious illness of the mind.",
+              "anchor": "帮助痴呆症病人"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她形成了坚强的个性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She has developed a strong personality.",
+            "explanation": "露丝说的是喜欢这个项目、享受其中的活动，原文没谈她的性格有什么变化。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Ruth Xavier",
+          "targetText": "Among those taking part in the project is 80-year-old Ruth Xavier.",
+          "targetParagraphId": "reading-c-3",
+          "answerText": "it feels great to have done something useful",
+          "bridgeZh": "引号里都是露丝的话，最后说出项目带给她的感受",
+          "note": "题干 Ruth Xavier 原词出现在这一句，她的话从这里开始。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "She has gained a sense of achievement.",
+          "targetText": "it feels great to have done something useful",
+          "targetParagraphId": "reading-c-5",
+          "relationType": "paraphrase",
+          "note": "露丝说做了有用的事感觉很棒（feels great to have done something useful），选项用“成就感”（a sense of achievement）概括这种感受，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:30": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 embark on 所在句的“最早……之一”，推出这个短语的意思。",
+      "stemTranslationZh": "第7段中画线的 embark on 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句的 first",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "改进。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Improve.",
+            "explanation": "放进去就成了“最早改进这个项目的地方之一”；上一段讲的是项目要推广（roll it out）到全国，这里说的是谁先做起来，不是谁改进它。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "反对。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Residents really welcome the idea of the project and the creative sessions.",
+            "sourceHighlight": "really welcome",
+            "optionText": "Oppose.",
+            "optionHighlight": "Oppose",
+            "explanation": "放进去成了“最早反对这个项目的地方之一”，可她紧接着说居民非常欢迎（really welcome）这个项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-c-7",
+              "quote": "Residents really welcome the idea of the project and the creative sessions.",
+              "anchor": "居民非常欢迎"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "开始。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-c-7",
+              "quote": "one of the first to embark on the project",
+              "anchor": "最早开始项目之一"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "评估。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Evaluate.",
+            "explanation": "放进去成了“最早评估这个项目的地方之一”；可她说还在期待（looking forward to）项目带来益处，效果还没出来，谈不上评估。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "embark on",
+          "targetText": "Wendy Wilson, extra care manager at 60 Penfold Street, one of the first to embark on the project, said: “Residents really welcome the idea of the project and the creative sessions.",
+          "targetParagraphId": "reading-c-7",
+          "answerText": "one of the first",
+          "note": "题干 embark on 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Begin.",
+          "targetText": "one of the first to embark on the project",
+          "targetParagraphId": "reading-c-7",
+          "relationType": "paraphrase",
+          "note": "embark on 前有“最早……之一”（one of the first），后接 the project，所以 embark on 必须是对项目做的、有先有后的动作。放回去：彭福尔德街60号是最早开始这个项目的地方之一，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把最后两段两位负责人的话合起来，看出他们对项目的共同态度。",
+      "stemTranslationZh": "从最后两段我们可以了解到这个项目的什么情况？",
+      "locateBy": "passage",
+      "locateFindZh": "[[reading-c-7]]经理说居民 really welcome，[[reading-c-8]]负责人说 happy to be taking part；答案要盖住两方的态度",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它很受欢迎。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-c-7",
+              "quote": "Residents really welcome the idea of the project and the creative sessions.",
+              "anchor": "居民非常欢迎"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-c-8",
+              "quote": "We are happy to be taking part in the project.",
+              "anchor": "很高兴参与"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它需要更有创意。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "creative",
+            "optionText": "creative",
+            "matchType": "exact",
+            "relationNote": "creative 两段都出现，说的是项目里已有的创意活动（creative sessions）受欢迎，没人说项目需要更有创意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-c-7",
+              "quote": "Residents really welcome the idea of the project and the creative sessions.",
+              "anchor": "创意活动受欢迎"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它利润很高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is highly profitable.",
+            "explanation": "经理期待的是项目给居民带来的益处（benefits）和乐趣，不是钱；原文没提项目赚钱。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它要很久才能见效。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It takes ages to see the results.",
+            "explanation": "经理说“期待”（looking forward to）益处，只说明项目刚开展，没说要等很久才见效。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is well received.",
+          "targetText": "Residents really welcome the idea of the project and the creative sessions.",
+          "targetParagraphId": "reading-c-7",
+          "relationType": "paraphrase",
+          "note": "两段都是参与机构的评价：经理说居民非常欢迎，还期待项目带来益处和乐趣；负责人说很高兴参与，相信它能把居民联系起来。选项的“很受欢迎”（well received）正好把两方的好评都包进去，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

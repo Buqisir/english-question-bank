@@ -1,0 +1,143 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Caroline,\n\nAs the person in charge of Talk and Talk, our school radio's English programme, I'm writing to invite you to be our guest for an interview.\n\nTalk and Talk goes on air every Friday afternoon. Students share stories and talk with guests, all in English. For many of us, it's the best chance to practise speaking outside class.\n\nWe hope to record it next Wednesday, from 4:30 to 5:00 p.m., in the radio room. The topic is learning English through culture. We'd love to hear about festivals in your home country and your tips on speaking English confidently.\n\nWould that time suit you? Please reply by Friday so I can send you the questions in advance.\n\nYours sincerely,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "身份和读者：校广播站英语节目 Talk and Talk 的负责人李华，写邮件给外教 Caroline，邀请她接受一次访谈。",
+        "两个要点：介绍节目；说明访谈的时间和话题。",
+        "格式：保留题面给的 Dear Caroline, 和 Yours sincerely, Li Hua，正文 80 词左右。"
+      ],
+      "thisEssayChooses": "本文补了节目播出时间、内容和对学生的用处；访谈定在下周三下午 4:30 到 5:00、地点在广播室，话题选“通过文化学英语”，请她讲家乡的节日和自信说英语的建议；结尾请她确认时间并答应提前发问题。时间、地点和话题都可以换成别的合理安排。"
+    },
+    "standard": {
+      "essay": "Dear Caroline,\n\nAs the person in charge of Talk and Talk, our school radio's English programme, I'm writing to invite you to be our guest for an interview.\n\nTalk and Talk goes on air every Friday afternoon. Students share stories and talk with guests, all in English. For many of us, it's the best chance to practise speaking outside class.\n\nWe hope to record it next Wednesday, from 4:30 to 5:00 p.m., in the radio room. The topic is learning English through culture. We'd love to hear about festivals in your home country and your tips on speaking English confidently.\n\nWould that time suit you? Please reply by Friday so I can send you the questions in advance.\n\nYours sincerely,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "节目介绍",
+          "quote": "Talk and Talk goes on air every Friday afternoon. Students share stories and talk with guests, all in English."
+        },
+        {
+          "point": "访谈的时间",
+          "quote": "We hope to record it next Wednesday, from 4:30 to 5:00 p.m., in the radio room."
+        },
+        {
+          "point": "访谈的话题",
+          "quote": "The topic is learning English through culture."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代身份，直接发出邀请。",
+          "items": [
+            {
+              "quote": "As the person in charge of Talk and Talk",
+              "explain": "题面说你是节目负责人，开头先用这个身份说话，邀请才显得正式、有分量。the person in charge of 就是“负责人”最常用的说法。"
+            },
+            {
+              "quote": "I'm writing to invite you to be our guest for an interview",
+              "explain": "第一句就说清这封信要干什么：邀请她来做访谈嘉宾。读者不用读到最后才知道来意。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：介绍节目。",
+          "items": [
+            {
+              "quote": "goes on air every Friday afternoon",
+              "explain": "go on air 是“播出”的地道说法，再说清什么时候播，节目一下子就真实了。"
+            },
+            {
+              "quote": "Students share stories and talk with guests, all in English.",
+              "explain": "用两个并列动作说节目里做什么，末尾 all in English 点出这是英语节目，也暗示请外教来是合适的。"
+            },
+            {
+              "quote": "it's the best chance to practise speaking outside class",
+              "explain": "从听众角度说节目的用处。Caroline 是老师，知道节目对学生有帮助，会更愿意来。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：访谈时间和话题。",
+          "items": [
+            {
+              "quote": "next Wednesday, from 4:30 to 5:00 p.m., in the radio room",
+              "explain": "时间写到哪天、几点到几点，再加地点，她一看就能判断自己有没有空，不用再来回问。"
+            },
+            {
+              "quote": "The topic is learning English through culture.",
+              "explain": "用一个短句先亮出话题，下一句再展开，读者先抓住大方向。"
+            },
+            {
+              "quote": "We'd love to hear about festivals in your home country",
+              "explain": "把话题落到她能讲的具体内容上。We'd love to hear 比 You must talk about 客气得多，适合对老师说话。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "请她确认，并说清下一步。",
+          "items": [
+            {
+              "quote": "Would that time suit you?",
+              "explain": "用问句请她确认时间，给对方留了选择，比直接说 You must come 有礼貌。"
+            },
+            {
+              "quote": "Please reply by Friday so I can send you the questions in advance.",
+              "explain": "结尾说清她要做什么（周五前回复）、你会做什么（提前发问题），信读完事情就能往下走。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "be our guest for an interview",
+          "function": "把“接受访谈”说成“做我们的嘉宾”，既点明邀请内容，又显得尊重对方。"
+        },
+        {
+          "expression": "go on air",
+          "function": "介绍广播节目的播出时间，比 is broadcast 更口语、更自然。"
+        },
+        {
+          "expression": "Would that time suit you?",
+          "function": "提出时间后请对方确认，委婉又给对方留余地。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Caroline,\n\nI'm writing on behalf of Talk and Talk, our school radio's English programme, to ask whether you would be willing to be our guest for an interview.\n\nEvery Friday afternoon, Talk and Talk fills the campus with English. Students share stories, discuss campus news and chat with guests, and many listeners say it is the one time in the week when English feels like a real language rather than a school subject.\n\nIf it suits you, we'd like to record it next Wednesday, from 4:30 to 5:00 p.m., in the radio room. Our listeners are curious about how people celebrate festivals in your home country, and many would also love a few tips on speaking English without worrying about mistakes.\n\nPlease let me know whether this works for you, or suggest a better one. Once you say yes, I'll send the questions so you can prepare.\n\nYours sincerely,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "节目介绍",
+          "quote": "Every Friday afternoon, Talk and Talk fills the campus with English. Students share stories, discuss campus news and chat with guests"
+        },
+        {
+          "point": "访谈的时间",
+          "quote": "we'd like to record it next Wednesday, from 4:30 to 5:00 p.m., in the radio room"
+        },
+        {
+          "point": "访谈的话题",
+          "quote": "Our listeners are curious about how people celebrate festivals in your home country, and many would also love a few tips on speaking English without worrying about mistakes."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "to ask whether you would be willing to be our guest",
+          "explain": "标准版直接说 invite you，这里用 whether you would be willing 先问对方意愿，对老师更委婉。"
+        },
+        {
+          "quote": "it is the one time in the week when English feels like a real language rather than a school subject",
+          "explain": "标准版说节目是练听说的机会，这里借听众的话说出英语从“科目”变成“真正的语言”，节目的意义更具体，也更打动外教。"
+        },
+        {
+          "quote": "or suggest a better one",
+          "explain": "标准版只问时间行不行，这里主动请她另提时间，替对方着想，邀请更容易被接受。"
+        }
+      ]
+    }
+  }
+}

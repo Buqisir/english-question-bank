@@ -1,0 +1,786 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:reading-d": {
+      "overview": "一项历时五年的研究发现，农业兴起后食物变软，人类咬合由对齐变为覆咬合，“f”“v”等唇齿音才容易发出并在世界语言中增多；这推翻了人类语音自古不变的观点。",
+      "fullTranslationZh": "人类语言包含2000多种不同的语音，从常见的“m”和“a”，到南部非洲一些语言中罕见的咂音。可为什么某些语音比其他语音更常见呢？一项开创性的、历时五年的研究表明，与饮食相关的人类咬合变化催生了新的语音，这些语音如今出现在世界上一半的语言中。\n\n30多年前，学者查尔斯·霍凯特注意到，被称为唇齿音的语音，例如“f”和“v”，在吃较软食物的社会的语言中更为常见。如今，瑞士苏黎世大学达米安·布拉西领导的研究团队弄清了这一趋势是怎样、又为什么出现的。\n\n他们发现，远古人类成年人的上下门牙是对齐的，这使得唇齿音很难发出，因为唇齿音要用下唇接触上齿来发。后来，我们的颌部变成了覆咬合结构，发这类音就容易了。\n\n研究团队证明，咬合的这一变化与新石器时代农业的发展有关。这时食物变得更容易咀嚼。颌骨不必做那么多工作，因此也就没有长得那么大。\n\n对一个语言数据库的分析也证实，新石器时代之后，世界语言的语音发生了全球性变化，“f”和“v”的使用在过去几千年里显著增多。如今许多狩猎采集民族的语言中仍然没有这些音。\n\n这项研究推翻了一种流行观点，即所有人类语音在大约30万年前人类进化出来时就已存在。研究团队成员史蒂文·莫兰说：“自人类出现以来，我们使用的这套语音并不一定一直保持稳定；相反，我们今天看到的种类繁多的语音，是生物变化和文化演进等因素复杂相互作用的产物。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-d-1",
+          "paragraphId": "reading-d-3",
+          "sourceText": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth.",
+          "displayText": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:33"
+          ],
+          "translationZh": "他们发现，远古人类成年人的上下门牙是对齐的，这使得唇齿音很难发出，因为唇齿音要用下唇接触上齿来发。",
+          "analysisZh": "主干是 They discovered that …，that 引出宾语从句，从句主干 the upper and lower front teeth of ancient human adults were aligned：远古成人的上下门牙是对齐的。making it hard to produce labiodentals 是现在分词短语作结果状语，it 是形式宾语，真正的宾语是 to produce labiodentals，意思是“这就使唇齿音难发”。which are formed by … 是非限制性定语从句，解释唇齿音怎么发：下唇碰上齿。门牙对齐时下唇够不着上齿，第33题的原因就在这条因果里。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 89,
+              "quote": "the upper and lower front teeth of ancient human adults were aligned"
+            },
+            {
+              "start": 96,
+              "end": 134,
+              "quote": "making it hard to produce labiodentals"
+            },
+            {
+              "start": 136,
+              "end": 197,
+              "quote": "which are formed by touching the lower lip to the upper teeth"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-d-2",
+          "paragraphId": "reading-d-6",
+          "sourceText": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+          "displayText": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:35"
+          ],
+          "translationZh": "自人类出现以来，我们使用的这套语音并不一定一直保持稳定；相反，我们今天看到的种类繁多的语音，是生物变化和文化演进等因素复杂相互作用的产物",
+          "analysisZh": "全句是 not … but rather … 结构，前后两个分句对照。前一句主干 The set of speech sounds has not necessarily remained stable：这套语音不一定一直稳定，we use 是省略关系词的定语从句，修饰 speech sounds；since the appearance of human beings 说时间起点。but rather 后是作者真正要说的：主干 the huge variety … is the product of a complex interplay，that we find today 修饰 speech sounds，of things like … 说是哪些因素在相互作用。第35题“复杂”“动态”两层就分别落在前后两个分句里。",
+          "underlineRanges": [
+            {
+              "start": 32,
+              "end": 67,
+              "quote": "has not necessarily remained stable"
+            },
+            {
+              "start": 106,
+              "end": 116,
+              "quote": "but rather"
+            },
+            {
+              "start": 170,
+              "end": 207,
+              "quote": "is the product of a complex interplay"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-i:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p1",
+              "sourceParagraphIds": [
+                "reading-d-1"
+              ],
+              "start": 0,
+              "end": 120,
+              "quote": "人类语言包含2000多种不同的语音，从常见的“m”和“a”，到南部非洲一些语言中罕见的咂音。可为什么某些语音比其他语音更常见呢？一项开创性的、历时五年的研究表明，与饮食相关的人类咬合变化催生了新的语音，这些语音如今出现在世界上一半的语言中。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p2",
+              "sourceParagraphIds": [
+                "reading-d-2"
+              ],
+              "start": 122,
+              "end": 222,
+              "quote": "30多年前，学者查尔斯·霍凯特注意到，被称为唇齿音的语音，例如“f”和“v”，在吃较软食物的社会的语言中更为常见。如今，瑞士苏黎世大学达米安·布拉西领导的研究团队弄清了这一趋势是怎样、又为什么出现的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p3",
+              "sourceParagraphIds": [
+                "reading-d-3"
+              ],
+              "start": 224,
+              "end": 299,
+              "quote": "他们发现，远古人类成年人的上下门牙是对齐的，这使得唇齿音很难发出，因为唇齿音要用下唇接触上齿来发。后来，我们的颌部变成了覆咬合结构，发这类音就容易了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p4",
+              "sourceParagraphIds": [
+                "reading-d-4"
+              ],
+              "start": 301,
+              "end": 364,
+              "quote": "研究团队证明，咬合的这一变化与新石器时代农业的发展有关。这时食物变得更容易咀嚼。颌骨不必做那么多工作，因此也就没有长得那么大。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p5",
+              "sourceParagraphIds": [
+                "reading-d-5"
+              ],
+              "start": 366,
+              "end": 449,
+              "quote": "对一个语言数据库的分析也证实，新石器时代之后，世界语言的语音发生了全球性变化，“f”和“v”的使用在过去几千年里显著增多。如今许多狩猎采集民族的语言中仍然没有这些音。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p6",
+              "sourceParagraphIds": [
+                "reading-d-6"
+              ],
+              "start": 451,
+              "end": 577,
+              "quote": "这项研究推翻了一种流行观点，即所有人类语音在大约30万年前人类进化出来时就已存在。研究团队成员史蒂文·莫兰说：“自人类出现以来，我们使用的这套语音并不一定一直保持稳定；相反，我们今天看到的种类繁多的语音，是生物变化和文化演进等因素复杂相互作用的产物。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:32-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-2",
+                "start": 277,
+                "end": 315,
+                "quote": "has found how and why this trend arose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p2",
+                "start": 81,
+                "end": 99,
+                "quote": "弄清了这一趋势是怎样、又为什么出现的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:32-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-1",
+                "start": 237,
+                "end": 296,
+                "quote": "diet-related changes in human bite led to new speech sounds"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p1",
+                "start": 81,
+                "end": 100,
+                "quote": "与饮食相关的人类咬合变化催生了新的语音"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:33-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-3",
+                "start": 0,
+                "end": 198,
+                "quote": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p3",
+                "start": 0,
+                "end": 49,
+                "quote": "他们发现，远古人类成年人的上下门牙是对齐的，这使得唇齿音很难发出，因为唇齿音要用下唇接触上齿来发。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:33-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-3",
+                "start": 199,
+                "end": 294,
+                "quote": "Later, our jaws changed to an overbite structure (结构), making it easier to produce such sounds."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p3",
+                "start": 49,
+                "end": 75,
+                "quote": "后来，我们的颌部变成了覆咬合结构，发这类音就容易了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:34-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-5",
+                "start": 0,
+                "end": 220,
+                "quote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age, with the use of “f” and “v” increasing remarkably during the last few thousand years."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p5",
+                "start": 0,
+                "end": 61,
+                "quote": "对一个语言数据库的分析也证实，新石器时代之后，世界语言的语音发生了全球性变化，“f”和“v”的使用在过去几千年里显著增多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:35-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-6",
+                "start": 136,
+                "end": 399,
+                "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p6",
+                "start": 56,
+                "end": 124,
+                "quote": "自人类出现以来，我们使用的这套语音并不一定一直保持稳定；相反，我们今天看到的种类繁多的语音，是生物变化和文化演进等因素复杂相互作用的产物"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-3",
+                "start": 0,
+                "end": 198,
+                "quote": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p3",
+                "start": 0,
+                "end": 49,
+                "quote": "他们发现，远古人类成年人的上下门牙是对齐的，这使得唇齿音很难发出，因为唇齿音要用下唇接触上齿来发。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-d-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "reading-d-6",
+                "start": 136,
+                "end": 399,
+                "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-d-p6",
+                "start": 56,
+                "end": 124,
+                "quote": "自人类出现以来，我们使用的这套语音并不一定一直保持稳定；相反，我们今天看到的种类繁多的语音，是生物变化和文化演进等因素复杂相互作用的产物"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-d-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头提出问题：为什么有些语音更常见，并给出研究结论；接着回顾霍凯特的发现，引出布拉西团队的研究；然后说明咬合变化怎样使唇齿音易发，又与农业发展相关；再用语言数据库的分析印证结论；最后指出研究推翻了语音自古不变的旧观点。",
+        "paragraphs": [
+          {
+            "paragraphId": "reading-d-1",
+            "summary": "人类语音种类繁多，研究发现饮食引起的咬合变化催生了新语音",
+            "function": "提出问题并给出研究的总结论。"
+          },
+          {
+            "paragraphId": "reading-d-2",
+            "summary": "霍凯特早就发现吃软食的社会唇齿音更常见，布拉西团队弄清了其成因",
+            "function": "交代研究背景，引出研究团队。"
+          },
+          {
+            "paragraphId": "reading-d-3",
+            "summary": "远古人上下门牙对齐，难发唇齿音；后来变为覆咬合，才容易发",
+            "function": "说明唇齿音难易变化的生理原因。"
+          },
+          {
+            "paragraphId": "reading-d-4",
+            "summary": "咬合变化与新石器时代农业发展有关：食物变软，颌骨变小",
+            "function": "说明咬合变化的成因。"
+          },
+          {
+            "paragraphId": "reading-d-5",
+            "summary": "语言数据库显示新石器时代后 f、v 显著增多，狩猎采集民族语言中仍少见",
+            "function": "用另一类证据印证研究结论。"
+          },
+          {
+            "paragraphId": "reading-d-6",
+            "summary": "研究推翻了语音自古就有的观点，语音是生物和文化共同作用的产物",
+            "function": "总结研究意义，引用团队成员的话收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-i:32": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从布拉西团队要弄清的问题，判断研究关注语音的哪一方面。",
+      "stemTranslationZh": "达米安·布拉西的研究关注人类语音的哪个方面？",
+      "locateBy": "stem",
+      "locateFindZh": "this 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它的多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "variety",
+            "optionText": "variety",
+            "matchType": "exact",
+            "relationNote": "variety 出自[[reading-d-6]]莫兰的话，说今天语音种类繁多（huge variety）是变化的结果；研究追问的是这些音怎么来的，不是有多少种。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-6",
+              "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "语音种类繁多"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的分布。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "More than 30 years ago, the scholar Charles Hockett noted that speech sounds called labiodentals, such as “f” and “v”, were more common in the languages of societies that ate softer foods.",
+            "sourceEntity": "Charles Hockett",
+            "optionText": "Its distribution.",
+            "optionEntity": "distribution",
+            "explanation": "唇齿音在吃软食的社会里更常见，这一分布是霍凯特三十多年前就注意到的；布拉西团队要弄清的是这一现象怎样、为何出现。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-2",
+              "quote": "More than 30 years ago, the scholar Charles Hockett noted that speech sounds called labiodentals, such as “f” and “v”, were more common in the languages of societies that ate softer foods.",
+              "anchor": "霍凯特的发现"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的数量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its quantity.",
+            "explanation": "2000多种语音（more than 2,000 different sounds）是开篇引出话题的背景数字；研究并没有去统计语音数量。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的发展。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-d-2",
+              "quote": "has found how and why this trend arose",
+              "anchor": "弄清趋势的成因"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-d-1",
+              "quote": "diet-related changes in human bite led to new speech sounds",
+              "anchor": "咬合变化催生新语音"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Damián Blasi",
+          "targetText": "Now a team of researchers led by Damián Blasi at the University of Zurich, Switzerland, has found how and why this trend arose.",
+          "targetParagraphId": "reading-d-2",
+          "answerText": "has found how and why this trend arose",
+          "note": "题干 Damián Blasi 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Its development.",
+          "targetText": "has found how and why this trend arose",
+          "targetParagraphId": "reading-d-2",
+          "relationType": "paraphrase",
+          "note": "原文没直接说“发展”，只说团队弄清了这一趋势怎样、为何出现（how and why … arose），[[reading-d-1|A ground-breaking, five-year study]]也说咬合变化催生了新语音（led to new speech sounds）。可见研究看的是语音怎样变出来，即“发展”（development），选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出远古成人难发唇齿音的原因，并把牙齿对齐概括成颌部结构的问题。",
+      "stemTranslationZh": "为什么远古人类成年人很难发唇齿音？",
+      "locateBy": "stem",
+      "locateFindZh": "看 making 前的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们的上牙比下牙少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "upper teeth",
+            "optionText": "upper teeth",
+            "matchType": "exact",
+            "relationNote": "upper teeth 出自唇齿音的发法（下唇碰上齿）；难发是因为上下门牙对齐，原文没比较上下牙的颗数。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-3",
+              "quote": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth.",
+              "anchor": "唇齿音的发法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们不能轻松地张嘴闭嘴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "lip",
+            "optionText": "lips",
+            "matchType": "wordFamily",
+            "relationNote": "lips 借自“用下唇碰上齿”（touching the lower lip）这一发音说明；难处在门牙对齐，原文没说嘴唇开合不便。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-3",
+              "quote": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth.",
+              "anchor": "下唇碰上齿"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们的颌部结构不便于发音。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-d-3",
+              "quote": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth.",
+              "anchor": "上下门牙对齐"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-d-3",
+              "quote": "Later, our jaws changed to an overbite structure (结构), making it easier to produce such sounds.",
+              "anchor": "后来变为覆咬合"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们的下门牙不够大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The jawbone didn’t have to do as much work and so didn’t grow to be so large.",
+            "sourceEntity": "The jawbone",
+            "optionText": "Their lower front teeth were not large enough.",
+            "optionEntity": "lower front teeth",
+            "explanation": "“没长那么大”（so large）说的是后来的颌骨（jawbone），讲的是农业出现之后的变化，与远古人的下门牙大小无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-4",
+              "quote": "The jawbone didn’t have to do as much work and so didn’t grow to be so large.",
+              "anchor": "颌骨变小"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "ancient human adults",
+          "targetText": "They discovered that the upper and lower front teeth of ancient human adults were aligned (对齐), making it hard to produce labiodentals, which are formed by touching the lower lip to the upper teeth.",
+          "targetParagraphId": "reading-d-3",
+          "answerText": "the upper and lower front teeth of ancient human adults were aligned",
+          "note": "题干 ancient human adults 原词出现在这一句，同句的 hard to produce labiodentals 对应题干的 difficult … to produce labiodentals。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Their jaws were not conveniently structured.",
+          "targetText": "the upper and lower front teeth of ancient human adults were aligned",
+          "targetParagraphId": "reading-d-3",
+          "relationType": "paraphrase",
+          "note": "原文没说“结构不便”，只说远古成人上下门牙对齐（aligned），[[reading-d-3|Later, our jaws changed]]又说颌部变成覆咬合结构（overbite structure）后才容易发音。两句对照可见难在当时的颌部结构，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:34": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看这一段的内容和前文结论是什么关系，概括它的作用。",
+      "stemTranslationZh": "第5段主要讲什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[reading-d-5]]用 also confirmed 引出语言数据库分析：新石器时代后 f、v 大增；要说清它和前面结论的关系",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "支持研究结果的证据。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-d-5",
+              "quote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age, with the use of “f” and “v” increasing remarkably during the last few thousand years.",
+              "anchor": "数据库分析也证实"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "研究成果的潜在应用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Potential application of the research findings.",
+            "explanation": "这段只报告数据库分析得出的结果，没谈研究成果能用在什么地方。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对研究方法的进一步说明。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A further explanation of the research methods.",
+            "explanation": "语言数据库分析（Analyses of a language database）确是一种研究手段，但这段讲的是分析得出的结论，没有说明研究怎么做。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对研究过程的合理质疑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age, with the use of “f” and “v” increasing remarkably during the last few thousand years.",
+            "sourceHighlight": "also confirmed",
+            "optionText": "A reasonable doubt about the research process.",
+            "optionHighlight": "doubt",
+            "explanation": "这段用 also confirmed 说数据库分析证实了前面的结论，是支持而不是质疑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-5",
+              "quote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age, with the use of “f” and “v” increasing remarkably during the last few thousand years.",
+              "anchor": "也证实"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Supporting evidence for the research results.",
+          "targetText": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age, with the use of “f” and “v” increasing remarkably during the last few thousand years.",
+          "targetParagraphId": "reading-d-5",
+          "relationType": "paraphrase",
+          "note": "这段用“也证实”（also confirmed）接上前文：语言数据库显示新石器时代后 f、v 大增，如今许多狩猎采集民族的语言里仍没有这些音。两点都从另一类材料印证了“农业改变咬合、催生唇齿音”的结论，选项的“支持研究结果的证据”说的正是这个作用，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:35": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读莫兰的话，把“不一定稳定”和“复杂相互作用”两层合起来概括。",
+      "stemTranslationZh": "关于人类这套语音，史蒂文·莫兰说了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 前后两层",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是有效交流的关键。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is key to effective communication.",
+            "explanation": "莫兰谈的是语音从哪来、怎样变化，原文没提语音对有效交流起什么作用。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它对文化多样性贡献很大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+            "sourceHighlight": "the product of",
+            "optionText": "It contributes much to cultural diversity.",
+            "optionHighlight": "contributes much to",
+            "explanation": "莫兰说语音是生物变化和文化演进相互作用的产物（the product of），文化是成因之一；选项反过来说语音促成文化多样。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-6",
+              "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "语音是产物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是一个复杂且动态的系统。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-d-6",
+              "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "不一定稳定、复杂相互作用"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它推动了人类的进化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+            "sourceHighlight": "biological change",
+            "optionText": "It drives the evolution of human beings.",
+            "optionHighlight": "drives the evolution",
+            "explanation": "原文说生物变化（biological change）等因素造就了今天的语音，是人的变化在先、语音变化在后；选项倒过来说语音推动人类进化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-d-6",
+              "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "生物变化造就语音"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Steven Moran",
+          "targetText": "“The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution,” said Steven Moran, a member of the research team.",
+          "targetParagraphId": "reading-d-6",
+          "answerText": "has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay",
+          "note": "题干 Steven Moran 原词出现在这句引语末尾，他的看法就在引号里。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "It is a complex and dynamic system.",
+          "targetText": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+          "targetParagraphId": "reading-d-6",
+          "relationType": "paraphrase",
+          "note": "选项两层各有落点：“动态”（dynamic）对应“不一定一直稳定”（not necessarily remained stable），即语音一直在变；“复杂”（complex）对应“复杂的相互作用”（a complex interplay）。合起来就是一个复杂且不断变化的系统，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

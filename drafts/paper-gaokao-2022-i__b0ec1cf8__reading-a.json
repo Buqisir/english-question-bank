@@ -1,0 +1,735 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:reading-a": {
+      "overview": "这是《文学导论》课的评分办法：先列分数与等级的换算，再说明总成绩由论文、小组作业和日常作业三部分按比例构成，最后规定论文和日常作业迟交怎样扣分。",
+      "fullTranslationZh": "《文学导论》课程评分办法\n\n评分等级\n\n90—100分为A；80—89分为B；70—79分为C；60—69分为D；60分以下为E。\n\n论文（60%）\n\n你的四篇主要论文合起来构成本课程成绩的主体：论文1占10%；论文2占15%；论文3占15%；论文4占20%。\n\n小组作业（30%）\n\n学生将在本课程期间分组完成四项作业。所有作业都要在指定日期前通过 Blackboard 提交，这是我们的在线学习与课程管理系统。\n\n日常作业/课堂写作与测验/小组活动/家庭作业（10%）\n\n课堂活动每天都不一样，但学生必须随时准备完成课堂短写作或测验，内容直接取自指定的阅读材料或上一节课讲授/讨论的笔记，所以课上认真记笔记很重要。此外，我还会不时布置在课上完成的小组活动或在家完成的简短作业，这两类都会计分。\n\n迟交作业\n\n论文如果没有在截止日当天课上提交，每迟交一个课时就降一个字母等级。如果到截止日后第4天仍未交，就得零分。课上没有完成的日常作业得零分。因准假缺席而错过的短写作可以补交。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-a-1",
+          "paragraphId": "reading-a-11",
+          "sourceText": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+          "displayText": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:23"
+          ],
+          "translationZh": "论文如果没有在截止日当天课上提交，每迟交一个课时就降一个字母等级。",
+          "analysisZh": "主干是 An essay will lose a letter grade：论文会降一个字母等级。not submitted in class on the due date 是过去分词短语，修饰 essay，交代是哪种论文——截止日当天没在课上交的。for each class period it is late 说扣分的频率：每晚一个课时扣一级，it is late 是省略了 that 的定语从句，修饰 class period。这句只管截止日后的头几天，下一句再规定第4天之后的处理，第23题要把两句连起来读。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 47,
+              "quote": "An essay not submitted in class on the due date"
+            },
+            {
+              "start": 48,
+              "end": 72,
+              "quote": "will lose a letter grade"
+            },
+            {
+              "start": 73,
+              "end": 105,
+              "quote": "for each class period it is late"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-a-2",
+          "paragraphId": "reading-a-9",
+          "sourceText": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "displayText": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "relatedQuestionIds": [],
+          "translationZh": "课堂活动每天都不一样，但学生必须随时准备完成课堂短写作或测验，内容直接取自指定的阅读材料或上一节课讲授/讨论的笔记，所以课上认真记笔记很重要。",
+          "analysisZh": "全句由 but 和 so 串起三层：先让步说课堂活动天天不同，but 后转到要求——students must be ready to complete short in-class writings or tests，学生必须随时准备好完成短写作或测验；drawn directly from … 是过去分词短语，修饰 writings or tests，说明题目出自指定阅读或上节课笔记；so 引出结论：所以上课要认真记笔记。读的时候先抓 must be ready to complete 这条主干，再把 drawn from 挂到测验上。",
+          "underlineRanges": [
+            {
+              "start": 48,
+              "end": 82,
+              "quote": "students must be ready to complete"
+            },
+            {
+              "start": 116,
+              "end": 135,
+              "quote": "drawn directly from"
+            },
+            {
+              "start": 208,
+              "end": 248,
+              "quote": "so it is important to take careful notes"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-i:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p1",
+              "sourceParagraphIds": [
+                "reading-a-1"
+              ],
+              "start": 0,
+              "end": 12,
+              "quote": "《文学导论》课程评分办法"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p2",
+              "sourceParagraphIds": [
+                "reading-a-2"
+              ],
+              "start": 14,
+              "end": 18,
+              "quote": "评分等级"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p3",
+              "sourceParagraphIds": [
+                "reading-a-3"
+              ],
+              "start": 20,
+              "end": 65,
+              "quote": "90—100分为A；80—89分为B；70—79分为C；60—69分为D；60分以下为E。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p4",
+              "sourceParagraphIds": [
+                "reading-a-4"
+              ],
+              "start": 67,
+              "end": 74,
+              "quote": "论文（60%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p5",
+              "sourceParagraphIds": [
+                "reading-a-5"
+              ],
+              "start": 76,
+              "end": 130,
+              "quote": "你的四篇主要论文合起来构成本课程成绩的主体：论文1占10%；论文2占15%；论文3占15%；论文4占20%。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p6",
+              "sourceParagraphIds": [
+                "reading-a-6"
+              ],
+              "start": 132,
+              "end": 141,
+              "quote": "小组作业（30%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p7",
+              "sourceParagraphIds": [
+                "reading-a-7"
+              ],
+              "start": 143,
+              "end": 207,
+              "quote": "学生将在本课程期间分组完成四项作业。所有作业都要在指定日期前通过 Blackboard 提交，这是我们的在线学习与课程管理系统。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p8",
+              "sourceParagraphIds": [
+                "reading-a-8"
+              ],
+              "start": 209,
+              "end": 236,
+              "quote": "日常作业/课堂写作与测验/小组活动/家庭作业（10%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p9",
+              "sourceParagraphIds": [
+                "reading-a-9"
+              ],
+              "start": 238,
+              "end": 348,
+              "quote": "课堂活动每天都不一样，但学生必须随时准备完成课堂短写作或测验，内容直接取自指定的阅读材料或上一节课讲授/讨论的笔记，所以课上认真记笔记很重要。此外，我还会不时布置在课上完成的小组活动或在家完成的简短作业，这两类都会计分。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p10",
+              "sourceParagraphIds": [
+                "reading-a-10"
+              ],
+              "start": 350,
+              "end": 354,
+              "quote": "迟交作业"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p11",
+              "sourceParagraphIds": [
+                "reading-a-11"
+              ],
+              "start": 356,
+              "end": 440,
+              "quote": "论文如果没有在截止日当天课上提交，每迟交一个课时就降一个字母等级。如果到截止日后第4天仍未交，就得零分。课上没有完成的日常作业得零分。因准假缺席而错过的短写作可以补交。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:21-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-1",
+                "start": 0,
+                "end": 47,
+                "quote": "Grading Policies for Introduction to Literature"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p1",
+                "start": 0,
+                "end": 12,
+                "quote": "《文学导论》课程评分办法"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:21-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-5",
+                "start": 0,
+                "end": 86,
+                "quote": "Your four major essays will combine to form the main part of the grade for this course"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p5",
+                "start": 0,
+                "end": 21,
+                "quote": "你的四篇主要论文合起来构成本课程成绩的主体"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:22-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-4",
+                "start": 0,
+                "end": 12,
+                "quote": "Essays (60%)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p4",
+                "start": 0,
+                "end": 7,
+                "quote": "论文（60%）"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:22-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-6",
+                "start": 0,
+                "end": 23,
+                "quote": "Group Assignments (30%)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p6",
+                "start": 0,
+                "end": 9,
+                "quote": "小组作业（30%）"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:22-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-8",
+                "start": 0,
+                "end": 64,
+                "quote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p8",
+                "start": 0,
+                "end": 27,
+                "quote": "日常作业/课堂写作与测验/小组活动/家庭作业（10%）"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:23-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-11",
+                "start": 107,
+                "end": 185,
+                "quote": "If it is not turned in by the 4th day after the due date, it will earn a zero."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p11",
+                "start": 33,
+                "end": 52,
+                "quote": "如果到截止日后第4天仍未交，就得零分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-11",
+                "start": 0,
+                "end": 106,
+                "quote": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p11",
+                "start": 0,
+                "end": 33,
+                "quote": "论文如果没有在截止日当天课上提交，每迟交一个课时就降一个字母等级。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-a-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "reading-a-9",
+                "start": 0,
+                "end": 262,
+                "quote": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-a-p9",
+                "start": 0,
+                "end": 71,
+                "quote": "课堂活动每天都不一样，但学生必须随时准备完成课堂短写作或测验，内容直接取自指定的阅读材料或上一节课讲授/讨论的笔记，所以课上认真记笔记很重要。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-a-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头标出课程名和评分办法，先给分数与等级的换算表；再用三个带百分比的标题说明总成绩的构成，论文占60%，小组作业占30%，日常作业占10%；最后规定迟交作业怎样扣分。",
+        "paragraphs": [
+          {
+            "paragraphId": "reading-a-1",
+            "summary": "《文学导论》课的评分办法",
+            "function": "总标题，点明全文是一门课的评分规定。"
+          },
+          {
+            "paragraphId": "reading-a-2",
+            "summary": "分数与等级怎样换算",
+            "function": "标题，引出下面的等级表。"
+          },
+          {
+            "paragraphId": "reading-a-3",
+            "summary": "百分制分数分五档对应 A 到 E",
+            "function": "列出分数与字母等级的对应关系。"
+          },
+          {
+            "paragraphId": "reading-a-4",
+            "summary": "论文占总成绩60%",
+            "function": "标题，引出成绩的第一部分。"
+          },
+          {
+            "paragraphId": "reading-a-5",
+            "summary": "四篇论文分别占10%、15%、15%、20%",
+            "function": "说明论文这一部分怎样分配比例。"
+          },
+          {
+            "paragraphId": "reading-a-6",
+            "summary": "小组作业占总成绩30%",
+            "function": "标题，引出成绩的第二部分。"
+          },
+          {
+            "paragraphId": "reading-a-7",
+            "summary": "分组完成四项作业，按时在 Blackboard 上提交",
+            "function": "说明小组作业的做法和提交方式。"
+          },
+          {
+            "paragraphId": "reading-a-8",
+            "summary": "日常作业等占总成绩10%",
+            "function": "标题，引出成绩的第三部分。"
+          },
+          {
+            "paragraphId": "reading-a-9",
+            "summary": "随时可能有课堂写作和测验，还有课上小组活动和课后短作业，都计分",
+            "function": "说明日常作业包括哪些，并提醒课上记笔记。"
+          },
+          {
+            "paragraphId": "reading-a-10",
+            "summary": "迟交作业的处理",
+            "function": "标题，引出迟交规定。"
+          },
+          {
+            "paragraphId": "reading-a-11",
+            "summary": "论文迟交每课时降一级，第4天后得零分；日常作业未在课上完成得零分",
+            "function": "规定迟交的扣分办法和可以补交的例外。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-i:21": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从全文写的课程名、成绩比例和交作业规定，推断这份材料出自哪里。",
+      "stemTranslationZh": "这篇文字可能选自哪里？",
+      "locateBy": "passage",
+      "locateFindZh": "[[reading-a-1]]标出课程名和 Grading Policies，接着列各项占分，[[reading-a-10]]讲 Late Work；出处要装得下评分和交作业规定",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本教科书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A textbook.",
+            "explanation": "课程名 Introduction to Literature 像一本书名，但全文没讲任何文学知识，只讲分数怎么算、作业怎么交。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一份试卷。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An exam paper.",
+            "explanation": "原文提到课上会有测验（tests），只是告诉学生测验要计分；材料本身没有一道题。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一份课程计划。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-a-1",
+              "quote": "Grading Policies for Introduction to Literature",
+              "anchor": "课程评分办法标题"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-a-5",
+              "quote": "Your four major essays will combine to form the main part of the grade for this course",
+              "anchor": "本课程成绩构成"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇学术文章。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An academic article.",
+            "explanation": "学术文章要提出观点并论证；这里用 your、I 直接向选课学生交代要求，没有观点也没有论证。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A course plan.",
+          "targetText": "Grading Policies for Introduction to Literature",
+          "targetParagraphId": "reading-a-1",
+          "relationType": "paraphrase",
+          "note": "全文讲的都是一门课怎样给分：等级怎么换算、各部分占多少、迟交怎么扣分，还用“我会布置作业”（I will assign）直接对选课学生说话。这是开课时发给学生的课程计划里的内容，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把带百分比的几个标题找齐，数出总成绩由几部分构成。",
+      "stemTranslationZh": "学生的总成绩由几部分构成？",
+      "locateBy": "options",
+      "locateFindZh": "数带百分比的标题有几个，再看加起来是否正好100%",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "两部分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)",
+            "sourceHighlight": "(10%)",
+            "optionText": "Two.",
+            "optionHighlight": "Two",
+            "explanation": "只算了论文和小组作业两大块，60%+30% 才90%，漏了占10%的日常作业。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-a-8",
+              "quote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)",
+              "anchor": "第三部分占10%"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "三部分。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-a-4",
+              "quote": "Essays (60%)",
+              "anchor": "论文占60%"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-a-6",
+              "quote": "Group Assignments (30%)",
+              "anchor": "小组作业占30%"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-a-8",
+              "quote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)",
+              "anchor": "日常作业占10%"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "四部分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "four",
+            "optionText": "Four",
+            "matchType": "exact",
+            "relationNote": "four 出自“四篇论文”（four major essays）和“四项作业”（four assignments），说的是论文和小组作业各有几份，不是总成绩分几块。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-a-5",
+              "quote": "Your four major essays will combine to form the main part of the grade for this course",
+              "anchor": "四篇论文"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "五部分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "90-100, A; 80-89, B; 70-79, C; 60-69, D; Below 60, E.",
+            "sourceEntity": "90-100, A; 80-89, B; 70-79, C; 60-69, D; Below 60, E",
+            "optionText": "Five.",
+            "optionEntity": "Five",
+            "explanation": "分数从 A 到 E 共五档（Grading Scale），那是分数怎样换成等级，不是成绩由几部分组成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-a-3",
+              "quote": "90-100, A; 80-89, B; 70-79, C; 60-69, D; Below 60, E.",
+              "anchor": "五档等级"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Three.",
+          "targetText": "Essays (60%)",
+          "targetParagraphId": "reading-a-4",
+          "relationType": "calculation",
+          "note": "带百分比的标题有三个：论文（Essays，60%）、小组作业（Group Assignments，30%）、日常作业（Daily Work，10%）。60%+30%+10%=100%，三部分正好凑成总成绩，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把“晚交一周”和迟交规定里的天数比一比，判断落在哪一条处理办法里。",
+      "stemTranslationZh": "如果你在截止日一周后才交论文，会怎样？",
+      "locateBy": "stem",
+      "locateFindZh": "看 if 后的期限，一周已超过",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "你会得零分。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-a-11",
+              "quote": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
+              "anchor": "第4天后仍未交得零分"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "你会降一个字母等级。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "lose a letter grade",
+            "optionText": "lose a letter grade",
+            "matchType": "exact",
+            "relationNote": "lose a letter grade 出自[[reading-a-11|An essay not submitted]]，是第4天之前的扣法，每晚一个课时降一级；晚交一周已过了第4天，直接得零分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-a-11",
+              "quote": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+              "anchor": "每晚一个课时降一级"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "你会被安排一次测验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tests",
+            "optionText": "test",
+            "matchType": "wordFamily",
+            "relationNote": "tests 出自[[reading-a-9]]，指课上随时可能有的随堂测验，属于日常作业，和迟交论文怎么处理无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-a-9",
+              "quote": "students must be ready to complete short in-class writings or tests",
+              "anchor": "随堂测验"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "你将不得不重写论文。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "You will have to rewrite it.",
+            "explanation": "迟交规定只有降等级和得零分两种处理，没提让学生重写论文。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "after the due date",
+          "targetText": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
+          "targetParagraphId": "reading-a-11",
+          "answerText": "it will earn a zero",
+          "note": "题干 after the due date 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "You will receive a zero.",
+          "targetText": "it will earn a zero",
+          "targetParagraphId": "reading-a-11",
+          "relationType": "calculation",
+          "note": "一周是7天，已经过了截止日后第4天（the 4th day）这条线，按这句规定论文得零分（earn a zero）；选项的 receive a zero 就是 earn a zero，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1063 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:grammar-fill": {
+      "overview": "中国计划设立大熊猫国家公园，把分散的保护区归同一机构管理，连通彼此隔离的大熊猫种群和栖息地，并借大熊猫的伞护作用保护同一区域的众多动植物。",
+      "fullTranslationZh": "中国政府最近敲定了设立大熊猫国家公园的计划。大熊猫国家公园占地面积约为黄石国家公园的三倍，将成为我国首批国家公园之一。这项计划将把保护范围扩大到大量此前未受保护的区域，并把许多现有的大熊猫保护区归由同一个机构管理，以提高管理成效、减少管理上的不一致。\n经过三年的试点期，大熊猫国家公园将于明年正式设立。公园的设计旨在体现“保护自然生态系统的原真性和完整性，保护生物多样性，保护生态缓冲区，并为子孙后代留下宝贵的自然资产”这一指导原则。公园的主要目标是增强彼此隔离的大熊猫种群及其栖息地之间的连通性，并最终使野生大熊猫种群数量达到理想水平。\n大熊猫还充当着伞护物种，让中国西南和西北地区的众多动植物也得到保护。设立大熊猫国家公园，是为了给生活在大熊猫分布区内的所有物种提供更有力的保护，并显著改善该地区生态系统的健康状况。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "group:paper-gaokao-2022-i:grammar-fill:sentence:1",
+          "paragraphId": "grammar-fill-1",
+          "sourceText": "The plan will extend protection to a significant number of areas that __58__ (be) previously unprotected, bringing many of the existing protected areas for giant pandas under one authority __59__ (increase) effectiveness and reduce inconsistencies in management.",
+          "displayText": "The plan will extend protection to a significant number of areas that were previously unprotected, bringing many of the existing protected areas for giant pandas under one authority to increase effectiveness and reduce inconsistencies in management.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:58",
+            "question:paper-gaokao-2022-i:59"
+          ],
+          "translationZh": "这项计划将把保护范围扩大到大量此前未受保护的区域，并把许多现有的大熊猫保护区归由同一个机构管理，以提高管理成效、减少管理上的不一致。",
+          "analysisZh": "主干是 The plan will extend protection to … areas（计划把保护扩大到许多区域）。that 引出的定语从句说明这些区域以前没受保护；逗号后 bringing … under one authority 接着说计划带来的另一项变化：保护区归一个机构管；末尾 to increase … and reduce … 两个并列的不定式交代统一管理的目的。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 31,
+              "quote": "will extend protection"
+            },
+            {
+              "start": 99,
+              "end": 144,
+              "quote": "bringing many of the existing protected areas"
+            },
+            {
+              "start": 182,
+              "end": 234,
+              "quote": "to increase effectiveness and reduce inconsistencies"
+            }
+          ]
+        },
+        {
+          "sentenceId": "group:paper-gaokao-2022-i:grammar-fill:sentence:2",
+          "paragraphId": "grammar-fill-2",
+          "sourceText": "The GPNP’s main goal is to improve connectivity between separate __62__ (population) and homes of giant pandas, and __63__ (eventual) achieve a desired level of population in the wild.",
+          "displayText": "The GPNP’s main goal is to improve connectivity between separate populations and homes of giant pandas, and eventually achieve a desired level of population in the wild.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:62",
+            "question:paper-gaokao-2022-i:63"
+          ],
+          "translationZh": "公园的主要目标是增强彼此隔离的大熊猫种群及其栖息地之间的连通性，并最终使野生大熊猫种群数量达到理想水平。",
+          "analysisZh": "主干是 The GPNP’s main goal is to improve … and eventually achieve …（主要目标是改善……并最终达到……）。is 后面是两个并列的动词短语，共用一个 to；between 连接 populations 和 homes 两样东西，eventually 修饰第二个动词 achieve。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 47,
+              "quote": "main goal is to improve connectivity"
+            },
+            {
+              "start": 48,
+              "end": 86,
+              "quote": "between separate populations and homes"
+            },
+            {
+              "start": 108,
+              "end": 142,
+              "quote": "eventually achieve a desired level"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2022-i:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh:grammar-fill-1",
+              "sourceParagraphIds": [
+                "grammar-fill-1"
+              ],
+              "start": 0,
+              "end": 125,
+              "quote": "中国政府最近敲定了设立大熊猫国家公园的计划。大熊猫国家公园占地面积约为黄石国家公园的三倍，将成为我国首批国家公园之一。这项计划将把保护范围扩大到大量此前未受保护的区域，并把许多现有的大熊猫保护区归由同一个机构管理，以提高管理成效、减少管理上的不一致。"
+            },
+            {
+              "paragraphId": "zh:grammar-fill-2",
+              "sourceParagraphIds": [
+                "grammar-fill-2"
+              ],
+              "start": 126,
+              "end": 269,
+              "quote": "经过三年的试点期，大熊猫国家公园将于明年正式设立。公园的设计旨在体现“保护自然生态系统的原真性和完整性，保护生物多样性，保护生态缓冲区，并为子孙后代留下宝贵的自然资产”这一指导原则。公园的主要目标是增强彼此隔离的大熊猫种群及其栖息地之间的连通性，并最终使野生大熊猫种群数量达到理想水平。"
+            },
+            {
+              "paragraphId": "zh:grammar-fill-3",
+              "sourceParagraphIds": [
+                "grammar-fill-3"
+              ],
+              "start": 270,
+              "end": 360,
+              "quote": "大熊猫还充当着伞护物种，让中国西南和西北地区的众多动植物也得到保护。设立大熊猫国家公园，是为了给生活在大熊猫分布区内的所有物种提供更有力的保护，并显著改善该地区生态系统的健康状况。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:grammar-fill-1",
+            "paragraphId": "grammar-fill-1",
+            "text": "The Chinese government recently finalized a plan to set up a Giant Panda National Park(GPNP). Covering an area about three times the size of Yellowstone National Park, the GPNP will be one of the first national parks in the country. The plan will extend protection to a significant number of areas that were previously unprotected, bringing many of the existing protected areas for giant pandas under one authority to increase effectiveness and reduce inconsistencies in management."
+          },
+          {
+            "textId": "completed:grammar-fill-2",
+            "paragraphId": "grammar-fill-2",
+            "text": "After a three-year pilot period, the GPNP will be officially set up next year. The GPNP is designed to reflect the guiding principle of “protecting the authenticity and integrity(完整性)of natural ecosystems, preserving biological diversity, protecting ecological buffer zones, and leaving behind precious natural assets(资产)for future generations”. The GPNP’s main goal is to improve connectivity between separate populations and homes of giant pandas, and eventually achieve a desired level of population in the wild."
+          },
+          {
+            "textId": "completed:grammar-fill-3",
+            "paragraphId": "grammar-fill-3",
+            "text": "Giant pandas also serve as an umbrella species(物种), bringing protection to a host of plants and animals in the southwestern and northwestern parts of China. The GPNP is intended to provide stronger protection for all the species that live within the Giant Panda Range and significantly improve the health of the ecosystem in the area."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 177,
+                "end": 193,
+                "quote": "the GPNP will be"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 22,
+                "end": 33,
+                "quote": "大熊猫国家公园占地面积"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:56"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 94,
+                "end": 102,
+                "quote": "Covering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 29,
+                "end": 31,
+                "quote": "占地"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 123,
+                "end": 134,
+                "quote": "three times"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 142,
+                "end": 175,
+                "quote": "size of Yellowstone National Park"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 35,
+                "end": 44,
+                "quote": "黄石国家公园的三倍"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:57"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 129,
+                "end": 132,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 35,
+                "end": 44,
+                "quote": "黄石国家公园的三倍"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 277,
+                "end": 306,
+                "quote": "a significant number of areas"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 324,
+                "end": 346,
+                "quote": "previously unprotected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 74,
+                "end": 83,
+                "quote": "此前未受保护的区域"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:58"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 303,
+                "end": 307,
+                "quote": "were"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 74,
+                "end": 80,
+                "quote": "此前未受保护"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 411,
+                "end": 430,
+                "quote": "under one authority"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-1",
+                "start": 467,
+                "end": 503,
+                "quote": "reduce inconsistencies in management"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 97,
+                "end": 106,
+                "quote": "归由同一个机构管理"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:59"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 415,
+                "end": 426,
+                "quote": "to increase"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 107,
+                "end": 110,
+                "quote": "以提高"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 104,
+                "end": 136,
+                "quote": "to reflect the guiding principle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 32,
+                "end": 34,
+                "quote": "体现"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:60"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 88,
+                "end": 99,
+                "quote": "is designed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 25,
+                "end": 32,
+                "quote": "公园的设计旨在"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 210,
+                "end": 241,
+                "quote": "preserving biological diversity"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 286,
+                "end": 324,
+                "quote": "leaving behind precious natural assets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 68,
+                "end": 83,
+                "quote": "并为子孙后代留下宝贵的自然资产"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:61"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 275,
+                "end": 278,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 68,
+                "end": 70,
+                "quote": "并为"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 401,
+                "end": 417,
+                "quote": "between separate"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 442,
+                "end": 463,
+                "quote": "homes of giant pandas"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 101,
+                "end": 106,
+                "quote": "彼此隔离的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:62"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 411,
+                "end": 422,
+                "quote": "populations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 106,
+                "end": 111,
+                "quote": "大熊猫种群"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 377,
+                "end": 400,
+                "quote": "to improve connectivity"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-2",
+                "start": 487,
+                "end": 510,
+                "quote": "achieve a desired level"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 136,
+                "end": 142,
+                "quote": "达到理想水平"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:63"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 454,
+                "end": 464,
+                "quote": "eventually"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 124,
+                "end": 126,
+                "quote": "最终"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-3",
+                "start": 18,
+                "end": 23,
+                "quote": "serve"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-3",
+                "start": 31,
+                "end": 50,
+                "quote": "an umbrella species"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-3",
+                "start": 7,
+                "end": 11,
+                "quote": "伞护物种"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:64"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-3",
+                "paragraphId": "grammar-fill-3",
+                "start": 24,
+                "end": 26,
+                "quote": "as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-3",
+                "start": 4,
+                "end": 7,
+                "quote": "充当着"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-3",
+                "start": 217,
+                "end": 232,
+                "quote": "all the species"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "grammar-fill-3",
+                "start": 240,
+                "end": 273,
+                "quote": "live within the Giant Panda Range"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-3",
+                "start": 48,
+                "end": 63,
+                "quote": "生活在大熊猫分布区内的所有物种"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:65"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-3",
+                "paragraphId": "grammar-fill-3",
+                "start": 229,
+                "end": 233,
+                "quote": "that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-3",
+                "start": 48,
+                "end": 59,
+                "quote": "生活在大熊猫分布区内的"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2022-i:grammar-fill:sentence:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:58",
+              "question:paper-gaokao-2022-i:59"
+            ],
+            "selectedSentenceId": "group:paper-gaokao-2022-i:grammar-fill:sentence:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 242,
+                "end": 264,
+                "quote": "will extend protection"
+              },
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 332,
+                "end": 377,
+                "quote": "bringing many of the existing protected areas"
+              },
+              {
+                "textId": "completed:grammar-fill-1",
+                "paragraphId": "grammar-fill-1",
+                "start": 415,
+                "end": 467,
+                "quote": "to increase effectiveness and reduce inconsistencies"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-1",
+                "start": 59,
+                "end": 125,
+                "quote": "这项计划将把保护范围扩大到大量此前未受保护的区域，并把许多现有的大熊猫保护区归由同一个机构管理，以提高管理成效、减少管理上的不一致。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2022-i:grammar-fill:sentence:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:62",
+              "question:paper-gaokao-2022-i:63"
+            ],
+            "selectedSentenceId": "group:paper-gaokao-2022-i:grammar-fill:sentence:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 357,
+                "end": 393,
+                "quote": "main goal is to improve connectivity"
+              },
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 394,
+                "end": 432,
+                "quote": "between separate populations and homes"
+              },
+              {
+                "textId": "completed:grammar-fill-2",
+                "paragraphId": "grammar-fill-2",
+                "start": 454,
+                "end": 488,
+                "quote": "eventually achieve a desired level"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:grammar-fill",
+                "paragraphId": "zh:grammar-fill-2",
+                "start": 91,
+                "end": 143,
+                "quote": "公园的主要目标是增强彼此隔离的大熊猫种群及其栖息地之间的连通性，并最终使野生大熊猫种群数量达到理想水平。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-i:56": {
+      "blankId": "blank:paper-gaokao-2022-i:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "cover",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Covering",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "逗号后才是主句 the GPNP will be one of the first national parks，句首这部分没有自己的谓语，作状语补充说明公园的面积；公园和 cover 是主动关系（公园占地），用现在分词，位于句首首字母大写，填 Covering。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the GPNP will be",
+          "signalSide": "passage",
+          "relation": "中文：主句主语 the GPNP 就是 cover 的逻辑主语，主动占地。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:57": {
+      "blankId": "blank:paper-gaokao-2022-i:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-postmodified-specific",
+        "features": []
+      },
+      "reason": "空格限定名词 size；three times ___ size of Yellowstone National Park 是“是……的三倍”的倍数说法，size 被 of Yellowstone National Park 限定为黄石公园的面积，是特指，填 the。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "size of Yellowstone National Park",
+          "signalSide": "passage",
+          "relation": "中文：of 短语把面积限定为黄石公园的面积。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "three times",
+          "signalSide": "passage",
+          "relation": "中文：倍数 + the size of 是倍数比较的说法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:58": {
+      "blankId": "blank:paper-gaokao-2022-i:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "that 引出定语从句修饰 areas，空格是从句的谓语；that 指代复数的 areas，previously 说明“未受保护”是以前的状态，用一般过去时复数，填 were。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a significant number of areas",
+          "signalSide": "passage",
+          "relation": "中文：先行词是复数 areas，从句谓语用复数。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "previously unprotected",
+          "signalSide": "passage",
+          "relation": "中文：previously 把未受保护的状态放在过去。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:59": {
+      "blankId": "blank:paper-gaokao-2022-i:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "increase",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to increase",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "空格接在 bringing many of the existing protected areas … under one authority 之后，说明把保护区归一个机构管理是为了什么，作目的状语，用不定式 to increase；后面 and reduce inconsistencies 与它并列，共用这个 to。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "reduce inconsistencies in management",
+          "signalSide": "passage",
+          "relation": "中文：reduce 与空格并列，同为统一管理的目的，共用 to。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "under one authority",
+          "signalSide": "passage",
+          "relation": "中文：归同一机构管理，后面交代这样做的目的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:60": {
+      "blankId": "blank:paper-gaokao-2022-i:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "design",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is designed",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "The GPNP ___ to reflect the guiding principle… 这句缺谓语；公园是被设计的，to reflect 交代设计的用意，用被动；这里介绍公园的设计定位，是现在的情况，主语单数，填 is designed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The GPNP",
+          "signalSide": "passage",
+          "relation": "中文：主语公园是被设计的对象，单数。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "to reflect the guiding principle",
+          "signalSide": "passage",
+          "relation": "中文：to reflect 是设计的目的，前面缺谓语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:61": {
+      "blankId": "blank:paper-gaokao-2022-i:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接引号里列出的四项原则：protecting…, preserving…, protecting…, leaving behind…，四个 -ing 短语并列，最后一项前用 and 接上，填 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "preserving biological diversity",
+          "signalSide": "passage",
+          "relation": "中文：与 protecting、leaving behind 并列的 -ing 短语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "leaving behind precious natural assets",
+          "signalSide": "passage",
+          "relation": "中文：并列的最后一项，前面用 and。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:62": {
+      "blankId": "blank:paper-gaokao-2022-i:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "population",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "populations",
+      "role": null,
+      "similarityProfile": {
+        "route": "countable-sense-shift",
+        "features": []
+      },
+      "reason": "空格作 between 的宾语，与 homes 并列；population 在这里指一个个大熊猫种群，是可数的，between separate 说的是彼此隔离的多个种群，所以用复数 populations。句末 a desired level of population 指种群数量，不加 s。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "between separate",
+          "signalSide": "passage",
+          "relation": "中文：between 连接多个对象，separate 表示彼此隔离的几群。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "homes of giant pandas",
+          "signalSide": "passage",
+          "relation": "中文：并列的 homes 是复数。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:63": {
+      "blankId": "blank:paper-gaokao-2022-i:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "eventual",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "eventually",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-non-finite",
+        "features": []
+      },
+      "reason": "and 后的 ___ achieve a desired level… 与前面的 improve connectivity 并列，都作 is to 后的表语；空格修饰动词 achieve，要用副词，eventual 变为 eventually，表示最终达到。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "achieve a desired level",
+          "signalSide": "passage",
+          "relation": "中文：空格修饰动词 achieve，用副词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "to improve connectivity",
+          "signalSide": "passage",
+          "relation": "中文：achieve 与 improve 并列，共用 to。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:64": {
+      "blankId": "blank:paper-gaokao-2022-i:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "as",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把 an umbrella species 接到动词 serve 上，说明大熊猫充当什么角色；“充当、起……作用”用 serve as，填 as。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "serve",
+          "signalSide": "passage",
+          "relation": "中文：serve 后用 as 引出所充当的角色。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "an umbrella species",
+          "signalSide": "passage",
+          "relation": "中文：大熊猫充当的角色是伞护物种。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:65": {
+      "blankId": "blank:paper-gaokao-2022-i:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格后的 live within the Giant Panda Range 缺主语，这个从句修饰前面的 species，限定是哪些物种；先行词指物，又被 all 修饰，用 that 作从句主语，填 that。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "all the species",
+          "signalSide": "passage",
+          "relation": "中文：先行词 species 指物，被 all 修饰。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "live within the Giant Panda Range",
+          "signalSide": "passage",
+          "relation": "中文：从句缺主语，由关系词充当。"
+        }
+      ]
+    }
+  }
+}

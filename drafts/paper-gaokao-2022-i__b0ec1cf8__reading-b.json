@@ -1,0 +1,843 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:reading-b": {
+      "overview": "作者从自家芝麻菜放坏的经历说起，指出食物浪费既有违道德，又浪费资源、加剧温室气体排放；接着介绍柯廷的机构回收食物做成餐食，最后转述他的建议：人人都能减少浪费。",
+      "fullTranslationZh": "和我们大多数人一样，我尽量留意不浪费食物。那些芝麻菜本来要做一份不错的蔬菜沙拉，给烤鸡晚餐配个菜。可我最后加班到很晚。接着朋友又打电话请我吃晚饭。我把鸡塞进了冷冻室。可几天过去，芝麻菜坏了。更糟的是，我当初不假思索地买得太多了；扔掉的那些足够做六份沙拉。\n\n在一个每年有近8亿人挨饿的世界里，正如伊丽莎白·罗伊特在本月封面故事中所写，“浪费食物有违道德”。大量完好的食物被扔掉，多得令人瞠目——从被食品杂货商拒收的“难看”（但完全能吃）的蔬菜，到被倒进餐馆垃圾桶的大量剩菜。\n\n生产没人吃的食物，白白浪费了种植它所用的水、燃料和其他资源。这使食物浪费成为一个环境问题。事实上，罗伊特写道：“如果食物浪费是一个国家，它将是世界第三大温室气体排放国。”\n\n如果这不好理解，那就把它简化成我冰箱深处那些芝麻菜那样简单的事。迈克·柯廷常常见到我这种芝麻菜的故事——只不过对他来说，更像是12箱快要放坏的捐赠草莓。柯廷是华盛顿特区“DC中央厨房”的首席执行官，这家机构回收食物，把它们做成健康的餐食。去年，它通过接受捐赠、收集那些否则就会烂在地里的有瑕疵的农产品，回收了超过807,500磅食物。那些草莓呢？志愿者会把它们洗净、切好，冷冻或晾干，留着以后做餐食用。\n\n这些办法看似显而易见，可我们常常就是想不到。“每个人都能为减少浪费出一份力，无论是每周采购时不买超出需要的食物，还是请餐馆不要上你不吃的配菜，”柯廷说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-b-1",
+          "paragraphId": "reading-b-4",
+          "sourceText": "Last year it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields.",
+          "displayText": "Last year it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:26"
+          ],
+          "translationZh": "去年，它通过接受捐赠、收集那些否则就会烂在地里的有瑕疵的农产品，回收了超过807,500磅食物。",
+          "analysisZh": "主干是 it recovered more than 807,500 pounds of food：它回收了八十多万磅食物，it 指 DC Central Kitchen。by 后面两个动名词 taking donations 和 collecting blemished produce 由 and 并列，说回收靠什么办法。that otherwise would have rotted in fields 是定语从句，修饰 produce；otherwise 意为“要不是被收走”，would have rotted 是虚拟语气，说这些农产品本来会烂在地里。第26题“没人要的食物”就落在这里。",
+          "underlineRanges": [
+            {
+              "start": 10,
+              "end": 55,
+              "quote": "it recovered more than 807,500 pounds of food"
+            },
+            {
+              "start": 56,
+              "end": 90,
+              "quote": "by taking donations and collecting"
+            },
+            {
+              "start": 116,
+              "end": 158,
+              "quote": "that otherwise would have rotted in fields"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-i:reading-b-2",
+          "paragraphId": "reading-b-5",
+          "sourceText": "Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat",
+          "displayText": "Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:27"
+          ],
+          "translationZh": "每个人都能为减少浪费出一份力，无论是每周采购时不买超出需要的食物，还是请餐馆不要上你不吃的配菜",
+          "analysisZh": "主干是 Everyone can play a part in reducing waste：人人都能为减少浪费出力。后面 whether by … or by … 给出两种做法，两个 by 后各接一个动名词短语：not purchasing more food than necessary（不买超出需要的食物）和 asking restaurants to not include the side dish（请餐馆别上配菜）。than necessary 是 than is necessary 的省略；you won’t eat 是省略关系词的定语从句，修饰 side dish。第27题要的就是第一个 by 后的做法。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 42,
+              "quote": "Everyone can play a part in reducing waste"
+            },
+            {
+              "start": 52,
+              "end": 94,
+              "quote": "by not purchasing more food than necessary"
+            },
+            {
+              "start": 122,
+              "end": 172,
+              "quote": "by asking restaurants to not include the side dish"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-i:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p1",
+              "sourceParagraphIds": [
+                "reading-b-1"
+              ],
+              "start": 0,
+              "end": 127,
+              "quote": "和我们大多数人一样，我尽量留意不浪费食物。那些芝麻菜本来要做一份不错的蔬菜沙拉，给烤鸡晚餐配个菜。可我最后加班到很晚。接着朋友又打电话请我吃晚饭。我把鸡塞进了冷冻室。可几天过去，芝麻菜坏了。更糟的是，我当初不假思索地买得太多了；扔掉的那些足够做六份沙拉。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p2",
+              "sourceParagraphIds": [
+                "reading-b-2"
+              ],
+              "start": 129,
+              "end": 237,
+              "quote": "在一个每年有近8亿人挨饿的世界里，正如伊丽莎白·罗伊特在本月封面故事中所写，“浪费食物有违道德”。大量完好的食物被扔掉，多得令人瞠目——从被食品杂货商拒收的“难看”（但完全能吃）的蔬菜，到被倒进餐馆垃圾桶的大量剩菜。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p3",
+              "sourceParagraphIds": [
+                "reading-b-3"
+              ],
+              "start": 239,
+              "end": 324,
+              "quote": "生产没人吃的食物，白白浪费了种植它所用的水、燃料和其他资源。这使食物浪费成为一个环境问题。事实上，罗伊特写道：“如果食物浪费是一个国家，它将是世界第三大温室气体排放国。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p4",
+              "sourceParagraphIds": [
+                "reading-b-4"
+              ],
+              "start": 326,
+              "end": 527,
+              "quote": "如果这不好理解，那就把它简化成我冰箱深处那些芝麻菜那样简单的事。迈克·柯廷常常见到我这种芝麻菜的故事——只不过对他来说，更像是12箱快要放坏的捐赠草莓。柯廷是华盛顿特区“DC中央厨房”的首席执行官，这家机构回收食物，把它们做成健康的餐食。去年，它通过接受捐赠、收集那些否则就会烂在地里的有瑕疵的农产品，回收了超过807,500磅食物。那些草莓呢？志愿者会把它们洗净、切好，冷冻或晾干，留着以后做餐食用。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p5",
+              "sourceParagraphIds": [
+                "reading-b-5"
+              ],
+              "start": 529,
+              "end": 605,
+              "quote": "这些办法看似显而易见，可我们常常就是想不到。“每个人都能为减少浪费出一份力，无论是每周采购时不买超出需要的食物，还是请餐馆不要上你不吃的配菜，”柯廷说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:24-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-1",
+                "start": 304,
+                "end": 407,
+                "quote": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p1",
+                "start": 95,
+                "end": 127,
+                "quote": "更糟的是，我当初不假思索地买得太多了；扔掉的那些足够做六份沙拉。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:24-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-1",
+                "start": 0,
+                "end": 64,
+                "quote": "Like most of us, I try to be mindful of food that goes to waste."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p1",
+                "start": 0,
+                "end": 21,
+                "quote": "和我们大多数人一样，我尽量留意不浪费食物。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:25-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-3",
+                "start": 93,
+                "end": 140,
+                "quote": "That makes food waste an environmental problem."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p3",
+                "start": 30,
+                "end": 45,
+                "quote": "这使食物浪费成为一个环境问题。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:25-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-3",
+                "start": 195,
+                "end": 266,
+                "quote": "it would be the third largest producer of greenhouse gases in the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p3",
+                "start": 68,
+                "end": 83,
+                "quote": "它将是世界第三大温室气体排放国"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:26-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-4",
+                "start": 236,
+                "end": 345,
+                "quote": "Curtin is CEO of DC Central Kitchen in Washington, D.C., which recovers food and turns it into healthy meals."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p4",
+                "start": 76,
+                "end": 119,
+                "quote": "柯廷是华盛顿特区“DC中央厨房”的首席执行官，这家机构回收食物，把它们做成健康的餐食。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:26-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-4",
+                "start": 405,
+                "end": 504,
+                "quote": "taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p4",
+                "start": 125,
+                "end": 150,
+                "quote": "接受捐赠、收集那些否则就会烂在地里的有瑕疵的农产品"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2022-i:27-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-5",
+                "start": 62,
+                "end": 248,
+                "quote": "Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p5",
+                "start": 23,
+                "end": 70,
+                "quote": "每个人都能为减少浪费出一份力，无论是每周采购时不买超出需要的食物，还是请餐馆不要上你不吃的配菜"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-4",
+                "start": 346,
+                "end": 505,
+                "quote": "Last year it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p4",
+                "start": 119,
+                "end": 167,
+                "quote": "去年，它通过接受捐赠、收集那些否则就会烂在地里的有瑕疵的农产品，回收了超过807,500磅食物。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-b-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2022-i:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "reading-b-5",
+                "start": 62,
+                "end": 248,
+                "quote": "Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-i:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-i:reading-b-p5",
+                "start": 23,
+                "end": 70,
+                "quote": "每个人都能为减少浪费出一份力，无论是每周采购时不买超出需要的食物，还是请餐馆不要上你不吃的配菜"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-i:reading-b-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先讲作者自己因一时疏忽让芝麻菜坏掉的小事，引出食物浪费的话题；再借罗伊特的文章说明浪费有违道德、危害环境；接着以柯廷的机构为例，说明回收食物的做法；最后转述柯廷的建议，号召人人减少浪费。",
+        "paragraphs": [
+          {
+            "paragraphId": "reading-b-1",
+            "summary": "作者本想节约，却因加班赴约、又买得太多，让芝麻菜坏掉扔了",
+            "function": "用亲身经历引出话题：人会不经意地浪费食物。"
+          },
+          {
+            "paragraphId": "reading-b-2",
+            "summary": "近8亿人挨饿，大量完好的食物却被扔掉，有违道德",
+            "function": "借罗伊特的话指出浪费食物的道德问题。"
+          },
+          {
+            "paragraphId": "reading-b-3",
+            "summary": "浪费食物也浪费了水和燃料等资源，是环境问题",
+            "function": "进一步说明浪费食物危害环境。"
+          },
+          {
+            "paragraphId": "reading-b-4",
+            "summary": "柯廷的机构回收捐赠和有瑕疵的食物，做成健康餐食",
+            "function": "举实例说明怎样减少食物浪费。"
+          },
+          {
+            "paragraphId": "reading-b-5",
+            "summary": "柯廷建议：别多买，别点不吃的配菜",
+            "function": "收尾，给出人人可做的减少浪费的办法。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-i:24": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "读完作者芝麻菜放坏的经过，看这段亲身经历要说明什么。",
+      "stemTranslationZh": "作者讲芝麻菜的故事想说明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读完这件事，看作者的反省",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "我们很少关注食物浪费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Like most of us, I try to be mindful of food that goes to waste.",
+            "sourceHighlight": "try to be mindful",
+            "optionText": "We pay little attention to food waste.",
+            "optionHighlight": "pay little attention",
+            "explanation": "作者一开头就说自己和大多数人一样，尽量留意别浪费（try to be mindful）；这次浪费是一时疏忽，不是平时不在意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-1",
+              "quote": "Like most of us, I try to be mindful of food that goes to waste.",
+              "anchor": "平时尽量留意"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "我们有时会无意中浪费食物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-b-1",
+              "quote": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+              "anchor": "不假思索买太多"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-b-1",
+              "quote": "Like most of us, I try to be mindful of food that goes to waste.",
+              "anchor": "平时尽量留意"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "我们浪费的蔬菜比肉多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "We waste more vegetables than meat.",
+            "explanation": "故事里坏掉的是芝麻菜，鸡肉放进了冷冻室（freezer），这只是作者一次的经历；原文没比较人们浪费蔬菜和肉哪个多。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "我们浪费食物是有正当理由的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+            "sourceHighlight": "unthinkingly",
+            "optionText": "We have good reasons for wasting food.",
+            "optionHighlight": "good reasons",
+            "explanation": "加班、朋友邀约只是菜放坏的经过；作者接着用“更糟的是”（Even worse）检讨自己不假思索买太多，并不认为浪费有理。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-1",
+              "quote": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+              "anchor": "作者自我检讨"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "arugula",
+          "targetText": "The arugula (芝麻菜)was to make a nice green salad, rounding out a roast chicken dinner.",
+          "targetParagraphId": "reading-b-1",
+          "answerText": "I had unthinkingly bought way too much",
+          "bridgeZh": "本想做沙拉，却因加班赴约顾不上，菜放坏才发现买多了",
+          "note": "题干 arugula 原词出现在故事开头这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "We waste food unintentionally at times.",
+          "targetText": "I had unthinkingly bought way too much",
+          "targetParagraphId": "reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项的“无意中”（unintentionally）就是原文的“不假思索地”（unthinkingly）；“有时”落在[[reading-b-1|Like most of us]]：作者平时也尽量留意（try to be mindful），这次还是浪费了。可见连有心节约的人也会不经意地浪费，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在文中找出食物浪费会带来什么后果。",
+      "stemTranslationZh": "根据本文，食物浪费的一个后果是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "道德滑坡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "moral",
+            "optionText": "Moral",
+            "matchType": "exact",
+            "relationNote": "moral 出自[[reading-b-2]]罗伊特的话，说浪费食物有违道德（goes against the moral grain），这是对浪费的评价，不是说浪费让道德滑坡。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-2",
+              "quote": "“food waste goes against the moral grain,”",
+              "anchor": "浪费有违道德"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "环境危害。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-b-3",
+              "quote": "That makes food waste an environmental problem.",
+              "anchor": "浪费是环境问题"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-b-3",
+              "quote": "it would be the third largest producer of greenhouse gases in the world",
+              "anchor": "第三大温室气体排放者"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "能源短缺。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Producing food that no one eats wastes the water, fuel, and other resources used to grow it.",
+            "sourceHighlight": "wastes the water, fuel",
+            "optionText": "Energy shortage.",
+            "optionHighlight": "shortage",
+            "explanation": "原文只说生产没人吃的食物白白耗掉了水和燃料（fuel），没说因此造成能源短缺。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-3",
+              "quote": "Producing food that no one eats wastes the water, fuel, and other resources used to grow it.",
+              "anchor": "浪费水和燃料"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "全球性饥荒。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In a world where nearly 800 million people a year go hungry",
+            "sourceEntity": "nearly 800 million people a year go hungry",
+            "optionText": "Worldwide starvation.",
+            "optionEntity": "Worldwide starvation",
+            "explanation": "近8亿人挨饿（go hungry）是作者谈浪费时交代的背景，用来反衬浪费有违道德；原文没说挨饿是浪费造成的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-2",
+              "quote": "In a world where nearly 800 million people a year go hungry",
+              "anchor": "近8亿人挨饿"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "consequence of food waste",
+          "sourceZh": "食物浪费的后果",
+          "targetText": "That makes food waste an environmental problem.",
+          "targetParagraphId": "reading-b-3",
+          "targetCue": "makes food waste",
+          "targetCueZh": "使食物浪费成为",
+          "answerText": "an environmental problem",
+          "note": "题干问浪费带来的后果，原文用 That makes food waste … 说浪费造成了什么。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Environmental harm.",
+          "targetText": "an environmental problem",
+          "targetParagraphId": "reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项的“环境危害”（Environmental harm）就是原文的“环境问题”（an environmental problem）；紧接着罗伊特还说浪费若是一个国家，就是第三大温室气体排放国（greenhouse gases），选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出柯廷的机构平时做什么。",
+      "stemTranslationZh": "柯廷的公司是做什么的？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 which 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它生产厨房设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Kitchen",
+            "optionText": "kitchen",
+            "matchType": "exact",
+            "relationNote": "kitchen 出自机构名 DC Central Kitchen，这里的“厨房”是它自己做饭的地方；原文说它回收食物做成餐食，没说生产厨房设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-4",
+              "quote": "Curtin is CEO of DC Central Kitchen in Washington, D.C., which recovers food and turns it into healthy meals.",
+              "anchor": "机构名里的 Kitchen"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它把烂掉的芝麻菜变成清洁燃料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "arugula",
+            "optionText": "arugula",
+            "matchType": "exact",
+            "relationNote": "arugula 是作者自己冰箱里放坏的那些菜，fuel 出自[[reading-b-3]]说种粮耗掉的燃料；柯廷的机构把食物做成餐食，不是变成燃料。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-1",
+              "quote": "But as days passed, the arugula went bad.",
+              "anchor": "作者的芝麻菜坏了"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它帮当地农民种水果。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields",
+            "sourceEntity": "collecting blemished (有瑕疵的) produce",
+            "optionText": "It helps local farmers grow fruits.",
+            "optionEntity": "helps local farmers grow fruits",
+            "explanation": "原文提到地里（in fields）和草莓（strawberries），但机构做的是收走地里没人要的瑕疵农产品，不是帮农民种水果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-4",
+              "quote": "Last year it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields.",
+              "anchor": "收集瑕疵农产品"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它用没人要的食物做成餐食。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-b-4",
+              "quote": "Curtin is CEO of DC Central Kitchen in Washington, D.C., which recovers food and turns it into healthy meals.",
+              "anchor": "回收食物做成健康餐"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "reading-b-4",
+              "quote": "taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields",
+              "anchor": "捐赠和瑕疵农产品"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Curtin’s company",
+          "sourceZh": "柯廷的公司",
+          "targetText": "Curtin is CEO of DC Central Kitchen in Washington, D.C., which recovers food and turns it into healthy meals.",
+          "targetParagraphId": "reading-b-4",
+          "targetCue": "DC Central Kitchen",
+          "targetCueZh": "中央厨房这家机构",
+          "answerText": "recovers food and turns it into healthy meals",
+          "note": "题干 Curtin’s company 指他担任首席执行官的 DC Central Kitchen。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "It makes meals out of unwanted food.",
+          "targetText": "recovers food and turns it into healthy meals",
+          "targetParagraphId": "reading-b-4",
+          "relationType": "paraphrase",
+          "note": "“做成餐食”（makes meals）对应“做成健康餐”（turns it into healthy meals）；“没人要的食物”（unwanted food）落在[[reading-b-4|Last year it recovered]]：接受的捐赠和本会烂在地里的瑕疵农产品（blemished produce），选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从柯廷的话里找出他建议人们怎样减少浪费。",
+      "stemTranslationZh": "柯廷建议人们做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 by 后的两种做法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "只买需要的东西。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "reading-b-5",
+              "quote": "Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat",
+              "anchor": "柯廷的建议"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "减少食物消费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "reducing",
+            "optionText": "Reduce",
+            "matchType": "wordFamily",
+            "relationNote": "Reduce 借自原文的 reducing，可原文要减少的是浪费（reducing waste）；柯廷没让人少吃，只让人别多买、别点不吃的配菜。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-5",
+              "quote": "Everyone can play a part in reducing waste",
+              "anchor": "减少浪费"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "每周购物一次。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "weekly",
+            "optionText": "week",
+            "matchType": "wordFamily",
+            "relationNote": "week 借自 weekly shopping，原文只是说“每周采购时”别多买，讲的是买多少，没要求一周只去一次。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-5",
+              "quote": "not purchasing more food than necessary in your weekly shopping",
+              "anchor": "每周采购时"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "少去餐馆吃饭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "restaurants",
+            "optionText": "restaurants",
+            "matchType": "exact",
+            "relationNote": "restaurants 出自后一种做法，是请餐馆别上你不吃的配菜（side dish），并没有劝人少下馆子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "reading-b-5",
+              "quote": "by asking restaurants to not include the side dish you won’t eat",
+              "anchor": "请餐馆别上配菜"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Curtin",
+          "targetText": "“Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat,” Curtin says.",
+          "targetParagraphId": "reading-b-5",
+          "answerText": "not purchasing more food than necessary",
+          "note": "题干 Curtin 原词出现在这句引语末尾，他的建议就在引号里。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Buy only what is needed.",
+          "targetText": "not purchasing more food than necessary",
+          "targetParagraphId": "reading-b-5",
+          "relationType": "paraphrase",
+          "note": "选项的“只买需要的”（Buy only what is needed）就是原文的“不买超出需要的食物”（not purchasing more food than necessary），选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

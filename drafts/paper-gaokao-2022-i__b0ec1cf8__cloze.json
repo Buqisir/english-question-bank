@@ -1,0 +1,1949 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:cloze": {
+      "overview": "作者回忆一家人十年来的露营趣事：溪边拴着小儿子怕他落水，结果掉进小溪的是三岁的孩子；湖上遇风暴、马达熄火被困，幸得钓鱼人拖回。如今全家仍满怀期待下一次露营。",
+      "fullTranslationZh": "过去十年里，我和丈夫、孩子们有过许多美好的露营经历。\n我们的一些回忆很好笑，尤其是孩子们还小的那几年。有一次，我们在查尔克溪边露营。我担心十五个月大的儿子会掉进小溪，就在他腰上系了根绳子，让他待在我们的营地附近。这只维持了大约十分钟。他很不舒服，哭声让整个营地的人都知道了。于是我不再绑着他，只是一直紧盯着他。这个办法奏效了——他最终没有掉进小溪。不过，我那三岁的孩子却掉进去了。\n还有一次，我们在瓦列西托湖租了条船。我们出发时天空晴朗，可山里的暴风雨来得很快，这一场很快就打断了我们平静的晨间游湖。风越刮越大，雷声隆隆。丈夫停下钓鱼，去发动马达。没反应。他又试了一次，还是不走运。马达熄了火，我们被困在湖中央。正当我们全家无助地坐在那里时，一个钓鱼的人把船开了过来，扔给我们一根绳子，把我们拖了回去。我们安全了。\n如今，每年丈夫把露营车从车库开出来的时候，我们都满怀兴奋，想着下一次会经历怎样的露营乐趣和冒险。",
+      "mainLine": {
+        "theme": {
+          "text": "露营中的窘事和险情回头看都成了趣事，全家年年期待新的 camping fun。",
+          "quote": "camping fun"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "cloze-1",
+            "text": "一家人十年来有过许多美好的露营经历。"
+          },
+          {
+            "paragraphId": "cloze-2",
+            "text": "溪边怕小儿子落水，绑绳不成改为紧盯，落水的却是三岁的孩子。"
+          },
+          {
+            "paragraphId": "cloze-3",
+            "text": "湖上遇风暴、马达熄火被困，幸得钓鱼人拖回脱险。"
+          },
+          {
+            "paragraphId": "cloze-4",
+            "text": "如今每年出发前全家都满怀兴奋，期待新的乐趣和冒险。"
+          }
+        ],
+        "emotion": "怀念→担心→无助→庆幸→兴奋"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "group:paper-gaokao-2022-i:cloze:sentence:1",
+          "paragraphId": "cloze-3",
+          "sourceText": "The sky was clear when we __47__, but storms move in fast in the mountains, and this one quickly __48__ our peaceful morning trip.",
+          "displayText": "The sky was clear when we headed off, but storms move in fast in the mountains, and this one quickly interrupted our peaceful morning trip.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:47",
+            "question:paper-gaokao-2022-i:48"
+          ],
+          "translationZh": "我们出发时天空晴朗，可山里的暴风雨来得很快，这一场很快就打断了我们平静的晨间游湖。",
+          "analysisZh": "先看 but 前后两半：前半主干是 The sky was clear，when 从句交代晴朗的时刻是动身出发时；but 后先说山里风暴来得快这一普遍情况，再用 and 接 this one（这一场风暴）打断了行程。前后由晴转暴，正是故事的转折。",
+          "underlineRanges": [
+            {
+              "start": 18,
+              "end": 36,
+              "quote": "when we headed off"
+            },
+            {
+              "start": 38,
+              "end": 61,
+              "quote": "but storms move in fast"
+            },
+            {
+              "start": 84,
+              "end": 112,
+              "quote": "this one quickly interrupted"
+            }
+          ]
+        },
+        {
+          "sentenceId": "group:paper-gaokao-2022-i:cloze:sentence:2",
+          "paragraphId": "cloze-4",
+          "sourceText": "Now, every year when my husband pulls our camper out of the garage, we are filled with a sense of __54__, wondering what camping fun and __55__ we will experience next.",
+          "displayText": "Now, every year when my husband pulls our camper out of the garage, we are filled with a sense of excitement, wondering what camping fun and adventure we will experience next.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:54",
+            "question:paper-gaokao-2022-i:55"
+          ],
+          "translationZh": "如今，每年丈夫把露营车从车库开出来的时候，我们都满怀兴奋，想着下一次会经历怎样的露营乐趣和冒险。",
+          "analysisZh": "主干是 we are filled with a sense of excitement（我们满怀兴奋）。前面 every year when 从句说这种心情每年在什么时候出现；后面 wondering 引出兴奋时在想的事，what 引导的宾语从句里 camping fun and adventure 是 experience 的宾语，被提到了从句开头。",
+          "underlineRanges": [
+            {
+              "start": 5,
+              "end": 20,
+              "quote": "every year when"
+            },
+            {
+              "start": 68,
+              "end": 108,
+              "quote": "we are filled with a sense of excitement"
+            },
+            {
+              "start": 110,
+              "end": 150,
+              "quote": "wondering what camping fun and adventure"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2022-i:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2022-i:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh:cloze-1",
+              "sourceParagraphIds": [
+                "cloze-1"
+              ],
+              "start": 0,
+              "end": 26,
+              "quote": "过去十年里，我和丈夫、孩子们有过许多美好的露营经历。"
+            },
+            {
+              "paragraphId": "zh:cloze-2",
+              "sourceParagraphIds": [
+                "cloze-2"
+              ],
+              "start": 27,
+              "end": 190,
+              "quote": "我们的一些回忆很好笑，尤其是孩子们还小的那几年。有一次，我们在查尔克溪边露营。我担心十五个月大的儿子会掉进小溪，就在他腰上系了根绳子，让他待在我们的营地附近。这只维持了大约十分钟。他很不舒服，哭声让整个营地的人都知道了。于是我不再绑着他，只是一直紧盯着他。这个办法奏效了——他最终没有掉进小溪。不过，我那三岁的孩子却掉进去了。"
+            },
+            {
+              "paragraphId": "zh:cloze-3",
+              "sourceParagraphIds": [
+                "cloze-3"
+              ],
+              "start": 191,
+              "end": 357,
+              "quote": "还有一次，我们在瓦列西托湖租了条船。我们出发时天空晴朗，可山里的暴风雨来得很快，这一场很快就打断了我们平静的晨间游湖。风越刮越大，雷声隆隆。丈夫停下钓鱼，去发动马达。没反应。他又试了一次，还是不走运。马达熄了火，我们被困在湖中央。正当我们全家无助地坐在那里时，一个钓鱼的人把船开了过来，扔给我们一根绳子，把我们拖了回去。我们安全了。"
+            },
+            {
+              "paragraphId": "zh:cloze-4",
+              "sourceParagraphIds": [
+                "cloze-4"
+              ],
+              "start": 358,
+              "end": 406,
+              "quote": "如今，每年丈夫把露营车从车库开出来的时候，我们都满怀兴奋，想着下一次会经历怎样的露营乐趣和冒险。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:cloze-2",
+            "paragraphId": "cloze-2",
+            "text": "Some of our memories are funny, especially from the early years when our children were little. Once, we camped along Chalk Creek. I was worried that our 15-month-old boy would fall into the creek (小溪). I tied a rope around his waist to keep him near to our spot. That lasted about ten minutes. He was uncomfortable, and his crying let the whole campground know it. So instead of tying him up, I just kept a close eye on him. It worked — he didn’t end up in the creek. My three-year-old, however, did."
+          },
+          {
+            "textId": "completed:cloze-3",
+            "paragraphId": "cloze-3",
+            "text": "Another time, we rented a boat in Vallecito Lake. The sky was clear when we headed off, but storms move in fast in the mountains, and this one quickly interrupted our peaceful morning trip. The wind picked up and thunder rolled. My husband stopped fishing to start the motor. Nothing. He tried again. No luck. We were stuck in the middle of the lake with a dead motor. As we all sat there helplessly, a fisherman pulled up, threw us a rope and towed (拖) us back. We were safe."
+          },
+          {
+            "textId": "completed:cloze-4",
+            "paragraphId": "cloze-4",
+            "text": "Now, every year when my husband pulls our camper out of the garage, we are filled with a sense of excitement, wondering what camping fun and adventure we will experience next."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-1",
+                "start": 50,
+                "end": 69,
+                "quote": "camping experiences"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 41,
+                "end": 61,
+                "quote": "from the early years"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-1",
+                "start": 21,
+                "end": 25,
+                "quote": "露营经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:41"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-2",
+                "paragraphId": "cloze-2",
+                "start": 12,
+                "end": 20,
+                "quote": "memories"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 5,
+                "end": 7,
+                "quote": "回忆"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 250,
+                "end": 258,
+                "quote": "our spot"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 325,
+                "end": 345,
+                "quote": "the whole campground"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 99,
+                "end": 103,
+                "quote": "整个营地"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:42"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-2",
+                "paragraphId": "cloze-2",
+                "start": 104,
+                "end": 110,
+                "quote": "camped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 36,
+                "end": 38,
+                "quote": "露营"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 167,
+                "end": 192,
+                "quote": "would fall into the creek"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 230,
+                "end": 246,
+                "quote": "to keep him near"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 50,
+                "end": 55,
+                "quote": "会掉进小溪"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:43"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-2",
+                "paragraphId": "cloze-2",
+                "start": 136,
+                "end": 143,
+                "quote": "worried"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 40,
+                "end": 42,
+                "quote": "担心"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 310,
+                "end": 320,
+                "quote": "his crying"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 325,
+                "end": 353,
+                "quote": "the whole campground know it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 96,
+                "end": 98,
+                "quote": "哭声"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:44"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-2",
+                "paragraphId": "cloze-2",
+                "start": 301,
+                "end": 314,
+                "quote": "uncomfortable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 91,
+                "end": 95,
+                "quote": "很不舒服"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 272,
+                "end": 289,
+                "quote": "about ten minutes"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 379,
+                "end": 409,
+                "quote": "I just kept a close eye on him"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 119,
+                "end": 127,
+                "quote": "只是一直紧盯着他"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:45"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-2",
+                "paragraphId": "cloze-2",
+                "start": 368,
+                "end": 378,
+                "quote": "instead of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 113,
+                "end": 115,
+                "quote": "不再"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 386,
+                "end": 409,
+                "quote": "kept a close eye on him"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-2",
+                "start": 423,
+                "end": 452,
+                "quote": "he didn’t end up in the creek"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 137,
+                "end": 146,
+                "quote": "他最终没有掉进小溪"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:46"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-2",
+                "paragraphId": "cloze-2",
+                "start": 428,
+                "end": 434,
+                "quote": "worked"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-2",
+                "start": 132,
+                "end": 135,
+                "quote": "奏效了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 17,
+                "end": 30,
+                "quote": "rented a boat"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 154,
+                "end": 179,
+                "quote": "our peaceful morning trip"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 13,
+                "end": 17,
+                "quote": "租了条船"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:47"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 76,
+                "end": 86,
+                "quote": "headed off"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 20,
+                "end": 22,
+                "quote": "出发"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 84,
+                "end": 107,
+                "quote": "but storms move in fast"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 154,
+                "end": 179,
+                "quote": "our peaceful morning trip"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 29,
+                "end": 39,
+                "quote": "山里的暴风雨来得很快"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:48"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 151,
+                "end": 162,
+                "quote": "interrupted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 46,
+                "end": 49,
+                "quote": "打断了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 88,
+                "end": 94,
+                "quote": "storms"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 206,
+                "end": 220,
+                "quote": "thunder rolled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 65,
+                "end": 69,
+                "quote": "雷声隆隆"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:49"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 194,
+                "end": 198,
+                "quote": "wind"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 33,
+                "end": 34,
+                "quote": "风"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 279,
+                "end": 293,
+                "quote": "He tried again"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 351,
+                "end": 363,
+                "quote": "a dead motor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 87,
+                "end": 93,
+                "quote": "他又试了一次"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:50"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 259,
+                "end": 264,
+                "quote": "start"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 78,
+                "end": 80,
+                "quote": "发动"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 279,
+                "end": 293,
+                "quote": "He tried again"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 351,
+                "end": 363,
+                "quote": "a dead motor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 87,
+                "end": 93,
+                "quote": "他又试了一次"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:51"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 304,
+                "end": 308,
+                "quote": "luck"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 94,
+                "end": 99,
+                "quote": "还是不走运"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 314,
+                "end": 345,
+                "quote": "stuck in the middle of the lake"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 393,
+                "end": 404,
+                "quote": "a fisherman"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 108,
+                "end": 114,
+                "quote": "被困在湖中央"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:52"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 389,
+                "end": 399,
+                "quote": "helplessly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 121,
+                "end": 124,
+                "quote": "无助地"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 306,
+                "end": 319,
+                "quote": "We were stuck"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 416,
+                "end": 431,
+                "quote": "threw us a rope"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 152,
+                "end": 159,
+                "quote": "把我们拖了回去"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:53"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 471,
+                "end": 475,
+                "quote": "safe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 162,
+                "end": 165,
+                "quote": "安全了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-4",
+                "start": 106,
+                "end": 132,
+                "quote": "wondering what camping fun"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-4",
+                "start": 29,
+                "end": 44,
+                "quote": "想着下一次会经历怎样的露营乐趣"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:54"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-4",
+                "paragraphId": "cloze-4",
+                "start": 98,
+                "end": 108,
+                "quote": "excitement"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-4",
+                "start": 24,
+                "end": 28,
+                "quote": "满怀兴奋"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:blank:paper-gaokao-2022-i:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-4",
+                "start": 121,
+                "end": 132,
+                "quote": "camping fun"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "cloze-3",
+                "start": 314,
+                "end": 345,
+                "quote": "stuck in the middle of the lake"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-4",
+                "start": 40,
+                "end": 44,
+                "quote": "露营乐趣"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:blank:paper-gaokao-2022-i:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:55"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-4",
+                "paragraphId": "cloze-4",
+                "start": 141,
+                "end": 150,
+                "quote": "adventure"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-4",
+                "start": 45,
+                "end": 47,
+                "quote": "冒险"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2022-i:cloze:sentence:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:47",
+              "question:paper-gaokao-2022-i:48"
+            ],
+            "selectedSentenceId": "group:paper-gaokao-2022-i:cloze:sentence:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 68,
+                "end": 86,
+                "quote": "when we headed off"
+              },
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 88,
+                "end": 111,
+                "quote": "but storms move in fast"
+              },
+              {
+                "textId": "completed:cloze-3",
+                "paragraphId": "cloze-3",
+                "start": 134,
+                "end": 162,
+                "quote": "this one quickly interrupted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-3",
+                "start": 18,
+                "end": 59,
+                "quote": "我们出发时天空晴朗，可山里的暴风雨来得很快，这一场很快就打断了我们平静的晨间游湖。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-gaokao-2022-i:cloze:sentence:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:54",
+              "question:paper-gaokao-2022-i:55"
+            ],
+            "selectedSentenceId": "group:paper-gaokao-2022-i:cloze:sentence:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:cloze-4",
+                "paragraphId": "cloze-4",
+                "start": 5,
+                "end": 20,
+                "quote": "every year when"
+              },
+              {
+                "textId": "completed:cloze-4",
+                "paragraphId": "cloze-4",
+                "start": 68,
+                "end": 108,
+                "quote": "we are filled with a sense of excitement"
+              },
+              {
+                "textId": "completed:cloze-4",
+                "paragraphId": "cloze-4",
+                "start": 110,
+                "end": 150,
+                "quote": "wondering what camping fun and adventure"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:cloze",
+                "paragraphId": "zh:cloze-4",
+                "start": 0,
+                "end": 48,
+                "quote": "如今，每年丈夫把露营车从车库开出来的时候，我们都满怀兴奋，想着下一次会经历怎样的露营乐趣和冒险。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "怀念→担心→无助→庆幸→兴奋"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-i:41": {
+      "blankId": "blank:paper-gaokao-2022-i:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者开始回顾露营往事，这里要一个指过去经历留在心里的东西的名词。",
+      "find": {
+        "check": "echo",
+        "text": "首段说 camping experiences over the past ten years，本句又说 from the early years，讲的是往事，用 memories。",
+        "quotes": [
+          "camping experiences",
+          "from the early years"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "回忆",
+        "reason": "作者开始回顾露营往事，这里要一个指过去经历留在心里的东西的名词。名词看复现：首段说 camping experiences over the past ten years，本句又说 from the early years，讲的是往事，用 memories。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ideas",
+          "meaning": "想法；后面讲的是 from the early years 真实发生过的事，不是想法。",
+          "quote": "from the early years"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "jokes",
+          "meaning": "笑话；后面讲的是在 Chalk Creek 边亲身经历的事，不是别人讲的笑话。",
+          "quote": "Chalk Creek"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "discoveries",
+          "meaning": "发现；接下来讲的是怕孩子 fall into the creek 的往事，不是新发现了什么。",
+          "quote": "fall into the creek"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "are funny",
+          "signalSide": "context-after",
+          "targetText": "memories are funny",
+          "relation": "中文：往事回想起来好笑，主语是回忆。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "camping experiences",
+          "signalSide": "context-before",
+          "relation": "中文：首段的露营经历，到这里成了回忆。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:42": {
+      "blankId": "blank:paper-gaokao-2022-i:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "交代这次在 Chalk Creek 边做的是什么，这里要一个说明全家活动的动词。",
+      "find": {
+        "check": "echo",
+        "text": "后文的 our spot 和 the whole campground 说明全家在溪边扎营，全文讲的又都是露营，用 camped。",
+        "quotes": [
+          "our spot",
+          "the whole campground"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "露营",
+        "reason": "交代这次在 Chalk Creek 边做的是什么，这里要一个说明全家活动的动词。动词看复现：后文的 our spot 和 the whole campground 说明全家在溪边扎营，全文讲的又都是露营，用 camped。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "drove",
+          "meaning": "开车；作者在 our spot 边给孩子系绳子，全家是停下来扎营，不是一路开车。",
+          "quote": "our spot"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "walked",
+          "meaning": "步行；作者要 keep him near to our spot，全家守在一处营地，不是沿溪走。",
+          "quote": "near to our spot"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cycled",
+          "meaning": "骑车；15-month-old boy 被拴在营地旁，全家是住在溪边，不是骑车经过。",
+          "quote": "15-month-old boy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "along Chalk Creek",
+          "signalSide": "context-after",
+          "targetText": "camped along Chalk Creek",
+          "relation": "中文：沿着溪边扎营。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the whole campground",
+          "signalSide": "context-after",
+          "relation": "中文：营地一词回应露营。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:43": {
+      "blankId": "blank:paper-gaokao-2022-i:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "孩子还小，溪水就在旁边，这里要作者怕出事的心情，引出下面系绳子的举动。",
+      "find": {
+        "check": "affect",
+        "text": "后面 that our 15-month-old boy would fall into the creek 是怕发生的事，接着她系绳 to keep him near，是担心。",
+        "quotes": [
+          "would fall into the creek",
+          "to keep him near"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "担心的",
+        "reason": "孩子还小，溪水就在旁边，这里要作者怕出事的心情，引出下面系绳子的举动。形容词看情感：后面 that our 15-month-old boy would fall into the creek 是怕发生的事，接着她系绳 to keep him near，是担心。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "annoyed",
+          "meaning": "恼火的；孩子还没 fall into the creek，作者是怕出事，谈不上恼火。",
+          "quote": "fall into the creek"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "surprised",
+          "meaning": "惊讶的；would fall 说的是可能发生的事，惊讶针对的是已经发生的事。",
+          "quote": "would fall"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "disappointed",
+          "meaning": "失望的；作者随即 tied a rope 预防孩子落水，这是担心出事，不是失望。",
+          "quote": "tied a rope"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "would fall into the creek",
+          "signalSide": "context-after",
+          "relation": "中文：怕孩子掉进小溪，心情是担忧。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I was",
+          "signalSide": "context-before",
+          "targetText": "I was worried that",
+          "relation": "中文：be worried that 接担心的内容。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2022-i:44": {
+      "blankId": "blank:paper-gaokao-2022-i:44",
+      "blankNo": 44,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "孩子被绳子拴住，这里要说他被拴着的感受，而且是不好受的。",
+      "find": {
+        "check": "affect",
+        "text": "后面 his crying let the whole campground know it，孩子哭得全营地都听见，说明他被拴着很难受。",
+        "quotes": [
+          "his crying",
+          "the whole campground know it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "不舒服的",
+        "meaning": "被拴着很难受",
+        "reason": "孩子被绳子拴住，这里要说他被拴着的感受，而且是不好受的。形容词看情感：后面 his crying let the whole campground know it，孩子哭得全营地都听见，说明他被拴着很难受。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unhurt",
+          "meaning": "没受伤的；his crying 让全营地都听见，说的是他难受，不是平安无事。",
+          "quote": "his crying"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "unfortunate",
+          "meaning": "不幸的；指遭遇倒霉，而 his crying 传出来的是他被拴着的切身感受。",
+          "quote": "his crying"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unafraid",
+          "meaning": "不害怕的；他哭得 the whole campground 都知道，和不害怕的平静样子对不上。",
+          "quote": "the whole campground"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "his crying",
+          "signalSide": "context-after",
+          "relation": "中文：哭声表明孩子不好受。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "He was",
+          "signalSide": "context-before",
+          "targetText": "He was uncomfortable",
+          "relation": "中文：系动词 was 后接描述感受的形容词。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2022-i:45": {
+      "blankId": "blank:paper-gaokao-2022-i:45",
+      "blankNo": 45,
+      "pos": "phrase",
+      "role": "main",
+      "context": "绑绳子不行，作者换了个办法，这里要一个表示用后者替换前者的词组。",
+      "find": {
+        "check": "logic",
+        "text": "绑绳只撑了 about ten minutes，后面 I just kept a close eye on him，是不绑了改为盯着，用 instead of。",
+        "quotes": [
+          "about ten minutes",
+          "I just kept a close eye on him"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "代替，而不是",
+        "reason": "绑绳子不行，作者换了个办法，这里要一个表示用后者替换前者的词组。词组看逻辑：绑绳只撑了 about ten minutes，后面 I just kept a close eye on him，是不绑了改为盯着，用 instead of。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "due to",
+          "meaning": "由于；tying him up 不是她 kept a close eye on him 的原因，前后是换办法。",
+          "quote": "kept a close eye on him"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "apart from",
+          "meaning": "除了……之外还；她是停止 tying him up 改为盯着，不是两样一起做。",
+          "quote": "tying him up"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "as for",
+          "meaning": "至于；用来引出新话题，而 tying him up 和盯着是看孩子的两种办法。",
+          "quote": "tying him up"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "So",
+          "signalSide": "context-before",
+          "relation": "中文：So 表示因为孩子哭闹，作者改了办法。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "tying him up",
+          "signalSide": "context-after",
+          "targetText": "instead of tying him up",
+          "relation": "中文：instead of 后接动名词 tying。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:46": {
+      "blankId": "blank:paper-gaokao-2022-i:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "main",
+      "context": "盯着孩子的新办法结果如何，这里要说办法起了作用。",
+      "find": {
+        "check": "collocation",
+        "text": "主语 It 指上句 kept a close eye on him 这个办法，破折号后 he didn’t end up in the creek 是它的效果。",
+        "quotes": [
+          "kept a close eye on him",
+          "he didn’t end up in the creek"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "奏效",
+        "reason": "盯着孩子的新办法结果如何，这里要说办法起了作用。动词看搭配：主语 It 指上句 kept a close eye on him 这个办法，破折号后 he didn’t end up in the creek 是它的效果。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "happened",
+          "meaning": "发生；It 指盯孩子的办法，办法不能说发生，破折号后 he didn’t end up in the creek 讲的是效果。",
+          "quote": "he didn’t end up in the creek"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mattered",
+          "meaning": "要紧；破折号后 he didn’t end up in the creek 说办法管用，不是在说它重不重要。",
+          "quote": "he didn’t end up in the creek"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "changed",
+          "meaning": "改变；作者一直 kept a close eye on him，办法没变，后面讲的是它的效果。",
+          "quote": "kept a close eye on him"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It",
+          "signalSide": "context-before",
+          "targetText": "It worked",
+          "relation": "中文：It 指盯着孩子的办法，办法管用用 work。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he didn’t end up in the creek",
+          "signalSide": "context-after",
+          "relation": "中文：孩子没掉进小溪，正是办法奏效的结果。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:47": {
+      "blankId": "blank:paper-gaokao-2022-i:47",
+      "blankNo": 47,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "交代天还晴的那个时刻，这里要全家开始游湖、动身出发的意思。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前句 rented a boat，后面说 our peaceful morning trip 被打断，when 指的是他们划船出发的时候。",
+        "quotes": [
+          "rented a boat",
+          "our peaceful morning trip"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "出发",
+        "reason": "交代天还晴的那个时刻，这里要全家开始游湖、动身出发的意思。词组看语境义：前句 rented a boat，后面说 our peaceful morning trip 被打断，when 指的是他们划船出发的时候。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "signed up",
+          "meaning": "报名；他们是自己 rented a boat 去游湖，不是报名参加什么活动。",
+          "quote": "rented a boat"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "calmed down",
+          "meaning": "平静下来；当时 The sky was clear，一切顺利，人用不着平静下来。",
+          "quote": "The sky was clear"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "checked out",
+          "meaning": "退房离开；他们刚 rented a boat 开始 morning trip，不是办手续离开。",
+          "quote": "rented a boat"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "when we",
+          "signalSide": "context-before",
+          "targetText": "when we headed off",
+          "relation": "中文：主语 we 发出动身出发的动作。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "morning trip",
+          "signalSide": "context-after",
+          "relation": "中文：晨间游湖说明他们刚出发不久。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2022-i:48": {
+      "blankId": "blank:paper-gaokao-2022-i:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "晴天里风暴突然来了，这是故事急转的地方，要说风暴破坏了平静的游湖。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 but storms move in fast，宾语是 our peaceful morning trip，风暴来了把平静的行程打断。",
+        "quotes": [
+          "but storms move in fast",
+          "our peaceful morning trip"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "打断",
+        "reason": "晴天里风暴突然来了，这是故事急转的地方，要说风暴破坏了平静的游湖。动词看搭配：前面 but storms move in fast，宾语是 our peaceful morning trip，风暴来了把平静的行程打断。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "arranged",
+          "meaning": "安排；行程是全家 rented a boat 自己定的，来势很快的风暴只会打乱它。",
+          "quote": "rented a boat"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "completed",
+          "meaning": "完成；后面全家 were stuck in the middle of the lake，行程没能完成。",
+          "quote": "were stuck in the middle of the lake"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recorded",
+          "meaning": "记录；风暴不会记录行程，接下来 thunder rolled，它是来打乱行程的。",
+          "quote": "thunder rolled"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "our peaceful morning trip",
+          "signalSide": "context-after",
+          "targetText": "interrupted our peaceful morning trip",
+          "relation": "中文：风暴打断平静的行程。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but",
+          "signalSide": "context-before",
+          "relation": "中文：but 从晴朗转到风暴。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:49": {
+      "blankId": "blank:paper-gaokao-2022-i:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "detail",
+      "context": "风暴来临的景象，这里要一个风暴里会越来越猛的天气现象。",
+      "find": {
+        "check": "topic",
+        "text": "这里写的是 storms 来袭，空格和 thunder rolled 并列，用 picked up 越刮越大的只能是风。",
+        "quotes": [
+          "storms",
+          "thunder rolled"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "风",
+        "reason": "风暴来临的景象，这里要一个风暴里会越来越猛的天气现象。名词看话题：这里写的是 storms 来袭，空格和 thunder rolled 并列，用 picked up 越刮越大的只能是风。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "noise",
+          "meaning": "噪音；和 thunder rolled 并列写的是 storms 的天气，噪音不是天气现象。",
+          "quote": "thunder rolled"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "temperature",
+          "meaning": "温度；温度一般说升降，和 thunder rolled 一起写风暴来势的，是越刮越大的风。",
+          "quote": "thunder rolled"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "speed",
+          "meaning": "速度；船没在加速，My husband stopped fishing，全家正停在湖上。",
+          "quote": "My husband stopped fishing"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "picked up",
+          "signalSide": "context-after",
+          "targetText": "The wind picked up",
+          "relation": "中文：pick up 指风变大。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "thunder rolled",
+          "signalSide": "context-after",
+          "relation": "中文：风和雷都是风暴的景象。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-gaokao-2022-i:50": {
+      "blankId": "blank:paper-gaokao-2022-i:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "main",
+      "context": "风暴来了要赶紧回去，丈夫停下钓鱼去弄马达，要一个让船开动的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 the motor，后面 Nothing 和 He tried again，最后才说 a dead motor，是在试着发动它。",
+        "quotes": [
+          "He tried again",
+          "a dead motor"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "启动",
+        "reason": "风暴来了要赶紧回去，丈夫停下钓鱼去弄马达，要一个让船开动的动作。动词看搭配：宾语是 the motor，后面 Nothing 和 He tried again，最后才说 a dead motor，是在试着发动它。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "find",
+          "meaning": "找到；马达就装在船上，He tried again 是在反复尝试发动，不是在找。",
+          "quote": "He tried again"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hide",
+          "meaning": "藏起来；风暴来了要靠 the motor 开船回去，把马达藏起来说不通。",
+          "quote": "the motor"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fix",
+          "meaning": "修理；修理要先知道坏了，Nothing 和 He tried again 是发动时才发现动不了。",
+          "quote": "He tried again"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the motor",
+          "signalSide": "context-after",
+          "targetText": "start the motor",
+          "relation": "中文：发动马达。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a dead motor",
+          "signalSide": "context-after",
+          "relation": "中文：马达熄火，说明前面是在尝试发动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:51": {
+      "blankId": "blank:paper-gaokao-2022-i:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "丈夫第二次发动马达，这里要说这次尝试又失败了。",
+      "find": {
+        "check": "collocation",
+        "text": "前面 He tried again，后面 a dead motor，No luck 就是又没成功，No 后接 luck。",
+        "quotes": [
+          "He tried again",
+          "a dead motor"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "运气",
+        "reason": "丈夫第二次发动马达，这里要说这次尝试又失败了。名词看搭配：前面 He tried again，后面 a dead motor，No luck 就是又没成功，No 后接 luck。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "answer",
+          "meaning": "回答；丈夫 tried again 发动的是机器，不是在等谁回答。",
+          "quote": "tried again"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wonder",
+          "meaning": "惊奇；No wonder 意为难怪，表示理解前面的原因，而 He tried again 后要说的是又失败了。",
+          "quote": "He tried again"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "signal",
+          "meaning": "信号；丈夫 tried again 是在发动马达，不是在找信号。",
+          "quote": "tried again"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "No",
+          "signalSide": "context-before",
+          "targetText": "No luck",
+          "relation": "中文：No luck 表示没成功。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "He tried again",
+          "signalSide": "context-before",
+          "relation": "中文：又试了一次，接着说结果。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:52": {
+      "blankId": "blank:paper-gaokao-2022-i:52",
+      "blankNo": 52,
+      "pos": "adverb",
+      "role": "main",
+      "context": "困在湖中、马达熄火，这是全文最糟的时候，要写全家束手无策地坐着。",
+      "find": {
+        "check": "affect",
+        "text": "前面 stuck in the middle of the lake with a dead motor，后面要靠 a fisherman 拖回，自己没办法。",
+        "quotes": [
+          "stuck in the middle of the lake",
+          "a fisherman"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "无助地",
+        "reason": "困在湖中、马达熄火，这是全文最糟的时候，要写全家束手无策地坐着。副词看情感：前面 stuck in the middle of the lake with a dead motor，后面要靠 a fisherman 拖回，自己没办法。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "patiently",
+          "meaning": "耐心地；被困湖中 with a dead motor，难处是没法自救，不是有没有耐心。",
+          "quote": "with a dead motor"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tirelessly",
+          "meaning": "不知疲倦地；全家是 sat there 坐着，不是不停地忙碌。",
+          "quote": "sat there"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "doubtfully",
+          "meaning": "怀疑地；with a dead motor 被困已是事实，没什么可怀疑的，是束手无策。",
+          "quote": "with a dead motor"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "stuck in the middle of the lake",
+          "signalSide": "context-before",
+          "relation": "中文：被困湖中，只能干坐着。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "sat there",
+          "signalSide": "context-before",
+          "targetText": "sat there helplessly",
+          "relation": "中文：副词修饰坐着的样子。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-gaokao-2022-i:53": {
+      "blankId": "blank:paper-gaokao-2022-i:53",
+      "blankNo": 53,
+      "pos": "adjective",
+      "role": "main",
+      "context": "被拖回岸边，湖上的险情结束了，这里要说全家脱离了危险。",
+      "find": {
+        "check": "affect",
+        "text": "前面 We were stuck 是险境，钓鱼人 threw us a rope 把船拖回，处境由危转安。",
+        "quotes": [
+          "We were stuck",
+          "threw us a rope"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "安全的",
+        "reason": "被拖回岸边，湖上的险情结束了，这里要说全家脱离了危险。形容词看情感：前面 We were stuck 是险境，钓鱼人 threw us a rope 把船拖回，处境由危转安。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sorry",
+          "meaning": "难过的；钓鱼人 threw us a rope 把全家救回，该是庆幸，不是难过。",
+          "quote": "threw us a rope"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "brave",
+          "meaning": "勇敢的；脱险靠的是 a fisherman 拖船，全家自己只是干坐着，谈不上勇敢。",
+          "quote": "a fisherman"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "right",
+          "meaning": "正确的；被 towed 回岸后说的是处境，不是判断对不对。",
+          "quote": "towed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "threw us a rope",
+          "signalSide": "context-before",
+          "relation": "中文：有人救援，险情解除。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "We were",
+          "signalSide": "context-before",
+          "targetText": "We were safe",
+          "relation": "中文：系动词 were 后接表示处境的形容词。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2022-i:54": {
+      "blankId": "blank:paper-gaokao-2022-i:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "如今每年露营车一出车库，全家的心情如何，要一种盼着下次露营的正面情绪。",
+      "find": {
+        "check": "affect",
+        "text": "后面 wondering what camping fun 是在盼下一次会有什么乐趣，心情是兴奋。",
+        "quotes": [
+          "wondering what camping fun"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "兴奋",
+        "reason": "如今每年露营车一出车库，全家的心情如何，要一种盼着下次露营的正面情绪。名词看情感：后面 wondering what camping fun 是在盼下一次会有什么乐趣，心情是兴奋。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relief",
+          "meaning": "宽慰；是麻烦结束后的轻松，而这里 wondering 下一次会怎样，是向前看。",
+          "quote": "wondering"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "duty",
+          "meaning": "责任；全家盼着 camping fun，露营是乐事，不是义务。",
+          "quote": "camping fun"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pride",
+          "meaning": "自豪；wondering what camping fun 是期待还没来的乐趣，不是为做成了什么而自豪。",
+          "quote": "wondering what camping fun"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "wondering what camping fun",
+          "signalSide": "context-after",
+          "relation": "中文：盼着新的乐趣，心情兴奋。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a sense of",
+          "signalSide": "context-before",
+          "targetText": "a sense of excitement",
+          "relation": "中文：a sense of 后接一种感受。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:55": {
+      "blankId": "blank:paper-gaokao-2022-i:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "和露营乐趣并列，回收前两段落水、被困那样有惊无险的经历，要一个正面的名词。",
+      "find": {
+        "check": "echo",
+        "text": "与 camping fun 用 and 并列，回指前文孩子落水、stuck in the middle of the lake 这类惊险经历。",
+        "quotes": [
+          "camping fun",
+          "stuck in the middle of the lake"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "冒险经历",
+        "reason": "和露营乐趣并列，回收前两段落水、被困那样有惊无险的经历，要一个正面的名词。名词看复现：与 camping fun 用 and 并列，回指前文孩子落水、stuck in the middle of the lake 这类惊险经历。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "failure",
+          "meaning": "失败；全家是满怀期待地想着 camping fun，不会和失败并列着盼。",
+          "quote": "camping fun"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "performance",
+          "meaning": "表演；露营里经历的是被 towed 回岸这类事，不是看表演。",
+          "quote": "towed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "conflict",
+          "meaning": "冲突；全家一起盼着 camping fun，家人间的冲突接不上这份期待。",
+          "quote": "camping fun"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "camping fun and",
+          "signalSide": "context-before",
+          "targetText": "camping fun and adventure",
+          "relation": "中文：adventure 与 fun 并列，都是要经历的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "stuck in the middle of the lake",
+          "signalSide": "context-before",
+          "relation": "中文：前文的险情就是露营中的冒险。"
+        }
+      ]
+    }
+  }
+}

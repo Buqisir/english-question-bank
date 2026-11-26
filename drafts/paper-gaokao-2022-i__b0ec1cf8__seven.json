@@ -1,0 +1,905 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-i:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-i:seven-choices": {
+      "overview": "文章围绕健身搭档展开：先借杂志文章说明结伴训练让人坚持、更努力，再讲怎样找搭档，包括想清目标、找住得近的人、写好征友启事，最后提醒双方接受差异、互相帮助。",
+      "fullTranslationZh": "《健身》杂志最近刊登了一篇题为《感谢健身搭档的五个理由》的文章。其中一个理由是：“如果你知道有人正在健身房等你，你就真的会去。”另一个理由写道：“如果你和别人一起训练，你会更努力。”有了健身搭档，你会加大训练力度，因为你们之间存在着一种微妙的竞争。\n\n那么，怎样找到健身搭档呢？\n\n首先，确定你希望从对方那里获得什么。你想在自己最喜欢的运动项目上成为更出色的运动员吗？还是只想身体健康，活动起来既有力量又灵活？想一想你希望和健身搭档一起做哪些运动。\n\n你可能会考虑在社交媒体上发布自己的需求，但这大概不会带来有用的回应。健身搭档通常需要住在附近。如果你打算在健身房锻炼，对方就必须和你在同一家健身房健身。\n\n我的搭档把她的征友启事贴在当地一座公园的告示板上。启事写明了她想做哪种训练、一周练几天、每次想练几个小时，以及她的年龄。启事还列出了她最喜欢的运动和活动，并提供了她的电话号码。任何寻找训练搭档的启事都应该包含这些信息。\n\n你和搭档很可能各有所长。接受你们的差异，学会互相配合就好。久而久之，你们两人都会受益——你的搭档能举起更重的重量，而你的身体会变得更强健。你们关系的核心在于，你们总会在对方需要时提供帮助。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2022-i:seven-choices:notice",
+          "paragraphId": "seven-choices-5",
+          "sourceText": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age.",
+          "displayText": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-i:39"
+          ],
+          "translationZh": "启事写明了她想做哪种训练、一周练几天、每次想练几个小时，以及她的年龄。",
+          "analysisZh": "主干是 Her notice included ...，意思是“她的启事包括……”。included 后并列列出训练种类、训练频率和时长，以及年龄；what kind of training 和 how many 引出的内容都充当宾语。不要把 and her age 误当成 spend 的宾语，它仍接在 included 后。这些具体内容也正是后面 such information 所概括的信息。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "Her notice included"
+            },
+            {
+              "start": 20,
+              "end": 58,
+              "quote": "what kind of training she wanted to do"
+            },
+            {
+              "start": 137,
+              "end": 148,
+              "quote": "and her age"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先用杂志文章说明结伴健身的好处，再提出怎样找搭档的问题，依次讨论目标、地点和启事内容，最后说明找到搭档后如何配合。",
+        "units": [
+          {
+            "unitId": "unit-seven-benefits",
+            "heading": "为什么找搭档",
+            "paragraphIds": [
+              "seven-choices-1"
+            ],
+            "summary": "同伴的等待与微妙竞争能帮助人坚持并更努力地训练。"
+          },
+          {
+            "unitId": "unit-seven-find",
+            "heading": "如何寻找合适的人",
+            "paragraphIds": [
+              "seven-choices-2",
+              "seven-choices-3",
+              "seven-choices-4",
+              "seven-choices-5"
+            ],
+            "summary": "从锻炼目标和地点筛选搭档，再用具体启事说明训练需求和联系方式。"
+          },
+          {
+            "unitId": "unit-seven-cooperate",
+            "heading": "怎样共同进步",
+            "paragraphIds": [
+              "seven-choices-6"
+            ],
+            "summary": "接受技能差异，长期互相配合和帮助。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2022-i:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:seven-choices-1",
+              "sourceParagraphIds": [
+                "seven-choices-1"
+              ],
+              "start": 0,
+              "end": 124,
+              "quote": "《健身》杂志最近刊登了一篇题为《感谢健身搭档的五个理由》的文章。其中一个理由是：“如果你知道有人正在健身房等你，你就真的会去。”另一个理由写道：“如果你和别人一起训练，你会更努力。”有了健身搭档，你会加大训练力度，因为你们之间存在着一种微妙的竞争。"
+            },
+            {
+              "paragraphId": "translation:seven-choices-2",
+              "sourceParagraphIds": [
+                "seven-choices-2"
+              ],
+              "start": 126,
+              "end": 139,
+              "quote": "那么，怎样找到健身搭档呢？"
+            },
+            {
+              "paragraphId": "translation:seven-choices-3",
+              "sourceParagraphIds": [
+                "seven-choices-3"
+              ],
+              "start": 141,
+              "end": 224,
+              "quote": "首先，确定你希望从对方那里获得什么。你想在自己最喜欢的运动项目上成为更出色的运动员吗？还是只想身体健康，活动起来既有力量又灵活？想一想你希望和健身搭档一起做哪些运动。"
+            },
+            {
+              "paragraphId": "translation:seven-choices-4",
+              "sourceParagraphIds": [
+                "seven-choices-4"
+              ],
+              "start": 226,
+              "end": 302,
+              "quote": "你可能会考虑在社交媒体上发布自己的需求，但这大概不会带来有用的回应。健身搭档通常需要住在附近。如果你打算在健身房锻炼，对方就必须和你在同一家健身房健身。"
+            },
+            {
+              "paragraphId": "translation:seven-choices-5",
+              "sourceParagraphIds": [
+                "seven-choices-5"
+              ],
+              "start": 304,
+              "end": 413,
+              "quote": "我的搭档把她的征友启事贴在当地一座公园的告示板上。启事写明了她想做哪种训练、一周练几天、每次想练几个小时，以及她的年龄。启事还列出了她最喜欢的运动和活动，并提供了她的电话号码。任何寻找训练搭档的启事都应该包含这些信息。"
+            },
+            {
+              "paragraphId": "translation:seven-choices-6",
+              "sourceParagraphIds": [
+                "seven-choices-6"
+              ],
+              "start": 415,
+              "end": 509,
+              "quote": "你和搭档很可能各有所长。接受你们的差异，学会互相配合就好。久而久之，你们两人都会受益——你的搭档能举起更重的重量，而你的身体会变得更强健。你们关系的核心在于，你们总会在对方需要时提供帮助。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:blank:paper-gaokao-2022-i:36",
+            "paragraphId": "seven-choices-1",
+            "text": "Fitness Magazine recently ran an article titled “Five Reasons to Thank Your Workout Partner.” One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read: “You’ll work harder if you train with someone else.” With a workout partner, you will increase your training effort as there is a subtle (微妙) competition."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2022-i:37",
+            "paragraphId": "seven-choices-3",
+            "text": "First of all, decide what you want from that person. Do you want to be a better athlete in your favorite sport? Or do you just want to be physically fit, able to move with strength and flexibility? Think about the exercises you would like to do with your workout partner."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2022-i:38",
+            "paragraphId": "seven-choices-4",
+            "text": "You might think about posting what you are looking for on social media, but it probably won’t result in a useful response. A workout partner usually needs to live close by. If you plan on working out in a gym, that person must belong to the same gym."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2022-i:39",
+            "paragraphId": "seven-choices-5",
+            "text": "My partner posted her request on the notice board of a local park. Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age. It also listed her favorite sports and activities, and provided her phone number. Any notice for a training partner should include such information."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2022-i:40",
+            "paragraphId": "seven-choices-6",
+            "text": "You and your partner will probably have different skills. Just accept your differences and learn to work with each other. Over time, both of you will benefit – your partner will be able to lift more weights and you will become more physically fit. The core (核心) of your relationship is that you will always be there to help each other."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-i:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "seven-choices-1",
+                "start": 216,
+                "end": 317,
+                "quote": "With a workout partner, you will increase your training effort as there is a subtle (微妙) competition."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-1",
+                "start": 91,
+                "end": 124,
+                "quote": "有了健身搭档，你会加大训练力度，因为你们之间存在着一种微妙的竞争。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-i:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:36"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2022-i:36",
+                "paragraphId": "seven-choices-1",
+                "start": 208,
+                "end": 258,
+                "quote": "You’ll work harder if you train with someone else."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-1",
+                "start": 73,
+                "end": 90,
+                "quote": "如果你和别人一起训练，你会更努力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-i:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "seven-choices-3",
+                "start": 60,
+                "end": 145,
+                "quote": "Or do you just want to be physically fit, able to move with strength and flexibility?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-3",
+                "start": 43,
+                "end": 64,
+                "quote": "还是只想身体健康，活动起来既有力量又灵活？"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-i:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:37"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2022-i:37",
+                "paragraphId": "seven-choices-3",
+                "start": 53,
+                "end": 111,
+                "quote": "Do you want to be a better athlete in your favorite sport?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-3",
+                "start": 18,
+                "end": 43,
+                "quote": "你想在自己最喜欢的运动项目上成为更出色的运动员吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-i:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "seven-choices-4",
+                "start": 130,
+                "end": 207,
+                "quote": "If you plan on working out in a gym, that person must belong to the same gym."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-4",
+                "start": 47,
+                "end": 76,
+                "quote": "如果你打算在健身房锻炼，对方就必须和你在同一家健身房健身。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-i:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:38"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2022-i:38",
+                "paragraphId": "seven-choices-4",
+                "start": 123,
+                "end": 172,
+                "quote": "A workout partner usually needs to live close by."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-4",
+                "start": 34,
+                "end": 47,
+                "quote": "健身搭档通常需要住在附近。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-i:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "seven-choices-5",
+                "start": 67,
+                "end": 216,
+                "quote": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-5",
+                "start": 25,
+                "end": 60,
+                "quote": "启事写明了她想做哪种训练、一周练几天、每次想练几个小时，以及她的年龄。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-i:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:39"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2022-i:39",
+                "paragraphId": "seven-choices-5",
+                "start": 299,
+                "end": 365,
+                "quote": "Any notice for a training partner should include such information."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-5",
+                "start": 88,
+                "end": 109,
+                "quote": "任何寻找训练搭档的启事都应该包含这些信息。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-i:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "seven-choices-6",
+                "start": 0,
+                "end": 57,
+                "quote": "You and your partner will probably have different skills."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-6",
+                "start": 0,
+                "end": 12,
+                "quote": "你和搭档很可能各有所长。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-i:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:40"
+            ],
+            "blankId": "blank:paper-gaokao-2022-i:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2022-i:40",
+                "paragraphId": "seven-choices-6",
+                "start": 58,
+                "end": 121,
+                "quote": "Just accept your differences and learn to work with each other."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-6",
+                "start": 12,
+                "end": 29,
+                "quote": "接受你们的差异，学会互相配合就好。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2022-i:seven-choices:notice",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-i:39"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2022-i:seven-choices:notice",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "seven-choices-5",
+                "start": 67,
+                "end": 216,
+                "quote": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-i:seven-choices",
+                "paragraphId": "translation:seven-choices-5",
+                "start": 25,
+                "end": 60,
+                "quote": "启事写明了她想做哪种训练、一周练几天、每次想练几个小时，以及她的年龄。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "E": {
+          "target": 39,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "notice",
+            "training partner"
+          ],
+          "text": "它讲 “notice” 和 “training partner”，像在接空前 “Her notice included” 那串内容。但该写什么前面已列完，再问怎么写是倒着走，后面也没人回答。它是照答案 G 改的：都有 “notice” 和 “training partner”，G 说启事都该写这些信息，它改成问怎样写好启事。它是问句，又像能接 “Or do you just want” 前那一问。",
+          "quotes": [
+            "notice",
+            "training partner",
+            "Her notice included",
+            "Or do you just want"
+          ]
+        },
+        "A": {
+          "target": 40,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 “first meeting” 和空后 “Over time” 一前一后，像在说先别扭、后受益。但空前 “different skills” 讲两人本事不同，空后 “both of you will benefit” 是互补带来的好处，它只说初次见面尴尬，把能力差异这个话头丢了。",
+          "quotes": [
+            "first meeting",
+            "Over time",
+            "different skills",
+            "both of you will benefit"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-i:36": {
+      "blankId": "blank:paper-gaokao-2022-i:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Five Reasons to Thank Your Workout Partner",
+        "someone is waiting for you at the gym",
+        "With a workout partner",
+        "increase your training effort",
+        "subtle (微妙) competition"
+      ],
+      "contextEvidence": {
+        "paragraphId": "seven-choices-1",
+        "beforeQuote": "One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read:",
+        "afterQuote": "With a workout partner, you will increase your training effort as there is a subtle (微妙) competition."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "work harder",
+          "signalSide": "option",
+          "targetText": "increase your training effort",
+          "relation": "work harder 就是空后 increase your training effort 说的加大训练力度。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "increase your training effort",
+          "signalSide": "context-after",
+          "targetText": "work harder",
+          "relation": "空后这句解释第二条理由，说的正是练得更卖力。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "train with someone else",
+          "signalSide": "option",
+          "targetText": "With a workout partner",
+          "relation": "和别人一起练，对应空后 With a workout partner。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "You’ll actually show up if",
+          "signalSide": "context-before",
+          "targetText": "You’ll work harder if",
+          "relation": "第一条理由用 You’ll…if… 句式，第二条照同样句式写。"
+        }
+      ],
+      "lock": [
+        "another read",
+        "work harder",
+        "increase your training effort"
+      ],
+      "find": {
+        "text": "空前第一条理由是 “You’ll actually show up if”，“another read” 要同样口气的第二条；空后 “increase your training effort” 解释的正是 C 的 “work harder”。",
+        "quotes": [
+          "You’ll actually show up if",
+          "another read",
+          "increase your training effort",
+          "work harder"
+        ]
+      },
+      "explain": "引号里是杂志列的第二条理由，和第一条句式相同；空后 “subtle (微妙) competition” 补出原因：有人一起练就会暗暗较劲，所以更卖力。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "引号里是杂志列的第二条理由，和第一条句式相同；空后 “subtle (微妙) competition” 补出原因：有人一起练就会暗暗较劲，所以更卖力。",
+        "matchedClues": [
+          {
+            "contextSide": "With a workout partner / increase your training effort",
+            "optionSide": "train with someone else / work harder",
+            "relation": "空后把选项的两半各换一种说法再说一遍：有搭档、更用力。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-i:37": {
+      "blankId": "blank:paper-gaokao-2022-i:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "decide what you want from that person",
+        "physically fit",
+        "strength and flexibility",
+        "the exercises you would like to do"
+      ],
+      "contextEvidence": {
+        "paragraphId": "seven-choices-3",
+        "beforeQuote": "First of all, decide what you want from that person.",
+        "afterQuote": "Or do you just want to be physically fit, able to move with strength and flexibility?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Or",
+          "signalSide": "context-after",
+          "targetText": "Do you want to be a better athlete",
+          "relation": "Or 开头的问句是二选一的后一半，前面要有一个同样的问句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "do you just want",
+          "signalSide": "context-after",
+          "targetText": "Do you want",
+          "relation": "后一问 do you just want 和前一问 Do you want 句式对齐。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Do you want",
+          "signalSide": "option",
+          "targetText": "Or do you just want",
+          "relation": "D 是前一问，给 Or 提供另一个选择。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "decide what you want",
+          "signalSide": "context-before",
+          "targetText": "Do you want to be a better athlete",
+          "relation": "空前让你想清想要什么，两个问句把可能的目标摆出来。"
+        }
+      ],
+      "lock": [
+        "decide what you want",
+        "Or do you just want",
+        "Do you want"
+      ],
+      "find": {
+        "text": "空后 “Or do you just want” 是二选一的后一问，前面得先有一问；七个里只有 D 用 “Do you want” 问目标，又接空前 “decide what you want”。",
+        "quotes": [
+          "Or do you just want",
+          "Do you want",
+          "decide what you want"
+        ]
+      },
+      "explain": "空前抛出任务“先想清要什么”，这句和空后的 Or 问句组成一对选择，把目标分成专项提高和一般健康两类，最后一句再落到和搭档练哪些项目。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前抛出任务“先想清要什么”，这句和空后的 Or 问句组成一对选择，把目标分成专项提高和一般健康两类，最后一句再落到和搭档练哪些项目。",
+        "matchedClues": [
+          {
+            "contextSide": "Or do you just want to be physically fit",
+            "optionSide": "Do you want to be a better athlete in your favorite sport?",
+            "relation": "两问并列，一个求专项提高，一个只求健康，正是空前要你决定的目标。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-i:38": {
+      "blankId": "blank:paper-gaokao-2022-i:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "posting what you are looking for on social media",
+        "a useful response",
+        "working out in a gym",
+        "the same gym"
+      ],
+      "contextEvidence": {
+        "paragraphId": "seven-choices-4",
+        "beforeQuote": "You might think about posting what you are looking for on social media, but it probably won’t result in a useful response.",
+        "afterQuote": "If you plan on working out in a gym, that person must belong to the same gym."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "that person",
+          "signalSide": "context-after",
+          "targetText": "A workout partner",
+          "relation": "that person 要回指一个人，指的就是 B 里的 A workout partner。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "A workout partner",
+          "signalSide": "option",
+          "targetText": "that person",
+          "relation": "B 先提出搭档，空后才能用 that person 接着说。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "live close by",
+          "signalSide": "option",
+          "targetText": "the same gym",
+          "relation": "住得近和同一家健身房都是对地点的要求，后者是前者的具体情形。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the same gym",
+          "signalSide": "context-after",
+          "targetText": "live close by",
+          "relation": "空后把住得近再收窄到同一家健身房。"
+        }
+      ],
+      "lock": [
+        "that person",
+        "the same gym",
+        "live close by"
+      ],
+      "find": {
+        "text": "空后 “that person must belong to the same gym” 要先有人可指，又是在讲地点；B 的 “A workout partner” 和 “live close by” 两样都给了。",
+        "quotes": [
+          "that person must belong to the same gym",
+          "A workout partner",
+          "live close by"
+        ]
+      },
+      "explain": "空前说网上征人难有回应，这句换个思路：从身边找；空后再把“住得近”收窄成同一家健身房，一般要求后跟具体情形。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 的 “notice” 像接空前的 “posting”，但 “such information” 前面没列出任何信息，空后 “that person” 也无人可指。",
+          "quotes": [
+            "notice",
+            "posting",
+            "such information",
+            "that person"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前说网上征人难有回应，这句换个思路：从身边找；空后再把“住得近”收窄成同一家健身房，一般要求后跟具体情形。",
+        "matchedClues": [
+          {
+            "contextSide": "that person / the same gym",
+            "optionSide": "A workout partner / live close by",
+            "relation": "空后的人称回指和地点要求都由 B 先铺好。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 的 “notice” 像接空前的 “posting”，但 “such information” 前面没列出任何信息，空后 “that person” 也无人可指。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:39": {
+      "blankId": "blank:paper-gaokao-2022-i:39",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "notice board",
+        "what kind of training",
+        "how many days a week",
+        "her age",
+        "her phone number"
+      ],
+      "contextEvidence": {
+        "paragraphId": "seven-choices-5",
+        "beforeQuote": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age. It also listed her favorite sports and activities, and provided her phone number.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "such information",
+          "signalSide": "option",
+          "targetText": "训练种类、天数、时长、年龄、爱好、电话",
+          "relation": "such information 回指前面逐项列出的启事内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "her phone number",
+          "signalSide": "context-before",
+          "targetText": "such information",
+          "relation": "电话是清单最后一项，列完正好用“这类信息”收住。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Any notice",
+          "signalSide": "option",
+          "targetText": "Her notice",
+          "relation": "从她这一份启事推广到任何征友启事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Her notice included",
+          "signalSide": "context-before",
+          "targetText": "Any notice … should include",
+          "relation": "included 讲她写了什么，should include 讲大家都该写什么。"
+        }
+      ],
+      "lock": [
+        "Her notice included",
+        "her phone number",
+        "such information"
+      ],
+      "find": {
+        "text": "空前 “Her notice included” 一路列到 “her phone number”，要一句把这些收住；G 的 “such information” 正好回指这份清单。",
+        "quotes": [
+          "Her notice included",
+          "her phone number",
+          "such information"
+        ]
+      },
+      "explain": "这一段先讲搭档的一份真实启事，这句收尾时从“她写了什么”转成“你也该写什么”，把一个例子变成读者能照做的写法。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "这一段先讲搭档的一份真实启事，这句收尾时从“她写了什么”转成“你也该写什么”，把一个例子变成读者能照做的写法。",
+        "matchedClues": [
+          {
+            "contextSide": "Her notice included / It also listed",
+            "optionSide": "Any notice / should include such information",
+            "relation": "由一份启事的具体内容，归纳为任何征友启事都该写的信息。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "它讲 “notice” 和 “training partner”，像在接空前 “Her notice included” 那串内容。但该写什么前面已列完，再问怎么写是倒着走，后面也没人回答。它是照答案 G 改的：都有 “notice” 和 “training partner”，G 说启事都该写这些信息，它改成问怎样写好启事。它是问句，又像能接 “Or do you just want” 前那一问。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-i:40": {
+      "blankId": "blank:paper-gaokao-2022-i:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "different skills",
+        "both of you will benefit",
+        "lift more weights",
+        "more physically fit",
+        "help each other"
+      ],
+      "contextEvidence": {
+        "paragraphId": "seven-choices-6",
+        "beforeQuote": "You and your partner will probably have different skills.",
+        "afterQuote": "Over time, both of you will benefit – your partner will be able to lift more weights and you will become more physically fit."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your differences",
+          "signalSide": "option",
+          "targetText": "different skills",
+          "relation": "your differences 就是空前说的 different skills。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "different skills",
+          "signalSide": "context-before",
+          "targetText": "your differences",
+          "relation": "空前先摆出两人本事不同，选项接着说怎么对待。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "work with each other",
+          "signalSide": "option",
+          "targetText": "both of you will benefit",
+          "relation": "先配合，空后才有两人都受益的结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "both of you will benefit",
+          "signalSide": "context-after",
+          "targetText": "work with each other",
+          "relation": "both of you 对应 each other，说的是配合的结果。"
+        }
+      ],
+      "lock": [
+        "different skills",
+        "your differences",
+        "both of you will benefit"
+      ],
+      "find": {
+        "text": "空前 “different skills” 摆出差异，F 的 “your differences” 接住它；空后 “both of you will benefit” 是配合的结果，要先有 “work with each other”。",
+        "quotes": [
+          "different skills",
+          "your differences",
+          "both of you will benefit",
+          "work with each other"
+        ]
+      },
+      "explain": "空前只说两人强项不同，这句给出态度和做法；空后用一个举重更多、一个更健康，说明差异配合好了双方各有收获。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前只说两人强项不同，这句给出态度和做法；空后用一个举重更多、一个更健康，说明差异配合好了双方各有收获。",
+        "matchedClues": [
+          {
+            "contextSide": "different skills / both of you will benefit",
+            "optionSide": "your differences / work with each other",
+            "relation": "先接受差异、互相配合，才有双方受益。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "它的 “first meeting” 和空后 “Over time” 一前一后，像在说先别扭、后受益。但空前 “different skills” 讲两人本事不同，空后 “both of you will benefit” 是互补带来的好处，它只说初次见面尴尬，把能力差异这个话头丢了。"
+        }
+      ]
+    }
+  }
+}
