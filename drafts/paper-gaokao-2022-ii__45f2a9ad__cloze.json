@@ -1,0 +1,2029 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:cloze": {
+      "overview": "杰茜卡和丈夫全职环游世界两年，靠加入线上看家群、免费住进陌生人家里来省下旅费。看家要围着宠物安排行程，但比酒店舒适；他们发照片、打扫房子、留礼物，总能超出房主的期望。",
+      "fullTranslationZh": "和许多年轻人一样，杰茜卡想环游世界。和他们大多数人不同的是，这位25岁的姑娘正在全职做这件事。过去两年，她和丈夫一直在周游世界，从巴黎到新加坡，处处都留下了足迹。这听起来像是一场漫长又昂贵的度假，但这对夫妇有个不同寻常的办法，让旅行变得负担得起。\n他们是一种新形式的共享经济的一员：一个线上看家人群体。在陌生人家里免费借住期间，他们趁房主不在，替房主喂宠物、浇花草。\n这并不全是观光。两位旅行者会仔细规划行程，围着那些有时很难伺候的宠物来安排每天的日程。不过，看家也能带来一种在酒店里找不到的舒适。“就像住在朋友家一样。”杰茜卡说。\n这对夫妇申请当看家人的成功率很高，而且总能超出房主的期望。对杰茜卡来说，这意味着给房主发去大量宠物开心的照片，把房子保持干净，并在前往下一家之前留下一份精致的小礼物。“你要让房主觉得，他们做了正确的决定。”她说。",
+      "mainLine": {
+        "theme": {
+          "text": "给陌生人看家是让长期旅行花得起的 unusual way，用心超出房主期望才能长久。",
+          "quote": "unusual way"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+            "text": "杰茜卡夫妇全职环游两年，却有办法让旅行花得起。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+            "text": "办法是加入线上看家群，免费住进陌生人家、替房主照看。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+            "text": "看家要围着宠物安排行程，但比住酒店更舒适自在。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+            "text": "他们总超出房主期望，让房主觉得选对了人。"
+          }
+        ],
+        "emotion": ""
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2022-ii:cloze:3:2",
+          "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+          "sourceText": "The two travelers carefully __47__ their trips, scheduling their days around the pets that are sometimes difficult to __48__.",
+          "displayText": "The two travelers carefully plan their trips, scheduling their days around the pets that are sometimes difficult to please.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:47",
+            "question:paper-gaokao-2022-ii:48"
+          ],
+          "translationZh": "两位旅行者会仔细规划行程，围着那些有时很难伺候的宠物来安排每天的日程。",
+          "analysisZh": "主干是 The two travelers carefully plan their trips，两人仔细规划行程。逗号后的 scheduling their days around the pets 补充怎样规划：按宠物排每天的日程。that 引出的部分修饰 the pets，说这些宠物有时很难伺候，交代了为什么要这样排。",
+          "underlineRanges": [
+            {
+              "start": 28,
+              "end": 44,
+              "quote": "plan their trips"
+            },
+            {
+              "start": 46,
+              "end": 83,
+              "quote": "scheduling their days around the pets"
+            },
+            {
+              "start": 84,
+              "end": 122,
+              "quote": "that are sometimes difficult to please"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2022-ii:cloze:4:2",
+          "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+          "sourceText": "For Jessica, that means __53__ plenty of pictures of happy pets, keeping the house __54__ and leaving a nice small gift before heading to the next house.",
+          "displayText": "For Jessica, that means sending plenty of pictures of happy pets, keeping the house clean and leaving a nice small gift before heading to the next house.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:53",
+            "question:paper-gaokao-2022-ii:54"
+          ],
+          "translationZh": "对杰茜卡来说，这意味着给房主发去大量宠物开心的照片，把房子保持干净，并在前往下一家之前留下一份精致的小礼物。",
+          "analysisZh": "主干是 that means，that 回指上句的超出房主期望。means 后接三个并列的动名词短语 sending…、keeping…、leaving…，把超出期望拆成三件具体的事；其中 keeping the house clean 是 keep 加宾语加形容词。before heading to the next house 交代留礼物的时间。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 23,
+              "quote": "that means"
+            },
+            {
+              "start": 66,
+              "end": 89,
+              "quote": "keeping the house clean"
+            },
+            {
+              "start": 120,
+              "end": 152,
+              "quote": "before heading to the next house"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2022-ii:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:cloze:1"
+              ],
+              "start": 0,
+              "end": 123,
+              "quote": "和许多年轻人一样，杰茜卡想环游世界。和他们大多数人不同的是，这位25岁的姑娘正在全职做这件事。过去两年，她和丈夫一直在周游世界，从巴黎到新加坡，处处都留下了足迹。这听起来像是一场漫长又昂贵的度假，但这对夫妇有个不同寻常的办法，让旅行变得负担得起。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:cloze:2"
+              ],
+              "start": 124,
+              "end": 183,
+              "quote": "他们是一种新形式的共享经济的一员：一个线上看家人群体。在陌生人家里免费借住期间，他们趁房主不在，替房主喂宠物、浇花草。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:cloze:3"
+              ],
+              "start": 184,
+              "end": 266,
+              "quote": "这并不全是观光。两位旅行者会仔细规划行程，围着那些有时很难伺候的宠物来安排每天的日程。不过，看家也能带来一种在酒店里找不到的舒适。“就像住在朋友家一样。”杰茜卡说。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:cloze:4"
+              ],
+              "start": 267,
+              "end": 373,
+              "quote": "这对夫妇申请当看家人的成功率很高，而且总能超出房主的期望。对杰茜卡来说，这意味着给房主发去大量宠物开心的照片，把房子保持干净，并在前往下一家之前留下一份精致的小礼物。“你要让房主觉得，他们做了正确的决定。”她说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:cloze:1",
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+            "text": "Like many young people, Jessica wants to travel the globe. Unlike most of them, this 25-year-old is doing it full-time. She and her husband have spent the last two years traveling the world, stopping everywhere from Paris to Singapore. It might sound like one long, expensive vacation, but the couple has an unusual way to make their travel affordable."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:cloze:2",
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+            "text": "They’re part of a new form of the sharing economy: an online group of house sitters. Throughout their no-cost stays in strangers’ homes, they feed pets and water plants in the homeowner’s absence."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+            "text": "It’s not all sightseeing. The two travelers carefully plan their trips, scheduling their days around the pets that are sometimes difficult to please. But house sitting also offers a level of comfort they can’t find in a hotel. “It’s like staying at a friend’s house,” Jessica says."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+            "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+            "text": "The couple has a high success rate in getting accepted as house sitters and they always go beyond the homeowner’s expectations. For Jessica, that means sending plenty of pictures of happy pets, keeping the house clean and leaving a nice small gift before heading to the next house. “You want to make the homeowner feel that they made the right decision,” she says."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 100,
+                "end": 108,
+                "quote": "doing it"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 137,
+                "end": 186,
+                "quote": "have spent the last two years traveling the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 40,
+                "end": 46,
+                "quote": "全职做这件事"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 56,
+                "end": 63,
+                "quote": "一直在周游世界"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:41"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 109,
+                "end": 118,
+                "quote": "full-time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 40,
+                "end": 42,
+                "quote": "全职"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 257,
+                "end": 272,
+                "quote": "long, expensive"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 167,
+                "end": 186,
+                "quote": "traveling the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 89,
+                "end": 94,
+                "quote": "漫长又昂贵"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 59,
+                "end": 63,
+                "quote": "周游世界"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:42"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 276,
+                "end": 284,
+                "quote": "vacation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 95,
+                "end": 97,
+                "quote": "度假"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 263,
+                "end": 272,
+                "quote": "expensive"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 281,
+                "end": 314,
+                "quote": "but the couple has an unusual way"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 101,
+                "end": 114,
+                "quote": "no-cost stays"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 92,
+                "end": 94,
+                "quote": "昂贵"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 118,
+                "end": 122,
+                "quote": "负担得起"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 33,
+                "end": 37,
+                "quote": "免费借住"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:43"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+                "start": 341,
+                "end": 351,
+                "quote": "affordable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:1",
+                "start": 118,
+                "end": 122,
+                "quote": "负担得起"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 41,
+                "end": 48,
+                "quote": "economy"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 50,
+                "end": 82,
+                "quote": "an online group of house sitters"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 9,
+                "end": 13,
+                "quote": "共享经济"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 19,
+                "end": 26,
+                "quote": "线上看家人群体"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:44"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 34,
+                "end": 41,
+                "quote": "sharing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 9,
+                "end": 11,
+                "quote": "共享"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 125,
+                "end": 130,
+                "quote": "homes"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 50,
+                "end": 65,
+                "quote": "an online group"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 28,
+                "end": 33,
+                "quote": "陌生人家里"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 19,
+                "end": 26,
+                "quote": "线上看家人群体"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:45"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 119,
+                "end": 129,
+                "quote": "strangers’"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 28,
+                "end": 31,
+                "quote": "陌生人"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 164,
+                "end": 182,
+                "quote": "in the homeowner’s"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 137,
+                "end": 163,
+                "quote": "feed pets and water plants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 43,
+                "end": 47,
+                "quote": "房主不在"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 51,
+                "end": 58,
+                "quote": "喂宠物、浇花草"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:46"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+                "start": 188,
+                "end": 195,
+                "quote": "absence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:2",
+                "start": 45,
+                "end": 47,
+                "quote": "不在"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 44,
+                "end": 53,
+                "quote": "carefully"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 74,
+                "end": 111,
+                "quote": "scheduling their days around the pets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 14,
+                "end": 20,
+                "quote": "仔细规划行程"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 35,
+                "end": 42,
+                "quote": "安排每天的日程"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:47"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 54,
+                "end": 58,
+                "quote": "plan"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 16,
+                "end": 18,
+                "quote": "规划"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 131,
+                "end": 143,
+                "quote": "difficult to"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 74,
+                "end": 111,
+                "quote": "scheduling their days around the pets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 27,
+                "end": 31,
+                "quote": "很难伺候"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 21,
+                "end": 34,
+                "quote": "围着那些有时很难伺候的宠物"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:48"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 142,
+                "end": 148,
+                "quote": "please"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 29,
+                "end": 31,
+                "quote": "伺候"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 205,
+                "end": 226,
+                "quote": "can’t find in a hotel"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 246,
+                "end": 265,
+                "quote": "at a friend’s house"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 54,
+                "end": 61,
+                "quote": "在酒店里找不到"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 66,
+                "end": 75,
+                "quote": "就像住在朋友家一样"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:49"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 191,
+                "end": 198,
+                "quote": "comfort"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 62,
+                "end": 64,
+                "quote": "舒适"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 246,
+                "end": 265,
+                "quote": "at a friend’s house"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 219,
+                "end": 226,
+                "quote": "a hotel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 68,
+                "end": 73,
+                "quote": "住在朋友家"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 55,
+                "end": 57,
+                "quote": "酒店"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:50"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 238,
+                "end": 245,
+                "quote": "staying"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 68,
+                "end": 70,
+                "quote": "住在"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 29,
+                "end": 33,
+                "quote": "rate"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 37,
+                "end": 53,
+                "quote": "getting accepted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 11,
+                "end": 16,
+                "quote": "成功率很高"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:51"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 22,
+                "end": 29,
+                "quote": "success"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 11,
+                "end": 13,
+                "quote": "成功"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 87,
+                "end": 96,
+                "quote": "go beyond"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 134,
+                "end": 144,
+                "quote": "that means"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 21,
+                "end": 28,
+                "quote": "超出房主的期望"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 36,
+                "end": 40,
+                "quote": "这意味着"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:52"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 114,
+                "end": 126,
+                "quote": "expectations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 26,
+                "end": 28,
+                "quote": "期望"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 152,
+                "end": 184,
+                "quote": "plenty of pictures of happy pets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 43,
+                "end": 54,
+                "quote": "发去大量宠物开心的照片"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:53"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 152,
+                "end": 159,
+                "quote": "sending"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 43,
+                "end": 45,
+                "quote": "发去"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 186,
+                "end": 203,
+                "quote": "keeping the house"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 215,
+                "end": 240,
+                "quote": "leaving a nice small gift"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 55,
+                "end": 62,
+                "quote": "把房子保持干净"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 72,
+                "end": 82,
+                "quote": "留下一份精致的小礼物"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:54"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 212,
+                "end": 217,
+                "quote": "clean"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 60,
+                "end": 62,
+                "quote": "干净"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 322,
+                "end": 336,
+                "quote": "made the right"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 37,
+                "end": 53,
+                "quote": "getting accepted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 94,
+                "end": 101,
+                "quote": "做了正确的决定"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:55"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 344,
+                "end": 352,
+                "quote": "decision"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 99,
+                "end": 101,
+                "quote": "决定"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2022-ii:cloze:3:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:47",
+              "question:paper-gaokao-2022-ii:48"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2022-ii:cloze:3:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 26,
+                "end": 70,
+                "quote": "The two travelers carefully plan their trips"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
+                "start": 72,
+                "end": 148,
+                "quote": "scheduling their days around the pets that are sometimes difficult to please"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 8,
+                "end": 20,
+                "quote": "两位旅行者会仔细规划行程"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:3",
+                "start": 21,
+                "end": 42,
+                "quote": "围着那些有时很难伺候的宠物来安排每天的日程"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2022-ii:cloze:4:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:53",
+              "question:paper-gaokao-2022-ii:54"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2022-ii:cloze:4:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+                "start": 141,
+                "end": 247,
+                "quote": "that means sending plenty of pictures of happy pets, keeping the house clean and leaving a nice small gift"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:cloze:4",
+                "start": 36,
+                "end": 82,
+                "quote": "这意味着给房主发去大量宠物开心的照片，把房子保持干净，并在前往下一家之前留下一份精致的小礼物"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-ii:41": {
+      "blankId": "blank:paper-gaokao-2022-ii:41",
+      "blankNo": 41,
+      "pos": "adverb",
+      "role": "main",
+      "context": "多数年轻人只是想环游世界，她却真的在做，要说明她投入旅行的程度。",
+      "find": {
+        "check": "echo",
+        "text": "后句 have spent the last two years traveling the world，两年都在路上，就是全职在旅行。",
+        "quotes": [
+          "have spent the last two years traveling the world"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "全职地",
+        "reason": "多数年轻人只是想环游世界，她却真的在做，要说明她投入旅行的程度。副词看复现：后句 have spent the last two years traveling the world，两年都在路上，就是全职在旅行。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "indoors",
+          "meaning": "在室内；后文 stopping everywhere from Paris to Singapore，她是满世界跑，不是待在屋里。",
+          "quote": "stopping everywhere from Paris to Singapore"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "online",
+          "meaning": "在网上；她和丈夫 traveling the world 是真的出门远行，网上只是联系看家的渠道。",
+          "quote": "traveling the world"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "single-handed",
+          "meaning": "独自一人地；后文 She and her husband 一起旅行，不是她一个人。",
+          "quote": "She and her husband"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "doing it",
+          "signalSide": "context-before",
+          "relation": "doing it 回指环游世界，空格说明她怎样在做这件事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "have spent the last two years traveling the world",
+          "signalSide": "context-after",
+          "relation": "两年一直在旅行，复现了全职这层意思。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:42": {
+      "blankId": "blank:paper-gaokao-2022-ii:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "两年周游世界听起来像什么，要一个指长途出游的名词，受 long 和 expensive 修饰。",
+      "find": {
+        "check": "topic",
+        "text": "前文讲 traveling the world，又说 long, expensive，四个里只有 vacation 是出游度假。",
+        "quotes": [
+          "traveling the world",
+          "long, expensive"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "度假",
+        "reason": "两年周游世界听起来像什么，要一个指长途出游的名词，受 long 和 expensive 修饰。名词看话题：前文讲 traveling the world，又说 long, expensive，四个里只有 vacation 是出游度假。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "game",
+          "meaning": "游戏；前文说的是两年 traveling the world，听起来像出游，不像一场游戏。",
+          "quote": "traveling the world"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "service",
+          "meaning": "服务；这里说两人 traveling the world 本身像什么，后文的看家才是他们提供的服务。",
+          "quote": "traveling the world"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "procedure",
+          "meaning": "程序，手续；traveling the world 听起来像漫长昂贵的出游，不像一套办事流程。",
+          "quote": "traveling the world"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "long, expensive",
+          "signalSide": "context-before",
+          "relation": "long 和 expensive 修饰空格，说的是一次又长又贵的出游。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "traveling the world",
+          "signalSide": "context-before",
+          "relation": "话题是周游世界，名词要属于出游一类。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:43": {
+      "blankId": "blank:paper-gaokao-2022-ii:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "but 把前面的 expensive 转过来，夫妇有办法让旅行不再昂贵，要一个花得起的意思。",
+      "find": {
+        "check": "echo",
+        "text": "but 前是 expensive，后段 no-cost stays 说住宿免费，旅行就变得 affordable。",
+        "quotes": [
+          "expensive",
+          "no-cost stays"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "负担得起的",
+        "reason": "but 把前面的 expensive 转过来，夫妇有办法让旅行不再昂贵，要一个花得起的意思。形容词看复现：but 前是 expensive，后段 no-cost stays 说住宿免费，旅行就变得 affordable。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "safe",
+          "meaning": "安全的；but 前面说的是 expensive，转过来要讲的是钱，不是安全。",
+          "quote": "expensive"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "busy",
+          "meaning": "忙碌的；后段 no-cost stays 讲的是省钱，让旅行变忙谈不上 unusual way。",
+          "quote": "no-cost stays"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "helpful",
+          "meaning": "有帮助的；but 要接住前面的 expensive，说旅行有帮助和花钱多少对不上。",
+          "quote": "expensive"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "make their travel",
+          "signalSide": "context-before",
+          "relation": "make their travel 后接形容词，说旅行变成什么样。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "expensive",
+          "signalSide": "context-before",
+          "relation": "but 前的 expensive 与答案意思相反。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "no-cost stays",
+          "signalSide": "context-after",
+          "relation": "免费住宿说明了旅行为什么花得起。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:44": {
+      "blankId": "blank:paper-gaokao-2022-ii:44",
+      "blankNo": 44,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "冒号后解释这种经济形式就是线上看家人群体，要一个说明房子与照看互相共用的词。",
+      "find": {
+        "check": "collocation",
+        "text": "和 economy 连用，冒号后 an online group of house sitters 是共用他人住房，即共享经济。",
+        "quotes": [
+          "economy",
+          "an online group of house sitters"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "共享的",
+        "reason": "冒号后解释这种经济形式就是线上看家人群体，要一个说明房子与照看互相共用的词。形容词看搭配：和 economy 连用，冒号后 an online group of house sitters 是共用他人住房，即共享经济。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "local",
+          "meaning": "当地的；an online group of house sitters 是线上群体，两人从 Paris 到 Singapore 各地去，不限当地。",
+          "quote": "an online group of house sitters"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "private",
+          "meaning": "私人的；an online group of house sitters 是房主和看家人共用住处，说私人经济概括不了。",
+          "quote": "an online group of house sitters"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "agricultural",
+          "meaning": "农业的；冒号后讲的是 an online group of house sitters 看家，跟种地无关。",
+          "quote": "an online group of house sitters"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "economy",
+          "signalSide": "context-after",
+          "relation": "sharing economy 共享经济，修饰 economy。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "an online group of house sitters",
+          "signalSide": "context-after",
+          "relation": "冒号后具体说明这种经济形式是线上看家群体。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:45": {
+      "blankId": "blank:paper-gaokao-2022-ii:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "在线上群里接的看家活，住的是原本不认识的房主家，要一个指陌生人的词。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前句 an online group 联系看家，后文还要 getting accepted 才能去住，房主原本不认识他们。",
+        "quotes": [
+          "an online group",
+          "getting accepted"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "陌生人的",
+        "reason": "在线上群里接的看家活，住的是原本不认识的房主家，要一个指陌生人的词。名词看语境义：前句 an online group 联系看家，后文还要 getting accepted 才能去住，房主原本不认识他们。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "parents’",
+          "meaning": "父母的；他们要 getting accepted 才能去看家，住父母家用不着被挑选。",
+          "quote": "getting accepted"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "co-workers’",
+          "meaning": "同事的；看家机会来自 an online group，不是同事之间互相帮忙。",
+          "quote": "an online group"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "neighbors’",
+          "meaning": "邻居的；两人 from Paris to Singapore 一路在外，住的不是自家邻居的房子。",
+          "quote": "from Paris to Singapore"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "homes",
+          "signalSide": "context-after",
+          "relation": "空格修饰 homes，说明住的是谁的家。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "an online group",
+          "signalSide": "context-before",
+          "relation": "看家机会来自线上群体，房主与他们本不相识。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:46": {
+      "blankId": "blank:paper-gaokao-2022-ii:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "房主为什么要人来喂宠物浇花，要说明房主当时的状态。",
+      "find": {
+        "check": "collocation",
+        "text": "in the homeowner’s 接名词，feed pets and water plants 是替人照看，房主不在家才需要。",
+        "quotes": [
+          "in the homeowner’s",
+          "feed pets and water plants"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "不在",
+        "reason": "房主为什么要人来喂宠物浇花，要说明房主当时的状态。名词看搭配：in the homeowner’s 接名词，feed pets and water plants 是替人照看，房主不在家才需要。",
+        "meaning": "房主不在家"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "favor",
+          "meaning": "恩惠；in one’s favor 是对某人有利，接不上 feed pets and water plants 要交代的房主外出。",
+          "quote": "feed pets and water plants"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "defense",
+          "meaning": "防御；in one’s defense 是替某人辩护，他们 feed pets and water plants 是替人照看。",
+          "quote": "feed pets and water plants"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honor",
+          "meaning": "荣誉；in one’s honor 是向某人致敬，feed pets and water plants 是因为房主不在家。",
+          "quote": "feed pets and water plants"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the homeowner’s",
+          "signalSide": "context-before",
+          "relation": "in one’s absence 在某人不在时。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "feed pets and water plants",
+          "signalSide": "context-before",
+          "relation": "喂宠物浇花是替不在家的房主照看。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:47": {
+      "blankId": "blank:paper-gaokao-2022-ii:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "main",
+      "context": "看家不全是观光，两人得事先把行程安排好，要一个安排的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "carefully 修饰，宾语是 their trips，后面 scheduling their days around the pets 正是在细排行程。",
+        "quotes": [
+          "carefully",
+          "scheduling their days around the pets"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "计划，规划",
+        "reason": "看家不全是观光，两人得事先把行程安排好，要一个安排的动作。动词看搭配：carefully 修饰，宾语是 their trips，后面 scheduling their days around the pets 正是在细排行程。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "explain",
+          "meaning": "解释；后面 scheduling their days 是在排日程，不是向谁解释行程。",
+          "quote": "scheduling their days"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "compare",
+          "meaning": "比较；scheduling their days around the pets 是围着宠物排日程，不是比较几趟旅行。",
+          "quote": "scheduling their days around the pets"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "complete",
+          "meaning": "完成；carefully 加上 scheduling their days 讲的是事先安排，不是走完行程。",
+          "quote": "scheduling their days"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "their trips",
+          "signalSide": "context-after",
+          "relation": "plan their trips 规划行程。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "scheduling their days around the pets",
+          "signalSide": "context-after",
+          "relation": "紧接着说按宠物安排每天的日程，是规划的具体做法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:48": {
+      "blankId": "blank:paper-gaokao-2022-ii:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "说明为什么要围着宠物排日程：这些宠物有时不好伺候。",
+      "find": {
+        "check": "collocation",
+        "text": "difficult to 后接动词，对象是 the pets，宠物难讨好，才要 scheduling their days around 它们。",
+        "quotes": [
+          "difficult to",
+          "the pets",
+          "scheduling their days around"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "使满意，取悦",
+        "reason": "说明为什么要围着宠物排日程：这些宠物有时不好伺候。动词看搭配：difficult to 后接动词，对象是 the pets，宠物难讨好，才要 scheduling their days around 它们。",
+        "meaning": "伺候好"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "buy",
+          "meaning": "买；宠物是房主家的，他们只是 feed pets 替人照看，谈不上难买。",
+          "quote": "feed pets"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "transport",
+          "meaning": "运送；他们是住进房主家照看 the pets，用不着把宠物运来运去。",
+          "quote": "the pets"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "choose",
+          "meaning": "选择；the pets 是房主家现成的，看家人没有挑选的余地。",
+          "quote": "the pets"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "difficult to",
+          "signalSide": "context-before",
+          "relation": "difficult to please 难以取悦，修饰前面的 pets。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the pets",
+          "signalSide": "context-before",
+          "relation": "难伺候的是宠物，所以日程要围着它们排。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:49": {
+      "blankId": "blank:paper-gaokao-2022-ii:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "main",
+      "context": "But 一转，看家虽辛苦也有好处，是住酒店得不到的一种感受。",
+      "find": {
+        "check": "echo",
+        "text": "后面说像住 at a friend’s house，这份自在正是 can’t find in a hotel 的，所以是舒适。",
+        "quotes": [
+          "at a friend’s house",
+          "can’t find in a hotel"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "舒适",
+        "reason": "But 一转，看家虽辛苦也有好处，是住酒店得不到的一种感受。名词看复现：后面说像住 at a friend’s house，这份自在正是 can’t find in a hotel 的，所以是舒适。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "support",
+          "meaning": "支持；后文说像住 at a friend’s house，讲的是住得自在，不是得到支持帮助。",
+          "quote": "at a friend’s house"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "control",
+          "meaning": "控制；他们还得 scheduling their days around the pets，看家谈不上给人掌控感。",
+          "quote": "scheduling their days around the pets"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "attention",
+          "meaning": "关注；at a friend’s house 说的是住得像在朋友家一样随意，不是受人关注。",
+          "quote": "at a friend’s house"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a level of",
+          "signalSide": "context-before",
+          "relation": "a level of comfort 一种舒适程度。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "at a friend’s house",
+          "signalSide": "context-after",
+          "relation": "像住在朋友家，复现了舒适自在的意思。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "But",
+          "signalSide": "context-before",
+          "relation": "But 从看家的辛苦转到它的好处。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:50": {
+      "blankId": "blank:paper-gaokao-2022-ii:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "杰茜卡打比方说看家的感受，要一个在朋友家借住的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "和 at a friend’s house 连用，前句比的是 a hotel 的住宿，所以是住在朋友家。",
+        "quotes": [
+          "at a friend’s house",
+          "a hotel"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "暂住，逗留",
+        "reason": "杰茜卡打比方说看家的感受，要一个在朋友家借住的动作。动词看搭配：和 at a friend’s house 连用，前句比的是 a hotel 的住宿，所以是住在朋友家。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cooking",
+          "meaning": "做饭；前句拿来比的是 a hotel 的住宿，在朋友家做饭和住酒店比不到一起。",
+          "quote": "a hotel"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waiting",
+          "meaning": "等待；和 a hotel 相比的是住的感受，说在朋友家等人对不上。",
+          "quote": "a hotel"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "studying",
+          "meaning": "学习；看家比的是 a hotel，讲住宿，不是在朋友家学习。",
+          "quote": "a hotel"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at a friend’s house",
+          "signalSide": "context-after",
+          "relation": "stay at a friend’s house 住在朋友家。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a hotel",
+          "signalSide": "context-before",
+          "relation": "前句拿酒店作比，说的都是住。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:51": {
+      "blankId": "blank:paper-gaokao-2022-ii:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "两人申请看家常被选中，要说明被接受的比例高。",
+      "find": {
+        "check": "collocation",
+        "text": "和 rate 连用，in getting accepted 是申请被接受，被接受的比例高就是 success rate。",
+        "quotes": [
+          "rate",
+          "getting accepted"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "成功",
+        "reason": "两人申请看家常被选中，要说明被接受的比例高。名词看搭配：和 rate 连用，in getting accepted 是申请被接受，被接受的比例高就是 success rate。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "survival",
+          "meaning": "存活；getting accepted as house sitters 说的是申请被接受，谈不上存活率。",
+          "quote": "getting accepted as house sitters"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "growth",
+          "meaning": "增长；high rate in getting accepted 是申请被接受的比例，不是增长速度。",
+          "quote": "getting accepted"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unemployment",
+          "meaning": "失业；他们 getting accepted 是被选上，和失业正好相反。",
+          "quote": "getting accepted"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "rate",
+          "signalSide": "context-after",
+          "relation": "success rate 成功率。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "getting accepted",
+          "signalSide": "context-after",
+          "relation": "被接受当看家人，说明成功的是申请。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:52": {
+      "blankId": "blank:paper-gaokao-2022-ii:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "他们总是做得比房主要求的多，要一个指房主心里预期的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "go beyond 接房主的期望，后句 leaving a nice small gift 这类额外的事正是超出期待。",
+        "quotes": [
+          "go beyond",
+          "leaving a nice small gift"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "期望",
+        "reason": "他们总是做得比房主要求的多，要一个指房主心里预期的名词。名词看搭配：go beyond 接房主的期望，后句 leaving a nice small gift 这类额外的事正是超出期待。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "budget",
+          "meaning": "预算；后句讲的是 leaving a nice small gift 这类贴心事，不是超出房主的花钱预算。",
+          "quote": "leaving a nice small gift"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "abilities",
+          "meaning": "能力；超出房主的能力说不通，他们做的是 keeping the house 干净这类额外照顾。",
+          "quote": "keeping the house"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understanding",
+          "meaning": "理解；后句 that means 列的三件事是做得比预想多，不是超出房主的理解。",
+          "quote": "that means"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "go beyond",
+          "signalSide": "context-before",
+          "relation": "go beyond one’s expectations 超出某人的期望。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "that means",
+          "signalSide": "context-after",
+          "relation": "that means 后列出的三件事具体说明怎样超出期望。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:53": {
+      "blankId": "blank:paper-gaokao-2022-ii:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "detail",
+      "context": "房主不在家，他们怎么处理宠物开心的照片，要一个把照片给房主的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 plenty of pictures of happy pets，房主人在外地，照片要发过去才看得到。",
+        "quotes": [
+          "plenty of pictures of happy pets"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "发送",
+        "reason": "房主不在家，他们怎么处理宠物开心的照片，要一个把照片给房主的动作。动词看搭配：宾语是 plenty of pictures of happy pets，房主人在外地，照片要发过去才看得到。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admiring",
+          "meaning": "欣赏；这些 pictures of happy pets 是给房主看的，自己欣赏起不到让房主放心的作用。",
+          "quote": "pictures of happy pets"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donating",
+          "meaning": "捐赠；plenty of pictures of happy pets 是给房主报平安的，谈不上捐出去。",
+          "quote": "plenty of pictures of happy pets"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "borrowing",
+          "meaning": "借；pictures of happy pets 是他们给房主宠物拍的，用不着借。",
+          "quote": "pictures of happy pets"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "plenty of pictures of happy pets",
+          "signalSide": "context-after",
+          "relation": "send pictures 发照片。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "that means",
+          "signalSide": "context-before",
+          "relation": "that means 后列举超出期待的做法，发照片是第一件。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:54": {
+      "blankId": "blank:paper-gaokao-2022-ii:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "离开前把房子保持成什么样，要一个让房主满意的状态。",
+      "find": {
+        "check": "collocation",
+        "text": "keeping the house 后接形容词，和 leaving a nice small gift 一样是让房主满意的事，房子要干净。",
+        "quotes": [
+          "keeping the house",
+          "leaving a nice small gift"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "干净的",
+        "reason": "离开前把房子保持成什么样，要一个让房主满意的状态。形容词看搭配：keeping the house 后接形容词，和 leaving a nice small gift 一样是让房主满意的事，房子要干净。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "open",
+          "meaning": "开着的；房门一直开着不安全，和 make the homeowner feel 放心的用意相反。",
+          "quote": "make the homeowner feel"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "simple",
+          "meaning": "简朴的；房子是房主的，看家人 keeping the house 能做的是打扫，不是改得简朴。",
+          "quote": "keeping the house"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "empty",
+          "meaning": "空的；房子里还有 happy pets 要照顾，谈不上让房子空着。",
+          "quote": "happy pets"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "keeping the house",
+          "signalSide": "context-before",
+          "relation": "keep the house clean 保持房子干净。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "leaving a nice small gift",
+          "signalSide": "context-after",
+          "relation": "并列的另一件贴心事，说明这里也是让房主满意的做法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:55": {
+      "blankId": "blank:paper-gaokao-2022-ii:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "房主当初挑了他们来看家，要让房主觉得这个选择对了，要一个指选择的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "和 made the right 连用，房主让他们 getting accepted 是做了选择，选对了就是 right decision。",
+        "quotes": [
+          "made the right",
+          "getting accepted"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "决定",
+        "reason": "房主当初挑了他们来看家，要让房主觉得这个选择对了，要一个指选择的名词。名词看搭配：和 made the right 连用，房主让他们 getting accepted 是做了选择，选对了就是 right decision。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "guess",
+          "meaning": "猜测；房主是挑选看家人，made the right 猜测接不上 getting accepted 的挑选。",
+          "quote": "getting accepted"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "response",
+          "meaning": "回应；right response 是回答得对，房主做的是 getting accepted 他们看家这件事。",
+          "quote": "getting accepted"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "impression",
+          "meaning": "印象；房主 made the right 什么要落在当初的挑选上，说做对了印象讲不通。",
+          "quote": "made the right"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "made the right",
+          "signalSide": "context-before",
+          "relation": "make the right decision 做出正确的决定。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "getting accepted",
+          "signalSide": "context-before",
+          "relation": "房主接受他们看家，就是当初做的决定。"
+        }
+      ]
+    }
+  }
+}

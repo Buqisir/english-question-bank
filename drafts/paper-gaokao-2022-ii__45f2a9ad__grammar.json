@@ -1,0 +1,1158 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:grammar-fill": {
+      "overview": "三岁的埃里克趁父亲看电视睡着，在阳台上踩椅子往下看时不慎翻出，挂在六楼阳台外呼救。正在修车的亨利听到喊声，扔下工具飞奔过去，伸出双臂接住了他，救了孩子一命。",
+      "fullTranslationZh": "亨利·泰勒在周末完成了一次年度最佳接球。他看见一个小孩悬挂在六楼公寓的阳台外，便跑了一百米，跳过一道1.2米高的栅栏，伸出双臂去接那个正在坠落的孩子。\n年仅三岁的埃里克·布朗掉下来时把亨利撞倒了。孩子正在住院，医生说他不会有事。\n布朗一家住在多伦多郊外的一栋公寓楼里。事发当天，布朗太太在上班，埃里克和父亲待在家里。父子俩看着电视都睡着了。\n过了一会儿，埃里克听到外面有孩子在玩，就醒了。他把一把椅子推到阳台上，爬上去看他们。往下看时，他不小心一滑，从边上翻了出去。他吊在那里坚持了几分钟，大声呼喊爸爸，可他爸爸没有听见。\n亨利听到尖叫声时正在修车。他抬头一看，只见埃里克挂在\n阳台外。他赶紧把工具扔到一边，张开双臂跑了过去。\n“他救了我儿子的命，”布朗太太说，“我都不知道该怎么感谢他。”\n“我只是不想让这孩子受伤。”亨利说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2022-ii:grammar-fill:1:2",
+          "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+          "sourceText": "When he saw a young child hanging from a sixth-floor apartment balcony (阳台), Henry ran one hundred metres, jumped over a 1.2-metre fence, and held out his arms to catch the __56__ (fall) child.",
+          "displayText": "When he saw a young child hanging from a sixth-floor apartment balcony (阳台), Henry ran one hundred metres, jumped over a 1.2-metre fence, and held out his arms to catch the falling child.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:56"
+          ],
+          "translationZh": "他看见一个小孩悬挂在六楼公寓的阳台外，便跑了一百米，跳过一道1.2米高的栅栏，伸出双臂去接那个正在坠落的孩子。",
+          "analysisZh": "主干是 Henry ran…, jumped over…, and held out his arms，亨利接连做了三个动作，三个过去式谓语并列。句首 When 引出时间状语从句，从句里 saw a young child hanging… 是 see sb doing，看见孩子正挂在阳台外。句末 to catch the falling child 说明伸出双臂的目的。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 33,
+              "quote": "When he saw a young child hanging"
+            },
+            {
+              "start": 77,
+              "end": 105,
+              "quote": "Henry ran one hundred metres"
+            },
+            {
+              "start": 160,
+              "end": 186,
+              "quote": "to catch the falling child"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:block:paper-gaokao-2022-ii:grammar-fill:4:4",
+          "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+          "sourceText": "He hung on for a few minutes __61__ screamed for his father, but his father didn’t hear him.",
+          "displayText": "He hung on for a few minutes and screamed for his father, but his father didn’t hear him.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:61"
+          ],
+          "translationZh": "他吊在那里坚持了几分钟，大声呼喊爸爸，可他爸爸没有听见。",
+          "analysisZh": "前一分句的主语 He 带两个并列谓语 hung on for a few minutes 和 screamed for his father，由 and 连接，说他一边吊着一边呼喊。but 引出后一分句 his father didn’t hear him，与前面形成转折：喊了，爸爸却没听见。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 28,
+              "quote": "hung on for a few minutes"
+            },
+            {
+              "start": 29,
+              "end": 56,
+              "quote": "and screamed for his father"
+            },
+            {
+              "start": 58,
+              "end": 88,
+              "quote": "but his father didn’t hear him"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 75,
+              "quote": "亨利·泰勒在周末完成了一次年度最佳接球。他看见一个小孩悬挂在六楼公寓的阳台外，便跑了一百米，跳过一道1.2米高的栅栏，伸出双臂去接那个正在坠落的孩子。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:2"
+              ],
+              "start": 76,
+              "end": 114,
+              "quote": "年仅三岁的埃里克·布朗掉下来时把亨利撞倒了。孩子正在住院，医生说他不会有事。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:3"
+              ],
+              "start": 115,
+              "end": 170,
+              "quote": "布朗一家住在多伦多郊外的一栋公寓楼里。事发当天，布朗太太在上班，埃里克和父亲待在家里。父子俩看着电视都睡着了。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:4"
+              ],
+              "start": 171,
+              "end": 261,
+              "quote": "过了一会儿，埃里克听到外面有孩子在玩，就醒了。他把一把椅子推到阳台上，爬上去看他们。往下看时，他不小心一滑，从边上翻了出去。他吊在那里坚持了几分钟，大声呼喊爸爸，可他爸爸没有听见。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:5"
+              ],
+              "start": 262,
+              "end": 288,
+              "quote": "亨利听到尖叫声时正在修车。他抬头一看，只见埃里克挂在"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:6"
+              ],
+              "start": 289,
+              "end": 313,
+              "quote": "阳台外。他赶紧把工具扔到一边，张开双臂跑了过去。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:7"
+              ],
+              "start": 314,
+              "end": 345,
+              "quote": "“他救了我儿子的命，”布朗太太说，“我都不知道该怎么感谢他。”"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:grammar-fill:8"
+              ],
+              "start": 346,
+              "end": 364,
+              "quote": "“我只是不想让这孩子受伤。”亨利说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+            "text": "Henry Tyler made the catch of the year on the weekend. When he saw a young child hanging from a sixth-floor apartment balcony (阳台), Henry ran one hundred metres, jumped over a 1.2-metre fence, and held out his arms to catch the falling child."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+            "text": "The Brown family live in an apartment building outside Toronto. On the day of the accident, Mrs. Brown was at work and Eric was at home with his father. They both fell asleep while watching TV."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+            "text": "Eric woke up a little later when he heard children playing outside. He pushed a chair onto the balcony, and climbed up to see them. When he looked down, he accidentally slipped and fell over the edge. He hung on for a few minutes and screamed for his father, but his father didn’t hear him."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:5",
+            "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:5",
+            "text": "Henry was fixing his car when he heard the screams. He looked up and saw Eric hanging from the"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:6",
+            "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:6",
+            "text": "balcony. He quickly threw his tools aside, and started running, arms out."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:7",
+            "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+            "text": "\"He saved my son’s life,\" said Mrs. Brown. \"I don’t know how to thank him.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 218,
+                "end": 227,
+                "quote": "catch the"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 67,
+                "end": 125,
+                "quote": "a young child hanging from a sixth-floor apartment balcony"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 63,
+                "end": 67,
+                "quote": "去接那个"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 23,
+                "end": 38,
+                "quote": "一个小孩悬挂在六楼公寓的阳台外"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:56"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 228,
+                "end": 235,
+                "quote": "falling"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 67,
+                "end": 72,
+                "quote": "正在坠落的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 7,
+                "end": 24,
+                "quote": "Brown family live"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 0,
+                "end": 6,
+                "quote": "布朗一家住在"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:57"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 0,
+                "end": 3,
+                "quote": "The"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 0,
+                "end": 4,
+                "quote": "布朗一家"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 156,
+                "end": 170,
+                "quote": "They both fell"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 186,
+                "end": 203,
+                "quote": "while watching TV"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 46,
+                "end": 50,
+                "quote": "看着电视"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 50,
+                "end": 54,
+                "quote": "都睡着了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:58"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 168,
+                "end": 174,
+                "quote": "asleep"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:3",
+                "start": 51,
+                "end": 54,
+                "quote": "睡着了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 108,
+                "end": 118,
+                "quote": "climbed up"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 42,
+                "end": 66,
+                "quote": "children playing outside"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 35,
+                "end": 41,
+                "quote": "爬上去看他们"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 11,
+                "end": 18,
+                "quote": "外面有孩子在玩"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:59"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 119,
+                "end": 125,
+                "quote": "to see"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 38,
+                "end": 41,
+                "quote": "看他们"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 182,
+                "end": 189,
+                "quote": "slipped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 51,
+                "end": 53,
+                "quote": "一滑"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:60"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 156,
+                "end": 168,
+                "quote": "accidentally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 48,
+                "end": 51,
+                "quote": "不小心"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 217,
+                "end": 242,
+                "quote": "hung on for a few minutes"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 250,
+                "end": 273,
+                "quote": "screamed for his father"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 63,
+                "end": 73,
+                "quote": "吊在那里坚持了几分钟"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 74,
+                "end": 80,
+                "quote": "大声呼喊爸爸"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:61"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 230,
+                "end": 233,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 63,
+                "end": 80,
+                "quote": "吊在那里坚持了几分钟，大声呼喊爸爸"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:5",
+                "start": 0,
+                "end": 5,
+                "quote": "Henry"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:5",
+                "start": 27,
+                "end": 52,
+                "quote": "when he heard the screams"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:5",
+                "start": 0,
+                "end": 8,
+                "quote": "亨利听到尖叫声时"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:62"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:5",
+                "start": 6,
+                "end": 16,
+                "quote": "was fixing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:5",
+                "start": 8,
+                "end": 12,
+                "quote": "正在修车"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:6",
+                "start": 9,
+                "end": 19,
+                "quote": "He quickly"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:6",
+                "start": 56,
+                "end": 71,
+                "quote": "started running"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:6",
+                "start": 5,
+                "end": 7,
+                "quote": "赶紧"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:6",
+                "start": 19,
+                "end": 23,
+                "quote": "跑了过去"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:63"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:6",
+                "start": 20,
+                "end": 25,
+                "quote": "threw"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:6",
+                "start": 10,
+                "end": 14,
+                "quote": "扔到一边"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 1,
+                "end": 12,
+                "quote": "He saved my"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 26,
+                "end": 30,
+                "quote": "life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 1,
+                "end": 9,
+                "quote": "他救了我儿子的命"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:64"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:7",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 13,
+                "end": 18,
+                "quote": "son’s"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 4,
+                "end": 8,
+                "quote": "我儿子的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 51,
+                "end": 63,
+                "quote": "I don’t know"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 71,
+                "end": 83,
+                "quote": "to thank him"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 18,
+                "end": 23,
+                "quote": "我都不知道"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:65"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:7",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 57,
+                "end": 60,
+                "quote": "how"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:7",
+                "start": 23,
+                "end": 29,
+                "quote": "该怎么感谢他"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2022-ii:grammar-fill:1:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:56"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2022-ii:grammar-fill:1:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 132,
+                "end": 214,
+                "quote": "Henry ran one hundred metres, jumped over a 1.2-metre fence, and held out his arms"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 215,
+                "end": 241,
+                "quote": "to catch the falling child"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 39,
+                "end": 63,
+                "quote": "便跑了一百米，跳过一道1.2米高的栅栏，伸出双臂"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:1",
+                "start": 63,
+                "end": 74,
+                "quote": "去接那个正在坠落的孩子"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:block:paper-gaokao-2022-ii:grammar-fill:4:4",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:61"
+            ],
+            "selectedSentenceId": "sentence:block:paper-gaokao-2022-ii:grammar-fill:4:4",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 201,
+                "end": 257,
+                "quote": "He hung on for a few minutes and screamed for his father"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 259,
+                "end": 289,
+                "quote": "but his father didn’t hear him"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 62,
+                "end": 80,
+                "quote": "他吊在那里坚持了几分钟，大声呼喊爸爸"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2022-ii:grammar-fill:4",
+                "start": 81,
+                "end": 89,
+                "quote": "可他爸爸没有听见"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2022-ii:56": {
+      "blankId": "blank:paper-gaokao-2022-ii:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "fall",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "falling",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "active-relation"
+        ]
+      },
+      "reason": "空格夹在 the 和 child 之间，作定语修饰 child，说明亨利要接的是怎样的孩子。孩子此刻正从楼上往下掉，fall 又是不及物动词，fallen 表示已经掉落，所以用表示正在进行的现在分词 falling。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "catch the",
+          "signalSide": "passage",
+          "relation": "空格修饰 catch the 后面的 child。"
+        },
+        {
+          "type": "subject",
+          "signalText": "a young child hanging from a sixth-floor apartment balcony",
+          "signalSide": "passage",
+          "relation": "孩子挂在阳台外随时会掉，正在坠落的是孩子自己。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:57": {
+      "blankId": "blank:paper-gaokao-2022-ii:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "The",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "proper-name-class"
+        ]
+      },
+      "reason": "空格在 Brown family 前作限定词，指布朗这一家人，用 the + 姓氏 + family 的说法；谓语用复数 live，也说明说的是这一家的成员。空在句首，首字母大写为 The。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "Brown family",
+          "signalSide": "passage",
+          "relation": "the Brown family 指布朗一家人。"
+        },
+        {
+          "type": "subject",
+          "signalText": "family live",
+          "signalSide": "passage",
+          "relation": "谓语 live 用复数，指一家人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:58": {
+      "blankId": "blank:paper-gaokao-2022-ii:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "sleep",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
+      "answer": "asleep",
+      "role": null,
+      "similarityProfile": {
+        "route": "true-derived-adjective",
+        "features": []
+      },
+      "reason": "They both fell ___ 里的 fell 是系动词，意思是“变得”，后面缺表语，要用形容词；sleep 的形容词形式是 asleep，fall asleep 就是“睡着”，与 while watching TV 看着电视睡着相合。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "They both fell",
+          "signalSide": "passage",
+          "relation": "fell 作系动词，后面接形容词作表语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "while watching TV",
+          "signalSide": "passage",
+          "relation": "看着电视时睡着，fall asleep 合乎情境。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:59": {
+      "blankId": "blank:paper-gaokao-2022-ii:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "see",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to see",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "He … climbed up 已经说完爬上去这个动作，空格引出爬上去要干什么，作目的状语，用不定式 to see；them 回指前句 children playing outside，他是要看外面玩耍的孩子。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "climbed up",
+          "signalSide": "passage",
+          "relation": "不定式补充爬上去的目的。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "children playing outside",
+          "signalSide": "passage",
+          "relation": "them 指外面玩耍的孩子，是要去看的对象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:60": {
+      "blankId": "blank:paper-gaokao-2022-ii:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "accidental",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "accidentally",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "he ___ slipped and fell 中主语、谓语都齐了，空格修饰谓语 slipped，说明他是不小心滑倒的，修饰动词要用副词，accidental 加 -ly 变成 accidentally。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "slipped",
+          "signalSide": "passage",
+          "relation": "空格修饰谓语动词 slipped，用副词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:61": {
+      "blankId": "blank:paper-gaokao-2022-ii:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接 hung on for a few minutes 和 screamed for his father 两个谓语，主语都是 He，两件事同时并进，用并列连词 and。转折在后面的 but his father didn’t hear him，这里两个动作并不对立，不用 but。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "hung on for a few minutes",
+          "signalSide": "passage",
+          "relation": "前一个谓语，与 screamed 并列。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "screamed for his father",
+          "signalSide": "passage",
+          "relation": "后一个谓语，同一主语 He 发出。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:62": {
+      "blankId": "blank:paper-gaokao-2022-ii:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "fix",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was fixing",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-progressive-background",
+        "features": []
+      },
+      "reason": "空格作主句谓语，主语是 Henry；when he heard the screams 给出过去的一个时刻，听到尖叫时修车正在进行，是背景动作，用过去进行时 was fixing。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Henry",
+          "signalSide": "passage",
+          "relation": "主语是第三人称单数 Henry，助动词用 was。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "when he heard the screams",
+          "signalSide": "passage",
+          "relation": "过去某一时刻正在进行的动作，用过去进行时。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:63": {
+      "blankId": "blank:paper-gaokao-2022-ii:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "throw",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "threw",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-narrative-chain",
+        "features": []
+      },
+      "reason": "空格作谓语，主语是 He；全文用一般过去时讲这件事，扔下工具和后面的 started running 是接连发生的两个动作，与 started 并列，用过去式 threw。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "He quickly",
+          "signalSide": "passage",
+          "relation": "主语 He 后缺谓语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "started running",
+          "signalSide": "passage",
+          "relation": "并列谓语 started 是过去式，threw 与之一致。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:64": {
+      "blankId": "blank:paper-gaokao-2022-ii:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "son",
+      "facetKey": "grammar-fill.given.noun.genitive",
+      "answer": "son’s",
+      "role": null,
+      "similarityProfile": {
+        "route": "genitive",
+        "features": []
+      },
+      "reason": "He saved my ___ life 中，空格和 my 一起修饰 life，说明救的是谁的命；是布朗太太儿子的命，son 要用所有格 son’s。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "life",
+          "signalSide": "passage",
+          "relation": "son’s 修饰 life，表示所属。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "He saved my",
+          "signalSide": "passage",
+          "relation": "my 修饰 son，my son’s life 我儿子的命。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:65": {
+      "blankId": "blank:paper-gaokao-2022-ii:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "how",
+      "role": null,
+      "similarityProfile": {
+        "route": "wh-infinitive",
+        "features": [
+          "object-clause"
+        ]
+      },
+      "reason": "I don’t know 后缺宾语，空格和 to thank him 一起作 know 的宾语；布朗太太说的是不知道用什么方式感谢亨利，问的是方式，用 how，how to thank him 即“该怎样感谢他”。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "I don’t know",
+          "signalSide": "passage",
+          "relation": "know 后接“疑问词 + 不定式”作宾语。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "to thank him",
+          "signalSide": "passage",
+          "relation": "缺的是感谢的方式，用 how。"
+        }
+      ]
+    }
+  }
+}

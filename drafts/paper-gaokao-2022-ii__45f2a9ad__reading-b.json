@@ -1,0 +1,784 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:reading-b": {
+      "overview": "记者作者春节给两岁孙子读绘本，孙子却像玩平板一样戳书页，让他意识到新媒体对年轻一代再平常不过；他自认数字技能不差，只是很少上镜，这回却因拍视频当了回网红。",
+      "fullTranslationZh": "我们记者生活在一个讲故事的新时代，手里有许多新的多媒体工具。许多年轻人甚至意识不到这是新事物。对他们来说，这再平常不过。\n\n今年春节假期，我和两岁的孙子坐在沙发上时，才真切体会到这一点。我带了一本儿童读物给他读。书里字句简单、图画色彩鲜艳——正适合他这个年纪。\n\n想象一下这个画面：孙子坐在我腿上，我把书举在他面前，好让他看到图画。我一边读，他一边伸出手指戳书页。\n\n这是怎么回事？我心想，他只是喜欢这些图吧。接着我翻过一页，继续往下读。他戳得更用力了。我差点把书掉了。我很困惑：这孩子是不是有什么问题？\n\n后来我明白了是怎么回事。他其实对书很陌生。他爸爸常用一台平板电脑逗他玩，平板里装满了彩色图画，一戳就会动起来。他以为我的故事书也是那样的。\n\n对不起了，孩子。这本书不属于你的高科技世界。它是个过时的、没有生气的东西，是件古董，就像你爷爷一样。不过，我也许老了，但说到数字技术，我还没落伍到无可救药的地步。我会剪辑视频、制作音频。我用移动支付。我甚至还建过网站。\n\n不过，我的新媒体经历中有一处明显的空白：我很少出现在镜头前，因为我长了一张只适合上电台的脸。但这并没有妨碍《中国日报》上周邀请我为一个关于京津冀一体化的视频项目讲一个个人故事。\n\n总之，爷爷现在成了网红——出了两分钟的名！我保证不会因此飘飘然。但我一定要让我两岁的孙子在他的平板电脑上看到这段视频。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+          "sourceText": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them.",
+          "displayText": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:25"
+          ],
+          "translationZh": "他爸爸常用一台平板电脑逗他玩，平板里装满了彩色图画，一戳就会动起来。",
+          "analysisZh": "主干是 His father amused the boy（他爸爸逗孩子玩），with a tablet computer 说用什么逗。后面两层定语从句一层套一层：which was loaded with colorful pictures 修饰平板，说里面装满彩图；that come alive 修饰 pictures，说这些图会动；when you poke them 交代什么时候动。读到最后的“一戳就动”，就明白孩子为什么去戳书页。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 36,
+              "quote": "amused the boy"
+            },
+            {
+              "start": 60,
+              "end": 99,
+              "quote": "which was loaded with colorful pictures"
+            },
+            {
+              "start": 100,
+              "end": 134,
+              "quote": "that come alive when you poke them"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+          "sourceText": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+          "displayText": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:27"
+          ],
+          "translationZh": "不过，我的新媒体经历中有一处明显的空白：我很少出现在镜头前，因为我长了一张只适合上电台的脸。",
+          "analysisZh": "主干 There’s one notable gap（有一处明显的空白），in my new-media experience 说是哪方面的空白；however 插在句中，和上段他会剪视频、建网站形成转折。冒号后具体说这处空白：I’ve spent little time in front of a camera（很少待在镜头前）。since 引出原因，a face made for radio 是自嘲：电台只听声音不看脸，意思是自己的长相不上镜。",
+          "underlineRanges": [
+            {
+              "start": 8,
+              "end": 23,
+              "quote": "one notable gap"
+            },
+            {
+              "start": 66,
+              "end": 104,
+              "quote": "spent little time in front of a camera"
+            },
+            {
+              "start": 119,
+              "end": 140,
+              "quote": "a face made for radio"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-ii:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:1"
+              ],
+              "start": 0,
+              "end": 60,
+              "quote": "我们记者生活在一个讲故事的新时代，手里有许多新的多媒体工具。许多年轻人甚至意识不到这是新事物。对他们来说，这再平常不过。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:2"
+              ],
+              "start": 62,
+              "end": 130,
+              "quote": "今年春节假期，我和两岁的孙子坐在沙发上时，才真切体会到这一点。我带了一本儿童读物给他读。书里字句简单、图画色彩鲜艳——正适合他这个年纪。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:3"
+              ],
+              "start": 132,
+              "end": 182,
+              "quote": "想象一下这个画面：孙子坐在我腿上，我把书举在他面前，好让他看到图画。我一边读，他一边伸出手指戳书页。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:4"
+              ],
+              "start": 184,
+              "end": 252,
+              "quote": "这是怎么回事？我心想，他只是喜欢这些图吧。接着我翻过一页，继续往下读。他戳得更用力了。我差点把书掉了。我很困惑：这孩子是不是有什么问题？"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:5"
+              ],
+              "start": 254,
+              "end": 323,
+              "quote": "后来我明白了是怎么回事。他其实对书很陌生。他爸爸常用一台平板电脑逗他玩，平板里装满了彩色图画，一戳就会动起来。他以为我的故事书也是那样的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:6"
+              ],
+              "start": 325,
+              "end": 434,
+              "quote": "对不起了，孩子。这本书不属于你的高科技世界。它是个过时的、没有生气的东西，是件古董，就像你爷爷一样。不过，我也许老了，但说到数字技术，我还没落伍到无可救药的地步。我会剪辑视频、制作音频。我用移动支付。我甚至还建过网站。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:7"
+              ],
+              "start": 436,
+              "end": 524,
+              "quote": "不过，我的新媒体经历中有一处明显的空白：我很少出现在镜头前，因为我长了一张只适合上电台的脸。但这并没有妨碍《中国日报》上周邀请我为一个关于京津冀一体化的视频项目讲一个个人故事。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-b:8"
+              ],
+              "start": 526,
+              "end": 585,
+              "quote": "总之，爷爷现在成了网红——出了两分钟的名！我保证不会因此飘飘然。但我一定要让我两岁的孙子在他的平板电脑上看到这段视频。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-b-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+                "start": 73,
+                "end": 208,
+                "quote": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p5",
+                "start": 21,
+                "end": 55,
+                "quote": "他爸爸常用一台平板电脑逗他玩，平板里装满了彩色图画，一戳就会动起来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-b-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:27"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+                "start": 0,
+                "end": 141,
+                "quote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p7",
+                "start": 0,
+                "end": 46,
+                "quote": "不过，我的新媒体经历中有一处明显的空白：我很少出现在镜头前，因为我长了一张只适合上电台的脸。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+                "start": 0,
+                "end": 35,
+                "quote": "Then I realized what was happening."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:1",
+                "start": 82,
+                "end": 128,
+                "quote": "Many young people don’t even realize it’s new."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p5",
+                "start": 0,
+                "end": 12,
+                "quote": "后来我明白了是怎么回事。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p1",
+                "start": 30,
+                "end": 47,
+                "quote": "许多年轻人甚至意识不到这是新事物。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+                "start": 73,
+                "end": 208,
+                "quote": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+                "start": 209,
+                "end": 247,
+                "quote": "He thought my storybook was like that."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p5",
+                "start": 21,
+                "end": 55,
+                "quote": "他爸爸常用一台平板电脑逗他玩，平板里装满了彩色图画，一戳就会动起来。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p5",
+                "start": 55,
+                "end": 69,
+                "quote": "他以为我的故事书也是那样的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+                "start": 128,
+                "end": 202,
+                "quote": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+                "start": 203,
+                "end": 282,
+                "quote": "I edit video and produce audio. I use mobile payment. I’ve even built websites."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p6",
+                "start": 50,
+                "end": 81,
+                "quote": "不过，我也许老了，但说到数字技术，我还没落伍到无可救药的地步。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p6",
+                "start": 81,
+                "end": 109,
+                "quote": "我会剪辑视频、制作音频。我用移动支付。我甚至还建过网站。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+                "start": 0,
+                "end": 141,
+                "quote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-b-p7",
+                "start": 0,
+                "end": 46,
+                "quote": "不过，我的新媒体经历中有一处明显的空白：我很少出现在镜头前，因为我长了一张只适合上电台的脸。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先提出年轻人把新媒体当成平常事这一观点，再用给孙子读书、孙子戳书页的小故事来印证；接着自嘲之余说明自己数字技能不差，只是很少上镜，最后以自己拍视频成网红的趣事收尾，呼应开头的新媒体时代。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:1",
+            "summary": "记者身处多媒体讲故事的新时代，年轻人却不觉得新",
+            "function": "提出观点，引出下文故事"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:2",
+            "summary": "春节给两岁孙子读绘本时，作者真切体会到这一点",
+            "function": "交代故事的时间、人物和起因"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:3",
+            "summary": "作者读书时孙子伸手戳书页",
+            "function": "描述令人不解的举动"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:4",
+            "summary": "作者以为孙子只是喜欢图画，孙子却戳得更用力，作者很困惑",
+            "function": "制造悬念，推进情节"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+            "summary": "原来孙子玩惯了一戳就动的平板电脑，以为书也一样",
+            "function": "揭开原因，印证开头观点"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+            "summary": "作者自嘲是古董，但说明自己会剪视频、用移动支付、建网站",
+            "function": "转向作者自己，说明其数字技能"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+            "summary": "作者很少上镜，却受《中国日报》邀请拍视频",
+            "function": "交代新媒体经历的空白和新机会"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+            "summary": "作者成了短暂的网红，要让孙子在平板上看视频",
+            "function": "幽默收尾，呼应全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-ii:24": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "结合 This 所指的观点和后文的故事，推断短语 hit home for me 的意思。",
+      "stemTranslationZh": "第2段画线部分“hit home for me”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读故事，看他什么时候 realized",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为我提供了庇护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Provided shelter for me.",
+            "explanation": "home 容易让人想到家和住处；放进去成了“这一点给我提供了庇护”，可他只是和孙子坐在沙发上读书，没有谁需要栖身之处。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "让我非常清楚地认识到。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "quote": "Then I realized what was happening.",
+              "anchor": "I realized"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:1",
+              "quote": "Many young people don’t even realize it’s new.",
+              "anchor": "don’t even realize"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "让我减轻了压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Took the pressure off me.",
+            "explanation": "放进去成了“这一点让我松了口气”；可接下来他被孙子戳书弄得很困惑（confused），原文没写他有压力，更谈不上减轻。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对我很管用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Worked quite well on me.",
+            "explanation": "放进去成了“这一点在我身上很管用”；This 说的是年轻人把新媒体当平常事这个现象，现象只能被人看清，谈不上对他起作用。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "hit home for me",
+          "sourceRole": "stem",
+          "targetText": "This hit home for me as I was sitting with my 2-year-old grandson on a sofa over the Spring Festival holiday.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "Then I realized what was happening",
+          "bridgeZh": "This 指年轻人视新媒体为平常，孙子戳书让他 realized 这点",
+          "note": "题干 hit home for me 原词出现在原文。"
+        },
+        {
+          "sourceText": "Became very clear to me.",
+          "sourceRole": "correctOption",
+          "targetText": "Then I realized what was happening.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "This 说的是一个看法，后面讲的是他亲眼看着孙子把书当平板去戳，所以 hit home for me 必须是“让我真正看清”一类的意思。放回去：和孙子坐在沙发上读书时，我才真切明白了这一点，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出孙子戳故事书的原因。",
+      "stemTranslationZh": "孩子为什么戳故事书？",
+      "locateBy": "stem",
+      "locateFindZh": "that 指什么，往前一句找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他把书当成了平板电脑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "quote": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them.",
+              "anchor": "a tablet computer"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "quote": "He thought my storybook was like that.",
+              "anchor": "like that"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他不喜欢那些彩色图画。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "He just likes the pictures, I thought.",
+            "sourceHighlight": "likes the pictures",
+            "optionText": "He disliked the colorful pictures.",
+            "optionHighlight": "disliked",
+            "explanation": "爷爷起初猜的是孙子喜欢这些图（likes the pictures），选项改成了不喜欢；后来他才知道孙子是想让图动起来。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:4",
+              "quote": "He just likes the pictures, I thought.",
+              "anchor": "likes the pictures"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他在生爷爷的气。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He was angry with his grandpa.",
+            "explanation": "困惑的是爷爷（I was confused），原文没写孩子生气；他戳得更用力（even harder），是图没动起来。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他想自己读这本书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He wanted to read it by himself.",
+            "explanation": "原文是爷爷举着书念给他听（As I read），孩子坐在他腿上，没提孩子想自己读。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "storybook",
+          "sourceRole": "stem",
+          "targetText": "He thought my storybook was like that.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "a tablet computer",
+          "bridgeZh": "that 指爸爸那台一戳画面就动的平板电脑",
+          "note": "题干 storybook 原词出现在原文。"
+        },
+        {
+          "sourceText": "He took it for a tablet computer.",
+          "sourceRole": "correctOption",
+          "targetText": "He thought my storybook was like that.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项的“把书当成”（took it for）就是原文的“以为故事书也是那样”（thought … was like that）：他戳书，是想让书上的图也动起来，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者对自己的评价和他列出的技能，推断他怎样看待自己。",
+      "stemTranslationZh": "作者怎样看待自己？",
+      "locateBy": "options",
+      "locateFindZh": "四个副词逐个回[[block:paper-gaokao-2022-ii:reading-b:6]][[block:paper-gaokao-2022-ii:reading-b:7]]，看他怎么评价自己",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "在社会上有雄心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I promise not to let it go to my head.",
+            "sourceHighlight": "not to let it go to my head",
+            "optionText": "Socially ambitious.",
+            "optionHighlight": "ambitious",
+            "explanation": "成了网红后他说不会让名气冲昏头脑（not to let it go to my head），只想让孙子看看；原文看不出他想出人头地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "quote": "I promise not to let it go to my head.",
+              "anchor": "not to let it go to my head"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "外表有吸引力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+            "sourceHighlight": "a face made for radio",
+            "optionText": "Physically attractive.",
+            "optionHighlight": "attractive",
+            "explanation": "他自嘲长了一张只适合上电台的脸（a face made for radio），意思是长相不上镜，选项说成外表有吸引力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+              "quote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+              "anchor": "a face made for radio"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "经济上独立。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Financially independent.",
+            "explanation": "原文的 mobile payment 只说明他会用手机支付这类数码工具，没谈他的收入或经济上是否独立。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在数字技术方面很能干。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+              "quote": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking.",
+              "anchor": "digitally speaking"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+              "quote": "I edit video and produce audio. I use mobile payment. I’ve even built websites.",
+              "anchor": "edit video"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Digitally competent.",
+          "sourceRole": "correctOption",
+          "targetText": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "“数字方面”（Digitally）出自原文 digitally speaking；“能干”是把他说自己并非无可救药（not hopelessly challenged）和后面会剪视频、做音频、建网站（edit video … built websites）合起来得出的，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项分别带回作者讲自己工作的几处，看哪一项和原文一致。",
+      "stemTranslationZh": "关于作者的记者身份，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "四项逐个回[[block:paper-gaokao-2022-ii:reading-b:6]]到[[block:paper-gaokao-2022-ii:reading-b:8]]，看他做过、没做过什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他缺乏工作经验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+            "sourceHighlight": "one notable gap in my new-media experience",
+            "optionText": "He lacks experience in his job.",
+            "optionHighlight": "lacks experience in his job",
+            "explanation": "原文说他的新媒体经历里只有一处明显空白（one notable gap），就是很少上镜；选项扩大成整个工作都缺经验，而[[block:paper-gaokao-2022-ii:reading-b:6]]他会剪视频、建网站。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+              "quote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+              "anchor": "one notable gap"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他很少上电视。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+              "quote": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+              "anchor": "little time in front of a camera"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他管理一个视频部门。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "video",
+            "optionText": "video",
+            "matchType": "exact",
+            "relationNote": "video 出自[[block:paper-gaokao-2022-ii:reading-b:6|I edit video]]，原文只说他会剪辑视频，没说他管理视频部门。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+              "quote": "I edit video and produce audio.",
+              "anchor": "edit video"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他经常采访网红。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "internet star",
+            "optionText": "internet star",
+            "matchType": "exact",
+            "relationNote": "internet star 出自[[block:paper-gaokao-2022-ii:reading-b:8]]，说的是他自己拍视频出了两分钟的名，不是他去采访网红；原文没提采访。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "quote": "Anyway, grandpa is now an internet star – two minutes of fame!",
+              "anchor": "internet star"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He seldom appears on television.",
+          "sourceRole": "correctOption",
+          "targetText": "There’s one notable gap in my new-media experience, however: I’ve spent little time in front of a camera, since I have a face made for radio.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+          "relationType": "paraphrase",
+          "note": "选项的“很少上电视”（seldom appears on television）就是原文的“很少待在镜头前”（spent little time in front of a camera），后半句自嘲脸只适合上电台也是这个意思，选 B。"
+        }
+      ]
+    }
+  }
+}

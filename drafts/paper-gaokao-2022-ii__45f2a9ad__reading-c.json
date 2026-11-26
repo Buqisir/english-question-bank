@@ -1,0 +1,774 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:reading-c": {
+      "overview": "美国多数州禁止开车发短信，宣传劝导也没管住，问题反而加剧。纽约立法者提议给警察配备 Textalyzer，在车祸现场查司机是否用过手机，像治酒驾一样治分心驾驶。",
+      "fullTranslationZh": "过去七年里，美国大多数州已禁止司机开车时发短信，公益宣传活动也尝试了各种方法，劝人们开车时放下手机。\n\n然而，无论用什么标准衡量，这个问题似乎都在变得更糟。美国人仍在边开车边发短信，还刷社交网络、拍照。道路交通事故曾连续多年下降，如今却在急剧上升。\n\n这在一定程度上是因为人们开车更多了，但美国国家公路交通安全管理局局长马克·罗斯金德说，分心驾驶“遗憾的是，只增不减”。\n\n“大变革需要大思路，”他上个月在一次演讲中说，泛指改善道路安全的必要。于是，为了改变这种典型的现代行为，立法者和公共卫生专家正回头借用一个老办法：他们想像对待酒驾一样对待分心驾驶。\n\n纽约立法者提出的一个设想是给警察配备一种名叫 Textalyzer 的新设备。它的用法是这样的：警察到达车祸现场后，可以要来司机的手机，用 Textalyzer 检查手机操作系统里最近的操作记录。这项技术能够确定司机刚才是否发过短信、电子邮件，或做过纽约免提驾驶法律所不允许的其他事情。\n\n“我们需要一些写进法规、能改变人们行为的东西，”费利克斯·W.奥尔蒂斯说，他曾推动纽约州在2001年出台禁止司机使用手持设备的禁令。他说，如果 Textalyzer 法案成为法律，“人们就会更不敢把手放到手机上”。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+          "sourceText": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+          "displayText": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:29"
+          ],
+          "translationZh": "这项技术能够确定司机刚才是否发过短信、电子邮件，或做过纽约免提驾驶法律所不允许的其他事情。",
+          "analysisZh": "主干是 The technology could determine whether …（这项技术能确定是否……），whether 引出 determine 的宾语从句。从句里 had just texted、emailed、done anything else 三个过去完成时并列，说的是车祸发生前刚做过的事；that is not allowed under New York’s hands-free driving laws 修饰 anything else，把范围限定在免提驾驶法律禁止的操作。",
+          "underlineRanges": [
+            {
+              "start": 15,
+              "end": 38,
+              "quote": "could determine whether"
+            },
+            {
+              "start": 48,
+              "end": 94,
+              "quote": "had just texted, emailed or done anything else"
+            },
+            {
+              "start": 95,
+              "end": 114,
+              "quote": "that is not allowed"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
+          "sourceText": "So to try to change a distinctly modern behavior, lawmakers and public health experts are reaching back to an old approach: They want to treat distracted driving like drunk driving.",
+          "displayText": "So to try to change a distinctly modern behavior, lawmakers and public health experts are reaching back to an old approach: They want to treat distracted driving like drunk driving.",
+          "relatedQuestionIds": [],
+          "translationZh": "于是，为了改变这种典型的现代行为，立法者和公共卫生专家正回头借用一个老办法：他们想像对待酒驾一样对待分心驾驶。",
+          "analysisZh": "主干是 lawmakers and public health experts are reaching back to an old approach（立法者和公共卫生专家正回头借用一个老办法）。句首 to try to change a distinctly modern behavior 是目的状语，说为什么这样做；冒号后具体解释老办法：treat A like B，像对待酒驾一样对待分心驾驶。modern 和 old 一新一旧，点出用老办法治新问题。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 19,
+              "quote": "to try to change"
+            },
+            {
+              "start": 90,
+              "end": 122,
+              "quote": "reaching back to an old approach"
+            },
+            {
+              "start": 137,
+              "end": 180,
+              "quote": "treat distracted driving like drunk driving"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-ii:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-c:1"
+              ],
+              "start": 0,
+              "end": 50,
+              "quote": "过去七年里，美国大多数州已禁止司机开车时发短信，公益宣传活动也尝试了各种方法，劝人们开车时放下手机。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-c:2"
+              ],
+              "start": 52,
+              "end": 124,
+              "quote": "然而，无论用什么标准衡量，这个问题似乎都在变得更糟。美国人仍在边开车边发短信，还刷社交网络、拍照。道路交通事故曾连续多年下降，如今却在急剧上升。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-c:3"
+              ],
+              "start": 126,
+              "end": 185,
+              "quote": "这在一定程度上是因为人们开车更多了，但美国国家公路交通安全管理局局长马克·罗斯金德说，分心驾驶“遗憾的是，只增不减”。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-c:4"
+              ],
+              "start": 187,
+              "end": 277,
+              "quote": "“大变革需要大思路，”他上个月在一次演讲中说，泛指改善道路安全的必要。于是，为了改变这种典型的现代行为，立法者和公共卫生专家正回头借用一个老办法：他们想像对待酒驾一样对待分心驾驶。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-c:5"
+              ],
+              "start": 279,
+              "end": 422,
+              "quote": "纽约立法者提出的一个设想是给警察配备一种名叫 Textalyzer 的新设备。它的用法是这样的：警察到达车祸现场后，可以要来司机的手机，用 Textalyzer 检查手机操作系统里最近的操作记录。这项技术能够确定司机刚才是否发过短信、电子邮件，或做过纽约免提驾驶法律所不允许的其他事情。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-c:6"
+              ],
+              "start": 424,
+              "end": 531,
+              "quote": "“我们需要一些写进法规、能改变人们行为的东西，”费利克斯·W.奥尔蒂斯说，他曾推动纽约州在2001年出台禁止司机使用手持设备的禁令。他说，如果 Textalyzer 法案成为法律，“人们就会更不敢把手放到手机上”。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-c-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+                "start": 284,
+                "end": 440,
+                "quote": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p5",
+                "start": 98,
+                "end": 143,
+                "quote": "这项技术能够确定司机刚才是否发过短信、电子邮件，或做过纽约免提驾驶法律所不允许的其他事情。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-c-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
+                "start": 119,
+                "end": 300,
+                "quote": "So to try to change a distinctly modern behavior, lawmakers and public health experts are reaching back to an old approach: They want to treat distracted driving like drunk driving."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p4",
+                "start": 35,
+                "end": 90,
+                "quote": "于是，为了改变这种典型的现代行为，立法者和公共卫生专家正回头借用一个老办法：他们想像对待酒驾一样对待分心驾驶。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+                "start": 0,
+                "end": 72,
+                "quote": "Yet the problem, by just about any measure, appears to be getting worse."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+                "start": 73,
+                "end": 167,
+                "quote": "Americans are still texting while driving, as well as using social networks and taking photos."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p2",
+                "start": 0,
+                "end": 26,
+                "quote": "然而，无论用什么标准衡量，这个问题似乎都在变得更糟。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p2",
+                "start": 26,
+                "end": 49,
+                "quote": "美国人仍在边开车边发短信，还刷社交网络、拍照。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+                "start": 284,
+                "end": 440,
+                "quote": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+                "start": 98,
+                "end": 283,
+                "quote": "It would work like this: An officer arriving at the scene of a crash could ask for the phones of the drivers and use the Textalyzer to check in the operating system for recent activity."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p5",
+                "start": 98,
+                "end": 143,
+                "quote": "这项技术能够确定司机刚才是否发过短信、电子邮件，或做过纽约免提驾驶法律所不允许的其他事情。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p5",
+                "start": 48,
+                "end": 98,
+                "quote": "警察到达车祸现场后，可以要来司机的手机，用 Textalyzer 检查手机操作系统里最近的操作记录。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+                "start": 158,
+                "end": 277,
+                "quote": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\""
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+                "start": 82,
+                "end": 157,
+                "quote": "Ortiz, who pushed for the state’s 2001 ban on hand-held devices by drivers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p6",
+                "start": 69,
+                "end": 107,
+                "quote": "如果 Textalyzer 法案成为法律，“人们就会更不敢把手放到手机上”。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p6",
+                "start": 37,
+                "end": 66,
+                "quote": "他曾推动纽约州在2001年出台禁止司机使用手持设备的禁令。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+                "start": 73,
+                "end": 167,
+                "quote": "Americans are still texting while driving, as well as using social networks and taking photos."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+                "start": 0,
+                "end": 97,
+                "quote": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+                "start": 158,
+                "end": 277,
+                "quote": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\""
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p2",
+                "start": 26,
+                "end": 49,
+                "quote": "美国人仍在边开车边发短信，还刷社交网络、拍照。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p5",
+                "start": 0,
+                "end": 39,
+                "quote": "纽约立法者提出的一个设想是给警察配备一种名叫 Textalyzer 的新设备。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-c-p6",
+                "start": 69,
+                "end": 107,
+                "quote": "如果 Textalyzer 法案成为法律，“人们就会更不敢把手放到手机上”。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先说禁令和宣传都没能管住开车发短信，事故反而上升；接着引出立法者想像治酒驾一样治分心驾驶，然后介绍纽约提议的 Textalyzer 及其用法，最后借议员的话说明立法能让司机不敢碰手机。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-c:1",
+            "summary": "多数州禁止开车发短信，宣传也在劝人放下手机",
+            "function": "交代已采取的措施"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+            "summary": "问题反而更糟，事故急剧上升",
+            "function": "用转折说明措施无效"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-c:3",
+            "summary": "交通安全局局长称分心驾驶只增不减",
+            "function": "引用权威印证问题严重"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
+            "summary": "立法者和专家想像对待酒驾一样对待分心驾驶",
+            "function": "引出新思路"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+            "summary": "纽约提议给警察配备 Textalyzer，在事故现场查手机记录",
+            "function": "介绍新设备及用法"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+            "summary": "议员 Ortiz 认为需要立法，法案通过后人们会更怕碰手机",
+            "function": "借人物之口说明立法的作用"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-ii:28": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据禁令实施后问题的走向，推断禁令的效果。",
+      "stemTranslationZh": "下列哪一项最能描述美国对司机开车发短信的禁令？",
+      "locateBy": "stem",
+      "locateFindZh": "往下读，看 Yet 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "无效的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "quote": "Yet the problem, by just about any measure, appears to be getting worse.",
+              "anchor": "getting worse"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "quote": "Americans are still texting while driving, as well as using social networks and taking photos.",
+              "anchor": "still texting"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "不必要的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Unnecessary.",
+            "explanation": "原文说问题越来越糟、事故急剧上升（rising sharply），正说明需要管；没有谁说禁令多余。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "前后不一的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Inconsistent.",
+            "explanation": "原文的 most states 只交代大多数州都禁了，没评价各州规定是否一致；文章关心的是禁了也没管住。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不公平的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Unfair.",
+            "explanation": "原文没有人抱怨禁令对司机不公平；立法者反而想用 Textalyzer 管得更严。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "ban",
+          "sourceRole": "stem",
+          "targetText": "Over the last seven years, most states have banned texting by drivers, and public service campaigns have tried a wide range of methods to persuade people to put down their phones when they are behind the wheel.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:1",
+          "relationType": "locationCue",
+          "sourceZh": "禁令",
+          "targetCue": "banned",
+          "targetCueZh": "已经禁止",
+          "answerText": "the problem, by just about any measure, appears to be getting worse",
+          "bridgeZh": "Yet 一转：禁令和宣传都有了，问题却更严重",
+          "note": "题干 ban 对应原文 banned。"
+        },
+        {
+          "sourceText": "Ineffective.",
+          "sourceRole": "correctOption",
+          "targetText": "Yet the problem, by just about any measure, appears to be getting worse.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "“无效”是推出来的：各州都禁了，问题却越来越糟（getting worse），人们照样边开车边发短信（still texting），可见禁令没起作用，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Textalyzer 能帮警察查明的信息。",
+      "stemTranslationZh": "Textalyzer 能帮警察查明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "司机从哪里来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Where a driver came from.",
+            "explanation": "它查的是手机系统里最近的操作（recent activity），原文没说能查出司机从哪里来。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "司机是否用过手机。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+              "quote": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+              "anchor": "whether a driver had just texted"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+              "quote": "It would work like this: An officer arriving at the scene of a crash could ask for the phones of the drivers and use the Textalyzer to check in the operating system for recent activity.",
+              "anchor": "the phones of the drivers"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "司机当时车速多快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How fast a driver was going.",
+            "explanation": "原文没提车速；这台设备只检查司机手机里最近有没有发短信、发邮件之类的操作。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "司机何时到达现场。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It would work like this: An officer arriving at the scene of a crash could ask for the phones of the drivers and use the Textalyzer to check in the operating system for recent activity.",
+            "sourceEntity": "An officer arriving at the scene",
+            "optionText": "When a driver arrived at the scene.",
+            "optionEntity": "a driver arrived at the scene",
+            "explanation": "arriving at the scene 出自[[block:paper-gaokao-2022-ii:reading-c:5|It would work like this]]，说的是警察赶到车祸现场后查手机；选项把“到场”安到司机身上，还改成查到场时间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+              "quote": "It would work like this: An officer arriving at the scene of a crash could ask for the phones of the drivers and use the Textalyzer to check in the operating system for recent activity.",
+              "anchor": "arriving at the scene"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "find out",
+          "sourceRole": "stem",
+          "targetText": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+          "relationType": "locationCue",
+          "sourceZh": "查明",
+          "targetCue": "determine",
+          "targetCueZh": "确定",
+          "answerText": "whether a driver had just texted, emailed or done anything else",
+          "note": "题干 find out 对应原文 determine。"
+        },
+        {
+          "sourceText": "Whether a driver used their phone.",
+          "sourceRole": "correctOption",
+          "targetText": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“是否用过手机”（used their phone）概括了原文的发短信、发邮件或做其他操作（texted, emailed or done anything else），这些都是在手机上做的事，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:30": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "结合 on the books 和说话人后面的话，判断 something 指什么。",
+      "stemTranslationZh": "最后一段中画线词“something”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他的话，看 if 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "建议。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Advice.",
+            "explanation": "放进去成了“我们需要写进法规、能改变行为的建议”；建议写不进法规，[[block:paper-gaokao-2022-ii:reading-c:1]]的宣传劝说（persuade）也早就试过了。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Data.",
+            "explanation": "放进去成了“写进法规、能改变行为的数据”；Textalyzer 查出的手机记录只是执法时的证据，本身改变不了人们的行为。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "检测。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Tests.",
+            "explanation": "用 Textalyzer 查手机像一种检测，但放进去成了“写进法规的检测”；Ortiz 接着盼的是法案变成法律（becomes law）。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "法律。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "quote": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\"",
+              "anchor": "bill becomes law"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "quote": "Ortiz, who pushed for the state’s 2001 ban on hand-held devices by drivers.",
+              "anchor": "2001 ban"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "something",
+          "sourceRole": "stem",
+          "targetText": "\"We need something on the books that can change people’s behavior,” said Félix W.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+          "relationType": "locationCue",
+          "answerText": "If the Textalyzer bill becomes law",
+          "bridgeZh": "他盼的是 Textalyzer 法案变成法律，人们才会怕",
+          "note": "题干 something 原词出现在原文。"
+        },
+        {
+          "sourceText": "Laws.",
+          "sourceRole": "correctOption",
+          "targetText": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\"",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "something 后面紧跟 on the books（写进法规），又要能改变人们的行为，说话人还推动过2001年的禁令（ban），所以 something 必须是能约束人的条文。放回去：“我们需要写进法规、能改变人们行为的法律”，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文的问题和对策，选出最合适的标题。",
+      "stemTranslationZh": "哪一项是本文合适的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2022-ii:reading-c:1]]禁了 texting，[[block:paper-gaokao-2022-ii:reading-c:2]]却 getting worse，[[block:paper-gaokao-2022-ii:reading-c:5]][[block:paper-gaokao-2022-ii:reading-c:6]]靠 Textalyzer 来管；标题要盖住开车发短信和这台设备",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "开还是不开？上路前想一想",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To Drive or Not to Drive? Think Before You Start",
+            "explanation": "文章讨论的是开车时发短信怎么管，没有讨论要不要开车；标题把话题换成了开不开车。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "边开车边发短信？当心 Textalyzer",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "quote": "Americans are still texting while driving, as well as using social networks and taking photos.",
+              "anchor": "still texting while driving"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+              "quote": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+              "anchor": "the Textalyzer"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "quote": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\"",
+              "anchor": "more afraid"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "纽约禁止司机使用手持设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "hand-held devices by drivers",
+            "optionText": "Hand-Held Devices by Drivers",
+            "matchType": "exact",
+            "relationNote": "hand-held devices by drivers 出自[[block:paper-gaokao-2022-ii:reading-c:6|Ortiz, who pushed for]]，那是纽约2001年的旧禁令，只用来交代 Ortiz 的身份；文章讲的是禁令管不住之后的新设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "quote": "Ortiz, who pushed for the state’s 2001 ban on hand-held devices by drivers.",
+              "anchor": "ban on hand-held devices"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "新一代手机：Textalyzer",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+            "sourceEntity": "a new device called the Textalyzer",
+            "optionText": "The Next Generation Cell Phone: The Textalyzer-",
+            "optionEntity": "The Next Generation Cell Phone",
+            "explanation": "Textalyzer 是警察用来检查司机手机的设备（a new device），不是新一代手机；选项把查手机的工具说成了手机本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+              "quote": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+              "anchor": "a new device"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Texting and Driving? Watch Out for the Textalyzer",
+          "sourceRole": "correctOption",
+          "targetText": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "全文围着一件事展开：开车发短信这个老问题禁不住，于是有了专门查它的新设备。标题前半“边开车边发短信？”点出问题，后半“当心 Textalyzer”落到文章主推的设备，“当心”还呼应[[block:paper-gaokao-2022-ii:reading-c:6|people are going to be more afraid]]，两头都盖住了，选 B。"
+        }
+      ]
+    }
+  }
+}

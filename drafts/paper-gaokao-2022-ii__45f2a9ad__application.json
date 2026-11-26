@@ -1,0 +1,139 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Caroline,\n\nAs the person in charge of Talk and Talk, the English programme of our school radio station, I'm writing to invite you to be our guest for an interview.\n\nOur programme goes on air every Wednesday at lunchtime. In each show, we chat in English with a teacher or a student about school life, and many students listen while having lunch.\n\nWe'd like to interview you next Wednesday from 12:30 to 1:00 p.m. The topic is how people in your country celebrate festivals and how you spent the Spring Festival in China. Your stories will help us see a different culture.\n\nCould you tell me whether the time suits you? I'm looking forward to your reply.\n\nYours sincerely,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "身份和读者：校广播站英语节目“Talk and Talk”的负责人李华，写邮件给外教 Caroline，邀请她做一次访谈。",
+        "两个要点：介绍节目；说明访谈的时间和话题。",
+        "格式：用题面给的 Dear Caroline, 开头，Yours sincerely, 和 Li Hua 结尾；词数 80 左右。"
+      ],
+      "thisEssayChooses": "本范文补出节目每周三午间播出、和师生用英语聊校园生活，访谈定在下周三 12:30 到 1:00，话题选外教熟悉又能讲出故事的节日习俗；语气对老师礼貌，结尾请她确认时间。这些细节都可以按自己学校的情况换。"
+    },
+    "standard": {
+      "essay": "Dear Caroline,\n\nAs the person in charge of Talk and Talk, the English programme of our school radio station, I'm writing to invite you to be our guest for an interview.\n\nOur programme goes on air every Wednesday at lunchtime. In each show, we chat in English with a teacher or a student about school life, and many students listen while having lunch.\n\nWe'd like to interview you next Wednesday from 12:30 to 1:00 p.m. The topic is how people in your country celebrate festivals and how you spent the Spring Festival in China. Your stories will help us see a different culture.\n\nCould you tell me whether the time suits you? I'm looking forward to your reply.\n\nYours sincerely,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "节目介绍",
+          "quote": "Our programme goes on air every Wednesday at lunchtime. In each show, we chat in English with a teacher or a student about school life, and many students listen while having lunch."
+        },
+        {
+          "point": "访谈的时间",
+          "quote": "We'd like to interview you next Wednesday from 12:30 to 1:00 p.m."
+        },
+        {
+          "point": "访谈的话题",
+          "quote": "The topic is how people in your country celebrate festivals and how you spent the Spring Festival in China."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "先报身份，同一句里亮明来意：邀请访谈。",
+          "items": [
+            {
+              "quote": "As the person in charge of Talk and Talk, the English programme of our school radio station",
+              "explain": "Caroline 未必熟悉这个节目，开头先说我负责哪个节目。in charge of 正是题面“负责人”的说法，比 the host 准确；署名已有 Li Hua，正文不用再报名字。"
+            },
+            {
+              "quote": "I'm writing to invite you to be our guest for an interview.",
+              "explain": "邮件目的在第一句就说清，读者不用往下猜。be our guest 把访谈说成请她来做客，比 have an interview with you 更有邀请的味道。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "介绍节目：什么时候播、播什么、谁在听。",
+          "items": [
+            {
+              "quote": "goes on air every Wednesday at lunchtime",
+              "explain": "go on air 是广播节目播出的固定说法。先交代播出时间，后面的访谈时间就顺理成章地落在同一个时段。"
+            },
+            {
+              "quote": "we chat in English with a teacher or a student about school life",
+              "explain": "说清节目形式是用英语聊天、嘉宾是老师或学生，外教就知道自己来了要做什么，不会把访谈想成正式讲座。"
+            },
+            {
+              "quote": "many students listen while having lunch",
+              "explain": "点出听众是边吃午饭边听的同学，让她知道自己的话有很多人听，也说明访谈为什么放在午间。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "访谈安排：时间、话题，再说这个话题对听众有什么用。",
+          "items": [
+            {
+              "quote": "next Wednesday from 12:30 to 1:00 p.m.",
+              "explain": "时间写到哪一天、几点到几点，正好落在节目播出的午间，对方一读就能判断有没有空。只写 next week 她就没法答复。"
+            },
+            {
+              "quote": "how people in your country celebrate festivals and how you spent the Spring Festival in China",
+              "explain": "话题分成两半：她国家的节日、她在中国过春节，都是她亲身经历、张口就能讲的事，比“谈谈英语学习”更容易聊出故事。"
+            },
+            {
+              "quote": "Your stories will help us see a different culture.",
+              "explain": "从听众的角度给一个理由，说明请她来对同学有什么用，邀请才站得住。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "请对方确认时间，等她回复。",
+          "items": [
+            {
+              "quote": "Could you tell me whether the time suits you?",
+              "explain": "结尾落在她下一步要做的事：回复时间行不行。用 Could you 问，比 Please tell me 对老师更客气。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "be in charge of …",
+          "function": "说明自己是节目负责人，对应题面身份。"
+        },
+        {
+          "expression": "go on air",
+          "function": "介绍广播节目什么时候播出。"
+        },
+        {
+          "expression": "Could you tell me whether … suits you?",
+          "function": "礼貌地请老师确认时间，给邮件一个能回复的结尾。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Caroline,\n\nAs the person in charge of Talk and Talk, the English programme of our school radio station, I'd like to invite you, on behalf of our team, to be our guest for an interview.\n\nTalk and Talk goes on air every Wednesday at lunchtime. Each week a teacher or a student joins us to chat in English about school life and culture, and it has become one of the most popular programmes on campus.\n\nWe were hoping you could join us next Wednesday from 12:30 to 1:00 p.m. in the radio studio. Since many of our listeners are curious about life abroad, we'd love you to share how festivals are celebrated in your country and what surprised you most about your first Spring Festival in China. We can send you the questions in advance.\n\nWould that time work for you? If not, we'll gladly change it.\n\nYours sincerely,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "节目介绍",
+          "quote": "Talk and Talk goes on air every Wednesday at lunchtime. Each week a teacher or a student joins us to chat in English about school life and culture, and it has become one of the most popular programmes on campus."
+        },
+        {
+          "point": "访谈的时间",
+          "quote": "We were hoping you could join us next Wednesday from 12:30 to 1:00 p.m. in the radio studio."
+        },
+        {
+          "point": "访谈的话题",
+          "quote": "Since many of our listeners are curious about life abroad, we'd love you to share how festivals are celebrated in your country and what surprised you most about your first Spring Festival in China."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "We were hoping you could join us",
+          "explain": "用过去进行时提请求，比 We would like to interview you 更委婉，给老师留了说不的余地，适合学生向老师发出邀请。"
+        },
+        {
+          "quote": "Since many of our listeners are curious about life abroad",
+          "explain": "先说听众为什么想听，再说请她讲什么，把邀请的理由放在话题前面，因果更顺；标准版的理由放在最后一句。"
+        },
+        {
+          "quote": "We can send you the questions in advance.",
+          "explain": "替对方想到她可能担心没准备，主动提出提前发问题，这一句让邀请更周到、更容易被接受。"
+        }
+      ]
+    }
+  }
+}

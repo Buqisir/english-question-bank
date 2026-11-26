@@ -1,0 +1,845 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:reading-a": {
+      "overview": "儿童探索博物馆面向团体的游玩须知：每人收费7美元，低收入团体可获资助但须参加参观后调查；每十名儿童须配一名监护人，至少提前两周报名，儿童不得无人陪同。",
+      "fullTranslationZh": "儿童探索博物馆\n\n团体游玩基本信息\n\n价格\n\n团体游玩：每人7美元\n\n资助\n\n我们向低收入学校和青少年组织提供资助，视名额而定。获得资助的团体必须参加参观后的调查。\n\n资助可用于团体游玩的入场费和/或交通费。交通费发票须在参观后60天内交到我们手中，才能确保获得资助。\n\n团体人数\n\n我们要求每十名儿童配一名监护人。监护人配备不足的，每缺一名成人将额外收取50美元。\n\n团体游玩适用于10人及以上、最多35人的团体。35人及以上的团体，请致电商议具体安排。\n\n开放时间\n\n博物馆每天上午9:30至下午4:30开放。\n\n团体游玩可以安排在博物馆开放的任何一天、任何时段。\n\n报名规定\n\n必须至少提前两周报名。\n\n可在线报名，或填写团体游玩报名表，并写明多个备选日期和开始时间。\n\n报名表收到并处理后，我们将在两个工作日内发送确认邮件。\n\n行为准则\n\n●教师和监护人应为团体做好行为示范，并始终和学生待在一起。\n\n●儿童在博物馆任何区域都不得无人陪同。\n\n●儿童之间要友好相处，也要爱护着玩展品。\n\n●在博物馆内请轻声说话。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+          "sourceText": "Failure to provide enough chaperones will result in an extra charge of $50 per absent adult.",
+          "displayText": "Failure to provide enough chaperones will result in an extra charge of $50 per absent adult.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:22"
+          ],
+          "translationZh": "监护人配备不足的，每缺一名成人将额外收取50美元。",
+          "analysisZh": "先找谓语 will result in（导致），它前面整个 Failure to provide enough chaperones 是主语，意思是“没配够监护人”这件事，不是某个人。result in 后接结果 an extra charge of $50（额外50美元费用），per absent adult 说按每缺一名成人算一次。所以少配几名就交几个50美元，这条罚则也说明监护人配比是硬性规定。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "Failure to provide enough chaperones"
+            },
+            {
+              "start": 37,
+              "end": 51,
+              "quote": "will result in"
+            },
+            {
+              "start": 75,
+              "end": 91,
+              "quote": "per absent adult"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-a-2",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-a:7",
+          "sourceText": "Transportation invoices (发票) must be received within 60 days of your visit to guarantee the scholarship.",
+          "displayText": "Transportation invoices (发票) must be received within 60 days of your visit to guarantee the scholarship.",
+          "relatedQuestionIds": [],
+          "translationZh": "交通费发票须在参观后60天内交到我们手中，才能确保获得资助。",
+          "analysisZh": "主干是 Transportation invoices must be received（交通发票必须被收到），用被动语态，收发票的是博物馆，交发票的是参观团体。within 60 days of your visit 限定期限，从参观那天算起60天内；句末 to guarantee the scholarship 是目的，说按时交发票才能保住资助。由此也能看出交通是团体自己安排、事后报销。",
+          "underlineRanges": [
+            {
+              "start": 29,
+              "end": 45,
+              "quote": "must be received"
+            },
+            {
+              "start": 46,
+              "end": 74,
+              "quote": "within 60 days of your visit"
+            },
+            {
+              "start": 75,
+              "end": 103,
+              "quote": "to guarantee the scholarship"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-ii:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-ii:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:1"
+              ],
+              "start": 0,
+              "end": 7,
+              "quote": "儿童探索博物馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:2"
+              ],
+              "start": 9,
+              "end": 17,
+              "quote": "团体游玩基本信息"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:3"
+              ],
+              "start": 19,
+              "end": 21,
+              "quote": "价格"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:4"
+              ],
+              "start": 23,
+              "end": 33,
+              "quote": "团体游玩：每人7美元"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:5"
+              ],
+              "start": 35,
+              "end": 37,
+              "quote": "资助"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:6"
+              ],
+              "start": 39,
+              "end": 82,
+              "quote": "我们向低收入学校和青少年组织提供资助，视名额而定。获得资助的团体必须参加参观后的调查。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:7"
+              ],
+              "start": 84,
+              "end": 134,
+              "quote": "资助可用于团体游玩的入场费和/或交通费。交通费发票须在参观后60天内交到我们手中，才能确保获得资助。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:8"
+              ],
+              "start": 136,
+              "end": 140,
+              "quote": "团体人数"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:9"
+              ],
+              "start": 142,
+              "end": 183,
+              "quote": "我们要求每十名儿童配一名监护人。监护人配备不足的，每缺一名成人将额外收取50美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:10"
+              ],
+              "start": 185,
+              "end": 228,
+              "quote": "团体游玩适用于10人及以上、最多35人的团体。35人及以上的团体，请致电商议具体安排。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:11"
+              ],
+              "start": 230,
+              "end": 234,
+              "quote": "开放时间"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:12"
+              ],
+              "start": 236,
+              "end": 257,
+              "quote": "博物馆每天上午9:30至下午4:30开放。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:13"
+              ],
+              "start": 259,
+              "end": 284,
+              "quote": "团体游玩可以安排在博物馆开放的任何一天、任何时段。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:14"
+              ],
+              "start": 286,
+              "end": 290,
+              "quote": "报名规定"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:15"
+              ],
+              "start": 292,
+              "end": 303,
+              "quote": "必须至少提前两周报名。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:16"
+              ],
+              "start": 305,
+              "end": 337,
+              "quote": "可在线报名，或填写团体游玩报名表，并写明多个备选日期和开始时间。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:17"
+              ],
+              "start": 339,
+              "end": 366,
+              "quote": "报名表收到并处理后，我们将在两个工作日内发送确认邮件。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:18"
+              ],
+              "start": 368,
+              "end": 372,
+              "quote": "行为准则"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p19",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:19"
+              ],
+              "start": 374,
+              "end": 403,
+              "quote": "●教师和监护人应为团体做好行为示范，并始终和学生待在一起。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p20",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:20"
+              ],
+              "start": 405,
+              "end": 424,
+              "quote": "●儿童在博物馆任何区域都不得无人陪同。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p21",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:21"
+              ],
+              "start": 426,
+              "end": 446,
+              "quote": "●儿童之间要友好相处，也要爱护着玩展品。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p22",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-a:22"
+              ],
+              "start": 448,
+              "end": 460,
+              "quote": "●在博物馆内请轻声说话。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-a-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+                "start": 49,
+                "end": 141,
+                "quote": "Failure to provide enough chaperones will result in an extra charge of $50 per absent adult."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p9",
+                "start": 16,
+                "end": 41,
+                "quote": "监护人配备不足的，每缺一名成人将额外收取50美元。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-a-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-a:7",
+                "start": 70,
+                "end": 174,
+                "quote": "Transportation invoices (发票) must be received within 60 days of your visit to guarantee the scholarship."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p7",
+                "start": 20,
+                "end": 50,
+                "quote": "交通费发票须在参观后60天内交到我们手中，才能确保获得资助。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-a:6",
+                "start": 94,
+                "end": 143,
+                "quote": "Participation in a post-visit survey is required."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p6",
+                "start": 25,
+                "end": 43,
+                "quote": "获得资助的团体必须参加参观后的调查。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+                "start": 0,
+                "end": 48,
+                "quote": "We require one chaperone (监护人) per ten children."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p9",
+                "start": 0,
+                "end": 16,
+                "quote": "我们要求每十名儿童配一名监护人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-a:20",
+                "start": 0,
+                "end": 67,
+                "quote": "●Children are not allowed unaccompanied in all areas of the Museum."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-a-p20",
+                "start": 0,
+                "end": 19,
+                "quote": "●儿童在博物馆任何区域都不得无人陪同。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "这是一份按栏目排列的团体参观须知：先报价格，再讲资助条件、团体人数与监护人配比、开放时间、报名流程，最后列出参观时的行为准则，方便带队老师逐项查找。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:1",
+            "summary": "儿童探索博物馆",
+            "function": "标明发布须知的机构"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:2",
+            "summary": "团体游玩基本信息",
+            "function": "点明全文是给团体看的须知"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:3",
+            "summary": "价格",
+            "function": "引出收费标准"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:4",
+            "summary": "团体游玩每人7美元",
+            "function": "给出收费标准"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:5",
+            "summary": "资助",
+            "function": "引出资助规定"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:6",
+            "summary": "向低收入学校和青少年组织提供资助，获助者须参加参观后调查",
+            "function": "说明资助对象和获助者的义务"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:7",
+            "summary": "资助可付入场费和交通费，交通发票须在参观后60天内交来",
+            "function": "说明资助用途和报销期限"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:8",
+            "summary": "团体人数",
+            "function": "引出人数要求"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+            "summary": "每十名儿童配一名监护人，缺一人罚50美元",
+            "function": "规定监护人配比"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:10",
+            "summary": "团体人数在10到35人之间，更多须电话商议",
+            "function": "限定团体规模"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:11",
+            "summary": "开放时间",
+            "function": "引出时间安排"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:12",
+            "summary": "每天9:30至16:30开放",
+            "function": "给出开放时段"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:13",
+            "summary": "团体游玩可安排在任何开放时间",
+            "function": "说明预约时段不受限"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:14",
+            "summary": "报名规定",
+            "function": "引出报名流程"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:15",
+            "summary": "至少提前两周报名",
+            "function": "规定提前量"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:16",
+            "summary": "在线或填表报名，写明多个备选时间",
+            "function": "说明报名方式"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:17",
+            "summary": "处理报名表后两个工作日内发确认邮件",
+            "function": "交代后续确认"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:18",
+            "summary": "行为准则",
+            "function": "引出参观纪律"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:19",
+            "summary": "教师和监护人要示范并全程陪同",
+            "function": "规定成人的职责"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:20",
+            "summary": "儿童不得无人陪同",
+            "function": "规定儿童须有人陪"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:21",
+            "summary": "儿童要友好相处、爱护展品",
+            "function": "规定儿童之间和对展品的态度"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-a:22",
+            "summary": "馆内轻声说话",
+            "function": "规定音量"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-ii:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在资助一栏里找出获得资助的团体必须履行的义务。",
+      "stemTranslationZh": "团体如果获得了资助，需要做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "预付入场费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "admission fees",
+            "optionText": "admission fees",
+            "matchType": "exact",
+            "relationNote": "admission fees 出自[[block:paper-gaokao-2022-ii:reading-a:7|Scholarships are for Group Play]]，说的是资助可以拿来付入场费；选项改成团体要先预付入场费，原文没有这项要求。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:7",
+              "quote": "Scholarships are for Group Play admission fees and/or transportation.",
+              "anchor": "admission fees"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "使用博物馆的交通工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "transportation",
+            "optionText": "transportation",
+            "matchType": "exact",
+            "relationNote": "transportation 也出自[[block:paper-gaokao-2022-ii:reading-a:7|Scholarships are for Group Play]]，指资助可报销交通费，还要团体交来交通发票（invoices）；可见车是团体自己安排的，没说要用博物馆的车。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:7",
+              "quote": "Scholarships are for Group Play admission fees and/or transportation.",
+              "anchor": "transportation"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "参观后参加一项调查。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:6",
+              "quote": "Participation in a post-visit survey is required.",
+              "anchor": "post-visit survey"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把参观安排在工作日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Group Play may be scheduled during any day or time the Museum is open.",
+            "sourceHighlight": "any day or time",
+            "optionText": "Schedule their visit on weekdays.",
+            "optionHighlight": "on weekdays",
+            "explanation": "[[block:paper-gaokao-2022-ii:reading-a:13]]说团体游玩可以排在开馆的任何一天、任何时段（any day or time），并不限于工作日，也和是否获得资助无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:13",
+              "quote": "Group Play may be scheduled during any day or time the Museum is open.",
+              "anchor": "any day or time"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "need to do",
+          "sourceRole": "stem",
+          "targetText": "Participation in a post-visit survey is required.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-a:6",
+          "relationType": "locationCue",
+          "sourceZh": "需要做",
+          "targetCue": "is required",
+          "targetCueZh": "是必须的",
+          "answerText": "Participation in a post-visit survey is required",
+          "note": "题干 need to do 对应原文 is required，同一句就写着获助团体的义务。"
+        },
+        {
+          "sourceText": "Take a survey after the visit.",
+          "sourceRole": "correctOption",
+          "targetText": "Participation in a post-visit survey is required.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "选项的“参观后做调查”（a survey after the visit）就是原文的“参加参观后的调查”（a post-visit survey），post-visit 拆成了 after the visit，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按每十名儿童配一名监护人的规定，算出30名儿童要几名监护人。",
+      "stemTranslationZh": "一个30名儿童的团体参观博物馆，需要几名监护人？",
+      "locateBy": "options",
+      "locateFindZh": "四个人数各乘十，看哪个正好够管30名儿童",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "one",
+            "optionText": "One",
+            "matchType": "exact",
+            "relationNote": "选项照搬了 one chaperone 里的 one，可那是每十名儿童配一名（per ten children）；一名只够管10名儿童，30名还差两名。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "one chaperone"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "两名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "We require one chaperone (监护人) per ten children.",
+            "sourceHighlight": "per ten children",
+            "optionText": "Two.",
+            "optionHighlight": "Two",
+            "explanation": "两名监护人按每人管十名算，只够20名儿童，剩下10名没人带，还差一名。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "per ten children"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "三名。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "one chaperone per ten children"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "四名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "We require one chaperone (监护人) per ten children.",
+            "sourceHighlight": "per ten children",
+            "optionText": "Four.",
+            "optionHighlight": "Four",
+            "explanation": "30 ÷ 10 正好等于3，按每十人一名算不出第四名；四名能管40名儿童，比规定要求的多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "per ten children"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Three.",
+          "sourceRole": "correctOption",
+          "targetText": "We require one chaperone (监护人) per ten children.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+          "relationType": "calculation",
+          "note": "选项的人数是算出来的：规定每十名儿童配一名监护人（one chaperone per ten children），30 ÷ 10 = 3，所以要三名，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在行为准则里找出明令禁止儿童做的事。",
+      "stemTranslationZh": "儿童在博物馆里被禁止做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使用电脑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Using the computer.",
+            "explanation": "须知里没有一处提到电脑；行为准则管的是陪同、相处、爱护展品和说话音量。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "互相交谈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "●Use your indoor voice when at the Museum.",
+            "sourceHighlight": "indoor voice",
+            "optionText": "Talking with each other.",
+            "optionHighlight": "Talking with each other",
+            "explanation": "[[block:paper-gaokao-2022-ii:reading-a:22]]只要求馆内轻声说话（indoor voice），没有不许孩子交谈；[[block:paper-gaokao-2022-ii:reading-a:21]]还要孩子们彼此友好相处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:22",
+              "quote": "●Use your indoor voice when at the Museum.",
+              "anchor": "indoor voice"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "触摸展品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "●Children should play nicely with each other and exhibits.",
+            "sourceHighlight": "play nicely with each other and exhibits",
+            "optionText": "Touching the exhibits.",
+            "optionHighlight": "Touching the exhibits",
+            "explanation": "exhibits 出自[[block:paper-gaokao-2022-ii:reading-a:21]]，原文要孩子们爱护着玩展品（play nicely with … exhibits），可见展品可以上手；选项说成禁止触摸。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:21",
+              "quote": "●Children should play nicely with each other and exhibits.",
+              "anchor": "exhibits"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "独自在馆内探索。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:20",
+              "quote": "●Children are not allowed unaccompanied in all areas of the Museum.",
+              "anchor": "not allowed unaccompanied"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "prohibited",
+          "sourceRole": "stem",
+          "targetText": "●Children are not allowed unaccompanied in all areas of the Museum.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-a:20",
+          "relationType": "locationCue",
+          "sourceZh": "被禁止",
+          "targetCue": "not allowed",
+          "targetCueZh": "不允许",
+          "answerText": "not allowed unaccompanied in all areas of the Museum",
+          "note": "题干 prohibited 对应原文 not allowed。"
+        },
+        {
+          "sourceText": "Exploring the place alone.",
+          "sourceRole": "correctOption",
+          "targetText": "●Children are not allowed unaccompanied in all areas of the Museum.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-a:20",
+          "relationType": "paraphrase",
+          "note": "选项的“独自”（alone）就是原文的“无人陪同”（unaccompanied），“这个地方”指博物馆各个区域（all areas of the Museum），选 D。"
+        }
+      ]
+    }
+  }
+}

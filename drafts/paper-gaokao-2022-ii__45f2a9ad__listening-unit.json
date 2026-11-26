@@ -1,0 +1,1009 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening:paper-gaokao-2022-ii:1": {
+      "segmentId": "listening:paper-gaokao-2022-ii:1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: We have to find a parking space. Let’s drive around the block one more time. Did you say the restaurant has no off-street parking at all?\nW: None. I checked it. Look, there is a space!",
+      "translationZh": "男：我们得找个停车位。咱们再绕着这个街区开一圈吧。你是说那家餐馆根本没有路外停车位？\n女：一个也没有。我查过了。看，那儿有个空位！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人开车去餐馆，餐馆没有停车场，他们绕街区找车位，终于看到一个空位。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:1:1",
+          "zh": "我们得找个停车位。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:1:2",
+          "zh": "咱们再绕着这个街区开一圈吧。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:1:3",
+          "zh": "你是说那家餐馆根本没有路外停车位？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:1:4",
+          "zh": "一个也没有。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:1:5",
+          "zh": "我查过了。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:1:6",
+          "zh": "看，那儿有个空位！"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:2": {
+      "segmentId": "listening:paper-gaokao-2022-ii:2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: You have to go now, Judy, or you’ll miss your flight. It’s an hour’s drive to the airport.\nW: I’m leaving. Don’t forget to water my flowers. Just a minute. Where is my ticket, Dad?",
+      "translationZh": "男：朱迪，你得马上走了，不然要误航班了。开车去机场要一个小时。\n女：我这就走。别忘了给我的花浇水。等一下。爸爸，我的机票在哪儿？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "父亲催女儿朱迪赶紧出发去机场，朱迪临走前嘱咐浇花，又找起机票。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:2:1",
+          "zh": "朱迪，你得马上走了，不然要误航班了。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:2:2",
+          "zh": "开车去机场要一个小时。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:2:3",
+          "zh": "我这就走。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:2:4",
+          "zh": "别忘了给我的花浇水。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:2:5",
+          "zh": "等一下。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:2:6",
+          "zh": "爸爸，我的机票在哪儿？"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:3": {
+      "segmentId": "listening:paper-gaokao-2022-ii:3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: Laura, what’s in the mailbox?\nW: It’s a thank-you note from our neighbour. They thank us for visiting them last week when the baby was born. They also invite us to have dinner next Friday.\nM: Are they back home now?\nW: Should be.",
+      "translationZh": "男：劳拉，信箱里有什么？\n女：是邻居寄来的感谢卡。他们感谢我们上周在宝宝出生时去看望他们。他们还邀请我们下周五去吃晚饭。\n男：他们现在回家了吗？\n女：应该回了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "社区生活"
+      },
+      "summaryZh": "邻居寄来感谢卡，感谢他们上周探望新生宝宝，并邀请他们下周五吃晚饭。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:3:1",
+          "zh": "劳拉，信箱里有什么？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:3:2",
+          "zh": "是邻居寄来的感谢卡。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:3:3",
+          "zh": "他们感谢我们上周在宝宝出生时去看望他们。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:3:4",
+          "zh": "他们还邀请我们下周五去吃晚饭。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:3:5",
+          "zh": "他们现在回家了吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:3:6",
+          "zh": "应该回了。"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:4": {
+      "segmentId": "listening:paper-gaokao-2022-ii:4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Good afternoon, Paper Museum.\nM: Hello. Could you tell me your opening hours for Saturday?\nW: Yeah. We’re open from ten in the morning to five in the afternoon.\nM: Thanks.",
+      "translationZh": "女：下午好，这里是纸博物馆。\n男：你好。能告诉我你们周六的开放时间吗？\n女：好的。我们从上午十点开到下午五点。\n男：谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士打电话给纸博物馆，询问周六的开放时间，得知是上午十点到下午五点。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:4:1",
+          "zh": "下午好，这里是纸博物馆。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:4:2",
+          "zh": "你好。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:4:3",
+          "zh": "能告诉我你们周六的开放时间吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:4:4",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:4:5",
+          "zh": "我们从上午十点开到下午五点。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:4:6",
+          "zh": "谢谢。"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:5": {
+      "segmentId": "listening:paper-gaokao-2022-ii:5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Excuse me, where is the hotel gym, please?\nW: It’s on the top floor. You can take the lift over there.\nM: Do I have to pay extra?\nW: No, sir, you just need to take your room key with you.",
+      "translationZh": "男：打扰一下，请问酒店的健身房在哪儿？\n女：在顶楼。您可以乘那边的电梯上去。\n男：我需要另外付费吗？\n女：不用，先生，您只要带上房卡就行。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "酒店住客询问健身房的位置，得知在顶楼，凭房卡免费使用。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:5:1",
+          "zh": "打扰一下，请问酒店的健身房在哪儿？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:5:2",
+          "zh": "在顶楼。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:5:3",
+          "zh": "您可以乘那边的电梯上去。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:5:4",
+          "zh": "我需要另外付费吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:5:5",
+          "zh": "不用，先生，您只要带上房卡就行。"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:6": {
+      "segmentId": "listening:paper-gaokao-2022-ii:6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Mr. Wilson, students from Class 2 want to visit the history museum. Will it be all right if I take them there this weekend?\nM: How about their revision test? Are they through with it?\nW: Yes, they are.\nM: In that case, you can go ahead. Try to finish it within one day, so that the students still have a whole day to rest on Sunday.\nW: All right. I’ll manage.",
+      "translationZh": "女：威尔逊先生，二班的学生想去参观历史博物馆。这个周末我带他们去可以吗？\n男：他们的复习测试呢？考完了吗？\n女：是的，考完了。\n男：那样的话，你们可以去。尽量一天之内结束，这样学生周日还有一整天可以休息。\n女：好的。我会安排好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "老师请示周末带学生参观历史博物馆，校方同意，但要求一天内结束。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:1",
+          "zh": "威尔逊先生，二班的学生想去参观历史博物馆。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:2",
+          "zh": "这个周末我带他们去可以吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:3",
+          "zh": "他们的复习测试呢？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:4",
+          "zh": "考完了吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:5",
+          "zh": "是的，考完了。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:6",
+          "zh": "那样的话，你们可以去。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:7",
+          "zh": "尽量一天之内结束，这样学生周日还有一整天可以休息。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:8",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:6:9",
+          "zh": "我会安排好的。"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:7": {
+      "segmentId": "listening:paper-gaokao-2022-ii:7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Hi, Linda. Fancy seeing you here. How long have you been shopping?\nW: Almost an hour. I have a lot to buy. My daughter Melissa’s birthday is coming. I’m trying to get her a good gift, but I don’t know what to choose. She seems to have everything she loves.\nM: Yeah, the same as Clara. We’ve already had bags of toys she’s no longer playing with. So this year, we didn’t buy her material things. We gave her an experience gift.\nW: What’s that?\nM: A city pass, with which she can visit 12 different attractions, including the national history museum, the science museum, the zoo, and more.\nW: How much is it?\nM: Fifty dollars per person, for a year-long pass. I bought three for the whole family.\nW: So you can have a different outing every month for the entire year. What a great idea!",
+      "translationZh": "男：嗨，琳达。真巧在这儿碰到你。你逛了多久了？\n女：快一个小时了。我要买的东西很多。我女儿梅丽莎快过生日了。我想给她买件好礼物，可不知道该挑什么。她好像喜欢的东西都有了。\n男：是啊，克拉拉也一样。她不再玩的玩具我们已经攒了好几袋。所以今年我们没给她买实物。我们送了她一份体验式礼物。\n女：那是什么？\n男：一张城市通票，凭它可以参观 12 个不同的景点，包括国家历史博物馆、科学博物馆、动物园等等。\n女：多少钱？\n男：每人 50 美元，有效期一年。我给全家买了三张。\n女：这样你们一整年每个月都能换个地方出游。真是个好主意！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "两位家长谈给女儿挑生日礼物，男士介绍了给全家买的年度城市通票。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:1",
+          "zh": "嗨，琳达。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:2",
+          "zh": "真巧在这儿碰到你。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:3",
+          "zh": "你逛了多久了？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:4",
+          "zh": "快一个小时了。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:5",
+          "zh": "我要买的东西很多。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:6",
+          "zh": "我女儿梅丽莎快过生日了。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:7",
+          "zh": "我想给她买件好礼物，可不知道该挑什么。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:8",
+          "zh": "她好像喜欢的东西都有了。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:9",
+          "zh": "是啊，克拉拉也一样。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:10",
+          "zh": "她不再玩的玩具我们已经攒了好几袋。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:11",
+          "zh": "所以今年我们没给她买实物。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:12",
+          "zh": "我们送了她一份体验式礼物。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:13",
+          "zh": "那是什么？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:14",
+          "zh": "一张城市通票，凭它可以参观 12 个不同的景点，包括国家历史博物馆、科学博物馆、动物园等等。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:15",
+          "zh": "多少钱？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:16",
+          "zh": "每人 50 美元，有效期一年。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:17",
+          "zh": "我给全家买了三张。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:18",
+          "zh": "这样你们一整年每个月都能换个地方出游。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:7:19",
+          "zh": "真是个好主意！"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:8": {
+      "segmentId": "listening:paper-gaokao-2022-ii:8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "M: Helen, busy doing anything?\nW: Oh Kevin, I’m preparing a presentation for the city library. It’s about a girl named Tracy Woods.\nM: What’s special about her?\nW: It was an amazing story. She brought specially-trained dogs to special education schools and helped children to build confidence. She believes that dogs can help children in ways we can’t. Dogs don’t judge, and they don’t care who you are or what you look like.\nM: But putting dogs into a school? Aren’t they going to mess up the school?\nW: Don’t worry. All the dogs are assessed and trained properly. There are now 40 dogs working with children aged from 6 to 18.\nM: I hope the children love them.\nW: Of course they do. I’ve got some pictures. I’ll show them at my presentation tomorrow morning.",
+      "translationZh": "男：海伦，在忙什么呢？\n女：哦，凯文，我在为市图书馆准备一场报告。讲的是一个叫特蕾西·伍兹的女孩。\n男：她有什么特别之处？\n女：她的故事很了不起。她把经过专门训练的狗带到特殊教育学校，帮助孩子们建立自信。她相信狗能以我们做不到的方式帮助孩子。狗不会评判别人，它们不在乎你是谁、长什么样。\n男：可是把狗放进学校？它们不会把学校弄得一团糟吗？\n女：别担心。所有的狗都经过评估和规范训练。现在有 40 只狗在陪伴 6 到 18 岁的孩子。\n男：希望孩子们喜欢它们。\n女：当然喜欢。我有一些照片。明天上午作报告时我会展示出来。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "人与动植物"
+      },
+      "summaryZh": "海伦准备报告，介绍特蕾西把训练过的狗带进特殊教育学校、帮孩子建立自信。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:1",
+          "zh": "海伦，在忙什么呢？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:2",
+          "zh": "哦，凯文，我在为市图书馆准备一场报告。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:3",
+          "zh": "讲的是一个叫特蕾西·伍兹的女孩。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:4",
+          "zh": "她有什么特别之处？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:5",
+          "zh": "她的故事很了不起。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:6",
+          "zh": "她把经过专门训练的狗带到特殊教育学校，帮助孩子们建立自信。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:7",
+          "zh": "她相信狗能以我们做不到的方式帮助孩子。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:8",
+          "zh": "狗不会评判别人，它们不在乎你是谁、长什么样。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:9",
+          "zh": "可是把狗放进学校？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:10",
+          "zh": "它们不会把学校弄得一团糟吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:11",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:12",
+          "zh": "所有的狗都经过评估和规范训练。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:13",
+          "zh": "现在有 40 只狗在陪伴 6 到 18 岁的孩子。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:14",
+          "zh": "希望孩子们喜欢它们。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:15",
+          "zh": "当然喜欢。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:16",
+          "zh": "我有一些照片。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:8:17",
+          "zh": "明天上午作报告时我会展示出来。"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:9": {
+      "segmentId": "listening:paper-gaokao-2022-ii:9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "M: Emily, thank you for taking time out of your busy schedule to answer a few questions.\nW: It’s my pleasure.\nM: People say you’re doing unpaid work in the new season of My Fair Lady. Is this what the show business has become?\nW: No, not really. All of my acting in the new season is unpaid. But the crew is paid. This is to raise money for the post-production of the show.\nM: I notice you’ve tried many different kinds of things: film, TV, and even theater.\nW: Yeah, that’s how I was trained at university. I work on anything that excites me.\nM: Tell us about the six months you recently spent at the workshop of the Film Center.\nW: It was an unbelievable experience, teaching young actors and actresses, and working with some great acting artists. It was also great to work in various labs, such as directors, writers and so on. It’s very helpful for making you a really well-rounded and active member of the film and television industry.\nM: Thank you very much, Emily. We look forward to your new season.",
+      "translationZh": "男：艾米莉，感谢你在百忙之中抽时间回答几个问题。\n女：这是我的荣幸。\n男：有人说你在新一季《窈窕淑女》里是在无偿工作。演艺圈已经变成这样了吗？\n女：不，并不是。我在新一季里的所有表演都不拿报酬。但剧组工作人员是有报酬的。这样做是为了给这部剧的后期制作筹钱。\n男：我注意到你尝试过很多不同的领域：电影、电视，甚至戏剧。\n女：是的，我在大学里就是这样受训的。只要能让我兴奋的事我都去做。\n男：跟我们说说你最近在电影中心工作坊度过的那六个月吧。\n女：那是一段难以置信的经历，我教年轻的男女演员，还和一些优秀的表演艺术家合作。能在各种工作室里工作也很棒，比如导演工作室、编剧工作室等等。这对让你成为影视行业里一名真正全面、活跃的成员非常有帮助。\n男：非常感谢你，艾米莉。我们期待你的新一季。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "主持人采访演员艾米莉，谈她无偿出演的原因、大学受训和电影中心工作坊的经历。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:1",
+          "zh": "艾米莉，感谢你在百忙之中抽时间回答几个问题。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:2",
+          "zh": "这是我的荣幸。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:3",
+          "zh": "有人说你在新一季《窈窕淑女》里是在无偿工作。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:4",
+          "zh": "演艺圈已经变成这样了吗？"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:5",
+          "zh": "不，并不是。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:6",
+          "zh": "我在新一季里的所有表演都不拿报酬。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:7",
+          "zh": "但剧组工作人员是有报酬的。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:8",
+          "zh": "这样做是为了给这部剧的后期制作筹钱。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:9",
+          "zh": "我注意到你尝试过很多不同的领域：电影、电视，甚至戏剧。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:10",
+          "zh": "是的，我在大学里就是这样受训的。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:11",
+          "zh": "只要能让我兴奋的事我都去做。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:12",
+          "zh": "跟我们说说你最近在电影中心工作坊度过的那六个月吧。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:13",
+          "zh": "那是一段难以置信的经历，我教年轻的男女演员，还和一些优秀的表演艺术家合作。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:14",
+          "zh": "能在各种工作室里工作也很棒，比如导演工作室、编剧工作室等等。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:15",
+          "zh": "这对让你成为影视行业里一名真正全面、活跃的成员非常有帮助。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:16",
+          "zh": "非常感谢你，艾米莉。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:9:17",
+          "zh": "我们期待你的新一季。"
+        }
+      ]
+    },
+    "listening:paper-gaokao-2022-ii:10": {
+      "segmentId": "listening:paper-gaokao-2022-ii:10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Hi, everyone. This is the monthly meeting of our club. We’ve been fortunate to have got good advice from some famous athletes on how to improve our skills and build up our body. Today, we’ll hear something different. We’re honored to have Emma Wilson here. Emma is a health expert and lecturer from UBC, the University of British Columbia. Emma worked for a football team in Manchester, then for a very successful rugby team in Dublin, and finally ended up working here in Vancouver. Emma says it’s challenging to be a health expert, because people can be easily influenced by advertisements that lack scientific support. Also, people aren’t willing to change their views about food and nutrition as there is so much confusing information online. It’s really important to hear what experts say, and that’s why we’ve invited Emma here. She isn’t going to tell us about everything we should eat. But, she will teach us to make better choices. Let’s welcome Emma Wilson.",
+      "translationZh": "女：大家好。这是我们俱乐部的月度例会。我们很幸运，曾得到一些著名运动员的好建议，教我们如何提高技能、增强体质。今天我们要听点不一样的。我们很荣幸请到了艾玛·威尔逊。艾玛是一位健康专家，也是英属哥伦比亚大学（UBC）的讲师。艾玛先在曼彻斯特为一支足球队工作，后来在都柏林为一支非常成功的橄榄球队工作，最后来到温哥华这里工作。艾玛说，当健康专家很有挑战，因为人们很容易被缺乏科学依据的广告影响。而且，网上令人困惑的信息太多，人们不愿意改变对食物和营养的看法。听听专家怎么说非常重要，这就是我们请艾玛来的原因。她不会告诉我们应该吃的每一样东西。但她会教我们做出更好的选择。让我们欢迎艾玛·威尔逊。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "俱乐部月会上，主持人介绍健康专家艾玛的经历和工作难处，欢迎她来教大家做出更好的选择。",
+      "sentences": [
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:1",
+          "zh": "大家好。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:2",
+          "zh": "这是我们俱乐部的月度例会。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:3",
+          "zh": "我们很幸运，曾得到一些著名运动员的好建议，教我们如何提高技能、增强体质。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:4",
+          "zh": "今天我们要听点不一样的。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:5",
+          "zh": "我们很荣幸请到了艾玛·威尔逊。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:6",
+          "zh": "艾玛是一位健康专家，也是英属哥伦比亚大学（UBC）的讲师。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:7",
+          "zh": "艾玛先在曼彻斯特为一支足球队工作，后来在都柏林为一支非常成功的橄榄球队工作，最后来到温哥华这里工作。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:8",
+          "zh": "艾玛说，当健康专家很有挑战，因为人们很容易被缺乏科学依据的广告影响。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:9",
+          "zh": "而且，网上令人困惑的信息太多，人们不愿意改变对食物和营养的看法。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:10",
+          "zh": "听听专家怎么说非常重要，这就是我们请艾玛来的原因。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:11",
+          "zh": "她不会告诉我们应该吃的每一样东西。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:12",
+          "zh": "但她会教我们做出更好的选择。"
+        },
+        {
+          "id": "listening:paper-gaokao-2022-ii:10:13",
+          "zh": "让我们欢迎艾玛·威尔逊。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening:paper-gaokao-2022-ii:1",
+      "stemTranslationZh": "接下来两人会做什么？",
+      "optionTranslationsZh": {
+        "A": "查看地图。",
+        "B": "离开餐馆。",
+        "C": "停车。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Look, there is a space!"
+      },
+      "reasonZh": "两人一直在找停车位（find a parking space），女士发现了空位，接下来就是把车停进去，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 check 是女士说她查过餐馆没有路外停车位（I checked it），不是要看地图。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "餐馆是两人要去的地方，他们还在附近找车位、没进去，谈不上离开。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening:paper-gaokao-2022-ii:2",
+      "stemTranslationZh": "两人在哪里？",
+      "optionTranslationsZh": {
+        "A": "在公共汽车站。",
+        "B": "在家里。",
+        "C": "在机场。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Where is my ticket, Dad?"
+      },
+      "reasonZh": "父亲催女儿出发，说去机场还要开一小时车（an hour’s drive to the airport），女儿临走嘱咐浇花、问爸爸机票在哪，可见两人还在家里，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "机场（airport）是朱迪要赶去的地方，开车过去还要一个小时，她此刻还没出门。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening:paper-gaokao-2022-ii:3",
+      "stemTranslationZh": "两人上周做了什么？",
+      "optionTranslationsZh": {
+        "A": "他们参加了庆祝晚宴。",
+        "B": "他们去看了一个新生婴儿。",
+        "C": "他们给邻居寄了一封信。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "They thank us for visiting them last week when the baby was born."
+      },
+      "reasonZh": "邻居感谢他们上周在宝宝出生时去探望（visiting them last week when the baby was born），这就是去看新生婴儿，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "晚饭（dinner）是邻居邀请他们下周五去吃（next Friday），还没发生，也谈不上庆祝晚宴。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "信箱里的感谢卡是邻居寄给他们的（a thank-you note from our neighbour），方向反了。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening:paper-gaokao-2022-ii:4",
+      "stemTranslationZh": "男士为什么打电话？",
+      "optionTranslationsZh": {
+        "A": "取消一次周末旅行。",
+        "B": "预约。",
+        "C": "了解一些信息。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Could you tell me your opening hours for Saturday?"
+      },
+      "reasonZh": "男士问博物馆周六几点开门（opening hours for Saturday），听到答复就道谢挂断，打电话是为了打听信息，选 C。"
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening:paper-gaokao-2022-ii:5",
+      "stemTranslationZh": "男士可能想做什么？",
+      "optionTranslationsZh": {
+        "A": "锻炼身体。",
+        "B": "再要一把钥匙。",
+        "C": "点客房服务。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Excuse me, where is the hotel gym, please?"
+      },
+      "reasonZh": "男士打听酒店健身房在哪（the hotel gym），还问去那里要不要另付钱，可见他想去健身，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "extra 是男士问要不要另外付费（pay extra），key 是女士让他带上房卡（your room key），没人说要多配一把钥匙。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "room 只出现在房卡（room key）里，男士问的是健身房，没提客房服务。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening:paper-gaokao-2022-ii:6",
+      "stemTranslationZh": "女士为什么来找男士？",
+      "optionTranslationsZh": {
+        "A": "请求许可。",
+        "B": "发出邀请。",
+        "C": "表示感谢。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Will it be all right if I take them there this weekend?"
+      },
+      "reasonZh": "女士问周末带学生去博物馆行不行（Will it be all right if…），男士随后答应（you can go ahead），可见她是来征求许可的，选 A。"
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening:paper-gaokao-2022-ii:6",
+      "stemTranslationZh": "学生们什么时候去博物馆？",
+      "optionTranslationsZh": {
+        "A": "周五。",
+        "B": "周六。",
+        "C": "周日。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Try to finish it within one day, so that the students still have a whole day to rest on Sunday."
+      },
+      "reasonZh": "女士说这个周末去（this weekend），男士要求一天内结束、把周日留给学生休息（rest on Sunday），周末去掉周日就是周六，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "周日（Sunday）是男士特意留给学生休息的一天，参观要放在周末的另一天。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening:paper-gaokao-2022-ii:7",
+      "stemTranslationZh": "两人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "买食品杂货。",
+        "B": "挑选礼物。",
+        "C": "见朋友。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m trying to get her a good gift, but I don’t know what to choose."
+      },
+      "reasonZh": "女士正为女儿挑生日礼物发愁（a good gift … what to choose），男士介绍自己送女儿的体验式礼物，两人都在谈选礼物，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说要买的东西很多（a lot to buy），但接着说的是给女儿买生日礼物，不是买食品杂货。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "seeing 出自男士碰见女士时的招呼（Fancy seeing you here），两人是偶遇，并没有谈去见朋友。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening:paper-gaokao-2022-ii:7",
+      "stemTranslationZh": "克拉拉是谁？",
+      "optionTranslationsZh": {
+        "A": "男士的妻子。",
+        "B": "男士的姐妹。",
+        "C": "男士的女儿。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yeah, the same as Clara."
+      },
+      "reasonZh": "女士说女儿梅丽莎好像什么都有了，男士接话说克拉拉也一样（the same as Clara），又说她不玩的玩具攒了好几袋，可见克拉拉是男士的女儿，选 C。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening:paper-gaokao-2022-ii:7",
+      "stemTranslationZh": "男士买城市通票花了多少钱？",
+      "optionTranslationsZh": {
+        "A": "36 美元。",
+        "B": "50 美元。",
+        "C": "150 美元。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Fifty dollars per person, for a year-long pass."
+      },
+      "reasonZh": "通票每人 50 美元（Fifty dollars per person），男士给全家买了三张（I bought three），50 × 3 = 150 美元，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "50 美元只是一张通票的价格，男士买了三张，要乘以 3。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening:paper-gaokao-2022-ii:8",
+      "stemTranslationZh": "特蕾西为什么把狗带给孩子们？",
+      "optionTranslationsZh": {
+        "A": "教他们爱护动物。",
+        "B": "帮助他们获得自信。",
+        "C": "保护他们免受危险。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "She brought specially-trained dogs to special education schools and helped children to build confidence."
+      },
+      "reasonZh": "海伦说特蕾西把训练过的狗带进特殊教育学校，帮孩子建立自信（build confidence），“获得自信”就是这个意思，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "love 是凯文希望孩子们喜欢这些狗（I hope the children love them），说的是孩子对狗的感情，不是特蕾西带狗的目的。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening:paper-gaokao-2022-ii:8",
+      "stemTranslationZh": "凯文对这些狗有什么担心？",
+      "optionTranslationsZh": {
+        "A": "它们可能捣乱。",
+        "B": "它们可能受伤。",
+        "C": "它们可能携带疾病。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Aren’t they going to mess up the school?"
+      },
+      "reasonZh": "凯文担心狗会把学校弄得一团糟（mess up the school），“可能捣乱”说的就是这个，选 A。"
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening:paper-gaokao-2022-ii:8",
+      "stemTranslationZh": "海伦明天上午要做什么？",
+      "optionTranslationsZh": {
+        "A": "作报告。",
+        "B": "见孩子们。",
+        "C": "拍些照片。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ll show them at my presentation tomorrow morning."
+      },
+      "reasonZh": "海伦在为市图书馆准备报告（preparing a presentation），明天上午要在报告上展示照片，就是去作报告，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "children 是特蕾西的狗陪伴的孩子，海伦明天是在图书馆作报告，没有说要去见他们。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "照片海伦已经有了（I’ve got some pictures），明天是拿去展示，不是去拍。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening:paper-gaokao-2022-ii:9",
+      "stemTranslationZh": "男士在做什么？",
+      "optionTranslationsZh": {
+        "A": "听讲座。",
+        "B": "主持工作坊。",
+        "C": "进行采访。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Emily, thank you for taking time out of your busy schedule to answer a few questions."
+      },
+      "reasonZh": "男士感谢艾米莉抽空回答几个问题（answer a few questions），之后一问一答，可见他在采访她，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "workshop 是男士请艾米莉谈她在电影中心工作坊的半年（the workshop of the Film Center），那是她的经历，男士并没有在主持工作坊。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening:paper-gaokao-2022-ii:9",
+      "stemTranslationZh": "艾米莉为什么在新一季节目里无偿工作？",
+      "optionTranslationsZh": {
+        "A": "追随最新潮流。",
+        "B": "帮助提高剧组人员的报酬。",
+        "C": "支持后期制作。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "This is to raise money for the post-production of the show."
+      },
+      "reasonZh": "艾米莉说自己不拿报酬是为了给这部剧的后期制作筹钱（raise money for the post-production），这就是支持后期制作，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "crew 和 raise 都听到了，但剧组人员本来就有报酬（the crew is paid），raise 筹的是后期制作的钱，不是给剧组加薪。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening:paper-gaokao-2022-ii:9",
+      "stemTranslationZh": "是什么让艾米莉能在本领域尝试不同的事？",
+      "optionTranslationsZh": {
+        "A": "她的大学教育。",
+        "B": "她的教学经历。",
+        "C": "她的家庭传统。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Yeah, that’s how I was trained at university."
+      },
+      "reasonZh": "男士说她拍过电影、电视，还演过戏剧，艾米莉说自己在大学里就是这样受训的（trained at university），这就是大学教育，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "教年轻演员（teaching young actors）是她最近在电影中心工作坊的经历，她说能涉足多个领域靠的是大学里的训练。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening:paper-gaokao-2022-ii:9",
+      "stemTranslationZh": "艾米莉怎样看待她在电影中心的工作？",
+      "optionTranslationsZh": {
+        "A": "无聊。",
+        "B": "有收获。",
+        "C": "要求高。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It was an unbelievable experience, teaching young actors and actresses, and working with some great acting artists."
+      },
+      "reasonZh": "艾米莉说那是一段难以置信的经历（an unbelievable experience），又说对成为全面的从业者很有帮助（very helpful），可见她觉得收获很大，选 B。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening:paper-gaokao-2022-ii:10",
+      "stemTranslationZh": "说话人在对谁讲话？",
+      "optionTranslationsZh": {
+        "A": "体育俱乐部成员。",
+        "B": "国际游客。",
+        "C": "大学生。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "This is the monthly meeting of our club."
+      },
+      "reasonZh": "说话人说这是“我们俱乐部”的月度例会（our club），又说以前请运动员教大家提高技能、增强体质，可见听众是体育俱乐部的成员，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "University 出自介绍艾玛的身份，她是英属哥伦比亚大学的讲师（the University of British Columbia），听众是俱乐部成员。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening:paper-gaokao-2022-ii:10",
+      "stemTranslationZh": "艾玛在哪里为一支橄榄球队工作过？",
+      "optionTranslationsZh": {
+        "A": "在曼彻斯特。",
+        "B": "在都柏林。",
+        "C": "在温哥华。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Emma worked for a football team in Manchester, then for a very successful rugby team in Dublin, and finally ended up working here in Vancouver."
+      },
+      "reasonZh": "说话人直接说了艾玛为都柏林的一支橄榄球队工作过（rugby team in Dublin），选项沿用地名，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "曼彻斯特是她为足球队工作的地方（a football team in Manchester），不是橄榄球队。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "温哥华是她最后来到的地方（ended up working here in Vancouver），说的是现在的工作地。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening:paper-gaokao-2022-ii:10",
+      "stemTranslationZh": "艾玛的工作可能面临什么挑战？",
+      "optionTranslationsZh": {
+        "A": "医疗保健行业的竞争。",
+        "B": "对女科学家的歧视。",
+        "C": "错误信息对公众的影响。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Emma says it’s challenging to be a health expert, because people can be easily influenced by advertisements that lack scientific support."
+      },
+      "reasonZh": "艾玛说难在人们容易被缺乏科学依据的广告左右（advertisements that lack scientific support），网上又有大量令人困惑的信息（confusing information online），选项把这两点概括为错误信息的影响，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "健康（health）只是在说艾玛是健康专家（a health expert），她讲的难处来自广告和网上信息，不是同行竞争。"
+        }
+      ]
+    }
+  }
+}

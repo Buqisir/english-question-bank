@@ -1,0 +1,932 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:seven-choices": {
+      "overview": "文章针对写文章时难以构思、执着初稿完美和不便修改的问题，介绍不停笔写作、快速起草以及打印三倍行距稿件三个技巧，帮助写作者积累想法并逐步完善文章。",
+      "fullTranslationZh": "对大多数人来说，写文章是一个困难的过程。不过，如果学会练习三个简单的技巧，这个过程就能变得更容易。\n\n首先，学会不停笔写作的技巧。刚开始为文章构思时，把笔落到纸上，不停地写上十到十五分钟，不让笔离开纸面。保持放松、自在。让笔跟着思绪走。不要担心语法或拼写。虽然这个技巧并不适合所有人，却能帮助很多人积累大量可供使用的想法。\n\n下一个技巧是迅速写出初稿，不必担心是否完美。太多写作者想在第一次就把初稿写好。然而，学会接受不完美，就能让你少些头疼，也不至于把废纸篓塞满揉皱的纸。把初稿看作在丛林中开出的一条小路，是探索的一部分，而不是一条完备的公路。\n\n第三个技巧是试着打印一份三倍行距的稿子，为修改留出空间。\n\n许多写作新手没有留出足够的修改空间。因此，这些写作者始终养不成划掉初稿中大段内容、在空白处写下修改文字的习惯。当你把初稿改得过于凌乱、无法继续使用时，就可以把修改内容输入文字处理软件。然后，你可以再打印一份新的初稿，仍然把行距设为三倍。这样留下的空白会促使你继续修改。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2022-ii:seven-choices:1",
+          "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+          "sourceText": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on.",
+          "displayText": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on.",
+          "relatedQuestionIds": [],
+          "translationZh": "虽然这个技巧并不适合所有人，却能帮助很多人积累大量可供使用的想法。",
+          "analysisZh": "主干是 it helps many people get a good store of ideas：这个技巧帮助很多人积累想法。Even though 引出让步，先承认它并非人人适用；to draw on 后置修饰 ideas，说明这些想法可以在写文章时调用。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 11,
+              "quote": "Even though"
+            },
+            {
+              "start": 52,
+              "end": 76,
+              "quote": "it helps many people get"
+            },
+            {
+              "start": 99,
+              "end": 109,
+              "quote": "to draw on"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2022-ii:seven-choices:2",
+          "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+          "sourceText": "After you have revised your draft until it is too messy to work from anymore, you can enter your changes into your word processor.",
+          "displayText": "After you have revised your draft until it is too messy to work from anymore, you can enter your changes into your word processor.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:40"
+          ],
+          "translationZh": "当你把初稿改得过于凌乱、无法继续使用时，就可以把修改内容输入文字处理软件。",
+          "analysisZh": "主干是 you can enter your changes into your word processor：你可以把修改输入文字处理软件。After 从句交代什么时候这样做；其中 until 又限定修改持续到什么程度，too messy to work from 表示稿子太乱，已经无法据此继续工作。这句话先完成录入修改，下一步才是重新打印。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 33,
+              "quote": "After you have revised your draft"
+            },
+            {
+              "start": 46,
+              "end": 76,
+              "quote": "too messy to work from anymore"
+            },
+            {
+              "start": 78,
+              "end": 104,
+              "quote": "you can enter your changes"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先指出写文章的困难并提出三个技巧，再按积累想法、写出初稿、反复修改的顺序展开；最后用重新打印留白接续修改。",
+        "units": [
+          {
+            "unitId": "unit:group:paper-gaokao-2022-ii:seven-choices:1",
+            "heading": "总起：写作可以更容易",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-ii:seven-choices:1"
+            ],
+            "summary": "说明困难并承诺介绍三个可练习的技巧。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2022-ii:seven-choices:2",
+            "heading": "构思：先不停笔地写",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-ii:seven-choices:2"
+            ],
+            "summary": "连续写出思绪，暂不纠结语法拼写，为成文积累想法。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2022-ii:seven-choices:3",
+            "heading": "起草：接受不完美",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-ii:seven-choices:3"
+            ],
+            "summary": "先快速形成初稿，把它当作探索起点，而非完成品。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2022-ii:seven-choices:4",
+            "heading": "修改：留白并再次打印",
+            "paragraphIds": [
+              "block:paper-gaokao-2022-ii:seven-choices:4",
+              "block:paper-gaokao-2022-ii:seven-choices:5"
+            ],
+            "summary": "用三倍行距给纸面修改留空间，改乱后录入电脑、重新打印，继续修订。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2022-ii:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 49,
+              "quote": "对大多数人来说，写文章是一个困难的过程。不过，如果学会练习三个简单的技巧，这个过程就能变得更容易。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:seven-choices:2"
+              ],
+              "start": 51,
+              "end": 161,
+              "quote": "首先，学会不停笔写作的技巧。刚开始为文章构思时，把笔落到纸上，不停地写上十到十五分钟，不让笔离开纸面。保持放松、自在。让笔跟着思绪走。不要担心语法或拼写。虽然这个技巧并不适合所有人，却能帮助很多人积累大量可供使用的想法。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:seven-choices:3"
+              ],
+              "start": 163,
+              "end": 273,
+              "quote": "下一个技巧是迅速写出初稿，不必担心是否完美。太多写作者想在第一次就把初稿写好。然而，学会接受不完美，就能让你少些头疼，也不至于把废纸篓塞满揉皱的纸。把初稿看作在丛林中开出的一条小路，是探索的一部分，而不是一条完备的公路。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:seven-choices:4"
+              ],
+              "start": 275,
+              "end": 303,
+              "quote": "第三个技巧是试着打印一份三倍行距的稿子，为修改留出空间。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:seven-choices:5"
+              ],
+              "start": 305,
+              "end": 439,
+              "quote": "许多写作新手没有留出足够的修改空间。因此，这些写作者始终养不成划掉初稿中大段内容、在空白处写下修改文字的习惯。当你把初稿改得过于凌乱、无法继续使用时，就可以把修改内容输入文字处理软件。然后，你可以再打印一份新的初稿，仍然把行距设为三倍。这样留下的空白会促使你继续修改。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:1",
+            "text": "Writing an essay is a difficult process for most people. However, the process can be made easier if you learn to practice three simple techniques."
+          },
+          {
+            "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+            "text": "First of all, learn the technique of nonstop writing. When you are first trying to think of ideas for an essay, put your pen to your paper and write nonstop for ten or fifteen minutes without letting your pen leave the paper. Stay loose and free. Let your pen follow the waves of thought. Don’t worry about grammar or spelling. Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on."
+          },
+          {
+            "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+            "text": "The next technique is to write your draft rapidly without worrying about being perfect. Too many writers try to get their drafts right the first time. Yet, by learning to live with imperfection, you will save yourself headaches and a wastepaper basket full of crumpled (弄皱) paper. Think of your first draft as a path cut out of the jungle – as part of an exploration, not as a complete highway."
+          },
+          {
+            "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:4",
+            "text": "The third technique is to try printing out a triple – spaced (三倍行距) copy to allow space for revision."
+          },
+          {
+            "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+            "text": "Many beginning writers don’t leave enough space to revise. As a result, these writers never get in the habit of crossing out chunks (大块) of their draft and writing revisions in the blank space. After you have revised your draft until it is too messy to work from anymore, you can enter your changes into your word processor. Then you can print out a fresh draft, again setting your text on triple-space. The resulting blank space invites you to revise."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 96,
+                "end": 136,
+                "quote": "write nonstop for ten or fifteen minutes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 31,
+                "end": 42,
+                "quote": "不停地写上十到十五分钟"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:36"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 0,
+                "end": 53,
+                "quote": "First of all, learn the technique of nonstop writing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 0,
+                "end": 14,
+                "quote": "首先，学会不停笔写作的技巧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 179,
+                "end": 199,
+                "quote": "Stay loose and free."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 51,
+                "end": 59,
+                "quote": "保持放松、自在。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:37"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 247,
+                "end": 288,
+                "quote": "Let your pen follow the waves of thought."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 59,
+                "end": 67,
+                "quote": "让笔跟着思绪走。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+                "start": 95,
+                "end": 137,
+                "quote": "Yet, by learning to live with imperfection"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:3",
+                "start": 39,
+                "end": 49,
+                "quote": "然而，学会接受不完美"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:38"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+                "start": 88,
+                "end": 150,
+                "quote": "Too many writers try to get their drafts right the first time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:3",
+                "start": 22,
+                "end": 39,
+                "quote": "太多写作者想在第一次就把初稿写好。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 7,
+                "end": 141,
+                "quote": "As a result, these writers never get in the habit of crossing out chunks (大块) of their draft and writing revisions in the blank space."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 18,
+                "end": 55,
+                "quote": "因此，这些写作者始终养不成划掉初稿中大段内容、在空白处写下修改文字的习惯。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:39"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 0,
+                "end": 58,
+                "quote": "Many beginning writers don’t leave enough space to revise."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 0,
+                "end": 18,
+                "quote": "许多写作新手没有留出足够的修改空间。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2022-ii:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 220,
+                "end": 272,
+                "quote": "you can enter your changes into your word processor."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 75,
+                "end": 92,
+                "quote": "就可以把修改内容输入文字处理软件。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2022-ii:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:40"
+            ],
+            "blankId": "blank:paper-gaokao-2022-ii:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-gaokao-2022-ii:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 325,
+                "end": 403,
+                "quote": "Then you can print out a fresh draft, again setting your text on triple-space."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 92,
+                "end": 118,
+                "quote": "然后，你可以再打印一份新的初稿，仍然把行距设为三倍。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2022-ii:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2022-ii:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 246,
+                "end": 356,
+                "quote": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:2",
+                "start": 77,
+                "end": 110,
+                "quote": "虽然这个技巧并不适合所有人，却能帮助很多人积累大量可供使用的想法。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2022-ii:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:40"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2022-ii:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 142,
+                "end": 272,
+                "quote": "After you have revised your draft until it is too messy to work from anymore, you can enter your changes into your word processor."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2022-ii:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2022-ii:seven-choices:5",
+                "start": 55,
+                "end": 92,
+                "quote": "当你把初稿改得过于凌乱、无法继续使用时，就可以把修改内容输入文字处理软件。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 37,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它和空前 \"put your pen to your paper\" 一样讲动笔，又是祈使句，像在接着教怎么写。但空前说 \"Stay loose and free\"，空后说 \"Don’t worry about grammar or spelling\"，都叫人别管形式；它却要字迹工整，方向反了。",
+          "quotes": [
+            "put your pen to your paper",
+            "Stay loose and free",
+            "Don’t worry about grammar or spelling"
+          ]
+        },
+        "C": {
+          "target": 40,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "draft"
+          ],
+          "text": "它说 \"The second draft\"，像接空前录入修改后的新稿。但空后 \"The resulting blank space\" 要有打印出空白的动作，它只说稿子该更好，空白没有来由。它照答案 G 改：都有 \"draft\"，答案说按三倍行距打印新稿，它改成新稿该更好。在那一空它像接着快写初稿，可 \"Yet\" 转不过来。",
+          "quotes": [
+            "The second draft",
+            "The resulting blank space",
+            "draft",
+            "Yet"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-ii:36": {
+      "blankId": "blank:paper-gaokao-2022-ii:36",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "think of ideas",
+        "write nonstop",
+        "ten or fifteen minutes",
+        "without letting your pen leave the paper"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+        "beforeQuote": "",
+        "afterQuote": "When you are first trying to think of ideas for an essay, put your pen to your paper and write nonstop for ten or fifteen minutes without letting your pen leave the paper."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "First of all",
+          "signalSide": "option",
+          "targetText": "The next technique / The third technique",
+          "relation": "总起段承诺三个技巧，此处先引出第一个，后文才接第二、第三个。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "nonstop writing",
+          "signalSide": "option",
+          "targetText": "write nonstop",
+          "relation": "选项先给技巧命名，随后说明连续写十到十五分钟的具体做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "write nonstop",
+          "signalSide": "context-after",
+          "targetText": "nonstop writing",
+          "relation": "空后要求不停地写，直接展开段首所说的技巧。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "这句是段首总起，先给第一个技巧起名。空后不停笔写十到十五分钟、笔不离纸，都是在教它怎么做；后面两段再用 \"The next technique\" 和 \"The third technique\" 依次排下去。",
+        "matchedClues": [
+          {
+            "contextSide": "write nonstop for ten or fifteen minutes",
+            "optionSide": "the technique of nonstop writing",
+            "relation": "后文的具体操作说明前面命名的写作技巧。"
+          }
+        ]
+      },
+      "lock": [
+        "three simple techniques",
+        "write nonstop"
+      ],
+      "find": {
+        "text": "上段末尾 \"three simple techniques\" 预告有三个技巧；空后 \"write nonstop\" 已在教具体做法。空里要先点出第一个技巧，只有 D 用 \"First of all\" 引出 \"nonstop writing\"。",
+        "quotes": [
+          "three simple techniques",
+          "write nonstop",
+          "First of all",
+          "nonstop writing"
+        ]
+      },
+      "explain": "这句是段首总起，先给第一个技巧起名。空后不停笔写十到十五分钟、笔不离纸，都是在教它怎么做；后面两段再用 \"The next technique\" 和 \"The third technique\" 依次排下去。",
+      "distractors": [],
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-ii:37": {
+      "blankId": "blank:paper-gaokao-2022-ii:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "think of ideas",
+        "Stay loose and free",
+        "grammar or spelling",
+        "a good store of ideas"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+        "beforeQuote": "put your pen to your paper and write nonstop for ten or fifteen minutes without letting your pen leave the paper. Stay loose and free.",
+        "afterQuote": "Don’t worry about grammar or spelling."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "waves of thought",
+          "signalSide": "option",
+          "targetText": "think of ideas",
+          "relation": "此时要先积累想法，所以让笔追随思绪，而非停下来纠错。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Stay loose and free",
+          "signalSide": "context-before",
+          "targetText": "Let your pen follow",
+          "relation": "放松、自由的状态要落实为顺着思路写下去。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "grammar or spelling",
+          "signalSide": "context-after",
+          "targetText": "waves of thought",
+          "relation": "空后让人先不管语言错误，说明当前重点是写出想法。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "几句短祈使句连着教不停笔写的心态：先放松，再让笔追着想法走，最后别停下来改语法拼写。这句把放松落到手上的动作，讲清此时只管把想法倒出来。",
+        "matchedClues": [
+          {
+            "contextSide": "Stay loose and free. / Don’t worry about grammar or spelling.",
+            "optionSide": "Let your pen follow the waves of thought.",
+            "relation": "先顺着思路写，暂缓形式检查，才不会打断构思。"
+          }
+        ]
+      },
+      "lock": [
+        "Stay loose and free",
+        "Don’t worry"
+      ],
+      "find": {
+        "text": "空前 \"Stay loose and free\"、空后 \"Don’t worry about grammar or spelling\" 都叫人放开写、别管形式。B 让笔跟着思路走，方向一致，又接着空前的 \"your pen\"。",
+        "quotes": [
+          "Stay loose and free",
+          "Don’t worry about grammar or spelling",
+          "your pen"
+        ]
+      },
+      "explain": "几句短祈使句连着教不停笔写的心态：先放松，再让笔追着想法走，最后别停下来改语法拼写。这句把放松落到手上的动作，讲清此时只管把想法倒出来。",
+      "distractors": [],
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "它和空前 \"put your pen to your paper\" 一样讲动笔，又是祈使句，像在接着教怎么写。但空前说 \"Stay loose and free\"，空后说 \"Don’t worry about grammar or spelling\"，都叫人别管形式；它却要字迹工整，方向反了。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:38": {
+      "blankId": "blank:paper-gaokao-2022-ii:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "write your draft rapidly",
+        "being perfect",
+        "live with imperfection",
+        "crumpled (弄皱) paper"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+        "beforeQuote": "The next technique is to write your draft rapidly without worrying about being perfect.",
+        "afterQuote": "Yet, by learning to live with imperfection, you will save yourself headaches and a wastepaper basket full of crumpled (弄皱) paper."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Yet",
+          "signalSide": "context-after",
+          "targetText": "try to get their drafts right the first time",
+          "relation": "前一句写很多人试图一次写好，Yet 转向接受不完美能减少烦恼和浪费。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "right the first time",
+          "signalSide": "option",
+          "targetText": "live with imperfection",
+          "relation": "一次就写好与接受初稿不完美形成对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "live with imperfection",
+          "signalSide": "context-after",
+          "targetText": "get their drafts right the first time",
+          "relation": "这是转折后的另一种做法，说明为什么不必急于写出完美初稿。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "段首先给建议：快写初稿，别求完美。这句点出很多人偏偏想一稿写好，给建议立一个要纠正的对象；空后 Yet 一转，说接受不完美能省去头疼和满篓废纸，理由就立住了。",
+        "matchedClues": [
+          {
+            "contextSide": "being perfect / live with imperfection",
+            "optionSide": "get their drafts right the first time",
+            "relation": "选项呈现要纠正的急于求完美的做法，后文给出相反做法及其收益。"
+          }
+        ]
+      },
+      "lock": [
+        "Yet",
+        "live with imperfection",
+        "right the first time"
+      ],
+      "find": {
+        "text": "先看空后 \"Yet\"：转折后劝人 \"live with imperfection\"，空里该是相反的做法。只有 E 的 \"right the first time\" 是一稿求完美。",
+        "quotes": [
+          "Yet",
+          "live with imperfection",
+          "right the first time"
+        ]
+      },
+      "explain": "段首先给建议：快写初稿，别求完美。这句点出很多人偏偏想一稿写好，给建议立一个要纠正的对象；空后 Yet 一转，说接受不完美能省去头疼和满篓废纸，理由就立住了。",
+      "distractors": [],
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2022-ii:39": {
+      "blankId": "blank:paper-gaokao-2022-ii:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "space for revision",
+        "crossing out chunks (大块) of their draft",
+        "writing revisions",
+        "the blank space"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": "As a result, these writers never get in the habit of crossing out chunks (大块) of their draft and writing revisions in the blank space."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "As a result",
+          "signalSide": "context-after",
+          "targetText": "don’t leave enough space to revise",
+          "relation": "先说明没有留够空白，才能推出难以养成在空白处修改的习惯。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "don’t leave enough space",
+          "signalSide": "option",
+          "targetText": "writing revisions in the blank space",
+          "relation": "没有足够位置写修改文字，是后面所说结果的具体原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these writers",
+          "signalSide": "context-after",
+          "targetText": "Many beginning writers",
+          "relation": "these writers 接住选项首次提到的写作新手。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Many beginning writers",
+          "signalSide": "option",
+          "targetText": "these writers",
+          "relation": "先明确是哪类写作者，后面才可以用 these writers 继续说他们。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "上段刚提出打印三倍行距、给修改留空间，这句从反面说新手偏不留；空后用 As a result 推出后果：他们养不成划掉大段、在空白处改写的习惯，也就说明了这个技巧为什么必要。",
+        "matchedClues": [
+          {
+            "contextSide": "As a result / writing revisions in the blank space",
+            "optionSide": "don’t leave enough space to revise",
+            "relation": "空间不足先作原因，不能养成在纸上改写的习惯随后作结果。"
+          },
+          {
+            "contextSide": "these writers",
+            "optionSide": "Many beginning writers",
+            "relation": "后句的这些写作者指向前句的写作新手。"
+          }
+        ]
+      },
+      "lock": [
+        "As a result",
+        "these writers"
+      ],
+      "find": {
+        "text": "空后 \"As a result, these writers\" 要一个原因，还要先提到某类写作者。F 有 \"writers\"，\"don’t leave enough space\" 又接上段 \"space for revision\"。",
+        "quotes": [
+          "As a result, these writers",
+          "writers",
+          "don’t leave enough space",
+          "space for revision"
+        ]
+      },
+      "explain": "上段刚提出打印三倍行距、给修改留空间，这句从反面说新手偏不留；空后用 As a result 推出后果：他们养不成划掉大段、在空白处改写的习惯，也就说明了这个技巧为什么必要。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 有 \"Too many writers\"，也能让 \"these writers\" 有所指。但它说一稿求完美，推不出空后不在 \"the blank space\" 里改写；缺了留空间这个原因。",
+          "quotes": [
+            "Too many writers",
+            "these writers",
+            "the blank space"
+          ]
+        }
+      ],
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 有 \"Too many writers\"，也能让 \"these writers\" 有所指。但它说一稿求完美，推不出空后不在 \"the blank space\" 里改写；缺了留空间这个原因。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:40": {
+      "blankId": "blank:paper-gaokao-2022-ii:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "enter your changes",
+        "your word processor",
+        "The resulting blank space",
+        "revise"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+        "beforeQuote": "After you have revised your draft until it is too messy to work from anymore, you can enter your changes into your word processor.",
+        "afterQuote": "The resulting blank space invites you to revise."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "option",
+          "targetText": "enter your changes into your word processor",
+          "relation": "先把纸上的修改输入电脑，然后才能打印更新后的稿子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "enter your changes",
+          "signalSide": "context-before",
+          "targetText": "print out a fresh draft",
+          "relation": "录入修改是打印新稿之前的步骤。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "triple-space",
+          "signalSide": "option",
+          "targetText": "The resulting blank space",
+          "relation": "新稿再次用三倍行距，才会产生下一句所说的空白。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "The resulting blank space",
+          "signalSide": "context-after",
+          "targetText": "again setting your text on triple-space",
+          "relation": "这里的空白是重新按三倍行距排印后得到的，不是凭空出现的。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "这一段排的是一串修改步骤：纸上改乱了，录进电脑，再打印新稿。这句补上打印这一步，又交代新稿还是三倍行距，空后才能说新的空白又在催你修改，修改就这样一轮轮接下去。",
+        "matchedClues": [
+          {
+            "contextSide": "enter your changes into your word processor",
+            "optionSide": "Then you can print out a fresh draft",
+            "relation": "输入修改后再打印新稿，操作顺序连贯。"
+          },
+          {
+            "contextSide": "The resulting blank space",
+            "optionSide": "again setting your text on triple-space",
+            "relation": "三倍行距具体解释新稿的空白从何而来。"
+          }
+        ]
+      },
+      "lock": [
+        "enter your changes",
+        "The resulting blank space"
+      ],
+      "find": {
+        "text": "先看空后 \"The resulting blank space\"：空白得有来由。只有 G 再用 \"triple-space\" 打印新稿；空前 \"enter your changes\" 录入，\"Then\" 打印正是下一步。",
+        "quotes": [
+          "The resulting blank space",
+          "triple-space",
+          "enter your changes",
+          "Then"
+        ]
+      },
+      "explain": "这一段排的是一串修改步骤：纸上改乱了，录进电脑，再打印新稿。这句补上打印这一步，又交代新稿还是三倍行距，空后才能说新的空白又在催你修改，修改就这样一轮轮接下去。",
+      "distractors": [],
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "它说 \"The second draft\"，像接空前录入修改后的新稿。但空后 \"The resulting blank space\" 要有打印出空白的动作，它只说稿子该更好，空白没有来由。它照答案 G 改：都有 \"draft\"，答案说按三倍行距打印新稿，它改成新稿该更好。在那一空它像接着快写初稿，可 \"Yet\" 转不过来。"
+        }
+      ]
+    }
+  }
+}

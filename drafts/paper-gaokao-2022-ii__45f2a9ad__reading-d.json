@@ -1,0 +1,786 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2022-ii:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2022-ii:reading-d": {
+      "overview": "心脏会随年龄像旧橡皮筋一样失去弹性。莱文发现，少运动的中年人坚持两年高强度有氧运动，心脏能恢复年轻，70岁才练则无效；另一位专家认为研究规模小，需扩大重复。",
+      "fullTranslationZh": "随着年龄增长，即使我们身体健康，心脏处理氧气的效率也不如从前了。大多数人在五十多岁或六十出头时出现最初的迹象。而在不锻炼的人当中，这些变化甚至可能来得更早。\n\n“想想橡皮筋吧。刚开始它很有弹性，但把它在抽屉里放上20年，它就会变干、一拉就断，”得克萨斯大学的心脏病专家本·莱文博士说。心脏的情况就是这样。对中年人来说幸运的是，莱文发现，即使你以前并不热衷锻炼，现在开始健身也可能有助于改善你日渐衰老的心脏。\n\n莱文和他的研究团队选取了年龄在45岁到64岁之间、平时不怎么锻炼但其他方面都健康的志愿者。参与者被随机分成两组。第一组参加无氧运动项目——平衡训练和力量训练——每周三次。第二组在教练指导下进行高强度有氧运动，每周四天或更多。两年后，第二组的心脏健康状况有了显著改善。\n\n“我们让这些50岁的心脏把时钟拨回到了30岁或35岁，”莱文说。“它们之所以变得强壮、健康得多，是因为现在心脏在运动时能更好地充盈，泵出多得多的血液。”但他说，那些做强度较低运动的人，心脏没有变化。\n\n“如果你还没开始锻炼，人生中开始锻炼的最佳时机是中年后期，那时心脏仍有弹性，”莱文说。“我们让健康的70岁老人参加了为期一年的锻炼训练项目，他们身上一点变化都没有。”\n\n美国心脏协会发言人妮卡·戈德堡博士说，莱文的研究发现是一个很好的开端。但这项研究规模小，需要在大得多的人群中重复进行，以准确确定锻炼方案的哪些方面作用最大。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+          "sourceText": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
+          "displayText": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:34"
+          ],
+          "translationZh": "对中年人来说幸运的是，莱文发现，即使你以前并不热衷锻炼，现在开始健身也可能有助于改善你日渐衰老的心脏。",
+          "analysisZh": "主干是 Levine is finding that …（莱文发现……），that 引出宾语从句。从句的主语是动名词短语 getting in shape now（现在开始健身），谓语是 may help improve your aging heart（可能有助于改善衰老的心脏）；中间 even if you haven’t been an enthusiastic exerciser 是插进来的让步状语。句首 Fortunately for those in midlife 先说这对中年人是好消息，后面的实验正是围绕中年人展开的。",
+          "underlineRanges": [
+            {
+              "start": 34,
+              "end": 56,
+              "quote": "Levine is finding that"
+            },
+            {
+              "start": 109,
+              "end": 129,
+              "quote": "getting in shape now"
+            },
+            {
+              "start": 130,
+              "end": 163,
+              "quote": "may help improve your aging heart"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2022-ii:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+          "sourceText": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+          "displayText": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2022-ii:35"
+          ],
+          "translationZh": "但这项研究规模小，需要在大得多的人群中重复进行，以准确确定锻炼方案的哪些方面作用最大。",
+          "analysisZh": "主语 the study 带两个并列谓语：was small（规模小）和 needs to be repeated（需要被重复）。with far larger groups of people 说用什么样的人群重复；to determine 引出目的，后面 which aspects of an exercise routine make the biggest difference 是 determine 的宾语从句。句首 But 和前一句的夸奖相对，这句才是她真正的意见。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 48,
+              "quote": "was small and needs to be repeated"
+            },
+            {
+              "start": 82,
+              "end": 94,
+              "quote": "to determine"
+            },
+            {
+              "start": 103,
+              "end": 139,
+              "quote": "which aspects of an exercise routine"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2022-ii:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-d:1"
+              ],
+              "start": 0,
+              "end": 78,
+              "quote": "随着年龄增长，即使我们身体健康，心脏处理氧气的效率也不如从前了。大多数人在五十多岁或六十出头时出现最初的迹象。而在不锻炼的人当中，这些变化甚至可能来得更早。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-d:2"
+              ],
+              "start": 80,
+              "end": 203,
+              "quote": "“想想橡皮筋吧。刚开始它很有弹性，但把它在抽屉里放上20年，它就会变干、一拉就断，”得克萨斯大学的心脏病专家本·莱文博士说。心脏的情况就是这样。对中年人来说幸运的是，莱文发现，即使你以前并不热衷锻炼，现在开始健身也可能有助于改善你日渐衰老的心脏。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-d:3"
+              ],
+              "start": 205,
+              "end": 338,
+              "quote": "莱文和他的研究团队选取了年龄在45岁到64岁之间、平时不怎么锻炼但其他方面都健康的志愿者。参与者被随机分成两组。第一组参加无氧运动项目——平衡训练和力量训练——每周三次。第二组在教练指导下进行高强度有氧运动，每周四天或更多。两年后，第二组的心脏健康状况有了显著改善。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-d:4"
+              ],
+              "start": 340,
+              "end": 439,
+              "quote": "“我们让这些50岁的心脏把时钟拨回到了30岁或35岁，”莱文说。“它们之所以变得强壮、健康得多，是因为现在心脏在运动时能更好地充盈，泵出多得多的血液。”但他说，那些做强度较低运动的人，心脏没有变化。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-d:5"
+              ],
+              "start": 441,
+              "end": 524,
+              "quote": "“如果你还没开始锻炼，人生中开始锻炼的最佳时机是中年后期，那时心脏仍有弹性，”莱文说。“我们让健康的70岁老人参加了为期一年的锻炼训练项目，他们身上一点变化都没有。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2022-ii:reading-d:6"
+              ],
+              "start": 526,
+              "end": 604,
+              "quote": "美国心脏协会发言人妮卡·戈德堡博士说，莱文的研究发现是一个很好的开端。但这项研究规模小，需要在大得多的人群中重复进行，以准确确定锻炼方案的哪些方面作用最大。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-d-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+                "start": 240,
+                "end": 404,
+                "quote": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p2",
+                "start": 72,
+                "end": 123,
+                "quote": "对中年人来说幸运的是，莱文发现，即使你以前并不热衷锻炼，现在开始健身也可能有助于改善你日渐衰老的心脏。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-d-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2022-ii:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+                "start": 112,
+                "end": 280,
+                "quote": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p6",
+                "start": 35,
+                "end": 78,
+                "quote": "但这项研究规模小，需要在大得多的人群中重复进行，以准确确定锻炼方案的哪些方面作用最大。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+                "start": 206,
+                "end": 239,
+                "quote": "That’s what happens to the heart."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+                "start": 0,
+                "end": 106,
+                "quote": "As we age, even if we’re healthy, the heart just isn’t as efficient in processing oxygen as it used to be."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p2",
+                "start": 62,
+                "end": 72,
+                "quote": "心脏的情况就是这样。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p1",
+                "start": 0,
+                "end": 32,
+                "quote": "随着年龄增长，即使我们身体健康，心脏处理氧气的效率也不如从前了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+                "start": 178,
+                "end": 308,
+                "quote": "The first group participated in a program of nonaerobic (无氧) exercise – balance training and weight training – three times a week."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+                "start": 309,
+                "end": 423,
+                "quote": "The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p3",
+                "start": 56,
+                "end": 85,
+                "quote": "第一组参加无氧运动项目——平衡训练和力量训练——每周三次。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p3",
+                "start": 85,
+                "end": 112,
+                "quote": "第二组在教练指导下进行高强度有氧运动，每周四天或更多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+                "start": 0,
+                "end": 102,
+                "quote": "“We took these 50-year-old hearts and turned the clock back to 30-or 35-year-old hearts,” says Levine."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+                "start": 309,
+                "end": 423,
+                "quote": "The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+                "start": 240,
+                "end": 404,
+                "quote": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p4",
+                "start": 0,
+                "end": 32,
+                "quote": "“我们让这些50岁的心脏把时钟拨回到了30岁或35岁，”莱文说。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p3",
+                "start": 85,
+                "end": 112,
+                "quote": "第二组在教练指导下进行高强度有氧运动，每周四天或更多。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p2",
+                "start": 72,
+                "end": 123,
+                "quote": "对中年人来说幸运的是，莱文发现，即使你以前并不热衷锻炼，现在开始健身也可能有助于改善你日渐衰老的心脏。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation-group:paper-gaokao-2022-ii:reading-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2022-ii:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+                "start": 112,
+                "end": 280,
+                "quote": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2022-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2022-ii:reading-d-p6",
+                "start": 35,
+                "end": 78,
+                "quote": "但这项研究规模小，需要在大得多的人群中重复进行，以准确确定锻炼方案的哪些方面作用最大。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先说心脏会随年龄变得低效，用橡皮筋打比方，并点出中年开始锻炼仍有帮助；接着介绍莱文的分组实验和结果，说明中年人做高强度有氧运动能让心脏变年轻，再指出最佳时机在中年后期；最后引用另一位专家的评价，指出研究规模小、还需扩大重复。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+            "summary": "人到中年心脏处理氧气的效率下降，不锻炼的人更早",
+            "function": "引出话题：心脏衰老"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+            "summary": "莱文用橡皮筋比喻心脏老化，并发现中年开始健身可能改善心脏",
+            "function": "用比方说明问题，引出研究发现"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+            "summary": "志愿者随机分两组，分别做无氧和高强度有氧运动，两年后有氧组心脏显著改善",
+            "function": "介绍实验设计和结果"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+            "summary": "有氧组心脏变年轻、泵血更多，低强度组没有变化",
+            "function": "借莱文的话解释结果"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+            "summary": "开始锻炼的最佳时机是中年后期，70岁老人锻炼无效",
+            "function": "补充适用的年龄"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+            "summary": "另一位专家肯定研究，但认为规模小、需扩大重复",
+            "function": "给出评价和局限"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2022-ii:32": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "弄清莱文用橡皮筋打比方是想说明什么。",
+      "stemTranslationZh": "莱文提到橡皮筋是想说明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读，看 That 指什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "正确的锻炼方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The right way of exercising.",
+            "explanation": "锻炼方式是[[block:paper-gaokao-2022-ii:reading-d:3]]实验才讲到的；橡皮筋只拿来比心脏怎样变老，没讲怎么练。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "心脏病发作的原因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The causes of a heart attack.",
+            "explanation": "原文没提心脏病发作；橡皮筋变干易断（easily broken）比的是心脏老化后失去弹性，不是发病原因。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保持健康的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The difficulty of keeping fit.",
+            "explanation": "橡皮筋是放久了自己变脆，不是说健身难坚持；[[block:paper-gaokao-2022-ii:reading-d:2|Fortunately for those in midlife]]反而说中年开始健身也有用。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "心脏的衰老过程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+              "quote": "That’s what happens to the heart.",
+              "anchor": "what happens to the heart"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "quote": "As we age, even if we’re healthy, the heart just isn’t as efficient in processing oxygen as it used to be.",
+              "anchor": "As we age"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "rubber band",
+          "sourceRole": "stem",
+          "targetText": "“Think of a rubber band.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "That’s what happens to the heart",
+          "bridgeZh": "That 指橡皮筋由软变脆，说的就是心脏",
+          "note": "题干 rubber band 原词出现在原文。"
+        },
+        {
+          "sourceText": "The aging process of the heart.",
+          "sourceRole": "correctOption",
+          "targetText": "That’s what happens to the heart.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "“衰老过程”是把比方和[[block:paper-gaokao-2022-ii:reading-d:1]]合起来得出的：橡皮筋新时有弹性（flexible），放20年就干脆易断，对应心脏随年龄增长（As we age）不如从前。用人人见过的橡皮筋，看不见的心脏老化就变得好懂，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "比较实验中两组的安排，找出两组不同的地方。",
+      "stemTranslationZh": "就研究设计而言，两组在哪方面不同？",
+      "locateBy": "options",
+      "locateFindZh": "把[[block:paper-gaokao-2022-ii:reading-d:3]]两组各做什么并排比，四项逐个对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "饮食计划。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Diet plan.",
+            "explanation": "原文没提饮食；两组的安排只写了做什么运动、一周练几次。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "职业背景。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Professional background.",
+            "explanation": "原文没提志愿者的职业；第二组有教练（a trainer）指导，那是练法上的安排，不是参与者的背景。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "锻炼类型。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "quote": "The first group participated in a program of nonaerobic (无氧) exercise – balance training and weight training – three times a week.",
+              "anchor": "nonaerobic exercise"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "quote": "The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week.",
+              "anchor": "high-intensity aerobic exercise"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "之前的身体状况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+            "sourceEntity": "volunteers",
+            "optionText": "Previous physical condition.",
+            "optionEntity": "Previous physical condition",
+            "explanation": "[[block:paper-gaokao-2022-ii:reading-d:3|selected volunteers aged between]]说志愿者都是平时少运动、其他方面健康的人，又是随机分组（randomly divided），身体条件是两组共有的，不是区别。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "quote": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+              "anchor": "otherwise healthy"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Exercise type.",
+          "sourceRole": "correctOption",
+          "targetText": "The first group participated in a program of nonaerobic (无氧) exercise – balance training and weight training – three times a week.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "“锻炼类型”是把两组的做法并排比出来的：第一组做无氧的平衡和力量训练（nonaerobic），第二组做高强度有氧运动（high-intensity aerobic），差别就在练哪一类，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:34": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把研究对象、锻炼方式和结果合起来，概括莱文的研究发现。",
+      "stemTranslationZh": "莱文的研究发现了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读实验，看有氧组结果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "中年人的心脏通过有氧运动变年轻。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+              "quote": "“We took these 50-year-old hearts and turned the clock back to 30-or 35-year-old hearts,” says Levine.",
+              "anchor": "turned the clock back"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "quote": "The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week.",
+              "anchor": "high-intensity aerobic exercise"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+              "quote": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
+              "anchor": "those in midlife"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "高强度运动更适合年轻人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "high-intensity",
+            "optionText": "High-intensity",
+            "matchType": "exact",
+            "relationNote": "high-intensity 出自[[block:paper-gaokao-2022-ii:reading-d:3|The second group did]]，是第二组的练法，说的是中年志愿者练了有效；研究对象是45到64岁的人，没和年轻人比过。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "quote": "The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week.",
+              "anchor": "high-intensity aerobic exercise"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们什么时候开始锻炼都不晚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
+            "sourceHighlight": "in late middle age",
+            "optionText": "It is never too late for people to start taking exercise.",
+            "optionHighlight": "never too late",
+            "explanation": "Levine 说开始锻炼的最佳时机在中年后期（late middle age），健康的70岁老人练一年毫无变化（nothing happened）；选项说成什么时候开始都不晚。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+              "quote": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
+              "anchor": "late middle age"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "运动越多，心脏越强壮。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "stronger",
+            "optionText": "stronger",
+            "matchType": "exact",
+            "relationNote": "stronger 出自[[block:paper-gaokao-2022-ii:reading-d:4|And the reason they got]]，说的是有氧组心脏变强，因为充盈和泵血更好；原文比的是运动类型和强度，没说练得越多越强。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+              "quote": "“And the reason they got so much stronger and fitter was that their hearts could now fill a lot better and pump (泵送) a lot more blood during exercise.”",
+              "anchor": "so much stronger"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "find",
+          "sourceRole": "stem",
+          "targetText": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+          "relationType": "locationCue",
+          "sourceZh": "研究发现",
+          "targetCue": "is finding",
+          "targetCueZh": "正在发现",
+          "answerText": "turned the clock back to 30-or 35-year-old hearts",
+          "bridgeZh": "这项发现落到实验上：有氧那组心脏前后的变化",
+          "note": "题干 find 对应原文 is finding。"
+        },
+        {
+          "sourceText": "Middle-aged hearts get younger with aerobic exercise.",
+          "sourceRole": "correctOption",
+          "targetText": "“We took these 50-year-old hearts and turned the clock back to 30-or 35-year-old hearts,” says Levine.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“变年轻”（get younger）就是原文的“把时钟拨回去”（turned the clock back）。“中年心脏”落在[[block:paper-gaokao-2022-ii:reading-d:4|We took these 50-year-old hearts]]（50-year-old hearts）；“有氧运动”落在[[block:paper-gaokao-2022-ii:reading-d:3|The second group did]]（high-intensity aerobic exercise），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2022-ii:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出戈德堡博士对这项研究提出的建议。",
+      "stemTranslationZh": "妮卡·戈德堡博士建议做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 But 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "利用这些研究发现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "findings",
+            "optionText": "findings",
+            "matchType": "exact",
+            "relationNote": "findings 出自她夸研究是好开端（a great start）的那句；她接着说研究太小，没建议马上应用这些发现。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+              "quote": "Dr. Nieca Goldberg, a spokeswoman for the American Heart Association, says Levine’s findings are a great start.",
+              "anchor": "findings"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "采访研究参与者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Interviewing the study participants.",
+            "explanation": "原文没提采访参与者；她要的是找多得多的人（far larger groups）把研究重做一遍。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "开展进一步的研究。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+              "quote": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+              "anchor": "needs to be repeated"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "阐明这项研究的目的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+            "sourceEntity": "to determine exactly which aspects of an exercise routine make the biggest difference",
+            "optionText": "Clarifying the purpose of the study.",
+            "optionEntity": "the purpose of the study",
+            "explanation": "to determine 说的是重做研究要查明锻炼的哪些方面最关键，这是新研究要弄清的问题；她没要求说明原研究的目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+              "quote": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+              "anchor": "to determine"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Nieca Goldberg",
+          "sourceRole": "stem",
+          "targetText": "Dr. Nieca Goldberg, a spokeswoman for the American Heart Association, says Levine’s findings are a great start.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+          "relationType": "locationCue",
+          "answerText": "needs to be repeated with far larger groups of people",
+          "bridgeZh": "先夸是好开端，But 后才提出研究的不足和要求",
+          "note": "题干 Nieca Goldberg 原词出现在原文。"
+        },
+        {
+          "sourceText": "Conducting further research.",
+          "sourceRole": "correctOption",
+          "targetText": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+          "targetParagraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“开展进一步研究”（Conducting further research）就是原文的“用大得多的人群重复研究”（needs to be repeated with far larger groups），选 C。"
+        }
+      ]
+    }
+  }
+}
