@@ -148,7 +148,7 @@ export function remeasureListeningReplaySilence(audio, durationSeconds, saved) {
 
 function engineDescriptor(file, bytes, record, durationSeconds) {
   const engine = record.engine || {}
-  const failed = Boolean(record.error) || !(record.result?.segments || record.segments)?.length
+  const failed = Boolean(record.error) || !Array.isArray(record.result?.segments ?? record.segments)
   return { path: file, sha256: digest(bytes), byteLength: bytes.length,
     kind: failed ? 'review_notes' : 'asr_window',
     window: failed ? null : { startSeconds: record.startSeconds ?? 0,
@@ -282,8 +282,10 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   for (const [index, failed] of apple.groups.entries()) {
     if (replay) {
       const number = Number(failed.segmentId.match(/(\d+)$/u)[1])
+      // Older descriptors classified successful empty windows as notes.
       const retained = replay.review.evidence.filter(e =>
-        e.path.includes(`-whisper-${number}-`) && (e.kind === 'asr_window' || e.path.endsWith('-failure.json')))
+        e.path.includes(`-whisper-${number}-`)
+        && (e.kind === 'asr_window' || /-(?:\d+|failure)\.json$/u.test(e.path)))
       if (!retained.length) continue
       const windows = retained.map((e, i) => retain(path.join(replay.directory, e.path), `whisper-${number}-${i}`))
       fallback.push(...evaluateListeningEngine({ ...base,

@@ -9,6 +9,7 @@
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
 //   after-proofread <paperId> [--issues-resolved] [--redo-from materialize --profile-version 17]
 //   finish <paperId> [--large-complete-page-limit 13] [--large-no-listening-page-limit 11] [--economy-page-limit 9] through frozen PDFs and their contact sheets
+//   reopen <paperId>                 archive a sealed local preview so it can be edited
 //   listening-redo <paperId> --feedback-fix <issueId>   hydrated Candidate, listening only
 //   submit <paperId>                 after PDF QA: push the Candidate, then Screen tiles
 //   report <paperId> --screen "<what was checked>" --pdf "<what was checked>"
@@ -57,6 +58,7 @@ import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME
   mergeListeningSentenceAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
 import { alignReviewedListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
 import { mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
+import { withReviewPaperLock } from './review-target.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -133,9 +135,13 @@ function lastJson(text) {
   return null
 }
 
-function context(paperId) {
+function workDirectory(paperId) {
   if (!/^paper-[a-z0-9-]+$/u.test(paperId || '')) fail('paperId must look like paper-…')
-  const work = path.join(root, 'imports/ocr-proofread', paperId)
+  return path.join(root, 'imports/ocr-proofread', paperId)
+}
+
+function context(paperId) {
+  const work = workDirectory(paperId)
   const fast = path.join(work, 'fast')
   const statePath = path.join(fast, 'state.json')
   return {
@@ -1492,6 +1498,10 @@ async function withOcrReconcileLock(ctx, action) {
   try { return await action() } finally { rmdirSync(lock) }
 }
 
+const retainedCandidateSignals = [
+  'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json', 'signals/locally-published.json',
+]
+
 function assertReferencesMutable(ctx) {
   const submitted = ['push', 'local-preview', 'screen', 'local-screen']
     // An unfinished upload is Candidate-specific UNKNOWN evidence until reconciled.
@@ -1502,8 +1512,7 @@ function assertReferencesMutable(ctx) {
   // Keep hydrate's CAS receipt for push; only its exact validated repair may rebuild.
   const repairingRestore = restore?.revisionId === fix?.baseRevisionId
     && Boolean(restore?.bundleDigest) && restore.bundleDigest === fix?.bundleDigest
-  const retained = ['canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
-    'signals/locally-published.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
+  const retained = retainedCandidateSignals.some(file => existsSync(path.join(ctx.paperDir, file)))
     || (existsSync(restorePath) && !repairingRestore)
     || existsSync(path.join(ctx.work, 'handoff/evidence.json'))
   const initialization = path.join(ctx.paperDir, 'signals/source-intake-initialization.json')
@@ -1802,7 +1811,7 @@ const STEP_ORDER = [
 // OCR generations invalidate derived listening state. Later edits retain it
 // until its own inputs change. Search and listening navigation edits only
 // affect the preview and submission.
-function redoFrom(ctx, name) {
+function redoFrom(ctx, name, { retain = file => archive(ctx, file), persist = save } = {}) {
   const index = STEP_ORDER.indexOf(name)
   if (index === -1) fail(`--redo-from 只接受：${STEP_ORDER.join(', ')}`)
   const listening = ['asr-wait', 'asr-apple-rule-v2', 'listening-review']
@@ -1821,7 +1830,7 @@ function redoFrom(ctx, name) {
   if (redo.has('pdf-qa') && existsSync(qa)) {
     for (const file of readdirSync(qa)) {
       if (/^(?:contact-(?:largeComplete|largeNoListening|economy8|answerOnly)\.png|(?:largeComplete|largeNoListening|economy8|answerOnly)\.txt)$/u.test(file)) {
-        archive(ctx, path.join(qa, file))
+        retain(path.join(qa, file))
       }
     }
   }
@@ -1834,13 +1843,13 @@ function redoFrom(ctx, name) {
   delete ctx.state.data.status
   delete ctx.state.data.localReport
   if (redoPagination) {
-    archive(ctx, path.join(ctx.fast, 'pagination'))
+    retain(path.join(ctx.fast, 'pagination'))
     for (const [key] of paginationJobs) delete ctx.state.background[key]
   }
   for (const [owner, file] of [['summaries', 'paragraph-summaries-v1.json'], ['search-metadata', 'public-search-metadata-v1.json'],
     ['listening-review', 'listening-review-v1.json'], ['ocr-correction-report', 'agent-ocr-correction-report-v2.json'],
     ['source-references', 'source-references-v1.json'], ['pagination-plan', PAPER_PAGINATION_PLAN_FILE_NAME], ['freeze', 'products']]) {
-    if (redo.has(owner)) archive(ctx, path.join(ctx.paperDir, file))
+    if (redo.has(owner)) retain(path.join(ctx.paperDir, file))
   }
   // The producer cache is keyed by its inputs, not its code: after a producer fix the cached
   // output would come back unchanged unless output, receipt, review and media move aside.
@@ -1850,15 +1859,91 @@ function redoFrom(ctx, name) {
   // revision, which supersedes the old one in Review. Source bytes are unchanged and kept.
   if (STEP_ORDER.indexOf('compile') >= index) {
     for (const file of [path.join(produced, 'nck1-ocr-source-evidence-v1.json'), path.join(produced, 'nck1-ocr-source-confirmation-v1.json'),
-      path.join(produced, 'agent-proofreading-receipt.json'), path.join(ctx.paperDir, 'signals', 'agent-proofreading-receipt.json')]) archive(ctx, file)
+      path.join(produced, 'agent-proofreading-receipt.json'), path.join(ctx.paperDir, 'signals', 'agent-proofreading-receipt.json')]) retain(file)
   }
   const receipt = path.join(produced, 'nck1-ocr-materialization-producer-receipt-v1.json')
   if (STEP_ORDER.indexOf('materialize') >= index && existsSync(receipt)) {
-    for (const file of readJson(receipt).mediaFiles || []) archive(ctx, path.join(ctx.paperDir, file.path))
-    for (const name of ['nck1-source-materialization-v1.json', 'nck1-ocr-materialization-review-v1.json']) archive(ctx, path.join(produced, name))
-    archive(ctx, receipt)
+    for (const file of readJson(receipt).mediaFiles || []) retain(path.join(ctx.paperDir, file.path))
+    for (const name of ['nck1-source-materialization-v1.json', 'nck1-ocr-materialization-review-v1.json']) retain(path.join(produced, name))
+    retain(receipt)
   }
-  save(ctx)
+  persist(ctx)
+}
+
+function assertLocalPreviewOnly(ctx) {
+  const { steps, data } = ctx.state
+  const preview = steps['local-preview']
+  const reject = () => fail('已有生产送审或未能确认归属的 Candidate 记录，请走现有 redo / 新 revision 流程')
+  if (steps.push || steps.screen || data.candidateRevisionId || data.revisionId || data.baseRevisionId
+    || data.feedbackFix || data.listeningRedo || (data.status && data.status !== 'local_ready')
+    || [...retainedCandidateSignals, 'signals/review-restore.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
+    || ['push-attempts.jsonl', 'review-push-attempts.jsonl', 'push-reconciliation'].some(file => existsSync(path.join(ctx.fast, file)))
+    || (existsSync(ctx.logs) && readdirSync(ctx.logs).some(file => /^push(?:-[\da-f-]{36})?\.log$/u.test(file)))) reject()
+  const initialization = path.join(ctx.paperDir, 'signals/source-intake-initialization.json')
+  if (existsSync(initialization) && readJson(initialization).baseRevisionId) reject()
+  if (!preview?.finishedAt || preview.result?.target !== 'local' || !preview.result?.revisionId) {
+    fail('reopen 需要已封存的本机 preview-local 记录')
+  }
+  const evidencePath = path.join(ctx.work, 'handoff/evidence.json')
+  if (existsSync(evidencePath)) {
+    const evidence = readJson(evidencePath)
+    if (evidence.screen?.revisionId !== preview.result.revisionId
+      || evidence.screen?.url !== steps['local-screen']?.result?.url
+      || !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?\//u.test(evidence.screen?.url || '')) reject()
+  }
+  // Historical direct pushes only wrote this shared timing file. Only rows
+  // accounted for by the known OCR and local preview steps can be archived.
+  const timing = path.join(ctx.fast, 'upload-timeline.jsonl')
+  if (existsSync(timing)) {
+    for (const line of readFileSync(timing, 'utf8').trim().split('\n').filter(Boolean)) {
+      const row = JSON.parse(line)
+      if (row.paperId !== ctx.paperId || ![steps['ocr-review'], preview].some(entry =>
+        Date.parse(entry?.startedAt) <= Date.parse(row.startedAt)
+        && Date.parse(row.startedAt) <= Date.parse(row.finishedAt)
+        && Date.parse(row.finishedAt) <= Date.parse(entry?.finishedAt))) reject()
+    }
+  }
+}
+
+export async function reopenLocalPreview(ctx) {
+  if (!reviewTarget().local) fail('reopen 只允许本机 Review；生产卷请走现有 redo / 新 revision 流程')
+  return withReviewPaperLock(path.join(ctx.fast, 'review-upload.lock'), () => {
+    ctx.state = readJson(ctx.statePath)
+    assertLocalPreviewOnly(ctx)
+    if (Object.values(ctx.state.background).some(job => alive(job.pid))) fail('本卷仍有任务运行，退出后再重开')
+    const stamp = new Date(ctx.state.steps['local-preview'].startedAt).toISOString().replace(/[:.]/gu, '-')
+    const directory = path.join(ctx.work, 'superseded', `${stamp}-local-preview`)
+    const stateCopy = path.join(directory, 'fast/state.json')
+    if (existsSync(stateCopy)) {
+      if (!readFileSync(stateCopy).equals(readFileSync(ctx.statePath))) fail('重开归档与现有状态不符，请先对账')
+    } else {
+      mkdirSync(path.dirname(stateCopy), { recursive: true })
+      copyFileSync(ctx.statePath, `${stateCopy}.tmp`)
+      renameSync(`${stateCopy}.tmp`, stateCopy)
+    }
+    const retain = file => {
+      if (!existsSync(file)) return
+      const paperFile = file.startsWith(`${ctx.paperDir}${path.sep}`)
+      const archived = paperFile ? path.join('paper', path.relative(ctx.paperDir, file)) : path.relative(ctx.work, file)
+      const destination = path.join(directory, archived)
+      if (existsSync(destination)) fail(`本机归档已有同名副本：${destination}`)
+      mkdirSync(path.dirname(destination), { recursive: true })
+      renameSync(file, destination)
+    }
+    const qa = path.join(ctx.work, 'handoff/qa')
+    const screenFiles = existsSync(qa) ? readdirSync(qa).filter(file => /^screen-(?:full|tile-\d+)\.png$/u.test(file)) : []
+    for (const file of [path.join(ctx.paperDir, 'canonical-evidence'),
+      ...['handoff/evidence.json', 'handoff/校正报告与预处理完成表.md', 'fast/upload-timeline.jsonl',
+        'fast/logs/local-preview.log', 'fast/logs/preprocessing-report.log'].map(file => path.join(ctx.work, file)),
+      ...screenFiles.map(file => path.join(qa, file))]) retain(file)
+    delete ctx.state.steps.build
+    redoFrom(ctx, 'source-references', { retain, persist: () => {
+      const next = path.join(directory, 'state.reopen.tmp')
+      writeJson(next, ctx.state)
+      renameSync(next, ctx.statePath)
+    } })
+    return { archived: directory, next: `fast-import.mjs after-proofread ${ctx.paperId}; fast-import.mjs finish ${ctx.paperId}` }
+  })
 }
 
 async function feedbackFix(ctx, args, readStatus, listeningOnly = false) {
@@ -2195,8 +2280,7 @@ export async function invalidateExplanationFigureDownstream(paperId, expectedMat
   return { invalidatedFrom: 'source-references' }
 }
 
-const [command, paperId, ...args] = process.argv.slice(2)
-if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
+async function runCommand(command, paperId, args) {
   const ctx = context(paperId)
   if (args.includes('--profile-version') && (command !== 'after-proofread'
     || option(args, '--redo-from') !== 'materialize' || args.includes('--feedback-fix')
@@ -2233,10 +2317,23 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'reconcile-ocr-generation') say(JSON.stringify(await reconcileOcrGeneration(ctx, option(args, '--failure-receipt')), null, 2))
   else if (command === 'submit') await submit(ctx, args)
   else if (command === 'preview-local') await submit(ctx, [...args, '--local-preview'])
+  else if (command === 'reopen') say(JSON.stringify(await reopenLocalPreview(ctx), null, 2))
   else if (command === 'report') await report(ctx, args)
   else if (command === 'status') status(ctx)
   else if (command === 'asr-extra') await asrExtra(ctx, args)
-  else fail('Usage: fast-import.mjs <prep|after-proofread|finish|listening-redo|submit|reconcile-push|report|status|asr-extra> <paperId> …')
+  else fail('Usage: fast-import.mjs <prep|after-proofread|finish|listening-redo|submit|preview-local|reopen|reconcile-push|report|status|asr-extra> <paperId> …')
+}
+
+if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
+  const [command, paperId, ...args] = process.argv.slice(2)
+  if (command === 'reopen' && args.length) fail('Usage: fast-import.mjs reopen <paperId>')
+  const run = () => runCommand(command, paperId, args)
+  if (['prep', 'after-proofread', 'finish', 'listening-redo', 'submit', 'preview-local', 'reopen',
+    'reconcile-push', 'reconcile-ocr-generation', 'report', 'asr-extra'].includes(command)) {
+    const fast = path.join(workDirectory(paperId), 'fast')
+    if (command === 'reopen' && !existsSync(path.join(fast, 'state.json'))) fail('reopen 需要已封存的本机 preview-local 记录')
+    await withReviewPaperLock(path.join(fast, 'review-state.lock'), run)
+  } else await run()
 } catch (error) {
   if (error instanceof Stop) {
     console.error(`\n需要处理：${error.message}`)

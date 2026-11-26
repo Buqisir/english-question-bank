@@ -5,7 +5,7 @@ import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSy
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, listeningRedo, rebindRejectedIssue, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
+import { assertReferenceProductsReady, finish, listeningRedo, rebindRejectedIssue, reconcilePush, reopenLocalPreview, requestedRedo, submit } from './fast-import.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
@@ -25,6 +25,57 @@ import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePre
 import { writePendingDeclarations } from './pending-declarations.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
+
+test('reopen archives one local seal and unlocks edits while retaining sealed OCR', async t => {
+  const { ctx } = fixture(t)
+  const url = 'http://127.0.0.1:51790/?reviewRevision=rev-local'
+  ctx.state.steps['local-preview'] = completed({ revisionId: 'rev-local', target: 'local' })
+  ctx.state.steps['local-screen'] = completed({ url, tiles: 1 })
+  ctx.state.steps.build = completed({})
+  ctx.state.data.status = 'local_ready'
+  json(ctx.statePath, ctx.state)
+  json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId: ctx.paperId, startedAt: oldTime, finishedAt: oldTime })
+  json(path.join(ctx.work, 'handoff/evidence.json'), { screen: { revisionId: 'rev-local', url } })
+  json(path.join(ctx.paperDir, 'canonical-evidence/candidate-summary.json'), { candidateDigest: 'old-candidate' })
+  const before = snapshot(ctx.work)
+  const paper = snapshot(ctx.paperDir)
+  await assert.rejects(() => requestedRedo(ctx, 'spelling'), /SOURCE_REFERENCES_RECONCILIATION_REQUIRED/u)
+
+  const { archived } = await reopenLocalPreview(ctx)
+  const retained = snapshot(archived)
+  for (const name of ['fast/state.json', 'fast/upload-timeline.jsonl', 'handoff/evidence.json',
+    'handoff/qa/screen-tile-00.png', 'handoff/qa/contact-answerOnly.png']) assert.equal(retained[name], before[name])
+  for (const name of ['canonical-evidence/candidate-summary.json', 'products/answerOnly.pdf', 'source-references-v1.json']) {
+    assert.equal(retained[`paper/${name}`], paper[name])
+    assert(!fs.existsSync(path.join(ctx.paperDir, name)))
+  }
+  const saved = JSON.parse(readFileSync(ctx.statePath))
+  for (const step of [...downstream, 'build', 'local-preview', 'local-screen']) assert(!saved.steps[step])
+  assert(!saved.data.status)
+  assert.deepEqual(saved.steps['ocr-review'], ctx.state.steps['ocr-review'])
+  await requestedRedo(ctx, 'spelling')
+  assert.equal(snapshot(ctx.paperDir)['signals/agent-proofreading-receipt.json'], paper['signals/agent-proofreading-receipt.json'])
+  assert.equal(readFileSync(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json')).toString('hex'),
+    before['handoff/qa/answer-key-comparison.json'])
+})
+
+test('reopen refuses production attempts and ambiguous upload history without changing the seal', async t => {
+  const { dir, ctx } = fixture(t)
+  ctx.state.steps['local-preview'] = completed({ revisionId: 'rev-local', target: 'local' })
+  json(ctx.statePath, ctx.state)
+  const record = path.join(ctx.fast, 'review-push-attempts.jsonl')
+  json(record, { paperId: ctx.paperId, origin: 'https://eqbank.cc' })
+  const assertRefused = async () => {
+    const before = snapshot(dir)
+    await assert.rejects(() => reopenLocalPreview(ctx), /redo \/ 新 revision/u)
+    assert.deepEqual(snapshot(dir), before)
+  }
+  await assertRefused()
+  rmSync(record)
+  json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId: ctx.paperId,
+    startedAt: '2026-01-02T00:00:00.000Z', finishedAt: '2026-01-02T00:00:01.000Z' })
+  await assertRefused()
+})
 
 test('pending declarations use source pages and quote existing diagnostics', async t => {
   const { work, paperDir, paperId } = fixture(t).ctx

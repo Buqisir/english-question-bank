@@ -79,6 +79,8 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
 这两个命令拒绝生产绑定，预览使用独立的 `local-preview` / `local-screen` 步骤，
 不把生产 `push` 标为完成。此状态不是送审；换到生产须从 OCR 确认重新建立绑定，
 不能沿用本地收据。广东批次明确决定见 `scripts/import-pipeline/guangdong-source-decisions-20261019.json`。
+本机预览封存后需改卷时，运行 `fast-import.mjs reopen <id>`，将旧封存归档到本卷 `superseded/`，再走 `after-proofread` 和 `finish`。
+已有生产 Candidate 送审记录或归属不明的卷须走现有 redo / 新 revision 流程。
 
 ## 送生产
 

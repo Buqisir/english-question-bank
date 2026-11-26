@@ -359,6 +359,27 @@ test('failed primary gets exactly one fallback; reruns append attempts without c
   assert.equal(hash(readFileSync(first.review)), hash(bytes))
   assert.deepEqual(oldFiles.map(f => hash(readFileSync(path.join(first.attempt, 'listening-review-evidence', f)))), before)
 })
+test('a successful empty Whisper crop is retained as an ASR window with no usable words', t => {
+  const { options, subject } = workspace(t, { ...fixture, result: { segments: [] } }, true)
+  options.pauses = null
+  const result = segmentListening({ ...options, runWhisper: ({ startSeconds, endSeconds }) => ({
+    startSeconds, endSeconds, engine: { name: 'faster-whisper', version: 'frozen' }, segments: [],
+  }) })
+  const review = validateListeningReview(result.attempt, readJson(result.review), subject, [group]).review
+  const whisper = review.evidence.find(file => file.path.endsWith('-whisper-1-0.json'))
+  assert.equal(whisper.kind, 'asr_window')
+  assert.equal(whisper.settings.engine, 'faster-whisper/frozen')
+  assert.deepEqual(readJson(path.join(result.attempt, whisper.path)).segments, [])
+  assert.equal(review.groups[0].decision, 'review_required')
+  const old = readJson(result.review)
+  const oldWindow = old.evidence.find(file => file.path === whisper.path)
+  Object.assign(oldWindow, { kind: 'review_notes', settings: null, window: null })
+  writeFileSync(result.review, JSON.stringify(old))
+  assert.throws(() => validateListeningReview(result.attempt, old, subject, [group]), /unrecognized automatic notes/u)
+  const replayed = segmentListening({ ...options, replayAttempt: result.attempt })
+  const repaired = validateListeningReview(replayed.attempt, readJson(replayed.review), subject, [group]).review
+  assert(repaired.evidence.some(file => file.kind === 'asr_window' && file.sha256 === whisper.sha256))
+})
 test('both failures remain retained and submit defers the group to Owner listening', t => {
   const { dir, options } = workspace(t, { error: 'Apple unavailable' })
   let calls = 0

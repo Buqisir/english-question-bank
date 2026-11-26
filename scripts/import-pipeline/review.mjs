@@ -3,6 +3,7 @@
 import { execFileSync } from 'node:child_process'
 import { createHash, randomBytes, randomUUID } from 'node:crypto'
 import {
+  appendFileSync,
   chmodSync,
   createReadStream,
   existsSync,
@@ -80,7 +81,7 @@ import {
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
-import { hydratedEvidenceBase, resolveReviewOrigin } from './review-target.mjs'
+import { hydratedEvidenceBase, resolveReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 export { hydratedEvidenceBase } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
@@ -406,16 +407,25 @@ export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBas
 
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
-  const { manifest, projection } = prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
-  const finalized = await uploadReviewBundle(paperDir, manifest)
-  console.log(JSON.stringify({
-    paperId,
-    revisionId: finalized.revision.id,
-    revisionNumber: finalized.revision.revisionNumber,
-    state: finalized.revision.state,
-    bundleDigest: finalized.revision.bundleDigest,
-    ...(projection.spellingReviewSummary ? { spellingReview: projection.spellingReviewSummary } : {}),
-  }, null, 2))
+  const fast = path.join(root, 'imports/ocr-proofread', paperId, 'fast')
+  await withReviewPaperLock(path.join(fast, 'review-upload.lock'), async () => {
+    const { manifest, projection } = prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
+    const destination = origin()
+    if (!/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/u.test(destination)) {
+      // Preserve direct CLI attempts even if registration or its response is interrupted.
+      appendFileSync(path.join(fast, 'review-push-attempts.jsonl'),
+        `${JSON.stringify({ paperId, origin: destination, startedAt: new Date().toISOString() })}\n`)
+    }
+    const finalized = await uploadReviewBundle(paperDir, manifest)
+    console.log(JSON.stringify({
+      paperId,
+      revisionId: finalized.revision.id,
+      revisionNumber: finalized.revision.revisionNumber,
+      state: finalized.revision.state,
+      bundleDigest: finalized.revision.bundleDigest,
+      ...(projection.spellingReviewSummary ? { spellingReview: projection.spellingReviewSummary } : {}),
+    }, null, 2))
+  })
 }
 
 async function paginationQa(paperId) {

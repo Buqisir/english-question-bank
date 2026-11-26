@@ -1,5 +1,14 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, rmdirSync } from 'node:fs'
 import path from 'node:path'
+
+export async function withReviewPaperLock(lock, action) {
+  mkdirSync(path.dirname(lock), { recursive: true })
+  try { mkdirSync(lock, { mode: 0o700 }) } catch (error) {
+    if (error.code === 'EEXIST') throw new Error(`本卷 Review 操作已持锁，请先对账：${lock}`)
+    throw error
+  }
+  try { return await action() } finally { rmdirSync(lock) }
+}
 
 // Disk-bound intent survives login-shell environment replacement. This is an
 // accidental-target guard, not an authorization boundary against a local writer.
