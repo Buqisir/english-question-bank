@@ -106,6 +106,37 @@ assert.deepEqual(warningResult.warnings.map(({ code }) => code).sort(), [
   'LISTENING_SUMMARY_SHORT',
 ])
 
+// Wrong options built from heard words must be explained (docs/product/listening-methods.md §三).
+const heardMaterialization = structuredClone(materialization)
+heardMaterialization.listening.transcript.find(({ segmentId }) => segmentId === 'text:1').text =
+  'W: Shall we drive to the lake tomorrow? M: No, the bus leaves at 7:40, so let us take it.'
+const heardQuestion = heardMaterialization.listening.questions.find(({ canonicalNumber }) => canonicalNumber === 1)
+heardQuestion.options = [{ label: 'A', text: 'By bus.' }, { label: 'B', text: 'Drive to the lake.' }, { label: 'C', text: 'At 7:40.' }]
+heardMaterialization.listening.answers.find(({ canonicalNumber }) => canonicalNumber === 1).value = 'A'
+const heardAnalysis = structuredClone(analysis)
+const heardTranscript = heardMaterialization.listening.transcript.find(({ segmentId }) => segmentId === 'text:1').text
+heardAnalysis.materials['text:1'].transcript = heardTranscript
+heardAnalysis.questions['question:listening:1'].evidence.quote = 'the bus leaves'
+heardAnalysis.questions['question:listening:1'].officialAnswer = 'A'
+const heardWarnings = validateListeningAnalysis(heardAnalysis, { materialization: heardMaterialization }).warnings
+  .filter(({ code }) => code === 'LISTENING_HEARD_OPTION_UNEXPLAINED')
+assert.deepEqual(heardWarnings.map(({ questionId, labels }) => [questionId, labels]), [['question:listening:1', ['B', 'C']]],
+  'stored analyses are only reminded about unexplained heard options')
+assert.throws(() => validateListeningAnalysis(heardAnalysis, { materialization: heardMaterialization, requireHeardDistractors: true }),
+  /must explain wrong option\(s\) B, C/u, 'a new draft must explain every heard option')
+heardAnalysis.questions['question:listening:1'].distractors = [
+  { label: 'B', explanationZh: '开车去湖边是女士的提议，男士没有同意（No）。' },
+  { label: 'C', explanationZh: '7:40 是公交车发车的时间，不是怎么去。' },
+]
+assert.equal(validateListeningAnalysis(heardAnalysis, { materialization: heardMaterialization, requireHeardDistractors: true }).ok, true)
+const heardRequest = buildListeningAnalysisAgentRequest({ materialization: heardMaterialization })
+assert.deepEqual(heardRequest.sourceGroup.material.materials[0].questions[0].wrongOptions, {
+  B: { heardInRecording: ['Drive', 'lake'], mustExplain: true },
+  C: { heardInRecording: ['7:40'], mustExplain: true },
+}, 'the writer is told which wrong options reuse heard words')
+assert.equal('wrongOptions' in buildListeningAnalysisInput(heardMaterialization).materials[0].questions[0], false,
+  'validation input stays exactly as captured')
+
 const messages = buildListeningAnalysisMessages({ materialization })
 assert.match(messages[0].content, /Exact output JSON Schema/u)
 assert.match(messages[0].content, /"const": "listening-analysis-v1"/u)
