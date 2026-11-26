@@ -5,7 +5,8 @@ import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nc
 import { produceNck1MaterializationFromStructures, RECORDING_TRANSCRIPT_TITLE } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { makeSyntheticNck1DocxFixture } from '../../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
-import { recordingCuts, recordingDocx } from './recording-transcript.mjs'
+import { recordingCuts, recordingDocx, recordingReviewCuts } from './recording-transcript.mjs'
+import { LISTENING_REVIEW_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { withWork } from './listening-transcript-check-engines.mjs'
 
 const fixture = makeSyntheticNck1DocxFixture({ listening: true, transformXml: xml => xml
@@ -34,6 +35,18 @@ test('explicit recording transcript keeps the answers and derives an audio-bound
   assert.equal(recordingCuts(cuts, fixture.paperId, hash, 20).length, 10)
   assert.throws(() => recordingCuts({ ...cuts, groups: groups.slice(1) }, fixture.paperId, hash, 20), /十段/)
   assert.throws(() => recordingCuts(cuts, fixture.paperId, sha256(Buffer.from('other audio')), 20), /十段/)
+  const review = { schemaVersion: LISTENING_REVIEW_VERSION, subject: { paperId: fixture.paperId,
+    playbackAudioSha256: hash, durationSeconds: 20 }, groups: groups.map(group => ({ ...group, decision: 'usable',
+    playback: { ...group.playback, endSeconds: group.playback.endSeconds + 0.8 },
+    occurrences: [group.playback, { startSeconds: group.playback.endSeconds + 0.2, endSeconds: group.playback.endSeconds + 0.8 }] })) }
+  assert.deepEqual(recordingReviewCuts(review, fixture.paperId, hash, 20), recordingCuts(cuts, fixture.paperId, hash, 20))
+  review.groups[5].occurrences = [review.groups[5].playback]
+  const notes = { groups: [{ segmentId: groups[5].segmentId, anchorEvidence: {
+    tails: [{ startSeconds: 10.7, endSeconds: 11 }, { startSeconds: 11.5, endSeconds: 11.7 }],
+  } }] }
+  assert.equal(recordingReviewCuts(review, fixture.paperId, hash, 20, notes)[5].occurrence.endSeconds, 11.15)
+  review.groups[0].decision = 'review_required'
+  assert.throws(() => recordingReviewCuts(review, fixture.paperId, hash, 20), /均可用/)
   assert.equal(printed.listening.transcript.length, 10)
   assert(produce(answerWithoutTranscript).issues.some(issue => issue.code === 'NCK1_OCR_LISTENING_TRANSCRIPT_AMBIGUOUS'))
   const paragraphs = [RECORDING_TRANSCRIPT_TITLE, `录音 SHA-256：${hash}`, 'ASR attempt：test',

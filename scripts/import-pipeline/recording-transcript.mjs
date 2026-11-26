@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, renameSync, utimesSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { LISTENING_REVIEW_VERSION, LISTENING_RULE_EVIDENCE_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { RECORDING_TRANSCRIPT_ID, RECORDING_TRANSCRIPT_TITLE } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { appleSource, localEngines, parakeet, remoteEngine, withWork } from './listening-transcript-check-engines.mjs'
 import { align, timedReading, units } from './listening-transcript-check-alignment.mjs'
@@ -24,6 +25,36 @@ export function recordingCuts(cuts, paperId, audioSha256, duration) {
     key: String(i + 1).padStart(2, '0'),
     occurrence: { startSeconds: playback.startSeconds, endSeconds: playback.endSeconds }, questionNumbers,
   }))
+}
+
+export function recordingReviewCuts(review, paperId, audioSha256, duration, ruleNotes) {
+  if (!['listening-review-v1', LISTENING_REVIEW_VERSION].includes(review?.schemaVersion)
+    || review.subject?.durationSeconds !== duration
+    || !Array.isArray(review.groups) || review.groups.some(group => group?.decision !== 'usable'
+      || !group.playback || !Array.isArray(group.occurrences) || !group.occurrences[0]
+      || group.occurrences[0].startSeconds < group.playback?.startSeconds
+      || group.occurrences[0].endSeconds > group.playback?.endSeconds)) {
+    throw new Error('录音转写需要十段均可用的听力分段 review.json')
+  }
+  const groups = review.groups.map(group => {
+    const first = group.occurrences[0]
+    const notes = ruleNotes?.groups.find(item => item.segmentId === group.segmentId)
+    const tails = notes?.anchorEvidence?.tails ?? []
+    // The current rule reports one outer occurrence spanning all readings.
+    // The first retained tail marks the end of the first complete reading.
+    if (group.occurrences.length === 1 && tails.length > 1) {
+      const end = tails[0].endSeconds
+      if (!(end > first.startSeconds && end < tails[1].startSeconds && end < first.endSeconds)) {
+        throw new Error(`单遍切点无法确认 · ${group.segmentId}`)
+      }
+      return { ...group, playback: { startSeconds: first.startSeconds, endSeconds: Math.min(end + 0.15, first.endSeconds) } }
+    }
+    if (group.occurrences.length === 1 && notes?.readingCountEvidence?.observedReadings > 1) {
+      throw new Error(`单遍切点无法确认 · ${group.segmentId}`)
+    }
+    return { ...group, playback: first }
+  })
+  return recordingCuts({ ...review.subject, groups }, paperId, audioSha256, duration)
 }
 
 async function mergeReadings(group, engines, remote) {
@@ -83,7 +114,15 @@ export async function stageRecordingTranscript(paperDir, cutsPath) {
   const segments = JSON.parse(readFileSync(path.join(path.dirname(audio), 'segments-v1.json'), 'utf8'))
   const audioSha256 = sha256(readFileSync(audio))
   if (segments.paperId !== manifest.paperId || segments.playbackAudioSha256 !== audioSha256) throw new Error('播放录音与本卷不匹配')
-  const groups = recordingCuts(JSON.parse(readFileSync(cutsPath, 'utf8')), manifest.paperId, audioSha256, segments.durationSeconds)
+  const review = JSON.parse(readFileSync(cutsPath, 'utf8'))
+  const ruleNotes = (review.evidence ?? []).filter(item => item.kind === 'review_notes'
+    && /^listening-review-evidence\/[^/\\]+-rule\.json$/u.test(item.path)).map(item => {
+    const bytes = readFileSync(path.join(path.dirname(cutsPath), item.path))
+    if (sha256(bytes) !== item.sha256) throw new Error('听力切段规则证据已变化')
+    return JSON.parse(bytes)
+  }).find(item => item.schemaVersion === LISTENING_RULE_EVIDENCE_VERSION && item.input.audioSha256 === audioSha256)
+  if (review.schemaVersion === LISTENING_REVIEW_VERSION && !ruleNotes) throw new Error('缺少与本卷录音绑定的听力切段规则证据')
+  const groups = recordingReviewCuts(review, manifest.paperId, audioSha256, segments.durationSeconds, ruleNotes)
   if (!existsSync(parakeet)) throw new Error('未找到 BUB-237 的 Parakeet v2 运行器')
   const input = { audioSha256, groups, apple: sha256(readFileSync(appleSource)), parakeet: sha256(readFileSync(parakeet)) }
   const evidence = digestJson(input)

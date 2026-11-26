@@ -7,7 +7,7 @@
 // agent judgement is required. Finished steps are skipped on rerun.
 //
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
-//   after-proofread <paperId> [--audio-transcript <cuts.json>] [--issues-resolved] [--redo-from materialize --profile-version 17]
+//   after-proofread <paperId> [--audio-transcript <review.json>] [--issues-resolved] [--redo-from materialize --profile-version 17]
 //   finish <paperId> [--large-complete-page-limit 13] [--large-no-listening-page-limit 11] [--economy-page-limit 9] through frozen PDFs and their contact sheets
 //   reopen <paperId>                 archive a sealed local preview so it can be edited
 //   listening-redo <paperId> --feedback-fix <issueId>   hydrated Candidate, listening only
@@ -2369,7 +2369,7 @@ async function runCommand(command, paperId, args) {
   const ctx = context(paperId)
   if (args.includes('--audio-transcript') && (command !== 'after-proofread'
     || !option(args, '--audio-transcript') || option(args, '--audio-transcript').startsWith('--'))) {
-    fail('--audio-transcript <cuts.json> 仅用于 after-proofread')
+    fail('--audio-transcript <review.json> 仅用于 after-proofread')
   }
   if (args.includes('--profile-version') && (command !== 'after-proofread'
     || option(args, '--redo-from') !== 'materialize' || args.includes('--feedback-fix')
