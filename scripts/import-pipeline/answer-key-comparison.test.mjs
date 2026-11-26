@@ -32,7 +32,10 @@ test('national legacy matches independent transcriptions by question identity', 
 for (const [actual, expected] of [
   ['that / which', 'which / that'], // Nanning April 2026, question 59.
   [' THAT / which / that ', 'Which/That'],
-  ['a b / c', 'C / ab'],
+  ['a   b / c', 'C / a b'],
+  ['description(s)', 'Descriptions / description'],
+  ['description(s) 或 passage', 'passage / descriptions / description'],
+  ['that/that', 'that'],
   ['although/while/though', 'while / though / although'],
 ]) test(`slash alternatives match as sets: ${actual}`, () => {
   assert.equal(answerKeyValuesMatch(actual, expected), true)
@@ -40,7 +43,8 @@ for (const [actual, expected] of [
 
 for (const [actual, expected] of [
   ['that', 'which'], ['that', 'which/that'], ['that/which', 'that/what'],
-  ['that/which', 'that/which/what'], ['that/that', 'that'],
+  ['that/which', 'that/which/what'], ['a b / c', 'C / ab'],
+  ['description(s)', 'description'], ['description(s)', 'description/descriptions/different'],
   ['some time', 'sometime'], ['that//which', 'that/which'], ['that/', 'that'],
 ]) test(`different or malformed answers remain mismatches: ${actual} vs ${expected}`, () => {
   assert.equal(answerKeyValuesMatch(actual, expected), false)
@@ -69,7 +73,6 @@ test('Chinese alternatives require complete matching sets and valid English bran
   for (const [left, right] of [
     ['most stable或者stablest', 'most stable / stable'],
     ['most stable或者stablest', 'most stable / stablest / stable'],
-    ['that或者that', 'that'],
     ['some time', 'sometime'],
     ['或者that', 'that / other'],
     ['that或者', 'that / other'],
@@ -80,7 +83,6 @@ test('Chinese alternatives require complete matching sets and valid English bran
     ['答案或者其他', '答案/其他'],
     ['that或者答案', 'that / 答案'],
     ['that or other', 'that / other'],
-    ['that或other', 'that / other'],
     ['that和other', 'that / other'],
     ['that及other', 'that / other'],
   ]) {

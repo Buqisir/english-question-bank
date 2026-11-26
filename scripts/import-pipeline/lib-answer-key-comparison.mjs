@@ -3,26 +3,26 @@ const normalize = (value) => String(value ?? '').replace(/[’]/gu, "'").replace
 // Recognize Chinese separators only when the entire value consists of English
 // alternatives; leave every other value to the existing literal/slash rules.
 function normalizeChineseAlternatives(value) {
-  if (!value.includes('或者')) return value
-  const parts = value.split(/或者|\//u)
-  const englishPhrase = /^[a-z]+(?:['-][a-z]+)*(?: [a-z]+(?:['-][a-z]+)*)*$/u
+  if (!value.includes('或')) return value
+  const parts = value.split(/或者?|\/|／/u)
+  const englishPhrase = /^[a-z]+(?:['-][a-z]+)*(?: [a-z]+(?:['-][a-z]+)*)*(?:\([a-z]+\))?$/u
   if (!parts.every(part => englishPhrase.test(part.trim()))) return value
-  return value.replace(/或者/gu, '/')
+  return value.replace(/或者?/gu, '/')
+}
+
+function acceptedAnswers(value) {
+  const parts = normalizeChineseAlternatives(normalize(value)).split(/[/／]/u).map(part => part.trim())
+  if (parts.length > 1 && parts.some(part => !part)) return null
+  return new Set(parts.flatMap(part => {
+    const suffix = /^(.*[a-z])[(（]([a-z]+)[)）]$/u.exec(part)
+    return suffix ? [suffix[1], suffix[1] + suffix[2]] : [part]
+  }))
 }
 
 export function answerKeyValuesMatch(transcribed, answerKey) {
-  const left = normalizeChineseAlternatives(normalize(transcribed))
-  const right = normalizeChineseAlternatives(normalize(answerKey))
-  // Only slash-delimited alternatives are sets. Single answers retain their
-  // existing word boundaries; empty alternatives never establish equivalence.
-  if (!left.includes('/') || !right.includes('/')) return left === right
-  const alternatives = value => value.split('/').map(part => part.replace(/\s+/gu, ''))
-  const leftParts = alternatives(left)
-  const rightParts = alternatives(right)
-  if (leftParts.some(part => !part) || rightParts.some(part => !part)) return false
-  const leftSet = new Set(leftParts)
-  const rightSet = new Set(rightParts)
-  return leftSet.size === rightSet.size && [...leftSet].every(part => rightSet.has(part))
+  const left = acceptedAnswers(transcribed)
+  const right = acceptedAnswers(answerKey)
+  return Boolean(left && right && left.size === right.size && [...left].every(part => right.has(part)))
 }
 
 export function comparePageAnswers(materialization, flags) {

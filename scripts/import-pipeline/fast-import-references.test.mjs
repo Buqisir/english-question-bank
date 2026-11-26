@@ -22,8 +22,38 @@ import { alignListeningSentences } from './listening-sentence-align.mjs'
 import { buildLocalReviewProjection, reviewManifest } from './review.mjs'
 import { prebindReviewFixtureReferences } from '../lib/syntheticReviewAnswerFixture.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
+import { writePendingDeclarations } from './pending-declarations.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
+
+test('pending declarations use source pages and quote existing diagnostics', async t => {
+  const { work, paperDir, paperId } = fixture(t).ctx
+  const artifact = name => path.join(paperDir, `materialization/nck1-ocr-source-${name}-v1.json`)
+  const region = { x: .1, y: .2, width: .4, height: .2 }
+  const located = { documentId: 'source', page: 8, region }
+  json(artifact('evidence'), { documents: [{ documentId: 'source', pages: [
+    { page: 8, observations: [{ observationId: 'line', region }] },
+  ] }] })
+  json(artifact('confirmation'), { documents: [{ documentId: 'source', pages: [
+    { page: 8, orderedItems: [{ itemId: 'line', observationIds: ['line'], text: '23. Options B. first B. second' },
+      { itemId: 'answer', text: '56. shortest，考查形容词。' }] },
+  ] }] })
+  const groups = [{ groupId: 'group:test:writing-application',
+    writingTask: { givenSkeleton: [{ role: 'opening', text: 'a printed gloss' }] },
+    blocks: [{ source: located, content: [{ text: 'a printed gloss' }] }] }]
+  const output = await writePendingDeclarations({ work, paperDir, paperId }, { groups, issues: [
+    { code: 'NCK1_OCR_OPTIONS_AMBIGUOUS', path: 'questions.23.options', source: located, message: 'Expected A-B-C-D' },
+    { code: 'NCK1_OCR_ANSWER_MISSING', path: 'answers.56', source: { ...located, page: 1, region: { height: 1 } }, message: 'Missing' },
+    { code: 'NCK1_OCR_LISTENING_TRANSCRIPT_AMBIGUOUS', path: 'listening.transcript', source: located, message: 'Boundary' },
+    { code: 'NCK1_OCR_WRITING_SKELETON_AMBIGUOUS', path: 'groups.writing.application.writingTask.givenSkeleton', message: 'Ambiguous' },
+  ] }, [{ pages: ['source-p07', 'source-p08'], answers: { 56: 'shortest' } }])
+  const report = readFileSync(output, 'utf8')
+  assert.match(report, /选项标签序列异常\n\n- 页码　source · 8\n- 原文　"23\. Options B\. first B\. second/u)
+  assert.match(report, /答案材料化缺题\n\n- 页码　source · 8\n- 原文　"56\. shortest/u)
+  assert.match(report, /听力源边界\n\n- 页码　source · 8/u)
+  assert.match(report, /写作答题框\n\n- 页码　source · 8\n- 原文　"a printed gloss"/u)
+  assert.equal(report.match(/## 答案材料化缺题/gu).length, 1)
+})
 
 test('an omitted repeated opening cannot claim the closing Right from the first reading', () => {
   const document = { listening: { transcript: [{

@@ -36,10 +36,10 @@ export function validateInlineBlankTextBoundaries(questionGroups) {
           if ((!edge && !adjacentBlank) || (edge && edge !== '\uFEFF' && /\s/u.test(edge))) continue
           // Closing punctuation belongs to the preceding answer; opening
           // brackets belong to the following answer. An em dash separates prose
-          // on either side without requiring spaces. Directional double quotes
+          // on either side without requiring spaces. Directional quotes
           // delimit answers too; ambiguous quotes/apostrophes/hyphens need review.
           if (edge === '—') continue
-          if (side === 'left' ? edge === '“' : edge === '”') continue
+          if (side === 'left' ? /[“‘]/u.test(edge) : /[”’]/u.test(edge)) continue
           // Source Chinese glosses delimit the preceding word even when the
           // answer line touches their closing parenthesis. Canonical text may
           // already have NFKC-normalized the fullwidth parentheses.

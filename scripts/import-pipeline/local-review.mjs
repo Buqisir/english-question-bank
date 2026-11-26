@@ -12,9 +12,10 @@
 import { spawn, spawnSync } from 'node:child_process'
 import { randomBytes } from 'node:crypto'
 import {
-  chmodSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, writeFileSync,
+  chmodSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, realpathSync, renameSync, rmdirSync, writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
+import { setTimeout as delay } from 'node:timers/promises'
 
 const root = path.resolve(import.meta.dirname, '../..')
 
@@ -78,30 +79,71 @@ async function waitFor(url, label) {
   const deadline = Date.now() + 60_000
   while (Date.now() < deadline) {
     try {
-      const response = await fetch(url)
-      if (response.status < 500) return
+      const response = await fetch(url, { signal: AbortSignal.timeout(1000) })
+      if (response.ok) return
     } catch {}
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    await delay(300)
   }
-  fail(`${label} did not answer at ${url}; see ${path.join(runtime, 'logs')}`)
+  throw new Error(`${label} did not answer at ${url}; see ${path.join(runtime, 'logs')}`)
 }
 
 function bindOrigin(apiOrigin) {
   if (existsSync(bindingPath)) {
     const bound = readFileSync(bindingPath, 'utf8').trim()
-    if (bound !== apiOrigin) fail(`${bindingPath} is bound to ${bound}; refusing to rebind to ${apiOrigin}`)
+    if (bound !== apiOrigin) throw new Error(`${bindingPath} is bound to ${bound}; refusing to rebind to ${apiOrigin}`)
     return
   }
   mkdirSync(path.dirname(bindingPath), { recursive: true })
   writeFileSync(bindingPath, `${apiOrigin}\n`)
 }
 
+async function withLifecycleLock(action) {
+  const lock = path.join(path.dirname(bindingPath), 'local-review-lifecycle.lock')
+  mkdirSync(path.dirname(lock), { recursive: true })
+  const deadline = Date.now() + 135_000
+  for (;;) {
+    try {
+      mkdirSync(lock)
+      break
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error
+      if (Date.now() >= deadline) throw new Error(`Local Review lock still held at ${lock}; check startup before removing it`)
+      await delay(150)
+    }
+  }
+  const interrupted = () => {
+    rmdirSync(lock)
+    process.exit(1)
+  }
+  process.once('SIGINT', interrupted)
+  process.once('SIGTERM', interrupted)
+  try {
+    return await action()
+  } finally {
+    process.removeListener('SIGINT', interrupted)
+    process.removeListener('SIGTERM', interrupted)
+    rmdirSync(lock)
+  }
+}
+
+function listenerPid(port, script, cwd) {
+  const find = spawnSync('lsof', ['-nP', '-t', `-iTCP:${port}`, '-sTCP:LISTEN'], { encoding: 'utf8' })
+  if (find.error) throw find.error
+  const pids = find.stdout.trim().split(/\s+/u).filter(Boolean)
+  if (!pids.length) return null
+  const [pid] = pids
+  const command = spawnSync('ps', ['-p', pid, '-o', 'command='], { encoding: 'utf8' }).stdout?.trim()
+  const args = command?.match(/^\S*\bnode(?:\.exe)? (.*)$/u)?.[1]
+  const directory = spawnSync('lsof', ['-a', '-p', pid, '-d', 'cwd', '-Fn'], { encoding: 'utf8' }).stdout
+  if (pids.length !== 1 || !(args === script || args?.startsWith(`${script} `))
+    || !directory?.split('\n').includes(`n${realpathSync(cwd)}`)) {
+    throw new Error(`Port ${port} is occupied by a process outside this Local Review worktree`)
+  }
+  return Number(pid)
+}
+
 async function up() {
   const existing = readState()
-  if (existing && alive(existing.apiPid) && alive(existing.appPid)) {
-    console.log(JSON.stringify({ ok: true, state: 'already_running', ...existing }, null, 2))
-    return
-  }
   const apiPort = Number(option('--api-port', existing?.apiPort || 18890))
   const appPort = Number(option('--app-port', existing?.appPort || 51790))
   for (const directory of ['db', 'review-files', 'paper-assets', 'user-space', 'blobs', 'home', 'tmp', 'logs']) {
@@ -123,27 +165,42 @@ async function up() {
     apiOrigin: `http://127.0.0.1:${apiPort}`,
     appOrigin: `http://127.0.0.1:${appPort}`,
   }
+  const apiScript = path.join(root, 'server/api.mjs')
+  const appDir = path.join(root, 'app')
+  const appScript = path.join(appDir, 'node_modules/vite/bin/vite.js')
+  const activeApi = listenerPid(apiPort, apiScript, root)
+  const activeApp = listenerPid(appPort, appScript, appDir)
+  if ((activeApi || activeApp) && !existing && runtime !== path.join(root, 'imports/local-review')) {
+    throw new Error('Cannot claim an occupied port for a custom runtime without its state file')
+  }
   bindOrigin(state.apiOrigin)
   const environment = serverEnvironment(state)
   const log = (name) => openSync(path.join(runtime, 'logs', name), 'a')
-  const api = spawn(process.execPath, [path.join(root, 'server/api.mjs')], {
+  const api = activeApi ? null : spawn(process.execPath, [apiScript], {
     cwd: root, env: environment, detached: true, stdio: ['ignore', log('api.log'), log('api.log')],
   })
-  api.unref()
+  api?.unref()
   await waitFor(`${state.apiOrigin}/api/health`, 'API')
-  const app = spawn(process.execPath, [
-    path.join(root, 'app/node_modules/vite/bin/vite.js'), '--host', '127.0.0.1', '--port', String(appPort), '--strictPort',
+  const app = activeApp ? null : spawn(process.execPath, [
+    appScript, '--host', '127.0.0.1', '--port', String(appPort), '--strictPort',
   ], {
     cwd: path.join(root, 'app'),
     env: { ...environment, HOME: process.env.HOME },
     detached: true,
     stdio: ['ignore', log('app.log'), log('app.log')],
   })
-  app.unref()
+  app?.unref()
   await waitFor(state.appOrigin, 'Website')
-  const saved = { ...state, apiPid: api.pid, appPid: app.pid, startedAt: new Date().toISOString() }
-  writeFileSync(statePath, `${JSON.stringify(saved, null, 2)}\n`)
-  console.log(JSON.stringify({ ok: true, state: 'running', ...saved, binding: bindingPath }, null, 2))
+  const apiPid = activeApi ?? api.pid
+  const appPid = activeApp ?? app.pid
+  if (listenerPid(apiPort, apiScript, root) !== apiPid || listenerPid(appPort, appScript, appDir) !== appPid) {
+    throw new Error('Local Review listeners changed during startup')
+  }
+  const reused = activeApi && activeApp
+  const saved = { ...state, apiPid, appPid, startedAt: (reused && existing?.startedAt) || new Date().toISOString() }
+  writeFileSync(`${statePath}.tmp`, `${JSON.stringify(saved, null, 2)}\n`)
+  renameSync(`${statePath}.tmp`, statePath)
+  console.log(JSON.stringify({ ok: true, state: reused ? 'already_running' : 'running', ...saved, binding: bindingPath }, null, 2))
 }
 
 function run() {
@@ -203,9 +260,14 @@ function down() {
 }
 
 const command = process.argv[2]
-if (command === 'up') await up()
+if (command === 'up' || command === 'down') {
+  try {
+    await withLifecycleLock(command === 'up' ? up : down)
+  } catch (error) {
+    fail(error.message)
+  }
+}
 else if (command === 'run') run()
 else if (command === 'owner') owner()
 else if (command === 'status') status()
-else if (command === 'down') down()
 else fail('Usage: local-review.mjs <up|run|owner|status|down> [--runtime <dir>]')
