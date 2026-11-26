@@ -1,0 +1,126 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Chris,\nI’m writing to share with you an art class I had in a park last Friday. Instead of staying in the art room, we took our paints outdoors, and everyone picked a spot.\n\nI chose a quiet corner by the lake and painted an old stone bridge with willows over the water. The reflection was the hardest part, because the water kept moving. Our teacher advised me to paint the colours I saw, not the shapes I expected, and it worked.\n\nLooking at my finished picture, I felt proud and surprisingly calm. Painting outdoors made me notice things I usually walk past, like the different greens of the leaves. I’ll take my sketchbook to the park more often.\n\nI’ll send you a photo soon. Do you ever have art classes outdoors in Britain?\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "给英国朋友 Chris 写邮件，分享上周五班里在公园上的美术课；保留题给称呼、首句、结尾和署名。",
+        "两个要点：你完成的作品；你的感想。"
+      ],
+      "thisEssayChooses": "本范文选的作品是湖边石桥和倒影，用画倒影的难点和老师的建议撑起作品段；感想写成自豪、平静和“看见平时忽略的东西”，结尾答应发照片并问 Chris 那边的情况。作品内容、感受和结尾问题都可以换成你自己的。"
+    },
+    "standard": {
+      "essay": "Dear Chris,\nI’m writing to share with you an art class I had in a park last Friday. Instead of staying in the art room, we took our paints outdoors, and everyone picked a spot.\n\nI chose a quiet corner by the lake and painted an old stone bridge with willows over the water. The reflection was the hardest part, because the water kept moving. Our teacher advised me to paint the colours I saw, not the shapes I expected, and it worked.\n\nLooking at my finished picture, I felt proud and surprisingly calm. Painting outdoors made me notice things I usually walk past, like the different greens of the leaves. I’ll take my sketchbook to the park more often.\n\nI’ll send you a photo soon. Do you ever have art classes outdoors in Britain?\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "你完成的作品",
+          "quote": "I chose a quiet corner by the lake and painted an old stone bridge with willows over the water."
+        },
+        {
+          "point": "你的感想",
+          "quote": "Looking at my finished picture, I felt proud and surprisingly calm."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接着题给首句交代这节课和平时有什么不同，让 Chris 有画面。",
+          "items": [
+            {
+              "quote": "Instead of staying in the art room, we took our paints outdoors",
+              "explain": "Chris 不在场，先用“没待在美术教室，而是把颜料搬到户外”点出这节课特别在哪，后面讲作品才有背景。比只写 It was interesting 具体得多。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "要点一：说清画了什么，以及画的过程中最难的一步怎么解决。",
+          "items": [
+            {
+              "quote": "painted an old stone bridge with willows over the water",
+              "explain": "作品写到“石桥、柳树、水面”三样看得见的东西，读者脑子里就有一幅画；只写 I drew a picture 等于没交代作品。"
+            },
+            {
+              "quote": "The reflection was the hardest part, because the water kept moving.",
+              "explain": "讲作品不只报题目，还说难在哪、为什么难，过程有起伏，邮件才像在分享经历。"
+            },
+            {
+              "quote": "paint the colours I saw, not the shapes I expected",
+              "explain": "老师的建议用 not 前后对照，一句话说清方法；and it worked 短短三个词交代结果，难点有了着落。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "要点二：写感想，从当时的感受落到以后要做的事。",
+          "items": [
+            {
+              "quote": "I felt proud and surprisingly calm",
+              "explain": "两个形容词各管一层：proud 来自画成了，calm 来自户外作画；surprisingly 说明这份平静是意外收获，比 very happy 准确。"
+            },
+            {
+              "quote": "made me notice things I usually walk past",
+              "explain": "感想有具体落点：平时路过不看的东西，这次看见了，后面再用叶子的不同绿色举例，感受就不空。"
+            },
+            {
+              "quote": "I’ll take my sketchbook to the park more often.",
+              "explain": "感想落到一个以后真能做的小打算，比“这节课很有意义”实在。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "收尾：答应发照片，再问 Chris 一个问题，让他好回信。",
+          "items": [
+            {
+              "quote": "Do you ever have art classes outdoors in Britain?",
+              "explain": "给英国朋友写信，问他那边有没有类似的课，对方读完就知道回信可以写什么。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Instead of doing ..., we ...",
+          "function": "一句话说出这次经历和平常有什么不同，适合分享一次特别的课或活动。"
+        },
+        {
+          "expression": "The hardest part was ..., because ...",
+          "function": "讲作品或经历时点出难点和原因，让分享有过程、有起伏。"
+        },
+        {
+          "expression": "... made me notice things I usually walk past",
+          "function": "把感想落到具体的新发现上，避免只说 happy 或 meaningful。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Chris,\nI’m writing to share with you an art class I had in a park last Friday. For once, our art teacher swapped the classroom for the open air, and we each had an hour to paint any scene we liked.\n\nI settled on a quiet corner by the lake, where an old stone bridge stood under two willows. The bridge was easy; its reflection was not, since the water kept rippling in the breeze. Our teacher gave me a tip: paint the colours you see, not the shapes you expect. It worked, and by the end my bridge seemed to float on the water.\n\nWhat surprised me most was how calm I felt. With a brush in my hand, I noticed things I usually rush past, like the dozen shades of green in a single tree. I’ve decided to take my sketchbook to the park at weekends.\n\nI’ll send you a photo tonight, and I’d love to hear whether your school ever holds classes outdoors.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "你完成的作品",
+          "quote": "I settled on a quiet corner by the lake, where an old stone bridge stood under two willows."
+        },
+        {
+          "point": "你的感想",
+          "quote": "What surprised me most was how calm I felt."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "The bridge was easy; its reflection was not",
+          "explain": "标准版直接说倒影最难；这里用分号把“桥容易、倒影难”并排放，省掉重复的谓语，对比更利落。"
+        },
+        {
+          "quote": "by the end my bridge seemed to float on the water",
+          "explain": "标准版只说 it worked；这里把方法的效果画出来：倒影画对了，桥像浮在水上，朋友能想见成品。"
+        },
+        {
+          "quote": "I’d love to hear whether your school ever holds classes outdoors",
+          "explain": "标准版用直接问句收尾；这里用 I’d love to hear whether 把问题放进一句话，语气更像朋友间的期待，也给了回信的话题。"
+        }
+      ]
+    }
+  }
+}

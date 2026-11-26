@@ -1,0 +1,744 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:reading-c": {
+      "overview": "文章比较纸质阅读与屏幕阅读、听看音视频的学习效果：长文在纸上读学得更好，原因既有纸张的物理特性，也有读数字文本时心态浅、投入少；作者提醒教育者不要把各种媒介等同看待。",
+      "fullTranslationZh": "无论在屏幕上还是在纸上读一篇文本，一个人的理解程度都一样吗？在内容相同的情况下，听和看是否和阅读书面文字一样有效？这两个问题的答案往往都是“否”。原因涉及多种因素，包括注意力下降、娱乐心态，以及在使用数字内容时一心多用的倾向。\n\n在阅读几百词或更长的文本时，纸质阅读的学习效果通常比屏幕阅读更好。大量研究证实了这一发现。当实验者从布置简单任务——比如找出一篇阅读文章的主旨——转向需要抽象思维的任务——比如根据文本进行推断——时，纸质阅读的优势就格外明显。\n\n纸质阅读与数字阅读效果的差异，部分与纸张的物理特性有关。用纸阅读时，人真的会用手去翻动触摸，而且一页页分明的纸张形成一种视觉上的“地理位置”。人们常常把对所读内容的记忆，同它在书中大约多靠后、在某页的什么位置联系起来。\n\n但同样重要的是心理层面。阅读研究者提出了一种名为“浅层化假说”的理论。根据这一理论，人们用一种适合社交媒体的心态来对待数字文本，而社交媒体往往不那么严肃，所以人们投入的脑力比读纸质材料时少。\n\n音频和视频会让人觉得比文字更吸引人，因此大学教师越来越多地使用这些技术——比如，布置学生看某人的在线讲座，而不是读同一个人写的文章。然而，心理学家已经证明，成年人阅读新闻报道时，比收听或观看内容完全相同的报道记住的内容更多。\n\n数字文本、音频和视频都有其教育作用，尤其是在提供纸质材料中没有的资源时。然而，在需要专注和思考才能让学习效果最大化的场合，教育者不应认为所有媒介都一样，即使它们包含的文字完全相同。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+          "sourceText": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "displayText": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:28"
+          ],
+          "translationZh": "当实验者从布置简单任务——比如找出一篇阅读文章的主旨——转向需要抽象思维的任务——比如根据文本进行推断——时，纸质阅读的优势就格外明显。",
+          "analysisZh": "主干是 The benefits of print reading particularly shine through，“纸质阅读的优势格外明显”，particularly 说明下面的情况尤其如此。when 引导时间状语从句，从句里是 move from … to …，“从……转向……”：from 后是 posing simple tasks，to 后的 ones 指 tasks，that require mental abstraction 是定语从句修饰 ones。两对破折号里的 like … 和 such as … 都是插入的例子，读时可先跳过，主干就清楚了。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 56,
+              "quote": "The benefits of print reading particularly shine through"
+            },
+            {
+              "start": 76,
+              "end": 105,
+              "quote": "move from posing simple tasks"
+            },
+            {
+              "start": 162,
+              "end": 201,
+              "quote": "to ones that require mental abstraction"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+          "sourceText": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+          "displayText": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:29"
+          ],
+          "translationZh": "根据这一理论，人们用一种适合社交媒体的心态来对待数字文本，而社交媒体往往不那么严肃，所以人们投入的脑力比读纸质材料时少。",
+          "analysisZh": "主干是 people approach digital texts … and devote less mental effort，主语 people 带两个并列谓语 approach 和 devote，由 and 连接。with a mindset suited to social media 说明用什么心态去读，suited to social media 是过去分词短语修饰 mindset；which are often not so serious 是非限制性定语从句，补充说明社交媒体不太严肃。句末 than when they are reading print 是比较对象：和读纸质材料时相比，投入的脑力更少。",
+          "underlineRanges": [
+            {
+              "start": 26,
+              "end": 55,
+              "quote": "people approach digital texts"
+            },
+            {
+              "start": 95,
+              "end": 125,
+              "quote": "which are often not so serious"
+            },
+            {
+              "start": 131,
+              "end": 156,
+              "quote": "devote less mental effort"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-i:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-c:1"
+              ],
+              "start": 0,
+              "end": 113,
+              "quote": "无论在屏幕上还是在纸上读一篇文本，一个人的理解程度都一样吗？在内容相同的情况下，听和看是否和阅读书面文字一样有效？这两个问题的答案往往都是“否”。原因涉及多种因素，包括注意力下降、娱乐心态，以及在使用数字内容时一心多用的倾向。"
+            },
+            {
+              "paragraphId": "zh-reading-c-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-c:2"
+              ],
+              "start": 115,
+              "end": 228,
+              "quote": "在阅读几百词或更长的文本时，纸质阅读的学习效果通常比屏幕阅读更好。大量研究证实了这一发现。当实验者从布置简单任务——比如找出一篇阅读文章的主旨——转向需要抽象思维的任务——比如根据文本进行推断——时，纸质阅读的优势就格外明显。"
+            },
+            {
+              "paragraphId": "zh-reading-c-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-c:3"
+              ],
+              "start": 230,
+              "end": 339,
+              "quote": "纸质阅读与数字阅读效果的差异，部分与纸张的物理特性有关。用纸阅读时，人真的会用手去翻动触摸，而且一页页分明的纸张形成一种视觉上的“地理位置”。人们常常把对所读内容的记忆，同它在书中大约多靠后、在某页的什么位置联系起来。"
+            },
+            {
+              "paragraphId": "zh-reading-c-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-c:4"
+              ],
+              "start": 341,
+              "end": 436,
+              "quote": "但同样重要的是心理层面。阅读研究者提出了一种名为“浅层化假说”的理论。根据这一理论，人们用一种适合社交媒体的心态来对待数字文本，而社交媒体往往不那么严肃，所以人们投入的脑力比读纸质材料时少。"
+            },
+            {
+              "paragraphId": "zh-reading-c-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-c:5"
+              ],
+              "start": 438,
+              "end": 550,
+              "quote": "音频和视频会让人觉得比文字更吸引人，因此大学教师越来越多地使用这些技术——比如，布置学生看某人的在线讲座，而不是读同一个人写的文章。然而，心理学家已经证明，成年人阅读新闻报道时，比收听或观看内容完全相同的报道记住的内容更多。"
+            },
+            {
+              "paragraphId": "zh-reading-c-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-c:6"
+              ],
+              "start": 552,
+              "end": 642,
+              "quote": "数字文本、音频和视频都有其教育作用，尤其是在提供纸质材料中没有的资源时。然而，在需要专注和思考才能让学习效果最大化的场合，教育者不应认为所有媒介都一样，即使它们包含的文字完全相同。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+                "start": 175,
+                "end": 418,
+                "quote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+                "start": 0,
+                "end": 124,
+                "quote": "When reading texts of several hundred words or more, learning is generally more successful when it’s on paper than onscreen."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "start": 45,
+                "end": 113,
+                "quote": "当实验者从布置简单任务——比如找出一篇阅读文章的主旨——转向需要抽象思维的任务——比如根据文本进行推断——时，纸质阅读的优势就格外明显。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "start": 0,
+                "end": 33,
+                "quote": "在阅读几百词或更长的文本时，纸质阅读的学习效果通常比屏幕阅读更好。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+                "start": 123,
+                "end": 313,
+                "quote": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-4",
+                "start": 35,
+                "end": 95,
+                "quote": "根据这一理论，人们用一种适合社交媒体的心态来对待数字文本，而社交媒体往往不那么严肃，所以人们投入的脑力比读纸质材料时少。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+                "start": 0,
+                "end": 194,
+                "quote": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-5",
+                "start": 0,
+                "end": 66,
+                "quote": "音频和视频会让人觉得比文字更吸引人，因此大学教师越来越多地使用这些技术——比如，布置学生看某人的在线讲座，而不是读同一个人写的文章。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+                "start": 119,
+                "end": 292,
+                "quote": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+                "start": 0,
+                "end": 118,
+                "quote": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-6",
+                "start": 36,
+                "end": 90,
+                "quote": "然而，在需要专注和思考才能让学习效果最大化的场合，教育者不应认为所有媒介都一样，即使它们包含的文字完全相同。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-6",
+                "start": 0,
+                "end": 36,
+                "quote": "数字文本、音频和视频都有其教育作用，尤其是在提供纸质材料中没有的资源时。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-1",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+                "start": 175,
+                "end": 418,
+                "quote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-2",
+                "start": 45,
+                "end": 113,
+                "quote": "当实验者从布置简单任务——比如找出一篇阅读文章的主旨——转向需要抽象思维的任务——比如根据文本进行推断——时，纸质阅读的优势就格外明显。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-c-2",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+                "start": 123,
+                "end": 313,
+                "quote": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-c",
+                "paragraphId": "zh-reading-c-4",
+                "start": 35,
+                "end": 95,
+                "quote": "根据这一理论，人们用一种适合社交媒体的心态来对待数字文本，而社交媒体往往不那么严肃，所以人们投入的脑力比读纸质材料时少。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头用两个问题引出话题并给出答案“往往不是”；接着用研究结论说明纸质阅读学得更好，再从纸张的物理特性和读者心态两方面分析原因；然后指出音视频虽然吸引人，记忆效果却不如阅读；最后提醒教育者不能把各种媒介等同看待。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+            "summary": "提出屏幕与纸质、听看与阅读效果是否相同的问题，答案往往是否定的，原因包括注意力下降等。",
+            "function": "提出问题，引出全文话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+            "summary": "大量研究表明读长文时纸质阅读学得更好，任务越需要抽象思维，优势越明显。",
+            "function": "用研究结论回答问题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-c:3",
+            "summary": "差异部分来自纸张的物理特性：能用手翻、页面分明，便于记住内容的位置。",
+            "function": "分析原因之一：物理层面。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+            "summary": "“浅层化假说”认为人们用对待社交媒体的心态读数字文本，投入的脑力更少。",
+            "function": "分析原因之二：心理层面。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+            "summary": "音视频更吸引人，大学教师用得越来越多，但阅读新闻记住的内容比听看更多。",
+            "function": "把比较扩展到音视频，用研究结果作对照。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+            "summary": "数字文本和音视频各有用处，但需要专注和思考的学习中，不能把所有媒介看成一样。",
+            "function": "总结全文，向教育者提出建议。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-i:28": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据画线短语所在句和前文的研究结论，推出 shine through 的意思。",
+      "stemTranslationZh": "第二段画线短语 shine through 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往前两句看纸质阅读好在哪",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "似乎不太可能持久。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "A large amount of research confirms this finding.",
+            "sourceHighlight": "confirms this finding",
+            "optionText": "Seem unlikely to last.",
+            "optionHighlight": "unlikely to last",
+            "explanation": "放进去就成了“任务变难时，纸质阅读的优势似乎难以持久”；可上文大量研究都证实纸质学得更好（confirms this finding），这句说的是优势在难题上更突出。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "quote": "A large amount of research confirms this finding.",
+              "anchor": "confirms this finding 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "似乎难以解释。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Seem hard to explain.",
+            "explanation": "放进去就成了“纸质阅读的优势在难题上难以解释”；这句只比较两种任务上优势大小，原因在[[block:paper-gaokao-2024-i:reading-c:3]]和[[block:paper-gaokao-2024-i:reading-c:4]]里一一讲了，没说解释不了。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "变得可以使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Become ready to use.",
+            "explanation": "放进去就成了“纸质阅读的优势变得可以拿来用了”；这句比的是简单任务和抽象任务上学习效果的差别，不涉及什么东西准备好可以用。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "变得容易看出来。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "quote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+              "anchor": "shine through 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "quote": "When reading texts of several hundred words or more, learning is generally more successful when it’s on paper than onscreen.",
+              "anchor": "more successful 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "shine through",
+          "sourceRole": "stem",
+          "targetText": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "learning is generally more successful when it’s on paper than onscreen",
+          "bridgeZh": "benefits 指纸上学得更好，难题上这份好处更突出",
+          "note": "题干 shine through 原词出现在原文。"
+        },
+        {
+          "sourceText": "Become easy to notice.",
+          "sourceRole": "correctOption",
+          "targetText": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "主语是纸质阅读的优势（benefits），particularly 说一到需要抽象思维的任务就尤其如此，所以 shine through 必须是“优势显出来”。放回去：从简单任务换成要做推断的任务时，纸质阅读的优势就格外明显，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂“浅层化假说”的具体内容，并用一个词概括人们对待数字文本的态度。",
+      "stemTranslationZh": "“浅层化假说”认为什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句，看这个理论怎么说",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "读者轻率地对待数字文本。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+              "quote": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+              "anchor": "According to this theory 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "数字文本更容易理解。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+            "sourceEntity": "devote less mental effort",
+            "optionText": "Digital texts are simpler to understand.",
+            "optionEntity": "Digital texts are simpler",
+            "explanation": "原文说花的脑力少（less mental effort），是读的人不够用心，不是数字文本本身更简单好懂。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+              "quote": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+              "anchor": "less mental effort 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们随意挑选数字文本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "People select digital texts randomly.",
+            "explanation": "假说讲的是读的时候用什么心态、花多少脑力，没提人们怎样挑选数字文本。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "数字文本适合社交媒体。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "social media",
+            "optionText": "social media",
+            "matchType": "exact",
+            "relationNote": "social media 借自[[block:paper-gaokao-2024-i:reading-c:4|a mindset suited to social media]]：适合社交媒体的是读者的心态（mindset），不是数字文本本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+              "quote": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+              "anchor": "suited to social media 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "shallowing hypothesis",
+          "sourceRole": "stem",
+          "targetText": "Reading researchers have proposed a theory called “shallowing hypothesis(假说).”",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort",
+          "bridgeZh": "this theory 指 shallowing hypothesis",
+          "note": "题干 shallowing hypothesis 原词出现在原文。"
+        },
+        {
+          "sourceText": "Readers treat digital texts lightly.",
+          "sourceRole": "correctOption",
+          "targetText": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“轻率对待”（treat … lightly）合了原文两点：用对付社交媒体那种不太严肃的心态去读（not so serious），投入的脑力也更少（less mental effort），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出大学教师越来越多使用音视频的原因。",
+      "stemTranslationZh": "大学教师为什么越来越多地使用音频和视频？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 so 前",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们能吸引学生的注意力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+              "quote": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
+              "anchor": "more engaging 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们准备起来更方便。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are more convenient to prepare.",
+            "explanation": "原文举的例子是布置网上讲座代替同一作者的文章，只是换了形式，没说这样备课更省事。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们有助于培养高阶能力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+            "sourceEntity": "The benefits of print reading",
+            "optionText": "They help develop advanced skills.",
+            "optionEntity": "They",
+            "explanation": "需要抽象思维、做推断这类高阶任务上见长的，是纸质阅读（print reading），不是音视频。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "quote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+              "anchor": "mental abstraction 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们比文字包含更多信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces.",
+            "sourceEntity": "identical pieces",
+            "optionText": "They are more informative than text.",
+            "optionEntity": "more informative",
+            "explanation": "音视频胜过文字的只是更吸引人；比较时用的是内容完全相同的材料（identical pieces），而且读文字的人反而记住得更多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+              "quote": "However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces.",
+              "anchor": "identical pieces 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "university teachers",
+          "sourceRole": "stem",
+          "targetText": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "can feel more engaging than text",
+          "note": "题干 university teachers 原词出现在原文。"
+        },
+        {
+          "sourceText": "They can hold students' attention.",
+          "sourceRole": "correctOption",
+          "targetText": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“能抓住学生的注意力”（hold … attention）就是原文的“比文字更吸引人”（more engaging）：东西吸引人，学生自然看得进去，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读懂最后一段先让步、后转折的建议，推出作者对纸质文本地位的看法。",
+      "stemTranslationZh": "作者在最后一段暗示了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2024-i:reading-c:6]]先承认数字文本和音视频 have educational roles，However 后说各种媒介不能当成一样；答案要推出纸质文本的位置",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "学生应该运用多种学习方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+            "sourceEntity": "educators",
+            "optionText": "Students should apply multiple learning techniques.",
+            "optionEntity": "Students",
+            "explanation": "这段的建议是给教育者的（educators），讲的是怎样看待不同媒介，不是要学生运用多种学习方法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "quote": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+              "anchor": "educators shouldn’t assume 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "教师应该自己编写教学材料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Teachers should produce their own teaching material.",
+            "explanation": "这段只提醒教育者别把各种媒介看成一样，没说要老师自己编写教材。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在教育中纸质文本不能被完全取代。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "quote": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+              "anchor": "shouldn’t assume all media are the same 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "quote": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print.",
+              "anchor": "not available in print 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "课堂外的教育不容忽视。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Education outside the classroom cannot be ignored.",
+            "explanation": "段中的 resources not available in print 指纸质材料里没有的资源，不是课堂外的教育；全段没谈课外教育。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Print texts cannot be entirely replaced in education.",
+          "sourceRole": "correctOption",
+          "targetText": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "这一步要自己推：段中的媒介之争就是全文一直在比的纸质和数字、音视频。数字媒介的用处是补上纸质没有的资源（not available in print），而在需要专注和思考的学习中，不能当作各种媒介都一样（shouldn’t assume all media are the same），可见纸质文本在这时仍有它的长处，不能全换掉，选 C。"
+        }
+      ]
+    }
+  }
+}

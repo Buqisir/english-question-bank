@@ -1,0 +1,135 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: I ran back to Gunter and told him the bad news. I offered to leave my watch with him until I could pay, but he just shook his head. Instead, he tore a page from a small notebook on the dashboard, wrote down his phone number and pushed it into my hand. “Call me when you come back to Vienna,” he said. “You can pay me then.” I could hardly believe that a stranger would trust me like this. I thanked him again and again, promised to call him, and grabbed my bag. Then I ran for the bus and got on just before the doors closed. Through the window, I saw his taxi pull away into the rain.\n\nParagraph 2: Four days later, when I was back in Vienna, I called Gunter as promised. He recognised my voice at once and laughed, saying he had been sure I would call. Half an hour later, he picked me up at the same bus station. This time I had cash in my wallet. I paid him the fare, together with a box of chocolates I had bought in Prague. He tried to refuse the chocolates, but I insisted. On the way to the airport, I told him that my conference had gone well and that I could never have got there without him. I still keep that page with his phone number in my wallet.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "停在“我”冲到取款机前，看到 “Out of order. Sorry.”：车费付不了，银行卡刷不出、取款机也坏了，而开往布拉格的末班车队伍正在变短。要解决的是：没钱付车费，怎么还能赶上车。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "“我”急着赶车去开会，也不想欠账：没现金时先 “flashed him an apologetic smile”，又掏卡付钱。Gunter 热心、肯帮到底：没听过车站就 “fished out his little phone and rang up a friend”，到站后还笑着说 “We made it”，可见他把“我”的事当成自己的事。"
+        },
+        {
+          "question": "原文是怎么写的？续写照着怎么写？",
+          "answer": "第一人称“我”回忆，一般过去时；句子中等长度，多用 ran、jumped、popped 这类快节奏动作动词。人物的话只有两处引号（“We made it” 和取款机上的字），约占全文 2%，其余都是转述（he said he hadn’t heard of…）。续写也以转述为主，只在 Gunter 做决定时留一两句短的直接引语；描写点到为止，用动作推进。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "zero cash in my wallet",
+          "use": "第二段写“这次钱包里有现金”，再把留有 Gunter 电话的纸条放进钱包，开头的难题在结尾收回。"
+        },
+        {
+          "sourceQuote": "I flashed him an apologetic smile",
+          "use": "说明“我”不是想白坐车，第一段主动提出押东西、承诺回来付钱，才合这个人物。"
+        },
+        {
+          "sourceQuote": "I saw the bus queue thinning out",
+          "use": "第一段要写“我”最后跑上车，时间紧迫由原文这条线索撑着，不必另造。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段以 “I ran back to Gunter and told him the bad news.” 开头：写 Gunter 听到坏消息后怎么办，车费问题必须有个说法，“我”要能离开去布拉格。",
+        "第二段首句的 “as promised” 要求第一段结束前，“我”已经答应回维也纳后给 Gunter 打电话；他的联系方式也得在第一段交到“我”手里。",
+        "第二段首句的 “Four days later, when I was back in Vienna” 说明“我”最终赶上了车、去了布拉格；第二段写打电话以后的事。"
+      ],
+      "thisEssayChooses": "本文选的路线是：“我”想押手表，Gunter 不要，写下电话号码让“我”回来再付；“我”最后一个上车。第二段他来车站接“我”，“我”付清车费、送巧克力，并把那张纸条留在钱包里。押手表、巧克力、去机场都是可以换的细节；也可以写成“我”回来后约他见面、把钱送到出租车公司，只要付清车费、谢过他就说得通。"
+    },
+    "standard": {
+      "essay": "Paragraph 1: I ran back to Gunter and told him the bad news. I offered to leave my watch with him until I could pay, but he just shook his head. Instead, he tore a page from a small notebook on the dashboard, wrote down his phone number and pushed it into my hand. “Call me when you come back to Vienna,” he said. “You can pay me then.” I could hardly believe that a stranger would trust me like this. I thanked him again and again, promised to call him, and grabbed my bag. Then I ran for the bus and got on just before the doors closed. Through the window, I saw his taxi pull away into the rain.\n\nParagraph 2: Four days later, when I was back in Vienna, I called Gunter as promised. He recognised my voice at once and laughed, saying he had been sure I would call. Half an hour later, he picked me up at the same bus station. This time I had cash in my wallet. I paid him the fare, together with a box of chocolates I had bought in Prague. He tried to refuse the chocolates, but I insisted. On the way to the airport, I told him that my conference had gone well and that I could never have got there without him. I still keep that page with his phone number in my wallet.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "解决没钱付车费的难题：Gunter 让“我”先走、以后再付，并把电话交给“我”，为第二段的 as promised 铺好路。",
+          "items": [
+            {
+              "quote": "I offered to leave my watch with him until I could pay",
+              "explain": "先让“我”主动想办法，接上原文 apologetic smile 里不想欠账的样子；Gunter 再拒绝，他的信任才显得出来。"
+            },
+            {
+              "quote": "wrote down his phone number and pushed it into my hand",
+              "explain": "第二段要“我”打电话，号码就得在这里交到手上。用 wrote down、pushed 两个动作写，比“他给了我电话”更像现场。"
+            },
+            {
+              "quote": "“Call me when you come back to Vienna,” he said. “You can pay me then.”",
+              "explain": "全段只有这一处直接引语，放在 Gunter 做决定的地方，和原文只留 “We made it” 一句的写法一致。"
+            },
+            {
+              "quote": "promised to call him",
+              "explain": "把“答应打电话”写明，第二段首句的 as promised 才有着落。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "兑现承诺：打电话、付清车费、道谢，并用原文的钱包收住故事。",
+          "items": [
+            {
+              "quote": "This time I had cash in my wallet.",
+              "explain": "This time 对照原文的 zero cash in my wallet，一句话交代难题已经不在。"
+            },
+            {
+              "quote": "I paid him the fare, together with a box of chocolates I had bought in Prague.",
+              "explain": "先还钱，再送一点在布拉格买的小礼物：欠的车费还清了，谢意也有了具体东西，而且合“刚从布拉格回来”的处境。"
+            },
+            {
+              "quote": "I still keep that page with his phone number in my wallet.",
+              "explain": "结尾落在一张纸条上，不写“人间有真情”之类的道理；纸条放进的正是当初空空的钱包。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I offered to leave ... with him until I could pay",
+          "function": "写“我”没钱时主动提出抵押，表现诚意，正好用在借钱、欠账一类的情节里。"
+        },
+        {
+          "expression": "I could hardly believe that a stranger would trust me like this.",
+          "function": "把“我”的惊讶和感激落在 Gunter 的信任上，比 I was very moved 具体。"
+        },
+        {
+          "expression": "This time I had ...",
+          "function": "第二段用 This time 和原文的窘境对照，一句话交代问题已经解决。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段写成“我”没赶上车，只好在维也纳过夜。",
+          "why": "第二段首句说“我”四天后“回到维也纳”，说明“我”去了布拉格开会；第一段的结局得是“我”上了车、去了布拉格。没赶上车，后面的时间线就接不上。"
+        },
+        {
+          "pitfall": "第一段没写“我”答应打电话、拿到 Gunter 的联系方式，第二段直接说打电话。",
+          "why": "首句里的 as promised 和 called Gunter 都要第一段先铺好：承诺在哪儿许的、号码从哪儿来的，读者要能找到。"
+        },
+        {
+          "pitfall": "第二段写 Gunter 坚决不要钱，或者让路人、站务员替“我”付了车费。",
+          "why": "原文的“我”一直想付钱，“as promised”最自然的落点是回来还钱；让新人物出钱解决问题，就成了天降的帮助，也抢了 Gunter 的戏。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: I ran back to Gunter and told him the bad news. I offered him my watch as a deposit, but he waved it away and glanced at the bus, where only a handful of passengers were still waiting. Then he tore a page out of the notebook on his dashboard, scribbled down his phone number and pressed it into my palm. “Pay me when you come back to Vienna,” he said. “Now go, or you’ll miss it!” For a second I just stared at him. He had found a station he had never heard of, and now he was letting a stranger leave without paying a cent. I promised to call him the moment I returned, grabbed my bag and dashed for the bus. I was the last one to climb aboard. As we pulled out, his taxi was still waiting in the rain, its headlights on.\n\nParagraph 2: Four days later, when I was back in Vienna, I called Gunter as promised. He answered on the second ring and burst out laughing when I told him who I was. “The Portuguese bankcard!” he said. Within twenty minutes his taxi pulled up outside the bus station. This time I had made sure my wallet was full. I paid him the fare and, on top of it, handed him a box of chocolates I had picked up in Prague. He tried to push the box back, but I would not take no for an answer. On the way to the airport, I told him about the conference, and he admitted that his friend had been teasing him all week about his crazy passenger. When we said goodbye, I kept the torn page with his number. It is still in my wallet, next to the bankcard that let us both down that night.",
+      "beyondStandard": [
+        {
+          "quote": "glanced at the bus, where only a handful of passengers were still waiting",
+          "explain": "标准版没写 Gunter 为什么急着放“我”走；这里用他看了一眼快走空的队伍，接上原文 the bus queue thinning out，他的决定有了理由。"
+        },
+        {
+          "quote": "He had found a station he had never heard of, and now he was letting a stranger leave without paying a cent.",
+          "explain": "标准版只说“不敢相信”；这里把原文 he hadn’t heard of the bus station 拿回来，把他做过的和正在做的并排放，“我”的震动有了来由。"
+        },
+        {
+          "quote": "I would not take no for an answer",
+          "explain": "标准版写 I insisted；这里用地道的口语搭配 would not take no for an answer，语气更像真人坚持。"
+        }
+      ]
+    }
+  }
+}

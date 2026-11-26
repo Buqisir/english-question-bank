@@ -1,0 +1,775 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:reading-d": {
+      "overview": "斯坦福大学达鲁团队用 19 亿条全球记录检验手机拍照等观察数据能否反映真实的生物多样性，发现这类数据数量虽多却偏向某些地区和物种，并建议生物多样性应用引导用户改进记录。",
+      "fullTranslationZh": "在赶在物种灭绝之前把地球上的物种记录下来的竞赛中，研究人员和公民科学家已经收集了数十亿条记录。如今，大多数生物多样性记录往往是照片、视频和其他数字记录的形式。尽管这类记录有助于发现某一地区物种数量和种类的变化，但斯坦福大学的一项新研究发现，它们并不完美。\n\n“随着技术的发展，人们借助手机应用就能轻松地观察记录不同的物种，”该研究的第一作者、斯坦福大学人文与科学学院生物学助理教授巴纳巴斯·达鲁说，“如今这些观察记录的数量已经超过了来自实物标本的原始数据；既然我们越来越多地用观察数据来研究物种如何应对全球变化，我就想知道：这些数据能用吗？”\n\n达鲁和他的团队利用一个包含 19 亿条植物、昆虫、鸟类和动物记录的全球数据集，检验了这些数据能在多大程度上反映真实的全球生物多样性格局。\n\n“我们特别想探究取样中容易使数据产生偏差的那些方面，比如公民科学家更可能去拍一株开花的植物，而不是拍它旁边的草，”达鲁说。\n\n他们的研究表明，大量只靠观察得来的记录并没有带来更好的全球覆盖。而且，这些数据存在偏差，偏向某些地区、时间段和物种。这不难理解，因为用移动设备获取生物多样性观察数据的人，往往是记录自己在附近地区偶遇物种的公民科学家。这些数据还偏向那些外形迷人或引人注目的物种。\n\n对于这些不完美的生物多样性数据集，我们能做些什么呢？\n\n“能做的很多，”达鲁解释说，“生物多样性应用可以利用我们的研究结果，告诉用户哪些地区采样过多，并引导他们前往采样不足的地方，甚至去记录采样不足的物种。为了提高观察数据的质量，生物多样性应用还可以鼓励用户请专家确认他们上传的图片中物种的鉴定结果。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+          "sourceText": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+          "displayText": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:33"
+          ],
+          "translationZh": "如今这些观察记录的数量已经超过了来自实物标本的原始数据；既然我们越来越多地用观察数据来研究物种如何应对全球变化，我就想知道：这些数据能用吗？",
+          "analysisZh": "这句由 and 连成前后两部分。前半句主干是 These observations now outnumber the primary data，outnumber 意为“数量超过”，that comes from physical specimens 是定语从句修饰 the primary data。后半句主干是 I wanted to know，since 引导原因状语从句，“既然我们越来越多地用观察数据来研究……”，其中 how species are responding to global change 是 investigate 的宾语从句；冒号后的 Are they usable? 是他想弄清的问题，they 指观察数据。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 49,
+              "quote": "These observations now outnumber the primary data"
+            },
+            {
+              "start": 94,
+              "end": 144,
+              "quote": "since we are increasingly using observational data"
+            },
+            {
+              "start": 205,
+              "end": 239,
+              "quote": "I wanted to know: Are they usable?"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+          "sourceText": "Though they are useful for detecting shifts in the number and variety of species in an area, a new Stanford study has found that this type of record is not perfect.",
+          "displayText": "Though they are useful for detecting shifts in the number and variety of species in an area, a new Stanford study has found that this type of record is not perfect.",
+          "relatedQuestionIds": [],
+          "translationZh": "尽管这类记录有助于发现某一地区物种数量和种类的变化，但斯坦福大学的一项新研究发现，它们并不完美。",
+          "analysisZh": "主干是 a new Stanford study has found that …，“斯坦福大学的一项新研究发现……”，that 引导宾语从句 this type of record is not perfect。句首 Though 引导让步状语从句，先承认这类记录有用（useful for detecting shifts …），in the number and variety of species in an area 说明变化发生在哪方面。先让一步再转到“并不完美”，正是全文要讨论的问题。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "Though they are useful"
+            },
+            {
+              "start": 93,
+              "end": 123,
+              "quote": "a new Stanford study has found"
+            },
+            {
+              "start": 129,
+              "end": 163,
+              "quote": "this type of record is not perfect"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-i:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:1"
+              ],
+              "start": 0,
+              "end": 127,
+              "quote": "在赶在物种灭绝之前把地球上的物种记录下来的竞赛中，研究人员和公民科学家已经收集了数十亿条记录。如今，大多数生物多样性记录往往是照片、视频和其他数字记录的形式。尽管这类记录有助于发现某一地区物种数量和种类的变化，但斯坦福大学的一项新研究发现，它们并不完美。"
+            },
+            {
+              "paragraphId": "zh-reading-d-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:2"
+              ],
+              "start": 129,
+              "end": 271,
+              "quote": "“随着技术的发展，人们借助手机应用就能轻松地观察记录不同的物种，”该研究的第一作者、斯坦福大学人文与科学学院生物学助理教授巴纳巴斯·达鲁说，“如今这些观察记录的数量已经超过了来自实物标本的原始数据；既然我们越来越多地用观察数据来研究物种如何应对全球变化，我就想知道：这些数据能用吗？”"
+            },
+            {
+              "paragraphId": "zh-reading-d-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:3"
+              ],
+              "start": 273,
+              "end": 341,
+              "quote": "达鲁和他的团队利用一个包含 19 亿条植物、昆虫、鸟类和动物记录的全球数据集，检验了这些数据能在多大程度上反映真实的全球生物多样性格局。"
+            },
+            {
+              "paragraphId": "zh-reading-d-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:4"
+              ],
+              "start": 343,
+              "end": 404,
+              "quote": "“我们特别想探究取样中容易使数据产生偏差的那些方面，比如公民科学家更可能去拍一株开花的植物，而不是拍它旁边的草，”达鲁说。"
+            },
+            {
+              "paragraphId": "zh-reading-d-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:5"
+              ],
+              "start": 406,
+              "end": 536,
+              "quote": "他们的研究表明，大量只靠观察得来的记录并没有带来更好的全球覆盖。而且，这些数据存在偏差，偏向某些地区、时间段和物种。这不难理解，因为用移动设备获取生物多样性观察数据的人，往往是记录自己在附近地区偶遇物种的公民科学家。这些数据还偏向那些外形迷人或引人注目的物种。"
+            },
+            {
+              "paragraphId": "zh-reading-d-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:6"
+              ],
+              "start": 538,
+              "end": 564,
+              "quote": "对于这些不完美的生物多样性数据集，我们能做些什么呢？"
+            },
+            {
+              "paragraphId": "zh-reading-d-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-d:7"
+              ],
+              "start": 566,
+              "end": 689,
+              "quote": "“能做的很多，”达鲁解释说，“生物多样性应用可以利用我们的研究结果，告诉用户哪些地区采样过多，并引导他们前往采样不足的地方，甚至去记录采样不足的物种。为了提高观察数据的质量，生物多样性应用还可以鼓励用户请专家确认他们上传的图片中物种的鉴定结果。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+                "start": 140,
+                "end": 243,
+                "quote": "Today, most records of biodiversity are often in the form of photos, videos, and other digital records."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-1",
+                "start": 47,
+                "end": 79,
+                "quote": "如今，大多数生物多样性记录往往是照片、视频和其他数字记录的形式。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+                "start": 271,
+                "end": 510,
+                "quote": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-2",
+                "start": 71,
+                "end": 141,
+                "quote": "如今这些观察记录的数量已经超过了来自实物标本的原始数据；既然我们越来越多地用观察数据来研究物种如何应对全球变化，我就想知道：这些数据能用吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:4",
+                "start": 0,
+                "end": 240,
+                "quote": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+                "start": 197,
+                "end": 376,
+                "quote": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-4",
+                "start": 0,
+                "end": 61,
+                "quote": "“我们特别想探究取样中容易使数据产生偏差的那些方面，比如公民科学家更可能去拍一株开花的植物，而不是拍它旁边的草，”达鲁说。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-5",
+                "start": 58,
+                "end": 108,
+                "quote": "这不难理解，因为用移动设备获取生物多样性观察数据的人，往往是记录自己在附近地区偶遇物种的公民科学家。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+                "start": 32,
+                "end": 184,
+                "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-7",
+                "start": 15,
+                "end": 75,
+                "quote": "生物多样性应用可以利用我们的研究结果，告诉用户哪些地区采样过多，并引导他们前往采样不足的地方，甚至去记录采样不足的物种。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-d-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-d-1",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+                "start": 271,
+                "end": 510,
+                "quote": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-2",
+                "start": 71,
+                "end": 141,
+                "quote": "如今这些观察记录的数量已经超过了来自实物标本的原始数据；既然我们越来越多地用观察数据来研究物种如何应对全球变化，我就想知道：这些数据能用吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-d-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-d-2",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+                "start": 244,
+                "end": 408,
+                "quote": "Though they are useful for detecting shifts in the number and variety of species in an area, a new Stanford study has found that this type of record is not perfect."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-d",
+                "paragraphId": "zh-reading-d-1",
+                "start": 79,
+                "end": 127,
+                "quote": "尽管这类记录有助于发现某一地区物种数量和种类的变化，但斯坦福大学的一项新研究发现，它们并不完美。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头交代如今物种记录多为数字形式，并引出新研究“这类记录不完美”的结论；接着用达鲁的话说明研究要回答观察数据能不能用，再交代研究方法和关注的取样偏差；然后报告结果并解释偏差的来由；最后自问自答，给出改进建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+            "summary": "人们已收集数十亿条物种记录，如今多为照片视频等数字形式，有用却不完美。",
+            "function": "交代背景，引出研究结论。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+            "summary": "达鲁说手机让观察记录变得容易，观察数据已超过标本数据，他想知道这些数据能不能用。",
+            "function": "用研究者的话点明研究要回答的问题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:3",
+            "summary": "团队用 19 亿条全球记录检验这些数据能否反映真实格局。",
+            "function": "交代研究方法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:4",
+            "summary": "他们特别关注容易造成偏差的取样方式，例如人们更爱拍开花的植物。",
+            "function": "说明研究关注的重点并举例。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+            "summary": "观察记录多并没有带来更好的覆盖，数据偏向某些地区、时间和醒目物种，因为记录者常在附近随手记录。",
+            "function": "报告研究结果并解释原因。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:6",
+            "summary": "提出问题：这些不完美的数据能拿来做什么？",
+            "function": "设问过渡，引出建议。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+            "summary": "达鲁建议应用引导用户去采样不足的地方，并鼓励用户请专家确认鉴定结果。",
+            "function": "给出改进办法，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-i:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出开头对如今物种记录形式的交代。",
+      "stemTranslationZh": "关于如今收集的物种记录，我们知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们正在变得过时。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are becoming outdated.",
+            "explanation": "原文说这类记录有用（useful），只是不完美（not perfect），没说它们正在过时。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们大多是电子形式。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+              "quote": "Today, most records of biodiversity are often in the form of photos, videos, and other digital records.",
+              "anchor": "Today 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们数量有限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records.",
+            "sourceHighlight": "billions of records",
+            "optionText": "They are limited in number.",
+            "optionHighlight": "limited in number",
+            "explanation": "原文说已经收集了数十亿条记录（billions of records），观察记录还超过了标本数据，数量一点也不少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+              "quote": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records.",
+              "anchor": "billions of records 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们被用于公开展览。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are used for public exhibition.",
+            "explanation": "原文说这些记录用来发现某地物种数量和种类的变化（detecting shifts），没提公开展览。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "now",
+          "sourceRole": "stem",
+          "targetText": "Today, most records of biodiversity are often in the form of photos, videos, and other digital records.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:1",
+          "relationType": "locationCue",
+          "targetCue": "Today",
+          "sourceZh": "现在",
+          "targetCueZh": "如今",
+          "answerText": "most records of biodiversity are often in the form of photos, videos, and other digital records",
+          "note": "题干 now 对应原文 Today。"
+        },
+        {
+          "sourceText": "They are mostly in electronic form.",
+          "sourceRole": "correctOption",
+          "targetText": "Today, most records of biodiversity are often in the form of photos, videos, and other digital records.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "选项的“大多”对应原文的 most，“电子形式”（electronic form）对应照片、视频和其他数字记录（digital records），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从达鲁自己说出的研究问题里，找出研究对象。",
+      "stemTranslationZh": "达鲁的研究关注的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "they 指什么，往同句前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "受威胁的物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records.",
+            "sourceEntity": "the species on Earth before they go extinct",
+            "optionText": "Threatened species.",
+            "optionEntity": "Threatened species",
+            "explanation": "开头提到物种灭绝（go extinct），只是交代人们抢着记录物种的背景；研究检验的是这些记录能不能用，不是濒危物种本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+              "quote": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records.",
+              "anchor": "go extinct 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "实物标本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "physical specimens",
+            "optionText": "Physical specimens",
+            "matchType": "exact",
+            "relationNote": "physical specimens 借自[[block:paper-gaokao-2024-i:reading-d:2|the primary data that comes from physical specimens]]，标本数据只是拿来比较的一方，观察数据数量已超过它，研究要检验的是后者。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+              "quote": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+              "anchor": "physical specimens 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "观察数据。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+              "quote": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+              "anchor": "Are they usable 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "手机应用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "mobile application",
+            "optionText": "Mobile application",
+            "matchType": "exact",
+            "relationNote": "mobile application 借自[[block:paper-gaokao-2024-i:reading-d:2|with the aid of a mobile application]]：手机应用只是人们观察记录物种的工具，研究检验的是这样得来的数据。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+              "quote": "“With the rise of technology it is easy for people to make observations of different species with the aid of a mobile application,” said Barnabas Daru, who is lead author of the study and assistant professor of biology in the Stanford School of Humanities and Sciences.",
+              "anchor": "a mobile application 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "focus on",
+          "sourceRole": "stem",
+          "targetText": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "wanted to know",
+          "sourceZh": "关注",
+          "targetCueZh": "想弄清",
+          "answerText": "using observational data",
+          "note": "题干 focus on 对应原文 wanted to know。"
+        },
+        {
+          "sourceText": "Observational data.",
+          "sourceRole": "correctOption",
+          "targetText": "These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 observational data：达鲁想弄清的是这些观察数据能不能用（Are they usable），接着[[block:paper-gaokao-2024-i:reading-d:3|tested how well these data represent]]也写团队检验的正是这些数据，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究认为数据产生偏差的原因。",
+      "stemTranslationZh": "根据这项研究，是什么导致了偏差？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 like 后的例子",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "数据分析中的错误。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Mistakes in data analysis.",
+            "explanation": "研究找到的偏差出在收集数据时拍什么、在哪儿拍，原文没说分析数据时出了错。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "上传图片质量差。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "uploaded",
+            "optionText": "uploaded",
+            "matchType": "exact",
+            "relationNote": "uploaded 借自[[block:paper-gaokao-2024-i:reading-d:7|confirm the identification of their uploaded image]]，那是请专家确认上传图片里是什么物种的改进建议；偏差来自拍什么、在哪拍，不是照片拍得差。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+              "quote": "To improve the quality of observational data, biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image.",
+              "anchor": "uploaded image 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "取样方式不当。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:4",
+              "quote": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru.",
+              "anchor": "aspects of sampling 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "quote": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby.",
+              "anchor": "areas nearby 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "数据收集设备不可靠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "devices",
+            "optionText": "devices",
+            "matchType": "exact",
+            "relationNote": "devices 借自[[block:paper-gaokao-2024-i:reading-d:5|on mobile devices]]，手机只是记录工具；数据偏向附近地区，是因为记录的人常在身边随手记，原文没说设备不可靠。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "quote": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby.",
+              "anchor": "mobile devices 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "led to the biases",
+          "sourceRole": "stem",
+          "targetText": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:4",
+          "relationType": "locationCue",
+          "targetCue": "tend to bias",
+          "sourceZh": "导致偏差",
+          "targetCueZh": "往往造成偏差",
+          "answerText": "the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it",
+          "note": "题干 led to the biases 对应原文 tend to bias。"
+        },
+        {
+          "sourceText": "Improper way of sampling.",
+          "sourceRole": "correctOption",
+          "targetText": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“取样方式”就是原文的 sampling；“不当”要从例子里看：人们更爱拍开花的植物，不拍旁边的草（instead of the grass），[[block:paper-gaokao-2024-i:reading-d:5|This makes sense because]]又说记录者多在附近（areas nearby）随手记，样本自然偏了，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从达鲁的两条建议里，找出与选项意思一致的一条。",
+      "stemTranslationZh": "达鲁对生物多样性应用有什么建议？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "审查来自某些地区的数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+            "sourceEntity": "inform users of oversampled areas",
+            "optionText": "Review data from certain areas.",
+            "optionEntity": "Review data",
+            "explanation": "对采样过多的地区（oversampled areas），原文是告诉用户、把人引到别处去，没说要回头审查这些地区的数据。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+              "anchor": "oversampled areas 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "雇专家来核查记录。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "To improve the quality of observational data, biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image.",
+            "sourceEntity": "encourage users",
+            "optionText": "Hire experts to check the records.",
+            "optionEntity": "Hire experts",
+            "explanation": "原文是应用鼓励用户（encourage users）自己找专家确认图片里的物种，不是应用出面雇专家来查记录。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+              "quote": "To improve the quality of observational data, biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image.",
+              "anchor": "have an expert confirm 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "确认用户的身份。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "confirm the identification",
+            "optionText": "Confirm the identity",
+            "matchType": "wordFamily",
+            "relationNote": "identity 和[[block:paper-gaokao-2024-i:reading-d:7|confirm the identification of their uploaded image]]的 identification 同源：要确认的是上传图片里是什么物种，不是用户是谁。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+              "quote": "To improve the quality of observational data, biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image.",
+              "anchor": "confirm the identification 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "给公民科学家提供指导。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+              "anchor": "inform users 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "biodiversity apps",
+          "sourceRole": "stem",
+          "targetText": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:7",
+          "relationType": "locationCue",
+          "answerText": "inform users of oversampled areas and lead them to places – and even species – that are not well-sampled",
+          "note": "题干 biodiversity apps 原词出现在原文。"
+        },
+        {
+          "sourceText": "Give guidance to citizen scientists.",
+          "sourceRole": "correctOption",
+          "targetText": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-d:7",
+          "relationType": "paraphrase",
+          "note": "选项的“给予指导”（give guidance）就是原文的告诉用户哪里采样过多、带他们去采样不足的地方（inform users … lead them to places）；这些用户就是[[block:paper-gaokao-2024-i:reading-d:5|are often citizen scientists]]所说用手机记录物种的公民科学家，选 D。"
+        }
+      ]
+    }
+  }
+}

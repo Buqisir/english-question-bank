@@ -1,0 +1,723 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:reading-a": {
+      "overview": "马林地区栖息地修复队的志愿者招募启事：介绍队伍修复自然区域、保护濒危物种的任务，说明团体报名办法、年龄要求和参加须知，并列出一月三次活动的时间和集合地点。",
+      "fullTranslationZh": "栖息地修复队\n\n帮助修复和保护马林从马林岬角到博利纳斯岭一带的自然区域。我们将一边探访美丽的公园景点，一边清除入侵植物、进行冬季种植和采集种子。栖息地修复队的志愿者在修复脆弱的自然资源、保护山岭和山谷间的濒危物种方面发挥着至关重要的作用。\n\n团体\n\n五人及以上的团体需要特别安排，并且必须提前确认。请查看可选项目清单，并填写团体项目申请表。\n\n年龄、技能与携带物品\n\n欢迎 10 岁及以上的志愿者参加。未满 15 岁的青少年请阅读我们的青少年政策指南。\n\n请带上填好的志愿者协议书。未满 18 岁的志愿者必须请父母或监护人在同意栏签字。\n\n无论晴雨，我们都照常工作。请穿不怕弄脏的衣服。带上可随天气增减的衣物，必要时带上雨衣。\n\n请自带水壶、防晒霜和午餐。\n\n无需经验。我们提供培训和工具。可满足社区服务的要求。\n\n近期活动\n\n时间｜集合地点\n\n1 月 15 日（周日）上午 10:00—下午 1:00｜巴特里亚历山大步道起点\n\n1 月 22 日（周日）上午 10:00—下午 2:30｜斯廷森海滩停车场\n\n1 月 29 日（周日）上午 9:30—下午 2:30｜郊狼岭步道起点",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+          "sourceText": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "displayText": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:21"
+          ],
+          "translationZh": "栖息地修复队的志愿者在修复脆弱的自然资源、保护山岭和山谷间的濒危物种方面发挥着至关重要的作用。",
+          "analysisZh": "主干是 volunteers play a vital role，play a vital role in 意为“在……中起关键作用”，句首 Habitat Restoration Team 作定语，说明是哪支队伍的志愿者。in 后面是两个并列的动名词短语 restoring sensitive resources 和 protecting endangered species，由 and 连接，交代这个作用具体是什么；across the ridges and valleys 说明范围。这句正面点出修复队做的事：修复资源、保护物种。",
+          "underlineRanges": [
+            {
+              "start": 25,
+              "end": 53,
+              "quote": "volunteers play a vital role"
+            },
+            {
+              "start": 57,
+              "end": 86,
+              "quote": "restoring sensitive resources"
+            },
+            {
+              "start": 91,
+              "end": 120,
+              "quote": "protecting endangered species"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+          "sourceText": "We’ll explore beautiful park sites while conducting invasive（侵入的） plant removal, winter planting, and seed collection.",
+          "displayText": "We’ll explore beautiful park sites while conducting invasive（侵入的） plant removal, winter planting, and seed collection.",
+          "relatedQuestionIds": [],
+          "translationZh": "我们将一边探访美丽的公园景点，一边清除入侵植物、进行冬季种植和采集种子。",
+          "analysisZh": "主干是 We’ll explore beautiful park sites，“我们将探访美丽的公园景点”。while 后接动名词短语 conducting …，表示“在探访的同时进行……”；conducting 带三个并列宾语 invasive plant removal、winter planting 和 seed collection，最后一项前用 and。三项都是动手的户外劳动，可见志愿者是去干活的，不是去搞研究或建新公园。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "We’ll explore beautiful park sites"
+            },
+            {
+              "start": 35,
+              "end": 51,
+              "quote": "while conducting"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-i:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:1"
+              ],
+              "start": 0,
+              "end": 6,
+              "quote": "栖息地修复队"
+            },
+            {
+              "paragraphId": "zh-reading-a-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:2"
+              ],
+              "start": 8,
+              "end": 119,
+              "quote": "帮助修复和保护马林从马林岬角到博利纳斯岭一带的自然区域。我们将一边探访美丽的公园景点，一边清除入侵植物、进行冬季种植和采集种子。栖息地修复队的志愿者在修复脆弱的自然资源、保护山岭和山谷间的濒危物种方面发挥着至关重要的作用。"
+            },
+            {
+              "paragraphId": "zh-reading-a-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:3"
+              ],
+              "start": 121,
+              "end": 123,
+              "quote": "团体"
+            },
+            {
+              "paragraphId": "zh-reading-a-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:4",
+                "block:paper-gaokao-2024-i:reading-a:5"
+              ],
+              "start": 125,
+              "end": 170,
+              "quote": "五人及以上的团体需要特别安排，并且必须提前确认。请查看可选项目清单，并填写团体项目申请表。"
+            },
+            {
+              "paragraphId": "zh-reading-a-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:6"
+              ],
+              "start": 172,
+              "end": 182,
+              "quote": "年龄、技能与携带物品"
+            },
+            {
+              "paragraphId": "zh-reading-a-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:7"
+              ],
+              "start": 184,
+              "end": 226,
+              "quote": "欢迎 10 岁及以上的志愿者参加。未满 15 岁的青少年请阅读我们的青少年政策指南。"
+            },
+            {
+              "paragraphId": "zh-reading-a-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:8"
+              ],
+              "start": 228,
+              "end": 268,
+              "quote": "请带上填好的志愿者协议书。未满 18 岁的志愿者必须请父母或监护人在同意栏签字。"
+            },
+            {
+              "paragraphId": "zh-reading-a-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:9"
+              ],
+              "start": 270,
+              "end": 313,
+              "quote": "无论晴雨，我们都照常工作。请穿不怕弄脏的衣服。带上可随天气增减的衣物，必要时带上雨衣。"
+            },
+            {
+              "paragraphId": "zh-reading-a-9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:10"
+              ],
+              "start": 315,
+              "end": 328,
+              "quote": "请自带水壶、防晒霜和午餐。"
+            },
+            {
+              "paragraphId": "zh-reading-a-10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:11"
+              ],
+              "start": 330,
+              "end": 356,
+              "quote": "无需经验。我们提供培训和工具。可满足社区服务的要求。"
+            },
+            {
+              "paragraphId": "zh-reading-a-11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-a:12"
+              ],
+              "start": 358,
+              "end": 362,
+              "quote": "近期活动"
+            },
+            {
+              "paragraphId": "zh-reading-a-12",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:1:1",
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:1:2"
+              ],
+              "start": 364,
+              "end": 371,
+              "quote": "时间｜集合地点"
+            },
+            {
+              "paragraphId": "zh-reading-a-13",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:2:1",
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:2:2"
+              ],
+              "start": 373,
+              "end": 413,
+              "quote": "1 月 15 日（周日）上午 10:00—下午 1:00｜巴特里亚历山大步道起点"
+            },
+            {
+              "paragraphId": "zh-reading-a-14",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:3:1",
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:3:2"
+              ],
+              "start": 415,
+              "end": 452,
+              "quote": "1 月 22 日（周日）上午 10:00—下午 2:30｜斯廷森海滩停车场"
+            },
+            {
+              "paragraphId": "zh-reading-a-15",
+              "sourceParagraphIds": [
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:4:1",
+                "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:4:2"
+              ],
+              "start": 454,
+              "end": 489,
+              "quote": "1 月 29 日（周日）上午 9:30—下午 2:30｜郊狼岭步道起点"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+                "start": 209,
+                "end": 360,
+                "quote": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+                "start": 0,
+                "end": 89,
+                "quote": "Help restore and protect Marin’s natural areas from the Marin Headlands to Bolinas Ridge."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "start": 64,
+                "end": 111,
+                "quote": "栖息地修复队的志愿者在修复脆弱的自然资源、保护山岭和山谷间的濒危物种方面发挥着至关重要的作用。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "start": 0,
+                "end": 28,
+                "quote": "帮助修复和保护马林从马林岬角到博利纳斯岭一带的自然区域。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:7",
+                "start": 0,
+                "end": 40,
+                "quote": "Volunteers aged 10 and over are welcome."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-6",
+                "start": 0,
+                "end": 17,
+                "quote": "欢迎 10 岁及以上的志愿者参加。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+                "start": 0,
+                "end": 31,
+                "quote": "We’ll be working rain or shine."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+                "start": 65,
+                "end": 127,
+                "quote": "Bring layers for changing weather and a raincoat if necessary."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-8",
+                "start": 0,
+                "end": 13,
+                "quote": "无论晴雨，我们都照常工作。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-8",
+                "start": 23,
+                "end": 43,
+                "quote": "带上可随天气增减的衣物，必要时带上雨衣。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-1",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+                "start": 209,
+                "end": 360,
+                "quote": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "start": 64,
+                "end": 111,
+                "quote": "栖息地修复队的志愿者在修复脆弱的自然资源、保护山岭和山谷间的濒危物种方面发挥着至关重要的作用。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-a-2",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+                "start": 90,
+                "end": 208,
+                "quote": "We’ll explore beautiful park sites while conducting invasive（侵入的） plant removal, winter planting, and seed collection."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-a",
+                "paragraphId": "zh-reading-a-2",
+                "start": 28,
+                "end": 64,
+                "quote": "我们将一边探访美丽的公园景点，一边清除入侵植物、进行冬季种植和采集种子。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "启事按小标题分块：开头说明修复队要做什么，“团体”讲团体报名的办法，“年龄、技能与携带物品”列出年龄要求、要带的东西和工作条件，“近期活动”用表格列出三次活动的时间和集合地点。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:1",
+            "summary": "栖息地修复队，点明招募的是哪支队伍。",
+            "function": "标题，交代启事的主体。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+            "summary": "志愿者将在马林各处清除入侵植物、种植、采种，修复自然区域、保护濒危物种。",
+            "function": "开头说明队伍的任务和意义，吸引人报名。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:3",
+            "summary": "团体报名须知。",
+            "function": "分区标题，引出团体报名的要求。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:4",
+            "summary": "五人及以上的团体要提前确认，查看项目清单并填写申请表。",
+            "function": "交代团体参加的办法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:6",
+            "summary": "年龄、技能与携带物品。",
+            "function": "分区标题，引出个人参加的各项须知。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:7",
+            "summary": "10 岁及以上可以参加，未满 15 岁须读青少年守则。",
+            "function": "交代年龄要求。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:8",
+            "summary": "要带上填好的协议书，未满 18 岁须家长签字。",
+            "function": "交代报名手续。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+            "summary": "风雨无阻照常干活，要穿耐脏衣服并按天气带衣物和雨衣。",
+            "function": "提醒工作条件和着装。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:10",
+            "summary": "自带水壶、防晒霜和午餐。",
+            "function": "列出要带的个人用品。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:11",
+            "summary": "不需要经验，提供培训和工具，可算作社区服务。",
+            "function": "打消顾虑，说明参加的好处。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-a:12",
+            "summary": "近期活动，下接活动表。",
+            "function": "分区标题，引出活动安排。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-i:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从开头对修复队工作的介绍里，找出这支队伍要达到的目的。",
+      "stemTranslationZh": "栖息地修复队的目的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了发现矿产资源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "resources",
+            "optionText": "resources",
+            "matchType": "exact",
+            "relationNote": "resources 借自[[block:paper-gaokao-2024-i:reading-a:2|restoring sensitive resources]]，那里指要修复的脆弱自然资源，队伍是去修复它们，不是去找矿（mineral）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+              "quote": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+              "anchor": "sensitive resources 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了开发新的野生动物公园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "park",
+            "optionText": "park",
+            "matchType": "exact",
+            "relationNote": "park 借自[[block:paper-gaokao-2024-i:reading-a:2|explore beautiful park sites]]：志愿者是在已有的公园景点里边走边除草种树，原文没说要新建野生动物公园。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+              "quote": "We’ll explore beautiful park sites while conducting invasive（侵入的） plant removal, winter planting, and seed collection.",
+              "anchor": "park sites 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了保护当地的生态系统。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+              "quote": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+              "anchor": "play a vital role 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+              "quote": "Help restore and protect Marin’s natural areas from the Marin Headlands to Bolinas Ridge.",
+              "anchor": "Help restore and protect 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了开展生物研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To conduct biological research.",
+            "explanation": "原文列的活动是清除入侵植物、冬季种植和采集种子（seed collection），都是动手修复，没提做生物研究。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Habitat Restoration Team",
+          "sourceRole": "stem",
+          "targetText": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-a:2",
+          "relationType": "locationCue",
+          "answerText": "restoring sensitive resources and protecting endangered species",
+          "note": "题干 Habitat Restoration Team 原词出现在原文。"
+        },
+        {
+          "sourceText": "To protect the local ecosystem.",
+          "sourceRole": "correctOption",
+          "targetText": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-a:2",
+          "relationType": "paraphrase",
+          "note": "选项的“保护”原文就有（protect），“当地生态系统”由两处合成：先是[[block:paper-gaokao-2024-i:reading-a:2|Help restore and protect]]说修复保护马林的自然区域（Marin’s natural areas），接着这句说保护当地的濒危物种（endangered species）；一地的自然环境加上其中的物种，就是当地生态系统，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在几处年龄数字里分清哪一个是参加的最低年龄。",
+      "stemTranslationZh": "加入栖息地修复队的最低年龄是多少？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "5 岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Groups of five or more require special arrangements and must be confirmed in advance.",
+            "sourceEntity": "five",
+            "optionText": "5.",
+            "optionEntity": "5",
+            "explanation": "5 来自[[block:paper-gaokao-2024-i:reading-a:4|Groups of five or more]]，那是需要提前安排的团体人数（five or more），说的是几个人，不是几岁。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "10 岁。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:7",
+              "quote": "Volunteers aged 10 and over are welcome.",
+              "anchor": "aged 10 and over 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "15 岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Read our Youth Policy Guidelines for youth under the age of 15.",
+            "sourceEntity": "under the age of 15",
+            "optionText": "15.",
+            "optionEntity": "15",
+            "explanation": "15 出自[[block:paper-gaokao-2024-i:reading-a:7|under the age of 15]]：未满 15 岁的少年要先读青少年守则，可见他们也能参加，15 不是下限。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "18 岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Volunteers under the age of 18 must have the parent/guardian approval section signed.",
+            "sourceEntity": "under the age of 18",
+            "optionText": "18.",
+            "optionEntity": "18",
+            "explanation": "未满 18 岁只是要家长或监护人签字同意（approval），未成年人照样能来，18 是要不要家长签字的分界。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "lower age limit",
+          "sourceRole": "stem",
+          "targetText": "Volunteers aged 10 and over are welcome.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-a:7",
+          "relationType": "locationCue",
+          "targetCue": "aged 10 and over",
+          "sourceZh": "最低年龄",
+          "targetCueZh": "十岁及以上",
+          "answerText": "aged 10 and over",
+          "note": "题干 lower age limit 对应原文 aged 10 and over。"
+        },
+        {
+          "sourceText": "10.",
+          "sourceRole": "correctOption",
+          "targetText": "Volunteers aged 10 and over are welcome.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项的 10 就是原文的数字：“10 岁及以上欢迎参加”（aged 10 and over），不到 10 岁就不收，下限是 10 岁，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项逐一放回参加须知，找出原文真正要求志愿者做到的一项。",
+      "stemTranslationZh": "志愿者需要做到什么？",
+      "locateBy": "options",
+      "locateFindZh": "逐项回 WHAT TO BRING 一节，对照工具、衣着、天气的说法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "自带工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Training and tools will be provided.",
+            "sourceHighlight": "tools will be provided",
+            "optionText": "Bring their own tools.",
+            "optionHighlight": "Bring their own tools",
+            "explanation": "要自带的是水壶、防晒霜和午饭；工具由队里提供（tools will be provided），不用自己带。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:11",
+              "quote": "Training and tools will be provided.",
+              "anchor": "tools will be provided 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "坏天气也照常工作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+              "quote": "We’ll be working rain or shine.",
+              "anchor": "rain or shine 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+              "quote": "Bring layers for changing weather and a raincoat if necessary.",
+              "anchor": "a raincoat 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "穿队服。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Wear clothes that can get dirty.",
+            "sourceEntity": "clothes that can get dirty",
+            "optionText": "Wear a team uniform.",
+            "optionEntity": "a team uniform",
+            "explanation": "原文的 Wear 只要求穿弄脏了也不心疼的衣服（clothes that can get dirty），再按天气添减衣物，没提统一的队服。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "至少参加三个项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Do at least three projects.",
+            "explanation": "活动表列了三个周日的场次，只是供志愿者挑选的时间，原文没要求每人至少做三个项目。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Work even in bad weather.",
+          "sourceRole": "correctOption",
+          "targetText": "We’ll be working rain or shine.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "选项的“坏天气也干”（even in bad weather）就是原文的“风雨无阻”（rain or shine）：下雨也照常干活，所以下一句还让带雨衣（a raincoat），选 B。"
+        }
+      ]
+    }
+  }
+}

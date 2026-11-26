@@ -1,0 +1,950 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:grammar-fill": {
+      "overview": "文章介绍伍尔贝丁花园的玻璃温室如何开合以保护植物，并沿着园内的小径追溯丝绸之路，说明来自亚洲的植物怎样丰富了英国园艺。",
+      "fullTranslationZh": "赫瑟威克工作室最近在英国国民信托的伍尔贝丁花园边缘建了一座温室。这座名为“玻璃温室”的漂亮建筑位于一座新花园的中心。花园展示了时至今日丝绸之路仍如何影响英国的花园。\n\n建造这座有保护作用、实用又美观的建筑，用上了最新的工程技术。设计采用十片以玻璃和铝制成的钢制“萼片”。天气暖和时，萼片会打开，让里面的植物获得阳光和新鲜空气。天气冷时，温室保持关闭，以保护植物。\n\n此外，温室周围的丝绸之路花园带游客踏上一段受古丝绸之路启发的旅程。丝绸以及许多植物品种都是经由这条古道首次传入英国的。其中有迷迭香、薰衣草和茴香等如今在西方备受喜爱的植物。园中还有一条蜿蜒小径，带游客走过丝绸之路的十二个地区。游客沿途还能看到三百多种植物。\n\n玻璃温室堪称当代设计的一大成就。它在一条重走丝绸之路的小径尽头，为中国西南地区的植物提供了生长空间。正是这条古道让植物从亚洲的原生地一路传来，塑造了英国园艺多样面貌中的相当一部分。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2024-i:grammar-fill:1",
+          "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+          "sourceText": "Further, the Silk Route Garden around the greenhouse __60__ (walk) visitors through a journey influenced by the ancient Silk Road, by which silk as well as many plant species came to Britain for __61__ first time.",
+          "displayText": "Further, the Silk Route Garden around the greenhouse walks visitors through a journey influenced by the ancient Silk Road, by which silk as well as many plant species came to Britain for the first time.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:60",
+            "question:paper-gaokao-2024-i:61"
+          ],
+          "translationZh": "此外，温室周围的丝绸之路花园带游客踏上一段受古丝绸之路启发的旅程。丝绸以及许多植物品种都是经由这条古道首次传入英国的。",
+          "analysisZh": "主干是 the Silk Route Garden walks visitors through a journey，意思是花园带游客走完一段旅程。around the greenhouse 交代花园的位置，influenced by … 说明旅程受什么启发。逗号后 by which 中的 which 指古丝绸之路，整个从句补充说明丝绸和植物怎样来到英国。",
+          "underlineRanges": [
+            {
+              "start": 53,
+              "end": 85,
+              "quote": "walks visitors through a journey"
+            },
+            {
+              "start": 86,
+              "end": 121,
+              "quote": "influenced by the ancient Silk Road"
+            },
+            {
+              "start": 123,
+              "end": 182,
+              "quote": "by which silk as well as many plant species came to Britain"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2024-i:grammar-fill:2",
+          "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+          "sourceText": "The Glasshouse stands __63__ a great achievement in contemporary design, to house the plants of the southwestern part of China at the end of a path retracing（追溯）the steps along the Silk Route __64__ brought the plants from their native habitat in Asia to come to define much of the __65__ (rich) of gardening in England.",
+          "displayText": "The Glasshouse stands as a great achievement in contemporary design, to house the plants of the southwestern part of China at the end of a path retracing（追溯）the steps along the Silk Route that/which brought the plants from their native habitat in Asia to come to define much of the richness of gardening in England.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:63",
+            "question:paper-gaokao-2024-i:64",
+            "question:paper-gaokao-2024-i:65"
+          ],
+          "translationZh": "玻璃温室堪称当代设计的一大成就。它在一条重走丝绸之路的小径尽头，为中国西南地区的植物提供了生长空间。正是这条古道让植物从亚洲的原生地一路传来，塑造了英国园艺多样面貌中的相当一部分。",
+          "analysisZh": "主干是 The Glasshouse stands as a great achievement，说温室堪称一大成就。逗号后的 to house the plants … 交代它的用途：给中国西南的植物安家，at the end of a path 说明温室在小径尽头。retracing the steps along the Silk Route 修饰 path，说小径重走丝绸之路；that/which brought the plants … 修饰 the Silk Route，to come to define … 接着说植物来到英国后渐渐成了英国园艺丰富性的重要部分。",
+          "underlineRanges": [
+            {
+              "start": 15,
+              "end": 44,
+              "quote": "stands as a great achievement"
+            },
+            {
+              "start": 144,
+              "end": 153,
+              "quote": "retracing"
+            },
+            {
+              "start": 188,
+              "end": 217,
+              "quote": "that/which brought the plants"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2024-i:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 82,
+              "quote": "赫瑟威克工作室最近在英国国民信托的伍尔贝丁花园边缘建了一座温室。这座名为“玻璃温室”的漂亮建筑位于一座新花园的中心。花园展示了时至今日丝绸之路仍如何影响英国的花园。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:grammar-fill:2"
+              ],
+              "start": 84,
+              "end": 181,
+              "quote": "建造这座有保护作用、实用又美观的建筑，用上了最新的工程技术。设计采用十片以玻璃和铝制成的钢制“萼片”。天气暖和时，萼片会打开，让里面的植物获得阳光和新鲜空气。天气冷时，温室保持关闭，以保护植物。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:grammar-fill:3"
+              ],
+              "start": 183,
+              "end": 311,
+              "quote": "此外，温室周围的丝绸之路花园带游客踏上一段受古丝绸之路启发的旅程。丝绸以及许多植物品种都是经由这条古道首次传入英国的。其中有迷迭香、薰衣草和茴香等如今在西方备受喜爱的植物。园中还有一条蜿蜒小径，带游客走过丝绸之路的十二个地区。游客沿途还能看到三百多种植物。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:grammar-fill:4"
+              ],
+              "start": 313,
+              "end": 403,
+              "quote": "玻璃温室堪称当代设计的一大成就。它在一条重走丝绸之路的小径尽头，为中国西南地区的植物提供了生长空间。正是这条古道让植物从亚洲的原生地一路传来，塑造了英国园艺多样面貌中的相当一部分。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+            "text": "The latest engineering techniques are applied to create this protective functional structure that is also beautiful. The design features ten steel “sepals（萼片）” made of glass and aluminium（铝）. These sepals open on warm days to give the inside plants sunshine and fresh air. In cold weather, the structure stays closed to protect the plants."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+            "text": "Further, the Silk Route Garden around the greenhouse walks visitors through a journey influenced by the ancient Silk Road, by which silk as well as many plant species came to Britain for the first time. These plants included modern Western favourites such as rosemary, lavender and fennel. The garden also contains a winding path that guides visitors through the twelve regions of the Silk Road. The path offers over 300 plant species for visitors to see, too."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+            "text": "The Glasshouse stands as a great achievement in contemporary design, to house the plants of the southwestern part of China at the end of a path retracing（追溯）the steps along the Silk Route that/which brought the plants from their native habitat in Asia to come to define much of the richness of gardening in England."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 29,
+                "end": 39,
+                "quote": "techniques"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 25,
+                "end": 29,
+                "quote": "工程技术"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:56"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 11,
+                "end": 22,
+                "quote": "engineering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 25,
+                "end": 29,
+                "quote": "工程技术"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 96,
+                "end": 128,
+                "quote": "structure that is also beautiful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 10,
+                "end": 12,
+                "quote": "实用"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:57"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 72,
+                "end": 82,
+                "quote": "functional"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 10,
+                "end": 12,
+                "quote": "实用"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 205,
+                "end": 235,
+                "quote": "These sepals open on warm days"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 63,
+                "end": 78,
+                "quote": "让里面的植物获得阳光和新鲜空气"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:58"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 223,
+                "end": 230,
+                "quote": "to give"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 63,
+                "end": 78,
+                "quote": "让里面的植物获得阳光和新鲜空气"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 309,
+                "end": 328,
+                "quote": "the structure stays"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 86,
+                "end": 90,
+                "quote": "保持关闭"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:59"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 310,
+                "end": 316,
+                "quote": "closed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:2",
+                "start": 86,
+                "end": 90,
+                "quote": "保持关闭"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 9,
+                "end": 30,
+                "quote": "the Silk Route Garden"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 14,
+                "end": 21,
+                "quote": "带游客踏上一段"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:60"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 53,
+                "end": 58,
+                "quote": "walks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 14,
+                "end": 21,
+                "quote": "带游客踏上一段"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 202,
+                "end": 212,
+                "quote": "first time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 51,
+                "end": 53,
+                "quote": "首次"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:61"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 187,
+                "end": 190,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 51,
+                "end": 53,
+                "quote": "首次"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 270,
+                "end": 307,
+                "quote": "such as rosemary, lavender and fennel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 78,
+                "end": 85,
+                "quote": "备受喜爱的植物"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:62"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 240,
+                "end": 250,
+                "quote": "favourites"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 78,
+                "end": 85,
+                "quote": "备受喜爱的植物"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 29,
+                "end": 71,
+                "quote": "a great achievement in contemporary design"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 4,
+                "end": 15,
+                "quote": "堪称当代设计的一大成就"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:63"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 22,
+                "end": 24,
+                "quote": "as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 4,
+                "end": 15,
+                "quote": "堪称当代设计的一大成就"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 199,
+                "end": 243,
+                "quote": "brought the plants from their native habitat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 50,
+                "end": 70,
+                "quote": "正是这条古道让植物从亚洲的原生地一路传来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:64"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 188,
+                "end": 198,
+                "quote": "that/which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 50,
+                "end": 70,
+                "quote": "正是这条古道让植物从亚洲的原生地一路传来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 296,
+                "end": 319,
+                "quote": "of gardening in England"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 78,
+                "end": 82,
+                "quote": "多样面貌"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:65"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 282,
+                "end": 290,
+                "quote": "richness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 78,
+                "end": 82,
+                "quote": "多样面貌"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2024-i:grammar-fill:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:60",
+              "question:paper-gaokao-2024-i:61"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2024-i:grammar-fill:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 0,
+                "end": 202,
+                "quote": "Further, the Silk Route Garden around the greenhouse walks visitors through a journey influenced by the ancient Silk Road, by which silk as well as many plant species came to Britain for the first time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:3",
+                "start": 0,
+                "end": 59,
+                "quote": "此外，温室周围的丝绸之路花园带游客踏上一段受古丝绸之路启发的旅程。丝绸以及许多植物品种都是经由这条古道首次传入英国的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2024-i:grammar-fill:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:63",
+              "question:paper-gaokao-2024-i:64",
+              "question:paper-gaokao-2024-i:65"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2024-i:grammar-fill:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 0,
+                "end": 315,
+                "quote": "The Glasshouse stands as a great achievement in contemporary design, to house the plants of the southwestern part of China at the end of a path retracing（追溯）the steps along the Silk Route that/which brought the plants from their native habitat in Asia to come to define much of the richness of gardening in England."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:grammar-fill:4",
+                "start": 0,
+                "end": 90,
+                "quote": "玻璃温室堪称当代设计的一大成就。它在一条重走丝绸之路的小径尽头，为中国西南地区的植物提供了生长空间。正是这条古道让植物从亚洲的原生地一路传来，塑造了英国园艺多样面貌中的相当一部分。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2024-i:56": {
+      "blankId": "blank:paper-gaokao-2024-i:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "engineer",
+      "facetKey": "grammar-fill.given.conversion.noun-to-noun",
+      "answer": "engineering",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格夹在 The latest 和 techniques 之间，修饰主语中心 techniques，说明是哪一领域的技术。engineer 指“工程师”，表示“工程”这一领域要用名词 engineering，engineering techniques 即工程技术。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "techniques",
+          "signalSide": "passage",
+          "relation": "techniques 是“技术”，前面的 engineering 说明技术所属的领域。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:57": {
+      "blankId": "blank:paper-gaokao-2024-i:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "function",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "functional",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格和 protective 一起修饰 structure（this protective ___ structure），要填形容词；名词 function 加 -al 变成 functional，说这座建筑既能保护植物又实用，后面 that is also beautiful 再补上“美观”。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "structure that is also beautiful",
+          "signalSide": "passage",
+          "relation": "空格和 protective 一起说明 structure 具有什么特点。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:58": {
+      "blankId": "blank:paper-gaokao-2024-i:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "give",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to give",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "主干 These sepals open on warm days 已经完整，空格引出的部分不再作谓语，而是说明萼片打开是为了什么：让里面的植物得到阳光和新鲜空气，所以用不定式 to give 作目的状语。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "These sepals open on warm days",
+          "signalSide": "passage",
+          "relation": "open 已交代动作，后一部分说明这个动作的目的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:59": {
+      "blankId": "blank:paper-gaokao-2024-i:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "close",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "closed",
+      "role": "predicative",
+      "similarityProfile": {
+        "route": "predicative-participle-state",
+        "features": []
+      },
+      "reason": "stays 在这里是系动词“保持”，后面缺表语，说明温室冷天处于什么状态；温室是被关上的，处于关闭状态，用过去分词 closed 作表语，后面 to protect the plants 交代保持关闭的目的。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the structure stays",
+          "signalSide": "passage",
+          "relation": "stays 后是温室持续处于的状态。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:60": {
+      "blankId": "blank:paper-gaokao-2024-i:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "walk",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "walks",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "主语是 the Silk Route Garden，around the greenhouse 只是修饰它的介词短语，句子还缺谓语，空格就是谓语。花园是单数，全文介绍花园现在的样子，后面 The garden also contains、The path offers 也用一般现在时，所以填 walks。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the Silk Route Garden",
+          "signalSide": "passage",
+          "relation": "动作的主语是这座花园，周围的 greenhouse 只是用来说明花园的位置。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "The garden also contains",
+          "signalSide": "passage",
+          "relation": "后文介绍花园同样用一般现在时 contains，说明这里描述的是花园现在的样子。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:61": {
+      "blankId": "blank:paper-gaokao-2024-i:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "ordinal"
+        ]
+      },
+      "reason": "空格在 for 和 first time 之间，给 first time 作限定词；序数词 first 前要用定冠词，for the first time 表示“第一次”，填 the。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "first time",
+          "signalSide": "passage",
+          "relation": "first 和 time 构成表示“第一次”的短语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:62": {
+      "blankId": "blank:paper-gaokao-2024-i:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "favourite",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "favourites",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "Western 后面缺名词，作 included 的宾语，指这些植物是什么；such as 后列了 rosemary, lavender and fennel 三种，主语 These plants 也是复数，所以 favourite 用复数 favourites。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "such as rosemary, lavender and fennel",
+          "signalSide": "passage",
+          "relation": "列出的三种植物表明这里是在说多种受欢迎的植物。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:63": {
+      "blankId": "blank:paper-gaokao-2024-i:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "as",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "主语 The Glasshouse 的谓语是 stands，空格要把名词短语 a great achievement 接到 stands 上，说明温室以什么身份立在那里；表示“作为”用介词 as，stand as 即“堪称”。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "a great achievement in contemporary design",
+          "signalSide": "passage",
+          "relation": "as 引出的名词短语说明这座温室在当代设计中算作什么。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:64": {
+      "blankId": "blank:paper-gaokao-2024-i:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that/which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格前是先行词 the Silk Route，后面 brought the plants from their native habitat 缺主语；空格引导定语从句修饰这条古道，并在从句里作主语，先行词指物，填 that 或 which。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "brought the plants from their native habitat",
+          "signalSide": "passage",
+          "relation": "brought 的宾语是 the plants，空格要补上把植物带来的那条路作主语。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "along the Silk Route",
+          "signalSide": "passage",
+          "relation": "先行词是 the Silk Route，指物，从句说明这条古道把植物带来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:65": {
+      "blankId": "blank:paper-gaokao-2024-i:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "rich",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "richness",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "much of the ___ of gardening in England 中，the 和 of 之间缺名词，作 define 的宾语中心；rich 是形容词，加 -ness 变成名词 richness，指英国园艺的丰富多样。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "of gardening in England",
+          "signalSide": "passage",
+          "relation": "of gardening in England 说明哪一方面的丰富性，前面需要名词 richness 作中心。"
+        }
+      ]
+    }
+  }
+}

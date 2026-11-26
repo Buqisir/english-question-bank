@@ -1,0 +1,983 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Speaker 1: Thanks for the wonderful weekend, Kate.\nSpeaker 2: That’s OK. Bob and I are glad you came to see us.\nSpeaker 1: Oh, I have to go in, my flight will take off soon. Do contact me when you’re in Sydney.\nSpeaker 2: Sure, we will.",
+      "translationZh": "说话者1：凯特，谢谢你让我度过了一个愉快的周末。\n说话者2：不客气。你能来看我们，鲍勃和我都很高兴。\n说话者1：噢，我得进去了，我的航班马上就要起飞了。你们来悉尼时一定要联系我。\n说话者2：当然会的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "朋友周末来访后乘机离开，凯特前来送行，双方约定日后保持联系。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "凯特，谢谢你让我度过了一个愉快的周末。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "不客气。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "你能来看我们，鲍勃和我都很高兴。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "噢，我得进去了，我的航班马上就要起飞了。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "你们来悉尼时一定要联系我。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "当然会的。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "Speaker 1: Paul, Listen to the radio. it’s you’ve stolen my heart. One of the songs played at our wedding.\nSpeaker 2: Yeah, how beautiful! It has been popular for almost 2 decades.",
+      "translationZh": "说话者1：保罗，听收音机。是《你偷走了我的心》。这是我们婚礼上播放过的歌曲之一。\n说话者2：是啊，真好听！这首歌已经流行了快二十年。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "音乐领域的概况及其发展"
+      },
+      "summaryZh": "两人从收音机里听到婚礼上播放过的歌曲，感叹它已流行近二十年。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "保罗，听收音机。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "是《你偷走了我的心》。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "这是我们婚礼上播放过的歌曲之一。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "是啊，真好听！"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "这首歌已经流行了快二十年。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "Speaker 1: David, forget about Mark. His aunt is in town. So, he can’t go with us today.\nSpeaker 2: Oh, What a pity. It’s the last day of the art show.",
+      "translationZh": "说话者1：戴维，先别管马克了。他姑妈来城里了。所以他今天不能跟我们一起去。\n说话者2：哦，真可惜。今天是艺术展的最后一天。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "丰富自我"
+      },
+      "summaryZh": "马克因为姑妈来城里而无法同行，两人谈到今天是艺术展最后一天。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "戴维，先别管马克了。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "他姑妈来城里了。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "所以他今天不能跟我们一起去。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "哦，真可惜。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "今天是艺术展的最后一天。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "Speaker 1: How may I help you?\nSpeaker 2: I bought a desk and asked for it to be delivered to my house this Friday.\nSpeaker 1: Yes, what’s the problem?\nSpeaker 2: I need to have it delivered this Saturday.",
+      "translationZh": "说话者1：有什么可以帮您？\n说话者2：我买了一张书桌，原本请你们这周五送到我家。\n说话者1：好的，有什么问题吗？\n说话者2：我需要改到这周六送货。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "顾客联系商家，把原定周五送到家里的书桌改到周六送达。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我买了一张书桌，原本请你们这周五送到我家。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "好的，有什么问题吗？"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我需要改到这周六送货。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "Speaker 1: Next please.\nSpeaker 2: Oh, hi! I missed my 9 o’clock train to Bedford. Do I have to buy another ticket?\nSpeaker 1: No, the next train leaves at 9:45 at platform 11.\nSpeaker 2: Thank you.",
+      "translationZh": "说话者1：下一位。\n说话者2：哦，您好！我错过了九点去贝德福德的火车。我得再买一张票吗？\n说话者1：不用，下一班九点四十五分从十一号站台发车。\n说话者2：谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "乘客错过了去贝德福德的火车，询问是否要另购车票，并得知下一班的时间和站台。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "下一位。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "哦，您好！"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我错过了九点去贝德福德的火车。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "我得再买一张票吗？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "不用，下一班九点四十五分从十一号站台发车。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "谢谢。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "Speaker 1: Honey, have you checked today’s weather forecast?\nSpeaker 2: Yes, it’s cold and wet. there is a warning for strong winds up to 100 km/h.\nSpeaker 1: What are we going to do then?\nSpeaker 2: Nothing much, just stay indoors. There is a risk of falling trees and powerlines.\nSpeaker 1: Right.\nSpeaker 2: And the low temperatures could bring snow to the forest area.\nSpeaker 1: I hope it’s over quickly.\nSpeaker 2: Well, it won’t get better until late Wednesday. Anyway, I have to move the car away from the trees.\nSpeaker 1: Yeah, you cannot be too careful.",
+      "translationZh": "说话者1：亲爱的，你看今天的天气预报了吗？\n说话者2：看了，今天天气又冷又湿。预报发出了大风警报，风速最高可达每小时一百公里。\n说话者1：那我们该怎么办？\n说话者2：不用做太多，待在屋里就好。树木和电线有倒落的危险。\n说话者1：嗯。\n说话者2：而且低温可能给林区带来降雪。\n说话者1：希望坏天气快点过去。\n说话者2：恐怕要到周三晚些时候天气才会好转。总之，我得把车挪到离树远一点的地方。\n说话者1：是啊，再小心也不为过。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "自然灾害与防范"
+      },
+      "summaryZh": "两人谈到大风和降雪风险，商量留在室内，并把车移到远离树木的地方。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "亲爱的，你看今天的天气预报了吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "看了，今天天气又冷又湿。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "预报发出了大风警报，风速最高可达每小时一百公里。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "那我们该怎么办？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "不用做太多，待在屋里就好。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "树木和电线有倒落的危险。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "嗯。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "而且低温可能给林区带来降雪。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "希望坏天气快点过去。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "恐怕要到周三晚些时候天气才会好转。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "总之，我得把车挪到离树远一点的地方。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "是啊，再小心也不为过。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "Speaker 1: Hello Dave, this is Kathy from Sunny California.\nSpeaker 2: Hi, Kathy. you finally called. How was the move? All settled in?\nSpeaker 1: Sorry I hadn’t called sooner, but it’s been a busy month. We're slowly getting things set up in our new home.\nSpeaker 1: Yeah, I understand. How are Jeff and the children?\nSpeaker 2: Jeff is doing well with his new job, Tom has made many new friends here and has a lot to do. Fiona is fine, though she misses her grandma. by the way thank you for looking in on my mother from time to time. I call her every week, but it isn’t the same as seeing her.\nSpeaker 1: No problem. Betty and I are friends now. how is the weather there?\nSpeaker 2: It’s nice and warm and we are able to spend some time every week on the beach with the children.\nSpeaker 1: that’s great.",
+      "translationZh": "说话者1：你好，戴夫，我是凯茜，正在阳光明媚的加利福尼亚。\n说话者2：你好，凯茜。你终于打电话来了。搬家还顺利吗？都安顿好了吗？\n说话者1：抱歉没早点打给你，这一个月比较忙。我们正在慢慢把新家布置好。\n说话者1：嗯，我理解。杰夫和孩子们怎么样？\n说话者2：杰夫的新工作很顺利，汤姆在这里交了很多新朋友，有不少事可做。菲奥娜也挺好，就是想念外婆。对了，谢谢你时不时去看看我妈妈。我每周都给她打电话，但和见面还是不一样。\n说话者1：没事。贝蒂和我现在已经是朋友了。你们那儿天气怎么样？\n说话者2：天气很好，也挺暖和，我们每周都能和孩子们在海滩上待一会儿。\n说话者1：那太好了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "凯茜来电聊起搬到加州后家人的近况，并感谢戴夫时常探望她的母亲。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你好，戴夫，我是凯茜，正在阳光明媚的加利福尼亚。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你好，凯茜。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "你终于打电话来了。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "搬家还顺利吗？"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "都安顿好了吗？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "抱歉没早点打给你，这一个月比较忙。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "我们正在慢慢把新家布置好。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "嗯，我理解。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "杰夫和孩子们怎么样？"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "杰夫的新工作很顺利，汤姆在这里交了很多新朋友，有不少事可做。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "菲奥娜也挺好，就是想念外婆。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "对了，谢谢你时不时去看看我妈妈。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我每周都给她打电话，但和见面还是不一样。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "没事。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "贝蒂和我现在已经是朋友了。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "你们那儿天气怎么样？"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "天气很好，也挺暖和，我们每周都能和孩子们在海滩上待一会儿。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "那太好了。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Speaker 1: Jack, how did you get to school when you were in primary school?\nSpeaker 2: I lived close to my school so I walked every day. Why?\nSpeaker 1: Well, I remember that when we were kids, we often walked, rode a bike or caught the bus to school. few of us were dropped off at the school gate by our parents.\nSpeaker 2: I see what you mean, these days you can see traffic jams around schools at drop off and pick-up times, but it’s hard to blame the parents. They have good reasons for driving their kids to school mostly to do with safety and convenience.\nSpeaker 1: You have a point there, but it could also mean children are missing out on much needed exercise and other life skills. Some parents are just being overprotective with their children learning nothing but living in fear of everything studies have found that children who spend more time outside tend to be healthier better adjusted and better at dealing with stress.",
+      "translationZh": "说话者1：杰克，你上小学的时候是怎么去学校的？\n说话者2：我家离学校很近，所以我每天走路上学。怎么了？\n说话者1：我记得我们小时候，上学常常是走路、骑车或者坐公交。很少有人由家长送到校门口。\n说话者2：我明白你的意思。如今上下学接送时段，学校附近常能看到堵车，但也很难怪家长。开车送孩子上学有他们的道理，主要是为了安全和方便。\n说话者1：你说得有道理，不过这也可能让孩子错过必要的锻炼和学习其他生活技能的机会。有些家长实在把孩子保护得太严，孩子什么本事也没学到，只变得事事害怕。研究发现，在户外待得较久的孩子往往更健康、适应能力更强，也更善于应对压力。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "两人回忆小时候如何上学，并讨论家长开车接送的理由及其可能影响。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "杰克，你上小学的时候是怎么去学校的？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我家离学校很近，所以我每天走路上学。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "怎么了？"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我记得我们小时候，上学常常是走路、骑车或者坐公交。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "很少有人由家长送到校门口。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我明白你的意思。如今上下学接送时段，学校附近常能看到堵车，但也很难怪家长。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "开车送孩子上学有他们的道理，主要是为了安全和方便。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你说得有道理，不过这也可能让孩子错过必要的锻炼和学习其他生活技能的机会。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "有些家长实在把孩子保护得太严，孩子什么本事也没学到，只变得事事害怕。研究发现，在户外待得较久的孩子往往更健康、适应能力更强，也更善于应对压力。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "Speaker 1: So, Marie your kitchen garden looks excellent. What made you turn to social media to record your vegetable growing?\nSpeaker 2: Initially, I used the online platform as a diary, something to look back on, giving me a sense of achievement and keeping me motivated and moving forward. As time went by, other gardeners and like-minded people began to follow my progress, too.\nSpeaker 1: I know you grow lots of fruit on your land. Which would you recommend to beginners as the best to grow?\nSpeaker 2: Strawberries would be a good choice. They produce a lot of fruit in their first season.\nSpeaker 1: That’s cool. Well, do you have plans to try new or any particular crops next year?\nSpeaker 2: Next season I will be adding some pear trees to the fruit area. I will be adding more herbs which I can use in the kitchen. After a couple of years of failure, I will try growing carrots again.\nSpeaker 1: What advice would you offer someone thinking of doing kitchen gardening?\nSpeaker 2: Have a plan of what you want your kitchen garden to look like. Don’t be too discouraged if things don’t go according to plan. Learn from your mistakes and move on. There’s always next season.",
+      "translationZh": "说话者1：玛丽，你的家庭菜园看起来真棒。是什么让你想到用社交媒体记录自己种菜的过程？\n说话者2：起初，我把网络平台当成一本日记，方便以后回看，也给自己一点成就感和继续做下去的动力。后来，其他园艺爱好者和志趣相投的人也开始关注我的进展。\n说话者1：我知道你在自己的地里种了很多水果。你最推荐初学者种哪一种？\n说话者2：草莓是个不错的选择。它们在第一个生长季就能结不少果。\n说话者1：真不错。那么，明年有没有计划试种什么新品种或特别的作物？\n说话者2：下一季我会在水果区多种几棵梨树。我还会多种些厨房用得上的香草。种了两年都没成功，我还想再试试种胡萝卜。\n说话者1：对于想打理家庭菜园的人，你有什么建议？\n说话者2：先规划一下你希望菜园是什么样子。进展不如预期时，别太灰心。从错误中吸取教训，继续往前走。总还有下一个种植季。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "玛丽分享记录菜园的初衷，为新手推荐草莓，并建议种植遇挫时吸取教训。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "玛丽，你的家庭菜园看起来真棒。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "是什么让你想到用社交媒体记录自己种菜的过程？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "起初，我把网络平台当成一本日记，方便以后回看，也给自己一点成就感和继续做下去的动力。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "后来，其他园艺爱好者和志趣相投的人也开始关注我的进展。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我知道你在自己的地里种了很多水果。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "你最推荐初学者种哪一种？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "草莓是个不错的选择。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "它们在第一个生长季就能结不少果。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "真不错。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "那么，明年有没有计划试种什么新品种或特别的作物？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "下一季我会在水果区多种几棵梨树。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我还会多种些厨房用得上的香草。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "种了两年都没成功，我还想再试试种胡萝卜。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "对于想打理家庭菜园的人，你有什么建议？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "先规划一下你希望菜园是什么样子。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "进展不如预期时，别太灰心。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "从错误中吸取教训，继续往前走。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "总还有下一个种植季。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Welcome to Meet the Author. Well, many readers of Sports Times turn to the last page of their magazine first in order to read Jacob Johnson’s weekly article under the title Life of Johnson, the articles along with his novels and essay collections have earned Johnson the reputation as one of the funniest humans on the planet. Johnson began writing about sports as a second-year student at the University of Colorado, covering high school volleyball games for his hometown newspaper. After graduating in 1981, he moved on to work at the Denver Weekly for 2 years and the Los Angeles Post for two more years before landing at Sports Times. He has been voted national sports writer of the year 11 times. So now let’s welcome the funny man with serious talent, Jacob Johnson.",
+      "translationZh": "欢迎收听《作家面对面》。《体育时报》的许多读者会先翻到杂志最后一页，去看雅各布·约翰逊每周撰写的《约翰逊的生活》专栏。这些文章和他写的小说、随笔集，让他有了全球最幽默的人之一的名声。约翰逊在科罗拉多大学读大二时开始写体育报道，为家乡的报纸报道高中排球比赛。他于1981年毕业，此后在《丹佛周刊》工作两年，又在《洛杉矶邮报》工作两年，之后加入《体育时报》。他曾十一次获评全国年度体育作家。现在，让我们欢迎这位幽默又才华出众的作家雅各布·约翰逊。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "传记"
+      },
+      "summaryZh": "节目介绍体育作家雅各布·约翰逊的幽默作品、从业经历和获奖情况。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "欢迎收听《作家面对面》。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "《体育时报》的许多读者会先翻到杂志最后一页，去看雅各布·约翰逊每周撰写的《约翰逊的生活》专栏。这些文章和他写的小说、随笔集，让他有了全球最幽默的人之一的名声。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "约翰逊在科罗拉多大学读大二时开始写体育报道，为家乡的报纸报道高中排球比赛。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "他于1981年毕业，此后在《丹佛周刊》工作两年，又在《洛杉矶邮报》工作两年，之后加入《体育时报》。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "他曾十一次获评全国年度体育作家。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "现在，让我们欢迎这位幽默又才华出众的作家雅各布·约翰逊。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "凯特正在做什么？",
+      "optionTranslationsZh": {
+        "A": "登机。",
+        "B": "安排旅行。",
+        "C": "给朋友送行。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Oh, I have to go in, my flight will take off soon."
+      },
+      "reasonZh": "朋友感谢凯特周末的招待，又说自己得进去了、航班快起飞了（my flight will take off soon），可见凯特是在送朋友，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "要登机的是说航班快起飞（my flight will take off soon）的那位朋友，凯特是来送他的一方。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "两位说话者在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一位流行歌手。",
+        "B": "一首老歌。",
+        "C": "一个广播节目。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "One of the songs played at our wedding."
+      },
+      "reasonZh": "女士说电台正放着他们婚礼上的一首歌（One of the songs played at our wedding），保罗补充它已流行近二十年（popular for almost 2 decades），合起来就是一首老歌，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 popular 说的是这首歌流行了近二十年，两人没有谈到哪位歌手。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "收音机（the radio）只是两人听到这首歌的途径，他们夸的是歌好听（how beautiful），不是在谈电台节目。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "两位说话者今天要做什么？",
+      "optionTranslationsZh": {
+        "A": "去看艺术展。",
+        "B": "去见男士的姑妈。",
+        "C": "和马克外出吃饭。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s the last day of the art show."
+      },
+      "reasonZh": "马克去不了，男士遗憾地说今天是艺术展最后一天（the last day of the art show），可见两人今天照样去看艺术展，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "来城里的是马克的姑妈（His aunt is in town），不是男士的，这正是马克去不了的原因。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "马克今天不能和他们一起去（he can’t go with us today），录音里也没有外出吃饭的安排。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士想做什么？",
+      "optionTranslationsZh": {
+        "A": "取消一笔订单。",
+        "B": "索要收据。",
+        "C": "改一下送货时间。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I need to have it delivered this Saturday."
+      },
+      "reasonZh": "男士原本约好这周五送货（this Friday），现在要改成这周六送（delivered this Saturday），就是更改送货时间，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士还是要把书桌送到（have it delivered），只是换一天，并没有取消订单。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "录音里的 asked 是男士说当初要求周五送货（asked for it to be delivered），不是索要收据。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "去贝德福德的下一班火车什么时候发车？",
+      "optionTranslationsZh": {
+        "A": "九点四十五分。",
+        "B": "十点十五分。",
+        "C": "十一点。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "the next train leaves at 9:45 at platform 11"
+      },
+      "reasonZh": "工作人员直接说下一班九点四十五分开（the next train leaves at 9:45），选项沿用这个时间，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的 11 是站台号（at platform 11），不是发车时间。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "今天的天气会怎样？",
+      "optionTranslationsZh": {
+        "A": "有风暴。",
+        "B": "晴朗。",
+        "C": "有雾。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "it’s cold and wet. there is a warning for strong winds up to 100 km/h."
+      },
+      "reasonZh": "男士说今天又冷又湿（cold and wet），还有时速高达 100 公里的大风警报（strong winds up to 100 km/h），风雨交加就是暴风雨天气，选 A。"
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士打算做什么？",
+      "optionTranslationsZh": {
+        "A": "种一棵树。",
+        "B": "挪车。",
+        "C": "查看地图。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I have to move the car away from the trees."
+      },
+      "reasonZh": "男士直接说得把车挪到离树远的地方（move the car away from the trees），选项沿用 move，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 trees 是可能被大风刮倒的树（falling trees），男士要做的是把车挪离这些树，不是种树。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的 checked 是女士问他看没看今天的天气预报（checked today’s weather forecast），没有人要查地图。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "凯茜现在为什么在加利福尼亚？",
+      "optionTranslationsZh": {
+        "A": "她在那里度假。",
+        "B": "她刚搬到那里。",
+        "C": "她在那里做生意。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We're slowly getting things set up in our new home."
+      },
+      "reasonZh": "戴夫问搬家顺不顺利（How was the move?），凯茜说正在慢慢布置新家（set up in our new home），可见她刚搬到加州，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "每周去海滩（spend some time every week on the beach）是搬家后的日常，她是在新家安顿下来，不是去度假。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的 doing 是说杰夫的新工作很顺利（Jeff is doing well with his new job），讲的是杰夫，不是凯茜在加州做生意。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "汤姆和菲奥娜是什么关系？",
+      "optionTranslationsZh": {
+        "A": "夫妻。",
+        "B": "兄弟姐妹。",
+        "C": "父女。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Jeff is doing well with his new job, Tom has made many new friends here and has a lot to do. Fiona is fine, though she misses her grandma."
+      },
+      "reasonZh": "戴夫问杰夫和孩子们怎么样（How are Jeff and the children?），凯茜说完杰夫，接着说汤姆和菲奥娜，两人都是她的孩子，是兄妹或姐弟，选 B。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "凯茜为什么感谢戴夫？",
+      "optionTranslationsZh": {
+        "A": "因为他帮她找了份新工作。",
+        "B": "因为他给她寄了礼物。",
+        "C": "因为他去探望了她的母亲。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "thank you for looking in on my mother from time to time"
+      },
+      "reasonZh": "凯茜谢戴夫时常去看她母亲（looking in on my mother），“探望她母亲”说的就是这件事，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "新工作（new job）是杰夫在加州的新工作（Jeff is doing well with his new job），和戴夫无关。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "杰克小时候怎么上学？",
+      "optionTranslationsZh": {
+        "A": "骑自行车。",
+        "B": "步行。",
+        "C": "坐公交车。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I lived close to my school so I walked every day."
+      },
+      "reasonZh": "“步行”就是杰克说的家离学校近、每天走路去（I walked every day），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "骑车（rode a bike）是女士回忆她们小时候大家上学的几种方式之一，杰克说的是自己每天走路。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "坐公交（caught the bus）同样出自女士对那时孩子们上学方式的回忆，不是杰克本人的情况。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "杰克对家长开车送孩子上学持什么态度？",
+      "optionTranslationsZh": {
+        "A": "反对。",
+        "B": "鼓励。",
+        "C": "理解。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "it’s hard to blame the parents. They have good reasons for driving their kids to school mostly to do with safety and convenience."
+      },
+      "reasonZh": "杰克说很难怪家长（hard to blame the parents），开车送孩子有安全和方便的理由（safety and convenience），这是理解家长的态度，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "持反对看法的是女士，她接着说孩子会因此缺少锻炼（missing out on much needed exercise），杰克是在替家长说话。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "在女士看来，有些家长的问题是什么？",
+      "optionTranslationsZh": {
+        "A": "把孩子保护得太严。",
+        "B": "给孩子施加太大压力。",
+        "C": "没时间陪孩子。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Some parents are just being overprotective"
+      },
+      "reasonZh": "女士直接说有些家长对孩子保护过度（being overprotective），选项沿用这个词，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 hard 是杰克说很难怪家长（hard to blame the parents），没有人说家长逼孩子太紧。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的 time 是上下学接送的时段（drop off and pick-up times）和孩子在户外的时间（spend more time outside），没有人说家长没时间陪孩子。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "玛丽起初为什么在网上分享打理菜园的过程？",
+      "optionTranslationsZh": {
+        "A": "记录自己的进展。",
+        "B": "出售自己种的菜。",
+        "C": "激励其他园艺爱好者。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Initially, I used the online platform as a diary, something to look back on"
+      },
+      "reasonZh": "玛丽说起初把网络平台当日记，记下来以后回看（as a diary, something to look back on），这就是记录自己的进展，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "其他园艺爱好者（other gardeners）是后来才关注她的（As time went by），起初激励的是她自己（keeping me motivated）。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "玛丽为什么推荐初学者种草莓？",
+      "optionTranslationsZh": {
+        "A": "草莓无需特别照料。",
+        "B": "草莓可以用来做菜。",
+        "C": "草莓很快就能结出很多果实。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "They produce a lot of fruit in their first season."
+      },
+      "reasonZh": "“很快结出很多果”就是玛丽说的草莓第一季就结很多果（produce a lot of fruit in their first season），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "能在厨房用的（use in the kitchen）是她下一季要多种的香草（more herbs），不是草莓的好处。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "玛丽觉得哪种作物难种？",
+      "optionTranslationsZh": {
+        "A": "香草。",
+        "B": "胡萝卜。",
+        "C": "梨。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "After a couple of years of failure, I will try growing carrots again."
+      },
+      "reasonZh": "玛丽说种胡萝卜失败了好几年（a couple of years of failure），还要再试，可见胡萝卜对她来说难种，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "香草（herbs）是她下一季要多种、能在厨房用的作物（which I can use in the kitchen），她没说种不好。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "梨树是她下一季打算添种的（adding some pear trees），她没说种梨失败过。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "玛丽给想打理家庭菜园的人什么建议？",
+      "optionTranslationsZh": {
+        "A": "把目标定高。",
+        "B": "保持专注。",
+        "C": "保持乐观。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Don’t be too discouraged if things don’t go according to plan. Learn from your mistakes and move on. There’s always next season."
+      },
+      "reasonZh": "玛丽说事情不顺时别太灰心（Don’t be too discouraged），总还有下一季（There’s always next season），这就是保持乐观，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 keeping 是她说记录让自己保持动力（keeping me motivated），讲的是当初上网记录的好处，不是给别人的建议。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "《约翰逊的生活》是什么？",
+      "optionTranslationsZh": {
+        "A": "杂志专栏。",
+        "B": "电视连续剧。",
+        "C": "历史小说。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "turn to the last page of their magazine first in order to read Jacob Johnson’s weekly article under the title Life of Johnson"
+      },
+      "reasonZh": "读者翻到杂志最后一页看约翰逊每周一篇的文章（weekly article under the title Life of Johnson），杂志里每周固定的文章就是专栏，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "小说（novels）是约翰逊在专栏之外写的作品（along with his novels），录音也没说有历史小说。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "约翰逊因什么而闻名？",
+      "optionTranslationsZh": {
+        "A": "他的表演才能。",
+        "B": "他幽默的文笔。",
+        "C": "他长期从事体育的经历。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "the articles along with his novels and essay collections have earned Johnson the reputation as one of the funniest humans on the planet"
+      },
+      "reasonZh": "主持人说这些文章和书让约翰逊被称为世上最幽默的人之一（one of the funniest humans），他靠写作出名，就是幽默的文笔，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 talent 是称他“有真才实学的幽默作家”（funny man with serious talent），他是作家，不是演员。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "他确实写了多年体育报道（began writing about sports），但让他出名的是幽默（one of the funniest humans）。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "约翰逊何时加入《体育时报》？",
+      "optionTranslationsZh": {
+        "A": "1981年。",
+        "B": "1983年。",
+        "C": "1985年。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "After graduating in 1981, he moved on to work at the Denver Weekly for 2 years and the Los Angeles Post for two more years before landing at Sports Times."
+      },
+      "reasonZh": "1981 年毕业，在《丹佛周刊》干 2 年（for 2 years），又在《洛杉矶邮报》干 2 年（for two more years），之后进《体育时报》：1981 + 2 + 2 = 1985，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "1981 是他大学毕业的年份（After graduating in 1981），之后还在两家报刊各干了两年。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "1983 只算了《丹佛周刊》的两年，漏掉了《洛杉矶邮报》的两年（two more years）。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,971 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:seven-choices": {
+      "overview": "文章从投稿时正确拼写的重要性谈起，介绍作者偏爱的纸质词典及其释义、发音、词源和用法功能，最后指出随手阅读词典也能带来乐趣与收获。",
+      "fullTranslationZh": "并不是所有优秀的作家都擅长拼写。如果你想让作品出版，提交一份毫无差错、呈现专业的原稿至关重要。这意味着语法正确，而且没有拼写错误。编辑大概都不会容忍一个连正确拼写单词都不肯费心的作者。\n\n我的书桌上总放着两本随手可取的参考书：词典和同义词词典。我不信任笔记本电脑上的拼写检查程序。它完全不考虑语境。当然，如今网上有很多词典和同义词词典，但我还是足够老派，更喜欢有硬封面、能用手指翻页的书。我用的是《简明牛津词典》和《柯林斯同义词词典》。\n\n当然，词典不仅仅是用来查拼写的。它应该给出每个词的准确定义，从而把这个词与其他意思相近却不完全相同的词区分开来。它通常还会标明这个词的发音。\n\n此外，我还有一套旧的两卷本《牛津英语简编词典》，几年前在书店促销时只花了99便士买下。当然，它足有2672页，实在称不上简短。它收录了大约163000个单词，还有词语组合和惯用语。我并不经常用这部词典。不过，如果我需要查一个词的来源，或查找它的用法例句，就没有比它更好的了。\n\n在长达一百多年的时间里，最有影响力的英语词典是塞缪尔·约翰逊于1755年出版的《英语词典》。约翰逊写道：“编词典是乏味的工作。”他用这句话为“乏味”的一个释义举例。不过，读词典也可以是一件乐事。花几分钟随意浏览一两页，可以是一次颇有收获的体验。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2024-i:seven-choices:definition",
+          "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+          "sourceText": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "displayText": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:38"
+          ],
+          "translationZh": "它应该给出每个词的准确定义，从而把这个词与其他意思相近却不完全相同的词区分开来。",
+          "analysisZh": "主干是It should give you a precise definition of each word，即词典应给出每个词的准确定义。thus differentiating...补充这样做产生的结果：把这个词与其他词区分开。whose meanings...修饰other words，说明这些词的意思虽相近，却并不完全一样；but not identical承接are，省略了重复成分。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "It should give you"
+            },
+            {
+              "start": 54,
+              "end": 94,
+              "quote": "thus differentiating it from other words"
+            },
+            {
+              "start": 95,
+              "end": 140,
+              "quote": "whose meanings are similar, but not identical"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先说明写作者为何要认真查词，再介绍工具选择、词典的多重功能和大型词典的价值，最后由查阅用途转到阅读乐趣。",
+        "units": [
+          {
+            "unitId": "unit:group:paper-gaokao-2024-i:seven-choices:1",
+            "heading": "投稿应重视拼写",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-i:seven-choices:1"
+            ],
+            "summary": "先提出专业原稿的要求，再强调编辑不会接受不认真拼写的作者。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2024-i:seven-choices:2",
+            "heading": "作者使用的工具",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-i:seven-choices:2"
+            ],
+            "summary": "解释不信任电脑拼写检查的原因，并介绍自己偏爱的纸质词典。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2024-i:seven-choices:3",
+            "heading": "词典的多种用途",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-i:seven-choices:3"
+            ],
+            "summary": "说明词典除拼写外还能提供准确定义、区分近义词及标明发音。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2024-i:seven-choices:4",
+            "heading": "大型词典的特定价值",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-i:seven-choices:4"
+            ],
+            "summary": "介绍一部厚重的词典，说明虽不常用，但查词源与用法时价值很高。"
+          },
+          {
+            "unitId": "unit:group:paper-gaokao-2024-i:seven-choices:5",
+            "heading": "读词典的乐趣",
+            "paragraphIds": [
+              "block:paper-gaokao-2024-i:seven-choices:5"
+            ],
+            "summary": "从编词典的乏味转向阅读词典的乐趣，鼓励读者随手翻阅。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2024-i:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 92,
+              "quote": "并不是所有优秀的作家都擅长拼写。如果你想让作品出版，提交一份毫无差错、呈现专业的原稿至关重要。这意味着语法正确，而且没有拼写错误。编辑大概都不会容忍一个连正确拼写单词都不肯费心的作者。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:seven-choices:2"
+              ],
+              "start": 94,
+              "end": 218,
+              "quote": "我的书桌上总放着两本随手可取的参考书：词典和同义词词典。我不信任笔记本电脑上的拼写检查程序。它完全不考虑语境。当然，如今网上有很多词典和同义词词典，但我还是足够老派，更喜欢有硬封面、能用手指翻页的书。我用的是《简明牛津词典》和《柯林斯同义词词典》。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:seven-choices:3"
+              ],
+              "start": 220,
+              "end": 290,
+              "quote": "当然，词典不仅仅是用来查拼写的。它应该给出每个词的准确定义，从而把这个词与其他意思相近却不完全相同的词区分开来。它通常还会标明这个词的发音。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:seven-choices:4"
+              ],
+              "start": 292,
+              "end": 429,
+              "quote": "此外，我还有一套旧的两卷本《牛津英语简编词典》，几年前在书店促销时只花了99便士买下。当然，它足有2672页，实在称不上简短。它收录了大约163000个单词，还有词语组合和惯用语。我并不经常用这部词典。不过，如果我需要查一个词的来源，或查找它的用法例句，就没有比它更好的了。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:seven-choices:5"
+              ],
+              "start": 431,
+              "end": 553,
+              "quote": "在长达一百多年的时间里，最有影响力的英语词典是塞缪尔·约翰逊于1755年出版的《英语词典》。约翰逊写道：“编词典是乏味的工作。”他用这句话为“乏味”的一个释义举例。不过，读词典也可以是一件乐事。花几分钟随意浏览一两页，可以是一次颇有收获的体验。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:seven-choices:1",
+            "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+            "text": "Not all great writers are great spellers. If you want to be published, it’s vital to submit a perfect, professionally presented manuscript (原稿). That means good grammar and no spelling mistakes. No editor is likely to tolerate a writer who does not take the trouble to spell words correctly."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
+            "text": "I keep two reference books close-by on my desk: dictionary and thesaurus(同义词词典).I don’t trust my laptop’s spellchecker. It takes no account of the context. Of course, these days there are plenty of online dictionaries and thesauruses, but I’m old-fashioned enough to prefer a hard cover and pages I can leaf through with my fingers. I use the Concise Oxford Dictionary and the Collins Thesaurus."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+            "text": "Of course, a dictionary is not only for spelling. It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical. It will also usually show how the word is pronounced."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+            "text": "In addition, I have an old two-volume copy of the Shorter Oxford Dictionary, picked up a few years ago in a bookshop sale for just 99 pence. Of course, with its 2,672 pages, it’s not exactly short. It contains around 163,000 words, plus word combinations and idiomatic phrases. I don’t often use this dictionary. However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+            "text": "For well over a hundred years the most influential English dictionary was Samuel Johnson’s Dictionary of the English Language published in 1755. \"To make dictionaries is dull (乏味) work,\" wrote Johnson, illustrating one definition of “dull”. But a dictionary can be a pleasure to read. A few minutes spent casting your eye over a page or two can be a rewarding experience."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+                "start": 42,
+                "end": 144,
+                "quote": "If you want to be published, it’s vital to submit a perfect, professionally presented manuscript (原稿)."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+                "start": 152,
+                "end": 248,
+                "quote": "No editor is likely to tolerate a writer who does not take the trouble to spell words correctly."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:1",
+                "start": 16,
+                "end": 47,
+                "quote": "如果你想让作品出版，提交一份毫无差错、呈现专业的原稿至关重要。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:1",
+                "start": 65,
+                "end": 92,
+                "quote": "编辑大概都不会容忍一个连正确拼写单词都不肯费心的作者。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:36"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:seven-choices:1",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+                "start": 145,
+                "end": 194,
+                "quote": "That means good grammar and no spelling mistakes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:1",
+                "start": 47,
+                "end": 65,
+                "quote": "这意味着语法正确，而且没有拼写错误。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
+                "start": 80,
+                "end": 119,
+                "quote": "I don’t trust my laptop’s spellchecker."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:2",
+                "start": 28,
+                "end": 46,
+                "quote": "我不信任笔记本电脑上的拼写检查程序。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:37"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
+                "start": 120,
+                "end": 155,
+                "quote": "It takes no account of the context."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:2",
+                "start": 46,
+                "end": 55,
+                "quote": "它完全不考虑语境。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 7,
+                "end": 148,
+                "quote": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 149,
+                "end": 202,
+                "quote": "It will also usually show how the word is pronounced."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 16,
+                "end": 56,
+                "quote": "它应该给出每个词的准确定义，从而把这个词与其他意思相近却不完全相同的词区分开来。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 56,
+                "end": 70,
+                "quote": "它通常还会标明这个词的发音。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:38"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 0,
+                "end": 49,
+                "quote": "Of course, a dictionary is not only for spelling."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 0,
+                "end": 16,
+                "quote": "当然，词典不仅仅是用来查拼写的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+                "start": 285,
+                "end": 394,
+                "quote": "However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:4",
+                "start": 101,
+                "end": 137,
+                "quote": "不过，如果我需要查一个词的来源，或查找它的用法例句，就没有比它更好的了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:39"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+                "start": 278,
+                "end": 312,
+                "quote": "I don’t often use this dictionary."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:4",
+                "start": 90,
+                "end": 101,
+                "quote": "我并不经常用这部词典。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+                "start": 145,
+                "end": 240,
+                "quote": "\"To make dictionaries is dull (乏味) work,\" wrote Johnson, illustrating one definition of “dull”."
+              },
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+                "start": 248,
+                "end": 334,
+                "quote": "A few minutes spent casting your eye over a page or two can be a rewarding experience."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:5",
+                "start": 46,
+                "end": 82,
+                "quote": "约翰逊写道：“编词典是乏味的工作。”他用这句话为“乏味”的一个释义举例。"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:5",
+                "start": 97,
+                "end": 122,
+                "quote": "花几分钟随意浏览一两页，可以是一次颇有收获的体验。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:40"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+                "start": 241,
+                "end": 284,
+                "quote": "But a dictionary can be a pleasure to read."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:5",
+                "start": 82,
+                "end": 97,
+                "quote": "不过，读词典也可以是一件乐事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2024-i:seven-choices:definition",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:38"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2024-i:seven-choices:definition",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 7,
+                "end": 25,
+                "quote": "It should give you"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 61,
+                "end": 101,
+                "quote": "thus differentiating it from other words"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 102,
+                "end": 147,
+                "quote": "whose meanings are similar, but not identical"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:seven-choices",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:seven-choices:3",
+                "start": 16,
+                "end": 56,
+                "quote": "它应该给出每个词的准确定义，从而把这个词与其他意思相近却不完全相同的词区分开来。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 39,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "A",
+          "shared": [
+            "I",
+            "don’t"
+          ],
+          "text": "它像接空前 \"163,000 words\"：这么全，我不想换。但这段用 it、its 指这部词典，them 无所指；空后 \"However\" 要前面先有限制，它已在说好话，转不过来。它照答案 A 改：都有 I 和 don’t，A 说不常用，它改成不想替换。前面那一空跟在 \"don’t trust\" 后，But 也像能转。",
+          "quotes": [
+            "163,000 words",
+            "them",
+            "However",
+            "I",
+            "don’t",
+            "don’t trust"
+          ]
+        },
+        "G": {
+          "target": 38,
+          "secondary": 39,
+          "kind": "shadow",
+          "shadowOf": "E",
+          "shared": [
+            "dictionar"
+          ],
+          "text": "它的 \"give you\" 像接空后 \"It should give you a precise definition\"，放段首也像总说。但空后在列词典给的定义、发音，没有抱怨；单数 It 也接不上复数 Dictionaries。它照答案 E 改：都说词典，E 说不只查拼写，它改成信息不够。后面那一空有 \"However\"，抱怨也像能被转过来。",
+          "quotes": [
+            "give you",
+            "It should give you a precise definition",
+            "It",
+            "Dictionaries",
+            "However"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-i:36": {
+      "blankId": "blank:paper-gaokao-2024-i:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "great spellers",
+        "professionally presented manuscript",
+        "spell words correctly"
+      ],
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That",
+          "signalSide": "option",
+          "targetText": "submit a perfect, professionally presented manuscript",
+          "relation": "That接住前句“提交完美、专业的原稿”这一要求，随后解释它具体意味着什么。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "a perfect, professionally presented manuscript",
+          "signalSide": "context-before",
+          "targetText": "That",
+          "relation": "这就是That所承接的要求，空格需要把“完美”具体化。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no spelling mistakes",
+          "signalSide": "option",
+          "targetText": "spell words correctly",
+          "relation": "不出拼写错误，正好接上后句编辑对正确拼写的要求。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "spell words correctly",
+          "signalSide": "context-after",
+          "targetText": "no spelling mistakes",
+          "relation": "后句从编辑的角度补充理由：正确拼写是作者应尽的责任。"
+        }
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+        "beforeQuote": "If you want to be published, it’s vital to submit a perfect, professionally presented manuscript (原稿).",
+        "afterQuote": "No editor is likely to tolerate a writer who does not take the trouble to spell words correctly."
+      },
+      "lock": [
+        "a perfect, professionally presented manuscript",
+        "That means",
+        "spell words correctly"
+      ],
+      "find": {
+        "text": "空前 \"a perfect, professionally presented manuscript\" 说得笼统，要有句话说清怎样才算完美。F 的 \"That means\" 回指它，\"no spelling mistakes\" 又接上空后 \"spell words correctly\"。",
+        "quotes": [
+          "a perfect, professionally presented manuscript",
+          "That means",
+          "no spelling mistakes",
+          "spell words correctly"
+        ]
+      },
+      "explain": "空前只提出要交完美原稿，这句把标准落到语法和拼写上；空后再从编辑不容忍的角度说明这条标准为什么硬，首句 great spellers 的话题也就接回来了。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前只提出要交完美原稿，这句把标准落到语法和拼写上；空后再从编辑不容忍的角度说明这条标准为什么硬，首句 great spellers 的话题也就接回来了。",
+        "matchedClues": [
+          {
+            "contextSide": "a perfect, professionally presented manuscript",
+            "optionSide": "That means good grammar and no spelling mistakes.",
+            "relation": "从笼统的稿件质量要求转到具体的语言标准。"
+          },
+          {
+            "contextSide": "spell words correctly",
+            "optionSide": "no spelling mistakes",
+            "relation": "后句解释为何不能出现拼写错误。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2024-i:37": {
+      "blankId": "blank:paper-gaokao-2024-i:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "reference books",
+        "dictionary and thesaurus(同义词词典)",
+        "laptop’s spellchecker"
+      ],
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "my laptop’s spellchecker",
+          "relation": "It指刚提到的电脑拼写检查程序，下一部分解释作者为何不信任它。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "my laptop’s spellchecker",
+          "signalSide": "context-before",
+          "targetText": "It takes no account of the context.",
+          "relation": "作者不信任的对象是检查程序，所以空格应接着说它的不足。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "takes no account of the context",
+          "signalSide": "option",
+          "targetText": "I don’t trust",
+          "relation": "不考虑语境就是不信任检查程序的具体理由，而不是不愿使用所有电子工具。"
+        }
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
+        "beforeQuote": "I don’t trust my laptop’s spellchecker.",
+        "afterQuote": "Of course, these days there are plenty of online dictionaries and thesauruses"
+      },
+      "lock": [
+        "spellchecker",
+        "It",
+        "takes no account"
+      ],
+      "find": {
+        "text": "空前 \"I don’t trust my laptop’s spellchecker\" 只说不信任，要给理由。B 的 It 指 spellchecker，\"takes no account of the context\" 正是它不可信的原因。",
+        "quotes": [
+          "I don’t trust my laptop’s spellchecker",
+          "It",
+          "spellchecker",
+          "takes no account of the context"
+        ]
+      },
+      "explain": "作者先表态不信电脑查拼写，这句补上原因：机器查拼写时不看上下文。理由交代完，空后才用 Of course 让一步，承认网上也有词典，再说自己偏爱纸质书。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "作者先表态不信电脑查拼写，这句补上原因：机器查拼写时不看上下文。理由交代完，空后才用 Of course 让一步，承认网上也有词典，再说自己偏爱纸质书。",
+        "matchedClues": [
+          {
+            "contextSide": "my laptop’s spellchecker",
+            "optionSide": "It",
+            "relation": "单数It回指紧邻的检查程序。"
+          },
+          {
+            "contextSide": "I don’t trust",
+            "optionSide": "takes no account of the context",
+            "relation": "空格补出“不信任”的具体原因。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2024-i:38": {
+      "blankId": "blank:paper-gaokao-2024-i:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a precise definition",
+        "meanings are similar",
+        "the word is pronounced"
+      ],
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "not only",
+          "signalSide": "option",
+          "targetText": "It will also usually show how the word is pronounced.",
+          "relation": "选项先说词典不只管拼写，后文列出释义和发音，also继续增加用途。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "not only for spelling",
+          "relation": "also说明发音是又一种用途，呼应“不仅仅查拼写”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "a dictionary",
+          "signalSide": "option",
+          "targetText": "It",
+          "relation": "选项先提出词典，后两句的It才有明确所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a precise definition",
+          "signalSide": "context-after",
+          "targetText": "not only for spelling",
+          "relation": "准确定义是拼写以外的功能，具体展开段首的概括。"
+        }
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical. It will also usually show how the word is pronounced."
+      },
+      "lock": [
+        "not only for spelling",
+        "It should give you",
+        "also"
+      ],
+      "find": {
+        "text": "段首空先看空后：\"It should give you\" 的 It 要单数先行词，讲的是定义和发音，不是拼写。E 给出 \"a dictionary\"，\"not only for spelling\" 引出拼写以外的用处，后面 \"also\" 接着加。",
+        "quotes": [
+          "It should give you",
+          "a dictionary",
+          "not only for spelling",
+          "also"
+        ]
+      },
+      "explain": "前两段都围着拼写转，这句一转，把词典的用处扩到拼写之外，是本段的总起；后面的准确定义、区分近义词、标明发音，就是逐项举出的「不只」。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 也有 \"a dictionary\"，能给 It 当先行词。但空后讲定义和发音，是词典的用处，不是读来有趣；段首的 But 也无话可转。",
+          "quotes": [
+            "a dictionary",
+            "It",
+            "But"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "前两段都围着拼写转，这句一转，把词典的用处扩到拼写之外，是本段的总起；后面的准确定义、区分近义词、标明发音，就是逐项举出的「不只」。",
+        "matchedClues": [
+          {
+            "contextSide": "a precise definition / the word is pronounced",
+            "optionSide": "not only for spelling",
+            "relation": "释义与发音共同说明词典还有拼写以外的用途。"
+          },
+          {
+            "contextSide": "It should give you",
+            "optionSide": "a dictionary",
+            "relation": "段首先给出对象，后文用It继续介绍它。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 也有 \"a dictionary\"，能给 It 当先行词。但空后讲定义和发音，是词典的用处，不是读来有趣；段首的 But 也无话可转。"
+        },
+        {
+          "optionLabel": "G",
+          "reason": "它的 \"give you\" 像接空后 \"It should give you a precise definition\"，放段首也像总说。但空后在列词典给的定义、发音，没有抱怨；单数 It 也接不上复数 Dictionaries。它照答案 E 改：都说词典，E 说不只查拼写，它改成信息不够。后面那一空有 \"However\"，抱怨也像能被转过来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:39": {
+      "blankId": "blank:paper-gaokao-2024-i:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Shorter Oxford Dictionary",
+        "2,672 pages",
+        "the origin of a word",
+        "examples of its usage"
+      ],
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "I don’t often use this dictionary.",
+          "relation": "后句转而高度评价它在查词源和用法时的价值，需要前面先交代平时不常使用。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "don’t often use",
+          "signalSide": "option",
+          "targetText": "there’s nothing better",
+          "relation": "平时不常用，与特定需要下“没有更好的”构成自然转折。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this dictionary",
+          "signalSide": "option",
+          "targetText": "the Shorter Oxford Dictionary",
+          "relation": "this dictionary指本段一直介绍的这套大部头词典。"
+        }
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+        "beforeQuote": "Of course, with its 2,672 pages, it’s not exactly short. It contains around 163,000 words, plus word combinations and idiomatic phrases.",
+        "afterQuote": "However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better."
+      },
+      "lock": [
+        "However",
+        "don’t often use",
+        "there’s nothing better"
+      ],
+      "find": {
+        "text": "先看空后 \"However\"，后面说特定需要时 \"there’s nothing better\"，空里得先有一句平时的限制。只有 A 的 \"don’t often use\" 能被它转过来。",
+        "quotes": [
+          "However",
+          "there’s nothing better",
+          "don’t often use"
+        ]
+      },
+      "explain": "空前用 2,672 页、约 16.3 万词写这部词典又厚又全，这句先交代作者平时很少翻它，再由 However 收到它的真正用处：查词源和例句。先抑后扬，突出这部大词典的特长。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前用 2,672 页、约 16.3 万词写这部词典又厚又全，这句先交代作者平时很少翻它，再由 However 收到它的真正用处：查词源和例句。先抑后扬，突出这部大词典的特长。",
+        "matchedClues": [
+          {
+            "contextSide": "However / there’s nothing better",
+            "optionSide": "I don’t often use this dictionary.",
+            "relation": "把一般使用频率与特定用途下的价值对照，不把“不常用”误读成“不好用”。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "它像接空前 \"163,000 words\"：这么全，我不想换。但这段用 it、its 指这部词典，them 无所指；空后 \"However\" 要前面先有限制，它已在说好话，转不过来。它照答案 A 改：都有 I 和 don’t，A 说不常用，它改成不想替换。前面那一空跟在 \"don’t trust\" 后，But 也像能转。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:40": {
+      "blankId": "blank:paper-gaokao-2024-i:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "To make dictionaries",
+        "dull (乏味) work",
+        "casting your eye over",
+        "a rewarding experience"
+      ],
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "To make dictionaries is dull (乏味) work",
+          "relation": "But把话题从编词典的乏味转向读词典的乐趣，两种活动并不相同。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "dull (乏味) work",
+          "signalSide": "context-before",
+          "targetText": "a pleasure to read",
+          "relation": "前句说编写乏味，给后句“阅读有趣”的转折提供对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a pleasure to read",
+          "signalSide": "option",
+          "targetText": "a rewarding experience",
+          "relation": "读词典的乐趣由后面的随手翻一两页也能有收获来具体说明。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a rewarding experience",
+          "signalSide": "context-after",
+          "targetText": "a pleasure to read",
+          "relation": "末句说明为何读词典值得一试，承接选项对阅读体验的肯定。"
+        }
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+        "beforeQuote": "\"To make dictionaries is dull (乏味) work,\" wrote Johnson, illustrating one definition of “dull”.",
+        "afterQuote": "A few minutes spent casting your eye over a page or two can be a rewarding experience."
+      },
+      "lock": [
+        "dull (乏味) work",
+        "But",
+        "a rewarding experience"
+      ],
+      "find": {
+        "text": "空前 \"To make dictionaries is dull (乏味) work\" 是负面的，空后 \"a rewarding experience\" 是正面的，中间要一个转折。D 用 \"But\" 转到 \"a pleasure to read\"。",
+        "quotes": [
+          "To make dictionaries is dull (乏味) work",
+          "a rewarding experience",
+          "But",
+          "a pleasure to read"
+        ]
+      },
+      "explain": "约翰逊说的是编词典乏味，这句借他的话反着说：读词典却有乐趣，把对象从编换成了读；空后再落到翻一两页就有收获，全文从查词典收到读词典上。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "约翰逊说的是编词典乏味，这句借他的话反着说：读词典却有乐趣，把对象从编换成了读；空后再落到翻一两页就有收获，全文从查词典收到读词典上。",
+        "matchedClues": [
+          {
+            "contextSide": "To make dictionaries is dull (乏味) work",
+            "optionSide": "But a dictionary can be a pleasure to read.",
+            "relation": "从编写转向阅读，乏味与乐趣形成对照。"
+          },
+          {
+            "contextSide": "a rewarding experience",
+            "optionSide": "a pleasure to read",
+            "relation": "末句把阅读的好处落到短时间浏览的具体体验。"
+          }
+        ]
+      },
+      "keyDistractors": []
+    }
+  }
+}

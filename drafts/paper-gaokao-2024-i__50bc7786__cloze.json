@@ -1,0 +1,1758 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:cloze": {
+      "overview": "作者受邻居获胜的鼓舞开始跑步，却因成绩对比和跑步的枯燥转向骑行。一次骑行中被众多当地人超过后，作者渐渐明白，目标应该由自己来定。",
+      "fullTranslationZh": "这一辈子，别人的成就给过我动力，也让我泄过气。\n\n十几岁时，邻居家的一个朋友赢得了一场马拉松比赛。我受了鼓舞，开始经常跑步，随后却发生了两件事。先是有一天，一个我遇到的女孩告诉我，她正在备战一次“超级马拉松”，也就是全程52.4英里的双倍马拉松。接着，第二天我跑了有史以来最长的一次，足足15英里。老实说，我讨厌那次跑步！那个女孩让我觉得自己的成绩微不足道，加上慢跑实在太枯燥，我决定，除非有条大狗追我，否则我再也不跑了！\n\n于是我改骑自行车。我买了辆好车，常常出去骑。我一直梦想参加自行车比赛，直到有一次坐飞机去圣迭戈看姐姐。有一天，她上班去了，我借了她的自行车，出去骑了一趟。难处在于，那儿的路穿过一些很大的山谷，上坡一骑就是好几英里。我以前从没遇到过这种挑战。那天，我被大约一百名熟悉这种路况的“当地”骑手超过。回家后，骑车一下子没那么吸引我了。\n\n从那以后，我成熟了不少。我渐渐明白，无论给自己定下什么目标，目标得是我自己真心想追求的。",
+      "mainLine": {
+        "theme": {
+          "text": "别人的成就会激励人也会打击人，目标得由自己来定，即 they just have to be my own。",
+          "quote": "they just have to be my own"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:1",
+            "text": "作者坦言，别人的成就一直既激励又打击着自己。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+            "text": "受朋友夺冠鼓舞开始跑步，被女孩一比又嫌枯燥，便不再跑了。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+            "text": "转而骑车，在圣迭戈被当地骑手大批超过，骑车也没了吸引力。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:4",
+            "text": "作者成熟起来，明白给自己定的目标得是自己的。"
+          }
+        ],
+        "emotion": "受鼓舞→泄气厌倦→重燃热情→受挫冷淡→成熟释然"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2024-i:cloze:1",
+          "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+          "sourceText": "Between the girl making my __45__ seem small and the pure boredom of jogging, I decided that the only __46__ I’d ever run again is if a big dog was running after me!",
+          "displayText": "Between the girl making my achievement seem small and the pure boredom of jogging, I decided that the only reason I’d ever run again is if a big dog was running after me!",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:45",
+            "question:paper-gaokao-2024-i:46"
+          ],
+          "translationZh": "那个女孩让我觉得自己的成绩微不足道，加上慢跑实在太枯燥，我决定，除非有条大狗追我，否则我再也不跑了！",
+          "analysisZh": "主干是 I decided，that 后面是他拿定的主意。开头的 Between … and … 把两个原因合在一起：女孩让他看轻自己的成绩，慢跑本身又很枯燥。I’d ever run again 修饰 reason，后面的 if 引出他认为自己还会跑起来的唯一情形。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 49,
+              "quote": "Between the girl making my achievement seem small"
+            },
+            {
+              "start": 83,
+              "end": 97,
+              "quote": "I decided that"
+            },
+            {
+              "start": 136,
+              "end": 169,
+              "quote": "if a big dog was running after me"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2024-i:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2024-i:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:cloze:1"
+              ],
+              "start": 0,
+              "end": 23,
+              "quote": "这一辈子，别人的成就给过我动力，也让我泄过气。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:cloze:2"
+              ],
+              "start": 25,
+              "end": 211,
+              "quote": "十几岁时，邻居家的一个朋友赢得了一场马拉松比赛。我受了鼓舞，开始经常跑步，随后却发生了两件事。先是有一天，一个我遇到的女孩告诉我，她正在备战一次“超级马拉松”，也就是全程52.4英里的双倍马拉松。接着，第二天我跑了有史以来最长的一次，足足15英里。老实说，我讨厌那次跑步！那个女孩让我觉得自己的成绩微不足道，加上慢跑实在太枯燥，我决定，除非有条大狗追我，否则我再也不跑了！"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:cloze:3"
+              ],
+              "start": 213,
+              "end": 376,
+              "quote": "于是我改骑自行车。我买了辆好车，常常出去骑。我一直梦想参加自行车比赛，直到有一次坐飞机去圣迭戈看姐姐。有一天，她上班去了，我借了她的自行车，出去骑了一趟。难处在于，那儿的路穿过一些很大的山谷，上坡一骑就是好几英里。我以前从没遇到过这种挑战。那天，我被大约一百名熟悉这种路况的“当地”骑手超过。回家后，骑车一下子没那么吸引我了。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:cloze:4"
+              ],
+              "start": 378,
+              "end": 422,
+              "quote": "从那以后，我成熟了不少。我渐渐明白，无论给自己定下什么目标，目标得是我自己真心想追求的。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+            "text": "When I was a teenager, a neighborhood friend won a marathon race. Feeling motivated, I started running regularly, but then two things happened. First, a girl I met one day told me she was training for a \"super,\" referring to a 52.4-mile double marathon. Then, the next day I went on my longest run - 15 miles. To be honest, I hated it! Between the girl making my achievement seem small and the pure boredom of jogging, I decided that the only reason I’d ever run again is if a big dog was running after me!"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+            "text": "So I turned to cycling. I got a good bike and rode a lot. I dreamed of entering cycle races until I flew to San Diego to visit my sister. While she was at work one day, I borrowed her bike and went for a ride. The problem: The roads there went through large valleys where I’d be riding uphill for miles at a time. I’d never faced such challenges. That day, I got passed by about 100 “local” bikers who were used to such roads. When I got back home, suddenly riding my bike didn’t seem quite as appealing."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2024-i:cloze:4",
+            "paragraphId": "block:paper-gaokao-2024-i:cloze:4",
+            "text": "I’ve matured a lot since then. I’ve come to accept that whatever goals I set for myself, they just have to be my own."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 52,
+                "end": 67,
+                "quote": "a marathon race"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 13,
+                "end": 16,
+                "quote": "赢得了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:41"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 45,
+                "end": 48,
+                "quote": "won"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 13,
+                "end": 16,
+                "quote": "赢得了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 88,
+                "end": 105,
+                "quote": "I started running"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 32,
+                "end": 34,
+                "quote": "经常"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:42"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 103,
+                "end": 112,
+                "quote": "regularly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 32,
+                "end": 34,
+                "quote": "经常"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 223,
+                "end": 250,
+                "quote": "a 52.4-mile double marathon"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 68,
+                "end": 70,
+                "quote": "备战"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:43"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 188,
+                "end": 196,
+                "quote": "training"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 68,
+                "end": 70,
+                "quote": "备战"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 384,
+                "end": 411,
+                "quote": "the pure boredom of jogging"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 129,
+                "end": 135,
+                "quote": "讨厌那次跑步"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:44"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 326,
+                "end": 331,
+                "quote": "hated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 129,
+                "end": 135,
+                "quote": "讨厌那次跑步"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 281,
+                "end": 306,
+                "quote": "my longest run - 15 miles"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 144,
+                "end": 149,
+                "quote": "自己的成绩"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:45"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 363,
+                "end": 374,
+                "quote": "achievement"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 144,
+                "end": 149,
+                "quote": "自己的成绩"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 466,
+                "end": 499,
+                "quote": "if a big dog was running after me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 168,
+                "end": 176,
+                "quote": "除非有条大狗追我"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:46"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 443,
+                "end": 449,
+                "quote": "reason"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 168,
+                "end": 176,
+                "quote": "除非有条大狗追我"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 21,
+                "end": 38,
+                "quote": "I got a good bike"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 3,
+                "end": 8,
+                "quote": "改骑自行车"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:47"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 5,
+                "end": 14,
+                "quote": "turned to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 3,
+                "end": 8,
+                "quote": "改骑自行车"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 64,
+                "end": 87,
+                "quote": "of entering cycle races"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 25,
+                "end": 27,
+                "quote": "梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:48"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 60,
+                "end": 67,
+                "quote": "dreamed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 25,
+                "end": 27,
+                "quote": "梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 174,
+                "end": 202,
+                "quote": "her bike and went for a ride"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 62,
+                "end": 64,
+                "quote": "借了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:49"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 171,
+                "end": 179,
+                "quote": "borrowed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 62,
+                "end": 64,
+                "quote": "借了"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 272,
+                "end": 305,
+                "quote": "riding uphill for miles at a time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 77,
+                "end": 79,
+                "quote": "难处"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:50"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 214,
+                "end": 221,
+                "quote": "problem"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 77,
+                "end": 79,
+                "quote": "难处"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 272,
+                "end": 305,
+                "quote": "riding uphill for miles at a time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 115,
+                "end": 119,
+                "quote": "这种挑战"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:51"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 335,
+                "end": 345,
+                "quote": "challenges"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 115,
+                "end": 119,
+                "quote": "这种挑战"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 380,
+                "end": 414,
+                "quote": "bikers who were used to such roads"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 143,
+                "end": 145,
+                "quote": "超过"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:52"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 363,
+                "end": 369,
+                "quote": "passed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 143,
+                "end": 145,
+                "quote": "超过"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 447,
+                "end": 482,
+                "quote": "riding my bike didn’t seem quite as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 158,
+                "end": 161,
+                "quote": "吸引我"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:53"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+                "start": 494,
+                "end": 503,
+                "quote": "appealing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:3",
+                "start": 158,
+                "end": 161,
+                "quote": "吸引我"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:4",
+                "start": 30,
+                "end": 49,
+                "quote": "I’ve come to accept"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:4",
+                "start": 6,
+                "end": 11,
+                "quote": "成熟了不少"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:54"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:4",
+                "start": 5,
+                "end": 12,
+                "quote": "matured"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:4",
+                "start": 6,
+                "end": 11,
+                "quote": "成熟了不少"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2024-i:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:4",
+                "start": 71,
+                "end": 87,
+                "quote": "I set for myself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:4",
+                "start": 25,
+                "end": 29,
+                "quote": "什么目标"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2024-i:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:55"
+            ],
+            "blankId": "blank:paper-gaokao-2024-i:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:4",
+                "start": 65,
+                "end": 70,
+                "quote": "goals"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:4",
+                "start": 25,
+                "end": 29,
+                "quote": "什么目标"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2024-i:cloze:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:45",
+              "question:paper-gaokao-2024-i:46"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2024-i:cloze:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2024-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+                "start": 336,
+                "end": 506,
+                "quote": "Between the girl making my achievement seem small and the pure boredom of jogging, I decided that the only reason I’d ever run again is if a big dog was running after me!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2024-i:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2024-i:cloze:2",
+                "start": 136,
+                "end": 186,
+                "quote": "那个女孩让我觉得自己的成绩微不足道，加上慢跑实在太枯燥，我决定，除非有条大狗追我，否则我再也不跑了！"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "受鼓舞→泄气厌倦→重燃热情→受挫冷淡→成熟释然"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2024-i:41": {
+      "blankId": "blank:paper-gaokao-2024-i:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "朋友的成绩激励了作者，这里要一个说出朋友在马拉松里取得成就的动作。",
+      "find": {
+        "check": "echo",
+        "text": "首段说作者受 other folks' achievements 影响，后句又说 Feeling motivated，朋友得赢了 a marathon race 才算成就。",
+        "quotes": [
+          "other folks' achievements",
+          "Feeling motivated",
+          "a marathon race"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "赢得",
+        "reason": "朋友的成绩激励了作者，这里要一个说出朋友在马拉松里取得成就的动作。动词看复现：首段说作者受 other folks' achievements 影响，后句又说 Feeling motivated，朋友得赢了 a marathon race 才算成就。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "knew",
+          "meaning": "知道；只是知道一场比赛算不上成就，激不起后面的 Feeling motivated。",
+          "quote": "Feeling motivated"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "held",
+          "meaning": "举办；首段说触动作者的是别人的 achievements，办一场比赛不是朋友的个人成就。",
+          "quote": "achievements"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "quit",
+          "meaning": "退出；朋友中途退赛，不会让作者 Feeling motivated 开始跑步。",
+          "quote": "Feeling motivated"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a marathon race",
+          "signalSide": "context-after",
+          "targetText": "won a marathon race",
+          "relation": "中文：win a race 赢得比赛，作动词的宾语。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "other folks' achievements",
+          "signalSide": "context-before",
+          "relation": "中文：首段说别人的成就，朋友赢得比赛就是这样的成就。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:42": {
+      "blankId": "blank:paper-gaokao-2024-i:42",
+      "blankNo": 42,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "受了鼓舞开始跑步，这里要说跑步成了常态，是一种长期坚持的方式。",
+      "find": {
+        "check": "direction",
+        "text": "Feeling motivated 后开始跑，后文还有 my longest run 跑了 15 英里，说明他是一直经常在跑。",
+        "quotes": [
+          "Feeling motivated",
+          "my longest run"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "有规律地",
+        "reason": "受了鼓舞开始跑步，这里要说跑步成了常态，是一种长期坚持的方式。副词看走向：Feeling motivated 后开始跑，后文还有 my longest run 跑了 15 英里，说明他是一直经常在跑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "silently",
+          "meaning": "默默地；后文写的是 my longest run 跑了多远，讲的是跑得多、跑得久，不是出不出声。",
+          "quote": "my longest run"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proudly",
+          "meaning": "骄傲地；他刚受朋友触动 Feeling motivated 才起步，还没有可骄傲的成绩。",
+          "quote": "Feeling motivated"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recently",
+          "meaning": "最近；全句讲 When I was a teenager 的往事，用最近接不上。",
+          "quote": "When I was a teenager"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I started running",
+          "signalSide": "context-before",
+          "targetText": "started running regularly",
+          "relation": "中文：started running regularly 开始经常跑步。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-gaokao-2024-i:43": {
+      "blankId": "blank:paper-gaokao-2024-i:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "main",
+      "context": "第一件泄气事：女孩在为一场双倍马拉松做准备，这里要「为比赛备战」。",
+      "find": {
+        "check": "collocation",
+        "text": "后面 for 接的是女孩要跑的 52.4-mile double marathon，为比赛而练是 training for，她在备战。",
+        "quotes": [
+          "52.4-mile double marathon"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "训练",
+        "meaning": "为比赛做准备",
+        "reason": "第一件泄气事：女孩在为一场双倍马拉松做准备，这里要「为比赛备战」。动词看搭配：后面 for 接的是女孩要跑的 52.4-mile double marathon，为比赛而练是 training for，她在备战。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "asking",
+          "meaning": "请求；ask for 一场 52.4-mile double marathon 说不通，比赛不是向人讨要的东西。",
+          "quote": "52.4-mile double marathon"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "looking",
+          "meaning": "寻找；女孩说的是自己要跑的 double marathon，这才让作者的成绩 seem small，不是在找比赛。",
+          "quote": "seem small"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waiting",
+          "meaning": "等待；光等着比赛不会让作者的成绩 seem small，要的是她正在为它苦练。",
+          "quote": "seem small"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for a \"super,\"",
+          "signalSide": "context-after",
+          "targetText": "training for a \"super,\"",
+          "relation": "中文：train for a race 为比赛训练。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "52.4-mile double marathon",
+          "signalSide": "context-after",
+          "relation": "中文：双倍马拉松是要练出来的长跑赛事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:44": {
+      "blankId": "blank:paper-gaokao-2024-i:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "第二件泄气事：跑完最长的一次后，作者对跑步的感受转向负面。",
+      "find": {
+        "check": "affect",
+        "text": "后句说 the pure boredom of jogging，又决定不再跑，To be honest 引出的真实感受是讨厌。",
+        "quotes": [
+          "the pure boredom of jogging",
+          "To be honest"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "讨厌",
+        "reason": "第二件泄气事：跑完最长的一次后，作者对跑步的感受转向负面。动词看情感：后句说 the pure boredom of jogging，又决定不再跑，To be honest 引出的真实感受是讨厌。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "made",
+          "meaning": "做到了；跑完 15 英里已是事实，To be honest 引出的是感受，后文说的是 pure boredom of jogging。",
+          "quote": "pure boredom of jogging"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "believed",
+          "meaning": "相信；it 指那次长跑，相信一次长跑说不通，后文讲的是 pure boredom of jogging。",
+          "quote": "pure boredom of jogging"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "deserved",
+          "meaning": "应得；一次长跑谈不上该不该得，后句 pure boredom of jogging 说的是他觉得乏味。",
+          "quote": "pure boredom of jogging"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "the pure boredom of jogging",
+          "signalSide": "context-after",
+          "relation": "中文：慢跑纯属乏味，感受是负面的。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "To be honest, I",
+          "signalSide": "context-before",
+          "targetText": "I hated it",
+          "relation": "中文：hate it 讨厌那次长跑，it 指 15 英里的长跑。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:45": {
+      "blankId": "blank:paper-gaokao-2024-i:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "女孩的双倍马拉松衬得作者的跑步成绩很渺小，这里要指他自己的成绩。",
+      "find": {
+        "check": "echo",
+        "text": "首段 other folks' achievements 在这里复现，my longest run 的 15 英里就是他的成绩，和女孩一比才 seem small。",
+        "quotes": [
+          "other folks' achievements",
+          "my longest run",
+          "seem small"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "成就",
+        "meaning": "那次长跑的成绩",
+        "reason": "女孩的双倍马拉松衬得作者的跑步成绩很渺小，这里要指他自己的成绩。名词看复现：首段 other folks' achievements 在这里复现，my longest run 的 15 英里就是他的成绩，和女孩一比才 seem small。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "advantage",
+          "meaning": "优势；作者的 15 英里比不过女孩的 52.4-mile double marathon，谈不上优势，被比小的是成绩。",
+          "quote": "52.4-mile double marathon"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "contribution",
+          "meaning": "贡献；他只是自己 went on my longest run，没有为谁作贡献，被比下去的是自己的成绩。",
+          "quote": "went on my longest run"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "influence",
+          "meaning": "影响；女孩比的是谁跑得远，my longest run 是作者自己的成绩，谈不上影响力。",
+          "quote": "my longest run"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "other folks' achievements",
+          "signalSide": "context-before",
+          "relation": "中文：首段的 achievements 在这里复现为作者自己的成就。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "seem small",
+          "signalSide": "context-after",
+          "targetText": "my achievement seem small",
+          "relation": "中文：make my achievement seem small 让我的成绩显得渺小。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:46": {
+      "blankId": "blank:paper-gaokao-2024-i:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "作者开玩笑说除非被大狗追才会再跑，这里要「再跑的理由」。",
+      "find": {
+        "check": "collocation",
+        "text": "表语 is if a big dog was running after me 是一个条件，能用 if 句来说明的是再跑的 the only reason。",
+        "quotes": [
+          "is if a big dog was running after me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "理由",
+        "reason": "作者开玩笑说除非被大狗追才会再跑，这里要「再跑的理由」。名词看搭配：表语 is if a big dog was running after me 是一个条件，能用 if 句来说明的是再跑的 the only reason。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "way",
+          "meaning": "方式；后面 if a big dog was running after me 讲的是什么情况下会跑，不是怎么跑。",
+          "quote": "if a big dog was running after me"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "risk",
+          "meaning": "风险；if a big dog was running after me 是逼他跑起来的原因，不是跑步带来的风险。",
+          "quote": "if a big dog was running after me"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "place",
+          "meaning": "地点；if a big dog was running after me 说的是一种情形，不是一个地方。",
+          "quote": "if a big dog was running after me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’d ever run again",
+          "signalSide": "context-after",
+          "targetText": "the only reason I’d ever run again",
+          "relation": "中文：the only reason I’d ever run again 我会再跑的唯一理由。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "is if a big dog was running after me",
+          "signalSide": "context-after",
+          "relation": "中文：表语用 if 句说明理由是什么。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:47": {
+      "blankId": "blank:paper-gaokao-2024-i:47",
+      "blankNo": 47,
+      "pos": "phrase",
+      "role": "main",
+      "context": "决定不再跑步后，作者换了项目开始骑车，这里要「转向」新的事。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "So 承接前面不再跑的决定，后面 I got a good bike and rode a lot，他是把兴趣转到 cycling 上。",
+        "quotes": [
+          "I got a good bike and rode a lot",
+          "cycling"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "转向",
+        "meaning": "转而开始骑车",
+        "reason": "决定不再跑步后，作者换了项目开始骑车，这里要「转向」新的事。词组看语境义：So 承接前面不再跑的决定，后面 I got a good bike and rode a lot，他是把兴趣转到 cycling 上。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gave up",
+          "meaning": "放弃；紧接着 I got a good bike and rode a lot，他是开始骑车，不是放弃骑车。",
+          "quote": "I got a good bike and rode a lot"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "went on",
+          "meaning": "继续；前面讲的是跑步，cycling 是新换的项目，谈不上继续骑车。",
+          "quote": "cycling"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dealt with",
+          "meaning": "处理；cycling 是他新找的爱好，后面 rode a lot，不是要应付的麻烦。",
+          "quote": "rode a lot"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "cycling",
+          "signalSide": "context-after",
+          "targetText": "turned to cycling",
+          "relation": "中文：turn to cycling 转而去骑车。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to",
+          "signalSide": "option",
+          "targetText": "turned to",
+          "relation": "中文：to 指向新的方向，turn to 转向某事。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2024-i:48": {
+      "blankId": "blank:paper-gaokao-2024-i:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "骑车骑得多，作者想去参加自行车比赛，这里要一个向往的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后面介词 of 接 entering cycle races，dream of 向往做某事，前句 rode a lot 说他正骑得起劲。",
+        "quotes": [
+          "entering cycle races",
+          "rode a lot"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "梦想",
+        "reason": "骑车骑得多，作者想去参加自行车比赛，这里要一个向往的意思。动词看搭配：后面介词 of 接 entering cycle races，dream of 向往做某事，前句 rode a lot 说他正骑得起劲。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "heard",
+          "meaning": "听说；他 rode a lot 正在兴头上，说的是自己想参赛，不是听人说起比赛。",
+          "quote": "rode a lot"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "complained",
+          "meaning": "抱怨；前句 got a good bike and rode a lot，热情正高，没有理由抱怨参赛。",
+          "quote": "rode a lot"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "approved",
+          "meaning": "赞成；approve of 是认可别人的做法，这里说的是他自己想 entering cycle races。",
+          "quote": "entering cycle races"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of entering cycle races",
+          "signalSide": "context-after",
+          "targetText": "dreamed of entering cycle races",
+          "relation": "中文：dream of doing 梦想做某事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:49": {
+      "blankId": "blank:paper-gaokao-2024-i:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "detail",
+      "context": "姐姐上班去了，作者骑的是姐姐的车，这里要「借用」的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是 her bike，车是姐姐的，she was at work 人不在，作者 went for a ride 只能是借她的车。",
+        "quotes": [
+          "her bike",
+          "she was at work",
+          "went for a ride"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "借",
+        "reason": "姐姐上班去了，作者骑的是姐姐的车，这里要「借用」的意思。动词看搭配：宾语是 her bike，车是姐姐的，she was at work 人不在，作者 went for a ride 只能是借她的车。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "painted",
+          "meaning": "上漆；后面 went for a ride 是骑车出门，不是给姐姐的车刷漆。",
+          "quote": "went for a ride"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bought",
+          "meaning": "买下；车是 her bike，属于姐姐，作者只是骑一趟。",
+          "quote": "her bike"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "parked",
+          "meaning": "停放；停好车就接不上后面的 went for a ride 出去骑。",
+          "quote": "went for a ride"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her bike",
+          "signalSide": "context-after",
+          "targetText": "borrowed her bike",
+          "relation": "中文：borrow her bike 借她的自行车。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "While she was at work",
+          "signalSide": "context-before",
+          "relation": "中文：姐姐上班不在，车是借来骑的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:50": {
+      "blankId": "blank:paper-gaokao-2024-i:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "冒号前先用一个名词点出在姐姐那里骑车的难处，冒号后再展开说。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后 riding uphill for miles at a time 是难处，下句 I’d never faced such 又说这种考验，冒号前要的就是 problem。",
+        "quotes": [
+          "riding uphill for miles at a time",
+          "I’d never faced such"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "问题",
+        "meaning": "难处",
+        "reason": "冒号前先用一个名词点出在姐姐那里骑车的难处，冒号后再展开说。名词看复现：冒号后 riding uphill for miles at a time 是难处，下句 I’d never faced such 又说这种考验，冒号前要的就是 problem。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "secret",
+          "meaning": "秘密；The roads there went through large valleys 是摆在眼前的路况，不是秘密。",
+          "quote": "The roads there went through large valleys"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "principle",
+          "meaning": "原则；冒号后讲的是 riding uphill for miles，一段难骑的路，不是什么原则。",
+          "quote": "riding uphill for miles"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "advice",
+          "meaning": "建议；冒号后是对路况的描述 The roads there went through large valleys，不是谁给的建议。",
+          "quote": "The roads there went through large valleys"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "riding uphill for miles at a time",
+          "signalSide": "context-after",
+          "relation": "中文：冒号后的上坡路就是这个难处。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "The roads there",
+          "signalSide": "context-after",
+          "targetText": "The problem: The roads there",
+          "relation": "中文：The problem: 后面直接说明难在哪里。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:51": {
+      "blankId": "blank:paper-gaokao-2024-i:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者从没骑过这么长的上坡，要一个名词概括这种考验。",
+      "find": {
+        "check": "echo",
+        "text": "such 回指前句 riding uphill for miles at a time，这是骑车的难关，用 challenges 概括。",
+        "quotes": [
+          "riding uphill for miles at a time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "挑战",
+        "reason": "作者从没骑过这么长的上坡，要一个名词概括这种考验。名词看复现：such 回指前句 riding uphill for miles at a time，这是骑车的难关，用 challenges 概括。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dangers",
+          "meaning": "危险；前句只说上坡一骑 for miles at a time，讲的是费力，不是有危险。",
+          "quote": "for miles at a time"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "events",
+          "meaning": "赛事；他只是借车 went for a ride 出去骑，没有参加比赛。",
+          "quote": "went for a ride"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "opponents",
+          "meaning": "对手；such 指前句的上坡路 riding uphill，路况不是对手，那些骑手下一句才出现。",
+          "quote": "riding uphill"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "riding uphill for miles at a time",
+          "signalSide": "context-before",
+          "relation": "中文：such 回指前句连续好几英里的上坡。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "faced such",
+          "signalSide": "context-before",
+          "targetText": "faced such challenges",
+          "relation": "中文：face challenges 面对挑战。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:52": {
+      "blankId": "blank:paper-gaokao-2024-i:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者在上坡路上被大批当地骑手甩下，这是他骑车受挫的一刻。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 by about 100 “local” bikers 说明是被动，这些人 were used to such roads 骑得快，作者是被他们超过。",
+        "quotes": [
+          "about 100 “local” bikers",
+          "were used to such roads"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "超过",
+        "reason": "作者在上坡路上被大批当地骑手甩下，这是他骑车受挫的一刻。动词看搭配：空后 by about 100 “local” bikers 说明是被动，这些人 were used to such roads 骑得快，作者是被他们超过。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "convinced",
+          "meaning": "说服；被骑手说服说不通，后面 were used to such roads 讲的是他们骑得比他好。",
+          "quote": "were used to such roads"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "admired",
+          "meaning": "钦佩；被一百个骑手钦佩，接不上回家后骑车 didn’t seem quite as 那么有意思。",
+          "quote": "didn’t seem quite as"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "stopped",
+          "meaning": "拦住；他们 were used to such roads，是骑得快超过他，不是拦下他。",
+          "quote": "were used to such roads"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "by about 100 “local” bikers",
+          "signalSide": "context-after",
+          "targetText": "got passed by about 100 “local” bikers",
+          "relation": "中文：get passed by sb 被某人超过。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "were used to such roads",
+          "signalSide": "context-after",
+          "relation": "中文：当地人习惯这种路，所以骑得快。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:53": {
+      "blankId": "blank:paper-gaokao-2024-i:53",
+      "blankNo": 53,
+      "pos": "adjective",
+      "role": "main",
+      "context": "被大批超过后，骑车对作者不再那么有吸引力，这里要一个被否定的正面词。",
+      "find": {
+        "check": "affect",
+        "text": "suddenly 和 didn’t seem quite as 说骑车原有的好感一下子少了，和跑步落到 pure boredom 一样，兴趣没了。",
+        "quotes": [
+          "didn’t seem quite as",
+          "pure boredom"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "有吸引力的",
+        "reason": "被大批超过后，骑车对作者不再那么有吸引力，这里要一个被否定的正面词。形容词看情感：suddenly 和 didn’t seem quite as 说骑车原有的好感一下子少了，和跑步落到 pure boredom 一样，兴趣没了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reliable",
+          "meaning": "可靠的；他受挫在于被 about 100 “local” bikers 超过，车本身没出毛病。",
+          "quote": "about 100 “local” bikers"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "convenient",
+          "meaning": "方便的；回家后不用再骑 riding uphill for miles，骑车并没变得不方便，变的是兴趣。",
+          "quote": "riding uphill for miles"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "familiar",
+          "meaning": "熟悉的；他早就 rode a lot，骑车不会一下子变得陌生，变的是兴趣。",
+          "quote": "rode a lot"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "didn’t seem quite as",
+          "signalSide": "context-before",
+          "relation": "中文：否定原来的好感，骑车不再那么吸引人。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "riding my bike",
+          "signalSide": "context-before",
+          "targetText": "riding my bike didn’t seem quite as appealing",
+          "relation": "中文：riding my bike 是被说不再吸引人的那件事。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2024-i:54": {
+      "blankId": "blank:paper-gaokao-2024-i:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "经过跑步和骑车两次受挫，作者回头说自己的变化，要「变得成熟」。",
+      "find": {
+        "check": "collocation",
+        "text": "主语 I 后接 a lot since then，下句 I’ve come to accept 说他想通了道理，是人长大成熟了。",
+        "quotes": [
+          "a lot since then",
+          "I’ve come to accept"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "成熟",
+        "reason": "经过跑步和骑车两次受挫，作者回头说自己的变化，要「变得成熟」。动词看搭配：主语 I 后接 a lot since then，下句 I’ve come to accept 说他想通了道理，是人长大成熟了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "traveled",
+          "meaning": "旅行；下句 I’ve come to accept 讲的是想法的变化，不是去了多少地方。",
+          "quote": "I’ve come to accept"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "missed",
+          "meaning": "想念；since then 之后他 I’ve come to accept 一个道理，不是在怀念什么。",
+          "quote": "I’ve come to accept"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "worried",
+          "meaning": "担心；下句 I’ve come to accept 是想通了、接受了，和担心相反。",
+          "quote": "I’ve come to accept"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a lot since then",
+          "signalSide": "context-after",
+          "targetText": "matured a lot since then",
+          "relation": "中文：mature a lot since then 从那以后成熟了很多。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I’ve come to accept",
+          "signalSide": "context-after",
+          "relation": "中文：想通道理，正是成熟的表现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:55": {
+      "blankId": "blank:paper-gaokao-2024-i:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "点题：无论给自己定下什么追求，都得是自己的，这里要「目标」。",
+      "find": {
+        "check": "collocation",
+        "text": "空后 I set for myself，set goals 定目标；they just have to be my own 回应首段被别人 achievements 左右。",
+        "quotes": [
+          "I set for myself",
+          "they just have to be my own",
+          "achievements"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "目标",
+        "reason": "点题：无论给自己定下什么追求，都得是自己的，这里要「目标」。名词看搭配：空后 I set for myself，set goals 定目标；they just have to be my own 回应首段被别人 achievements 左右。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "limits",
+          "meaning": "限制；作者从别人的 achievements 里想通的是该追求什么，不是给自己设限。",
+          "quote": "achievements"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dates",
+          "meaning": "日期；给自己定日期接不上 they just have to be my own，全文比的是成绩，不是时间。",
+          "quote": "they just have to be my own"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tests",
+          "meaning": "测试；全文是别人的 achievements 打乱了自己的追求，不是给自己出考题。",
+          "quote": "achievements"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I set for myself",
+          "signalSide": "context-after",
+          "targetText": "whatever goals I set for myself",
+          "relation": "中文：set goals for oneself 给自己定目标。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "they just have to be my own",
+          "signalSide": "context-after",
+          "relation": "中文：目标要属于自己，点明全文道理。"
+        }
+      ]
+    }
+  }
+}

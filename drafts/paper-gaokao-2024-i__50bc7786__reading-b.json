@@ -1,0 +1,731 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2024-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2024-i:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2024-i:reading-b": {
+      "overview": "介绍美国兽医威廉·法伯：他自己背痛被针灸治好后，开始给动物做针灸、按摩等“整体”治疗，虽被同事笑话，却治好了不少动物，他相信这种疗法会越来越受欢迎。",
+      "fullTranslationZh": "“我没疯，”威廉·法伯博士刚给一只兔子做完针灸就说，“我只是走在了时代前面。”他看上去有点急于为自己辩护，这也许是因为连他的一些同事都时不时嘲笑他那些不同寻常的方法。但法伯确信，笑到最后的会是他。他是美国为数不多但人数正在增加的兽医之一，这些兽医如今在实践“整体”医学——把传统西医疗法与针灸、按摩疗法和草药结合起来。\n\n法伯毕业于科罗拉多州立大学，起初是一名比较传统的兽医。20 年前，他饱受严重背痛之苦，从那时起对替代疗法产生了兴趣。他试过肌肉松弛药，却几乎没有缓解。后来他尝试了针灸这一古老的中国疗法，惊讶地发现治疗两三次后自己就好转了。对一名兽医管用的方法，似乎也很可能对他的动物病人管用。于是，在钻研这些技术几年之后，他开始给宠物提供这类治疗。\n\n利·廷德尔的狗查理患有严重的心脏病。廷德尔说，查理心脏病发作后，她已经准备让它安乐死，但法伯的治疗大大减轻了狗的痛苦，她因此又让它多活了五个月。普丽西拉·迪尤因也说，她的马纳皮接受按摩调整后“行动更灵活，骑起来也更舒服”。\n\n法伯确信，整体疗法会随着时间推移越来越受欢迎。如果过去的情况能说明问题，他也许是对的：自 1982 年以来，美国整体兽医协会的会员已从 30 人增加到 700 多人。“有时它效果这么好，连我自己都感到惊讶，”他说，“为了帮助动物，我什么都愿意做。这是我的职责。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+          "sourceText": "He’s one of a small but growing number of American veterinarians（兽医） now practicing “holistic” medicine-combining traditional Western treatments with acupuncture, chiropractic（按摩疗法） and herbal medicine.",
+          "displayText": "He’s one of a small but growing number of American veterinarians（兽医） now practicing “holistic” medicine-combining traditional Western treatments with acupuncture, chiropractic（按摩疗法） and herbal medicine.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:26"
+          ],
+          "translationZh": "他是美国为数不多但人数正在增加的兽医之一，这些兽医如今在实践“整体”医学——把传统西医疗法与针灸、按摩疗法和草药结合起来。",
+          "analysisZh": "主干是 He’s one of a … number of American veterinarians，“他是……的美国兽医之一”，small but growing 修饰 number，说这类兽医人数少但在增加。now practicing “holistic” medicine 是现在分词短语，作后置定语修饰 veterinarians，说这些兽医在做什么；破折号后的 combining … with … 解释什么是“整体”医学：把传统西医疗法和针灸、按摩疗法、草药结合起来。读懂这一句，就知道后文的针灸和按摩都属于整体疗法。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 38,
+              "quote": "He’s one of a small but growing number"
+            },
+            {
+              "start": 69,
+              "end": 103,
+              "quote": "now practicing “holistic” medicine"
+            },
+            {
+              "start": 104,
+              "end": 161,
+              "quote": "combining traditional Western treatments with acupuncture"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+          "sourceText": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+          "displayText": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2024-i:27"
+          ],
+          "translationZh": "法伯确信，整体疗法会随着时间推移越来越受欢迎。如果过去的情况能说明问题，他也许是对的：自 1982 年以来，美国整体兽医协会的会员已从 30 人增加到 700 多人。",
+          "analysisZh": "这句以冒号为界。冒号前是两个并列分句：Farber is certain that … 说他确信整体疗法会越来越流行，that 引导宾语从句；and 后的 he may be right 是作者的判断，if the past is any indication 是条件，意思是“如果过去能说明问题的话”。冒号后用会员数从 30 涨到 700 多的事实，具体说明为什么“他可能是对的”。主干是 membership … has grown from 30 to over 700，in the American Holistic Veterinary Medical Association 修饰 membership。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "Farber is certain that"
+            },
+            {
+              "start": 114,
+              "end": 129,
+              "quote": "he may be right"
+            },
+            {
+              "start": 210,
+              "end": 239,
+              "quote": "has grown from 30 to over 700"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2024-i:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-b:1"
+              ],
+              "start": 0,
+              "end": 159,
+              "quote": "“我没疯，”威廉·法伯博士刚给一只兔子做完针灸就说，“我只是走在了时代前面。”他看上去有点急于为自己辩护，这也许是因为连他的一些同事都时不时嘲笑他那些不同寻常的方法。但法伯确信，笑到最后的会是他。他是美国为数不多但人数正在增加的兽医之一，这些兽医如今在实践“整体”医学——把传统西医疗法与针灸、按摩疗法和草药结合起来。"
+            },
+            {
+              "paragraphId": "zh-reading-b-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-b:2"
+              ],
+              "start": 161,
+              "end": 327,
+              "quote": "法伯毕业于科罗拉多州立大学，起初是一名比较传统的兽医。20 年前，他饱受严重背痛之苦，从那时起对替代疗法产生了兴趣。他试过肌肉松弛药，却几乎没有缓解。后来他尝试了针灸这一古老的中国疗法，惊讶地发现治疗两三次后自己就好转了。对一名兽医管用的方法，似乎也很可能对他的动物病人管用。于是，在钻研这些技术几年之后，他开始给宠物提供这类治疗。"
+            },
+            {
+              "paragraphId": "zh-reading-b-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-b:3"
+              ],
+              "start": 329,
+              "end": 440,
+              "quote": "利·廷德尔的狗查理患有严重的心脏病。廷德尔说，查理心脏病发作后，她已经准备让它安乐死，但法伯的治疗大大减轻了狗的痛苦，她因此又让它多活了五个月。普丽西拉·迪尤因也说，她的马纳皮接受按摩调整后“行动更灵活，骑起来也更舒服”。"
+            },
+            {
+              "paragraphId": "zh-reading-b-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2024-i:reading-b:4"
+              ],
+              "start": 442,
+              "end": 573,
+              "quote": "法伯确信，整体疗法会随着时间推移越来越受欢迎。如果过去的情况能说明问题，他也许是对的：自 1982 年以来，美国整体兽医协会的会员已从 30 人增加到 700 多人。“有时它效果这么好，连我自己都感到惊讶，”他说，“为了帮助动物，我什么都愿意做。这是我的职责。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+                "start": 121,
+                "end": 242,
+                "quote": "If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+                "start": 0,
+                "end": 17,
+                "quote": "“I am not crazy,”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 39,
+                "end": 83,
+                "quote": "他看上去有点急于为自己辩护，这也许是因为连他的一些同事都时不时嘲笑他那些不同寻常的方法。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 0,
+                "end": 6,
+                "quote": "“我没疯，”"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+                "start": 256,
+                "end": 374,
+                "quote": "Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+                "start": 375,
+                "end": 443,
+                "quote": "What worked on a veterinarian seemed likely to work on his patients."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 75,
+                "end": 111,
+                "quote": "后来他尝试了针灸这一古老的中国疗法，惊讶地发现治疗两三次后自己就好转了。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-2",
+                "start": 111,
+                "end": 138,
+                "quote": "对一名兽医管用的方法，似乎也很可能对他的动物病人管用。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+                "start": 59,
+                "end": 269,
+                "quote": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+                "start": 270,
+                "end": 401,
+                "quote": "And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "start": 18,
+                "end": 72,
+                "quote": "廷德尔说，查理心脏病发作后，她已经准备让它安乐死，但法伯的治疗大大减轻了狗的痛苦，她因此又让它多活了五个月。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-3",
+                "start": 72,
+                "end": 111,
+                "quote": "普丽西拉·迪尤因也说，她的马纳皮接受按摩调整后“行动更灵活，骑起来也更舒服”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+                "start": 0,
+                "end": 240,
+                "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-4",
+                "start": 0,
+                "end": 83,
+                "quote": "法伯确信，整体疗法会随着时间推移越来越受欢迎。如果过去的情况能说明问题，他也许是对的：自 1982 年以来，美国整体兽医协会的会员已从 30 人增加到 700 多人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-1",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-1",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+                "start": 292,
+                "end": 494,
+                "quote": "He’s one of a small but growing number of American veterinarians（兽医） now practicing “holistic” medicine-combining traditional Western treatments with acupuncture, chiropractic（按摩疗法） and herbal medicine."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-1",
+                "start": 98,
+                "end": 159,
+                "quote": "他是美国为数不多但人数正在增加的兽医之一，这些兽医如今在实践“整体”医学——把传统西医疗法与针灸、按摩疗法和草药结合起来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-2",
+            "kind": "sentence-structure",
+            "selectedSentenceId": "sentence-reading-b-2",
+            "questionIds": [
+              "question:paper-gaokao-2024-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+                "start": 0,
+                "end": 240,
+                "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2024-i:reading-b",
+                "paragraphId": "zh-reading-b-4",
+                "start": 0,
+                "end": 83,
+                "quote": "法伯确信，整体疗法会随着时间推移越来越受欢迎。如果过去的情况能说明问题，他也许是对的：自 1982 年以来，美国整体兽医协会的会员已从 30 人增加到 700 多人。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用法伯“我没疯”的自辩和同事的嘲笑引出他所做的整体医学，再回头讲他自己被针灸治好、转而用在动物身上的经过，接着举两位主人的例子说明疗效，最后用协会会员人数的增长和他本人的话收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+            "summary": "法伯给兔子做针灸，被同事笑话，他却坚信自己走在时代前面，他实践的是结合西医与针灸、按摩、草药的整体医学。",
+            "function": "引出人物和话题，点出他和同事看法的分歧。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+            "summary": "法伯原是传统兽医，20 年前背痛被针灸治好，便学习技术后用到宠物身上。",
+            "function": "交代他转向整体疗法的原因和经过。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+            "summary": "狗查理靠他的治疗多活了五个月，马纳皮经按摩调整后行动更轻松。",
+            "function": "用两个实例说明整体疗法的效果。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+            "summary": "协会会员从 30 人增至 700 多人，印证法伯认为这种疗法会更流行的判断，他表示愿为动物做任何事。",
+            "function": "用数据支持人物的观点，并以他的话收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2024-i:24": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从同事笑话他的方法这一细节，推出同事对法伯的看法。",
+      "stemTranslationZh": "法伯的一些同事怎么看他？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 because 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他很古怪。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "quote": "If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
+              "anchor": "laugh at his unusual methods 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "quote": "“I am not crazy,”",
+              "anchor": "I am not crazy"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他很严厉。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He’s strict.",
+            "explanation": "同事笑的是他的治疗方法不寻常（unusual methods），说的是做法怪，原文没写他对人要求严。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他很勇敢。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He’s brave.",
+            "explanation": "“走在时代前面”（ahead of my time）是法伯对自己的评价；同事对他是笑话，不是佩服他有胆量。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他很粗鲁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He’s rude.",
+            "explanation": "他显得有点戒备（defensive），是因为被同事笑话而替自己辩解，原文没说他待人无礼。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "coworkers",
+          "sourceRole": "stem",
+          "targetText": "If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "laugh at his unusual methods",
+          "note": "题干 coworkers 原词出现在原文。"
+        },
+        {
+          "sourceText": "He’s odd.",
+          "sourceRole": "correctOption",
+          "targetText": "If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "原文没直接给同事的评价，要推一步：同事笑他的方法不寻常（unusual methods），他还先声明自己没疯（not crazy），可见在一些同事眼里他有点怪（odd），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从法伯自己治背痛的经历里，找出他把针灸用到宠物身上的原因。",
+      "stemTranslationZh": "法伯为什么决定在宠物身上尝试针灸？",
+      "locateBy": "stem",
+      "locateFindZh": "往前两句找他自己的经历",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他在大学里接受过针灸训练。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Farber, a graduate of Colorado State University, started out as a more conventional veterinarian.",
+            "sourceEntity": "a more conventional veterinarian",
+            "optionText": "He was trained in it at university.",
+            "optionEntity": "trained in it at university",
+            "explanation": "大学（Colorado State University）只交代他的学历，毕业后他是传统兽医（conventional）；针灸是他后来自己花几年学的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+              "quote": "Farber, a graduate of Colorado State University, started out as a more conventional veterinarian.",
+              "anchor": "a graduate of Colorado State University 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他受到了另一位兽医的启发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "veterinarian",
+            "optionText": "veterinarian",
+            "matchType": "exact",
+            "relationNote": "veterinarian 借自[[block:paper-gaokao-2024-i:reading-b:2|What worked on a veterinarian]]，这里的兽医就是法伯本人，没有别的兽医启发他。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+              "quote": "What worked on a veterinarian seemed likely to work on his patients.",
+              "anchor": "What worked on a veterinarian 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他作为病人从中受益。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+              "quote": "Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments.",
+              "anchor": "he improved 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+              "quote": "What worked on a veterinarian seemed likely to work on his patients.",
+              "anchor": "What worked on a veterinarian 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他想为宠物主人省钱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He wanted to save money for pet owners.",
+            "explanation": "原文只说针灸治好了他自己的背痛，止痛的肌肉松弛药却不管用，没提治疗费用，也没说要替主人省钱。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "pets",
+          "sourceRole": "stem",
+          "targetText": "So, after studying the techniques for a couple of years, he began offering them to pets.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "he improved after two or three treatments",
+          "bridgeZh": "他本人是兽医，针灸治好了自己，便推想也能治动物",
+          "note": "题干 pets 原词出现在原文。"
+        },
+        {
+          "sourceText": "He benefited from it as a patient.",
+          "sourceRole": "correctOption",
+          "targetText": "Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“受益”（benefited）就是原文的“好转”（improved）；“作为病人”指他背痛难忍（terrible back pain）时自己去扎针灸，两三次就见好，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:26": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把这一段的两个动物病例合起来看，概括它们共同说明了什么。",
+      "stemTranslationZh": "第三段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2024-i:reading-b:3]]先写狗 Charlie 多活了 five months，再写马 Nappy moves more easily；答案要盖住两例共同说明的东西",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "按摩疗法的步骤。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "chiropractic",
+            "optionText": "chiropractic",
+            "matchType": "exact",
+            "relationNote": "chiropractic 借自[[block:paper-gaokao-2024-i:reading-b:3|after a chiropractic adjustment]]，原文只说马调整后的变化，没讲调整怎么做、分几步，而且只占一个例子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "quote": "And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment.",
+              "anchor": "chiropractic adjustment 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "兽医工作的复杂性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The complexity of veterinarians' work.",
+            "explanation": "这一段是两位主人讲自家动物治疗后的变化，没谈兽医的工作有多复杂。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "罕见动物疾病的例子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Leigh Tindale’s dog Charlie had a serious heart condition.",
+            "sourceEntity": "a serious heart condition",
+            "optionText": "Examples of rare animal diseases.",
+            "optionEntity": "rare animal diseases",
+            "explanation": "狗的心脏病（heart condition）是严重，不是罕见；马的例子也没写得了什么病，两例落脚在治疗后的好转上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "quote": "Leigh Tindale’s dog Charlie had a serious heart condition.",
+              "anchor": "heart condition 一句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "整体疗法的效果。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "quote": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months.",
+              "anchor": "eased her dog’s suffering 一句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "quote": "And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment.",
+              "anchor": "moves more easily 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The effectiveness of holistic medicine.",
+          "sourceRole": "correctOption",
+          "targetText": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "两个例子都是主人亲口讲法伯的治疗见效：病狗少受了罪（eased her dog’s suffering），马走起来更轻松。针灸、按摩正是[[block:paper-gaokao-2024-i:reading-b:1|He’s one of a small]]所说的整体医学（holistic medicine），所以选项的“整体疗法的效果”正好把两例都包进去，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2024-i:27": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "viewpoint-support"
+      },
+      "questionFocus": "看清作者提到协会会员数的增长，是在支持前面谁的什么看法。",
+      "stemTranslationZh": "作者为什么提到美国整体兽医协会？",
+      "locateBy": "stem",
+      "locateFindZh": "看冒号前的判断",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了证明法伯的观点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+              "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+              "anchor": "he may be right 一句"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了强调该协会的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+            "sourceEntity": "the holistic approach",
+            "optionText": "To emphasize its importance.",
+            "optionEntity": "its importance",
+            "explanation": "会员数是拿来说明整体疗法（the holistic approach）越来越受欢迎，说的是疗法流行，不是协会本身有多重要。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+              "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+              "anchor": "the holistic approach 一句"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了赞扬兽医。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To praise veterinarians.",
+            "explanation": "会员人数只说明加入的兽医越来越多，作者拿它印证法伯的预测，没有夸奖兽医。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了倡导保护动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "animal",
+            "optionText": "animal",
+            "matchType": "exact",
+            "relationNote": "animal 借自[[block:paper-gaokao-2024-i:reading-b:4|I will do anything to help an animal]]，那是法伯说自己的职责，和协会的数字无关，也不是呼吁大家保护动物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+              "quote": "“I will do anything to help an animal.",
+              "anchor": "help an animal 一句"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "American Holistic Veterinary Medical Association",
+          "sourceRole": "stem",
+          "targetText": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right",
+          "note": "题干 American Holistic Veterinary Medical Association 原词出现在原文。"
+        },
+        {
+          "sourceText": "To prove Farber’s point.",
+          "sourceRole": "correctOption",
+          "targetText": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+          "targetParagraphId": "block:paper-gaokao-2024-i:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“法伯的观点”就是他确信的“整体疗法会越来越受欢迎”（grow more popular）；会员从 30 人涨到 700 多人，正是让作者说“他可能是对的”（he may be right）的事实，所以提这个协会是为了证明他的观点，选 A。"
+        }
+      ]
+    }
+  }
+}
