@@ -1,0 +1,1818 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:cloze": {
+      "overview": "作者自认出身与文学无缘，放弃写作转学教育。一次诗歌课上，学生反问她劝人追梦自己可曾试过，她被问醒，回到大学学习创意写作，靠自信和努力走出羞愧，做上了热爱的工作。",
+      "fullTranslationZh": "我从没想过自己能成为作家。我的家人和文学界毫无关联，在我看来，这是一大难题。本科毕业后，我认定写作不适合我，便转而去学了教育。\n\n后来，一个下午改变了一切。那天我在教诗歌，鼓励学生们写写自己的梦想。快下课时，一个孩子问了我一个问题：“老师，您一直都想当老师吗？”我解释说，我像他这么大时，其实想当作家，只是觉得自己不太具备当作家的条件。男孩带着不以为然的神情回答：“可是，您叫我们去实现梦想，自己却从没这么做过。您试过吗？”\n\n我一下子哑口无言——他说得对。我从未认真对待过自己，也从未认真对待过自己的愿望，又有什么资格给他们讲勇气和冒险的大道理呢？\n\n就因为那次谈话，我申请重回大学学习创意写作。有好几次，我发觉自己在想要不要干脆放弃，但男孩的话一直在我耳边回响。我明白，要成功，我只需要一点自信，再加上努力。我终于设法走出羞愧，进入了一种自己热爱的工作状态。",
+      "mainLine": {
+        "theme": {
+          "text": "认真对待自己的梦想并动手去试，才有资格劝别人 live our dreams。",
+          "quote": "live our dreams"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+            "text": "作者觉得自己出身与文学无缘，放弃写作，转去学教育。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+            "text": "学生一句“您试过吗”，点破她劝人追梦自己却从没尝试。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+            "text": "她哑口无言，承认自己从未认真对待自己的愿望。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+            "text": "她重回大学学创意写作，靠自信和努力走出羞愧。"
+          }
+        ],
+        "emotion": "自我怀疑→哑口无言→羞愧中坚持→找到热爱"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2026-ii:cloze:1",
+          "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+          "sourceText": "Who was I to __51__ them on bravery and risk when I had never taken myself nor my own __52__ seriously?",
+          "displayText": "Who was I to lecture them on bravery and risk when I had never taken myself nor my own desires seriously?",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:51",
+            "question:paper-gaokao-2026-ii:52"
+          ],
+          "translationZh": "我从未认真对待过自己，也从未认真对待过自己的愿望，又有什么资格给他们讲勇气和冒险的大道理呢？",
+          "analysisZh": "主干是反问句 Who was I to lecture them，字面是“我算什么人，要去教训他们”，实际是说“我没资格说教”。on bravery and risk 交代说教的内容。when 引出的从句说明没资格的原因：never 的否定一直管到 nor 后面，表示她既没认真对待自己，也没认真对待自己的愿望。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 25,
+              "quote": "Who was I to lecture them"
+            },
+            {
+              "start": 46,
+              "end": 75,
+              "quote": "when I had never taken myself"
+            },
+            {
+              "start": 76,
+              "end": 94,
+              "quote": "nor my own desires"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2026-ii:cloze:2",
+          "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+          "sourceText": "I didn’t come from a family connected to the __41__ world, which I perceived as a major __42__.",
+          "displayText": "I didn’t come from a family connected to the literary world, which I perceived as a major problem.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:41",
+            "question:paper-gaokao-2026-ii:42"
+          ],
+          "translationZh": "我的家人和文学界毫无关联，在我看来，这是一大难题。",
+          "analysisZh": "主干是 I didn’t come from a family，我并非出身于那样的家庭。connected to the literary world 是过去分词短语，修饰 family，说明是与文学界有联系的家庭。逗号后的 which 引出非限制性定语从句，指代前面整件事，即自家与文学界无关；perceive A as B 表示把它看作一大难题。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "I didn’t come from a family"
+            },
+            {
+              "start": 28,
+              "end": 59,
+              "quote": "connected to the literary world"
+            },
+            {
+              "start": 61,
+              "end": 81,
+              "quote": "which I perceived as"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2026-ii:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:cloze:1"
+              ],
+              "start": 0,
+              "end": 63,
+              "quote": "我从没想过自己能成为作家。我的家人和文学界毫无关联，在我看来，这是一大难题。本科毕业后，我认定写作不适合我，便转而去学了教育。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:cloze:2"
+              ],
+              "start": 65,
+              "end": 212,
+              "quote": "后来，一个下午改变了一切。那天我在教诗歌，鼓励学生们写写自己的梦想。快下课时，一个孩子问了我一个问题：“老师，您一直都想当老师吗？”我解释说，我像他这么大时，其实想当作家，只是觉得自己不太具备当作家的条件。男孩带着不以为然的神情回答：“可是，您叫我们去实现梦想，自己却从没这么做过。您试过吗？”"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:cloze:3"
+              ],
+              "start": 214,
+              "end": 275,
+              "quote": "我一下子哑口无言——他说得对。我从未认真对待过自己，也从未认真对待过自己的愿望，又有什么资格给他们讲勇气和冒险的大道理呢？"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:cloze:4"
+              ],
+              "start": 277,
+              "end": 381,
+              "quote": "就因为那次谈话，我申请重回大学学习创意写作。有好几次，我发觉自己在想要不要干脆放弃，但男孩的话一直在我耳边回响。我明白，要成功，我只需要一点自信，再加上努力。我终于设法走出羞愧，进入了一种自己热爱的工作状态。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:cloze:1",
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+            "text": "I never thought I could be a writer. I didn’t come from a family connected to the literary world, which I perceived as a major problem. After my undergraduate degree, convinced that writing wasn’t for me, I went off to study teaching."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+            "text": "Then came an afternoon that changed everything. I was teaching poetry, encouraging students to write about their dreams. And then, at the end of the lesson, one child asked me a question: “Have you always wanted to be a teacher, Miss?” I explained that when I was his age, I actually wanted to be a writer, but I didn’t think I quite had what it took. The boy replied with a disapproving look, “Well, you are telling us to live our dreams when you haven’t even done it yourself. Have you even tried?”"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:cloze:3",
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+            "text": "I was struck speechless – he was right. Who was I to lecture them on bravery and risk when I had never taken myself nor my own desires seriously?"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:cloze:4",
+            "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+            "text": "On the basis of that conversation, I applied to go back to university and study creative writing. There were times when I found myself wondering if I should pack it all in, but the boy’s words kept ringing in my ears. I knew I needed nothing else to succeed but a bit of self-belief and hard work. I managed to find a way out of my shame and into a pattern of work that I loved."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 18,
+                "end": 35,
+                "quote": "could be a writer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 8,
+                "end": 12,
+                "quote": "成为作家"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:41"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 82,
+                "end": 90,
+                "quote": "literary"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 18,
+                "end": 21,
+                "quote": "文学界"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 102,
+                "end": 124,
+                "quote": "I perceived as a major"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 26,
+                "end": 30,
+                "quote": "在我看来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:42"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 127,
+                "end": 134,
+                "quote": "problem"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 33,
+                "end": 37,
+                "quote": "一大难题"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 164,
+                "end": 200,
+                "quote": "convinced that writing wasn’t for me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 45,
+                "end": 53,
+                "quote": "认定写作不适合我"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:43"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 207,
+                "end": 215,
+                "quote": "went off"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 55,
+                "end": 59,
+                "quote": "转而去学"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+                "start": 31,
+                "end": 63,
+                "quote": "applied to go back to university"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:4",
+                "start": 9,
+                "end": 15,
+                "quote": "申请重回大学"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:44"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 28,
+                "end": 35,
+                "quote": "changed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 7,
+                "end": 12,
+                "quote": "改变了一切"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 417,
+                "end": 432,
+                "quote": "live our dreams"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 125,
+                "end": 130,
+                "quote": "去实现梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:45"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 113,
+                "end": 119,
+                "quote": "dreams"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 26,
+                "end": 33,
+                "quote": "写写自己的梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 47,
+                "end": 68,
+                "quote": "I was teaching poetry"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 13,
+                "end": 20,
+                "quote": "那天我在教诗歌"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:46"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 220,
+                "end": 227,
+                "quote": "teacher"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 56,
+                "end": 63,
+                "quote": "一直都想当老师"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 332,
+                "end": 343,
+                "quote": "had what it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 92,
+                "end": 96,
+                "quote": "不太具备"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:47"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 346,
+                "end": 350,
+                "quote": "took"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 94,
+                "end": 102,
+                "quote": "具备当作家的条件"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 438,
+                "end": 471,
+                "quote": "you haven’t even done it yourself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 131,
+                "end": 140,
+                "quote": "自己却从没这么做过"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:48"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 375,
+                "end": 387,
+                "quote": "disapproving"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 107,
+                "end": 114,
+                "quote": "不以为然的神情"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 442,
+                "end": 471,
+                "quote": "haven’t even done it yourself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 134,
+                "end": 140,
+                "quote": "从没这么做过"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:49"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 493,
+                "end": 498,
+                "quote": "tried"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 141,
+                "end": 145,
+                "quote": "您试过吗"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+                "start": 6,
+                "end": 23,
+                "quote": "struck speechless"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+                "start": 4,
+                "end": 8,
+                "quote": "哑口无言"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:50"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+                "start": 33,
+                "end": 38,
+                "quote": "right"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+                "start": 10,
+                "end": 14,
+                "quote": "他说得对"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+                "start": 61,
+                "end": 85,
+                "quote": "them on bravery and risk"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+                "start": 50,
+                "end": 55,
+                "quote": "勇气和冒险"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:51"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+                "start": 53,
+                "end": 60,
+                "quote": "lecture"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+                "start": 49,
+                "end": 59,
+                "quote": "讲勇气和冒险的大道理"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 273,
+                "end": 303,
+                "quote": "actually wanted to be a writer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 79,
+                "end": 85,
+                "quote": "其实想当作家"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:52"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+                "start": 127,
+                "end": 134,
+                "quote": "desires"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+                "start": 34,
+                "end": 39,
+                "quote": "自己的愿望"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+                "start": 352,
+                "end": 367,
+                "quote": "The boy replied"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:2",
+                "start": 114,
+                "end": 116,
+                "quote": "回答"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:53"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+                "start": 21,
+                "end": 33,
+                "quote": "conversation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:4",
+                "start": 3,
+                "end": 7,
+                "quote": "那次谈话"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 0,
+                "end": 35,
+                "quote": "I never thought I could be a writer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 0,
+                "end": 12,
+                "quote": "我从没想过自己能成为作家"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:54"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+                "start": 271,
+                "end": 282,
+                "quote": "self-belief"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:4",
+                "start": 68,
+                "end": 72,
+                "quote": "一点自信"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+                "start": 335,
+                "end": 365,
+                "quote": "a pattern of work that I loved"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:4",
+                "start": 94,
+                "end": 103,
+                "quote": "自己热爱的工作状态"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:55"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+                "start": 300,
+                "end": 307,
+                "quote": "managed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:4",
+                "start": 82,
+                "end": 88,
+                "quote": "设法走出羞愧"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2026-ii:cloze:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:51",
+              "question:paper-gaokao-2026-ii:52"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2026-ii:cloze:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+                "start": 40,
+                "end": 145,
+                "quote": "Who was I to lecture them on bravery and risk when I had never taken myself nor my own desires seriously?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:3",
+                "start": 15,
+                "end": 61,
+                "quote": "我从未认真对待过自己，也从未认真对待过自己的愿望，又有什么资格给他们讲勇气和冒险的大道理呢？"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2026-ii:cloze:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:41",
+              "question:paper-gaokao-2026-ii:42"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2026-ii:cloze:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+                "start": 37,
+                "end": 135,
+                "quote": "I didn’t come from a family connected to the literary world, which I perceived as a major problem."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:cloze",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:cloze:1",
+                "start": 13,
+                "end": 38,
+                "quote": "我的家人和文学界毫无关联，在我看来，这是一大难题。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2026-ii:41": {
+      "blankId": "blank:paper-gaokao-2026-ii:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "作者交代自己当不了作家的出身原因，这里要和写作有关的那个圈子。",
+      "find": {
+        "check": "topic",
+        "text": "开头说 never thought I could be a writer，作家所属的圈子是文学界，四个里只有 literary 指写作。",
+        "quotes": [
+          "never thought I could be a writer"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "文学的",
+        "reason": "作者交代自己当不了作家的出身原因，这里要和写作有关的那个圈子。形容词看话题：开头说 never thought I could be a writer，作家所属的圈子是文学界，四个里只有 literary 指写作。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "medical",
+          "meaning": "医学的；作者担心的是能不能 be a writer，医学圈和当作家扯不上关系。",
+          "quote": "be a writer"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "artistic",
+          "meaning": "艺术的；范围太宽，后文她回大学学的是 creative writing，具体是文学写作。",
+          "quote": "creative writing"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "scientific",
+          "meaning": "科学的；全文讲的是当作家、学 creative writing，和科学界无关。",
+          "quote": "creative writing"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "world",
+          "signalSide": "context-after",
+          "targetText": "literary world",
+          "relation": "中文：world 前要一个说明是哪个圈子的形容词。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "writer",
+          "signalSide": "context-before",
+          "relation": "中文：作家对应的圈子是文学界。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:42": {
+      "blankId": "blank:paper-gaokao-2026-ii:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "没有文学圈背景，在她看来是当作家的一大阻碍，这里要一个负面的名词。",
+      "find": {
+        "check": "echo",
+        "text": "which 指前面 didn’t come from a family 这件缺憾，用一个名词概括它，后文她又认定 writing wasn’t for me，负面的只有 problem。",
+        "quotes": [
+          "didn’t come from a family",
+          "writing wasn’t for me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "难题",
+        "meaning": "当作家的障碍",
+        "reason": "没有文学圈背景，在她看来是当作家的一大阻碍，这里要一个负面的名词。名词看复现：which 指前面 didn’t come from a family 这件缺憾，用一个名词概括它，后文她又认定 writing wasn’t for me，负面的只有 problem。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "subject",
+          "meaning": "学科，话题；出身不沾文学是缺憾，说它是 a major subject 不通，后面她因此认定 writing wasn’t for me。",
+          "quote": "writing wasn’t for me"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "event",
+          "meaning": "事件；没有文学背景是一直存在的出身，不是一件事，也不会让她认定 writing wasn’t for me。",
+          "quote": "writing wasn’t for me"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "breakthrough",
+          "meaning": "突破；出身不沾文学是缺憾，她随后认定 writing wasn’t for me，正好反着，不是突破。",
+          "quote": "writing wasn’t for me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "perceived as a major",
+          "signalSide": "context-before",
+          "targetText": "perceived as a major problem",
+          "relation": "中文：perceive A as B，把前面那件事看作什么。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "didn’t come from a family",
+          "signalSide": "context-before",
+          "relation": "中文：which 回指家里与文学圈无关这件缺憾。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:43": {
+      "blankId": "blank:paper-gaokao-2026-ii:43",
+      "blankNo": 43,
+      "pos": "phrase",
+      "role": "main",
+      "context": "认定写作不适合自己后，她离开这条路去学教育，这里要“动身去做别的”。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前有 convinced that writing wasn’t for me，后接 to study teaching，是离开写作、另去学教育，went off 正是离开去做。",
+        "quotes": [
+          "convinced that writing wasn’t for me",
+          "to study teaching"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "离开",
+        "meaning": "转而去（学教育）",
+        "reason": "认定写作不适合自己后，她离开这条路去学教育，这里要“动身去做别的”。词组看语境义：前有 convinced that writing wasn’t for me，后接 to study teaching，是离开写作、另去学教育，went off 正是离开去做。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "stepped aside",
+          "meaning": "让到一边，让位；她不是给谁让路，后面 to study teaching 是她自己选的新方向。",
+          "quote": "to study teaching"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "got up",
+          "meaning": "起床，站起来；got up to study teaching 成了站起身去学，说的却是本科毕业后的人生选择。",
+          "quote": "to study teaching"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "turned back",
+          "meaning": "折回，返回；她以前没学过教育，谈不上回头，to study teaching 是一条新路。",
+          "quote": "to study teaching"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to study teaching",
+          "signalSide": "context-after",
+          "targetText": "went off to study teaching",
+          "relation": "中文：go off to do 表示离开去做某事。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "off",
+          "signalSide": "option",
+          "targetText": "went off",
+          "relation": "中文：off 表示离开原处，这里是离开写作这条路。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:44": {
+      "blankId": "blank:paper-gaokao-2026-ii:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "第二段开头的转折：这个下午让她的人生走向从此不同，这里要“改变”。",
+      "find": {
+        "check": "collocation",
+        "text": "主语 an afternoon，宾语 everything；后文她因这个下午 applied to go back to university，一切都变了。",
+        "quotes": [
+          "applied to go back to university"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "改变",
+        "reason": "第二段开头的转折：这个下午让她的人生走向从此不同，这里要“改变”。动词看搭配：主语 an afternoon，宾语 everything；后文她因这个下午 applied to go back to university，一切都变了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "ruined",
+          "meaning": "毁掉；这个下午最终让她走进 a pattern of work that I loved，是好结果，不是毁掉一切。",
+          "quote": "a pattern of work that I loved"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "revealed",
+          "meaning": "揭示；这个下午之后她 applied to go back to university，是人生转了向，不是揭露了什么。",
+          "quote": "applied to go back to university"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "interrupted",
+          "meaning": "打断；这个下午不是让事情中断，而是让她后来 applied to go back to university，走上新路。",
+          "quote": "applied to go back to university"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "everything",
+          "signalSide": "context-after",
+          "targetText": "changed everything",
+          "relation": "中文：change everything，改变了一切。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "applied to go back to university",
+          "signalSide": "context-after",
+          "relation": "中文：后文的行动说明她的生活确实变了。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:45": {
+      "blankId": "blank:paper-gaokao-2026-ii:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "她课上鼓励学生写的内容，正是后面男孩拿来反问她的那件事，这里要“梦想”。",
+      "find": {
+        "check": "echo",
+        "text": "后文男孩说 you are telling us to live our dreams，她鼓励学生写的就是 dreams，原词复现。",
+        "quotes": [
+          "you are telling us to live our dreams"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "梦想",
+        "reason": "她课上鼓励学生写的内容，正是后面男孩拿来反问她的那件事，这里要“梦想”。名词看复现：后文男孩说 you are telling us to live our dreams，她鼓励学生写的就是 dreams，原词复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hobbies",
+          "meaning": "爱好；男孩反驳她 telling us to live our dreams，可见课上谈的是梦想，不是爱好。",
+          "quote": "live our dreams"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "families",
+          "meaning": "家庭；男孩反问她没有 live our dreams，课上让学生写的是梦想，不是家人。",
+          "quote": "live our dreams"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lessons",
+          "meaning": "课程，教训；男孩说她 telling us to live our dreams，她鼓励学生写的是梦想。",
+          "quote": "live our dreams"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "write about their",
+          "signalSide": "context-before",
+          "targetText": "write about their dreams",
+          "relation": "中文：write about 后接写作的内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "live our dreams",
+          "signalSide": "context-after",
+          "relation": "中文：男孩的话复现了 dreams。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:46": {
+      "blankId": "blank:paper-gaokao-2026-ii:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "学生问老师是不是一直想干现在这一行，这里要她眼下的职业。",
+      "find": {
+        "check": "echo",
+        "text": "她正 teaching poetry，学生叫她 Miss；她答 actually wanted to be a writer，actually 说明问的是另一行，即 teacher。",
+        "quotes": [
+          "teaching poetry",
+          "actually wanted to be a writer"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "教师",
+        "reason": "学生问老师是不是一直想干现在这一行，这里要她眼下的职业。名词看复现：她正 teaching poetry，学生叫她 Miss；她答 actually wanted to be a writer，actually 说明问的是另一行，即 teacher。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "writer",
+          "meaning": "作家；她答 actually wanted to be a writer，actually 表示和所问的不一样，问的不是作家。",
+          "quote": "actually wanted to be a writer"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reporter",
+          "meaning": "记者；学生眼前的她正在 teaching poetry，问的是她现在当老师这件事。",
+          "quote": "teaching poetry"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "publisher",
+          "meaning": "出版商；她此时在 teaching poetry，学生问的是她当老师是不是一直的心愿。",
+          "quote": "teaching poetry"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wanted to be a",
+          "signalSide": "context-before",
+          "targetText": "wanted to be a teacher",
+          "relation": "中文：be a 后接职业名词。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I was teaching poetry",
+          "signalSide": "context-before",
+          "relation": "中文：她正在上课，身份是老师。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:47": {
+      "blankId": "blank:paper-gaokao-2026-ii:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她觉得自己不太具备当作家的条件，这里要构成“具备所需素质”的固定说法。",
+      "find": {
+        "check": "collocation",
+        "text": "前面是 had what it，组成 have what it takes，表示具备成事所需的条件；跟着 didn’t think 用过去式 took。",
+        "quotes": [
+          "had what it",
+          "didn’t think"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "需要",
+        "meaning": "当作家所需的条件",
+        "reason": "她觉得自己不太具备当作家的条件，这里要构成“具备所需素质”的固定说法。动词看搭配：前面是 had what it，组成 have what it takes，表示具备成事所需的条件；跟着 didn’t think 用过去式 took。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "kept",
+          "meaning": "保持，保留；had what it kept 不成说法，这里说的是当作家所需的条件。",
+          "quote": "had what it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "left",
+          "meaning": "留下；had what it left 成了“有它剩下的东西”，接不上她怀疑自己当不了作家。",
+          "quote": "had what it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "held",
+          "meaning": "持有；had what it held 说不通，“具备所需条件”只能说 had what it took。",
+          "quote": "had what it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "had what it",
+          "signalSide": "context-before",
+          "targetText": "had what it took",
+          "relation": "中文：have what it takes，具备所需的条件。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:48": {
+      "blankId": "blank:paper-gaokao-2026-ii:48",
+      "blankNo": 48,
+      "pos": "adjective",
+      "role": "main",
+      "context": "男孩接下来要指出她言行不一，这时的神情要带着不满。",
+      "find": {
+        "check": "affect",
+        "text": "后面他说 you haven’t even done it yourself，又追问 Have you even，是在责备，神情是 disapproving。",
+        "quotes": [
+          "you haven’t even done it yourself",
+          "Have you even"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "不赞成的",
+        "reason": "男孩接下来要指出她言行不一，这时的神情要带着不满。形容词看情感：后面他说 you haven’t even done it yourself，又追问 Have you even，是在责备，神情是 disapproving。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "satisfied",
+          "meaning": "满意的；他接着指出 you haven’t even done it yourself，是在挑她的毛病，不是满意。",
+          "quote": "you haven’t even done it yourself"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "guilty",
+          "meaning": "内疚的；说空话的是老师，男孩在质问 you haven’t even done it yourself，轮不到他内疚。",
+          "quote": "you haven’t even done it yourself"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "grateful",
+          "meaning": "感激的；男孩说的是 you haven’t even done it yourself，带着责备，没有感激。",
+          "quote": "you haven’t even done it yourself"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "look",
+          "signalSide": "context-after",
+          "targetText": "disapproving look",
+          "relation": "中文：look 前要描写神情的形容词。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "you haven’t even done it yourself",
+          "signalSide": "context-after",
+          "relation": "中文：这句是在责备老师。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:49": {
+      "blankId": "blank:paper-gaokao-2026-ii:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "男孩的追问点破关键：她劝人追梦，自己却连试都没试过，这里要“尝试”。",
+      "find": {
+        "check": "echo",
+        "text": "前句 haven’t even done it yourself，追问里同样用 even，问她连迈第一步都没有吗，tried 接的就是 done it。",
+        "quotes": [
+          "haven’t even done it yourself"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "尝试",
+        "reason": "男孩的追问点破关键：她劝人追梦，自己却连试都没试过，这里要“尝试”。动词看复现：前句 haven’t even done it yourself，追问里同样用 even，问她连迈第一步都没有吗，tried 接的就是 done it。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "noticed",
+          "meaning": "注意到；前句责备的是 haven’t even done it yourself，追问的是她做没做，不是注意没注意。",
+          "quote": "haven’t even done it yourself"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "asked",
+          "meaning": "问；男孩责备她 haven’t even done it yourself，追问的是她试过没有，不是问过没有。",
+          "quote": "haven’t even done it yourself"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "waited",
+          "meaning": "等待；男孩说她 haven’t even done it yourself，追问的是行动，等待恰好不是行动。",
+          "quote": "haven’t even done it yourself"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Have you even",
+          "signalSide": "context-before",
+          "targetText": "Have you even tried",
+          "relation": "中文：Have you even 后接她该做却没做的动作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "haven’t even done it yourself",
+          "signalSide": "context-before",
+          "relation": "中文：done it 和 tried 说的都是动手去做。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:50": {
+      "blankId": "blank:paper-gaokao-2026-ii:50",
+      "blankNo": 50,
+      "pos": "adjective",
+      "role": "main",
+      "context": "她被问得哑口无言，是因为承认男孩说中了，这里要肯定男孩的话。",
+      "find": {
+        "check": "affect",
+        "text": "后一句 Who was I to … when I had never taken myself … seriously 是在自责，说明她认同男孩，他是 right。",
+        "quotes": [
+          "Who was I to",
+          "when I had never taken myself"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "正确的",
+        "meaning": "说得对",
+        "reason": "她被问得哑口无言，是因为承认男孩说中了，这里要肯定男孩的话。形容词看情感：后一句 Who was I to … when I had never taken myself … seriously 是在自责，说明她认同男孩，他是 right。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rude",
+          "meaning": "粗鲁的；后句她自问 Who was I to 给人说教，是在责怪自己，不是怪男孩无礼。",
+          "quote": "Who was I to"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "shy",
+          "meaning": "害羞的；男孩刚当面质问她，并不害羞；后句 Who was I to 说明她认同他的话。",
+          "quote": "Who was I to"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "silent",
+          "meaning": "沉默的；说不出话的是作者 struck speechless，男孩刚把话说完，并不沉默。",
+          "quote": "struck speechless"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he was",
+          "signalSide": "context-before",
+          "targetText": "he was right",
+          "relation": "中文：he was 后接对男孩的评价。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Who was I to",
+          "signalSide": "context-after",
+          "relation": "中文：她接着反省自己，等于认同男孩。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:51": {
+      "blankId": "blank:paper-gaokao-2026-ii:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "她反省自己一边劝学生勇敢冒险一边不行动，这里要“对人讲道理、说教”。",
+      "find": {
+        "check": "collocation",
+        "text": "后接 them on bravery and risk，lecture sb on sth 指就某事教训人，对应男孩说的 telling us to live our dreams。",
+        "quotes": [
+          "them on bravery and risk",
+          "telling us to live our dreams"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "训诫",
+        "meaning": "给学生讲大道理",
+        "reason": "她反省自己一边劝学生勇敢冒险一边不行动，这里要“对人讲道理、说教”。动词看搭配：后接 them on bravery and risk，lecture sb on sth 指就某事教训人，对应男孩说的 telling us to live our dreams。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "examine",
+          "meaning": "考查；examine them on 是就某事考他们，可她做的是 telling us to live our dreams，是劝导。",
+          "quote": "telling us to live our dreams"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "congratulate",
+          "meaning": "祝贺；congratulate them on 是为某事祝贺他们，她做的是 telling us to live our dreams。",
+          "quote": "telling us to live our dreams"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "consult",
+          "meaning": "请教；她是给学生讲道理，即 telling us to live our dreams，不是向学生请教勇气。",
+          "quote": "telling us to live our dreams"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "them on bravery and risk",
+          "signalSide": "context-after",
+          "targetText": "lecture them on bravery and risk",
+          "relation": "中文：lecture sb on sth，就某事教训某人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "telling us to live our dreams",
+          "signalSide": "context-before",
+          "relation": "中文：男孩说的“叫我们追梦”就是她的说教。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:52": {
+      "blankId": "blank:paper-gaokao-2026-ii:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "她自责从没认真对待的东西，就是想当作家的那份心愿，这里要“愿望”。",
+      "find": {
+        "check": "echo",
+        "text": "前文她说 actually wanted to be a writer，男孩说 live our dreams，desires 复现的就是这份想当作家的心愿。",
+        "quotes": [
+          "actually wanted to be a writer",
+          "live our dreams"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "愿望",
+        "reason": "她自责从没认真对待的东西，就是想当作家的那份心愿，这里要“愿望”。名词看复现：前文她说 actually wanted to be a writer，男孩说 live our dreams，desires 复现的就是这份想当作家的心愿。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "values",
+          "meaning": "价值观；她没当真的是 wanted to be a writer 这份心愿，不是价值观。",
+          "quote": "wanted to be a writer"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "imagination",
+          "meaning": "想象力；她自责的是没把 wanted to be a writer 的心愿当真，不是想象力。",
+          "quote": "wanted to be a writer"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "inspiration",
+          "meaning": "灵感；她没认真对待的是 wanted to be a writer 这个愿望，不是一时的灵感。",
+          "quote": "wanted to be a writer"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "taken myself nor my own",
+          "signalSide": "context-before",
+          "targetText": "taken myself nor my own desires seriously",
+          "relation": "中文：take sth seriously，认真对待某事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "wanted to be a writer",
+          "signalSide": "context-before",
+          "relation": "中文：她想当作家的心愿就是 desires。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:53": {
+      "blankId": "blank:paper-gaokao-2026-ii:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "这里概括前面她和男孩的那番问答，正是它促使她下决心，要指那次交谈。",
+      "find": {
+        "check": "echo",
+        "text": "that 回指前文 one child asked me a question 和 The boy replied 的一问一答，概括成 conversation。",
+        "quotes": [
+          "one child asked me a question",
+          "The boy replied"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "交谈",
+        "reason": "这里概括前面她和男孩的那番问答，正是它促使她下决心，要指那次交谈。名词看复现：that 回指前文 one child asked me a question 和 The boy replied 的一问一答，概括成 conversation。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cooperation",
+          "meaning": "合作；前文是 one child asked me a question 的一问一答，不是合作。",
+          "quote": "one child asked me a question"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "administration",
+          "meaning": "管理，行政；前文是 The boy replied 的师生对话，和学校管理无关。",
+          "quote": "The boy replied"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "explanation",
+          "meaning": "解释；她的 I explained 只是其中一句，促使她回大学的是男孩的反问，that 指整场对话。",
+          "quote": "I explained"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "On the basis of that",
+          "signalSide": "context-before",
+          "targetText": "On the basis of that conversation",
+          "relation": "中文：that 回指前文出现过的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The boy replied",
+          "signalSide": "context-before",
+          "relation": "中文：师生一问一答，就是一次谈话。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:54": {
+      "blankId": "blank:paper-gaokao-2026-ii:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "她总结成功所需，正对上开头的不自信，这里要“相信自己”。",
+      "find": {
+        "check": "echo",
+        "text": "开头 I never thought I could be a writer，后来又 didn’t think I quite had，缺的就是自信，和 hard work 并列的是 self-belief。",
+        "quotes": [
+          "I never thought I could be a writer",
+          "didn’t think I quite had",
+          "hard work"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "自信",
+        "reason": "她总结成功所需，正对上开头的不自信，这里要“相信自己”。名词看复现：开头 I never thought I could be a writer，后来又 didn’t think I quite had，缺的就是自信，和 hard work 并列的是 self-belief。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "know-how",
+          "meaning": "技能，诀窍；她起初缺的不是技能，而是 never thought I could be a writer 的不自信。",
+          "quote": "never thought I could be a writer"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "brainstorming",
+          "meaning": "集思广益；与 hard work 并列的是她自己身上要有的东西，不是集体讨论。",
+          "quote": "hard work"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teamwork",
+          "meaning": "团队合作；她是一个人回大学 study creative writing，并列的 hard work 也是个人努力。",
+          "quote": "study creative writing"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a bit of",
+          "signalSide": "context-before",
+          "targetText": "a bit of self-belief",
+          "relation": "中文：a bit of 后接不可数名词，与 hard work 并列。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I never thought I could be a writer",
+          "signalSide": "context-before",
+          "relation": "中文：开头的不自信和这里的自信正相反。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:55": {
+      "blankId": "blank:paper-gaokao-2026-ii:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "结尾交代结果：她终于走出羞愧，做上热爱的工作，这里要“设法做成”。",
+      "find": {
+        "check": "collocation",
+        "text": "后接 to find a way out of my shame，结果是 a pattern of work that I loved，manage to do 表示设法做成了。",
+        "quotes": [
+          "to find a way out of my shame",
+          "a pattern of work that I loved"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "设法做成",
+        "reason": "结尾交代结果：她终于走出羞愧，做上热爱的工作，这里要“设法做成”。动词看搭配：后接 to find a way out of my shame，结果是 a pattern of work that I loved，manage to do 表示设法做成了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "remembered",
+          "meaning": "记得；remembered to find 是记得去找，而结尾讲的是她真的走进 a pattern of work that I loved。",
+          "quote": "a pattern of work that I loved"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "agreed",
+          "meaning": "同意；agreed to find 是答应去找，而结尾是她已经进入 a pattern of work that I loved。",
+          "quote": "a pattern of work that I loved"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hesitated",
+          "meaning": "犹豫；前面 the boy’s words kept ringing in my ears 让她坚持下来，结局是走出羞愧，不是犹豫。",
+          "quote": "the boy’s words kept ringing in my ears"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to find a way out of my shame",
+          "signalSide": "context-after",
+          "targetText": "managed to find a way out of my shame",
+          "relation": "中文：manage to do，设法做成某事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a pattern of work that I loved",
+          "signalSide": "context-after",
+          "relation": "中文：她已进入热爱的工作，说明做成了。"
+        }
+      ]
+    }
+  }
+}

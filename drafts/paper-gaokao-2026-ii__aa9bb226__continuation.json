@@ -1,0 +1,140 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Struck by the doctor’s warning, I knew I had to make a change. That evening, I told my roommates what the doctor had said, and this time I asked for their help. I set a simple rule for myself: phone off at ten thirty, lights out by eleven. The first few nights were hard. I lay in bed wide awake, missing my videos and the quiet hours I used to love. More than once I reached for my phone, but I remembered the words on that medical report and put it back. That weekend I called my parents and admitted that they had been right all along. Instead of blaming me, they said they were glad I was finally listening.\n\nParagraph 2: Slowly but surely, my efforts to adjust to the new routine paid off. After about two weeks, I began to fall asleep soon after my head touched the pillow. My headaches disappeared, and I no longer felt tired in morning classes. I even started doing my homework early in the morning, just as my roommates had suggested. To my surprise, I finished it faster and made fewer mistakes. A month later, the doctor checked my heart again, and this time he smiled. I still love silence, but now it is the quiet of six o’clock in the morning, with a clear head and a steady heart.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "停在“我”在校医室听到“心脏像 40 岁”，意识到多年熬夜把心脏累成了超负荷的发动机。熬夜的习惯还在，“我”只是刚被吓醒，还没有任何改变。"
+        },
+        {
+          "question": "“我”想要什么、是什么样的人？从哪里看出来？",
+          "answer": "“我”从中学起就爱夜里的安静，父母反复劝也 “fell on deaf ears”，室友劝早起写作业，“我”回一句 “No way!”，是个很固执、听不进劝的人。所以续写的改变要写得一步一步、有反复，不能一夜之间就变了个人。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第一人称“我”回忆往事，过去时，句子多为中短句。全文只有医生一句带引号的直接引语，父母、室友的话都是转述；描写很少，重在交代事情和感受。续写也以转述为主，至多留一句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "My roommates would tell me to go to bed and get up early the following morning to do it instead.",
+          "use": "室友当初的建议可以在续写里真正被采纳：“我”早起写作业，正好回应原文那句 “No way!”。"
+        },
+        {
+          "sourceQuote": "their repeated requests fell on deaf ears",
+          "use": "父母劝了多年没被听进去，续写里“我”主动给父母打电话认错，这条线就收住了。"
+        },
+        {
+          "sourceQuote": "I loved the silence of the night",
+          "use": "结尾可以回到“安静”：“我”仍然爱安静，只是换成了清晨的安静，前后呼应，不必另造象征。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从被医生的话震动、下决心改变写起，要写出具体怎么改。",
+        "第二段首句说“慢慢地、扎扎实实地，适应新作息的努力有了回报”，所以第一段结束时新作息必须已经开始，而且适应得并不轻松。",
+        "第二段写回报：身体、学习或心态上看得见的变化，回应医生的警告。",
+        "保持第一人称、过去时，人物只用“我”、父母、室友和医生。"
+      ],
+      "thisEssayChooses": "本文第一段让“我”向室友求助、定下“十点半关手机、十一点熄灯”的规矩，写头几夜忍不住想拿手机的反复，再给父母打电话认错；第二段写入睡变快、头痛消失、照室友说的早起写作业、复查时医生露出笑容，最后落在“清晨的安静”。具体时间、求助对象、复查这件事都可以换，比如改成写作息表或请父母监督，只要第一段新作息已经开始、第二段写出回报即可。"
+    },
+    "standard": {
+      "essay": "Paragraph 1: Struck by the doctor’s warning, I knew I had to make a change. That evening, I told my roommates what the doctor had said, and this time I asked for their help. I set a simple rule for myself: phone off at ten thirty, lights out by eleven. The first few nights were hard. I lay in bed wide awake, missing my videos and the quiet hours I used to love. More than once I reached for my phone, but I remembered the words on that medical report and put it back. That weekend I called my parents and admitted that they had been right all along. Instead of blaming me, they said they were glad I was finally listening.\n\nParagraph 2: Slowly but surely, my efforts to adjust to the new routine paid off. After about two weeks, I began to fall asleep soon after my head touched the pillow. My headaches disappeared, and I no longer felt tired in morning classes. I even started doing my homework early in the morning, just as my roommates had suggested. To my surprise, I finished it faster and made fewer mistakes. A month later, the doctor checked my heart again, and this time he smiled. I still love silence, but now it is the quiet of six o’clock in the morning, with a clear head and a steady heart.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把“要改变”落到具体规矩上，写出开头几天的挣扎，并收住父母这条线。",
+          "items": [
+            {
+              "quote": "and this time I asked for their help",
+              "explain": "原文室友劝“我”早睡，“我”一口回绝；this time 点出这回不一样了，人物的改变有了对照。"
+            },
+            {
+              "quote": "phone off at ten thirty, lights out by eleven",
+              "explain": "冒号后用两个短语给出规矩，具体到几点，读者一看就知道“改变”是什么，比写 I decided to sleep early 实在。"
+            },
+            {
+              "quote": "More than once I reached for my phone, but I remembered the words on that medical report and put it back.",
+              "explain": "改习惯不会一下就成，写出伸手又缩回的动作，挣扎就看得见；让“我”缩手的是原文的那份体检报告，用回了原文的物件。"
+            },
+            {
+              "quote": "admitted that they had been right all along",
+              "explain": "转述而不用引号，和原文写父母的方式一样；过去完成时说父母“早就是对的”，回应原文父母多年的劝说。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "一步步写出回报：先是睡眠，再是身体和学习，最后用复查和清晨收尾。",
+          "items": [
+            {
+              "quote": "After about two weeks",
+              "explain": "段首句说 Slowly but surely，这里马上给出时间，变化是一点点来的，不是第二天就好了。"
+            },
+            {
+              "quote": "just as my roommates had suggested",
+              "explain": "早起写作业正是原文“我”说 No way 的事，现在真的做到了，原文的伏笔有了回应。"
+            },
+            {
+              "quote": "the doctor checked my heart again, and this time he smiled",
+              "explain": "原文医生 with a serious expression，这里换成笑，用同一个人的表情变化说明心脏好转，不用直接说“我健康了”。"
+            },
+            {
+              "quote": "I still love silence, but now it is the quiet of six o’clock in the morning",
+              "explain": "结尾回到原文“爱夜里的安静”，只把夜里换成清晨，用一个具体时刻收住全文，而不是喊一句熬夜有害的口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "reached for my phone ... put it back",
+          "function": "用一伸一放两个动作写出想玩手机又忍住，情绪不用直接说出来。"
+        },
+        {
+          "expression": "fall asleep soon after my head touched the pillow",
+          "function": "写入睡变快的具体画面，比 I slept well 更能让人看见“回报”。"
+        },
+        {
+          "expression": "admitted that they had been right all along",
+          "function": "转述认错的话，既交代了和父母的和解，又和原文的叙述方式一致。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段写完改变，第一段末尾就写身体全好了。",
+          "why": "第二段首句才说努力“慢慢有了回报”，回报属于第二段；第一段提前写掉，第二段就没东西可写。"
+        },
+        {
+          "pitfall": "只写“我下定决心早睡早起”，没有任何具体做法和困难。",
+          "why": "“我”是个多年听不进劝的人，改变要有具体规矩和反复，否则第二段的 Slowly but surely 没有着落。"
+        },
+        {
+          "pitfall": "结尾写一大段“健康最重要，熬夜危害大”的道理。",
+          "why": "口号放在任何熬夜故事后都成立，不推进情节；用复查结果或清晨的一个场景收尾更像原文作者的写法。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Struck by the doctor’s warning, I knew I had to make a change. Back in the dorm, I told my roommates everything, and for once I asked for their help instead of brushing off their advice. Together we came up with a plan: my phone would go into a drawer at ten thirty, and the lights would go out by eleven, however much work was left. The first week was a battle. I tossed and turned in the dark, my mind still racing, my fingers itching for the phone. One night I even got up and pulled the drawer open, but the picture of that medical report flashed into my mind, and I pushed it shut again. That weekend I called my parents. “You were right,” I said quietly. Instead of reminding me of all those ignored requests, my mother simply asked whether I was sleeping any better.\n\nParagraph 2: Slowly but surely, my efforts to adjust to the new routine paid off. By the third week, I was drifting off soon after my head touched the pillow, and the headaches that used to follow me into morning classes faded away. I even took my roommates’ old advice and began doing my homework at dawn. To my surprise, with a fresh mind I could finish in an hour what used to keep me up half the night. When I went back to the school clinic a month later, the same doctor studied my new report and, for the first time, smiled. Walking back across the empty campus, I realized I still loved silence. It was just a different kind now: the silence of six in the morning, when my head was clear and my heart beat calmly.",
+      "beyondStandard": [
+        {
+          "quote": "instead of brushing off their advice",
+          "explain": "brush off 是“把劝告当耳旁风”的地道说法，直接对照原文“我”拒绝室友的样子，比标准版的 this time 更具体。"
+        },
+        {
+          "quote": "I tossed and turned in the dark, my mind still racing, my fingers itching for the phone.",
+          "explain": "一个主句加两个独立主格结构，把翻来覆去、脑子停不下、手痒想拿手机三件事放进一句，挣扎写得更细，又不加新情节。"
+        },
+        {
+          "quote": "Instead of reminding me of all those ignored requests",
+          "explain": "标准版只说父母没有责怪，这里点出母亲本可以翻旧账却没翻，用回原文 repeated requests，母亲的宽容更真实。"
+        }
+      ]
+    }
+  }
+}

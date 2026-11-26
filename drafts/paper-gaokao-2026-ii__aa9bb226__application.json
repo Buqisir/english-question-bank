@@ -1,0 +1,143 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Kate,\n\nIt’s a great idea to make a collection of our English essays. I’m writing to suggest adding pictures to it, and I’d love to draw them myself.\n\nPictures would make the book far more inviting. Many of our essays describe real scenes, like our sports meet or a farm visit. A simple drawing beside each one would help readers see these moments at a glance, and it would make the book feel more like our own.\n\nAs for the drawing, I’m confident I can handle it. I’ve been in the school art club for two years and drew the posters for our class reading week. I’d draw small black-and-white pictures, which are quick to finish and print clearly.\n\nIf you agree, I can show you a few sample sketches next Monday.\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "taskRequires": [
+        "写给外教 Kate 的邮件，用题给称呼、首句、结尾 Yours, 和署名 Li Hua，首句开头接着写第一段。",
+        "要点一：建议给作文集配图；要点二：自荐承担画图工作。",
+        "对象是外教，语气礼貌、真诚，词数 80 左右。"
+      ],
+      "thisEssayChooses": "本文把配图的理由落在“作文里写的就是我们自己的活动，配图让读者先看到画面”上，自荐时补了美术社两年、画过读书周海报的经历，还提出黑白小图、下周一先交样稿。这些经历和安排都可以换成你自己真实的情况。"
+    },
+    "standard": {
+      "essay": "Dear Kate,\n\nIt’s a great idea to make a collection of our English essays. I’m writing to suggest adding pictures to it, and I’d love to draw them myself.\n\nPictures would make the book far more inviting. Many of our essays describe real scenes, like our sports meet or a farm visit. A simple drawing beside each one would help readers see these moments at a glance, and it would make the book feel more like our own.\n\nAs for the drawing, I’m confident I can handle it. I’ve been in the school art club for two years and drew the posters for our class reading week. I’d draw small black-and-white pictures, which are quick to finish and print clearly.\n\nIf you agree, I can show you a few sample sketches next Monday.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "建议配图",
+          "quote": "I’m writing to suggest adding pictures to it"
+        },
+        {
+          "point": "建议配图（理由）",
+          "quote": "A simple drawing beside each one would help readers see these moments at a glance"
+        },
+        {
+          "point": "自荐承担画图工作",
+          "quote": "I’d love to draw them myself"
+        },
+        {
+          "point": "自荐承担画图工作（资格与做法）",
+          "quote": "I’ve been in the school art club for two years and drew the posters for our class reading week."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住题给首句，一句话亮出两件事：建议配图、我来画。",
+          "items": [
+            {
+              "quote": "I’m writing to suggest adding pictures to it",
+              "explain": "首句已经夸过这个主意，第二句马上说来意。suggest 后接 doing，是提建议最稳的说法；Kate 读到这里就知道这封信要她决定什么。"
+            },
+            {
+              "quote": "and I’d love to draw them myself",
+              "explain": "同一句里顺手把自荐带出来，建议和自荐连成一件事：不是只给老师出主意，而是自己愿意动手。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "讲配图的理由，从读者和这本作文集本身说，而不是“我喜欢画画”。",
+          "items": [
+            {
+              "quote": "Pictures would make the book far more inviting.",
+              "explain": "段首先给结论，inviting 说的是书让人想翻开，比 beautiful 更贴近作文集要被人读的目的。would 表示这是设想，语气留有余地，适合对老师提建议。"
+            },
+            {
+              "quote": "like our sports meet or a farm visit",
+              "explain": "举出作文里真实的场景，说明这些文章本来就有画面可画，理由才不空。"
+            },
+            {
+              "quote": "it would make the book feel more like our own",
+              "explain": "第二个理由落在“这是我们班自己的书”，Kate 编这本集子正是为了这个，理由站在她的目标上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "自荐：说清为什么能胜任、打算怎么画。",
+          "items": [
+            {
+              "quote": "I’ve been in the school art club for two years and drew the posters for our class reading week.",
+              "explain": "用两件具体经历代替“我画得很好”，老师能据此判断你靠得住。现在完成时说长期经历，一般过去时说做过的一件事，时态各管一头。"
+            },
+            {
+              "quote": "which are quick to finish and print clearly",
+              "explain": "替对方想到了顾虑：会不会拖进度、印出来好不好看。一个非限制性定语从句就把两点都接住了。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "落在下一步：什么时候、拿什么给 Kate 看。",
+          "items": [
+            {
+              "quote": "If you agree, I can show you a few sample sketches next Monday.",
+              "explain": "结尾不写“期待回复”这类套话，而是给出具体行动和时间。Kate 只要回一句同意，事情就能往下走。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "suggest adding ...",
+          "function": "向老师提建议时直接说出要加什么，suggest 后接动名词，不说 suggest to add。"
+        },
+        {
+          "expression": "As for the drawing, ...",
+          "function": "从“为什么配图”转到“谁来画”，一个短语就换好话题，自荐段的开头清清楚楚。"
+        },
+        {
+          "expression": "If you agree, I can ...",
+          "function": "把决定权留给老师，同时给出自己马上能做的事，自荐不显得强求。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Kate,\n\nIt’s a great idea to make a collection of our English essays. Having read through many of them, I’d like to suggest adding some pictures, and I’d be glad to take on the drawing myself.\n\nA book with nothing but words can feel a little heavy, especially for readers who are still learning English. Yet many of our pieces describe vivid scenes, like last autumn’s rainy sports meet. A small drawing beside each title would give readers a first taste of the story and invite them to read on. It would also make the book feel truly ours.\n\nAs for me, I’ve been in the school art club for two years and designed the posters for our class reading week. I’d keep the pictures to simple black-and-white line drawings, which print clearly and won’t delay the book.\n\nIf you like the idea, I could bring you three sample sketches next Monday so we can choose a style together.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "建议配图",
+          "quote": "I’d like to suggest adding some pictures"
+        },
+        {
+          "point": "建议配图（理由）",
+          "quote": "A small drawing beside each title would give readers a first taste of the story and invite them to read on."
+        },
+        {
+          "point": "自荐承担画图工作",
+          "quote": "I’d be glad to take on the drawing myself"
+        },
+        {
+          "point": "自荐承担画图工作（资格与做法）",
+          "quote": "I’ve been in the school art club for two years and designed the posters for our class reading week."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "Having read through many of them",
+          "explain": "先交代建议从哪来：读过同学们的作文才想到配图。现在分词短语开头，让建议显得有根据，也更像学生对老师说话。"
+        },
+        {
+          "quote": "A book with nothing but words can feel a little heavy, especially for readers who are still learning English.",
+          "explain": "标准版直接说配图更吸引人，这里先说不配图的问题，而且点出读者是学英语的人，理由更贴近一本英语作文集的实际读者。"
+        },
+        {
+          "quote": "so we can choose a style together",
+          "explain": "标准版只说给老师看样稿，这里把样稿变成两人一起定风格，既尊重外教的决定权，也显出合作的态度。"
+        }
+      ]
+    }
+  }
+}

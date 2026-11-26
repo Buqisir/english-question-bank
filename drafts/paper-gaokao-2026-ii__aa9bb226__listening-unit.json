@@ -1,0 +1,949 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: We're going to the park for a picnic. Would you like to come, Rose?\nW: I'd love to, but I have to go downtown to get Kevin a birthday present. He invited me to his party.",
+      "translationZh": "男：我们要去公园野餐。罗斯，你想一起来吗？\n女：我很想去，可我得去市中心给凯文买份生日礼物。他邀请我去参加他的聚会。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "罗斯要去市中心给凯文买生日礼物，所以不能和男士一起去公园野餐。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我们要去公园野餐。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "罗斯，你想一起来吗？"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我很想去，可我得去市中心给凯文买份生日礼物。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "他邀请我去参加他的聚会。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Larry, how is your swimming class going?\nM: Well, believe it or not, we haven't touched the water so far. It's just the same body-building exercises every day.\nW: No hurry, it'll be fine.",
+      "translationZh": "女：拉里，你的游泳课上得怎么样？\n男：唉，说出来你都不信，我们到现在连水都没碰过。每天就是做同样的健身练习。\n女：别着急，会好起来的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "拉里抱怨游泳课到现在还没下过水，每天只做同样的健身练习。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "拉里，你的游泳课上得怎么样？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "唉，说出来你都不信，我们到现在连水都没碰过。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "每天就是做同样的健身练习。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "别着急，会好起来的。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: What's for dinner tonight?\nW: Baked beans.\nM: Not beans again. I remember we've got some carrots and potatoes left.\nW: We ate them up yesterday.",
+      "translationZh": "男：今晚吃什么？\n女：烤豆子。\n男：又是豆子啊。我记得家里还剩些胡萝卜和土豆。\n女：昨天就吃完了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "晚饭又是烤豆子，男士想吃的胡萝卜和土豆昨天已经吃完了。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "今晚吃什么？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "烤豆子。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "又是豆子啊。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我记得家里还剩些胡萝卜和土豆。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "昨天就吃完了。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: You are always working in the office and at home. You should go to parks or to theaters.\nM: I have no time for parks or theaters, honey.",
+      "translationZh": "女：你总是在办公室工作，回到家还在工作。你应该去公园或者剧院走走。\n男：亲爱的，我可没时间去公园或剧院。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "女士嫌男士在单位和家里都忙工作，劝他去公园或剧院放松一下。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你总是在办公室工作，回到家还在工作。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "你应该去公园或者剧院走走。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "亲爱的，我可没时间去公园或剧院。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Do you know Helen and Judy in the IT department?\nW: Sure, we studied in the same university. Helen is lively and talkative, while Judy is just the opposite.",
+      "translationZh": "男：你认识信息技术部的海伦和朱迪吗？\n女：当然认识，我们是大学同学。海伦活泼健谈，朱迪则正好相反。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "女士和海伦、朱迪是大学同学，她说海伦活泼健谈，朱迪正好相反。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你认识信息技术部的海伦和朱迪吗？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "当然认识，我们是大学同学。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "海伦活泼健谈，朱迪则正好相反。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Good morning, sir. Can I help you?\nM: Yes, I've booked a ticket for June 22nd to Swansea. I'd like to see if there's an earlier flight available.\nW: What date do you have in mind?\nM: I'd prefer the 18th, if possible.\nW: I'm sorry. There are no departures for the 18th. We have a flight leaving on the 15th and the 17th. Will either of\nthese days work for you?\nM: The 17th would work better for me. Thank you.",
+      "translationZh": "女：早上好，先生。有什么可以帮您？\n男：是的，我订了一张 6 月 22 日去斯旺西的票。我想看看有没有更早的航班。\n女：您想改到哪一天？\n男：可以的话，最好是 18 号。\n女：抱歉，18 号没有航班。我们有 15 号和 17 号出发的航班。这两天您有哪天合适吗？\n男：17 号对我更合适。谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士想把 6 月 22 日去斯旺西的机票改早，18 号没有航班，最后选了 17 号。"
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Congratulations, Alex. You've just set a record in rock climbing. How do you feel now?\nM: Honestly, I feel great. It's exactly what I'd hoped for.\nW: Tell us about your state of mind before you started.\nM: Well, my heart was racing for a few moments. I mean, it's a huge wall above you with a glass-smooth surface\nand no hand-holds.\nW: Are you going to climb more today?\nM: Probably not, but I'll do some strength training this afternoon. There will be more challenges ahead.",
+      "translationZh": "女：祝贺你，亚历克斯。你刚刚创造了一项攀岩纪录。你现在感觉怎么样？\n男：说实话，感觉好极了。这正是我所期望的。\n女：给我们讲讲你开始攀登之前的心态吧。\n男：嗯，有那么一会儿我的心跳得很快。我是说，头顶上是一面巨大的岩壁，表面像玻璃一样光滑，没有任何可以抓手的地方。\n女：你今天还打算再爬吗？\n男：可能不爬了，不过今天下午我要做些力量训练。前面还会有更多挑战。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "体育精神"
+      },
+      "summaryZh": "女士采访刚创下攀岩纪录的亚历克斯，他谈到赛前的紧张和下午的力量训练。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "祝贺你，亚历克斯。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你刚刚创造了一项攀岩纪录。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "你现在感觉怎么样？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "说实话，感觉好极了。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "这正是我所期望的。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "给我们讲讲你开始攀登之前的心态吧。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "嗯，有那么一会儿我的心跳得很快。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我是说，头顶上是一面巨大的岩壁，表面像玻璃一样光滑，"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "没有任何可以抓手的地方。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "你今天还打算再爬吗？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "可能不爬了，不过今天下午我要做些力量训练。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "前面还会有更多挑战。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: How was your interview, Bob?\nM: It was bad. I didn't get the job.\nW: Oh no, I'm sorry to hear that.\nM: You know what, I think I've changed my mind. I want to try something different. Maybe I don't have to work\nfor someone else. I might start my own business.\nW: Oh? What kind of business?\nM: What about opening a small restaurant?\nW: Well, but are you prepared both mentally and financially?\nM: I can start from what I have, and I think I'm ready to do it.\nW: It's easier said than done, Bob. You should give it more thought.\nM: Understood. I'll choose a good location for my restaurant, and I'll do some careful research to get off to a solid\nstart.",
+      "translationZh": "女：鲍勃，你的面试怎么样？\n男：很糟糕。我没得到那份工作。\n女：哎呀，真遗憾。\n男：你知道吗，我想我改主意了。我想试试不一样的事。也许我不必给别人打工，我可能会自己创业。\n女：哦？什么样的生意？\n男：开一家小餐馆怎么样？\n女：嗯，可你在心理上和资金上都准备好了吗？\n男：我可以从手头已有的条件做起，而且我觉得自己已经准备好了。\n女：说起来容易做起来难啊，鲍勃。你应该再多考虑考虑。\n男：明白。我会给我的餐馆选个好位置，还会认真做些调研，争取开个好头。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "创业意识"
+      },
+      "summaryZh": "鲍勃面试失败后想自己开餐馆，女士劝他多考虑，他决定先选址调研。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "鲍勃，你的面试怎么样？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "很糟糕。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "我没得到那份工作。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "哎呀，真遗憾。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "你知道吗，我想我改主意了。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我想试试不一样的事。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "也许我不必"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "给别人打工。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "我可能会自己创业。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "哦？"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "什么样的生意？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "开一家小餐馆怎么样？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "嗯，可你在心理上和资金上都准备好了吗？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "我可以从手头已有的条件做起，而且我觉得自己已经准备好了。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "说起来容易做起来难啊，鲍勃。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "你应该再多考虑考虑。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "明白。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "我会给我的餐馆选个好位置，还会认真做些调研，争取开个好"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "头。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: Sally, are you busy now? I need some help.\nW: Sure, Henry. What can I do?\nM: I broke Sophia's toy house yesterday. I need to rebuild it for her.\nW: Does she know?\nM: Yeah... she was really upset. I told her I'd finish rebuilding it before she gets back from school. I'm not sure I can get it done in just two hours.\nW: Don't worry, honey. Just putting together some wood pieces shouldn't be that difficult.\nM: It's more complicated than that. We need to put in all those windows and doors too.\nW: Why don't we just build a simpler one without those small parts?\nM: No, we can't. I've promised Sophia a toy house just like the old one.\nW: Well, you're right, but it will take us forever to build it. Maybe we should find Sophia's grandpa to help us.\nM: Good idea.",
+      "translationZh": "男：萨莉，你现在忙吗？我需要帮忙。\n女：不忙，亨利。我能做什么？\n男：我昨天把索菲娅的玩具屋弄坏了。我得给她重新搭一个。\n女：她知道了吗？\n男：知道了……她特别难过。我跟她说过，在她放学回来之前我就能重新搭好。我不确定只用两个小时能不能搭完。\n女：别担心，亲爱的。只是把一些木块拼起来，应该没那么难。\n男：没那么简单。我们还得把那些窗户和门都装上。\n女：我们干脆搭个简单点的，不要那些小部件，怎么样？\n男：不行。我答应过索菲娅，要给她一个和原来一模一样的玩具屋。\n女：好吧，你说得对，可这得花我们好长时间才能搭好。也许我们该找索菲娅的爷爷来帮忙。\n男：好主意。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "亨利弄坏了索菲娅的玩具屋，担心两小时内修不好，决定找她爷爷帮忙。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "萨莉，你现在忙吗？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我需要帮忙。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "不忙，亨利。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "我能做什么？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我昨天把索菲娅的玩具屋弄坏了。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我得给她重新搭一个。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "她知道了吗？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "知道了……"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "她特别难过。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我跟她说过，在她放学回来之前我就能重新搭好。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我不确定只用两个小时能不能搭完。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "别担心，亲爱的。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "只是把一些木块拼起来，应该没那么难。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "没那么简单。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "我们还得把那些窗户和门都装上。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "我们干脆搭个简单点的，不要那些小部件，怎么样？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "不行。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我答应过索菲娅，要给她一个和原来一模一样的玩具屋。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "好吧，你说得对，可这得花我们好长时间才能搭好。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "也许我们该找索菲娅的爷爷来帮忙。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "好主意。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Okay, now let's briefly review what we have done in the past few days. We set off on Monday morning and arrived in Melbourne after a two-hour bus ride, we started with a guided tour of Eureka Tower. After lunch, we walked along Collins Street, taking in the view of Town Hall. We then took a walk through Chinatown to the State Library. Unexpectedly, we also met Markus Zusak, the author of The Book Thief, at the library on Tuesday morning. We enjoyed the beauty of the botanical gardens, followed by a tour of the Victoria Parliament House in the afternoon. Today is Wednesday. We spent most of the morning on Swanston Street studying the historic architecture. Now we've finished lunch. It's time to head back to school, and you can enjoy the views through the bus windows on the way. A big thank you to my fellow teachers and parent volunteers for your wonderful help. The students had a great time and learned a lot.",
+      "translationZh": "好，现在我们来简单回顾一下这几天做了些什么。我们周一上午出发，坐了两个小时大巴到达墨尔本，第一站是在导游带领下参观尤里卡塔。午饭后，我们沿着柯林斯街散步，欣赏了市政厅的景色。接着我们穿过唐人街，步行到州立图书馆。没想到的是，周二上午我们还在图书馆见到了《偷书贼》的作者祖萨克（Markus Zusak）。我们欣赏了植物园的美景，下午又参观了维多利亚州议会大厦。今天是周三。上午大部分时间我们在斯旺斯顿街研究那里的历史建筑。现在我们已经吃完午饭了。该返回学校了，回去的路上大家可以透过大巴车窗欣赏沿途风景。非常感谢各位老师同事和家长志愿者的大力帮助。同学们玩得很开心，也学到了很多。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "老师回顾三天的墨尔本研学行程，午饭后带学生返校，并感谢同事和家长志愿者。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "好，现在我们来简单回顾一下这几天做了些什么。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我们周一上午出发，坐了两个小时大巴到达墨尔本，第一站是在导游带领下参观尤里卡塔。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "午饭后，我们沿着柯林斯街散步，欣赏了市政厅的景色。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "接着我们穿过唐人街，步行到州立图书馆。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "没想到的是，周二上午我们还在图书馆见到了《偷书贼》的作者祖萨克（Markus Zusak）。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "我们欣赏了植物园的美景，下午又参观了维多利亚州议会大厦。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "今天是周三。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "上午大部分时间我们在斯旺斯顿街研究那里的历史建筑。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "现在我们已经吃完午饭了。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "该返回学校了，回去的路上大家可以透过大巴车窗欣赏沿途风景。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "非常感谢各位老师同事和家长志愿者的大力帮助。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "同学们玩得很开心，也学到了很多。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "罗斯为什么要去市中心？",
+      "optionTranslationsZh": {
+        "A": "去主办一场聚会。",
+        "B": "去接凯文。",
+        "C": "去买礼物。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I have to go downtown to get Kevin a birthday present"
+      },
+      "reasonZh": "“买礼物”就是罗斯说的去市中心给凯文买份生日礼物（get Kevin a birthday present），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "聚会（party）是凯文办的，罗斯只是受到邀请（He invited me to his party），不是她来主办。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "凯文（Kevin）是礼物要送的人，罗斯去市中心是给他买礼物，不是去接他。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "关于游泳课，拉里对什么不满？",
+      "optionTranslationsZh": {
+        "A": "进度太慢。",
+        "B": "水太冷。",
+        "C": "设施太差。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "we haven't touched the water so far"
+      },
+      "reasonZh": "拉里说到现在连水都没碰过（haven't touched the water so far），每天只做同样的健身练习，可见他嫌课程进展太慢，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的水（water）出现在“还没下过水”这句话里，拉里根本没碰到水，谈不上嫌水冷。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人晚饭要吃什么？",
+      "optionTranslationsZh": {
+        "A": "胡萝卜。",
+        "B": "豆子。",
+        "C": "土豆。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Baked beans."
+      },
+      "reasonZh": "女士直接说晚饭是烤豆子（Baked beans），男士虽然抱怨“又是豆子”，也没有别的可吃，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "胡萝卜（carrots）是男士以为家里还剩的菜，女士说昨天已经吃完了（We ate them up yesterday），今晚吃不上。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "土豆（potatoes）和胡萝卜是男士一起提的，同样被女士一句“昨天吃完了”否定了。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士建议男士做什么？",
+      "optionTranslationsZh": {
+        "A": "收拾他的办公室。",
+        "B": "在家办公。",
+        "C": "放松一下。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "You should go to parks or to theaters."
+      },
+      "reasonZh": "女士嫌他总在工作，劝他去公园或剧院（go to parks or to theaters），去这些地方就是让他歇下来放松，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "办公室（office）是女士说他总在那里工作的地方（always working in the office），她没有让他收拾办公室。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "在家工作（working … at home）正是女士埋怨的现状，她劝他的是出门去公园或剧院。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "关于朱迪，我们知道什么？",
+      "optionTranslationsZh": {
+        "A": "她很文静。",
+        "B": "她很有礼貌。",
+        "C": "她很幽默。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Helen is lively and talkative, while Judy is just the opposite."
+      },
+      "reasonZh": "女士说海伦活泼健谈（lively and talkative），朱迪正好相反（just the opposite），反过来就是安静、话少，选 A。"
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士想做什么？",
+      "optionTranslationsZh": {
+        "A": "订一张票。",
+        "B": "确认座位。",
+        "C": "改签航班。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I'd like to see if there's an earlier flight available."
+      },
+      "reasonZh": "男士已经订了 6 月 22 日的票，想看看有没有更早的航班（an earlier flight），也就是把航班改到更早的日子，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "订票（booked a ticket）是男士已经做完的事（I've booked a ticket），他现在要的是把这张票换到更早的航班。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士哪天动身去斯旺西？",
+      "optionTranslationsZh": {
+        "A": "6 月 15 日。",
+        "B": "6 月 17 日。",
+        "C": "6 月 18 日。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The 17th would work better for me."
+      },
+      "reasonZh": "工作人员给出 15 号和 17 号两个航班，男士最后说 17 号更合适（The 17th would work better），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "15 号是工作人员提供的两个日期之一（a flight leaving on the 15th and the 17th），男士没选它。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "18 号是男士最先想要的日期（I'd prefer the 18th），但那天没有航班（no departures for the 18th）。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士最可能是什么人？",
+      "optionTranslationsZh": {
+        "A": "体育记者。",
+        "B": "私人医生。",
+        "C": "健身教练。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You've just set a record in rock climbing."
+      },
+      "reasonZh": "女士先祝贺亚历克斯刚创下攀岩纪录（just set a record），接着问他现在的感受、开赛前的心态和今天的安排，这是赛后采访，可见她是体育记者，选 A。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "亚历克斯攀岩前感觉如何？",
+      "optionTranslationsZh": {
+        "A": "非常后悔。",
+        "B": "相当尴尬。",
+        "C": "比较紧张。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "my heart was racing for a few moments"
+      },
+      "reasonZh": "亚历克斯说开始前有一会儿心跳很快（my heart was racing），面对光滑无抓手的岩壁心跳加速，就是紧张，选 C。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "亚历克斯今天下午要做什么？",
+      "optionTranslationsZh": {
+        "A": "好好休息。",
+        "B": "做力量训练。",
+        "C": "再去攀岩。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I'll do some strength training this afternoon"
+      },
+      "reasonZh": "亚历克斯直接说下午要做些力量训练（strength training this afternoon），选项沿用，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "亚历克斯说今天可能不再攀岩（Probably not），但紧接着说下午还要训练，并不是休息。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "攀岩（climb）出现在女士的提问里（Are you going to climb more today?），亚历克斯的回答是可能不爬了（Probably not）。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "说话人主要在谈什么？",
+      "optionTranslationsZh": {
+        "A": "鲍勃的职业规划。",
+        "B": "一个职位空缺。",
+        "C": "助学贷款。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I might start my own business."
+      },
+      "reasonZh": "鲍勃面试失败后说想自己创业、开小餐馆，女士劝他多考虑，他最后说要选址、做调研，整段都围绕他今后干什么，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 job 是鲍勃没得到的那份工作（I didn't get the job），只是谈话的起因；opening 说的是开餐馆（opening a small restaurant），不是职位空缺。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士给了鲍勃什么建议？",
+      "optionTranslationsZh": {
+        "A": "志向远大。",
+        "B": "要有创意。",
+        "C": "三思而行。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "You should give it more thought."
+      },
+      "reasonZh": "女士说说起来容易做起来难（easier said than done），劝他再多考虑考虑（give it more thought），这就是三思而行，选 C。"
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "鲍勃最后的决定是什么？",
+      "optionTranslationsZh": {
+        "A": "自己创业。",
+        "B": "继续深造。",
+        "C": "接受那份工作。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I'll choose a good location for my restaurant"
+      },
+      "reasonZh": "听了女士的劝告，鲍勃说会给自己的餐馆选好位置（a good location for my restaurant）、认真调研，说明他仍决定自己开店创业，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的 job 是鲍勃面试没拿到的工作（I didn't get the job），根本没有可以接受的录用机会。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "谁弄坏了玩具屋？",
+      "optionTranslationsZh": {
+        "A": "索菲娅。",
+        "B": "亨利。",
+        "C": "萨莉。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I broke Sophia's toy house yesterday."
+      },
+      "reasonZh": "男士说是他昨天弄坏了玩具屋（I broke Sophia's toy house），女士称呼他亨利（Sure, Henry），所以弄坏的是亨利，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "索菲娅（Sophia）是玩具屋的主人，亨利说的是他弄坏了“索菲娅的”玩具屋。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "萨莉（Sally）是亨利找来帮忙的人（Sally, are you busy now? I need some help），不是弄坏玩具屋的人。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人为什么担心重建玩具屋？",
+      "optionTranslationsZh": {
+        "A": "他们时间不够。",
+        "B": "缺了一些部件。",
+        "C": "说明书看不懂。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I'm not sure I can get it done in just two hours."
+      },
+      "reasonZh": "亨利答应在索菲娅放学前搭好，却没把握两小时内完成（in just two hours），女士也说得花好长时间（take us forever），担心的是时间不够，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "部件（parts）出现在女士的提议里：干脆搭个简单的，不要那些小部件（without those small parts），说的是可以省掉窗和门，不是部件缺了。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人接下来可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "修理窗户和门。",
+        "B": "订购一个新玩具屋。",
+        "C": "请人帮忙。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Maybe we should find Sophia's grandpa to help us."
+      },
+      "reasonZh": "女士提议找索菲娅的爷爷来帮忙（find Sophia's grandpa to help us），亨利说好主意（Good idea），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "窗户和门（windows and doors）是亨利说重建时还得装上的部分（put in all those windows and doors），是在说活儿复杂，不是要去修窗户和门。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "玩具屋（toy house）是要重新搭的东西，亨利答应的是搭一个和原来一样的（a toy house just like the old one），没说要买新的。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这群人在墨尔本的第一站是哪里？",
+      "optionTranslationsZh": {
+        "A": "市政厅。",
+        "B": "尤里卡塔。",
+        "C": "唐人街。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "we started with a guided tour of Eureka Tower"
+      },
+      "reasonZh": "到墨尔本后，第一项就是参观尤里卡塔（started with a guided tour of Eureka Tower），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "市政厅（Town Hall）是午饭后沿柯林斯街散步时看到的（After lunch … taking in the view of Town Hall），排在尤里卡塔之后。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "唐人街（Chinatown）是再往后去州立图书馆途中穿过的地方（then took a walk through Chinatown）。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这群人在哪里见到了一位著名作家？",
+      "optionTranslationsZh": {
+        "A": "在州立图书馆。",
+        "B": "在植物园。",
+        "C": "在斯旺斯顿街。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "we also met Markus Zusak, the author of The Book Thief, at the library on Tuesday morning"
+      },
+      "reasonZh": "他们在图书馆见到了《偷书贼》的作者（the author of The Book Thief, at the library），前一句刚说他们走到了州立图书馆，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "植物园（botanical gardens）是见过作家之后才去游览的（We enjoyed the beauty of the botanical gardens），不是见作家的地方。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的 Street 是柯林斯街和斯旺斯顿街；斯旺斯顿街是周三上午看历史建筑的地方，见作家是在周二上午的图书馆。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这群人的旅行持续多久？",
+      "optionTranslationsZh": {
+        "A": "两天。",
+        "B": "三天。",
+        "C": "四天。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Today is Wednesday."
+      },
+      "reasonZh": "周一上午出发（set off on Monday morning），今天是周三（Today is Wednesday），吃完午饭就返校，周一到周三共 3 天，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "two 在录音里是坐了两小时大巴（a two-hour bus ride）；只算周一、周二也会得两天，漏了今天周三上午还在斯旺斯顿街参观。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "周三吃完午饭就返校（head back to school），行程没有第四天。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这群人接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "去吃午饭。",
+        "B": "返回学校。",
+        "C": "写一篇评论。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It's time to head back to school"
+      },
+      "reasonZh": "说话人说现在该返回学校了（It's time to head back to school），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "午饭（lunch）已经吃过了（Now we've finished lunch），接下来是上车返校。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "review 出现在开头，是老师带大家口头回顾这几天的行程（let's briefly review what we have done），不是要写一篇评论。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,709 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:reading-b": {
+      "overview": "101岁的 Reisley 在赖特为他设计的房子里住了73年。文章写他当年因邻居热情而定居 Usonia，房子的赖特式特色，以及他多年开放住宅、参与创办组织保护赖特建筑。",
+      "fullTranslationZh": "罗兰·赖斯利今年5月满101岁，身体格外健康。但这并不是他引以为豪的事。“我是弗兰克·劳埃德·赖特最初的客户里最后一位在世的，至今还住在他为我设计的房子里，”赖斯利坐在这位著名建筑师设计的房子那明亮开阔的客厅里说。\n\n赖斯利已经住了73年的这栋房子坐落在纽约州威彻斯特县的树林里，距曼哈顿以北仅30英里。尤索尼亚是一个宁静的20世纪中叶现代风格村落，由47栋房子组成，这栋就是其中之一。\n\n时间回到1951年，赖斯利那时只有26岁，刚刚结婚，准备安家落户。他和妻子开始在曼哈顿找住处。但他们喜欢的房子，凭他做音响工程师的工资买不起；买得起的，他们又不喜欢。后来，他们听说了尤索尼亚。第一次去那里，已在当地安家的10户人家就热情地欢迎了他们，热情得让他们决定加入。\n\n这栋房子有着赖特的标志性特点。它用当地材料建成，有平屋顶、木质护墙板、混凝土地面和定制家具。几十年来，赖斯利一直向参观者敞开家门。这栋房子如今已被列入美国国家史迹名录。赖斯利说，他一直尽最大努力当好一名管家，不仅照管自己住的这件赖特作品，也照管赖特所有其他的作品。他参与创办了弗兰克·劳埃德·赖特建筑保护协会，这个组织致力于保护赖特所有现存的建筑。赖斯利相信，正是他对这所房子和这个社区的投入，让他这些年来一直保持着如此好的健康状况。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+          "sourceText": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join.",
+          "displayText": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:25"
+          ],
+          "translationZh": "第一次去那里，已在当地安家的10户人家就热情地欢迎了他们，热情得让他们决定加入。",
+          "analysisZh": "主干是 they were greeted with such enthusiasm：他们受到了如此热情的欢迎。from the 10 families 说欢迎来自谁，who’d already established homes there 修饰 families，说明这10户人家已先在那里安了家。句子的骨架是 such … that：热情到这种程度，结果是 they decided to join。第25题问他们为什么最终定居，答案就在 such 和 that 之间。",
+          "underlineRanges": [
+            {
+              "start": 30,
+              "end": 63,
+              "quote": "were greeted with such enthusiasm"
+            },
+            {
+              "start": 85,
+              "end": 122,
+              "quote": "who’d already established homes there"
+            },
+            {
+              "start": 123,
+              "end": 148,
+              "quote": "that they decided to join"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+          "sourceText": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
+          "displayText": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:27"
+          ],
+          "translationZh": "赖斯利说，他一直尽最大努力当好一名管家，不仅照管自己住的这件赖特作品，也照管赖特所有其他的作品。",
+          "analysisZh": "Reisley said 后面是他说的话，主干是 he’s tried his best to be a good steward：他一直尽力当个好管家。of 引出照管的对象，用 not just … but … as well 连起两层：先是 the Wright creation he lives in（he lives in 修饰 creation，指他自己住的那栋），再扩到 all others，指赖特的其他作品，不是指别的居民。从“只管自家”到“管全部”，正是第27题推断他依恋赖特建筑的依据之一。",
+          "underlineRanges": [
+            {
+              "start": 33,
+              "end": 53,
+              "quote": "to be a good steward"
+            },
+            {
+              "start": 59,
+              "end": 102,
+              "quote": "not just of the Wright creation he lives in"
+            },
+            {
+              "start": 104,
+              "end": 126,
+              "quote": "but all others as well"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-ii:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-b:1"
+              ],
+              "start": 0,
+              "end": 107,
+              "quote": "罗兰·赖斯利今年5月满101岁，身体格外健康。但这并不是他引以为豪的事。“我是弗兰克·劳埃德·赖特最初的客户里最后一位在世的，至今还住在他为我设计的房子里，”赖斯利坐在这位著名建筑师设计的房子那明亮开阔的客厅里说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-b:2"
+              ],
+              "start": 109,
+              "end": 193,
+              "quote": "赖斯利已经住了73年的这栋房子坐落在纽约州威彻斯特县的树林里，距曼哈顿以北仅30英里。尤索尼亚是一个宁静的20世纪中叶现代风格村落，由47栋房子组成，这栋就是其中之一。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-b:3"
+              ],
+              "start": 195,
+              "end": 331,
+              "quote": "时间回到1951年，赖斯利那时只有26岁，刚刚结婚，准备安家落户。他和妻子开始在曼哈顿找住处。但他们喜欢的房子，凭他做音响工程师的工资买不起；买得起的，他们又不喜欢。后来，他们听说了尤索尼亚。第一次去那里，已在当地安家的10户人家就热情地欢迎了他们，热情得让他们决定加入。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-b:4"
+              ],
+              "start": 333,
+              "end": 550,
+              "quote": "这栋房子有着赖特的标志性特点。它用当地材料建成，有平屋顶、木质护墙板、混凝土地面和定制家具。几十年来，赖斯利一直向参观者敞开家门。这栋房子如今已被列入美国国家史迹名录。赖斯利说，他一直尽最大努力当好一名管家，不仅照管自己住的这件赖特作品，也照管赖特所有其他的作品。他参与创办了弗兰克·劳埃德·赖特建筑保护协会，这个组织致力于保护赖特所有现存的建筑。赖斯利相信，正是他对这所房子和这个社区的投入，让他这些年来一直保持着如此好的健康状况。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:24-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+                "start": 72,
+                "end": 231,
+                "quote": "But that’s not the thing he prides himself on. “I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,” Reisley said"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p1",
+                "start": 23,
+                "end": 82,
+                "quote": "但这并不是他引以为豪的事。“我是弗兰克·劳埃德·赖特最初的客户里最后一位在世的，至今还住在他为我设计的房子里，”赖斯利"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:25-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+                "start": 276,
+                "end": 425,
+                "quote": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p3",
+                "start": 96,
+                "end": 136,
+                "quote": "第一次去那里，已在当地安家的10户人家就热情地欢迎了他们，热情得让他们决定加入。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:26-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+                "start": 41,
+                "end": 148,
+                "quote": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p4",
+                "start": 15,
+                "end": 46,
+                "quote": "它用当地材料建成，有平屋顶、木质护墙板、混凝土地面和定制家具。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:27-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+                "start": 278,
+                "end": 405,
+                "quote": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p4",
+                "start": 84,
+                "end": 132,
+                "quote": "赖斯利说，他一直尽最大努力当好一名管家，不仅照管自己住的这件赖特作品，也照管赖特所有其他的作品。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:27-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+                "start": 406,
+                "end": 548,
+                "quote": "He co-founded the Frank Lloyd Wright Building Conservancy, an organization engaged in the preservation of all of Wright’s remaining buildings."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p4",
+                "start": 132,
+                "end": 174,
+                "quote": "他参与创办了弗兰克·劳埃德·赖特建筑保护协会，这个组织致力于保护赖特所有现存的建筑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+                "start": 276,
+                "end": 425,
+                "quote": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p3",
+                "start": 96,
+                "end": 136,
+                "quote": "第一次去那里，已在当地安家的10户人家就热情地欢迎了他们，热情得让他们决定加入。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-b-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+                "start": 278,
+                "end": 405,
+                "quote": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-b-p4",
+                "start": 84,
+                "end": 132,
+                "quote": "赖斯利说，他一直尽最大努力当好一名管家，不仅照管自己住的这件赖特作品，也照管赖特所有其他的作品。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-b-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写百岁老人最自豪的是仍住在赖特为他设计的房子里，再交代房子和村子的位置，接着回到1951年讲他为何定居，最后写房子的特色和他保护赖特建筑的投入。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+            "summary": "百岁的 Reisley 最自豪的是仍住在赖特为他设计的房子里",
+            "function": "用人物现状和他自己的话引出他与赖特建筑的关系。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-b:2",
+            "summary": "房子在 Usonia 村，他已住了73年",
+            "function": "交代房子和社区的位置与背景。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+            "summary": "在曼哈顿找房受挫，因居民热情而定居 Usonia",
+            "function": "回溯安家经过，交代定居原因。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+            "summary": "房子的赖特式特色，以及他开放住宅、保护赖特建筑",
+            "function": "从自家房子延伸到保护所有赖特建筑，并回扣他的健康。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-ii:24": {
+      "skill": {
+        "primary": "attitude",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Reisley 说起赖特时的话里，判断他对这件事的感受。",
+      "stemTranslationZh": "Reisley 对由赖特为自己设计房子有什么感受？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句看他以什么为荣",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "感到荣幸。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+              "quote": "But that’s not the thing he prides himself on. “I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,” Reisley said",
+              "anchor": "Reisley 引以为豪的事"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "觉得好笑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Amused.",
+            "explanation": "他是坐在客厅里郑重地说出这层身份，用来表明自己最得意的事，原文没有任何让他觉得好笑的地方。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "感到有压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Stressed.",
+            "explanation": "他在这房子里一住73年，还主动照管赖特的建筑，原文看不出这位设计师给他带来什么压力。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "受到启发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Inspired.",
+            "explanation": "原文只写他把做赖特的客户当作骄傲（prides himself on），没说赖特的设计启发他去做了什么。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "house designer",
+          "targetText": "“I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,” Reisley said, sitting in the bright open living room of the home designed by the famous architect.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+          "targetCue": "the home he designed",
+          "sourceZh": "房屋设计师",
+          "targetCueZh": "他设计的房子",
+          "answerText": "prides himself on",
+          "bridgeZh": "他自豪的不是长寿，而是能住在赖特为他设计的房子里",
+          "note": "题干 house designer 对应原文 the home he designed。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Honored.",
+          "targetText": "But that’s not the thing he prides himself on.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“荣幸”（Honored）对应原文的“引以为豪”（prides himself on）：做赖特最后一位还住在原屋里的老客户，在他看来是件光彩的事，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Reisley 夫妇最终决定定居 Usonia 的原因。",
+      "stemTranslationZh": "是什么让 Reisley 最终决定在 Usonia 定居？",
+      "locateBy": "stem",
+      "locateFindZh": "看 that 前的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "那里的自然环境。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "is located in the woods of Westchester County, New York",
+            "sourceEntity": "the woods",
+            "optionText": "Its natural environment.",
+            "optionEntity": "natural environment",
+            "explanation": "房子在树林里（in the woods）是 [[block:paper-gaokao-2026-ii:reading-b:2]] 介绍的位置；说到他们为何决定加入，原文写的是邻居的热情，没提环境。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:2",
+              "quote": "The house where Reisley has lived for 73 years is located in the woods of Westchester County, New York, just 30 miles north of Manhattan.",
+              "anchor": "房子的位置"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "那里的房子很大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its large-sized houses.",
+            "explanation": "原文只说村子由47栋房子组成（one of 47），没写房子大小，更没把面积当成定居的理由。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "那里位置便利。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "just 30 miles north of Manhattan",
+            "sourceEntity": "30 miles north of Manhattan",
+            "optionText": "The convenience of its location.",
+            "optionEntity": "convenience of its location",
+            "explanation": "离曼哈顿仅30英里（just 30 miles north of Manhattan）只是交代方位；他们原本想住曼哈顿却买不起，原文没说看中了交通方便。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:2",
+              "quote": "The house where Reisley has lived for 73 years is located in the woods of Westchester County, New York, just 30 miles north of Manhattan.",
+              "anchor": "房子的位置"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "那里居民的热情。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "quote": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join.",
+              "anchor": "10户人家的热情欢迎"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "decide to settle down",
+          "targetText": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+          "targetCue": "decided to join",
+          "sourceZh": "决定定居",
+          "targetCueZh": "决定加入",
+          "answerText": "greeted with such enthusiasm from the 10 families who’d already established homes there",
+          "note": "题干 decide to settle down 对应原文 decided to join。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "The warmth of its residents.",
+          "targetText": "greeted with such enthusiasm from the 10 families",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“居民的热情”（warmth of its residents）就是原文里先住进村的10户人家（the 10 families）给他们的热情欢迎（such enthusiasm），选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项分别拿回原文，核对 Reisley 房子的年头、材料、屋顶和现状。",
+      "stemTranslationZh": "关于 Reisley 的房子，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "算房子和主人谁年长，再查材料、屋顶和房子现状",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它比主人年纪还大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "“I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,”",
+            "sourceHighlight": "the home he designed for me",
+            "optionText": "It is older than its owner.",
+            "optionHighlight": "older than its owner",
+            "explanation": "房子是赖特为他设计的（designed for me），而他1951年来这里安家时已经26岁，房子比主人晚出现，不会更老。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+              "quote": "“I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,”",
+              "anchor": "为他设计的房子"
+            },
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "quote": "Back in 1951, Reisley was just 26, newly married and ready to put down roots.",
+              "anchor": "1951年他26岁"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它使用当地材料。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "quote": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture.",
+              "anchor": "房子的赖特式特色"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是尖屋顶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture.",
+            "sourceEntity": "a flat roof",
+            "optionText": "It has a pointed roof.",
+            "optionEntity": "a pointed roof",
+            "explanation": "原文写的是平屋顶（a flat roof），选项换成尖屋顶，屋顶形状不对。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "quote": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture.",
+              "anchor": "房子的赖特式特色"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它被挂牌出售。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is put up for sale.",
+            "explanation": "原文说房子被列入国家史迹名录（listed on the National Register of Historic Places），是登记为历史建筑，不是挂牌出售；他至今还住在里面。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It uses local materials.",
+          "targetText": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "原文用的就是 local materials（当地材料），选项沿用原词，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完最后一段 Reisley 的所作所为，推断他和赖特建筑的关系。",
+      "stemTranslationZh": "从最后一段可以推断出 Reisley 的什么情况？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2026-ii:reading-b:4]]先写房子的赖特特色，再写他 opened his doors、当 steward、co-founded 保护组织；推断要盖住这些投入",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他非常依恋赖特设计的建筑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "quote": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
+              "anchor": "照管所有赖特作品"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "quote": "He co-founded the Frank Lloyd Wright Building Conservancy, an organization engaged in the preservation of all of Wright’s remaining buildings.",
+              "anchor": "创办赖特建筑保护协会"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他致力于健康教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "good health",
+            "optionText": "health",
+            "matchType": "exact",
+            "relationNote": "段末确实提到健康（good health），但那是他相信对房子和社区的投入让自己一直健康，没说他去做健康教育。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "quote": "Reisley believes that his devotion to the home and the community are what have kept him in such good health all of these years.",
+              "anchor": "投入让他保持健康"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他是家居装修专家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He is an expert in home decoration.",
+            "explanation": "木质护墙板、定制家具（custom-made furniture）是赖特设计里的特色，原文没说他本人懂家居装修。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他热衷于旅游业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Over the decades, Reisley has opened his doors to visitors.",
+            "sourceHighlight": "opened his doors to visitors",
+            "optionText": "He is passionate about tourism.",
+            "optionHighlight": "passionate about tourism",
+            "explanation": "他几十年来让参观者进门看房（opened his doors to visitors），为的是让人看看这件赖特作品，说不上热衷旅游业。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "quote": "Over the decades, Reisley has opened his doors to visitors.",
+              "anchor": "向参观者开放"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He is very attached to Wright buildings.",
+          "targetText": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "原文没直说他依恋，要从做法推一步：他不只照管自己住的那栋，连赖特的其他作品也要管（all others），还参与创办保护赖特建筑的组织（co-founded）；可见他对赖特建筑感情很深，选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,761 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:reading-c": {
+      "overview": "这是一本讲海平面概念史的书的引言。作者从高度必须依赖参照点说起，指出海平面这一参照标准有其历史，讲述测高仪读数差异引发的研究缘起，并用近年海平面上升说明研究的紧迫。",
+      "fullTranslationZh": "珠穆朗玛峰峰顶，海拔8849米。钦博拉索山，6263米；勃朗峰，4806米；位于多洛米蒂山脉帕拉山群山脚下的普拉迪达利山屋，2278米。标明一个地方的海拔是一种常见做法。如今，我们用手机和可穿戴设备就能轻松获取简单的高度读数。但高度必然是相对的：只有选定参照点，我们才能用数字表示一个物体或地点的高度。\n\n把海平面作为高度参照点的观念，存在的时间已经如此之久，以至于人们基本不会再注意到它——我们提起它时，甚至不会考虑它究竟是什么意思。这个概念也有自己的历史，这一点很容易被忽略。我们往往忘记，海平面是由技术和文化所决定的一系列假设的产物。在这本书中，我讲述这些假设的故事。\n\n说来也巧，这本书是在海边与山间度过的一个夏天里成形的。我游览了法国里维埃拉，在尼斯和芒通的沙滩上尽情玩耍；一个月后，我和朋友们去帕拉山群徒步。在普拉迪达利山屋附近的一个山口休息时，我们开始讨论各自测高仪显示的读数。为什么不同仪器的读数之间会有那么细微的差别？这种不确定感让我开始思考零点的含义。我就是这样开始探寻海平面这一概念的历史的。\n\n在这本书中，我考察了平均海平面历史上的三个关键阶段。这些阶段反映了人类对海洋认识的发展。自2011年8月我开始思考这个研究项目以来，海平面上升问题，以及把这个问题放到历史中去考察的必要性，都变得越发紧迫：从那时到2022年底，全球海平面上升了近5厘米，约占1993年以来卫星记录的总上升幅度的一半。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+          "sourceText": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
+          "displayText": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
+          "relatedQuestionIds": [],
+          "translationZh": "把海平面作为高度参照点的观念，存在的时间已经如此之久，以至于人们基本不会再注意到它——我们提起它时，甚至不会考虑它究竟是什么意思。",
+          "analysisZh": "主干是 The idea has been around：这个观念已经存在了。of sea level as a reference point for elevations 交代观念的内容，即拿海平面当高度的参照点。for so long as to go essentially unnoticed 是 so … as to 结构，意思是“久到几乎没人注意”。破折号后把“没人注意”说具体：we mention it without even considering what it means，两个 it 都指海平面这个观念。",
+          "underlineRanges": [
+            {
+              "start": 58,
+              "end": 80,
+              "quote": "has by now been around"
+            },
+            {
+              "start": 81,
+              "end": 123,
+              "quote": "for so long as to go essentially unnoticed"
+            },
+            {
+              "start": 140,
+              "end": 178,
+              "quote": "without even considering what it means"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+          "sourceText": "Since I began thinking about this project in August 2011, the issue of sea-level rise and the need to place it historically have only become more urgent: between then and the end of 2022 the global sea rose by almost 5 centimeters, about half of the overall rise recorded by satellites since 1993.",
+          "displayText": "Since I began thinking about this project in August 2011, the issue of sea-level rise and the need to place it historically have only become more urgent: between then and the end of 2022 the global sea rose by almost 5 centimeters, about half of the overall rise recorded by satellites since 1993.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:30"
+          ],
+          "translationZh": "自2011年8月我开始思考这个研究项目以来，海平面上升问题，以及把这个问题放到历史中去考察的必要性，都变得越发紧迫：从那时到2022年底，全球海平面上升了近5厘米，约占1993年以来卫星记录的总上升幅度的一半。",
+          "analysisZh": "先跳过 Since 引出的时间状语，找到主句：the issue of sea-level rise and the need … have only become more urgent，两个并列主语，海平面上升问题和考察它的必要性，都更紧迫了。to place it historically 修饰 need，这里的 it 回指前面的 the issue of sea-level rise，第30题考的就是它。冒号后用数据说明为什么紧迫：近5厘米，about half of … 是对这一数字的补充说明。",
+          "underlineRanges": [
+            {
+              "start": 58,
+              "end": 85,
+              "quote": "the issue of sea-level rise"
+            },
+            {
+              "start": 99,
+              "end": 123,
+              "quote": "to place it historically"
+            },
+            {
+              "start": 124,
+              "end": 152,
+              "quote": "have only become more urgent"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-ii:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-c:1"
+              ],
+              "start": 0,
+              "end": 151,
+              "quote": "珠穆朗玛峰峰顶，海拔8849米。钦博拉索山，6263米；勃朗峰，4806米；位于多洛米蒂山脉帕拉山群山脚下的普拉迪达利山屋，2278米。标明一个地方的海拔是一种常见做法。如今，我们用手机和可穿戴设备就能轻松获取简单的高度读数。但高度必然是相对的：只有选定参照点，我们才能用数字表示一个物体或地点的高度。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-c:2"
+              ],
+              "start": 153,
+              "end": 287,
+              "quote": "把海平面作为高度参照点的观念，存在的时间已经如此之久，以至于人们基本不会再注意到它——我们提起它时，甚至不会考虑它究竟是什么意思。这个概念也有自己的历史，这一点很容易被忽略。我们往往忘记，海平面是由技术和文化所决定的一系列假设的产物。在这本书中，我讲述这些假设的故事。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-c:3"
+              ],
+              "start": 289,
+              "end": 457,
+              "quote": "说来也巧，这本书是在海边与山间度过的一个夏天里成形的。我游览了法国里维埃拉，在尼斯和芒通的沙滩上尽情玩耍；一个月后，我和朋友们去帕拉山群徒步。在普拉迪达利山屋附近的一个山口休息时，我们开始讨论各自测高仪显示的读数。为什么不同仪器的读数之间会有那么细微的差别？这种不确定感让我开始思考零点的含义。我就是这样开始探寻海平面这一概念的历史的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-c:4"
+              ],
+              "start": 459,
+              "end": 608,
+              "quote": "在这本书中，我考察了平均海平面历史上的三个关键阶段。这些阶段反映了人类对海洋认识的发展。自2011年8月我开始思考这个研究项目以来，海平面上升问题，以及把这个问题放到历史中去考察的必要性，都变得越发紧迫：从那时到2022年底，全球海平面上升了近5厘米，约占1993年以来卫星记录的总上升幅度的一半。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:28-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+                "start": 308,
+                "end": 455,
+                "quote": "But elevation is necessarily relative: only the choice of a reference point allows us to express numerically the height of an object or a location."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p1",
+                "start": 113,
+                "end": 151,
+                "quote": "但高度必然是相对的：只有选定参照点，我们才能用数字表示一个物体或地点的高度。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:29-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+                "start": 399,
+                "end": 538,
+                "quote": "This sense of uncertainty led me to think about the meaning of zero. This is how I began my search for the conceptual history of sea level."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p3",
+                "start": 129,
+                "end": 168,
+                "quote": "这种不确定感让我开始思考零点的含义。我就是这样开始探寻海平面这一概念的历史的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:30-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+                "start": 205,
+                "end": 299,
+                "quote": "the issue of sea-level rise and the need to place it historically have only become more urgent"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p4",
+                "start": 66,
+                "end": 101,
+                "quote": "海平面上升问题，以及把这个问题放到历史中去考察的必要性，都变得越发紧迫"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:31-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+                "start": 180,
+                "end": 229,
+                "quote": "That the concept has a history is easily ignored."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p2",
+                "start": 65,
+                "end": 87,
+                "quote": "这个概念也有自己的历史，这一点很容易被忽略。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:31-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+                "start": 468,
+                "end": 538,
+                "quote": "This is how I began my search for the conceptual history of sea level."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p3",
+                "start": 147,
+                "end": 168,
+                "quote": "我就是这样开始探寻海平面这一概念的历史的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:31-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+                "start": 0,
+                "end": 77,
+                "quote": "In this book I examine three crucial stages in the history of mean sea level."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p4",
+                "start": 0,
+                "end": 26,
+                "quote": "在这本书中，我考察了平均海平面历史上的三个关键阶段。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+                "start": 0,
+                "end": 179,
+                "quote": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p2",
+                "start": 0,
+                "end": 65,
+                "quote": "把海平面作为高度参照点的观念，存在的时间已经如此之久，以至于人们基本不会再注意到它——我们提起它时，甚至不会考虑它究竟是什么意思。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-c-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+                "start": 147,
+                "end": 444,
+                "quote": "Since I began thinking about this project in August 2011, the issue of sea-level rise and the need to place it historically have only become more urgent: between then and the end of 2022 the global sea rose by almost 5 centimeters, about half of the overall rise recorded by satellites since 1993."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-c-p4",
+                "start": 44,
+                "end": 149,
+                "quote": "自2011年8月我开始思考这个研究项目以来，海平面上升问题，以及把这个问题放到历史中去考察的必要性，都变得越发紧迫：从那时到2022年底，全球海平面上升了近5厘米，约占1993年以来卫星记录的总上升幅度的一半。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-c-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用一串海拔数字引出“高度是相对的、要靠参照点”，再指出海平面这个参照标准有被忽略的历史，接着讲作者因测高仪读数不一开始研究，最后介绍书的内容和研究的紧迫性。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+            "summary": "常见的海拔数字背后，高度要靠参照点才能表示",
+            "function": "用熟悉的山峰海拔引出“高度是相对的”。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+            "summary": "海平面作为参照点的观念有一段常被忽略的历史",
+            "function": "点出本书的研究对象。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+            "summary": "徒步时测高仪读数不一，引作者开始研究海平面概念史",
+            "function": "交代研究和写书的缘起。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+            "summary": "书中考察三个阶段，海平面上升让研究更紧迫",
+            "function": "介绍全书内容，联系现实说明意义。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-ii:28": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读开头一段，分清哪些是铺垫的例子，哪句才是作者要点明的观点。",
+      "stemTranslationZh": "作者在文章开头指出了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2026-ii:reading-c:1]]先列几座山的海拔和手机读数，再用 But 转出作者的看法；要找的是 But 后这句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "有些山在变高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Some mountains are getting higher.",
+            "explanation": "开头列出珠峰8849米等数字，只是举例说明人们习惯标海拔，没说哪座山在长高。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "可穿戴设备上的数据有误导性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "wearables",
+            "optionText": "wearables",
+            "matchType": "exact",
+            "relationNote": "wearables 原词出自 [[block:paper-gaokao-2026-ii:reading-c:1|readily available on our phones]]，原文只说读数随手可得，没说这些数据会误导人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+              "quote": "Simple readings are now readily available on our phones and wearables.",
+              "anchor": "手机和穿戴设备上的读数"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "高度这一概念是相对的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+              "quote": "But elevation is necessarily relative: only the choice of a reference point allows us to express numerically the height of an object or a location.",
+              "anchor": "高度是相对的"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "参照点很难找到。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "reference point",
+            "optionText": "reference point",
+            "matchType": "exact",
+            "relationNote": "reference point 原词就在 But 后的冒号句里，原文说的是必须先选定参照点才能给出高度，没说参照点难找。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+              "quote": "But elevation is necessarily relative: only the choice of a reference point allows us to express numerically the height of an object or a location.",
+              "anchor": "选定参照点"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The concept of elevation is relative.",
+          "targetText": "But elevation is necessarily relative: only the choice of a reference point allows us to express numerically the height of an object or a location.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "原文用的就是 relative，选项沿用；“高度的概念”就是原文的 elevation。前面那串海拔数字和手机读数都是铺垫，作者要点出的是高度离不开参照点，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:29": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括第3段几件事共同交代的内容。",
+      "stemTranslationZh": "第3段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2026-ii:reading-c:3]]从度假写到 altimeters 读数不一，再到思考零点，落在 This is how I began；主旨要盖住研究怎么开始",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "测高仪是怎样发明的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "altimeter",
+            "optionText": "altimeter",
+            "matchType": "exact",
+            "relationNote": "测高仪（altimeters）确实出现在这段，但只是用来讨论读数差异，原文没讲它是怎么发明的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "Resting on a pass near the Pradidali hut, we began discussing the readings offered by our altimeters (测高仪).",
+              "anchor": "讨论测高仪读数"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "是什么引发了作者的研究。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "This sense of uncertainty led me to think about the meaning of zero. This is how I began my search for the conceptual history of sea level.",
+              "anchor": "研究的缘起"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "数字读数为什么不同。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Why did they vary ever so slightly from one instrument to the next?",
+            "sourceHighlight": "Why did they vary",
+            "optionText": "Why the digital readings varied.",
+            "optionHighlight": "Why the digital readings varied",
+            "explanation": "读数为什么不同只是作者当时冒出的疑问（Why did they vary），这段没给答案，而是借这个疑问引出后面的研究。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "Why did they vary ever so slightly from one instrument to the next?",
+              "anchor": "作者的疑问"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者在哪里度假。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "A month after visiting the French Riviera and enjoying the sandy beaches of Nice and Menton, I went hiking with friends in the Pala group.",
+            "sourceHighlight": "visiting the French Riviera",
+            "optionText": "Where the author spent his holiday.",
+            "optionHighlight": "Where the author spent his holiday",
+            "explanation": "尼斯的海滩和帕拉山徒步只是事情发生的背景，地点交代完，这段就转到测高仪引出的疑问上了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "A month after visiting the French Riviera and enjoying the sandy beaches of Nice and Menton, I went hiking with friends in the Pala group.",
+              "anchor": "度夏的地点"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What initiated the author’s research.",
+          "targetText": "This is how I began my search for the conceptual history of sea level.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "几件事都在交代研究从何而起：读数不一让作者生出疑惑，最后用“我就是这样开始的”（This is how I began）收住。选项的“引发作者研究的事”（initiated the author’s research）正好概括全段，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:30": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "弄清最后一段画线的 it 回指哪个名词。",
+      "stemTranslationZh": "最后一段中画线的 it 指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "同句往前找 it 指的名词",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这本书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In this book I examine three crucial stages in the history of mean sea level.",
+            "sourceEntity": "this book",
+            "optionText": "The book.",
+            "optionEntity": "The book",
+            "explanation": "放进去就成了“把这本书放到历史中考察的必要性越发紧迫”，可冒号后说紧迫的原因是海平面上升了近5厘米，与书无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+              "quote": "In this book I examine three crucial stages in the history of mean sea level.",
+              "anchor": "这本书考察的内容"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这个研究项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Since I began thinking about this project in August 2011",
+            "sourceEntity": "this project",
+            "optionText": "The project.",
+            "optionEntity": "The project",
+            "explanation": "project 离 it 最近，但放进去就成了“把这个研究项目放到历史中考察”，而项目只是作者从2011年起思考的事，越发紧迫的是海平面上升。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+              "quote": "Since I began thinking about this project in August 2011",
+              "anchor": "作者的研究项目"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "这个问题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+              "quote": "the issue of sea-level rise and the need to place it historically have only become more urgent",
+              "anchor": "it 回指海平面上升问题"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "这种发展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "These stages mirror the development of human conceptions of the sea.",
+            "sourceEntity": "the development",
+            "optionText": "The development.",
+            "optionEntity": "The development",
+            "explanation": "development 出自 [[block:paper-gaokao-2026-ii:reading-c:4|These stages mirror the development]]，讲人类对海洋认识的发展；放进去成了“把这种发展放到历史中考察”，和后面海平面升高的数据对不上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+              "quote": "These stages mirror the development of human conceptions of the sea.",
+              "anchor": "人类认识的发展"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "it",
+          "targetText": "Since I began thinking about this project in August 2011, the issue of sea-level rise and the need to place it historically have only become more urgent: between then and the end of 2022 the global sea rose by almost 5 centimeters, about half of the overall rise recorded by satellites since 1993.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+          "answerText": "the issue of sea-level rise",
+          "note": "题干画线词 it 就在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "The issue.",
+          "targetText": "the issue of sea-level rise",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "it 要能“放到历史中去考察”（place … historically），所以它必须是一件有来龙去脉的事。放回去：海平面上升这个问题，以及把这个问题放到历史中考察的必要性，都越发紧迫，后面近5厘米的数据正好说明它，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据作者对书的介绍，选出最能概括这本书内容的书名。",
+      "stemTranslationZh": "文中提到的这本书的书名可能是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2026-ii:reading-c:2]]说 sea level 这个概念有历史，[[block:paper-gaokao-2026-ii:reading-c:3]]讲研究缘起，[[block:paper-gaokao-2026-ii:reading-c:4]]讲它历史上的三个阶段；书名要盖住海平面的概念史",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "测高仪：必备之物",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "altimeter",
+            "optionText": "Altimeter",
+            "matchType": "exact",
+            "relationNote": "测高仪（altimeters）只在 [[block:paper-gaokao-2026-ii:reading-c:3]] 出现，是引起作者疑问的工具，书写的并不是测高仪有多必要。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "Resting on a pass near the Pradidali hut, we began discussing the readings offered by our altimeters (测高仪).",
+              "anchor": "讨论测高仪读数"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "海平面：一部历史",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+              "quote": "That the concept has a history is easily ignored.",
+              "anchor": "海平面概念有历史"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "This is how I began my search for the conceptual history of sea level.",
+              "anchor": "探寻海平面的概念史"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+              "quote": "In this book I examine three crucial stages in the history of mean sea level.",
+              "anchor": "书中考察三个阶段"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "零的含义：空无还是一切",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "meaning of zero",
+            "optionText": "Meaning of Zero",
+            "matchType": "exact",
+            "relationNote": "“零点的含义”出自 [[block:paper-gaokao-2026-ii:reading-c:3|led me to think about the meaning of zero]]，只是作者研究途中的一个念头，书写的是海平面的概念史，也没谈“空无还是一切”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "This sense of uncertainty led me to think about the meaning of zero.",
+              "anchor": "思考零点的含义"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "从山到海：起起落落",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Appropriately, the book took shape during a summer spent between sea and mountains.",
+            "sourceHighlight": "between sea and mountains",
+            "optionText": "Mountains to Seas: Ups and Downs",
+            "optionHighlight": "Mountains to Seas",
+            "explanation": "海边和山间只是作者构思这本书那个夏天去过的地方（between sea and mountains），书讲的不是山海起伏，而是海平面这个基准的来历。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "quote": "Appropriately, the book took shape during a summer spent between sea and mountains.",
+              "anchor": "书成形的那个夏天"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Sea Level: A History",
+          "targetText": "In this book I examine three crucial stages in the history of mean sea level.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "作者每次提到这本书，说的都是海平面这个概念的来历：它有历史却常被忽略，他追寻的是它的概念史（conceptual history of sea level），书里考察它历史上的三个阶段。选项“海平面：一部历史”正好把这些都包进去，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

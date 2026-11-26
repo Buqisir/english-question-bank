@@ -1,0 +1,994 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:seven-choices": {
+      "overview": "文章介绍尽早培养孩子劳动观念的四种方法：让家务融入日常、父母以身作则、借助小目标培养毅力，并把错误当作学习机会，强调温和引导和长期坚持。",
+      "fullTranslationZh": "尽早培养孩子劳动观念的方法\n\n你见过孩子找借口逃避家务吗？要是他们能把逃避责任时花的那份心思，用到真正承担责任上就好了。其实，培养孩子的劳动观念并不需要军事化训练。下面有四种简单实用的方法。\n\n● 让家务成为家庭日常生活的一部分。\n\n让孩子参与家庭的日常事务：收拾玩具、喂狗、给植物浇水。关键在于坚持。当这些任务变得像刷牙一样日常时，孩子就会从心底明白，帮忙做家务本来就是生活的一部分。\n\n● 以身作则，展现你希望孩子拥有的劳动观念。\n\n你不能一边抱怨往洗碗机里放碗碟，一边指望孩子热情地完成自己的任务。如果孩子看到你享受工作，并为把事情做好而自豪，他们就更有可能这样做。\n\n● 通过目标培养毅力。\n\n并不是每个孩子都生来就有马拉松跑者般的意志力。有时，你得帮他们找到自己的兴趣所在。和他们一起设定小而可实现的目标，为进步而非完美喝彩。诀窍是让他们自己努力应对一会儿——不要一遇到挫折，就忍不住替他们把事情解决。\n\n● 把错误当作机会。\n\n很少有什么能像可能失败那样令孩子害怕。最好的办法是让犯错成为学习过程中再自然不过的一部分。孩子把事情搞砸时，不要立刻冲过去救场。相反，要鼓励他们下次换一种做法。\n\n教孩子树立劳动观念，就是温和而持续地引导他们承担责任、培养毅力，并为自己的努力感到自豪。进步可能很慢，你会怀疑这些教导是否真的被孩子听进去了。别担心。你现在正在培养的这些习惯，正为孩子一生的韧性和满足感打下基础。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:paper-gaokao-2026-ii:seven:1",
+          "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:6",
+          "sourceText": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same.",
+          "displayText": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:37"
+          ],
+          "translationZh": "如果孩子看到你享受工作，并为把事情做好而自豪，他们就更有可能这样做。",
+          "analysisZh": "主句是 they’re far more likely to do the same，意思是孩子更可能照着做。句首 If 从句给出前提；sees you 后并列接 enjoying 和 taking，表示孩子看到父母享受工作、为做好工作而自豪。the same 回指父母表现出的态度，解释了为什么父母的示范会影响孩子。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "If your child sees you"
+            },
+            {
+              "start": 23,
+              "end": 58,
+              "quote": "enjoying your work and taking pride"
+            },
+            {
+              "start": 79,
+              "end": 117,
+              "quote": "they’re far more likely to do the same"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:paper-gaokao-2026-ii:seven:2",
+          "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+          "sourceText": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
+          "displayText": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:38"
+          ],
+          "translationZh": "诀窍是让他们自己努力应对一会儿——不要一遇到挫折，就忍不住替他们把事情解决。",
+          "analysisZh": "主干是 The trick is to let them struggle a bit，说明诀窍是让孩子自己试着克服困难。破折号后是对家长的祈使句 resist the urge，进一步说明怎样做到不包办。to help fix things 修饰 urge；the moment 引出时间从句，表示“一……就……”，强调别在孩子刚遇到挫折时立刻接手。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 39,
+              "quote": "The trick is to let them struggle a bit"
+            },
+            {
+              "start": 42,
+              "end": 57,
+              "quote": "resist the urge"
+            },
+            {
+              "start": 77,
+              "end": 113,
+              "quote": "the moment they experience a setback"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先以孩子逃避家务引出问题，再依次说明日常练习、父母示范、目标训练和从错误中学习，最后回应家长担心见效慢的顾虑。",
+        "units": [
+          {
+            "unitId": "unit-seven-intro",
+            "heading": "提出问题",
+            "paragraphIds": [
+              "block:paper-gaokao-2026-ii:seven-choices:1",
+              "block:paper-gaokao-2026-ii:seven-choices:2"
+            ],
+            "summary": "培养劳动观念无需严厉操练，可以从日常小事入手。"
+          },
+          {
+            "unitId": "unit-seven-routine",
+            "heading": "把家务变成习惯",
+            "paragraphIds": [
+              "block:paper-gaokao-2026-ii:seven-choices:3",
+              "block:paper-gaokao-2026-ii:seven-choices:4"
+            ],
+            "summary": "持续参与日常家务，让孩子明白分担事务是生活的一部分。"
+          },
+          {
+            "unitId": "unit-seven-model",
+            "heading": "父母先做示范",
+            "paragraphIds": [
+              "block:paper-gaokao-2026-ii:seven-choices:5",
+              "block:paper-gaokao-2026-ii:seven-choices:6"
+            ],
+            "summary": "孩子会观察父母如何对待工作，再模仿这种态度。"
+          },
+          {
+            "unitId": "unit-seven-goals",
+            "heading": "用小目标练毅力",
+            "paragraphIds": [
+              "block:paper-gaokao-2026-ii:seven-choices:7",
+              "block:paper-gaokao-2026-ii:seven-choices:8"
+            ],
+            "summary": "从兴趣和可实现的目标入手，鼓励进步，也留出孩子自己应对挫折的空间。"
+          },
+          {
+            "unitId": "unit-seven-mistakes",
+            "heading": "让错误成为学习机会",
+            "paragraphIds": [
+              "block:paper-gaokao-2026-ii:seven-choices:9",
+              "block:paper-gaokao-2026-ii:seven-choices:10"
+            ],
+            "summary": "父母不急于救场，让孩子从错误中改进下一次的做法。"
+          },
+          {
+            "unitId": "unit-seven-close",
+            "heading": "看重长期积累",
+            "paragraphIds": [
+              "block:paper-gaokao-2026-ii:seven-choices:11"
+            ],
+            "summary": "即使进步缓慢，持续培养的习惯仍会为孩子的未来打下基础。"
+          }
+        ]
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "text:paper-gaokao-2026-ii:seven:source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "text:paper-gaokao-2026-ii:seven:translation",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 13,
+              "quote": "尽早培养孩子劳动观念的方法"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:2"
+              ],
+              "start": 15,
+              "end": 95,
+              "quote": "你见过孩子找借口逃避家务吗？要是他们能把逃避责任时花的那份心思，用到真正承担责任上就好了。其实，培养孩子的劳动观念并不需要军事化训练。下面有四种简单实用的方法。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:3"
+              ],
+              "start": 97,
+              "end": 115,
+              "quote": "● 让家务成为家庭日常生活的一部分。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:4"
+              ],
+              "start": 117,
+              "end": 193,
+              "quote": "让孩子参与家庭的日常事务：收拾玩具、喂狗、给植物浇水。关键在于坚持。当这些任务变得像刷牙一样日常时，孩子就会从心底明白，帮忙做家务本来就是生活的一部分。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:5"
+              ],
+              "start": 195,
+              "end": 217,
+              "quote": "● 以身作则，展现你希望孩子拥有的劳动观念。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:6"
+              ],
+              "start": 219,
+              "end": 286,
+              "quote": "你不能一边抱怨往洗碗机里放碗碟，一边指望孩子热情地完成自己的任务。如果孩子看到你享受工作，并为把事情做好而自豪，他们就更有可能这样做。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:7"
+              ],
+              "start": 288,
+              "end": 299,
+              "quote": "● 通过目标培养毅力。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:8"
+              ],
+              "start": 301,
+              "end": 406,
+              "quote": "并不是每个孩子都生来就有马拉松跑者般的意志力。有时，你得帮他们找到自己的兴趣所在。和他们一起设定小而可实现的目标，为进步而非完美喝彩。诀窍是让他们自己努力应对一会儿——不要一遇到挫折，就忍不住替他们把事情解决。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:9"
+              ],
+              "start": 408,
+              "end": 418,
+              "quote": "● 把错误当作机会。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:10"
+              ],
+              "start": 420,
+              "end": 500,
+              "quote": "很少有什么能像可能失败那样令孩子害怕。最好的办法是让犯错成为学习过程中再自然不过的一部分。孩子把事情搞砸时，不要立刻冲过去救场。相反，要鼓励他们下次换一种做法。"
+            },
+            {
+              "paragraphId": "translation:paper-gaokao-2026-ii:seven:11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:seven-choices:11"
+              ],
+              "start": 502,
+              "end": 608,
+              "quote": "教孩子树立劳动观念，就是温和而持续地引导他们承担责任、培养毅力，并为自己的努力感到自豪。进步可能很慢，你会怀疑这些教导是否真的被孩子听进去了。别担心。你现在正在培养的这些习惯，正为孩子一生的韧性和满足感打下基础。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "text:paper-gaokao-2026-ii:seven:completed:4",
+            "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+            "text": "Involve your child in the daily running of the house: tidying toys, feeding the dog, watering the plants. The key is consistency. When the tasks become as routine as brushing teeth, kids internalise that helping with housework is simply part of life."
+          },
+          {
+            "textId": "text:paper-gaokao-2026-ii:seven:completed:5",
+            "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:5",
+            "text": "● Model the work ethic you want to see."
+          },
+          {
+            "textId": "text:paper-gaokao-2026-ii:seven:completed:8",
+            "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+            "text": "Not every child is born with the willpower of a marathon runner. Sometimes you have to help them find their “thing.” Set small, achievable goals together with them and celebrate progress, not perfection. The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback."
+          },
+          {
+            "textId": "text:paper-gaokao-2026-ii:seven:completed:10",
+            "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+            "text": "Few things strike fear into a child’s heart like the prospect of failing. The best way is to normalise mistakes as a natural part of learning. When kids mess up, don’t jump in with a rescue mission. Instead, encourage them to do differently next time."
+          },
+          {
+            "textId": "text:paper-gaokao-2026-ii:seven:completed:11",
+            "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+            "text": "Teaching kids work ethic is to gently and consistently push them toward responsibility, determination, and pride in their efforts. Progress can be slow, and you’ll wonder if it’s all sinking in. No worry. Those habits you’re building now are setting your child up for a lifetime of resilience (韧性) and satisfaction."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "annotation:seven:36:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+                "start": 113,
+                "end": 233,
+                "quote": "When the tasks become as routine as brushing teeth, kids internalise that helping with housework is simply part of life."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:4",
+                "start": 34,
+                "end": 76,
+                "quote": "当这些任务变得像刷牙一样日常时，孩子就会从心底明白，帮忙做家务本来就是生活的一部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:36:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:36"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:36",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:completed:4",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+                "start": 106,
+                "end": 129,
+                "quote": "The key is consistency."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:4",
+                "start": 27,
+                "end": 34,
+                "quote": "关键在于坚持。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:37:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:6",
+                "start": 121,
+                "end": 239,
+                "quote": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:6",
+                "start": 33,
+                "end": 67,
+                "quote": "如果孩子看到你享受工作，并为把事情做好而自豪，他们就更有可能这样做。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:37:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:37"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:37",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:completed:5",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:5",
+                "start": 2,
+                "end": 39,
+                "quote": "Model the work ethic you want to see."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:5",
+                "start": 2,
+                "end": 22,
+                "quote": "以身作则，展现你希望孩子拥有的劳动观念。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:38:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+                "start": 59,
+                "end": 145,
+                "quote": "Set small, achievable goals together with them and celebrate progress, not perfection."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:8",
+                "start": 41,
+                "end": 67,
+                "quote": "和他们一起设定小而可实现的目标，为进步而非完美喝彩。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:38:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:38"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:38",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:completed:8",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+                "start": 0,
+                "end": 64,
+                "quote": "Not every child is born with the willpower of a marathon runner."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:8",
+                "start": 0,
+                "end": 23,
+                "quote": "并不是每个孩子都生来就有马拉松跑者般的意志力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:39:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+                "start": 143,
+                "end": 198,
+                "quote": "When kids mess up, don’t jump in with a rescue mission."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:10",
+                "start": 45,
+                "end": 64,
+                "quote": "孩子把事情搞砸时，不要立刻冲过去救场。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:39:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:39"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:39",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:completed:10",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+                "start": 199,
+                "end": 251,
+                "quote": "Instead, encourage them to do differently next time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:10",
+                "start": 64,
+                "end": 80,
+                "quote": "相反，要鼓励他们下次换一种做法。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:40:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+                "start": 138,
+                "end": 147,
+                "quote": "No worry."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:11",
+                "start": 71,
+                "end": 75,
+                "quote": "别担心。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:40:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:40"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:40",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:completed:11",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+                "start": 131,
+                "end": 194,
+                "quote": "Progress can be slow, and you’ll wonder if it’s all sinking in."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:11",
+                "start": 44,
+                "end": 71,
+                "quote": "进步可能很慢，你会怀疑这些教导是否真的被孩子听进去了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:sentence:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:37"
+            ],
+            "selectedSentenceId": "sentence:paper-gaokao-2026-ii:seven:1",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:6",
+                "start": 121,
+                "end": 239,
+                "quote": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:6",
+                "start": 33,
+                "end": 67,
+                "quote": "如果孩子看到你享受工作，并为把事情做好而自豪，他们就更有可能这样做。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:sentence:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:38"
+            ],
+            "selectedSentenceId": "sentence:paper-gaokao-2026-ii:seven:2",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+                "start": 146,
+                "end": 260,
+                "quote": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2026-ii:seven:translation",
+                "paragraphId": "translation:paper-gaokao-2026-ii:seven:8",
+                "start": 67,
+                "end": 105,
+                "quote": "诀窍是让他们自己努力应对一会儿——不要一遇到挫折，就忍不住替他们把事情解决。"
+              }
+            ]
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 37,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它是祈使句，和 \"Make housework part of the family routine.\" 一样像一条小标题，放进这一空很顺眼。但下一段开头 \"while you’re complaining about loading the dishwasher\" 说的是家长自己干活的样子，要的是家长做榜样；\"analytical skills\" 全文没有一句接得上。",
+          "quotes": [
+            "Make housework part of the family routine.",
+            "while you’re complaining about loading the dishwasher",
+            "analytical skills"
+          ]
+        },
+        "E": {
+          "target": 36,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "它的 \"a cleaner living room\" 和空前 \"tidying toys\" 都是收拾屋子，看着像在接这一空。但空后 \"as routine as brushing teeth\" 讲的是天天做、做成习惯，它却跳到做完以后的奖励；小标题 \"family routine\" 要的也是惯例，不是奖赏。",
+          "quotes": [
+            "a cleaner living room",
+            "tidying toys",
+            "as routine as brushing teeth",
+            "family routine"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-ii:36": {
+      "blankId": "blank:paper-gaokao-2026-ii:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "family routine",
+        "daily running of the house",
+        "brushing teeth",
+        "helping with housework"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+        "headingAnchor": "● Make housework part of the family routine.",
+        "beforeQuote": "Involve your child in the daily running of the house: tidying toys, feeding the dog, watering the plants.",
+        "afterQuote": "When the tasks become as routine as brushing teeth, kids internalise that helping with housework is simply part of life."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "consistency",
+          "signalSide": "option",
+          "targetText": "daily running / as routine as brushing teeth",
+          "relation": "选项强调持续去做，才能把家务变成稳定的日常习惯。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "daily running",
+          "signalSide": "context-before",
+          "targetText": "consistency",
+          "relation": "空前让孩子参与每天的家庭事务，重点不是偶尔帮一次忙。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "as routine as brushing teeth",
+          "signalSide": "context-after",
+          "targetText": "consistency",
+          "relation": "空后用每天刷牙作类比，说明坚持以后任务才会变成习惯。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前列出孩子能做的几样家务，这句点明要害不在做哪件，而在一直做下去；空后顺着说，做到像刷牙那样天天如此，孩子就把家务当成生活本身。",
+        "matchedClues": [
+          {
+            "contextSide": "daily running / as routine as brushing teeth",
+            "optionSide": "consistency",
+            "relation": "每天做、做成习惯，具体解释了坚持为什么是关键。"
+          }
+        ]
+      },
+      "lock": [
+        "daily running",
+        "consistency",
+        "as routine as"
+      ],
+      "find": {
+        "text": "空后 \"as routine as brushing teeth\" 说做成惯例，空前是 \"daily running\" 的家务；能把两头连起来的只有 A 的 \"consistency\"：天天坚持做。",
+        "quotes": [
+          "as routine as brushing teeth",
+          "daily running",
+          "consistency"
+        ]
+      },
+      "explain": "空前列出孩子能做的几样家务，这句点明要害不在做哪件，而在一直做下去；空后顺着说，做到像刷牙那样天天如此，孩子就把家务当成生活本身。",
+      "distractors": [],
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "它的 \"a cleaner living room\" 和空前 \"tidying toys\" 都是收拾屋子，看着像在接这一空。但空后 \"as routine as brushing teeth\" 讲的是天天做、做成习惯，它却跳到做完以后的奖励；小标题 \"family routine\" 要的也是惯例，不是奖赏。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:37": {
+      "blankId": "blank:paper-gaokao-2026-ii:37",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "tackle their tasks with enthusiasm",
+        "complaining about loading the dishwasher",
+        "enjoying your work",
+        "taking pride in a job well done"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Model the work ethic",
+          "signalSide": "option",
+          "targetText": "your child sees you enjoying your work",
+          "relation": "Model 在这里是动词：大人先表现出自己希望孩子具有的工作态度。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your child sees you enjoying your work",
+          "signalSide": "context-after",
+          "targetText": "Model the work ethic",
+          "relation": "孩子观察父母如何对待工作，因此父母自己的做法就是榜样。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "taking pride in a job well done",
+          "signalSide": "context-after",
+          "targetText": "the work ethic you want to see",
+          "relation": "把事情做好后感到自豪，是父母可以示范的具体态度。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "这行小标题管下面一整段：先举家长一边抱怨一边要孩子卖力的反例，再说孩子看到家长乐在其中就会照做，正反两句都在讲孩子学的是家长的样子。",
+        "matchedClues": [
+          {
+            "contextSide": "your child sees you enjoying your work / do the same",
+            "optionSide": "Model the work ethic you want to see.",
+            "relation": "孩子模仿父母的工作态度，说明本段建议的对象首先是父母自己。"
+          }
+        ]
+      },
+      "lock": [
+        "Model",
+        "while you’re complaining"
+      ],
+      "find": {
+        "text": "先跳过，读完下一段再回来。\"while you’re complaining\" 说家长自己边干边抱怨，就别指望孩子热情；这是要家长先做样子，只有 C 的 \"Model\" 说这个。",
+        "quotes": [
+          "while you’re complaining",
+          "Model"
+        ]
+      },
+      "explain": "这行小标题管下面一整段：先举家长一边抱怨一边要孩子卖力的反例，再说孩子看到家长乐在其中就会照做，正反两句都在讲孩子学的是家长的样子。",
+      "distractors": [],
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "它是祈使句，和 \"Make housework part of the family routine.\" 一样像一条小标题，放进这一空很顺眼。但下一段开头 \"while you’re complaining about loading the dishwasher\" 说的是家长自己干活的样子，要的是家长做榜样；\"analytical skills\" 全文没有一句接得上。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:38": {
+      "blankId": "blank:paper-gaokao-2026-ii:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "Build determination through goals",
+        "small, achievable goals",
+        "celebrate progress, not perfection",
+        "experience a setback"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+        "headingAnchor": "● Build determination through goals.",
+        "beforeQuote": "",
+        "afterQuote": "Sometimes you have to help them find their “thing.” Set small, achievable goals together with them and celebrate progress, not perfection."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "willpower",
+          "signalSide": "option",
+          "targetText": "Build determination through goals",
+          "relation": "选项说意志力并非人人天生具备，为后面的培养方法提出需要解决的问题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Build determination through goals",
+          "signalSide": "context-before",
+          "targetText": "willpower",
+          "relation": "标题提出用目标培养毅力，正好回应选项中的意志力不足。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "small, achievable goals",
+          "signalSide": "context-after",
+          "targetText": "Not every child is born with",
+          "relation": "既然不是每个孩子天生就有很强的毅力，就从孩子够得着的小目标开始培养。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "这句先承认孩子不都天生能坚持，把为什么要培养摆在前面；空后的找兴趣、定小目标、容他们受点挫，都是冲着这份不足给出的办法。",
+        "matchedClues": [
+          {
+            "contextSide": "Build determination through goals / small, achievable goals",
+            "optionSide": "willpower of a marathon runner",
+            "relation": "马拉松跑者用来比喻强大的意志力，后文的小目标则是培养毅力的起点。"
+          }
+        ]
+      },
+      "lock": [
+        "determination",
+        "willpower",
+        "help them"
+      ],
+      "find": {
+        "text": "小标题 \"Build determination\" 讲培养毅力，空后 \"Sometimes you have to help them\" 说家长得出手帮；G 的 \"willpower of a marathon runner\" 先说毅力并非天生，帮的理由才有了。",
+        "quotes": [
+          "Build determination",
+          "Sometimes you have to help them",
+          "willpower of a marathon runner"
+        ]
+      },
+      "explain": "这句先承认孩子不都天生能坚持，把为什么要培养摆在前面；空后的找兴趣、定小目标、容他们受点挫，都是冲着这份不足给出的办法。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "F 的 \"Progress\" 像在呼应空后 \"celebrate progress\"；但 F 是安慰家长见效慢，这里要先说孩子缺毅力，空后 \"help them\" 才有对象。",
+          "quotes": [
+            "Progress",
+            "celebrate progress",
+            "help them"
+          ]
+        }
+      ],
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 的 \"Progress\" 像在呼应空后 \"celebrate progress\"；但 F 是安慰家长见效慢，这里要先说孩子缺毅力，空后 \"help them\" 才有对象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:39": {
+      "blankId": "blank:paper-gaokao-2026-ii:39",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "topicClues": [
+        "Treat mistakes as opportunities",
+        "a natural part of learning",
+        "mess up",
+        "a rescue mission"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+        "headingAnchor": "● Treat mistakes as opportunities.",
+        "beforeQuote": "When kids mess up, don’t jump in with a rescue mission.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Instead",
+          "signalSide": "option",
+          "targetText": "don’t jump in with a rescue mission",
+          "relation": "Instead 接在“不要马上救场”之后，转而提出应该采取的做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "don’t jump in with a rescue mission",
+          "signalSide": "context-before",
+          "targetText": "encourage them to do differently next time",
+          "relation": "空前否定父母立即代劳，空后要给孩子自己改进的机会。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "do differently next time",
+          "signalSide": "option",
+          "targetText": "opportunities / learning",
+          "relation": "换种做法再尝试，才能把这次错误变成学习机会。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前叫家长别替孩子收拾残局，这句给出替代做法：让孩子自己琢磨下回怎么改；这样犯错就成了学东西的机会，和小标题对上。",
+        "matchedClues": [
+          {
+            "contextSide": "don’t jump in with a rescue mission",
+            "optionSide": "Instead, encourage them to do differently next time.",
+            "relation": "不替孩子包办解决，而是让孩子从这次错误中学会调整做法。"
+          }
+        ]
+      },
+      "lock": [
+        "don’t jump in",
+        "Instead"
+      ],
+      "find": {
+        "text": "空前 \"don’t jump in with a rescue mission\" 只说别做什么，空里该给出该做什么；D 以 \"Instead\" 开头，正好接住这个否定。",
+        "quotes": [
+          "don’t jump in with a rescue mission",
+          "Instead"
+        ]
+      },
+      "explain": "空前叫家长别替孩子收拾残局，这句给出替代做法：让孩子自己琢磨下回怎么改；这样犯错就成了学东西的机会，和小标题对上。",
+      "distractors": [],
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2026-ii:40": {
+      "blankId": "blank:paper-gaokao-2026-ii:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "gently and consistently push",
+        "responsibility, determination",
+        "Those habits",
+        "a lifetime of resilience"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+        "beforeQuote": "Teaching kids work ethic is to gently and consistently push them toward responsibility, determination, and pride in their efforts.",
+        "afterQuote": "No worry. Those habits you’re building now are setting your child up for a lifetime of resilience (韧性) and satisfaction."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it’s all sinking in",
+          "signalSide": "option",
+          "targetText": "Teaching kids work ethic",
+          "relation": "这里的 it 指前文对孩子的这些教导：父母可能怀疑孩子是否真正理解并接受了。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Teaching kids work ethic",
+          "signalSide": "context-before",
+          "targetText": "it’s all sinking in",
+          "relation": "前句说父母持续教导孩子，给选项中“这些教导有没有被接受”提供所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "you’ll wonder",
+          "signalSide": "option",
+          "targetText": "No worry.",
+          "relation": "选项先写家长因进步缓慢产生疑虑，空后的安慰才有具体对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "No worry.",
+          "signalSide": "context-after",
+          "targetText": "Progress can be slow",
+          "relation": "别担心回应见效慢的顾虑，后句再解释眼下的习惯有长远作用。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前总说要温和而持续地推着孩子走，这句说出坚持路上家长难免的心慌：见效慢、怕白教；空后先劝一句别急，再用 \"Those habits\" 说眼下的习惯受用一生。",
+        "matchedClues": [
+          {
+            "contextSide": "Teaching kids work ethic / No worry.",
+            "optionSide": "you’ll wonder if it’s all sinking in",
+            "relation": "怀疑孩子是否理解这些教导，自然引出作者对家长的安慰。"
+          }
+        ]
+      },
+      "lock": [
+        "you’ll wonder",
+        "No worry"
+      ],
+      "find": {
+        "text": "空后 \"No worry.\" 是在安慰，空里得先有让家长担心的事；F 的 \"you’ll wonder if it’s all sinking in\" 正是这份担心。",
+        "quotes": [
+          "No worry.",
+          "you’ll wonder if it’s all sinking in"
+        ]
+      },
+      "explain": "空前总说要温和而持续地推着孩子走，这句说出坚持路上家长难免的心慌：见效慢、怕白教；空后先劝一句别急，再用 \"Those habits\" 说眼下的习惯受用一生。",
+      "distractors": [
+        {
+          "label": "A",
+          "text": "A 的 \"consistency\" 像在接空前 \"consistently push\"；但空后 \"No worry.\" 要安慰一种担心，A 里没有让人担心的事。",
+          "quotes": [
+            "consistency",
+            "consistently push",
+            "No worry."
+          ]
+        }
+      ],
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 的 \"consistency\" 像在接空前 \"consistently push\"；但空后 \"No worry.\" 要安慰一种担心，A 里没有让人担心的事。"
+        }
+      ]
+    }
+  }
+}

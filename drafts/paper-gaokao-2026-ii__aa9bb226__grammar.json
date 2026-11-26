@@ -1,0 +1,996 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:grammar-fill": {
+      "overview": "作者第一次在悉尼社区中心跟有二十八年经验的教练安杰拉学太极，从原地热身、平行站立、沉丹田练到模仿招式，课后虽仍是清晨却十分清醒，准备去喝咖啡。",
+      "fullTranslationZh": "我第一次打太极\n太极课的前 15 分钟，我们完全待在原地热身。安杰拉是一位有二十八年经验的太极教练，她说，一小时成功的太极课，就是一小时里没有任何消极念头。“你的心和身体要合在一起。这才是最要紧的。”\n虽然我不是习惯早起的人，早上 7 点我还是和另外大约二十个人一起，在悉尼一个社区中心的院子里开始跟安杰拉上课。“双脚平行站好，用丹田撑住身体。”她说。\n在太极里，丹田是气的核心，而汉语里的“气”指的是生命力。现在，我应该感受到双腿承受的重量，并让丹田下沉。\n接着我们开始练太极招式，在安杰拉教的这一流派里，招式共有四十二式。今天我们只练前九式。这些招式的名字都很形象，比如“捧碗”和“揽雀尾”。\n课上大部分时间，我们跟着安杰拉，专心做一些细小、单独的动作。然后，安杰拉让我们自己试着做这九个动作。我一直盯着右边的一位女士，努力模仿她的动作，可惜我很快就走神了。\n课程结束时，我感觉十分清醒，尽管当时才早上 8 点，时间还早。该让我的丹田去见见另一种生命力了：咖啡。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2026-ii:grammar-fill:1",
+          "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+          "sourceText": "We move on to tai chi positions, of __61__ there are forty-two in the style that Angela teaches.",
+          "displayText": "We move on to tai chi positions, of which there are forty-two in the style that Angela teaches.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:61"
+          ],
+          "translationZh": "接着我们开始练太极招式，在安杰拉教的这一流派里，招式共有四十二式。",
+          "analysisZh": "主干是 We move on to tai chi positions，我们接着练太极招式。逗号后 of which 引出非限制性定语从句，which 指 tai chi positions，从句可还原为 there are forty-two of them in the style，说这些招式一共四十二式。句末 that Angela teaches 又是一个定语从句，修饰 the style，限定是安杰拉教的那一派。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "We move on to tai chi positions"
+            },
+            {
+              "start": 33,
+              "end": 61,
+              "quote": "of which there are forty-two"
+            },
+            {
+              "start": 75,
+              "end": 94,
+              "quote": "that Angela teaches"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2026-ii:grammar-fill:2",
+          "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+          "sourceText": "Angela, a tai chi __57__ (instruct) with twenty-eight years of experience, says that a successful hour of tai chi is an hour with no negative thoughts.",
+          "displayText": "Angela, a tai chi instructor with twenty-eight years of experience, says that a successful hour of tai chi is an hour with no negative thoughts.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:57"
+          ],
+          "translationZh": "安杰拉是一位有二十八年经验的太极教练，她说，一小时成功的太极课，就是一小时里没有任何消极念头。",
+          "analysisZh": "主干是 Angela says that…，安杰拉说……。两个逗号之间的 a tai chi instructor with twenty-eight years of experience 是 Angela 的同位语，with 短语修饰 instructor，交代她有二十八年经验。that 引导宾语从句，从句主干是 a successful hour of tai chi is an hour，句末 with no negative thoughts 修饰后一个 an hour，说这一小时里没有消极念头。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 6,
+              "quote": "Angela"
+            },
+            {
+              "start": 68,
+              "end": 77,
+              "quote": "says that"
+            },
+            {
+              "start": 107,
+              "end": 143,
+              "quote": "is an hour with no negative thoughts"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 7,
+              "quote": "我第一次打太极"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:2"
+              ],
+              "start": 8,
+              "end": 100,
+              "quote": "太极课的前 15 分钟，我们完全待在原地热身。安杰拉是一位有二十八年经验的太极教练，她说，一小时成功的太极课，就是一小时里没有任何消极念头。“你的心和身体要合在一起。这才是最要紧的。”"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:3"
+              ],
+              "start": 101,
+              "end": 176,
+              "quote": "虽然我不是习惯早起的人，早上 7 点我还是和另外大约二十个人一起，在悉尼一个社区中心的院子里开始跟安杰拉上课。“双脚平行站好，用丹田撑住身体。”她说。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:4"
+              ],
+              "start": 177,
+              "end": 229,
+              "quote": "在太极里，丹田是气的核心，而汉语里的“气”指的是生命力。现在，我应该感受到双腿承受的重量，并让丹田下沉。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:5"
+              ],
+              "start": 230,
+              "end": 298,
+              "quote": "接着我们开始练太极招式，在安杰拉教的这一流派里，招式共有四十二式。今天我们只练前九式。这些招式的名字都很形象，比如“捧碗”和“揽雀尾”。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:6"
+              ],
+              "start": 299,
+              "end": 381,
+              "quote": "课上大部分时间，我们跟着安杰拉，专心做一些细小、单独的动作。然后，安杰拉让我们自己试着做这九个动作。我一直盯着右边的一位女士，努力模仿她的动作，可惜我很快就走神了。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:grammar-fill:7"
+              ],
+              "start": 382,
+              "end": 433,
+              "quote": "课程结束时，我感觉十分清醒，尽管当时才早上 8 点，时间还早。该让我的丹田去见见另一种生命力了：咖啡。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+            "text": "For the first 15 minutes of my tai chi (太极) class, we remain entirely in one spot to warm up. Angela, a tai chi instructor with twenty-eight years of experience, says that a successful hour of tai chi is an hour with no negative thoughts. “Your mind and body go together. That’s all that matters.”"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:3",
+            "text": "Although not a morning person, I begin my lesson with Angela and about twenty others at a Sydney community centre courtyard at 7 am. “Put your feet parallel (平行), and use your dan tian to hold up your body,” she says."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:4",
+            "text": "In tai chi, the dan tian is your qi core and qi in Chinese means life force. Now, I am supposed to feel the weight on my legs and sink my dan tian."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:5",
+            "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+            "text": "We move on to tai chi positions, of which there are forty-two in the style that Angela teaches. Today, we will only be doing the first nine. The movements have descriptive names like “holding the bowl” and “grabbing the bird’s tail.”"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:6",
+            "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
+            "text": "During most of the class, we follow Angela and concentrate on making tiny, isolated (单独) movements. Then, Angela gets us to try the nine movements on our own. I keep my eyes on a woman to my right and try to copy her movements, but unfortunately I soon lose focus."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:7",
+            "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:7",
+            "text": "At the end of the lesson, I feel wide awake, despite it still being early at 8 am. It’s time for my dan tian to meet another life force: coffee."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 51,
+                "end": 60,
+                "quote": "we remain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 16,
+                "end": 20,
+                "quote": "待在原地"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:56"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 61,
+                "end": 69,
+                "quote": "entirely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 14,
+                "end": 16,
+                "quote": "完全"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 101,
+                "end": 118,
+                "quote": "Angela, a tai chi"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 23,
+                "end": 29,
+                "quote": "安杰拉是一位"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:57"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 112,
+                "end": 122,
+                "quote": "instructor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 37,
+                "end": 41,
+                "quote": "太极教练"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 271,
+                "end": 287,
+                "quote": "body go together"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 78,
+                "end": 82,
+                "quote": "合在一起"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:58"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 250,
+                "end": 253,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 73,
+                "end": 77,
+                "quote": "心和身体"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:3",
+                "start": 157,
+                "end": 170,
+                "quote": "parallel (平行)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:3",
+                "start": 58,
+                "end": 62,
+                "quote": "平行站好"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:59"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:3",
+                "start": 143,
+                "end": 147,
+                "quote": "feet"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:3",
+                "start": 56,
+                "end": 58,
+                "quote": "双脚"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:4",
+                "start": 101,
+                "end": 119,
+                "quote": "to feel the weight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:4",
+                "start": 34,
+                "end": 44,
+                "quote": "感受到双腿承受的重量"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:60"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:4",
+                "start": 84,
+                "end": 95,
+                "quote": "am supposed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:4",
+                "start": 32,
+                "end": 34,
+                "quote": "应该"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 14,
+                "end": 35,
+                "quote": "tai chi positions, of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 7,
+                "end": 11,
+                "quote": "太极招式"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:61"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 36,
+                "end": 41,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 24,
+                "end": 32,
+                "quote": "招式共有四十二式"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 179,
+                "end": 189,
+                "quote": "names like"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 55,
+                "end": 57,
+                "quote": "比如"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:62"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 160,
+                "end": 171,
+                "quote": "descriptive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 51,
+                "end": 54,
+                "quote": "很形象"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
+                "start": 159,
+                "end": 173,
+                "quote": "I keep my eyes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:6",
+                "start": 50,
+                "end": 55,
+                "quote": "我一直盯着"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:63"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
+                "start": 174,
+                "end": 176,
+                "quote": "on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:6",
+                "start": 51,
+                "end": 55,
+                "quote": "一直盯着"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 45,
+                "end": 61,
+                "quote": "despite it still"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 14,
+                "end": 16,
+                "quote": "尽管"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:64"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:7",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 62,
+                "end": 67,
+                "quote": "being"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 26,
+                "end": 30,
+                "quote": "时间还早"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2026-ii:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 89,
+                "end": 114,
+                "quote": "It’s time for my dan tian"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 31,
+                "end": 37,
+                "quote": "该让我的丹田"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2026-ii:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:65"
+            ],
+            "blankId": "blank:paper-gaokao-2026-ii:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:7",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 109,
+                "end": 116,
+                "quote": "to meet"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:7",
+                "start": 37,
+                "end": 40,
+                "quote": "去见见"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2026-ii:grammar-fill:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:61"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2026-ii:grammar-fill:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 0,
+                "end": 95,
+                "quote": "We move on to tai chi positions, of which there are forty-two in the style that Angela teaches."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:5",
+                "start": 0,
+                "end": 33,
+                "quote": "接着我们开始练太极招式，在安杰拉教的这一流派里，招式共有四十二式。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2026-ii:grammar-fill:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:57"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2026-ii:grammar-fill:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2026-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 94,
+                "end": 238,
+                "quote": "Angela, a tai chi instructor with twenty-eight years of experience, says that a successful hour of tai chi is an hour with no negative thoughts."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2026-ii:grammar-fill",
+                "paragraphId": "translation-paragraph:group:paper-gaokao-2026-ii:grammar-fill:2",
+                "start": 23,
+                "end": 70,
+                "quote": "安杰拉是一位有二十八年经验的太极教练，她说，一小时成功的太极课，就是一小时里没有任何消极念头。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2026-ii:56": {
+      "blankId": "blank:paper-gaokao-2026-ii:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "entire",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "entirely",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "主干是 we remain ___ in one spot，空格修饰谓语 remain in one spot，说明“完全”待在原地不动；修饰动词要用副词，把形容词 entire 变成 entirely。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "we remain",
+          "signalSide": "passage",
+          "relation": "中文：entirely 修饰 remain in one spot，说明待在原地的程度。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:57": {
+      "blankId": "blank:paper-gaokao-2026-ii:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "instruct",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "instructor",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "两个逗号之间的 a tai chi ___ with twenty-eight years of experience 作 Angela 的同位语，说明她的身份；a tai chi 后缺一个指人的单数名词，把动词 instruct 加 -or 变成 instructor（教练）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "Angela, a tai chi",
+          "signalSide": "passage",
+          "relation": "中文：同位语说明 Angela 是什么人，a 后要单数可数名词。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "with twenty-eight years of experience",
+          "signalSide": "passage",
+          "relation": "中文：有二十八年经验的应是人，即教练。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:58": {
+      "blankId": "blank:paper-gaokao-2026-ii:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "引号里的主干是 Your mind ___ body go together，空格要把 mind 和 body 两个名词连起来共同作主语；谓语 go 用复数形式，together 也说明是两样东西合在一起，所以填 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "body go together",
+          "signalSide": "passage",
+          "relation": "中文：go together 要两个并列的主语，and 把 mind 和 body 连起来。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:59": {
+      "blankId": "blank:paper-gaokao-2026-ii:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "foot",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "feet",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "Put your ___ parallel 中，空格作 put 的宾语，parallel 说明摆成什么样；“平行”至少要两只脚，所以用复数，foot 的复数是不规则的 feet。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "parallel (平行)",
+          "signalSide": "passage",
+          "relation": "中文：平行至少涉及两样东西，脚要用复数。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:60": {
+      "blankId": "blank:paper-gaokao-2026-ii:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "suppose",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "am supposed",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "主干是 I ___ to feel the weight on my legs and sink my dan tian，空格作主语 I 的谓语；“按要求应该做”用 be supposed to do，全文用现在时讲课堂经过（I begin、she says），Now 也指此刻，主语 I 配 am，填 am supposed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Now, I",
+          "signalSide": "passage",
+          "relation": "中文：主语是 I，时间是此刻，be 动词用 am。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to feel the weight",
+          "signalSide": "passage",
+          "relation": "中文：be supposed to do，应该做某事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:61": {
+      "blankId": "blank:paper-gaokao-2026-ii:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "preposition-relative",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "逗号后的 there are forty-two in the style… 是一个完整的从句，空格跟在介词 of 后面，代替先行词 tai chi positions 作 of 的宾语，可还原为 there are forty-two of these positions；指物、又在逗号后，填 which。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "tai chi positions",
+          "signalSide": "passage",
+          "relation": "中文：which 指代太极招式，of which 意思是“这些招式之中”。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "there are forty-two",
+          "signalSide": "passage",
+          "relation": "中文：从句主谓齐全，空格只作 of 的宾语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:62": {
+      "blankId": "blank:paper-gaokao-2026-ii:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "describe",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
+      "answer": "descriptive",
+      "role": null,
+      "similarityProfile": {
+        "route": "true-derived-adjective",
+        "features": []
+      },
+      "reason": "主干是 The movements have ___ names，空格修饰名词 names，要用形容词；后面举的 holding the bowl、grabbing the bird’s tail 都能让人想到动作的样子，所以把 describe 变成形容词 descriptive（形象的、描述性的）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "names like",
+          "signalSide": "passage",
+          "relation": "中文：descriptive 修饰 names，后面举例说明名字很形象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:63": {
+      "blankId": "blank:paper-gaokao-2026-ii:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "on",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "I keep my eyes ___ a woman 中，keep 的宾语已经是 my eyes，a woman 要靠介词接到前面，说明眼睛落在谁身上；“盯着某人”用 keep one’s eyes on sb，填 on，后面 try to copy her movements 也说明她一直在看那位女士。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "I keep my eyes",
+          "signalSide": "passage",
+          "relation": "中文：keep one’s eyes on sb，眼睛一直盯着某人。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "try to copy her movements",
+          "signalSide": "passage",
+          "relation": "中文：要模仿她，就得一直盯着她看。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:64": {
+      "blankId": "blank:paper-gaokao-2026-ii:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "being",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-preposition",
+        "features": []
+      },
+      "reason": "主干 I feel wide awake 已经完整，despite 是介词，后面要接名词性成分作它的宾语；it still ___ early 中 it 是 be 的逻辑主语，介词后的动词用 -ing 形式，填 being，构成 despite it still being early（尽管时间还早）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "despite it still",
+          "signalSide": "passage",
+          "relation": "中文：despite 是介词，后接动名词复合结构作宾语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:65": {
+      "blankId": "blank:paper-gaokao-2026-ii:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "meet",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to meet",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-abstract-content",
+        "features": []
+      },
+      "reason": "It’s time for my dan tian ___ another life force 中，空格修饰 time，说明是做什么的时候，for my dan tian 交代由谁来做；“该某人做某事了”用 It’s time for sb to do，填 to meet。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "It’s time for my dan tian",
+          "signalSide": "passage",
+          "relation": "中文：It’s time for sb to do，该某人做某事了。"
+        }
+      ]
+    }
+  }
+}

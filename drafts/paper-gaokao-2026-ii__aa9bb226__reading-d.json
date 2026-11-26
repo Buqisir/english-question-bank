@@ -1,0 +1,733 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:reading-d": {
+      "overview": "巴塞罗那推出 MetroCharge 项目，把地铁刹车时回收的能量供给列车、车站和地面的电动汽车充电桩。文章写项目的环保目标、车主的反应、再生制动的原理和专家对其创新的评价。",
+      "fullTranslationZh": "巴塞罗那的地铁驶入车站，车门滑开，乘客涌出，各自去忙日常的事。他们几乎不知道，就在他们走出车厢时，一股能量被送上地面，帮着给一辆电动汽车充电。\n\n巴塞罗那整合了一套清洁能源技术，帮助公共交通变得更环保，同时也为应对气候变化、助力欧洲艰难地向私人电动汽车市场转型尽一份力。\n\n巴塞罗那地铁系统的16个车站加入了新推出的 MetroCharge 项目：地下列车刹车产生的能量被用来给列车和车站本身供电，剩余的能量则沿着蜿蜒的电缆输送到地面，为私家车充电桩供电。\n\n贝尔纳多·埃斯皮诺萨是一名工程师，每天乘地铁，自己有一辆电动汽车。“我很惊喜，因为我总在找地方给车充电，”埃斯皮诺萨在巴塞罗那南部一个工薪阶层社区搭地铁前说，“要是用的还是列车刹车产生的能量，那就更好了。”\n\n再生制动装置在列车上已经用了几十年，一些汽车也在使用。它包含一个电动机，能收集刹车过程中的能量，而用传统刹车时，这部分能量会以热的形式散失掉。这些能量可以马上用来让车辆加速，也可以像巴塞罗那地铁系统那样，沿电缆输送，为车站或电动汽车充电桩供电。\n\n电气工程教授阿尔瓦罗·卢纳说，这套系统的创新之处在于，它能把回收的能量转用于当地的特定用途——在这里，就是给停在附近的电动汽车充电。他说，这样做提高了效率。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+          "sourceText": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+          "displayText": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:34"
+          ],
+          "translationZh": "它包含一个电动机，能收集刹车过程中的能量，而用传统刹车时，这部分能量会以热的形式散失掉。",
+          "analysisZh": "主干很短：They consist of an electric motor，They 指再生制动装置，它由一个电动机构成。which collects energy 修饰 motor，说这个电动机收集能量；used in the braking action 修饰 energy，限定是刹车时用掉的能量；that would be lost as heat by conventional brakes 再修饰这部分能量，用虚拟的 would 说明换成传统刹车它就会变成热散掉。一层层修饰讲清了装置怎样工作，是第34题的依据。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 33,
+              "quote": "They consist of an electric motor"
+            },
+            {
+              "start": 34,
+              "end": 55,
+              "quote": "which collects energy"
+            },
+            {
+              "start": 83,
+              "end": 109,
+              "quote": "that would be lost as heat"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+          "sourceText": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+          "displayText": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:35"
+          ],
+          "translationZh": "电气工程教授阿尔瓦罗·卢纳说，这套系统的创新之处在于，它能把回收的能量转用于当地的特定用途——在这里，就是给停在附近的电动汽车充电。",
+          "analysisZh": "主干是 Alvaro Luna said that …，a professor of electrical engineering 是插在中间说明身份的同位语。that 从句先给评价 the system is innovative，in so far as 引出“在……这一点上”，说明创新在哪：it allows for recycled energy to be redirected to specific local uses，让回收的能量转作当地的具体用途。破折号后的 in this case powering electric cars parked nearby 举出这里的用途，parked nearby 修饰 electric cars。第35题的答案就在这一句。",
+          "underlineRanges": [
+            {
+              "start": 62,
+              "end": 86,
+              "quote": "the system is innovative"
+            },
+            {
+              "start": 87,
+              "end": 99,
+              "quote": "in so far as"
+            },
+            {
+              "start": 130,
+              "end": 169,
+              "quote": "to be redirected to specific local uses"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-ii:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-d:1"
+              ],
+              "start": 0,
+              "end": 71,
+              "quote": "巴塞罗那的地铁驶入车站，车门滑开，乘客涌出，各自去忙日常的事。他们几乎不知道，就在他们走出车厢时，一股能量被送上地面，帮着给一辆电动汽车充电。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-d:2"
+              ],
+              "start": 73,
+              "end": 135,
+              "quote": "巴塞罗那整合了一套清洁能源技术，帮助公共交通变得更环保，同时也为应对气候变化、助力欧洲艰难地向私人电动汽车市场转型尽一份力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-d:3"
+              ],
+              "start": 137,
+              "end": 228,
+              "quote": "巴塞罗那地铁系统的16个车站加入了新推出的 MetroCharge 项目：地下列车刹车产生的能量被用来给列车和车站本身供电，剩余的能量则沿着蜿蜒的电缆输送到地面，为私家车充电桩供电。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-d:4"
+              ],
+              "start": 230,
+              "end": 333,
+              "quote": "贝尔纳多·埃斯皮诺萨是一名工程师，每天乘地铁，自己有一辆电动汽车。“我很惊喜，因为我总在找地方给车充电，”埃斯皮诺萨在巴塞罗那南部一个工薪阶层社区搭地铁前说，“要是用的还是列车刹车产生的能量，那就更好了。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-d:5"
+              ],
+              "start": 335,
+              "end": 457,
+              "quote": "再生制动装置在列车上已经用了几十年，一些汽车也在使用。它包含一个电动机，能收集刹车过程中的能量，而用传统刹车时，这部分能量会以热的形式散失掉。这些能量可以马上用来让车辆加速，也可以像巴塞罗那地铁系统那样，沿电缆输送，为车站或电动汽车充电桩供电。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-d:6"
+              ],
+              "start": 459,
+              "end": 537,
+              "quote": "电气工程教授阿尔瓦罗·卢纳说，这套系统的创新之处在于，它能把回收的能量转用于当地的特定用途——在这里，就是给停在附近的电动汽车充电。他说，这样做提高了效率。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:32-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+                "start": 0,
+                "end": 239,
+                "quote": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p2",
+                "start": 0,
+                "end": 62,
+                "quote": "巴塞罗那整合了一套清洁能源技术，帮助公共交通变得更环保，同时也为应对气候变化、助力欧洲艰难地向私人电动汽车市场转型尽一份力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:33-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+                "start": 86,
+                "end": 164,
+                "quote": "I am pleasantly surprised, because I am always looking for where to plug it in"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p4",
+                "start": 34,
+                "end": 51,
+                "quote": "我很惊喜，因为我总在找地方给车充电"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:34-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+                "start": 84,
+                "end": 217,
+                "quote": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p5",
+                "start": 27,
+                "end": 71,
+                "quote": "它包含一个电动机，能收集刹车过程中的能量，而用传统刹车时，这部分能量会以热的形式散失掉。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:34-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+                "start": 218,
+                "end": 418,
+                "quote": "That energy can be immediately used to accelerate (加速) the vehicle or, in the case of the Barcelona subway system, sent along cables to supply electricity for the station or for electric car chargers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p5",
+                "start": 71,
+                "end": 122,
+                "quote": "这些能量可以马上用来让车辆加速，也可以像巴塞罗那地铁系统那样，沿电缆输送，为车站或电动汽车充电桩供电。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:35-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+                "start": 0,
+                "end": 222,
+                "quote": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p6",
+                "start": 0,
+                "end": 66,
+                "quote": "电气工程教授阿尔瓦罗·卢纳说，这套系统的创新之处在于，它能把回收的能量转用于当地的特定用途——在这里，就是给停在附近的电动汽车充电。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+                "start": 84,
+                "end": 217,
+                "quote": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p5",
+                "start": 27,
+                "end": 71,
+                "quote": "它包含一个电动机，能收集刹车过程中的能量，而用传统刹车时，这部分能量会以热的形式散失掉。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-d-1"
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+                "start": 0,
+                "end": 222,
+                "quote": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-d-p6",
+                "start": 0,
+                "end": 66,
+                "quote": "电气工程教授阿尔瓦罗·卢纳说，这套系统的创新之处在于，它能把回收的能量转用于当地的特定用途——在这里，就是给停在附近的电动汽车充电。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-d-2"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用地铁进站的场景引出看不见的能量流动，再交代项目的环保目标和能量去向，接着借车主的话写实际需求，然后解释再生制动的原理，最后引专家的话评价项目的创新和效率。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+            "summary": "地铁进站时，能量被送上地面给电动汽车充电",
+            "function": "用日常场景引入话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+            "summary": "城市整合清洁能源技术，让公共交通更环保",
+            "function": "交代项目的目标和背景。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-d:3",
+            "summary": "16个车站加入项目，刹车能量先供列车和车站，余下送去充电桩",
+            "function": "介绍项目规模和能量流向。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+            "summary": "电动车主为多了充电地方感到惊喜",
+            "function": "借使用者的话呈现实际需求。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+            "summary": "再生制动收集原本会散失的能量，再用于加速或供电",
+            "function": "解释技术原理。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+            "summary": "专家认为把回收能量就近转用很有创新，能提高效率",
+            "function": "引专家评价收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-ii:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出巴塞罗那推出 MetroCharge 项目的目的。",
+      "stemTranslationZh": "巴塞罗那为什么推出 MetroCharge 项目？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一段找 to 引出的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为城市经济注入动力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To fuel the city’s economy.",
+            "explanation": "选项借 fuel 一词让人联想到能源，但原文讲的是用刹车能量给列车、车站和电动车供电，没提拉动城市经济。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "提升乘客的乘车体验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "passengers",
+            "optionText": "passengers",
+            "matchType": "exact",
+            "relationNote": "passengers 出自开头的进站场景，可紧接着就说他们根本不知道（Little do they know）能量被送上地面，项目改变的不是乘客的感受。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "quote": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
+              "anchor": "乘客出站"
+            },
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "quote": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+              "anchor": "乘客并不知情"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "推动绿色交通。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+              "quote": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market.",
+              "anchor": "项目的环保目标"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "提高电动汽车的质量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "aid Europe’s difficult shift to the privately owned electric vehicle market",
+            "sourceEntity": "Europe’s difficult shift",
+            "optionText": "To raise the quality of electric cars.",
+            "optionEntity": "the quality of electric cars",
+            "explanation": "原文说帮欧洲向私人电动车市场转型（shift to … electric vehicle market），做法是给电动车充电，没说要提高电动车本身的质量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+              "quote": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market.",
+              "anchor": "助力电动车转型"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "MetroCharge project",
+          "targetText": "Sixteen stations of Barcelona’s subway system are part of its new MetroCharge project, whereby the energy from the underground trains’ brakes (刹车) is used to power the trains and the stations themselves, while the remainder is sent snaking through cables (电缆) to the surface to power plug-in stations for privately owned vehicles.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:3",
+          "answerText": "to help public transportation go greener",
+          "bridgeZh": "MetroCharge 正是那套清洁能源技术中的一项",
+          "note": "题干 MetroCharge project 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "To promote green transportation.",
+          "targetText": "to help public transportation go greener",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“推动绿色交通”（promote green transportation）就是原文的“让公共交通更环保”（help public transportation go greener），选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Espinoza 自己的话里找出他平时发愁的事。",
+      "stemTranslationZh": "Espinoza 担心的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 because 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "怎样减少出行开支。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How to cut his travel expenses.",
+            "explanation": "他每天坐地铁、自己有电动车，原文没提他在意出行花多少钱。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "去哪里找停车位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "parked",
+            "optionText": "parking",
+            "matchType": "wordFamily",
+            "relationNote": "parked 出自 [[block:paper-gaokao-2026-ii:reading-d:6|powering electric cars parked nearby]]，说的是给停在附近的车充电；他自己发愁的是去哪儿插电，不是车位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+              "quote": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+              "anchor": "给附近停放的电动车供电"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "怎样避开高峰期的交通。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How to avoid rush-hour traffic.",
+            "explanation": "原文只写他在工薪阶层社区搭地铁前接受采访（before catching the subway），没提高峰期堵车。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "去哪里找充电点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+              "quote": "I am pleasantly surprised, because I am always looking for where to plug it in",
+              "anchor": "Espinoza 的烦恼"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Espinoza",
+          "targetText": "“I am pleasantly surprised, because I am always looking for where to plug it in,” Espinoza said before catching the subway in a working-class area of southern Barcelona.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+          "answerText": "I am always looking for where to plug it in",
+          "note": "题干人名 Espinoza 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Where to find a charging point.",
+          "targetText": "I am always looking for where to plug it in",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“找充电点”（find a charging point）就是原文的“找地方插电”（where to plug it in），it 指他的电动车，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:34": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括第5段讲的是再生制动的哪一方面。",
+      "stemTranslationZh": "第5段讨论了再生制动装置的哪一方面？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2026-ii:reading-d:5]]先说它用了几十年，再讲 electric motor 收集刹车能量、送去加速或供电；答案要盖住构成和能量去向",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们的运行条件。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Their operating conditions.",
+            "explanation": "这段讲装置收集和输送能量的过程，没说它要在什么条件下才能运行。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们的常规标准。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "conventional",
+            "optionText": "conventional",
+            "matchType": "exact",
+            "relationNote": "conventional 出自 [[block:paper-gaokao-2026-ii:reading-d:5|lost as heat by conventional brakes]]，是拿传统刹车作对比，说能量原本会变成热散掉，不是在讲什么常规标准。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+              "quote": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+              "anchor": "与传统刹车对比"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们的潜在风险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Their potential risks.",
+            "explanation": "这段只讲回收的能量用于加速或供电，通篇没提这项技术有什么风险。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们的工作原理。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+              "quote": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+              "anchor": "电动机收集刹车能量"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+              "quote": "That energy can be immediately used to accelerate (加速) the vehicle or, in the case of the Barcelona subway system, sent along cables to supply electricity for the station or for electric car chargers.",
+              "anchor": "能量用于加速或供电"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Their working mechanism.",
+          "targetText": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "这段讲装置由什么构成（consist of an electric motor）、能量从哪儿来、又怎样被用掉，合起来就是它的运作过程；选项的“工作原理”（working mechanism）正好概括这些，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Luna 的评价里找出他对这套系统的看法。",
+      "stemTranslationZh": "关于这套系统，Luna 说了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它创造性地利用回收的能量。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+              "quote": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+              "anchor": "Luna 的评价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它提高了工人的效率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "efficiency",
+            "optionText": "efficiency",
+            "matchType": "exact",
+            "relationNote": "efficiency 出自 [[block:paper-gaokao-2026-ii:reading-d:6|That, he said, boosts efficiency]]，指能源利用的效率提高了，不是工人的工作效率。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+              "quote": "That, he said, boosts efficiency.",
+              "anchor": "提高效率"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它把列车安全放在首位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It prioritizes the safety of trains.",
+            "explanation": "Luna 只评价能量转用带来的创新和效率，没谈列车安全。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它为当地人创造了就业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "local",
+            "optionText": "locals",
+            "matchType": "wordFamily",
+            "relationNote": "local 出自 Luna 说的 specific local uses，指就近的用途；选项把它变成“当地人”（locals），原文没提创造就业。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+              "quote": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+              "anchor": "就近的用途"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Luna",
+          "targetText": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+          "answerText": "the system is innovative in so far as it allows for recycled energy to be redirected",
+          "note": "题干人名 Luna 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "It uses reclaimed energy creatively.",
+          "targetText": "the system is innovative in so far as it allows for recycled energy to be redirected",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“回收的能量”（reclaimed energy）就是原文的 recycled energy；“有创意地用”（creatively）对应 innovative，创新之处正是把这些能量转作附近充电的用途（redirected），选 A。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,657 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2026-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2026-ii:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2026-ii:reading-a": {
+      "overview": "文章介绍华盛顿特区及周边四家中餐馆，分别写各店的招牌菜、点单与取餐方式、预订安排、营业时间和地址，方便食客按口味和就餐需求挑选。",
+      "fullTranslationZh": "华盛顿哥伦比亚特区周边最好的中餐馆\n\n华盛顿哥伦比亚特区一带有许多出色的中餐馆，不过，愿意走出市区的食客也会有所收获。\n\nPanda Gourmet 餐馆\n\n这家供应四川菜的优质餐馆位于纽约大道旁的戴斯酒店内，如今已不再那么鲜为人知。担担面和麻婆豆腐都是稳妥的选择。Panda Gourmet 提供网上点单、自取外带服务，现在也可以配送。营业时间为上午11点至晚上9点45分，星期二休息。\n\n华盛顿哥伦比亚特区纽约大道东北段2700号，邮编20002\n\nShanghai Taste 餐馆\n\nShanghai Taste 的汤包可以说是这一带最好的。这里还供应各种主厨特色菜、牛肉炒年糕等。餐馆星期二至星期日营业，时间为上午11点至晚上9点，接受电话点单并提供自取服务。\n\n马里兰州罗克维尔市纳尔逊街1121号，邮编20850\n\nGourmet Inspirations 餐馆\n\n宽敞的餐厅里经常坐满了享用饺子以及各种面食、米饭菜品的顾客。顾客也可以在网上下单，自取午餐或晚餐；每周营业六天，接受下单至晚上8点。星期二休息。\n\n马里兰州银泉市大学大道西段2646号，邮编20902\n\nQueen’s English 餐馆\n\n这家位于哥伦比亚高地的优质粤菜馆，凭借主厨 Henji Cheung 的港式烹饪，以及共同经营者 Sarah Thompson 为餐厅精选的天然葡萄酒单，很快成为食客向往之地；这份酒单也为她赢得了米其林的认可。你可以预订室内座位、主厨吧台座位，或有顶棚且欢迎携犬入内的露台座位，同时还可以体验富有创意的葡萄酒品鉴。晚餐营业时间：星期二至星期四下午5点30分至晚上9点（最后入座时间）；星期五和星期六下午5点至晚上9点30分（最后入座时间）。星期日和星期一休息。\n\n华盛顿哥伦比亚特区第11街西北段3410号，邮编20010",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2026-ii:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+          "sourceText": "This nice Cantonese restaurant in Columbia Heights quickly became a destination for chef Henji Cheung’s Hong Kong-style cooking and co-owner Sarah Thompson’s natural wine list that earned her a Michelin nod.",
+          "displayText": "This nice Cantonese restaurant in Columbia Heights quickly became a destination for chef Henji Cheung’s Hong Kong-style cooking and co-owner Sarah Thompson’s natural wine list that earned her a Michelin nod.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2026-ii:23"
+          ],
+          "translationZh": "这家位于哥伦比亚高地的优质粤菜馆，凭借主厨 Henji Cheung 的港式烹饪，以及共同经营者 Sarah Thompson 为餐厅精选的天然葡萄酒单，很快成为食客向往之地；这份酒单也为她赢得了米其林的认可。",
+          "analysisZh": "先抓主干 This nice Cantonese restaurant quickly became a destination：这家粤菜馆很快成了食客想去的地方。in Columbia Heights 交代地点，第23题就靠它找到这家店。for 后面用 and 并列两样东西，主厨的港式烹饪和合伙人的天然葡萄酒单，说明人们为什么专程来。句末 that earned her a Michelin nod 修饰紧挨着的 wine list，说的是这份酒单让 Sarah Thompson 得到米其林认可。",
+          "underlineRanges": [
+            {
+              "start": 51,
+              "end": 79,
+              "quote": "quickly became a destination"
+            },
+            {
+              "start": 80,
+              "end": 127,
+              "quote": "for chef Henji Cheung’s Hong Kong-style cooking"
+            },
+            {
+              "start": 176,
+              "end": 206,
+              "quote": "that earned her a Michelin nod"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2026-ii:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2026-ii:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:1"
+              ],
+              "start": 0,
+              "end": 17,
+              "quote": "华盛顿哥伦比亚特区周边最好的中餐馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:2"
+              ],
+              "start": 19,
+              "end": 59,
+              "quote": "华盛顿哥伦比亚特区一带有许多出色的中餐馆，不过，愿意走出市区的食客也会有所收获。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:3"
+              ],
+              "start": 61,
+              "end": 77,
+              "quote": "Panda Gourmet 餐馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:4"
+              ],
+              "start": 79,
+              "end": 194,
+              "quote": "这家供应四川菜的优质餐馆位于纽约大道旁的戴斯酒店内，如今已不再那么鲜为人知。担担面和麻婆豆腐都是稳妥的选择。Panda Gourmet 提供网上点单、自取外带服务，现在也可以配送。营业时间为上午11点至晚上9点45分，星期二休息。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:5"
+              ],
+              "start": 196,
+              "end": 225,
+              "quote": "华盛顿哥伦比亚特区纽约大道东北段2700号，邮编20002"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:6"
+              ],
+              "start": 227,
+              "end": 244,
+              "quote": "Shanghai Taste 餐馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:7"
+              ],
+              "start": 246,
+              "end": 335,
+              "quote": "Shanghai Taste 的汤包可以说是这一带最好的。这里还供应各种主厨特色菜、牛肉炒年糕等。餐馆星期二至星期日营业，时间为上午11点至晚上9点，接受电话点单并提供自取服务。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:8"
+              ],
+              "start": 337,
+              "end": 363,
+              "quote": "马里兰州罗克维尔市纳尔逊街1121号，邮编20850"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:9"
+              ],
+              "start": 365,
+              "end": 388,
+              "quote": "Gourmet Inspirations 餐馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:10"
+              ],
+              "start": 390,
+              "end": 462,
+              "quote": "宽敞的餐厅里经常坐满了享用饺子以及各种面食、米饭菜品的顾客。顾客也可以在网上下单，自取午餐或晚餐；每周营业六天，接受下单至晚上8点。星期二休息。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:11"
+              ],
+              "start": 464,
+              "end": 490,
+              "quote": "马里兰州银泉市大学大道西段2646号，邮编20902"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:12"
+              ],
+              "start": 492,
+              "end": 510,
+              "quote": "Queen’s English 餐馆"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:13"
+              ],
+              "start": 512,
+              "end": 742,
+              "quote": "这家位于哥伦比亚高地的优质粤菜馆，凭借主厨 Henji Cheung 的港式烹饪，以及共同经营者 Sarah Thompson 为餐厅精选的天然葡萄酒单，很快成为食客向往之地；这份酒单也为她赢得了米其林的认可。你可以预订室内座位、主厨吧台座位，或有顶棚且欢迎携犬入内的露台座位，同时还可以体验富有创意的葡萄酒品鉴。晚餐营业时间：星期二至星期四下午5点30分至晚上9点（最后入座时间）；星期五和星期六下午5点至晚上9点30分（最后入座时间）。星期日和星期一休息。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2026-ii:reading-a:14"
+              ],
+              "start": 744,
+              "end": 773,
+              "quote": "华盛顿哥伦比亚特区第11街西北段3410号，邮编20010"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:21-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+                "start": 151,
+                "end": 231,
+                "quote": "Panda Gourmet offers online ordering for takeout, and delivery is now an option."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p4",
+                "start": 54,
+                "end": 90,
+                "quote": "Panda Gourmet 提供网上点单、自取外带服务，现在也可以配送。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:22-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+                "start": 0,
+                "end": 144,
+                "quote": "Shanghai Taste offers arguably the best soup dumplings in the area. It also serves a variety of chef’s specials, beef with rice cakes, and more."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p7",
+                "start": 0,
+                "end": 49,
+                "quote": "Shanghai Taste 的汤包可以说是这一带最好的。这里还供应各种主厨特色菜、牛肉炒年糕等。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2026-ii:23-0",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+                "start": 331,
+                "end": 459,
+                "quote": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p13",
+                "start": 157,
+                "end": 220,
+                "quote": "晚餐营业时间：星期二至星期四下午5点30分至晚上9点（最后入座时间）；星期五和星期六下午5点至晚上9点30分（最后入座时间）。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2026-ii:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2026-ii:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+                "start": 0,
+                "end": 207,
+                "quote": "This nice Cantonese restaurant in Columbia Heights quickly became a destination for chef Henji Cheung’s Hong Kong-style cooking and co-owner Sarah Thompson’s natural wine list that earned her a Michelin nod."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2026-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2026-ii:reading-a-p13",
+                "start": 0,
+                "end": 105,
+                "quote": "这家位于哥伦比亚高地的优质粤菜馆，凭借主厨 Henji Cheung 的港式烹饪，以及共同经营者 Sarah Thompson 为餐厅精选的天然葡萄酒单，很快成为食客向往之地；这份酒单也为她赢得了米其林的认可。"
+              }
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2026-ii:reading-a-1"
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "标题和导语先点出华盛顿内外都有好中餐，随后按店名分栏，每家依次写招牌菜、点单取餐方式、营业时间和地址，读者可按菜品或服务对照查找。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:1",
+            "summary": "华盛顿周边最好的中餐馆",
+            "function": "标题交代地点和主题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:2",
+            "summary": "市区内外都有值得一去的中餐馆",
+            "function": "导语，把推荐范围扩大到市区以外。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:3",
+            "summary": "Panda Gourmet",
+            "function": "引出第一家餐馆。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+            "summary": "川菜招牌、网上点单外带、可配送，周二休息",
+            "function": "介绍第一家的菜品、服务和营业时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:5",
+            "summary": "Panda Gourmet 的地址",
+            "function": "提供到店信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:6",
+            "summary": "Shanghai Taste",
+            "function": "引出第二家餐馆。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+            "summary": "汤包、牛肉炒年糕，电话点单和自取",
+            "function": "介绍第二家的菜品、服务和营业时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:8",
+            "summary": "Shanghai Taste 的地址",
+            "function": "提供到店信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:9",
+            "summary": "Gourmet Inspirations",
+            "function": "引出第三家餐馆。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:10",
+            "summary": "宽敞堂食、网上下单自取，周二休息",
+            "function": "介绍第三家的用餐方式和营业时间。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:11",
+            "summary": "Gourmet Inspirations 的地址",
+            "function": "提供到店信息。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:12",
+            "summary": "Queen’s English",
+            "function": "引出第四家餐馆。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+            "summary": "港式烹饪与葡萄酒，可订座带狗，只开晚餐",
+            "function": "介绍第四家的特色、预订和晚餐时段。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2026-ii:reading-a:14",
+            "summary": "Queen’s English 的地址",
+            "function": "提供到店信息。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2026-ii:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把 Panda Gourmet 的服务和其他三家比一比，找出只有它提供的那一项。",
+      "stemTranslationZh": "哪项服务只有 Panda Gourmet 提供？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "电话点单。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The restaurant is open from11: 00 am to 9: 00 pm Tuesday through Sunday, offering call-in orders and pickups.",
+            "sourceEntity": "The restaurant",
+            "optionText": "Call-in orders.",
+            "optionEntity": "Call-in orders",
+            "explanation": "电话点单（call-in orders）写在 [[block:paper-gaokao-2026-ii:reading-a:7]] Shanghai Taste 的介绍里；Panda Gourmet 只说网上点单，没提电话点单。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+              "quote": "offering call-in orders and pickups",
+              "anchor": "Shanghai Taste 的点单方式"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "免费打包。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Free packing.",
+            "explanation": "原文只说 Panda Gourmet 能外带（takeout），打包收不收费四家都没写，选项是从“外带”多想了一步。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "外卖配送。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+              "quote": "Panda Gourmet offers online ordering for takeout, and delivery is now an option.",
+              "anchor": "Panda Gourmet 的点单与配送"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "网上下单自取。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "pickup orders",
+            "optionText": "pickup orders",
+            "matchType": "exact",
+            "relationNote": "Panda Gourmet 确实能网上点单自取，但 [[block:paper-gaokao-2026-ii:reading-a:10]] 的 Gourmet Inspirations 同样接受网上自取订单（pickup orders），不是一家独有。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:10",
+              "quote": "Customers can also place pickup orders online for lunch or dinner until 8: 00 pm six days a week.",
+              "anchor": "Gourmet Inspirations 的网上自取"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Panda Gourmet",
+          "targetText": "Panda Gourmet offers online ordering for takeout, and delivery is now an option.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+          "answerText": "takeout, and delivery is now an option",
+          "note": "题干店名 Panda Gourmet 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Takeout delivery.",
+          "targetText": "delivery is now an option",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+          "relationType": "paraphrase",
+          "note": "选项的“外卖配送”就是原文的外带（takeout）加上门配送（delivery）。其余三家只写了电话点单、网上下单自取和订座，都没提配送，选 C。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按菜名找到供应这道菜的餐馆。",
+      "stemTranslationZh": "想吃牛肉炒年糕，你可以去哪家餐馆？",
+      "locateBy": "stem",
+      "locateFindZh": "It 指哪家，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Panda Gourmet 餐馆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Panda Gourmet.",
+            "explanation": "Panda Gourmet 推荐的是担担面和麻婆豆腐（Dandan noodles and mapo tofu），没提牛肉炒年糕。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Shanghai Taste 餐馆。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+              "quote": "Shanghai Taste offers arguably the best soup dumplings in the area. It also serves a variety of chef’s specials, beef with rice cakes, and more.",
+              "anchor": "Shanghai Taste 的菜品"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Gourmet Inspirations 餐馆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Gourmet Inspirations.",
+            "explanation": "这家有米饭类菜品（rice dishes），和年糕（rice cakes）只共用一个 rice，原文没说它卖牛肉炒年糕。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Queen’s English 餐馆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Queen’s English.",
+            "explanation": "Queen’s English 只说以港式烹饪和天然葡萄酒单出名，没列具体菜名，更没有牛肉炒年糕。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "beef with rice cakes",
+          "targetText": "It also serves a variety of chef’s specials, beef with rice cakes, and more.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+          "answerText": "Shanghai Taste",
+          "bridgeZh": "It 指 Shanghai Taste 这家店",
+          "note": "题干菜名 beef with rice cakes 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "Shanghai Taste.",
+          "targetText": "Shanghai Taste offers arguably the best soup dumplings in the area.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文店名 Shanghai Taste；牛肉炒年糕只出现在这家店的菜品里，选 B。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    },
+    "question:paper-gaokao-2026-ii:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "找到哥伦比亚高地那家粤菜馆，逐项核对它的营业日、宠物、预订和用餐时段。",
+      "stemTranslationZh": "关于哥伦比亚高地的这家粤菜馆，我们知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读到营业时间",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它只在工作日营业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+            "sourceEntity": "Saturday",
+            "optionText": "It is open only on weekdays.",
+            "optionEntity": "weekdays",
+            "explanation": "营业日是星期二到星期六（Friday and Saturday），星期六是周末；它休息的是星期日和星期一，并不是只在工作日开门。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "quote": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+              "anchor": "Queen’s English 的营业日"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它实行禁止宠物入内的规定。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+            "sourceHighlight": "dog-friendly",
+            "optionText": "It adopts a no-pet policy.",
+            "optionHighlight": "no-pet policy",
+            "explanation": "露台写明欢迎带狗（dog-friendly），顾客可以带着狗来吃饭，和“禁止宠物”正相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "quote": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+              "anchor": "Queen’s English 的座位"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它不接受预订。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+            "sourceHighlight": "Reserve a spot",
+            "optionText": "It takes no reservations.",
+            "optionHighlight": "no reservations",
+            "explanation": "原文请顾客预订座位（Reserve a spot），还列出室内、主厨吧台、露台三处可订，不是不接受预订。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "quote": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+              "anchor": "Queen’s English 的预订"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它只供应晚餐。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "quote": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+              "anchor": "Queen’s English 的晚餐时段"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Columbia Heights",
+          "targetText": "This nice Cantonese restaurant in Columbia Heights quickly became a destination for chef Henji Cheung’s Hong Kong-style cooking and co-owner Sarah Thompson’s natural wine list that earned her a Michelin nod.",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+          "answerText": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating)",
+          "bridgeZh": "营业时间只列晚餐时段，每天都从傍晚开始",
+          "note": "题干地名 Columbia Heights 原词出现在这一句。",
+          "sourceRole": "stem",
+          "relationType": "locationCue"
+        },
+        {
+          "sourceText": "It serves only dinner.",
+          "targetText": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+          "targetParagraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+          "relationType": "paraphrase",
+          "note": "原文给出的营业时间就叫晚餐时段（Dinner hours），每天最早下午5点才开门，没有午餐时段，由此推出它只供应晚餐，选 D。",
+          "sourceRole": "correctOption"
+        }
+      ]
+    }
+  }
+}
