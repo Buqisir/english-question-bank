@@ -30,11 +30,15 @@ export function recordingCuts(cuts, paperId, audioSha256, duration) {
 export function recordingReviewCuts(review, paperId, audioSha256, duration, ruleNotes) {
   if (!['listening-review-v1', LISTENING_REVIEW_VERSION].includes(review?.schemaVersion)
     || review.subject?.durationSeconds !== duration
-    || !Array.isArray(review.groups) || review.groups.some(group => group?.decision !== 'usable'
+    || !Array.isArray(review.groups)) {
+    throw new Error('录音转写需要十段均可用的听力分段 review.json')
+  }
+  const unavailable = review.groups.filter(group => group?.decision !== 'usable'
       || !group.playback || !Array.isArray(group.occurrences) || !group.occurrences[0]
       || group.occurrences[0].startSeconds < group.playback?.startSeconds
-      || group.occurrences[0].endSeconds > group.playback?.endSeconds)) {
-    throw new Error('录音转写需要十段均可用的听力分段 review.json')
+      || group.occurrences[0].endSeconds > group.playback?.endSeconds)
+  if (unavailable.length) {
+    throw new Error(`录音转写需要十段均可用的听力分段 · ${unavailable.map(group => group?.segmentId ?? '未知段').join(', ')}`)
   }
   const groups = review.groups.map(group => {
     const first = group.occurrences[0]
@@ -57,12 +61,16 @@ export function recordingReviewCuts(review, paperId, audioSha256, duration, rule
   return recordingCuts({ ...review.subject, groups }, paperId, audioSha256, duration)
 }
 
-async function mergeReadings(group, engines, remote) {
-  const [apple, parakeet] = Object.values(engines).map(engine => timedReading(engine[group.key] || [], []))
+export async function mergeReadings(group, engines, remote) {
+  const [apple, parakeet] = [engines.apple, engines['parakeet-v2']].map(engine => timedReading(engine[group.key] || [], []))
   const exact = (a, b) => a.token === b.token
   const { changes } = align(apple.words, parakeet.words, exact)
   if (!apple.words.length || !parakeet.words.length) throw new Error(`本地转写缺段 · Text ${group.key}`)
   let text = apple.text
+  const disagreements = []
+  const tokens = value => units(value).map(word => word.token).join(' ')
+  const excerpt = (reading, first, last) => first === last ? ''
+    : reading.text.slice(reading.words[first].start, reading.words[last - 1].end)
   for (const site of changes.reverse()) {
     const { start, end, heardStart, heardEnd } = site
     const left = Math.max(0, start - 2), right = Math.min(apple.words.length, end + 2)
@@ -71,24 +79,38 @@ async function mergeReadings(group, engines, remote) {
     const origin = group.occurrence.startSeconds
     const range = { startSeconds: Math.max(origin, origin + Math.min(...context.map(w => w.startSeconds)) - 0.2),
       endSeconds: Math.min(group.occurrence.endSeconds, origin + Math.max(...context.map(w => w.endSeconds)) + 0.2) }
-    if (range.endSeconds > range.startSeconds && range.endSeconds - range.startSeconds <= 12) {
+    const evidence = { ...range, apple: excerpt(apple, start, end),
+      parakeet: excerpt(parakeet, heardStart, heardEnd), whisper: null, accepted: null }
+    disagreements.unshift(evidence)
+    if (range.endSeconds > range.startSeconds) {
       const clip = (await remote(range)).text
+      evidence.whisper = clip
       const heard = units(clip)
       const { matches } = align(reference, heard, exact)
       const before = start === 0 ? 0 : matches.find(m => m.end === start - left)?.heardEnd
       const after = end === apple.words.length ? heard.length : matches.find(m => m.start === end - left)?.heardStart
       if (heard.length && Number.isInteger(before) && Number.isInteger(after) && after >= before) {
         const replacement = before === after ? '' : clip.slice(heard[before].start, heard[after - 1].end)
+        const local = [evidence.apple, evidence.parakeet].find(value => tokens(value) === tokens(replacement))
+        if (local === undefined) continue
+        evidence.accepted = local
         const from = apple.words[start]?.start ?? apple.words.at(-1).end
         const to = start === end ? from : apple.words[end - 1].end
-        const inserted = from === to && replacement ? (start === apple.words.length ? ` ${replacement}` : `${replacement} `) : replacement
+        const inserted = from === to && local ? (start === apple.words.length ? ` ${local}` : `${local} `) : local
         text = text.slice(0, from) + inserted + text.slice(to)
         continue
       }
     }
-    throw new Error(`分歧片段无法按共同上下文复核 · Text ${group.key}`)
   }
+  return { text: normalizeRecordingTranscript(text), disagreements }
+}
+
+export function normalizeRecordingTranscript(text) {
   return text.replace(/\s+/gu, ' ').trim()
+    .replace(/¢\s*(?=\d+(?:[.,]\d+)* cents?\b)/giu, '')
+    .replace(/\$\s*(?=\d+(?:[.,]\d+)* dollars?\b)/giu, '')
+    .replace(/£\s*(?=\d+(?:[.,]\d+)* pounds?\b)/giu, '')
+    .replace(/€\s*(?=\d+(?:[.,]\d+)* euros?\b)/giu, '')
 }
 
 export function recordingDocx(paragraphs, work) {
@@ -107,7 +129,7 @@ export function recordingDocx(paragraphs, work) {
   return execFileSync('zip', ['-q', '-X', '-', ...Object.keys(files)], { cwd: work, env: { ...process.env, TZ: 'UTC' } })
 }
 
-export async function stageRecordingTranscript(paperDir, cutsPath) {
+export async function stageRecordingTranscript(paperDir, cutsPath, reviewDir) {
   const manifestPath = path.join(paperDir, 'universal-source-manifest.json')
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
   const audio = path.join(paperDir, 'materialization/listening-audio/playback.mp3')
@@ -128,21 +150,49 @@ export async function stageRecordingTranscript(paperDir, cutsPath) {
   const evidence = digestJson(input)
   const cache = path.join(path.dirname(audio), 'recording-transcript', evidence.slice(7))
   mkdirSync(cache, { recursive: true })
-  const bytes = await withWork(async (work, env) => {
+  const sourceDigest = digestJson(manifest)
+  const requestPath = path.join(reviewDir, 'recording-transcript-request.json')
+  const decisionsPath = path.join(reviewDir, 'recording-transcript-decisions.json')
+  const draft = await withWork(async (work, env) => {
     const engines = await localEngines(audio, groups, cache, work, env)
-    const paragraphs = [RECORDING_TRANSCRIPT_TITLE, `录音 SHA-256：${audioSha256}`,
-      `ASR attempt：${evidence}`, `evidence.json：${evidence}；摘要：Apple SpeechAnalyzer、Parakeet v2 与短片复核`]
-    for (const [index, group] of groups.entries()) {
-      const text = await mergeReadings(group, engines, range => remoteEngine(audio, range, cache))
-      if (!units(text).length) throw new Error(`转写为空 · Text ${index + 1}`)
-      paragraphs.push(`Text ${index + 1} | 题号：${group.questionNumbers.join(',')} | 据录音整理 | ${text}`)
-    }
-    return recordingDocx(paragraphs, work)
+    return Promise.all(groups.map(async (group, index) => ({
+      segmentId: `listening-text-${index + 1}`, questionNumbers: group.questionNumbers,
+      occurrence: group.occurrence,
+      ...await mergeReadings(group, engines, range => remoteEngine(audio, range, cache, 'whisper-1')),
+    })))
   })
+  const request = { paperId: manifest.paperId, audioSha256, sourceDigest, groups: draft }
+  const requestDigest = digestJson(request)
+  writeFileSync(requestPath, `${JSON.stringify({ ...request, requestDigest }, null, 2)}\n`)
+  const decisions = existsSync(decisionsPath) ? JSON.parse(readFileSync(decisionsPath, 'utf8')) : null
+  if (decisions?.requestDigest !== requestDigest || decisions.groups?.length !== draft.length) {
+    return { requestPath, decisionsPath }
+  }
+  const blocked = []
+  const paragraphs = [RECORDING_TRANSCRIPT_TITLE, `录音 SHA-256：${audioSha256}`,
+    `ASR attempt：${evidence}`, `evidence.json：${evidence}；摘要：Apple SpeechAnalyzer、Parakeet v2、Whisper 与 Agent 听核`]
+  for (const [index, group] of draft.entries()) {
+    const decision = decisions.groups[index]
+    if (decision?.segmentId !== group.segmentId || !decision.reason?.trim()
+      || !['confirmed', 'answer_conflict', 'unresolved_keyword'].includes(decision.decision)) {
+      throw new Error(`缺少有效的 Agent 听核结论 · ${group.segmentId} · ${decisionsPath}`)
+    }
+    if (decision.decision !== 'confirmed') {
+      blocked.push({ ...group, text: decision.text ?? group.text, reason: decision.reason })
+      continue
+    }
+    const text = normalizeRecordingTranscript(decision.text ?? group.text)
+    if (!units(text).length || (group.disagreements.some(site => site.accepted === null) && !decision.text?.trim())) {
+      throw new Error(`缺少 Agent 定稿 · ${group.segmentId} · ${decisionsPath}`)
+    }
+    paragraphs.push(`Text ${index + 1} | 题号：${group.questionNumbers.join(',')} | 据录音整理 | ${text}`)
+  }
+  if (blocked.length) return { requestPath, decisionsPath, audioSha256, blocked }
+  const bytes = await withWork(work => recordingDocx(paragraphs, work))
   writeFileSync(path.join(cache, 'evidence.json'), stableStringify(input))
   withPaperWriterLock({ paperDir, paperId: manifest.paperId }, () => {
     const current = JSON.parse(readFileSync(manifestPath, 'utf8'))
-    if (sha256(readFileSync(audio)) !== audioSha256 || digestJson(current) !== digestJson(manifest)) {
+    if (sha256(readFileSync(audio)) !== audioSha256 || digestJson(current) !== sourceDigest) {
       throw new Error('转写期间播放录音或 Source Manifest 已变化')
     }
     const digest = sha256(bytes)
@@ -159,4 +209,5 @@ export async function stageRecordingTranscript(paperDir, cutsPath) {
     writeFileSync(`${manifestPath}.recording.tmp`, `${JSON.stringify(current, null, 2)}\n`)
     renameSync(`${manifestPath}.recording.tmp`, manifestPath)
   })
+  return { requestPath, decisionsPath, sealed: true }
 }

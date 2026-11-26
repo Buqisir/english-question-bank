@@ -168,13 +168,15 @@ function locate(group, streams, pauses, durationSeconds) {
     clips: [{ kind: 'window', sourceStartSeconds: cut.startSeconds, sourceEndSeconds: cut.endSeconds }] }]
 }
 
-function page(segments) {
-  let body = '<h1>整段听核</h1><p>每段音频包含所有遍，保持原速。对照转录与官方原文，回复卷名、段号及首尾／正文情况。</p>'
+function page(segments, recording = false) {
+  const introduction = recording ? '对照单遍原录音、转写和题目，核实争议听词与官方答案。'
+    : '每段音频包含所有遍，保持原速。对照转录与官方原文，回复卷名、段号及首尾／正文情况。'
+  let body = `<h1>整段听核</h1><p>${introduction}</p>`
   for (const e of segments) {
     body += `<section><h2>${esc(e.paperName)} · ${esc(e.segmentId)}</h2>`
     if (Number.isInteger(e.expectedReadings) && e.expectedReadings > 0) body += `<p>原卷说明：读 ${e.expectedReadings} 遍</p>`
     for (const r of e.readings) {
-      const readingLabel = '整段音频（含所有遍）'
+      const readingLabel = recording ? '单遍录音' : '整段音频（含所有遍）'
       body += `<article><h3>${readingLabel}</h3><div class="sentences"><small>应听首句</small><p>${esc(e.expectedFirstSentence)}</p><small>应听末句</small><p>${esc(e.expectedLastSentence)}</p></div><div class="players">`
       for (const c of r.clips) {
         const label = c.kind === 'window' ? '整段时间窗' : c.kind === 'exact' ? '精确剪辑' : '上下文 · 前后各多 3 秒'
@@ -182,11 +184,12 @@ function page(segments) {
       }
       body += `</div><p>回复示例：${esc(e.paperName)} ${esc(e.segmentId)} ${readingLabel}：首尾完整／开头缺 __／结尾缺 __／多了报题；正文差异 __</p></article>`
     }
-    body += `<details open><summary>查看整段转录</summary><pre>${esc(e.observedTranscript || '暂无保留转录')}</pre></details><details><summary>查看完整官方原文</summary><pre>${esc(e.sourceText)}</pre></details></section>`
+    const referenceLabel = recording ? '查看停单原因与识别分歧' : '查看完整官方原文'
+    body += `<details open><summary>查看整段转录</summary><pre>${esc(e.observedTranscript || '暂无保留转录')}</pre></details><details><summary>${referenceLabel}</summary><pre>${esc(e.sourceText)}</pre></details></section>`
   }
   return `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>整段听核</title>
 <style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f6f0;color:#191d18;font:14px/1.65 -apple-system,"PingFang SC",sans-serif}main{max-width:1080px;margin:auto;padding:32px 24px}h1{font-size:28px}h2{font-size:20px}h3{font-size:17px}section{background:#fafcf8;padding:24px;border-radius:12px;margin:24px 0;box-shadow:0 0 0 1px #191d180d,0 1px 2px #191d180f}article{padding:24px 0;border-top:1px solid #d5dacf}.sentences,pre{font:18px/1.7 Georgia,"Times New Roman",serif}small,.clock{font:12px/1.5 -apple-system,"PingFang SC",sans-serif;color:#60665c}.players{display:grid;grid-template-columns:1fr;gap:24px;margin:24px 0}.players>div{min-width:0}audio{display:block;width:100%;margin:8px 0}pre{white-space:pre-wrap}summary{cursor:pointer}:focus-visible{outline:2px solid #191d18;outline-offset:3px}@media(max-width:700px){.players{grid-template-columns:1fr}main{padding:24px 16px}}</style>
-<main>${body}<footer>每段从整段起点播放至整段结束，包含录音中的所有遍，不按原卷说明拆分。机器定位尚未经 Owner 听审，本包不能认定 usable。</footer></main>
+<main>${body}${recording ? '' : '<footer>每段从整段起点播放至整段结束，包含录音中的所有遍，不按原卷说明拆分。机器定位尚未经 Owner 听审，本包不能认定 usable。</footer>'}</main>
 <script>const aa=[...document.querySelectorAll('audio')];aa.forEach(a=>{a.addEventListener('play',()=>aa.forEach(b=>{if(a!==b)b.pause()}));a.addEventListener('timeupdate',()=>{a.nextElementSibling.textContent='片段内 '+a.currentTime.toFixed(2)+' 秒 · 整录音 '+(Number(a.dataset.start)+a.currentTime).toFixed(2)+' 秒'})})</script></html>`
 }
 
@@ -273,6 +276,29 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
   }
   if (selections.some(s => !usedSelections.has(s))) fail('REVIEW_PACK_SELECTION_INVALID', selections.filter(s => !usedSelections.has(s)).join(', '))
   if (!segments.length) fail('REVIEW_PACK_NOTHING_SELECTED', '没有不确定段；可显式 --select')
+  return writeReviewPack(output, segments, inputSha256)
+}
+
+export function buildRecordingReviewPack({ output, paperDir, paperId, audioSha256, blocked }) {
+  output = physical(path.resolve(output))
+  if (inside(realpathSync(DEFAULT_ROOT), output) || inside(realpathSync(paperDir), output)) {
+    fail('REVIEW_PACK_OUTPUT_INSIDE_SOURCE', output)
+  }
+  const audio = realpathSync(path.join(paperDir, 'materialization/listening-audio/playback.mp3'))
+  if (sha(audio) !== audioSha256) fail('REVIEW_PACK_AUDIO_CHANGED', paperId)
+  const segments = blocked.map(({ segmentId, questionNumbers, occurrence, text, disagreements, reason }) => {
+    const { startSeconds, endSeconds } = occurrence
+    const [expectedFirstSentence, expectedLastSentence] = edgeSentences(text)
+    return { paperId, paperName: paperId, segmentId, questionNumbers, observedTranscript: text,
+      sourceText: [reason, ...disagreements.map(site =>
+        `Apple: ${site.apple} | Parakeet: ${site.parakeet} | Whisper: ${site.whisper ?? '—'}`)].join('\n'),
+      expectedFirstSentence, expectedLastSentence, sourceAudioPath: audio,
+      readings: [{ clips: [{ kind: 'exact', sourceStartSeconds: startSeconds, sourceEndSeconds: endSeconds }] }] }
+  })
+  return writeReviewPack(output, segments, { [audio]: audioSha256 }, true)
+}
+
+function writeReviewPack(output, segments, inputSha256, recording = false) {
   // Validate every selection before creating anything, and never overwrite an old package.
   mkdirSync(path.dirname(output), { recursive: true })
   mkdirSync(output)
@@ -294,10 +320,11 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
   }
   for (const [file, digest] of Object.entries(inputSha256)) if (sha(file) !== digest) fail('REVIEW_PACK_SOURCE_CHANGED', file)
   const manifest = { schema: 'listening-owner-review-pack-v1', createdAt: new Date().toISOString(),
-    timebase: 'normalized_playback_seconds', rule: 'one whole-segment clip including all recorded readings',
+    timebase: 'normalized_playback_seconds', rule: recording ? 'reviewed single reading'
+      : 'one whole-segment clip including all recorded readings',
     rules: { playbackRate: 1 },
     ownerReviewed: false, asrAdded: false, sourceFingerprintCheck: 'PASS', inputSha256, segments }
-  writeFileSync(path.join(output, 'index.html'), page(segments), { flag: 'wx' })
+  writeFileSync(path.join(output, 'index.html'), page(segments, recording), { flag: 'wx' })
   writeFileSync(path.join(output, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' })
   return manifest
 }

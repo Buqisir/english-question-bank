@@ -1740,9 +1740,6 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const runIsOrdered = markers.length === 10
     && markers.every((marker, index) => marker.number === index + 1)
   if (recordingTranscript) {
-    if (markers.length || answerBody.some(item => LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text)))) {
-      throw new Error('存在印刷听力原文标记，请使用原页物化')
-    }
     const paragraphs = extractDocxDocumentParagraphs(recordingTranscript.bytes).map(item => item.text)
     if (paragraphs[0] !== RECORDING_TRANSCRIPT_TITLE || paragraphs.length !== 14 || longRanges.length !== 5) {
       throw new Error('录音转写需要完整的 Text 1–10 及原题范围')

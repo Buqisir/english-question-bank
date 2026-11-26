@@ -44,6 +44,7 @@ import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE, expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { segmentListening } from './listening-segment.mjs'
 import { stageRecordingTranscript } from './recording-transcript.mjs'
+import { buildRecordingReviewPack } from './listening-owner-review-pack.mjs'
 import { comparePageAnswers } from './lib-answer-key-comparison.mjs'
 import { writePendingDeclarations } from './pending-declarations.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
@@ -627,8 +628,13 @@ export async function runOcrReview(ctx, generationPlan = null, execute = run) {
 async function afterProofread(ctx, args) {
   const generationPlan = option(args, '--ocr-generation-plan')
   const audioTranscript = option(args, '--audio-transcript')
+  const sourceManifest = readJson(path.join(ctx.paperDir, 'universal-source-manifest.json'))
+  const recordingSealed = sourceManifest.documents.some(document => document.documentId === 'recording-transcript')
   if (audioTranscript && (!hasListening(ctx) || ctx.state.steps.materialize?.finishedAt)) {
     fail('录音转写需要听力音频；已物化时请加 --redo-from materialize')
+  }
+  if (hasListening(ctx) && !recordingSealed && !audioTranscript && !ctx.state.steps.materialize?.finishedAt) {
+    throw new Stop(`请用 after-proofread ${ctx.paperId} --audio-transcript <review.json> 提供十段听力切点`)
   }
   const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
   if (existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
@@ -648,7 +654,28 @@ async function afterProofread(ctx, args) {
   await step(ctx, 'compile', () => run(ctx, 'compile', cli('ocr-proofread.mjs', 'compile', ctx.paperId)))
   await step(ctx, 'ocr-review', () => runOcrReview(ctx, generationPlan))
   await step(ctx, 'materialize', async () => {
-    if (audioTranscript) await stageRecordingTranscript(ctx.paperDir, audioTranscript)
+    if (audioTranscript && !recordingSealed) {
+      const result = await stageRecordingTranscript(ctx.paperDir, audioTranscript, ctx.fast)
+      if (result.blocked?.length) {
+        const ids = result.blocked.map(group => group.segmentId).join(', ')
+        const reviewSite = path.join(os.homedir(), 'Projects/eqb-listening-review')
+        const name = `recording-${ctx.paperId}-${Date.now()}`
+        const publishLocal = existsSync(path.join(reviewSite, 'start.command'))
+        const output = path.join(publishLocal ? reviewSite : os.tmpdir(), name)
+        try {
+          buildRecordingReviewPack({ output, paperDir: ctx.paperDir, paperId: ctx.paperId,
+            audioSha256: result.audioSha256, blocked: result.blocked })
+        } catch (error) {
+          throw new Stop(`听力停单 · ${ids} · ${result.decisionsPath} · 听核包生成失败：${error.message}`)
+        }
+        const url = publishLocal ? ` · http://127.0.0.1:19080/${name}/` : ''
+        throw new Stop(`听力停单 · ${ids} · 判定 ${result.decisionsPath} · 听核包 ${output}${url}`)
+      }
+      if (!result.sealed) throw new Stop(`请对照录音、题目选项及官方答案审核 ${result.requestPath}。`
+        + ` 若有印刷稿，仅供人名、说话人与标点参考。将 requestDigest 和逐段 groups 写入 ${result.decisionsPath}。`
+        + ' 每段填写 segmentId、decision（confirmed、answer_conflict 或 unresolved_keyword）、reason，'
+        + ' 并提供仍有分歧的段落的定稿 text。')
+    }
     await run(ctx, 'materialize', cli('universal-nck1.mjs', 'materialize', ctx.paperId))
     return { issues: (readJson(materializationPath(ctx)).issues || []).length }
   })

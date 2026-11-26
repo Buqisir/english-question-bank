@@ -63,7 +63,7 @@ export async function localEngines(audio, groups, cache, work, env) {
   return { apple: results[0].value, 'parakeet-v2': results[1].value }
 }
 
-async function requestClip(audio, range) {
+async function requestClip(audio, range, model) {
   const file = await readFile(path.join(homedir(), '.config/openai/speech-to-text.env'), 'utf8')
   const settings = Object.fromEntries([...file.matchAll(/^(OPENAI_[A-Z_]+)=(.*?)\s*$/gmu)]
     .map(([, key, value]) => [key, value.replace(/^(['"])(.*)\1$/u, '$2')]))
@@ -73,7 +73,7 @@ async function requestClip(audio, range) {
   }
   const { stdout } = await cut(audio, range, 'pipe:1', ['-b:a', '48k', '-f', 'mp3'])
   const form = new FormData()
-  form.set('model', 'gpt-transcribe')
+  form.set('model', model)
   form.set('language', 'en')
   form.set('response_format', 'json')
   form.set('file', new Blob([stdout], { type: 'audio/mpeg' }), 'clip.mp3')
@@ -87,9 +87,9 @@ async function requestClip(audio, range) {
   return { text }
 }
 
-export const remoteEngine = (audio, range, cache) => cacheFile(
-  path.join(cache, `gpt-transcribe-${range.startSeconds}-${range.endSeconds}.json`),
-  () => requestClip(audio, range),
+export const remoteEngine = (audio, range, cache, model = 'gpt-transcribe') => cacheFile(
+  path.join(cache, `${model}-${range.startSeconds}-${range.endSeconds}.json`),
+  () => requestClip(audio, range, model),
 )
 
 export async function withWork(runCheck) {

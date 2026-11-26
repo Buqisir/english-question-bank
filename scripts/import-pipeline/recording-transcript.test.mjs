@@ -5,7 +5,7 @@ import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nc
 import { produceNck1MaterializationFromStructures, RECORDING_TRANSCRIPT_TITLE } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { makeSyntheticNck1DocxFixture } from '../../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
-import { recordingCuts, recordingDocx, recordingReviewCuts } from './recording-transcript.mjs'
+import { mergeReadings, normalizeRecordingTranscript, recordingCuts, recordingDocx, recordingReviewCuts } from './recording-transcript.mjs'
 import { LISTENING_REVIEW_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { withWork } from './listening-transcript-check-engines.mjs'
 
@@ -25,6 +25,27 @@ const produce = (answerStructure, recordingTranscript) => produceNck1Materializa
   codePrefix: 'NCK1_OCR', recordingTranscript,
 }).materialization
 const hash = sha256(Buffer.from('local audio fixture'))
+
+test('recording cleanup drops currency symbols only before amounts with matching unit words', () => {
+  assert.equal(normalizeRecordingTranscript('¢10 cents, $1 dollar, £2.50 pounds, € 3 euros, $4, £5 sterling.'),
+    '10 cents, 1 dollar, 2.50 pounds, 3 euros, $4, £5 sterling.')
+})
+
+test('recording merge uses Whisper only at a disagreement and leaves three-way splits for the Agent', async () => {
+  const group = { key: '01', occurrence: { startSeconds: 10, endSeconds: 16 } }
+  const reading = word => `Please bring ${word} tickets today.`.split(' ')
+    .map((text, start) => ({ text, start, end: start + 0.5 }))
+  const apple = { '01': reading('two') }
+  const merge = (local, remote) => mergeReadings(group, { apple, 'parakeet-v2': { '01': reading(local) } }, remote)
+  assert.deepEqual(await merge('two', () => assert.fail('local engines agree')),
+    { text: 'Please bring two tickets today.', disagreements: [] })
+  const confirmed = await merge('three', async () => ({ text: 'Please bring three tickets today.' }))
+  assert.equal(confirmed.text, 'Please bring three tickets today.')
+  assert.equal(confirmed.disagreements[0].accepted, 'three')
+  const unresolved = await merge('three', async () => ({ text: 'Please bring four tickets today.' }))
+  assert.equal(unresolved.disagreements[0].accepted, null)
+  assert.equal(unresolved.text, 'Please bring two tickets today.')
+})
 
 test('explicit recording transcript keeps the answers and derives an audio-bound Candidate', async () => {
   const printed = produce(original)
@@ -60,8 +81,8 @@ test('explicit recording transcript keeps the answers and derives an audio-bound
   const missing = await supplemental(paragraphs.slice(0, -1))
   assert.throws(() => produce(answerWithoutTranscript, missing), /十段|Text 1–10/)
   const document = await supplemental(paragraphs)
-  assert.throws(() => produce(original, document), /印刷听力原文/)
   const materialization = produce(answerWithoutTranscript, document)
+  assert.deepEqual(produce(original, document).listening, materialization.listening)
   assert.deepEqual(materialization.issues, [])
   assert.deepEqual(materialization.listening.answers, printed.listening.answers)
   assert.equal(materialization.listening.transcript[9].text, 'This is spoken dialogue 10.')
