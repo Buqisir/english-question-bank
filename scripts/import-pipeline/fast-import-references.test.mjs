@@ -5,7 +5,9 @@ import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSy
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, listeningRedo, rebindRejectedIssue, reconcilePush, reopenLocalPreview, requestedRedo, submit } from './fast-import.mjs'
+import { assertReferenceProductsReady, finish, installListeningSentenceAnalysis, listeningRedo, rebindRejectedIssue,
+  reconcilePush, reopenLocalPreview, requestedRedo, round2Prompts, submit } from './fast-import.mjs'
+import listeningAnalysisEnricher from './enrichers/listening-analysis.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
@@ -271,6 +273,9 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
   const stale = mode.includes('newer revision'), mismatch = mode.includes('original manifest')
   fakeReviewOrigin(t)
   const { dir, ctx } = fixture(t)
+  const { reviewRoot } = await listeningReviewFixture(dir, ctx.paperId)
+  json(path.join(reviewRoot, 'products/answerOnly.pdf'), { old: 'products/answerOnly.pdf' })
+  ctx.paperDir = reviewRoot
   ctx.state = { paperId: ctx.paperId, steps: {}, background: {}, data: {} }
   rmSync(ctx.statePath)
   const restore = { schemaVersion: 'review-restore-v1', paperId: ctx.paperId,
@@ -282,8 +287,10 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
   json(path.join(ctx.paperDir, 'public-search-metadata-v1.json'), { retained: 'metadata' })
   json(path.join(ctx.paperDir, 'listening-review-v1.json'), { method: 'agent_asr_comparison', old: true })
   const stagedListening = path.join(ctx.paperDir, 'analysis-listening.json')
-  const theirTeaching = { materials: { s: { segmentId: 's', summaryZh: '保留原讲解' } } }
-  json(stagedListening, { materials: { s: { ...theirTeaching.materials.s, sentences: [{ id: 'old' }] } } })
+  const theirTeaching = JSON.parse(readFileSync(stagedListening))
+  const previousAnalysis = structuredClone(theirTeaching)
+  Object.values(previousAnalysis.materials)[0].sentences = [{ id: 'old' }]
+  json(stagedListening, previousAnalysis)
   const descriptors = () => Object.entries(snapshot(ctx.paperDir)).filter(([name]) => !name.startsWith('signals/'))
     .map(([name, hex]) => ({ path: name, sha256: sha256(Buffer.from(hex, 'hex')),
       byteLength: hex.length / 2, mediaType: 'application/json', role: name === 'config.json' ? 'config' : 'evidence' }))
@@ -477,6 +484,75 @@ function fixture(t, referencesVersion = version) {
   return { dir, ctx, calls, options: { referenceStages } }
 }
 
+async function listeningReviewFixture(dir, paperId, options) {
+  const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+  process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+  const { makeReviewRoot } = await import('../verify-universal-nck1-publish.mjs').finally(() => {
+    if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+  })
+  return makeReviewRoot(path.join(dir, 'actual'), paperId, undefined, { listening: true, ...options })
+}
+
+test('public paper writing and enrichment can install listening analysis by itself', async t => {
+  const { dir, ctx } = fixture(t)
+  const { reviewRoot, projection } = await listeningReviewFixture(dir, ctx.paperId)
+  ctx.paperDir = reviewRoot
+  ctx.state.data.summaryParts = []
+  const config = path.join(reviewRoot, 'config.json')
+  json(config, { ...JSON.parse(readFileSync(config)), importProfile: 'public-paper-v1' })
+  const staged = path.join(reviewRoot, 'analysis-listening.json')
+  const valid = JSON.parse(readFileSync(staged))
+  for (const file of readdirSync(reviewRoot).filter(name => /^analysis-.+\.json$/u.test(name))) {
+    rmSync(path.join(reviewRoot, file))
+  }
+  const prompts = round2Prompts(ctx)
+  assert.deepEqual(prompts.map(({ label }) => label), ['检索 metadata', '听力讲解'])
+  const [authored] = prompts[1].outputs
+  assert.throws(() => installListeningSentenceAnalysis(ctx), /缺少听力讲解稿/u)
+  json(authored, { ...valid, paperId: 'another-paper' })
+  assert.throws(() => installListeningSentenceAnalysis(ctx), /paperId does not match/u)
+  assert(!fs.existsSync(staged))
+  const request = JSON.parse(readFileSync(path.join(ctx.fast, 'listening-analysis-request.json')))
+  for (const { questions } of request.sourceGroup.material.materials) {
+    for (const { questionId, wrongOptions } of questions) {
+      const distractors = Object.entries(wrongOptions).filter(([, { mustExplain }]) => mustExplain)
+        .map(([label]) => ({ label, explanationZh: '合成录音中的干扰项。' }))
+      if (distractors.length) valid.questions[questionId].distractors = distractors
+    }
+  }
+  const review = path.join(reviewRoot, 'listening-review-v1.json')
+  json(review, { evidence: [{ kind: 'asr_window', path: 'missing-asr.json', settings: { engine: 'apple' } }] })
+  json(authored, valid)
+  assert.match(installListeningSentenceAnalysis(ctx).detail, /句级对齐跳过.*missing-asr\.json/u)
+  assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
+  assert.deepEqual(readdirSync(reviewRoot).filter(name => /^analysis-.+\.json$/u.test(name)), ['analysis-listening.json'])
+  json(authored, { ...valid, questions: {} })
+  assert.throws(() => installListeningSentenceAnalysis(ctx), /schema invalid: \/questions/u)
+  assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
+
+  rmSync(staged)
+  rmSync(review)
+  const materializationPath = projection.manifest.materializationPath
+  const enrichContext = {
+    paperId: ctx.paperId, baseRev: 'rev-fixture', bundle: reviewRoot,
+    files: [{ role: 'materialization', path: materializationPath }],
+    readBase: async file => {
+      assert.equal(file, materializationPath)
+      return projection.materialization
+    },
+    writeJson: (file, value) => json(path.join(reviewRoot, file), value),
+  }
+  const plan = await listeningAnalysisEnricher.plan(enrichContext)
+  assert.equal(plan.state, 'ok', plan.reason)
+  const result = await listeningAnalysisEnricher.run(enrichContext, plan)
+  assert.deepEqual(result.aligned, [])
+  assert.deepEqual(result.sentenceTargets, {})
+  const enrichRequest = listeningAnalysisEnricher.agentRequest(enrichContext, result)
+  listeningAnalysisEnricher.mergeAgentResponse(enrichContext, result, enrichRequest, { ...enrichRequest, analysis: valid })
+  assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
+})
+
 test('local enrichment and finalize replay only byte-identical sealed source references', async t => {
   const { dir } = fixture(t)
   const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -527,17 +603,9 @@ for (const [edit, expectation] of [
 ]) test(`finish ${expectation}`, async t => {
   const editOption = edit === 'option', legacy = edit === 'legacy', rerun = editOption || legacy
   const { dir, ctx, options } = fixture(t)
-  const { makeReviewRoot } = await (async () => {
-    const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
-    process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
-    try { return await import('../verify-universal-nck1-publish.mjs') } finally {
-      if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
-      else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
-    }
-  })()
   if (rerun) ctx.paperId = `paper-synthetic-listening-rule-${edit}-${process.pid}`
-  let { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, {
-    listening: true, openingListeningText: editOption
+  let { reviewRoot, projection } = await listeningReviewFixture(dir, ctx.paperId, {
+    openingListeningText: editOption
       ? 'Blue dolphins travel beyond distant islands while young sailors carefully study maps beside the harbor and curious children quietly gather orange leaves around their peaceful village during bright summer holidays'
       : undefined,
   })

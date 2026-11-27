@@ -55,7 +55,6 @@ import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMate
 import { buildLocalReviewProjection, hydratedEvidenceBase, importLocalReviewCandidate, legacyPreviewStatuses,
   loadLocalReviewedListening, reviewManifest, withLocalReviewEvidence } from './review.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
-import { NCK1_STAGED_ANALYSIS_FILES } from '../../server/import-review/nck1AnalysisProjection.mjs'
 import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME,
   mergeListeningSentenceAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
 import { alignReviewedListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
@@ -567,7 +566,7 @@ function listeningGroups(ctx) {
     .map((group) => group.segmentId)
 }
 
-function round2Prompts(ctx) {
+export function round2Prompts(ctx) {
   const prompts = []
   const relative = (file) => path.relative(root, file)
   for (const part of ctx.state.data.summaryParts) {
@@ -584,8 +583,7 @@ function round2Prompts(ctx) {
     `在 worktree ${root} 写公开检索 metadata。读 ${relative(path.join(ctx.fast, 'search-metadata-request.json'))}，按其中说明与结构`,
     `写 ${relative(path.join(ctx.fast, 'search-metadata-authored.json'))}。只写这个文件，不联网，不运行 finalize 或其他写命令。完成后回报题组数。`,
   ].join('\n') })
-  const config = readJson(path.join(ctx.paperDir, 'config.json'))
-  if (hasListening(ctx) && (!config.importProfile || config.withTeachingAnalyses === true)) {
+  if (hasListening(ctx) && readJson(materializationPath(ctx)).listening?.state === 'captured') {
     const { materialization, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
     const sentenceTargets = Object.fromEntries(listeningSentenceTargets(materialization)
       .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
@@ -1046,40 +1044,31 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
   const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
   const staged = existsSync(stage) ? readJson(stage) : null
   const hasAuthored = useAuthored && existsSync(authored)
-  if (!staged && !hasAuthored) return { detail: '无听力讲解，保留段级展示' }
-  const writeAnalysis = analysis => {
-    if (staged && digestJson(staged) === digestJson(analysis)) return
+  if (!staged && !hasAuthored) {
+    if (!useAuthored) return { detail: '无听力讲解，保留段级展示' }
+    throw new Stop('缺少听力讲解稿；先运行 after-proofread 并完成第二轮听力讲解')
+  }
+  const { materialization: document, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
+  const draft = hasAuthored ? readJson(authored) : null
+  let segments = []
+  let detail
+  try {
+    const review = readJson(path.join(ctx.paperDir, LISTENING_REVIEW_FILE))
+    segments = alignReviewedListeningSentences(document, review, file => readJson(path.join(ctx.paperDir, file)))
+    detail = `${segments.filter(segment => !segment.degraded).length}/${segments.length} 段有句时`
+  } catch (error) {
+    detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
+  }
+  const effective = projectEffectiveAnswers(document, answerCorrections)
+  const analysis = mergeReviewedListeningAnalysis(effective, segments, {
+    staged: hasAuthored ? null : staged, authored: draft, requireHeardDistractors: hasAuthored,
+  })
+  if (!staged || digestJson(staged) !== digestJson(analysis)) {
     const temporary = `${stage}.partial`
     writeJson(temporary, analysis)
     renameSync(temporary, stage)
   }
-  try {
-    const { materialization: document, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
-    if (!staged && NCK1_STAGED_ANALYSIS_FILES.some(({ key, path: file }) =>
-      (!key.startsWith('reading-') || document.groups.some(({ slotId }) => slotId === key.replace('-', '.')))
-      && !existsSync(path.join(ctx.paperDir, file)))) return { detail: '讲解分片未齐，保留段级展示' }
-    const draft = hasAuthored ? readJson(authored) : null
-    let segments = []
-    let detail
-    try {
-      const review = readJson(path.join(ctx.paperDir, LISTENING_REVIEW_FILE))
-      segments = alignReviewedListeningSentences(document, review, file => readJson(path.join(ctx.paperDir, file)))
-      detail = `${segments.filter(segment => !segment.degraded).length}/${segments.length} 段有句时`
-    } catch (error) {
-      detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
-    }
-    const effective = projectEffectiveAnswers(document, answerCorrections)
-    const staleCorrection = draft && staged && answerCorrections?.corrections.some(({ questionId, correctedAnswer }) =>
-      questionId.startsWith('question:listening:') && staged.questions?.[questionId]?.officialAnswer !== correctedAnswer)
-    const analysis = mergeReviewedListeningAnalysis(effective, segments, {
-      staged: staleCorrection ? null : staged, authored: draft,
-    })
-    writeAnalysis(analysis)
-    return { detail }
-  } catch (error) {
-    if (staged) writeAnalysis(mergeListeningSentenceAnalysis(staged))
-    return { detail: `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）` }
-  }
+  return { detail }
 }
 
 function refreshListeningSentences(ctx, options) {
