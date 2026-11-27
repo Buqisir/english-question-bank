@@ -175,7 +175,7 @@ motive or broader rule, and never give only a reusable dictionary gloss such as
 
 每个空（页面印出来的样子，下面每空只示范一条错项）：
 
-- 第一空（细节）题头：1 A put up 竖起；此处指立起（牌子）。脉络：她要把提醒别踩土的牌子立起来。找法：词组看语境义：牌子（a sign）上写着请勿踩土（Please don't step on the soil），需要立起来让人看到。错项 B：推迟；这里处理的是提醒行人的牌子（a sign），没有要改期的活动。
+- 第一空（细节）题头：1 A put up 竖起；此处指立起（牌子）。脉络：她要把提醒别踩土的牌子立起来。找法：词组看语境义：牌子（a sign）上写着请勿踩土（Please don't step on the soil），需要立起来让人看到。错项 B：推迟；这里是把牌子（a sign）立起来给行人看，不是把什么事改期。
 - 第二空（主线）题头：2 B discouraged 灰心的。脉络：坚持几周没有结果，这是米娅情绪的低谷。找法：形容词看情感：几周没长东西（For weeks nothing grew），连坚持的米娅也动摇了（even Mia）。错项 A：充满希望；几周没长东西（For weeks nothing grew）使连一开始愿意参加的米娅也失去了信心。
 - 第三空（主线）题头：3 A shoots 嫩芽。脉络：这是菜园种植有了进展的第一个迹象。找法：名词看话题：嫩绿的小东西（tiny green）从土里冒出来（pushing through the soil），接上了菜园的种植主线。错项 C：昆虫；后文写番茄满园（full of tomatoes），顺着出苗往下写作物结果。
 - 第四空（主线）题头：4 B However 然而。脉络：多数学生原来嘲笑这个主意，现在有二十人想加入，态度转变了。找法：副词看逻辑：从嘲笑这事（laughed at the idea）转到请求加入（asked to join）。错项 C：因此；请求加入（asked to join）与先前的嘲笑形成反差，嘲笑本身没有促成加入。
