@@ -3,7 +3,9 @@ import { mkdirSync, mkdtempSync, rmSync, unlinkSync, writeFileSync } from 'node:
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
-import { draftsForMerge } from './lecture-redo.mjs'
+import { ANALYSIS_PDF_EDITION, productFiles } from '../../server/paper-import/pdfProductSet.mjs'
+import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
+import { assertLectureAnalysisPdf, draftsForMerge } from './lecture-redo.mjs'
 
 const base = { id: 'rev-12345678-abcd', paperId: 'paper-fixture' }
 const requests = [
@@ -57,4 +59,17 @@ test('merge rejects a wrong filename or a conflicting identity in a correctly na
     writeFileSync(boundPath('application'), JSON.stringify(draft))
     throws(() => draftsForMerge(work, base, requests, 'application'), new RegExp(`请求不一致：application\\.${field}$`, 'u'))
   }
+})
+
+test('lecture merge accepts four PDFs for listening-only analysis and requires five for full teaching analysis', () => {
+  const standard = productFiles(PAPER_PDF_EDITIONS)
+  const withCompanion = productFiles([...PAPER_PDF_EDITIONS, ANALYSIS_PDF_EDITION])
+  const listeningOnly = { importProfile: 'public-paper-v1', analysisDigest: `sha256:${'a'.repeat(64)}`,
+    analysisSidecars: { 'listening-analysis-v1.json': {} } }
+  const full = { ...listeningOnly,
+    analysisSidecars: { ...listeningOnly.analysisSidecars, 'reading-choice-analysis-v1.json': {} } }
+
+  assertLectureAnalysisPdf(standard, listeningOnly)
+  throws(() => assertLectureAnalysisPdf(standard, full), /缺少解析 PDF/u)
+  assertLectureAnalysisPdf(withCompanion, full)
 })

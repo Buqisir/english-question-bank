@@ -19,6 +19,7 @@ import { buildApplicationStagedAnalysisContract } from '../../server/paper-impor
 import { projectEffectiveAnswers } from '../../server/paper-import/answerCorrections.mjs'
 import { PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { analysisPdfDigest } from './lib-fast-products.mjs'
 import { mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
 import { alignReviewedListeningSentences } from './listening-sentence-align.mjs'
 import { readUploadReceipt, writeUploadReceipt } from './lib-review-upload.mjs'
@@ -190,6 +191,10 @@ async function prepare(work, paperId) {
   }
 }
 
+export function assertLectureAnalysisPdf(pdfs, after) {
+  if (analysisPdfDigest(after) && !pdfs.some(file => file.path === analysisPdf)) throw new Error('缺少解析 PDF')
+}
+
 function merge(work, only) {
   const sealed = path.join(work, 'sealed')
   const base = hydratedEvidenceBase(sealed)?.revision
@@ -241,7 +246,7 @@ function merge(work, only) {
     const subject = finalizeContentSubject(bundle, local, after)
     if (!subject.ok) throw new Error(`本地 finalize 失败：${subject.reasonCode}`)
     const pdfs = manifest.files.filter(file => file.role === 'pdf_product')
-    if (!pdfs.some(file => file.path === analysisPdf)) throw new Error('缺少解析 PDF')
+    assertLectureAnalysisPdf(pdfs, after)
     writeJson(path.join(staging, 'manifest.json'), manifest)
     writeJson(path.join(staging, 'merge-receipt.json'), { baseRevisionId: base.id, bundleDigest: manifest.bundleDigest, merged })
     writeFileSync(path.join(staging, 'INDEX.md'), [`# ${base.paperId} · ${base.id}`, '', '本次合入', '',

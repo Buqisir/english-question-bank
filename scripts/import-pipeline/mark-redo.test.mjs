@@ -1,6 +1,8 @@
 import { deepStrictEqual, throws } from 'node:assert/strict'
 import { test } from 'node:test'
-import { assertMarkPushReceipt, markParagraph, moveUnderline } from './mark-redo.mjs'
+import { ANALYSIS_PDF_EDITION, productFiles } from '../../server/paper-import/pdfProductSet.mjs'
+import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
+import { assertMarkPdfProducts, assertMarkPushReceipt, markParagraph, moveUnderline } from './mark-redo.mjs'
 
 const item = { text: 'its it', sourceEmphasis: [{ start: 0, end: 2, marks: ['bold', 'underline'] }] }
 
@@ -43,4 +45,19 @@ test('rejects mismatched slices and destinations inside a word', () => {
   throws(() => moveUnderline(item, '1,3', '4,6', 'it'), /坐标文本/)
   throws(() => moveUnderline(item, '0,2', '3,5', 'it'), /坐标文本/)
   throws(() => moveUnderline(item, 'none', '0,2', 'it'), /整词/)
+})
+
+test('mark merge preserves standard PDFs and requires a companion only for full teaching analysis', () => {
+  const standard = productFiles(PAPER_PDF_EDITIONS)
+  const withCompanion = productFiles([...PAPER_PDF_EDITIONS, ANALYSIS_PDF_EDITION])
+  const listeningOnly = { importProfile: 'public-paper-v1', analysisDigest: `sha256:${'a'.repeat(64)}`,
+    analysisSidecars: { 'listening-analysis-v1.json': {} } }
+  const full = { ...listeningOnly,
+    analysisSidecars: { ...listeningOnly.analysisSidecars, 'reading-choice-analysis-v1.json': {} } }
+
+  assertMarkPdfProducts(standard, standard, listeningOnly)
+  assertMarkPdfProducts(withCompanion, standard, listeningOnly)
+  throws(() => assertMarkPdfProducts(standard, standard.slice(1), listeningOnly), { name: 'AssertionError' })
+  throws(() => assertMarkPdfProducts(standard, standard, full), { name: 'AssertionError' })
+  assertMarkPdfProducts(standard, withCompanion, full)
 })

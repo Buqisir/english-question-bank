@@ -14,6 +14,7 @@ import { SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferenc
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSealedCandidate, pushPreparedCandidate } from './lecture-redo.mjs'
+import { analysisPdfDigest } from './lib-fast-products.mjs'
 import { hydratedEvidenceBase, prepareReviewPush, withLocalReviewEvidence } from './review.mjs'
 
 const confirmationFile = `materialization/${NCK1_OCR_CONFIRMATION_FILE_NAME}`
@@ -107,6 +108,13 @@ function editConfirmation(sealed, { block: blockId, ...edit }) {
   return { confirmation, itemId, source: block.source }
 }
 
+export function assertMarkPdfProducts(basePdfs, mergedPdfs, after) {
+  const analysisPdf = `products/${ANALYSIS_PDF_EDITION}.pdf`
+  const expectedPdfs = basePdfs.map(file => file.path).filter(file => file !== analysisPdf)
+  if (analysisPdfDigest(after)) expectedPdfs.push(analysisPdf)
+  deepStrictEqual(mergedPdfs.map(file => file.path).sort(), expectedPdfs.sort())
+}
+
 function merge(work, sealed, base) {
   const edit = readJson(path.join(work, 'mark-receipt.json'))
   deepStrictEqual([edit.baseRevisionId, edit.bundleDigest], [base.id, base.bundleDigest], '修订回执与基线不符')
@@ -154,14 +162,12 @@ function merge(work, sealed, base) {
     deepStrictEqual(finalizeInventory(bundle, local, after), manifest.files.map(file => `${file.path}\0${file.mediaType}\0${file.role}`).sort())
     const subject = finalizeContentSubject(bundle, local, after)
     if (!subject.ok) throw new Error(`本地 finalize 失败：${subject.reasonCode}`)
-    const pdfs = revision => revision.files.filter(file => file.role === 'pdf_product')
+    const pdfProducts = revision => revision.files.filter(file => file.role === 'pdf_product')
       .map(({ path, sha256 }) => ({ path, sha256 }))
-    const expectedPdfs = new Set(pdfs(base.manifest).map(file => file.path))
-    // Older Candidates can have staged analyses but no frozen analysis PDF.
-    if (before.analysisDigest) expectedPdfs.add(`products/${ANALYSIS_PDF_EDITION}.pdf`)
-    deepStrictEqual(pdfs(manifest).map(file => file.path).sort(), [...expectedPdfs].sort())
+    const pdfs = { before: pdfProducts(base.manifest), after: pdfProducts(manifest) }
+    assertMarkPdfProducts(pdfs.before, pdfs.after, after)
     const comparison = { before: content(before), after: content(after),
-      unchangedFiles: unchanged(manifest.files), pdfs: { before: pdfs(base.manifest), after: pdfs(manifest) } }
+      unchangedFiles: unchanged(manifest.files), pdfs }
     writeJson(path.join(staging, 'manifest.json'), manifest)
     writeJson(path.join(staging, 'merge-receipt.json'), { baseRevisionId: base.id,
       bundleDigest: manifest.bundleDigest, merged: [confirmationFile], edit, comparison })
