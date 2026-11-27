@@ -518,8 +518,10 @@ function WritingPaperPageContent({
                       data-writing-answer-supplement=""
                     >
                       <RetainedModelAnswer
-                        modelAnswer={retainedModelAnswer}
-                        officialModelAnswer={retainedOfficialModelAnswer}
+                        modelAnswer={isContinuationWriting && retainedModelAnswer
+                          ? continuationEssayDisplayText(retainedModelAnswer) : retainedModelAnswer}
+                        officialModelAnswer={isContinuationWriting && retainedOfficialModelAnswer
+                          ? continuationEssayDisplayText(retainedOfficialModelAnswer) : retainedOfficialModelAnswer}
                       />
                     </div>
                   )}
