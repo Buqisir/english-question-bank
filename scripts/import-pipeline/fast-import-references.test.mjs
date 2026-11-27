@@ -5,7 +5,7 @@ import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSy
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, installListeningSentenceAnalysis, listeningRedo, rebindRejectedIssue,
+import { assertListeningRedoReady, assertReferenceProductsReady, finish, installListeningSentenceAnalysis, listeningRedo, rebindRejectedIssue,
   reconcilePush, reopenLocalPreview, requestedRedo, round2Prompts, submit } from './fast-import.mjs'
 import listeningAnalysisEnricher from './enrichers/listening-analysis.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
@@ -763,6 +763,62 @@ for (const [edit, expectation] of [
   if (edit === 'reading') {
     prebindReviewFixtureReferences(reviewRoot, { expectedCandidateDigest: candidate.candidateDigest })
     const projection = buildLocalReviewProjection(reviewRoot)
+    await t.test('listening-redo refreshes the companion for new sentence timings and passes submit preflight', async t => {
+      fakeReviewOrigin(t)
+      const { dir, ctx } = fixture(t)
+      ctx.paperDir = path.join(dir, 'hydrated')
+      fs.cpSync(reviewRoot, ctx.paperDir, { recursive: true })
+      const analysisPath = path.join(ctx.paperDir, 'analysis-listening.json')
+      const oldAnalysis = JSON.parse(readFileSync(analysisPath))
+      delete oldAnalysis.materials[transcript[0].segmentId].sentences
+      json(analysisPath, oldAnalysis)
+      freezeCompanionFixture(ctx.paperDir)
+      const before = buildLocalReviewProjection(ctx.paperDir)
+      const manifest = reviewManifest(ctx.paperDir, before, [], 'listening-redo-companion-fixture')
+      const binding = path.resolve(import.meta.dirname, '../../.amp/import-review-origin')
+      const boundOrigin = fs.existsSync(binding) ? new URL(readFileSync(binding, 'utf8').trim()).origin : null
+      const restore = { schemaVersion: 'review-restore-v1', paperId: ctx.paperId,
+        origin: boundOrigin && !/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/u.test(boundOrigin)
+          ? boundOrigin : 'http://127.0.0.1:18890',
+        revisionId: 'rev-hydrated', bundleDigest: reviewBundleDigest(manifest) }
+      const reviewFile = path.join(ctx.paperDir, 'listening-review-v1.json')
+      const reviewBytes = readFileSync(reviewFile)
+      json(path.join(ctx.paperDir, 'signals/review-restore.json'), restore)
+      const status = JSON.parse(fakeStatus(ctx, [{ id: restore.revisionId,
+        state: 'changes_requested', bundleDigest: restore.bundleDigest, manifest }]))
+      status.issues = [{ id: 'issue-listening', paperId: ctx.paperId, state: 'open' }]
+      let freezeRuns = 0, qaRuns = 0
+      const run = () => listeningRedo(ctx, ['--feedback-fix', 'issue-listening'], {
+        readStatus: async () => JSON.stringify(status),
+        ensureAsr: async () => asrPath,
+        install: () => writeFileSync(reviewFile, reviewBytes),
+        execute: (_ctx, label, args) => {
+          if (label !== 'freeze') return {}
+          freezeRuns++
+          assert(fs.existsSync(path.join(ctx.paperDir, PRODUCT_MANIFEST)))
+          const result = spawnSync(process.execPath, args, { encoding: 'utf8', timeout: 60_000 })
+          assert.equal(result.status, 0, result.stderr || String(result.error))
+        },
+        qa: () => { qaRuns++; return { dir: 'new-qa' } },
+      })
+      await run()
+      const after = buildLocalReviewProjection(ctx.paperDir)
+      assert.equal(after.frozenProducts.manifest.inputDigest, before.frozenProducts.manifest.inputDigest)
+      assert.notEqual(after.analysisDigest, before.analysisDigest)
+      assert(after.analysisSidecars['listening-analysis-v1.json'].materials[transcript[0].segmentId].sentences[0].passes.length)
+      for (const { path: file } of before.frozenProducts.manifest.files.filter(({ path }) => path !== 'products/analysis.pdf')) {
+        assert.deepEqual(after.frozenProducts.bytes[file], before.frozenProducts.bytes[file])
+      }
+      assert.notDeepEqual(after.frozenProducts.bytes['products/analysis.pdf'], before.frozenProducts.bytes['products/analysis.pdf'])
+      assert.doesNotThrow(() => assertListeningRedoReady(ctx))
+      const receipt = ctx.state.steps['listening-redo-products'].result
+      receipt.analysisDigest = before.analysisDigest
+      await assert.rejects(() => submit(ctx, ['--resolves', 'issue-listening']), /保留输入或冻结输入已变化/u)
+      receipt.analysisDigest = after.analysisDigest
+      await run()
+      assert.equal(freezeRuns, 1)
+      assert.equal(qaRuns, 1)
+    })
     const asset = projection.analysisSidecars['listening-analysis-v1.json']
     const firstPass = asset.materials[transcript[0].segmentId].sentences[0].passes[0]
     firstPass.start = Number((firstPass.start + .004).toFixed(3))
@@ -1460,13 +1516,8 @@ test('submit and local preview require the current successful listening installa
   await assertBlocked()
 })
 
-test('finish refreshes only the stale analysis PDF and reruns PDF QA after a listening rewrite', async t => {
-  const { dir, ctx } = fixture(t)
-  const { reviewRoot } = await listeningReviewFixture(dir, ctx.paperId)
-  ctx.paperDir = reviewRoot
-  ctx.state.steps['listening-review'] = completed({})
+function freezeCompanionFixture(reviewRoot) {
   const before = freezeReviewFixture(reviewRoot)
-  ctx.state.steps['source-references'].result.producerVersion = before.sourceReferences.producerVersion
   const analysisPath = 'products/analysis.pdf'
   const oldAnalysis = productPdfBytes(1, 'Old analysis')
   writeFileSync(path.join(reviewRoot, analysisPath), oldAnalysis)
@@ -1478,6 +1529,16 @@ test('finish refreshes only the stale analysis PDF and reruns PDF QA after a lis
       sha256: sha256(oldAnalysis), byteLength: oldAnalysis.length,
     }],
   })
+  return { before, original, analysisPath, oldAnalysis }
+}
+
+test('finish refreshes only the stale analysis PDF and reruns PDF QA after a listening rewrite', async t => {
+  const { dir, ctx } = fixture(t)
+  const { reviewRoot } = await listeningReviewFixture(dir, ctx.paperId)
+  ctx.paperDir = reviewRoot
+  ctx.state.steps['listening-review'] = completed({})
+  const { before, original, analysisPath, oldAnalysis } = freezeCompanionFixture(reviewRoot)
+  ctx.state.steps['source-references'].result.producerVersion = before.sourceReferences.producerVersion
   const draft = JSON.parse(readFileSync(path.join(reviewRoot, 'analysis-listening.json')))
   Object.values(draft.questions)[0].reasonZh = '更新后的听力讲解。'
   writeListeningDraftFixture(ctx, draft)

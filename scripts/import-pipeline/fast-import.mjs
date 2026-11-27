@@ -28,7 +28,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { buildNck1ProductRefreshProjection, loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { projectEffectiveAnswers } from '../../server/paper-import/answerCorrections.mjs'
-import { PRODUCT_MANIFEST, matchesSealedPrintInputs, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { PRODUCT_FILES, PRODUCT_MANIFEST, matchesSealedPrintInputs, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { LISTENING_RULE_EVIDENCE_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
@@ -2182,10 +2182,11 @@ async function feedbackFix(ctx, args, readStatus, listeningOnly = false) {
   return status.latest.manifest
 }
 
-function assertRetainedListeningFiles(ctx, manifest, productsOnly = false) {
+function assertRetainedListeningFiles(ctx, manifest, productsOnly = false, printOnly = false) {
   for (const file of manifest.files) {
     if (file.path === 'listening-review-v1.json' || file.path.startsWith('listening-review-evidence/')
       || file.path.startsWith('products/') !== productsOnly) continue
+    if (printOnly && !PRODUCT_FILES.some(product => product.path === file.path)) continue
     const local = path.join(ctx.paperDir, file.path)
     if (existsSync(local)) {
       if (sha256(readFileSync(local)) === file.sha256) continue
@@ -2193,6 +2194,14 @@ function assertRetainedListeningFiles(ctx, manifest, productsOnly = false) {
         && ctx.state.data.listeningRedo?.teachingDigest === digestJson(mergeListeningSentenceAnalysis(readJson(local)))) continue
     }
     fail(`listening-redo：原 revision 文件哈希不匹配：${file.path}`)
+  }
+}
+
+function assertListeningRedoProductBytes(ctx, originalManifest, result) {
+  if (!result.refrozen) assertRetainedListeningFiles(ctx, originalManifest, true, result.analysisRefreshed)
+  if (result.analysisRefreshed
+    && result.manifestSha256 !== sha256(readFileSync(path.join(ctx.paperDir, PRODUCT_MANIFEST)))) {
+    fail('listening-redo：解析 PDF 清单已变化；重新运行 listening-redo')
   }
 }
 
@@ -2213,7 +2222,7 @@ function listeningProductDigest(ctx) {
     reviewBundleFilePaths(ctx.paperDir, imported.candidate, hydratedEvidenceBase(ctx.paperDir)), reviewed)
 }
 
-function assertListeningRedoReady(ctx) {
+export function assertListeningRedoReady(ctx) {
   assertStepTimes(ctx, ['listening-redo-request', 'listening-redo-segment', 'listening-redo-install',
     'listening-redo-products', 'pdf-qa'])
   const redo = ctx.state.data.listeningRedo
@@ -2222,13 +2231,14 @@ function assertListeningRedoReady(ctx) {
     fail('listening-redo：原 revision manifest 与 hydrate 恢复凭据不匹配')
   }
   assertRetainedListeningFiles(ctx, redo.manifest)
-  if (!ctx.state.steps['listening-redo-products'].result?.refrozen) assertRetainedListeningFiles(ctx, redo.manifest, true)
+  const products = ctx.state.steps['listening-redo-products'].result
   if (!redo || redo.baseRevisionId !== restore.revisionId || redo.bundleDigest !== restore.bundleDigest
     || digestJson(redo.retainedInputs) !== digestJson(retainedListeningInputs(ctx))
-    || !ctx.state.steps['listening-redo-products']?.finishedAt
-    || ctx.state.steps['listening-redo-products'].result.inputDigest !== listeningProductDigest(ctx)) {
+    || products?.inputDigest !== listeningProductDigest(ctx)
+    || products.analysisDigest !== readJson(path.join(ctx.paperDir, PRODUCT_MANIFEST)).analysisDigest) {
     fail('listening-redo：保留输入或冻结输入已变化；重新运行 listening-redo')
   }
+  assertListeningRedoProductBytes(ctx, redo.manifest, products)
   // Validate real source references, pagination, listening evidence and frozen bytes.
   buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true })
 }
@@ -2309,27 +2319,40 @@ export async function listeningRedo(ctx, args, {
   // Re-evaluate on resume, including after a fresh agent_asr_comparison.
   const digest = inputDigest(ctx)
   const manifest = path.join(ctx.paperDir, PRODUCT_MANIFEST)
-  if (ctx.state.steps['listening-redo-products']?.result?.inputDigest !== digest) {
+  const bytes = existsSync(manifest) ? readFileSync(manifest) : null
+  const frozen = bytes && JSON.parse(bytes)
+  const sealed = originalManifest.files.find(file => file.path === PRODUCT_MANIFEST)
+  const printChanged = frozen?.inputDigest !== digest
+    && !(bytes && sealed && sha256(bytes) === sealed.sha256 && bytes.length === sealed.byteLength
+      && matchesSealedPrintInputs({ rootDir: ctx.paperDir, inputDigest: digest, sealedFiles: originalManifest.files }))
+  const analysisDigest = !printChanged && frozen?.analysisDigest !== undefined
+    ? buildNck1ProductRefreshProjection(ctx.paperDir, { requireAnalyses: true }, hydratedEvidenceBase(ctx.paperDir)).analysisDigest
+    : frozen?.analysisDigest
+  const refreshAnalysis = !printChanged && frozen?.analysisDigest !== analysisDigest
+  const previous = ctx.state.steps['listening-redo-products']?.result
+  if (printChanged || refreshAnalysis || previous?.inputDigest !== digest || previous.analysisDigest !== analysisDigest) {
     delete ctx.state.steps['listening-redo-products']
     delete ctx.state.steps['pdf-qa']
   }
-  await step(ctx, 'listening-redo-products', async () => {
-    let refrozen = true
-    if (existsSync(manifest)) {
-      const bytes = readFileSync(manifest)
-      const sealed = originalManifest.files.find(file => file.path === PRODUCT_MANIFEST)
-      refrozen = JSON.parse(bytes).inputDigest !== digest
-        && !(sealed && sha256(bytes) === sealed.sha256 && bytes.length === sealed.byteLength
-          && matchesSealedPrintInputs({ rootDir: ctx.paperDir, inputDigest: digest, sealedFiles: originalManifest.files }))
-    }
-    if (refrozen) {
-      archive(ctx, path.join(ctx.paperDir, 'products'))
+  const products = await step(ctx, 'listening-redo-products', async () => {
+    const refrozen = printChanged || (previous?.inputDigest === digest && previous.refrozen === true)
+    const analysisRefreshed = refreshAnalysis || (previous?.inputDigest === digest && previous.analysisRefreshed === true)
+    if (!refrozen) assertRetainedListeningFiles(ctx, originalManifest, true, analysisRefreshed)
+    if (printChanged || refreshAnalysis) {
+      // Persist the permitted product changes before rendering so a retry can retain them.
+      ctx.state.steps['listening-redo-products'].result = { inputDigest: digest, refrozen, analysisRefreshed }
+      save(ctx)
+      if (printChanged) archive(ctx, path.join(ctx.paperDir, 'products'))
       await execute(ctx, 'freeze', cli('freeze-products.mjs', '--paper-dir', ctx.paperDir, '--parallel'))
-      if (readJson(manifest).inputDigest !== digest) fail('listening-redo：PDF 冻结输入不匹配')
     }
-    return { inputDigest: digest, refrozen }
+    const currentBytes = readFileSync(manifest)
+    const current = JSON.parse(currentBytes)
+    if (((printChanged || refreshAnalysis) && current.inputDigest !== digest)
+      || (refreshAnalysis && current.analysisDigest !== analysisDigest)) fail('listening-redo：PDF 冻结输入不匹配')
+    return { inputDigest: digest, refrozen, analysisRefreshed, analysisDigest: current.analysisDigest,
+      ...(analysisRefreshed && { manifestSha256: sha256(currentBytes) }) }
   })
-  if (!ctx.state.steps['listening-redo-products'].result.refrozen) assertRetainedListeningFiles(ctx, originalManifest, true)
+  assertListeningRedoProductBytes(ctx, originalManifest, products)
   await step(ctx, 'pdf-qa', qa)
   if (digestJson(inputs(ctx)) !== digestJson(ctx.state.data.listeningRedo.retainedInputs)) {
     fail('listening-redo：非听力输入已变化')
