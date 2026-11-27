@@ -1,6 +1,10 @@
 export const CONTINUATION_ANALYSIS_V1 = 'continuation-analysis-v1'
 export const CONTINUATION_ANALYSIS_V2 = 'continuation-analysis-v2'
 
+export function continuationEssayDisplayText(text) {
+  return text.replace(/^[ \t]*Para(?:graph|\.)?[ \t]*[12][ \t]*[.:：][ \t]*(?:\r?\n)?/gimu, '')
+}
+
 function object(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? value : null
 }

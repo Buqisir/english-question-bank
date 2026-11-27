@@ -68,7 +68,7 @@ const core = value => String(value ?? '').replace(EDGE, '')
 // between the initials of "D. C." and inside "(or a few!) doesn't", and it
 // ends a sentence inside reported speech (say, “That’s okay. Put it …”).
 // A piece belongs to the sentence before it when that one ends in an
-// abbreviation, when both sides of the break are single-letter initials, when
+// abbreviation or a name initial, when both sides are single-letter initials, when
 // the piece starts in lower case, or when the sentence before it opened a
 // short quotation (“Safe!”, “That’s okay.”) after some words of its own and
 // the quotation closes later in the paragraph. A quoted speech of full
@@ -76,6 +76,7 @@ const core = value => String(value ?? '').replace(EDGE, '')
 const SHORT_QUOTE_WORDS = 3
 const INITIAL_END = /(?:^|[\s(])[A-Z]\.\s*$/u
 const INITIAL_START = /^[A-Z]\.(?:[\s,;:]|$)/u
+const NAME_INITIAL_END = /(?:^|[^\p{L}])\p{Lu}\p{Ll}[\p{L}\p{M}]*[\p{Zs}\t]+\p{Lu}\.[\p{Zs}\t]*$/u
 function insideReportedSpeech(sentence, paragraphText) {
   const open = sentence.text.lastIndexOf('“')
   if (open <= 0 || sentence.text.slice(0, open).trim() === '') return false
@@ -90,6 +91,7 @@ export function passageSentences(paragraphText) {
     const previous = sentences.at(-1)
     if (previous && (ABBREVIATION.test(previous.text) || /^[a-z]/u.test(piece.text)
       || (INITIAL_END.test(previous.text) && INITIAL_START.test(piece.text))
+      || NAME_INITIAL_END.test(previous.text)
       || insideReportedSpeech(previous, paragraphText))) {
       previous.end = piece.end
       previous.text = paragraphText.slice(previous.start, previous.end)

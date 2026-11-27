@@ -7,6 +7,7 @@ import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedP
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
 import { projectEffectiveAnswers } from './paper-import/answerCorrections.mjs'
+import { continuationEssayDisplayText } from '../shared/writing/continuationAnalysis.mjs'
 
 export const unofficialListeningLabel = '听力答案（非官方，据录音整理）'
 const unofficialTranscriptLabel = '听力稿（非官方，据录音整理）'
@@ -62,6 +63,8 @@ function referenceFigureHtml(figure) {
 
 function referenceSection(group, kind, starters = [], labelOverride = null, namespace = null) {
   const section = group[kind]
+  const continuationEssay = kind === 'essays' && group.taskType === 'continuation'
+  const displayStarters = starters.map(continuationEssayDisplayText)
   const sourceEntries = section.entries.filter(entry => entry.provenance !== 'unofficial')
   const label = labelOverride ?? (kind === 'essays'
     ? group.taskType === 'application' ? '第一节（满分15分）' : '第二节（满分25分）'
@@ -93,16 +96,17 @@ function referenceSection(group, kind, starters = [], labelOverride = null, name
           ).join('')}</tbody></table>`
         }
         const { paragraph } = block
+        const text = continuationEssay ? continuationEssayDisplayText(paragraph.text) : paragraph.text
         // Emphasize only a source-bound starter actually present in the essay;
         // do not prepend paragraph numbers or invent missing starter text.
         const starter = kind === 'essays' && paragraph.role === 'body'
-          ? starters.map(value => value.replace(/^Paragraph\s+\d+\s*:\s*/iu, ''))
-            .find(value => value && paragraph.text.startsWith(value)) : null
-        const prose = starter ? `<em class="continuation-starter">${textHtml(starter)}</em>${textHtml(paragraph.text.slice(starter.length))}` : textHtml(paragraph.text)
+          ? displayStarters.find(value => value && text.startsWith(value)) : null
+        const prose = starter ? `<em class="continuation-starter">${textHtml(starter)}</em>${textHtml(text.slice(starter.length))}` : textHtml(text)
         const figures = kind === 'essays' ? sourceReferenceFigurePresentation(entry, paragraph.paragraphId, namespace)
           .map(referenceFigureHtml).join('') : ''
+        if (continuationEssay && !text.trim()) return figures
         return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>${figures}`
-      })
+      }).filter(Boolean)
       // Keep the section, source label and first source paragraph together.
       // The rest of a long essay can still flow onto subsequent pages.
       const keepOpening = blocks[0]?.paragraph?.role === 'salutation'
@@ -110,7 +114,7 @@ function referenceSection(group, kind, starters = [], labelOverride = null, name
       const sectionHeading = keepOpening && index === 0 ? heading : ''
       if (sectionHeading) joinedHeading = true
       const opening = keepOpening
-        ? `<div class="reference-opening">${sectionHeading}${labelHtml}${paragraphs.shift()}</div>` : labelHtml
+        ? `<div class="reference-opening">${sectionHeading}${labelHtml}${paragraphs.shift() ?? ''}</div>` : labelHtml
       return `<article data-source-reference="${escapeHtml(entry.referenceId)}">
 ${opening}
 ${paragraphs.join('\n')}

@@ -80,7 +80,7 @@ export function renderClozeGroup({ group, title, paperAsset, analysis, answers, 
   return `<section class="analysis-group analysis-group--cloze">
     ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '完形填空', answers), renderOverview(groupAnalysis.overview))}
     ${renderClozeMainLine(groupAnalysis.mainLine, group)}
-    ${renderFullTranslation(groupAnalysis, paperAsset)}
+    ${renderFullTranslation(groupAnalysis, paperAsset, { clues: false })}
     ${questions}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}
   </section>`

@@ -1,6 +1,6 @@
 import { sourceReferenceBlocks } from '../../paper-import/sourceReferences.mjs'
 import { projectApplicationReviewCardDisplay } from '../../../shared/writing/applicationReviewCard.mjs'
-import { projectContinuationAnalysisDisplay } from '../../../shared/writing/continuationAnalysis.mjs'
+import { continuationEssayDisplayText, projectContinuationAnalysisDisplay } from '../../../shared/writing/continuationAnalysis.mjs'
 import { isApplicationAnalysisV4 } from '../../../shared/writing/applicationAnalysisV4.mjs'
 import { isContinuationAnalysisV3 } from '../../../shared/writing/continuationAnalysisV3.mjs'
 import { renderHeadingLead } from './blocks.mjs'
@@ -154,7 +154,7 @@ function signoffIndex(text, isContinuation) {
 // One essay: a run-in heading, then its paragraphs; a letter's sign-off lines
 // stay together with the paragraph before them.
 function renderModelEssay(text, label, isContinuation) {
-  const paragraphs = paragraphBlocks(text, 'model-paragraph')
+  const paragraphs = paragraphBlocks(isContinuation ? continuationEssayDisplayText(text) : text, 'model-paragraph')
   const signoff = signoffIndex(text, isContinuation)
   if (signoff > 0) {
     const tail = paragraphs.splice(signoff - 1)

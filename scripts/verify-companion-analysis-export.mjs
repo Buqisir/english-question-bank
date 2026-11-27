@@ -92,11 +92,14 @@ for (const [hasSource, hasAi, expected] of [
   [false, true, [aiEssay]], [false, false, []],
 ]) {
   writingProjection.sourceReferences.groups[0].essays.entries = hasSource
-    ? [{ provenance: 'unofficial', paragraphs: [{ text: sourceEssay[1] }] }] : []
+    ? [{ provenance: 'unofficial', paragraphs: [
+      { text: 'paragraph1:' }, { text: `Para 1. ${sourceEssay[1]}` }, { text: 'Paragraph 2: SECOND_SOURCE_PARAGRAPH' },
+    ] }] : []
   v2Writing.modelAnswer = hasAi ? aiEssay[1] : ''
   const revision = buildCompanionAnalysisHtml({ projection: writingProjection })
   assert.deepEqual([...revision.matchAll(/<h4>([^<]*范文[^<]*)<\/h4><p class="model-paragraph">([^<]+)<\/p>/gu)]
     .map(([, label, text]) => [label, text]), expected)
+  if (hasSource) assert.ok(revision.includes('SOURCE_ESSAY_SENTINEL</p></div><p class="model-paragraph">SECOND_SOURCE_PARAGRAPH</p>'))
   assert.equal(revision.includes('data-continuation-section="modelAnswer"'), expected.length > 0)
 }
 const translatedSource = structuredClone(source)
@@ -217,8 +220,11 @@ sevenAnalysis.groups[sevenGroupId].fullTranslationZh = '甲乙'
 sevenAnalysis.groups[sevenGroupId].teachingContent = {
   schemaVersion: 'objective-teaching-content-v1',
   translation: { textId: 'translation', paragraphs: [{ paragraphId: 'p', quote: '甲乙' }] },
-  annotations: [[sevenQuestionId, 2, '甲乙'], [nextSevenQuestionId, 1, '甲']].map(([id, end, quote]) => ({
-    kind: 'evidence', questionIds: [id], translationRanges: [{ textId: 'translation', paragraphId: 'p', start: 0, end, quote }],
+  annotations: [
+    ['answer-insertion', sevenQuestionId, 2, '甲乙'],
+    ['evidence', nextSevenQuestionId, 1, '甲'],
+  ].map(([kind, id, end, quote]) => ({
+    kind, questionIds: [id], translationRanges: [{ textId: 'translation', paragraphId: 'p', start: 0, end, quote }],
   })),
 }
 const revisionHtml = buildCompanionAnalysisHtml({ projection: {
@@ -248,10 +254,9 @@ assert.match(revisionHtml, /<span>空后<\/span><p lang="en">Later\.<\/p>/)
 assert.match(revisionHtml, /<h3>听力<small>听力答案（非官方，据录音整理）<\/small><\/h3>/)
 assert.match(revisionHtml, /<small>听力答案（非官方，据录音整理）<\/small>/)
 assert.match(revisionHtml, /第 1 段材料（第 1 题）[\s\S]*第 3 段材料（第 3–4 题）/u)
-// Each clue's number appears once, after its last character (甲 ends the 37
-// clue, 乙 ends the 36 clue), however the two clues overlap.
-assert.deepEqual([...revisionHtml.matchAll(/class="clue-no">([\d,]+)<\/sup>/gu)]
-  .map(([, marker]) => marker), ['37', '36'])
+const sevenTranslation = revisionHtml.match(/<section class="full-translation">.*?<\/section>/su)?.[0] ?? ''
+assert.doesNotMatch(sevenTranslation, /class="clue-no"/u)
+assert.match(sevenTranslation, /class="blank-no">\[36\]<\/b>/u)
 const answerCells = markup => [...markup.matchAll(/data-question-id="([^"]+)"><b>([^<]+)<\/b> <span>([^<]+)<\/span>/gu)]
   .map(([, id, number, answer]) => [id, `${number} ${answer}`])
 for (const document of [html, revisionHtml]) {

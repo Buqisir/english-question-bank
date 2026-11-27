@@ -83,6 +83,9 @@ ok('sentences: initials and reported speech stay in one sentence; quoted dialogu
   assert.deepEqual(split('Curtin works in Washington, D. C., which recovers food. Last year it grew.'), [
     'Curtin works in Washington, D. C., which recovers food.', 'Last year it grew.',
   ])
+  assert.deepEqual(split('They met Félix W. Ortiz on Friday. He showed them around.'), [
+    'They met Félix W. Ortiz on Friday.', 'He showed them around.',
+  ])
   assert.deepEqual(split('The students would say, “That’s okay. Put it in the box.” Then they left.'), [
     'The students would say, “That’s okay. Put it in the box.”', 'Then they left.',
   ])

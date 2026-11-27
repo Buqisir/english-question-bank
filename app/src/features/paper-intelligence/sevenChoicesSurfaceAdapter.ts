@@ -287,6 +287,7 @@ export function buildSevenChoicesSurfaceModel(
     teachingContent = buildObjectiveTeachingView(
       groupAnalysis,
       Object.fromEntries(questionOrder.map(({ questionId, questionNo }) => [questionId, questionNo])),
+      { clues: false },
     )
     teachingSource = source
   } catch (error) {

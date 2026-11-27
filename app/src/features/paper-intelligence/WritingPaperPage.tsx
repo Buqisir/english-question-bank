@@ -13,6 +13,7 @@ import { applicationWritingRhythm } from '../../../../shared/paper-canonical/app
 import { continuationStarterDisplayInlines, continuationStarterDisplayText } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
 import { splitApplicationEssay } from '../../../../shared/writing/applicationAnalysisV4.mjs'
+import { continuationEssayDisplayText } from '../../../../shared/writing/continuationAnalysis.mjs'
 import {
   paperTypographyRuntime,
   sectionHeadingRuntime,
@@ -213,7 +214,7 @@ function applicationEssayBody(essay: string, givenTop: readonly WritingGivenPart
 
 /** 续写：每段范文去掉框里已经印着的段首句，剩下的接在段首句后面。接不上的整段放到框下面。 */
 function continuationEssayRests(essay: string, starters: readonly WritingGivenPart[]): { rests: (string | null)[]; extra: string[] } {
-  const paragraphs = essay.split(/\n[ \t]*\n/).map(paragraph => paragraph.trim()).filter(Boolean)
+  const paragraphs = continuationEssayDisplayText(essay).split(/\n[ \t]*\n/).map(paragraph => paragraph.trim()).filter(Boolean)
   const rests: (string | null)[] = starters.map(() => null)
   const extra: string[] = []
   paragraphs.forEach((paragraph, index) => {
@@ -538,7 +539,8 @@ function WritingPaperPageContent({
                           </section>
                         )}
                         {lectureEssay.officialModelAnswer && (
-                          <RetainedModelAnswer officialModelAnswer={lectureEssay.officialModelAnswer} />
+                          <RetainedModelAnswer officialModelAnswer={isContinuationWriting
+                            ? continuationEssayDisplayText(lectureEssay.officialModelAnswer) : lectureEssay.officialModelAnswer} />
                         )}
                       </div>
                     </div>
@@ -573,9 +575,11 @@ function WritingPaperPageContent({
                     style={{ marginTop: 16 }} data-model-answer-source={essay.provenance === 'unofficial' ? 'unofficial' : 'official'}>
                     <h4 className="retained-writing-answer-label">{essay.provenance === 'unofficial' ? '非官方参考范文' : '官方参考范文'}</h4>
                     <div className="retained-writing-answer-copy">
-                      {essay.paragraphs.map(paragraph => (
-                        <p key={paragraph.paragraphId} className="retained-writing-answer-line">{paragraph.text}</p>
-                      ))}
+                      {essay.paragraphs.map(paragraph => {
+                        const text = isContinuationWriting ? continuationEssayDisplayText(paragraph.text) : paragraph.text
+                        if (isContinuationWriting && !text.trim()) return null
+                        return <p key={paragraph.paragraphId} className="retained-writing-answer-line">{text}</p>
+                      })}
                     </div>
                   </section>
                 ))}

@@ -231,7 +231,7 @@ export function buildClozeAnalysisSurfaceModel(input: {
             questionId,
             String(asset.content.questions[questionId]?.questionNo ?? ''),
           ]),
-        )),
+        ), { clues: false }),
       }
     : null
 

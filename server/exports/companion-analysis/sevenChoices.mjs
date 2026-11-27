@@ -109,7 +109,7 @@ export function renderSevenChoicesGroup({ group, title, paperAsset, analysis, an
   }).join('')
   return `<section class="analysis-group analysis-group--seven">
     ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '七选五', answers), renderOverview(groupAnalysis.overview))}
-    ${renderFullTranslation(groupAnalysis, paperAsset)}
+    ${renderFullTranslation(groupAnalysis, paperAsset, { clues: false })}
     ${questions}
     ${renderUnaimedExtras(extraOptions, optionByLabel)}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}

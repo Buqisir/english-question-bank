@@ -10,7 +10,7 @@ import type {
   ContinuationContract,
 } from '../../domain/continuationAnalysis.ts'
 import type { ContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
-import { projectContinuationAnalysisDisplay } from '../../../../shared/writing/continuationAnalysis.mjs'
+import { continuationEssayDisplayText, projectContinuationAnalysisDisplay } from '../../../../shared/writing/continuationAnalysis.mjs'
 
 const EVIDENCE_SOURCE_LABEL: Record<ContinuationEvidenceRef['source'], string> = {
   instruction: '题干',
@@ -171,7 +171,8 @@ export function ContinuationAnalysisPanel({
 }: {
   analysis: ContinuationWritingAnalysis
 }): ReactNode {
-  const { modelAnswer, officialModelAnswer } = analysis
+  const modelAnswer = analysis.modelAnswer && continuationEssayDisplayText(analysis.modelAnswer)
+  const officialModelAnswer = analysis.officialModelAnswer && continuationEssayDisplayText(analysis.officialModelAnswer)
   const display = 'continuationAnalysis' in analysis
     ? projectContinuationAnalysisDisplay(analysis.continuationAnalysis)
     : null
