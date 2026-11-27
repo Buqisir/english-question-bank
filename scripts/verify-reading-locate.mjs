@@ -125,6 +125,15 @@ ok('a full locate quote can cross consecutive initial breaks without changing se
   }
 })
 
+ok('a locate quote across initial fragments preserves double spaces and permits omitted outer quotes', () => {
+  const quote = 'They met Félix W.  Ortiz on Friday.'
+  const paragraph = `It was sunny. “${quote}” Everyone went home.`
+  const { errors, locate } = resolveSentenceQuote(paragraph, quote, 'Ortiz', 'on Friday')
+  assert.deepEqual(errors, [])
+  assert.equal(paragraph.slice(locate.sentence.start, locate.sentence.end).trim(), `“${quote}”`)
+  assert.equal(paragraph.slice(locate.cue.start, locate.cue.end), 'Ortiz')
+})
+
 ok('single locate quotes remain valid next to Roman numerals, plans and room labels', () => {
   for (const [first, firstCue, second, secondCue] of [
     ['She served in World War I.', 'World War I', 'Her letters survived.', 'letters'],

@@ -102,14 +102,12 @@ export function passageSentences(paragraphText) {
 
 // Accept a complete copied quote across initial boundaries while preserving
 // the sentence indices and the original span used to locate cues and answers.
-function joinedLocateSentence(sentences, targetText) {
+function joinedLocateSentence(paragraph, sentences, targetCore) {
   for (const [index, first] of sentences.entries()) {
-    let joined = first.text.trim()
     for (let last = index; last + 1 < sentences.length; last += 1) {
-      if (!/ \p{Lu}\.$/u.test(sentences[last].text.trimEnd()) || !targetText.startsWith(`${joined} `)) break
-      const next = sentences[last + 1]
-      joined += ` ${next.text.trim()}`
-      if (joined === targetText) return { index, start: first.start, end: next.end }
+      if (!/ \p{Lu}\.$/u.test(sentences[last].text.trimEnd())) break
+      const end = sentences[last + 1].end
+      if (core(paragraph.slice(first.start, end)) === targetCore) return { index, start: first.start, end }
     }
   }
   return null
@@ -259,10 +257,11 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
   const targetText = text(item.targetText)
   if (!targetText || !paragraph.includes(targetText)) return fail('定位句 targetText 必须精确匹配原文。')
   const sentences = passageSentences(paragraph)
-  const sentenceIndex = sentences.findIndex(sentence => core(sentence.text) === core(targetText))
+  const targetCore = core(targetText)
+  const sentenceIndex = sentences.findIndex(sentence => core(sentence.text) === targetCore)
   const sentence = sentenceIndex >= 0
     ? { ...sentences[sentenceIndex], index: sentenceIndex }
-    : joinedLocateSentence(sentences, targetText)
+    : joinedLocateSentence(paragraph, sentences, targetCore)
   if (!sentence) return fail('定位句 targetText 必须是原文中完整的一句。')
 
   const targetCue = text(item.targetCue)

@@ -176,6 +176,14 @@ function markedHtml(text, marks) {
   return html
 }
 
+function sentenceIndices(sentences, span) {
+  const indices = []
+  for (const [index, sentence] of sentences.entries()) {
+    if (sentence.end > span.start && sentence.start < span.end) indices.push(index)
+  }
+  return indices
+}
+
 // One excerpt in reading order: the 定位句 and the sentences that hold the
 // answer, with the sentences between them kept when there is one and cut to
 // "……" when there are more.
@@ -183,35 +191,28 @@ function locateExcerpt(locate, group) {
   const texts = paragraphTexts(group)
   const order = array(group?.passage?.paragraphs).map(paragraph => paragraph.paragraphId)
   const pieces = []
-  const add = (paragraphId, indices) => {
-    const sentences = passageSentences(texts.get(paragraphId))
-    const kept = new Set(indices)
-    // Visit added pieces too, so a run of initials stays in the excerpt.
-    for (const index of kept) {
-      if (index + 1 < sentences.length && / \p{Lu}\.$/u.test(sentences[index].text.trimEnd())) kept.add(index + 1)
-    }
-    for (const index of [...kept].sort((left, right) => left - right)) {
-      pieces.push({ paragraphId, index, ...sentences[index] })
-    }
+  const add = (paragraphId, sentences, indices) => {
+    for (const index of indices) pieces.push({ paragraphId, index, ...sentences[index] })
   }
-  const answerSentences = passageSentences(texts.get(locate.answer.paragraphId))
-    .map((sentence, index) => ({ ...sentence, index }))
-    .filter(sentence => sentence.end > locate.answer.start && sentence.start < locate.answer.end)
-    .map(sentence => sentence.index)
-  if (locate.answer.paragraphId === locate.paragraphId) {
-    const low = Math.min(locate.sentence.index, answerSentences[0])
-    const high = Math.max(locate.sentence.index, answerSentences.at(-1))
-    const kept = new Set([locate.sentence.index, ...answerSentences])
+  const sameParagraph = locate.answer.paragraphId === locate.paragraphId
+  const targetSentences = passageSentences(texts.get(locate.paragraphId))
+  const answerSentences = sameParagraph ? targetSentences : passageSentences(texts.get(locate.answer.paragraphId))
+  const targetIndices = sentenceIndices(targetSentences, locate.sentence)
+  const answerIndices = sentenceIndices(answerSentences, locate.answer)
+  if (sameParagraph) {
+    const low = Math.min(targetIndices[0], answerIndices[0])
+    const high = Math.max(targetIndices.at(-1), answerIndices.at(-1))
+    const kept = new Set([...targetIndices, ...answerIndices])
     const between = []
     for (let index = low; index <= high; index += 1) if (!kept.has(index)) between.push(index)
-    add(locate.paragraphId, between.length <= 1
+    add(locate.paragraphId, targetSentences, between.length <= 1
       ? Array.from({ length: high - low + 1 }, (_, offset) => low + offset)
       : [...kept].sort((left, right) => left - right))
   } else {
     const first = order.indexOf(locate.paragraphId) <= order.indexOf(locate.answer.paragraphId)
-    const target = [locate.paragraphId, [locate.sentence.index]]
-    const answer = [locate.answer.paragraphId, answerSentences]
-    for (const [paragraphId, indices] of first ? [target, answer] : [answer, target]) add(paragraphId, indices)
+    const target = [locate.paragraphId, targetSentences, targetIndices]
+    const answer = [locate.answer.paragraphId, answerSentences, answerIndices]
+    for (const selection of first ? [target, answer] : [answer, target]) add(...selection)
   }
   let html = ''
   pieces.forEach((piece, position) => {
@@ -282,12 +283,12 @@ function answerWhere(locate, group) {
     const order = array(group?.passage?.paragraphs).map(paragraph => paragraph.paragraphId)
     return order.indexOf(locate.answer.paragraphId) > order.indexOf(locate.paragraphId) ? '同段后文' : '同段前文'
   }
-  const indices = passageSentences(paragraphTexts(group).get(locate.paragraphId))
-    .map((sentence, index) => ({ ...sentence, index }))
-    .filter(sentence => sentence.end > locate.answer.start && sentence.start < locate.answer.end)
-    .map(sentence => sentence.index)
-  const before = indices[0] < locate.sentence.index
-  const step = before ? locate.sentence.index - indices[0] : indices.at(-1) - locate.sentence.index
+  const sentences = passageSentences(paragraphTexts(group).get(locate.paragraphId))
+  const targetIndices = sentenceIndices(sentences, locate.sentence)
+  const answerIndices = sentenceIndices(sentences, locate.answer)
+  const before = answerIndices[0] < targetIndices[0]
+  const step = before ? targetIndices[0] - answerIndices[0] : answerIndices.at(-1) - targetIndices.at(-1)
+  if (!before && step === 1) return '下一句'
   return step <= 2 ? `${before ? '前' : '后'}${SENTENCE_STEPS[step]}句` : `同段${before ? '前' : '后'}文`
 }
 

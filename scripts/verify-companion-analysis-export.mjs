@@ -546,24 +546,28 @@ console.log('Companion analysis grammar-fill sentence lines, no reprinted passag
     assert.equal((learnt.match(/class="reading-distractor-item"/gu) || []).length, 2)
   } else assert.fail('the 定位 + 同义替换 fixture did not render a question')
 
-  for (const targetText of ['They met Félix W. Ortiz on Friday.', 'They met Félix W. Smith B. Ortiz on Friday.']) {
-    const quoteHtml = renderReadingGroup({
-      group: { ...group, passage: { paragraphs: [{ paragraphId: 'p1', text: `${targetText} Everyone went home.` }] } },
-      paperAsset: { ...paper, content: { questions: { q1: { ...paper.content.questions.q1, stem: 'What does the passage say about Félix?' } } } },
-      answers: [], openingHeadings: '',
-      analysis: { questions: { q1: {
-        locateBy: 'stem',
-        locationParaphrases: [{ sourceText: 'Félix', sourceRole: 'stem', targetText, targetParagraphId: 'p1',
-          relationType: 'locationCue', answerText: 'met Félix' }],
-        optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p1', quote: targetText }] }],
-      } } },
-    })
+  const initialQuote = 'They met Félix W. Ortiz on Friday.'
+  const renderInitialLocate = (targetText, answerText, evidence, bridgeZh) => renderReadingGroup({
+    group: { ...group, passage: { paragraphs: [{ paragraphId: 'p1', text: `${targetText} Everyone went home.` }] } },
+    paperAsset: { ...paper, content: { questions: { q1: { ...paper.content.questions.q1, stem: 'What does the passage say about Félix?' } } } },
+    answers: [], openingHeadings: '',
+    analysis: { questions: { q1: {
+      locateBy: 'stem',
+      locationParaphrases: [{ sourceText: 'Félix', sourceRole: 'stem', targetText, targetParagraphId: 'p1',
+        relationType: 'locationCue', answerText, bridgeZh }],
+      optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p1', quote: evidence }] }],
+    } } },
+  })
+  for (const targetText of [initialQuote, 'They met Félix W. Smith B. Ortiz on Friday.', 'They met Félix\u00a0W. Ortiz on Friday.']) {
+    const quoteHtml = renderInitialLocate(targetText, 'met Félix', targetText)
     const [, quote] = quoteHtml.match(/<div class="evidence-quote"><span class="micro-heading">原文依据<\/span><p lang="en">(.*?)<\/p>/u) ?? []
     assert.ok(quote, 'the locate excerpt is rendered')
     assert.equal(quote.replace(/<[^>]+>/gu, ''), `“${targetText}”`)
     assert.match(quote, /<span class="source-underline"><b class="locate-cue">Félix<\/b><\/span>/u)
-    if (targetText.includes('W. Ortiz')) console.log(`Companion analysis evidence excerpt: ${quote}`)
+    if (targetText === initialQuote) console.log(`Companion analysis evidence excerpt: ${quote}`)
   }
+  const nextSentence = renderInitialLocate(initialQuote, 'went home', 'Everyone went home.', '他们随后回了家。')
+  assert.match(nextSentence, /<span class="locate-where">答案不在定位句，在下一句<\/span>/u)
 
   // 2026-11-24 (Owner): the correct option prints as the paper prints it under
   // 「正确选项」; a 定位词 and the passage's other words for it each carry a
