@@ -185,7 +185,14 @@ function locateExcerpt(locate, group) {
   const pieces = []
   const add = (paragraphId, indices) => {
     const sentences = passageSentences(texts.get(paragraphId))
-    for (const index of indices) pieces.push({ paragraphId, index, ...sentences[index] })
+    const kept = new Set(indices)
+    // Visit added pieces too, so a run of initials stays in the excerpt.
+    for (const index of kept) {
+      if (index + 1 < sentences.length && / \p{Lu}\.$/u.test(sentences[index].text.trimEnd())) kept.add(index + 1)
+    }
+    for (const index of [...kept].sort((left, right) => left - right)) {
+      pieces.push({ paragraphId, index, ...sentences[index] })
+    }
   }
   const answerSentences = passageSentences(texts.get(locate.answer.paragraphId))
     .map((sentence, index) => ({ ...sentence, index }))
