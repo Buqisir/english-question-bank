@@ -83,6 +83,21 @@ for (const [label, pattern, change] of failures) {
   assert.throws(() => run(mutate(change)), pattern, label)
 }
 
+// A name in the given opening also counts as part of the given text.
+const namedOpening = 'I’m Li Hua.'
+const sharedName = mutate((out, task) => {
+  task.applicationGiven.top[1] = namedOpening
+  for (const variant of [out.standard, out.advanced]) {
+    variant.essay = variant.essay.replace(firstSentence, namedOpening)
+  }
+})
+assert.doesNotThrow(() => run(sharedName))
+const repeatedOpening = structuredClone(sharedName)
+repeatedOpening.output.standard.essay = repeatedOpening.output.standard.essay.replace(
+  namedOpening, `${namedOpening} ${namedOpening}`,
+)
+assert.throws(() => run(repeatedOpening), /standard\.essay repeats given text: I’m Li Hua\./)
+
 // Warnings do not fail: a one-sentence middle paragraph.
 const eight = fixtures.find((fixture) => fixture.name === 'paper-gaokao-2021-eight-provinces-jan.json')
 assert.deepEqual(run(eight).warnings, ['standard.essay paragraph 2 is one sentence'])

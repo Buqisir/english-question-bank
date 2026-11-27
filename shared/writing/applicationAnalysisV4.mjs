@@ -174,7 +174,8 @@ function checkEssay(essay, label, given, range, problems, warnings) {
   if (/^\s*[[{]/.test(essay)) problems.push(`${label}.essay contains JSON`)
   if (/\n[ \t]*\n[ \t]*\n/.test(essay)) problems.push(`${label}.essay has more than one blank line between paragraphs`)
   for (const text of new Set(given)) {
-    const want = given.filter((g) => g === text).length
+    // The opening can already contain text from another given line, such as the signature.
+    const want = given.reduce((count, line) => count + (line.split(text).length - 1), 0)
     if (essay.split(text).length - 1 > want) problems.push(`${label}.essay repeats given text: ${text}`)
   }
   const { paragraphs, problems: givenProblems } = splitApplicationEssay(essay, given)
