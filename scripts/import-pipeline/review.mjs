@@ -84,7 +84,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { hydratedEvidenceBase, isLocalReviewOrigin, resolveReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 export { hydratedEvidenceBase } from './review-target.mjs'
-import { reconcileRevision, uploadReviewBundle as uploadBundle, writeUploadReceipt } from './lib-review-upload.mjs'
+import { reconcileRevision, supersededUpload, uploadReviewBundle as uploadBundle, writeUploadReceipt } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
@@ -505,7 +505,9 @@ async function freezeSubmission(paperId, paperDir, fast, status) {
     if (original?.finalizedAt && report && !status.revisions.some(item => item.id === report.ocrRevisionId)) {
       fail('UNKNOWN: finalized Candidate 缺少关联 OCR')
     }
-    if (old.some(item => item.id !== original?.id && !prior.includes(item))) fail('UNKNOWN: 存在其他未完成 Candidate')
+    if (old.some(item => item.id !== original?.id && !prior.includes(item) && !supersededUpload(status, item))) {
+      fail('UNKNOWN: 存在其他未完成 Candidate')
+    }
     if ((source.expectedBaseRevisionId && source.expectedBaseRevisionId !== status.latestRevisionId
       || !source.expectedBaseRevisionId && status.latest?.reviewKind === 'candidate') && status.latest?.id !== original?.id) {
       fail('UNKNOWN: Candidate 基线已变化')

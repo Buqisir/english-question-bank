@@ -336,18 +336,38 @@ test('latest finalized reconciliation fills missing screenshots and an unreviewe
   assert.match(report, /Screen 和 PDF 待目检/)
 })
 
+for (const reviewKind of ['candidate', 'ocr']) {
+  test(`reconciliation ignores only other ${reviewKind} uploads older than a finalized latest revision`, () => {
+    const paperId = 'paper-test'
+    const latest = { paperId, id: 'rev-latest', reviewKind, state: 'approved', finalizedAt: '2026-01-01',
+      bundleDigest: digest('latest'), revisionNumber: 8 }
+    const upload = { paperId, id: 'rev-upload', reviewKind, state: 'uploading', finalizedAt: null,
+      bundleDigest: digest('upload'), revisionNumber: 4 }
+    const status = { paperId, latest, latestRevisionId: latest.id, revisions: [latest, upload] }
+    const observe = (bundleDigest = digest('new submission')) =>
+      reconcileRevision(status, { paperId, bundleDigest }, reviewKind, latest.id)
+    assert.equal(observe(), undefined)
+    assert.equal(observe(upload.bundleDigest), upload)
+    upload.revisionNumber = 9
+    assert.throws(() => observe(), /UNKNOWN/)
+    upload.revisionNumber = 4
+    Object.assign(latest, { state: 'uploading', finalizedAt: null })
+    assert.throws(() => observe(latest.bundleDigest), /UNKNOWN/)
+  })
+}
+
 test('a fresh worktree reconciles stranded Candidates against production OCR history', () => {
   const paperId = 'paper-test'
   const manifest = { paperId, bundleDigest: digest('lecture') }
   const base = { paperId, id: 'rev-base', reviewKind: 'candidate', state: 'approved', finalizedAt: '2026-01-01',
-    bundleDigest: digest('base'), revisionNumber: 3 }
+    bundleDigest: digest('base'), revisionNumber: 1 }
   const report = { paperId, ocrRevisionId: 'rev-local' }
   const old = { paperId, id: 'rev-old', reviewKind: 'candidate', state: 'uploading', finalizedAt: null,
-    revisionNumber: 1, bundleDigest: digest('old'), manifest: { schemaVersion: 'web-import-review-bundle-v3', ocrCorrectionReportDigest: digestJson(report) } }
+    revisionNumber: 2, bundleDigest: digest('old'), manifest: { schemaVersion: 'web-import-review-bundle-v3', ocrCorrectionReportDigest: digestJson(report) } }
   const status = { paperId, latest: base, latestRevisionId: base.id, revisions: [base, old] }
   const observe = report => reconcileRevision(status, manifest, 'candidate', base.id, strandedUploads(status, report))
   assert.equal(observe(), undefined)
-  const ocr = { ...base, reviewKind: 'ocr', id: 'rev-production', revisionNumber: 2 }
+  const ocr = { ...base, reviewKind: 'ocr', id: 'rev-production', revisionNumber: 3 }
   status.revisions.push(ocr)
   assert.equal(observe(), undefined)
   old.revisionNumber = 4

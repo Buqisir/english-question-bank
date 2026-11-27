@@ -41,6 +41,17 @@ export function writeUploadReceipt(file, receipt) {
   } finally { rmSync(staging, { force: true }) }
 }
 
+// Finalizing an older upload cannot advance the paper's latest revision.
+export function supersededUpload({ paperId, latest, latestRevisionId }, row) {
+  return Boolean(paperId && row.paperId === paperId
+    && row.state === 'uploading' && row.finalizedAt === null
+    && latest?.id && latest.id === latestRevisionId && latest.paperId === paperId
+    && latest.finalizedAt && latest.state !== 'uploading'
+    && Number.isSafeInteger(row.revisionNumber) && row.revisionNumber > 0
+    && Number.isSafeInteger(latest.revisionNumber) && latest.revisionNumber > 0
+    && row.revisionNumber < latest.revisionNumber)
+}
+
 export function reconcileRevision(status, manifest, kind, baseline, stranded = []) {
   const unknown = () => { throw new Error('UNKNOWN: Review 归属、基线或修订状态已变化') }
   if (status?.paperId !== manifest.paperId || !Array.isArray(status.revisions)
@@ -53,7 +64,7 @@ export function reconcileRevision(status, manifest, kind, baseline, stranded = [
     if (item.reviewKind === kind && item.bundleDigest === manifest.bundleDigest) {
       if (match || JSON.stringify(item.manifest?.resolvesIssueIds ?? []) !== JSON.stringify(manifest.resolvesIssueIds ?? [])) unknown()
       match = item
-    } else if (item.state === 'uploading' && !(item.reviewKind === 'candidate'
+    } else if (item.state === 'uploading' && !supersededUpload(status, item) && !(item.reviewKind === 'candidate'
       && stranded.some(proof => item.id === proof.id && item.bundleDigest === proof.bundleDigest))) unknown()
   }
   if (match?.finalizedAt ? match.id !== status.latestRevisionId : status.latestRevisionId !== baseline) unknown()
