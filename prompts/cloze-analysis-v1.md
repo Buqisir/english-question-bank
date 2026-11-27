@@ -218,7 +218,7 @@ Do NOT write these; the server fills them from your new fields so older consumer
       "overview": "50–80字软目标的中文内容简介；记叙文须包含有意义的事件发展或转折",
       "fullTranslationZh": "填入正答后的全文中文翻译",
       "mainLine": {
-        "theme": { "text": "要改变别人的看法，做给他们看比说服更有用，即 show them, not tell them。", "quote": "show them, not tell them" },
+        "theme": { "text": "要改变别人的看法，让人亲眼看到比光说更有用（show them, not tell them）。", "quote": "show them, not tell them" },
         "paragraphs": [
           { "paragraphId": "para-...-1", "text": "学校开屋顶菜园，多数人觉得白费功夫。" }
         ],

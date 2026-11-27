@@ -212,7 +212,7 @@ find oneself doing 是固定搭配。
 A preposition blank, job first:
 
 ```text
-「准备」（prepared）已经有宾语「我」（me），空格要把「这件事」（this one）接到动词上。
+空格要把「这件事」（this one）接到动词「准备」（prepared）上，说明为哪件事做准备。
 表示「让某人为某事做好准备」，用介词（for）。
 ```
 
@@ -225,8 +225,8 @@ Not:
 An article blank:
 
 ```text
-「方式」（way）是单数可数名词，这里首次提到的是一种新的穿衣方式，空格需要不定冠词。
-「新的」（new）以辅音音素开头，所以用不定冠词（a）。
+空格要限定单数可数名词「方式」（way）。这里首次提到的是一种新的穿衣方式，需要不定冠词。
+「新的」（new）以辅音音素开头，所以用（a）。
 ```
 
 ## Required Top-Level Shape

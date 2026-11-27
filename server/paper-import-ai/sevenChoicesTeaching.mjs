@@ -8,6 +8,7 @@ export const SEVEN_EXTRA_KINDS = { shadow: '影子项', context: '语境项', to
 const LIMITS = { find: 55, explain: 80, distractor: 45, extra: 100 }
 const EMPTY_TALK = [/能统领整段/, /不符合语境/, /不如.{0,12}切题/, /衔接自然/, /使文章更完整/, /语意连贯/, /起到.{0,12}的?作用/]
 const PARAGRAPH_NUMBER = /第\s*[一二三四五六七八九十百0-9]+\s*段/
+const EXTRA_BLANK_LOCATION = /第\s*\d+\s*题|第\s*[一二三四五六七八九十百0-9]+\s*段\s*第\s*[一二三四五六七八九十百0-9]+\s*空/g
 const BLANK_MARKER = /__\d*__|_{2,}/
 
 const text = (value) => (typeof value === 'string' ? value.trim() : '')
@@ -111,15 +112,17 @@ function makeQuoteCheck(sources) {
   }
 }
 
-function assertProse(value, limit, where, { quotes = [], quoteCheck, forbiddenNumbers = [] }) {
+function assertProse(value, limit, where, { quotes = [], quoteCheck, forbiddenNumbers = [], allowBlankLocations = false }) {
   if (!value) throw new Error(`${where}: 空的。`)
   const units = clozeTextUnits(value)
   if (units > limit) throw new Error(`${where}: ${units} 字，超过 ${limit}。`)
   for (const pattern of EMPTY_TALK) if (pattern.test(value)) throw new Error(`${where}: 「${value.match(pattern)[0]}」是空话，说原文哪个词怎么接。`)
   if (value.includes('·')) throw new Error(`${where}: 不要用「·」。`)
-  if (PARAGRAPH_NUMBER.test(value)) throw new Error(`${where}: 不写「${value.match(PARAGRAPH_NUMBER)[0]}」，说上一段、下一段或引原文。`)
+  const locationProse = allowBlankLocations ? value.replace(EXTRA_BLANK_LOCATION, ' ') : value
+  const paragraphNumber = locationProse.match(PARAGRAPH_NUMBER)
+  if (paragraphNumber) throw new Error(`${where}: 不写「${paragraphNumber[0]}」，说上一段、下一段或引原文。`)
   for (const no of forbiddenNumbers) {
-    if (new RegExp(`(?<![0-9A-Za-z])${no}(?![0-9])`).test(value)) throw new Error(`${where}: 不写题号 ${no}。`)
+    if (new RegExp(`(?<![0-9A-Za-z])${no}(?![0-9])`).test(locationProse)) throw new Error(`${where}: 不写题号 ${no}。`)
   }
   for (const quote of quotes) {
     const checked = quoteCheck(quote, where)
@@ -198,7 +201,9 @@ function assertExtras({ extras, facts, quoteCheck }) {
         }
       }
     } else if (extra.shadowOf !== null) throw new Error(`${where}: 不是影子项，shadowOf 写 null。`)
-    assertProse(text(extra.text), LIMITS.extra, where, { quotes: extra.quotes || [], quoteCheck, forbiddenNumbers: numbers })
+    assertProse(text(extra.text), LIMITS.extra, where, {
+      quotes: extra.quotes || [], quoteCheck, forbiddenNumbers: numbers, allowBlankLocations: true,
+    })
   }
 }
 

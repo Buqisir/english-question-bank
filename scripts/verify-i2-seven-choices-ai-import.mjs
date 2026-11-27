@@ -295,6 +295,17 @@ async function assertAnalysisValidation() {
   })
   assert('valid seven-choices analysis passes', result.analysis.schemaVersion === 'seven-choices-analysis-v1' && result.requestId === 'i2-verify')
 
+  const withExtraLocations = validScAnalysis(input)
+  const extraOptions = withExtraLocations.groups[input.group.groupId].extraOptions
+  extraOptions.C.text = '第 36 题空后 "fixture end." 接不上 "Comparing yourself"。'
+  extraOptions.F.text = '第 2 段第 1 空前谈训练进度，接不上 "While you do not need" 提到的装备。'
+  const admittedWithExtraLocations = await analyzeSevenChoicesImportCandidate(input, {
+    providerCallers: { deepseek: stubProvider(withExtraLocations) },
+  })
+  const admittedExtras = admittedWithExtraLocations.analysis.groups[input.group.groupId].extraOptions
+  assert('seven choices accepts question and paragraph blank locations in spare option text',
+    admittedExtras.C.text === extraOptions.C.text && admittedExtras.F.text === extraOptions.F.text)
+
   const withoutNotes = validScAnalysis(input)
   for (const item of Object.values(withoutNotes.questions)) delete item.teachingNote
   const admittedWithoutNotes = await analyzeSevenChoicesImportCandidate(input, {
@@ -328,7 +339,7 @@ async function assertAnalysisValidation() {
     ['a lock word that is not in the chain', (bad) => { bad.questions[firstId].lock = ['marathon'] }, /锁定词「marathon」/],
     ['a missing spare option', (bad) => { delete bad.groups[input.group.groupId].extraOptions.F }, /多余选项 F: 缺这一条/],
     ['a shadow option without a shared word', (bad) => { Object.assign(bad.groups[input.group.groupId].extraOptions.C, { kind: 'shadow', shadowOf: 'B', shared: ['marathon'] }) }, /共同词「marathon」/],
-    ['a question number in a spare option', (bad) => { bad.groups[input.group.groupId].extraOptions.C.text = '它最像 36 空 "fixture end."，但 "Comparing yourself" 接不上。' }, /不写题号 36/],
+    ['a bare question number in a spare option', (bad) => { bad.groups[input.group.groupId].extraOptions.C.text = '它最像 36 空 "fixture end."，但 "Comparing yourself" 接不上。' }, /不写题号 36/],
     ['empty talk', (bad) => { bad.questions[firstId].explain = '答案和空后衔接自然。' }, /衔接自然/],
   ]
   for (const [label, mutate, pattern] of teachingRejections) {
