@@ -626,7 +626,7 @@ console.log('Companion analysis 定位, paragraph count and answer table: PASS')
   assert.doesNotMatch(appPart, /review-card|参考范文（AI 撰写）/u)
   assert.doesNotMatch(contPart, /data-continuation-section="(?:storyUnderstanding|continuationContract|developmentPlan)"/u)
   // The group heading opens the first block, never stands alone.
-  assert.match(appPart, /^\s*<section class="writing-block lecture-block" data-writing-lecture-block="taskCard"><div class="heading-lead">[\s\S]*?<h3 class="group-title"/u)
+  assert.match(appPart, /^\s*<section class="writing-block lecture-block lecture-front" data-writing-lecture-block="taskCard"><div class="heading-lead">[\s\S]*?<h3 class="group-title"/u)
   // Every note, expression, pitfall and both essays are on the page.
   const text = (part) => part.replace(/<[^>]+>/gu, '').replaceAll('&#39;', "'").replaceAll('&quot;', '"').replaceAll('&amp;', '&')
   for (const [writing, part] of [[appWriting.applicationAnalysis, appPart], [contWriting.continuationAnalysis, contPart]]) {
@@ -644,6 +644,7 @@ console.log('Companion analysis 定位, paragraph count and answer table: PASS')
   }
   for (const item of contWriting.continuationAnalysis.standard.pitfalls) assert.ok(text(contPart).includes(item.why))
   for (const item of contWriting.continuationAnalysis.reading.questions) assert.ok(text(contPart).includes(item.answer))
+  assert.match(contPart, /原文这里可以借[\s\S]*?审题卡[\s\S]*?必须做到[\s\S]*?可以换/u)
   assert.doesNotMatch(lectureHtml, /<p[^>]*>\s*<\/p>/u)
   const body = lectureHtml.slice(lectureHtml.indexOf('<body'))
   for (const [, classes] of body.matchAll(/class="([^"]+)"/gu)) {

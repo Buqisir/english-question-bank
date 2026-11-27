@@ -36,7 +36,7 @@
 > never asked about the source's writing.
 >
 > Adopted (Owner decision, 2026-11-24, after round 3) with one fix: principle 3
-> and the third reading question now decide the amount of direct speech from the
+> and the reading question on style now decide the amount of direct speech from the
 > source first. In round 3 the dialogue-led 2020 新高考Ⅰ source (36% of words
 > quoted) got essays quoting 2–3%, because the old wording led with "mostly
 > reported speech". The Owner kept "no empty moral at the end" unchanged.
@@ -134,8 +134,8 @@
   两个段首句。词按英文单词计，带连字符或撇号的算一个词。
 - 除段首句外，不出现与原文连续相同的 8 个或更多单词。
 - 成文只含英文续写，不含中文、标题、Markdown、编号或说明文字。
-- 讲解里的 `quote` 必须是对应文章里逐字存在的片段；`sourceQuote` 必须是原文或段首句里
-  逐字存在的片段。
+- 讲解里的 `quote` 逐字引自对应范文。`evidence` 逐字引自原文，
+  `sourceQuote` 和 `bridgeQuote` 可逐字引自原文或段首句。
 - 题面信息不全（缺原文、缺段首句）时，不要猜测补全：在 `blocked` 中写明缺什么，
   其余字段留空。
 
@@ -143,18 +143,22 @@
 
 讲解是给学生看的，用中文，先讲人话再给名字。
 
-- **读原文**：正好 3 个问题，每个配一两句回答，各管一件事：
-  1. 原文停在哪里，什么问题还没解决；
-  2. 人物想要什么、是什么样的人，从原文哪里看出来；
-  3. 原文是怎么写的：谁在讲，句子长短，人物的话多是直接引语还是转述（数一数原文有几处
-     引号、占多大篇幅），描写多少；续写照着这样写。
-  段首句定下的要求只写在审题卡里，这里不重复。再挑 2–3 处原文里能用进续写的细节，
-  逐字引出（`sourceQuote`），说明它在续写里可以怎么用。
-- **审题卡**两类内容分开：
-  - `taskRequires`：两个段首句和原文定下的，尤其是第二段首句要求第一段写到哪里，
-    以及必须接上的原文事实。两到四条。
-  - `thisEssayChooses`：本文在允许范围内选的路线、补的细节、用的语气，以及哪些
-    可以换。
+- **读原文**：`reading.questions` 固定用以下三条作标题，每条用一两句回答。
+  1. **人物**：用 `reading.characters` 列续写中要动笔的主要人物。每人写名字、身份和
+     若干行观察，行标题从「性格」「想要」「此刻」「表现」中取。能从原文看出的才写，
+     每行最多引一句 `evidence`。`questions` 里的「人物」仍写一句概括。
+  2. **视角与风格**：谁在讲，用什么人称、视角和时态，句子长短，人物的话多是直接引语
+     还是转述（留意引号所占篇幅），描写多少。说明续写怎么接得上。
+  3. **待解决问题**：原文停在哪里，原文留下哪件事要在续写里解决。
+  每个问题可以附 0–2 句 `evidence`。每句约 15 个英文词以内，人物各行和问题的依据
+  合起来最多 8 句。段首句定下的要求放在「两段怎么写」。
+- **可用伏笔**：`reading.sourceLinks` 挑 2–3 处能用进续写的原文细节。逐字引出
+  `sourceQuote`，在 `use` 写清第几段会用它、怎么用。
+- **两段怎么写**：`taskCard.route` 用一句话说本文走哪条路。`taskCard.paragraphs` 按
+  第 1、2 段各写一项。`must` 只写题目定下的事，尤其是第二段首句要求第一段写到哪里；
+  `draft` 概括标准版范文这一段实际发生的事，写完范文后对照核实。第 1 项还可以同时
+  给 `bridgeQuote` 和 `bridge`：从段首句逐字引一句或一个短语，再用一句中文问题点出
+  两段之间要接住的事。
 - **逐段批注**是讲解主体。对标准版按段写：这一段完成了什么，然后挑出段内真正起作用
   的句子或短语，逐字引出，说明它做了什么、为什么这样写。每段两到四条，宁少勿凑。
   不要给每句话都贴“过渡自然”“表达高级”这类标签。
@@ -174,15 +178,24 @@
   "blocked": null,
   "reading": {
     "questions": [
-      { "question": "……", "answer": "……" }
+      { "question": "人物", "answer": "概括主要人物" },
+      { "question": "视角与风格", "answer": "说明续写要接住的叙述方式", "evidence": ["逐字原文"] },
+      { "question": "待解决问题", "answer": "原文留下的问题" }
+    ],
+    "characters": [
+      { "name": "人物原名", "role": "人物身份", "lines": [{ "label": "想要", "text": "他想做什么", "evidence": "逐字原文" }] }
     ],
     "sourceLinks": [
-      { "sourceQuote": "原文或段首句中的逐字片段", "use": "在续写里可以怎么用" }
+      { "sourceQuote": "原文中的逐字片段", "use": "第 1 段用在哪件事上" },
+      { "sourceQuote": "另一处逐字片段", "use": "第 2 段用在哪件事上" }
     ]
   },
   "taskCard": {
-    "taskRequires": ["……", "……"],
-    "thisEssayChooses": "……"
+    "route": "用一句话交代标准版的情节走向。",
+    "paragraphs": [
+      { "paragraph": 1, "must": "题面要求第 1 段做到的事", "draft": "标准版第 1 段实际写的事", "bridgeQuote": "段首句中的逐字引句", "bridge": "第 2 段接下来要弄清什么？" },
+      { "paragraph": 2, "must": "题面要求第 2 段做到的事", "draft": "标准版第 2 段实际写的事" }
+    ]
   },
   "standard": {
     "essay": "两段续写，各以段首句开头，段落之间用一个空行分隔",

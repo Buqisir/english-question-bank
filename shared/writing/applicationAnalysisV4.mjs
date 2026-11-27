@@ -26,12 +26,12 @@ function isPlainObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value)
 }
 
-function exactKeys(value, keys, where, problems) {
+function exactKeys(value, keys, where, problems, optional = []) {
   if (!isPlainObject(value)) {
     problems.push(`${where} must be an object`)
     return false
   }
-  const allowed = new Set(keys)
+  const allowed = new Set([...keys, ...optional])
   for (const key of Object.keys(value)) {
     if (!allowed.has(key)) problems.push(`${where} has unknown field ${key}`)
   }
@@ -82,9 +82,15 @@ export function applicationAnalysisV4ShapeProblems(value) {
   if (value.schemaVersion !== APPLICATION_ANALYSIS_V4) {
     problems.push(`applicationAnalysis.schemaVersion must be ${APPLICATION_ANALYSIS_V4}`)
   }
-  if (exactKeys(value.taskCard, ['taskRequires', 'thisEssayChooses'], 'taskCard', problems)) {
+  if (exactKeys(value.taskCard, ['taskRequires', 'thisEssayChooses'], 'taskCard', problems, ['basics'])) {
     textArray(value.taskCard.taskRequires, 'taskCard.taskRequires', 1, 4, problems)
     if (!isText(value.taskCard.thisEssayChooses)) problems.push('taskCard.thisEssayChooses is empty')
+    const basicsFields = ['form', 'personTense', 'readerTone', 'goal']
+    if ('basics' in value.taskCard && exactKeys(value.taskCard.basics, basicsFields, 'taskCard.basics', problems)) {
+      for (const key of basicsFields) {
+        if (!isText(value.taskCard.basics[key])) problems.push(`taskCard.basics.${key} is empty`)
+      }
+    }
   }
   if (exactKeys(value.standard, ['essay', 'pointMap', 'notes', 'expressions'], 'standard', problems)) {
     if (!isText(value.standard.essay)) problems.push('standard.essay is empty')

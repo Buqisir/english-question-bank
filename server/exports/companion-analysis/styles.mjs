@@ -906,9 +906,54 @@ dd {
   margin-top: 1mm;
 }
 
-/* 应用文 V4、读后续写 V3 的讲解 (WritingLecture). */
-.lecture-subhead {
+/* 应用文 V4、读后续写 V3 的审题和原文。 */
+.lecture-front {
+  font-size: var(--fs);
+  line-height: var(--lh);
+}
+
+.lecture-front > .heading-lead > h4 {
+  margin-bottom: calc(var(--lh) / 3);
+  font-size: 12pt;
+}
+
+.lecture-front > .heading-lead > .group-title + h4 {
+  padding-top: var(--lh);
+}
+
+.lecture-front .lecture-subhead,
+.lecture-front .review-facts dt,
+.lecture-field-label {
+  color: var(--muted);
+  font: 700 var(--small)/var(--lh) var(--zh);
+}
+
+.lecture-front .lecture-subhead {
   margin: 0;
+  break-after: avoid;
+}
+
+.lecture-front > .heading-lead + .heading-lead,
+.lecture-front > .lecture-character,
+.lecture-front > .lecture-character + .heading-lead {
+  margin-top: calc(var(--lh) / 2);
+}
+
+.lecture-field-label,
+.lecture-character-name strong {
+  margin-right: 0.5em;
+}
+
+.lecture-front[data-writing-lecture-block="route"] .lecture-field-label {
+  display: block;
+}
+
+.lecture-character > .heading-lead + .heading-lead {
+  margin-top: calc(var(--lh) / 6);
+}
+
+.lecture-character-name {
+  margin-bottom: calc(var(--lh) / 6);
 }
 
 .lecture-list {
@@ -916,23 +961,22 @@ dd {
   padding-left: 1.5em;
 }
 
-.lecture-qa {
-  break-inside: avoid;
+.lecture-reading-answer {
+  white-space: pre-line;
 }
 
-.lecture-qa + .lecture-qa {
-  margin-top: calc(var(--lh) / 4);
+.lecture-source-quote {
+  margin-left: 1em;
+  color: var(--muted);
+  font: var(--small)/var(--lh) var(--en);
 }
 
-.lecture-question {
-  font-weight: 700;
+.lecture-evidence-label {
+  margin-right: 0.5em;
+  font-family: var(--zh);
 }
 
-.lecture-block .lecture-list + p,
-.lecture-qa + .heading-lead {
-  margin-top: calc(var(--lh) / 4);
-}
-
+/* 范文及后续讲解。 */
 .lecture-note {
   margin-top: calc(var(--lh) / 4);
   break-inside: avoid;

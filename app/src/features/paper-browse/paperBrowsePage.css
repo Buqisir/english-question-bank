@@ -2604,9 +2604,22 @@
   }
 }
 
-/* 新版写作讲评右栏（应用文 V4、续写 V3，WritingLectureV4.tsx）。
-   外框和小节标沿用 .retained-writing-card；块内只有三种东西：
-   小标题（必须做到 / 可以换 / 原文这里可以借）、英文原句 + 中文说明、英文表达 + 中文用途。 */
+/* 写作讲评右栏（应用文 V4、续写 V3，WritingLectureV4.tsx）。 */
+.writing-lecture-front > h5 {
+  color: var(--eqb-color-text-strong);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.writing-lecture-front > h5::before {
+  content: none;
+}
+
+.writing-lecture-front + .writing-lecture-front {
+  border-top: 0;
+  padding-top: 8px;
+}
+
 .writing-lecture-lead {
   margin: -4px 0 12px;
   color: var(--eqb-color-text-muted);
@@ -2615,21 +2628,27 @@
 }
 
 .writing-lecture-subhead {
-  margin: 16px 0 6px;
+  margin: 12px 0 4px;
+}
+
+.writing-lecture-subhead,
+.writing-lecture-field-label,
+.writing-lecture-basics dt {
   color: var(--eqb-color-text-muted);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.3;
 }
 
-.writing-lecture-block h5 + .writing-lecture-subhead {
+.writing-lecture-block h5 + .writing-lecture-subhead,
+.writing-lecture-qa li > .writing-lecture-subhead {
   margin-top: 0;
 }
 
 .writing-lecture-text,
 .writing-lecture-list li,
-.writing-lecture-qa p,
 .writing-lecture-quotes p,
+.writing-lecture-basics dd,
 .writing-lecture-pairs dd,
 .writing-lecture-paragraph-role {
   margin: 0;
@@ -2671,15 +2690,50 @@
 }
 
 .writing-lecture-qa {
-  gap: 14px;
+  gap: 16px;
 }
 
-.writing-lecture-qa .writing-lecture-question {
+.writing-lecture-reading-answer {
+  white-space: pre-line;
+}
+
+.writing-lecture-character + .writing-lecture-character {
+  margin-top: 8px;
+}
+
+.writing-lecture-character > p {
   margin-bottom: 4px;
+}
+
+.writing-lecture-field-label {
+  margin-right: 8px;
+}
+
+.writing-lecture-route-paragraph .writing-lecture-field-label {
+  display: block;
+}
+
+.writing-lecture-route-paragraph .writing-lecture-text + .writing-lecture-text {
+  margin-top: 4px;
+}
+
+.writing-lecture-front p.writing-lecture-source-quote {
+  margin: 0 0 0 12px;
   color: var(--eqb-color-text-muted);
   font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.writing-lecture-basics > div {
+  display: grid;
+  grid-template-columns: 4em minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+}
+
+.writing-lecture-basics > div + div {
+  margin-top: 4px;
 }
 
 .writing-lecture-quotes {

@@ -15,10 +15,21 @@ this outer shape, with exactly these top-level keys and no others:
   "continuationAnalysis": {
     "schemaVersion": "continuation-analysis-v3",
     "reading": {
-      "questions": [{ "question": "……", "answer": "……" }],
+      "questions": [
+        { "question": "人物", "answer": "……" },
+        { "question": "视角与风格", "answer": "……", "evidence": ["逐字原文"] },
+        { "question": "待解决问题", "answer": "……" }
+      ],
+      "characters": [{ "name": "……", "role": "……", "lines": [{ "label": "想要", "text": "……", "evidence": "逐字原文" }] }],
       "sourceLinks": [{ "sourceQuote": "……", "use": "……" }]
     },
-    "taskCard": { "taskRequires": ["……"], "thisEssayChooses": "……" },
+    "taskCard": {
+      "route": "……",
+      "paragraphs": [
+        { "paragraph": 1, "must": "……", "draft": "……", "bridgeQuote": "段首句中的逐字引句", "bridge": "……？" },
+        { "paragraph": 2, "must": "……", "draft": "……" }
+      ]
+    },
     "standard": {
       "essay": "……",
       "notes": [{ "paragraph": 1, "role": "……", "items": [{ "quote": "……", "explain": "……" }] }],

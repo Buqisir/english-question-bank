@@ -136,6 +136,48 @@ const validate = new Ajv({ allErrors: true, strict: false }).compile(schema)
 const stored = run(base).writing
 const envelope = (writing) => ({ schemaVersion: 'writing-analysis-v1', paperId: 'paper-cw3', groups: { g: { writing } } })
 assert.ok(validate(envelope(stored)), JSON.stringify(validate.errors))
+const newFormat = mutate((out, task) => {
+  const evidence = task.materialText.split(/\s+/).slice(0, 6).join(' ')
+  out.reading.questions = [
+    { question: '人物', answer: 'Emily 和帮助她的那对夫妇。' },
+    { question: '视角与风格', answer: '第三人称叙述。', evidence: [evidence] },
+    { question: '待解决问题', answer: 'Emily 怎样去见男友，陷在雪里的车怎么办？' },
+  ]
+  out.reading.characters = [{
+    name: 'Emily', role: '主人公', lines: [{ label: '此刻', text: '被雪困住。', evidence }],
+  }]
+  out.taskCard = {
+    route: '夫妇先帮 Emily 脱困，再接她回来取车。',
+    paragraphs: [
+      { paragraph: 1, must: '交代怎样离开。', draft: '夫妇安排拖车并送 Emily 去车站。', bridgeQuote: starter2, bridge: '她回来时，车修好了吗？' },
+      { paragraph: 2, must: '接上她回来取车。', draft: '车已经停在夫妇家，Emily 留下来和他们喝热巧克力。' },
+    ],
+  }
+})
+const newWriting = run(newFormat).writing
+assert.ok(validate(envelope(newWriting)), JSON.stringify(validate.errors))
+assert.deepEqual(projectNck1StagedWritingAnalysis(newWriting), newWriting)
+for (const [pattern, change] of [
+  [/questions\[1\]\.evidence\[0\] is not verbatim/, (out) => { out.reading.questions[1].evidence = ['Not in the source.'] }],
+  [/characters\[0\]\.lines\[0\]\.evidence is not verbatim/, (out) => { out.reading.characters[0].lines[0].evidence = starter1 }],
+  [/paragraphs\[0\]\.bridgeQuote is not verbatim/, (out) => { out.taskCard.paragraphs[0].bridgeQuote = 'Not in the source.' }],
+]) {
+  const candidate = structuredClone(newFormat)
+  change(candidate.output)
+  assert.throws(() => run(candidate), pattern)
+}
+for (const change of [
+  (analysis) => { analysis.taskCard.taskRequires = ['旧稿要求一', '旧稿要求二'] },
+  (analysis) => { delete analysis.taskCard.route },
+  (analysis) => { analysis.taskCard.paragraphs[1].bridge = '位置错了' },
+  (analysis) => { delete analysis.taskCard.paragraphs[0].bridge },
+  (analysis) => { analysis.reading.questions.reverse() },
+]) {
+  const candidate = structuredClone(newWriting)
+  change(candidate.continuationAnalysis)
+  assert.equal(isContinuationAnalysisV3(candidate.continuationAnalysis), false)
+  assert.equal(validate(envelope(candidate)), false)
+}
 assert.equal(validate(envelope({ ...stored, continuationAnalysis: { ...stored.continuationAnalysis, extra: 1 } })), false, 'closed object')
 assert.equal(validate(envelope({ ...stored, reviewCard: {} })), false, 'V3 with reviewCard')
 const bareV2 = { schemaVersion: 'continuation-analysis-v2', storyUnderstanding: {}, continuationContract: {}, developmentPlan: {} }

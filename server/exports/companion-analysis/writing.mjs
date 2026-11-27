@@ -182,23 +182,69 @@ export function renderWritingModels(source, legacySourceEssay, model, isContinua
 }
 
 // 应用文 V4 and 读后续写 V3 (docs/cuts/application-writing-v4/spec.md D6,
-// docs/cuts/continuation-writing-v3/spec.md D6). One lecture in the order the
-// spec gives; continuation adds only 读原文 before and 容易写偏 after the
-// shared blocks. The group heading opens the first block so it never sits
-// alone at a column foot.
-function lectureBlock(name, title, body, groupHeading = '') {
+// docs/cuts/continuation-writing-v3/spec.md D6). The group heading opens the
+// first block so it never sits alone at a column foot.
+function lectureBlock(name, title, body, groupHeading = '', className = '') {
   const [first = '', ...rest] = body
-  return `<section class="writing-block lecture-block" data-writing-lecture-block="${name}">${renderHeadingLead(`${groupHeading}<h4>${escapeHtml(title)}</h4>`, first, ...rest)}</section>`
+  return `<section class="writing-block lecture-block${className}" data-writing-lecture-block="${name}">${renderHeadingLead(`${groupHeading}<h4>${escapeHtml(title)}</h4>`, first, ...rest)}</section>`
 }
 
 function lectureNotes(items) {
   return array(items).map(item => `<div class="lecture-note"><p class="lecture-quote" lang="en">“${escapeHtml(innerQuote(item.quote))}”</p><p class="lecture-explain">${escapeHtml(item.explain)}</p></div>`)
 }
 
-// A run-in label never ends a column: it and the first item below it stay together.
-function labelled(label, items) {
-  const [first = '', ...rest] = items
-  return [`<div class="heading-lead"><p class="lecture-subhead"><span class="inline-label">${escapeHtml(label)}</span></p>${first}</div>`, ...rest]
+function lectureLabel(label) {
+  return `<h5 class="lecture-subhead">${escapeHtml(label)}</h5>`
+}
+
+function lectureSourceQuote(quote, label = '') {
+  return `<p class="lecture-source-quote">${label ? `<span class="lecture-evidence-label">${escapeHtml(label)}</span>` : ''}<span lang="en">“${escapeHtml(innerQuote(quote))}”</span></p>`
+}
+
+function lectureEvidence(quotes) {
+  return array(quotes).map(quote => lectureSourceQuote(quote, '依据')).join('')
+}
+
+function lectureField(label, text) {
+  return `<p><span class="lecture-field-label">${escapeHtml(label)}</span>${escapeHtml(text)}</p>`
+}
+
+function lectureCharacters(characters, label) {
+  return characters.map(({ name, role, lines }, index) => {
+    const heading = `${index === 0 ? lectureLabel(label) : ''}<p class="lecture-character-name"><strong>${escapeHtml(name)}</strong> ${escapeHtml(role)}</p>`
+    const rows = lines.map(line => `<div class="heading-lead">${lectureField(line.label, line.text)}${line.evidence ? lectureSourceQuote(line.evidence, '依据') : ''}</div>`)
+    return `<section class="lecture-character">${renderHeadingLead(heading, ...rows)}</section>`
+  })
+}
+
+function lectureTaskCard({ basics, taskRequires, thisEssayChooses }) {
+  const blocks = []
+  if (basics) {
+    const rows = [
+      ['文体格式', basics.form],
+      ['人称时态', basics.personTense],
+      ['读者语气', basics.readerTone],
+      ['交际目的', basics.goal],
+    ]
+    blocks.push(`<dl class="review-facts">${rows.map(([label, text]) =>
+      `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(text)}</dd></div>`).join('')}</dl>`)
+  }
+  blocks.push(renderHeadingLead(lectureLabel(basics ? '内容要点' : '必须做到'),
+    `<ol class="lecture-list">${taskRequires.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol>`))
+  blocks.push(renderHeadingLead(lectureLabel(basics ? '范文的选择（可以换）' : '可以换'),
+    `<p>${escapeHtml(thisEssayChooses)}</p>`))
+  return blocks
+}
+
+function lectureRoute({ route, paragraphs }) {
+  const blocks = [`<p>${escapeHtml(route)}</p>`]
+  paragraphs.forEach(({ paragraph, must, draft, bridgeQuote, bridge }) => {
+    blocks.push(`<div class="heading-lead">${lectureLabel(`第 ${paragraph} 段`)}${lectureField('题目要求', must)}${lectureField('范文这样写', draft)}</div>`)
+    if (bridgeQuote) {
+      blocks.push(renderHeadingLead(lectureLabel('两段之间'), `${lectureSourceQuote(bridgeQuote)}<p>${escapeHtml(bridge)}</p>`))
+    }
+  })
+  return blocks
 }
 
 function lectureEssay(name, text, label, isContinuation) {
@@ -213,18 +259,28 @@ export function writingLectureOf(writing, isContinuation) {
 }
 
 export function renderWritingLecture(lecture, { groupHeading, isContinuation, source, legacySourceEssay }) {
+  const { taskCard } = lecture
   const blocks = []
   if (isContinuation) {
-    blocks.push(['reading', '读原文', [
-      ...array(lecture.reading.questions).map(item => `<div class="lecture-qa"><p class="lecture-question">${escapeHtml(item.question)}</p><p>${escapeHtml(item.answer)}</p></div>`),
-      ...labelled('原文这里可以借', lectureNotes(array(lecture.reading.sourceLinks).map(link => ({ quote: link.sourceQuote, explain: link.use })))),
-    ]])
+    const { questions, characters, sourceLinks } = lecture.reading
+    const reading = questions.flatMap(item => {
+      if (item.question === '人物' && characters) return lectureCharacters(characters, item.question)
+      return `<div class="heading-lead">${lectureLabel(item.question)}<p class="lecture-reading-answer">${escapeHtml(item.answer)}</p>${lectureEvidence(item.evidence)}</div>`
+    })
+    if (taskCard.paragraphs) {
+      blocks.push(['reading', '读原文', reading])
+      blocks.push(['sourceLinks', '可用伏笔', sourceLinks.map(link =>
+        `<div class="heading-lead">${lectureSourceQuote(link.sourceQuote)}<p>${escapeHtml(link.use)}</p></div>`)])
+      blocks.push(['route', '两段怎么写', lectureRoute(taskCard)])
+    } else {
+      const [first, ...rest] = lectureNotes(sourceLinks.map(link => ({ quote: link.sourceQuote, explain: link.use })))
+      reading.push(renderHeadingLead(lectureLabel('原文这里可以借'), first), ...rest)
+      blocks.push(['reading', '读原文', reading])
+    }
   }
-  blocks.push(['taskCard', '审题卡', [
-    `<p class="lecture-subhead"><span class="inline-label">必须做到</span></p><ol class="lecture-list">${array(lecture.taskCard.taskRequires).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol>`,
-    `<p><span class="inline-label">可以换</span>${escapeHtml(lecture.taskCard.thisEssayChooses)}</p>`,
-  ]])
-  const html = blocks.map(([name, title, body], index) => lectureBlock(name, title, body, index === 0 ? groupHeading : ''))
+  if (!isContinuation || !taskCard.paragraphs) blocks.push(['taskCard', '审题卡', lectureTaskCard(taskCard)])
+  const html = blocks.map(([name, title, body], index) =>
+    lectureBlock(name, title, body, index === 0 ? groupHeading : '', ' lecture-front'))
   html.push(lectureEssay('standardEssay', lecture.standard.essay, '标准版范文（AI 撰写）', isContinuation))
   // Each paragraph's heading travels with its first note only, so a long
   // paragraph can still run on into the next column.

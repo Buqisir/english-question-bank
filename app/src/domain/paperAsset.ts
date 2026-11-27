@@ -284,7 +284,11 @@ export type ApplicationPointMapEntry = { point: string; quote: string }
 /** V4 application analysis. When present, `modelAnswer` equals `standard.essay`. */
 export type ApplicationAnalysisV4 = {
   schemaVersion: 'application-analysis-v4'
-  taskCard: { taskRequires: string[]; thisEssayChooses: string }
+  taskCard: {
+    taskRequires: string[]
+    thisEssayChooses: string
+    basics?: { form: string; personTense: string; readerTone: string; goal: string }
+  }
   standard: {
     essay: string
     pointMap: ApplicationPointMapEntry[]

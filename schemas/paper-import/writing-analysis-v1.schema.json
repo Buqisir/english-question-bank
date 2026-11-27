@@ -167,6 +167,22 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["schemaVersion", "reading", "taskCard", "standard", "advanced"],
+      "if": { "properties": { "taskCard": { "required": ["route"] } } },
+      "then": {
+        "properties": {
+          "reading": {
+            "properties": {
+              "questions": {
+                "prefixItems": [
+                  { "properties": { "question": { "const": "人物" } } },
+                  { "properties": { "question": { "const": "视角与风格" } } },
+                  { "properties": { "question": { "const": "待解决问题" } } }
+                ]
+              }
+            }
+          }
+        }
+      },
       "properties": {
         "schemaVersion": { "const": "continuation-analysis-v3" },
         "reading": {
@@ -184,7 +200,39 @@
                 "required": ["question", "answer"],
                 "properties": {
                   "question": { "$ref": "#/$defs/applicationAnalysisText" },
-                  "answer": { "$ref": "#/$defs/applicationAnalysisText" }
+                  "answer": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "evidence": {
+                    "type": "array",
+                    "maxItems": 2,
+                    "items": { "$ref": "#/$defs/applicationAnalysisText" }
+                  }
+                }
+              }
+            },
+            "characters": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "role", "lines"],
+                "properties": {
+                  "name": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "role": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "lines": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["label", "text"],
+                      "properties": {
+                        "label": { "enum": ["性格", "想要", "此刻", "表现"] },
+                        "text": { "$ref": "#/$defs/applicationAnalysisText" },
+                        "evidence": { "$ref": "#/$defs/applicationAnalysisText" }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -207,7 +255,11 @@
         "taskCard": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["taskRequires", "thisEssayChooses"],
+          "maxProperties": 2,
+          "oneOf": [
+            { "required": ["taskRequires", "thisEssayChooses"] },
+            { "required": ["route", "paragraphs"] }
+          ],
           "properties": {
             "taskRequires": {
               "type": "array",
@@ -215,7 +267,38 @@
               "maxItems": 4,
               "items": { "$ref": "#/$defs/applicationAnalysisText" }
             },
-            "thisEssayChooses": { "$ref": "#/$defs/applicationAnalysisText" }
+            "thisEssayChooses": { "$ref": "#/$defs/applicationAnalysisText" },
+            "route": { "$ref": "#/$defs/applicationAnalysisText" },
+            "paragraphs": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["paragraph", "must", "draft"],
+                  "dependentRequired": { "bridgeQuote": ["bridge"], "bridge": ["bridgeQuote"] },
+                  "properties": {
+                    "paragraph": { "const": 1 },
+                    "must": { "$ref": "#/$defs/applicationAnalysisText" },
+                    "draft": { "$ref": "#/$defs/applicationAnalysisText" },
+                    "bridgeQuote": { "$ref": "#/$defs/applicationAnalysisText" },
+                    "bridge": { "$ref": "#/$defs/applicationAnalysisText" }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["paragraph", "must", "draft"],
+                  "properties": {
+                    "paragraph": { "const": 2 },
+                    "must": { "$ref": "#/$defs/applicationAnalysisText" },
+                    "draft": { "$ref": "#/$defs/applicationAnalysisText" }
+                  }
+                }
+              ]
+            }
           }
         },
         "standard": {
@@ -306,7 +389,18 @@
               "maxItems": 4,
               "items": { "$ref": "#/$defs/applicationAnalysisText" }
             },
-            "thisEssayChooses": { "$ref": "#/$defs/applicationAnalysisText" }
+            "thisEssayChooses": { "$ref": "#/$defs/applicationAnalysisText" },
+            "basics": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["form", "personTense", "readerTone", "goal"],
+              "properties": {
+                "form": { "$ref": "#/$defs/applicationAnalysisText" },
+                "personTense": { "$ref": "#/$defs/applicationAnalysisText" },
+                "readerTone": { "$ref": "#/$defs/applicationAnalysisText" },
+                "goal": { "$ref": "#/$defs/applicationAnalysisText" }
+              }
+            }
           }
         },
         "standard": {

@@ -38,11 +38,10 @@ rejected.
 When a continuation group is generated after this cut, a student or parent
 reading the web page or the PDF can:
 
-1. answer three questions about the source before writing: where it stops,
-   what the character wants and is like, and how it is written;
+1. read the source through its main characters, point of view and style, and
+   the problem left open at the end;
 2. see 2–3 quoted source details and how each can be reused;
-3. see what the starters and source require and, separately, what this essay
-   chose and could swap;
+3. see the standard essay's route and how each paragraph meets the task;
 4. read a standard essay they could write themselves, with notes per paragraph
    that quote it and say why each choice works;
 5. take away two or three expressions that fit this story, and two or three
@@ -62,10 +61,23 @@ Groups generated before this cut look exactly as they do now.
 "continuationAnalysis": {
   "schemaVersion": "continuation-analysis-v3",
   "reading": {
-    "questions": [{ "question": "…", "answer": "…" }],
+    "questions": [
+      { "question": "人物", "answer": "…" },
+      { "question": "视角与风格", "answer": "…", "evidence": ["…"] },
+      { "question": "待解决问题", "answer": "…" }
+    ],
+    "characters": [
+      { "name": "…", "role": "…", "lines": [{ "label": "想要", "text": "…", "evidence": "…" }] }
+    ],
     "sourceLinks": [{ "sourceQuote": "…", "use": "…" }]
   },
-  "taskCard": { "taskRequires": ["…"], "thisEssayChooses": "…" },
+  "taskCard": {
+    "route": "…",
+    "paragraphs": [
+      { "paragraph": 1, "must": "…", "draft": "…", "bridgeQuote": "…", "bridge": "…？" },
+      { "paragraph": 2, "must": "…", "draft": "…" }
+    ]
+  },
   "standard": {
     "essay": "…",
     "notes": [{ "paragraph": 1, "role": "…", "items": [{ "quote": "…", "explain": "…" }] }],
@@ -79,7 +91,12 @@ Groups generated before this cut look exactly as they do now.
 }
 ```
 
-- The V3 object is closed: no keys beyond those shown.
+- V3 stays closed. Existing `taskCard` objects with `taskRequires` and
+  `thisEssayChooses` stay valid as an alternative to `route` and `paragraphs`.
+- `characters` and `evidence` are optional. When characters are present, they
+  supply the 人物 row. Character line labels are 性格、想要、此刻、表现.
+  Only include main characters whose actions matter to the continuation.
+- `bridgeQuote` and `bridge` are optional as a pair on paragraph 1.
 - The schema's shared `required` list (`storyUnderstanding`,
   `continuationContract`) moves into the V1 and V2 branches, because V3 has
   neither key.
@@ -92,10 +109,11 @@ Groups generated before this cut look exactly as they do now.
 ### D2 Prompt
 
 - `prompts/continuation-writing-model-answer-v3.md` becomes the production
-  prompt. Its status line changes from CANDIDATE to PRODUCTION. Its body is the
-  one fixed after round 3 (direct speech decided from the source first).
-- The runtime prompt is V3 plus the structured task input, exactly as in the
-  trials. The shared doctrine (`teaching-analysis-style-v1.md`) is not appended
+  prompt. The writing principles from round 3 still apply. The updated prompt
+  asks for the new reading and paragraph guidance fields. It asks for evidence
+  of about 15 English words per excerpt and no more than eight in 读原文.
+- The runtime prompt is V3 plus the structured task input.
+  The shared doctrine (`teaching-analysis-style-v1.md`) is not appended
   for continuation writing, because V3 was voted without it. Two doctrine rules
   would also contradict V3: "highlight expressions are retired" (V3 has task
   expressions), and V2's "never quote generated prose" (V3 notes quote the
@@ -106,7 +124,7 @@ Groups generated before this cut look exactly as they do now.
 ### D3 Validation
 
 A V3 result is accepted only if all of the following hold. Each failure names
-the field and the rule. These are the checks `trial/check.mjs` already runs.
+the field and the rule.
 
 1. Shape matches D1; `blocked` is null.
 2. Both essays: exactly two paragraphs separated by one blank line; paragraph 1
@@ -119,10 +137,17 @@ the field and the rule. These are the checks `trial/check.mjs` already runs.
    on one.
 5. Neither essay repeats 8 or more consecutive words of the source, starters
    excepted.
-6. `reading.questions` has exactly 3 entries; `reading.sourceLinks` has 2–3,
-   each `sourceQuote` verbatim in the source or a starter.
-7. `taskCard.taskRequires` has 2–4 non-empty lines; `thisEssayChooses` is
-   non-empty.
+6. `reading.questions` has exactly three entries. On the new route the order is
+   人物、视角与风格、待解决问题. Each may have 0–2 verbatim source excerpts,
+   and each character line may have one. `reading.sourceLinks` has 2–3 entries
+   with verbatim excerpts from the source or a starter. For new entries, `use`
+   names the paragraph where the detail is used.
+7. `taskCard` uses exactly one structure. The new route includes a one-sentence
+   `route` and two `paragraphs` in order. `must` states the task requirement and
+   `draft` explains the action actually written in the standard essay. The first
+   paragraph may include a verbatim `bridgeQuote` from the source or a starter
+   and a Chinese bridge question. The legacy structure has 2–4 non-empty
+   `taskRequires` and a non-empty `thisEssayChooses`.
 8. `standard.notes` covers paragraphs 1 and 2, each with 2–4 items; every
    `quote` is verbatim in the standard essay.
 9. `expressions`, `pitfalls` and `beyondStandard` have 2–3 entries each; every
@@ -155,29 +180,20 @@ reviews both essays and the notes.
 
 Continuation follows application writing V4: the essay sits in the answer box,
 with a switch to the advanced essay, and the teaching sits in the right rail.
-Today the continuation essay is at the bottom of the right rail, under three
-analysis zones. Right rail, in order:
-
-1. 读原文: the three questions with answers, then the source details (原文这里可以借);
-2. 审题卡: 必须做到 / 可以换;
-3. 逐段看;
-4. 本题可用表达;
-5. 容易写偏;
-6. 提高版多做了什么 (shown with the advanced essay).
-
-Blocks shared with application V4 (task card, paragraph notes, expressions,
-essay switch) reuse the same components; continuation adds only 读原文 and
-容易写偏. Paragraphs are separated by spacing, not by empty lines. Exact layout
-is settled by before/after samples that the Owner approves before anything
-reaches main.
+For the new route, the rail shows 读原文 → 可用伏笔 → 两段怎么写 → 逐段看 →
+本题可用表达 → 容易写偏 → 提高版多做了什么 (shown with the advanced essay).
+两段怎么写 shows the route, then 题目要求 and 范文这样写 for each paragraph,
+with 两段之间 after the first paragraph when supplied. Legacy V3 retains
+原文这里可以借 inside 读原文, followed by 审题卡 (必须做到 / 可以换).
 
 ### D6 PDF (`analysis.pdf`)
 
-V3 groups print, in order: reading questions and source details, task card,
-standard essay, paragraph notes, expressions, pitfalls, advanced essay, what
-the advanced essay adds. V1 and V2 groups print as today. Exact layout is
-settled by before/after samples that the Owner approves before anything
-reaches main.
+The new route prints 读原文 → 可用伏笔 → 两段怎么写 → 标准版范文 → 逐段看 →
+本题可用表达 → 容易写偏 → 提高版范文 → 提高版多做了什么. The first three blocks
+use 12 pt headings, 10 pt body text, and 9 pt muted bold labels. Indented quotes
+run on their own line in 9 pt muted ink, with 依据 before reading evidence.
+Spacing separates the first block heading from the group title. Legacy V3
+retains 审题卡, and V1 and V2 retain their existing layout.
 
 ### D7 Legacy
 
@@ -206,7 +222,6 @@ application V4 tickets 03 and 04 land. Tickets 01 and 02 do not wait.
 ## Out of scope
 
 - Regenerating any paper's continuation writing.
-- Changing the V3 prompt body beyond its status line.
 - Retiring V1, V2 or I19 data.
 - `paper-zj-2026-jan`.
 

@@ -19,6 +19,8 @@ const WORD = /[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*/g
 const CJK = /[㐀-鿿豈-﫿]/
 const MARKDOWN = /^```|^#{1,6}\s|\*\*|__|^\s*[-*+]\s|^\s*\d+[.)]\s/m
 const COPY_RUN = 8
+const READING_TOPICS = ['人物', '视角与风格', '待解决问题']
+const CHARACTER_LABELS = ['性格', '想要', '此刻', '表现']
 
 // Days, months, holidays, languages and family forms of address are not new
 // people when capitalised mid-sentence.
@@ -50,12 +52,12 @@ function isPlainObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value)
 }
 
-function exactKeys(value, keys, where, problems) {
+function exactKeys(value, keys, where, problems, optional = []) {
   if (!isPlainObject(value)) {
     problems.push(`${where} must be an object`)
     return false
   }
-  const allowed = new Set(keys)
+  const allowed = new Set([...keys, ...optional])
   for (const key of Object.keys(value)) {
     if (!allowed.has(key)) problems.push(`${where} has unknown field ${key}`)
   }
@@ -83,7 +85,7 @@ function textArray(value, where, min, max, problems) {
   })
 }
 
-function objectArray(value, where, keys, min, max, problems) {
+function objectArray(value, where, keys, min, max, problems, optional = []) {
   if (!Array.isArray(value)) {
     problems.push(`${where} must be an array`)
     return []
@@ -91,9 +93,9 @@ function objectArray(value, where, keys, min, max, problems) {
   countRange(value, where, min, max, problems)
   value.forEach((entry, index) => {
     const at = `${where}[${index}]`
-    if (!exactKeys(entry, keys, at, problems)) return
+    if (!exactKeys(entry, keys, at, problems, optional)) return
     for (const key of keys) {
-      if (key === 'items' || key === 'paragraph') continue
+      if (key === 'items' || key === 'lines' || key === 'paragraph') continue
       if (!isText(entry[key])) problems.push(`${at}.${key} is empty`)
     }
   })
@@ -108,13 +110,57 @@ export function continuationAnalysisV3ShapeProblems(value) {
   if (value.schemaVersion !== CONTINUATION_ANALYSIS_V3) {
     problems.push(`continuationAnalysis.schemaVersion must be ${CONTINUATION_ANALYSIS_V3}`)
   }
-  if (exactKeys(value.reading, ['questions', 'sourceLinks'], 'reading', problems)) {
-    objectArray(value.reading.questions, 'reading.questions', ['question', 'answer'], 3, 3, problems)
+  const taskCard = value.taskCard
+  const hasRoute = isPlainObject(taskCard) && ('route' in taskCard || 'paragraphs' in taskCard)
+  if (exactKeys(value.reading, ['questions', 'sourceLinks'], 'reading', problems, ['characters'])) {
+    const questions = objectArray(value.reading.questions, 'reading.questions', ['question', 'answer'], 3, 3, problems, ['evidence'])
+    questions.forEach((item, index) => {
+      if (!isPlainObject(item)) return
+      if (hasRoute && index < READING_TOPICS.length && item.question !== READING_TOPICS[index]) {
+        problems.push(`reading.questions[${index}].question must be ${READING_TOPICS[index]}`)
+      }
+      if ('evidence' in item) {
+        textArray(item.evidence, `reading.questions[${index}].evidence`, 0, 2, problems)
+      }
+    })
     objectArray(value.reading.sourceLinks, 'reading.sourceLinks', ['sourceQuote', 'use'], 2, 3, problems)
+    if ('characters' in value.reading) {
+      const characters = objectArray(value.reading.characters, 'reading.characters', ['name', 'role', 'lines'], 1, Infinity, problems)
+      characters.forEach((character, index) => {
+        if (!isPlainObject(character)) return
+        const where = `reading.characters[${index}].lines`
+        const lines = objectArray(character.lines, where, ['label', 'text'], 1, Infinity, problems, ['evidence'])
+        lines.forEach((line, i) => {
+          if (!isPlainObject(line)) return
+          if (!CHARACTER_LABELS.includes(line.label)) problems.push(`${where}[${i}].label must be 性格、想要、此刻 or 表现`)
+          if ('evidence' in line && !isText(line.evidence)) {
+            problems.push(`${where}[${i}].evidence must be one non-empty quote`)
+          }
+        })
+      })
+    }
   }
-  if (exactKeys(value.taskCard, ['taskRequires', 'thisEssayChooses'], 'taskCard', problems)) {
-    textArray(value.taskCard.taskRequires, 'taskCard.taskRequires', 2, 4, problems)
-    if (!isText(value.taskCard.thisEssayChooses)) problems.push('taskCard.thisEssayChooses is empty')
+  const taskCardKeys = hasRoute ? ['route', 'paragraphs'] : ['taskRequires', 'thisEssayChooses']
+  if (exactKeys(taskCard, taskCardKeys, 'taskCard', problems)) {
+    if (hasRoute) {
+      if (!isText(taskCard.route)) problems.push('taskCard.route is empty')
+      const paragraphs = objectArray(taskCard.paragraphs, 'taskCard.paragraphs',
+        ['paragraph', 'must', 'draft'], 2, 2, problems, ['bridgeQuote', 'bridge'])
+      paragraphs.forEach((item, index) => {
+        if (!isPlainObject(item)) return
+        const where = `taskCard.paragraphs[${index}]`
+        if (item.paragraph !== index + 1) problems.push(`${where}.paragraph must be ${index + 1}`)
+        if (('bridgeQuote' in item) !== ('bridge' in item) || (index !== 0 && ('bridgeQuote' in item || 'bridge' in item))) {
+          problems.push(`${where}: bridgeQuote and bridge must appear together and only in paragraph 1`)
+        }
+        for (const key of ['bridgeQuote', 'bridge']) {
+          if (key in item && !isText(item[key])) problems.push(`${where}.${key} is empty`)
+        }
+      })
+    } else {
+      textArray(taskCard.taskRequires, 'taskCard.taskRequires', 2, 4, problems)
+      if (!isText(taskCard.thisEssayChooses)) problems.push('taskCard.thisEssayChooses is empty')
+    }
   }
   if (exactKeys(value.standard, ['essay', 'notes', 'expressions', 'pitfalls'], 'standard', problems)) {
     if (!isText(value.standard.essay)) problems.push('standard.essay is empty')
@@ -206,8 +252,11 @@ function checkEssay(essay, label, context, problems, warnings) {
 function checkQuotes(entries, text, where, field, problems) {
   const haystack = normalizeContinuationText(text)
   entries.forEach((entry, index) => {
-    if (!normalizeContinuationText(entry[field]).length || !haystack.includes(normalizeContinuationText(entry[field]))) {
-      problems.push(`${where}[${index}].${field} is not verbatim: ${entry[field]}`)
+    const raw = field ? entry[field] : entry
+    if (raw === undefined) return
+    const quote = normalizeContinuationText(raw)
+    if (!quote || !haystack.includes(quote)) {
+      problems.push(`${where}[${index}]${field ? `.${field}` : ''} is not verbatim: ${raw}`)
     }
   })
 }
@@ -239,7 +288,7 @@ export function checkContinuationAnalysisV3(analysis, { material = '', starters 
     sourceShare: directSpeechShare(material),
   }
   directSpeech.source = shared.sourceShare
-  const { standard, advanced, reading } = analysis
+  const { standard, advanced, reading, taskCard } = analysis
   const std = checkEssay(standard.essay, 'standard', { ...shared, range: CONTINUATION_V3_WORD_RANGES.standard }, problems, warnings)
   const adv = checkEssay(advanced.essay, 'advanced', { ...shared, range: CONTINUATION_V3_WORD_RANGES.advanced }, problems, warnings)
   wordCounts.standard = std.newWords
@@ -247,6 +296,13 @@ export function checkContinuationAnalysisV3(analysis, { material = '', starters 
   directSpeech.standard = std.share
   directSpeech.advanced = adv.share
   checkQuotes(reading.sourceLinks, sourceText, 'reading.sourceLinks', 'sourceQuote', problems)
+  reading.questions.forEach(({ evidence }, index) => {
+    if (evidence) checkQuotes(evidence, material, `reading.questions[${index}].evidence`, null, problems)
+  })
+  reading.characters?.forEach(({ lines }, index) => {
+    checkQuotes(lines, material, `reading.characters[${index}].lines`, 'evidence', problems)
+  })
+  if (taskCard.paragraphs) checkQuotes(taskCard.paragraphs, sourceText, 'taskCard.paragraphs', 'bridgeQuote', problems)
   const covered = new Set()
   standard.notes.forEach((note, index) => {
     if (note.paragraph > 2) problems.push(`standard.notes[${index}].paragraph ${note.paragraph} does not exist`)

@@ -14,7 +14,11 @@ this outer shape, with exactly these top-level keys and no others:
   "modelAnswer": "the V4 standard.essay string, copied character for character",
   "applicationAnalysis": {
     "schemaVersion": "application-analysis-v4",
-    "taskCard": { "taskRequires": ["……"], "thisEssayChooses": "……" },
+    "taskCard": {
+      "basics": { "form": "……", "personTense": "……", "readerTone": "……", "goal": "……" },
+      "taskRequires": ["……"],
+      "thisEssayChooses": "……"
+    },
     "standard": {
       "essay": "……",
       "pointMap": [{ "point": "……", "quote": "……" }],

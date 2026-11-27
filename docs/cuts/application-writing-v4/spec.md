@@ -54,7 +54,11 @@ Groups generated before this cut look exactly as they do now.
 ```json
 "applicationAnalysis": {
   "schemaVersion": "application-analysis-v4",
-  "taskCard": { "taskRequires": ["…"], "thisEssayChooses": "…" },
+  "taskCard": {
+    "basics": { "form": "…", "personTense": "…", "readerTone": "…", "goal": "…" },
+    "taskRequires": ["…"],
+    "thisEssayChooses": "…"
+  },
   "standard": {
     "essay": "…",
     "pointMap": [{ "point": "…", "quote": "…" }],
@@ -70,6 +74,9 @@ Groups generated before this cut look exactly as they do now.
 ```
 
 - The object is closed: no keys beyond those shown.
+- `basics` is optional. When present it holds four non-empty lines.
+  `taskRequires` gives the task's content points. `thisEssayChooses` gives the
+  standard essay's choices, including any examples it adds.
 - When `applicationAnalysis` is present, `modelAnswer` equals
   `applicationAnalysis.standard.essay` byte for byte, so every existing reader of
   `modelAnswer` (answer box, teacher print, draft-paper text) keeps working.
@@ -82,9 +89,9 @@ Groups generated before this cut look exactly as they do now.
 ### D2 Prompt
 
 - `prompts/application-writing-model-answer-v4.md` becomes the production prompt.
-  Its status line changes from TRIAL to PRODUCTION; its body does not change in
-  this cut.
-- The runtime prompt is V4 plus the task text, exactly as in both blind trials.
+  The updated prompt asks for the four basics and keeps examples out of
+  `taskRequires`.
+- The runtime prompt is V4 plus the task text.
   The shared doctrine (`teaching-analysis-style-v1.md`) is not appended for
   application writing, because V4 was voted without it and the doctrine's
   "highlight expressions are retired" rule would contradict V4's task
@@ -113,7 +120,7 @@ field and the rule.
 7. `expressions` has 2–3 entries; `beyondStandard` has 2–3 entries, each `quote`
    verbatim in the advanced essay.
 8. `taskCard.taskRequires` has 1–4 non-empty lines; `thisEssayChooses` is
-   non-empty.
+   non-empty. If `basics` is present, all four fields are non-empty text.
 
 Warnings, not failures: a one-sentence middle paragraph; middle paragraphs whose
 word counts differ by more than 2×.
@@ -139,19 +146,20 @@ Position stays as today: the essay sits in the answer box, the teaching sits in
 the right rail. V4 groups show:
 
 - answer box: standard essay, with a switch to the advanced essay;
-- right rail, in order: task card (必须做到 / 可以换), paragraph notes
-  (逐段看), task expressions (本题可用表达), and, when the advanced essay is shown,
-  what it adds (提高版多做了什么).
+- right rail, in order: 审题卡, 逐段看, 本题可用表达, and, when the advanced essay
+  is shown, 提高版多做了什么. The new task card first shows 文体格式 / 人称时态 /
+  读者语气 / 交际目的 with labels on the left, then 内容要点 and
+  范文的选择（可以换）. Cards without `basics` retain 必须做到 / 可以换.
 
 Paragraphs are separated by spacing, not by empty lines. Exact layout is settled
 by before/after samples that the Owner approves before anything reaches main.
 
 ### D6 PDF (`analysis.pdf`)
 
-V4 groups print, in order: task card, standard essay, paragraph notes, task
-expressions, advanced essay, what the advanced essay adds. Groups with
-`reviewCard` print as today. Exact layout is settled by before/after samples
-that the Owner approves before anything reaches main.
+V4 groups print the same task card as the web rail, followed by the standard
+essay, 逐段看, 本题可用表达, the advanced essay and 提高版多做了什么. The task
+card uses a 12 pt heading, 10 pt body text, and 9 pt muted bold labels. Rows
+rely on alignment and spacing. Groups with `reviewCard` retain their layout.
 
 ### D7 Legacy
 

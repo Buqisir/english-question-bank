@@ -93,6 +93,20 @@ const validate = new Ajv({ allErrors: true, strict: false }).compile(schema)
 const stored = run(base).writing
 const envelope = (writing) => ({ schemaVersion: 'writing-analysis-v1', paperId: 'paper-v4', groups: { g: { writing } } })
 assert.ok(validate(envelope(stored)), JSON.stringify(validate.errors))
+const newFixture = mutate((out) => {
+  out.taskCard.basics = {
+    form: '写给外教的建议信', personTense: '第一人称、一般现在时',
+    readerTone: '对熟悉的外教礼貌建议', goal: '提出作文集配图的建议并自荐',
+  }
+  out.taskCard.taskRequires = ['说明配图意见及理由', '自荐担任插画作者']
+})
+const newWriting = run(newFixture).writing
+assert.ok(validate(envelope(newWriting)), JSON.stringify(validate.errors))
+assert.deepEqual(projectNck1StagedWritingAnalysis(newWriting), newWriting)
+const incompleteBasics = structuredClone(newWriting)
+delete incompleteBasics.applicationAnalysis.taskCard.basics.readerTone
+assert.equal(isApplicationAnalysisV4(incompleteBasics.applicationAnalysis), false)
+assert.equal(validate(envelope(incompleteBasics)), false)
 const v2Card = {
   schemaVersion: 'application-review-card-v2', form: '邮件', topic: '作文集', purpose: '提建议',
   person: '第一人称', tense: '一般现在时', points: ['配图'], reader: '外教', relationship: '师生',
@@ -129,6 +143,7 @@ const stagedRequest = {
 assert.match(stagedRequest.outputContract, /^# Application Writing Model Answer Prompt — V4\n/)
 assert.match(stagedRequest.outputContract, /^# NCK1 Staged Application Analysis Packaging Contract — V2$/m)
 assert.equal(validateNck1StagedAnalysis(stagedRequest, stored).ok, true)
+assert.equal(validateNck1StagedAnalysis(stagedRequest, newWriting).ok, true)
 assert.throws(() => validateNck1StagedAnalysis(stagedRequest, {
   ...stored, applicationAnalysis: { ...stored.applicationAnalysis, standard: { ...stored.applicationAnalysis.standard, essay: stored.modelAnswer.replace(firstSentence, 'Hello.') } },
 }), /must equal the standard essay|given text/)

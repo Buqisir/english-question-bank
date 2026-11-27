@@ -209,13 +209,31 @@ export type ContinuationQuoteNote = { quote: string; explain: string }
  * When present, `modelAnswer` equals `standard.essay`. Not part of
  * `ContinuationAnalysis`, whose readers render the V1/V2 three-zone shape.
  */
+type ContinuationRouteParagraph = { paragraph: number; must: string; draft: string }
+
+export type ContinuationRoute = {
+  route: string
+  paragraphs: [
+    ContinuationRouteParagraph & { paragraph: 1 } & (
+      | { bridgeQuote: string; bridge: string }
+      | { bridgeQuote?: never; bridge?: never }
+    ),
+    ContinuationRouteParagraph & { paragraph: 2 },
+  ]
+}
+
 export type ContinuationAnalysisV3 = {
   schemaVersion: 'continuation-analysis-v3'
   reading: {
-    questions: { question: string; answer: string }[]
+    questions: { question: string; answer: string; evidence?: string[] }[]
+    characters?: {
+      name: string
+      role: string
+      lines: { label: '性格' | '想要' | '此刻' | '表现'; text: string; evidence?: string }[]
+    }[]
     sourceLinks: { sourceQuote: string; use: string }[]
   }
-  taskCard: { taskRequires: string[]; thisEssayChooses: string }
+  taskCard: ContinuationRoute | { taskRequires: string[]; thisEssayChooses: string }
   standard: {
     essay: string
     notes: { paragraph: number; role: string; items: ContinuationQuoteNote[] }[]

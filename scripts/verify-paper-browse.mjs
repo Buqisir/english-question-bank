@@ -2293,6 +2293,33 @@ try {
     blocksOf(contStandard).join() === 'reading,taskCard,notes,expressions,pitfalls'
       && blocksOf(contAdvanced).join() === 'reading,taskCard,notes,expressions,pitfalls,beyondStandard',
     blocksOf(contAdvanced).join())
+  const appWithBasics = structuredClone(appLecture)
+  appWithBasics.analysis.taskCard.basics = {
+    form: '建议帖', personTense: '第一人称、一般现在时', readerTone: '对同龄人说话', goal: '分享时间分配建议',
+  }
+  const appWithBasicsMarkup = railMarkup(appWithBasics, 'standard')
+  assert('application rail: basics, content points, then model essay choices',
+    /文体格式[\s\S]*人称时态[\s\S]*读者语气[\s\S]*交际目的[\s\S]*内容要点[\s\S]*范文的选择（可以换）/.test(appWithBasicsMarkup))
+  const contWithRoute = structuredClone(contLecture)
+  const contEvidence = contFixture.writingTask.materialText.split(/\s+/).slice(0, 6).join(' ')
+  contWithRoute.analysis.reading.questions = [
+    { question: '人物', answer: 'Emily 和帮助她的夫妇。' },
+    { question: '视角与风格', answer: '第三人称叙述。', evidence: [contEvidence] },
+    { question: '待解决问题', answer: 'Emily 的车被困在雪里。' },
+  ]
+  contWithRoute.analysis.taskCard = {
+    route: '夫妇先帮 Emily 脱困，再接她回来取车。',
+    paragraphs: [
+      { paragraph: 1, must: '交代怎样离开。', draft: '夫妇送 Emily 去车站。', bridgeQuote: contFixture.writingTask.continuationStarters[1], bridge: '她回来时，车拖出来了吗？' },
+      { paragraph: 2, must: '接上她回来取车。', draft: '他们一起喝热巧克力。' },
+    ],
+  }
+  const contWithRouteMarkup = railMarkup(contWithRoute, 'advanced')
+  assert('continuation rail: evidence, source links and route replace the old task card',
+    blocksOf(contWithRouteMarkup).join() === 'reading,sourceLinks,route,notes,expressions,pitfalls,beyondStandard'
+      && /人物[\s\S]*视角与风格[\s\S]*待解决问题[\s\S]*可用伏笔[\s\S]*两段怎么写[\s\S]*题目要求[\s\S]*范文这样写[\s\S]*两段之间/.test(contWithRouteMarkup)
+      && contWithRouteMarkup.includes(encoded(contEvidence))
+      && !contWithRouteMarkup.includes('审题卡'))
   assert('rails show every quote, expression, pitfall and reading answer from the fixtures',
     [appLecture, contLecture].every((lecture) => {
       const markup = railMarkup(lecture, 'advanced')
