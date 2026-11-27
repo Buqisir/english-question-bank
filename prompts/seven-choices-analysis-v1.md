@@ -97,27 +97,27 @@ not simply announce that they belong to the same topic field.
 
 ### 两个多余选项（`groups[groupId].extraOptions`）
 
-这是这份解析的特点，要讲好。命题人常常照某一空的正确答案改出一个多余选项，专门骗那一空：共用一个核心词，把对象或方向改掉；或者把答案的陈述改成问句；或者对同一个问题给另一种回答；或者仿答案开头的 This、They、But。也有的照某空前后的原文词改，还有的只和全文话题沾边。
+多余选项可能与某个正确选项共享核心词、采用相似的开头，或对同一个问题给出不同回答。也可能复现某个空前后的原文词，或只和全文话题有关。分类看这些相似之处，讲解回到多余选项和原文的关系。
 
 两个多余选项各写一条，键是选项字母：
 
-- `target`：它最能骗的那一空的题号（数字）。哪一空都接不实写 `null`，这时 `kind` 必须是 `topic`。
+- `target`：最容易误填的位置所对应的题号（数字）。哪一空都接不实写 `null`，这时 `kind` 必须是 `topic`。
 - `secondary`：还能骗的第二空的题号，没有写 `null`。不硬凑。
-- `kind`：`shadow`（影子项，照某空答案改的）、`context`（语境项，照某空前后的原文词改的）、`topic`（话题项，只和全文话题沾边）。判断顺序：先拿它和五个正确答案逐个比，共用一个核心词（单复数、大小写、词形不同也算，如 plant 和 plants、This 和 this）、仿同一种开头（This、They、But、Both）、或是同一句话换成问句或反过来说，就是影子项，哪怕它同时也借了空前后的原文词；都不是，再看语境项、话题项。
-- `shadowOf`：影子项写它照着改的那个正确答案的字母，其余写 `null`。
+- `kind`：`shadow`（影子项，与某个正确选项相似）、`context`（语境项，复现某空前后的原文词）、`topic`（话题项，只和全文话题沾边）。判断顺序：先拿它和五个正确答案逐个比，共用一个核心词（单复数、大小写、词形不同也算，如 plant 和 plants、This 和 this）、采用同一种开头（This、They、But、Both）、或是同一句话换成问句或反过来说，就是影子项，哪怕它同时也借了空前后的原文词；都不是，再看语境项、话题项。
+- `shadowOf`：影子项写与它相似的正确选项的字母，其余写 `null`。
 - `shared`：影子项写两边共同的英文词，取两边都有的那一段字母（plant 和 plants 写 "plant"，This 和 this 写 "this"，不分大小写）；其余写空数组。
-- `text`（100 字以内）：依次说**像在哪**（选项里哪个词和那一空前后哪个词看似接得上）；**断在哪**（原文哪个具体的词让它不成立，优先找空后：代词没有先行词、连接词转不过来、空后的伏笔没人接、和原文事实矛盾、对象换了；说不出具体的词就是没找到，接着找）；影子项再加一句它是照哪个答案改的、都有什么词、答案说什么、它改成什么；有次目标就用一句话说它为什么也像那一空。话题项直说「它和全文话题有关，但哪一空都接不上」，再说最接近的那一空断在哪。
+- `text`（100 字以内）：依次说**像在哪**（多余选项和空前后原文共享哪个词，或哪两个词意思相近）；**断在哪**（优先找空后，指出哪个词或事实把它排除，例如代词没有先行词、连接词方向相反、后文的例子不支持它或对象换了）。影子项也只讲选项和原文，不写「它是照答案 G 改的」。有次目标就说它为什么在那个位置也有迷惑性。话题项写它与全文共享的词或话题，再用最接近的位置说明为什么仍接不上；没有共用原词时按实际意思写。
 - `quotes`：`text` 里引的英文，原样抄。
 
-导出把多余选项印在 `target` 那一空后面，标「多余项」，并在这一条末尾替你印「也可能误填第 N 空」；`target` 为 `null` 的印在题组末尾。所以 `text` 里不写任何题号，用「这一空」「那一空」「答案 X」指代。
+导出在 `target` 指定的题后印「多余项」，并标明 `secondary`；`target` 为 `null` 时印在题组末尾。`text` 里用题号（如「第 38 题」）或明确的段落位置（如「第 3 段第 2 空」）指代，避免「这一空」「那一空」。
 
 ### 写死的
 
 - 每个空、两个多余选项都要有一条。
 - 所有英文引文（`beforeQuote`、`afterQuote`、`lock`、`find.quotes`、`distractors[].quotes`、`extraOptions.*.quotes`、`shared`）是原文或选项里一字不差的子串，不含空位标记；`quotes` 里的每一条都原样出现在它所属的那段中文里。原文里的弯引号、不间断空格照原样抄。
 - 字数：一个汉字算 1，一个英文词算 1，标点不算。找法 55，讲解 80，错项每条 45，多余选项每条 100。
-- 找法、讲解、错项里不写本空题号（题头已印）；提别的空说「前一空」「后面那一空」或引原文。多余选项的 `text` 里不写任何题号。
-- 不写「第几段」：段落编号和卷面不一定对得上。说「上一段」「下一段」「最后一段」或引原文。
+- 找法、讲解、错项里不写本空题号（题头已印）；提别的空用明确的相邻位置或引原文。
+- 找法、讲解、错项里用「上一段」「下一段」「最后一段」或引原文定位。多余选项的 `text` 可用题号，或用与题面对得上的段落位置。
 - 不用「·」。不写空话：「能统领整段」「不符合语境」「不如……切题」「衔接自然」「使文章更完整」「语意连贯」「起到……的作用」。
 
 ### 你自己判断的
@@ -130,21 +130,21 @@ not simply announce that they belong to the same topic field.
 
 原文片段：
 
-> Many people think a garden needs a lot of space. __2__ A few pots on a balcony can grow herbs, tomatoes and even small lemon trees. They only need sun for about six hours a day.
+> Many people think a big garden is essential. __38__ A few pots on a balcony can grow herbs, tomatoes and even small lemon trees. They only need sun for about six hours a day.
 
-答案：「In fact, a small corner is often enough.」
+答案 E：「In fact, a small corner is often enough.」
 
-- 找法：「空后 "A few pots on a balcony" 是例子，要空里先有一句总说。只有 "a small corner is often enough" 能被它证明，又和空前 "a lot of space" 唱反调。」
+- 找法：「空后 "A few pots on a balcony" 是例子，只有 "a small corner is often enough" 能被它证明，又反驳空前非要 "a big garden" 的看法。」
 - 讲解：「空前是一般人的想法，这句马上纠正：小角落就够；空后用阳台几盆菜把纠正坐实。」
 - 坏的讲解：「承上启下，使文章衔接自然。」搬到哪一空都成立，什么也没说。
 
-多余选项「In fact, a big garden is often better.」（`kind: "shadow"`，`shadowOf` 是答案的字母，`shared: ["In fact", "is often"]`）：
+多余选项 C「In fact, a big garden is often better.」（`kind: "shadow"`，`shadowOf: "E"`，`shared: ["In fact", "is often"]`）：
 
-- text：「它和答案一样以 "In fact" 开头，也像在纠正空前 "a lot of space"。但空后 "A few pots on a balcony" 是在证明小也行，它却说大园子更好，方向反了。它是照答案改的：都有 "In fact" 和 "is often"，答案说小角落就够，它改成大园子更好。」
+- text：「选项复现第 38 题空前的大园子（a big garden）。空后举阳台几盆植物的例子（A few pots on a balcony），说明小地方也能种，接不上选项说的大园子更好。」
 
-多余选项「They should be watered every morning.」（`kind: "context"`）：
+多余选项 A「They should be watered every morning.」（`kind: "context"`）：
 
-- text：「开头 They 像在接空后的 "They only need sun"，又都在说怎么照料。但放进这一空，They 前面只有 "a garden"，没有复数名词可指；照料是下一句的事，它抢在例子前面说了。」
+- text：「选项沿用第 38 题空后谈照料的代词（They）。但空前只有人（Many people）能对应复数，空后才提到需要照料的几盆植物（A few pots on a balcony）。」
 
 ## Legacy Fields the Server Derives
 
@@ -224,14 +224,16 @@ Include:
 ```json
 "extraOptions": {
   "C": {
-    "target": 38, "secondary": 40, "kind": "shadow", "shadowOf": "E",
-    "shared": ["plant"],
-    "text": "Chinese, no question numbers",
-    "quotes": ["exact English quoted in text"]
+    "target": 38, "secondary": null, "kind": "shadow", "shadowOf": "E",
+    "shared": ["In fact", "is often"],
+    "text": "选项复现第 38 题空前的大园子（a big garden）。空后举阳台几盆植物的例子（A few pots on a balcony），说明小地方也能种，接不上选项说的大园子更好。",
+    "quotes": ["a big garden", "A few pots on a balcony"]
   },
   "A": {
-    "target": null, "secondary": null, "kind": "topic", "shadowOf": null,
-    "shared": [], "text": "…", "quotes": ["…"]
+    "target": 38, "secondary": null, "kind": "context", "shadowOf": null,
+    "shared": [],
+    "text": "选项沿用第 38 题空后谈照料的代词（They）。但空前只有人（Many people）能对应复数，空后才提到需要照料的几盆植物（A few pots on a balcony）。",
+    "quotes": ["They", "Many people", "A few pots on a balcony"]
   }
 }
 ```

@@ -6,7 +6,9 @@ Produce one complete `listening-analysis-v1` object for either one supplied list
 
 - Copy every `segmentId`, `questionId`, transcript, and official answer exactly from the structured input. The official answer is immutable; do not solve again or substitute your own answer.
 - For every material, give a complete, natural Chinese translation of the exact transcript, one main topic as the exact linked `theme` → `themeGroup` → `subtopic` triple selected from the supplied taxonomy, and one useful Chinese summary. Aim for 20–40 Chinese characters; this is a soft writing target, so never pad or truncate meaning merely to meet it.
-- For every question, translate the stem and A/B/C options. Quote in `evidence.quote` the exact decisive words from that question's own transcript segment.
+- For every question, translate the stem and A/B/C options. In `evidence.quote`, copy one continuous span from exactly one aligned sentence in that question's own transcript segment. Include enough of that sentence to show what supports the answer, including any decisive person, quantity, unit, time, or other qualifier. When the answer needs a premise from another sentence or turn, keep the decisive sentence as evidence and explain the other premise in `reasonZh`. Keep the quote verbatim, without added ellipses or stitched excerpts.
+
+Example: If an earlier turn names Paris and the reply is `We'll stay there for 4 nights.`, a question about the length of the stay in Paris needs `We'll stay there for 4 nights.` in `evidence.quote`. Explain in `reasonZh` that the earlier turn establishes Paris and the reply gives the length of the stay, four nights.
 - A material may own two or more questions and one quote may support several questions. Keep each question bound to its actual `segmentId`. Do not create timestamps, audio cuts, ASR evidence, publication approval, or search scores.
 
 ## What a student needs from a listening explanation
@@ -26,18 +28,18 @@ Do not teach slogans (「注意转折词」「听前预测」「抓关键词」)
    - it is worked out one step past the recording; write the premise and the step: 「男士感谢凯特周末招待，又说自己的航班快起飞了（My flight will take off soon），可见凯特是在送他」;
    - it is calculated; write the whole operation: 「约好 8 点到，路上 20 分钟，8:00 − 20 分钟 = 7:40 出发」.
    Never call it 换说法 or 同义替换 when the option keeps the speaker's word. Never open with 「本题询问」「题目问」, and never name the question type.
-2. **Who said it, when it applies.** When the question is about one speaker, or about a plan that changed, make clear who said the deciding words and which time they refer to.
+2. **Who said it, when it applies.** When the question is about one speaker, or about a plan that changed, make clear who said the deciding words and which time they refer to. When paraphrasing, retain any qualifier that affects the answer, including who, how many and for how long.
 3. **As long as the question needs, no longer.** One stated fact: one sentence, about 40 Chinese characters, ending 「选 B」. Inference, calculation, or two places put together: up to about 80.
-4. **Chinese first, English in brackets, only the deciding words** (one to three short word groups, `…` for a cut). The evidence quote is printed above your text: never copy it again, and never leave English bare inside a Chinese sentence.
+4. **Chinese first, English in brackets, only the deciding words** (one to three short word groups, `…` for a cut in `reasonZh` only). The evidence quote is printed above your text: never copy it again, and never leave English bare inside a Chinese sentence.
 
 ## `distractors`: the wrong options that borrow from the recording
 
 Each question in the input carries `wrongOptions`: for every wrong option, `heardInRecording` (the option's content words and numbers the program found in this material's transcript) and `mustExplain`.
 
 1. **`mustExplain: true` → this option MUST have a distractor entry.** The validator rejects a draft that leaves one out. Say what was heard and why it does not answer this question, in one or two sentences:
-   - the word is there but means something else here: 「录音里的 terrible 说的是账算错了（terrible mistake），不是饭菜难吃」;
+   - the word is there but means something else here: 「服务员说算错账单是个严重失误（terrible mistake），这句谈的是账单金额」;
    - it was the other speaker, or another person: 「烧烤是女士的安排，男士说的是还想去钓鱼」;
-   - it is the wrong time, or a plan that changed: 「Friday 是鲍勃上周五出院（last Friday），男士去看他是这周六」;
+   - it is the wrong time, or a plan that changed: 「鲍勃上周五（last Friday）出院，男士这周六才去看他」;
    - it was said, then denied or turned around (but, actually, not, instead): quote the turn;
    - it answers a different question from the recording: 「记录数据是分组做实验时的分工，提前做完要做的是清理台面」;
    - it is a detail, not the point or purpose: 「书是介绍嘉宾时顺带提到的，整段话是在请嘉宾上台」;

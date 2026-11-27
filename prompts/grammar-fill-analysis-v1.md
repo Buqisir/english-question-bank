@@ -159,30 +159,35 @@ Facet keys, role enums, and evidence types are internal
 classification. Keep them exact in their own fields, but do not use them as the
 opening or substance of `reason` or `evidence[].relation`.
 
-Write `reason` by walking the actual sentence:
+The page already prints the complete source sentence before each explanation.
+To prepare `reason`, restore the shortest useful skeleton around the gap.
+Write the explanation starting with the judgment:
 
-1. restore the shortest useful skeleton around the gap;
-2. state what job the gap performs in that skeleton;
-3. derive the required word or form;
-4. when useful, verify it with a nearby parallel structure, paired blank,
+1. state what job the gap performs in that skeleton;
+2. derive the required word or form;
+3. when useful, verify it with a nearby parallel structure, paired blank,
    antecedent, time relation, or governing word.
 
 **Job first.** The first clause of `reason` says what the gap does in its own
 sentence: which part is missing (谓语、宾语、连接两个分句……) or what the gap
-attaches to (修饰哪个名词、把哪个宾语接到哪个动词上). Only after that may a
-collocation, sentence pattern or fixed phrase appear, and only as the reason
-for the particular word or form. A `reason` that opens with, or consists only
+attaches to (修饰哪个名词、把哪个宾语接到哪个动词上). Skip openings like
+「句子说……___」 and avoid reproducing the source sentence. Write the reasoning
+in Chinese and put English cues or forms in parentheses where needed.
+Only after stating the job may a collocation, sentence pattern or fixed phrase
+appear, and only as the reason for the particular word or form. A `reason`
+that opens with, or consists only
 of, “X 是固定搭配” / “prepare sb for sth” / “keep one's eyes on” is not
 acceptable, including for prepositions, articles and `to do` blanks. When the
 governing word is separated from the gap (long subject, inserted phrase,
 antecedent across a prepositional phrase), name that governing word.
 A multi-word preposition (thanks to, because of, instead of, according to,
-in front of, due to) is one preposition: write “作 thanks to 的宾语”, never
-“作介词 to 的宾语”.
+in front of, due to) is one preposition: write “作复合介词（thanks to）的宾语”,
+never treat `to` on its own as the governing preposition.
 
 Simple blanks may combine these into one sentence. A difficult blank may use up
 to three. Do not expand a simple article or preposition blank into a general
-grammar lecture, and do not invent distractors for a task with no options.
+grammar lecture. Mention a common wrong form only when a specific cue in this
+sentence or its context could lead a student to it.
 
 Keep only the relation that determines the form: what the word modifies,
 completes or agrees with, and the needed inflection or word class. Prefer
@@ -195,8 +200,7 @@ any necessary local verification; do not append a general usage lesson.
 Prefer concrete wording such as:
 
 ```text
-句子的主干是 I have found ___ taking on...；find 后缺宾语，而这个宾语仍指
-主语 I，所以要用反身代词 myself，不能用只表示普通宾语的 me。
+空格作「发现」（find）的宾语，指的还是主语「我」（I），所以要用反身代词（myself）。
 ```
 
 Do not stop at:
@@ -208,14 +212,21 @@ find oneself doing 是固定搭配。
 A preposition blank, job first:
 
 ```text
-prepare 的宾语位置已经是 me，this one 要靠介词接到 prepared 上；“为……做准备”
-用 prepare sb for sth，填 for。
+「准备」（prepared）已经有宾语「我」（me），空格要把「这件事」（this one）接到动词上。
+表示「让某人为某事做好准备」，用介词（for）。
 ```
 
 Not:
 
 ```text
 固定搭配 prepare sb for sth，故填 for。
+```
+
+An article blank:
+
+```text
+「方式」（way）是单数可数名词，这里首次提到的是一种新的穿衣方式，空格需要不定冠词。
+「新的」（new）以辅音音素开头，所以用不定冠词（a）。
 ```
 
 ## Required Top-Level Shape
@@ -273,8 +284,8 @@ Every `blanks[questionId]` MUST include:
   `{ "route": "controlled-value", "features": ["controlled-value"] }`; choose
   the route that states **why this answer form is required**, and use only the
   applicable controlled features below (`[]` when none apply)
-- `reason` — 中文 1–3 句：还原句子骨架，说明空格职责并推出答案；有相邻
-  并列、成对空格或回指关系时，用它作必要验证
+- `reason` — 中文 1–3 句，开头直接说明空格职责，随后推出答案；有相邻
+  并列、成对空格或回指关系时，用它作必要验证。
 - `evidence` — array with ≥1 item
 
 Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb), or `form`/
@@ -592,7 +603,7 @@ Each evidence item:
   "type": "subject",
   "signalText": "exact passage substring",
   "signalSide": "passage",
-  "relation": "中文：这个词如何指向答案"
+  "relation": "主语是第三人称单数，谓语形式要与它一致。"
 }
 ```
 
@@ -602,6 +613,7 @@ Rules:
 - `signalText` MUST be an **exact substring** of the grammar-fill passage text.
 - `signalText` MUST NOT include a blank marker (`  56  ` token or `(wear)` hint-token) — quote the surrounding trigger words, not the gap or hint parentheses.
 - `signalSide` is always `passage` for grammar fill (no options exist).
+- `relation` 直接写中文句子，说明线索和答案的关系，省去「中文：」等前缀。
 - Prefer short `signalText` (1–8 words).
 
 ## Answer Authority

@@ -249,8 +249,8 @@ below say how to write it.
    from the sentence you wrote out.
 8. **The whole text or a whole paragraph: show the answer covers it.** For a
    best title, main idea or purpose of the whole text, or the main idea of one
-   paragraph, `locateFindZh` already walks through the parts with marks; do
-   not walk through them again in the note. Write the note in full sentences,
+   paragraph, use `locateFindZh` for where to start reading and the note to
+   show what the relevant parts have in common. Write the note in full sentences,
    not a list of fragments: say what all the parts have in common and why the
    correct option's words name exactly that (「几段写的都是早起给人带来的变化：
    精神更好、效率更高、心情更稳；选项的“改变生活”正好把这几样都包进去，
@@ -811,6 +811,12 @@ Step 2. Choose `locateBy` by the question form. A reader should see a
 定位句 whenever one exists, so `options` is kept for the few forms where
 no single sentence can carry the answer.
 
+Write 找法 from the student's position just after reading the stem. Use
+stem clues, the paragraph it names, or the place where those clues first
+land. For an `options` question, give a check that applies to each option.
+Save words that only turn up later in the search or are only known from the
+correct option for the evidence and answer explanation.
+
 | Question form | `locateBy` |
 | --- | --- |
 | why, what caused / led to / prompted / made sb do; what X is aimed at | `stem` |
@@ -1010,42 +1016,37 @@ second line of the 定位 block. The page prints a fixed first line:
   → gave up（放弃）第 2 段首句」;
 - `options`: 「定位 核对选项」;
 - `passage`: 「定位 看全文」, or the paragraph the question names.
-`locateFindZh` goes under it. It shows how to do THIS question well: the move a
-strong reader makes on this question, in this passage's words. Test it: if
+`locateFindZh` goes under it. It gives the first move the reader can make
+with the stem and the starting point shown above. Test it: if
 the line would still fit another question or another passage unchanged, it
 is a template and teaches nothing; rewrite it.
 - `stem`: from where the reader lands, ONE move and what to look for. At
   most 16 units (each Chinese character and each English word counts as
   one), and at most one English signal word (but, this, there, if, so,
-  For example) copied from the passage. Never copy a passage phrase: the
+  For example) already visible in the 定位句. Never copy a passage phrase: the
   quote and its highlight show the content.
   - answer outside the 定位句: say which way and what to look for:
-    「往前一句找原因」「看 but 后」「this 指什么，往前找」「往后两句读她的话」.
+    「往前一句找原因」「往后找实际结果」「this 指什么，往前找」「往后两句读她的话」.
   - answer inside the 定位句: write it only when a signal in that sentence
     is the handle (「看同句 but 后」「看 if 后的条件」); otherwise write ""
     (the page then prints nothing under the first line).
   - Never repeat the 定位词, its counterpart or the paragraph; never write
     template phrases (原词, 答案在定位句, 答案不在定位句).
-- `options`: say what to carry back from each option here and what decides
-  it in this passage: 「四个队名逐个回表里数出场次」「各取一个地名回原文找
-  free」. Not 「逐项回原文核对」「各取关键词找依据」: those fit any question.
+- `options`: say what to carry back from each option and what to check
+  against the stem: 「四个队名逐个回表里数出场次」「按选项地名找对应介绍，核对开放时间」.
+  Not 「逐项回原文核对」「各取关键词找依据」: those fit any question.
   At most 24 units and 3 English words.
-- `passage` (the whole text, or one named paragraph as a whole): say how
-  THIS text or paragraph is built, in its own content, and where the answer
-  comes from: what it starts with, what changes or what it argues, where it
-  lands. Name each place as [[paragraphId]] and copy the two to four passage
-  words that show each step, so the reader can see it in the passage. Then
-  say in a few words what the answer has to cover. At most 48 units and 8
-  English words.
-  Good (made-up passage on a town that rebuilt its river): 「[[para-1]]写河
-  被 factories 污染，[[para-3]]镇民 clean it up，[[para-5]] fish return；
-  标题要盖住从脏到净的经过」.
+- `passage` (the whole text, or one named paragraph as a whole): give a
+  starting place and what to look for based on the stem, such as the issue
+  the text opens with or the claim a named paragraph develops. Name places
+  as [[paragraphId]]. At most 48 units and 8 English words.
+  Good (stem “Which title best describes the river's changes?”):
+  「从 [[para-1]] 找河流变化的起点，再看各段写了什么变化」.
   Not: 「看全文」「看首段加末段」「盯住反复出现的 X」「看每段首句」 on their
-  own: those fit any passage. A frequent word is a handle only after you
-  have counted it and it really carries the text; then say what it shows.
-  For where the text is taken from or who it is written for, name the
-  features of THIS text that decide it (a price and a booking line, a
-  book's author and publisher, a research finding with its journal).
+  own: those fit any passage.
+  For where the text is taken from or who it is written for, tell the
+  reader where to look for a clue to the source or audience, such as the
+  publication information near a title or the instructions after a tour description.
 - Name a paragraph only as [[paragraphId]]; the page prints it the way the
   passage is labelled. Never write 第 N 段 yourself.
 - Never use an English word that only a wrong option uses. Do not give the
@@ -1099,11 +1100,11 @@ Example, the passage uses other words:
   "note": "题干 quit 对应原文 gave up。"
 }
 ```
-Its `locateFindZh`: "往后读，看 But 后".
-`locateFindZh` for an `options` question: "各取一个地名回原文找 free".
-`locateFindZh` for a `passage` question on a made-up passage that opens with
-a question about sleep and ends with a study's answer: "[[para-1]]问 why we
-dream，[[para-4]]研究说 sorting memories；主旨要盖住这个问答".
+Its `locateFindZh`: "往后找朋友担心的事有没有发生".
+`locateFindZh` for an `options` question asking where visitors can go in
+the evening: "按选项地名找对应介绍，核对开放时间".
+`locateFindZh` for a `passage` question asking the main purpose of the last
+paragraph: "看 [[para-4]] 开头提的研究，再判断末尾是在总结发现还是提出问题".
 
 ---
 
@@ -1147,7 +1148,7 @@ Output must:
 - Every wrong option must have trap diagnosis
 - Every question must have `stemTranslationZh` and `locationParaphrases`
 - Every question must have `locateBy`; a `stem` question has exactly one stem `locationCue` item whose `sourceText` is copied from the stem, whose `targetText` is one whole passage sentence, and whose `answerText` lies inside the correct option's evidence quote; `bridgeZh` appears exactly when `answerText` is outside `targetText`
-- Every question has `locateFindZh`: "" only for a `stem` question whose answer is in the 定位句 with no signal word as the handle; otherwise the line says how to do this question well and would not fit another question unchanged (stem: one move, at most 16 units and one English signal word; options: what to carry back and what decides it, at most 24 units; passage: how this text is built, with [[paragraphId]] places and a few passage words, then what the answer must cover, at most 48 units); paragraphs only as [[paragraphId]]
+- Every question has `locateFindZh`: "" only for a `stem` question whose answer is in the 定位句 with no signal word as the handle; otherwise give a first move the reader can make without knowing the answer (stem: one move, at most 16 units and one signal word from the 定位句; options: what to carry back and what to check against the stem, at most 24 units; passage: where to start and what to look for, at most 48 units). Use [[paragraphId]] for named places.
 - A stem `locationCue` item whose `targetCue` uses other words than `sourceText` has `sourceZh` and `targetCueZh`, each Chinese only and at most 10 characters; an item with no `targetCue`, or a cue that only drops or adds words, has neither
 - Notes of non-stem items, wrong-option `explanation` and `relationNote`, `bridgeZh` and `locateFindZh` name places only as [[paragraphId]] or [[paragraphId|words copied from one sentence of that paragraph]]; no 第 N 段, 第 M 句, 首句, 末句, 首段, 末段 written out
 - None of these contain 读得通、读不通、说得通、说不通、讲得通、讲不通、换了个说法、换了一种说法、换个说法、容易误选、容易选错

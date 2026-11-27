@@ -73,7 +73,7 @@ inventing a grammar rule or a missing event to justify the answer.
 **主线空还是细节空** `role`：
 
 - `main`：把答案换成错项，这一段推进主线的那件事就说不成了。人物的关键动作、情感的转折点、对前后一件事的概括、点题的词，通常是主线空。
-- `detail`：换成错项，只是本句说不通，主线照样往下走。
+- `detail`：换成错项，只与本句的搭配或语义冲突，主线照样往下走。
 - 拿不准就标 `detail`。不要为了显得每个空都有意义把细节空标成主线。
 
 **脉络** `context`：不看选项也能说出的那句话：这个空在这里必须是什么意思。可以说它是正是负、是哪一类动作、是在概括前面哪件事，还是在引出后面哪件事。不超过 45 字。
@@ -124,6 +124,8 @@ inventing a grammar rule or a missing event to justify the answer.
 
 **错项** `distractorGlosses`：三个错项都写，每项一句，不超过 45 字。写 what the word or phrase would mean here（这个词放进这句是什么意思），再写原文哪个词让它不成立，也就是放回当前语境为何不成立。`meaning` 先写词义，用「；」接上排除的理由，开头不重复选项词本身（页面会印）。好的空放进去语法都对，错项靠意思排除；只说「原文没有这回事」不算排除，要说出原文写的是什么。有的错项放进这一句也说得通，但会让主线断掉，这时就用主线排除，说出放进去以后前后哪件事对不上。`quote` 是你在 `meaning` 里引的那处原文。
 
+先排除与正确项最像的干扰项。理由写出与上下文的具体冲突，例如动作对象、情绪方向、前后事件或因果关系，不用「说不通」「讲不通」代替。
+
 Explaining why a distractor is tempting is optional, never required. 原文撑得住时可以带半句，不虚构学生的动机。
 
 Before writing, substitute each option into the complete construction. Preserve
@@ -143,7 +145,7 @@ motive or broader rule, and never give only a reusable dictionary gloss such as
 
 - 输出格式、字段和长度上限（一个汉字算 1，一个英文词算 1，标点不算）。
 - `find.check` 只用上面八个值。
-- 主题意义、找法、每个错项都至少引一处原文。英文原样抄（大小写、词形都不改），是原文的 exact substring，不引空位标记（`__41__` 这种）。引的词必须原样出现在你写的那句话里。
+- 主题意义、找法、每个错项都至少引一处原文。中文先说清意思，英文原词放在对应中文后的括号里。引文保留大小写和词形，是原文的 exact substring，不引空位标记（`__41__` 这种）。
 - 答案是给定的，不改，不重新解题。
 - 不用「·」做分隔。
 
@@ -167,16 +169,16 @@ motive or broader rule, and never give only a reusable dictionary gloss such as
 
 题组开头：
 
-- 主题意义：要改变别人的看法，做给他们看比说服更有用，即 show them, not tell them。
-- 主线：第 1 段 学校开屋顶菜园，多数人觉得白费功夫。第 2 段 Mia 独自坚持，几周没长东西，她也泄气。第 3 段 菜苗冒出，番茄满园，嘲笑的人要求加入。第 4 段 Mia 点出道理。
+- 主题意义：要改变别人的看法，让人亲眼看到比光说更有用（show them, not tell them）。
+- 主线：第 1 段 学校开屋顶菜园，多数学生觉得白费功夫。第 2 段 米娅还是参加了，几周没长东西，她也泄气。第 3 段 菜苗冒出，番茄满园，二十名学生要求加入。第 4 段 米娅点出道理。
 - 情感线：坚持→泄气→惊喜→欣慰
 
-每个空（页面印出来的样子）：
+每个空（页面印出来的样子，下面每空只示范一条错项）：
 
-- 第一空（细节）题头：1 A put up 竖起；此处指立起（牌子）。脉络：她立了一块提醒别踩土的牌子，这里要「竖起、挂出」的意思。找法：词组看语境义：宾语是 a sign，牌子上写着 Please don't step on the soil，是把牌子立起来。错项 B：推迟；a sign 是立起来给人看的，推迟一块牌子说不通。
-- 第二空（主线）题头：2 B discouraged 灰心的。脉络：坚持几周没有结果，这是全文的低谷，要一个负面的情绪。找法：形容词看情感：前面 nothing grew，even 说连坚持的 Mia 也动摇了，四个里负面的只有 discouraged。错项 A：充满希望；前面是 nothing grew，even 表示连她也撑不住了，和 hopeful 反着。
-- 第三空（主线）题头：3 A shoots 嫩芽，新枝。脉络：低谷后的转机，要一样从土里长出来的东西。找法：名词看话题：讲的是 garden，又是 pushing through the soil，长出来的绿色东西是 shoots。错项 C：昆虫；虫子不会 pushing through the soil，也长不成后面的 tomatoes。
-- 第四空（主线）题头：4 B However 然而。脉络：前句说大家笑话这事，后句说他们要加入，态度翻过来了。找法：副词看逻辑：laughed at the idea 和 asked to join 前后相反，用转折。错项 C：因此；laughed at the idea 推不出 asked to join，不是因果。
+- 第一空（细节）题头：1 A put up 竖起；此处指立起（牌子）。脉络：她要把提醒别踩土的牌子立起来。找法：词组看语境义：牌子（a sign）上写着请勿踩土（Please don't step on the soil），需要立起来让人看到。错项 B：推迟；这里处理的是提醒行人的牌子（a sign），没有要改期的活动。
+- 第二空（主线）题头：2 B discouraged 灰心的。脉络：坚持几周没有结果，这是米娅情绪的低谷。找法：形容词看情感：几周没长东西（For weeks nothing grew），连坚持的米娅也动摇了（even Mia）。错项 A：充满希望；几周没长东西（For weeks nothing grew）使连一开始愿意参加的米娅也失去了信心。
+- 第三空（主线）题头：3 A shoots 嫩芽。脉络：这是菜园种植有了进展的第一个迹象。找法：名词看话题：嫩绿的小东西（tiny green）从土里冒出来（pushing through the soil），接上了菜园的种植主线。错项 C：昆虫；后文写番茄满园（full of tomatoes），顺着出苗往下写作物结果。
+- 第四空（主线）题头：4 B However 然而。脉络：多数学生原来嘲笑这个主意，现在有二十人想加入，态度转变了。找法：副词看逻辑：从嘲笑这事（laughed at the idea）转到请求加入（asked to join）。错项 C：因此；请求加入（asked to join）与先前的嘲笑形成反差，嘲笑本身没有促成加入。
 
 
 ## Legacy Fields the Server Derives
@@ -244,28 +246,28 @@ Do NOT write these; the server fills them from your new fields so older consumer
       "context": "坚持几周没有结果，这是全文的低谷，要一个负面的情绪。",
       "find": {
         "check": "affect",
-        "text": "前面 nothing grew，even 说连坚持的 Mia 也动摇了，四个里负面的只有 discouraged。",
-        "quotes": ["nothing grew"]
+        "text": "几周没长东西（For weeks nothing grew），连坚持的米娅也动摇了（even Mia）。",
+        "quotes": ["For weeks nothing grew", "even Mia"]
       },
       "correctFit": { "optionLabel": "B", "dictMeaning": "灰心的" },
       "distractorGlosses": [
-        { "optionLabel": "A", "optionText": "hopeful", "meaning": "充满希望；前面是 nothing grew，even 表示连她也撑不住了，和 hopeful 反着。", "quote": "nothing grew" },
-        { "optionLabel": "C", "optionText": "proud", "meaning": "……", "quote": "……" },
-        { "optionLabel": "D", "optionText": "curious", "meaning": "……", "quote": "……" }
+        { "optionLabel": "A", "optionText": "hopeful", "meaning": "充满希望；几周没长东西（For weeks nothing grew）使连一开始愿意参加的米娅也失去了信心。", "quote": "For weeks nothing grew" },
+        { "optionLabel": "C", "optionText": "proud", "meaning": "自豪；几周没长东西（For weeks nothing grew），此时还没有让她自豪的收成。", "quote": "For weeks nothing grew" },
+        { "optionLabel": "D", "optionText": "curious", "meaning": "好奇；连米娅也动摇了（even Mia），这里强调长期没见进展带来的失望。", "quote": "even Mia" }
       ],
       "evidence": [
         {
           "type": "affective-cue",
           "signalText": "nothing grew",
           "signalSide": "context-before",
-          "relation": "中文：几周没长东西，情绪是往下走的。"
+          "relation": "几周没长东西，米娅渐渐泄气。"
         },
         {
           "type": "collocation-partner",
           "signalText": "began to feel",
           "signalSide": "context-before",
           "targetText": "began to feel discouraged",
-          "relation": "中文：feel 后面接人的感受。"
+          "relation": "表示开始感到某种情绪（began to feel），后面接米娅的感受。"
         }
       ]
     }
@@ -373,11 +375,13 @@ Each evidence item:
   "signalText": "exact substring of source",
   "signalSide": "context-before",
   "targetText": "optional connected phrase",
-  "relation": "中文：这个词如何指向答案"
+  "relation": "这处线索表明空格要写人物的感受。"
 }
 ```
 
 `signalSide` MUST be exactly one of: `context-before`, `context-after`, `stem`, `option`
+
+`relation` 直接写中文句子，说明线索和答案的关系，省去「中文：」等前缀。
 
 **Exact-substring rule:** `signalText` MUST be an exact substring of its source.
 - `context-before` / `context-after` / `stem` signals: `signalText` MUST appear verbatim in the cloze passage text or question stem.
@@ -388,7 +392,7 @@ Each evidence item:
 **Option-side usage:** `option`-side signals are reserved for `phrase` blanks only, to decompose the phrase (e.g. highlight `empty` and `out` separately) alongside a `contextual-composition` signature. Single-word blanks highlight in the passage, not the option. Correct shape for an option-side decomposition signal:
 
 ```json
-{ "type": "collocation-partner", "signalText": "empty", "signalSide": "option", "targetText": "empty out", "relation": "中文：empty 表示“空”。" }
+{ "type": "collocation-partner", "signalText": "empty", "signalSide": "option", "targetText": "empty out", "relation": "清空（empty）表示把里面的东西去掉。" }
 ```
 
 Use short `signalText` (1–8 words). Use `targetText` for the larger connected object.
