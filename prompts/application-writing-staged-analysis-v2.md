@@ -11,7 +11,7 @@ this outer shape, with exactly these top-level keys and no others:
 ```json
 {
   "taskType": "application",
-  "modelAnswer": "the V4 standard.essay string, copied character for character",
+  "modelAnswer": "标准版范文全文",
   "applicationAnalysis": {
     "schemaVersion": "application-analysis-v4",
     "taskCard": {
@@ -20,15 +20,27 @@ this outer shape, with exactly these top-level keys and no others:
       "thisEssayChooses": "……"
     },
     "standard": {
-      "essay": "……",
+      "essay": "标准版范文全文",
       "pointMap": [{ "point": "……", "quote": "……" }],
-      "notes": [{ "paragraph": 1, "role": "……", "items": [{ "quote": "……", "explain": "……" }] }],
-      "expressions": [{ "expression": "……", "function": "……" }]
+      "notes": [{
+        "paragraph": 1, "role": "……",
+        "items": [
+          { "quote": "本段第一处逐字引句", "explain": "……" },
+          { "quote": "本段第二处逐字引句", "explain": "……" }
+        ]
+      }],
+      "expressions": [
+        { "expression": "第一处表达", "function": "……" },
+        { "expression": "第二处表达", "function": "……" }
+      ]
     },
     "advanced": {
       "essay": "……",
       "pointMap": [{ "point": "……", "quote": "……" }],
-      "beyondStandard": [{ "quote": "……", "explain": "……" }]
+      "beyondStandard": [
+        { "quote": "提高版第一处逐字引句", "explain": "……" },
+        { "quote": "提高版第二处逐字引句", "explain": "……" }
+      ]
     }
   }
 }

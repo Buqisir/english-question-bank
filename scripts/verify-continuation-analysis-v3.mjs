@@ -166,6 +166,16 @@ for (const [pattern, change] of [
   change(candidate.output)
   assert.throws(() => run(candidate), pattern)
 }
+const crossSource = 'journey by train. Three days later,'
+assert.ok(`${starter1} ${starter2}`.includes(crossSource))
+const stitchedQuotes = structuredClone(newFormat)
+stitchedQuotes.output.taskCard.paragraphs[0].bridgeQuote = crossSource
+stitchedQuotes.output.reading.sourceLinks[0].sourceQuote = crossSource
+assert.throws(() => run(stitchedQuotes), (error) => {
+  assert.match(error.message, /taskCard\.paragraphs\[0\]\.bridgeQuote is not verbatim/)
+  assert.match(error.message, /reading\.sourceLinks\[0\]\.sourceQuote is not verbatim/)
+  return true
+})
 for (const change of [
   (analysis) => { analysis.taskCard.taskRequires = ['旧稿要求一', '旧稿要求二'] },
   (analysis) => { delete analysis.taskCard.route },

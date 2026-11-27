@@ -11,7 +11,7 @@ this outer shape, with exactly these top-level keys and no others:
 ```json
 {
   "taskType": "continuation",
-  "modelAnswer": "the V3 standard.essay string, copied character for character",
+  "modelAnswer": "标准版范文全文",
   "continuationAnalysis": {
     "schemaVersion": "continuation-analysis-v3",
     "reading": {
@@ -21,7 +21,10 @@ this outer shape, with exactly these top-level keys and no others:
         { "question": "待解决问题", "answer": "……" }
       ],
       "characters": [{ "name": "……", "role": "……", "lines": [{ "label": "想要", "text": "……", "evidence": "逐字原文" }] }],
-      "sourceLinks": [{ "sourceQuote": "……", "use": "……" }]
+      "sourceLinks": [
+        { "sourceQuote": "第一处逐字引句", "use": "第 1 段怎样用" },
+        { "sourceQuote": "第二处逐字引句", "use": "第 2 段怎样用" }
+      ]
     },
     "taskCard": {
       "route": "……",
@@ -31,14 +34,38 @@ this outer shape, with exactly these top-level keys and no others:
       ]
     },
     "standard": {
-      "essay": "……",
-      "notes": [{ "paragraph": 1, "role": "……", "items": [{ "quote": "……", "explain": "……" }] }],
-      "expressions": [{ "expression": "……", "function": "……" }],
-      "pitfalls": [{ "pitfall": "……", "why": "……" }]
+      "essay": "标准版范文全文",
+      "notes": [
+        {
+          "paragraph": 1, "role": "第 1 段的作用",
+          "items": [
+            { "quote": "第 1 段第一处逐字引句", "explain": "……" },
+            { "quote": "第 1 段第二处逐字引句", "explain": "……" }
+          ]
+        },
+        {
+          "paragraph": 2, "role": "第 2 段的作用",
+          "items": [
+            { "quote": "第 2 段第一处逐字引句", "explain": "……" },
+            { "quote": "第 2 段第二处逐字引句", "explain": "……" }
+          ]
+        }
+      ],
+      "expressions": [
+        { "expression": "第一处表达", "function": "……" },
+        { "expression": "第二处表达", "function": "……" }
+      ],
+      "pitfalls": [
+        { "pitfall": "第一处容易写偏的地方", "why": "……" },
+        { "pitfall": "第二处容易写偏的地方", "why": "……" }
+      ]
     },
     "advanced": {
       "essay": "……",
-      "beyondStandard": [{ "quote": "……", "explain": "……" }]
+      "beyondStandard": [
+        { "quote": "提高版第一处逐字引句", "explain": "……" },
+        { "quote": "提高版第二处逐字引句", "explain": "……" }
+      ]
     }
   }
 }
@@ -46,6 +73,9 @@ this outer shape, with exactly these top-level keys and no others:
 
 - `continuationAnalysis` holds the V3 `reading`, `taskCard`, `standard` and
   `advanced` objects unchanged, plus `schemaVersion`.
+- When `reading.characters` is present, put character evidence only in
+  `characters[].lines[].evidence`. The 人物 entry in `reading.questions`
+  keeps its summary, and the renderer uses the character lines for display.
 - `modelAnswer` is identical to `continuationAnalysis.standard.essay`. A program
   rejects the result if they differ by even one character.
 - Do not include the V3 `taskType` or `blocked` fields inside

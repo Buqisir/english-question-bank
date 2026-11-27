@@ -137,26 +137,33 @@
   "standard": {
     "essay": "完整成文，含题面给定行，段落之间用一个空行分隔",
     "pointMap": [
-      { "point": "题面要点原话或概括", "quote": "文中完成该要点的句子，逐字" }
+      { "point": "说明配图意见及理由", "quote": "标准版中完成第一个要点的句子，逐字" },
+      { "point": "自荐担任插画作者", "quote": "标准版中完成第二个要点的句子，逐字" }
     ],
     "notes": [
       {
         "paragraph": 1,
         "role": "这一段完成了什么",
         "items": [
-          { "quote": "逐字片段", "explain": "它做了什么、为什么这样写" }
+          { "quote": "本段第一处逐字引句", "explain": "它做了什么、为什么这样写" },
+          { "quote": "本段第二处逐字引句", "explain": "它怎样让读者明白写信目的" }
         ]
       }
     ],
     "expressions": [
-      { "expression": "……", "function": "在本题里完成什么" }
+      { "expression": "提出建议的表达", "function": "怎样清楚地表明配图立场" },
+      { "expression": "主动请缨的表达", "function": "怎样礼貌地让对方考虑由我画图" }
     ]
   },
   "advanced": {
     "essay": "……",
-    "pointMap": [ { "point": "……", "quote": "……" } ],
+    "pointMap": [
+      { "point": "说明配图意见及理由", "quote": "提高版中完成第一个要点的句子，逐字" },
+      { "point": "自荐担任插画作者", "quote": "提高版中完成第二个要点的句子，逐字" }
+    ],
     "beyondStandard": [
-      { "quote": "提高版中逐字片段", "explain": "比标准版多做了什么" }
+      { "quote": "提高版中的第一处逐字引句", "explain": "比标准版哪处理由更具体" },
+      { "quote": "提高版中的第二处逐字引句", "explain": "比标准版哪处更贴近师生关系" }
     ]
   }
 }

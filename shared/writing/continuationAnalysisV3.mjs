@@ -249,13 +249,13 @@ function checkEssay(essay, label, context, problems, warnings) {
   return { paragraphs, newWords, share }
 }
 
-function checkQuotes(entries, text, where, field, problems) {
-  const haystack = normalizeContinuationText(text)
+function checkQuotes(entries, sources, where, field, problems) {
+  const haystacks = sources.map(normalizeContinuationText)
   entries.forEach((entry, index) => {
     const raw = field ? entry[field] : entry
     if (raw === undefined) return
     const quote = normalizeContinuationText(raw)
-    if (!quote || !haystack.includes(quote)) {
+    if (!quote || !haystacks.some(source => source.includes(quote))) {
       problems.push(`${where}[${index}]${field ? `.${field}` : ''} is not verbatim: ${raw}`)
     }
   })
@@ -280,11 +280,11 @@ export function checkContinuationAnalysisV3(analysis, { material = '', starters 
     problems.push(`word-count target ${wordCountTarget ?? 'missing'} is not supported by V3; handle manually`)
     return { problems, warnings, wordCounts, directSpeech }
   }
-  const sourceText = [material, ...starters].join('\n')
+  const sources = [material, ...starters]
   const shared = {
     starters,
     runs: copyRuns(material),
-    known: new Set((sourceText.match(WORD) || []).map((w) => w.toLowerCase())),
+    known: new Set(sources.flatMap(source => (source.match(WORD) || []).map(word => word.toLowerCase()))),
     sourceShare: directSpeechShare(material),
   }
   directSpeech.source = shared.sourceShare
@@ -295,23 +295,23 @@ export function checkContinuationAnalysisV3(analysis, { material = '', starters 
   wordCounts.advanced = adv.newWords
   directSpeech.standard = std.share
   directSpeech.advanced = adv.share
-  checkQuotes(reading.sourceLinks, sourceText, 'reading.sourceLinks', 'sourceQuote', problems)
+  checkQuotes(reading.sourceLinks, sources, 'reading.sourceLinks', 'sourceQuote', problems)
   reading.questions.forEach(({ evidence }, index) => {
-    if (evidence) checkQuotes(evidence, material, `reading.questions[${index}].evidence`, null, problems)
+    if (evidence) checkQuotes(evidence, [material], `reading.questions[${index}].evidence`, null, problems)
   })
   reading.characters?.forEach(({ lines }, index) => {
-    checkQuotes(lines, material, `reading.characters[${index}].lines`, 'evidence', problems)
+    checkQuotes(lines, [material], `reading.characters[${index}].lines`, 'evidence', problems)
   })
-  if (taskCard.paragraphs) checkQuotes(taskCard.paragraphs, sourceText, 'taskCard.paragraphs', 'bridgeQuote', problems)
+  if (taskCard.paragraphs) checkQuotes(taskCard.paragraphs, sources, 'taskCard.paragraphs', 'bridgeQuote', problems)
   const covered = new Set()
   standard.notes.forEach((note, index) => {
     if (note.paragraph > 2) problems.push(`standard.notes[${index}].paragraph ${note.paragraph} does not exist`)
     covered.add(note.paragraph)
-    checkQuotes(note.items, standard.essay, `standard.notes[${index}].items`, 'quote', problems)
+    checkQuotes(note.items, [standard.essay], `standard.notes[${index}].items`, 'quote', problems)
   })
   for (const paragraph of [1, 2]) {
     if (!covered.has(paragraph)) problems.push(`standard.notes has no note for paragraph ${paragraph}`)
   }
-  checkQuotes(advanced.beyondStandard, advanced.essay, 'advanced.beyondStandard', 'quote', problems)
+  checkQuotes(advanced.beyondStandard, [advanced.essay], 'advanced.beyondStandard', 'quote', problems)
   return { problems, warnings, wordCounts, directSpeech }
 }
