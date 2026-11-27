@@ -83,9 +83,6 @@ ok('sentences: initials and reported speech stay in one sentence; quoted dialogu
   assert.deepEqual(split('Curtin works in Washington, D. C., which recovers food. Last year it grew.'), [
     'Curtin works in Washington, D. C., which recovers food.', 'Last year it grew.',
   ])
-  assert.deepEqual(split('They met Félix W. Ortiz on Friday. He showed them around.'), [
-    'They met Félix W. Ortiz on Friday.', 'He showed them around.',
-  ])
   assert.deepEqual(split('The students would say, “That’s okay. Put it in the box.” Then they left.'), [
     'The students would say, “That’s okay. Put it in the box.”', 'Then they left.',
   ])
@@ -101,12 +98,44 @@ ok('sentences: initials and reported speech stay in one sentence; quoted dialogu
   ])
 })
 
-ok('sentences: Roman numerals and plan labels can end a sentence', () => {
-  const split = value => passageSentences(value).map(sentence => sentence.text.trim())
-  assert.deepEqual(split('She served in World War I. Her letters survived.'), [
-    'She served in World War I.', 'Her letters survived.',
-  ])
-  assert.deepEqual(split('Plan B. It worked.'), ['Plan B.', 'It worked.'])
+const resolveSentenceQuote = (paragraph, targetText, sourceText, answerText) => resolveReadingLocate({
+  entry: { locateBy: 'stem', locationParaphrases: [{
+    sourceRole: 'stem', relationType: 'locationCue', sourceText, targetText, targetParagraphId: 'p', answerText,
+  }] },
+  stem: `What does the passage say about ${sourceText}?`,
+  paragraphs: new Map([['p', paragraph]]),
+  correctEvidence: [{ paragraphId: 'p', quote: paragraph }],
+})
+
+ok('a full locate quote can cross consecutive initial breaks without changing sentence splits', () => {
+  for (const [quote, pieces, cue, answer] of [
+    ['They met Félix W. Ortiz on Friday.', ['They met Félix W.', 'Ortiz on Friday.'], 'Ortiz', 'on Friday'],
+    ['John V. Atanasoff developed a computer.', ['John V.', 'Atanasoff developed a computer.'], 'Atanasoff', 'a computer'],
+    ['They met John V. Smith B. Ortiz on Friday.', ['They met John V.', 'Smith B.', 'Ortiz on Friday.'], 'Ortiz', 'on Friday'],
+  ]) {
+    const paragraph = `It was sunny. ${quote} Everyone went home.`
+    assert.deepEqual(passageSentences(paragraph).map(sentence => sentence.text.trim()), ['It was sunny.', ...pieces, 'Everyone went home.'])
+    const { errors, locate: resolved } = resolveSentenceQuote(paragraph, quote, cue, answer)
+    assert.deepEqual(errors, [])
+    assert.equal(resolved.sentence.index, 1)
+    assert.equal(paragraph.slice(resolved.sentence.start, resolved.sentence.end).trim(), quote)
+    assert.equal(paragraph.slice(resolved.cue.start, resolved.cue.end), cue)
+    assert.equal(resolved.same, true)
+    assert.match(resolveSentenceQuote(paragraph, `${quote} Everyone went home.`, cue, answer).errors[0], /完整的一句/u)
+  }
+})
+
+ok('single locate quotes remain valid next to Roman numerals, plans and room labels', () => {
+  for (const [first, firstCue, second, secondCue] of [
+    ['She served in World War I.', 'World War I', 'Her letters survived.', 'letters'],
+    ['Plan B.', 'Plan B', 'It worked.', 'worked'],
+    ['We met in Room B.', 'Room B', 'The meeting began at noon.', 'meeting'],
+  ]) {
+    const paragraph = `${first} ${second}`
+    assert.deepEqual(passageSentences(paragraph).map(sentence => sentence.text.trim()), [first, second])
+    assert.deepEqual(resolveSentenceQuote(paragraph, first, firstCue, firstCue).errors, [])
+    assert.deepEqual(resolveSentenceQuote(paragraph, second, secondCue, secondCue).errors, [])
+  }
 })
 
 ok('a no-break space in the passage matches a plain space in the stem words and in a copied sentence', () => {

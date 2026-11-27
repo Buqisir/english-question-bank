@@ -68,16 +68,14 @@ const core = value => String(value ?? '').replace(EDGE, '')
 // between the initials of "D. C." and inside "(or a few!) doesn't", and it
 // ends a sentence inside reported speech (say, “That’s okay. Put it …”).
 // A piece belongs to the sentence before it when that one ends in an
-// abbreviation, when the break falls inside a name or between two initials,
-// when the piece starts in lower case, or when the sentence before it opened a
+// abbreviation, when both sides of the break are single-letter initials, when
+// the piece starts in lower case, or when the sentence before it opened a
 // short quotation (“Safe!”, “That’s okay.”) after some words of its own and
 // the quotation closes later in the paragraph. A quoted speech of full
 // sentences still splits, so each of its sentences can be a 定位句.
 const SHORT_QUOTE_WORDS = 3
 const INITIAL_END = /(?:^|[\s(])[A-Z]\.\s*$/u
 const INITIAL_START = /^[A-Z]\.(?:[\s,;:]|$)/u
-const NAME_INITIAL_END = /(?:^|[^\p{L}])(?!Plan[\p{Zs}\t])\p{Lu}\p{Ll}[\p{L}\p{M}]*[\p{Zs}\t]+(?![IVX])\p{Lu}\.[\p{Zs}\t]+$/u
-const SURNAME_START = /^(?!(?:He|Her|His|It|She|Their|They|We|You)\b)\p{Lu}\p{Ll}/u
 function insideReportedSpeech(sentence, paragraphText) {
   const open = sentence.text.lastIndexOf('“')
   if (open <= 0 || sentence.text.slice(0, open).trim() === '') return false
@@ -92,7 +90,6 @@ export function passageSentences(paragraphText) {
     const previous = sentences.at(-1)
     if (previous && (ABBREVIATION.test(previous.text) || /^[a-z]/u.test(piece.text)
       || (INITIAL_END.test(previous.text) && INITIAL_START.test(piece.text))
-      || (NAME_INITIAL_END.test(previous.text) && SURNAME_START.test(piece.text))
       || insideReportedSpeech(previous, paragraphText))) {
       previous.end = piece.end
       previous.text = paragraphText.slice(previous.start, previous.end)
@@ -101,6 +98,21 @@ export function passageSentences(paragraphText) {
     }
   }
   return sentences
+}
+
+// Accept a complete copied quote across initial boundaries while preserving
+// the sentence indices and the original span used to locate cues and answers.
+function joinedLocateSentence(sentences, targetText) {
+  for (const [index, first] of sentences.entries()) {
+    let joined = first.text.trim()
+    for (let last = index; last + 1 < sentences.length; last += 1) {
+      if (!/ \p{Lu}\.$/u.test(sentences[last].text.trimEnd()) || !targetText.startsWith(`${joined} `)) break
+      const next = sentences[last + 1]
+      joined += ` ${next.text.trim()}`
+      if (joined === targetText) return { index, start: first.start, end: next.end }
+    }
+  }
+  return null
 }
 
 // A bridge is short: each Chinese character and each English word counts once.
@@ -248,8 +260,10 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
   if (!targetText || !paragraph.includes(targetText)) return fail('定位句 targetText 必须精确匹配原文。')
   const sentences = passageSentences(paragraph)
   const sentenceIndex = sentences.findIndex(sentence => core(sentence.text) === core(targetText))
-  if (sentenceIndex < 0) return fail('定位句 targetText 必须是原文中完整的一句。')
-  const sentence = sentences[sentenceIndex]
+  const sentence = sentenceIndex >= 0
+    ? { ...sentences[sentenceIndex], index: sentenceIndex }
+    : joinedLocateSentence(sentences, targetText)
+  if (!sentence) return fail('定位句 targetText 必须是原文中完整的一句。')
 
   const targetCue = text(item.targetCue)
   const sentenceText = paragraph.slice(sentence.start, sentence.end)
@@ -324,7 +338,7 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
       by,
       sourceText,
       paragraphId,
-      sentence: { index: sentenceIndex, start: sentence.start, end: sentence.end },
+      sentence: { index: sentence.index, start: sentence.start, end: sentence.end },
       cue: { start: cueOffset, end: cueOffset + cueText.length, text: cueText },
       sameWords,
       ...(sourceZh && cueZh ? { sourceZh, cueZh } : {}),
