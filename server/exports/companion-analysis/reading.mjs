@@ -184,6 +184,18 @@ function sentenceIndices(sentences, span) {
   return indices
 }
 
+// Older analyses may end the 定位句 at a name initial ("Félix W."), where the
+// splitter breaks; keep the rest of that sentence with it.
+function throughInitials(sentences, indices, paragraph) {
+  const widened = [...indices]
+  while (widened.length && widened.at(-1) + 1 < sentences.length) {
+    const last = sentences[widened.at(-1)]
+    if (!/(?:^|\s)\p{Lu}\.\s*$/u.test(paragraph.slice(last.start, last.end))) break
+    widened.push(widened.at(-1) + 1)
+  }
+  return widened
+}
+
 // One excerpt in reading order: the 定位句 and the sentences that hold the
 // answer, with the sentences between them kept when there is one and cut to
 // "……" when there are more.
@@ -197,7 +209,7 @@ function locateExcerpt(locate, group) {
   const sameParagraph = locate.answer.paragraphId === locate.paragraphId
   const targetSentences = passageSentences(texts.get(locate.paragraphId))
   const answerSentences = sameParagraph ? targetSentences : passageSentences(texts.get(locate.answer.paragraphId))
-  const targetIndices = sentenceIndices(targetSentences, locate.sentence)
+  const targetIndices = throughInitials(targetSentences, sentenceIndices(targetSentences, locate.sentence), texts.get(locate.paragraphId))
   const answerIndices = sentenceIndices(answerSentences, locate.answer)
   if (sameParagraph) {
     const low = Math.min(targetIndices[0], answerIndices[0])
@@ -283,8 +295,9 @@ function answerWhere(locate, group) {
     const order = array(group?.passage?.paragraphs).map(paragraph => paragraph.paragraphId)
     return order.indexOf(locate.answer.paragraphId) > order.indexOf(locate.paragraphId) ? '同段后文' : '同段前文'
   }
-  const sentences = passageSentences(paragraphTexts(group).get(locate.paragraphId))
-  const targetIndices = sentenceIndices(sentences, locate.sentence)
+  const paragraph = paragraphTexts(group).get(locate.paragraphId)
+  const sentences = passageSentences(paragraph)
+  const targetIndices = throughInitials(sentences, sentenceIndices(sentences, locate.sentence), paragraph)
   const answerIndices = sentenceIndices(sentences, locate.answer)
   const before = answerIndices[0] < targetIndices[0]
   const step = before ? targetIndices[0] - answerIndices[0] : answerIndices.at(-1) - targetIndices.at(-1)

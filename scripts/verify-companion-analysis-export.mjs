@@ -568,6 +568,19 @@ console.log('Companion analysis grammar-fill sentence lines, no reprinted passag
   }
   const nextSentence = renderInitialLocate(initialQuote, 'went home', 'Everyone went home.', '他们随后回了家。')
   assert.match(nextSentence, /<span class="locate-where">答案不在定位句，在下一句<\/span>/u)
+  const oldDraft = renderReadingGroup({
+    group: { ...group, passage: { paragraphs: [{ paragraphId: 'p1', text: `${initialQuote} Everyone went home.` }] } },
+    paperAsset: { ...paper, content: { questions: { q1: { ...paper.content.questions.q1, stem: 'What does the passage say about Félix?' } } } },
+    answers: [], openingHeadings: '',
+    analysis: { questions: { q1: {
+      locateBy: 'stem',
+      locationParaphrases: [{ sourceText: 'Félix', sourceRole: 'stem', targetText: 'They met Félix W.', targetParagraphId: 'p1',
+        relationType: 'locationCue', answerText: 'met Félix' }],
+      optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p1', quote: 'They met Félix W.' }] }],
+    } } },
+  })
+  const [, oldQuote] = oldDraft.match(/<div class="evidence-quote"><span class="micro-heading">原文依据<\/span><p lang="en">(.*?)<\/p>/u) ?? []
+  assert.equal(oldQuote?.replace(/<[^>]+>/gu, ''), `“${initialQuote}”`, 'an older 定位句 that stops at a name initial still prints the whole sentence')
 
   // 2026-11-24 (Owner): the correct option prints as the paper prints it under
   // 「正确选项」; a 定位词 and the passage's other words for it each carry a
