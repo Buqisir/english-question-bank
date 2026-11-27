@@ -5,7 +5,7 @@ import { loadNck1ReviewSource } from '../../../server/import-review/revisionProj
 import { projectEffectiveAnswers } from '../../../server/paper-import/answerCorrections.mjs'
 import { LISTENING_REVIEW_FILE } from '../../../server/paper-import/listeningReview.mjs'
 import { digestJson } from '../../../shared/paper-canonical/stable.mjs'
-import { mergeReviewedListeningAnalysis } from '../lib-listening-analysis.mjs'
+import { assertListeningSentenceTranslations, mergeReviewedListeningAnalysis } from '../lib-listening-analysis.mjs'
 import { alignReviewedListeningSentences } from '../listening-sentence-align.mjs'
 
 const skip = reason => ({ state: 'skip', reason })
@@ -61,17 +61,8 @@ function mergeAgentResponse(ctx, { document, aligned, sentenceTargets }, request
   if (response?.paperId !== request.paperId || response.baseRev !== request.baseRev
     || response.inputDigest !== request.inputDigest) throw new Error('Agent 回复的卷、基线或输入摘要不匹配')
   const authored = response.analysis
+  assertListeningSentenceTranslations(authored, sentenceTargets)
   const merged = mergeReviewedListeningAnalysis(document, aligned, { authored, requireHeardDistractors: true })
-  for (const [segmentId, material] of Object.entries(authored.materials)) {
-    const ids = new Set((sentenceTargets[segmentId] ?? []).map(({ id }) => id))
-    if (material.sentences === undefined) continue
-    if (!Array.isArray(material.sentences)) throw new Error(`${segmentId} 的逐句译文格式无效`)
-    for (const sentence of material.sentences) {
-      if (!ids.delete(sentence?.id) || typeof sentence.zh !== 'string' || !sentence.zh.trim()) {
-        throw new Error(`${segmentId} 的逐句译文 ID 或 zh 无效：${sentence?.id}`)
-      }
-    }
-  }
   ctx.writeJson(output, merged)
 }
 

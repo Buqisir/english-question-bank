@@ -58,7 +58,7 @@ import { reviewBundleDigest } from '../../server/import-review/importReviewStore
 import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME,
   mergeListeningSentenceAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
 import { alignReviewedListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
-import { mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
+import { assertListeningSentenceTranslations, mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
 import { isLocalReviewOrigin, withReviewPaperLock } from './review-target.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
@@ -566,6 +566,12 @@ function listeningGroups(ctx) {
     .map((group) => group.segmentId)
 }
 
+function fastListeningAnalysisRequest(document) {
+  const sentenceTargets = Object.fromEntries(listeningSentenceTargets(document)
+    .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
+  return { sentenceTargets, request: buildListeningAnalysisAgentRequest({ materialization: document, sentenceTargets }) }
+}
+
 export function round2Prompts(ctx) {
   const prompts = []
   const relative = (file) => path.relative(root, file)
@@ -585,14 +591,15 @@ export function round2Prompts(ctx) {
   ].join('\n') })
   if (hasListening(ctx) && readJson(materializationPath(ctx)).listening?.state === 'captured') {
     const { materialization, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
-    const sentenceTargets = Object.fromEntries(listeningSentenceTargets(materialization)
-      .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
     const file = path.join(ctx.fast, 'listening-analysis-request.json')
     const output = path.join(ctx.fast, 'listening-analysis-authored.json')
-    const request = buildListeningAnalysisAgentRequest({
-      materialization: projectEffectiveAnswers(materialization, answerCorrections), sentenceTargets,
-    })
-    if (existsSync(file) && digestJson(readJson(file)) !== digestJson(request)) archive(ctx, output)
+    const { request } = fastListeningAnalysisRequest(projectEffectiveAnswers(materialization, answerCorrections))
+    if (existsSync(file) && digestJson(readJson(file)) !== digestJson(request)) {
+      delete ctx.state.steps['listening-sentences']
+      save(ctx)
+      archive(ctx, output)
+      archive(ctx, path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME))
+    }
     writeJson(file, request)
     if (!existsSync(output)) prompts.push({ label: '听力讲解', outputs: [output], prompt:
       `读 ${relative(file)}，按 outputContract 写 ${relative(output)}。只写该文件。` })
@@ -1044,12 +1051,22 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
   const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
   const staged = existsSync(stage) ? readJson(stage) : null
   const hasAuthored = useAuthored && existsSync(authored)
-  if (!staged && !hasAuthored) {
+  const requestFile = path.join(ctx.fast, 'listening-analysis-request.json')
+  const hasRequest = useAuthored && existsSync(requestFile)
+  if (!hasAuthored && (!staged || hasRequest)) {
     if (!useAuthored) return { detail: '无听力讲解，保留段级展示' }
     throw new Stop('缺少听力讲解稿；先运行 after-proofread 并完成第二轮听力讲解')
   }
-  const { materialization: document, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
+  const { materialization: document, answerCorrections, sourceInput } = loadNck1ReviewSource(ctx.paperDir)
   const draft = hasAuthored ? readJson(authored) : null
+  const effective = projectEffectiveAnswers(document, answerCorrections)
+  if (hasAuthored) {
+    const { request, sentenceTargets } = fastListeningAnalysisRequest(effective)
+    if (hasRequest && digestJson(readJson(requestFile)) !== digestJson(request)) {
+      throw new Stop('听力讲解请求已过期；先运行 after-proofread 并完成第二轮听力讲解')
+    }
+    assertListeningSentenceTranslations(draft, sentenceTargets)
+  }
   let segments = []
   let detail
   try {
@@ -1059,7 +1076,6 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
   } catch (error) {
     detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
   }
-  const effective = projectEffectiveAnswers(document, answerCorrections)
   const analysis = mergeReviewedListeningAnalysis(effective, segments, {
     staged: hasAuthored ? null : staged, authored: draft, requireHeardDistractors: hasAuthored,
   })
@@ -1068,7 +1084,12 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
     writeJson(temporary, analysis)
     renameSync(temporary, stage)
   }
-  return { detail }
+  if (!useAuthored) return { detail }
+  return {
+    detail,
+    analysisSha256: sha256(readFileSync(stage)),
+    materializationSha256: sha256(sourceInput.materializationBytes),
+  }
 }
 
 function refreshListeningSentences(ctx, options) {
@@ -1561,6 +1582,17 @@ export function assertReferenceProductsReady(ctx) {
   assertStepTimes(ctx, ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa'])
 }
 
+function assertListeningAnalysisReady(ctx) {
+  const materialization = readFileSync(materializationPath(ctx))
+  if (JSON.parse(materialization).listening?.state !== 'captured') return
+  const receipt = ctx.state.steps['listening-sentences']
+  const analysis = path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME)
+  if (!receipt?.finishedAt || receipt.result?.materializationSha256 !== sha256(materialization)
+    || !existsSync(analysis) || receipt.result.analysisSha256 !== sha256(readFileSync(analysis))) {
+    throw new Stop('听力讲解缺失或与本次 finish 安装的文件不符；请重新运行 finish 再送审')
+  }
+}
+
 function assertStepTimes(ctx, names) {
   // A completion marker alone cannot prove that QA followed this reference generation.
   let previous = -Infinity
@@ -1708,7 +1740,10 @@ export async function submit(ctx, args) {
     }
   }
   if (ctx.state.data.listeningRedo) assertListeningRedoReady(ctx)
-  else assertReferenceProductsReady(ctx)
+  else {
+    assertReferenceProductsReady(ctx)
+    assertListeningAnalysisReady(ctx)
+  }
   // Always re-read before a possibly cached push step; no preview/submit bypass.
   const gate = assertImportSubmissionReady(ctx.paperDir)
   if (gate.pendingOwnerListening?.length) {

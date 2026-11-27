@@ -501,8 +501,16 @@ test('public paper writing and enrichment can install listening analysis by itse
   ctx.state.data.summaryParts = []
   const config = path.join(reviewRoot, 'config.json')
   json(config, { ...JSON.parse(readFileSync(config)), importProfile: 'public-paper-v1' })
+  const materializationPath = projection.manifest.materializationPath
+  const sourcePath = path.join(reviewRoot, materializationPath)
+  const source = JSON.parse(readFileSync(sourcePath))
+  const optionB = source.listening.questions[0].options.find(({ label }) => label === 'B')
+  optionB.text = 'By boat.'
+  json(sourcePath, source)
   const staged = path.join(reviewRoot, 'analysis-listening.json')
   const valid = JSON.parse(readFileSync(staged))
+  const questionId = `question:listening:${source.listening.questions[0].canonicalNumber}`
+  valid.questions[questionId].optionTranslationsZh.B = '乘船'
   for (const file of readdirSync(reviewRoot).filter(name => /^analysis-.+\.json$/u.test(name))) {
     rmSync(path.join(reviewRoot, file))
   }
@@ -523,7 +531,20 @@ test('public paper writing and enrichment can install listening analysis by itse
   }
   const review = path.join(reviewRoot, 'listening-review-v1.json')
   json(review, { evidence: [{ kind: 'asr_window', path: 'missing-asr.json', settings: { engine: 'apple' } }] })
-  json(authored, valid)
+  const [first, second] = request.sourceGroup.material.materials
+  const translation = { id: first.sentenceTargets[0].id, zh: '第一句译文' }
+  await t.test('rejects duplicate and cross-segment sentence IDs even without ASR timecodes', () => {
+    for (const invalid of [translation, { ...translation, id: second.sentenceTargets[0].id }]) {
+      const draft = structuredClone(valid)
+      draft.materials[first.segmentId].sentences = [translation, { ...invalid, zh: '重复或跨段译文' }]
+      json(authored, draft)
+      assert.throws(() => installListeningSentenceAnalysis(ctx), /逐句译文 ID 或 zh 无效/u)
+      assert(!fs.existsSync(staged))
+    }
+  })
+  const sentenceDraft = structuredClone(valid)
+  sentenceDraft.materials[first.segmentId].sentences = [translation]
+  json(authored, sentenceDraft)
   assert.match(installListeningSentenceAnalysis(ctx).detail, /句级对齐跳过.*missing-asr\.json/u)
   assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
   assert.deepEqual(readdirSync(reviewRoot).filter(name => /^analysis-.+\.json$/u.test(name)), ['analysis-listening.json'])
@@ -533,13 +554,12 @@ test('public paper writing and enrichment can install listening analysis by itse
 
   rmSync(staged)
   rmSync(review)
-  const materializationPath = projection.manifest.materializationPath
   const enrichContext = {
     paperId: ctx.paperId, baseRev: 'rev-fixture', bundle: reviewRoot,
     files: [{ role: 'materialization', path: materializationPath }],
     readBase: async file => {
       assert.equal(file, materializationPath)
-      return projection.materialization
+      return source
     },
     writeJson: (file, value) => json(path.join(reviewRoot, file), value),
   }
@@ -551,6 +571,23 @@ test('public paper writing and enrichment can install listening analysis by itse
   const enrichRequest = listeningAnalysisEnricher.agentRequest(enrichContext, result)
   listeningAnalysisEnricher.mergeAgentResponse(enrichContext, result, enrichRequest, { ...enrichRequest, analysis: valid })
   assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
+
+  await t.test('changing By boat. to By train. requires a new listening draft', () => {
+    json(authored, valid)
+    assert.equal(installListeningSentenceAnalysis(ctx).analysisSha256, sha256(readFileSync(staged)))
+    optionB.text = 'By train.'
+    json(sourcePath, source)
+    assert.throws(() => installListeningSentenceAnalysis(ctx), /听力讲解请求已过期/u)
+    assert(round2Prompts(ctx).some(({ label }) => label === '听力讲解'))
+    assert(!fs.existsSync(staged))
+    assert(!fs.existsSync(authored))
+    assert.throws(() => installListeningSentenceAnalysis(ctx), /缺少听力讲解稿/u)
+    const updated = structuredClone(valid)
+    updated.questions[questionId].optionTranslationsZh.B = '乘火车'
+    json(authored, updated)
+    installListeningSentenceAnalysis(ctx)
+    assert.equal(JSON.parse(readFileSync(staged)).questions[questionId].optionTranslationsZh.B, '乘火车')
+  })
 })
 
 test('local enrichment and finalize replay only byte-identical sealed source references', async t => {
@@ -1346,6 +1383,38 @@ test('submit and local preview reject current answer failures despite completed 
     }
     assert.deepEqual(snapshot(dir), before)
   }
+})
+
+test('submit and local preview require the current successful listening installation despite completed PDF QA', async t => {
+  const { dir, ctx, options } = fixture(t)
+  const { reviewRoot } = await listeningReviewFixture(dir, ctx.paperId)
+  const referenceFile = 'source-references-v1.json'
+  writeFileSync(path.join(reviewRoot, referenceFile), readFileSync(path.join(ctx.paperDir, referenceFile)))
+  ctx.paperDir = reviewRoot
+  ctx.state.steps['listening-review'] = completed({})
+  const staleQa = ctx.state.steps['pdf-qa']
+  const staged = path.join(reviewRoot, 'analysis-listening.json')
+  const valid = readFileSync(staged)
+  const assertBlocked = async () => {
+    assert.equal(ctx.state.steps['pdf-qa'], staleQa)
+    for (const args of [[], ['--local-preview']]) {
+      await assert.rejects(() => submit(ctx, args), /听力讲解缺失或与本次 finish 安装的文件不符/u)
+    }
+  }
+  await finish(ctx, [], options)
+  const receipt = ctx.state.steps['listening-sentences']
+  assert.equal(receipt.result.analysisSha256, sha256(valid))
+  await assert.rejects(() => submit(ctx, []), { code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE' })
+  appendFileSync(staged, ' ')
+  await assertBlocked()
+  rmSync(staged)
+  await assertBlocked()
+  writeFileSync(staged, valid)
+  json(path.join(ctx.fast, 'listening-analysis-authored.json'), {})
+  await assert.rejects(() => finish(ctx, [], options), /Listening analysis schema invalid/u)
+  assert.equal(ctx.state.steps['listening-sentences'].finishedAt, undefined)
+  assert.deepEqual(readFileSync(staged), valid)
+  await assertBlocked()
 })
 
 for (const name of downstream.slice(1)) {
