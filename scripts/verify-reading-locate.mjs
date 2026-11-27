@@ -101,6 +101,14 @@ ok('sentences: initials and reported speech stay in one sentence; quoted dialogu
   ])
 })
 
+ok('sentences: Roman numerals and plan labels can end a sentence', () => {
+  const split = value => passageSentences(value).map(sentence => sentence.text.trim())
+  assert.deepEqual(split('She served in World War I. Her letters survived.'), [
+    'She served in World War I.', 'Her letters survived.',
+  ])
+  assert.deepEqual(split('Plan B. It worked.'), ['Plan B.', 'It worked.'])
+})
+
 ok('a no-break space in the passage matches a plain space in the stem words and in a copied sentence', () => {
   const paragraphs = new Map([['p', 'Take\u00a0a view of the hills. It is quiet.']])
   const entry = { locateBy: 'stem', locationParaphrases: [{ sourceText: 'Take a view', sourceRole: 'stem', relationType: 'locationCue', targetText: 'Take\u00a0a view of the hills.', targetParagraphId: 'p', answerText: 'of the hills', note: '原词' }] }

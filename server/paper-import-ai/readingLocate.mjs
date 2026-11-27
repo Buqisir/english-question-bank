@@ -68,15 +68,16 @@ const core = value => String(value ?? '').replace(EDGE, '')
 // between the initials of "D. C." and inside "(or a few!) doesn't", and it
 // ends a sentence inside reported speech (say, “That’s okay. Put it …”).
 // A piece belongs to the sentence before it when that one ends in an
-// abbreviation or a name initial, when both sides are single-letter initials, when
-// the piece starts in lower case, or when the sentence before it opened a
+// abbreviation, when the break falls inside a name or between two initials,
+// when the piece starts in lower case, or when the sentence before it opened a
 // short quotation (“Safe!”, “That’s okay.”) after some words of its own and
 // the quotation closes later in the paragraph. A quoted speech of full
 // sentences still splits, so each of its sentences can be a 定位句.
 const SHORT_QUOTE_WORDS = 3
 const INITIAL_END = /(?:^|[\s(])[A-Z]\.\s*$/u
 const INITIAL_START = /^[A-Z]\.(?:[\s,;:]|$)/u
-const NAME_INITIAL_END = /(?:^|[^\p{L}])\p{Lu}\p{Ll}[\p{L}\p{M}]*[\p{Zs}\t]+\p{Lu}\.[\p{Zs}\t]*$/u
+const NAME_INITIAL_END = /(?:^|[^\p{L}])(?!Plan[\p{Zs}\t])\p{Lu}\p{Ll}[\p{L}\p{M}]*[\p{Zs}\t]+(?![IVX])\p{Lu}\.[\p{Zs}\t]+$/u
+const SURNAME_START = /^(?!(?:He|Her|His|It|She|Their|They|We|You)\b)\p{Lu}\p{Ll}/u
 function insideReportedSpeech(sentence, paragraphText) {
   const open = sentence.text.lastIndexOf('“')
   if (open <= 0 || sentence.text.slice(0, open).trim() === '') return false
@@ -91,7 +92,7 @@ export function passageSentences(paragraphText) {
     const previous = sentences.at(-1)
     if (previous && (ABBREVIATION.test(previous.text) || /^[a-z]/u.test(piece.text)
       || (INITIAL_END.test(previous.text) && INITIAL_START.test(piece.text))
-      || NAME_INITIAL_END.test(previous.text)
+      || (NAME_INITIAL_END.test(previous.text) && SURNAME_START.test(piece.text))
       || insideReportedSpeech(previous, paragraphText))) {
       previous.end = piece.end
       previous.text = paragraphText.slice(previous.start, previous.end)
