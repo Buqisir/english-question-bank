@@ -39,7 +39,7 @@ import {
 import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit, importLargePageLimits } from './lib-economy-page-allowance.mjs'
 import { LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
-import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
+import { analysisPdfDigest, declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE, expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { segmentListening } from './listening-segment.mjs'
@@ -1738,7 +1738,7 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
       && hasListening(ctx)
       && existsSync(manifestPath) && readJson(manifestPath).analysisDigest) {
       const projection = buildNck1ProductRefreshProjection(ctx.paperDir, { requireAnalyses: true }, hydratedEvidenceBase(ctx.paperDir))
-      if (projection.frozenProducts.manifest.analysisDigest !== projection.analysisDigest) {
+      if (projection.frozenProducts.manifest.analysisDigest !== analysisPdfDigest(projection)) {
         delete ctx.state.steps.freeze
         delete ctx.state.steps['pdf-qa']
       }
@@ -2326,7 +2326,7 @@ export async function listeningRedo(ctx, args, {
     && !(bytes && sealed && sha256(bytes) === sealed.sha256 && bytes.length === sealed.byteLength
       && matchesSealedPrintInputs({ rootDir: ctx.paperDir, inputDigest: digest, sealedFiles: originalManifest.files }))
   const analysisDigest = !printChanged && frozen?.analysisDigest !== undefined
-    ? buildNck1ProductRefreshProjection(ctx.paperDir, { requireAnalyses: true }, hydratedEvidenceBase(ctx.paperDir)).analysisDigest
+    ? analysisPdfDigest(buildNck1ProductRefreshProjection(ctx.paperDir, { requireAnalyses: true }, hydratedEvidenceBase(ctx.paperDir)))
     : frozen?.analysisDigest
   const refreshAnalysis = !printChanged && frozen?.analysisDigest !== analysisDigest
   const previous = ctx.state.steps['listening-redo-products']?.result

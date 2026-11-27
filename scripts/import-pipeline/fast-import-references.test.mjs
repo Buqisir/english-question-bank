@@ -13,15 +13,17 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
 import { uploadReviewBundle } from './lib-review-upload.mjs'
 import { finalizeProjection } from '../../server/import-review/finalizeComputation.mjs'
-import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
+import { reviewBundleDigest, validateReviewBundleManifest } from '../../server/import-review/importReviewStore.mjs'
 import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { enumerateParagraphSummaryTargets } from '../../server/paper-import-ai/paragraphSummaries.mjs'
+import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
 import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
-import { buildLocalReviewProjection, reviewManifest } from './review.mjs'
+import { buildLocalReviewProjection, prepareReviewPush, reviewManifest } from './review.mjs'
 import { freezeReviewFixture } from '../lib/reviewPublicationFixture.mjs'
 import { prebindReviewFixtureReferences } from '../lib/syntheticReviewAnswerFixture.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
@@ -763,7 +765,9 @@ for (const [edit, expectation] of [
   if (edit === 'reading') {
     prebindReviewFixtureReferences(reviewRoot, { expectedCandidateDigest: candidate.candidateDigest })
     const projection = buildLocalReviewProjection(reviewRoot)
-    await t.test('listening-redo refreshes the companion for new sentence timings and passes submit preflight', async t => {
+    for (const publicPaper of [false, true]) await t.test(publicPaper
+      ? 'public-paper-v1 with only listening analysis freezes four PDFs and passes submit preflight after listening-redo'
+      : 'listening-redo refreshes the companion for new sentence timings and passes submit preflight', async t => {
       fakeReviewOrigin(t)
       const { dir, ctx } = fixture(t)
       ctx.paperDir = path.join(dir, 'hydrated')
@@ -772,9 +776,42 @@ for (const [edit, expectation] of [
       const oldAnalysis = JSON.parse(readFileSync(analysisPath))
       delete oldAnalysis.materials[transcript[0].segmentId].sentences
       json(analysisPath, oldAnalysis)
-      freezeCompanionFixture(ctx.paperDir)
-      const before = buildLocalReviewProjection(ctx.paperDir)
-      const manifest = reviewManifest(ctx.paperDir, before, [], 'listening-redo-companion-fixture')
+      if (publicPaper) {
+        const config = path.join(ctx.paperDir, 'config.json')
+        const raw = JSON.parse(readFileSync(config))
+        raw.importProfile = 'public-paper-v1'
+        raw.provenance.month = 10
+        json(config, raw)
+        for (const file of readdirSync(ctx.paperDir).filter(name => name.startsWith('analysis-') && name.endsWith('.json'))) {
+          if (file !== 'analysis-listening.json') rmSync(path.join(ctx.paperDir, file))
+        }
+        const targets = enumerateParagraphSummaryTargets(projection.materialization)
+        json(path.join(ctx.paperDir, 'paragraph-summaries-v1.json'), {
+          schemaVersion: 'paragraph-summaries-v1', paperId: ctx.paperId,
+          sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+          groups: [...Map.groupBy(targets, ({ groupId }) => groupId)].map(([groupId, paragraphs]) => ({
+            groupId, paragraphs: paragraphs.map(({ paragraphId }) => ({ paragraphId, summary: '合成段落摘要。' })),
+          })),
+        })
+        const result = spawnSync(process.execPath, [path.join(import.meta.dirname, 'freeze-products.mjs'),
+          '--paper-dir', ctx.paperDir, '--parallel'], { encoding: 'utf8', timeout: 180_000 })
+        assert.equal(result.status, 0, result.stderr || String(result.error))
+      } else freezeCompanionFixture(ctx.paperDir)
+      const { manifest, projection: before } = prepareReviewPush(ctx.paperDir)
+      validateReviewBundleManifest(manifest)
+      if (publicPaper) {
+        assert.deepEqual(Object.keys(before.analysisSidecars), ['listening-analysis-v1.json'])
+        assert.equal(manifest.analysisDigest, before.analysisDigest)
+        assert(manifest.files.some(({ path }) => path === 'analysis-listening.json'))
+        assert.deepEqual(before.frozenProducts.manifest.files.map(({ path }) => path),
+          PAPER_PDF_EDITIONS.map(edition => `products/${edition}.pdf`))
+        assert(!Object.hasOwn(before.frozenProducts.manifest, 'analysisDigest'))
+        assert(!fs.existsSync(path.join(ctx.paperDir, 'products/analysis.pdf')))
+        const revision = { ...manifest, manifest, id: 'rev-public-four-pdfs', state: 'ready',
+          reviewKind: 'candidate', finalizedAt: oldTime }
+        assert.equal(finalizeProjection(ctx.paperDir, revision).analysisDigest, manifest.analysisDigest)
+        assert.equal(buildNck1SealedReviewProjection(ctx.paperDir, revision).analysisDigest, manifest.analysisDigest)
+      }
       const binding = path.resolve(import.meta.dirname, '../../.amp/import-review-origin')
       const boundOrigin = fs.existsSync(binding) ? new URL(readFileSync(binding, 'utf8').trim()).origin : null
       const restore = { schemaVersion: 'review-restore-v1', paperId: ctx.paperId,
@@ -809,14 +846,18 @@ for (const [edit, expectation] of [
       for (const { path: file } of before.frozenProducts.manifest.files.filter(({ path }) => path !== 'products/analysis.pdf')) {
         assert.deepEqual(after.frozenProducts.bytes[file], before.frozenProducts.bytes[file])
       }
-      assert.notDeepEqual(after.frozenProducts.bytes['products/analysis.pdf'], before.frozenProducts.bytes['products/analysis.pdf'])
       assert.doesNotThrow(() => assertListeningRedoReady(ctx))
-      const receipt = ctx.state.steps['listening-redo-products'].result
-      receipt.analysisDigest = before.analysisDigest
-      await assert.rejects(() => submit(ctx, ['--resolves', 'issue-listening']), /保留输入或冻结输入已变化/u)
-      receipt.analysisDigest = after.analysisDigest
+      if (publicPaper) {
+        assert.deepEqual(after.frozenProducts.bytes, before.frozenProducts.bytes)
+      } else {
+        assert.notDeepEqual(after.frozenProducts.bytes['products/analysis.pdf'], before.frozenProducts.bytes['products/analysis.pdf'])
+        const receipt = ctx.state.steps['listening-redo-products'].result
+        receipt.analysisDigest = before.analysisDigest
+        await assert.rejects(() => submit(ctx, ['--resolves', 'issue-listening']), /保留输入或冻结输入已变化/u)
+        receipt.analysisDigest = after.analysisDigest
+      }
       await run()
-      assert.equal(freezeRuns, 1)
+      assert.equal(freezeRuns, publicPaper ? 0 : 1)
       assert.equal(qaRuns, 1)
     })
     const asset = projection.analysisSidecars['listening-analysis-v1.json']

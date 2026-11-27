@@ -1,4 +1,11 @@
 import { ABSENT_BY_EXAM_DESIGN, sourceProductEditions } from '../../server/paper-import/pdfProductSet.mjs'
+import { LISTENING_ANALYSIS_FILE_NAME } from '../../server/paper-import-ai/analyzeListening.mjs'
+
+export function analysisPdfDigest(projection) {
+  if (projection.importProfile === 'public-paper-v1'
+    && !Object.keys(projection.analysisSidecars).some(file => file !== LISTENING_ANALYSIS_FILE_NAME)) return undefined
+  return projection.analysisDigest ?? undefined
+}
 
 // Before materialization only the explicit source declaration is available.
 // Once Canonical exists callers pass its independent listening-slot count.
