@@ -106,11 +106,14 @@ test('missing, corrupt, escaping, oversized and unknown diagnostics fail closed'
     decodedSha256: sha256(decoded), decodedByteLength: decoded.length } })
   assert.throws(() => loadListeningResult(file), /payload version/u)
 })
-function navigation(root) {
+function navigation(root, { extraWords = [], extraSegments = [], windowStart = 0 } = {}) {
   mkdirSync(path.join(root, 'listening-review-evidence'))
-  const bytes = Buffer.from(JSON.stringify({ result: { segments: [{ words: [
-    { word: 'Synthetic', start: 1, end: 1.2 }, { word: 'source', start: 3.5, end: 3.7 },
-  ] }] } }))
+  const words = [
+    { word: 'Synthetic', start: 1, end: 1.2 }, { word: 'source.', start: 2.8, end: 3 },
+    { word: 'SOURCE!', start: 3.5, end: 3.7 }, ...extraWords,
+  ].sort((a, b) => a.start - b.start)
+    .map(({ word, start, end }) => ({ word, start: start - windowStart, end: end - windowStart }))
+  const bytes = Buffer.from(JSON.stringify({ result: { segments: [{ words }, ...extraSegments] } }))
   writeFileSync(path.join(root, 'listening-review-evidence/raw.json'), bytes)
   const transcript = [{ segmentId: 's1', questionNumbers: [1], text: 'Synthetic source.' }]
   const subject = { paperId: 'paper-synthetic', sourceDigest: sha256('source'),
@@ -119,7 +122,7 @@ function navigation(root) {
     method: 'asr_source_comparison', untrustedContentHandledAsData: true,
     scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
     evidence: [{ path: 'listening-review-evidence/raw.json', sha256: sha256(bytes), byteLength: bytes.length,
-      kind: 'asr_window', window: { startSeconds: 0, endSeconds: 10 },
+      kind: 'asr_window', window: { startSeconds: windowStart, endSeconds: 10 },
       settings: { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' } }],
     groups: [{ segmentId: 's1', questionNumbers: [1], decision: 'usable', reason: 'Synthetic attestation', limits: [],
       playback: { startSeconds: 1, endSeconds: 3 }, occurrences: [{ startSeconds: 1, endSeconds: 3,
@@ -211,23 +214,32 @@ test('local upload preflight names oversize files and refuses total budget overf
     path: `file-${i}.json`, byteLength: 64 * 1024 ** 2 }))), /bundle/u)
 })
 
-function agentNavigation(t) {
-  const root = workspace(t), { review, subject, transcript } = navigation(root)
+function agentNavigation(t, machineDecision = 'review_required', asrOptions) {
+  const root = workspace(t), { review, subject, transcript } = navigation(root, asrOptions)
   transcript.push({ segmentId: 's2', questionNumbers: [2], text: 'Another source.' })
   review.groups.push({ ...structuredClone(review.groups[0]), segmentId: 's2', questionNumbers: [2],
     playback: { startSeconds: 5, endSeconds: 7 },
     occurrences: [{ startSeconds: 5, endSeconds: 7, evidencePaths: [review.evidence[0].path] }] })
-  review.groups[0].decision = 'review_required'
-  review.groups[0].playback = null
-  review.groups[0].occurrences = []
+  if (machineDecision === 'review_required') {
+    Object.assign(review.groups[0], { decision: 'review_required', playback: null, occurrences: [] })
+  }
+  // Bind the machine word edges separately from the padded playback range.
   const agent = withListeningRuleFixture(root, review, transcript)
+  if (machineDecision === 'usable') {
+    const descriptor = agent.evidence.at(-1), file = path.join(root, descriptor.path)
+    const summary = JSON.parse(readFileSync(file))
+    Object.assign(summary.groups[0].occurrences[0], { startSeconds: 1, endSeconds: 3 })
+    const bytes = Buffer.from(JSON.stringify(summary))
+    writeFileSync(file, bytes)
+    Object.assign(descriptor, { sha256: sha256(bytes), byteLength: bytes.length })
+  }
   agent.method = 'agent_asr_comparison'
   Object.assign(agent.groups[0], { decision: 'usable', playback: { startSeconds: 1, endSeconds: 4 },
     occurrences: [{ startSeconds: 1, endSeconds: 4, evidencePaths: [agent.evidence[0].path] }] })
   const edge = (sourceText, text, startSeconds) => ({ sourceText,
     words: [{ text, startSeconds, endSeconds: startSeconds + 0.2, evidencePath: agent.evidence[0].path }] })
   agent.groups[0].boundaryJudgment = {
-    start: edge('Synthetic', 'Synthetic', 1), end: edge('source.', 'source', 3.5),
+    start: edge('Synthetic', 'Synthetic', 1), end: edge('source.', 'SOURCE!', 3.5),
   }
   return { root, agent, subject, transcript }
 }
@@ -246,11 +258,83 @@ test('agent ASR adjustment cannot overlap its adjacent group', t => {
   agent.groups[0].occurrences[0].endSeconds = 5.1
   assert.throws(() => validateListeningReview(root, agent, subject, transcript), /overlapping playback/u)
 })
-test('agent ASR cannot rewrite a machine usable group', t => {
-  const root = workspace(t), { review, subject, transcript } = navigation(root)
-  review.method = 'agent_asr_comparison'
-  review.groups[0].playback.endSeconds = 4
-  assert.throws(() => validateListeningReview(root, review, subject, transcript), /navigation differs from rule/u)
+test('agent ASR can widen a machine usable group over a same-word echo with retained boundary basis', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable',
+    { extraWords: [{ word: 'SYNTHETIC!', start: 0.5, end: 0.7 }] })
+  const group = agent.groups[0]
+  group.playback.startSeconds = group.occurrences[0].startSeconds = 0.5
+  assert.equal(validateListeningReview(root, agent, subject, transcript).review, agent)
+  delete group.boundaryJudgment
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /boundary basis/u)
+  agent.method = 'asr_source_comparison'
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /navigation differs from rule/u)
+})
+test('agent ASR cannot start a machine usable occurrence at a repeated word inside it', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable',
+    { extraWords: [{ word: 'Synthetic', start: 1.5, end: 1.7 }] })
+  const group = agent.groups[0]
+  group.playback.startSeconds = group.occurrences[0].startSeconds = 1.5
+  Object.assign(group.boundaryJudgment.start.words[0], { startSeconds: 1.5, endSeconds: 1.7 })
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /usable adjustment must only widen/u)
+})
+test('agent ASR cannot widen machine usable playback by more than a second per edge', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable')
+  const group = agent.groups[0]
+  group.playback.endSeconds = 4.01
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /more than 1 second per edge/u)
+  group.occurrences[0].endSeconds = 4.01
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /more than 1 second per edge/u)
+})
+test('agent ASR cannot widen a machine usable occurrence over a spoken announcement', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+    extraWords: [{ word: 'Text', start: 3.1, end: 3.2 }, { word: 'two', start: 3.2, end: 3.4 }],
+  })
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
+  agent.groups[0].occurrences[0].endSeconds = 3
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
+})
+test('agent ASR rejects words overlapping either widened edge even if their onset was outside it', t => {
+  const after = agentNavigation(t, 'usable', { extraWords: [{ word: 'Next', start: 3, end: 3.2 }] })
+  assert.throws(() => validateListeningReview(after.root, after.agent, after.subject, after.transcript),
+    /end: widened range contains other speech/u)
+  const before = agentNavigation(t, 'usable', { extraWords: [{ word: 'Previous', start: 0.4, end: 0.6 }] })
+  const group = before.agent.groups[0]
+  group.playback.startSeconds = group.occurrences[0].startSeconds = 0.5
+  assert.throws(() => validateListeningReview(before.root, before.agent, before.subject, before.transcript),
+    /start: widened range contains other speech/u)
+})
+test('agent ASR rejects a zero-length ASR word inside widened playback', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+    extraSegments: [{ text: ' Deal. Next', words: [{ word: ' Deal.', start: 3.2, end: 3.2 }, { word: ' Next', start: 5, end: 5.2 }] }],
+  })
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
+})
+test('agent ASR checks timed announcements and ASR segments without word timestamps in widened playback', t => {
+  for (const segment of [
+    { text: '第二段', words: [{ word: '第二段', start: 3.1, end: 3.3 }] },
+    { text: '请看第二题', words: [{ word: '请看第二题', start: 3.1, end: 3.3 }] },
+    { text: 'Next dialogue', start: 3.1, end: 3.3 },
+  ]) {
+    const { root, agent, subject, transcript } = agentNavigation(t, 'usable', { extraSegments: [segment] })
+    assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
+  }
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+    extraSegments: [{ text: 'SOURCE!', start: 3.1, end: 3.3 }],
+  })
+  assert.equal(validateListeningReview(root, agent, subject, transcript).review, agent)
+})
+test('agent ASR requires continuous ASR coverage when only group playback widens', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable', { windowStart: 0.25 })
+  agent.groups[0].playback.startSeconds = 0
+  agent.groups[0].occurrences[0].endSeconds = agent.groups[0].playback.endSeconds = 3
+  Object.assign(agent.groups[0].boundaryJudgment.end.words[0], { text: 'source.', startSeconds: 2.8, endSeconds: 3 })
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript),
+    /ASR evidence does not cover the widened range/u)
+})
+test('agent ASR cannot change the occurrence count of a machine usable group', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable')
+  agent.groups[0].occurrences = []
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /preserve occurrence count/u)
 })
 test('agent ASR rejects invented words, mismatched timestamps and distant boundary words', t => {
   const { root, agent, subject, transcript } = agentNavigation(t)

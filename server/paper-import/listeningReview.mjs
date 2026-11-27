@@ -2,7 +2,8 @@ import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import path from 'node:path'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { LISTENING_REVIEW_VERSION, LISTENING_RULE_EVIDENCE_VERSION,
-  assertListeningRuleEvidence, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
+  assertListeningRuleEvidence, assertListeningUploadBudget,
+  listeningAsrWindowsCover } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { reviewSubjectBundleDigest } from '../import-review/reviewSubject.mjs'
 import { listeningAsrTokens } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
 
@@ -17,6 +18,34 @@ const range = (value, duration) => value && Number.isFinite(value.startSeconds)
 
 function fail(message) {
   throw Object.assign(new Error(`Listening review: ${message}`), { code: 'LISTENING_REVIEW_INVALID' })
+}
+
+function readAsrWindow(record, window) {
+  const { words, markers } = listeningAsrTokens([{ ...record, ...window }])
+  const speech = markers.map(({ startSeconds, endSeconds, raw }) => ({ startSeconds, endSeconds, text: raw }))
+  const absolute = item => ({
+    startSeconds: window.startSeconds + Number(item.start ?? item.startSeconds),
+    endSeconds: window.startSeconds + Number(item.end ?? item.endSeconds),
+  })
+  for (const segment of record.result?.segments || record.segments || []) {
+    const runs = segment.runs || segment.words || []
+    // A timed run can carry speech the tokenizer drops (e.g. a Chinese question announcement).
+    // faster-whisper emits zero-length runs (start === end) for real words.
+    const timed = runs.filter(run => {
+      const span = absolute(run)
+      return Number.isFinite(span.startSeconds) && span.startSeconds >= 0
+        && span.endSeconds >= span.startSeconds && span.endSeconds <= window.endSeconds + 0.5
+    })
+    for (const run of timed) {
+      const text = run.word ?? run.text
+      if (nonempty(text)) speech.push({ ...absolute(run), text })
+    }
+    if (timed.length) continue
+    const span = absolute(segment)
+    const text = segment.text || runs.map(run => run.word ?? run.text).join(' ')
+    if (nonempty(text) && range(span, Infinity)) speech.push({ ...span, text })
+  }
+  return { words, speech }
 }
 
 export function listeningReviewSubject(loaded, candidate) {
@@ -76,7 +105,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
   assertListeningUploadBudget(review.evidence)
   const paths = new Set()
   const ruleNotes = []
-  const asrWords = new Map()
+  const asrByPath = new Map()
   for (const file of review.evidence) {
     if (!exactKeys(file, ['path', 'sha256', 'byteLength', 'kind', 'window', 'settings'])
       || paths.has(file.path) || !digest(file.sha256) || !Number.isSafeInteger(file.byteLength)
@@ -92,7 +121,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) fail(`changed evidence: ${file.path}`)
     const record = JSON.parse(bytes.toString('utf8'))
     if (!retained && review.method === 'agent_asr_comparison' && file.kind === 'asr_window') {
-      asrWords.set(file.path, listeningAsrTokens([{ ...record, ...file.window }]).words)
+      asrByPath.set(file.path, readAsrWindow(record, file.window))
     }
     if (version === LISTENING_REVIEW_VERSION && file.kind === 'asr_window'
       && (record.rule || record.groups || record.engineAttempts
@@ -118,7 +147,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
     // A sealed review already checked the exact rule/ASR bytes with its
     // original reader, including the word timings used for agent judgments.
     for (const notes of retained ? [] : ruleNotes) {
-      try { assertListeningRuleEvidence(notes, review, transcript, asrWords) } catch (error) { fail(error.message) }
+      try { assertListeningRuleEvidence(notes, review, transcript, asrByPath) } catch (error) { fail(error.message) }
     }
   }
   if (!retainedNavigation && review.method !== 'audio_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
@@ -153,13 +182,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
       if (['asr_source_comparison', 'agent_asr_comparison'].includes(review.method)) {
         const windows = review.evidence.filter(file => file.kind === 'asr_window'
           && occurrence.evidencePaths.includes(file.path)).map(file => file.window)
-          .sort((a, b) => a.startSeconds - b.startSeconds)
-        let coveredEnd = occurrence.startSeconds
-        for (const window of windows) {
-          if (window.startSeconds > coveredEnd) break
-          coveredEnd = Math.max(coveredEnd, window.endSeconds)
-        }
-        if (coveredEnd < occurrence.endSeconds) fail('ASR evidence does not cover the occurrence')
+        if (!listeningAsrWindowsCover(windows, occurrence)) fail('ASR evidence does not cover the occurrence')
       }
       occurrenceEnd = occurrence.endSeconds
     }

@@ -33,7 +33,68 @@ export function listeningNavigationGroup(group) {
       ? group.occurrences.map(occurrence => ({ ...occurrence.playback, evidencePaths: occurrence.evidencePaths })) : [] }
 }
 
-export function assertListeningRuleEvidence(value, review, transcript, asrWords = new Map()) {
+export function listeningAsrWindowsCover(windows, { startSeconds, endSeconds }) {
+  let coveredEnd = startSeconds
+  for (const window of [...windows].sort((a, b) => a.startSeconds - b.startSeconds)) {
+    if (window.startSeconds > coveredEnd) break
+    coveredEnd = Math.max(coveredEnd, window.endSeconds)
+    if (coveredEnd >= endSeconds) return true
+  }
+  return false
+}
+
+const edgeWordText = text => text.toLowerCase().replace(/\p{P}/gu, '').trim()
+
+function assertUsableAdjustment(machine, adjusted, asrByPath, windows, fail) {
+  if (!Array.isArray(adjusted.occurrences) || machine.occurrences.length !== adjusted.occurrences.length) {
+    fail(`${machine.segmentId}: usable adjustment must preserve occurrence count`)
+  }
+  for (const [i, occurrence] of machine.occurrences.entries()) {
+    const next = adjusted.occurrences[i]
+    const original = occurrence.playback
+    const label = `${machine.segmentId} occurrence ${i + 1}`
+    if (!(next?.startSeconds <= original.startSeconds && next?.endSeconds >= original.endSeconds)) {
+      fail(`${label}: usable adjustment must only widen`)
+    }
+    // The teacher player uses group playback, which can extend past the occurrences.
+    const start = i === 0 ? Math.min(next.startSeconds, adjusted.playback?.startSeconds) : next.startSeconds
+    const end = i === machine.occurrences.length - 1
+      ? Math.max(next.endSeconds, adjusted.playback?.endSeconds) : next.endSeconds
+    if (original.startSeconds - start > 1 + 1e-9 || end - original.endSeconds > 1 + 1e-9) {
+      fail(`${label}: usable adjustment cannot widen more than 1 second per edge`)
+    }
+    const machineWords = occurrence.evidencePaths.flatMap(path => asrByPath.get(path)?.words || [])
+    const edges = [
+      ['start', { startSeconds: start, endSeconds: original.startSeconds },
+        word => word.startBoundary && Math.abs(word.runStartSeconds - occurrence.startSeconds) <= 1e-9],
+      ['end', { startSeconds: original.endSeconds, endSeconds: end },
+        word => word.endBoundary && Math.abs(word.runEndSeconds - occurrence.endSeconds) <= 1e-9],
+    ]
+    for (const [side, extension, atMachineEdge] of edges) {
+      if (!(extension.startSeconds < extension.endSeconds)) continue
+      if (!listeningAsrWindowsCover(windows, extension)) {
+        fail(`${label} ${side}: ASR evidence does not cover the widened range`)
+      }
+      const boundaryWords = new Set(machineWords.filter(atMachineEdge).map(word => edgeWordText(word.expressionText)))
+      const [boundaryWord] = boundaryWords
+      const echo = boundaryWords.size === 1 && boundaryWord && !/\s/u.test(boundaryWord) ? boundaryWord : null
+      const overlaps = span => span.endSeconds > span.startSeconds
+        ? Math.max(span.startSeconds, extension.startSeconds) < Math.min(span.endSeconds, extension.endSeconds)
+        : side === 'end'
+          ? span.startSeconds > extension.startSeconds && span.startSeconds <= extension.endSeconds
+          : span.startSeconds >= extension.startSeconds && span.startSeconds < extension.endSeconds
+      const conflicts = (span, text) => overlaps(span) && edgeWordText(text) !== echo
+      for (const { words, speech } of asrByPath.values()) {
+        if (words.some(word => conflicts(word, word.expressionText))
+          || speech.some(span => conflicts(span, span.text))) {
+          fail(`${label} ${side}: widened range contains other speech`)
+        }
+      }
+    }
+  }
+}
+
+export function assertListeningRuleEvidence(value, review, transcript, asrByPath = new Map()) {
   const fail = detail => { throw new Error(`Listening rule evidence: ${detail}`) }
   if (!exactKeys(value, ['schemaVersion', 'rule', 'normalization', 'input', 'rawEvidence', 'groups', 'diagnostic'])
     || value.schemaVersion !== LISTENING_RULE_EVIDENCE_VERSION
@@ -52,6 +113,7 @@ export function assertListeningRuleEvidence(value, review, transcript, asrWords 
     || value.input.sourceTextSha256 !== sha256(JSON.stringify(transcript))
     || digestJson(value.rule) !== digestJson(value.input.rule)
     || digestJson(value.normalization) !== digestJson(value.input.normalization)) fail('inconsistent rule/input binding')
+  const windows = value.rawEvidence.map(file => file.window)
   for (const [i, group] of value.groups.entries()) {
     if (group.segmentId !== review.groups[i].segmentId
       || group.sourceText !== transcript.find(source => source.segmentId === group.segmentId)?.text
@@ -65,9 +127,10 @@ export function assertListeningRuleEvidence(value, review, transcript, asrWords 
       && digestJson(listeningNavigationGroup(group)) !== digestJson(pick(review.groups[i],
       ['segmentId', 'questionNumbers', 'decision', 'playback', 'occurrences']))
     if (differs && (review.method === 'asr_source_comparison'
-      || (review.method === 'agent_asr_comparison' && group.decision !== 'review_required'))) fail('navigation differs from rule')
+      || (review.method === 'agent_asr_comparison' && group.decision === 'blocked'))) fail('navigation differs from rule')
     if (review.method === 'agent_asr_comparison'
       && (differs || Object.hasOwn(review.groups[i], 'boundaryJudgment'))) {
+      if (differs && group.decision === 'usable') assertUsableAdjustment(group, review.groups[i], asrByPath, windows, fail)
       const basis = review.groups[i].boundaryJudgment
       const nonempty = text => typeof text === 'string' && text.trim().length > 0
       if (!exactKeys(basis, ['start', 'end'])) fail('missing agent ASR boundary basis')
@@ -85,7 +148,7 @@ export function assertListeningRuleEvidence(value, review, transcript, asrWords 
           const nearby = side === 'start' ? word.startSeconds - review.groups[i].playback?.startSeconds
             : review.groups[i].playback?.endSeconds - word.endSeconds
           if (!(nearby >= 0 && nearby <= 1.5)
-            || !asrWords.get(word.evidencePath)?.some(observed => observed.rawRunText === word.text
+            || !asrByPath.get(word.evidencePath)?.words.some(observed => observed.rawRunText === word.text
               && Math.abs(observed.runStartSeconds - word.startSeconds) <= 0.05 + 1e-9
               && Math.abs(observed.runEndSeconds - word.endSeconds) <= 0.05 + 1e-9)) {
             fail('agent ASR boundary word missing or far from playback')
