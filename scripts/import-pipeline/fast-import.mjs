@@ -26,7 +26,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
-import { loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { buildNck1ProductRefreshProjection, loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { projectEffectiveAnswers } from '../../server/paper-import/answerCorrections.mjs'
 import { PRODUCT_MANIFEST, matchesSealedPrintInputs, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
@@ -569,7 +569,8 @@ function listeningGroups(ctx) {
 function fastListeningAnalysisRequest(document) {
   const sentenceTargets = Object.fromEntries(listeningSentenceTargets(document)
     .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
-  return { sentenceTargets, request: buildListeningAnalysisAgentRequest({ materialization: document, sentenceTargets }) }
+  const input = buildListeningAnalysisAgentRequest({ materialization: document, sentenceTargets })
+  return { sentenceTargets, request: { ...input, requestDigest: digestJson(input) } }
 }
 
 export function round2Prompts(ctx) {
@@ -596,13 +597,16 @@ export function round2Prompts(ctx) {
     const { request } = fastListeningAnalysisRequest(projectEffectiveAnswers(materialization, answerCorrections))
     if (existsSync(file) && digestJson(readJson(file)) !== digestJson(request)) {
       delete ctx.state.steps['listening-sentences']
+      delete ctx.state.data.listeningAnalysisBinding
       save(ctx)
       archive(ctx, output)
       archive(ctx, path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME))
     }
+    if (existsSync(output) && readJson(output)?.requestDigest !== request.requestDigest) archive(ctx, output)
     writeJson(file, request)
     if (!existsSync(output)) prompts.push({ label: '听力讲解', outputs: [output], prompt:
-      `读 ${relative(file)}，按 outputContract 写 ${relative(output)}。只写该文件。` })
+      `读 ${relative(file)}，只写 ${relative(output)}。回复为 {"requestDigest":…,"analysis":…}，`
+      + '原样复制所读请求的 requestDigest，把按 outputContract 写的讲解放在 analysis 中。' })
   }
   return prompts
 }
@@ -1049,23 +1053,37 @@ async function installListening(ctx) {
 export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {}) {
   const stage = path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME)
   const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
-  const staged = existsSync(stage) ? readJson(stage) : null
+  let stagedBytes = existsSync(stage) ? readFileSync(stage) : null
+  const staged = stagedBytes ? JSON.parse(stagedBytes) : null
   const hasAuthored = useAuthored && existsSync(authored)
-  const requestFile = path.join(ctx.fast, 'listening-analysis-request.json')
-  const hasRequest = useAuthored && existsSync(requestFile)
-  if (!hasAuthored && (!staged || hasRequest)) {
+  if (!hasAuthored && !staged) {
     if (!useAuthored) return { detail: '无听力讲解，保留段级展示' }
     throw new Stop('缺少听力讲解稿；先运行 after-proofread 并完成第二轮听力讲解')
   }
   const { materialization: document, answerCorrections, sourceInput } = loadNck1ReviewSource(ctx.paperDir)
-  const draft = hasAuthored ? readJson(authored) : null
   const effective = projectEffectiveAnswers(document, answerCorrections)
-  if (hasAuthored) {
+  let draft = null
+  let requestDigest
+  if (useAuthored) {
     const { request, sentenceTargets } = fastListeningAnalysisRequest(effective)
-    if (hasRequest && digestJson(readJson(requestFile)) !== digestJson(request)) {
-      throw new Stop('听力讲解请求已过期；先运行 after-proofread 并完成第二轮听力讲解')
+    requestDigest = request.requestDigest
+    if (hasAuthored) {
+      const requestFile = path.join(ctx.fast, 'listening-analysis-request.json')
+      if (!existsSync(requestFile) || digestJson(readJson(requestFile)) !== digestJson(request)) {
+        throw new Stop('听力讲解请求已过期；先运行 after-proofread 并完成第二轮听力讲解')
+      }
+      const response = readJson(authored)
+      if (response?.requestDigest !== requestDigest) {
+        throw new Stop('听力讲解稿与本次请求摘要不符；先运行 after-proofread 并完成第二轮听力讲解')
+      }
+      draft = response.analysis
+      assertListeningSentenceTranslations(draft, sentenceTargets)
+    } else {
+      const binding = ctx.state.data.listeningAnalysisBinding
+      if (binding?.requestDigest !== requestDigest || binding.analysisSha256 !== sha256(stagedBytes)) {
+        throw new Stop('已有听力讲解缺少当前输入绑定；先运行 after-proofread 并完成第二轮听力讲解')
+      }
     }
-    assertListeningSentenceTranslations(draft, sentenceTargets)
   }
   let segments = []
   let detail
@@ -1082,12 +1100,15 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
   if (!staged || digestJson(staged) !== digestJson(analysis)) {
     const temporary = `${stage}.partial`
     writeJson(temporary, analysis)
+    stagedBytes = readFileSync(temporary)
     renameSync(temporary, stage)
   }
   if (!useAuthored) return { detail }
+  const analysisSha256 = sha256(stagedBytes)
+  ctx.state.data.listeningAnalysisBinding = { requestDigest, analysisSha256 }
   return {
     detail,
-    analysisSha256: sha256(readFileSync(stage)),
+    analysisSha256,
     materializationSha256: sha256(sourceInput.materializationBytes),
   }
 }
@@ -1710,7 +1731,20 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
     'pdf-qa': () => pdfContactSheets(ctx),
     ...referenceStages,
   }
-  for (const [name, produce] of Object.entries(stages)) await step(ctx, name, produce)
+  const manifestPath = path.join(ctx.paperDir, PRODUCT_MANIFEST)
+  for (const [name, produce] of Object.entries(stages)) {
+    // A retry can reach freeze after the listening sidecar was already installed.
+    if (name === 'freeze' && (ctx.state.steps.freeze?.finishedAt || ctx.state.steps['pdf-qa']?.finishedAt)
+      && hasListening(ctx)
+      && existsSync(manifestPath) && readJson(manifestPath).analysisDigest) {
+      const projection = buildNck1ProductRefreshProjection(ctx.paperDir, { requireAnalyses: true }, hydratedEvidenceBase(ctx.paperDir))
+      if (projection.frozenProducts.manifest.analysisDigest !== projection.analysisDigest) {
+        delete ctx.state.steps.freeze
+        delete ctx.state.steps['pdf-qa']
+      }
+    }
+    await step(ctx, name, produce)
+  }
   const qa = ctx.state.steps['pdf-qa'].result
   const steps = ctx.state.steps
   say('\n待主 Agent 目检 PDF：')

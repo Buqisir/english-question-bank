@@ -18,11 +18,13 @@ import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
-import { productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
 import { buildLocalReviewProjection, reviewManifest } from './review.mjs'
+import { freezeReviewFixture } from '../lib/reviewPublicationFixture.mjs'
 import { prebindReviewFixtureReferences } from '../lib/syntheticReviewAnswerFixture.mjs'
+import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 import { writePendingDeclarations } from './pending-declarations.mjs'
 
@@ -494,6 +496,26 @@ async function listeningReviewFixture(dir, paperId, options) {
   return makeReviewRoot(path.join(dir, 'actual'), paperId, undefined, { listening: true, ...options })
 }
 
+function explainFixtureDistractors(analysis, request) {
+  for (const { questions } of request.sourceGroup.material.materials) {
+    for (const { questionId, wrongOptions } of questions) {
+      const distractors = Object.entries(wrongOptions).filter(([, { mustExplain }]) => mustExplain)
+        .map(([label]) => ({ label, explanationZh: '合成录音中的干扰项。' }))
+      if (distractors.length) analysis.questions[questionId].distractors = distractors
+    }
+  }
+}
+
+function writeListeningDraftFixture(ctx, analysis) {
+  ctx.state.data.summaryParts ??= []
+  round2Prompts(ctx)
+  const request = JSON.parse(readFileSync(path.join(ctx.fast, 'listening-analysis-request.json')))
+  const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
+  explainFixtureDistractors(analysis, request)
+  json(authored, { requestDigest: request.requestDigest, analysis })
+  return { authored, request }
+}
+
 test('public paper writing and enrichment can install listening analysis by itself', async t => {
   const { dir, ctx } = fixture(t)
   const { reviewRoot, projection } = await listeningReviewFixture(dir, ctx.paperId)
@@ -517,18 +539,14 @@ test('public paper writing and enrichment can install listening analysis by itse
   const prompts = round2Prompts(ctx)
   assert.deepEqual(prompts.map(({ label }) => label), ['检索 metadata', '听力讲解'])
   const [authored] = prompts[1].outputs
+  const requestFile = path.join(ctx.fast, 'listening-analysis-request.json')
+  const request = JSON.parse(readFileSync(requestFile))
+  const writeDraft = analysis => json(authored, { requestDigest: request.requestDigest, analysis })
   assert.throws(() => installListeningSentenceAnalysis(ctx), /缺少听力讲解稿/u)
-  json(authored, { ...valid, paperId: 'another-paper' })
+  writeDraft({ ...valid, paperId: 'another-paper' })
   assert.throws(() => installListeningSentenceAnalysis(ctx), /paperId does not match/u)
   assert(!fs.existsSync(staged))
-  const request = JSON.parse(readFileSync(path.join(ctx.fast, 'listening-analysis-request.json')))
-  for (const { questions } of request.sourceGroup.material.materials) {
-    for (const { questionId, wrongOptions } of questions) {
-      const distractors = Object.entries(wrongOptions).filter(([, { mustExplain }]) => mustExplain)
-        .map(([label]) => ({ label, explanationZh: '合成录音中的干扰项。' }))
-      if (distractors.length) valid.questions[questionId].distractors = distractors
-    }
-  }
+  explainFixtureDistractors(valid, request)
   const review = path.join(reviewRoot, 'listening-review-v1.json')
   json(review, { evidence: [{ kind: 'asr_window', path: 'missing-asr.json', settings: { engine: 'apple' } }] })
   const [first, second] = request.sourceGroup.material.materials
@@ -537,18 +555,18 @@ test('public paper writing and enrichment can install listening analysis by itse
     for (const invalid of [translation, { ...translation, id: second.sentenceTargets[0].id }]) {
       const draft = structuredClone(valid)
       draft.materials[first.segmentId].sentences = [translation, { ...invalid, zh: '重复或跨段译文' }]
-      json(authored, draft)
+      writeDraft(draft)
       assert.throws(() => installListeningSentenceAnalysis(ctx), /逐句译文 ID 或 zh 无效/u)
       assert(!fs.existsSync(staged))
     }
   })
   const sentenceDraft = structuredClone(valid)
   sentenceDraft.materials[first.segmentId].sentences = [translation]
-  json(authored, sentenceDraft)
+  writeDraft(sentenceDraft)
   assert.match(installListeningSentenceAnalysis(ctx).detail, /句级对齐跳过.*missing-asr\.json/u)
   assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
   assert.deepEqual(readdirSync(reviewRoot).filter(name => /^analysis-.+\.json$/u.test(name)), ['analysis-listening.json'])
-  json(authored, { ...valid, questions: {} })
+  writeDraft({ ...valid, questions: {} })
   assert.throws(() => installListeningSentenceAnalysis(ctx), /schema invalid: \/questions/u)
   assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
 
@@ -572,8 +590,8 @@ test('public paper writing and enrichment can install listening analysis by itse
   listeningAnalysisEnricher.mergeAgentResponse(enrichContext, result, enrichRequest, { ...enrichRequest, analysis: valid })
   assert.deepEqual(JSON.parse(readFileSync(staged)), valid)
 
-  await t.test('changing By boat. to By train. requires a new listening draft', () => {
-    json(authored, valid)
+  await t.test('a late By boat. draft cannot be installed for the new By train. request', () => {
+    writeDraft(valid)
     assert.equal(installListeningSentenceAnalysis(ctx).analysisSha256, sha256(readFileSync(staged)))
     optionB.text = 'By train.'
     json(sourcePath, source)
@@ -582,9 +600,13 @@ test('public paper writing and enrichment can install listening analysis by itse
     assert(!fs.existsSync(staged))
     assert(!fs.existsSync(authored))
     assert.throws(() => installListeningSentenceAnalysis(ctx), /缺少听力讲解稿/u)
+    writeDraft(valid)
+    assert.throws(() => installListeningSentenceAnalysis(ctx), /听力讲解稿与本次请求摘要不符/u)
+    assert(!fs.existsSync(staged))
+    assert(round2Prompts(ctx).some(({ label }) => label === '听力讲解'))
     const updated = structuredClone(valid)
     updated.questions[questionId].optionTranslationsZh.B = '乘火车'
-    json(authored, updated)
+    writeListeningDraftFixture(ctx, updated)
     installListeningSentenceAnalysis(ctx)
     assert.equal(JSON.parse(readFileSync(staged)).questions[questionId].optionTranslationsZh.B, '乘火车')
   })
@@ -720,6 +742,7 @@ for (const [edit, expectation] of [
   if (!legacy) assert.notEqual(current.candidateDigest, subject.candidateDigest)
   const asrStage = ctx.state.steps['asr-apple-rule-v2'] = completed({ retained: true })
   const sentenceStage = ctx.state.steps['listening-sentences'] = completed({ stale: true })
+  writeListeningDraftFixture(ctx, JSON.parse(readFileSync(path.join(reviewRoot, 'analysis-listening.json'))))
   await finish(ctx, [], options)
   assert.notEqual(ctx.state.steps['listening-sentences'], sentenceStage)
   const { review } = readListeningReview(reviewRoot, current, transcript)
@@ -1387,21 +1410,41 @@ test('submit and local preview reject current answer failures despite completed 
 
 test('submit and local preview require the current successful listening installation despite completed PDF QA', async t => {
   const { dir, ctx, options } = fixture(t)
-  const { reviewRoot } = await listeningReviewFixture(dir, ctx.paperId)
+  const { reviewRoot, projection } = await listeningReviewFixture(dir, ctx.paperId)
   const referenceFile = 'source-references-v1.json'
   writeFileSync(path.join(reviewRoot, referenceFile), readFileSync(path.join(ctx.paperDir, referenceFile)))
   ctx.paperDir = reviewRoot
   ctx.state.steps['listening-review'] = completed({})
   const staleQa = ctx.state.steps['pdf-qa']
   const staged = path.join(reviewRoot, 'analysis-listening.json')
-  const valid = readFileSync(staged)
+  const sourcePath = path.join(reviewRoot, projection.manifest.materializationPath)
+  const source = JSON.parse(readFileSync(sourcePath))
+  const question = source.listening.questions[0]
+  const optionB = question.options.find(({ label }) => label === 'B')
+  const questionId = `question:listening:${question.canonicalNumber}`
+  const analysis = JSON.parse(readFileSync(staged))
+  optionB.text = 'By boat.'
+  json(sourcePath, source)
+  analysis.questions[questionId].optionTranslationsZh.B = '乘船'
+  json(staged, analysis)
   const assertBlocked = async () => {
     assert.equal(ctx.state.steps['pdf-qa'], staleQa)
     for (const args of [[], ['--local-preview']]) {
       await assert.rejects(() => submit(ctx, args), /听力讲解缺失或与本次 finish 安装的文件不符/u)
     }
   }
+  optionB.text = 'By train.'
+  json(sourcePath, source)
+  await assert.rejects(() => finish(ctx, [], options), /已有听力讲解缺少当前输入绑定/u)
+  assert.equal(JSON.parse(readFileSync(staged)).questions[questionId].optionTranslationsZh.B, '乘船')
+  await assertBlocked()
+  analysis.questions[questionId].optionTranslationsZh.B = '乘火车'
+  const { authored, request } = writeListeningDraftFixture(ctx, analysis)
   await finish(ctx, [], options)
+  rmSync(authored)
+  await finish(ctx, [], options)
+  const valid = readFileSync(staged)
+  assert.equal(JSON.parse(valid).questions[questionId].optionTranslationsZh.B, '乘火车')
   const receipt = ctx.state.steps['listening-sentences']
   assert.equal(receipt.result.analysisSha256, sha256(valid))
   await assert.rejects(() => submit(ctx, []), { code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE' })
@@ -1410,11 +1453,48 @@ test('submit and local preview require the current successful listening installa
   rmSync(staged)
   await assertBlocked()
   writeFileSync(staged, valid)
-  json(path.join(ctx.fast, 'listening-analysis-authored.json'), {})
+  json(authored, { requestDigest: request.requestDigest, analysis: {} })
   await assert.rejects(() => finish(ctx, [], options), /Listening analysis schema invalid/u)
   assert.equal(ctx.state.steps['listening-sentences'].finishedAt, undefined)
   assert.deepEqual(readFileSync(staged), valid)
   await assertBlocked()
+})
+
+test('finish refreshes only the stale analysis PDF and reruns PDF QA after a listening rewrite', async t => {
+  const { dir, ctx } = fixture(t)
+  const { reviewRoot } = await listeningReviewFixture(dir, ctx.paperId)
+  ctx.paperDir = reviewRoot
+  ctx.state.steps['listening-review'] = completed({})
+  const before = freezeReviewFixture(reviewRoot)
+  ctx.state.steps['source-references'].result.producerVersion = before.sourceReferences.producerVersion
+  const analysisPath = 'products/analysis.pdf'
+  const oldAnalysis = productPdfBytes(1, 'Old analysis')
+  writeFileSync(path.join(reviewRoot, analysisPath), oldAnalysis)
+  const original = before.frozenProducts
+  json(path.join(reviewRoot, PRODUCT_MANIFEST), {
+    ...original.manifest, analysisDigest: before.analysisDigest,
+    files: [...original.manifest.files, {
+      path: analysisPath, mediaType: 'application/pdf', pageCount: 1,
+      sha256: sha256(oldAnalysis), byteLength: oldAnalysis.length,
+    }],
+  })
+  const draft = JSON.parse(readFileSync(path.join(reviewRoot, 'analysis-listening.json')))
+  Object.values(draft.questions)[0].reasonZh = '更新后的听力讲解。'
+  writeListeningDraftFixture(ctx, draft)
+  let qaRuns = 0
+  const options = { referenceStages: { 'pdf-qa': () => { qaRuns++; return { dir: 'new-qa' } } } }
+  await finish(ctx, [], options)
+  const after = buildLocalReviewProjection(reviewRoot)
+  assert.equal(qaRuns, 1)
+  assert.notEqual(after.analysisDigest, before.analysisDigest)
+  assert.equal(after.frozenProducts.manifest.analysisDigest, after.analysisDigest)
+  assert.notDeepEqual(after.frozenProducts.bytes[analysisPath], oldAnalysis)
+  assert.equal(original.manifest.files.length, 4)
+  for (const { path: file } of original.manifest.files) {
+    assert.deepEqual(after.frozenProducts.bytes[file], original.bytes[file])
+  }
+  await finish(ctx, [], options)
+  assert.equal(qaRuns, 1)
 })
 
 for (const name of downstream.slice(1)) {
