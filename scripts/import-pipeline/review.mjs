@@ -327,7 +327,7 @@ export function loadLocalReviewedListening(paperDir, loaded, candidate) {
 async function productionStatus(paperId) {
   const empty = { paperId, latest: null, latestRevisionId: null, revisions: [] }
   const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
-    { cache: 'no-store', signal: AbortSignal.timeout(15_000) }, { allowNotFound: true, notFoundValue: empty }).catch(error => { throw new Error(`UNKNOWN: ${error.message}`, { cause: error }) })
+    { cache: 'no-store', signal: AbortSignal.timeout(90_000) }, { allowNotFound: true, notFoundValue: empty }).catch(error => { throw new Error(`UNKNOWN: ${error.message}`, { cause: error }) })
   if (status?.paperId !== paperId || !Array.isArray(status.revisions)) fail('UNKNOWN: Review 状态不完整')
   return status
 }
