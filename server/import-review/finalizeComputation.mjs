@@ -45,10 +45,10 @@ export function finalizeProjection(directory, revision, {
     expectedCandidateDigest: revision.candidateDigest,
     replayReferencesFromRevisionId: evidenceBase?.directory ? revision.manifest?.expectedBaseRevisionId : null,
   }, evidenceBase)
+  const baseManifest = evidenceBase?.directory && evidenceBase.revision?.id === revision.manifest?.expectedBaseRevisionId
+    && evidenceBase.revision?.paperId === projection.paperId ? evidenceBase.revision.manifest : null
   const readBaseReview = () => {
-    if (!evidenceBase?.directory || evidenceBase.revision?.id !== revision.manifest?.expectedBaseRevisionId
-      || evidenceBase.revision?.paperId !== projection.paperId) return null
-    const descriptor = evidenceBase.revision.manifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)
+    const descriptor = baseManifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)
     if (!descriptor) return null
     const bytes = readFileSync(resolveReviewFile(evidenceBase.directory, LISTENING_REVIEW_FILE))
     return bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256 ? JSON.parse(bytes) : null
@@ -59,10 +59,12 @@ export function finalizeProjection(directory, revision, {
     const spellingReview = readFileSync(resolveReviewFile(directory, SPELLING_REVIEW_FILE))
     verifyListeningInsertionOccurrences(spellingReview, readBaseReview)
     // A new Candidate can bind to its own validated navigation sidecar.
+    const baseReport = baseManifest?.files?.find(file => file.path === SPELLING_REVIEW_FILE)
+    const retainedReport = baseReport?.sha256 === sha256(spellingReview) && baseReport.byteLength === spellingReview.length
     verifyListeningEditOccurrences(spellingReview, listening, () => {
       const base = readBaseReview()
       return base?.subject?.paperId === revision.manifest.paperId ? base : null
-    })
+    }, retainedReport)
   }
   return projection
 }

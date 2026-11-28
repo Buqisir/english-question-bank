@@ -269,6 +269,22 @@ test('agent ASR can widen a machine usable group over a same-word echo with reta
   agent.method = 'asr_source_comparison'
   assert.throws(() => validateListeningReview(root, agent, subject, transcript), /navigation differs from rule/u)
 })
+test('a supplemental source word explains a cropped recognition only at the same time', t => {
+  for (const [text, start, allowed] of [['sauce', 3.52, true], ['Text', 3.52, false],
+    ['Another', 3.52, false], ['sauce', 3.48, false], ['sauce', 3.85, false]]) {
+    const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+      extraWords: [{ word: text, start, end: Math.max(start, 3.66) }],
+    })
+    const relative = 'listening-review-evidence/supplement.json'
+    const bytes = Buffer.from(JSON.stringify({ segments: [{ words: [{ word: 'source', start: 3.5, end: 3.7 }] }] }))
+    writeFileSync(path.join(root, relative), bytes)
+    agent.evidence.push({ ...agent.evidence[0], path: relative, sha256: sha256(bytes), byteLength: bytes.length })
+    Object.assign(agent.groups[0].boundaryJudgment.end.words[0], { text: 'source', evidencePath: relative })
+    const validate = () => validateListeningReview(root, agent, subject, transcript)
+    if (allowed) assert.doesNotThrow(validate)
+    else assert.throws(validate, /widened range contains other speech/u)
+  }
+})
 test('agent ASR cannot start a machine usable occurrence at a repeated word inside it', t => {
   const { root, agent, subject, transcript } = agentNavigation(t, 'usable',
     { extraWords: [{ word: 'Synthetic', start: 1.5, end: 1.7 }] })

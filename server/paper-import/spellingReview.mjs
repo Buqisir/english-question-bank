@@ -253,15 +253,16 @@ export function supportsListeningEdit(text, edit, heard) {
   return listeningEditEvidenceMatch(text, edit, heard) === 'unique'
 }
 
-export function verifyListeningEditOccurrences(reportBytes, current, readBaseReview = () => null) {
+export function verifyListeningEditOccurrences(reportBytes, current, readBaseReview = () => null, retainedReport = false) {
   const { listeningEdits } = JSON.parse(new TextDecoder().decode(reportBytes))
   if (!listeningEdits?.length) return
   let base
   for (const { segmentId, audioSha256, occurrence } of listeningEdits) {
     const matches = review => audioSha256 === review?.subject?.playbackAudioSha256
       && review.groups?.some(group => group.segmentId === segmentId && group.decision === 'usable'
-        && group.occurrences?.some(item => item.startSeconds === occurrence.startSeconds
-          && item.endSeconds === occurrence.endSeconds))
+        && group.occurrences?.some(item => retainedReport
+          ? item.startSeconds <= occurrence.startSeconds && item.endSeconds >= occurrence.endSeconds
+          : item.startSeconds === occurrence.startSeconds && item.endSeconds === occurrence.endSeconds))
     if (!matches(current) && !matches(base ??= readBaseReview())) {
       fail(`listening edit must match a reviewed occurrence of ${segmentId}`)
     }

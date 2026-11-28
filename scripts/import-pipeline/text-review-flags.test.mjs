@@ -220,6 +220,10 @@ test('whole-turn admission binds the original turn and only changes transcript t
     segmentId: turn.segmentId, decision: 'usable', occurrences: [turn.occurrence],
   }] }
   verifyListeningEditOccurrences(encode(turn), review)
+  const widened = structuredClone(review)
+  widened.groups[0].occurrences[0].endSeconds += 1
+  verifyListeningEditOccurrences(encode(turn), widened, () => null, true)
+  assert.throws(() => verifyListeningEditOccurrences(encode(turn), widened), /match a reviewed occurrence/)
   assert.throws(() => verifyListeningEditOccurrences(encode({ ...turn, occurrence: { startSeconds: 10, endSeconds: 31 } }), review),
     /match a reviewed occurrence/)
   assert.throws(() => apply({ ...turn, before: 'I agre.' }), /complete original turn/)
