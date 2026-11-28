@@ -1,0 +1,152 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Sophia,\nI’m glad you’re curious about the “Reading China” activity our school held recently. Here’s what it was like.\n\nDuring the activity, each of us chose an English book about Chinese culture, such as stories of traditional festivals. We read in groups after class and shared what we had learned. Finally, each group gave an English talk to the whole grade.\n\nFor me, it was a real eye-opener. I picked up many useful expressions, like how to explain dumplings and paper-cutting in English. More importantly, I now feel more confident introducing my own culture to friends abroad, including you!\n\nIf you like, I can mail you the book I read so we can talk about it together.\nBest wishes,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "回复笔友的电子邮件，沿用题面给出的称呼 Dear Sophia 和落款 Best wishes、Li Hua",
+        "personTense": "用第一人称介绍；活动已经办完，讲活动内容用一般过去时，谈现在的感受用一般现在时",
+        "readerTone": "写给新西兰笔友，像朋友聊天一样亲切、自然，不用公文腔",
+        "goal": "让 Sophia 知道“悦读中国”活动做了什么，以及我从中得到了什么"
+      },
+      "taskRequires": [
+        "介绍“悦读中国”英语读书活动的内容",
+        "谈自己的收获与感想"
+      ],
+      "thisEssayChooses": "活动内容按先后写三步：每人选一本讲中国文化的英文书，课后分组共读交流，最后各组用英语向全年级分享；收获落在学会用英语讲饺子、剪纸，感想落在更有信心向外国朋友介绍本国文化；结尾提出把书寄给 Sophia，方便两人接着聊。"
+    },
+    "standard": {
+      "essay": "Dear Sophia,\nI’m glad you’re curious about the “Reading China” activity our school held recently. Here’s what it was like.\n\nDuring the activity, each of us chose an English book about Chinese culture, such as stories of traditional festivals. We read in groups after class and shared what we had learned. Finally, each group gave an English talk to the whole grade.\n\nFor me, it was a real eye-opener. I picked up many useful expressions, like how to explain dumplings and paper-cutting in English. More importantly, I now feel more confident introducing my own culture to friends abroad, including you!\n\nIf you like, I can mail you the book I read so we can talk about it together.\nBest wishes,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "介绍活动的内容",
+          "quote": "During the activity, each of us chose an English book about Chinese culture, such as stories of traditional festivals."
+        },
+        {
+          "point": "介绍活动的内容",
+          "quote": "Finally, each group gave an English talk to the whole grade."
+        },
+        {
+          "point": "谈收获与感想",
+          "quote": "I picked up many useful expressions, like how to explain dumplings and paper-cutting in English."
+        },
+        {
+          "point": "谈收获与感想",
+          "quote": "More importantly, I now feel more confident introducing my own culture to friends abroad, including you!"
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "回应笔友的询问，点明这封信要介绍什么",
+          "items": [
+            {
+              "quote": "I’m glad you’re curious about the “Reading China” activity our school held recently.",
+              "explain": "先接住 Sophia 想了解活动这件事，再说出活动名称，读者一眼就知道信的主题；held recently 和题面“最近举行”对上，没有另编日期。"
+            },
+            {
+              "quote": "Here’s what it was like.",
+              "explain": "一句短话把话头交给下一段，口气像朋友聊天，比 I am writing to tell you 更适合笔友。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：按先后顺序交代活动做了什么",
+          "items": [
+            {
+              "quote": "each of us chose an English book about Chinese culture, such as stories of traditional festivals",
+              "explain": "用 such as 举出一类书，外国读者马上明白“悦读中国”读的是什么，而不只是一个活动名。"
+            },
+            {
+              "quote": "We read in groups after class and shared what we had learned.",
+              "explain": "写出活动怎么进行；shared 发生在 learned 之后，所以 what we had learned 用过去完成时。"
+            },
+            {
+              "quote": "Finally,",
+              "explain": "During、Finally 把选书、共读、分享串成先后三步，读者不必自己理顺顺序。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：先写具体收获，再写感想",
+          "items": [
+            {
+              "quote": "it was a real eye-opener",
+              "explain": "用 eye-opener（让人大开眼界的事）概括感受，比 very meaningful 具体，也更口语。"
+            },
+            {
+              "quote": "like how to explain dumplings and paper-cutting in English",
+              "explain": "收获不说空话“学到很多”，而是落到能讲饺子、剪纸这件能看见的本事上。"
+            },
+            {
+              "quote": "including you!",
+              "explain": "把感想拉回到读信的 Sophia 身上，让她觉得这封信是写给她的。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "给出下一步，让笔友能接着回应",
+          "items": [
+            {
+              "quote": "I can mail you the book I read so we can talk about it together",
+              "explain": "结尾提出寄书、一起聊，Sophia 读完知道可以怎么回信，比 Looking forward to your reply 更有内容。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Here’s what it was like.",
+          "function": "在开头一句话引出介绍，适合给朋友讲一段经历。"
+        },
+        {
+          "expression": "It was a real eye-opener.",
+          "function": "概括一次活动给人的新鲜感受，可以直接用在活动介绍类书信里。"
+        },
+        {
+          "expression": "feel more confident introducing ... to ...",
+          "function": "把收获说成能力的变化，写感想时比 I learned a lot 更具体。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Sophia,\nI was thrilled to hear you’re curious about “Reading China,” the English reading activity our school held recently. Here’s what it was like.\n\nEach of us picked an English book that tells a Chinese story, from legends behind traditional festivals to journeys along the Silk Road. We met in reading circles after class, swapping notes and favorite passages. The activity ended with a book-sharing session, where every group presented its book to the whole grade in English.\n\nI gained far more than new words. Explaining the Mid-Autumn Festival in English forced me to understand my own culture better. I also found that I could stand in front of the whole grade and speak without my voice shaking. Now I can’t wait to share more Chinese stories with you in our emails.\n\nShall I mail you the book I read? I’d love to hear what you think of it.\nBest wishes,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "介绍活动的内容",
+          "quote": "Each of us picked an English book that tells a Chinese story, from legends behind traditional festivals to journeys along the Silk Road."
+        },
+        {
+          "point": "介绍活动的内容",
+          "quote": "The activity ended with a book-sharing session, where every group presented its book to the whole grade in English."
+        },
+        {
+          "point": "谈收获与感想",
+          "quote": "Explaining the Mid-Autumn Festival in English forced me to understand my own culture better."
+        },
+        {
+          "point": "谈收获与感想",
+          "quote": "I also found that I could stand in front of the whole grade and speak without my voice shaking."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "from legends behind traditional festivals to journeys along the Silk Road",
+          "explain": "用 from ... to ... 写出书目的跨度，比标准版只举节日故事更能让读者看到选书范围。"
+        },
+        {
+          "quote": "swapping notes and favorite passages",
+          "explain": "用现在分词短语补出共读时具体做什么，读书小组的样子更清楚，句子也不显得拉长。"
+        },
+        {
+          "quote": "speak without my voice shaking",
+          "explain": "用“声音不再发抖”这个细节写出变得自信，比直接说 I became more confident 更真实，也更像学生自己的经历。"
+        }
+      ]
+    }
+  }
+}

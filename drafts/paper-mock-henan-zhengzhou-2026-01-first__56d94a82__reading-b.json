@@ -1,0 +1,765 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b": {
+      "overview": "记叙文。兽医 Kwane Stewart 在收容所工作四年后身心俱疲，一次在路边为流浪者的狗治病让他重新出发，成为每周为流浪者宠物义诊的“街头兽医”，并希望更多人效仿。",
+      "fullTranslationZh": "每周，兽医 Kwane Stewart 医生都会前往圣迭戈的东村，照料当地流浪者群体养的狗、猫和鸟。\nStewart 对动物的喜爱是受父母影响而来的。六岁时，他就知道自己想当一名兽医。在科罗拉多州读完兽医学课程后，他做了十年兽医。2008 年，他成为一家县立动物收容所的首席兽医，那里地处受金融危机冲击的地区。在那里，他目睹了宠物被遗弃的令人心碎的现实。干了四年后，Stewart 发现自己身心俱疲、满怀内疚，准备辞职。\n后来，一天早上在上班路上，他看到一个带着狗的流浪汉。他治好了那条狗的皮肤病，狗的变化非常明显。心怀感激的狗主人对他说：“谢谢你没有无视我，还给我的狗治病。”那一刻彻底改变了 Stewart。“就是在那时，我决定重新去救助动物，但要按我自己的方式来。”他说。\n几周后，Stewart 在一家施食处开了一间临时兽医诊所。那里的顾客鼓励他把服务做得更远，于是他作为“街头兽医”的新角色开始了。除了治疗常见病，Stewart 还提供疫苗接种和常规健康检查，并倡导让宠物不感到害怕的护理方式。他帮助过的许多人不仅深表感激，还和他结下了深厚的情谊，把他看作一个既关心他们的宠物、又尊重他们人格的人。\n“我梦想全世界的人都愿意效仿我所做的事。”Stewart 说。目前，他正在组建一个由志愿者、技术员和医院工作人员组成的网络。“这些人是受我所做的事启发，主动来联系我的，他们问：‘我怎样也能这样做？’”他说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b-1",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+          "sourceText": "On a weekly basis, Dr. Kwane Stewart, a vet (兽医), heads to San Diego’s East Village to care for the dogs, cats, and birds that belong to the homeless community in the area.",
+          "displayText": "On a weekly basis, Dr. Kwane Stewart, a vet (兽医), heads to San Diego’s East Village to care for the dogs, cats, and birds that belong to the homeless community in the area.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:24"
+          ],
+          "translationZh": "每周，兽医 Kwane Stewart 医生都会前往圣迭戈的东村，照料当地流浪者群体养的狗、猫和鸟。",
+          "analysisZh": "主干是 Dr. Kwane Stewart … heads to San Diego’s East Village（Stewart 医生前往圣迭戈东村）。a vet 是插在主语后的同位语，交代他的身份；句首的 On a weekly basis 说明频率是每周一次。to care for … 是不定式，表示去那里的目的。care for 的宾语是并列的 the dogs, cats, and birds，后面的 that belong to the homeless community in the area 是定语从句，限定这些是当地流浪者群体养的动物。",
+          "underlineRanges": [
+            {
+              "start": 19,
+              "end": 36,
+              "quote": "Dr. Kwane Stewart"
+            },
+            {
+              "start": 50,
+              "end": 83,
+              "quote": "heads to San Diego’s East Village"
+            },
+            {
+              "start": 84,
+              "end": 95,
+              "quote": "to care for"
+            },
+            {
+              "start": 122,
+              "end": 171,
+              "quote": "that belong to the homeless community in the area"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b-2",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+          "sourceText": "Many of those he helps not only express deep gratefulness but also form strong bonds with him, seeing him as someone who cares for their pets and acknowledges their humanity.",
+          "displayText": "Many of those he helps not only express deep gratefulness but also form strong bonds with him, seeing him as someone who cares for their pets and acknowledges their humanity.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:26"
+          ],
+          "translationZh": "他帮助过的许多人不仅深表感激，还和他结下了深厚的情谊，把他看作一个既关心他们的宠物、又尊重他们人格的人。",
+          "analysisZh": "主语是 Many of those he helps（他帮助过的许多人），he helps 是省略了关系词的定语从句，修饰 those。谓语由 not only … but also … 连接两个并列动作：express deep gratefulness（深表感激）和 form strong bonds with him（和他结下深厚情谊）。逗号后的 seeing him as someone … 是现在分词短语，补充说明这些人怎样看待他；someone 后的 who 从句里又有两个并列谓语 cares for their pets 和 acknowledges their humanity，既关心宠物，也尊重主人的人格。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "Many of those he helps"
+            },
+            {
+              "start": 23,
+              "end": 57,
+              "quote": "not only express deep gratefulness"
+            },
+            {
+              "start": 58,
+              "end": 93,
+              "quote": "but also form strong bonds with him"
+            },
+            {
+              "start": 95,
+              "end": 116,
+              "quote": "seeing him as someone"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1"
+              ],
+              "start": 0,
+              "end": 50,
+              "quote": "每周，兽医 Kwane Stewart 医生都会前往圣迭戈的东村，照料当地流浪者群体养的狗、猫和鸟。"
+            },
+            {
+              "paragraphId": "zh-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2"
+              ],
+              "start": 51,
+              "end": 210,
+              "quote": "Stewart 对动物的喜爱是受父母影响而来的。六岁时，他就知道自己想当一名兽医。在科罗拉多州读完兽医学课程后，他做了十年兽医。2008 年，他成为一家县立动物收容所的首席兽医，那里地处受金融危机冲击的地区。在那里，他目睹了宠物被遗弃的令人心碎的现实。干了四年后，Stewart 发现自己身心俱疲、满怀内疚，准备辞职。"
+            },
+            {
+              "paragraphId": "zh-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3"
+              ],
+              "start": 211,
+              "end": 339,
+              "quote": "后来，一天早上在上班路上，他看到一个带着狗的流浪汉。他治好了那条狗的皮肤病，狗的变化非常明显。心怀感激的狗主人对他说：“谢谢你没有无视我，还给我的狗治病。”那一刻彻底改变了 Stewart。“就是在那时，我决定重新去救助动物，但要按我自己的方式来。”他说。"
+            },
+            {
+              "paragraphId": "zh-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4"
+              ],
+              "start": 340,
+              "end": 504,
+              "quote": "几周后，Stewart 在一家施食处开了一间临时兽医诊所。那里的顾客鼓励他把服务做得更远，于是他作为“街头兽医”的新角色开始了。除了治疗常见病，Stewart 还提供疫苗接种和常规健康检查，并倡导让宠物不感到害怕的护理方式。他帮助过的许多人不仅深表感激，还和他结下了深厚的情谊，把他看作一个既关心他们的宠物、又尊重他们人格的人。"
+            },
+            {
+              "paragraphId": "zh-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5"
+              ],
+              "start": 505,
+              "end": 608,
+              "quote": "“我梦想全世界的人都愿意效仿我所做的事。”Stewart 说。目前，他正在组建一个由志愿者、技术员和医院工作人员组成的网络。“这些人是受我所做的事启发，主动来联系我的，他们问：‘我怎样也能这样做？’”他说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+                "start": 19,
+                "end": 36,
+                "quote": "Dr. Kwane Stewart"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+                "start": 50,
+                "end": 83,
+                "quote": "heads to San Diego’s East Village"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+                "start": 84,
+                "end": 95,
+                "quote": "to care for"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+                "start": 122,
+                "end": 171,
+                "quote": "that belong to the homeless community in the area"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p1",
+                "start": 0,
+                "end": 50,
+                "quote": "每周，兽医 Kwane Stewart 医生都会前往圣迭戈的东村，照料当地流浪者群体养的狗、猫和鸟。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+                "start": 328,
+                "end": 350,
+                "quote": "Many of those he helps"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+                "start": 351,
+                "end": 385,
+                "quote": "not only express deep gratefulness"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+                "start": 386,
+                "end": 421,
+                "quote": "but also form strong bonds with him"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+                "start": 423,
+                "end": 444,
+                "quote": "seeing him as someone"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p4",
+                "start": 112,
+                "end": 164,
+                "quote": "他帮助过的许多人不仅深表感激，还和他结下了深厚的情谊，把他看作一个既关心他们的宠物、又尊重他们人格的人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+                "start": 0,
+                "end": 172,
+                "quote": "On a weekly basis, Dr. Kwane Stewart, a vet (兽医), heads to San Diego’s East Village to care for the dogs, cats, and birds that belong to the homeless community in the area."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p1",
+                "start": 33,
+                "end": 49,
+                "quote": "照料当地流浪者群体养的狗、猫和鸟"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+                "start": 374,
+                "end": 469,
+                "quote": "Four years into the job, Stewart found himself burnt out, filled with guilt, and ready to quit."
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3",
+                "start": 282,
+                "end": 359,
+                "quote": "It was then that I decided to get back to saving animals, but on my own terms"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p2",
+                "start": 126,
+                "end": 159,
+                "quote": "干了四年后，Stewart 发现自己身心俱疲、满怀内疚，准备辞职。"
+              },
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p3",
+                "start": 96,
+                "end": 124,
+                "quote": "就是在那时，我决定重新去救助动物，但要按我自己的方式来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+                "start": 328,
+                "end": 502,
+                "quote": "Many of those he helps not only express deep gratefulness but also form strong bonds with him, seeing him as someone who cares for their pets and acknowledges their humanity."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p4",
+                "start": 112,
+                "end": 164,
+                "quote": "他帮助过的许多人不仅深表感激，还和他结下了深厚的情谊，把他看作一个既关心他们的宠物、又尊重他们人格的人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+                "start": 178,
+                "end": 279,
+                "quote": "These are people who’ve reached out to me, inspired by what I’m doing, asking, ‘How can I do it too?’"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+                "paragraphId": "zh-b-p5",
+                "start": 63,
+                "end": 99,
+                "quote": "这些人是受我所做的事启发，主动来联系我的，他们问：‘我怎样也能这样做？’"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写 Stewart 现在每周为流浪者的宠物看病，再倒叙他当兽医、在收容所累垮想辞职的经历，接着写路边救狗这一转折，最后写他成为“街头兽医”和希望更多人加入。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+            "summary": "Stewart 每周去圣迭戈东村照料流浪者的宠物。",
+            "function": "开篇介绍人物和他现在做的事"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+            "summary": "他从小想当兽医，在收容所当首席兽医四年后身心俱疲，准备辞职。",
+            "function": "倒叙转行前的经历和低谷"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3",
+            "summary": "他在上班路上为流浪汉的狗治好皮肤病，主人的感谢让他决定按自己的方式重新救助动物。",
+            "function": "写转折点"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+            "summary": "他开设临时诊所，成为“街头兽医”，提供多种服务，被帮助的人感激并信任他。",
+            "function": "写他的新工作和人们的评价"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+            "summary": "他梦想全世界有人效仿，正在组建由受他启发的人组成的网络。",
+            "function": "写他的愿望和影响"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "分清 Stewart 过去在收容所的工作和他现在做的事，选出描述现在工作的一项。",
+      "stemTranslationZh": "关于 Stewart 现在的工作，可以知道什么？",
+      "locateBy": "options",
+      "locateFindZh": "核对各选项是他在收容所的旧工作还是现在的工作",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他收养被遗弃的动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "abandoned pets",
+            "optionText": "abandoned animals",
+            "matchType": "exact",
+            "relationNote": "abandoned 出自他在收容所目睹宠物被遗弃（abandoned pets）的经历，那是过去的事；他现在照料的是流浪者自己养的宠物，原文也没说他收养动物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+              "quote": "There, he witnessed the heartbreaking reality of abandoned pets.",
+              "anchor": "abandoned pets"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他管理一家动物救助中心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In 2008, he became the head vet at a county-run animal shelter in an area struck by the financial crisis.",
+            "sourceEntity": "the head vet at a county-run animal shelter",
+            "optionText": "He manages an animal rescue center.",
+            "optionEntity": "manages an animal rescue center",
+            "explanation": "他 2008 年起在县立收容所当首席兽医（head vet），四年后累得想辞职，那是从前的工作；他现在是在街头义诊的“街头兽医”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+              "quote": "In 2008, he became the head vet at a county-run animal shelter in an area struck by the financial crisis.",
+              "anchor": "head vet at a county-run animal shelter"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他受雇于一个科研项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "veterinary science program",
+            "optionText": "scientific program",
+            "matchType": "wordFamily",
+            "relationNote": "选项把 science program 改成 scientific program，可[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2|After completing a veterinary science program]]说的是他在科罗拉多读完的兽医学课程，是求学经历，不是雇他的单位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+              "quote": "After completing a veterinary science program in Colorado, he worked as a vet for a decade.",
+              "anchor": "veterinary science program"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他照料流浪者的宠物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+              "quote": "On a weekly basis, Dr. Kwane Stewart, a vet (兽医), heads to San Diego’s East Village to care for the dogs, cats, and birds that belong to the homeless community in the area.",
+              "anchor": "care for the dogs, cats, and birds that belong to the homeless community"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "tends to the pets of homeless individuals",
+          "sourceRole": "correctOption",
+          "targetText": "care for the dogs, cats, and birds that belong to the homeless community",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“照料”（tends to）就是原文的 care for，“流浪者的宠物”概括了流浪群体养的猫狗和鸟（belong to the homeless community）；“每周”（On a weekly basis）加上一般现在时，说明这是他眼下的工作，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:25": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "topic-introduction"
+      },
+      "questionFocus": "弄清作者写 Stewart 在收容所的经历，是为后文的哪件事做铺垫。",
+      "stemTranslationZh": "文中为什么提到 Stewart 在收容所的工作？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他在收容所几年后的状态",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了突出他作为兽医的技术和能力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "His work at the shelter highlights his skills and abilities as a vet.",
+            "explanation": "收容所那段写的是他目睹宠物被遗弃的惨状、累到想辞职，没写他医术多高明。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了说明他为什么决定转变职业方向。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+              "quote": "Four years into the job, Stewart found himself burnt out, filled with guilt, and ready to quit.",
+              "anchor": "burnt out, filled with guilt, and ready to quit"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3",
+              "quote": "It was then that I decided to get back to saving animals, but on my own terms",
+              "anchor": "on my own terms"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了说明这份工作将来可能的样子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "In 2008, he became the head vet at a county-run animal shelter in an area struck by the financial crisis.",
+            "sourceHighlight": "In 2008",
+            "optionText": "To illustrate what the job might look like in the future.",
+            "optionHighlight": "in the future",
+            "explanation": "收容所是他 2008 年起做过的旧工作（In 2008），写的是过去的经历，没有预示这份工作将来会怎样。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+              "quote": "In 2008, he became the head vet at a county-run animal shelter in an area struck by the financial crisis.",
+              "anchor": "In 2008"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了展示这份工作的困难和压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Four years into the job, Stewart found himself burnt out, filled with guilt, and ready to quit.",
+            "sourceHighlight": "ready to quit",
+            "optionText": "To demonstrate the difficulties and pressures of the job.",
+            "optionHighlight": "the difficulties and pressures of the job",
+            "explanation": "原文确实写了他累垮、内疚（burnt out, filled with guilt），但落脚在他准备辞职、随后转去街头行医；写压力是为了引出转行，不是专门讲这份工作有多难。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+              "quote": "Four years into the job, Stewart found himself burnt out, filled with guilt, and ready to quit.",
+              "anchor": "burnt out, filled with guilt"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "shelter",
+          "sourceRole": "stem",
+          "targetText": "In 2008, he became the head vet at a county-run animal shelter in an area struck by the financial crisis.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "burnt out, filled with guilt, and ready to quit",
+          "bridgeZh": "在收容所熬了四年的结局，引出后文的转变",
+          "note": "题干 shelter 原词出现在原文。"
+        },
+        {
+          "sourceText": "why he decided to shift his career direction",
+          "sourceRole": "correctOption",
+          "targetText": "It was then that I decided to get back to saving animals, but on my own terms",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“转变职业方向”要把两处连起来看：先是在收容所干到身心俱疲、准备辞职（ready to quit），接着[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3|It was then that I decided]]他决定按自己的方式重新救助动物（on my own terms）。前面的低谷正是他转向的起因，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据被帮助的人怎样看待 Stewart，概括出他的品质。",
+      "stemTranslationZh": "许多人认为 Stewart 是个怎样的人？",
+      "locateBy": "stem",
+      "locateFindZh": "看逗号后他们把他看作什么人",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "仁慈的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+              "quote": "Many of those he helps not only express deep gratefulness but also form strong bonds with him, seeing him as someone who cares for their pets and acknowledges their humanity.",
+              "anchor": "cares for their pets and acknowledges their humanity"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有创造力的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Many people think Stewart is creative.",
+            "explanation": "他开临时诊所（pop-up veterinary clinic）算是新办法，但被帮助的人看重的是他关心宠物、尊重他们，没有人夸他有创意。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "谦逊的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Many people think Stewart is humble.",
+            "explanation": "原文没写他怎样看待自己的成就，人们感激他是因为他关心宠物、尊重主人，和谦虚低调无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "宽容的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Many people think Stewart is tolerant.",
+            "explanation": "尊重他们的人格（acknowledges their humanity）是主动的关心和尊重，原文没写他容忍谁的缺点或冒犯。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "many people",
+          "sourceRole": "stem",
+          "targetText": "Many of those he helps not only express deep gratefulness but also form strong bonds with him, seeing him as someone who cares for their pets and acknowledges their humanity.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+          "relationType": "locationCue",
+          "targetCue": "Many of those he helps",
+          "sourceZh": "许多人",
+          "targetCueZh": "他帮助过的许多人",
+          "answerText": "seeing him as someone who cares for their pets and acknowledges their humanity",
+          "note": "题干 many people 对应原文 Many of those he helps。"
+        },
+        {
+          "sourceText": "Merciful",
+          "sourceRole": "correctOption",
+          "targetText": "cares for their pets and acknowledges their humanity",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项是对人们评价的归纳：他关心流浪者的宠物（cares for their pets），又尊重这些处境艰难的主人的人格（acknowledges their humanity）。对弱者有同情、肯伸手帮助，就是“仁慈”，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:27": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借后文受他启发的人说的话，推断 imitate 在句中的意思。",
+      "stemTranslationZh": "末段画线词 imitate 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找受他启发的人怎么说",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "钦佩。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "These are people who’ve reached out to me, inspired by what I’m doing",
+            "sourceHighlight": "inspired by what I’m doing",
+            "optionText": "Feel admiration for.",
+            "optionHighlight": "Feel admiration for",
+            "explanation": "放进去成了“全世界的人都想钦佩我做的事”；可后文受他启发的人问的是自己怎样也能做（do it too），要的是动手跟着做，不只是佩服。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+              "quote": "These are people who’ve reached out to me, inspired by what I’m doing",
+              "anchor": "inspired by what I’m doing"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "意识到。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "imitate means become aware of",
+            "explanation": "放进去成了“全世界的人都想意识到我做的事”，和后文那些人主动来问怎样也能这样做接不上。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "效仿；以……为榜样。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+              "quote": "These are people who’ve reached out to me, inspired by what I’m doing, asking, ‘How can I do it too?’",
+              "anchor": "How can I do it too?"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "体谅；考虑到。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "imitate means show consideration for",
+            "explanation": "放进去成了“全世界的人都想体谅我做的事”，可后文那些人是来问怎样也能这样做，不是来体谅他。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "imitate",
+          "sourceRole": "stem",
+          "targetText": "“I dream that people from all over the world will want to imitate what I do,” Stewart shared.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "How can I do it too?",
+          "bridgeZh": "These are people 指受他启发、来联系他的这些人",
+          "note": "题干画线词 imitate 原词出现在原文。"
+        },
+        {
+          "sourceText": "Follow the example of",
+          "sourceRole": "correctOption",
+          "targetText": "How can I do it too?",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "imitate 的宾语是“我做的事”（what I do），后文受他启发的人问“我怎样也能这样做”（do it too），所以 imitate 必须是“照着做”。放回去：他梦想全世界的人都愿意照着他的做法去做，选 C。"
+        }
+      ]
+    }
+  }
+}

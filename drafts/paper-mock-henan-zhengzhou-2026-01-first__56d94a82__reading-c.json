@@ -1,0 +1,833 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-c": {
+      "overview": "说明文。研究发现，如今的水果、蔬菜和谷物所含营养比几十年前明显减少，会削弱食物预防慢性病的作用；原因在现代耕作方式和气候变化，肉类也受牵连，科学家呼吁关注食物的种植方式。",
+      "fullTranslationZh": "当你看着杂货店里一排排五颜六色的水果和蔬菜时，你可能会以为自己正在获取所需的全部营养。但最近的研究表明，如今作物所含的营养比几十年前我们祖辈吃的要少。这种下降令人担忧，并可能在未来影响我们的健康。\n在过去 70 年里，许多水果、蔬菜和谷物中的蛋白质、钙、铁和维生素都大量流失。2024 年《食品》期刊上的一篇综述称这是后代面临的一大挑战。随着越来越多的人出于健康和环保的原因被鼓励采用植物性饮食，这一点就显得尤为重要。\n华盛顿大学教授 David Montgomery 警告说，这种营养下降意味着我们的食物在预防慢性病方面的效果变差了。气候变化与健康专家 Kristie Ebi 说，即使你吃大量新鲜农产品，你今天吃的东西也不如你祖辈吃的有营养。\n问题出在现代耕作方式上。提高作物产量的方法往往会损害土壤健康。灌溉、施肥和收割阻碍了植物与土壤真菌之间的自然互动，减少了营养的吸收。气候变化和不断上升的二氧化碳浓度也在降低营养含量方面起了作用。\n2004 年的一项重要研究发现，与 50 年前相比，43 种园艺作物中的蛋白质、钙、铁和维生素 C 都减少了。更近的研究显示，澳大利亚的蔬菜和小麦也呈现类似趋势，铁和蛋白质含量显著下降。\n这种营养下降影响的不仅是植物性饮食，还有肉类。动物如今吃的牧草和谷物营养更少，使得肉类和乳制品也没那么有营养了。\n科学家敦促我们不要过分担忧，但要关注我们的食物是怎样种出来的。Montgomery 说，了解耕作方式的影响给了我们一个新的理由。随着人口增长，我们需要保护和恢复农田，以确保每个人都能吃上健康的食物。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c-1",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+          "sourceText": "David Montgomery, a professor at the University of Washington, warns that this nutrient decline means our food is less effective at preventing chronic (慢性的) diseases.",
+          "displayText": "David Montgomery, a professor at the University of Washington, warns that this nutrient decline means our food is less effective at preventing chronic (慢性的) diseases.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:29"
+          ],
+          "translationZh": "华盛顿大学教授 David Montgomery 警告说，这种营养下降意味着我们的食物在预防慢性病方面的效果变差了。",
+          "analysisZh": "主干是 David Montgomery … warns that …（Montgomery 警告说……），a professor at the University of Washington 是同位语。that 引导宾语从句，从句里又套一层：this nutrient decline means …，means 后省略了 that，our food is less effective at preventing chronic diseases 是 means 的宾语从句。be less effective at doing 意为“在做某事上效果更差”。读清这两层，就能看出一条链：营养下降 → 食物预防慢性病的作用变弱。",
+          "underlineRanges": [
+            {
+              "start": 63,
+              "end": 73,
+              "quote": "warns that"
+            },
+            {
+              "start": 74,
+              "end": 101,
+              "quote": "this nutrient decline means"
+            },
+            {
+              "start": 102,
+              "end": 165,
+              "quote": "our food is less effective at preventing chronic (慢性的) diseases"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c-2",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+          "sourceText": "Irrigation, fertilization, and harvesting prevent the natural interactions between plants and soil fungi (真菌), reducing nutrient absorption.",
+          "displayText": "Irrigation, fertilization, and harvesting prevent the natural interactions between plants and soil fungi (真菌), reducing nutrient absorption.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:29"
+          ],
+          "translationZh": "灌溉、施肥和收割阻碍了植物与土壤真菌之间的自然互动，减少了营养的吸收。",
+          "analysisZh": "主语是三个并列名词 Irrigation, fertilization, and harvesting（灌溉、施肥和收割），谓语是 prevent，宾语是 the natural interactions，between plants and soil fungi 修饰 interactions，说明是植物和土壤真菌之间的互动。逗号后的 reducing nutrient absorption 是现在分词短语作结果状语：阻碍这种互动的结果是营养吸收减少。这一句具体说明了现代耕作方式怎样拉低作物营养。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 41,
+              "quote": "Irrigation, fertilization, and harvesting"
+            },
+            {
+              "start": 42,
+              "end": 74,
+              "quote": "prevent the natural interactions"
+            },
+            {
+              "start": 111,
+              "end": 139,
+              "quote": "reducing nutrient absorption"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1"
+              ],
+              "start": 0,
+              "end": 98,
+              "quote": "当你看着杂货店里一排排五颜六色的水果和蔬菜时，你可能会以为自己正在获取所需的全部营养。但最近的研究表明，如今作物所含的营养比几十年前我们祖辈吃的要少。这种下降令人担忧，并可能在未来影响我们的健康。"
+            },
+            {
+              "paragraphId": "zh-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2"
+              ],
+              "start": 99,
+              "end": 209,
+              "quote": "在过去 70 年里，许多水果、蔬菜和谷物中的蛋白质、钙、铁和维生素都大量流失。2024 年《食品》期刊上的一篇综述称这是后代面临的一大挑战。随着越来越多的人出于健康和环保的原因被鼓励采用植物性饮食，这一点就显得尤为重要。"
+            },
+            {
+              "paragraphId": "zh-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3"
+              ],
+              "start": 210,
+              "end": 323,
+              "quote": "华盛顿大学教授 David Montgomery 警告说，这种营养下降意味着我们的食物在预防慢性病方面的效果变差了。气候变化与健康专家 Kristie Ebi 说，即使你吃大量新鲜农产品，你今天吃的东西也不如你祖辈吃的有营养。"
+            },
+            {
+              "paragraphId": "zh-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4"
+              ],
+              "start": 324,
+              "end": 421,
+              "quote": "问题出在现代耕作方式上。提高作物产量的方法往往会损害土壤健康。灌溉、施肥和收割阻碍了植物与土壤真菌之间的自然互动，减少了营养的吸收。气候变化和不断上升的二氧化碳浓度也在降低营养含量方面起了作用。"
+            },
+            {
+              "paragraphId": "zh-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:5"
+              ],
+              "start": 422,
+              "end": 515,
+              "quote": "2004 年的一项重要研究发现，与 50 年前相比，43 种园艺作物中的蛋白质、钙、铁和维生素 C 都减少了。更近的研究显示，澳大利亚的蔬菜和小麦也呈现类似趋势，铁和蛋白质含量显著下降。"
+            },
+            {
+              "paragraphId": "zh-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:6"
+              ],
+              "start": 516,
+              "end": 572,
+              "quote": "这种营养下降影响的不仅是植物性饮食，还有肉类。动物如今吃的牧草和谷物营养更少，使得肉类和乳制品也没那么有营养了。"
+            },
+            {
+              "paragraphId": "zh-c-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7"
+              ],
+              "start": 573,
+              "end": 672,
+              "quote": "科学家敦促我们不要过分担忧，但要关注我们的食物是怎样种出来的。Montgomery 说，了解耕作方式的影响给了我们一个新的理由。随着人口增长，我们需要保护和恢复农田，以确保每个人都能吃上健康的食物。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+                "start": 63,
+                "end": 73,
+                "quote": "warns that"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+                "start": 74,
+                "end": 101,
+                "quote": "this nutrient decline means"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+                "start": 102,
+                "end": 165,
+                "quote": "our food is less effective at preventing chronic (慢性的) diseases"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p3",
+                "start": 0,
+                "end": 58,
+                "quote": "华盛顿大学教授 David Montgomery 警告说，这种营养下降意味着我们的食物在预防慢性病方面的效果变差了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+                "start": 105,
+                "end": 146,
+                "quote": "Irrigation, fertilization, and harvesting"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+                "start": 147,
+                "end": 179,
+                "quote": "prevent the natural interactions"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+                "start": 216,
+                "end": 244,
+                "quote": "reducing nutrient absorption"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p4",
+                "start": 31,
+                "end": 66,
+                "quote": "灌溉、施肥和收割阻碍了植物与土壤真菌之间的自然互动，减少了营养的吸收。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+                "start": 141,
+                "end": 248,
+                "quote": "But recent studies show that today’s crops have fewer nutrients than what our grandparents ate decades ago."
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+                "start": 249,
+                "end": 273,
+                "quote": "This decline is alarming"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p1",
+                "start": 52,
+                "end": 74,
+                "quote": "如今作物所含的营养比几十年前我们祖辈吃的要少"
+              },
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p1",
+                "start": 75,
+                "end": 83,
+                "quote": "这种下降令人担忧"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+                "start": 63,
+                "end": 165,
+                "quote": "warns that this nutrient decline means our food is less effective at preventing chronic (慢性的) diseases"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+                "start": 0,
+                "end": 45,
+                "quote": "The problem lies in modern farming practices."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p3",
+                "start": 29,
+                "end": 57,
+                "quote": "这种营养下降意味着我们的食物在预防慢性病方面的效果变差了"
+              },
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p4",
+                "start": 0,
+                "end": 12,
+                "quote": "问题出在现代耕作方式上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7",
+                "start": 0,
+                "end": 87,
+                "quote": "Scientists urge us not to worry too much but to pay attention to how our food is grown."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p7",
+                "start": 15,
+                "end": 30,
+                "quote": "要关注我们的食物是怎样种出来的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+                "start": 170,
+                "end": 247,
+                "quote": "today’s crops have fewer nutrients than what our grandparents ate decades ago"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2",
+                "start": 24,
+                "end": 129,
+                "quote": "many fruits, vegetables, and grains have lost significant amounts of protein, calcium, iron, and vitamins"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p1",
+                "start": 52,
+                "end": 74,
+                "quote": "如今作物所含的营养比几十年前我们祖辈吃的要少"
+              },
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+                "paragraphId": "zh-c-p2",
+                "start": 10,
+                "end": 38,
+                "quote": "许多水果、蔬菜和谷物中的蛋白质、钙、铁和维生素都大量流失"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用超市果蔬引出“作物营养比祖辈时少”这一发现，再讲营养流失的程度和对健康的影响，接着分析原因并用研究数据佐证，补充肉类也受影响，最后给出科学家的建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+            "summary": "研究显示今天作物的营养比祖辈时少，这种下降令人担忧。",
+            "function": "引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2",
+            "summary": "70 年来果蔬谷物营养大量流失，对提倡植物性饮食的今天尤为重要。",
+            "function": "说明流失程度和重要性"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+            "summary": "专家指出营养下降削弱食物预防慢性病的作用，多吃也补不回来。",
+            "function": "讲对健康的影响"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+            "summary": "现代耕作方式损害土壤、阻碍营养吸收，气候变化和二氧化碳上升也有影响。",
+            "function": "分析原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:5",
+            "summary": "2004 年及更近的研究都显示作物营养明显下降。",
+            "function": "用研究数据佐证"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:6",
+            "summary": "动物吃的饲草营养变少，肉类和乳制品也受影响。",
+            "function": "补充影响范围"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7",
+            "summary": "科学家建议不必过分担忧，但要关注食物怎样种出来，保护和恢复农田。",
+            "function": "给出建议，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:28": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "弄清作者拿祖辈吃的东西和今天的作物比什么，这个对比要突出什么。",
+      "stemTranslationZh": "作者为什么提到我们祖辈吃的东西？",
+      "locateBy": "stem",
+      "locateFindZh": "看 than 前后比的是什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了批评现代饮食。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "But recent studies show that today’s crops have fewer nutrients than what our grandparents ate decades ago.",
+            "sourceEntity": "today’s crops",
+            "optionText": "To criticize modern diets.",
+            "optionEntity": "modern diets",
+            "explanation": "对比的是今天的作物（today’s crops）本身营养变少，不是批评现代人怎么吃；文中还说人们正被鼓励多吃植物性饮食。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+              "quote": "today’s crops have fewer nutrients",
+              "anchor": "today’s crops"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了比较耕作成本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The author compares farming costs.",
+            "explanation": "这里比的是营养含量（fewer nutrients），全文都没提种地要花多少钱。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了突出营养流失。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+              "quote": "But recent studies show that today’s crops have fewer nutrients than what our grandparents ate decades ago.",
+              "anchor": "fewer nutrients"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+              "quote": "This decline is alarming",
+              "anchor": "This decline is alarming"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了推广传统菜谱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The author promotes traditional recipes.",
+            "explanation": "提祖辈吃的东西只是拿来和今天比营养，文中没介绍任何传统菜谱，也没劝人照着做。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "our grandparents ate",
+          "sourceRole": "stem",
+          "targetText": "But recent studies show that today’s crops have fewer nutrients than what our grandparents ate decades ago.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "today’s crops have fewer nutrients",
+          "note": "题干 our grandparents ate 原词出现在原文。"
+        },
+        {
+          "sourceText": "highlight nutrient loss",
+          "sourceRole": "correctOption",
+          "targetText": "today’s crops have fewer nutrients",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“营养流失”就是这组对比的结果：作者拿今天的作物和祖辈几十年前吃的比营养，今天的更少（fewer nutrients），紧接着又称之为令人担忧的下降（This decline is alarming）。用祖辈作参照，正是为了让营养变少显得具体，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:29": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把 Montgomery 对营养下降后果的警告，和下文营养下降的原因连起来，推出现代耕作方式造成的影响。",
+      "stemTranslationZh": "关于现代耕作方式，Montgomery 揭示了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 warns 后他警告了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们把土壤健康放在首位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Methods that increase crop harvest often harm soil health.",
+            "sourceHighlight": "harm soil health",
+            "optionText": "They put soil health first.",
+            "optionHighlight": "put soil health first",
+            "explanation": "原文说追求高产的耕作方法往往损害土壤健康（harm soil health），选项说成把土壤健康放在首位，方向正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "quote": "Methods that increase crop harvest often harm soil health.",
+              "anchor": "harm soil health"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们提高了作物的品种多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Methods that increase crop harvest often harm soil health.",
+            "sourceEntity": "crop harvest",
+            "optionText": "They improve crop variety.",
+            "optionEntity": "crop variety",
+            "explanation": "原文说这些方法提高的是作物产量（crop harvest），选项换成了品种（crop variety），全文没谈品种多不多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "quote": "Methods that increase crop harvest often harm soil health.",
+              "anchor": "increase crop harvest"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们减少了二氧化碳。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "rising carbon dioxide levels",
+            "optionText": "carbon dioxide",
+            "matchType": "exact",
+            "relationNote": "carbon dioxide 出自[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4|rising carbon dioxide levels]]，原文说的是二氧化碳浓度上升也在拉低营养，没说耕作方式能减少二氧化碳。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "quote": "Climate change and rising carbon dioxide levels also play a role in lowering nutrient content.",
+              "anchor": "rising carbon dioxide levels"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们破坏了疾病预防。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+              "quote": "warns that this nutrient decline means our food is less effective at preventing chronic (慢性的) diseases",
+              "anchor": "less effective at preventing chronic diseases"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "quote": "The problem lies in modern farming practices.",
+              "anchor": "The problem lies in modern farming practices"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Montgomery",
+          "sourceRole": "stem",
+          "targetText": "David Montgomery, a professor at the University of Washington, warns that this nutrient decline means our food is less effective at preventing chronic (慢性的) diseases.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "our food is less effective at preventing chronic (慢性的) diseases",
+          "note": "题干 Montgomery 原词出现在原文。"
+        },
+        {
+          "sourceText": "They ruin disease prevention",
+          "sourceRole": "correctOption",
+          "targetText": "The problem lies in modern farming practices.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项要把两处连起来推：先是 Montgomery 警告营养下降让食物防慢性病的效果变差（less effective at preventing），接着[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4|The problem lies in modern farming practices]]把营养下降归到现代耕作方式。耕作方式 → 营养下降 → 防病作用变弱，选项的“破坏疾病预防”说的就是这条链的结果，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到科学家给出的建议，看清 not … but … 后真正要我们做的事。",
+      "stemTranslationZh": "针对营养下降，科学家的建议是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 but 后真正的建议",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "关注农业。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7",
+              "quote": "Scientists urge us not to worry too much but to pay attention to how our food is grown.",
+              "anchor": "pay attention to how our food is grown"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "注重食物的数量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Methods that increase crop harvest often harm soil health.",
+            "sourceEntity": "crop harvest",
+            "optionText": "Focusing on food quantity.",
+            "optionEntity": "food quantity",
+            "explanation": "全文担心的是营养，也就是食物的质量；一味提高产量（increase crop harvest）的做法反而伤害土壤，科学家没建议看重数量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "quote": "Methods that increase crop harvest often harm soil health.",
+              "anchor": "increase crop harvest"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "避免植物性饮食。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "plant-based diets",
+            "optionText": "plant-based diets",
+            "matchType": "exact",
+            "relationNote": "plant-based diets 出自[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:6|not just plant-based diets but also meat]]，原文说营养下降连肉类也受影响，换掉植物性饮食躲不开它，科学家也没这样建议。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:6",
+              "quote": "This nutrient decline affects not just plant-based diets but also meat.",
+              "anchor": "not just plant-based diets but also meat"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "少吃加工食品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Scientists advise eating less processed foods.",
+            "explanation": "全文没提加工食品；科学家的建议落在关注食物怎样种出来上。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "scientists",
+          "sourceRole": "stem",
+          "targetText": "Scientists urge us not to worry too much but to pay attention to how our food is grown.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7",
+          "relationType": "locationCue",
+          "answerText": "pay attention to how our food is grown",
+          "note": "题干 scientists 原词出现在原文。"
+        },
+        {
+          "sourceText": "Caring about agriculture",
+          "sourceRole": "correctOption",
+          "targetText": "pay attention to how our food is grown",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7",
+          "relationType": "paraphrase",
+          "note": "选项的“关注农业”（Caring about agriculture）就是原文的“留意食物是怎样种出来的”（pay attention to how our food is grown），种植食物正是农业的事，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看清各段都围绕哪一个话题展开，选出能统领全文的主旨。",
+      "stemTranslationZh": "这篇文章主要讲什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1]] 的 This decline 看起，再看后面几段分别讲它的什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "作物中营养的减少。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+              "quote": "today’s crops have fewer nutrients than what our grandparents ate decades ago",
+              "anchor": "today’s crops have fewer nutrients"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2",
+              "quote": "many fruits, vegetables, and grains have lost significant amounts of protein, calcium, iron, and vitamins",
+              "anchor": "have lost significant amounts"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "植物性饮食的后果。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "plant-based diets",
+            "optionText": "plant-based diets",
+            "matchType": "exact",
+            "relationNote": "plant-based diets 只在[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2|more people are encouraged to eat plant-based diets]]和[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:6]]顺带出现，说的是营养下降对植物性饮食的人尤其要紧，不是讲吃植物性饮食会带来什么后果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2",
+              "quote": "This is especially important as more people are encouraged to eat plant-based diets for health and environmental reasons.",
+              "anchor": "plant-based diets"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人类日益恶化的健康状况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "This decline is alarming and could affect our health in the future.",
+            "sourceHighlight": "could affect our health in the future",
+            "optionText": "The worsening health conditions of humans.",
+            "optionHighlight": "worsening health conditions",
+            "explanation": "原文只说营养下降将来可能影响健康（could affect our health），是一层担忧，也只是全文的一部分，没写人类健康已经在恶化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+              "quote": "This decline is alarming and could affect our health in the future.",
+              "anchor": "could affect our health in the future"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "现代耕作方式的大问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The problem lies in modern farming practices.",
+            "sourceHighlight": "modern farming practices",
+            "optionText": "The big problems of modern farming practices.",
+            "optionHighlight": "modern farming practices",
+            "explanation": "现代耕作方式只在[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4]]作为营养下降的原因出现，是全文的一环；各段围绕的是营养下降本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "quote": "The problem lies in modern farming practices.",
+              "anchor": "modern farming practices"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The decrease of nutrients in crops",
+          "sourceRole": "correctOption",
+          "targetText": "today’s crops have fewer nutrients than what our grandparents ate decades ago",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "各段都围着作物营养下降写：[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:1]] 提出这一发现，[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:2]] 和 [[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:5]] 用数据说明，[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:3]] 讲对健康的影响，[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4]] 找原因，[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:6]] 补充肉类也受牵连，[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7]] 给出建议。选项的“作物中营养的减少”正好统领这些段落，选 A。"
+        }
+      ]
+    }
+  }
+}

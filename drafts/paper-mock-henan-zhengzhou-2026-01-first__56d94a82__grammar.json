@@ -1,0 +1,1057 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill": {
+      "overview": "2025 年 9 月，上海市第四中学举办劳模工匠精神传承活动和劳动教育课程发布仪式。劳模工匠展示创新课程、受聘为劳动教育教师，并用亲身经历和科技案例启发学生，活动为培养新时代人才打下基础。",
+      "fullTranslationZh": "2025 年 9 月 29 日，“传承劳模工匠精神，培育新时代劳动人才”活动暨 2025 年秋季学期劳动教育课程发布仪式在上海市第四中学隆重举行，为区域劳动教育注入了新活力。\n这次活动亮点纷呈。由劳模和工匠精心准备并亲自讲授的 25 门创新课程集中亮相，其中 5 门深度融入学校教学安排的校本课程，凭借“理论学习—实践体验—成果展示”的完整闭环设计，成为上海劳动教育先行引领的示范，标志着徐汇区在深化教育体系上迈出了关键一步。\n活动中，10 位劳模工匠代表被聘为“劳动教育教师”。全国劳动模范、上海外高桥造船设计研究所技术总监洪刚从造船中“每一根钢管的重量”讲起，用自己几十年的行业奋斗故事，把“追求卓越、认真担当”的工匠精神传递给学生；人工智能专家吴文伟则通过讲解自己团队利用信息技术解决西藏供水难题的案例，点燃了学生通过科技劳动创造美好未来的热情。\n课堂上，学生们积极提问、分享看法。“洪刚老师让我们明白的是，任何一个微小的环节都关系到整体的成败；吴文伟老师让我们看到了科技如何解决民生痛点。这堂课让我充分理解了‘三种精神’的深刻内涵。”一名学生课后激动地分享了自己的感受。\n这次活动是弘扬中华优秀劳动文化的一次生动实践，它很可能会推动工匠精神的传播，并为培养全面发展的新时代人才打下坚实基础。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sls-1",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+          "sourceText": "Hong Gang, a national model worker and the technical director of the Design and Research Institute of Shanghai Waigaoqiao Shipbuilding, __61__ (start) from “the weight of each steel pipe” in shipbuilding and passed on the craftsmanship spirit of “seeking __62__ (excellent) and taking responsibility seriously” to students with his decades-long industry struggle stories; Wu Wenwei, an artificial intelligence expert, lit students’ enthusiasm for creating a better future through technological labor by interpreting the case of his team using information technology __63__ (solve) the water supply problem in Xizang.",
+          "displayText": "Hong Gang, a national model worker and the technical director of the Design and Research Institute of Shanghai Waigaoqiao Shipbuilding, started from “the weight of each steel pipe” in shipbuilding and passed on the craftsmanship spirit of “seeking excellence and taking responsibility seriously” to students with his decades-long industry struggle stories; Wu Wenwei, an artificial intelligence expert, lit students’ enthusiasm for creating a better future through technological labor by interpreting the case of his team using information technology to solve the water supply problem in Xizang.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:61",
+            "question:paper-mock-henan-zhengzhou-2026-01-first:62",
+            "question:paper-mock-henan-zhengzhou-2026-01-first:63"
+          ],
+          "translationZh": "全国劳动模范、上海外高桥造船设计研究所技术总监洪刚从造船中“每一根钢管的重量”讲起，用自己几十年的行业奋斗故事，把“追求卓越、认真担当”的工匠精神传递给学生；人工智能专家吴文伟则通过讲解自己团队利用信息技术解决西藏供水难题的案例，点燃了学生通过科技劳动创造美好未来的热情。",
+          "analysisZh": "分号把句子分成两个并列的分句。前一分句主干是洪刚从……讲起，并把……传给学生（Hong Gang … started from … and passed on … to students）：主语后两个逗号之间的部分是同位语，由两个并列名词（a national model worker and the technical director of …）交代他的身份；讲起（started）和传递（passed on）是由并列连词（and）连接的两个谓语，介词短语（with his decades-long industry struggle stories）说明靠什么来传递。后一分句主干是吴文伟点燃了学生的热情（Wu Wenwei … lit students’ enthusiasm）：同位语（an artificial intelligence expert）交代身份；介词短语（for creating a better future through technological labor）修饰热情；方式状语（by interpreting the case …）说明怎样点燃，案例后的介词短语（of his team using information technology to solve …）交代案例内容，团队（his team）是动名词（using）的逻辑主语，不定式（to solve）表示使用信息技术的目的。",
+          "underlineRanges": [
+            {
+              "quote": "started",
+              "start": 136,
+              "end": 143
+            },
+            {
+              "quote": "passed on",
+              "start": 201,
+              "end": 210
+            },
+            {
+              "quote": "lit students’ enthusiasm",
+              "start": 403,
+              "end": 427
+            }
+          ]
+        },
+        {
+          "sentenceId": "sls-2",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+          "sourceText": "25 innovative courses carefully prepared and taught by model workers and craftsmen were presented, among __58__ 5 school-based courses deeply integrated into the school’s teaching arrangement became the pioneering and leading model of labor education in Shanghai for a complete closed-loop (闭环) design of “theoretical learning-practical experience-achievement display”, __59__ (mark) a crucial step for Xuhui District in deepening the education system.",
+          "displayText": "25 innovative courses carefully prepared and taught by model workers and craftsmen were presented, among which 5 school-based courses deeply integrated into the school’s teaching arrangement became the pioneering and leading model of labor education in Shanghai for a complete closed-loop (闭环) design of “theoretical learning-practical experience-achievement display”, marking a crucial step for Xuhui District in deepening the education system.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:58",
+            "question:paper-mock-henan-zhengzhou-2026-01-first:59"
+          ],
+          "translationZh": "由劳模和工匠精心准备并亲自讲授的 25 门创新课程集中亮相，其中 5 门深度融入学校教学安排的校本课程，凭借“理论学习—实践体验—成果展示”的完整闭环设计，成为上海劳动教育先行引领的示范，标志着徐汇区在深化教育体系上迈出了关键一步。",
+          "analysisZh": "主干是 25 门创新课程被展示（25 innovative courses … were presented）。课程后面的过去分词短语（carefully prepared and taught by model workers and craftsmen）由两个并列的过去分词组成，作后置定语，说明课程由劳模和工匠准备并讲授。逗号后的介词加关系词（among which）引导非限制性定语从句，从句主干是 5 门校本课程成为示范（5 school-based courses … became the pioneering and leading model），其中过去分词短语（deeply integrated into the school’s teaching arrangement）修饰校本课程，介词短语（for a complete closed-loop design …）说明凭什么成为示范。句末的现在分词短语（marking a crucial step …）作状语，补充说明这件事的意义。",
+          "underlineRanges": [
+            {
+              "quote": "were presented",
+              "start": 83,
+              "end": 97
+            },
+            {
+              "quote": "among which",
+              "start": 99,
+              "end": 110
+            },
+            {
+              "quote": "marking a crucial step",
+              "start": 369,
+              "end": 391
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 87,
+              "quote": "2025 年 9 月 29 日，“传承劳模工匠精神，培育新时代劳动人才”活动暨 2025 年秋季学期劳动教育课程发布仪式在上海市第四中学隆重举行，为区域劳动教育注入了新活力。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2"
+              ],
+              "start": 88,
+              "end": 213,
+              "quote": "这次活动亮点纷呈。由劳模和工匠精心准备并亲自讲授的 25 门创新课程集中亮相，其中 5 门深度融入学校教学安排的校本课程，凭借“理论学习—实践体验—成果展示”的完整闭环设计，成为上海劳动教育先行引领的示范，标志着徐汇区在深化教育体系上迈出了关键一步。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3"
+              ],
+              "start": 214,
+              "end": 376,
+              "quote": "活动中，10 位劳模工匠代表被聘为“劳动教育教师”。全国劳动模范、上海外高桥造船设计研究所技术总监洪刚从造船中“每一根钢管的重量”讲起，用自己几十年的行业奋斗故事，把“追求卓越、认真担当”的工匠精神传递给学生；人工智能专家吴文伟则通过讲解自己团队利用信息技术解决西藏供水难题的案例，点燃了学生通过科技劳动创造美好未来的热情。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4"
+              ],
+              "start": 377,
+              "end": 489,
+              "quote": "课堂上，学生们积极提问、分享看法。“洪刚老师让我们明白的是，任何一个微小的环节都关系到整体的成败；吴文伟老师让我们看到了科技如何解决民生痛点。这堂课让我充分理解了‘三种精神’的深刻内涵。”一名学生课后激动地分享了自己的感受。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5"
+              ],
+              "start": 490,
+              "end": 549,
+              "quote": "这次活动是弘扬中华优秀劳动文化的一次生动实践，它很可能会推动工匠精神的传播，并为培养全面发展的新时代人才打下坚实基础。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+            "text": "On September 29, 2025, the event of “Passing on the Spirit of Model Workers and Craftsmen, Training New Labor-minded Talents” and the release ceremony（仪式）of labor education courses for the autumn term of 2025 were held grandly in Shanghai No.4 High School, bringing new energy into regional labor education."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+            "text": "The event was full of highlights. 25 innovative courses carefully prepared and taught by model workers and craftsmen were presented, among which 5 school-based courses deeply integrated into the school’s teaching arrangement became the pioneering and leading model of labor education in Shanghai for a complete closed-loop (闭环) design of “theoretical learning-practical experience-achievement display”, marking a crucial step for Xuhui District in deepening the education system."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+            "text": "During the event, 10 representatives of model workers and craftsmen were appointed as “labor education teachers”. Hong Gang, a national model worker and the technical director of the Design and Research Institute of Shanghai Waigaoqiao Shipbuilding, started from “the weight of each steel pipe” in shipbuilding and passed on the craftsmanship spirit of “seeking excellence and taking responsibility seriously” to students with his decades-long industry struggle stories; Wu Wenwei, an artificial intelligence expert, lit students’ enthusiasm for creating a better future through technological labor by interpreting the case of his team using information technology to solve the water supply problem in Xizang."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+            "text": "In the classroom, students actively asked questions and shared their views. “What Mr. Hong Gang made us understand is that any tiny link is related to the success or failure of the whole; Mr. Wu Wenwei showed us how technology can solve people’s livelihood pain points. This class made me fully understand the depth of the ‘Three Spirits’,” a student excitedly shared his feelings after class."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+            "text": "This event is a vivid practice of carrying forward excellent Chinese labor culture, which probably promotes the craftsmanship spirit and lays a solid foundation for training new-era talents with all-around development."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "start": 0,
+                "end": 21,
+                "quote": "On September 29, 2025"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "start": 130,
+                "end": 150,
+                "quote": "the release ceremony"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "start": 0,
+                "end": 15,
+                "quote": "2025 年 9 月 29 日"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "start": 56,
+                "end": 60,
+                "quote": "发布仪式"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 14,
+                "end": 21,
+                "quote": "full of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 6,
+                "end": 8,
+                "quote": "纷呈"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 42,
+                "end": 63,
+                "quote": "25 innovative courses"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 154,
+                "end": 176,
+                "quote": "5 school-based courses"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 26,
+                "end": 34,
+                "quote": "25 门创新课程"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 42,
+                "end": 60,
+                "quote": "5 门深度融入学校教学安排的校本课程"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 125,
+                "end": 139,
+                "quote": "were presented"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 426,
+                "end": 440,
+                "quote": "a crucial step"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 34,
+                "end": 38,
+                "quote": "集中亮相"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 120,
+                "end": 124,
+                "quote": "关键一步"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 68,
+                "end": 82,
+                "quote": "were appointed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 14,
+                "end": 17,
+                "quote": "被聘为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 118,
+                "end": 127,
+                "quote": "Hong Gang"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 326,
+                "end": 335,
+                "quote": "passed on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 49,
+                "end": 51,
+                "quote": "洪刚"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 99,
+                "end": 104,
+                "quote": "传递给学生"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 365,
+                "end": 372,
+                "quote": "seeking"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 396,
+                "end": 427,
+                "quote": "taking responsibility seriously"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 84,
+                "end": 86,
+                "quote": "追求"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 89,
+                "end": 93,
+                "quote": "认真担当"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 655,
+                "end": 683,
+                "quote": "using information technology"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 123,
+                "end": 129,
+                "quote": "利用信息技术"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+                "start": 98,
+                "end": 124,
+                "quote": "made us understand is that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+                "start": 22,
+                "end": 27,
+                "quote": "让我们明白"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+                "start": 108,
+                "end": 116,
+                "quote": "promotes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+                "start": 28,
+                "end": 30,
+                "quote": "推动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:56"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "start": 209,
+                "end": 218,
+                "quote": "were held"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:1",
+                "start": 70,
+                "end": 72,
+                "quote": "举行"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:57"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 22,
+                "end": 32,
+                "quote": "highlights"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 4,
+                "end": 6,
+                "quote": "亮点"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:58"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 139,
+                "end": 144,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 39,
+                "end": 41,
+                "quote": "其中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:59"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 403,
+                "end": 410,
+                "quote": "marking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 103,
+                "end": 106,
+                "quote": "标志着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:60"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 83,
+                "end": 85,
+                "quote": "as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 14,
+                "end": 17,
+                "quote": "被聘为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:61"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 250,
+                "end": 257,
+                "quote": "started"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 65,
+                "end": 67,
+                "quote": "讲起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:62"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 362,
+                "end": 372,
+                "quote": "excellence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 86,
+                "end": 88,
+                "quote": "卓越"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:63"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 665,
+                "end": 673,
+                "quote": "to solve"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 129,
+                "end": 131,
+                "quote": "解决"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:64"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+                "start": 77,
+                "end": 81,
+                "quote": "What"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:4",
+                "start": 22,
+                "end": 29,
+                "quote": "让我们明白的是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:65"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+                "start": 90,
+                "end": 98,
+                "quote": "probably"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:5",
+                "start": 24,
+                "end": 27,
+                "quote": "很可能"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:61",
+              "question:paper-mock-henan-zhengzhou-2026-01-first:62",
+              "question:paper-mock-henan-zhengzhou-2026-01-first:63"
+            ],
+            "selectedSentenceId": "sls-1",
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 118,
+                "end": 734,
+                "quote": "Hong Gang, a national model worker and the technical director of the Design and Research Institute of Shanghai Waigaoqiao Shipbuilding, __61__ (start) from “the weight of each steel pipe” in shipbuilding and passed on the craftsmanship spirit of “seeking __62__ (excellent) and taking responsibility seriously” to students with his decades-long industry struggle stories; Wu Wenwei, an artificial intelligence expert, lit students’ enthusiasm for creating a better future through technological labor by interpreting the case of his team using information technology __63__ (solve) the water supply problem in Xizang."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:3",
+                "start": 26,
+                "end": 162,
+                "quote": "全国劳动模范、上海外高桥造船设计研究所技术总监洪刚从造船中“每一根钢管的重量”讲起，用自己几十年的行业奋斗故事，把“追求卓越、认真担当”的工匠精神传递给学生；人工智能专家吴文伟则通过讲解自己团队利用信息技术解决西藏供水难题的案例，点燃了学生通过科技劳动创造美好未来的热情。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:58",
+              "question:paper-mock-henan-zhengzhou-2026-01-first:59"
+            ],
+            "selectedSentenceId": "sls-2",
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 42,
+                "end": 494,
+                "quote": "25 innovative courses carefully prepared and taught by model workers and craftsmen were presented, among __58__ 5 school-based courses deeply integrated into the school’s teaching arrangement became the pioneering and leading model of labor education in Shanghai for a complete closed-loop (闭环) design of “theoretical learning-practical experience-achievement display”, __59__ (mark) a crucial step for Xuhui District in deepening the education system."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:grammar-fill:2",
+                "start": 9,
+                "end": 125,
+                "quote": "由劳模和工匠精心准备并亲自讲授的 25 门创新课程集中亮相，其中 5 门深度融入学校教学安排的校本课程，凭借“理论学习—实践体验—成果展示”的完整闭环设计，成为上海劳动教育先行引领的示范，标志着徐汇区在深化教育体系上迈出了关键一步。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:56": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "hold",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were held",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "空格作全句的谓语，主语是由并列连词（and）连接的活动（the event）和发布仪式（the release ceremony），是复数。活动是被举办的，又明确发生在 2025 年 9 月 29 日（On September 29, 2025），所以用一般过去时的被动（were held）。句末的（bringing）是非谓语，全句只有这一处谓语。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the release ceremony",
+          "signalSide": "passage",
+          "relation": "与活动（the event）并列作主语，主语是复数，且与举办是被动关系。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "On September 29, 2025",
+          "signalSide": "passage",
+          "relation": "明确的过去时间，谓语用一般过去时。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:57": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "highlight",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "highlights",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作短语充满（full of）中介词（of）的宾语，要用名词。亮点（highlight）是可数名词，后文接着列出课程亮相、聘任教师、专家讲课等多项内容，充满亮点要用复数（highlights）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "full of",
+          "signalSide": "passage",
+          "relation": "介词（of）后接名词作宾语，这里指充满多个亮点。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:58": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "preposition-relative",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导逗号后的非限制性定语从句，修饰前面的 25 门创新课程（25 innovative courses），并在从句里作介词（among）的宾语，即从这些课程当中。从句本身主谓齐全（5 school-based courses … became），先行词指物又在介词后，用（which）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "25 innovative courses",
+          "signalSide": "passage",
+          "relation": "先行词指物，就是从句里介词（among）的宾语所指的对象。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "5 school-based courses",
+          "signalSide": "passage",
+          "relation": "从句的主语，后面有谓语（became），从句缺的只是介词宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:59": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "mark",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "marking",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "主句已有谓语（were presented），从句已有谓语（became），逗号后又没有连词，空格不能再作谓语，只能作状语，补充说明前面这件事意味着什么。这件事与标志（mark）是主动关系，用现在分词（marking）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "were presented",
+          "signalSide": "passage",
+          "relation": "主句谓语已经齐全，空格只能用非谓语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "a crucial step",
+          "signalSide": "passage",
+          "relation": "分词的宾语，标志着关键一步。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:60": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "as",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把身份劳动教育教师（labor education teachers）接到被聘任（were appointed）后面，说明被任命成什么身份。任命某人为某职用介词（as），这里是它的被动说法。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "were appointed",
+          "signalSide": "passage",
+          "relation": "任命的被动，后面接表示身份的介词短语。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:61": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "start",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "started",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-narrative-chain",
+        "features": []
+      },
+      "reason": "空格作主语洪刚（Hong Gang）的谓语，中间隔着一长串同位语，说明他的身份。它和并列连词（and）后的传递（passed on）是并列谓语，叙述的是这次活动中已经发生的事，所以同样用一般过去时（started）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Hong Gang",
+          "signalSide": "passage",
+          "relation": "主语，与谓语之间隔着同位语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "passed on",
+          "signalSide": "passage",
+          "relation": "并列谓语用一般过去时，空格与它保持一致。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:62": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "excellent",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "excellence",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作动名词追求（seeking）的宾语，需要名词，把形容词（excellent）变成名词（excellence），意为卓越。它和后面的担当责任（taking responsibility）结构对称，都是动名词加名词宾语。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "seeking",
+          "signalSide": "passage",
+          "relation": "动名词后接名词作宾语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "taking responsibility seriously",
+          "signalSide": "passage",
+          "relation": "并列的动名词短语，宾语同样是名词。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:63": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "solve",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to solve",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "空格说明团队使用信息技术（using information technology）是为了做什么，作目的状语，用不定式（to solve）：用信息技术来解决西藏的供水问题。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "using information technology",
+          "signalSide": "passage",
+          "relation": "使用某物去做某事，后面的不定式表示使用的目的。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:64": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "What",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "subject-clause"
+        ]
+      },
+      "reason": "空格引导主语从句（… Mr. Hong Gang made us understand），整个从句作谓语（is）的主语，表语是后面的从句（that any tiny link is related to …）。从句里让我们明白（made us understand）缺少宾语，要一个既引导从句又在从句里作宾语、表示所……的事的词，用（What），在引号内句首要大写。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "made us understand is that",
+          "signalSide": "passage",
+          "relation": "从句缺明白（understand）的宾语，整个从句作谓语（is）的主语。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:65": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "probable",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "probably",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰定语从句的谓语推动（promotes），需要副词，把形容词（probable）变为副词（probably），表示很可能。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "promotes",
+          "signalSide": "passage",
+          "relation": "从句谓语动词，前面要用副词修饰。"
+        }
+      ]
+    }
+  }
+}

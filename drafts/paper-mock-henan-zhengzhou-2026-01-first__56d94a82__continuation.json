@@ -1,0 +1,194 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: I realized that I should take some measures. The doves never gave up, so why should I? After breakfast, I found an old plastic basket in the kitchen and asked Mateo to help me. He picked up the fallen sticks while I tied the basket tightly to the thickest fork of the rubber tree with string. My stomach hurt every time I raised my arms, but I didn’t stop. Together we laid the sticks inside. However, the next morning the doves did not come, and the day after, they were still missing. Mateo waited by the glass door, and I began to worry that our basket had frightened them away.\n\nParagraph 2: “Look! The birds have returned!” Mateo shouted. I hurried to the door. Both doves were standing on the edge of the basket, turning their heads as if checking our work. Then one of them hopped inside with a stick in its beak. By evening, they were building a nest there. That night the wind blew hard again, but in the morning the nest was still there. Soon two eggs appeared, and later two baby doves hatched. Watching them, I found it easier to get out of bed. One morning, Mateo looked at me and asked, “Mom, can we play?” This time, I smiled, nodded and took his hand.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写里要动笔的是手术后还在恢复、心情低落的“我”和五岁的儿子 Mateo；那对白鸽是推动故事的关键。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”回忆，一般过去时；句子短而平实，多写动作和看见的景象，心里的感受只用一两句交代。人物的话很少，只有几句很短的直接引语，续写也以动作推进，只在关键处留一两句短引语。",
+          "evidence": [
+            "I shook my head and replied, “Not today, sweetie.”",
+            "I heard the small branches break."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在白鸽的巢一次次被风吹毁、它们一次次重来。没解决的有两件：鸽巢搭在不稳的细枝上，总保不住；“我”身体虚弱、对未来没有信心，也一直没答应陪 Mateo 玩。",
+          "evidence": [
+            "But day after day, they kept starting again as if nothing had occurred."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "叙述者，Mateo 的妈妈，手术后正在恢复",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "身体还疼，连起床都很吃力。",
+              "evidence": "These days, getting out of bed was a real struggle for me."
+            },
+            {
+              "label": "想要",
+              "text": "盼着重新有力气、有快乐，却觉得未来没有希望。",
+              "evidence": "I longed for strength and happiness, yet the future seemed so hopeless."
+            },
+            {
+              "label": "表现",
+              "text": "鸽巢被吹落后，觉得美好的东西总不长久。",
+              "evidence": "Nothing good ever lasts."
+            }
+          ]
+        },
+        {
+          "name": "Mateo",
+          "role": "“我”五岁的儿子",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "想让妈妈陪他玩，被妈妈拒绝了。",
+              "evidence": "“Mom, let’s play,” Mateo looked at me and said."
+            },
+            {
+              "label": "表现",
+              "text": "每天早上守在玻璃门边和鸽子说话，他的快乐感染了“我”。",
+              "evidence": "His joy was influential."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "the rubber tree’s small branches were not stable at all",
+          "use": "第 1 段：“我”针对细枝不稳这个原因，把篮子绑到橡胶树最粗的枝杈上。"
+        },
+        {
+          "sourceQuote": "the pile of sticks that used to be their nest",
+          "use": "第 1 段：Mateo 把散落的旧树枝捡起来铺进篮子，旧巢的材料重新派上用场。"
+        },
+        {
+          "sourceQuote": "“Mom, let’s play,” Mateo looked at me and said.",
+          "use": "第 2 段结尾：Mateo 又一次邀妈妈玩，这次“我”答应了，回应开头的拒绝。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”被白鸽不放弃的样子触动，带着 Mateo 用篮子给鸽子做了个稳当的巢座，鸽子却两天没来；鸽子回来后在篮子里筑巢、孵出小鸽，“我”也渐渐有了力气，答应陪 Mateo 玩。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "段首句要求“我”采取措施，措施要对准原文的问题：细枝不稳，巢总被风吹落。第二段首句是 Mateo 喊鸽子回来了，所以第一段结束时鸽子必须已经离开、不在树上。",
+          "draft": "“我”从厨房找出旧塑料篮，忍着疼把它绑在橡胶树最粗的枝杈上，Mateo 捡来散落的树枝铺进去；可接下来两天鸽子都没来，“我”担心篮子把它们吓跑了。",
+          "bridgeQuote": "The birds have returned!",
+          "bridge": "鸽子回来了，会不会接受“我们”做的篮子？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以 Mateo 喊鸽子回来开头，写清鸽子回来后怎样，并收住原文留下的事：鸽巢能不能保住，“我”能不能从低落里走出来。",
+          "draft": "两只鸽子在篮沿上看了看，衔着树枝进去筑巢；当晚又刮大风，巢却保住了。后来鸽蛋孵出小鸽，“我”起床越来越容易；Mateo 再问能不能玩，“我”笑着点头，牵起他的手。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: I realized that I should take some measures. The doves never gave up, so why should I? After breakfast, I found an old plastic basket in the kitchen and asked Mateo to help me. He picked up the fallen sticks while I tied the basket tightly to the thickest fork of the rubber tree with string. My stomach hurt every time I raised my arms, but I didn’t stop. Together we laid the sticks inside. However, the next morning the doves did not come, and the day after, they were still missing. Mateo waited by the glass door, and I began to worry that our basket had frightened them away.\n\nParagraph 2: “Look! The birds have returned!” Mateo shouted. I hurried to the door. Both doves were standing on the edge of the basket, turning their heads as if checking our work. Then one of them hopped inside with a stick in its beak. By evening, they were building a nest there. That night the wind blew hard again, but in the morning the nest was still there. Soon two eggs appeared, and later two baby doves hatched. Watching them, I found it easier to get out of bed. One morning, Mateo looked at me and asked, “Mom, can we play?” This time, I smiled, nodded and took his hand.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写“我”采取措施，并让鸽子暂时不见，给第二段留出位置",
+          "items": [
+            {
+              "quote": "The doves never gave up, so why should I?",
+              "explain": "把原文鸽子一次次重建和“我”的决定连起来，交代“我”为什么要动手；用反问写出心里的触动，不必写一长段心理。"
+            },
+            {
+              "quote": "tied the basket tightly to the thickest fork of the rubber tree",
+              "explain": "措施对准原文“细枝不稳”这个原因：换到最粗的枝杈，再用篮子托住，读者看得出这个办法为什么管用。"
+            },
+            {
+              "quote": "My stomach hurt every time I raised my arms, but I didn’t stop.",
+              "explain": "回扣原文手术后的疼痛，“我”忍着疼也要做完，人物的变化落在动作上。"
+            },
+            {
+              "quote": "I began to worry that our basket had frightened them away.",
+              "explain": "段尾停在鸽子不见、“我”担心，正好接上第二段首句 Mateo 喊鸽子回来了。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写鸽子接受新巢座，收住鸽巢和“我”两条线",
+          "items": [
+            {
+              "quote": "turning their heads as if checking our work",
+              "explain": "鸽子回来先看再用，as if 把它们的动作写得像在验收，接住第一段末的担心。"
+            },
+            {
+              "quote": "That night the wind blew hard again, but in the morning the nest was still there.",
+              "explain": "让原文的大风再来一次，用结果说明措施有效，比直接说巢安全了更有说服力。"
+            },
+            {
+              "quote": "I found it easier to get out of bed",
+              "explain": "回收原文起床都吃力的细节，“我”的好转用起床这件小事写出来。"
+            },
+            {
+              "quote": "This time, I smiled, nodded and took his hand.",
+              "explain": "回应开头那句 Not today，This time 点出前后变化；结尾落在动作上，不另加道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "..., so why should I?",
+          "function": "用反问写人物被触动后下定决心，比 I decided to help them 更有劲。"
+        },
+        {
+          "expression": "as if checking our work",
+          "function": "用 as if 写鸽子的动作，像在打量人做的东西，写动物时很好用。"
+        },
+        {
+          "expression": "This time, ...",
+          "function": "结尾和开头的拒绝形成对照，一个短语就写出人物前后的变化。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写鸽子回来、在篮子里筑巢",
+          "why": "第二段首句才是 Mateo 喊鸽子回来了，第一段先写掉，第二段就和段首句冲突，也没东西可写。"
+        },
+        {
+          "pitfall": "措施和问题对不上，比如只给鸽子喂食、放水",
+          "why": "原文的问题是细枝不稳、巢被风吹落，措施不对准这一点，鸽子回来也还是保不住巢。"
+        },
+        {
+          "pitfall": "结尾写“我”一下子痊愈，或贴一句“永不放弃就会成功”",
+          "why": "原文的“我”是手术后慢慢恢复，突然痊愈不合情理；空泛的道理放到任何故事后面都成立，结尾应落在答应陪 Mateo 玩这样的具体动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: I realized that I should take some measures. If two small birds refused to give up, how could I? After breakfast, I dug out an old plastic basket from under the sink and called Mateo over. “We’re going to give the doves a safer home,” I told him. He gathered the scattered sticks while I stood on a low stool and tied the basket firmly to the thickest fork of the rubber tree. Each time I raised my arms, a sharp pain shot through my stomach, but I kept knotting the string until the basket no longer moved. Then we lined it with the sticks, one by one. Yet the next morning, the tree was empty, and it stayed empty the day after. Mateo kept watch by the sliding door, his face pressed to the glass, while I began to fear that our clumsy basket had scared the doves away for good.\n\nParagraph 2: “Look! The birds have returned!” Mateo shouted. I hurried to the door as fast as my body allowed. The two doves were perched on the rim of the basket, tilting their heads as if inspecting our work. After a moment, one of them hopped inside with a stick in its beak. By sunset, a neat nest sat in the basket. That night the wind howled again, and I lay awake listening, but at dawn the nest was still in place. Before long, two white eggs appeared, and then two tiny chicks were crying for food. Watching the parents fly in and out, I found myself getting up earlier each day. One morning, when Mateo tugged at my sleeve, I put down my cup before he could ask. “Come on, sweetie,” I said. “Let’s play.”",
+      "beyondStandard": [
+        {
+          "quote": "If two small birds refused to give up, how could I?",
+          "explain": "把鸽子说成 two small birds，鸟小却不放弃，和“我”形成对照，反问更有分量。"
+        },
+        {
+          "quote": "a sharp pain shot through my stomach, but I kept knotting the string until the basket no longer moved",
+          "explain": "shoot through 写疼痛猛地袭来，until 写出一直绑到篮子不晃为止，比标准版的 My stomach hurt 更具体。"
+        },
+        {
+          "quote": "I put down my cup before he could ask",
+          "explain": "这次不等 Mateo 开口，“我”主动放下杯子邀他玩，人物的变化比标准版的点头又进了一步。"
+        }
+      ]
+    }
+  }
+}

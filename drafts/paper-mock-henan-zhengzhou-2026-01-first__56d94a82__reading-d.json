@@ -1,0 +1,818 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-d": {
+      "overview": "说明文。一种新 AI 系统能分析人们听音乐的方式、识别个人“收听风格”，测试中 86% 的情况下认出了陌生用户，有望改进个性化歌单；但它可能凭收听习惯认出用户，引发隐私担忧。",
+      "fullTranslationZh": "长期以来，AI 技术一直能够识别音乐偏好中的规律并生成个性化歌单。如今，一种新的 AI 系统更进了一步：它分析人们听音乐的方式，识别出他们独特的“收听风格”。这一进展改变了音乐流媒体服务为每位用户量身定制歌单的方式，让歌单更讨人喜欢。\n音乐推荐算法在推荐新歌和新艺人方面一直非常有效。但音乐与科技大学的音乐数据科学家 Emily Carter 博士指出，这些算法往往采用“一刀切”的方法，记录不下个人收听行为的细微差别。为了更好地理解和满足个人偏好，研究人员需要分析每位用户独特的收听模式。\n为了开发和训练他们的 AI，研究人员从 5000 多万次收听记录中收集数据，并把数据输入一个神经网络。他们通过观察这个系统区分不同用户收听习惯的能力来测试它。系统拿到了约 3000 名已知用户每人 100 次收听记录，以及一名未知用户的 100 次新记录。根据在国际音乐信息检索学会（ISMIR）上发表的一项研究，AI 寻找最佳匹配，在 86% 的情况下认出了这名未知用户。“这样的准确率让我们相当吃惊。”Carter 实验室的博士生、该研究的第一作者 Alex Johnson 说。一种非 AI 方法的准确率只有 28%。\n“这项工作很有创新性，”音乐研究者 Sarah Kim 博士说，“个性化的音乐体验可能会改变我们与音乐平台互动的方式。”\n研究人员意识到了他们的系统对隐私的影响：它有可能根据收听习惯认出用户。从理论上讲，类似的系统还能分析其他行为，比如人们收听的播客类型或他们听音乐的时间。ISMIR 的组织者认为这项研究令人印象深刻，但也有值得质疑之处，在研究人员详细说明隐私风险的条件下才接收了它。Carter 说，他们目前已决定不公开发布这款软件。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d-1",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+          "sourceText": "But Dr. Emily Carter, a music data scientist at the University of Music and Technology, notes that these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior.",
+          "displayText": "But Dr. Emily Carter, a music data scientist at the University of Music and Technology, notes that these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:33"
+          ],
+          "translationZh": "但音乐与科技大学的音乐数据科学家 Emily Carter 博士指出，这些算法往往采用“一刀切”的方法，记录不下个人收听行为的细微差别。",
+          "analysisZh": "句首的 But 和前一句转折：前一句夸算法很有效，这一句说它的不足。主干是 Dr. Emily Carter … notes that …（Carter 博士指出……），a music data scientist at … 是同位语。that 引导宾语从句，从句主干是 these algorithms often use a one-size-fits-all approach（这些算法往往采用一刀切的方法）；approach 后的 that doesn’t record … 是定语从句，说明这种方法记录不下个人收听行为的细微差别。one-size-fits-all 字面是“一个尺码人人都穿”，即不分个人、统一对待。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 20,
+              "quote": "Dr. Emily Carter"
+            },
+            {
+              "start": 88,
+              "end": 98,
+              "quote": "notes that"
+            },
+            {
+              "start": 126,
+              "end": 154,
+              "quote": "a one-size-fits-all approach"
+            },
+            {
+              "start": 155,
+              "end": 230,
+              "quote": "that doesn’t record the slight differences of individual listening behavior"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d-2",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+          "sourceText": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+          "displayText": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:35"
+          ],
+          "translationZh": "ISMIR 的组织者认为这项研究令人印象深刻，但也有值得质疑之处，在研究人员详细说明隐私风险的条件下才接收了它。",
+          "analysisZh": "主语 ISMIR organizers 后有两个并列谓语，由 and 连接：found the study impressive but questionable 和 accepted it。found 后是“宾语 + 宾语补足语”：the study 是宾语，impressive but questionable 是补足语，表示他们认为这项研究出色但有疑问。on condition that … 引导条件状语从句，意为“在……的条件下”，修饰 accepted it；从句里的 detail 是动词，意为“详细说明”。整句先肯定、再存疑、最后附条件接收。",
+          "underlineRanges": [
+            {
+              "start": 17,
+              "end": 60,
+              "quote": "found the study impressive but questionable"
+            },
+            {
+              "start": 66,
+              "end": 77,
+              "quote": "accepted it"
+            },
+            {
+              "start": 78,
+              "end": 95,
+              "quote": "on condition that"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1"
+              ],
+              "start": 0,
+              "end": 117,
+              "quote": "长期以来，AI 技术一直能够识别音乐偏好中的规律并生成个性化歌单。如今，一种新的 AI 系统更进了一步：它分析人们听音乐的方式，识别出他们独特的“收听风格”。这一进展改变了音乐流媒体服务为每位用户量身定制歌单的方式，让歌单更讨人喜欢。"
+            },
+            {
+              "paragraphId": "zh-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2"
+              ],
+              "start": 118,
+              "end": 245,
+              "quote": "音乐推荐算法在推荐新歌和新艺人方面一直非常有效。但音乐与科技大学的音乐数据科学家 Emily Carter 博士指出，这些算法往往采用“一刀切”的方法，记录不下个人收听行为的细微差别。为了更好地理解和满足个人偏好，研究人员需要分析每位用户独特的收听模式。"
+            },
+            {
+              "paragraphId": "zh-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3"
+              ],
+              "start": 246,
+              "end": 508,
+              "quote": "为了开发和训练他们的 AI，研究人员从 5000 多万次收听记录中收集数据，并把数据输入一个神经网络。他们通过观察这个系统区分不同用户收听习惯的能力来测试它。系统拿到了约 3000 名已知用户每人 100 次收听记录，以及一名未知用户的 100 次新记录。根据在国际音乐信息检索学会（ISMIR）上发表的一项研究，AI 寻找最佳匹配，在 86% 的情况下认出了这名未知用户。“这样的准确率让我们相当吃惊。”Carter 实验室的博士生、该研究的第一作者 Alex Johnson 说。一种非 AI 方法的准确率只有 28%。"
+            },
+            {
+              "paragraphId": "zh-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:4"
+              ],
+              "start": 509,
+              "end": 569,
+              "quote": "“这项工作很有创新性，”音乐研究者 Sarah Kim 博士说，“个性化的音乐体验可能会改变我们与音乐平台互动的方式。”"
+            },
+            {
+              "paragraphId": "zh-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5"
+              ],
+              "start": 570,
+              "end": 728,
+              "quote": "研究人员意识到了他们的系统对隐私的影响：它有可能根据收听习惯认出用户。从理论上讲，类似的系统还能分析其他行为，比如人们收听的播客类型或他们听音乐的时间。ISMIR 的组织者认为这项研究令人印象深刻，但也有值得质疑之处，在研究人员详细说明隐私风险的条件下才接收了它。Carter 说，他们目前已决定不公开发布这款软件。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+                "start": 105,
+                "end": 121,
+                "quote": "Dr. Emily Carter"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+                "start": 189,
+                "end": 199,
+                "quote": "notes that"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+                "start": 227,
+                "end": 255,
+                "quote": "a one-size-fits-all approach"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+                "start": 256,
+                "end": 331,
+                "quote": "that doesn’t record the slight differences of individual listening behavior"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "zh-d-p2",
+                "start": 24,
+                "end": 92,
+                "quote": "但音乐与科技大学的音乐数据科学家 Emily Carter 博士指出，这些算法往往采用“一刀切”的方法，记录不下个人收听行为的细微差别。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+                "start": 311,
+                "end": 354,
+                "quote": "found the study impressive but questionable"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+                "start": 360,
+                "end": 371,
+                "quote": "accepted it"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+                "start": 372,
+                "end": 389,
+                "quote": "on condition that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "zh-d-p5",
+                "start": 76,
+                "end": 132,
+                "quote": "ISMIR 的组织者认为这项研究令人印象深刻，但也有值得质疑之处，在研究人员详细说明隐私风险的条件下才接收了它。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+                "start": 251,
+                "end": 370,
+                "quote": "This advancement changes how music streaming services tailor playlists to individual users, making them more enjoyable."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "zh-d-p1",
+                "start": 79,
+                "end": 107,
+                "quote": "这一进展改变了音乐流媒体服务为每位用户量身定制歌单的方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+                "start": 200,
+                "end": 331,
+                "quote": "these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "zh-d-p2",
+                "start": 59,
+                "end": 91,
+                "quote": "这些算法往往采用“一刀切”的方法，记录不下个人收听行为的细微差别"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+                "start": 0,
+                "end": 136,
+                "quote": "The researchers are aware of the privacy impact of their system, which could potentially identify users based on their listening habits."
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+                "start": 360,
+                "end": 430,
+                "quote": "accepted it on condition that the researchers detail the privacy risks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "zh-d-p5",
+                "start": 0,
+                "end": 35,
+                "quote": "研究人员意识到了他们的系统对隐私的影响：它有可能根据收听习惯认出用户。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+                "start": 294,
+                "end": 431,
+                "quote": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
+                "paragraphId": "zh-d-p5",
+                "start": 76,
+                "end": 132,
+                "quote": "ISMIR 的组织者认为这项研究令人印象深刻，但也有值得质疑之处，在研究人员详细说明隐私风险的条件下才接收了它。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先介绍新 AI 系统能识别个人收听风格，再说明旧推荐算法的不足，接着讲系统的训练与测试结果和业内评价，最后写它带来的隐私担忧和研究者的应对。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+            "summary": "AI 早能识别音乐偏好；新系统能识别个人收听风格，改进歌单定制。",
+            "function": "引出新进展"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+            "summary": "现有推荐算法有效但一刀切，研究者需要分析每个用户的收听模式。",
+            "function": "说明研发的原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3",
+            "summary": "系统用海量数据训练，测试中 86% 认出陌生用户，远超非 AI 方法的 28%。",
+            "function": "介绍训练和测试结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:4",
+            "summary": "业内专家称这项工作有创新性，可能改变人们使用音乐平台的方式。",
+            "function": "引用专家的正面评价"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+            "summary": "系统可能凭收听习惯认出用户，会议附条件接收，研究者暂不公开软件。",
+            "function": "讲隐私担忧和应对"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "分清这一段里 AI 早就会的本领和这次的新进展，找出新进展带来的改变。",
+      "stemTranslationZh": "第一段提到了 AI 的什么进展？",
+      "locateBy": "stem",
+      "locateFindZh": "看 changes 后改变了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "保护人们的隐私。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The researchers are aware of the privacy impact of their system, which could potentially identify users based on their listening habits.",
+            "sourceHighlight": "could potentially identify users",
+            "optionText": "Protecting people’s privacy.",
+            "optionHighlight": "Protecting people’s privacy",
+            "explanation": "[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1]] 没谈隐私；隐私到[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5]]才出现，说的是这个系统可能凭收听习惯认出用户，带来的是隐私风险，不是保护隐私。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "The researchers are aware of the privacy impact of their system, which could potentially identify users based on their listening habits.",
+              "anchor": "could potentially identify users"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "识别音乐规律。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "recognize patterns in music preferences",
+            "optionText": "Recognizing music patterns",
+            "matchType": "wordFamily",
+            "relationNote": "选项借[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1|has long been able to recognize patterns]]里的 recognize patterns，可 has long been able 说明这是 AI 早就会的本领，不是这里说的新进展。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+              "quote": "AI technology has long been able to recognize patterns in music preferences and create personalized playlists.",
+              "anchor": "has long been able to recognize patterns"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "量身定制个性化歌单。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+              "quote": "This advancement changes how music streaming services tailor playlists to individual users, making them more enjoyable.",
+              "anchor": "tailor playlists to individual users"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "提高音乐流媒体的播放质量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "music streaming services",
+            "optionText": "music streaming",
+            "matchType": "exact",
+            "relationNote": "music streaming 出自同一句，但这一进展改变的是平台怎样按个人定制歌单、让歌单更合人意（more enjoyable），没说提高音质或播放质量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+              "quote": "This advancement changes how music streaming services tailor playlists to individual users, making them more enjoyable.",
+              "anchor": "music streaming services"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "advancement",
+          "sourceRole": "stem",
+          "targetText": "This advancement changes how music streaming services tailor playlists to individual users, making them more enjoyable.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+          "relationType": "locationCue",
+          "answerText": "tailor playlists to individual users",
+          "note": "题干 advancement 原词出现在原文。"
+        },
+        {
+          "sourceText": "Tailoring personalized playlists",
+          "sourceRole": "correctOption",
+          "targetText": "tailor playlists to individual users",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 tailor，“个性化歌单”对应“按每位用户定制的歌单”（playlists to individual users）。新系统能认出每个人的收听风格，这一进展落到实处，就是平台能为每个人量身定制歌单，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂 Carter 对现有推荐算法的评价，把“一刀切、记录不下个人差别”和选项对应起来。",
+      "stemTranslationZh": "关于音乐推荐算法，Carter 说了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 notes 后她指出的毛病",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们考虑到了收听风格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior",
+            "sourceHighlight": "doesn’t record the slight differences of individual listening behavior",
+            "optionText": "They consider listening styles.",
+            "optionHighlight": "consider listening styles",
+            "explanation": "能分辨收听风格（listening styles）的是[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:1]]里的新系统；Carter 说现有算法恰恰记录不下个人收听上的细微差别。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+              "quote": "these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior",
+              "anchor": "doesn’t record the slight differences"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们不断更新网络。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a neural network",
+            "optionText": "networks",
+            "matchType": "wordFamily",
+            "relationNote": "network 出自[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3|fed it into a neural network]]，那是研究者训练新系统用的神经网络；Carter 评价现有算法时没提更新网络。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3",
+              "quote": "To develop and train their AI, the researchers collected data from over 50 million listening sessions and fed it into a neural network.",
+              "anchor": "a neural network"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们推荐流行歌曲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Music recommendation algorithms (算法) have been highly effective at suggesting new songs and artists.",
+            "sourceEntity": "new songs and artists",
+            "optionText": "They recommend popular songs.",
+            "optionEntity": "popular songs",
+            "explanation": "原文说算法擅长推荐的是新歌和新艺人（new songs and artists），没说是流行歌曲；而且这句是作者的介绍，Carter 的话从 But 之后才开始。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+              "quote": "Music recommendation algorithms (算法) have been highly effective at suggesting new songs and artists.",
+              "anchor": "new songs and artists"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们忽视个人偏好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+              "quote": "these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior",
+              "anchor": "one-size-fits-all approach"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Carter",
+          "sourceRole": "stem",
+          "targetText": "But Dr. Emily Carter, a music data scientist at the University of Music and Technology, notes that these algorithms often use a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior",
+          "note": "题干 Carter 原词出现在原文。"
+        },
+        {
+          "sourceText": "They ignore individual preferences",
+          "sourceRole": "correctOption",
+          "targetText": "a one-size-fits-all approach that doesn’t record the slight differences of individual listening behavior",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“忽视个人偏好”是由 Carter 的话概括出来的：算法“一刀切”（one-size-fits-all），记录不下个人收听行为的细微差别（doesn’t record the slight differences），也就照顾不到每个人的偏好，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出文中对新 AI 系统表达的担忧，并核对选项里“风险从哪来”是否对得上。",
+      "stemTranslationZh": "人们对这个新 AI 系统主要担忧什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 which 后系统可能做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它在分析数据方面的技术缺陷。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "“We were quite surprised by the accuracy,” says Alex Johnson, a doctoral student in Carter’s lab and the lead author of the study.",
+            "sourceHighlight": "surprised by the accuracy",
+            "optionText": "Its technical weaknesses in analyzing data.",
+            "optionHighlight": "technical weaknesses",
+            "explanation": "系统分析数据的准确度让研究者都吃惊（surprised by the accuracy），原文没提技术缺陷；让人担心的恰恰是它太会认人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3",
+              "quote": "We were quite surprised by the accuracy",
+              "anchor": "surprised by the accuracy"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它无法区分用户的收听习惯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "The AI looked for the best match and identified the unknown user 86% of the time",
+            "sourceHighlight": "identified the unknown user 86% of the time",
+            "optionText": "Its inability to distinguish between users’ habits.",
+            "optionHighlight": "inability to distinguish",
+            "explanation": "测试中系统在约 3000 名用户里 86% 的情况下认出了陌生用户（identified the unknown user），恰恰很会区分不同用户。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3",
+              "quote": "The AI looked for the best match and identified the unknown user 86% of the time",
+              "anchor": "identified the unknown user 86% of the time"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的准确率比非 AI 方法低。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "A non-AI method was only 28% accurate.",
+            "sourceHighlight": "only 28% accurate",
+            "optionText": "Its limited accuracy compared to non-AI methods.",
+            "optionHighlight": "limited accuracy compared to non-AI methods",
+            "explanation": "非 AI 方法的准确率只有 28%（only 28% accurate），新系统是 86%，比下来新系统准得多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:3",
+              "quote": "A non-AI method was only 28% accurate.",
+              "anchor": "only 28% accurate"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它追踪收听习惯可能带来的隐私风险。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "The researchers are aware of the privacy impact of their system, which could potentially identify users based on their listening habits.",
+              "anchor": "privacy impact"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "accepted it on condition that the researchers detail the privacy risks",
+              "anchor": "detail the privacy risks"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "concern",
+          "sourceRole": "stem",
+          "targetText": "The researchers are aware of the privacy impact of their system, which could potentially identify users based on their listening habits.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+          "relationType": "locationCue",
+          "targetCue": "are aware of",
+          "sourceZh": "担忧",
+          "targetCueZh": "意识到",
+          "answerText": "privacy impact of their system, which could potentially identify users based on their listening habits",
+          "note": "题干 concern 对应原文 are aware of，研究者意识到的正是让人担心的地方。"
+        },
+        {
+          "sourceText": "Its potential privacy risk from tracking listening habits",
+          "sourceRole": "correctOption",
+          "targetText": "privacy impact of their system, which could potentially identify users based on their listening habits",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“潜在隐私风险”对应原文的隐私影响和“有可能”（could potentially），“追踪收听习惯”对应凭收听习惯认出用户（based on their listening habits）；[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5|ISMIR organizers found the study]]里会议也要求详细说明隐私风险，可见这是主要担忧，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:35": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 ISMIR 组织者对研究的评价和接收论文的方式，判断他们的态度。",
+      "stemTranslationZh": "ISMIR 的组织者对这项新 AI 系统研究持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "看 but 后和接收时附的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "谨慎的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+              "anchor": "impressive but questionable"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "失望的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "ISMIR organizers found the study impressive but questionable",
+            "sourceHighlight": "impressive",
+            "optionText": "Disappointed.",
+            "optionHighlight": "Disappointed",
+            "explanation": "组织者觉得这项研究令人印象深刻（impressive），还接收了论文，谈不上失望。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "ISMIR organizers found the study impressive but questionable",
+              "anchor": "impressive"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "赞同的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+            "sourceHighlight": "on condition that",
+            "optionText": "Favorable.",
+            "optionHighlight": "Favorable",
+            "explanation": "选项只取了 impressive 这一半，丢掉了 questionable 和接收的前提（on condition that）；他们是有保留地接收，不是一味赞同。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+              "anchor": "on condition that"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不感兴趣的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+            "sourceHighlight": "accepted it on condition that",
+            "optionText": "Uninterested.",
+            "optionHighlight": "Uninterested",
+            "explanation": "组织者认真评价了研究，指出它出色也有疑点，还提出接收条件（accepted it on condition that），并非不感兴趣。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+              "quote": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+              "anchor": "accepted it on condition that"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "ISMIR organizers",
+          "sourceRole": "stem",
+          "targetText": "ISMIR organizers found the study impressive but questionable, and accepted it on condition that the researchers detail the privacy risks.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "impressive but questionable, and accepted it on condition that the researchers detail the privacy risks",
+          "note": "题干 ISMIR organizers 原词出现在原文。"
+        },
+        {
+          "sourceText": "Careful",
+          "sourceRole": "correctOption",
+          "targetText": "impressive but questionable, and accepted it on condition that the researchers detail the privacy risks",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项是对组织者做法的归纳：他们觉得研究出色却有疑问（impressive but questionable），只在研究者详细说明隐私风险的条件下才接收（on condition that）。既肯定又设防，就是“谨慎”，选 A。"
+        }
+      ]
+    }
+  }
+}

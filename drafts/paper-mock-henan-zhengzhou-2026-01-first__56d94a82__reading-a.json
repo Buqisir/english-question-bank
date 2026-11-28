@@ -1,0 +1,712 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:reading-a": {
+      "overview": "应用文。一份旅行摄影器材推荐：依次介绍富士 X-T50 相机、Petzl Tikka 头灯、Peak Design 旅行三脚架和 GoPro Hero 13 Black 运动相机，逐件说明它们适合旅行拍摄的长处，以及由哪位摄影师、记者或评测团队推荐。",
+      "fullTranslationZh": "旅行摄影师必须随时准备好应对目的地抛给他们的任何状况。这时，这份最佳旅行摄影器材合集就派上了用场。下面这些装备是任何一套器材的绝佳基础配置。\n富士 X-T50 相机\n《国家地理》自家的摄影工程团队把富士 X-T50 评为最适合旅行的相机，理由是它出色的胶片模拟效果和清晰的画面。他们还盛赞它直出的清晰 JPG 照片几乎不需要后期修图。这款便于旅行携带的相机重量不到一磅，却能拍出专业水准的照片。\nPetzl Tikka 头灯\nBettymaya Foott 大部分时间都在夜间拍摄，她对自己的 Petzl Tikka 头灯评价很高。它的一些特点包括：能保护夜视能力的红光功能、持久的电池续航以及舒适的头带。此外，它只用一个按键就能切换各种模式。\nPeak Design 旅行三脚架\n无论你是拍摄北极光还是录制采访，都需要一个旅行三脚架来稳住相机。芝加哥的旅行记者 Yulia 推荐 Peak Design 旅行三脚架。“它很轻，也好收纳打包。”她说。这款碳纤维款重量不到三磅，能折叠到一个水瓶大小。\nGoPro Hero 13 Black 相机\nGoPro Hero 13 Black 相机能以每秒 60 帧拍摄 5K 视频，或以每秒 120 帧拍摄 4K 视频——非常适合在不损失画质的前提下制作慢动作画面。它能从每段视频中截取 2470 万像素的静态照片，这意味着你不必在拍视频和拍照片之间二选一。它的电池可支持连续拍摄 2.5 小时。它还能在水下 33 英尺深处防水。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a-1",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+          "sourceText": "Some of the features include the red-light capabilities, which preserve night vision; the long battery life; and the comfortable strap.",
+          "displayText": "Some of the features include the red-light capabilities, which preserve night vision; the long battery life; and the comfortable strap.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:21"
+          ],
+          "translationZh": "它的一些特点包括：能保护夜视能力的红光功能、持久的电池续航以及舒适的头带。",
+          "analysisZh": "主干是 Some of the features include …（其中一些特点包括……）。include 后面跟三个并列宾语，用分号隔开：the red-light capabilities、the long battery life 和 the comfortable strap。第一个宾语后的 which preserve night vision 是非限制性定语从句，只修饰红光功能，说明它能保护夜视。正因为第一项内部已经有逗号，三项之间才改用分号分隔，读的时候按分号数出三个特点。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "Some of the features include"
+            },
+            {
+              "start": 29,
+              "end": 55,
+              "quote": "the red-light capabilities"
+            },
+            {
+              "start": 86,
+              "end": 107,
+              "quote": "the long battery life"
+            },
+            {
+              "start": 113,
+              "end": 134,
+              "quote": "the comfortable strap"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a-2",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+          "sourceText": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+          "displayText": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:22"
+          ],
+          "translationZh": "这款碳纤维款重量不到三磅，能折叠到一个水瓶大小。",
+          "analysisZh": "主语 The carbon fiber model（这款碳纤维款）接着上文说，指的是 Yulia 推荐的 Peak Design 旅行三脚架。and 连接两个并列谓语：weighs just under three pounds（重量不到三磅）和 can fold down to the size of a water bottle（能折叠到水瓶大小）。just under 意为“略低于”；fold down to 表示折起来后缩小到某个尺寸，后面的 the size of a water bottle 就是折叠后的大小。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "The carbon fiber model"
+            },
+            {
+              "start": 23,
+              "end": 53,
+              "quote": "weighs just under three pounds"
+            },
+            {
+              "start": 58,
+              "end": 101,
+              "quote": "can fold down to the size of a water bottle"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1"
+              ],
+              "start": 0,
+              "end": 70,
+              "quote": "旅行摄影师必须随时准备好应对目的地抛给他们的任何状况。这时，这份最佳旅行摄影器材合集就派上了用场。下面这些装备是任何一套器材的绝佳基础配置。"
+            },
+            {
+              "paragraphId": "zh-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:2"
+              ],
+              "start": 71,
+              "end": 82,
+              "quote": "富士 X-T50 相机"
+            },
+            {
+              "paragraphId": "zh-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:3"
+              ],
+              "start": 83,
+              "end": 197,
+              "quote": "《国家地理》自家的摄影工程团队把富士 X-T50 评为最适合旅行的相机，理由是它出色的胶片模拟效果和清晰的画面。他们还盛赞它直出的清晰 JPG 照片几乎不需要后期修图。这款便于旅行携带的相机重量不到一磅，却能拍出专业水准的照片。"
+            },
+            {
+              "paragraphId": "zh-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:4"
+              ],
+              "start": 198,
+              "end": 212,
+              "quote": "Petzl Tikka 头灯"
+            },
+            {
+              "paragraphId": "zh-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5"
+              ],
+              "start": 213,
+              "end": 322,
+              "quote": "Bettymaya Foott 大部分时间都在夜间拍摄，她对自己的 Petzl Tikka 头灯评价很高。它的一些特点包括：能保护夜视能力的红光功能、持久的电池续航以及舒适的头带。此外，它只用一个按键就能切换各种模式。"
+            },
+            {
+              "paragraphId": "zh-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:6"
+              ],
+              "start": 323,
+              "end": 340,
+              "quote": "Peak Design 旅行三脚架"
+            },
+            {
+              "paragraphId": "zh-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7"
+              ],
+              "start": 341,
+              "end": 449,
+              "quote": "无论你是拍摄北极光还是录制采访，都需要一个旅行三脚架来稳住相机。芝加哥的旅行记者 Yulia 推荐 Peak Design 旅行三脚架。“它很轻，也好收纳打包。”她说。这款碳纤维款重量不到三磅，能折叠到一个水瓶大小。"
+            },
+            {
+              "paragraphId": "zh-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:8"
+              ],
+              "start": 450,
+              "end": 472,
+              "quote": "GoPro Hero 13 Black 相机"
+            },
+            {
+              "paragraphId": "zh-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:9"
+              ],
+              "start": 473,
+              "end": 637,
+              "quote": "GoPro Hero 13 Black 相机能以每秒 60 帧拍摄 5K 视频，或以每秒 120 帧拍摄 4K 视频——非常适合在不损失画质的前提下制作慢动作画面。它能从每段视频中截取 2470 万像素的静态照片，这意味着你不必在拍视频和拍照片之间二选一。它的电池可支持连续拍摄 2.5 小时。它还能在水下 33 英尺深处防水。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+                "start": 115,
+                "end": 143,
+                "quote": "Some of the features include"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+                "start": 144,
+                "end": 170,
+                "quote": "the red-light capabilities"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+                "start": 201,
+                "end": 222,
+                "quote": "the long battery life"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+                "start": 228,
+                "end": 249,
+                "quote": "the comfortable strap"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p5",
+                "start": 53,
+                "end": 90,
+                "quote": "它的一些特点包括：能保护夜视能力的红光功能、持久的电池续航以及舒适的头带。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+                "start": 246,
+                "end": 268,
+                "quote": "The carbon fiber model"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+                "start": 269,
+                "end": 299,
+                "quote": "weighs just under three pounds"
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+                "start": 304,
+                "end": 347,
+                "quote": "can fold down to the size of a water bottle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p7",
+                "start": 84,
+                "end": 108,
+                "quote": "这款碳纤维款重量不到三磅，能折叠到一个水瓶大小。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:9",
+                "start": 326,
+                "end": 363,
+                "quote": "It’s also waterproof down to 33 feet."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p9",
+                "start": 147,
+                "end": 164,
+                "quote": "它还能在水下 33 英尺深处防水。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+                "start": 246,
+                "end": 348,
+                "quote": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle."
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+                "start": 125,
+                "end": 200,
+                "quote": "Chicago-based travel journalist Yulia recommends Peak Design Travel Tripod."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p7",
+                "start": 97,
+                "end": 107,
+                "quote": "能折叠到一个水瓶大小"
+              },
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p7",
+                "start": 32,
+                "end": 68,
+                "quote": "芝加哥的旅行记者 Yulia 推荐 Peak Design 旅行三脚架。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+                "start": 0,
+                "end": 80,
+                "quote": "Travel photographers have to be ready for whatever a destination throws at them."
+              },
+              {
+                "textId": "source-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:3",
+                "start": 0,
+                "end": 93,
+                "quote": "Nat Geo’s in-house photo engineering team named the Fujifilm X-T50 the best camera for travel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p1",
+                "start": 0,
+                "end": 27,
+                "quote": "旅行摄影师必须随时准备好应对目的地抛给他们的任何状况。"
+              },
+              {
+                "textId": "translation-group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+                "paragraphId": "zh-a-p3",
+                "start": 0,
+                "end": 35,
+                "quote": "《国家地理》自家的摄影工程团队把富士 X-T50 评为最适合旅行的相机"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先说旅行摄影师需要应对各种状况，引出器材推荐；再按小标题依次介绍四件装备，每件都写推荐者或评测方和主要长处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+            "summary": "旅行摄影师要随时应对各种状况，下面推荐的装备是器材的基础配置。",
+            "function": "开篇点题，引出推荐"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:2",
+            "summary": "富士 X-T50 相机。",
+            "function": "第一件装备的名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:3",
+            "summary": "《国家地理》团队评它为最佳旅行相机，画面清晰、直出照片少修图，重量不到一磅。",
+            "function": "介绍相机的长处"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:4",
+            "summary": "Petzl Tikka 头灯。",
+            "function": "第二件装备的名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+            "summary": "夜拍摄影师推荐：红光保护夜视、续航长、头带舒适、单键切换模式。",
+            "function": "介绍头灯的特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:6",
+            "summary": "Peak Design 旅行三脚架。",
+            "function": "第三件装备的名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+            "summary": "旅行记者推荐：轻便好收纳，重量不到三磅，可折叠到水瓶大小。",
+            "function": "介绍三脚架的特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:8",
+            "summary": "GoPro Hero 13 Black 相机。",
+            "function": "第四件装备的名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:9",
+            "summary": "能拍高帧率视频、从视频截取照片，续航 2.5 小时，可防水 33 英尺。",
+            "function": "介绍运动相机的性能"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "四个选项各说一件装备的性能，要分别回到对应的介绍里核对。",
+      "stemTranslationZh": "关于文中推荐的装备，可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "按选项里的装备名找各自介绍，核对选项所说的性能",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "GoPro Hero 13 Black 相机可以在水下使用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:9",
+              "quote": "It’s also waterproof down to 33 feet.",
+              "anchor": "waterproof down to 33 feet"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Peak Design 旅行三脚架对做采访的人来说价格实惠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "recording an interview",
+            "optionText": "interviewers",
+            "matchType": "wordFamily",
+            "relationNote": "选项从 interview（采访）派生出“做采访的人”，可[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7|recording an interview]]只说录采访时需要三脚架稳住相机，记者夸的是轻便好收纳，没提价格。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+              "quote": "Whether you’re capturing the northern lights or recording an interview, you need a travel tripod to keep your camera steady.",
+              "anchor": "recording an interview"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "富士 X-T50 相机是市面上最轻的相机。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The travel-friendly camera weighs just under a pound, but it captures (拍摄) professional-level images.",
+            "sourceHighlight": "weighs just under a pound",
+            "optionText": "The Fujifilm X-T50 Camera is the lightest camera in the market.",
+            "optionHighlight": "the lightest camera in the market",
+            "explanation": "原文只说它重量不到一磅（just under a pound），没拿它和市面上别的相机比轻重，推不出“最轻”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:3",
+              "quote": "The travel-friendly camera weighs just under a pound",
+              "anchor": "just under a pound"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Petzl Tikka 头灯不用按键就能帮人看清远处的东西。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Additionally, it alternates between settings with one single button.",
+            "sourceHighlight": "with one single button",
+            "optionText": "The Petzl Tikka Headlamp helps see distant objects with no button.",
+            "optionHighlight": "with no button",
+            "explanation": "头灯是靠一个按键（one single button）切换模式，不是不用按键；红光的作用是保护夜视，原文也没说能看清远处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:5",
+              "quote": "Additionally, it alternates between settings with one single button.",
+              "anchor": "one single button"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "can be used underwater",
+          "sourceRole": "correctOption",
+          "targetText": "waterproof down to 33 feet",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "选项的“能在水下用”是从原文“防水深达 33 英尺”（waterproof down to 33 feet）推出来的：下到水下 33 英尺都不进水，自然能带进水里拍，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出原文里哪件装备写了能折叠，并认清那句话说的是哪件装备。",
+      "stemTranslationZh": "下列哪一件是可以折叠的？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "富士 X-T50 相机。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+            "sourceEntity": "The carbon fiber model",
+            "optionText": "Fujifilm X-T50 Camera.",
+            "optionEntity": "Fujifilm X-T50 Camera",
+            "explanation": "相机和三脚架的介绍都写了“重量不到几磅”（weighs just under），但能折叠的是碳纤维三脚架，相机那段只讲画质和轻便。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:3",
+              "quote": "The travel-friendly camera weighs just under a pound",
+              "anchor": "weighs just under a pound"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Petzl Tikka 头灯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Petzl Tikka Headlamp is foldable.",
+            "explanation": "头灯的介绍列的是红光模式、续航、头带和单键切换，没有折叠这一项。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Peak Design 旅行三脚架。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+              "quote": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+              "anchor": "can fold down"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+              "quote": "Chicago-based travel journalist Yulia recommends Peak Design Travel Tripod.",
+              "anchor": "Peak Design Travel Tripod"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "GoPro Hero 13 Black 相机。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "GoPro Hero 13 Black Camera is foldable.",
+            "explanation": "GoPro 那段讲的是拍视频、截照片、续航和防水，没说能折叠收起。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "foldable",
+          "sourceRole": "stem",
+          "targetText": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+          "relationType": "locationCue",
+          "targetCue": "fold down",
+          "sourceZh": "可折叠的",
+          "targetCueZh": "折叠起来",
+          "answerText": "can fold down to the size of a water bottle",
+          "note": "题干 foldable 对应原文 fold down。"
+        },
+        {
+          "sourceText": "Peak Design Travel Tripod",
+          "sourceRole": "correctOption",
+          "targetText": "The carbon fiber model",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "能折叠的主语是“这款碳纤维款”（The carbon fiber model），它接着[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7|Yulia recommends Peak Design Travel Tripod]]往下说，指的就是这款三脚架，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:23": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据文章写给谁看、由谁来推荐，推断它最可能刊登在哪里。",
+      "stemTranslationZh": "这篇文章可能选自哪里？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1]] 看文章写给哪些人，再看各件装备由谁来推荐、评测",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本旅行手册。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "travel camera equipment",
+            "optionText": "travel",
+            "matchType": "exact",
+            "relationNote": "选项抓住反复出现的 travel，可全文只推荐摄影器材，不介绍目的地、路线或行程，不像旅行手册的内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+              "quote": "That’s where this collection of the best travel camera equipment comes into play.",
+              "anchor": "travel camera equipment"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一份器材合集。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "this collection of the best travel camera equipment",
+            "optionText": "equipment collection",
+            "matchType": "exact",
+            "relationNote": "“器材合集”（collection … equipment）是文章对自己内容的称呼，说的是这篇文章收了哪些器材，回答不了它刊登在什么地方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+              "quote": "That’s where this collection of the best travel camera equipment comes into play.",
+              "anchor": "this collection of the best travel camera equipment"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一则相机广告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The text is a camera advertisement.",
+            "explanation": "文章推荐的是四个不同品牌的器材，其中还有头灯和三脚架，由摄影师和记者来评价，没有价格、购买方式这类广告信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一本摄影杂志。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+              "quote": "Travel photographers have to be ready for whatever a destination throws at them.",
+              "anchor": "Travel photographers"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:3",
+              "quote": "Nat Geo’s in-house photo engineering team named the Fujifilm X-T50 the best camera for travel",
+              "anchor": "Nat Geo’s in-house photo engineering team"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A photography magazine",
+          "sourceRole": "correctOption",
+          "targetText": "Travel photographers",
+          "targetParagraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "选项是由全文推出来的：[[block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1]] 对着旅行摄影师（Travel photographers）说话，接着请《国家地理》自家的（in-house）摄影工程团队、夜拍摄影师和旅行记者逐件推荐器材。面向摄影爱好者、由刊物和行家出面评测器材，这最像摄影杂志里的栏目，选 D。"
+        }
+      ]
+    }
+  }
+}

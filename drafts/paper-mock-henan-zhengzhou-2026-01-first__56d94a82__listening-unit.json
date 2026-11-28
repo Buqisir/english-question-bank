@@ -1,0 +1,915 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Hello, can I pay by credit card for the pizza?\nM: I'm sorry, our restaurant is not set up to take credit cards over the phone for delivery orders. It's cash only, and we would appreciate it if you paid our driver with the smallest bill possible.",
+      "translationZh": "女：你好，我订的披萨能用信用卡付款吗？\n男：抱歉，我们餐厅不支持外卖订单在电话里用信用卡付款。只收现金，另外您付钱给送餐司机时，如果能尽量用小面额的钞票，我们会很感激。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士打电话订披萨外卖，询问能否用信用卡付款，店员说明了付款规定。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你好，我订的披萨能用信用卡付款吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "抱歉，我们餐厅不支持外卖订单在电话里用信用卡付款。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "只收现金，另外您付钱给送餐司机时，如果能尽量用小面额的钞票，我们会很感激。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: So, as an expert, what new technology do you think we will see in 2026?\nW: We will continue to see improvements in machine learning and computer intelligence, leading to progress in the Internet of Things and 6G. I also hope to see new clean energy technology coming into the market.",
+      "translationZh": "男：那么，作为专家，您认为 2026 年我们会看到哪些新技术？\n女：机器学习和计算机智能会继续进步，从而推动物联网和 6G 的发展。我也希望看到新的清洁能源技术进入市场。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "科学与技术",
+        "subtopic": "科技发展"
+      },
+      "summaryZh": "男士与一位女专家交谈，话题是 2026 年可能出现的新技术。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "那么，作为专家，您认为 2026 年我们会看到哪些新技术？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "机器学习和计算机智能会继续进步，从而推动物联网和 6G 的发展。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我也希望看到新的清洁能源技术进入市场。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: I have heard you are going to England tomorrow. I want to see you off at the airport. When will you leave?\nM: One in the afternoon. But I am to check in at 11:20 in the morning.\nW: Then I will see you at the airport at 11 in the morning.",
+      "translationZh": "女：听说你明天要去英国。我想去机场送你。你什么时候走？\n男：下午一点。不过我上午十一点二十就得办理登机手续。\n女：那我上午十一点在机场跟你碰面。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士明天要去英国，女士打算去机场送行，两人商量在机场见面的时间。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "听说你明天要去英国。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我想去机场送你。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "你什么时候走？"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "下午一点。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "不过我上午十一点二十就得办理登机手续。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "那我上午十一点在机场跟你碰面。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Have you ever watched the game for disabled athletes?\nM: Yes, watching these athletes is a moving experience.\nW: Because disabled athletes have to adapt to their disability and make a huge effort to succeed. So they need encouragement and shouldn't be made fun of.\nM: I couldn't agree more.",
+      "translationZh": "女：你看过残疾人运动会吗？\n男：看过，看这些运动员比赛让人很感动。\n女：因为残疾运动员得适应自己的残疾，还要付出巨大的努力才能成功。所以他们需要鼓励，不应该被人取笑。\n男：我完全同意。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "体育精神"
+      },
+      "summaryZh": "一男一女谈起观看残疾人运动会的感受，交流对残疾运动员的看法。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你看过残疾人运动会吗？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "看过，看这些运动员比赛让人很感动。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "因为残疾运动员得适应自己的残疾，还要付出巨大的努力才能成功。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "所以他们需要鼓励，不应该被人取笑。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我完全同意。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Most of the world's rainforests are in danger. They are disappearing at an alarming rate.\nM: Yeah, many plants and a large population of animals exist only in rainforest. Have you heard of the Amazon rainforest fires in 2019?\nW: Yes, they led to mass loss of wildlife.",
+      "translationZh": "女：世界上大部分雨林都处于危险之中，正以惊人的速度消失。\n男：是啊，很多植物和大量动物只生活在雨林里。你听说过 2019 年亚马孙雨林大火吗？\n女：听说过，那场大火造成大量野生动物死亡。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "生态环境"
+      },
+      "summaryZh": "一男一女聊起世界雨林的现状，还说到 2019 年的亚马孙雨林大火。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "世界上大部分雨林都处于危险之中。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "它们正以惊人的速度消失。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "是啊，很多植物和大量动物只生活在雨林里。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "你听说过 2019 年亚马孙雨林大火吗？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "听说过，那场大火造成大量野生动物死亡。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Globe Language Center. May I help you?\nW: Yes, I'd like some information about your study abroad programs.\nM: Sure. Our short-term programs are eight weeks long.\nW: Eight weeks is perfect. I have to start a new job in the fall. Can you tell me what kind of housing is out there?\nM: We place all of our students in homestay. If you like, I can send you our brochure and some information about our host families.\nW: Okay, thanks.",
+      "translationZh": "男：环球语言中心，有什么可以帮您？\n女：是的，我想了解一下你们的留学项目。\n男：好的。我们的短期项目为期八周。\n女：八周正合适。我秋天得开始一份新工作。你能说说那边的住宿是什么样的吗？\n男：我们把所有学生都安排在寄宿家庭。如果您愿意，我可以把我们的宣传册和一些寄宿家庭的资料寄给您。\n女：好的，谢谢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士打电话向一家语言中心咨询留学短期项目和住宿安排。"
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: You don't look well. What troubles you, Daniel?\nM: Well, you know, our music teacher has asked me to prepare something for the city piano competition. I have chosen a piece of Beethoven's music.\nW: That is great, Daniel. We all know you are the best in our class, and I hope you will win.\nM: The only problem is that my mother is not feeling well. Can you imagine what my practicing at home would do to her?\nW: There must be a solution.",
+      "translationZh": "女：你脸色不太好。有什么烦心事吗，丹尼尔？\n男：嗯，你知道，我们的音乐老师让我为全市钢琴比赛准备一首曲子。我选了一首贝多芬的作品。\n女：太好了，丹尼尔。大家都知道你是我们班最棒的，我希望你能赢。\n男：唯一的问题是我妈妈身体不舒服。你能想象我在家练琴会对她有什么影响吗？\n女：总会有办法的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "丹尼尔要准备全市钢琴比赛，他向关心他的女孩说起自己的烦恼。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你脸色不太好。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "有什么烦心事吗，丹尼尔？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "嗯，你知道，我们的音乐老师让我为全市钢琴比赛准备一首曲子。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我选了一首贝多芬的作品。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "太好了，丹尼尔。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "大家都知道你是我们班最棒的，我希望你能赢。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "唯一的问题是我妈妈身体不舒服。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "你能想象我在家练琴会对她有什么影响吗？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "总会有办法的。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "M: Hi, Elena. Congratulations on bringing out your book about fundraising for nonprofit organizations.\nW: Thanks. I couldn't have done it without the support from everyone here at the Society for Wildlife Preservation.\nM: If it is possible, I would like you to give a talk on your book to the public. I think it would really encourage everyone to think creatively about how we can attract more donors to help our cause.\nW: Sure, I can do that, but it will have to wait until next month because I am going to a meeting on protecting the wetlands.",
+      "translationZh": "男：你好，埃琳娜。祝贺你出版了那本讲如何为非营利组织筹款的书。\n女：谢谢。没有野生动物保护协会这里每个人的支持，我不可能做到。\n男：如果可以的话，我想请你就这本书给公众做一次讲座。我觉得这真的会鼓励大家创造性地思考，怎样吸引更多捐赠者来支持我们的事业。\n女：当然可以，不过得等到下个月，因为我要去参加一个关于保护湿地的会议。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "公益事业"
+      },
+      "summaryZh": "男士和野生动物保护协会的埃琳娜交谈，提出一个请求，埃琳娜说起近期安排。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "你好，埃琳娜。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "祝贺你出版了那本讲如何为非营利组织筹款的书。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "没有野生动物保护协会这里每个人的支持，我不可能做到。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "如果可以的话，我想请你就这本书给公众做一次讲座。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我觉得这真的会鼓励大家创造性地思考，怎样吸引更多捐赠者来支持我们的事业。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "当然可以，不过得等到下个月，因为我要去参加一个关于保护湿地的会议。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: Hello everyone. Welcome to our program. Today we are fortunate to have a special guest with us. Her name is Yang Liu, a performer of bamboo drifting. When did you begin to learn bamboo drifting?\nW: I learned it from my grandmother when I was seven.\nM: Could you share your learning experience with us?\nW: With pleasure. Usually, the bamboo under my feet is about nine meters long, and the bamboo in my hands is about five meters long. I fell in the water several times when I was practicing. So keeping my body from falling into the water is the most difficult part of bamboo drifting.\nM: What makes you keep going?\nW: Just the love for the ancient skill. In the past 17 years, I have been drifting all year round, in winter cold and summer heat. Now I am able to do Chinese qigong on the water, and I put dance into bamboo drifting to make it elegant. As Hanfu culture has been on the rise, I started wearing Hanfu when performing, creating a beautiful feel.\nM: We all know you registered on social media platforms and posted your videos.\nW: Yes. I want to spread it to other countries so that more people around the world will like Chinese culture.\nM: I totally agree with you. It was good to talk to you. I feel like I always learn so much more when I get the chance to speak with you about these things.",
+      "translationZh": "男：大家好。欢迎收看我们的节目。今天我们很荣幸请到一位特别嘉宾。她叫杨柳，是一位独竹漂表演者。你是什么时候开始学独竹漂的？\n女：我七岁时跟奶奶学的。\n男：能和我们分享一下你的学艺经历吗？\n女：乐意之至。通常，我脚下踩的竹子大约九米长，手里拿的竹竿大约五米长。练习的时候我掉进水里好几次。所以，不让身体掉进水里是独竹漂最难的部分。\n男：是什么让你坚持下来的？\n女：就是对这门古老技艺的热爱。过去 17 年里，无论冬寒还是夏热，我一年到头都在练独竹漂。现在我能在水上练中国气功，还把舞蹈融入独竹漂，让它更优美。随着汉服文化兴起，我开始穿汉服表演，营造出一种美感。\n男：我们都知道你在社交媒体平台上注册了账号，发布了自己的视频。\n女：是的。我想把它传播到其他国家，让世界各地更多的人喜欢中国文化。\n男：我完全赞同。和你聊天很愉快。我觉得每次有机会和你聊这些事，我总能学到更多。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "非物质文化遗产"
+      },
+      "summaryZh": "一档节目请来独竹漂表演者杨柳，她讲述学艺经历和在网上发视频的情况。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "大家好。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "欢迎收看我们的节目。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "今天我们很荣幸请到一位特别嘉宾。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "她叫杨柳，是一位独竹漂表演者。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "你是什么时候开始学独竹漂的？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我七岁时跟奶奶学的。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "能和我们分享一下你的学艺经历吗？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "乐意之至。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "通常，我脚下踩的竹子大约九米长，手里拿的竹竿大约五米长。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "练习的时候我掉进水里好几次。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "所以，不让身体掉进水里是独竹漂最难的部分。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "是什么让你坚持下来的？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "就是对这门古老技艺的热爱。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "过去 17 年里，无论冬寒还是夏热，我一年到头都在练独竹漂。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "现在我能在水上练中国气功，还把舞蹈融入独竹漂，让它更优美。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "随着汉服文化兴起，我开始穿汉服表演，营造出一种美感。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "我们都知道你在社交媒体平台上注册了账号，发布了自己的视频。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "我想把它传播到其他国家，让世界各地更多的人喜欢中国文化。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "我完全赞同。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "和你聊天很愉快。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "我觉得每次有机会和你聊这些事，我总能学到更多。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Microplastics are everywhere in our environment. Measuring 50 to 500 micrometers in length, microplastics come from a variety of sources, including large plastics that break down into smaller pieces. Therefore, much remains unknown about the common existence of these materials within the human body, as well as their impact on human health. A research team led by Kieran Cox studied 26 papers on the amount of microplastics in common foods. Using previously reported data, the team evaluated the potential consumption of microplastics and calculated annual intake via food and drink at 34,000 to 52,000 particles. The study found that people who drink only bottled water absorb an additional 90,000 microplastics each year, compared to 4,000 among those who only drink tap water. But the food and drink that the researchers analyzed represent 15 of Americans' caloric intake. The team couldn't account for food groups like fruits, vegetables, and grains, because there simply is not enough data on their microplastic content. For those who are worried about microplastic consumption, cutting down bottled water is a good start. But as for the heart of the problem, we have to stop producing and using so much plastic.",
+      "translationZh": "微塑料在我们的环境中无处不在。微塑料长 50 到 500 微米，来源多种多样，其中包括分解成小碎片的大块塑料。因此，这些物质在人体内普遍存在的情况以及它们对人体健康的影响，还有很多未知之处。由基兰·考克斯带领的研究团队研究了 26 篇关于常见食物中微塑料含量的论文。团队利用以往报告的数据，评估了人们可能摄入的微塑料量，计算出每人每年通过食物和饮料摄入 34,000 到 52,000 个微塑料颗粒。研究发现，只喝瓶装水的人每年会额外摄入 90,000 个微塑料颗粒，而只喝自来水的人只有 4,000 个。但研究人员分析的食物和饮料只占美国人热量摄入的 15%。团队无法把水果、蔬菜和谷物等食物类别算进去，因为关于它们微塑料含量的数据实在太少。对于担心摄入微塑料的人来说，少喝瓶装水是个好的开始。但要从根本上解决问题，我们必须停止生产和使用这么多塑料。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人类生存与环境的关系"
+      },
+      "summaryZh": "讲话人介绍基兰·考克斯团队关于微塑料的一项研究及其发现。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "微塑料在我们的环境中无处不在。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "微塑料长 50 到 500 微米，来源多种多样，其中包括分解成小碎片的大块塑料。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "因此，这些物质在人体内普遍存在的情况以及它们对人体健康的影响，还有很多未知之处。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "由基兰·考克斯带领的研究团队研究了 26 篇关于常见食物中微塑料含量的论文。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "团队利用以往报告的数据，评估了人们可能摄入的微塑料量，计算出每人每年通过食物和饮料摄入 34,000 到 52,000 个微塑料颗粒。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "研究发现，只喝瓶装水的人每年会额外摄入 90,000 个微塑料颗粒，而只喝自来水的人只有 4,000 个。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "但研究人员分析的食物和饮料只占美国人热量摄入的 15%。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "团队无法把水果、蔬菜和谷物等食物类别算进去，因为关于它们微塑料含量的数据实在太少。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "对于担心摄入微塑料的人来说，少喝瓶装水是个好的开始。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "但要从根本上解决问题，我们必须停止生产和使用这么多塑料。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士可能在哪里？",
+      "optionTranslationsZh": {
+        "A": "在车里。",
+        "B": "在她家里。",
+        "C": "在餐馆里。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I'm sorry, our restaurant is not set up to take credit cards over the phone for delivery orders."
+      },
+      "reasonZh": "女士是打电话订披萨外卖（over the phone for delivery orders），钱要付给送餐司机（paid our driver），可见她在家等着送餐，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "司机（our driver）是餐厅派去送外卖的人，女士是等着收餐付钱的一方，不在车上。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "餐厅（our restaurant）是接电话的男店员说的“我们餐厅”，女士是打电话来订外卖的顾客。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士请女士做什么？",
+      "optionTranslationsZh": {
+        "A": "发表她的看法。",
+        "B": "帮他做一个项目。",
+        "C": "多了解一些技术知识。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "So, as an expert, what new technology do you think we will see in 2026?"
+      },
+      "reasonZh": "男士问女士作为专家（as an expert）认为（do you think）2026 年会出现哪些新技术，是请她谈自己的看法，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "技术（technology）是男士提问的话题，他请女士预测新技术，不是让她去多学技术。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士的航班几点起飞？",
+      "optionTranslationsZh": {
+        "A": "上午 11:00。",
+        "B": "上午 11:20。",
+        "C": "下午 1:00。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "One in the afternoon."
+      },
+      "reasonZh": "女士问男士几点走（When will you leave?），男士答下午一点（One in the afternoon），即航班下午 1:00 起飞，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "上午 11 点是女士说要在机场跟他碰面的时间（see you at the airport at 11），比值机还早一点。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "11:20 是男士上午要办理登机手续的时间（check in at 11:20），不是起飞时间。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人对残疾运动员持什么看法？",
+      "optionTranslationsZh": {
+        "A": "他们令人鼓舞。",
+        "B": "他们应该受到尊重。",
+        "C": "他们必须得到悉心照顾。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "So they need encouragement and shouldn't be made fun of."
+      },
+      "reasonZh": "女士说残疾运动员需要鼓励、不该被取笑（shouldn't be made fun of），男士完全同意（I couldn't agree more），两人都主张尊重他们，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "需要鼓励（need encouragement）是说运动员该得到别人的鼓励，A 说的却是运动员让别人受到鼓舞，方向反了。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "森林火灾。",
+        "B": "野生动物保护。",
+        "C": "濒危的雨林。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Most of the world's rainforests are in danger."
+      },
+      "reasonZh": "女士开头就说世界上大部分雨林处于危险中（in danger），接着说雨林在消失、举亚马孙大火为例，都围绕濒危的雨林，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "亚马孙雨林大火（Amazon rainforest fires）是男士举的一个例子，用来说明雨林正在遭到破坏。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "野生动物大量死亡（mass loss of wildlife）是大火造成的后果，两人没有谈怎样保护野生动物。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女孩秋天必须做什么？",
+      "optionTranslationsZh": {
+        "A": "开始工作。",
+        "B": "出国留学。",
+        "C": "找房子。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I have to start a new job in the fall."
+      },
+      "reasonZh": "“开始工作”就是女士说的秋天得开始一份新工作（start a new job in the fall），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "留学（study abroad programs）是女士打电话咨询的项目，她说秋天必须做的是开始新工作。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "读一本宣传册。",
+        "B": "带女孩参观中心。",
+        "C": "给女孩寄一些资料。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "If you like, I can send you our brochure and some information about our host families."
+      },
+      "reasonZh": "男士提出把宣传册和寄宿家庭的资料寄给女士（send you our brochure and some information），女士答应了（Okay, thanks），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "宣传册（brochure）是男士要寄出的资料，要读它的是收到资料的女士，不是男士。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "中心（Globe Language Center）是男士接电话时报的机构名，他答应做的是寄资料，没有提出带她参观。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人之间最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "同班同学。",
+        "B": "邻居。",
+        "C": "师生。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We all know you are the best in our class, and I hope you will win."
+      },
+      "reasonZh": "女士说大家都知道丹尼尔是“我们班”最棒的（the best in our class），丹尼尔也说“我们的”音乐老师（our music teacher），两人在同一个班，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "老师（our music teacher）是丹尼尔提到的第三个人，是老师让他准备比赛，对话的两人都不是老师。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "丹尼尔担心什么？",
+      "optionTranslationsZh": {
+        "A": "他的母亲病得很重。",
+        "B": "他可能会输掉比赛。",
+        "C": "他的母亲可能会受他练琴的影响。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Can you imagine what my practicing at home would do to her?"
+      },
+      "reasonZh": "丹尼尔先说妈妈身体不舒服，又问在家练琴会对她有什么影响（what my practicing at home would do to her），他担心的是练琴打扰生病的妈妈，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "丹尼尔只说妈妈身体不太舒服（not feeling well），没有说病得很重；他发愁的是自己在家练琴会影响她。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "比赛（competition）是女士希望他赢的那场，丹尼尔说唯一的问题（The only problem）是妈妈身体不好，不是怕输。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士为什么祝贺埃琳娜？",
+      "optionTranslationsZh": {
+        "A": "她最近出版了一本书。",
+        "B": "她为慈善事业筹到了一些钱。",
+        "C": "她创办了一个非营利组织。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Congratulations on bringing out your book about fundraising for nonprofit organizations."
+      },
+      "reasonZh": "“出版了一本书”就是男士祝贺的出书（bringing out your book），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "筹款（fundraising）是这本书的主题，书讲怎样为非营利组织筹款，不是说她自己为慈善筹到了钱。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "非营利组织（nonprofit organizations）也是书的内容，男士祝贺的是出书，不是她创办了组织。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士请埃琳娜做什么？",
+      "optionTranslationsZh": {
+        "A": "帮助他们的事业。",
+        "B": "发表演讲。",
+        "C": "向别人寻求支持。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If it is possible, I would like you to give a talk on your book to the public."
+      },
+      "reasonZh": "“发表演讲”就是男士请埃琳娜给公众做的讲座（give a talk on your book），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "帮助事业（help our cause）是男士希望讲座带来的效果：鼓励大家想办法吸引捐赠者，他请埃琳娜做的是讲座。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "支持（support）是埃琳娜感谢协会同事给她的帮助，不是男士对她的请求。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "埃琳娜接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "参加一个会议。",
+        "B": "吸引更多捐赠者。",
+        "C": "去湿地考察。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Sure, I can do that, but it will have to wait until next month because I am going to a meeting on protecting the wetlands."
+      },
+      "reasonZh": "埃琳娜说讲座要等到下个月，因为她要去参加（going to a meeting）一个关于保护湿地的会议，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "吸引更多捐赠者（attract more donors）是男士希望讲座起到的作用，不是埃琳娜接下来的安排。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "湿地（the wetlands）是会议的议题，她是去开保护湿地的会，不是去湿地考察。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士是做什么的？",
+      "optionTranslationsZh": {
+        "A": "设计师。",
+        "B": "主持人。",
+        "C": "艺术家。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Welcome to our program."
+      },
+      "reasonZh": "男士欢迎大家收看节目（Welcome to our program），介绍今天的嘉宾并一路向她提问，可见他是节目主持人，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "表演者（a performer of bamboo drifting）是男士对嘉宾杨柳的介绍，不是他自己的身份。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "杨柳练习独竹漂时最大的挑战是什么？",
+      "optionTranslationsZh": {
+        "A": "怎样保持平衡。",
+        "B": "怎样在竹子上跳舞。",
+        "C": "怎样应对天气变化。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "So keeping my body from falling into the water is the most difficult part of bamboo drifting."
+      },
+      "reasonZh": "“保持平衡”就是杨柳说的最难的是不让身体掉进水里（keeping my body from falling into the water），她练习时也确实落水好几次，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "把舞蹈融入独竹漂（put dance into bamboo drifting）是她练成以后的新尝试，不是练习时最难的部分。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "哪个词最能形容杨柳？",
+      "optionTranslationsZh": {
+        "A": "幸运的。",
+        "B": "有趣的。",
+        "C": "有创造力的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Now I am able to do Chinese qigong on the water, and I put dance into bamboo drifting to make it elegant."
+      },
+      "reasonZh": "杨柳在水上练气功、把舞蹈融入独竹漂（put dance into bamboo drifting），后来还穿汉服表演（started wearing Hanfu），都是给老技艺添的新花样，可见她富有创造力，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "幸运（fortunate）是男士说节目有幸请到这位嘉宾（we are fortunate to have a special guest），说的是节目方，不是在形容杨柳。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "杨柳为什么在网上发视频？",
+      "optionTranslationsZh": {
+        "A": "为了出名。",
+        "B": "为了推广中国文化。",
+        "C": "为了号召更多人加入。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I want to spread it to other countries so that more people around the world will like Chinese culture."
+      },
+      "reasonZh": "“推广中国文化”就是杨柳说的把独竹漂传到其他国家，让更多人喜欢中国文化（like Chinese culture），选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "更多人（more people）是她希望喜欢上中国文化的人，她说的是让人喜欢中国文化，不是号召人们来学独竹漂。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "讲话人着重讲什么？",
+      "optionTranslationsZh": {
+        "A": "微塑料的潜力。",
+        "B": "微塑料污染。",
+        "C": "微塑料的摄入。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Using previously reported data, the team evaluated the potential consumption of microplastics and calculated annual intake via food and drink at 34,000 to 52,000 particles."
+      },
+      "reasonZh": "讲话从微塑料对人体的影响说起，接着讲研究团队估算每年从食物饮料中摄入多少微塑料（annual intake），再比较瓶装水和自来水，最后建议少喝瓶装水，都围绕人们吃进喝进的微塑料，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "潜在（potential）修饰的是摄入量（potential consumption），指人们可能吃进多少微塑料，不是微塑料本身的潜力。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "开头说微塑料遍布环境（everywhere in our environment）只是引子，后面讲的都是人体摄入的数量。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "基兰·考克斯的团队是怎样计算微塑料可能摄入量的？",
+      "optionTranslationsZh": {
+        "A": "通过分析数据。",
+        "B": "通过比较影响。",
+        "C": "通过测量食物样本。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Using previously reported data, the team evaluated the potential consumption of microplastics and calculated annual intake via food and drink at 34,000 to 52,000 particles."
+      },
+      "reasonZh": "“分析数据”就是团队利用以往报告的数据（Using previously reported data）来估算摄入量，前一句也说他们研读了 26 篇论文（studied 26 papers），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "比较（compared to）出现在研究结果里，比的是喝瓶装水和喝自来水的人摄入的数量；影响（impact）是开头说微塑料对健康的影响还不清楚，都不是计算方法。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "测量（Measuring 50 to 500 micrometers）说的是微塑料的长度，团队用的是已有数据，没有自己去测食物样本。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "关于基兰·考克斯带领的研究团队，我们可以知道什么？",
+      "optionTranslationsZh": {
+        "A": "他们建议人们不要再喝瓶装水。",
+        "B": "他们获得了关于微塑料的全面信息。",
+        "C": "他们无法说明蔬菜和水果中的微塑料情况。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The team couldn't account for food groups like fruits, vegetables, and grains, because there simply is not enough data on their microplastic content."
+      },
+      "reasonZh": "“无法说明蔬果中的微塑料”就是团队没法把水果、蔬菜等算进去（couldn't account for food groups like fruits, vegetables），原因是缺少数据，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "少喝瓶装水（cutting down bottled water）是讲话人给担心者的建议，只说减少；“停止”（stop）出现在最后一句，说的是停止大量生产和使用塑料。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "团队连水果、蔬菜、谷物都缺数据（not enough data），掌握的信息谈不上全面。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "讲话人为什么做这次讲话？",
+      "optionTranslationsZh": {
+        "A": "告诉我们要重视产品质量。",
+        "B": "呼吁人们减少塑料的使用。",
+        "C": "指出吃有机食品的好处。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But as for the heart of the problem, we have to stop producing and using so much plastic."
+      },
+      "reasonZh": "讲话最后落到问题的根本：必须停止生产和使用这么多塑料（stop producing and using so much plastic），前面的研究数据都是铺垫，这就是呼吁减少塑料使用，选 B。"
+    }
+  }
+}

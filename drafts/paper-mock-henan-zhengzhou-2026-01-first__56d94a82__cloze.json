@@ -1,0 +1,2118 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:cloze": {
+      "overview": "作者天生视力差，多年来一直隐瞒。求职试岗时看不清菜单而被拒，作者终于正视诊断、接受残疾，学会向人求助，在朋友和陌生人的善意中变得自信，并为英国众多视障者发声。",
+      "fullTranslationZh": "2019 年，我决定找份工作，于是把简历投给了村里的每一家商店和咖啡馆。幸运的是，当地一家餐馆给了我面试的机会。\n面试很顺利，可在我离开前，经理让我试着接待一位顾客。让我惊恐的是，菜单上的字我一个也看不清。顾客不耐烦地站着，我却僵在原地。不出所料，第二天早上我收到了一封拒绝录用的邮件。我所有的梦想都破灭了。\n我天生视力不好。小时候，即使坐在第一排，我也很难看清课堂上的黑板。我靠抄朋友的笔记把这件事掩盖过去。随着年龄增长，我把这个秘密埋得更深了。我拼命地想逃避视力差这个事实。\n然而，那次求职面试回来后，我迈出了面对残疾生活的第一步——接受。我从医生那里得知，眼镜也帮不上忙，而且我永远都不能开车。每一条新消息都像是一次新的打击。我第一次读了自己的正式诊断——视力残疾。出乎我意料的是，我心里满是如释重负的感觉。\n下一步是放弃多年来养成的独立。我必须学会求助，而这是我一直回避的事。\n当我开始向别人求助时，朋友们的关爱和支持感动了我。他们增强了我的信心，让我不再因请求帮助而感到难为情。当我请陌生人帮我读咖啡馆的菜单或扶我过马路时，他们的善良让我很惊讶。\n如今，我比以往任何时候都自信得多。虽然我的视力无法改变，但我把每一个障碍都当作新的挑战。当有些东西不方便视障者使用时，我会说出来并要求调整。如果我自己都为视力感到害羞，英国两百多万视力受损的人又会怎么想呢？我不只是在为自己发声，也是在为千千万万和我一样的人发声。",
+      "mainLine": {
+        "theme": {
+          "text": "坦然接受视力残疾、学会求助后，作者变得自信，还为同样处境的人发声（for the millions like me）。",
+          "quote": "for the millions like me"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+            "text": "作者四处投简历找工作，幸运地得到餐馆的面试机会。"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+            "text": "试岗时看不清菜单当场愣住，第二天被拒，梦想破灭。"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+            "text": "作者天生视力差，从小靠抄笔记隐瞒，拼命逃避这一事实。"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+            "text": "面试失败后作者第一次读诊断，接受残疾，反而如释重负。"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+            "text": "下一步是放下多年养成的独立，学会开口求助。"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+            "text": "朋友的关爱让作者有了信心，陌生人的善意也让作者意外。"
+          },
+          {
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+            "text": "如今作者更自信，把障碍当挑战，为众多视障者发声。"
+          }
+        ],
+        "emotion": "庆幸→惊恐→绝望→释然→感动→自信"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sls-1",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+          "sourceText": "However, when I got back from that job interview, I made the first step toward dealing with life with a disability — __46__.",
+          "displayText": "However, when I got back from that job interview, I made the first step toward dealing with life with a disability — acceptance.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:46"
+          ],
+          "translationZh": "然而，那次求职面试回来后，我迈出了面对残疾生活的第一步——接受。",
+          "analysisZh": "主干是我迈出了第一步（I made the first step）。从句（when I got back from that job interview）交代时间：面试回来以后。介词短语（toward dealing with life with a disability）修饰第一步，说明这一步朝哪里迈：介词（toward）后接动名词（dealing），介词短语（with a disability）修饰生活（life），指带着残疾的生活。破折号后的接受（acceptance）补充说明这第一步具体是什么。句首然而（However）与上一段的拼命逃避形成转折。",
+          "underlineRanges": [
+            {
+              "quote": "I made the first step",
+              "start": 50,
+              "end": 71
+            },
+            {
+              "quote": "toward dealing with life with a disability",
+              "start": 72,
+              "end": 114
+            },
+            {
+              "quote": "acceptance",
+              "start": 117,
+              "end": 127
+            }
+          ]
+        },
+        {
+          "sentenceId": "sls-2",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+          "sourceText": "From my doctor, I learned that glasses wouldn’t __47__ and that I would never be allowed to drive.",
+          "displayText": "From my doctor, I learned that glasses wouldn’t help and that I would never be allowed to drive.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:47"
+          ],
+          "translationZh": "我从医生那里得知，眼镜也帮不上忙，而且我永远都不能开车。",
+          "analysisZh": "主干是我得知（I learned）。得知后面有两个由并列连词（and）连接的宾语从句：一个是眼镜帮不上忙（that glasses wouldn’t help），一个是我永远不能开车（that I would never be allowed to drive）。句首介词短语（From my doctor）交代消息来自医生。第二个从句用被动（be allowed to drive），意为被允许开车，加上永不（never）就是永远不会被允许开车。",
+          "underlineRanges": [
+            {
+              "quote": "I learned",
+              "start": 16,
+              "end": 25
+            },
+            {
+              "quote": "that glasses wouldn’t help",
+              "start": 26,
+              "end": 52
+            },
+            {
+              "quote": "that I would never be allowed to drive",
+              "start": 57,
+              "end": 95
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1"
+              ],
+              "start": 0,
+              "end": 56,
+              "quote": "2019 年，我决定找份工作，于是把简历投给了村里的每一家商店和咖啡馆。幸运的是，当地一家餐馆给了我面试的机会。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2"
+              ],
+              "start": 57,
+              "end": 154,
+              "quote": "面试很顺利，可在我离开前，经理让我试着接待一位顾客。让我惊恐的是，菜单上的字我一个也看不清。顾客不耐烦地站着，我却僵在原地。不出所料，第二天早上我收到了一封拒绝录用的邮件。我所有的梦想都破灭了。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3"
+              ],
+              "start": 155,
+              "end": 239,
+              "quote": "我天生视力不好。小时候，即使坐在第一排，我也很难看清课堂上的黑板。我靠抄朋友的笔记把这件事掩盖过去。随着年龄增长，我把这个秘密埋得更深了。我拼命地想逃避视力差这个事实。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4"
+              ],
+              "start": 240,
+              "end": 357,
+              "quote": "然而，那次求职面试回来后，我迈出了面对残疾生活的第一步——接受。我从医生那里得知，眼镜也帮不上忙，而且我永远都不能开车。每一条新消息都像是一次新的打击。我第一次读了自己的正式诊断——视力残疾。出乎我意料的是，我心里满是如释重负的感觉。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5"
+              ],
+              "start": 358,
+              "end": 392,
+              "quote": "下一步是放弃多年来养成的独立。我必须学会求助，而这是我一直回避的事。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6"
+              ],
+              "start": 393,
+              "end": 478,
+              "quote": "当我开始向别人求助时，朋友们的关爱和支持感动了我。他们增强了我的信心，让我不再因请求帮助而感到难为情。当我请陌生人帮我读咖啡馆的菜单或扶我过马路时，他们的善良让我很惊讶。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7"
+              ],
+              "start": 479,
+              "end": 610,
+              "quote": "如今，我比以往任何时候都自信得多。虽然我的视力无法改变，但我把每一个障碍都当作新的挑战。当有些东西不方便视障者使用时，我会说出来并要求调整。如果我自己都为视力感到害羞，英国两百多万视力受损的人又会怎么想呢？我不只是在为自己发声，也是在为千千万万和我一样的人发声。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+            "text": "In 2019, I decided to get a job, so I sent my CV (简历) to every shop and cafe in my village. Luckily, I was offered an interview at a local restaurant."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+            "text": "The interview went well, but before I left, the manager asked me to try out serving a customer. To my horror, I couldn’t make out a word on the menu. The customer stood impatiently as I froze. Unsurprisingly, I received a refusal email the next morning. All my dreams were destroyed."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+            "text": "I was born with poor eyesight. As a child, I struggled to see the board in class, even from the front row. I hid this by copying notes from my friends. As I got older, I buried the secret even more. I desperately tried to escape from my poor eyesight."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+            "text": "However, when I got back from that job interview, I made the first step toward dealing with life with a disability — acceptance. From my doctor, I learned that glasses wouldn’t help and that I would never be allowed to drive. Each new detail felt like a fresh blow. For the first time, I read my official diagnosis（诊断）— visual disability. To my surprise, I was filled with relief."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+            "text": "The next step was abandoning the independence I’d developed over the years. I had to learn to ask for help, something I’d always avoided."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+            "text": "As I started reaching out for help, the love and support of my friends moved me. They boosted my confidence so that I no longer felt embarrassed to ask for assistance. When I asked strangers to help read cafe menus or cross the road, I was surprised at how kind they were."
+          },
+          {
+            "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+            "text": "Today, I’m much more confident than ever. Though my vision can’t be changed, I treat every barrier as a new challenge. I speak up when something isn’t accessible and ask for adjustments. If I feel shy about my vision, how will over two million people in Britain with sight loss think? I’m not just speaking up for myself but for the millions like me."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "start": 114,
+                "end": 148,
+                "quote": "an interview at a local restaurant"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "start": 92,
+                "end": 99,
+                "quote": "Luckily"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "start": 50,
+                "end": 55,
+                "quote": "面试的机会"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "start": 36,
+                "end": 40,
+                "quote": "幸运的是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 128,
+                "end": 146,
+                "quote": "a word on the menu"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 0,
+                "end": 29,
+                "quote": "I was born with poor eyesight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 33,
+                "end": 38,
+                "quote": "菜单上的字"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 0,
+                "end": 7,
+                "quote": "我天生视力不好"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 191,
+                "end": 205,
+                "quote": "Unsurprisingly"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 251,
+                "end": 279,
+                "quote": "All my dreams were destroyed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 62,
+                "end": 66,
+                "quote": "不出所料"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 86,
+                "end": 96,
+                "quote": "我所有的梦想都破灭了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 121,
+                "end": 153,
+                "quote": "by copying notes from my friends"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 173,
+                "end": 200,
+                "quote": "buried the secret even more"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 34,
+                "end": 41,
+                "quote": "靠抄朋友的笔记"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 58,
+                "end": 68,
+                "quote": "把这个秘密埋得更深了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 173,
+                "end": 200,
+                "quote": "buried the secret even more"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 211,
+                "end": 248,
+                "quote": "tried to escape from my poor eyesight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 58,
+                "end": 68,
+                "quote": "把这个秘密埋得更深了"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 73,
+                "end": 83,
+                "quote": "想逃避视力差这个事实"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 57,
+                "end": 114,
+                "quote": "the first step toward dealing with life with a disability"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 293,
+                "end": 314,
+                "quote": "my official diagnosis"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 17,
+                "end": 27,
+                "quote": "面对残疾生活的第一步"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 85,
+                "end": 89,
+                "quote": "正式诊断"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 156,
+                "end": 163,
+                "quote": "glasses"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 224,
+                "end": 262,
+                "quote": "Each new detail felt like a fresh blow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 41,
+                "end": 43,
+                "quote": "眼镜"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 60,
+                "end": 75,
+                "quote": "每一条新消息都像是一次新的打击"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 264,
+                "end": 282,
+                "quote": "For the first time"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 293,
+                "end": 314,
+                "quote": "my official diagnosis"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 76,
+                "end": 80,
+                "quote": "我第一次"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 85,
+                "end": 89,
+                "quote": "正式诊断"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 339,
+                "end": 353,
+                "quote": "To my surprise"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 224,
+                "end": 262,
+                "quote": "Each new detail felt like a fresh blow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 96,
+                "end": 103,
+                "quote": "出乎我意料的是"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 71,
+                "end": 75,
+                "quote": "新的打击"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 25,
+                "end": 70,
+                "quote": "the independence I’d developed over the years"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 72,
+                "end": 102,
+                "quote": "I had to learn to ask for help"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 6,
+                "end": 14,
+                "quote": "多年来养成的独立"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 15,
+                "end": 22,
+                "quote": "我必须学会求助"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 36,
+                "end": 70,
+                "quote": "the love and support of my friends"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 93,
+                "end": 106,
+                "quote": "my confidence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 11,
+                "end": 20,
+                "quote": "朋友们的关爱和支持"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 30,
+                "end": 34,
+                "quote": "我的信心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 139,
+                "end": 160,
+                "quote": "to ask for assistance"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 104,
+                "end": 132,
+                "quote": "something I’d always avoided"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 182,
+                "end": 211,
+                "quote": "If I feel shy about my vision"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 39,
+                "end": 44,
+                "quote": "因请求帮助"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 24,
+                "end": 33,
+                "quote": "这是我一直回避的事"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 70,
+                "end": 83,
+                "quote": "如果我自己都为视力感到害羞"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 42,
+                "end": 75,
+                "quote": "Though my vision can’t be changed"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 98,
+                "end": 116,
+                "quote": "as a new challenge"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 17,
+                "end": 27,
+                "quote": "虽然我的视力无法改变"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 39,
+                "end": 43,
+                "quote": "新的挑战"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 161,
+                "end": 180,
+                "quote": "ask for adjustments"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 193,
+                "end": 226,
+                "quote": "read cafe menus or cross the road"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 65,
+                "end": 69,
+                "quote": "要求调整"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 59,
+                "end": 72,
+                "quote": "读咖啡馆的菜单或扶我过马路"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 182,
+                "end": 211,
+                "quote": "If I feel shy about my vision"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 239,
+                "end": 272,
+                "quote": "people in Britain with sight loss"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 70,
+                "end": 83,
+                "quote": "如果我自己都为视力感到害羞"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 84,
+                "end": 96,
+                "quote": "英国两百多万视力受损的人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:41"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "start": 107,
+                "end": 114,
+                "quote": "offered"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:1",
+                "start": 47,
+                "end": 50,
+                "quote": "给了我"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:42"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 121,
+                "end": 129,
+                "quote": "make out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 42,
+                "end": 45,
+                "quote": "看不清"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:43"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 222,
+                "end": 229,
+                "quote": "refusal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:2",
+                "start": 78,
+                "end": 82,
+                "quote": "拒绝录用"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:44"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 109,
+                "end": 112,
+                "quote": "hid"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 45,
+                "end": 47,
+                "quote": "掩盖"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:45"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 201,
+                "end": 212,
+                "quote": "desperately"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:3",
+                "start": 70,
+                "end": 73,
+                "quote": "拼命地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:46"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 117,
+                "end": 127,
+                "quote": "acceptance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 29,
+                "end": 31,
+                "quote": "接受"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:47"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 177,
+                "end": 181,
+                "quote": "help"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 44,
+                "end": 48,
+                "quote": "帮不上忙"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:48"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 288,
+                "end": 292,
+                "quote": "read"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 80,
+                "end": 82,
+                "quote": "读了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:49"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 373,
+                "end": 379,
+                "quote": "relief"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 109,
+                "end": 113,
+                "quote": "如释重负"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:50"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 18,
+                "end": 28,
+                "quote": "abandoning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:5",
+                "start": 4,
+                "end": 6,
+                "quote": "放弃"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:51"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 86,
+                "end": 93,
+                "quote": "boosted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 27,
+                "end": 30,
+                "quote": "增强了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:52"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 133,
+                "end": 144,
+                "quote": "embarrassed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+                "start": 47,
+                "end": 50,
+                "quote": "难为情"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:53"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 91,
+                "end": 98,
+                "quote": "barrier"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 34,
+                "end": 36,
+                "quote": "障碍"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:54"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 151,
+                "end": 161,
+                "quote": "accessible"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 49,
+                "end": 57,
+                "quote": "不方便视障者使用"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:55"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 278,
+                "end": 283,
+                "quote": "think"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:7",
+                "start": 98,
+                "end": 101,
+                "quote": "怎么想"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:46"
+            ],
+            "selectedSentenceId": "sls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 0,
+                "end": 128,
+                "quote": "However, when I got back from that job interview, I made the first step toward dealing with life with a disability — acceptance."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 0,
+                "end": 32,
+                "quote": "然而，那次求职面试回来后，我迈出了面对残疾生活的第一步——接受。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:47"
+            ],
+            "selectedSentenceId": "sls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 129,
+                "end": 225,
+                "quote": "From my doctor, I learned that glasses wouldn’t help and that I would never be allowed to drive."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-henan-zhengzhou-2026-01-first:cloze:4",
+                "start": 32,
+                "end": 60,
+                "quote": "我从医生那里得知，眼镜也帮不上忙，而且我永远都不能开车。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "庆幸→惊恐→绝望→释然→感动→自信"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:41": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "投完简历后，餐馆给了作者面试机会，空格要“给予”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "作者是被给予面试机会（an interview at a local restaurant）的一方，幸运的是（Luckily）也说明得到了机会，用给予（offered）的被动。",
+        "quotes": [
+          "an interview at a local restaurant",
+          "Luckily"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "提供",
+        "meaning": "给予面试机会",
+        "reason": "投完简历后，餐馆给了作者面试机会，空格要“给予”的意思。动词看搭配：作者是被给予面试机会（an interview at a local restaurant）的一方，幸运的是（Luckily）也说明得到了机会，用给予（offered）的被动。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "promised",
+          "meaning": "被许诺；后文直接写面试进行得很顺利（The interview went well），机会是实实在在给了，不只是许诺。",
+          "quote": "The interview went well"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "awarded",
+          "meaning": "被授予；授予多指奖项、荣誉，面试机会（an interview）是餐馆看了简历后给的，不是奖励。",
+          "quote": "an interview"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "spared",
+          "meaning": "被免去；成了作者被免掉面试，与后文面试很顺利（The interview went well）矛盾。",
+          "quote": "The interview went well"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "an interview",
+          "signalSide": "context-after",
+          "targetText": "offered an interview",
+          "relation": "给某人面试机会，被动说成我得到了面试机会。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The interview went well",
+          "signalSide": "context-after",
+          "relation": "下一段接着写面试，说明面试机会确实给到了作者。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:42": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:42",
+      "blankNo": 42,
+      "pos": "phrase",
+      "role": "main",
+      "context": "试岗时作者连菜单上的一个字都看不清，视力问题第一次让作者当众出丑。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "下一段交代作者天生视力差（I was born with poor eyesight），所以是看不清菜单上的字（a word on the menu）。",
+        "quotes": [
+          "I was born with poor eyesight",
+          "a word on the menu"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "辨认出",
+        "meaning": "看清菜单上的字",
+        "reason": "试岗时作者连菜单上的一个字都看不清，视力问题第一次让作者当众出丑。词组看语境义：下一段交代作者天生视力差（I was born with poor eyesight），所以是看不清菜单上的字（a word on the menu）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "note down",
+          "meaning": "记下；作者是给顾客点餐时愣住了（I froze），问题在看不清字，不是来不及记录。",
+          "quote": "I froze"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "pick up",
+          "meaning": "学会；试岗服务时不需要学菜单上的词，下一段点明原因是视力差（poor eyesight）。",
+          "quote": "poor eyesight"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "get across",
+          "meaning": "讲清楚、使被理解；菜单上的字（a word on the menu）是作者要读的，不是要向别人讲明白的意思。",
+          "quote": "a word on the menu"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a word on the menu",
+          "signalSide": "context-after",
+          "targetText": "make out a word on the menu",
+          "relation": "宾语是菜单上的字，要的是看清、认出的动作。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "make out",
+          "relation": "出来（out）和做出（make）合起来，指把字从模糊中辨认出来。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "poor eyesight",
+          "signalSide": "context-after",
+          "relation": "下一段的视力差解释了作者为什么看不清菜单。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:43": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "试岗时僵住、顾客不耐烦，第二天的邮件只能是坏结果，作者的梦想随之破灭。",
+      "find": {
+        "check": "affect",
+        "text": "不出所料（Unsurprisingly）承接前面当众僵住，后句又说梦想全毁（All my dreams were destroyed），邮件是拒绝。",
+        "quotes": [
+          "Unsurprisingly",
+          "All my dreams were destroyed"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "拒绝",
+        "meaning": "拒绝录用",
+        "reason": "试岗时僵住、顾客不耐烦，第二天的邮件只能是坏结果，作者的梦想随之破灭。名词看情感：不出所料（Unsurprisingly）承接前面当众僵住，后句又说梦想全毁（All my dreams were destroyed），邮件是拒绝。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "confirmation",
+          "meaning": "确认；若是确认录用，就接不上后句梦想全毁（All my dreams were destroyed）。",
+          "quote": "All my dreams were destroyed"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "response",
+          "meaning": "回复；回复不分好坏，而不出所料（Unsurprisingly）和梦想破灭都要求一个负面结果。",
+          "quote": "Unsurprisingly"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "proposal",
+          "meaning": "提议；作者等的是录用结果，梦想破灭（All my dreams were destroyed）说明结果是被拒，不是收到提议。",
+          "quote": "All my dreams were destroyed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "email",
+          "signalSide": "context-after",
+          "targetText": "a refusal email",
+          "relation": "修饰邮件，说明邮件的内容是拒绝录用。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "All my dreams were destroyed",
+          "signalSide": "context-after",
+          "relation": "梦想全毁说明收到的是坏消息。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:44": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者从小看不清黑板，却靠抄笔记把这件事遮掩过去，不让人知道。",
+      "find": {
+        "check": "echo",
+        "text": "后句说长大后把这个秘密埋得更深（buried the secret even more），秘密（the secret）说明此前一直在隐瞒。",
+        "quotes": [
+          "buried the secret even more",
+          "the secret"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "隐藏",
+        "meaning": "隐瞒视力差",
+        "reason": "作者从小看不清黑板，却靠抄笔记把这件事遮掩过去，不让人知道。动词看复现：后句说长大后把这个秘密埋得更深（buried the secret even more），秘密（the secret）说明此前一直在隐瞒。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admitted",
+          "meaning": "承认；靠抄笔记（by copying notes）正是为了不让人发现，后句还称它为秘密，谈不上承认。",
+          "quote": "by copying notes"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "denied",
+          "meaning": "否认；否认是被问起时说不是，这里是靠抄朋友笔记（copying notes from my friends）悄悄补上，是遮掩。",
+          "quote": "copying notes from my friends"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "defeated",
+          "meaning": "战胜；抄笔记只是绕开问题，视力没有变好，后文还说作者拼命想逃避（tried to escape）。",
+          "quote": "tried to escape"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "by copying notes from my friends",
+          "signalSide": "context-after",
+          "targetText": "hid this by copying notes from my friends",
+          "relation": "靠抄朋友的笔记来遮掩看不清黑板这件事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "buried the secret even more",
+          "signalSide": "context-after",
+          "relation": "把秘密埋得更深，与前面的隐瞒是同一件事的加深。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:45": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:45",
+      "blankNo": 45,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "秘密越埋越深，作者逃避视力差的劲头很大，空格要表示程度很深。",
+      "find": {
+        "check": "direction",
+        "text": "前句用更（even more）写隐瞒层层加深，逃避（tried to escape）也走到最强烈的一步，是拼命地。",
+        "quotes": [
+          "even more",
+          "tried to escape"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "拼命地",
+        "reason": "秘密越埋越深，作者逃避视力差的劲头很大，空格要表示程度很深。副词看走向：前句用更（even more）写隐瞒层层加深，逃避（tried to escape）也走到最强烈的一步，是拼命地。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gradually",
+          "meaning": "逐渐地；作者从小就在掩饰，长大后又埋得更深（even more），不是慢慢才开始逃避。",
+          "quote": "even more"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "eventually",
+          "meaning": "最终；逃避贯穿从小到大，下一段的然而（However）才写转变，这里写的不是最后的结果。",
+          "quote": "However"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "firmly",
+          "meaning": "坚定地；坚定带着主动下决心的意味，这里是越埋越深（buried the secret even more）的慌乱躲避。",
+          "quote": "buried the secret even more"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "tried to escape",
+          "signalSide": "context-after",
+          "targetText": "desperately tried to escape",
+          "relation": "修饰试图逃避，说明作者逃避得有多拼命。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "even more",
+          "signalSide": "context-before",
+          "relation": "隐瞒一步比一步深，逃避的程度也最强烈。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:46": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "main",
+      "context": "破折号后要说出面对残疾生活的第一步是什么，这是作者从逃避转向正视的转折。",
+      "find": {
+        "check": "echo",
+        "text": "后文写作者第一次读了自己的正式诊断（my official diagnosis），这就是第一步（the first step）：接受残疾。",
+        "quotes": [
+          "my official diagnosis",
+          "the first step"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "接受",
+        "meaning": "正视自己的残疾",
+        "reason": "破折号后要说出面对残疾生活的第一步是什么，这是作者从逃避转向正视的转折。名词看复现：后文写作者第一次读了自己的正式诊断（my official diagnosis），这就是第一步（the first step）：接受残疾。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "tolerance",
+          "meaning": "容忍；容忍是勉强忍着，读完诊断后作者却出乎意料（To my surprise）地放下了心，是坦然接受。",
+          "quote": "To my surprise"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "control",
+          "meaning": "控制；后文说视力无法改变（my vision can’t be changed），作者谈不上控制残疾。",
+          "quote": "my vision can’t be changed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "independence",
+          "meaning": "独立；下一段说下一步是放下多年养成的独立（the independence I’d developed），独立不是第一步。",
+          "quote": "the independence I’d developed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the first step",
+          "signalSide": "context-before",
+          "targetText": "the first step — acceptance",
+          "relation": "破折号后的词解释这第一步具体是什么。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my official diagnosis",
+          "signalSide": "context-after",
+          "relation": "第一次读诊断，就是在正视并接受残疾。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:47": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "医生告诉作者的又一个坏消息：戴眼镜也不能改善视力。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是眼镜（glasses），与永远不能开车并列，都是新的打击（a fresh blow），即眼镜帮不上忙。",
+        "quotes": [
+          "glasses",
+          "a fresh blow"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "有帮助",
+        "meaning": "起作用",
+        "reason": "医生告诉作者的又一个坏消息：戴眼镜也不能改善视力。动词看搭配：主语是眼镜（glasses），与永远不能开车并列，都是新的打击（a fresh blow），即眼镜帮不上忙。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "change",
+          "meaning": "变化；不带宾语时成了眼镜（glasses）本身不会变，医生说的是眼镜对作者的视力有没有用。",
+          "quote": "glasses"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fit",
+          "meaning": "合适；医生谈的是能不能改善视力，配不配得上眼镜和新的打击（a fresh blow）对不上。",
+          "quote": "a fresh blow"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "protect",
+          "meaning": "保护；这里和永远不能开车（never be allowed to drive）并列，说的是视力无法矫正，不是眼睛缺保护。",
+          "quote": "never be allowed to drive"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "glasses",
+          "signalSide": "context-before",
+          "targetText": "glasses wouldn’t help",
+          "relation": "眼镜作主语，说眼镜对作者的视力不起作用。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "a fresh blow",
+          "signalSide": "context-after",
+          "relation": "每条新消息都是打击，眼镜也是一条坏消息。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:48": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者第一次正面看自己的诊断结果，这是接受残疾的具体行动。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是正式诊断（my official diagnosis），破折号后是诊断内容视力残疾（visual disability），作者第一次去读它。",
+        "quotes": [
+          "my official diagnosis",
+          "visual disability"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "阅读",
+        "reason": "作者第一次正面看自己的诊断结果，这是接受残疾的具体行动。动词看搭配：宾语是正式诊断（my official diagnosis），破折号后是诊断内容视力残疾（visual disability），作者第一次去读它。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ignored",
+          "meaning": "忽视；第一次（For the first time）说明以前一直回避，这次是正视诊断，忽视是作者过去的做法。",
+          "quote": "For the first time"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "checked",
+          "meaning": "核对；诊断（my official diagnosis）是医生下的结论，作者不是去核查对错，而是第一次读到它。",
+          "quote": "my official diagnosis"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "valued",
+          "meaning": "珍视；诊断写的是视力残疾（visual disability），谈不上珍视，这里只是第一次面对这个结论。",
+          "quote": "visual disability"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my official diagnosis",
+          "signalSide": "context-after",
+          "targetText": "read my official diagnosis",
+          "relation": "读的对象是自己的正式诊断。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "For the first time",
+          "signalSide": "context-before",
+          "relation": "第一次去读，说明以前一直不愿面对。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:49": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "main",
+      "context": "读到诊断后作者没有崩溃，反而终于放下了心，这是情感的转折点。",
+      "find": {
+        "check": "affect",
+        "text": "出乎意料（To my surprise）说明感受与前面接连的打击（a fresh blow）相反，要正面的情绪：如释重负。",
+        "quotes": [
+          "To my surprise",
+          "a fresh blow"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "宽慰",
+        "meaning": "如释重负",
+        "reason": "读到诊断后作者没有崩溃，反而终于放下了心，这是情感的转折点。名词看情感：出乎意料（To my surprise）说明感受与前面接连的打击（a fresh blow）相反，要正面的情绪：如释重负。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fear",
+          "meaning": "恐惧；接连受打击（a fresh blow）后感到害怕在意料之中，用不上出乎意料。",
+          "quote": "a fresh blow"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confidence",
+          "meaning": "自信；后文作者才说如今更自信（much more confident than ever），读诊断时作者只是终于放下了心。",
+          "quote": "much more confident than ever"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pressure",
+          "meaning": "压力；压力和接连的打击同向，与出乎意料（To my surprise）矛盾。",
+          "quote": "To my surprise"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "To my surprise",
+          "signalSide": "context-before",
+          "relation": "出乎意料，说明情绪与前面的打击方向相反。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "filled with",
+          "signalSide": "context-before",
+          "targetText": "filled with relief",
+          "relation": "心里充满某种情绪，后面接表示感受的名词。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:50": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "main",
+      "context": "接受残疾之后的下一步，是放下多年来事事自己扛的独立，开始求助。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是多年养成的独立（the independence I’d developed），后句说必须学会求助（learn to ask for help），求助就得放下独立。",
+        "quotes": [
+          "the independence I’d developed",
+          "learn to ask for help"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "放弃",
+        "meaning": "不再事事靠自己",
+        "reason": "接受残疾之后的下一步，是放下多年来事事自己扛的独立，开始求助。动词看搭配：宾语是多年养成的独立（the independence I’d developed），后句说必须学会求助（learn to ask for help），求助就得放下独立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "expecting",
+          "meaning": "期待；独立是作者多年来已经养成的（developed over the years），不是还在期待的东西。",
+          "quote": "developed over the years"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "building",
+          "meaning": "建立；独立早已养成（developed over the years），后句要学的是求助，不是继续建立独立。",
+          "quote": "developed over the years"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "challenging",
+          "meaning": "挑战；后句说作者必须学会求助（learn to ask for help），要做的是放下独立，不是向它挑战。",
+          "quote": "learn to ask for help"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the independence I’d developed",
+          "signalSide": "context-after",
+          "targetText": "abandoning the independence",
+          "relation": "放下的对象是多年养成的独立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "ask for help",
+          "signalSide": "context-after",
+          "relation": "学会求助与放下独立是同一件事的两面。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:51": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "朋友的关爱和支持让作者有了底气，空格要“增强信心”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是给作者关爱和支持的朋友（They），宾语是作者的信心（my confidence），结果是不再难为情，只能是增强。",
+        "quotes": [
+          "They",
+          "my confidence"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "增强",
+        "reason": "朋友的关爱和支持让作者有了底气，空格要“增强信心”的意思。动词看搭配：主语是给作者关爱和支持的朋友（They），宾语是作者的信心（my confidence），结果是不再难为情，只能是增强。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "gained",
+          "meaning": "获得；获得信心的应是作者本人，朋友（They）作主语就成了朋友得到作者的信心。",
+          "quote": "They"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "shook",
+          "meaning": "动摇；朋友的关爱和支持（the love and support of my friends）感动了作者，不会动摇信心。",
+          "quote": "the love and support of my friends"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "saw",
+          "meaning": "看到；看到信心带不出后面的结果：作者不再难为情（no longer felt）。",
+          "quote": "no longer felt"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my confidence",
+          "signalSide": "context-after",
+          "targetText": "boosted my confidence",
+          "relation": "宾语是作者的信心，朋友的支持让信心增强。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the love and support of my friends",
+          "signalSide": "context-before",
+          "relation": "主语他们指给作者关爱和支持的朋友。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:52": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "有了信心，作者开口求助时不再觉得丢面子，空格要一种难为情的感受。",
+      "find": {
+        "check": "affect",
+        "text": "求助是作者一直回避的事（something I’d always avoided），后文又说为视力感到害羞（feel shy），这里是难为情。",
+        "quotes": [
+          "something I’d always avoided",
+          "feel shy"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "尴尬的",
+        "meaning": "难为情",
+        "reason": "有了信心，作者开口求助时不再觉得丢面子，空格要一种难为情的感受。形容词看情感：求助是作者一直回避的事（something I’d always avoided），后文又说为视力感到害羞（feel shy），这里是难为情。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "awful",
+          "meaning": "糟糕的；它说的是事情让人感觉很糟，后文点出作者的顾虑是害羞（feel shy），不是糟糕。",
+          "quote": "feel shy"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "disappointed",
+          "meaning": "失望的；失望是期望落空，作者顾虑的是开口求人（to ask for assistance）丢面子。",
+          "quote": "to ask for assistance"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hopeless",
+          "meaning": "绝望的；信心刚被增强（my confidence），这里要克服的是求助时的难为情，不是对前途绝望。",
+          "quote": "my confidence"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to ask for assistance",
+          "signalSide": "context-after",
+          "targetText": "felt embarrassed to ask for assistance",
+          "relation": "因请求帮助而感到难为情，接不定式说明为什么事尴尬。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "feel shy",
+          "signalSide": "context-after",
+          "relation": "后文的害羞与这里的难为情是同一种顾虑。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:53": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "视力无法改变，作者把它带来的每个难处都当成新挑战，态度已从逃避变为迎难而上。",
+      "find": {
+        "check": "echo",
+        "text": "让步句说视力改不了（my vision can’t be changed），当成新挑战（a new challenge）的应是视力带来的障碍，与挑战意思相近。",
+        "quotes": [
+          "my vision can’t be changed",
+          "a new challenge"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "障碍",
+        "meaning": "视力带来的不便",
+        "reason": "视力无法改变，作者把它带来的每个难处都当成新挑战，态度已从逃避变为迎难而上。名词看复现：让步句说视力改不了（my vision can’t be changed），当成新挑战（a new challenge）的应是视力带来的障碍，与挑战意思相近。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "attempt",
+          "meaning": "尝试；尝试本身不是难处，把它当成新挑战（a new challenge）说不成一回事。",
+          "quote": "a new challenge"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "failure",
+          "meaning": "失败；作者如今比以往更自信（much more confident than ever），后句写的是主动要求调整，面对的是障碍不是失败。",
+          "quote": "much more confident than ever"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "opportunity",
+          "meaning": "机会；让步句说视力改不了（my vision can’t be changed），后面要说迎难而上，把机会当挑战前后不搭。",
+          "quote": "my vision can’t be changed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as a new challenge",
+          "signalSide": "context-after",
+          "targetText": "treat every barrier as a new challenge",
+          "relation": "把障碍看作新的挑战。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Though",
+          "signalSide": "context-before",
+          "relation": "虽然视力改不了，但作者把难处当挑战，让步后转向积极。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:54": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "有东西视障者用不了时，作者会说出来，要的是“方便使用”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后面接着要求调整（ask for adjustments），前文作者请人帮忙读菜单、过马路（read cafe menus or cross the road），说的是方便视障者使用。",
+        "quotes": [
+          "ask for adjustments",
+          "read cafe menus or cross the road"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "易使用的",
+        "meaning": "方便视障者使用",
+        "reason": "有东西视障者用不了时，作者会说出来，要的是“方便使用”的意思。形容词看搭配：后面接着要求调整（ask for adjustments），前文作者请人帮忙读菜单、过马路（read cafe menus or cross the road），说的是方便视障者使用。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "possible",
+          "meaning": "可能的；成了事情做不成时就要求调整，而要调整（ask for adjustments）的是视障者用不了的东西。",
+          "quote": "ask for adjustments"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reliable",
+          "meaning": "可靠的；可靠说的是信不信得过，作者要求调整（ask for adjustments）是因为看不清、用不了。",
+          "quote": "ask for adjustments"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "satisfactory",
+          "meaning": "令人满意的；范围太泛，作者是在为视障者发声（I speak up），针对的是视障者用不了的东西。",
+          "quote": "I speak up"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "ask for adjustments",
+          "signalSide": "context-after",
+          "targetText": "isn’t accessible and ask for adjustments",
+          "relation": "视障者用不了，所以要求调整。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "read cafe menus or cross the road",
+          "signalSide": "context-before",
+          "relation": "读菜单、过马路正是视障者不方便独自完成的事。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:55": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者若自己都羞于面对视力，其他视障者会怎么看，由此引出为大家发声。",
+      "find": {
+        "check": "collocation",
+        "text": "前半句是我若为视力害羞（If I feel shy about my vision），主语是英国两百多万视障者（people in Britain with sight loss），问他们会怎么想。",
+        "quotes": [
+          "If I feel shy about my vision",
+          "people in Britain with sight loss"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "想",
+        "meaning": "看待自身处境",
+        "reason": "作者若自己都羞于面对视力，其他视障者会怎么看，由此引出为大家发声。动词看搭配：前半句是我若为视力害羞（If I feel shy about my vision），主语是英国两百多万视障者（people in Britain with sight loss），问他们会怎么想。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "speak",
+          "meaning": "说话；后句写的是作者在为大家发声（speaking up），这里问的是作者的害羞会让别人怎么想。",
+          "quote": "speaking up"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "adjust",
+          "meaning": "适应；前一句的调整（adjustments）是要求外界做的，这里问的是作者的态度会让别人怎么想。",
+          "quote": "adjustments"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "imagine",
+          "meaning": "想象；想象是构想没发生的事，这里问的是看到作者害羞（feel shy）后他们会怎么看。",
+          "quote": "feel shy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "people in Britain with sight loss",
+          "signalSide": "context-before",
+          "targetText": "people in Britain with sight loss think",
+          "relation": "主语是英国的视障者，问他们会怎么想。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "If I feel shy about my vision",
+          "signalSide": "context-before",
+          "relation": "条件句：作者若害羞，会影响其他视障者的看法。"
+        }
+      ]
+    }
+  }
+}

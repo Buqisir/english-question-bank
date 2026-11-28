@@ -1,0 +1,1037 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-henan-zhengzhou-2026-01-first:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-henan-zhengzhou-2026-01-first:seven-choices": {
+      "overview": "文章谈怎样走出被拒绝的痛苦：先说被拒会带来悲伤、愤怒，还会伤及自尊，再给出深呼吸、写日记、帮助他人三条建议，最后劝读者给自己时间，相信这份辛苦值得。",
+      "fullTranslationZh": "被拒绝会让人的情绪像坐过山车。我们会感到悲伤、愤怒，也会因失去拒绝我们的那个人而失落。我们的自尊心也会受到伤害。这就是走出被拒绝的阴影之所以困难的原因。虽然没有立竿见影的办法，但下面这些建议能帮助我们摆脱困惑，减轻被拒绝的痛苦。\n借助呼吸的力量。呼吸与身体、情绪和思维相连，而且三者相互影响。深呼吸帮助我们消化这些感受，恢复平静。正念呼吸是自我调节、放松身心和促进整体健康最有效、也最容易做到的方法之一。我们还可以借助呼吸，把注意力从扰人的念头拉回到自己身上。\n把它写进日记。写日记提供了一个安全的空间，不必担心被误解。在悲伤和失落的时刻，情绪的重量可能非常沉重。写作是卸下内心重负的有力工具。它让我们能够探索自己的想法、感受和回忆，消化自己的经历，在痛苦中找到解脱。\n学会为他人付出。服务他人、为他人付出的行为强大而有益。当我们支持他人，尤其是在困难的时候，内心的某种东西也开始愈合、成长。帮助他人给我们带来目标感和深深的满足感。当我们和不如自己幸运的人接触时，我们开始意识到自己的痛苦没那么重要。为他人付出也让我们变得更有力量。它带给我们自我价值感，让我们远离伤痛。\n走出被拒绝的阴影很难。不过，你的痛苦不会永远持续。它的存在是为了让你成长。每个人都以自己的节奏、自己的方式从拒绝中恢复。我们每个人都会在某个时候、以某种方式经受痛苦。我们必须怜惜自己，接受这个现实。重要的是，要给自己时间去应对拒绝，用上面建议的方法疗伤，继而迎接生活带给我们的新机会。这不会容易，但一定值得。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:seven-choices:p5-important",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+          "sourceText": "It’s important to take your time to deal with rejection and to use the practices suggested to heal and move on to the new opportunities life presents us.",
+          "displayText": "It’s important to take your time to deal with rejection and to use the practices suggested to heal and move on to the new opportunities life presents us.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:40"
+          ],
+          "translationZh": "重要的是，要给自己时间去应对拒绝，并用上面建议的方法疗伤，继而迎接生活带给我们的新机会。",
+          "analysisZh": "主干是 It’s important to do A and to do B：It 是形式主语，真正的主语是 and 连接的两个不定式，一个是 to take your time to deal with rejection（花时间应对拒绝），一个是 to use the practices suggested（用上文建议的方法）。suggested 是过去分词，后置修饰 practices。to heal and move on to the new opportunities 说明用这些方法的目的，heal 和 move on 并列。最后的 life presents us 是省略关系词 that 的定语从句，修饰 opportunities；这种 present 带两个宾语的说法不常见，规范写法多为 life presents to us 或 life presents us with。这句的两件事正是第 40 题答案里 It 所指的过程。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 14,
+              "quote": "It’s important"
+            },
+            {
+              "start": 15,
+              "end": 55,
+              "quote": "to take your time to deal with rejection"
+            },
+            {
+              "start": 60,
+              "end": 90,
+              "quote": "to use the practices suggested"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:seven-choices:p4-support",
+          "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+          "sourceText": "When we support others, especially during difficult times, something within also starts to heal (愈合) and grow.",
+          "displayText": "When we support others, especially during difficult times, something within also starts to heal (愈合) and grow.",
+          "relatedQuestionIds": [
+            "question:paper-mock-henan-zhengzhou-2026-01-first:39"
+          ],
+          "translationZh": "当我们支持他人，尤其是在困难的时候，内心的某种东西也开始愈合、成长。",
+          "analysisZh": "主干是 something within also starts to heal and grow：within 是副词，放在 something 后面说明「内心的」那种东西；starts 后面的不定式里 heal 和 grow 两个动词并列。句首 When we support others 是时间状语从句，especially during difficult times 是插入的补充，强调在困难时期。这句先说帮人时自己内心在好转，第 39 题的答案顺着它点明帮人带来的收获。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "When we support others"
+            },
+            {
+              "start": 59,
+              "end": 75,
+              "quote": "something within"
+            },
+            {
+              "start": 81,
+              "end": 109,
+              "quote": "starts to heal (愈合) and grow"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "首段写被拒绝带来的多重伤害，点出走出来不容易，并引出建议；中间三段各以一句祈使句开头，分别介绍借助呼吸、写日记、帮助他人三种做法及其作用；末段承认过程艰难，劝人按自己的节奏疗伤，以「不容易但值得」收尾。",
+        "units": [
+          {
+            "unitId": "unit-seven-1",
+            "paragraphIds": [
+              "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1"
+            ],
+            "summary": "被拒绝会带来悲伤、愤怒、失落和自尊受挫，所以走出来很难；文章由此引出下面的建议。"
+          },
+          {
+            "unitId": "unit-seven-2",
+            "heading": "Use the power of breath.",
+            "paragraphIds": [
+              "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2"
+            ],
+            "summary": "呼吸与身体、情绪和思维相连，深呼吸能让人平静，并把注意力从扰人的念头拉回自身。"
+          },
+          {
+            "unitId": "unit-seven-3",
+            "heading": "Note it down in a journal.",
+            "paragraphIds": [
+              "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3"
+            ],
+            "summary": "写日记是安全的倾诉空间，写作能卸下情绪的重担，帮人梳理经历、在痛苦中找到解脱。"
+          },
+          {
+            "unitId": "unit-seven-4",
+            "heading": "Learn to give to others.",
+            "paragraphIds": [
+              "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4"
+            ],
+            "summary": "帮助他人让自己内心愈合，带来目标感和满足感，也让人看轻自身痛苦、获得力量。"
+          },
+          {
+            "unitId": "unit-seven-5",
+            "paragraphIds": [
+              "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5"
+            ],
+            "summary": "痛苦不会永远持续，每个人按自己的节奏恢复；要给自己时间、用上文的方法疗伤，这个过程不容易但值得。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 39,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "E",
+          "shared": [
+            "It is"
+          ],
+          "text": "选项的 \"offer\" 像在接第 39 题空前的 \"support others\"。但本段只讲给予，不讲接受；空后说帮人后觉得 \"our pain is less significant\"，B 没说帮人有什么收获。放进第 37 题也接不上：B 的 It 是形式主语，代的是 \"to offer and accept\"，不指空前的 \"breath\"；空后 \"each one affects the others\" 要先列几样东西，B 没列。",
+          "quotes": [
+            "offer",
+            "support others",
+            "our pain is less significant",
+            "to offer and accept",
+            "breath",
+            "each one affects the others"
+          ]
+        },
+        "D": {
+          "target": 39,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "others"
+          ],
+          "text": "选项和第 39 题空前一样谈 others，也是动名词开头讲感受。但本段讲我们去帮人（\"support others\"），空后是我们接触 \"people who are less fortunate\"，D 却是接受别人的帮助，方向反了。放进第 40 题也接不上：空前劝人自己 \"take your time\"，没有别人的 \"offer\" 可接受。",
+          "quotes": [
+            "others",
+            "support others",
+            "people who are less fortunate",
+            "take your time",
+            "offer"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "text:seven-choices:source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "text:seven-choices:translation-zh",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 114,
+              "quote": "被拒绝会让人的情绪像坐过山车。我们会感到悲伤、愤怒，也会因失去拒绝我们的那个人而失落。我们的自尊心也会受到伤害。这就是走出被拒绝的阴影之所以困难的原因。虽然没有立竿见影的办法，但下面这些建议能帮助我们摆脱困惑，减轻被拒绝的痛苦。"
+            },
+            {
+              "paragraphId": "translation:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2"
+              ],
+              "start": 115,
+              "end": 230,
+              "quote": "借助呼吸的力量。呼吸与身体、情绪和思维相连，而且三者相互影响。深呼吸帮助我们消化这些感受，恢复平静。正念呼吸是自我调节、放松身心和促进整体健康最有效、也最容易做到的方法之一。我们还可以借助呼吸，把注意力从扰人的念头拉回到自己身上。"
+            },
+            {
+              "paragraphId": "translation:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3"
+              ],
+              "start": 231,
+              "end": 334,
+              "quote": "把它写进日记。写日记提供了一个安全的空间，不必担心被误解。在悲伤和失落的时刻，情绪的重量可能非常沉重。写作是卸下内心重负的有力工具。它让我们能够探索自己的想法、感受和回忆，消化自己的经历，在痛苦中找到解脱。"
+            },
+            {
+              "paragraphId": "translation:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4"
+              ],
+              "start": 335,
+              "end": 485,
+              "quote": "学会为他人付出。服务他人、为他人付出的行为强大而有益。当我们支持他人，尤其是在困难的时候，内心的某种东西也开始愈合、成长。帮助他人给我们带来目标感和深深的满足感。当我们和不如自己幸运的人接触时，我们开始意识到自己的痛苦没那么重要。为他人付出也让我们变得更有力量。它带给我们自我价值感，让我们远离伤痛。"
+            },
+            {
+              "paragraphId": "translation:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5"
+              ],
+              "start": 486,
+              "end": 640,
+              "quote": "走出被拒绝的阴影很难。不过，你的痛苦不会永远持续。它的存在是为了让你成长。每个人都以自己的节奏、自己的方式从拒绝中恢复。我们每个人都会在某个时候、以某种方式经受痛苦。我们必须怜惜自己，接受这个现实。重要的是，要给自己时间去应对拒绝，用上面建议的方法疗伤，继而迎接生活带给我们的新机会。这不会容易，但一定值得。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "text:seven-choices:completed:1",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1",
+            "text": "Rejection creates an emotional roller coaster (过山车). We feel the sadness, anger, and loss of the person who rejects us. Our self-respect is hurt as well. This is why getting over a rejection is challenging. While there is no quick fix, the following suggestions can help us overcome the confusion and ease the pain of rejection."
+          },
+          {
+            "textId": "text:seven-choices:completed:2",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2",
+            "text": "Use the power of breath. It is connected to the body, emotions and thoughts. And each one affects the others. Deep breaths help us absorb the feelings and restore a sense of calm. Mindful breathing is one of the most powerful and accessible resources for self-regulation, relaxation, and overall well-being. We can also use breath to move our attention from disturbing thoughts back to ourselves."
+          },
+          {
+            "textId": "text:seven-choices:completed:3",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3",
+            "text": "Note it down in a journal. Journaling provides a safe place without fear of misunderstanding. In moments of sadness and loss, the weight of emotions can be very great. Writing serves as a powerful tool to unburden our inner selves. It allows us to explore our thoughts, feelings, and memories, process our experiences and find relief in pain."
+          },
+          {
+            "textId": "text:seven-choices:completed:4",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+            "text": "Learn to give to others. The acts of serving and giving to others are powerful and helpful. When we support others, especially during difficult times, something within also starts to heal (愈合) and grow. Helping others provides us with a sense of purpose and deep satisfaction. When we connect with people who are less fortunate, we start to realize that our pain is less significant. Giving to others also empowers us. It gives us a sense of self-worth and moves us away from the hurt."
+          },
+          {
+            "textId": "text:seven-choices:completed:5",
+            "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+            "text": "Getting over a rejection is hard. However, your pain won’t last forever. It is there to make you grow. Everyone heals from rejection at their own pace in their own way. We are all suffering in one way or another at one time or another. We must have pity for ourselves and accept that reality. It’s important to take your time to deal with rejection and to use the practices suggested to heal and move on to the new opportunities life presents us. It won’t be easy, but it will be worth it."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "annotation:seven-choices:36:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1",
+                "start": 65,
+                "end": 89,
+                "quote": "sadness, anger, and loss"
+              },
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1",
+                "start": 127,
+                "end": 179,
+                "quote": "This is why getting over a rejection is challenging."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:1",
+                "start": 20,
+                "end": 25,
+                "quote": "悲伤、愤怒"
+              },
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:1",
+                "start": 56,
+                "end": 76,
+                "quote": "这就是走出被拒绝的阴影之所以困难的原因。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:36:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:36"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:36",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:completed:1",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1",
+                "start": 120,
+                "end": 153,
+                "quote": "Our self-respect is hurt as well."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:1",
+                "start": 43,
+                "end": 56,
+                "quote": "我们的自尊心也会受到伤害。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:37:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2",
+                "start": 0,
+                "end": 24,
+                "quote": "Use the power of breath."
+              },
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2",
+                "start": 32,
+                "end": 64,
+                "quote": "And each one affects the others."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:2",
+                "start": 0,
+                "end": 8,
+                "quote": "借助呼吸的力量。"
+              },
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:2",
+                "start": 22,
+                "end": 31,
+                "quote": "而且三者相互影响。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:37:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:37"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:37",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:completed:2",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2",
+                "start": 25,
+                "end": 76,
+                "quote": "It is connected to the body, emotions and thoughts."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:2",
+                "start": 8,
+                "end": 21,
+                "quote": "呼吸与身体、情绪和思维相连"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:38:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3",
+                "start": 126,
+                "end": 167,
+                "quote": "the weight of emotions can be very great."
+              },
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3",
+                "start": 175,
+                "end": 235,
+                "quote": "It allows us to explore our thoughts, feelings, and memories"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:3",
+                "start": 39,
+                "end": 51,
+                "quote": "情绪的重量可能非常沉重。"
+              },
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:3",
+                "start": 66,
+                "end": 85,
+                "quote": "它让我们能够探索自己的想法、感受和回忆"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:38:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:38"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:38",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:completed:3",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3",
+                "start": 168,
+                "end": 231,
+                "quote": "Writing serves as a powerful tool to unburden our inner selves."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:3",
+                "start": 51,
+                "end": 66,
+                "quote": "写作是卸下内心重负的有力工具。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:39:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+                "start": 92,
+                "end": 114,
+                "quote": "When we support others"
+              },
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+                "start": 317,
+                "end": 351,
+                "quote": "Giving to others also empowers us."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:4",
+                "start": 27,
+                "end": 34,
+                "quote": "当我们支持他人"
+              },
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:4",
+                "start": 115,
+                "end": 131,
+                "quote": "为他人付出也让我们变得更有力量。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:39:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:39"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:39",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:completed:4",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+                "start": 203,
+                "end": 276,
+                "quote": "Helping others provides us with a sense of purpose and deep satisfaction."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:4",
+                "start": 61,
+                "end": 81,
+                "quote": "帮助他人给我们带来目标感和深深的满足感。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:40:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+                "start": 0,
+                "end": 33,
+                "quote": "Getting over a rejection is hard."
+              },
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+                "start": 311,
+                "end": 348,
+                "quote": "take your time to deal with rejection"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:5",
+                "start": 0,
+                "end": 11,
+                "quote": "走出被拒绝的阴影很难。"
+              },
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:5",
+                "start": 104,
+                "end": 115,
+                "quote": "要给自己时间去应对拒绝"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:40:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:40"
+            ],
+            "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:40",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:completed:5",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+                "start": 447,
+                "end": 489,
+                "quote": "It won’t be easy, but it will be worth it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:5",
+                "start": 142,
+                "end": 154,
+                "quote": "这不会容易，但一定值得。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:sentence:p5-important",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:40"
+            ],
+            "selectedSentenceId": "sentence:seven-choices:p5-important",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+                "start": 293,
+                "end": 446,
+                "quote": "It’s important to take your time to deal with rejection and to use the practices suggested to heal and move on to the new opportunities life presents us."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:5",
+                "start": 99,
+                "end": 142,
+                "quote": "重要的是，要给自己时间去应对拒绝，用上面建议的方法疗伤，继而迎接生活带给我们的新机会。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven-choices:sentence:p4-support",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-henan-zhengzhou-2026-01-first:39"
+            ],
+            "selectedSentenceId": "sentence:seven-choices:p4-support",
+            "sourceRanges": [
+              {
+                "textId": "text:seven-choices:source",
+                "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+                "start": 92,
+                "end": 202,
+                "quote": "When we support others, especially during difficult times, something within also starts to heal (愈合) and grow."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven-choices:translation-zh",
+                "paragraphId": "translation:seven-choices:4",
+                "start": 27,
+                "end": 61,
+                "quote": "当我们支持他人，尤其是在困难的时候，内心的某种东西也开始愈合、成长。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-henan-zhengzhou-2026-01-first:36": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "emotional roller coaster",
+        "sadness, anger, and loss",
+        "the person who rejects us",
+        "getting over a rejection is challenging"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1",
+        "beforeQuote": "We feel the sadness, anger, and loss of the person who rejects us.",
+        "afterQuote": "This is why getting over a rejection is challenging."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "as well",
+          "signalSide": "option",
+          "targetText": "sadness, anger, and loss",
+          "relation": "as well 表示在空前列出的几种痛苦之外再添一种伤害。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "sadness, anger, and loss",
+          "signalSide": "context-before",
+          "targetText": "Our self-respect is hurt",
+          "relation": "空前列的是情绪上的痛苦，选项补上自尊受挫，同属被拒后的伤害。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This is why",
+          "signalSide": "context-after",
+          "targetText": "空前与空里的各种伤害",
+          "relation": "This 总括前面所有伤害，说明走出拒绝为什么难。"
+        }
+      ],
+      "lock": [
+        "as well",
+        "This is why"
+      ],
+      "find": {
+        "text": "空前列了 \"sadness, anger, and loss\"，A 用 \"as well\" 再添一种伤害；空后 \"This is why\" 把这些伤害合起来当作走出拒绝难的原因。",
+        "quotes": [
+          "sadness, anger, and loss",
+          "as well",
+          "This is why"
+        ]
+      },
+      "explain": "首段先写被拒后的种种痛苦，这句把伤害从情绪推到对自己的看法上，痛苦写足了，空后才能顺势说走出来很难，并引出下文的几条建议。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "sadness, anger, and loss",
+            "optionSide": "Our self-respect is hurt as well",
+            "relation": "前面是情绪受伤，选项再加上自尊受伤，as well 表示追加。"
+          },
+          {
+            "contextSide": "This is why getting over a rejection is challenging",
+            "optionSide": "hurt",
+            "relation": "空后的 This 回指包括自尊受伤在内的全部伤害。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "首段先写被拒后的种种痛苦，这句把伤害从情绪推到对自己的看法上，痛苦写足了，空后才能顺势说走出来很难，并引出下文的几条建议。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:37": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "the power of breath",
+        "each one affects the others",
+        "Deep breaths",
+        "absorb the feelings",
+        "disturbing thoughts"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2",
+        "beforeQuote": "Use the power of breath.",
+        "afterQuote": "And each one affects the others."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "breath",
+          "relation": "选项的 It 指空前小标题里的 breath。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "each one",
+          "signalSide": "context-after",
+          "targetText": "the body, emotions and thoughts",
+          "relation": "each one 和 the others 要前面先列出几样东西，选项列了三样。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "body, emotions and thoughts",
+          "signalSide": "option",
+          "targetText": "absorb the feelings / disturbing thoughts",
+          "relation": "选项的 emotions、thoughts 在后文的 feelings、thoughts 里展开。"
+        }
+      ],
+      "lock": [
+        "body, emotions and thoughts",
+        "each one"
+      ],
+      "find": {
+        "text": "空后 \"each one affects the others\" 要前面先列出几样东西，E 正好列了 \"the body, emotions and thoughts\"，开头的 It 指空前的 breath。",
+        "quotes": [
+          "each one affects the others",
+          "the body, emotions and thoughts",
+          "breath"
+        ]
+      },
+      "explain": "小标题只提出借助呼吸，这句先交代呼吸和哪几样东西相连；空后说三者互相牵动，下文才能落到深呼吸让情绪平静、把注意力拉回自身。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Use the power of breath.",
+            "optionSide": "It",
+            "relation": "It 回指小标题里的 breath。"
+          },
+          {
+            "contextSide": "each one affects the others",
+            "optionSide": "the body, emotions and thoughts",
+            "relation": "三样东西给 each one、the others 提供了所指。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "小标题只提出借助呼吸，这句先交代呼吸和哪几样东西相连；空后说三者互相牵动，下文才能落到深呼吸让情绪平静、把注意力拉回自身。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:38": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Note it down in a journal",
+        "Journaling provides a safe place",
+        "the weight of emotions",
+        "explore our thoughts, feelings, and memories",
+        "find relief in pain"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:3",
+        "beforeQuote": "In moments of sadness and loss, the weight of emotions can be very great.",
+        "afterQuote": "It allows us to explore our thoughts, feelings, and memories, process our experiences and find relief in pain."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It allows us",
+          "signalSide": "context-after",
+          "targetText": "Writing",
+          "relation": "空后 It 要指一种能帮我们的东西，即选项的 Writing。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Writing",
+          "signalSide": "option",
+          "targetText": "It allows us",
+          "relation": "Writing 给空后的 It 提供先行词，也呼应小标题的写日记。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the weight of emotions",
+          "signalSide": "context-before",
+          "targetText": "unburden",
+          "relation": "空前说情绪很重，选项的 unburden 就是卸下这份重担。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "unburden",
+          "signalSide": "option",
+          "targetText": "weight",
+          "relation": "unburden 与空前的 weight 一压一卸。"
+        }
+      ],
+      "lock": [
+        "weight",
+        "unburden",
+        "It allows us"
+      ],
+      "find": {
+        "text": "空前说情绪的 \"weight\" 很重，F 的 \"unburden\" 正是卸下重担；空后 \"It allows us\" 的 It 要指能帮我们的东西，就是 F 的 \"Writing\"。",
+        "quotes": [
+          "weight",
+          "unburden",
+          "It allows us",
+          "Writing"
+        ]
+      },
+      "explain": "本段讲写日记，空前把悲伤说成压在心上的重量，这句点明写作能把它卸下；空后接着说写作让人梳理想法和回忆、在痛苦中找到解脱。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 也有 emotions 和 thoughts，可本段讲写日记，从没提 body；空前说情绪很重（\"the weight of emotions\"），E 没给出卸下重担的办法。",
+          "quotes": [
+            "emotions",
+            "thoughts",
+            "body",
+            "the weight of emotions"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the weight of emotions can be very great",
+            "optionSide": "unburden our inner selves",
+            "relation": "一边说负担重，一边说卸下负担。"
+          },
+          {
+            "contextSide": "It allows us to explore our thoughts",
+            "optionSide": "Writing serves as a powerful tool",
+            "relation": "空后的 It 回指 Writing，继续说这件工具的用处。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "本段讲写日记，空前把悲伤说成压在心上的重量，这句点明写作能把它卸下；空后接着说写作让人梳理想法和回忆、在痛苦中找到解脱。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 也有 emotions 和 thoughts，可本段讲写日记，从没提 body；空前说情绪很重（\"the weight of emotions\"），E 没给出卸下重担的办法。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:39": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "Learn to give to others",
+        "serving and giving to others",
+        "support others",
+        "heal (愈合) and grow",
+        "Giving to others also empowers us"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:4",
+        "beforeQuote": "When we support others, especially during difficult times, something within also starts to heal (愈合) and grow.",
+        "afterQuote": "When we connect with people who are less fortunate, we start to realize that our pain is less significant. Giving to others also empowers us."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "support others",
+          "signalSide": "context-before",
+          "targetText": "Helping others",
+          "relation": "support others 与选项的 Helping others 同义复现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Helping others",
+          "signalSide": "option",
+          "targetText": "support others / giving to others",
+          "relation": "选项继续谈帮人，主语和本段小标题、空前一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also empowers us",
+          "signalSide": "context-after",
+          "targetText": "a sense of purpose and deep satisfaction",
+          "relation": "also 表示帮人还有另一种好处，前面要先出现一种。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a sense of purpose",
+          "signalSide": "option",
+          "targetText": "a sense of self-worth",
+          "relation": "帮人带来的收获，与段末 a sense of self-worth 同类。"
+        }
+      ],
+      "lock": [
+        "support others",
+        "Helping others",
+        "also empowers us"
+      ],
+      "find": {
+        "text": "空前 \"support others\" 和 G 的 \"Helping others\" 是同一件事；空后 \"also empowers us\" 说帮人还有另一种好处，前面要先讲一种。",
+        "quotes": [
+          "support others",
+          "Helping others",
+          "also empowers us"
+        ]
+      },
+      "explain": "空前说帮助别人时自己内心开始愈合，这句把这种变化落到具体收获上；空后再从看轻自身痛苦、获得力量两方面补充帮人的好处。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "When we support others",
+            "optionSide": "Helping others",
+            "relation": "同一个动作换了说法。"
+          },
+          {
+            "contextSide": "Giving to others also empowers us",
+            "optionSide": "provides us with a sense of purpose and deep satisfaction",
+            "relation": "选项是帮人的一种好处，空后的 also 再加一种。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前说帮助别人时自己内心开始愈合，这句把这种变化落到具体收获上；空后再从看轻自身痛苦、获得力量两方面补充帮人的好处。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项的 \"offer\" 像在接第 39 题空前的 \"support others\"。但本段只讲给予，不讲接受；空后说帮人后觉得 \"our pain is less significant\"，B 没说帮人有什么收获。放进第 37 题也接不上：B 的 It 是形式主语，代的是 \"to offer and accept\"，不指空前的 \"breath\"；空后 \"each one affects the others\" 要先列几样东西，B 没列。"
+        },
+        {
+          "optionLabel": "D",
+          "reason": "选项和第 39 题空前一样谈 others，也是动名词开头讲感受。但本段讲我们去帮人（\"support others\"），空后是我们接触 \"people who are less fortunate\"，D 却是接受别人的帮助，方向反了。放进第 40 题也接不上：空前劝人自己 \"take your time\"，没有别人的 \"offer\" 可接受。"
+        }
+      ]
+    },
+    "question:paper-mock-henan-zhengzhou-2026-01-first:40": {
+      "blankId": "blank:paper-mock-henan-zhengzhou-2026-01-first:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Getting over a rejection is hard",
+        "your pain won’t last forever",
+        "take your time to deal with rejection",
+        "move on to the new opportunities"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+        "beforeQuote": "It’s important to take your time to deal with rejection and to use the practices suggested to heal and move on to the new opportunities life presents us.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "to take your time to deal with rejection and to use the practices suggested",
+          "relation": "选项的 It 指空前要做的事：花时间应对拒绝、用上文的方法疗伤。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "take your time to deal with rejection",
+          "signalSide": "context-before",
+          "targetText": "won’t be easy",
+          "relation": "要慢慢来，说明过程不轻松。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "worth it",
+          "signalSide": "option",
+          "targetText": "the new opportunities life presents us",
+          "relation": "值得，落在空前说的新机会上。"
+        }
+      ],
+      "lock": [
+        "take your time",
+        "won’t be easy",
+        "worth it"
+      ],
+      "find": {
+        "text": "空在全文末尾。C 的 It 指空前 \"take your time to deal with rejection\" 这件事，\"won’t be easy\" 承认它难，\"worth it\" 接新机会。",
+        "quotes": [
+          "take your time to deal with rejection",
+          "won’t be easy",
+          "worth it"
+        ]
+      },
+      "explain": "最后一段先承认走出拒绝很难，再劝人慢慢来、用上文的方法疗伤；这句给全文收尾，一面承认过程辛苦，一面让读者看到坚持下去的盼头。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "take your time to deal with rejection",
+            "optionSide": "It won’t be easy",
+            "relation": "It 指这件要慢慢做的事，并承认它不容易。"
+          },
+          {
+            "contextSide": "move on to the new opportunities life presents us",
+            "optionSide": "it will be worth it",
+            "relation": "新机会就是这份辛苦值得的理由。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "最后一段先承认走出拒绝很难，再劝人慢慢来、用上文的方法疗伤；这句给全文收尾，一面承认过程辛苦，一面让读者看到坚持下去的盼头。"
+      },
+      "keyDistractors": []
+    }
+  }
+}
