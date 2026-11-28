@@ -1,0 +1,796 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:reading-c": {
+      "overview": "一项针对数百名五年级学生的随机试验表明，用戏剧表演的方式学习莎士比亚，能扩大孩子的词汇量、提高写作质量并加深情感理解，研究者认为这与莎士比亚丰富的用词和孩子亲身表演有关。",
+      "fullTranslationZh": "这位来自埃文河畔斯特拉特福的文法学校男孩又上了新闻头条：一项开创性的研究表明，莎士比亚确实有益于儿童的读写能力和情感发展，但前提是孩子们能把他的作品表演出来。\n研究发现，以戏剧表演为基础的莎士比亚教学法扩大了孩子们的词汇量，提高了他们的写作质量，并增进了他们对情感的理解。“演员的工作方式对孩子们如何使用语言、如何看待自己有很大影响，”该研究的首席研究员杰姬·奥汉隆说。\n这项随机试验涉及45所公立小学的数百名五年级学生（九到十岁）。孩子们被分成实验组和对照组。两组都阅读了《罗密欧与朱丽叶》中的一段文字，并被要求以罗密欧的身份，写一封他与朱丽叶分离后的信。写信之前，实验组参加了一个30分钟的戏剧活动，对照组则没有。\n结果显示，实验组的学生用到的词汇更广，用了更多复杂或少见的词，写得也更长。他们似乎也更习惯以角色身份写作。对照组的学生想象的是他们自己与所爱之人分离时会作何反应，而实验组的孩子则设身处地站在罗密欧的立场上，表达出这个角色的情感。\n奥汉隆说，最让她惊讶的是孩子们文字中体现出的情感理解，他们表现出更深的同理心，情感表达也更生动。“这可能与戏剧化的过程有关，在这个过程中，你习惯于努力像角色那样去思考和感受，”她补充道。\n但是，换成随便哪位剧作家，也能得出同样的结果吗？奥汉隆说还需要更多研究，但她认为，莎士比亚用了两万个词，而日常用语只有两千个词，这让孩子们生活中的语言大大扩展，再加上孩子们调动整个身体让文字活起来，两者结合起了作用。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-c-1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:6",
+          "sourceText": "O’Hanlon said more research would be needed but suggested that Shakespeare’s use of 20,000 words, compared with the everyday 2,000 words, gave a massive expansion of language into children’s lives, which was combined with children using their whole bodies to bring words to life.",
+          "displayText": "O’Hanlon said more research would be needed but suggested that Shakespeare’s use of 20,000 words, compared with the everyday 2,000 words, gave a massive expansion of language into children’s lives, which was combined with children using their whole bodies to bring words to life.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:31"
+          ],
+          "translationZh": "奥汉隆说还需要更多研究，但她认为，莎士比亚用了两万个词，而日常用语只有两千个词，这让孩子们生活中的语言大大扩展，再加上孩子们调动整个身体让文字活起来，两者结合起了作用。",
+          "analysisZh": "主语 O’Hanlon 带了两个由 but 连接的并列谓语：said（说）和 suggested（认为、暗示）。said 后面省略了 that，宾语从句是 more research would be needed；suggested 后面是 that 引导的宾语从句，这个从句的主干是 Shakespeare’s use of 20,000 words gave a massive expansion of language（莎士比亚使用两万个词，带来了语言的大幅扩展），夹在中间的 compared with the everyday 2,000 words 是插入的比较，into children’s lives 说明扩展到哪里。which was combined with ... 是非限制性定语从句，which 指前面说的这种语言扩展；children using their whole bodies 中 children 是 using 的逻辑主语，to bring words to life 表目的。整句说明效果来自“丰富的语言”加上“亲身表演”两方面。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 13,
+              "quote": "O’Hanlon said"
+            },
+            {
+              "start": 44,
+              "end": 62,
+              "quote": "but suggested that"
+            },
+            {
+              "start": 138,
+              "end": 174,
+              "quote": "gave a massive expansion of language"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-c-2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:4",
+          "sourceText": "While pupils in the control group imagined how they themselves would react to being separated from a loved one, children in the target group put themselves in Romeo’s shoes and expressed that character’s emotion.",
+          "displayText": "While pupils in the control group imagined how they themselves would react to being separated from a loved one, children in the target group put themselves in Romeo’s shoes and expressed that character’s emotion.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:30"
+          ],
+          "translationZh": "对照组的学生想象的是他们自己与所爱之人分离时会作何反应，而实验组的孩子则设身处地站在罗密欧的立场上，表达出这个角色的情感。",
+          "analysisZh": "这里的 While 表示对比，意为“而”，不是让步。主句的主语是 children in the target group，带两个由 and 连接的并列谓语：put themselves in Romeo’s shoes（设身处地站在罗密欧的立场上）和 expressed that character’s emotion（表达这个角色的情感）。While 从句的主干是 pupils in the control group imagined ...，how 引导的宾语从句说明他们想象的内容，to being separated 中的 to 是介词，后接动名词。两组一个想“我自己会怎样”，一个想“罗密欧会怎样”，这正是实验组情感表达更深的原因。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 42,
+              "quote": "While pupils in the control group imagined"
+            },
+            {
+              "start": 112,
+              "end": 186,
+              "quote": "children in the target group put themselves in Romeo’s shoes and expressed"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-nb-2026-m2:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-c:1"
+              ],
+              "start": 0,
+              "end": 79,
+              "quote": "这位来自埃文河畔斯特拉特福的文法学校男孩又上了新闻头条：一项开创性的研究表明，莎士比亚确实有益于儿童的读写能力和情感发展，但前提是孩子们能把他的作品表演出来。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-c:2"
+              ],
+              "start": 80,
+              "end": 185,
+              "quote": "研究发现，以戏剧表演为基础的莎士比亚教学法扩大了孩子们的词汇量，提高了他们的写作质量，并增进了他们对情感的理解。“演员的工作方式对孩子们如何使用语言、如何看待自己有很大影响，”该研究的首席研究员杰姬·奥汉隆说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-c:3"
+              ],
+              "start": 186,
+              "end": 309,
+              "quote": "这项随机试验涉及45所公立小学的数百名五年级学生（九到十岁）。孩子们被分成实验组和对照组。两组都阅读了《罗密欧与朱丽叶》中的一段文字，并被要求以罗密欧的身份，写一封他与朱丽叶分离后的信。写信之前，实验组参加了一个30分钟的戏剧活动，对照组则没有。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-c:4"
+              ],
+              "start": 310,
+              "end": 424,
+              "quote": "结果显示，实验组的学生用到的词汇更广，用了更多复杂或少见的词，写得也更长。他们似乎也更习惯以角色身份写作。对照组的学生想象的是他们自己与所爱之人分离时会作何反应，而实验组的孩子则设身处地站在罗密欧的立场上，表达出这个角色的情感。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-c:5"
+              ],
+              "start": 425,
+              "end": 518,
+              "quote": "奥汉隆说，最让她惊讶的是孩子们文字中体现出的情感理解，他们表现出更深的同理心，情感表达也更生动。“这可能与戏剧化的过程有关，在这个过程中，你习惯于努力像角色那样去思考和感受，”她补充道。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-c:6"
+              ],
+              "start": 519,
+              "end": 627,
+              "quote": "但是，换成随便哪位剧作家，也能得出同样的结果吗？奥汉隆说还需要更多研究，但她认为，莎士比亚用了两万个词，而日常用语只有两千个词，这让孩子们生活中的语言大大扩展，再加上孩子们调动整个身体让文字活起来，两者结合起了作用。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+                "start": 186,
+                "end": 218,
+                "quote": "but only if they can act him out"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:2",
+                "start": 21,
+                "end": 67,
+                "quote": "a drama-based approach to teaching Shakespeare"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p1",
+                "start": 61,
+                "end": 78,
+                "quote": "但前提是孩子们能把他的作品表演出来"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p2",
+                "start": 5,
+                "end": 21,
+                "quote": "以戏剧表演为基础的莎士比亚教学法"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+                "start": 0,
+                "end": 100,
+                "quote": "The random trial involved hundreds of Year 5 pupils (aged nine and ten) at 45 state primary schools."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+                "start": 101,
+                "end": 167,
+                "quote": "The children were divided into a target group and a control group."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+                "start": 294,
+                "end": 406,
+                "quote": "Before writing, the target group took part in a 30-minute drama-based activity, while the control group did not."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p3",
+                "start": 0,
+                "end": 31,
+                "quote": "这项随机试验涉及45所公立小学的数百名五年级学生（九到十岁）。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p3",
+                "start": 31,
+                "end": 45,
+                "quote": "孩子们被分成实验组和对照组。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p3",
+                "start": 93,
+                "end": 123,
+                "quote": "写信之前，实验组参加了一个30分钟的戏剧活动，对照组则没有。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:5",
+                "start": 45,
+                "end": 179,
+                "quote": "the emotional understanding evident in the children’s writing, and that they showed deeper empathy and expressed emotions more vividly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p5",
+                "start": 5,
+                "end": 47,
+                "quote": "最让她惊讶的是孩子们文字中体现出的情感理解，他们表现出更深的同理心，情感表达也更生动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+                "start": 186,
+                "end": 218,
+                "quote": "but only if they can act him out"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+                "start": 294,
+                "end": 406,
+                "quote": "Before writing, the target group took part in a 30-minute drama-based activity, while the control group did not."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:6",
+                "start": 283,
+                "end": 339,
+                "quote": "children using their whole bodies to bring words to life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p1",
+                "start": 61,
+                "end": 78,
+                "quote": "但前提是孩子们能把他的作品表演出来"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p3",
+                "start": 93,
+                "end": 123,
+                "quote": "写信之前，实验组参加了一个30分钟的戏剧活动，对照组则没有。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p6",
+                "start": 83,
+                "end": 98,
+                "quote": "孩子们调动整个身体让文字活起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-c-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:6",
+                "start": 61,
+                "end": 340,
+                "quote": "O’Hanlon said more research would be needed but suggested that Shakespeare’s use of 20,000 words, compared with the everyday 2,000 words, gave a massive expansion of language into children’s lives, which was combined with children using their whole bodies to bring words to life."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p6",
+                "start": 24,
+                "end": 108,
+                "quote": "奥汉隆说还需要更多研究，但她认为，莎士比亚用了两万个词，而日常用语只有两千个词，这让孩子们生活中的语言大大扩展，再加上孩子们调动整个身体让文字活起来，两者结合起了作用。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-c-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:4",
+                "start": 193,
+                "end": 405,
+                "quote": "While pupils in the control group imagined how they themselves would react to being separated from a loved one, children in the target group put themselves in Romeo’s shoes and expressed that character’s emotion."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-c-p4",
+                "start": 53,
+                "end": 114,
+                "quote": "对照组的学生想象的是他们自己与所爱之人分离时会作何反应，而实验组的孩子则设身处地站在罗密欧的立场上，表达出这个角色的情感。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先抛出研究结论：莎士比亚有益于儿童，但前提是演出来；接着概括研究发现，再介绍试验怎么做、结果如何，然后写研究者最意外的发现，最后讨论结果能否推广及可能的原因。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+            "summary": "研究表明莎士比亚有益于儿童读写和情感发展，前提是孩子能把他演出来。",
+            "function": "开门见山抛出研究结论，引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:2",
+            "summary": "戏剧式教学扩大词汇、提高写作、增进情感理解，研究负责人强调演员式方法的作用。",
+            "function": "概括研究的三项发现，并引用研究者的话。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+            "summary": "数百名五年级学生分成两组读同一段《罗密欧与朱丽叶》并写信，只有实验组事先做了戏剧活动。",
+            "function": "交代试验的对象、分组和步骤。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:4",
+            "summary": "实验组用词更广更难、写得更长，能站在罗密欧的角度表达情感。",
+            "function": "用两组对比呈现试验结果。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:5",
+            "summary": "奥汉隆最惊讶于孩子们文字中的情感理解，认为这与像角色一样思考感受的过程有关。",
+            "function": "突出最重要的发现并解释原因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:6",
+            "summary": "结果能否推广还需研究，奥汉隆认为莎士比亚的丰富词汇加上全身投入的表演共同起了作用。",
+            "function": "讨论研究的局限和可能原因，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-nb-2026-m2:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "根据研究结论中的条件，判断研究提倡孩子们怎样学习莎士比亚。",
+      "stemTranslationZh": "这项研究鼓励孩子们做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 后的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "表演莎士比亚的作品。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+              "quote": "but only if they can act him out",
+              "anchor": "前提是演出来"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:2",
+              "quote": "a drama-based approach to teaching Shakespeare",
+              "anchor": "戏剧式教学法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "写自己原创的剧本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "write a letter as Romeo",
+            "optionText": "Write",
+            "matchType": "exact",
+            "relationNote": "选项借了[[block:paper-mock-nb-2026-m2:reading-c:3|write a letter as Romeo]]里的 write；孩子们写的是以罗密欧身份写的一封信，是试验布置的任务，不是自己创作剧本。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "were asked to write a letter as Romeo after being separated from Juliet",
+              "anchor": "以罗密欧身份写信"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "背诵莎士比亚的台词。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "背诵莎士比亚的台词",
+            "explanation": "文中没提背台词；孩子们只读了《罗密欧与朱丽叶》中的一段（read a passage），研究看重的是把作品演出来。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "观看舞台上的专业表演。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "actors",
+            "optionText": "acting",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 acting 和[[block:paper-mock-nb-2026-m2:reading-c:2|The way actors work makes a big difference]]里的 actors 同属 act 一族；但那句说的是让孩子学演员的方式亲自去演，不是坐着看专业演出。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:2",
+              "quote": "The way actors work makes a big difference to how children use language",
+              "anchor": "演员的工作方式"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the study",
+          "sourceRole": "stem",
+          "targetText": "The grammar school boy from Stratford-Upon-Avon has made headlines again after a groundbreaking study showed that Shakespeare does benefit children’s literacy and emotional development, but only if they can act him out.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "study",
+          "answerText": "but only if they can act him out",
+          "note": "题干的 the study 在[[block:paper-mock-nb-2026-m2:reading-c:1]]第一次出现，就是这项开创性研究。"
+        },
+        {
+          "sourceText": "Perform Shakespeare’s works.",
+          "sourceRole": "correctOption",
+          "targetText": "but only if they can act him out",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“表演”（Perform）就是原文的“演出来”（act him out），him 指莎士比亚，这里代指他的剧作；研究说只有演出来才有益，等于鼓励孩子去演，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:29": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括介绍试验安排的这一段在讲研究的哪一方面。",
+      "stemTranslationZh": "第3段主要谈论这项研究的哪个方面？",
+      "locateBy": "passage",
+      "locateFindZh": "逐句看 [[block:paper-mock-nb-2026-m2:reading-c:3]] 写了谁参加、怎样分组、各做什么，再想这些合起来是什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "研究的过程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "The random trial involved hundreds of Year 5 pupils (aged nine and ten) at 45 state primary schools.",
+              "anchor": "参加者"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "The children were divided into a target group and a control group.",
+              "anchor": "分组"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "Before writing, the target group took part in a 30-minute drama-based activity, while the control group did not.",
+              "anchor": "两组的不同做法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "研究的背景。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "介绍研究背景",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-c:3]]没交代这项研究是在什么情况下、为什么开展的，一开头就直接写参加者和分组。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "研究的目的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "介绍研究目的",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-c:3]]没说研究想弄清什么问题，只写了参加的学生、两组的分法和各自的任务。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "研究的意义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "介绍研究意义",
+            "explanation": "研究带来的好处写在[[block:paper-mock-nb-2026-m2:reading-c:2]]的词汇、写作和情感三方面；[[block:paper-mock-nb-2026-m2:reading-c:3]]只安排试验，还没谈结果，更谈不上意义。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Its procedure.",
+          "sourceRole": "correctOption",
+          "targetText": "The children were divided into a target group and a control group.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-nb-2026-m2:reading-c:3]]依次写了谁参加（hundreds of Year 5 pupils）、怎样分组（a target group and a control group）、两组都读同一段并以罗密欧身份写信、写信前只有实验组做了30分钟戏剧活动，这些都是试验一步步怎么做；选项的“过程”（procedure）正好把它们概括进去，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究者对实验组写作印象最深的一点。",
+      "stemTranslationZh": "实验组的写作中，最让奥汉隆印象深刻的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "文章的流畅度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "文章流畅",
+            "explanation": "原文没评价文字是否流畅；[[block:paper-mock-nb-2026-m2:reading-c:4]]只说实验组写得更长（wrote at greater length），篇幅长不等于流畅。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "情感的深度。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:5",
+              "quote": "the emotional understanding evident in the children’s writing, and that they showed deeper empathy and expressed emotions more vividly",
+              "anchor": "情感理解与同理心"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "用词的复杂程度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It was shown that pupils in the target group drew on a wider vocabulary, used more complicated or rarer words, and wrote at greater length.",
+            "sourceEntity": "used more complicated or rarer words",
+            "optionText": "Word complexity.",
+            "optionEntity": "Word complexity",
+            "explanation": "用词更复杂确实是[[block:paper-mock-nb-2026-m2:reading-c:4]]写的试验结果之一，但奥汉隆说最让她惊讶的是情感理解（emotional understanding），不是用词。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:4",
+              "quote": "used more complicated or rarer words",
+              "anchor": "用词更复杂"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "情节的想象力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "imagined",
+            "optionText": "imagination",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 imagination 和[[block:paper-mock-nb-2026-m2:reading-c:4|While pupils in the control group imagined]]里的 imagined 同族，但那里说的是对照组想象自己会怎样反应，原文也没谈过情节。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:4",
+              "quote": "While pupils in the control group imagined how they themselves would react",
+              "anchor": "对照组的想象"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "impressed O’Hanlon most",
+          "sourceRole": "stem",
+          "targetText": "O’Hanlon said she had been most surprised by the emotional understanding evident in the children’s writing, and that they showed deeper empathy and expressed emotions more vividly.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-c:5",
+          "relationType": "locationCue",
+          "targetCue": "most surprised",
+          "sourceZh": "最让奥汉隆印象深",
+          "targetCueZh": "最惊讶",
+          "answerText": "the emotional understanding evident in the children’s writing, and that they showed deeper empathy",
+          "note": "题干的 impressed O’Hanlon most 对应原文 she had been most surprised，都是说最让她意外、印象最深的一点。"
+        },
+        {
+          "sourceText": "Emotional depth.",
+          "sourceRole": "correctOption",
+          "targetText": "O’Hanlon said she had been most surprised by the emotional understanding evident in the children’s writing, and that they showed deeper empathy and expressed emotions more vividly.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“情感深度”，“情感”落在情感理解（emotional understanding），“深度”落在更深的同理心（deeper empathy），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从全文的研究结论和试验对比中，选出最贴切的启示。",
+      "stemTranslationZh": "从文中可以得到什么启示？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-nb-2026-m2:reading-c:1]] 的 only if 条件读起，看后面的试验怎样证明这个条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "熟能生巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Before writing, the target group took part in a 30-minute drama-based activity, while the control group did not.",
+            "sourceEntity": "a 30-minute drama-based activity",
+            "optionText": "Practice makes perfect.",
+            "optionEntity": "Practice",
+            "explanation": "熟能生巧讲的是反复练习；试验里实验组只多做了一次30分钟的戏剧活动（a 30-minute drama-based activity），差别来自亲身去演，而不是练得多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "the target group took part in a 30-minute drama-based activity",
+              "anchor": "30分钟戏剧活动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在做中学效果最好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+              "quote": "but only if they can act him out",
+              "anchor": "前提是演出来"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "Before writing, the target group took part in a 30-minute drama-based activity, while the control group did not.",
+              "anchor": "只有实验组参加戏剧活动"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:6",
+              "quote": "children using their whole bodies to bring words to life",
+              "anchor": "用全身让文字活起来"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "读书使人充实。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "read",
+            "optionText": "Reading",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 Reading 呼应[[block:paper-mock-nb-2026-m2:reading-c:3|Both groups read a passage]]里的 read；但两组读的是同一段文字，拉开差距的是写信前那30分钟戏剧活动，全文强调的不是读书。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "quote": "Both groups read a passage from Romeo and Juliet",
+              "anchor": "两组都读了同一段"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "言为心声。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "words",
+            "optionText": "Words",
+            "matchType": "exact",
+            "relationNote": "选项借了文中反复出现的 words，如[[block:paper-mock-nb-2026-m2:reading-c:6|Shakespeare’s use of 20,000 words]]；原文讲词汇量扩大是表演式学习带来的效果，并没有谈语言反映内心。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:6",
+              "quote": "Shakespeare’s use of 20,000 words",
+              "anchor": "两万个词"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Learning by doing works best.",
+          "sourceRole": "correctOption",
+          "targetText": "but only if they can act him out",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "全文反复强调孩子要亲身去“演”：[[block:paper-mock-nb-2026-m2:reading-c:1]]说只有演出来才有益（only if they can act him out），[[block:paper-mock-nb-2026-m2:reading-c:3]]和[[block:paper-mock-nb-2026-m2:reading-c:4]]用两组对比说明，先做戏剧活动的一组写得更好，[[block:paper-mock-nb-2026-m2:reading-c:6]]又说孩子调动全身让文字活起来（using their whole bodies）。选项的“在做中学”正好把这些亲身表演都包进去，选 B。"
+        }
+      ]
+    }
+  }
+}

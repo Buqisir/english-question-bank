@@ -1,0 +1,134 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Chris,\n\nGlad to hear you’re participating in the World Earth Day poster contest! I’ve looked at both versions carefully, and I’d choose the first one, “There is no Planet B.”\n\nTwo things make it stand out. First, the picture tells a story at a glance. The Earth is crying and sweating, with two factory chimneys pouring out smoke on its head, so anyone can see at once how pollution is hurting our planet. Second, the slogan is clever. It plays on the phrase “Plan B” and reminds people that we have no second home to move to.\n\nSome people may find the crying Earth sad, but that is exactly what makes them stop and think. So go with the first one. I’m sure it will catch the judges’ eyes. Good luck!\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "回复朋友的电子邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "以李华的第一人称表态，评价海报用一般现在时",
+        "readerTone": "写给外国朋友 Chris，语气亲切真诚，意见给得明确",
+        "goal": "告诉 Chris 选哪一版海报、为什么，帮他定下参赛作品"
+      },
+      "taskRequires": [
+        "说明你选择哪一版海报",
+        "说明选择的理由"
+      ],
+      "thisEssayChooses": "标准版选第一版 “There is no Planet B”。理由分两条：画面上流泪冒汗、头顶冒烟囱的地球一眼看懂；标语借 “Plan B” 说地球没有备用。最后先接住“画面太悲伤”的顾虑，再明确建议他交第一版。"
+    },
+    "standard": {
+      "essay": "Dear Chris,\n\nGlad to hear you’re participating in the World Earth Day poster contest! I’ve looked at both versions carefully, and I’d choose the first one, “There is no Planet B.”\n\nTwo things make it stand out. First, the picture tells a story at a glance. The Earth is crying and sweating, with two factory chimneys pouring out smoke on its head, so anyone can see at once how pollution is hurting our planet. Second, the slogan is clever. It plays on the phrase “Plan B” and reminds people that we have no second home to move to.\n\nSome people may find the crying Earth sad, but that is exactly what makes them stop and think. So go with the first one. I’m sure it will catch the judges’ eyes. Good luck!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "你的选择",
+          "quote": "I’ve looked at both versions carefully, and I’d choose the first one, “There is no Planet B.”"
+        },
+        {
+          "point": "说明理由（画面）",
+          "quote": "The Earth is crying and sweating, with two factory chimneys pouring out smoke on its head, so anyone can see at once how pollution is hurting our planet."
+        },
+        {
+          "point": "说明理由（标语）",
+          "quote": "It plays on the phrase “Plan B” and reminds people that we have no second home to move to."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接着给定首句，直接亮出选择。",
+          "items": [
+            {
+              "quote": "I’ve looked at both versions carefully",
+              "explain": "先说自己认真看过两版，Chris 会觉得这个意见是比较过才给的，不是随口一说。"
+            },
+            {
+              "quote": "I’d choose the first one, “There is no Planet B.”",
+              "explain": "第一段就给出结论，并把标语原样写出，Chris 不用猜指的是哪一张。I’d choose 比 I choose 委婉一点，适合给朋友提建议。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "主体段，从画面和标语两方面讲理由。",
+          "items": [
+            {
+              "quote": "Two things make it stand out.",
+              "explain": "先说有两条理由，再用 First、Second 分开讲，读者一眼看清结构。"
+            },
+            {
+              "quote": "The Earth is crying and sweating, with two factory chimneys pouring out smoke on its head",
+              "explain": "把海报上看得见的细节写出来（流泪、冒汗、烟囱冒烟），理由才落到这张图上；with 复合结构把烟囱放进同一句，不用另起一句。"
+            },
+            {
+              "quote": "so anyone can see at once how pollution is hurting our planet",
+              "explain": "从画面推到效果：谁看了都能马上明白。理由站在看海报的人一边说，比只说“我喜欢”更有说服力。"
+            },
+            {
+              "quote": "It plays on the phrase “Plan B”",
+              "explain": "play on 指借一个说法做文字游戏，点出 Planet B 和 Plan B 只差几个字母，后半句再说出它的意思：地球没有备用的。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "接住可能的顾虑，明确建议，祝他好运。",
+          "items": [
+            {
+              "quote": "Some people may find the crying Earth sad, but that is exactly what makes them stop and think.",
+              "explain": "先承认有人会觉得画面太悲伤，再说这正是它能让人停下来想一想的地方，把顾虑变成理由。"
+            },
+            {
+              "quote": "So go with the first one.",
+              "explain": "结尾再给一句明确的行动建议，Chris 读完就知道该交哪一版。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I’d choose / go with the first one",
+          "function": "给朋友提建议时表明选择，语气明确又不生硬。"
+        },
+        {
+          "expression": "tell a story at a glance",
+          "function": "评价海报画面：不用文字，一眼就能看懂它想说什么。"
+        },
+        {
+          "expression": "play on the phrase …",
+          "function": "说明标语的妙处在于借用一个熟悉的说法做文字游戏。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Chris,\n\nGlad to hear you’re participating in the World Earth Day poster contest! Both designs are impressive, but if I were you, I’d enter the first one, “There is no Planet B.”\n\nWhat wins me over is how the picture and the slogan work together. The sad, sweating Earth, with two chimneys puffing smoke from the top of its head, looks like a patient running a high fever. Nobody needs a lecture on global warming to get the message. The slogan then drives the point home. By turning the familiar phrase “Plan B” into “Planet B”, it reminds us that, unlike a backup plan, there is no spare planet waiting for us.\n\nI know the second poster feels more hopeful, and the hands holding the Earth are a lovely touch. Still, a warning tends to stay in people’s minds longer than a pleasant picture. Go for the first one, and I bet the judges will remember it. Fingers crossed for you!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "你的选择",
+          "quote": "Both designs are impressive, but if I were you, I’d enter the first one, “There is no Planet B.”"
+        },
+        {
+          "point": "说明理由（画面）",
+          "quote": "The sad, sweating Earth, with two chimneys puffing smoke from the top of its head, looks like a patient running a high fever."
+        },
+        {
+          "point": "说明理由（标语）",
+          "quote": "By turning the familiar phrase “Plan B” into “Planet B”, it reminds us that, unlike a backup plan, there is no spare planet waiting for us."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "looks like a patient running a high fever",
+          "explain": "标准版只描述画面，这里把冒汗的地球比作发高烧的病人，让“地球在受苦”更具体、好记。"
+        },
+        {
+          "quote": "unlike a backup plan, there is no spare planet waiting for us",
+          "explain": "把 Plan B 的本义（备用方案）和地球并排对比，比标准版更清楚地讲出这个文字游戏妙在哪里。"
+        },
+        {
+          "quote": "I know the second poster feels more hopeful, and the hands holding the Earth are a lovely touch.",
+          "explain": "先肯定第二版的优点再说自己的取舍，照顾到 Chris 两版都花了心思，朋友之间更得体。"
+        }
+      ]
+    }
+  }
+}

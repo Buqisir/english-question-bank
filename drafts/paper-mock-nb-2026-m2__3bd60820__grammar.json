@@ -1,0 +1,1110 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:grammar-fill": {
+      "overview": "青年创业者 Jing Ran 毕业后走遍全国，看到老龄化已深入中国社会，于是创办养老企业，推出配有智能座椅的接驳车，并把养老机构建在城市社区，帮老人保持尊严与原有生活。",
+      "fullTranslationZh": "大学毕业后，年轻的创业者 Jing Ran 决心把一生投入到解决一个紧迫的社会难题中，而不是去追求一份传统的职业。\n他花了几个月走遍全国，观察城市、城镇和农村社区的生活。让他感触很深的是，老龄化在多大程度上已经成为中国社会的一部分。“街上到处都是积极参加休闲活动的老年居民。”Jing 回忆道。这段旅程最终让他找到了一个明确的目标：把老年从一个受限的阶段变成一个有尊严、有快乐的阶段。\n如今，Jing 是 Time Light Care Group 的创始人，这家公司专注于改善老年护理的创新方案。它的创新成果中有一种配有智能座椅的医院接驳车。只要按一下按钮，座椅就会滑出车外，变成一把电动轮椅，让老人能独立进入医院，不必经历被人从一辆车抬到另一辆车上的不愉快。\n此外，大多数机构都位于城市社区，而不是偏远地区，这让家人更方便经常探望，也让日常的社会联系更容易维持下去。让老人留在离原来社区不远的地方，有助于保留那些曾在家中给他们带来快乐和幸福的日常习惯和兴趣。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+          "sourceText": "With the press of a button, __62__ seat slides out of the vehicle and turns into an electric wheelchair, allowing the elderly to enter the hospital independently without the unpleasant experience of __63__ (lift) from one vehicle to another.",
+          "displayText": "With the press of a button, the seat slides out of the vehicle and turns into an electric wheelchair, allowing the elderly to enter the hospital independently without the unpleasant experience of being lifted from one vehicle to another.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:62",
+            "question:paper-mock-nb-2026-m2:63"
+          ],
+          "translationZh": "只要按一下按钮，座椅就会滑出车外，变成一把电动轮椅，让老人能独立进入医院，不必经历被人从一辆车抬到另一辆车上的不愉快。",
+          "analysisZh": "主干是“座椅滑出车外，并变成电动轮椅”：主语 the seat 带两个并列谓语 slides out of the vehicle 和 turns into an electric wheelchair，用 and 连接。句首 With the press of a button 说明在什么情况下发生。逗号后的现在分词短语 allowing … 作结果状语，说前面座椅滑出、变形这件事带来的结果；allow 后接老人和不定式（the elderly to enter），说让老人能独立进医院。without 引出的介词短语说明老人进医院时免去了什么。",
+          "underlineRanges": [
+            {
+              "start": 28,
+              "end": 62,
+              "quote": "the seat slides out of the vehicle"
+            },
+            {
+              "start": 63,
+              "end": 100,
+              "quote": "and turns into an electric wheelchair"
+            },
+            {
+              "start": 102,
+              "end": 144,
+              "quote": "allowing the elderly to enter the hospital"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+          "sourceText": "Keeping seniors close to their original communities helps preserve their routines and interests __65__ once brought them joy and well-being at home.",
+          "displayText": "Keeping seniors close to their original communities helps preserve their routines and interests that/which once brought them joy and well-being at home.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:65"
+          ],
+          "translationZh": "让老人留在离原来社区不远的地方，有助于保留那些曾在家中给他们带来快乐和幸福的日常习惯和兴趣。",
+          "analysisZh": "主干是“让老人留在原社区附近，有助于保留习惯和兴趣”：主语是动名词短语 Keeping seniors close to their original communities，其中 keep 后接宾语 seniors 和形容词短语 close to …；谓语是 helps，后面直接接动词原形 preserve。preserve 带两个并列宾语 routines 和 interests，共用 their。that/which 引导的定语从句修饰这两个并列名词，从句谓语是 brought，带双宾语 them 和 joy and well-being。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 51,
+              "quote": "Keeping seniors close to their original communities"
+            },
+            {
+              "start": 52,
+              "end": 66,
+              "quote": "helps preserve"
+            },
+            {
+              "start": 96,
+              "end": 143,
+              "quote": "that/which once brought them joy and well-being"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 57,
+              "quote": "大学毕业后，年轻的创业者 Jing Ran 决心把一生投入到解决一个紧迫的社会难题中，而不是去追求一份传统的职业。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:grammar-fill:2"
+              ],
+              "start": 58,
+              "end": 192,
+              "quote": "他花了几个月走遍全国，观察城市、城镇和农村社区的生活。让他感触很深的是，老龄化在多大程度上已经成为中国社会的一部分。“街上到处都是积极参加休闲活动的老年居民。”Jing 回忆道。这段旅程最终让他找到了一个明确的目标：把老年从一个受限的阶段变成一个有尊严、有快乐的阶段。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:grammar-fill:3"
+              ],
+              "start": 193,
+              "end": 331,
+              "quote": "如今，Jing 是 Time Light Care Group 的创始人，这家公司专注于改善老年护理的创新方案。它的创新成果中有一种配有智能座椅的医院接驳车。只要按一下按钮，座椅就会滑出车外，变成一把电动轮椅，让老人能独立进入医院，不必经历被人从一辆车抬到另一辆车上的不愉快。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:grammar-fill:4"
+              ],
+              "start": 332,
+              "end": 431,
+              "quote": "此外，大多数机构都位于城市社区，而不是偏远地区，这让家人更方便经常探望，也让日常的社会联系更容易维持下去。让老人留在离原来社区不远的地方，有助于保留那些曾在家中给他们带来快乐和幸福的日常习惯和兴趣。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:1",
+            "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:1",
+            "text": "After graduating from college, Jing Ran, a young entrepreneur, was determined to devote his life to solving a pressing social challenge rather than pursue a conventional career."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:2",
+            "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+            "text": "He spent months traveling across the country, observing life in cities, towns and rural communities. What struck him was how much aging had become a part of Chinese society. “The streets were filled with elderly residents actively involved in leisure activities,” Jing recalled. The journey eventually led him to a clear goal: transforming aging from a period of limitation into one of dignity and joy."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+            "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+            "text": "Today, Jing is the founder of Time Light Care Group, a company focusing on innovative solutions to improve elderly care. Among its innovations is a hospital shuttle(接驳车) equipped with a smart seat. With the press of a button, the seat slides out of the vehicle and turns into an electric wheelchair, allowing the elderly to enter the hospital independently without the unpleasant experience of being lifted from one vehicle to another."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:4",
+            "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+            "text": "Besides, most facilities are located within urban neighborhoods rather than in remote areas, making it easier for families to visit regularly and for everyday social ties to endure. Keeping seniors close to their original communities helps preserve their routines and interests that/which once brought them joy and well-being at home."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "start": 177,
+                "end": 183,
+                "quote": "career"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "start": 54,
+                "end": 56,
+                "quote": "职业"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:56"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "start": 157,
+                "end": 169,
+                "quote": "conventional"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "start": 51,
+                "end": 54,
+                "quote": "传统的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 0,
+                "end": 2,
+                "quote": "He"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "start": 63,
+                "end": 77,
+                "quote": "was determined"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 0,
+                "end": 1,
+                "quote": "他"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:1",
+                "start": 22,
+                "end": 24,
+                "quote": "决心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:57"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 3,
+                "end": 8,
+                "quote": "spent"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 1,
+                "end": 3,
+                "quote": "花了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 117,
+                "end": 131,
+                "quote": "struck him was"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 27,
+                "end": 35,
+                "quote": "让他感触很深的是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:58"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 101,
+                "end": 105,
+                "quote": "What"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 27,
+                "end": 35,
+                "quote": "让他感触很深的是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 313,
+                "end": 320,
+                "quote": "led him"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 328,
+                "end": 340,
+                "quote": "a clear goal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 93,
+                "end": 100,
+                "quote": "最终让他找到了"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 100,
+                "end": 107,
+                "quote": "一个明确的目标"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:59"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 310,
+                "end": 312,
+                "quote": "to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:2",
+                "start": 95,
+                "end": 100,
+                "quote": "让他找到了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 75,
+                "end": 95,
+                "quote": "innovative solutions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 51,
+                "end": 55,
+                "quote": "创新方案"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:60"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 96,
+                "end": 106,
+                "quote": "to improve"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 44,
+                "end": 46,
+                "quote": "改善"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 127,
+                "end": 151,
+                "quote": "Among its innovations is"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 152,
+                "end": 170,
+                "quote": "a hospital shuttle"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 191,
+                "end": 208,
+                "quote": "with a smart seat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 56,
+                "end": 64,
+                "quote": "它的创新成果中有"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 73,
+                "end": 78,
+                "quote": "医院接驳车"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 68,
+                "end": 72,
+                "quote": "智能座椅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:61"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 170,
+                "end": 178,
+                "quote": "equipped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 66,
+                "end": 68,
+                "quote": "配有"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 196,
+                "end": 208,
+                "quote": "a smart seat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 68,
+                "end": 72,
+                "quote": "智能座椅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:62"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 226,
+                "end": 229,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 87,
+                "end": 89,
+                "quote": "座椅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 380,
+                "end": 408,
+                "quote": "the unpleasant experience of"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 324,
+                "end": 335,
+                "quote": "the elderly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 134,
+                "end": 137,
+                "quote": "不愉快"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 106,
+                "end": 108,
+                "quote": "老人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:63"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 394,
+                "end": 406,
+                "quote": "being lifted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 120,
+                "end": 133,
+                "quote": "被人从一辆车抬到另一辆车上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 110,
+                "end": 141,
+                "quote": "for families to visit regularly"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 150,
+                "end": 165,
+                "quote": "everyday social"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 25,
+                "end": 35,
+                "quote": "让家人更方便经常探望"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 38,
+                "end": 41,
+                "quote": "日常的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:64"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 166,
+                "end": 170,
+                "quote": "ties"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 41,
+                "end": 45,
+                "quote": "社会联系"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 257,
+                "end": 285,
+                "quote": "their routines and interests"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 293,
+                "end": 314,
+                "quote": "once brought them joy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 91,
+                "end": 98,
+                "quote": "日常习惯和兴趣"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 76,
+                "end": 90,
+                "quote": "曾在家中给他们带来快乐和幸福"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:65"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 278,
+                "end": 288,
+                "quote": "that/which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 76,
+                "end": 91,
+                "quote": "曾在家中给他们带来快乐和幸福的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:62",
+              "question:paper-mock-nb-2026-m2:63"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 226,
+                "end": 260,
+                "quote": "the seat slides out of the vehicle"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 261,
+                "end": 298,
+                "quote": "and turns into an electric wheelchair"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 300,
+                "end": 342,
+                "quote": "allowing the elderly to enter the hospital"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:3",
+                "start": 79,
+                "end": 138,
+                "quote": "只要按一下按钮，座椅就会滑出车外，变成一把电动轮椅，让老人能独立进入医院，不必经历被人从一辆车抬到另一辆车上的不愉快。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:65"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 182,
+                "end": 233,
+                "quote": "Keeping seniors close to their original communities"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 234,
+                "end": 248,
+                "quote": "helps preserve"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 278,
+                "end": 325,
+                "quote": "that/which once brought them joy and well-being"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:grammar-fill:4",
+                "start": 53,
+                "end": 99,
+                "quote": "让老人留在离原来社区不远的地方，有助于保留那些曾在家中给他们带来快乐和幸福的日常习惯和兴趣。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-nb-2026-m2:56": {
+      "blankId": "blank:paper-mock-nb-2026-m2:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "convention",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "conventional",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格修饰名词「职业」（career），说明是怎样的职业，要用形容词。提示词是名词（convention，惯例），加后缀 -al 变成形容词（conventional，传统的）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "career",
+          "signalSide": "passage",
+          "relation": "空格修饰职业这个名词，要用形容词。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:57": {
+      "blankId": "blank:paper-mock-nb-2026-m2:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "spend",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "spent",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-narrative-chain",
+        "features": []
+      },
+      "reason": "空格是这句的谓语，主语是他（He），后面的旅行、观察（traveling、observing）都是非谓语。上文用过去时叙述他毕业后的决定（was determined），这里接着讲他随后做的事，用过去式（spent）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "He",
+          "signalSide": "passage",
+          "relation": "主语是他，句中没有别的谓语动词，空格作谓语。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "was determined",
+          "signalSide": "passage",
+          "relation": "上文用过去时叙述他的经历，这里接着叙述，用过去式。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:58": {
+      "blankId": "blank:paper-mock-nb-2026-m2:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "What",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "subject-clause"
+        ]
+      },
+      "reason": "空格引导的从句作整句的主语，整句谓语是（was）。从句里的动词「打动」（struck）缺主语，前面又没有先行词，要用表示“……的事物”的（what），放在句首大写为（What）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "struck him was",
+          "signalSide": "passage",
+          "relation": "从句缺主语，整个从句又作谓语 was 的主语。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:59": {
+      "blankId": "blank:paper-mock-nb-2026-m2:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把「一个明确的目标」（a clear goal）接到「带领他」（led him）上，说明旅程把他带向哪里。表示“把某人引向某个结果”，用介词（to）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "led him",
+          "signalSide": "passage",
+          "relation": "动词带领后面接介词，说明把他引向哪里。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "a clear goal",
+          "signalSide": "passage",
+          "relation": "引向的结果是一个明确的目标。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:60": {
+      "blankId": "blank:paper-mock-nb-2026-m2:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "improve",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to improve",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-future",
+        "features": []
+      },
+      "reason": "句子已有谓语（is），空格修饰名词「方案」（solutions），说明这些方案是用来做什么的，可改写成（solutions that can improve elderly care）。方案要实现的是尚未完成的事，用不定式（to improve）作后置定语。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "innovative solutions",
+          "signalSide": "passage",
+          "relation": "空格修饰方案，说明方案要做的事。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:61": {
+      "blankId": "blank:paper-mock-nb-2026-m2:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "equip",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "equipped",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "这句是倒装，谓语是（is），还原语序是（A hospital shuttle … is among its innovations），空格只能修饰「医院接驳车」（a hospital shuttle）。接驳车是被配上智能座椅的，配有用（equipped with），所以用过去分词（equipped）作后置定语。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "Among its innovations is",
+          "signalSide": "passage",
+          "relation": "介词短语提前、谓语 is 放在主语前，空格不再作谓语。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "a hospital shuttle",
+          "signalSide": "passage",
+          "relation": "空格修饰接驳车，接驳车与配备是被动关系。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "with a smart seat",
+          "signalSide": "passage",
+          "relation": "被配备某物，后接 with。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:62": {
+      "blankId": "blank:paper-mock-nb-2026-m2:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-anaphoric",
+        "features": []
+      },
+      "reason": "空格限定单数可数名词「座椅」（seat）。这个座椅就是前一句接驳车上的智能座椅（a smart seat），再次提到，用定冠词（the）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a smart seat",
+          "signalSide": "passage",
+          "relation": "前一句已提到智能座椅，这里再次提到，用定冠词。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:63": {
+      "blankId": "blank:paper-mock-nb-2026-m2:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "lift",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "being lifted",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-preposition",
+        "features": []
+      },
+      "reason": "空格作介词（of）的宾语，说明是什么样的不愉快经历，介词后用动名词。老人是被人从一辆车抬到另一辆车上（from one vehicle to another），与抬是被动关系，用被动的动名词（being lifted）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the unpleasant experience of",
+          "signalSide": "passage",
+          "relation": "介词后要用动名词作宾语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "the elderly",
+          "signalSide": "passage",
+          "relation": "老人是被抬的一方，动名词要用被动。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:64": {
+      "blankId": "blank:paper-mock-nb-2026-m2:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "tie",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "ties",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格是「日常的社会」（everyday social）修饰的名词，作介词（for）的宾语，也是不定式（to endure）的逻辑主语，和前面并列的「家人」（families）位置相同。提示词在这里作名词，指人际联系，可数且前面没有冠词，泛指各种日常联系，用复数（ties）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "for families to visit regularly",
+          "signalSide": "passage",
+          "relation": "与前面的结构并列，空格和家人一样作介词的宾语。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "everyday social",
+          "signalSide": "passage",
+          "relation": "形容词修饰空格，空格要用名词。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:65": {
+      "blankId": "blank:paper-mock-nb-2026-m2:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that/which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句，修饰先行词「日常习惯和兴趣」（routines and interests）。从句的谓语（brought）缺主语，先行词指物，用（that）或（which）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "their routines and interests",
+          "signalSide": "passage",
+          "relation": "先行词是日常习惯和兴趣，指物。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "once brought them joy",
+          "signalSide": "passage",
+          "relation": "从句谓语前缺主语，由关系词充当。"
+        }
+      ]
+    }
+  }
+}

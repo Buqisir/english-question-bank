@@ -1,0 +1,1027 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:seven-choices": {
+      "overview": "作者回顾与滑板相伴的一生：11岁用破旧滑板体会到骑行的自由，少年时和伙伴一起滑，大学时四处找地方滑，后来以滑板写作出版为业，如今又把这份热爱传给了孩子。",
+      "fullTranslationZh": "我与滑板的缘分始于1975年，我一下子就迷上了它。11岁生日时，父亲给我买了第一块滑板。它装着廉价的陶土轮子，滑起来又晃又颠，还响个不停。然而，当我感受到滑行带来的自由时，这些都不重要了。这段早年的经历让我明白：热爱不在于拥有最好的装备，而在于它带给你的感觉。\n\n很快，我就每期必读《滑板人》——当时一本很受欢迎的杂志，而我们街区到处都是一起玩滑板的孩子。我们自己搭滑道，一连几个小时沿着各家门前的车道往下滑。那种共享的自由感改变了我，对一个在传统团体运动中从不出众的人来说尤其如此。\n\n1983年，滑板陪我去了多伦多上大学。有一次，一位在城北约克大学读书的朋友提议我们去试试大学里的隧道。然而我们发现隧道关闭了，这反倒促使我去探索别的地方——空旷的停车场、安静的办公园区和平整的小路。从这些经历中得到的快乐从未离开过我。\n\n随着年龄增长，我与滑板的关系也成熟起来。我创建了一个名为SkateGeezer的网站，专门面向在20世纪60、70和80年代玩过滑板的人。它启发我写了一本书——《混凝土浪潮》。从那以后，我最终在滑板杂志社开始了出版方面的职业生涯。\n\n如今，我有了自己的家庭，那份热爱仍在延续。孩子们几乎刚会走路，我就带他们接触滑板。看到儿子们超越我自己的水平，这种圆满的时刻带来的自豪无可比拟。我知道，有些旅程只要你坚持下去，就不会结束。它们只是找到了新的、美好的前进道路。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sent:seven:1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+          "sourceText": "This early experience taught me that passion isn’t about having the best equipment, but about the feeling it gives you.",
+          "displayText": "This early experience taught me that passion isn’t about having the best equipment, but about the feeling it gives you.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:36"
+          ],
+          "translationZh": "这段早年的经历让我明白：热爱不在于拥有最好的装备，而在于它带给你的感觉。",
+          "analysisZh": "主干是 This early experience taught me that…，taught 后面先接人（me），再接 that 引导的宾语从句，说明学到了什么。从句里用 not about A but about B 对比两样东西：A 是 having the best equipment，B 是 the feeling it gives you。it gives you 是省略了关系词的定语从句，修饰 the feeling，it 指 passion 所热爱的滑板这件事。这句正好和第 36 题的转折呼应：装备差，但感受好。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 36,
+              "quote": "taught me that"
+            },
+            {
+              "start": 45,
+              "end": 82,
+              "quote": "isn’t about having the best equipment"
+            },
+            {
+              "start": 84,
+              "end": 118,
+              "quote": "but about the feeling it gives you"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sent:seven:2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+          "sourceText": "Yet, we found them closed, which only pushed me to explore other places – empty parking lots, quiet office parks, and smooth pathways.",
+          "displayText": "Yet, we found them closed, which only pushed me to explore other places – empty parking lots, quiet office parks, and smooth pathways.",
+          "relatedQuestionIds": [],
+          "translationZh": "然而我们发现隧道关闭了，这反倒促使我去探索别的地方——空旷的停车场、安静的办公园区和平整的小路。",
+          "analysisZh": "主干是 we found them closed，found 带宾语 them（指前一句的 the tunnels）和宾语补足语 closed，意思是发现隧道关着。逗号后的 which 引导非限制性定语从句，指代前面整件事（隧道关着），说这件事反而 pushed me to explore other places。破折号后并列三个名词短语 empty parking lots、quiet office parks 和 smooth pathways，具体说明 other places 是哪些地方。",
+          "underlineRanges": [
+            {
+              "start": 8,
+              "end": 25,
+              "quote": "found them closed"
+            },
+            {
+              "start": 27,
+              "end": 71,
+              "quote": "which only pushed me to explore other places"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "全文按时间顺序写作者的滑板之路：童年起步，少年结伴，大学探索，成年以此为业，最后传给下一代，并点明热爱会一直延续。",
+        "units": [
+          {
+            "unitId": "unit:seven:1",
+            "paragraphIds": [
+              "block:paper-mock-nb-2026-m2:seven-choices:1"
+            ],
+            "summary": "1975年开始滑板，第一块滑板很破，但骑行的自由让作者明白热爱在于感受而非装备。"
+          },
+          {
+            "unitId": "unit:seven:2",
+            "paragraphIds": [
+              "block:paper-mock-nb-2026-m2:seven-choices:2"
+            ],
+            "summary": "少年时读滑板杂志，和街区孩子一起搭滑道玩，共享的自由改变了不擅长团体运动的作者。"
+          },
+          {
+            "unitId": "unit:seven:3",
+            "paragraphIds": [
+              "block:paper-mock-nb-2026-m2:seven-choices:3"
+            ],
+            "summary": "大学时带着滑板到多伦多，隧道去不成就转去停车场、园区和小路，乐趣一直留在心里。"
+          },
+          {
+            "unitId": "unit:seven:4",
+            "paragraphIds": [
+              "block:paper-mock-nb-2026-m2:seven-choices:4"
+            ],
+            "summary": "成年后创办滑板网站，写书，最终在滑板杂志社从事出版工作。"
+          },
+          {
+            "unitId": "unit:seven:5",
+            "paragraphIds": [
+              "block:paper-mock-nb-2026-m2:seven-choices:5"
+            ],
+            "summary": "有了家庭后教孩子滑板，看到儿子超过自己，作者感到这段旅程不会结束，只会找到新的路。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 36,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项顺着第 36 题空前轮子 \"shook, bumped and made much noise\" 的抱怨往下说，又借了空后的 equipment。但空后明说热爱 \"isn’t about having the best equipment\"，正好否定换好装备的想法。",
+          "quotes": [
+            "shook, bumped and made much noise",
+            "equipment",
+            "isn’t about having the best equipment"
+          ]
+        },
+        "D": {
+          "target": 36,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "E",
+          "shared": [
+            "that",
+            "when I"
+          ],
+          "text": "选项像是第 36 题空前破轮子的结果：轮子 \"made much noise\"，干脆不玩了。但空后 \"This early experience taught me that passion\" 讲的是热爱留下来了。放进第 37 题也接不上：other sports 像在接 \"traditional team sports\"，可作者正是在团体运动里 \"never stood out\"，滑板的 \"shared freedom\" 才改变了他。",
+          "quotes": [
+            "made much noise",
+            "This early experience taught me that passion",
+            "other sports",
+            "traditional team sports",
+            "never stood out",
+            "shared freedom"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src:seven",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "zh:seven",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh:seven:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 130,
+              "quote": "我与滑板的缘分始于1975年，我一下子就迷上了它。11岁生日时，父亲给我买了第一块滑板。它装着廉价的陶土轮子，滑起来又晃又颠，还响个不停。然而，当我感受到滑行带来的自由时，这些都不重要了。这段早年的经历让我明白：热爱不在于拥有最好的装备，而在于它带给你的感觉。"
+            },
+            {
+              "paragraphId": "zh:seven:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:seven-choices:2"
+              ],
+              "start": 132,
+              "end": 242,
+              "quote": "很快，我就每期必读《滑板人》——当时一本很受欢迎的杂志，而我们街区到处都是一起玩滑板的孩子。我们自己搭滑道，一连几个小时沿着各家门前的车道往下滑。那种共享的自由感改变了我，对一个在传统团体运动中从不出众的人来说尤其如此。"
+            },
+            {
+              "paragraphId": "zh:seven:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:seven-choices:3"
+              ],
+              "start": 244,
+              "end": 361,
+              "quote": "1983年，滑板陪我去了多伦多上大学。有一次，一位在城北约克大学读书的朋友提议我们去试试大学里的隧道。然而我们发现隧道关闭了，这反倒促使我去探索别的地方——空旷的停车场、安静的办公园区和平整的小路。从这些经历中得到的快乐从未离开过我。"
+            },
+            {
+              "paragraphId": "zh:seven:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:seven-choices:4"
+              ],
+              "start": 363,
+              "end": 478,
+              "quote": "随着年龄增长，我与滑板的关系也成熟起来。我创建了一个名为SkateGeezer的网站，专门面向在20世纪60、70和80年代玩过滑板的人。它启发我写了一本书——《混凝土浪潮》。从那以后，我最终在滑板杂志社开始了出版方面的职业生涯。"
+            },
+            {
+              "paragraphId": "zh:seven:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:seven-choices:5"
+              ],
+              "start": 480,
+              "end": 592,
+              "quote": "如今，我有了自己的家庭，那份热爱仍在延续。孩子们几乎刚会走路，我就带他们接触滑板。看到儿子们超越我自己的水平，这种圆满的时刻带来的自豪无可比拟。我知道，有些旅程只要你坚持下去，就不会结束。它们只是找到了新的、美好的前进道路。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:seven:1",
+            "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+            "text": "My journey with skateboarding began in 1975, and I was immediately hooked(钩住). For my 11th birthday, my father bought me my first board. It had cheap clay wheels that shook, bumped and made much noise. Yet, none of that mattered when I felt the freedom of the ride. This early experience taught me that passion isn’t about having the best equipment, but about the feeling it gives you."
+          },
+          {
+            "textId": "completed:seven:2",
+            "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:2",
+            "text": "Soon enough, I found myself reading every issue of Skateboarder, a popular magazine back then, and our neighborhood was full of kids skating together. We built skating tracks and spent hours riding down driveways. The sense of shared freedom was transformative, especially for someone who never stood out at traditional team sports."
+          },
+          {
+            "textId": "completed:seven:3",
+            "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+            "text": "In 1983, my skateboard accompanied me to university in Toronto. At one point, a friend who was a student at York, north of the city, suggested we try the tunnels at the university. Yet, we found them closed, which only pushed me to explore other places – empty parking lots, quiet office parks, and smooth pathways. The joy I got from these experiences never left me."
+          },
+          {
+            "textId": "completed:seven:4",
+            "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:4",
+            "text": "As I grew older, my relationship with skateboarding matured. I created a website called SkateGeezer dedicated to skaters who had ridden in the 1960s, 70s and 80s. It inspired me to write a book, The Concrete Wave. From there, I eventually built a career in publishing at skateboarding magazines."
+          },
+          {
+            "textId": "completed:seven:5",
+            "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:5",
+            "text": "Now, with a family of my own, that passion rides on. I introduced all my children to skateboarding almost as soon as they could walk. The full-circle moment of seeing my sons surpass my own ability is a pride unlike any other. I know some journeys, when you stick with them, don’t end. They just find new, beautiful paths forward."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ann:seven:evidence:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+                "start": 144,
+                "end": 200,
+                "quote": "cheap clay wheels that shook, bumped and made much noise"
+              },
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+                "start": 303,
+                "end": 327,
+                "quote": "the feeling it gives you"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:1",
+                "start": 47,
+                "end": 68,
+                "quote": "廉价的陶土轮子，滑起来又晃又颠，还响个不停"
+              },
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:1",
+                "start": 120,
+                "end": 129,
+                "quote": "在于它带给你的感觉"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:insertion:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:36"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:1",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+                "start": 202,
+                "end": 265,
+                "quote": "Yet, none of that mattered when I felt the freedom of the ride."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:1",
+                "start": 69,
+                "end": 94,
+                "quote": "然而，当我感受到滑行带来的自由时，这些都不重要了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:evidence:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:2",
+                "start": 128,
+                "end": 149,
+                "quote": "kids skating together"
+              },
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:2",
+                "start": 171,
+                "end": 185,
+                "quote": "shared freedom"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:2",
+                "start": 37,
+                "end": 45,
+                "quote": "一起玩滑板的孩子"
+              },
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:2",
+                "start": 75,
+                "end": 81,
+                "quote": "共享的自由感"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:insertion:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:37"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:2",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:2",
+                "start": 151,
+                "end": 213,
+                "quote": "We built skating tracks and spent hours riding down driveways."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:2",
+                "start": 46,
+                "end": 73,
+                "quote": "我们自己搭滑道，一连几个小时沿着各家门前的车道往下滑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:evidence:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+                "start": 38,
+                "end": 74,
+                "quote": "a student at York, north of the city"
+              },
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+                "start": 93,
+                "end": 122,
+                "quote": "the tunnels at the university"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:3",
+                "start": 25,
+                "end": 34,
+                "quote": "在城北约克大学读书"
+              },
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:3",
+                "start": 44,
+                "end": 50,
+                "quote": "大学里的隧道"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:insertion:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:38"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+                "start": 0,
+                "end": 63,
+                "quote": "In 1983, my skateboard accompanied me to university in Toronto."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:3",
+                "start": 0,
+                "end": 19,
+                "quote": "1983年，滑板陪我去了多伦多上大学。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:evidence:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:4",
+                "start": 71,
+                "end": 99,
+                "quote": "a website called SkateGeezer"
+              },
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:4",
+                "start": 170,
+                "end": 223,
+                "quote": "From there, I eventually built a career in publishing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:4",
+                "start": 24,
+                "end": 42,
+                "quote": "一个名为SkateGeezer的网站"
+              },
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:4",
+                "start": 88,
+                "end": 114,
+                "quote": "从那以后，我最终在滑板杂志社开始了出版方面的职业生涯"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:insertion:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:39"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:4",
+                "start": 163,
+                "end": 213,
+                "quote": "It inspired me to write a book, The Concrete Wave."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:4",
+                "start": 69,
+                "end": 88,
+                "quote": "它启发我写了一本书——《混凝土浪潮》。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:evidence:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:5",
+                "start": 234,
+                "end": 284,
+                "quote": "some journeys, when you stick with them, don’t end"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:5",
+                "start": 76,
+                "end": 93,
+                "quote": "有些旅程只要你坚持下去，就不会结束"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:insertion:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:40"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:5",
+                "start": 286,
+                "end": 330,
+                "quote": "They just find new, beautiful paths forward."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:5",
+                "start": 94,
+                "end": 112,
+                "quote": "它们只是找到了新的、美好的前进道路。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:structure:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:36"
+            ],
+            "selectedSentenceId": "sent:seven:1",
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+                "start": 209,
+                "end": 328,
+                "quote": "This early experience taught me that passion isn’t about having the best equipment, but about the feeling it gives you."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:1",
+                "start": 94,
+                "end": 130,
+                "quote": "这段早年的经历让我明白：热爱不在于拥有最好的装备，而在于它带给你的感觉。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann:seven:structure:2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sent:seven:2",
+            "sourceRanges": [
+              {
+                "textId": "src:seven",
+                "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+                "start": 124,
+                "end": 258,
+                "quote": "Yet, we found them closed, which only pushed me to explore other places – empty parking lots, quiet office parks, and smooth pathways."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "zh:seven",
+                "paragraphId": "zh:seven:3",
+                "start": 51,
+                "end": 99,
+                "quote": "然而我们发现隧道关闭了，这反倒促使我去探索别的地方——空旷的停车场、安静的办公园区和平整的小路。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-nb-2026-m2:36": {
+      "blankId": "blank:paper-mock-nb-2026-m2:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "cheap clay wheels",
+        "shook, bumped and made much noise",
+        "having the best equipment",
+        "the feeling it gives you"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:1",
+        "beforeQuote": "It had cheap clay wheels that shook, bumped and made much noise.",
+        "afterQuote": "This early experience taught me that passion isn’t about having the best equipment, but about the feeling it gives you."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Yet",
+          "signalSide": "option",
+          "targetText": "shook, bumped and made much noise",
+          "relation": "Yet 把话头从轮子的毛病转到骑行的感受上，前抑后扬。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "none of that",
+          "signalSide": "option",
+          "targetText": "shook, bumped and made much noise",
+          "relation": "none of that 回指空前轮子又晃又颠又吵的那些毛病。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "made much noise",
+          "signalSide": "context-before",
+          "targetText": "none of that",
+          "relation": "空前列出的毛病，正是选项 none of that 所指的内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the feeling it gives you",
+          "signalSide": "context-after",
+          "targetText": "the freedom of the ride",
+          "relation": "空后说热爱在于感受，选项里的 the freedom of the ride 就是这种感受。"
+        }
+      ],
+      "lock": [
+        "made much noise",
+        "Yet",
+        "the feeling it gives you"
+      ],
+      "find": {
+        "text": "空前全是轮子的毛病，空后却说热爱在于 \"the feeling it gives you\"。中间要一句转折，E 用 \"Yet\" 接住 \"made much noise\"，再落到骑行的感受。",
+        "quotes": [
+          "the feeling it gives you",
+          "Yet",
+          "made much noise"
+        ]
+      },
+      "explain": "先抑后扬：上一句把第一块滑板说得又破又吵，这句一转，说骑起来的自由让这些都不算什么；空后 \"This early experience\" 再把这段经历总结成道理。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "shook, bumped and made much noise",
+            "optionSide": "none of that",
+            "relation": "选项用 none of that 一并指代空前轮子的三个毛病。"
+          },
+          {
+            "contextSide": "the feeling it gives you",
+            "optionSide": "the freedom of the ride",
+            "relation": "空后说的“感受”，在选项里具体为骑行的自由。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "先抑后扬：上一句把第一块滑板说得又破又吵，这句一转，说骑起来的自由让这些都不算什么；空后 \"This early experience\" 再把这段经历总结成道理。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "选项顺着第 36 题空前轮子 \"shook, bumped and made much noise\" 的抱怨往下说，又借了空后的 equipment。但空后明说热爱 \"isn’t about having the best equipment\"，正好否定换好装备的想法。"
+        },
+        {
+          "optionLabel": "D",
+          "reason": "选项像是第 36 题空前破轮子的结果：轮子 \"made much noise\"，干脆不玩了。但空后 \"This early experience taught me that passion\" 讲的是热爱留下来了。放进第 37 题也接不上：other sports 像在接 \"traditional team sports\"，可作者正是在团体运动里 \"never stood out\"，滑板的 \"shared freedom\" 才改变了他。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:37": {
+      "blankId": "blank:paper-mock-nb-2026-m2:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "our neighborhood",
+        "kids skating together",
+        "shared freedom",
+        "traditional team sports"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:2",
+        "beforeQuote": "Soon enough, I found myself reading every issue of Skateboarder, a popular magazine back then, and our neighborhood was full of kids skating together.",
+        "afterQuote": "The sense of shared freedom was transformative, especially for someone who never stood out at traditional team sports."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "We",
+          "signalSide": "option",
+          "targetText": "kids skating together",
+          "relation": "We 指作者和空前街区里一起滑板的孩子们。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "kids skating together",
+          "signalSide": "context-before",
+          "targetText": "We",
+          "relation": "空前先交代有一群孩子一起滑，选项的 We 才有所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "spent hours riding",
+          "signalSide": "option",
+          "targetText": "shared freedom",
+          "relation": "一起搭滑道、一连几小时地滑，是空后 shared freedom 的具体内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "shared freedom",
+          "signalSide": "context-after",
+          "targetText": "We built skating tracks",
+          "relation": "空后用 shared freedom 概括选项里大家一起玩的情景。"
+        }
+      ],
+      "lock": [
+        "kids skating together",
+        "We",
+        "shared freedom"
+      ],
+      "find": {
+        "text": "空前说街区里 \"kids skating together\"，空后用 \"shared freedom\" 概括一群人的感受。F 的 \"We\" 把作者放进这群孩子里，又写出他们一起做的事。",
+        "quotes": [
+          "kids skating together",
+          "shared freedom",
+          "We"
+        ]
+      },
+      "explain": "空前只笼统说孩子们一起滑，这句把画面落到具体活动上：自己搭滑道、整下午顺着车道往下冲。有了这些，空后才能说这种一起玩的自由改变了作者。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "kids skating together",
+            "optionSide": "We",
+            "relation": "We 回指作者和街区里一起滑板的孩子。"
+          },
+          {
+            "contextSide": "shared freedom",
+            "optionSide": "built skating tracks and spent hours riding down driveways",
+            "relation": "空后的“共享的自由”概括的就是选项里大家一起搭滑道、一起滑的情景。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前只笼统说孩子们一起滑，这句把画面落到具体活动上：自己搭滑道、整下午顺着车道往下冲。有了这些，空后才能说这种一起玩的自由改变了作者。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-nb-2026-m2:38": {
+      "blankId": "blank:paper-mock-nb-2026-m2:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a student at York",
+        "north of the city",
+        "the tunnels at the university"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "At one point, a friend who was a student at York, north of the city, suggested we try the tunnels at the university."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "north of the city",
+          "signalSide": "context-after",
+          "targetText": "Toronto",
+          "relation": "the city 要前文先说出是哪座城，只有选项给了 Toronto。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the university",
+          "signalSide": "context-after",
+          "targetText": "university in Toronto",
+          "relation": "the university 用定冠词，说明前面已经提过大学。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "university in Toronto",
+          "signalSide": "option",
+          "targetText": "a student at York / the university",
+          "relation": "选项交代作者到多伦多上大学，空后的同学和大学隧道才有着落。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "In 1983",
+          "signalSide": "option",
+          "targetText": "My journey with skateboarding began in 1975",
+          "relation": "选项用年份把时间从童年推到大学阶段。"
+        }
+      ],
+      "lock": [
+        "north of the city",
+        "the university",
+        "Toronto"
+      ],
+      "find": {
+        "text": "空在段首，先看空后：\"north of the city\" 和 \"the university\" 都要前面交代是哪座城、哪所大学。只有 G 提到 \"university in Toronto\"。",
+        "quotes": [
+          "north of the city",
+          "the university",
+          "university in Toronto"
+        ]
+      },
+      "explain": "上一段还在街区和小伙伴一起滑，这句用 \"In 1983\" 把时间推到大学，并说滑板一直跟着作者；这一段找隧道、转去停车场，都是在这座城市里发生的。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "north of the city",
+            "optionSide": "Toronto",
+            "relation": "空后的 the city 指选项里的多伦多。"
+          },
+          {
+            "contextSide": "the tunnels at the university",
+            "optionSide": "university",
+            "relation": "空后的 the university 承接选项里作者去上的大学。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "上一段还在街区和小伙伴一起滑，这句用 \"In 1983\" 把时间推到大学，并说滑板一直跟着作者；这一段找隧道、转去停车场，都是在这座城市里发生的。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-nb-2026-m2:39": {
+      "blankId": "blank:paper-mock-nb-2026-m2:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "my relationship with skateboarding matured",
+        "a website called SkateGeezer",
+        "From there",
+        "a career in publishing"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:4",
+        "beforeQuote": "I created a website called SkateGeezer dedicated to skaters who had ridden in the 1960s, 70s and 80s.",
+        "afterQuote": "From there, I eventually built a career in publishing at skateboarding magazines."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "a website called SkateGeezer",
+          "relation": "It 指空前作者创建的网站。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "a website called SkateGeezer",
+          "signalSide": "context-before",
+          "targetText": "It",
+          "relation": "空前的网站是单数事物，正好做 It 的先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "From there",
+          "signalSide": "context-after",
+          "targetText": "write a book",
+          "relation": "From there 要前面有一个起点，写书就是这个起点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "write a book",
+          "signalSide": "option",
+          "targetText": "publishing",
+          "relation": "写书和空后的出版同属文字出版这条线。"
+        }
+      ],
+      "lock": [
+        "SkateGeezer",
+        "From there",
+        "publishing"
+      ],
+      "find": {
+        "text": "空后 \"From there\" 要前面有个起点，\"publishing\" 说的是出版。C 的 \"It\" 接空前的网站 \"SkateGeezer\"，写书正好通向出版。",
+        "quotes": [
+          "From there",
+          "publishing",
+          "It",
+          "SkateGeezer"
+        ]
+      },
+      "explain": "这一段讲爱好怎样一步步变成职业：办网站，网站带出一本书，再进杂志社做出版。C 是中间那一步，少了它，从网站直接跳到出版事业就缺了过渡。",
+      "distractors": [
+        {
+          "label": "B",
+          "text": "B 的 \"They\" 看似能指空前的 skaters，但老玩家找新路与作者无关，空后 \"From there, I\" 接不上。",
+          "quotes": [
+            "They",
+            "skaters",
+            "From there, I"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a website called SkateGeezer",
+            "optionSide": "It",
+            "relation": "It 回指作者创建的网站。"
+          },
+          {
+            "contextSide": "a career in publishing",
+            "optionSide": "write a book, The Concrete Wave",
+            "relation": "写书是作者进入出版行业的起点。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "这一段讲爱好怎样一步步变成职业：办网站，网站带出一本书，再进杂志社做出版。C 是中间那一步，少了它，从网站直接跳到出版事业就缺了过渡。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 的 \"They\" 看似能指空前的 skaters，但老玩家找新路与作者无关，空后 \"From there, I\" 接不上。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:40": {
+      "blankId": "blank:paper-mock-nb-2026-m2:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "that passion rides on",
+        "surpass my own ability",
+        "some journeys",
+        "don’t end"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:5",
+        "beforeQuote": "The full-circle moment of seeing my sons surpass my own ability is a pride unlike any other. I know some journeys, when you stick with them, don’t end.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They",
+          "signalSide": "option",
+          "targetText": "some journeys",
+          "relation": "They 指空前的 some journeys。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "some journeys",
+          "signalSide": "context-before",
+          "targetText": "They",
+          "relation": "空前的复数名词 some journeys 做 They 的先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "don’t end",
+          "signalSide": "context-before",
+          "targetText": "find new, beautiful paths forward",
+          "relation": "旅程不结束，选项接着说它们换了新路继续往前。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "paths forward",
+          "signalSide": "option",
+          "targetText": "don’t end",
+          "relation": "paths forward 说明“不结束”是怎么回事。"
+        }
+      ],
+      "lock": [
+        "some journeys",
+        "don’t end",
+        "They"
+      ],
+      "find": {
+        "text": "空在全文末尾，看空前：\"some journeys\" 是复数，又说 \"don’t end\"。B 的 \"They\" 指这些旅程，\"paths forward\" 说明它们怎样不结束。",
+        "quotes": [
+          "some journeys",
+          "don’t end",
+          "They",
+          "paths forward"
+        ]
+      },
+      "explain": "最后一段说热爱传到了孩子身上，作者自己滑不过儿子了。这句给 \"don’t end\" 补上答案：旅程换一条路接着走，回应开头的 \"My journey with skateboarding\"，全文收住。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "some journeys",
+            "optionSide": "They",
+            "relation": "They 回指空前的 some journeys。"
+          },
+          {
+            "contextSide": "don’t end",
+            "optionSide": "find new, beautiful paths forward",
+            "relation": "选项解释旅程为什么不会结束：它们找到新的路继续前进。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "最后一段说热爱传到了孩子身上，作者自己滑不过儿子了。这句给 \"don’t end\" 补上答案：旅程换一条路接着走，回应开头的 \"My journey with skateboarding\"，全文收住。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

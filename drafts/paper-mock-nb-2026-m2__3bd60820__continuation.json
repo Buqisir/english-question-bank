@@ -1,0 +1,200 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Inspired, Nate suggested they visit his Grandpa’s farm. That afternoon, they rode their bikes there. Briana ran straight to the fence, where a group of chicks were hurrying after their mother. “They’re so cute!” she laughed. Nate followed her gaze, just as he had under the maple. This time he did not see an ordinary farm. The old red barn was glowing in the evening sun, and the wheat was waving in the wind. He sat down on a pile of hay, took out his sketchpad and began to draw. Over the next few days, he added color with his crayons until the drawing seemed alive. Then he handed it to Ms. Kim.\n\nParagraph 2: On the day of the award ceremony, the library was crowded. Nate stood near the back with Briana, his hands sweaty. When Ms. Kim announced the first prize, he heard his own name. On the wall hung his drawing: the red barn, the golden wheat and the little chicks. “I’ve driven past that farm a thousand times,” an old man said, “and never noticed how lovely it is.” Nate smiled. He had once felt the same way. “Thank you for showing me my own town,” he whispered to Briana. On his way home, he looked at every tree and field along the road, already wondering what to draw next.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写围绕热爱画画却嫌小镇无聊的 Nate 和刚从大城市搬来、看什么都新鲜的 Briana；图书管理员 Ms. Kim 负责比赛和展出。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时，从 Nate 的角度讲。句子短，叙述里穿插几句简短的直接引语，描写集中在一两个画面上。续写照这个比例：多用动作推进，留两三句短对话，景物只写最打动人的一处。",
+          "evidence": [
+            "Nate paused beside her."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "Nate 想参赛却不知道画什么，枫树下他刚意识到小镇不是无聊，只是自己看惯了。续写要让他真的找到小镇的美、画出来，并在颁奖日有个交代。",
+          "evidence": [
+            "“What will I draw?”",
+            "Highland wasn’t a big bore – he was just too used to it."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Nate Jasper",
+          "role": "热爱画画的小镇男孩",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "一看到比赛就决定参加。",
+              "evidence": "“I have to enter this contest!”"
+            },
+            {
+              "label": "此刻",
+              "text": "刚从枫树下的一幕醒悟过来，开始想小镇还藏着哪些美。",
+              "evidence": "He began to wonder what other hidden beauty was waiting to be discovered."
+            }
+          ]
+        },
+        {
+          "name": "Briana Williams",
+          "role": "刚从休斯敦搬来的新同学",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "Nate 觉得无聊的东西，在她眼里都是新的。",
+              "evidence": "everything here may seem boring to you, but to me, it’s all new!"
+            },
+            {
+              "label": "想要",
+              "text": "想多看看这个小镇，也鼓励 Nate 带上素描本。",
+              "evidence": "I’d love to see more of it."
+            }
+          ]
+        },
+        {
+          "name": "Ms. Kim",
+          "role": "图书管理员",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "注意到 Nate 感兴趣，主动递上传单，并告诉他获奖作品会在图书馆展出。",
+              "evidence": "The winning drawings will be displayed right here in the library"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "only ordinary farms, animals, and trees!",
+          "use": "第 1 段用：Nate 曾嫌弃的“普通农场和动物”，正是爷爷农场上的牛、小鸡和谷仓，让他亲眼推翻自己的话。"
+        },
+        {
+          "sourceQuote": "as he followed her gaze",
+          "use": "第 1 段用：在农场再写一次 Nate 顺着 Briana 的目光看，和枫树那一幕呼应，说明他换了一种眼光。"
+        },
+        {
+          "sourceQuote": "The winning drawings will be displayed right here in the library",
+          "use": "第 2 段用：颁奖日 Nate 的画挂上图书馆的墙，兑现 Ms. Kim 开头的话。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "Nate 带 Briana 去爷爷的农场，借她的眼光看见熟悉农场的美并画下来参赛；颁奖日画作获奖挂上图书馆的墙，他也学会了重新看自己的小镇。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "以段首句开头写去爷爷的农场。原文里 Nate 想参赛、却不知道画什么，第二段又直接到了颁奖日，所以第一段结束前要让他找到想画的东西、把作品画完交上去；颁奖的事留给第二段。",
+          "draft": "Briana 一到农场就被小鸡吸引，Nate 顺着她的目光看，发现谷仓和麦田很美，坐下来画；之后几天用蜡笔上色，最后把画交给 Ms. Kim。",
+          "bridgeQuote": "On the day of the award ceremony, the library was crowded.",
+          "bridge": "人挤满图书馆的那一天，Nate 的农场画会怎样被大家看到？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以段首句开头写颁奖日图书馆人很多。要收住原文的问题：Nate 是否真的看见了小镇的美。他得不得奖、得几等奖都可以自选，但要和第一段的画接上。",
+          "draft": "Nate 紧张地站在后排，听到自己得了一等奖；画挂在墙上，一位老人说自己路过那片农场无数次都没注意到它这么美；Nate 小声向 Briana 道谢，回家路上看着沿途的树和田，想着下一幅画什么。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Inspired, Nate suggested they visit his Grandpa’s farm. That afternoon, they rode their bikes there. Briana ran straight to the fence, where a group of chicks were hurrying after their mother. “They’re so cute!” she laughed. Nate followed her gaze, just as he had under the maple. This time he did not see an ordinary farm. The old red barn was glowing in the evening sun, and the wheat was waving in the wind. He sat down on a pile of hay, took out his sketchpad and began to draw. Over the next few days, he added color with his crayons until the drawing seemed alive. Then he handed it to Ms. Kim.\n\nParagraph 2: On the day of the award ceremony, the library was crowded. Nate stood near the back with Briana, his hands sweaty. When Ms. Kim announced the first prize, he heard his own name. On the wall hung his drawing: the red barn, the golden wheat and the little chicks. “I’ve driven past that farm a thousand times,” an old man said, “and never noticed how lovely it is.” Nate smiled. He had once felt the same way. “Thank you for showing me my own town,” he whispered to Briana. On his way home, he looked at every tree and field along the road, already wondering what to draw next.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写农场之行：Nate 借 Briana 的眼光看见农场的美，画出参赛作品。",
+          "items": [
+            {
+              "quote": "Briana ran straight to the fence, where a group of chicks were hurrying after their mother.",
+              "explain": "先写 Briana 的兴奋，把原文里 Nate 嫌弃的 “animals” 变成具体的一群小鸡，让新鲜感从她那里开始。"
+            },
+            {
+              "quote": "Nate followed her gaze, just as he had under the maple.",
+              "explain": "直接接上枫树那一幕，说明 Nate 又一次换了眼光，转变有来由，不是突然想通。"
+            },
+            {
+              "quote": "This time he did not see an ordinary farm.",
+              "explain": "用 ordinary 回扣原文他说的 “only ordinary farms”，一句话写出他的看法变了。"
+            },
+            {
+              "quote": "Over the next few days, he added color with his crayons until the drawing seemed alive. Then he handed it to Ms. Kim.",
+              "explain": "用原文里的 crayons 把画画完，再交给 Ms. Kim，第一段停在“作品交上去了”，为颁奖日做好准备。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写颁奖日：画作获奖展出，Nate 收住“小镇无聊”这个心结。",
+          "items": [
+            {
+              "quote": "Nate stood near the back with Briana, his hands sweaty.",
+              "explain": "先用手心出汗写他的紧张，让后面听到名字时的惊喜有对比。"
+            },
+            {
+              "quote": "On the wall hung his drawing: the red barn, the golden wheat and the little chicks.",
+              "explain": "倒装把“画”放到句末，冒号后列出第一段的谷仓、麦田和小鸡，两段的细节对上，也兑现了作品在图书馆展出的话。"
+            },
+            {
+              "quote": "“I’ve driven past that farm a thousand times,” an old man said, “and never noticed how lovely it is.”",
+              "explain": "借一位不知名观众说出 Nate 以前的想法，他只是背景人物，却把“看惯了就看不见美”的道理说得具体。"
+            },
+            {
+              "quote": "he looked at every tree and field along the road, already wondering what to draw next",
+              "explain": "结尾落在一个动作上：他开始留心路边的树和田，回应原文 “what other hidden beauty”，不用另贴道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "follow one’s gaze",
+          "function": "写顺着别人的目光看过去，在本题里表示 Nate 借用 Briana 的眼光重新看小镇。"
+        },
+        {
+          "expression": "his hands sweaty",
+          "function": "独立主格结构，用手心出汗这个身体反应写紧张，不必直接说 nervous。"
+        },
+        {
+          "expression": "On the wall hung his drawing",
+          "function": "地点放句首的倒装，把读者的注意力引到那幅画上，适合写揭晓的一刻。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写颁奖或宣布获奖",
+          "why": "第二段段首句才到颁奖日，第一段提前写掉，第二段就没东西可写，也和段首句的时间顺序冲突。"
+        },
+        {
+          "pitfall": "农场之行只写风景，不写 Nate 动笔画画、把作品交上去",
+          "why": "第二段的颁奖礼要和 Nate 的作品有关，第一段不交代作品，两段就接不上。"
+        },
+        {
+          "pitfall": "让 Briana 或其他新人物替 Nate 画画、替他获奖，或结尾只喊“家乡最美”之类的口号",
+          "why": "原文的问题是 Nate 自己觉得小镇无聊、不知道画什么，要由他自己的发现和行动来解决，结尾落在具体的画和动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Inspired, Nate suggested they visit his Grandpa’s farm. That afternoon they cycled out past the edge of town, and Briana jumped off her bike before it had even stopped. She leaned over the fence, giggling as a line of fluffy chicks hurried after their mother and an old cow chewed lazily. Nate followed her gaze, the way he had under the maple. Suddenly the barn he had always called shabby was glowing red in the late sun, and the wheat field rippled like a golden sea. “You were right,” he murmured, flipping open his sketchpad. He settled onto a pile of hay and let his pencil fly. Every afternoon that week, Nate pedaled back to add color with his crayons, until at last the farm seemed to breathe on the paper. Then he slid the drawing across Ms. Kim’s desk.\n\nParagraph 2: On the day of the award ceremony, the library was crowded. Nate hovered near the back beside Briana, his palms damp. When Ms. Kim read out the winner of the first prize, it took him a moment to realize she had said his name. His knees shook all the way to the front. There on the wall hung his farm: the glowing barn, the rippling wheat, the chicks scurrying across the yard. People crowded in for a closer look. “I’ve driven past that place a thousand times,” an elderly man said, “and never once noticed how lovely it is.” Nate grinned, because not long ago he would have said the same. He caught Briana’s eye. “Thanks for lending me your eyes,” he whispered. That evening he walked home the long way, past the quiet lane and the big maple, his sketchpad tucked under his arm, already looking for his next picture.",
+      "beyondStandard": [
+        {
+          "quote": "Suddenly the barn he had always called shabby was glowing red in the late sun, and the wheat field rippled like a golden sea.",
+          "explain": "用 he had always called shabby 点出他以前的偏见，再写夕阳下的谷仓和麦浪，“前后反差”比标准版更清楚，麦浪也呼应原文枫叶的 “a sea of burning gold”。"
+        },
+        {
+          "quote": "until at last the farm seemed to breathe on the paper",
+          "explain": "比标准版的 seemed alive 更具体：画里的农场像在呼吸，写出他一遍遍上色的成果。"
+        },
+        {
+          "quote": "“Thanks for lending me your eyes,” he whispered.",
+          "explain": "lend me your eyes 既是道谢，又把“借她的眼光看小镇”这条线收住，比标准版的 showing me my own town 更含蓄。"
+        }
+      ]
+    }
+  }
+}

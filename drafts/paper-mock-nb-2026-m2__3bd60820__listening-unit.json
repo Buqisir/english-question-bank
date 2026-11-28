@@ -1,0 +1,1019 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Why did you set the alarm so early?\nW: Dear, you said you have a meeting to attend at 9:00. Hurry up. Now you only get half an hour before it starts.\nM: Oh, I forgot that. I’m so dead.",
+      "translationZh": "男：你为什么把闹钟定得这么早？\n女：亲爱的，你说过你九点要参加一个会。快点吧。现在离会议开始只剩半个小时了。\n男：哦，我把这事忘了。这下我完了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "清早闹钟响后，丈夫抱怨定得太早，妻子提醒他当天要开会并催他快点。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你为什么把闹钟定得这么早？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "亲爱的，你说过你九点要参加一个会。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "快点吧。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "现在离会议开始只剩半个小时了。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "哦，我把这事忘了。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "这下我完了。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: It’s so nice today. It’s a good time to go out and get relaxed.\nW: Yes, I will go to the amusement park. What about you?\nM: My wife wants to go to the beach, but I have to go to the company to write a report.",
+      "translationZh": "男：今天天气真好，正适合出去放松一下。\n女：是啊，我要去游乐园。你呢？\n男：我妻子想去海边，可我得去公司写一份报告。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "天气晴好，一男一女聊各自今天的打算，男士还提到妻子想去的地方。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "今天天气真好。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "正适合出去放松一下。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "是啊，我要去游乐园。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我妻子想去海边，可我得去公司写一份报告。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: You arrived at school early today! Did your dad bring you by car?\nW: No. And I didn’t take a bus, either. Everything on the underground went smoothly! I was lucky.",
+      "translationZh": "男：你今天到校真早！是你爸爸开车送你来的吗？\n女：不是。我也没坐公交车。地铁上一切都很顺利！我运气真好。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "男生见女生今天到校很早，问她是怎么来学校的，女生说明了路上的情况。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "你今天到校真早！"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "是你爸爸开车送你来的吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "不是。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我也没坐公交车。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "地铁上一切都很顺利！"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "我运气真好。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: It’s so annoying. I keep losing my files. Do you know what the problem is?\nM: Let me have a look. There’s a lot of stuff here. Why don’t you save the files onto a memory stick?\nW: That’s a good idea.",
+      "translationZh": "女：真烦人。我的文件老是丢。你知道是什么问题吗？\n男：我看看。这里面东西太多了。你为什么不把文件存到U盘里呢？\n女：好主意。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士抱怨电脑里的文件总是丢失，向男士求助，男士查看后给她出了个主意。"
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Why did Tom quit the job?\nM: He said his present job had no future.\nW: If he does not change his attitude towards his work, I don’t think a new job can make any difference.",
+      "translationZh": "女：汤姆为什么辞职了？\n男：他说他现在的工作没有前途。\n女：如果他不改变对工作的态度，我觉得换份新工作也不会有什么不同。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "正确的人生态度"
+      },
+      "summaryZh": "两人谈论汤姆辞职一事，男士转述了汤姆的说法，女士谈了自己的看法。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "汤姆为什么辞职了？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "他说他现在的工作没有前途。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "如果他不改变对工作的态度，我觉得换份新工作也不会有什么不同。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Mary, where is your mother?\nW: She is preparing breakfast in the kitchen. What are our plans for today?\nM: How about going on a boat tour? I think your mother will also like this idea.\nW: Yes! I don’t mind that the weather is a bit cloudy.\nM: Uncle Pablo works in a tour company and he’s telling tourists about the history of the town when they’re on the boat today!\nW: I’d love to listen to him!\nM: Me, too. I’ll book our tickets online.",
+      "translationZh": "男：玛丽，你妈妈在哪儿？\n女：她在厨房做早饭。我们今天有什么安排？\n男：去坐船游览怎么样？我想你妈妈也会喜欢这个主意的。\n女：好啊！天有点阴我也不在乎。\n男：帕布罗叔叔在一家旅游公司工作，今天游客坐船时，他要给他们讲这座小镇的历史！\n女：我很想听他讲！\n男：我也是。我来在网上订票。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "早饭时，男士和玛丽商量全家今天的安排，聊到坐船游览和在旅游公司工作的帕布罗叔叔。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "玛丽，你妈妈在哪儿？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "她在厨房做早饭。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我们今天有什么安排？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "去坐船游览怎么样？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我想你妈妈也会喜欢这个主意的。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "好啊！"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "天有点阴我也不在乎。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "帕布罗叔叔在一家旅游公司工作，今天游客坐船时，他要给他们讲这座小镇的历史！"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我很想听他讲！"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "我也是。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "我来在网上订票。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Tom, I’ve got the computer game called Green Space.\nM: Where did you find out about it?\nW: I borrowed a magazine from a friend and there was an ad for it. I asked my mum and she bought it for me from their website.\nM: I really like that game. Who are you going to play it with?\nW: Well, my brother’s too busy, and my cousin Amy only likes board games. Only my granddad\nhas lots of time, so I want to play with him.\nM: Which part do you like best?\nW: Crossing the river is really good, but what I enjoy most is finding something to eat. The part about building a house is my least favourite.",
+      "translationZh": "女：汤姆，我买到了那款叫《绿色空间》的电脑游戏。\n男：你是从哪儿知道它的？\n女：我从朋友那里借了一本杂志，上面有这款游戏的广告。我问了妈妈，她就从他们的网站上给我买了。\n男：我很喜欢那款游戏。你打算和谁一起玩？\n女：嗯，我哥哥太忙，我表妹埃米只喜欢桌游。只有我爷爷时间很多，所以我想和他一起玩。\n男：你最喜欢哪一部分？\n女：过河那部分很好玩，但我最喜欢的是找东西吃。造房子那部分是我最不喜欢的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女孩向汤姆说起新买的电脑游戏，谈到怎么知道这款游戏、打算和谁玩以及对各部分的喜好。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "汤姆，我买到了那款叫《绿色空间》的电脑游戏。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你是从哪儿知道它的？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "我从朋友那里借了一本杂志，上面有这款游戏的广告。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我问了妈妈，她就从他们的网站上给我买了。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "我很喜欢那款游戏。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "你打算和谁一起玩？"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "嗯，我哥哥太忙，我表妹埃米只喜欢桌游。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "只有我爷爷"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "时间很多，所以我想和他一起玩。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "你最喜欢哪一部分？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "过河那部分很好玩，但我最喜欢的是找东西吃。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "造房子那部分是我最不喜欢的。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Hi, Bill. When did you get back?\nM: About an hour ago. What’s new? Did anyone call?\nW: Yeah, someone called Dave made a phone call this afternoon. He’s at the Holiday Inn Hotel. You can get in touch with him there.\nM: Oh, that’s my old friend from college, Dave Johnson. I knew he was coming to town. I didn’t expect him today, though.\nW: Should we ask him to our party tonight?\nM: I’d like to. But we’ve already invited twenty people and the apartment is pretty small.\nW: Don’t worry. We can always make room for one more. The more, the happier, you know.\nM: That’s true. And the other guests will like Dave. He’s very friendly, and he always has funny stories and jokes to tell.\nW: Be sure to tell him not to dress up. It’s not formal, you know.\nM: Okay. I’ll go to pick Dave up. He doesn’t know this town well. He might lose his way coming alone.\nW: Okay.",
+      "translationZh": "女：嗨，比尔。你什么时候回来的？\n男：大约一个小时前。有什么新消息吗？有人打电话来吗？\n女：有，今天下午一个叫戴夫的人打过电话。他住在假日酒店。你可以去那里联系他。\n男：哦，那是我大学时的老朋友戴夫·约翰逊。我知道他要来城里，不过没想到他今天就到了。\n女：要不要请他来参加我们今晚的聚会？\n男：我是想请。可我们已经邀请了二十个人，公寓又挺小的。\n女：别担心。再多一个人的地方总还是能腾出来的。你知道的，人越多越开心嘛。\n男：没错。而且其他客人也会喜欢戴夫的。他人很友善，总有好玩的故事和笑话可讲。\n女：一定要告诉他别穿得太正式。你知道的，这不是正式聚会。\n男：好的。我去接戴夫。他对这座城市不熟，一个人来可能会迷路。\n女：好的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "比尔回家后，女士转告他有人来电，两人商量是否邀请这位来客参加当晚的聚会。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "嗨，比尔。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "你什么时候回来的？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "大约一个小时前。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "有什么新消息吗？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "有人打电话来吗？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "有，今天下午一个叫戴夫的人打过电话。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "他住在假日酒店。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你可以去那里联系他。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "哦，那是我大学时的老朋友戴夫·约翰逊。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我知道他要来城里。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "不过没想到他今天就到了。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "要不要请他来参加我们今晚的聚会？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我是想请。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "可我们已经邀请了二十个人，公寓又挺小的。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "再多一个人的地方总还是能腾出来的。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "你知道的，人越多越开心嘛。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "而且其他客人也会喜欢戴夫的。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "他人很友善，总有好玩的故事和笑话可讲。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "一定要告诉他别穿得太正式。"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "你知道的，这不是正式聚会。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "我去接戴夫。"
+        },
+        {
+          "id": "listening-text-8:25",
+          "zh": "他对这座城市不熟。"
+        },
+        {
+          "id": "listening-text-8:26",
+          "zh": "一个人来可能会迷路。"
+        },
+        {
+          "id": "listening-text-8:27",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "W: Professor Smith.\nM: Hi, Justine. How are you? You don’t look very happy.\nW: I’m OK, but I’m doing badly in your class. I wonder how to do better.\nM: I think coming prepared to class may do something to improve your grades.\nW: How can I prepare for class?\nM: Have you checked out my web page? All my lecture notes are on my web page. You can read them first.\nW: Really? Wow. That would be very helpful.\nM: Another good idea is to read the book before class.\nW: I usually don’t do that. I thought hearing the lecture first would be better than reading first.\nM: Reading first is actually better. You should also write down ideas or notes while you’re reading. That way you can come to class with some questions.\nW: Yeah. Thank you very much, Professor Smith. I feel much better now.",
+      "translationZh": "女：史密斯教授。\n男：嗨，贾斯汀。你好吗？你看上去不太高兴。\n女：我还好，可我在您的课上学得很差。我想知道怎样才能学得好一些。\n男：我觉得有准备地来上课，或许能帮你提高成绩。\n女：我该怎么为上课做准备呢？\n男：你看过我的网页吗？我所有的讲义都在网页上。你可以先读一读。\n女：真的吗？哇。那会很有帮助。\n男：另一个好办法是课前先读课本。\n女：我通常不这么做。我原以为先听课会比先读书好。\n男：其实先读更好。你读的时候还应该把想法或笔记记下来。这样你来上课时就能带着一些问题。\n女：好的。太谢谢您了，史密斯教授。我现在感觉好多了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "善于学习"
+      },
+      "summaryZh": "学生贾斯汀找史密斯教授谈自己在这门课上的学习情况，教授给了她几条建议。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "史密斯教授。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "嗨，贾斯汀。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "你好吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "你看上去不太高兴。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我还好，可我在您的课上学得很差。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我想知道怎样才能学得好一些。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "我觉得有准备地来上课，或许能帮你提高成绩。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "我该怎么为上课做准备呢？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "你看过我的网页吗？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我所有的讲义都在网页上。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "你可以先读一读。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "真的吗？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "哇。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "那会很有帮助。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "另一个好办法是课前先读课本。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "我通常不这么做。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "我原以为先听课会比先读书好。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "其实先读更好。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "你读的时候还应该把想法或笔记记下来。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "这样你来上课时就能带着一些问题。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "太谢谢您了，史密斯教授。"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "我现在感觉好多了。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Good morning, everyone. Today we need to choose a new director for the marketing department. There are two candidates for this position: Amy Coleman, and Sam Stewart. First, let’s explore Amy’s qualifications for this position. On the positive side, she has excellent communication skills and is experienced in running a marketing team. Additionally, she is really popular among the other employees. On the other side, Amy is not receptive to new information\nor viewpoints and she’s not creative enough. Now, let’s turn to Sam. In the first place, Sam doesn’t have much experience or good communication abilities, compared to Amy. But he seems to have much potential despite his lack of experience. He is very creative and I could see that while working with him in the same team. He even attends a class on Sunday these days to learn some marketing skills. I know it’s hard to find the ideal person to handle this job on a short meeting. We’ll meet here again next Friday at 9:00. We must have a clear decision before Sunday.",
+      "translationZh": "女：大家早上好。今天我们要为市场部选一位新主管。这个职位有两位候选人：埃米·科尔曼和萨姆·斯图尔特。首先，我们来看看埃米是否胜任这个职位。从好的方面说，她沟通能力出色，有带市场团队的经验。此外，她在其他员工中很受欢迎。从另一方面说，埃米不太接受新的信息或观点，创造力也不够。现在，我们来说说萨姆。首先，和埃米相比，萨姆经验不多，沟通能力也不算好。但他虽然缺乏经验，似乎很有潜力。他很有创造力，我和他在同一个团队共事时就看出来了。最近他甚至每个星期天都去上课，学习一些营销技能。我知道，开一次短会很难找到处理这项工作的理想人选。下周五九点我们再在这里开会。星期天之前我们必须作出明确的决定。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "公司会议上，女士向同事介绍市场部主管的两位候选人，逐一分析两人的长处和不足。"
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "现在几点了？",
+      "optionTranslationsZh": {
+        "A": "现在8点。",
+        "B": "现在8点半。",
+        "C": "现在9点。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Now you only get half an hour before it starts."
+      },
+      "reasonZh": "女士先说会议九点开始（at 9:00），又说现在离开始只剩半小时（half an hour），9:00 − 30 分钟 = 8:30，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "8:00 是把剩下的时间算成一小时才会得出的，女士说的是只剩半小时（half an hour）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "9:00 是会议开始的时间（a meeting to attend at 9:00），不是现在的时间。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士要去哪里？",
+      "optionTranslationsZh": {
+        "A": "海边。",
+        "B": "公司。",
+        "C": "游乐园。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yes, I will go to the amusement park."
+      },
+      "reasonZh": "女士直接说自己要去游乐园（the amusement park），选项沿用，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "想去海边的是男士的妻子（My wife wants to go to the beach），不是女士。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "要去公司写报告的是男士（I have to go to the company），不是女士。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士今天是怎么到学校的？",
+      "optionTranslationsZh": {
+        "A": "坐地铁。",
+        "B": "坐公交车。",
+        "C": "坐小汽车。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Everything on the underground went smoothly!"
+      },
+      "reasonZh": "“坐地铁”（By subway）就是女士说的地铁上一切顺利（on the underground went smoothly），两个词都指地铁，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说的是她也没坐公交车（I didn’t take a bus, either），坐公交被她否定了。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "开车送她是男士的猜测（by car），女士开口就答“不是”（No）。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士的建议是什么？",
+      "optionTranslationsZh": {
+        "A": "用U盘。",
+        "B": "升级电脑。",
+        "C": "删掉一些东西。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Why don’t you save the files onto a memory stick?"
+      },
+      "reasonZh": "男士用“你为什么不……”（Why don’t you）提出建议，让她把文件存到U盘（a memory stick）里，选项沿用，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "东西多（There’s a lot of stuff here）只是男士看了电脑后的观察，他接着建议的是把文件存进U盘，并没有让她删东西。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士是什么意思？",
+      "optionTranslationsZh": {
+        "A": "汤姆辞职的理由很充分。",
+        "B": "换个职位也改变不了多少。",
+        "C": "真正的问题在于汤姆的工作本身。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If he does not change his attitude towards his work, I don’t think a new job can make any difference."
+      },
+      "reasonZh": "“换个职位也改变不了多少”就是女士说的不认为新工作能带来什么不同（I don’t think … make any difference），前提是汤姆不改变对工作的态度，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "辞职的理由是男士转述汤姆自己的说法（He said his present job had no future），女士并不认同，她认为问题在汤姆的态度。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "说工作本身没前途的是汤姆（his present job had no future），女士认为真正的问题是他对工作的态度（his attitude towards his work）。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "两位说话人最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "哥哥和妹妹。",
+        "B": "父亲和女儿。",
+        "C": "丈夫和妻子。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I think your mother will also like this idea."
+      },
+      "reasonZh": "男士叫女孩玛丽，问她“你妈妈”在哪（your mother），又替全家定当天的安排、负责订票（I’ll book our tickets online），可见他是长辈，最可能是玛丽的父亲，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "女士说“她在厨房做早饭”（She is preparing breakfast），这个“她”是玛丽的妈妈，女士是玛丽本人，不是男士的妻子。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "帕布罗叔叔今天要做什么？",
+      "optionTranslationsZh": {
+        "A": "卖游船票。",
+        "B": "推销一家旅游公司。",
+        "C": "介绍小镇的过去。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Uncle Pablo works in a tour company and he’s telling tourists about the history of the town when they’re on the boat today!"
+      },
+      "reasonZh": "“介绍小镇的过去”就是男士说的帕布罗叔叔今天要给游客讲小镇的历史（telling tourists about the history of the town），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "订票的是男士自己（I’ll book our tickets online），而且是在网上订，帕布罗叔叔今天是给游客讲解。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "旅游公司是帕布罗叔叔工作的地方（works in a tour company），男士没说他要推销这家公司。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士最初是从哪里得知这款游戏的？",
+      "optionTranslationsZh": {
+        "A": "在一本杂志上。",
+        "B": "从她朋友那里。",
+        "C": "在一个网站上。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I borrowed a magazine from a friend and there was an ad for it."
+      },
+      "reasonZh": "女士说借来的杂志上有这款游戏的广告（there was an ad for it），她是在杂志上看到的，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "朋友只是借给她杂志的人（borrowed a magazine from a friend），游戏的消息来自杂志上的广告，不是朋友告诉她的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "网站是妈妈后来买游戏的地方（bought it for me from their website），那时她已经知道这款游戏了。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "谁会和女士一起玩这款游戏？",
+      "optionTranslationsZh": {
+        "A": "她哥哥。",
+        "B": "她爷爷。",
+        "C": "她表妹。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "has lots of time, so I want to play with him."
+      },
+      "reasonZh": "女士前半句说“只有我爷爷”（Only my granddad），后半句说他时间多，所以想和他一起玩（I want to play with him）；选项的“爷爷”（grandpa）就是她说的爷爷（granddad），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说哥哥太忙（my brother’s too busy），没法陪她玩。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "表妹埃米只喜欢桌游（only likes board games），不玩这款电脑游戏。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士最喜欢这款游戏的哪一部分？",
+      "optionTranslationsZh": {
+        "A": "造房子。",
+        "B": "过河。",
+        "C": "找食物。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Crossing the river is really good, but what I enjoy most is finding something to eat."
+      },
+      "reasonZh": "“找食物”就是女士说的最喜欢找东西吃（what I enjoy most is finding something to eat），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "造房子是她最不喜欢的部分（my least favourite），和问的正好相反。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "过河她只说很好玩（really good），后面用 but 转到了最喜欢的找东西吃。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "今天下午谁给比尔打了电话？",
+      "optionTranslationsZh": {
+        "A": "一位以前的老师。",
+        "B": "一位酒店前台接待员。",
+        "C": "一位大学时的朋友。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Oh, that’s my old friend from college, Dave Johnson."
+      },
+      "reasonZh": "女士说下午是戴夫来的电话，比尔接着说那是他大学时的老朋友（my old friend from college），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "酒店是戴夫住的地方（He’s at the Holiday Inn Hotel），打电话的是戴夫本人，不是酒店的工作人员。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士对邀请戴夫持什么态度？",
+      "optionTranslationsZh": {
+        "A": "她欢迎这个主意。",
+        "B": "她更喜欢安静的聚会。",
+        "C": "她抱怨花费。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We can always make room for one more."
+      },
+      "reasonZh": "比尔担心人多、公寓小，女士让他别担心，说再多一个人总能腾出地方（make room for one more），可见她赞成请戴夫，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士还说人越多越开心（The more, the happier），她要的是热闹，不是安静的聚会。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "关于戴夫·约翰逊，我们可以知道什么？",
+      "optionTranslationsZh": {
+        "A": "他熟悉这一带。",
+        "B": "他善于交际，风趣幽默。",
+        "C": "他习惯穿得很随意。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "He’s very friendly, and he always has funny stories and jokes to tell."
+      },
+      "reasonZh": "“善于交际，风趣幽默”概括了比尔说的戴夫很友善（very friendly），总有好玩的故事和笑话可讲（funny stories and jokes），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "比尔说的正相反：戴夫对这座城市不熟（He doesn’t know this town well），一个人来可能迷路。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "不要穿得太正式是女士让比尔转告戴夫的话（tell him not to dress up），因为聚会不正式，说的不是戴夫平时的穿衣习惯。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "贾斯汀为什么来找史密斯教授？",
+      "optionTranslationsZh": {
+        "A": "为了请教学习建议。",
+        "B": "为了要一些额外的资料。",
+        "C": "为了讨论她最近的考试成绩。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I wonder how to do better."
+      },
+      "reasonZh": "贾斯汀先说自己在这门课上学得很差，又说想知道怎样才能学得好一些（how to do better），她是来请教学习方法的，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "讲义在网页上（All my lecture notes are on my web page）是教授主动给的建议，不是贾斯汀来要资料。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "教授提到的是提高成绩（improve your grades），贾斯汀说的是在这门课上学得差（doing badly in your class），没有谈某次考试的分数。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "教授为什么认为课前先读更好？",
+      "optionTranslationsZh": {
+        "A": "这让记笔记更容易。",
+        "B": "这能节省上课时间。",
+        "C": "这有助于提出有用的问题。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "That way you can come to class with some questions."
+      },
+      "reasonZh": "教授说先读并在读时记下想法，这样就能带着问题来上课（come to class with some questions），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "记笔记是教授让她读书时顺带做的事（write down ideas or notes while you’re reading），他没说先读会让记笔记更容易。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "对话结束时贾斯汀感觉怎样？",
+      "optionTranslationsZh": {
+        "A": "自豪。",
+        "B": "宽慰。",
+        "C": "惊讶。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I feel much better now."
+      },
+      "reasonZh": "贾斯汀一开始因学得差而不太高兴（You don’t look very happy），最后说现在感觉好多了（I feel much better now），心里的担子放下了，就是宽慰，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "“哇”（Wow）是她听说讲义都在网页上时的反应，出现在对话中间，结束时她说的是感觉好多了。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这段讲话主要是关于什么的？",
+      "optionTranslationsZh": {
+        "A": "一项员工培训计划。",
+        "B": "一项新的商业策略。",
+        "C": "一项要作出的招聘决定。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Today we need to choose a new director for the marketing department."
+      },
+      "reasonZh": "女士开头就说今天要为市场部选一位新主管（choose a new director），后面逐一分析两位候选人，最后要求作出决定，都围绕这次人选决定，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "上课学营销技能是萨姆自己最近在做的事（attends a class on Sunday），是介绍他时提到的细节，不是公司的培训计划。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "埃米的优点之一是什么？",
+      "optionTranslationsZh": {
+        "A": "她有经验。",
+        "B": "她思想开明。",
+        "C": "她很有创新精神。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "On the positive side, she has excellent communication skills and is experienced in running a marketing team."
+      },
+      "reasonZh": "女士讲埃米的长处时说她有带市场团队的经验（is experienced in running a marketing team），选项把它换成名词说法，意思不变，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士讲埃米的不足时说她不太接受新信息或新观点（not receptive to new information or viewpoints），这和思想开明正相反。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士也说埃米创造力不够（she’s not creative enough），很有创造力的是萨姆。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "萨姆最近每个星期天都在做什么？",
+      "optionTranslationsZh": {
+        "A": "和团队成员开会。",
+        "B": "忙他的项目。",
+        "C": "上营销课程。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "He even attends a class on Sunday these days to learn some marketing skills."
+      },
+      "reasonZh": "“上营销课程”就是女士说的萨姆最近星期天去上课学营销技能（attends a class … to learn some marketing skills），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "同一个团队是女士回忆和萨姆共事的经历（working with him in the same team），开会说的是下周五九点再开会，都和星期天无关。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "女士说的工作是她和萨姆在同一个团队共事（while working with him），不是萨姆星期天在忙项目。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "星期天之前必须做什么？",
+      "optionTranslationsZh": {
+        "A": "最终确定人选。",
+        "B": "更新候选人名单。",
+        "C": "确认下一次会议。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We must have a clear decision before Sunday."
+      },
+      "reasonZh": "“最终确定人选”就是女士说的星期天前必须作出明确的决定（have a clear decision），这次会就是为选主管开的，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "两位候选人开头已经定了（There are two candidates），女士没说要更新人选名单。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "下次会议女士已经定在下周五九点（next Friday at 9:00），不需要再确认，星期天前要的是作出决定。"
+        }
+      ]
+    }
+  }
+}

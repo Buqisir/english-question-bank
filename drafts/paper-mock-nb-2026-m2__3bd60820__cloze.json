@@ -1,0 +1,2097 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:cloze": {
+      "overview": "作者一次失手把苹果核掉在篱笆边，第二天发现兔子脚印，从此每晚放果核、辨认来访的动物；后来车道被弄得一片狼藉，邻居很烦恼，他便停了手，但仍相信人能与野生动物共处。",
+      "fullTranslationZh": "我开车下班回家的路上通常会吃一个苹果。平时，我会把果核带进厨房，扔进标着“有机垃圾”的垃圾桶。\n但有一天，我下车时把果核掉在了地上。我有些心虚，把它踢到篱笆边，答应自己过会儿再捡起来。当然，我把这事忘得一干二净。\n第二天早上，我注意到篱笆周围有兔子的脚印。我想起了那个苹果核，一时感到很满足：某只小动物找到了我无意中留下的美食。我发现自己咧嘴笑了，那个快乐的时刻一直留在我的脑海里。\n那天傍晚，我在同一个地方做了同样的事。令我高兴的是，地上发现了更多不同动物的足迹。我开始上网搜索它们，在接下来的几个月里乐于辨认这些来访者。我感到自己和身边一直存在的另一个世界联系在了一起。\n我没有和任何人分享我的新爱好，我也知道邻居们对我这些看似无害的礼物有怨言。我不理会他们所有的劝告，每天早上都享受着自己的发现，直到有一天，车道上满是大脚印、散落的泥巴和树叶，这让邻居们非常烦恼。我一句话也没说，但不再放果核了，我和野生动物的秘密共处也就此结束。\n这段经历只是一次单纯的尝试，想缩小我们与许多和我们共存的物种之间的隔阂。看来，与我们长着羽毛和皮毛的朋友们和睦共处是一个艰巨的挑战。我很乐观，相信我们能想出办法，或者至少减少我们造成的影响。",
+      "mainLine": {
+        "theme": {
+          "text": "与野生动物共处不易，但作者相信人能想出办法，至少减少影响（lessen our impact）。",
+          "quote": "lessen our impact"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:1",
+            "text": "作者平时把吃剩的果核扔进厨房的有机垃圾桶。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+            "text": "一天他失手掉了果核，踢到篱笆边后忘了捡。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+            "text": "兔子脚印让他想到动物吃到了果核，心里很满足。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+            "text": "他每晚照样放果核，乐于辨认来访的动物。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+            "text": "他不顾劝告继续放，车道被弄乱惹恼邻居后停手。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+            "text": "他反思这段经历，对人与动物共处仍抱乐观。"
+          }
+        ],
+        "emotion": "内疚→满足→欣喜→无奈→乐观"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+          "sourceText": "I __49__ all their cautionary voices and enjoyed my __50__ every morning until one day, the driveway was full of large prints, scattered mud and leaves, which deeply __51__ the neighbors.",
+          "displayText": "I ignored all their cautionary voices and enjoyed my discoveries every morning until one day, the driveway was full of large prints, scattered mud and leaves, which deeply disturbed the neighbors.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:49",
+            "question:paper-mock-nb-2026-m2:50",
+            "question:paper-mock-nb-2026-m2:51"
+          ],
+          "translationZh": "我不理会他们所有的劝告，每天早上都享受着自己的发现，直到有一天，车道上满是大脚印、散落的泥巴和树叶，这让邻居们非常烦恼。",
+          "analysisZh": "主干是“我不理会劝告，并且每天早上享受发现”：主语 I 带两个并列谓语 ignored 和 enjoyed，用 and 连接。until 引导时间状语从句，one day 是从句里的时间，从句主干是 the driveway was full of …，full of 后面列出车道上的东西：大脚印、散落的泥巴和树叶。逗号后的 which 引导非限制性定语从句，指前面车道一片狼藉这件事，说它让邻居非常烦恼。",
+          "underlineRanges": [
+            {
+              "start": 2,
+              "end": 9,
+              "quote": "ignored"
+            },
+            {
+              "start": 42,
+              "end": 49,
+              "quote": "enjoyed"
+            },
+            {
+              "start": 79,
+              "end": 92,
+              "quote": "until one day"
+            },
+            {
+              "start": 159,
+              "end": 195,
+              "quote": "which deeply disturbed the neighbors"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+          "sourceText": "This episode was just one innocent __53__ to lessen the divide between ourselves and the many species with whom we co-exist.",
+          "displayText": "This episode was just one innocent attempt to lessen the divide between ourselves and the many species with whom we co-exist.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:53"
+          ],
+          "translationZh": "这段经历只是一次单纯的尝试，想缩小我们与许多和我们共存的物种之间的隔阂。",
+          "analysisZh": "主干是 This episode was one attempt（这段经历是一次尝试）。不定式 to lessen the divide 修饰 attempt，说明尝试要做什么；between ourselves and the many species 说明是谁和谁之间的隔阂。with whom we co-exist 是定语从句，修饰 species，介词 with 提到 whom 前面，还原就是 we co-exist with the species。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 42,
+              "quote": "This episode was just one innocent attempt"
+            },
+            {
+              "start": 43,
+              "end": 63,
+              "quote": "to lessen the divide"
+            },
+            {
+              "start": 103,
+              "end": 124,
+              "quote": "with whom we co-exist"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:cloze:1"
+              ],
+              "start": 0,
+              "end": 47,
+              "quote": "我开车下班回家的路上通常会吃一个苹果。平时，我会把果核带进厨房，扔进标着“有机垃圾”的垃圾桶。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:cloze:2"
+              ],
+              "start": 48,
+              "end": 106,
+              "quote": "但有一天，我下车时把果核掉在了地上。我有些心虚，把它踢到篱笆边，答应自己过会儿再捡起来。当然，我把这事忘得一干二净。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:cloze:3"
+              ],
+              "start": 107,
+              "end": 191,
+              "quote": "第二天早上，我注意到篱笆周围有兔子的脚印。我想起了那个苹果核，一时感到很满足：某只小动物找到了我无意中留下的美食。我发现自己咧嘴笑了，那个快乐的时刻一直留在我的脑海里。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:cloze:4"
+              ],
+              "start": 192,
+              "end": 287,
+              "quote": "那天傍晚，我在同一个地方做了同样的事。令我高兴的是，地上发现了更多不同动物的足迹。我开始上网搜索它们，在接下来的几个月里乐于辨认这些来访者。我感到自己和身边一直存在的另一个世界联系在了一起。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:cloze:5"
+              ],
+              "start": 288,
+              "end": 418,
+              "quote": "我没有和任何人分享我的新爱好，我也知道邻居们对我这些看似无害的礼物有怨言。我不理会他们所有的劝告，每天早上都享受着自己的发现，直到有一天，车道上满是大脚印、散落的泥巴和树叶，这让邻居们非常烦恼。我一句话也没说，但不再放果核了，我和野生动物的秘密共处也就此结束。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:cloze:6"
+              ],
+              "start": 419,
+              "end": 514,
+              "quote": "这段经历只是一次单纯的尝试，想缩小我们与许多和我们共存的物种之间的隔阂。看来，与我们长着羽毛和皮毛的朋友们和睦共处是一个艰巨的挑战。我很乐观，相信我们能想出办法，或者至少减少我们造成的影响。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:cloze:2",
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+            "text": "But one day, I dropped the core as I climbed out of the car. Guiltily, I kicked it toward the fence, promising myself to pick it up later. Of course. I forgot all about it."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:cloze:3",
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+            "text": "The next morning, I noticed rabbit footprints around the fence. I remembered the apple core and felt a moment of satisfaction that some creature had found the treat I’d unintentionally left. I found myself grinning, and the happy moment stuck in my mind."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:cloze:4",
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+            "text": "That evening, I did the same thing at the same spot. To my delight, more tracks of different animals were found. I began to Google them and take pleasure for the following months in identifying my visitors. I felt connected to a different world that existed all around me."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+            "text": "I didn’t share my new hobby with anyone and I knew the complaints from my neighbors about my seemingly innocent gifts. I ignored all their cautionary voices and enjoyed my discoveries every morning until one day, the driveway was full of large prints, scattered mud and leaves, which deeply disturbed the neighbors. I didn’t say a word but stopped leaving my cores and my secret co-existence with wildlife came to an end."
+          },
+          {
+            "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+            "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+            "text": "This episode was just one innocent attempt to lessen the divide between ourselves and the many species with whom we co-exist. It seems that living in partnership with our feathered and furred friends is a difficult challenge. I am optimistic that we can figure it out, or at least lessen our impact."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 31,
+                "end": 58,
+                "quote": "as I climbed out of the car"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 72,
+                "end": 98,
+                "quote": "kicked it toward the fence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 5,
+                "end": 9,
+                "quote": "我下车时"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 24,
+                "end": 31,
+                "quote": "把它踢到篱笆边"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:41"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:2",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 15,
+                "end": 22,
+                "quote": "dropped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 12,
+                "end": 17,
+                "quote": "掉在了地上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 107,
+                "end": 133,
+                "quote": "myself to pick it up later"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 146,
+                "end": 167,
+                "quote": "I forgot all about it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 36,
+                "end": 43,
+                "quote": "过会儿再捡起来"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 47,
+                "end": 57,
+                "quote": "我把这事忘得一干二净"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:42"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:2",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 101,
+                "end": 110,
+                "quote": "promising"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 32,
+                "end": 36,
+                "quote": "答应自己"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 176,
+                "end": 199,
+                "quote": "I found myself grinning"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 205,
+                "end": 221,
+                "quote": "the happy moment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 57,
+                "end": 66,
+                "quote": "我发现自己咧嘴笑了"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 67,
+                "end": 74,
+                "quote": "那个快乐的时刻"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:43"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 113,
+                "end": 125,
+                "quote": "satisfaction"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 36,
+                "end": 38,
+                "quote": "满足"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 146,
+                "end": 167,
+                "quote": "I forgot all about it"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 149,
+                "end": 162,
+                "quote": "the treat I’d"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:2",
+                "start": 47,
+                "end": 57,
+                "quote": "我把这事忘得一干二净"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 47,
+                "end": 56,
+                "quote": "我无意中留下的美食"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:44"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:3",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 169,
+                "end": 184,
+                "quote": "unintentionally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 48,
+                "end": 51,
+                "quote": "无意中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 28,
+                "end": 45,
+                "quote": "rabbit footprints"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 233,
+                "end": 245,
+                "quote": "large prints"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:3",
+                "start": 15,
+                "end": 20,
+                "quote": "兔子的脚印"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 74,
+                "end": 77,
+                "quote": "大脚印"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:45"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 73,
+                "end": 79,
+                "quote": "tracks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 38,
+                "end": 40,
+                "quote": "足迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 177,
+                "end": 203,
+                "quote": "in identifying my visitors"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 53,
+                "end": 66,
+                "quote": "To my delight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 62,
+                "end": 69,
+                "quote": "辨认这些来访者"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 19,
+                "end": 25,
+                "quote": "令我高兴的是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:46"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 145,
+                "end": 153,
+                "quote": "pleasure"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 60,
+                "end": 62,
+                "quote": "乐于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 219,
+                "end": 239,
+                "quote": "to a different world"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 360,
+                "end": 396,
+                "quote": "my secret co-existence with wildlife"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 83,
+                "end": 88,
+                "quote": "另一个世界"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 113,
+                "end": 124,
+                "quote": "我和野生动物的秘密共处"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:47"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:4",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 214,
+                "end": 223,
+                "quote": "connected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 88,
+                "end": 94,
+                "quote": "联系在了一起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 14,
+                "end": 51,
+                "quote": "I did the same thing at the same spot"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 177,
+                "end": 203,
+                "quote": "in identifying my visitors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 5,
+                "end": 18,
+                "quote": "我在同一个地方做了同样的事"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 62,
+                "end": 69,
+                "quote": "辨认这些来访者"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:48"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 22,
+                "end": 27,
+                "quote": "hobby"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 12,
+                "end": 14,
+                "quote": "爱好"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 129,
+                "end": 156,
+                "quote": "all their cautionary voices"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 179,
+                "end": 192,
+                "quote": "every morning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 41,
+                "end": 48,
+                "quote": "他们所有的劝告"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 49,
+                "end": 53,
+                "quote": "每天早上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:49"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 121,
+                "end": 128,
+                "quote": "ignored"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 38,
+                "end": 41,
+                "quote": "不理会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 101,
+                "end": 111,
+                "quote": "were found"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:4",
+                "start": 26,
+                "end": 31,
+                "quote": "地上发现了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:50"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 172,
+                "end": 183,
+                "quote": "discoveries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 60,
+                "end": 62,
+                "quote": "发现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 225,
+                "end": 271,
+                "quote": "full of large prints, scattered mud and leaves"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 52,
+                "end": 84,
+                "quote": "the complaints from my neighbors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 69,
+                "end": 86,
+                "quote": "车道上满是大脚印、散落的泥巴和树叶"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 19,
+                "end": 36,
+                "quote": "邻居们对我这些看似无害的礼物有怨言"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:51"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 291,
+                "end": 300,
+                "quote": "disturbed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 94,
+                "end": 96,
+                "quote": "烦恼"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 339,
+                "end": 355,
+                "quote": "leaving my cores"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 397,
+                "end": 411,
+                "quote": "came to an end"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 108,
+                "end": 112,
+                "quote": "放果核了"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 124,
+                "end": 129,
+                "quote": "也就此结束"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:52"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 340,
+                "end": 347,
+                "quote": "stopped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 106,
+                "end": 109,
+                "quote": "不再放"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 0,
+                "end": 12,
+                "quote": "This episode"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 42,
+                "end": 62,
+                "quote": "to lessen the divide"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 0,
+                "end": 4,
+                "quote": "这段经历"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 14,
+                "end": 35,
+                "quote": "想缩小我们与许多和我们共存的物种之间的隔阂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:53"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 35,
+                "end": 42,
+                "quote": "attempt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 11,
+                "end": 13,
+                "quote": "尝试"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 102,
+                "end": 123,
+                "quote": "with whom we co-exist"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 153,
+                "end": 185,
+                "quote": "our feathered and furred friends"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 22,
+                "end": 30,
+                "quote": "和我们共存的物种"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 42,
+                "end": 53,
+                "quote": "长着羽毛和皮毛的朋友们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:54"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 147,
+                "end": 166,
+                "quote": "in partnership with"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 53,
+                "end": 57,
+                "quote": "和睦共处"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 229,
+                "end": 249,
+                "quote": "we can figure it out"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 263,
+                "end": 280,
+                "quote": "lessen our impact"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 73,
+                "end": 80,
+                "quote": "我们能想出办法"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 85,
+                "end": 94,
+                "quote": "减少我们造成的影响"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:55"
+            ],
+            "blankId": "blank:paper-mock-nb-2026-m2:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 231,
+                "end": 241,
+                "quote": "optimistic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 68,
+                "end": 70,
+                "quote": "乐观"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:49",
+              "question:paper-mock-nb-2026-m2:50",
+              "question:paper-mock-nb-2026-m2:51"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 121,
+                "end": 128,
+                "quote": "ignored"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 161,
+                "end": 168,
+                "quote": "enjoyed"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 198,
+                "end": 211,
+                "quote": "until one day"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:5",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 278,
+                "end": 314,
+                "quote": "which deeply disturbed the neighbors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:5",
+                "start": 37,
+                "end": 97,
+                "quote": "我不理会他们所有的劝告，每天早上都享受着自己的发现，直到有一天，车道上满是大脚印、散落的泥巴和树叶，这让邻居们非常烦恼。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:53"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 0,
+                "end": 42,
+                "quote": "This episode was just one innocent attempt"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 43,
+                "end": 63,
+                "quote": "to lessen the divide"
+              },
+              {
+                "textId": "done-block:paper-mock-nb-2026-m2:cloze:6",
+                "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 103,
+                "end": 124,
+                "quote": "with whom we co-exist"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-nb-2026-m2:cloze:6",
+                "start": 0,
+                "end": 36,
+                "quote": "这段经历只是一次单纯的尝试，想缩小我们与许多和我们共存的物种之间的隔阂。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "内疚→满足→欣喜→无奈→乐观"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-nb-2026-m2:41": {
+      "blankId": "blank:paper-mock-nb-2026-m2:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "下车时果核意外离了手，后面才有他心虚地把它踢到篱笆边的事。",
+      "find": {
+        "check": "action-sequence",
+        "text": "下车时（as I climbed out of the car）果核落了地，接着他才会用脚把它踢向篱笆（kicked it toward the fence）。",
+        "quotes": [
+          "as I climbed out of the car",
+          "kicked it toward the fence"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "失手掉落",
+        "reason": "下车时果核意外离了手，后面才有他心虚地把它踢到篱笆边的事。动词看动作顺序：下车时（as I climbed out of the car）果核落了地，接着他才会用脚把它踢向篱笆（kicked it toward the fence）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hid",
+          "meaning": "藏起果核；他接着用脚把它踢向篱笆（kicked it toward the fence），果核就在地上，没有藏起来。",
+          "quote": "kicked it toward the fence"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "wrapped",
+          "meaning": "把果核包起来；包好的果核可以照常带进厨房，他却心虚地用脚去踢（Guiltily, I kicked it），说明果核掉在了地上。",
+          "quote": "Guiltily, I kicked it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "held",
+          "meaning": "手里拿着果核；拿在手里就不必用脚踢（kicked it toward the fence），也谈不上心虚。",
+          "quote": "kicked it toward the fence"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the core",
+          "signalSide": "context-after",
+          "targetText": "dropped the core",
+          "relation": "空后的宾语是果核，下车时果核掉落。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "kicked it toward the fence",
+          "signalSide": "context-after",
+          "relation": "果核在地上，他才会用脚把它踢开。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-mock-nb-2026-m2:42": {
+      "blankId": "blank:paper-mock-nb-2026-m2:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "把果核踢开时，他在心里对自己许下过会儿去捡的话。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是自己和要做的事（myself to pick it up later），对自己保证稍后去捡，后文才有全忘了（I forgot all about it）的反差。",
+        "quotes": [
+          "myself to pick it up later",
+          "I forgot all about it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "答应，保证",
+        "reason": "把果核踢开时，他在心里对自己许下过会儿去捡的话。动词看搭配：空后是自己和要做的事（myself to pick it up later），对自己保证稍后去捡，后文才有全忘了（I forgot all about it）的反差。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "warning",
+          "meaning": "告诫自己；他只是打算稍后去捡（pick it up later），这是给自己的承诺，不是对危险的告诫。",
+          "quote": "pick it up later"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "teaching",
+          "meaning": "教自己；捡起果核（pick it up later）是件随手的事，用不着学。",
+          "quote": "pick it up later"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "encouraging",
+          "meaning": "鼓励自己；捡起果核（pick it up later）不需要给自己打气，后文说他转头就忘了（I forgot all about it）。",
+          "quote": "I forgot all about it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "myself to pick it up later",
+          "signalSide": "context-after",
+          "targetText": "promising myself to pick it up later",
+          "relation": "对自己保证稍后要做某事，宾语是自己，后接要做的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I forgot all about it",
+          "signalSide": "context-after",
+          "relation": "许下的打算随后被忘掉，前后形成反差。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:43": {
+      "blankId": "blank:paper-mock-nb-2026-m2:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "看到兔子脚印，先前的愧疚转成高兴，这是情绪的转折，要一个正面的感受。",
+      "find": {
+        "check": "affect",
+        "text": "空后他忍不住咧嘴笑（I found myself grinning），又说那是快乐的时刻（the happy moment），情绪是满足。",
+        "quotes": [
+          "I found myself grinning",
+          "the happy moment"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "满足",
+        "reason": "看到兔子脚印，先前的愧疚转成高兴，这是情绪的转折，要一个正面的感受。名词看情感：空后他忍不住咧嘴笑（I found myself grinning），又说那是快乐的时刻（the happy moment），情绪是满足。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "guilt",
+          "meaning": "内疚；心虚是踢果核时的感受（Guiltily），此刻他想到动物吃到了美食，忍不住笑了（grinning）。",
+          "quote": "grinning"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "sorrow",
+          "meaning": "悲伤；紧接着他咧嘴笑了（I found myself grinning），心情是高兴的。",
+          "quote": "I found myself grinning"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curiosity",
+          "meaning": "好奇；空后从句说的是动物已经吃到了美食（had found the treat），他为这件事高兴，后文称之为快乐的时刻（the happy moment）。",
+          "quote": "the happy moment"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "I found myself grinning",
+          "signalSide": "context-after",
+          "relation": "他忍不住笑了，说明此刻的感受是满足。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "felt a moment of",
+          "signalSide": "context-before",
+          "targetText": "felt a moment of satisfaction",
+          "relation": "感到一阵某种情绪，空格要填情绪名词。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:44": {
+      "blankId": "blank:paper-mock-nb-2026-m2:44",
+      "blankNo": 44,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "这份美食是果核掉了又忘了捡才留下的，要一个“并非有意”的意思。",
+      "find": {
+        "check": "echo",
+        "text": "回看前文：果核是下车时掉的，他又忘了捡（I forgot all about it），所以是无意中留下的（the treat I’d）。",
+        "quotes": [
+          "I forgot all about it",
+          "the treat I’d"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "无意地",
+        "reason": "这份美食是果核掉了又忘了捡才留下的，要一个“并非有意”的意思。副词看复现：回看前文：果核是下车时掉的，他又忘了捡（I forgot all about it），所以是无意中留下的（the treat I’d）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secretly",
+          "meaning": "偷偷地；果核是掉了以后忘了捡（I forgot all about it），他并没有瞒着谁刻意去放。",
+          "quote": "I forgot all about it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cautiously",
+          "meaning": "谨慎地；他只是用脚把果核踢到篱笆边（kicked it toward the fence），谈不上小心安放。",
+          "quote": "kicked it toward the fence"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unwillingly",
+          "meaning": "不情愿地；没人逼他留下果核，他是忘了捡（I forgot all about it）。",
+          "quote": "I forgot all about it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "I forgot all about it",
+          "signalSide": "context-before",
+          "relation": "果核是忘了捡才留下的，呼应“无意地”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "left",
+          "signalSide": "context-after",
+          "targetText": "unintentionally left",
+          "relation": "副词修饰留下这个动作，说明是怎样留下的。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:45": {
+      "blankId": "blank:paper-mock-nb-2026-m2:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "他照样放果核，又发现了更多动物来过的痕迹，接着前文的兔子脚印往下写。",
+      "find": {
+        "check": "echo",
+        "text": "前文是兔子脚印（rabbit footprints），后文是车道上的大脚印（large prints），这里也是动物留下的足迹。",
+        "quotes": [
+          "rabbit footprints",
+          "large prints"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "足迹",
+        "reason": "他照样放果核，又发现了更多动物来过的痕迹，接着前文的兔子脚印往下写。名词看复现：前文是兔子脚印（rabbit footprints），后文是车道上的大脚印（large prints），这里也是动物留下的足迹。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "records",
+          "meaning": "记录；篱笆边留下的是动物的脚印（rabbit footprints），不是谁写下的记录。",
+          "quote": "rabbit footprints"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "images",
+          "meaning": "图像；他是在地上看到动物的痕迹，前文写的是脚印（rabbit footprints），这时他还没去网上查。",
+          "quote": "rabbit footprints"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "enemies",
+          "meaning": "敌人；这些动物来访让他高兴（To my delight），后文还把它们称作访客（my visitors）。",
+          "quote": "To my delight"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "rabbit footprints",
+          "signalSide": "context-before",
+          "relation": "前文的兔子脚印和这里的足迹是同一类东西。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "of different animals",
+          "signalSide": "context-after",
+          "targetText": "tracks of different animals",
+          "relation": "空格是不同动物的什么东西，与动物搭配的是足迹。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "large prints",
+          "signalSide": "context-after",
+          "relation": "后文的大脚印再次复现足迹。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:46": {
+      "blankId": "blank:paper-mock-nb-2026-m2:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "接下来几个月他乐于辨认来访的动物，要一个表示乐趣的词。",
+      "find": {
+        "check": "collocation",
+        "text": "空前的动词（take）与它搭配，隔着时间状语接上辨认访客（in identifying my visitors），合起来是以此为乐。",
+        "quotes": [
+          "in identifying my visitors"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "乐趣",
+        "meaning": "乐于辨认动物",
+        "reason": "接下来几个月他乐于辨认来访的动物，要一个表示乐趣的词。名词看搭配：空前的动词（take）与它搭配，隔着时间状语接上辨认访客（in identifying my visitors），合起来是以此为乐。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "comfort",
+          "meaning": "安慰；他并没有烦恼要排解，这一段开头说的是令我高兴（To my delight）。",
+          "quote": "To my delight"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "care",
+          "meaning": "小心；这里讲他乐在其中，开头就说令我高兴（To my delight），不是说他辨认时多仔细。",
+          "quote": "To my delight"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "part",
+          "meaning": "参与；辨认来访的动物（in identifying my visitors）是他一个人的爱好，不是参加什么活动。",
+          "quote": "in identifying my visitors"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "take",
+          "signalSide": "context-before",
+          "targetText": "take pleasure in identifying my visitors",
+          "relation": "与前面的动词（take）搭配，表示以做某事为乐。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "To my delight",
+          "signalSide": "context-before",
+          "relation": "这一段开头就是高兴的情绪，空格顺着说乐趣。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:47": {
+      "blankId": "blank:paper-mock-nb-2026-m2:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "main",
+      "context": "辨认动物让他觉得和身边另一个世界连在了一起，是正面的感受。",
+      "find": {
+        "check": "echo",
+        "text": "后文把这段经历称作和野生动物的秘密共处（my secret co-existence with wildlife），说明他感到与这个世界相连。",
+        "quotes": [
+          "my secret co-existence with wildlife"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "有联系的",
+        "reason": "辨认动物让他觉得和身边另一个世界连在了一起，是正面的感受。形容词看复现：后文把这段经历称作和野生动物的秘密共处（my secret co-existence with wildlife），说明他感到与这个世界相连。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "limited",
+          "meaning": "受限的；他每天在发现新的来访动物（in identifying my visitors），感受是眼界打开，不是被局限。",
+          "quote": "in identifying my visitors"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reduced",
+          "meaning": "沦落的；感到自己沦落到另一个世界，与他乐于辨认动物（in identifying my visitors）的心情相反。",
+          "quote": "in identifying my visitors"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promoted",
+          "meaning": "被提升的；提升是职位上的事，这里说的是他和身边动物世界（a different world that existed all around me）的关系。",
+          "quote": "a different world that existed all around me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to a different world",
+          "signalSide": "context-after",
+          "targetText": "connected to a different world",
+          "relation": "后接介词（to），表示感到和另一个世界有了联系。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my secret co-existence with wildlife",
+          "signalSide": "context-after",
+          "relation": "后文的共处呼应这里与动物世界的联系。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:48": {
+      "blankId": "blank:paper-mock-nb-2026-m2:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "把前面每晚放果核、辨认动物这件事概括成一个词，是他的新消遣。",
+      "find": {
+        "check": "echo",
+        "text": "前文他每晚在同一地点放果核（I did the same thing at the same spot），又乐于辨认访客（in identifying my visitors），合起来是一项爱好。",
+        "quotes": [
+          "I did the same thing at the same spot",
+          "in identifying my visitors"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "爱好",
+        "reason": "把前面每晚放果核、辨认动物这件事概括成一个词，是他的新消遣。名词看复现：前文他每晚在同一地点放果核（I did the same thing at the same spot），又乐于辨认访客（in identifying my visitors），合起来是一项爱好。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "home",
+          "meaning": "家；他没有换住处，前文写的是每晚在同一地点放果核（I did the same thing at the same spot）。",
+          "quote": "I did the same thing at the same spot"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "toy",
+          "meaning": "玩具；他每天琢磨的是辨认来访的动物（in identifying my visitors），不是一件玩具。",
+          "quote": "in identifying my visitors"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "skill",
+          "meaning": "技能；邻居抱怨的是他放出去的东西（my seemingly innocent gifts），他瞒着的是放果核这件事，不是一项本领。",
+          "quote": "my seemingly innocent gifts"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "share my new",
+          "signalSide": "context-before",
+          "targetText": "share my new hobby",
+          "relation": "不和别人分享的新东西，指前面这项新消遣。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I did the same thing at the same spot",
+          "signalSide": "context-before",
+          "relation": "每晚重复放果核，是被概括的那件事。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:49": {
+      "blankId": "blank:paper-mock-nb-2026-m2:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "明知邻居会抱怨，他仍每天照旧，要一个“不理会”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是邻居的劝告（all their cautionary voices），并列的后一个动作是每天早上照样享受（every morning），所以是不理会。",
+        "quotes": [
+          "all their cautionary voices",
+          "every morning"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "不理会",
+        "reason": "明知邻居会抱怨，他仍每天照旧，要一个“不理会”的意思。动词看搭配：宾语是邻居的劝告（all their cautionary voices），并列的后一个动作是每天早上照样享受（every morning），所以是不理会。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "understood",
+          "meaning": "理解；理解了邻居的劝告就该收手，可他每天早上照样享受（every morning）。",
+          "quote": "every morning"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "doubted",
+          "meaning": "怀疑；他早就知道邻居会抱怨（I knew the complaints），问题不在信不信，而在他照旧做下去。",
+          "quote": "I knew the complaints"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "considered",
+          "meaning": "考虑；认真考虑劝告就该停下，可他每天早上照样享受（every morning），直到出事才停。",
+          "quote": "every morning"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "all their cautionary voices",
+          "signalSide": "context-after",
+          "targetText": "ignored all their cautionary voices",
+          "relation": "动词的宾语是邻居的劝告，他对劝告置之不理。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "every morning",
+          "signalSide": "context-after",
+          "relation": "并列谓语说他每天早上照样享受，可见没理会劝告。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:50": {
+      "blankId": "blank:paper-mock-nb-2026-m2:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "detail",
+      "context": "每天早上他享受的是夜里动物来过后留下的新东西，要一个指“发现”的名词。",
+      "find": {
+        "check": "echo",
+        "text": "前文说放果核后发现了更多动物的足迹（were found），这里的名词复现这一发现。",
+        "quotes": [
+          "were found"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "发现的东西",
+        "meaning": "早上看到的新足迹",
+        "reason": "每天早上他享受的是夜里动物来过后留下的新东西，要一个指“发现”的名词。名词看复现：前文说放果核后发现了更多动物的足迹（were found），这里的名词复现这一发现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "trips",
+          "meaning": "旅行；他是在自家篱笆边（around the fence）看动物的痕迹，没有出门。",
+          "quote": "around the fence"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "stories",
+          "meaning": "故事；他每天看的是地上发现的足迹（were found），不是听来的故事。",
+          "quote": "were found"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "collections",
+          "meaning": "收藏；足迹留在地上（were found），他只是辨认，并没有收集起来。",
+          "quote": "were found"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "were found",
+          "signalSide": "context-before",
+          "relation": "前文的发现足迹与这里的发现相呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "enjoyed my",
+          "signalSide": "context-before",
+          "targetText": "enjoyed my discoveries",
+          "relation": "享受的对象是自己的发现。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:51": {
+      "blankId": "blank:paper-mock-nb-2026-m2:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "车道一片狼藉，邻居更加不满，这是事情转坏的地方，要一个负面的词。",
+      "find": {
+        "check": "affect",
+        "text": "车道满是大脚印、泥和树叶（full of large prints, scattered mud and leaves），邻居本来就有怨言（the complaints from my neighbors）。",
+        "quotes": [
+          "full of large prints, scattered mud and leaves",
+          "the complaints from my neighbors"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "使烦恼",
+        "reason": "车道一片狼藉，邻居更加不满，这是事情转坏的地方，要一个负面的词。动词看情感：车道满是大脚印、泥和树叶（full of large prints, scattered mud and leaves），邻居本来就有怨言（the complaints from my neighbors）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "interested",
+          "meaning": "使感兴趣；邻居本来就有怨言（the complaints from my neighbors），满地泥和树叶只会让他们更反感。",
+          "quote": "the complaints from my neighbors"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "moved",
+          "meaning": "使感动；满地泥和树叶（scattered mud and leaves）不会感动邻居，作者随后只好停手。",
+          "quote": "scattered mud and leaves"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "confused",
+          "meaning": "使困惑；邻居早就抱怨他的礼物（my seemingly innocent gifts），看到满地狼藉是恼火，不是不明白。",
+          "quote": "my seemingly innocent gifts"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "scattered mud and leaves",
+          "signalSide": "context-before",
+          "relation": "车道上满是泥和树叶，邻居的反应是负面的。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the neighbors",
+          "signalSide": "context-after",
+          "targetText": "deeply disturbed the neighbors",
+          "relation": "动词的宾语是邻居，说的是邻居的感受。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:52": {
+      "blankId": "blank:paper-mock-nb-2026-m2:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "main",
+      "context": "邻居被惹恼后，他不再放果核，故事从这里收尾。",
+      "find": {
+        "check": "collocation",
+        "text": "空后接放果核（leaving my cores），并列分句说他和野生动物的秘密共处就此结束（came to an end），所以是停止放果核。",
+        "quotes": [
+          "leaving my cores",
+          "came to an end"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "停止",
+        "reason": "邻居被惹恼后，他不再放果核，故事从这里收尾。动词看搭配：空后接放果核（leaving my cores），并列分句说他和野生动物的秘密共处就此结束（came to an end），所以是停止放果核。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "delayed",
+          "meaning": "推迟；推迟放果核意味着以后还会放，可后文说这段共处结束了（came to an end）。",
+          "quote": "came to an end"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "forgot",
+          "meaning": "忘记；他是在邻居被惹恼后有意不再放，后文说共处到此结束（came to an end），不是一时忘了。",
+          "quote": "came to an end"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "imagined",
+          "meaning": "想象；想象放果核接不上共处就此结束（came to an end），这里要一个实际不再做的动作。",
+          "quote": "came to an end"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "leaving my cores",
+          "signalSide": "context-after",
+          "targetText": "stopped leaving my cores",
+          "relation": "停止做某事，后接动名词说停下的是放果核。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "came to an end",
+          "signalSide": "context-after",
+          "relation": "共处结束，与停止放果核前后一致。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:53": {
+      "blankId": "blank:paper-mock-nb-2026-m2:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "回头概括整件事：放果核是他想拉近人与动物距离的一次努力。",
+      "find": {
+        "check": "echo",
+        "text": "主语这段经历（This episode）指前文放果核的事，空后接要做的事（to lessen the divide），所以概括成一次尝试。",
+        "quotes": [
+          "This episode",
+          "to lessen the divide"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "尝试",
+        "reason": "回头概括整件事：放果核是他想拉近人与动物距离的一次努力。名词看复现：主语这段经历（This episode）指前文放果核的事，空后接要做的事（to lessen the divide），所以概括成一次尝试。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "result",
+          "meaning": "结果；空后接要去做的事（to lessen the divide），放果核是他的做法，不是缩小隔阂后得到的结果。",
+          "quote": "to lessen the divide"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "excuse",
+          "meaning": "借口；他是真心乐于辨认动物（in identifying my visitors），不是拿放果核当借口。",
+          "quote": "in identifying my visitors"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "question",
+          "meaning": "问题；空后接要去做的事（to lessen the divide），说的是一次行动，不是提出一个问题。",
+          "quote": "to lessen the divide"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to lessen the divide",
+          "signalSide": "context-after",
+          "targetText": "attempt to lessen the divide",
+          "relation": "名词后接不定式，说明这次努力要做什么。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "This episode",
+          "signalSide": "context-before",
+          "relation": "这段经历指前文放果核的事，空格把它概括成一个词。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:54": {
+      "blankId": "blank:paper-mock-nb-2026-m2:54",
+      "blankNo": 54,
+      "pos": "phrase",
+      "role": "main",
+      "context": "说的是人怎样和动物一起生活，要一个表示共处的词组。",
+      "find": {
+        "check": "echo",
+        "text": "前一句说与我们共存的物种（with whom we co-exist），这里又把动物称作朋友（our feathered and furred friends），是和它们共处。",
+        "quotes": [
+          "with whom we co-exist",
+          "our feathered and furred friends"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "与……合作",
+        "meaning": "与动物和睦共处",
+        "reason": "说的是人怎样和动物一起生活，要一个表示共处的词组。词组看复现：前一句说与我们共存的物种（with whom we co-exist），这里又把动物称作朋友（our feathered and furred friends），是和它们共处。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "in charge of",
+          "meaning": "负责管理；作者把动物称作朋友（our feathered and furred friends），讲的是共处，不是管理它们。",
+          "quote": "our feathered and furred friends"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "in exchange for",
+          "meaning": "交换；作者想的是与动物共存（with whom we co-exist），不是拿什么去换取它们。",
+          "quote": "with whom we co-exist"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in reply to",
+          "meaning": "回复；和动物一起生活谈不上回复，前一句说的是共存（with whom we co-exist）。",
+          "quote": "with whom we co-exist"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "living",
+          "signalSide": "context-before",
+          "targetText": "living in partnership with our feathered and furred friends",
+          "relation": "接在生活（living）后面，说怎样和动物一起生活。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "with whom we co-exist",
+          "signalSide": "context-before",
+          "relation": "前一句的共存与这里的共处相呼应。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:55": {
+      "blankId": "blank:paper-mock-nb-2026-m2:55",
+      "blankNo": 55,
+      "pos": "adjective",
+      "role": "main",
+      "context": "承认共处很难之后，作者仍看好人类能解决，全文以积极的态度收尾。",
+      "find": {
+        "check": "affect",
+        "text": "空后是他相信的事：我们能想出办法（we can figure it out），至少能减少影响（lessen our impact），态度是乐观的。",
+        "quotes": [
+          "we can figure it out",
+          "lessen our impact"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "乐观的",
+        "reason": "承认共处很难之后，作者仍看好人类能解决，全文以积极的态度收尾。形容词看情感：空后是他相信的事：我们能想出办法（we can figure it out），至少能减少影响（lessen our impact），态度是乐观的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "grateful",
+          "meaning": "感激的；空后从句是对将来的判断（we can figure it out），表达的是信心，不是感谢。",
+          "quote": "we can figure it out"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "informed",
+          "meaning": "被告知的；没人告诉他什么，空后从句是他自己的看法（we can figure it out）。",
+          "quote": "we can figure it out"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "impressed",
+          "meaning": "印象深刻的；能否想出办法（we can figure it out）还是将来的事，谈不上被打动。",
+          "quote": "we can figure it out"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "we can figure it out",
+          "signalSide": "context-after",
+          "relation": "相信能想出办法，是乐观的态度。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "that we can figure it out",
+          "signalSide": "context-after",
+          "targetText": "optimistic that we can figure it out",
+          "relation": "形容词后接从句，说明他对什么感到乐观。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    }
+  }
+}

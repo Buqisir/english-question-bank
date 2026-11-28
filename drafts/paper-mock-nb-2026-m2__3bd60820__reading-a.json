@@ -1,0 +1,762 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:reading-a": {
+      "overview": "TechForward 公司招募本地居民在家试用新款声控智能家居助手四周，文中说明了参与者的待遇和支持、项目时间表，以及居住地、年龄、使用经验等申请条件和报名方式。",
+      "fullTranslationZh": "TechForward 公司正在招募本地居民试用其新款智能家居助手。这是一款声控设备，旨在帮助用户处理日常事务，例如设置提醒、控制灯光、查看天气和播放音乐。公司希望在今年晚些时候正式发布产品之前，收集真实的使用反馈。\n入选的居民将免费获得这台设备，试用结束后可以留下自用。完成一份最终反馈问卷后，他们还将获得100美元报酬；问卷会询问他们对设备各项功能、易用性的使用体验以及任何改进建议。在整个测试期间，TechForward 将提供安装支持和技术协助，其中包括一次一对一的线上指导，帮助参与者上手。试用期间，公司还会通过电话或电子邮件解答任何问题。\n项目时间表\n5月10日：申请截止\n5月20日前：通知入选者；签署协议\n6月1日—28日：设备测试期\n7月18日：最终反馈问卷截止\n申请要求\n本项目将选出15名全程参与的试用者，在自己家中使用该设备四周。招募面向居住在市区范围内的居民。所有申请人须年满18周岁，并且必须有使用智能设备的经验。\n申请时，申请人须提供以下信息：\n• 姓名和有效的电子邮箱。这些信息仅用于与项目相关的联络。\n• 一段关于你使用智能设备经验的简短描述（不超过100词）。这有助于我们了解你对智能设备的熟悉程度。\n请将上述材料发送至 apply@techforward.com。截止日期后收到的申请将不予考虑。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-a-1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+          "sourceText": "TechForward is looking for local residents to test its new smart home assistant, a voice-controlled device designed to help users manage daily tasks such as setting reminders, controlling lights, checking the weather, and playing music.",
+          "displayText": "TechForward is looking for local residents to test its new smart home assistant, a voice-controlled device designed to help users manage daily tasks such as setting reminders, controlling lights, checking the weather, and playing music.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:21"
+          ],
+          "translationZh": "TechForward 公司正在招募本地居民试用其新款智能家居助手，这是一款声控设备，旨在帮助用户处理设置提醒、控制灯光、查看天气和播放音乐等日常事务。",
+          "analysisZh": "主干是 TechForward is looking for local residents（公司正在招募本地居民），这正是全文的写作意图。to test its new smart home assistant 是不定式，说明招人来做什么。逗号后的 a voice-controlled device 是同位语，补充说明 smart home assistant 是什么；designed to help users manage daily tasks 是过去分词短语，修饰 device，其中 help sb do 表示“帮助某人做某事”。such as 后面并列了四个动名词短语：setting reminders、controlling lights、checking the weather 和 playing music，都是在举例说明 daily tasks。",
+          "underlineRanges": [
+            {
+              "start": 12,
+              "end": 42,
+              "quote": "is looking for local residents"
+            },
+            {
+              "start": 81,
+              "end": 106,
+              "quote": "a voice-controlled device"
+            },
+            {
+              "start": 107,
+              "end": 148,
+              "quote": "designed to help users manage daily tasks"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-a-2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+          "sourceText": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+          "displayText": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:23"
+          ],
+          "translationZh": "所有申请人须年满18周岁，并且必须有使用智能设备的经验。",
+          "analysisZh": "这是 and 连接的两个并列分句，各有自己的主语和谓语。前一句主干是 All applicants are supposed to be at least 18 years old，be supposed to 在这里表示“按规定应当”，提出年龄要求。后一句主干是 previous experience is a must，with smart devices 修饰 experience，a must 是名词，意为“必须具备的东西”，提出经验要求。两条都是硬性条件，第23题要拿它们去逐一检验人物。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 33,
+              "quote": "All applicants are supposed to be"
+            },
+            {
+              "start": 60,
+              "end": 108,
+              "quote": "previous experience with smart devices is a must"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-nb-2026-m2:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:1"
+              ],
+              "start": 0,
+              "end": 108,
+              "quote": "TechForward 公司正在招募本地居民试用其新款智能家居助手。这是一款声控设备，旨在帮助用户处理日常事务，例如设置提醒、控制灯光、查看天气和播放音乐。公司希望在今年晚些时候正式发布产品之前，收集真实的使用反馈。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:2"
+              ],
+              "start": 109,
+              "end": 275,
+              "quote": "入选的居民将免费获得这台设备，试用结束后可以留下自用。完成一份最终反馈问卷后，他们还将获得100美元报酬；问卷会询问他们对设备各项功能、易用性的使用体验以及任何改进建议。在整个测试期间，TechForward 将提供安装支持和技术协助，其中包括一次一对一的线上指导，帮助参与者上手。试用期间，公司还会通过电话或电子邮件解答任何问题。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:3"
+              ],
+              "start": 276,
+              "end": 281,
+              "quote": "项目时间表"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p4",
+              "sourceParagraphIds": [
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:1:1",
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:1:2"
+              ],
+              "start": 282,
+              "end": 292,
+              "quote": "5月10日：申请截止"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p5",
+              "sourceParagraphIds": [
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:2:1",
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:2:2"
+              ],
+              "start": 293,
+              "end": 310,
+              "quote": "5月20日前：通知入选者；签署协议"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p6",
+              "sourceParagraphIds": [
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:3:1",
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:3:2"
+              ],
+              "start": 311,
+              "end": 325,
+              "quote": "6月1日—28日：设备测试期"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p7",
+              "sourceParagraphIds": [
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:4:1",
+                "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:4:2"
+              ],
+              "start": 326,
+              "end": 340,
+              "quote": "7月18日：最终反馈问卷截止"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:5"
+              ],
+              "start": 341,
+              "end": 345,
+              "quote": "申请要求"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:6"
+              ],
+              "start": 346,
+              "end": 421,
+              "quote": "本项目将选出15名全程参与的试用者，在自己家中使用该设备四周。招募面向居住在市区范围内的居民。所有申请人须年满18周岁，并且必须有使用智能设备的经验。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:7"
+              ],
+              "start": 422,
+              "end": 437,
+              "quote": "申请时，申请人须提供以下信息："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:8"
+              ],
+              "start": 438,
+              "end": 467,
+              "quote": "• 姓名和有效的电子邮箱。这些信息仅用于与项目相关的联络。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:9"
+              ],
+              "start": 468,
+              "end": 518,
+              "quote": "• 一段关于你使用智能设备经验的简短描述（不超过100词）。这有助于我们了解你对智能设备的熟悉程度。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-a:10"
+              ],
+              "start": 519,
+              "end": 567,
+              "quote": "请将上述材料发送至 apply@techforward.com。截止日期后收到的申请将不予考虑。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+                "start": 0,
+                "end": 79,
+                "quote": "TechForward is looking for local residents to test its new smart home assistant"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+                "start": 0,
+                "end": 99,
+                "quote": "This program will select 15 full-time participants to use the device in their homes for four weeks."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:10",
+                "start": 0,
+                "end": 57,
+                "quote": "Please send the above materials to apply@techforward.com."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p1",
+                "start": 0,
+                "end": 33,
+                "quote": "TechForward 公司正在招募本地居民试用其新款智能家居助手"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p9",
+                "start": 0,
+                "end": 31,
+                "quote": "本项目将选出15名全程参与的试用者，在自己家中使用该设备四周。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p13",
+                "start": 0,
+                "end": 32,
+                "quote": "请将上述材料发送至 apply@techforward.com。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+                "start": 54,
+                "end": 98,
+                "quote": "use the device in their homes for four weeks"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:3:1",
+                "start": 0,
+                "end": 11,
+                "quote": "June 1 - 28"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p9",
+                "start": 18,
+                "end": 30,
+                "quote": "在自己家中使用该设备四周"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p6",
+                "start": 0,
+                "end": 8,
+                "quote": "6月1日—28日"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+                "start": 100,
+                "end": 158,
+                "quote": "The call is open to residents living within the city area."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+                "start": 159,
+                "end": 268,
+                "quote": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p9",
+                "start": 31,
+                "end": 47,
+                "quote": "招募面向居住在市区范围内的居民。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p9",
+                "start": 47,
+                "end": 75,
+                "quote": "所有申请人须年满18周岁，并且必须有使用智能设备的经验。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-a-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+                "start": 0,
+                "end": 236,
+                "quote": "TechForward is looking for local residents to test its new smart home assistant, a voice-controlled device designed to help users manage daily tasks such as setting reminders, controlling lights, checking the weather, and playing music."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p1",
+                "start": 0,
+                "end": 78,
+                "quote": "TechForward 公司正在招募本地居民试用其新款智能家居助手。这是一款声控设备，旨在帮助用户处理日常事务，例如设置提醒、控制灯光、查看天气和播放音乐。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-a-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+                "start": 159,
+                "end": 268,
+                "quote": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-a-p9",
+                "start": 47,
+                "end": 75,
+                "quote": "所有申请人须年满18周岁，并且必须有使用智能设备的经验。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先说明公司招募居民试用新设备及其目的，再写入选者的待遇和支持；随后用时间表列出各阶段日期，最后写申请条件、所需材料和投递方式。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+            "summary": "公司招募本地居民试用新款智能家居助手，并说明设备功能和收集反馈的目的。",
+            "function": "开门见山点明招募意图，统领全文。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:2",
+            "summary": "入选者免费获得设备，完成问卷可得100美元，公司全程提供技术支持。",
+            "function": "介绍参与者的待遇，吸引读者报名。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:3",
+            "summary": "项目时间表。",
+            "function": "引出下方表格，列出申请、通知、测试和反馈的日期。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:5",
+            "summary": "申请要求。",
+            "function": "引出后面的报名条件和所需材料。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+            "summary": "项目选15人在家试用四周，限市区居民、年满18岁、有智能设备使用经验。",
+            "function": "列出申请资格。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:7",
+            "summary": "申请须提供以下信息。",
+            "function": "引出两项材料清单。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:8",
+            "summary": "提供姓名和有效邮箱，仅用于项目联络。",
+            "function": "列出第一项材料并说明用途。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:9",
+            "summary": "提供不超过100词的智能设备使用经验描述。",
+            "function": "列出第二项材料并说明用途。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:10",
+            "summary": "材料发到指定邮箱，逾期不予考虑。",
+            "function": "交代投递方式和截止提醒，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-nb-2026-m2:21": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "判断这则广告式文字的写作目的，看全文各部分共同服务于什么。",
+      "stemTranslationZh": "这篇文章的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-nb-2026-m2:reading-a:1]] 看公司在找什么人，再看后文的待遇、时间表和申请条件写给谁看",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "介绍一款新的智能设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "a voice-controlled device designed to help users manage daily tasks such as setting reminders, controlling lights, checking the weather, and playing music",
+            "sourceHighlight": "a voice-controlled device",
+            "optionText": "To introduce a new smart device.",
+            "optionHighlight": "introduce a new smart device",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-a:1]]介绍设备能设提醒、控灯光，只是交代要试用的是什么；后文的待遇、时间表和申请条件都是写给报名者的，选项只抓住了开头这一点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+              "quote": "a voice-controlled device designed to help users manage daily tasks",
+              "anchor": "设备功能介绍"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为一家科技公司做广告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "为一家科技公司做广告",
+            "explanation": "TechForward 只是发布招募的一方，文中没有介绍公司的实力或业务，通篇讲的是这次试用项目怎么报名。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为一次产品试用招募志愿者。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+              "quote": "TechForward is looking for local residents to test its new smart home assistant",
+              "anchor": "招募本地居民试用"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "This program will select 15 full-time participants to use the device in their homes for four weeks.",
+              "anchor": "选15名参与者"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:10",
+              "quote": "Please send the above materials to apply@techforward.com.",
+              "anchor": "投递申请材料"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "解释如何使用一款智能助手。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "解释智能助手的使用方法",
+            "explanation": "文中只说入选后公司会提供安装支持和一对一线上指导（one-on-one virtual session），并没有写设备的操作步骤。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To seek volunteers for a product trial.",
+          "sourceRole": "correctOption",
+          "targetText": "TechForward is looking for local residents to test its new smart home assistant",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "选项的“招募志愿者参加产品试用”概括的是[[block:paper-mock-nb-2026-m2:reading-a:1]]的“找本地居民来试用新设备”（looking for local residents to test）。后面几部分都围着这件事：[[block:paper-mock-nb-2026-m2:reading-a:2]]写入选者能得到什么，时间表写各阶段日期，[[block:paper-mock-nb-2026-m2:reading-a:6]]到[[block:paper-mock-nb-2026-m2:reading-a:10]]写谁能报名、交什么、发到哪里，全文就是一则招募启事，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出试用设备的时长，并把“周”换算成天数，再用时间表核对。",
+      "stemTranslationZh": "参与者预计要测试这台设备多长时间？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "18天。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "July 18",
+            "optionText": "18",
+            "matchType": "exact",
+            "relationNote": "18 取自时间表里的 July 18，那是最终反馈问卷的截止日期，不是测试的天数。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:4:1",
+              "quote": "July 18",
+              "anchor": "问卷截止日期"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "20天。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "By May 20",
+            "optionText": "20",
+            "matchType": "exact",
+            "relationNote": "20 取自时间表里的 By May 20，指5月20日前通知入选者、签协议，和测试多久无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:2:1",
+              "quote": "By May 20",
+              "anchor": "通知日期"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "28天。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "use the device in their homes for four weeks",
+              "anchor": "在家使用四周"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:3:1",
+              "quote": "June 1 - 28",
+              "anchor": "测试期日期"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "30天。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "June 1 - 28",
+            "sourceHighlight": "June 1 - 28",
+            "optionText": "30 days.",
+            "optionHighlight": "30 days",
+            "explanation": "6月虽有30天，但测试期只到6月28日（June 1 - 28），并没有占满整个6月；原文写的也是四周，不是一个月。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-nb-2026-m2:reading-a:ocr-6604f2303d584c56:3:1",
+              "quote": "June 1 - 28",
+              "anchor": "测试期日期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "test the device",
+          "sourceRole": "stem",
+          "targetText": "This program will select 15 full-time participants to use the device in their homes for four weeks.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+          "relationType": "locationCue",
+          "targetCue": "use the device",
+          "sourceZh": "测试设备",
+          "targetCueZh": "使用设备",
+          "answerText": "for four weeks",
+          "note": "题干的 test the device 对应原文 use the device，说的都是参与者在家试用设备。"
+        },
+        {
+          "sourceText": "28 days.",
+          "sourceRole": "correctOption",
+          "targetText": "for four weeks",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+          "relationType": "calculation",
+          "note": "原文说用四周（four weeks），4×7=28天；时间表里的测试期是6月1日到28日（June 1 - 28），也正好28天，两处一致，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:23": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把申请要求里的三条硬性条件逐一套到四个人身上，找出全部满足的人。",
+      "stemTranslationZh": "谁最适合参加这个项目？",
+      "locateBy": "options",
+      "locateFindZh": "按 [[block:paper-mock-nb-2026-m2:reading-a:6]] 的要求，逐个核对每人的住处、年龄和设备经验",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Samantha，一名本地大学毕业生，专业是信息技术。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "The call is open to residents living within the city area.",
+              "anchor": "限市区居民"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+              "anchor": "年龄与经验要求"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Christopher，一名住在城外的退休教师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "The call is open to residents living within the city area.",
+            "sourceHighlight": "within the city area",
+            "optionText": "Christopher, a retired teacher living outside the city.",
+            "optionHighlight": "living outside the city",
+            "explanation": "招募只面向住在市区内的居民（within the city area），他住在城外，第一条就不符合；退休教师这个身份本身不是问题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "The call is open to residents living within the city area.",
+              "anchor": "限市区居民"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Fia，一名喜欢科技的初中生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+            "sourceHighlight": "at least 18 years old",
+            "optionText": "Fia, a junior high school student fond of technology.",
+            "optionHighlight": "a junior high school student",
+            "explanation": "喜欢科技看似贴合智能设备，但初中生一般不满18岁，达不到年满18周岁（at least 18 years old）的要求。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "All applicants are supposed to be at least 18 years old",
+              "anchor": "年龄要求"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Max，一名很少使用智能设备的兼职工作者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+            "sourceHighlight": "previous experience with smart devices is a must",
+            "optionText": "Max, a part-time worker seldom using smart devices.",
+            "optionHighlight": "seldom using smart devices",
+            "explanation": "原文要求必须有智能设备使用经验（is a must），他却很少用智能设备，这一条就不符合。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "quote": "previous experience with smart devices is a must",
+              "anchor": "经验要求"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Samantha, a local college graduate majoring in IT.",
+          "sourceRole": "correctOption",
+          "targetText": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "三条要求她都满足：“本地”对上只招市区居民（living within the city area）；大学毕业说明已年满18岁；学信息技术专业，可以推出她常接触智能设备，满足必须有经验（is a must）这一条，选 A。"
+        }
+      ]
+    }
+  }
+}

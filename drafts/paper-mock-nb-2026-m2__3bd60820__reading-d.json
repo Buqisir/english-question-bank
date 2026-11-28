@@ -1,0 +1,800 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:reading-d": {
+      "overview": "文章指出许多海洋物种固守特定栖息地，人造建筑会阻断它们的活动，以绿锯鳐为例说明危害，并借鉴陆地上的野生动物通道，呼吁为海洋动物开辟通道、保护迁徙栖息地。",
+      "fullTranslationZh": "海洋看上去无边无际。人们很容易以为，鱼类和其他海洋生物可以不受限制地自由游动。然而，这种设想是错误的。据生态学家卡丽莎·利尔说，许多海洋物种固守特定的栖息地，很少越出它们的范围。这种习性可能引发意想不到的大问题，尤其是在人造建筑挡住去路的时候。\n以生活在西澳大利亚州阿什伯顿河河口附近的绿锯鳐为例。2017年，岸边建起了一座大型建筑，向海中延伸约550码。正如利尔所担心的，这项工程确实伤害了极度濒危的绿锯鳐——它们无法绕过这道屏障。在利尔看来，这一发现支持了一个令人惊讶的新观点：海洋动物和陆地物种很像，也需要有人帮一把，才能绕过人造建筑。\n在陆地上，野生动物通道正变得越来越常见。例如，绿色桥梁帮助熊和麋鹿避开加拿大班夫国家公园里的一条公路。2022年，华盛顿州的一座野生动物通道被鹿和郊狼等动物使用了5000多次。利尔说，尽管这类桥梁在陆地上已经很普遍，但为帮助海洋动物安全通行而设计野生动物通道的想法却很少受到关注。\n对海洋动物来说，屏障太多会把它们与重要的觅食地隔开。活动范围过于受限，可能导致形成彼此隔绝的种群，而这样的种群更容易灭绝。由于阿什伯顿河一带还计划修建更多大型建筑，利尔说，多重屏障的累积效应确实让人担忧绿锯鳐的未来。\n随着气候不断变化，关注海洋动物的需求十分重要。许多海洋动物正在向更北的地方迁移，它们需要合适的栖息地供其穿行。为解决这一问题，我们可以在人造建筑中开辟通道，或保护它们迁徙路线沿线的栖息地。随着我们不断改造海洋，这样的努力会对保护海洋生物大有帮助。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-d-1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+          "sourceText": "To Lear, this discovery supported a surprising new idea that ocean animals, much like land species, need a helping hand getting around human-built structures.",
+          "displayText": "To Lear, this discovery supported a surprising new idea that ocean animals, much like land species, need a helping hand getting around human-built structures.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:34",
+            "question:paper-mock-nb-2026-m2:35"
+          ],
+          "translationZh": "在利尔看来，这一发现支持了一个令人惊讶的新观点：海洋动物和陆地物种很像，也需要有人帮一把，才能绕过人造建筑。",
+          "analysisZh": "主干是 this discovery supported a surprising new idea（这一发现支持了一个令人惊讶的新观点），句首的 To Lear 意为“在利尔看来”。that 引导同位语从句，说明 idea 的具体内容；that 在从句里不作任何成分，后面的 ocean animals need a helping hand 本身就是完整句子。much like land species 是插入语，把海洋动物和陆地物种作类比；getting around human-built structures 说明在哪方面需要帮助（绕过人造建筑）。这个观点正是后文讲陆地通道、呼吁海洋通道的依据。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 55,
+              "quote": "this discovery supported a surprising new idea"
+            },
+            {
+              "start": 56,
+              "end": 74,
+              "quote": "that ocean animals"
+            },
+            {
+              "start": 100,
+              "end": 119,
+              "quote": "need a helping hand"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-d-2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+          "sourceText": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+          "displayText": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:34"
+          ],
+          "translationZh": "利尔说，尽管这类桥梁在陆地上已经很普遍，但为帮助海洋动物安全通行而设计野生动物通道的想法却很少受到关注。",
+          "analysisZh": "主句是 Lear says ...，says 后面省略了 that，宾语从句的主干是 little attention has been paid to the idea（这个想法很少受到关注），这是 pay attention to 的被动形式，little 表示“几乎没有”。of wildlife crossings 说明是什么想法，designed to help ocean animals get around safely 是过去分词短语，修饰 wildlife crossings，其中 help sb do 表示“帮助某人做某事”。句首 Although 引导让步状语从句，先承认陆地上已普遍，重点落在主句：海洋方面几乎没人关注。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 48,
+              "quote": "Although the bridges are already popular on land"
+            },
+            {
+              "start": 60,
+              "end": 93,
+              "quote": "little attention has been paid to"
+            },
+            {
+              "start": 125,
+              "end": 155,
+              "quote": "designed to help ocean animals"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-nb-2026-m2:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-d:1"
+              ],
+              "start": 0,
+              "end": 122,
+              "quote": "海洋看上去无边无际。人们很容易以为，鱼类和其他海洋生物可以不受限制地自由游动。然而，这种设想是错误的。据生态学家卡丽莎·利尔说，许多海洋物种固守特定的栖息地，很少越出它们的范围。这种习性可能引发意想不到的大问题，尤其是在人造建筑挡住去路的时候。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-d:2"
+              ],
+              "start": 123,
+              "end": 271,
+              "quote": "以生活在西澳大利亚州阿什伯顿河河口附近的绿锯鳐为例。2017年，岸边建起了一座大型建筑，向海中延伸约550码。正如利尔所担心的，这项工程确实伤害了极度濒危的绿锯鳐——它们无法绕过这道屏障。在利尔看来，这一发现支持了一个令人惊讶的新观点：海洋动物和陆地物种很像，也需要有人帮一把，才能绕过人造建筑。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-d:3"
+              ],
+              "start": 272,
+              "end": 412,
+              "quote": "在陆地上，野生动物通道正变得越来越常见。例如，绿色桥梁帮助熊和麋鹿避开加拿大班夫国家公园里的一条公路。2022年，华盛顿州的一座野生动物通道被鹿和郊狼等动物使用了5000多次。利尔说，尽管这类桥梁在陆地上已经很普遍，但为帮助海洋动物安全通行而设计野生动物通道的想法却很少受到关注。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-d:4"
+              ],
+              "start": 413,
+              "end": 521,
+              "quote": "对海洋动物来说，屏障太多会把它们与重要的觅食地隔开。活动范围过于受限，可能导致形成彼此隔绝的种群，而这样的种群更容易灭绝。由于阿什伯顿河一带还计划修建更多大型建筑，利尔说，多重屏障的累积效应确实让人担忧绿锯鳐的未来。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-d:5"
+              ],
+              "start": 522,
+              "end": 645,
+              "quote": "随着气候不断变化，关注海洋动物的需求十分重要。许多海洋动物正在向更北的地方迁移，它们需要合适的栖息地供其穿行。为解决这一问题，我们可以在人造建筑中开辟通道，或保护它们迁徙路线沿线的栖息地。随着我们不断改造海洋，这样的努力会对保护海洋生物大有帮助。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+                "start": 32,
+                "end": 121,
+                "quote": "It’s easy to imagine that fish and other ocean creatures swim freely without restriction."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+                "start": 122,
+                "end": 160,
+                "quote": "That assumption, however, is mistaken."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p1",
+                "start": 10,
+                "end": 39,
+                "quote": "人们很容易以为，鱼类和其他海洋生物可以不受限制地自由游动。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p1",
+                "start": 39,
+                "end": 51,
+                "quote": "然而，这种设想是错误的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+                "start": 284,
+                "end": 327,
+                "quote": "they were unable to pass around the barrier"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p2",
+                "start": 83,
+                "end": 93,
+                "quote": "它们无法绕过这道屏障"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+                "start": 325,
+                "end": 438,
+                "quote": "little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+                "start": 390,
+                "end": 486,
+                "quote": "ocean animals, much like land species, need a helping hand getting around human-built structures"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:4",
+                "start": 256,
+                "end": 362,
+                "quote": "Lear says the cumulative(累积的) effect of multiple barriers is a real concern for the green sawfish’s future"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p3",
+                "start": 109,
+                "end": 139,
+                "quote": "为帮助海洋动物安全通行而设计野生动物通道的想法却很少受到关注"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p2",
+                "start": 118,
+                "end": 147,
+                "quote": "海洋动物和陆地物种很像，也需要有人帮一把，才能绕过人造建筑"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p4",
+                "start": 82,
+                "end": 107,
+                "quote": "利尔说，多重屏障的累积效应确实让人担忧绿锯鳐的未来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+                "start": 390,
+                "end": 486,
+                "quote": "ocean animals, much like land species, need a helping hand getting around human-built structures"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+                "start": 265,
+                "end": 439,
+                "quote": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:5",
+                "start": 194,
+                "end": 248,
+                "quote": "we can create crossings through human-built structures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p2",
+                "start": 118,
+                "end": 147,
+                "quote": "海洋动物和陆地物种很像，也需要有人帮一把，才能绕过人造建筑"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p3",
+                "start": 88,
+                "end": 140,
+                "quote": "利尔说，尽管这类桥梁在陆地上已经很普遍，但为帮助海洋动物安全通行而设计野生动物通道的想法却很少受到关注。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p5",
+                "start": 63,
+                "end": 77,
+                "quote": "我们可以在人造建筑中开辟通道"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-d-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:34",
+              "question:paper-mock-nb-2026-m2:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+                "start": 329,
+                "end": 487,
+                "quote": "To Lear, this discovery supported a surprising new idea that ocean animals, much like land species, need a helping hand getting around human-built structures."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p2",
+                "start": 94,
+                "end": 148,
+                "quote": "在利尔看来，这一发现支持了一个令人惊讶的新观点：海洋动物和陆地物种很像，也需要有人帮一把，才能绕过人造建筑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-d-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+                "start": 265,
+                "end": 439,
+                "quote": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-d-p3",
+                "start": 88,
+                "end": 140,
+                "quote": "利尔说，尽管这类桥梁在陆地上已经很普遍，但为帮助海洋动物安全通行而设计野生动物通道的想法却很少受到关注。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先纠正“海洋生物可以自由游动”的看法，提出人造建筑阻隔的问题；再以绿锯鳐为例引出海洋动物也需要帮助的观点；接着对照陆地上已普及的野生动物通道，指出海洋通道少有人关注；然后说明阻隔的危害；最后提出建通道、护栖息地的办法。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+            "summary": "海洋生物并非自由游动，许多物种固守栖息地，人造建筑会带来大问题。",
+            "function": "纠正常见看法，提出话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+            "summary": "一座伸入海中的建筑挡住了绿锯鳐，利尔由此认为海洋动物也需要帮助绕过建筑。",
+            "function": "举例说明问题，并引出核心观点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+            "summary": "陆地上的野生动物通道越来越常见，而为海洋动物设计通道的想法却少有人关注。",
+            "function": "用陆地做法作对照，指出海洋方面的空白。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:4",
+            "summary": "屏障过多会切断觅食地、导致种群隔绝灭绝，多重屏障威胁绿锯鳐的未来。",
+            "function": "具体说明阻隔的危害，强调问题的紧迫。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:5",
+            "summary": "气候变化下海洋动物北迁，需要建通道或保护迁徙路线上的栖息地。",
+            "function": "提出解决办法，总结全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-nb-2026-m2:32": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "topic-introduction"
+      },
+      "questionFocus": "判断作者在开篇用什么方式引出要讨论的问题。",
+      "stemTranslationZh": "作者在第一段是如何引出问题的？",
+      "locateBy": "options",
+      "locateFindZh": "把各选项的手法放回 [[block:paper-mock-nb-2026-m2:reading-d:1]]，看 however 前后对应哪一种",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过详细介绍研究发现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "According to ecologist Karissa Lear, many ocean species stick to specific habitats and seldom go beyond them.",
+            "sourceHighlight": "According to ecologist Karissa Lear",
+            "optionText": "By detailing research findings.",
+            "optionHighlight": "detailing research findings",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-d:1]]只用一句 According to ecologist Karissa Lear 引出她的看法，没有列出研究数据或过程；具体事例要到[[block:paper-mock-nb-2026-m2:reading-d:2]]的绿锯鳐才出现。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+              "quote": "According to ecologist Karissa Lear, many ocean species stick to specific habitats and seldom go beyond them.",
+              "anchor": "引用生态学家的看法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过描写一处自然景象。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The ocean may appear boundless.",
+            "sourceHighlight": "may appear boundless",
+            "optionText": "By describing a natural scene.",
+            "optionHighlight": "describing a natural scene",
+            "explanation": "开头的“海洋看似无边无际”（may appear boundless）只是一句话交代海洋给人的印象，为后面的错误设想作铺垫，并没有展开描写景色。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+              "quote": "The ocean may appear boundless.",
+              "anchor": "海洋看似无边"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过回应公众的担忧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "回应公众担忧",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-d:1]]摆出的是大众的一种设想（That assumption），不是公众担心的事；文中的担忧出现在[[block:paper-mock-nb-2026-m2:reading-d:4]]，是利尔对绿锯鳐未来的担心。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过质疑一种普遍的看法。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+              "quote": "It’s easy to imagine that fish and other ocean creatures swim freely without restriction.",
+              "anchor": "常见的设想"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+              "quote": "That assumption, however, is mistaken.",
+              "anchor": "指出设想错误"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By challenging a common belief.",
+          "sourceRole": "correctOption",
+          "targetText": "That assumption, however, is mistaken.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "作者先摆出人们很容易有的想法：海洋生物可以自由游动（swim freely without restriction），紧接着用 however 说这个设想是错的（is mistaken），再引出利尔的观点。选项的“普遍看法”就是这个设想，“质疑”就是指出它错了；这样开头让“海洋动物也会被困”显得出人意料，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出阿什伯顿河附近那座建筑对绿锯鳐造成的具体影响。",
+      "stemTranslationZh": "阿什伯顿河附近的那座建筑产生了什么影响？",
+      "locateBy": "stem",
+      "locateFindZh": "看破折号后伤害的具体表现",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它为海洋生物提供了新的栖息地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "As Lear had feared, the construction did harm the critically endangered green sawfish – they were unable to pass around the barrier.",
+            "sourceHighlight": "did harm",
+            "optionText": "It provided a new habitat for ocean life.",
+            "optionHighlight": "provided a new habitat",
+            "explanation": "原文说这项工程伤害了绿锯鳐（did harm），选项却说它给海洋生物带来了新栖息地；habitat 一词出自[[block:paper-mock-nb-2026-m2:reading-d:1|many ocean species stick to specific habitats]]，说的是物种固守原有的地盘。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "quote": "the construction did harm the critically endangered green sawfish",
+              "anchor": "工程伤害了绿锯鳐"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它挡住了绿锯鳐的去路。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "quote": "they were unable to pass around the barrier",
+              "anchor": "无法绕过屏障"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它吸引了更多新物种来到这一带。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "建筑吸引了更多新物种",
+            "explanation": "原文没说有新物种被吸引过来；[[block:paper-mock-nb-2026-m2:reading-d:4|With more large structures planned]]里的“更多”说的是还要再建更多大型建筑。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它把绿锯鳐赶进了深水区。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "绿锯鳐被赶进深水区",
+            "explanation": "原文只说绿锯鳐绕不过这道屏障（unable to pass around），没说它们被赶去哪里；伸进海里的是那座建筑（stretching about 550 yards into the sea）。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the structure",
+          "sourceRole": "stem",
+          "targetText": "As Lear had feared, the construction did harm the critically endangered green sawfish – they were unable to pass around the barrier.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "the construction",
+          "sourceZh": "那座建筑",
+          "targetCueZh": "这项工程",
+          "answerText": "they were unable to pass around the barrier",
+          "note": "题干的 the structure 对应原文 the construction，指2017年岸边建起的那座大型建筑。"
+        },
+        {
+          "sourceText": "It blocked the path of the green sawfish.",
+          "sourceRole": "correctOption",
+          "targetText": "they were unable to pass around the barrier",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“挡住了去路”（blocked the path）就是原文的“无法绕过这道屏障”（unable to pass around the barrier），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从利尔对陆地和海洋野生动物通道的对比中，推断她的言外之意。",
+      "stemTranslationZh": "关于野生动物通道，利尔暗示了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 Although 后的主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们减少了陆地上的交通事故。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "野生动物通道减少了交通事故",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-d:3]]只说绿色桥梁帮熊和麋鹿避开公路（avoid a road）、一座通道被动物用了5000多次，没提交通事故有没有减少。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们最终会取代海洋中的屏障。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "通道将取代海洋屏障",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-d:5|we can create crossings through human-built structures]]说的是在人造建筑中开辟通道，建筑仍在，通道并不取代屏障。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们破坏了陆地动物的栖息地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Green bridges, for instance, help bears and elk avoid a road in Canada’s Banff National Park.",
+            "sourceHighlight": "help bears and elk",
+            "optionText": "They have destroyed land animals’ habitats.",
+            "optionHighlight": "destroyed land animals’ habitats",
+            "explanation": "原文说绿色桥梁帮助熊和麋鹿避开公路（help bears and elk），对陆地动物是保护，选项却说成破坏它们的栖息地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+              "quote": "Green bridges, for instance, help bears and elk avoid a road in Canada’s Banff National Park.",
+              "anchor": "绿色桥梁帮助动物"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "海洋动物迫切需要它们。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+              "quote": "little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely",
+              "anchor": "海洋通道少受关注"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "quote": "ocean animals, much like land species, need a helping hand getting around human-built structures",
+              "anchor": "海洋动物也需要帮助"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:4",
+              "quote": "Lear says the cumulative(累积的) effect of multiple barriers is a real concern for the green sawfish’s future",
+              "anchor": "多重屏障令人担忧"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "wildlife crossings",
+          "sourceRole": "stem",
+          "targetText": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "little attention has been paid to the idea of wildlife crossings designed to help ocean animals",
+          "note": "题干的 Lear 和 wildlife crossings 原词都出现在这一句。"
+        },
+        {
+          "sourceText": "They are urgently needed for ocean animals.",
+          "sourceRole": "correctOption",
+          "targetText": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "利尔没直接说“急需”，只说海洋通道这个想法很少受关注（little attention has been paid）。把这句和[[block:paper-mock-nb-2026-m2:reading-d:2]]说海洋动物也需要帮一把（need a helping hand）、[[block:paper-mock-nb-2026-m2:reading-d:4]]说多重屏障让绿锯鳐前景堪忧（a real concern）合起来，可见她是在暗示海洋动物急需这样的通道，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找出能概括全文主线的标题。",
+      "stemTranslationZh": "哪一项适合作本文的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-nb-2026-m2:reading-d:1]] 提出的问题读起，看 [[block:paper-mock-nb-2026-m2:reading-d:3]] 的陆地通道和 [[block:paper-mock-nb-2026-m2:reading-d:5]] 的建议怎样连起来",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "野生动物通道：从陆地到海洋",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "quote": "ocean animals, much like land species, need a helping hand getting around human-built structures",
+              "anchor": "海洋动物也需要帮助"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+              "quote": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+              "anchor": "陆地通道普及而海洋通道少有关注"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:5",
+              "quote": "we can create crossings through human-built structures",
+              "anchor": "在人造建筑中开辟通道"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "当海洋生物身处险境时",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "This habit can cause unexpectedly big problems, especially when human-built structures get in the way.",
+            "sourceHighlight": "cause unexpectedly big problems",
+            "optionText": "When Ocean Life Is in Danger",
+            "optionHighlight": "in Danger",
+            "explanation": "文中海洋生物的麻烦专指人造建筑挡路（human-built structures get in the way），主线落在建通道上；这个标题只说处境危险，范围太大，也没点出通道。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+              "quote": "This habit can cause unexpectedly big problems, especially when human-built structures get in the way.",
+              "anchor": "人造建筑带来问题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "迷失归途的锯鳐",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Take, for example, the green sawfish living near the mouth of the Ashburton River in Western Australia.",
+            "sourceHighlight": "Take, for example",
+            "optionText": "The Sawfish That Lost Their Way Home",
+            "optionHighlight": "The Sawfish",
+            "explanation": "绿锯鳐只是[[block:paper-mock-nb-2026-m2:reading-d:2]]举的例子（Take, for example）；而且它们是绕不过屏障，不是迷了回家的路。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "quote": "Take, for example, the green sawfish living near the mouth of the Ashburton River in Western Australia.",
+              "anchor": "以绿锯鳐为例"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "海洋建筑：毫无害处",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the construction did harm the critically endangered green sawfish",
+            "sourceHighlight": "did harm",
+            "optionText": "Ocean Structures: No Harm Done",
+            "optionHighlight": "No Harm Done",
+            "explanation": "[[block:paper-mock-nb-2026-m2:reading-d:2]]明说那项工程确实伤害了绿锯鳐（did harm），标题却说毫无害处，和原文正相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "quote": "the construction did harm the critically endangered green sawfish",
+              "anchor": "工程伤害了绿锯鳐"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Wildlife Crossings: From Land to Sea",
+          "sourceRole": "correctOption",
+          "targetText": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "全文从海洋生物会被人造建筑困住说起，用绿锯鳐的例子引出海洋动物也像陆地动物一样需要帮助；[[block:paper-mock-nb-2026-m2:reading-d:3]]写陆地上已普及的野生动物通道（wildlife crossings），指出海洋方面少有人关注，[[block:paper-mock-nb-2026-m2:reading-d:5]]建议在人造建筑中为海洋动物开辟通道（create crossings）。标题的“从陆地到海洋”正是把陆地经验推到海洋这条主线，选 A。"
+        }
+      ]
+    }
+  }
+}

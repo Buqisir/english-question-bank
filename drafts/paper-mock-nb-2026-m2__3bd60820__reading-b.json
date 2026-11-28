@@ -1,0 +1,779 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-nb-2026-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-nb-2026-m2:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-nb-2026-m2:reading-b": {
+      "overview": "作者以幽默口吻抱怨冰箱、汽车、炉灶和手机等设备无处不在的哔哔提醒声，犹豫是否拆掉冰箱警报，最终决定拆掉发声器，改用便利贴提醒自己关门。",
+      "fullTranslationZh": "为我最爱的三明治凑齐食材需要时间，肯定不止10秒——这是冰箱允许我安安静静在里面翻找的时长。10秒一过，一连串刺耳的哔哔声就响起来——这是提醒健忘的人类关上冰箱门的警报。我怀疑，这个无法关闭的警报就是为了阻止我深夜翻冰箱而设计的——妻子早就警告过我，半夜吃零食对腰围不好。\n这台“受了惊吓”的冰箱只是工程师兼设计师们的作品之一，他们坚信像我这样的老年人没有哔哔声提醒就活不下去。我的汽车也一直哔哔响，尤其是在我下车的时候。根本没办法让它停下来。起初，我还以为是车看到我要走，太伤心了。\n不只是冰箱和汽车。一旦我开始留意，就发现我们周围的环境里充满了提醒声。炉灶也会“唱歌”——开着一个灶头不关，它就上演一场自己的小型音乐会。至于我的手机，即使关掉了我能找到的所有通知，日历提醒还是照样弹出来。\n于是我上网找解决办法——结果找到一段视频，一个同样烦恼的男人正在拆卸同一型号冰箱上的蜂鸣器。这个修法我能应付。可现在的问题是：我真的想这么做吗？要是我没把冰箱门关严，毁了一块昂贵的烤肉怎么办？要是我错过了提醒我去赴一个可能会忘掉的约会的通知，又怎么办？没有哔哔声的生活，后果也许严重到让人不敢冒险。\n最后，我手拿工具站在冰箱前。如果有静音选项，我也许就不去动它了。可是没有——我也受够了。我要拆掉这个发声器，改在门上贴一张便利贴，提醒自己关门。深夜成功找到一份美味三明治的回报，绝对值得我这么做。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-b-1",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+          "sourceText": "My suspicion is that the alarm, which cannot be neutralized, was designed to stop my late-night search in the fridge – my wife has long warned me that midnight snacking is bad for my waistline.",
+          "displayText": "My suspicion is that the alarm, which cannot be neutralized, was designed to stop my late-night search in the fridge – my wife has long warned me that midnight snacking is bad for my waistline.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:24"
+          ],
+          "translationZh": "我怀疑，这个无法关闭的警报就是为了阻止我深夜翻冰箱而设计的——妻子早就警告过我，半夜吃零食对腰围不好。",
+          "analysisZh": "破折号前是主句，主干是 My suspicion is that ...（我的怀疑是……），that 引导表语从句，说明怀疑的内容。表语从句的主干是 the alarm was designed to stop my late-night search（警报被设计来阻止我深夜找吃的）；夹在中间的 which cannot be neutralized 是非限制性定语从句，修饰 the alarm，补充说明这个警报关不掉，第24题考的就是 neutralized。破折号后是另一个完整句子 my wife has long warned me that ...，交代作者为什么会这样猜，其中 that 引导的从句作 warned 的宾语。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "My suspicion is that"
+            },
+            {
+              "start": 32,
+              "end": 59,
+              "quote": "which cannot be neutralized"
+            },
+            {
+              "start": 61,
+              "end": 102,
+              "quote": "was designed to stop my late-night search"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-b-2",
+          "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:2",
+          "sourceText": "The frightened fridge is just one example of the creations by engineer-designers who are convinced that seniors like me can’t survive without beeping reminders.",
+          "displayText": "The frightened fridge is just one example of the creations by engineer-designers who are convinced that seniors like me can’t survive without beeping reminders.",
+          "relatedQuestionIds": [
+            "question:paper-mock-nb-2026-m2:25"
+          ],
+          "translationZh": "这台“受了惊吓”的冰箱只是工程师兼设计师们的作品之一，他们坚信像我这样的老年人没有哔哔声提醒就活不下去。",
+          "analysisZh": "主干是 The frightened fridge is just one example（这台冰箱只是一个例子），of the creations by engineer-designers 说明是谁的作品的例子。who are convinced that ... 是定语从句，修饰紧挨着的 engineer-designers，be convinced that 表示“坚信”，that 从句交代他们坚信的内容。要注意“老人离不开提醒”是这些设计者的看法，作者是在调侃，并不是他本人的结论，第25题 A 项就是把这个看法当成了作者要说明的道理。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 41,
+              "quote": "The frightened fridge is just one example"
+            },
+            {
+              "start": 81,
+              "end": 103,
+              "quote": "who are convinced that"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-nb-2026-m2:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-b:1"
+              ],
+              "start": 0,
+              "end": 136,
+              "quote": "为我最爱的三明治凑齐食材需要时间，肯定不止10秒——这是冰箱允许我安安静静在里面翻找的时长。10秒一过，一连串刺耳的哔哔声就响起来——这是提醒健忘的人类关上冰箱门的警报。我怀疑，这个无法关闭的警报就是为了阻止我深夜翻冰箱而设计的——妻子早就警告过我，半夜吃零食对腰围不好。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-b:2"
+              ],
+              "start": 137,
+              "end": 242,
+              "quote": "这台“受了惊吓”的冰箱只是工程师兼设计师们的作品之一，他们坚信像我这样的老年人没有哔哔声提醒就活不下去。我的汽车也一直哔哔响，尤其是在我下车的时候。根本没办法让它停下来。起初，我还以为是车看到我要走，太伤心了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-b:3"
+              ],
+              "start": 243,
+              "end": 346,
+              "quote": "不只是冰箱和汽车。一旦我开始留意，就发现我们周围的环境里充满了提醒声。炉灶也会“唱歌”——开着一个灶头不关，它就上演一场自己的小型音乐会。至于我的手机，即使关掉了我能找到的所有通知，日历提醒还是照样弹出来。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-b:4"
+              ],
+              "start": 347,
+              "end": 496,
+              "quote": "于是我上网找解决办法——结果找到一段视频，一个同样烦恼的男人正在拆卸同一型号冰箱上的蜂鸣器。这个修法我能应付。可现在的问题是：我真的想这么做吗？要是我没把冰箱门关严，毁了一块昂贵的烤肉怎么办？要是我错过了提醒我去赴一个可能会忘掉的约会的通知，又怎么办？没有哔哔声的生活，后果也许严重到让人不敢冒险。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-nb-2026-m2:reading-b:5"
+              ],
+              "start": 497,
+              "end": 595,
+              "quote": "最后，我手拿工具站在冰箱前。如果有静音选项，我也许就不去动它了。可是没有——我也受够了。我要拆掉这个发声器，改在门上贴一张便利贴，提醒自己关门。深夜成功找到一份美味三明治的回报，绝对值得我这么做。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+                "start": 50,
+                "end": 121,
+                "quote": "If there were a silence option, I might leave it alone. But there isn’t"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+                "start": 298,
+                "end": 325,
+                "quote": "which cannot be neutralized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p5",
+                "start": 14,
+                "end": 36,
+                "quote": "如果有静音选项，我也许就不去动它了。可是没有"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p1",
+                "start": 91,
+                "end": 96,
+                "quote": "无法关闭的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+                "start": 39,
+                "end": 130,
+                "quote": "Once I started paying attention, I realized our environment is filled with reminder noises."
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+                "start": 232,
+                "end": 322,
+                "quote": "even after turning off every notification I can find, calendar reminders still get through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p3",
+                "start": 9,
+                "end": 35,
+                "quote": "一旦我开始留意，就发现我们周围的环境里充满了提醒声。"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p3",
+                "start": 76,
+                "end": 102,
+                "quote": "即使关掉了我能找到的所有通知，日历提醒还是照样弹出来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+                "start": 213,
+                "end": 281,
+                "quote": "What if I leave the fridge door partly open and ruin a costly roast?"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+                "start": 282,
+                "end": 361,
+                "quote": "What if I miss the notification that reminds me of an appointment I may forget?"
+              },
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+                "start": 362,
+                "end": 426,
+                "quote": "The consequences of an unbeeped life may be too serious to risk."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p4",
+                "start": 72,
+                "end": 96,
+                "quote": "要是我没把冰箱门关严，毁了一块昂贵的烤肉怎么办？"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p4",
+                "start": 96,
+                "end": 126,
+                "quote": "要是我错过了提醒我去赴一个可能会忘掉的约会的通知，又怎么办？"
+              },
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p4",
+                "start": 126,
+                "end": 149,
+                "quote": "没有哔哔声的生活，后果也许严重到让人不敢冒险。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+                "start": 145,
+                "end": 241,
+                "quote": "I’ll remove the noise-maker and put a sticky note on the door instead, reminding me to close it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p5",
+                "start": 44,
+                "end": 72,
+                "quote": "我要拆掉这个发声器，改在门上贴一张便利贴，提醒自己关门。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-b-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+                "start": 266,
+                "end": 459,
+                "quote": "My suspicion is that the alarm, which cannot be neutralized, was designed to stop my late-night search in the fridge – my wife has long warned me that midnight snacking is bad for my waistline."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p1",
+                "start": 85,
+                "end": 136,
+                "quote": "我怀疑，这个无法关闭的警报就是为了阻止我深夜翻冰箱而设计的——妻子早就警告过我，半夜吃零食对腰围不好。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-nb-2026-m2:reading-b-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-nb-2026-m2:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-nb-2026-m2:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:2",
+                "start": 0,
+                "end": 160,
+                "quote": "The frightened fridge is just one example of the creations by engineer-designers who are convinced that seniors like me can’t survive without beeping reminders."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-nb-2026-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-nb-2026-m2:reading-b-p2",
+                "start": 0,
+                "end": 52,
+                "quote": "这台“受了惊吓”的冰箱只是工程师兼设计师们的作品之一，他们坚信像我这样的老年人没有哔哔声提醒就活不下去。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写冰箱警报打断深夜觅食，再由冰箱推到汽车、炉灶和手机，说明提醒声无处不在；接着写作者找到拆除办法却担心没有提醒的后果，最后下定决心拆掉警报、改贴便条。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+            "summary": "冰箱门开10秒就会报警，作者怀疑它专为阻止自己深夜找吃的。",
+            "function": "以亲身经历引出话题：恼人的哔哔提醒。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:2",
+            "summary": "设计者认为老人离不开提醒，作者的汽车也响个不停、无法关闭。",
+            "function": "由冰箱推及汽车，进一步举例。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+            "summary": "炉灶、手机也不停提醒，周围环境充满提醒声。",
+            "function": "再举两例，归纳出提醒声无处不在。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+            "summary": "作者在网上找到拆蜂鸣器的方法，却担心没有提醒会误事。",
+            "function": "写作者的犹豫，形成转折。"
+          },
+          {
+            "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+            "summary": "作者受够了，决定拆掉发声器、改贴便利贴提醒关门。",
+            "function": "交代最终决定，幽默收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-nb-2026-m2:24": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据警报的特点和后文作者对冰箱的描述，推测 neutralized 在句中的意思。",
+      "stemTranslationZh": "第1段中画线词“neutralized”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找冰箱警报能不能关掉",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "被使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "警报不能被使用",
+            "explanation": "放进去就成了“这个不能被使用的警报”，可它10秒一到就自己响起来，并不存在用不了的问题。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "被听到。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "After those 10 seconds, a series of ear-piercing beeps begin",
+            "sourceHighlight": "ear-piercing beeps",
+            "optionText": "Heard.",
+            "optionHighlight": "Heard",
+            "explanation": "放进去就成了“这个听不见的警报”，可原文说它发出的是刺耳的哔哔声（ear-piercing beeps），作者正是被吵得受不了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+              "quote": "a series of ear-piercing beeps begin",
+              "anchor": "刺耳的哔哔声"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "被关闭。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+              "quote": "If there were a silence option, I might leave it alone. But there isn’t",
+              "anchor": "没有静音选项"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+              "quote": "the alarm, which cannot be neutralized,",
+              "anchor": "画线词所在处"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "被修理。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "警报无法被修好",
+            "explanation": "放进去就成了“这个修不好的警报”，可警报没坏，一直照常在响；[[block:paper-mock-nb-2026-m2:reading-b:4|I can handle the fix]]里的 fix 指拆掉蜂鸣器，也不是修理它。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "neutralized",
+          "sourceRole": "stem",
+          "targetText": "My suspicion is that the alarm, which cannot be neutralized, was designed to stop my late-night search in the fridge – my wife has long warned me that midnight snacking is bad for my waistline.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "If there were a silence option, I might leave it alone. But there isn’t",
+          "bridgeZh": "这个警报关不关得掉，作者最后站在冰箱前给出了答案",
+          "note": "题干的 neutralized 原词出现在[[block:paper-mock-nb-2026-m2:reading-b:1]]，修饰冰箱的警报。"
+        },
+        {
+          "sourceText": "Disabled.",
+          "sourceRole": "correctOption",
+          "targetText": "If there were a silence option, I might leave it alone. But there isn’t",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "这个警报10秒后自动响起，作者怀疑它专为阻止自己深夜找吃的，所以 neutralized 必须是“让它停下、不再响”的意思；[[block:paper-mock-nb-2026-m2:reading-b:5|If there were a silence option]]又说冰箱没有静音选项。放回去：这个无法被关闭的警报，正是作者最后要动手拆掉的原因，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:25": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者提到炉灶和手机这两个例子是为了说明什么观点。",
+      "stemTranslationZh": "文中提到炉灶和手机是为了说明____________________。",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句找这两个例子说明的观点",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "老年人记忆力衰退",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The frightened fridge is just one example of the creations by engineer-designers who are convinced that seniors like me can’t survive without beeping reminders.",
+            "sourceEntity": "engineer-designers",
+            "optionText": "elderly people have a failing memory",
+            "optionEntity": "elderly people",
+            "explanation": "“老人离不开提醒”是[[block:paper-mock-nb-2026-m2:reading-b:2]]里设计者们的看法（are convinced that），作者是在调侃；炉灶和手机这两例要说的是提醒声到处都有，不是老人记性差。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:2",
+              "quote": "engineer-designers who are convinced that seniors like me can’t survive without beeping reminders",
+              "anchor": "设计者的看法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "现代机器设计得很糟糕",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "现代机器设计得很糟糕",
+            "explanation": "作者确实嫌提醒声烦，但炉灶会“唱歌”、手机提醒照样弹出，说的是提醒多到躲不开，并没有评价这些机器设计得好坏。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "科技改变了老年人的生活习惯",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "科技改变了老年人的生活习惯",
+            "explanation": "文中没写科技改变了谁的生活习惯；作者深夜找吃的习惯也没被警报改掉，最后反而拆掉发声器接着找三明治。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "哔哔提醒声在日常生活中无法避免",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+              "quote": "Once I started paying attention, I realized our environment is filled with reminder noises.",
+              "anchor": "环境中充满提醒声"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+              "quote": "even after turning off every notification I can find, calendar reminders still get through",
+              "anchor": "关掉通知仍有提醒"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "stove",
+          "sourceRole": "stem",
+          "targetText": "The stove(炉灶) sings too – leave a burner on and it performs its own little concert.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "our environment is filled with reminder noises",
+          "bridgeZh": "炉灶和手机是两个例子，用来支撑作者刚发现的情况",
+          "note": "题干的 stove 原词出现在原文，手机紧跟在它后面。"
+        },
+        {
+          "sourceText": "beeping alarms are unavoidable in daily life",
+          "sourceRole": "correctOption",
+          "targetText": "Once I started paying attention, I realized our environment is filled with reminder noises.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“生活中躲不开提醒声”（unavoidable in daily life）就是原文的“环境里充满提醒声”（environment is filled with reminder noises）。炉灶一开着就“唱歌”，手机关掉所有通知后提醒仍会弹出（still get through），两例都让“躲不开”落到具体的家电上，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完作者找到修法后的一连串自问，推断他当时的心理。",
+      "stemTranslationZh": "从第4段可以推断出关于作者的什么信息？",
+      "locateBy": "passage",
+      "locateFindZh": "看 [[block:paper-mock-nb-2026-m2:reading-b:4]] 找到修法之后作者问了自己什么，再看他连用的两个 What if",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他没能找到让噪声停下来的办法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "found a video of an equally frustrated man taking apart the beeper on the exact same fridge model",
+            "sourceHighlight": "found a video",
+            "optionText": "He fails to find a way to stop the noise.",
+            "optionHighlight": "fails to find a way",
+            "explanation": "作者上网找到了拆蜂鸣器的视频（found a video），办法是有的，他犹豫的是要不要动手。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+              "quote": "found a video of an equally frustrated man taking apart the beeper on the exact same fridge model",
+              "anchor": "找到视频"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他认为网上的视频没有帮助。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "online",
+            "optionText": "online",
+            "matchType": "exact",
+            "relationNote": "选项借了[[block:paper-mock-nb-2026-m2:reading-b:4|So I went online looking for a solution]]里的 online 和 video；作者看完说自己能应付这个修法（I can handle the fix），可见视频是有用的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+              "quote": "So I went online looking for a solution",
+              "anchor": "上网找办法"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他担心没有提醒的生活。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+              "quote": "The consequences of an unbeeped life may be too serious to risk.",
+              "anchor": "没有提醒的后果"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+              "quote": "What if I leave the fridge door partly open and ruin a costly roast?",
+              "anchor": "担心毁了烤肉"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+              "quote": "What if I miss the notification that reminds me of an appointment I may forget?",
+              "anchor": "担心错过约会"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他无法自己修好冰箱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "I can handle the fix.",
+            "sourceHighlight": "can handle the fix",
+            "optionText": "He is unable to fix the fridge by himself.",
+            "optionHighlight": "is unable to fix",
+            "explanation": "原文说 I can handle the fix，他自己能拆，选项说他做不到，正好说反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+              "quote": "I can handle the fix.",
+              "anchor": "能应付修理"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He worries about life without reminders.",
+          "sourceRole": "correctOption",
+          "targetText": "The consequences of an unbeeped life may be too serious to risk.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“没有提醒的生活”就是原文的 unbeeped life（没有哔哔声的生活）。作者先连问两个“要是……怎么办”，怕没关严冰箱门毁了烤肉、怕错过约会，接着说后果可能严重到不敢冒险（too serious to risk），可见他担心的正是没了提醒会误事，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-nb-2026-m2:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者最后对冰箱警报采取的做法。",
+      "stemTranslationZh": "作者最终决定怎样处理冰箱？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读 But 之后他的决定",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "买一台安静得多的冰箱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "买一台更安静的冰箱",
+            "explanation": "作者没打算换冰箱，他是拿着工具站在原来那台冰箱前，准备自己动手改。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "忍受这恼人的噪声。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "But there isn’t – and I’ve had enough.",
+            "sourceHighlight": "I’ve had enough",
+            "optionText": "Tolerate the disturbing noise.",
+            "optionHighlight": "Tolerate",
+            "explanation": "“有静音选项就不管它”只是假设，冰箱并没有这个选项；作者说自己受够了（I’ve had enough），要拆掉发声器，不是继续忍着。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+              "quote": "But there isn’t – and I’ve had enough.",
+              "anchor": "受够了"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "不再深夜去冰箱里找吃的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The reward of a successful late-night search for a delicious sandwich is definitely worth it.",
+            "sourceHighlight": "definitely worth it",
+            "optionText": "Avoid late-night searches in it.",
+            "optionHighlight": "Avoid late-night searches",
+            "explanation": "选项借了 late-night search，可作者拆警报恰恰是为了接着深夜找三明治，他说这份回报绝对值得（definitely worth it）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+              "quote": "The reward of a successful late-night search for a delicious sandwich is definitely worth it.",
+              "anchor": "深夜觅食值得"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "用一张便条代替警报。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+              "quote": "I’ll remove the noise-maker and put a sticky note on the door instead, reminding me to close it.",
+              "anchor": "拆发声器、贴便条"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "finally",
+          "sourceRole": "stem",
+          "targetText": "Finally, tool in hand, I stand before the fridge.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "I’ll remove the noise-maker and put a sticky note on the door instead",
+          "bridgeZh": "冰箱没有静音选项，作者受够了，才说出要怎么做",
+          "note": "题干的 finally 原词出现在[[block:paper-mock-nb-2026-m2:reading-b:5]]开头。"
+        },
+        {
+          "sourceText": "Replace the alarm with a note.",
+          "sourceRole": "correctOption",
+          "targetText": "I’ll remove the noise-maker and put a sticky note on the door instead, reminding me to close it.",
+          "targetParagraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项的“警报”就是原文的“发声器”（noise-maker），“便条”就是门上的便利贴（sticky note）；拆掉前者、改贴后者，instead 正是“代替”的意思，选 D。"
+        }
+      ]
+    }
+  }
+}
