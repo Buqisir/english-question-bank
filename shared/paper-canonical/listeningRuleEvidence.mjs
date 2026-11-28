@@ -46,8 +46,11 @@ export function listeningAsrWindowsCover(windows, { startSeconds, endSeconds }) 
 
 const edgeWordText = text => text.toLowerCase().replace(/\p{P}/gu, '').trim()
 
-const touches = (span, word) => span.startSeconds <= word.runEndSeconds + 1e-9
-  && span.endSeconds >= word.runStartSeconds - 1e-9
+const CROSS_WINDOW_WORD_JITTER_SECONDS = 0.15
+function samePronunciation(span, path, original) {
+  const tolerance = (path === original.path ? 0 : CROSS_WINDOW_WORD_JITTER_SECONDS) + 1e-9
+  return span.startSeconds <= original.runEndSeconds + tolerance && span.endSeconds >= original.runStartSeconds - tolerance
+}
 
 function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source, previous, next: following, observedEdges, machinePaths }, fail) {
   if (!Array.isArray(adjusted.occurrences) || machine.occurrences.length !== adjusted.occurrences.length) {
@@ -68,7 +71,7 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source,
       fail(`${label}: usable adjustment cannot widen more than 1 second per edge`)
     }
     const originalStreams = occurrence.evidencePaths.filter(path => machinePaths.has(path))
-      .map(path => asrByPath.get(path)?.words ?? [])
+      .map(path => ({ path, words: asrByPath.get(path)?.words ?? [] }))
     const edges = [
       ['start', { startSeconds: start, endSeconds: original.startSeconds },
         word => word.startBoundary && Math.abs(word.runStartSeconds - occurrence.startSeconds) <= 1e-9],
@@ -80,7 +83,7 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source,
       if (!listeningAsrWindowsCover(windows, extension)) {
         fail(`${label} ${side}: ASR evidence does not cover the widened range`)
       }
-      const anchors = originalStreams.flatMap(words => words.filter(atMachineEdge))
+      const anchors = originalStreams.flatMap(({ path, words }) => words.filter(atMachineEdge).map(word => ({ ...word, path })))
       const boundaryWords = new Set(anchors.map(word => edgeWordText(word.expressionText)))
       const [boundaryWord] = boundaryWords
       const echo = boundaryWords.size === 1 && boundaryWord && !/\s/u.test(boundaryWord) ? boundaryWord : null
@@ -91,18 +94,19 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source,
           : span.startSeconds >= extension.startSeconds && span.startSeconds < extension.endSeconds
       const ownWords = side === 'end' ? source.slice(-2) : source.slice(0, 2)
       const neighbor = side === 'end' ? following?.[0] : previous?.at(-1)
-      const originals = originalStreams.flatMap(words => words.flatMap((word, index) => {
+      const originals = originalStreams.flatMap(({ path, words }) => words.flatMap((word, index) => {
         if (!atMachineEdge(word)) return []
-        return side === 'end' ? words.slice(Math.max(0, index - 1), index + 1) : words.slice(index, index + 2)
+        const pair = side === 'end' ? words.slice(Math.max(0, index - 1), index + 1) : words.slice(index, index + 2)
+        return pair.map(original => ({ ...original, path }))
       }))
       const judged = observedEdges[side].filter(word => ownWords.includes(edgeWordText(word.text))
-        && originals.some(original => edgeWordText(original.expressionText) === edgeWordText(word.text) && touches(word, original)))
+        && originals.some(original => edgeWordText(original.expressionText) === edgeWordText(word.text) && samePronunciation(word, word.path, original)))
       for (const [path, { words, speech }] of asrByPath) {
         const conflicts = (span, text) => {
           const token = edgeWordText(text)
           if (!overlaps(span)) return false
           if (token === 'text' || token === neighbor) return true
-          if (token === echo && ownWords.includes(token) && anchors.some(word => touches(span, word))) return false
+          if (token === echo && ownWords.includes(token) && anchors.some(word => samePronunciation(span, path, word))) return false
           if (judged.some(word => word.path === path && edgeWordText(word.text) === token
             && word.startSeconds <= span.startSeconds && word.endSeconds >= span.endSeconds)) return false
           // A cropped window can report a different word within the same spoken syllables.

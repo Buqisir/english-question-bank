@@ -288,6 +288,28 @@ test('a supplemental source word explains a cropped recognition only at the same
     else assert.throws(validate, /widened range contains other speech/u)
   }
 })
+test('only cross-window timestamps tolerate a gap of up to 0.15 seconds', t => {
+  for (const [gap, allowed] of [[0.04, true], [0.06, true], [0.15, true], [0.16, false]]) {
+    const start = 3 + gap, end = start + 0.2
+    const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+      extraWords: [{ word: 'sauce', start, end }],
+    })
+    const relative = 'listening-review-evidence/second-window.json'
+    const bytes = Buffer.from(JSON.stringify({ segments: [{ words: [{ word: 'source', start, end }] }] }))
+    writeFileSync(path.join(root, relative), bytes)
+    agent.evidence.push({ ...agent.evidence[0], path: relative, sha256: sha256(bytes), byteLength: bytes.length })
+    Object.assign(agent.groups[0].boundaryJudgment.end.words[0], {
+      text: 'source', startSeconds: start, endSeconds: end, evidencePath: relative,
+    })
+    const validate = () => validateListeningReview(root, agent, subject, transcript)
+    if (allowed) assert.doesNotThrow(validate)
+    else assert.throws(validate, /widened range contains other speech/u)
+  }
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+    extraWords: [{ word: 'source', start: 3.04, end: 3.24 }],
+  })
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
+})
 test('the unresolved next opening You takes precedence over a judged thank you', t => {
   const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
     sourceText: 'M: Thank you.', nextText: 'W: You look tired.', unresolvedNext: true,
