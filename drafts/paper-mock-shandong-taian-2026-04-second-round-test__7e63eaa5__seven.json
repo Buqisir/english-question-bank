@@ -1,0 +1,964 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices": {
+      "overview": "文章介绍怎样用 SMART 目标法帮孩子定目标、实现目标：它把大目标拆成具体的小步骤；定目标要简单，并避开只看结果、替孩子做主等错误；定下目标后还要靠检查、庆祝和调整坚持下去。",
+      "fullTranslationZh": "对许多孩子来说，定下一个大目标并实现它，可能就像攀爬一座湿滑的山坡。但 SMART 目标能给他们工具，让他们满怀信心地征服它。教孩子制定具体的、可衡量的、可实现的、相关的且有时限的目标，能培养他们“我能行”的态度，并帮助他们面对人生中的障碍。\nSMART 目标把较大的目标分解成较小的、可操作的步骤。它们免去了瞎猜，也让目标更容易跟进。目标应当具体、详细。例如，像“数学学得更好”这样不明确的目标，可以改成“每天晚饭后练习乘法表10分钟”。\n和孩子一起制定 SMART 目标时，关键是让目标由大家一起商定，并且保持简单。首先，不要把目标定得太大，也不要一次定太多。它们会让孩子不堪重负，所以最好一次只专注于一个简单的目标，直到它成为习惯。\n避免常见错误也很重要。其中之一是不关注过程。只表扬结果而不表扬努力，会让孩子在遇到挫折时灰心丧气。此外，不要替孩子定目标——让他们自己掌握自己的目标。\n定下目标只是第一步，坚持下去更重要。有几个窍门可以帮助孩子坚持他们的 SMART 目标。定期检查、庆祝小的进步，并在需要时调整目标，都能帮助孩子按计划推进他们的 SMART 目标。归根结底，SMART 目标不仅关乎达成某件事，更关乎培养孩子时间管理、自律等生活技能。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+          "sourceText": "Teaching children to create goals that are specific, measurable, achievable, relevant, and time-bound builds a can-do attitude and helps them face obstacles in life.",
+          "displayText": "Teaching children to create goals that are specific, measurable, achievable, relevant, and time-bound builds a can-do attitude and helps them face obstacles in life.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:36"
+          ],
+          "translationZh": "教孩子制定具体的、可衡量的、可实现的、相关的且有时限的目标，能培养他们“我能行”的态度，并帮助他们面对人生中的障碍。",
+          "analysisZh": "主干是 Teaching children to create goals … builds … and helps …：动名词短语 Teaching children to create goals 作主语，按单数看，所以两个并列谓语 builds 和 helps 都加 s。that 引导定语从句修饰 goals，从句表语是五个并列形容词 specific, measurable, achievable, relevant, and time-bound，首字母连起来就是 SMART。helps them face obstacles 是 help sb do 结构，them 指 children。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 33,
+              "quote": "Teaching children to create goals"
+            },
+            {
+              "start": 102,
+              "end": 108,
+              "quote": "builds"
+            },
+            {
+              "start": 131,
+              "end": 156,
+              "quote": "helps them face obstacles"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+          "sourceText": "They can make kids feel overwhelmed, so it’s better to focus on one simple goal at a time until it becomes a habit.",
+          "displayText": "They can make kids feel overwhelmed, so it’s better to focus on one simple goal at a time until it becomes a habit.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:38"
+          ],
+          "translationZh": "它们会让孩子不堪重负，所以最好一次只专注于一个简单的目标，直到它成为习惯。",
+          "analysisZh": "全句是 so 连接的两个分句，前因后果。前一句主干 They can make kids feel overwhelmed，是 make + 宾语 + 不带 to 的不定式 feel 作宾补，They 指空里说的太大、太多的目标。后一句 it 是形式主语，真正的主语是 to focus on one simple goal at a time；until 引导时间状语从句，其中 it 指这个简单目标。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 35,
+              "quote": "make kids feel overwhelmed"
+            },
+            {
+              "start": 40,
+              "end": 63,
+              "quote": "it’s better to focus on"
+            },
+            {
+              "start": 90,
+              "end": 114,
+              "quote": "until it becomes a habit"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "全文按“提出难题 → 介绍办法 → 怎样制定 → 避开错误 → 怎样坚持”推进：首段把实现大目标比作爬滑坡，引出 SMART 目标；接着说它把大目标拆小、写具体；随后两段讲和孩子定目标要简单，并指出两种常见错误；末段讲坚持目标的几种做法，最后收到培养生活技能。",
+        "units": [
+          {
+            "unitId": "unit-1",
+            "paragraphIds": [
+              "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1"
+            ],
+            "summary": "实现大目标对孩子来说像爬滑坡，SMART 目标能帮他们自信地做到，并展开 SMART 五个字母的含义。"
+          },
+          {
+            "unitId": "unit-2",
+            "paragraphIds": [
+              "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2"
+            ],
+            "summary": "SMART 目标把大目标拆成小步骤，目标要具体，用把“学好数学”改成“饭后练乘法表”的例子说明。"
+          },
+          {
+            "unitId": "unit-3",
+            "paragraphIds": [
+              "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+              "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4"
+            ],
+            "summary": "和孩子定目标要简单：目标别太大、别太多；还要避开只夸结果不看过程、替孩子定目标两种错误。"
+          },
+          {
+            "unitId": "unit-4",
+            "paragraphIds": [
+              "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5"
+            ],
+            "summary": "坚持比定目标更重要，定期检查、庆祝小进步和及时调整都能帮孩子坚持；最终目的是培养时间管理和自律等能力。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 38,
+          "secondary": 39,
+          "kind": "shadow",
+          "shadowOf": "D",
+          "shared": [
+            "set",
+            "goals"
+          ],
+          "text": "选项让孩子参与定目标，像是接第 38 题空前的 \"collaborative\"。但空后 \"They can make kids feel overwhelmed\" 里，填 C 后 They 只能指 Children，成了孩子让孩子吃不消。放进第 39 题也接不上：空前要列 \"common mistakes\"，C 是正面建议，和段末 \"their own goals\" 也重复。",
+          "quotes": [
+            "collaborative",
+            "They can make kids feel overwhelmed",
+            "Children",
+            "common mistakes",
+            "their own goals"
+          ]
+        },
+        "F": {
+          "target": 37,
+          "secondary": 36,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "tools"
+          ],
+          "text": "选项的 \"track the goals\" 复现第 37 题空前的 \"easier to track\"。但空前说 SMART 目标已让跟进变容易，空后 \"For example\" 举的是把 \"an unclear goal\" 改写具体，和准备 \"professional tools\" 无关。放进第 36 题也接不上：空前说难，要 \"But\" 转到办法上，F 没有转折。",
+          "quotes": [
+            "track the goals",
+            "easier to track",
+            "For example",
+            "an unclear goal",
+            "professional tools",
+            "But"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 121,
+              "quote": "对许多孩子来说，定下一个大目标并实现它，可能就像攀爬一座湿滑的山坡。但 SMART 目标能给他们工具，让他们满怀信心地征服它。教孩子制定具体的、可衡量的、可实现的、相关的且有时限的目标，能培养他们“我能行”的态度，并帮助他们面对人生中的障碍。"
+            },
+            {
+              "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2"
+              ],
+              "start": 122,
+              "end": 220,
+              "quote": "SMART 目标把较大的目标分解成较小的、可操作的步骤。它们免去了瞎猜，也让目标更容易跟进。目标应当具体、详细。例如，像“数学学得更好”这样不明确的目标，可以改成“每天晚饭后练习乘法表10分钟”。"
+            },
+            {
+              "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3"
+              ],
+              "start": 221,
+              "end": 319,
+              "quote": "和孩子一起制定 SMART 目标时，关键是让目标由大家一起商定，并且保持简单。首先，不要把目标定得太大，也不要一次定太多。它们会让孩子不堪重负，所以最好一次只专注于一个简单的目标，直到它成为习惯。"
+            },
+            {
+              "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4"
+              ],
+              "start": 320,
+              "end": 395,
+              "quote": "避免常见错误也很重要。其中之一是不关注过程。只表扬结果而不表扬努力，会让孩子在遇到挫折时灰心丧气。此外，不要替孩子定目标——让他们自己掌握自己的目标。"
+            },
+            {
+              "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5"
+              ],
+              "start": 396,
+              "end": 529,
+              "quote": "定下目标只是第一步，坚持下去更重要。有几个窍门可以帮助孩子坚持他们的 SMART 目标。定期检查、庆祝小的进步，并在需要时调整目标，都能帮助孩子按计划推进他们的 SMART 目标。归根结底，SMART 目标不仅关乎达成某件事，更关乎培养孩子时间管理、自律等生活技能。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:1",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+            "text": "For many kids, setting a big goal and achieving it can feel like climbing a slippery hill. But SMART goals can give them the tools to conquer it with confidence. Teaching children to create goals that are specific, measurable, achievable, relevant, and time-bound builds a can-do attitude and helps them face obstacles in life."
+          },
+          {
+            "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:2",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+            "text": "SMART goals deconstruct larger goals into smaller, actionable steps. They remove guesswork and make goals easier to track. Goals should be specific and detailed. For example, an unclear goal like “do better at math” can be reframed as “practice multiplication tables for 10 minutes after dinner every day”."
+          },
+          {
+            "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:3",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+            "text": "When you set SMART goals with kids, the key is to keep them collaborative and simple. First, avoid making goals too big or setting too many of them. They can make kids feel overwhelmed, so it’s better to focus on one simple goal at a time until it becomes a habit."
+          },
+          {
+            "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:4",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4",
+            "text": "It’s also important to avoid common mistakes. One of them is paying no attention to process. Praising only the results instead of the effort will make kids discouraged when they face setbacks. What’s more, don’t set goals for your kids – let them take ownership of their own goals."
+          },
+          {
+            "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:5",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5",
+            "text": "Setting the goal is just the first step; sticking to it is more important. There are several tips to help kids stick to their SMART goals. Regular check-ins, celebrating small progress and adjusting goals when needed can all help kids stay on track with their SMART goals. In the end, SMART goals are not just about achieving something, but about building life skills like time management and self-discipline for kids."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+                "start": 65,
+                "end": 89,
+                "quote": "climbing a slippery hill"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+                "start": 24,
+                "end": 33,
+                "quote": "攀爬一座湿滑的山坡"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:36"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:36",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+                "start": 91,
+                "end": 161,
+                "quote": "But SMART goals can give them the tools to conquer it with confidence."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+                "start": 34,
+                "end": 63,
+                "quote": "但 SMART 目标能给他们工具，让他们满怀信心地征服它。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+                "start": 143,
+                "end": 202,
+                "quote": "an unclear goal like “do better at math” can be reframed as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+                "start": 59,
+                "end": 81,
+                "quote": "像“数学学得更好”这样不明确的目标，可以改成"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:37"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:37",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:2",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+                "start": 123,
+                "end": 161,
+                "quote": "Goals should be specific and detailed."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+                "start": 46,
+                "end": 56,
+                "quote": "目标应当具体、详细。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+                "start": 93,
+                "end": 128,
+                "quote": "They can make kids feel overwhelmed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+                "start": 61,
+                "end": 71,
+                "quote": "它们会让孩子不堪重负"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:38"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:38",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:3",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+                "start": 86,
+                "end": 148,
+                "quote": "First, avoid making goals too big or setting too many of them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+                "start": 39,
+                "end": 61,
+                "quote": "首先，不要把目标定得太大，也不要一次定太多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4",
+                "start": 23,
+                "end": 44,
+                "quote": "avoid common mistakes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4",
+                "start": 0,
+                "end": 6,
+                "quote": "避免常见错误"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:39"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:39",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:4",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4",
+                "start": 46,
+                "end": 92,
+                "quote": "One of them is paying no attention to process."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4",
+                "start": 11,
+                "end": 22,
+                "quote": "其中之一是不关注过程。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5",
+                "start": 41,
+                "end": 73,
+                "quote": "sticking to it is more important"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5",
+                "start": 10,
+                "end": 17,
+                "quote": "坚持下去更重要"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:40"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:40",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:completed:5",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5",
+                "start": 75,
+                "end": 138,
+                "quote": "There are several tips to help kids stick to their SMART goals."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5",
+                "start": 18,
+                "end": 44,
+                "quote": "有几个窍门可以帮助孩子坚持他们的 SMART 目标。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:36"
+            ],
+            "selectedSentenceId": "sentence:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+                "start": 98,
+                "end": 263,
+                "quote": "Teaching children to create goals that are specific, measurable, achievable, relevant, and time-bound builds a can-do attitude and helps them face obstacles in life."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+                "start": 63,
+                "end": 121,
+                "quote": "教孩子制定具体的、可衡量的、可实现的、相关的且有时限的目标，能培养他们“我能行”的态度，并帮助他们面对人生中的障碍。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:38"
+            ],
+            "selectedSentenceId": "sentence:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:source",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+                "start": 93,
+                "end": 208,
+                "quote": "They can make kids feel overwhelmed, so it’s better to focus on one simple goal at a time until it becomes a habit."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:translation-zh",
+                "paragraphId": "translation:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3",
+                "start": 61,
+                "end": 98,
+                "quote": "它们会让孩子不堪重负，所以最好一次只专注于一个简单的目标，直到它成为习惯。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:36": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "setting a big goal",
+        "climbing a slippery hill",
+        "create goals",
+        "can-do attitude",
+        "face obstacles"
+      ],
+      "contextEvidence": {
+        "beforeQuote": "For many kids, setting a big goal and achieving it can feel like climbing a slippery hill.",
+        "afterQuote": "Teaching children to create goals that are specific, measurable, achievable, relevant, and time-bound builds a can-do attitude",
+        "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "can feel like climbing a slippery hill",
+          "relation": "But 把空前“定大目标很难”转到“有办法做到”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "conquer it",
+          "signalSide": "option",
+          "targetText": "a slippery hill",
+          "relation": "it 指空前那座难爬的滑坡，也就是定下并实现大目标这件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "climbing a slippery hill",
+          "signalSide": "context-before",
+          "targetText": "conquer it",
+          "relation": "空前的比喻给选项里的 it 提供了所指对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "specific, measurable, achievable, relevant, and time-bound",
+          "signalSide": "context-after",
+          "targetText": "SMART goals",
+          "relation": "空后五个形容词的首字母拼成 SMART，是对选项里 SMART goals 的展开。"
+        }
+      ],
+      "lock": [
+        "But",
+        "slippery hill",
+        "conquer it"
+      ],
+      "find": {
+        "text": "空前 \"climbing a slippery hill\" 说定大目标难，后面该转折；G 用 \"But\" 转到办法，\"conquer it\" 的 it 正指这座坡，them 指 kids。",
+        "quotes": [
+          "climbing a slippery hill",
+          "But",
+          "conquer it"
+        ]
+      },
+      "explain": "空前把实现大目标比作爬滑坡，这句先亮出 SMART 目标这个办法；空后把 SMART 五个字母逐个展开，交代这套办法具体指什么。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "climbing a slippery hill",
+            "optionSide": "conquer it with confidence",
+            "relation": "空前说难爬，选项说能有信心地爬上去，难题和解决一前一后。"
+          },
+          {
+            "contextSide": "specific, measurable, achievable, relevant, and time-bound",
+            "optionSide": "SMART goals",
+            "relation": "空后用五个形容词解释选项里第一次出现的 SMART。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前把实现大目标比作爬滑坡，这句先亮出 SMART 目标这个办法；空后把 SMART 五个字母逐个展开，交代这套办法具体指什么。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:37": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "smaller, actionable steps",
+        "remove guesswork",
+        "easier to track",
+        "an unclear goal",
+        "practice multiplication tables for 10 minutes"
+      ],
+      "contextEvidence": {
+        "beforeQuote": "They remove guesswork and make goals easier to track.",
+        "afterQuote": "For example, an unclear goal like “do better at math” can be reframed as “practice multiplication tables for 10 minutes after dinner every day”.",
+        "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:2"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "For example",
+          "signalSide": "context-after",
+          "targetText": "Goals should be specific and detailed.",
+          "relation": "For example 后面的例子要证明空里那句话，空里得是一条能被例子说明的要求。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "an unclear goal",
+          "signalSide": "context-after",
+          "targetText": "specific and detailed",
+          "relation": "例子先举不明确的目标，再改成具体的，正好对照选项要求的具体、详细。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "specific and detailed",
+          "signalSide": "option",
+          "targetText": "practice multiplication tables for 10 minutes after dinner every day",
+          "relation": "改写后的目标有内容、时长和时间，就是具体、详细的样子。"
+        }
+      ],
+      "lock": [
+        "For example",
+        "unclear goal",
+        "specific and detailed"
+      ],
+      "find": {
+        "text": "先看空后 \"For example\"：例子把 \"an unclear goal\" 改成有时长、有时间的计划，它能证明的只有 A 的 \"specific and detailed\"。",
+        "quotes": [
+          "For example",
+          "an unclear goal",
+          "specific and detailed"
+        ]
+      },
+      "explain": "空前笼统说 SMART 目标好跟进，这句落到“具体”这一条要求上；空后拿“学好数学”和“饭后练10分钟乘法表”对比，示范目标怎样写具体。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "an unclear goal like “do better at math”",
+            "optionSide": "specific and detailed",
+            "relation": "不明确的目标是反面，选项给出要求，例子再示范改法。"
+          },
+          {
+            "contextSide": "practice multiplication tables for 10 minutes after dinner every day",
+            "optionSide": "detailed",
+            "relation": "练什么、练多久、什么时候练都写明了，就是详细。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前笼统说 SMART 目标好跟进，这句落到“具体”这一条要求上；空后拿“学好数学”和“饭后练10分钟乘法表”对比，示范目标怎样写具体。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "选项的 \"track the goals\" 复现第 37 题空前的 \"easier to track\"。但空前说 SMART 目标已让跟进变容易，空后 \"For example\" 举的是把 \"an unclear goal\" 改写具体，和准备 \"professional tools\" 无关。放进第 36 题也接不上：空前说难，要 \"But\" 转到办法上，F 没有转折。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:38": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "keep them collaborative and simple",
+        "feel overwhelmed",
+        "one simple goal at a time",
+        "becomes a habit"
+      ],
+      "contextEvidence": {
+        "beforeQuote": "When you set SMART goals with kids, the key is to keep them collaborative and simple.",
+        "afterQuote": "They can make kids feel overwhelmed, so it’s better to focus on one simple goal at a time until it becomes a habit.",
+        "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:3"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They",
+          "signalSide": "context-after",
+          "targetText": "goals too big / too many of them",
+          "relation": "They 指空里太大、太多的目标，只有它们会让孩子吃不消。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "too big or setting too many",
+          "signalSide": "option",
+          "targetText": "one simple goal at a time",
+          "relation": "太大、太多和空后的“一次一个简单目标”正反对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "simple",
+          "signalSide": "context-before",
+          "targetText": "avoid making goals too big",
+          "relation": "空前要求简单，选项给出做到简单的第一条做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "overwhelmed",
+          "signalSide": "context-after",
+          "targetText": "too big or setting too many",
+          "relation": "目标太大太多，孩子才会不堪重负。"
+        }
+      ],
+      "lock": [
+        "They",
+        "overwhelmed",
+        "one simple goal at a time"
+      ],
+      "find": {
+        "text": "先看空后 \"They can make kids feel overwhelmed\"：They 得指让人吃不消的东西，D 的 \"too big\" \"too many\" 正是；\"one simple goal at a time\" 又和它对着说。",
+        "quotes": [
+          "They can make kids feel overwhelmed",
+          "too big",
+          "too many",
+          "one simple goal at a time"
+        ]
+      },
+      "explain": "空前定下“要简单”的原则，这句给出第一条具体做法；空后先说目标太大太多的坏处，再给出一次只盯一个目标的替代办法。",
+      "distractors": [
+        {
+          "label": "A",
+          "text": "A 也在说怎样定目标，但填 A 后 They 指具体、详细的目标，这种目标不会让孩子 \"overwhelmed\"。",
+          "quotes": [
+            "overwhelmed"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "keep them collaborative and simple",
+            "optionSide": "avoid making goals too big or setting too many of them",
+            "relation": "不贪大、不贪多，就是让目标保持简单。"
+          },
+          {
+            "contextSide": "one simple goal at a time",
+            "optionSide": "too many of them",
+            "relation": "空后的建议正是针对“太多”给出的解决办法。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前定下“要简单”的原则，这句给出第一条具体做法；空后先说目标太大太多的坏处，再给出一次只盯一个目标的替代办法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 也在说怎样定目标，但填 A 后 They 指具体、详细的目标，这种目标不会让孩子 \"overwhelmed\"。"
+        },
+        {
+          "optionLabel": "C",
+          "reason": "选项让孩子参与定目标，像是接第 38 题空前的 \"collaborative\"。但空后 \"They can make kids feel overwhelmed\" 里，填 C 后 They 只能指 Children，成了孩子让孩子吃不消。放进第 39 题也接不上：空前要列 \"common mistakes\"，C 是正面建议，和段末 \"their own goals\" 也重复。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:39": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "avoid common mistakes",
+        "Praising only the results",
+        "instead of the effort",
+        "What’s more"
+      ],
+      "contextEvidence": {
+        "beforeQuote": "It’s also important to avoid common mistakes.",
+        "afterQuote": "Praising only the results instead of the effort will make kids discouraged when they face setbacks. What’s more, don’t set goals for your kids – let them take ownership of their own goals.",
+        "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:4"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "One of them",
+          "signalSide": "option",
+          "targetText": "common mistakes",
+          "relation": "them 指空前的 common mistakes，One of them 引出其中第一个错误。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "common mistakes",
+          "signalSide": "context-before",
+          "targetText": "One of them",
+          "relation": "空前提出“常见错误”，给 them 提供了所指对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "process",
+          "signalSide": "option",
+          "targetText": "the effort",
+          "relation": "过程和空后的努力说的是同一面，与结果相对。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "instead of the effort",
+          "signalSide": "context-after",
+          "targetText": "paying no attention to process",
+          "relation": "只夸结果不夸努力，就是不关注过程的具体表现。"
+        }
+      ],
+      "lock": [
+        "common mistakes",
+        "One of them",
+        "effort"
+      ],
+      "find": {
+        "text": "空前 \"common mistakes\" 要列出错误；B 的 \"One of them\" 里 them 正指这些错误，\"process\" 又对上空后的 \"the effort\"。",
+        "quotes": [
+          "common mistakes",
+          "One of them",
+          "process",
+          "the effort"
+        ]
+      },
+      "explain": "空前只说要避开常见错误，这句点出第一个错误；空后用只夸结果、不夸努力说明它的害处，\"What’s more\" 再补上第二个错误。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "avoid common mistakes",
+            "optionSide": "One of them",
+            "relation": "先总说有错误，再用“其中之一”分说。"
+          },
+          {
+            "contextSide": "Praising only the results instead of the effort",
+            "optionSide": "paying no attention to process",
+            "relation": "空后的例子正是不看过程的做法。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "空前只说要避开常见错误，这句点出第一个错误；空后用只夸结果、不夸努力说明它的害处，\"What’s more\" 再补上第二个错误。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:40": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "sticking to it is more important",
+        "Regular check-ins",
+        "celebrating small progress",
+        "adjusting goals when needed",
+        "stay on track"
+      ],
+      "contextEvidence": {
+        "beforeQuote": "Setting the goal is just the first step; sticking to it is more important.",
+        "afterQuote": "Regular check-ins, celebrating small progress and adjusting goals when needed can all help kids stay on track with their SMART goals. In the end, SMART goals are not just about achieving something, but about building life skills like time management and self-discipline for kids.",
+        "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:5"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "sticking to it",
+          "signalSide": "context-before",
+          "targetText": "stick to their SMART goals",
+          "relation": "空前说坚持更重要，选项接着说怎样坚持，sticking 和 stick 是同一个词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "several tips",
+          "signalSide": "option",
+          "targetText": "Regular check-ins, celebrating small progress and adjusting goals",
+          "relation": "选项预告有几条窍门，空后正好列出三种做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "can all help kids",
+          "signalSide": "context-after",
+          "targetText": "help kids stick to",
+          "relation": "空后的 all 把前面三种做法合在一起，回应选项的 help kids。"
+        }
+      ],
+      "lock": [
+        "sticking to it",
+        "several tips",
+        "can all help kids"
+      ],
+      "find": {
+        "text": "空前说 \"sticking to it\" 更重要，空后连列三种做法，再说 \"can all help kids\"；E 的 \"several tips\" 正好把这串做法引出来。",
+        "quotes": [
+          "sticking to it",
+          "can all help kids",
+          "several tips"
+        ]
+      },
+      "explain": "空前从“定目标”转到“坚持目标”，这句先预告下面要给办法；空后逐条列出检查、庆祝、调整三种做法，再用 \"In the end\" 收到培养生活技能上。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "sticking to it is more important",
+            "optionSide": "stick to their SMART goals",
+            "relation": "同一个动词 stick to 前后相连，话题从定目标转到坚持。"
+          },
+          {
+            "contextSide": "Regular check-ins, celebrating small progress and adjusting goals when needed",
+            "optionSide": "several tips",
+            "relation": "空后三项就是选项说的几条窍门。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前从“定目标”转到“坚持目标”，这句先预告下面要给办法；空后逐条列出检查、庆祝、调整三种做法，再用 \"In the end\" 收到培养生活技能上。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

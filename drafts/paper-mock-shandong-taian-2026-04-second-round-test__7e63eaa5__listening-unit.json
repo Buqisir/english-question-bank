@@ -1,0 +1,1081 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Hey, Alex. Have you paid our electricity bill? I’m worried we’re going to get cut off.\nM: Don’t worry, we’ve still got time. I’ll pay as soon as I finish watching this. The forward is about to take a shot at the goal. Oops…\nW: Seriously? Did you see that? The power’s actually out now!",
+      "translationZh": "女：嘿，亚历克斯。你交电费了吗？我担心我们会被断电。\n男：别担心，我们还有时间。我看完这个就去交。前锋马上要射门了。哎呀……\n女：不会吧？你看到了吗？现在真的停电了！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士担心欠费停电，催亚历克斯去交电费，他说稍后再交，结果家里真的停了电。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "嘿，亚历克斯。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "你交电费了吗？"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我担心我们会被断电。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "别担心，我们还有时间。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "我看完这个就去交。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "前锋马上要射门了。"
+        },
+        {
+          "id": "listening-text-1:7",
+          "zh": "哎呀……"
+        },
+        {
+          "id": "listening-text-1:8",
+          "zh": "不会吧？"
+        },
+        {
+          "id": "listening-text-1:9",
+          "zh": "你看到了吗？"
+        },
+        {
+          "id": "listening-text-1:10",
+          "zh": "现在真的停电了！"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: I’ve been super stressed lately. How do you usually relieve stress?\nM: After a long day, I turn on the table lamp and relax with a book. Or when I want to relax, I love to lie in until lunchtime. Moreover, listening to music is also a good way.\nW: I will definitely give the last one a try.",
+      "translationZh": "女：我最近压力特别大。你平时怎么减压？\n男：忙了一整天之后，我会打开台灯，看本书放松一下。或者想放松的时候，我喜欢睡懒觉，一直睡到午饭时。另外，听音乐也是个好办法。\n女：我一定要试试最后这个。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "女士最近压力很大，向男士请教怎样减压，男士介绍了自己常用的几种放松方式。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "我最近压力特别大。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "你平时怎么减压？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "忙了一整天之后，我会打开台灯，看本书放松一下。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "或者想放松的时候，我喜欢睡懒觉，一直睡到午饭时。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "另外，听音乐也是个好办法。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "我一定要试试最后这个。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: I have washed the dishes. Now I need to sweep up the dirt. Can you clean out the fridge?\nM: The fridge has been thoroughly cleaned. All that’s left for me to do is take the bins out.",
+      "translationZh": "女：我把碗洗好了。现在我得把地上的脏东西扫干净。你能把冰箱清理一下吗？\n男：冰箱已经彻底清理过了。我只剩把垃圾桶拿出去这件事了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士和男士分工做家务，两人说起各自已经做完和还没做的活儿。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "我把碗洗好了。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "现在我得把地上的脏东西扫干净。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "你能把冰箱清理一下吗？"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "冰箱已经彻底清理过了。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我只剩把垃圾桶拿出去这件事了。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: The sweltering heat is killing me. Could we possibly go to the pool for some relief?\nM: I’ve told you that the pool is shut down for a whole week due to repairs.\nW: But I’m burning up! How about we go get some ice cream or find another way to cool off?",
+      "translationZh": "女：这闷热的天气要热死我了。我们能不能去游泳池凉快一下？\n男：我跟你说过，游泳池因为维修要整整关一周。\n女：可我热得受不了了！要不我们去买点冰淇淋，或者想别的办法凉快凉快？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "天气闷热难耐，女士提出几个消暑的主意，男士提醒她其中一个地方去不成。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "这闷热的天气要热死我了。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我们能不能去游泳池凉快一下？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我跟你说过，游泳池因为维修要整整关一周。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "可我热得受不了了！"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "要不我们去买点冰淇淋，或者想别的办法凉快凉快？"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: You’ve eaten half the chocolate bar again! Maybe you should swap it for fruit.\nW: That’s a good idea. I just need something to satisfy my sweet tooth.",
+      "translationZh": "男：你又吃掉了半条巧克力！也许你该把它换成水果。\n女：好主意。我只是需要点东西解解馋。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "男士发现女士又吃掉了半条巧克力，劝她换一种零食，女士作出回应。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你又吃掉了半条巧克力！"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "也许你该把它换成水果。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "好主意。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "我只是需要点东西解解馋。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: I was trying to print out our project reports, but the paper tray is empty again. Do you know if we have more paper in stock?\nM: I think we used up the last pack yesterday.\nW: I’m planning to swing by the supplies store this afternoon, so I can grab some more paper then.\nM: Great! While you’re there, could you also get a few other supplies? I noticed that our scissors are missing, and we’re also low on sticky notes and highlighters.\nW: Of course. Send me a quick list of the things we need in the next hour, and I’ll make sure to pick everything up.",
+      "translationZh": "女：我想把我们的项目报告打印出来，可纸盒又空了。你知道我们还有存纸吗？\n男：我想最后一包昨天就用完了。\n女：我打算今天下午顺路去一趟文具店，到时候可以再买些纸。\n男：太好了！你去的时候，能不能再买些别的用品？我发现我们的剪刀不见了，便利贴和荧光笔也快用完了。\n女：没问题。一小时内把我们需要的东西列个简单的清单发给我，我保证全部买齐。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "合作"
+      },
+      "summaryZh": "两位同事打印项目报告时遇到麻烦，女士打算下午去文具店，男士托她顺便买些办公用品。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "我想把我们的项目报告打印出来，可纸盒又空了。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "你知道我们还有存纸吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我想最后一包昨天就用完了。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我打算今天下午顺路去一趟文具店，到时候可以再买些纸。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "太好了！"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "你去的时候，能不能再买些别的用品？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我发现我们的剪刀不见了，便利贴和荧光笔也快用完了。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "一小时内把我们需要的东西列个简单的清单发给我，我保证全部买齐。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: What’s wrong with Mom and Dad? They look very upset.\nM: Jack just called and said he would like to go to art school instead of medical college.\nW: Why? He worked hard and stayed up late studying because he wanted to become a doctor in the future.\nM: No, he didn’t want to do that. It’s our parents who have always wanted him to be a doctor. Do you remember the times he played the organ and the guitar?\nW: Yeah, he always played very well. He could compose a song very quickly with those instruments.\nM: That’s his actual passion. He doesn’t like performing on stage. He only hopes that the songs he creates can be loved by people.\nW: But I don’t think he should make such a decision. Doesn’t he need to consider our parents’ feelings?\nM: He tried to explain this to Mom and Dad last month, but they wouldn’t listen. I think everyone has the right to pursue their dreams.",
+      "translationZh": "女：爸妈怎么了？他们看起来很难过。\n男：杰克刚打电话来，说他想上艺术学院，不想上医学院了。\n女：为什么？他那么用功，熬夜学习，就是因为将来想当医生啊。\n男：不，他并不想当医生。一直想让他当医生的是我们的父母。你还记得他弹风琴和吉他的那些时候吗？\n女：记得，他一直弹得很好。他用那些乐器很快就能写出一首曲子。\n男：那才是他真正热爱的。他不喜欢上台表演。他只希望自己创作的歌能被人们喜爱。\n女：可我觉得他不该做这样的决定。难道他不需要考虑爸妈的感受吗？\n男：上个月他试着跟爸妈解释过，可他们不肯听。我觉得每个人都有权追求自己的梦想。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "一男一女谈起杰克想放弃医学院、改上艺术学院，父母为此很难过的事。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "爸妈怎么了？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "他们看起来很难过。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "杰克刚打电话来，说他想上艺术学院，不想上医学院了。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "为什么？"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "他那么用功，熬夜学习，就是因为将来想当医生啊。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "不，他并不想当医生。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "一直想让他当医生的是我们的父母。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "你还记得他弹风琴和吉他的那些时候吗？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "记得，他一直弹得很好。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "他用那些乐器很快就能写出一首曲子。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "那才是他真正热爱的。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "他不喜欢上台表演。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "他只希望自己创作的歌能被人们喜爱。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "可我觉得他不该做这样的决定。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "难道他不需要考虑爸妈的感受吗？"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "上个月他试着跟爸妈解释过，可他们不肯听。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "我觉得每个人都有权追求自己的梦想。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Alright, Mr. Johnson. What’s been bothering you lately?\nM: My knees have been quite painful, especially during work. I work in a warehouse, and I’m on my feet all day lifting heavy boxes. Sometimes I have to carry up to 50 pounds at a time.\nW: I see. Are you experiencing swelling or stiffness?\nM: Yes, exactly. The knees get swollen by midday, and by the end of my shift, I can barely bend it. Walking upstairs has become a real challenge. Do you think it’s related to my job? I’ve never had knee issues before.\nW: Very likely. Repetitive lifting like that can put a lot of strain on your joints. I’ll prescribe some medication to reduce the swelling, but it’s also important to modify your work routine. Have you talked to your boss about lighter tasks?\nM: No, I haven’t. I’m worried about falling behind on my workload.\nW: I understand, but continuing like this could lead to a more serious injury. Maybe you can rotate between heavy lifting and paperwork during your shift. Taking short breaks every hour can also help.",
+      "translationZh": "女：好的，约翰逊先生。您最近哪里不舒服？\n男：我的膝盖一直很疼，尤其是干活的时候。我在仓库工作，整天站着搬重箱子。有时一次要搬多达50磅的东西。\n女：明白了。您有肿胀或僵硬的感觉吗？\n男：对，正是这样。到中午膝盖就肿了，到下班时我几乎弯不了腿。上楼梯都成了一件难事。您觉得这和我的工作有关吗？我以前膝盖从没出过问题。\n女：很有可能。像那样反复搬重物会给关节带来很大的负担。我会给您开点消肿的药，但调整您的工作安排也很重要。您和老板谈过换些轻松点的活儿吗？\n男：没有。我担心完不成工作量。\n女：我理解，但再这样下去可能会造成更严重的损伤。也许您可以在一个班次里轮流做搬重物和文书工作。每小时短暂休息一下也会有帮助。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "约翰逊先生讲了自己最近膝盖肿痛的情况和平时的工作，女士了解后给出建议。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "好的，约翰逊先生。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "您最近哪里不舒服？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "我的膝盖一直很疼，尤其是干活的时候。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我在仓库工作，整天站着搬重箱子。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "有时一次要搬多达50磅的东西。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "您有肿胀或僵硬的感觉吗？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "对，正是这样。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "到中午膝盖就肿了，到下班时我几乎弯不了腿。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "上楼梯都成了一件难事。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "您觉得这和我的工作有关吗？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "我以前膝盖从没出过问题。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "很有可能。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "像那样反复搬重物会给关节带来很大的负担。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "我会给您开点消肿的药，但调整您的工作安排也很重要。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "您和老板谈过换些轻松点的活儿吗？"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "没有。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "我担心完不成工作量。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "我理解，但再这样下去可能会造成更严重的损伤。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "也许您可以在一个班次里轮流做搬重物和文书工作。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "每小时短暂休息一下也会有帮助。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "W: Hey, have you read the latest study on Alpine glaciers? It’s pretty worrying.\nM: No, I haven’t. What’s going on?\nW: Well, the Stubai glacier in Austria and others are disappearing fast. Scientists say they’ll be gone in about 2046 because of rising temperatures.\nM: That’s crazy! What does that mean for the area?\nW: There are so many problems. For one, the melting ice leads to more rockfalls, which makes high mountain paths unsafe. Water from the melting glaciers also carries small pieces of rock, including dangerous materials, which can harm water supplies.\nM: Besides this, are there other influences?\nW: Frozen ground is melting, and this makes rocks fall. Tourists can still visit lower places safely, but it’s dangerous to go to higher ones. Oh, and get this: the glaciers are turning green! Plants are growing where there used to be only ice.\nM: That’s such a huge change. All because of climate change, right?\nW: Exactly. It’s a wake-up call for us to reduce carbon emissions without delay, like switching to renewable energy sources, upgrading to electric vehicles, or tightening regulations on industrial factories.",
+      "translationZh": "女：嘿，你读过关于阿尔卑斯山冰川的最新研究吗？挺让人担忧的。\n男：没有。怎么了？\n女：是这样，奥地利的斯图拜冰川和其他冰川正在快速消失。科学家说，由于气温上升，它们大约到2046年就会消失。\n男：太离谱了！这对那个地区意味着什么？\n女：问题可多了。一方面，冰的融化导致更多落石，使高山小路变得不安全。冰川融水还会携带小碎石，其中包括有害物质，可能危害供水。\n男：除此之外，还有别的影响吗？\n女：冻土正在融化，这也会造成落石。游客仍可以安全游览较低的地方，但去更高的地方就危险了。哦，还有，你听好了：冰川正在变绿！原来只有冰的地方正在长出植物。\n男：变化真大啊。全都是气候变化造成的，对吧？\n女：没错。这给我们敲响了警钟，必须立即减少碳排放，比如改用可再生能源、换用电动汽车，或者加强对工厂的管控。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人与环境"
+      },
+      "summaryZh": "两人谈起一项关于阿尔卑斯山冰川的最新研究，女士介绍了冰川变化给当地带来的问题。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "嘿，你读过关于阿尔卑斯山冰川的最新研究吗？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "挺让人担忧的。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "没有。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "怎么了？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "是这样，奥地利的斯图拜冰川和其他冰川正在快速消失。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "科学家说，由于气温上升，它们大约到2046年就会消失。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "太离谱了！"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "这对那个地区意味着什么？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "问题可多了。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "一方面，冰的融化导致更多落石，使高山小路变得不安全。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "冰川融水还会携带小碎石，其中包括有害物质，可能危害供水。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "除此之外，还有别的影响吗？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "冻土正在融化，这也会造成落石。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "游客仍可以安全游览较低的地方，但去更高的地方就危险了。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "哦，还有，你听好了：冰川正在变绿！"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "原来只有冰的地方正在长出植物。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "变化真大啊。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "全都是气候变化造成的，对吧？"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "这给我们敲响了警钟，必须立即减少碳排放，比如改用可再生能源、换用电动汽车，或者加强对工厂的管控。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: My name’s Liz Fuller and I’m a running coach with Compton Park Runners Club. Welcome to my podcast. If you’re thinking about taking up running, I’m here to help.\nI have a couple of simple tips I always give to new runners. I suppose you’ve been told to run very slowly until your fitness increases. Well, I find that can prevent progress. You should run at a speed that feels comfortable, but time yourself and try to run a bit faster each time.\nListening to music can be very helpful. I’d say that it is better than running with a friend, especially as most people are competitive, and that’s not what you want when you’re just starting. I don’t think the time of day is especially important. Some people are better in the evening, while others are morning people, but you need to be consistent, so aim to train regularly. Twice a week is enough to begin with.\nNew members often say to me that they’ve put off running either because they lack confidence, or they don’t have time, or they think they dislike running. Ceri, for example, joined the club two years ago at the age of 40. She was worried about being left behind and being the slowest runner. But she said she was made to feel so welcome after she joined the club. The coach went out of his way to chat with her before and after runs, giving tips on pacing and gear that helped ease her nerves.",
+      "translationZh": "女：我叫莉兹·富勒，是康普顿公园跑步俱乐部的跑步教练。欢迎收听我的播客。如果你正想开始跑步，我可以帮你。\n我总会给新跑者几条简单的建议。我猜有人告诉过你，在体能提高之前要跑得很慢。嗯，我发现这样反而可能妨碍进步。你应该用感觉舒服的速度跑，但要给自己计时，每次都争取跑快一点。\n听音乐会很有帮助。我想说，这比和朋友一起跑要好，尤其是大多数人都爱争强好胜，而你刚起步时并不需要这样。我认为一天中什么时间跑并不特别重要。有些人晚上状态更好，有些人则习惯早起，但你需要保持一贯，所以要争取规律训练。刚开始每周两次就够了。\n新会员常对我说，他们之所以迟迟没开始跑步，要么是缺乏信心，要么是没时间，要么是觉得自己不喜欢跑步。比如切丽，她两年前40岁时加入了俱乐部。她当时担心被落下，担心自己是跑得最慢的人。但她说，加入俱乐部后她感到非常受欢迎。教练特意在跑步前后和她聊天，给她讲配速和装备方面的建议，这帮助她缓解了紧张。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "体育与健康"
+      },
+      "summaryZh": "莉兹·富勒在自己的播客里给打算开始跑步的新手讲几条建议，并讲了一位会员的经历。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "我叫莉兹·富勒，是康普顿公园跑步俱乐部的跑步教练。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "欢迎收听我的播客。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "如果你正想开始跑步，我可以帮你。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我总会给新跑者几条简单的建议。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "我猜有人告诉过你，在体能提高之前要跑得很慢。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "嗯，我发现这样反而可能妨碍进步。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "你应该用感觉舒服的速度跑，但要给自己计时，每次都争取跑快一点。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "听音乐会很有帮助。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "我想说，这比和朋友一起跑要好，尤其是大多数人都爱争强好胜，而你刚起步时并不需要这样。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "我认为一天中什么时间跑并不特别重要。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "有些人晚上状态更好，有些人则习惯早起，但你需要保持一贯，所以要争取规律训练。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "刚开始每周两次就够了。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "新会员常对我说，他们之所以迟迟没开始跑步，要么是缺乏信心，要么是没时间，要么是觉得自己不喜欢跑步。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "比如切丽，她两年前40岁时加入了俱乐部。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "她当时担心被落下，担心自己是跑得最慢的人。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "但她说，加入俱乐部后她感到非常受欢迎。"
+        },
+        {
+          "id": "listening-text-10:17",
+          "zh": "教练特意在跑步前后和她聊天，给她讲配速和装备方面的建议，这帮助她缓解了紧张。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "亚历克斯在做什么？",
+      "optionTranslationsZh": {
+        "A": "交电费。",
+        "B": "看比赛。",
+        "C": "检查电路系统。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll pay as soon as I finish watching this."
+      },
+      "reasonZh": "亚历克斯说要先看完这个（finish watching this），接着又说前锋马上要射门（The forward is about to take a shot），可见他正在看球赛，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "交电费（pay）是他打算看完之后才做的事，女士问起时他还没去交。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士将怎样减压？",
+      "optionTranslationsZh": {
+        "A": "看书。",
+        "B": "听音乐。",
+        "C": "睡到午饭时。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I will definitely give the last one a try."
+      },
+      "reasonZh": "女士说一定要试试最后一种（the last one），男士最后说的是听音乐（listening to music），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "看书（relax with a book）是男士自己下班后的放松方式，是他说的第一种，不是最后一种。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "睡到午饭时（lie in until lunchtime）是男士说的第二种办法，女士要试的是最后一种。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士还需要做什么？",
+      "optionTranslationsZh": {
+        "A": "清理冰箱。",
+        "B": "洗碗。",
+        "C": "处理垃圾。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "All that’s left for me to do is take the bins out."
+      },
+      "reasonZh": "男士说自己只剩把垃圾桶拿出去（take the bins out），“处理垃圾”就是这件事，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士请男士清理冰箱，男士回答冰箱已经彻底清理过了（has been thoroughly cleaned）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "洗碗是女士说自己已经做完的事（I have washed the dishes），不是男士要做的。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "什么时候去游泳池。",
+        "B": "去哪里买冰淇淋。",
+        "C": "天热时怎样降温。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "How about we go get some ice cream or find another way to cool off?"
+      },
+      "reasonZh": "女士嫌天太热（sweltering heat），先想去游泳池，泳池去不成又提吃冰淇淋或想别的办法凉快（cool off），两人一直在商量天热怎样降温，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "游泳池因维修要关一整周（shut down for a whole week），两人没有在商量哪天去。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "冰淇淋只是女士提出的一个降温办法，两人没有谈去哪里买。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士暗示什么？",
+      "optionTranslationsZh": {
+        "A": "她会试着吃水果。",
+        "B": "她会不吃一切甜食。",
+        "C": "她会继续吃巧克力。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "That’s a good idea."
+      },
+      "reasonZh": "男士建议把巧克力换成水果（swap it for fruit），女士回答这是个好主意，可见她愿意试着吃水果，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说自己只是需要点东西解馋（satisfy my sweet tooth），并没有说要戒掉所有甜食。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "巧克力正是男士劝她换掉的零食，女士已经同意换成水果。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "打印机出了什么问题？",
+      "optionTranslationsZh": {
+        "A": "它坏了。",
+        "B": "墨盒空了。",
+        "C": "纸用完了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I think we used up the last pack yesterday."
+      },
+      "reasonZh": "女士说打印机纸盒又空了（the paper tray is empty），男士说最后一包纸昨天就用完了（used up the last pack），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说空了的是纸盒（paper tray），不是墨盒。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士最后让男士做什么？",
+      "optionTranslationsZh": {
+        "A": "列一份清单。",
+        "B": "去接她。",
+        "C": "去购物。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Send me a quick list of the things we need in the next hour, and I’ll make sure to pick everything up."
+      },
+      "reasonZh": "女士最后让男士在一小时内把需要的东西列个清单发给她（Send me a quick list），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说的是自己会把东西都买齐（pick everything up），不是让男士去接她。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "去文具店买东西的是女士自己（swing by the supplies store），男士只需列清单。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "杰克是谁？",
+      "optionTranslationsZh": {
+        "A": "说话人的兄弟。",
+        "B": "说话人的邻居。",
+        "C": "说话人的同学。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s our parents who have always wanted him to be a doctor."
+      },
+      "reasonZh": "男士说一直想让杰克当医生的是“我们的父母”（our parents），女士开头也说杰克的事让爸妈很难过，可见杰克是两人的兄弟，选 A。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "杰克想成为什么？",
+      "optionTranslationsZh": {
+        "A": "歌手。",
+        "B": "作曲家。",
+        "C": "吉他手。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "He only hopes that the songs he creates can be loved by people."
+      },
+      "reasonZh": "女士说杰克能很快写出曲子（compose a song），男士说这才是他真正热爱的（actual passion），他只希望自己创作的歌（songs he creates）受人喜爱，可见他想当作曲家，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "歌手要上台演唱，男士说杰克不喜欢上台表演（doesn’t like performing on stage）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "吉他（guitar）是杰克用来作曲的乐器之一，弹得好不等于想当吉他手。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士对杰克的决定持什么态度？",
+      "optionTranslationsZh": {
+        "A": "支持。",
+        "B": "拿不准。",
+        "C": "不赞成。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "But I don’t think he should make such a decision."
+      },
+      "reasonZh": "女士说她认为杰克不该做这样的决定（don’t think he should），还问他难道不用考虑父母的感受，她是不赞成的，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "支持杰克追求梦想的是男士（everyone has the right to pursue their dreams），不是女士。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "说话人之间是什么关系？",
+      "optionTranslationsZh": {
+        "A": "家人。",
+        "B": "医生和病人。",
+        "C": "老板和雇员。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll prescribe some medication to reduce the swelling, but it’s also important to modify your work routine."
+      },
+      "reasonZh": "女士问约翰逊先生哪里不舒服、有没有肿胀，又说要给他开消肿的药（prescribe some medication），可见两人是医生和病人，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "老板（boss）是女士问他有没有和老板谈过换轻活时提到的另一个人，不是正在说话的人。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "什么让约翰逊先生的膝盖更疼？",
+      "optionTranslationsZh": {
+        "A": "负重快跑。",
+        "B": "整天站着不休息。",
+        "C": "工作时反复搬重箱子。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Repetitive lifting like that can put a lot of strain on your joints."
+      },
+      "reasonZh": "约翰逊先生说自己在仓库整天搬重箱子（lifting heavy boxes），干活时膝盖尤其疼，女士说这样反复搬重物（Repetitive lifting）会给关节很大负担，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "他说整天站着（on my feet all day）是在搬箱子，短暂休息（short breaks）是女士最后给的建议，不是膝盖更疼的原因。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士建议约翰逊先生做什么？",
+      "optionTranslationsZh": {
+        "A": "辞掉工作，以免伤得更重。",
+        "B": "在体力活和办公室工作之间轮换。",
+        "C": "请几天假在家休息。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Maybe you can rotate between heavy lifting and paperwork during your shift."
+      },
+      "reasonZh": "“在体力活和办公室工作之间轮换”就是女士说的在搬重物和文书工作之间轮着做（rotate between heavy lifting and paperwork），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说照这样下去可能伤得更重（a more serious injury），但她建议的是调整工作安排，没有让他辞职。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士说的是每小时短暂休息一下（short breaks every hour），不是请几天假在家休息。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "奥地利的斯图拜冰川和其他冰川可能在什么时候消失？",
+      "optionTranslationsZh": {
+        "A": "大约10年后。",
+        "B": "大约20年后。",
+        "C": "大约30年后。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Scientists say they’ll be gone in about 2046 because of rising temperatures."
+      },
+      "reasonZh": "科学家说这些冰川大约到2046年就会消失（in about 2046），从现在的2026年算起，2046 − 2026 = 20年，选 B。"
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "冰川融化有什么影响？",
+      "optionTranslationsZh": {
+        "A": "破坏水源。",
+        "B": "使许多植物灭绝。",
+        "C": "在较低地区引发大洪水。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Water from the melting glaciers also carries small pieces of rock, including dangerous materials, which can harm water supplies."
+      },
+      "reasonZh": "“破坏水源”就是女士说的冰川融水夹带碎石和有害物质，会危害供水（harm water supplies），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说的是原来只有冰的地方长出了植物（Plants are growing），冰川在变绿，不是植物灭绝。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士提到较低的地方（lower places）游客仍能安全游览，没有说那里发洪水。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "对话结尾女士强调了什么行动？",
+      "optionTranslationsZh": {
+        "A": "投资冰川研究。",
+        "B": "限制游客人数。",
+        "C": "立即减少碳排放。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It’s a wake-up call for us to reduce carbon emissions without delay, like switching to renewable energy sources, upgrading to electric vehicles, or tightening regulations on industrial factories."
+      },
+      "reasonZh": "“立即减少碳排放”就是女士最后说的毫不拖延地减排（reduce carbon emissions without delay），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "游客（Tourists）是女士谈影响时说的，较高的地方去了危险，她没有提限制游客人数。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这位女士是做什么的？",
+      "optionTranslationsZh": {
+        "A": "教练。",
+        "B": "运动员。",
+        "C": "记者。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "My name’s Liz Fuller and I’m a running coach with Compton Park Runners Club."
+      },
+      "reasonZh": "莉兹开头就说自己是跑步俱乐部的跑步教练（running coach），选项沿用原词，选 A。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人建议新跑者怎么做？",
+      "optionTranslationsZh": {
+        "A": "和朋友比赛。",
+        "B": "以舒服的速度训练。",
+        "C": "跑得越慢越好。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "You should run at a speed that feels comfortable, but time yourself and try to run a bit faster each time."
+      },
+      "reasonZh": "莉兹说应该用感觉舒服的速度跑（run at a speed that feels comfortable），选项沿用原词，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "莉兹说听音乐比和朋友一起跑更好（better than running with a friend），因为多数人爱较劲，新手不需要这样。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "跑得很慢是新手常听到的说法（you’ve been told to run very slowly），莉兹认为这样会妨碍进步（prevent progress）。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人认为下列哪一项更重要？",
+      "optionTranslationsZh": {
+        "A": "选择跑步的时间。",
+        "B": "每周至少跑三次。",
+        "C": "保持规律的训练安排。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Some people are better in the evening, while others are morning people, but you need to be consistent, so aim to train regularly."
+      },
+      "reasonZh": "“保持规律的训练安排”就是莉兹说的要保持一贯、争取规律训练（be consistent … train regularly），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "莉兹明说她不认为一天中什么时间跑特别重要（I don’t think the time of day is especially important）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "莉兹说刚开始每周两次就够了（Twice a week is enough），没有要求至少三次。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人为什么提到切丽？",
+      "optionTranslationsZh": {
+        "A": "为了说明跑步的好处。",
+        "B": "为了举例说明俱乐部怎样帮助新会员。",
+        "C": "为了证明年龄不妨碍开始跑步。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But she said she was made to feel so welcome after she joined the club."
+      },
+      "reasonZh": "莉兹先说新会员常因缺乏信心等原因迟迟不跑，再举切丽为例：她入会后受到热情欢迎（made to feel so welcome），教练还主动和她聊天、给建议，这是在说明俱乐部怎样帮助新会员，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "莉兹讲切丽，讲的是她怕落后、入会后得到照顾，没有讲跑步给她带来了什么好处。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "切丽40岁入会（at the age of 40）只是介绍她时交代的情况，后文讲的是她的担心和俱乐部怎样让她安心。"
+        }
+      ]
+    }
+  }
+}

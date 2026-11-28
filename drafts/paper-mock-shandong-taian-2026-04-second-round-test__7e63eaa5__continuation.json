@@ -1,0 +1,199 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: “Why not look up the correct way to free a trapped fox online?” suggested Mr. Green. Soon we found a guide from a wildlife rescue center on his phone. It said that a frightened animal calms down when it cannot see, so I gently laid the soft towel over the fox’s head. Slowly, its struggling stopped. The guide also suggested making the paw slippery, so Mr. Green fetched some cooking oil from his kitchen. He held the flashlight steady while I rubbed a little oil around the paw, turned it slowly and slid it back out between the bars. We washed the small cut with clean water. When I lifted the towel, the fox limped across the lawn and disappeared into the bushes.\n\nParagraph 2: Several days later, Mr. Green called me excitedly and asked me to go to his backyard. I ran over, wondering what had happened. Smiling, he pointed quietly at the flower bed. There sat the little fox, its reddish-brown fur clean and shiny. It did not run away. Instead, it walked a few steps along the fence, and I noticed it was no longer limping. The cut on its paw had healed. It looked at us for a moment, with no fear in its eyes this time, and then trotted off. Mr. Green said he would cover the bottom of the fence with wire netting, so that no other animal would get stuck there again.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "“我”是做完作业的学生，接到邻居求助就带着手套和毛巾赶来；Mr. Green 是心软又不敢动手的邻居；被困的小狐狸受了惊，也受了点轻伤。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”讲述，一般过去时；句子中等长度，多用分词短语写动作和神态（his voice trembling、its body trembling）。原文没有一句直接引语，Mr. Green 的话全是转述，续写也以转述为主，只在关键处留一句短的直接引语。",
+          "evidence": [
+            "He told me he had found the fox ten minutes ago while watering flowers"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在两人蹲在铁栏边，想救却不知道怎样才不弄伤狐狸；续写要解决怎样安全地把狐狸的爪子取出来，以及它伤好没有。",
+          "evidence": [
+            "We just hoped we could free the poor little guy safely as soon as possible."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "讲故事的学生，Mr. Green 的邻居",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "接到电话立刻动身，还想到带上手套和毛巾，做事有准备。",
+              "evidence": "I immediately grabbed a pair of thick cotton gloves and a soft towel"
+            },
+            {
+              "label": "此刻",
+              "text": "想救狐狸，却不知道怎样做才不会弄伤它。",
+              "evidence": "I didn’t know the best way to avoid hurting it"
+            }
+          ]
+        },
+        {
+          "name": "Mr. Green",
+          "role": "“我”的邻居，发现被困狐狸的人",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "心疼狐狸，又怕弄伤它、吓着它，不敢自己动手。",
+              "evidence": "he didn’t dare to move it"
+            },
+            {
+              "label": "此刻",
+              "text": "在旁边举手电帮忙，自己也紧张得手发抖。",
+              "evidence": "his hands also a little shaky"
+            }
+          ]
+        },
+        {
+          "name": "小狐狸",
+          "role": "爪子卡在铁栏里的小狐狸",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "又怕又无助，一直挣扎却挣不脱。",
+              "evidence": "its big eyes were filled with fear and helplessness"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "a soft towel",
+          "use": "第 1 段用：照网上的方法把毛巾盖在狐狸头上，让它看不见、安静下来，原文带来的东西有了用处。"
+        },
+        {
+          "sourceQuote": "Mr. Green held a flashlight to help me see clearly, his hands also a little shaky.",
+          "use": "第 1 段用：有了方法以后，他把手电举稳了，从手抖到手稳，写出两人心里有了底。"
+        },
+        {
+          "sourceQuote": "finding a small cut with a little blood, but no serious injury",
+          "use": "第 2 段用：几天后狐狸走路不再一瘸一拐，伤口已经长好，收住“它伤得怎样”这个问题。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "照网上查到的办法用毛巾让狐狸安静、用油让爪子滑出来，狐狸跑走；几天后它回到后院，伤已好，Mr. Green 决定把铁栏底部围上铁丝网。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "接着 Mr. Green 的建议上网查方法，并照着做；第二段首句已跳到几天后，所以把狐狸救出来这件事要在第一段了结。",
+          "draft": "两人查到野生动物救助中心的指南：我用毛巾盖住狐狸的头让它安静，Mr. Green 拿来食用油并举稳手电，我把爪子慢慢转出来；洗过伤口后狐狸一瘸一拐地跑进灌木丛。",
+          "bridgeQuote": "Several days later",
+          "bridge": "几天后 Mr. Green 为什么这么激动，后院里出现了什么？"
+        },
+        {
+          "paragraph": 2,
+          "must": "写“我”赶到后院看到了什么，说明 Mr. Green 为什么激动，并收住原文留下的问题。",
+          "draft": "小狐狸回到花坛边，毛干净了，走路不再瘸，伤口已经长好；它不再怕我们，看了一会儿才离开；Mr. Green 说要用铁丝网把铁栏底部围上，免得别的小动物再被卡住。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: “Why not look up the correct way to free a trapped fox online?” suggested Mr. Green. Soon we found a guide from a wildlife rescue center on his phone. It said that a frightened animal calms down when it cannot see, so I gently laid the soft towel over the fox’s head. Slowly, its struggling stopped. The guide also suggested making the paw slippery, so Mr. Green fetched some cooking oil from his kitchen. He held the flashlight steady while I rubbed a little oil around the paw, turned it slowly and slid it back out between the bars. We washed the small cut with clean water. When I lifted the towel, the fox limped across the lawn and disappeared into the bushes.\n\nParagraph 2: Several days later, Mr. Green called me excitedly and asked me to go to his backyard. I ran over, wondering what had happened. Smiling, he pointed quietly at the flower bed. There sat the little fox, its reddish-brown fur clean and shiny. It did not run away. Instead, it walked a few steps along the fence, and I noticed it was no longer limping. The cut on its paw had healed. It looked at us for a moment, with no fear in its eyes this time, and then trotted off. Mr. Green said he would cover the bottom of the fence with wire netting, so that no other animal would get stuck there again.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把“上网查”变成具体步骤，一步步把狐狸救出来，并让它离开，给第二段留出“几天后”。",
+          "items": [
+            {
+              "quote": "we found a guide from a wildlife rescue center",
+              "explain": "段首句只说“上网查”，这句交代查到了什么。方法来自网上的指南，不另请救援人员到场，救狐狸的仍是“我”和 Mr. Green。"
+            },
+            {
+              "quote": "I gently laid the soft towel over the fox’s head",
+              "explain": "原文“我”出门时特意拿了毛巾，这里让它派上用场；先说明理由（看不见就会安静），再写动作，因果不跳步。"
+            },
+            {
+              "quote": "He held the flashlight steady while I rubbed a little oil around the paw",
+              "explain": "原文他举手电时手在抖，这里写“举稳了”，不用直说“他不紧张了”，读者也看得出两人有了把握。while 把两人同时做的事放进一句。"
+            },
+            {
+              "quote": "the fox limped across the lawn and disappeared into the bushes",
+              "explain": "狐狸带着伤离开，救援这件事在第一段了结；limped 一瘸一拐，又为第二段“伤好没好”埋下问题。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "交代 Mr. Green 激动的原因：狐狸回来了，伤也好了；最后落在修铁栏这个具体动作上。",
+          "items": [
+            {
+              "quote": "I ran over, wondering what had happened.",
+              "explain": "接住段首句的电话，wondering 写出“我”的疑问，读者跟着“我”一起去看后院里有什么。"
+            },
+            {
+              "quote": "I noticed it was no longer limping. The cut on its paw had healed.",
+              "explain": "和第一段的 limped、原文的 small cut 对上，用看得见的变化说明它好了，不靠“我们很高兴”这类空话。"
+            },
+            {
+              "quote": "with no fear in its eyes this time",
+              "explain": "原文写它眼里满是恐惧，这里只改一处：这次眼里没有害怕。用前后对照写出狐狸的变化，不写它“报恩”“道谢”。"
+            },
+            {
+              "quote": "he would cover the bottom of the fence with wire netting",
+              "explain": "狐狸是被铁栏卡住的，结尾就落在补铁栏这件事上，把原文的问题收干净，不贴一句放在哪篇都成立的道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "lay the towel over the fox’s head",
+          "function": "写救援的具体动作，把原文带来的毛巾用起来，比笼统说“我们想办法让它安静”具体。"
+        },
+        {
+          "expression": "slide it back out between the bars",
+          "function": "说明爪子是怎样取出来的：顺着卡进去的方向退出来，动作清楚，学生也能照着写。"
+        },
+        {
+          "expression": "no longer limping / had healed",
+          "function": "用前后对照写恢复：第一段一瘸一拐，第二段不瘸了，比直接写“它好了”更有画面。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段写打电话请动物救援人员赶来，由他们把狐狸救出",
+          "why": "段首句是建议上网查方法，原文的问题是“我们不知道怎么做”，该由两人学会以后自己动手；新来的救援人员会抢走原文人物的戏，也成了天降帮助。"
+        },
+        {
+          "pitfall": "第一段没写狐狸被救出，或救出后一直留在后院",
+          "why": "第二段首句一下跳到几天后，又说 Mr. Green 激动地叫“我”去看，救援在第一段了结，几天后后院里的事才是新消息。"
+        },
+        {
+          "pitfall": "第二段写狐狸叼来礼物报恩，或结尾喊“人与动物要和谐相处”之类的口号",
+          "why": "原文的狐狸只是受惊的野生动物，写成会报恩的童话角色就和原文不协同；结尾落在伤好了、补铁栏这样的具体事情上更扎实。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: “Why not look up the correct way to free a trapped fox online?” suggested Mr. Green. His fingers were still a little unsteady, but he soon found a guide from a wildlife rescue center. Reading it aloud, he told me that a frightened animal often calms down once its eyes are covered. Holding my breath, I draped the soft towel over the fox’s head, and its trembling body gradually went still. Next, the guide advised making the trapped paw slippery, so Mr. Green hurried inside and came back with a bottle of cooking oil. While he kept the flashlight steady, I rubbed a few drops around the paw, turned it ever so slightly and eased it back between the bars. It slid free. We rinsed the small cut with clean water before I lifted the towel. For a second the fox stared at us. Then it limped across the lawn and slipped into the bushes.\n\nParagraph 2: Several days later, Mr. Green called me excitedly and asked me to go to his backyard. I dropped my pen and rushed over. He was waiting by the fence, a finger pressed to his lips, and nodded toward the flower bed. There, in the soft evening light, sat the little fox. Its fur was clean now, and when it rose and padded along the fence, it no longer limped. The cut on its paw had healed. It paused a few steps away and looked at us, its eyes calm instead of fearful. Neither of us moved. A moment later it turned and trotted off into the bushes. “It came back to let us see it’s well,” Mr. Green whispered, his voice trembling again, but this time with joy. The next morning, we fixed wire netting along the bottom of the fence, so that no other little creature would be caught there again.",
+      "beyondStandard": [
+        {
+          "quote": "His fingers were still a little unsteady",
+          "explain": "接住原文 his hands also a little shaky，先写他还在紧张，再让他找到办法，人物情绪是连着原文往下走的。"
+        },
+        {
+          "quote": "a finger pressed to his lips",
+          "explain": "不写“他让我别出声”，只写一个动作，读者就知道后院里有怕被吓走的东西，悬念留到下一句才揭开。"
+        },
+        {
+          "quote": "his voice trembling again, but this time with joy",
+          "explain": "回收原文开头 his voice trembling a little over the phone：同样是声音发抖，开头因为着急，这里因为高兴，首尾对照比直接说“他很激动”更地道。"
+        }
+      ]
+    }
+  }
+}

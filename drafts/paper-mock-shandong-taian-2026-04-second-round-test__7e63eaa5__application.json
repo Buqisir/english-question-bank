@@ -1,0 +1,126 @@
+{
+  "taskType": "application",
+  "modelAnswer": "This chart surprised me. It shows that in the 12 months ending August 2025, AI data centers produced 2.5% to 3.7% of global carbon emissions, while the aviation industry produced 2%. In other words, the AI we use every day pollutes more than all the planes in the sky.\n\nTo change this, I have two suggestions. First, tech companies should power their data centers with clean energy like solar and wind power. Second, before asking AI a simple question, we users can try a quick search or think it through ourselves.\n\nAI is a powerful tool, but it should not cost the earth. If companies and users act now, we can enjoy AI and a greener planet.",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "网页评论，直接写评论正文；题面没有给定称呼、首句和署名，姓名另填在 Name 栏",
+        "personTense": "第一人称发表看法；转述图中这 12 个月的数据用一般过去时，提建议用 should、can 等情态动词",
+        "readerTone": "读者是这个环保网站上的网友，语气客观、友好，提建议时有号召力但不说教",
+        "goal": "用图中数字说清 AI 数据中心的排放已超过航空业，并提出可行的减排建议"
+      },
+      "taskRequires": [
+        "总结图片信息：图中比较了截至 2025 年 8 月的 12 个月里 AI 数据中心和航空业的碳排放占比",
+        "提出建议"
+      ],
+      "thisEssayChooses": "先照图转述两组占比（2.5%–3.7% 与 2%），再用“我们每天用的 AI 比天上所有飞机排得还多”点出对比；建议分两层：科技公司用太阳能、风能等清洁能源给数据中心供电，普通用户遇到简单问题先自己查或自己想；最后用 not cost the earth 收住，呼吁公司和用户一起行动。"
+    },
+    "standard": {
+      "essay": "This chart surprised me. It shows that in the 12 months ending August 2025, AI data centers produced 2.5% to 3.7% of global carbon emissions, while the aviation industry produced 2%. In other words, the AI we use every day pollutes more than all the planes in the sky.\n\nTo change this, I have two suggestions. First, tech companies should power their data centers with clean energy like solar and wind power. Second, before asking AI a simple question, we users can try a quick search or think it through ourselves.\n\nAI is a powerful tool, but it should not cost the earth. If companies and users act now, we can enjoy AI and a greener planet.",
+      "pointMap": [
+        {
+          "point": "总结图片信息",
+          "quote": "It shows that in the 12 months ending August 2025, AI data centers produced 2.5% to 3.7% of global carbon emissions, while the aviation industry produced 2%."
+        },
+        {
+          "point": "提出建议",
+          "quote": "First, tech companies should power their data centers with clean energy like solar and wind power."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "总结图片信息：先交代时间范围和两组数字，再用一句话点出对比的意思",
+          "items": [
+            {
+              "quote": "in the 12 months ending August 2025",
+              "explain": "照抄图表标题里的时间范围，不改成“去年”或别的年份；数据说的是这 12 个月，所以动词用过去时 produced。"
+            },
+            {
+              "quote": "while the aviation industry produced 2%",
+              "explain": "while 把两组数字放进一句里对照，读者一眼看出谁多谁少，比分成两句各报一个数更省力。"
+            },
+            {
+              "quote": "In other words, the AI we use every day pollutes more than all the planes in the sky.",
+              "explain": "把百分比翻成网友能感受到的画面：手机里的 AI 比天上的飞机排得还多。总结图表不只是报数，还要说出数字意味着什么。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "提出建议：分别对科技公司和普通用户各提一条能做到的办法",
+          "items": [
+            {
+              "quote": "To change this, I have two suggestions.",
+              "explain": "this 指上一段说的排放问题，一句话完成从总结到建议的转向，并先告诉读者有两条。"
+            },
+            {
+              "quote": "power their data centers with clean energy like solar and wind power",
+              "explain": "建议落到数据中心用什么电上，正对着图里的“AI 数据中心”，比空喊“保护环境”具体。"
+            },
+            {
+              "quote": "before asking AI a simple question, we users can try a quick search or think it through ourselves",
+              "explain": "给高中生自己也做得到的一步：简单问题先自己查、自己想。Before doing 开头先交代时机，think it through 是“自己想清楚”的地道说法。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "收束：承认 AI 有用，再呼吁大家一起行动",
+          "items": [
+            {
+              "quote": "it should not cost the earth",
+              "explain": "cost the earth 本义是“花费极大”，这里又让人想到“以地球为代价”，一语双关，正好收住排放话题。"
+            },
+            {
+              "quote": "If companies and users act now",
+              "explain": "把上一段的两类人收在一起，结尾落在“现在就行动”上，读者知道自己该做什么。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "It shows that ..., while ...",
+          "function": "转述图表并在一句里对比两组数据，适合任何“总结图表信息”的要点。"
+        },
+        {
+          "expression": "power ... with clean energy",
+          "function": "说清用什么能源来驱动数据中心，是本题建议里最具体的动词搭配。"
+        },
+        {
+          "expression": "should not cost the earth",
+          "function": "在结尾既承认 AI 的价值，又点出环境代价，语气平和而有分量。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "As a student who uses AI almost daily, I was surprised by this chart. It shows that in the 12 months ending August 2025, AI data centers were responsible for 2.5% to 3.7% of global carbon emissions, while the aviation industry, which is often blamed for polluting the air, accounted for just 2%. At the high end, that is nearly twice as much.\n\nThe hidden cost of AI deserves more attention. Tech companies could take the lead by running their data centers on renewable energy like solar and wind power, and by building models that do more with less electricity. Meanwhile, users like us can do our part: think twice before asking AI to do what a quick search could handle.\n\nSmart technology should make our future brighter, not hotter. Let's use AI wisely, so that progress and a healthy planet can go hand in hand.",
+      "pointMap": [
+        {
+          "point": "总结图片信息",
+          "quote": "It shows that in the 12 months ending August 2025, AI data centers were responsible for 2.5% to 3.7% of global carbon emissions, while the aviation industry, which is often blamed for polluting the air, accounted for just 2%."
+        },
+        {
+          "point": "提出建议",
+          "quote": "Tech companies could take the lead by running their data centers on renewable energy like solar and wind power, and by building models that do more with less electricity."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "which is often blamed for polluting the air",
+          "explain": "补一句人们印象中的“污染大户”是航空业，再说它只占 2%，反差更强；were responsible for 和 accounted for 也让报数的动词不再重复。"
+        },
+        {
+          "quote": "At the high end, that is nearly twice as much.",
+          "explain": "用图中区间的上限 3.7% 和 2% 比，说“接近两倍”，把对比讲得更具体，又没有超出图中数据。"
+        },
+        {
+          "quote": "Smart technology should make our future brighter, not hotter.",
+          "explain": "brighter 和 hotter 对照，暗指全球变暖，比直接说“要保护环境”更有记忆点，也更像网友留言的口吻。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,809 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c": {
+      "overview": "伦敦医生用基因疗法让天生失明的孩子重见光明：把健康基因注入视网膜，修复无法正常工作的感光细胞，术后不少患儿视力明显改善，作者看好这一疗法的前景。",
+      "fullTranslationZh": "伦敦的医生借助基因疗法，让天生失明的孩子重见光明，在医学上迈出了重要一步。这种疗法专为一种影响视网膜的罕见遗传性眼病而设计——视网膜是眼睛中负责把光转化成大脑能理解的信号的部分。\n接受治疗的孩子患有一种由缺陷基因引起的严重视网膜营养不良。这一缺陷使他们眼中的感光细胞无法正常工作。因此，这些孩子在法律上被认定为盲人，尽管有些人仍能分辨明暗。\n在这项新手术中，外科医生通过一次约一小时的锁孔手术，把该缺陷基因的一份健康拷贝注射进一只眼睛。这个基因被安全地包裹在一种无害的病毒里，精准地送到视网膜的感光层。目的是帮助受损的细胞恢复对光的反应能力。\n手术后，研究人员对孩子们的情况跟踪观察了数年。研究结果发表在一份权威医学期刊上。许多家庭反映孩子有了显著的改善。一位家长说，治疗前，即使把明亮的物体举到离儿子的脸只有几英寸的地方，孩子也察觉不到。手术后，男孩开始伸手去够玩具，能认出近处的人。他甚至对透过窗户照进来的阳光有了反应——这是他第一次对光有反应。参与这项工作的资深视网膜专家詹姆斯·班布里奇说，这种疗法不仅帮助眼部细胞更好地工作，还促使大脑更有效地解读视觉信号。\n尽管还需要进一步研究来确认长期安全性，但视力障碍基因疗法的前景光明，有望彻底改变治疗方式，并给视力残障人士带来新的希望。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-1",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+          "sourceText": "The treatment was designed for a rare inherited eye condition that affects the retina – the part of the eye responsible for transforming light into signals the brain can understand.",
+          "displayText": "The treatment was designed for a rare inherited eye condition that affects the retina – the part of the eye responsible for transforming light into signals the brain can understand.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:28",
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:29"
+          ],
+          "translationZh": "这种疗法专为一种影响视网膜的罕见遗传性眼病而设计——视网膜是眼睛中负责把光转化成大脑能理解的信号的部分。",
+          "analysisZh": "主干是 The treatment was designed for a rare inherited eye condition（这种疗法是为一种罕见的遗传性眼病设计的），被动语态。that affects the retina 是定语从句，修饰 condition，说明这种病影响视网膜。破折号后的 the part of the eye … 是 the retina 的同位语，解释视网膜是什么：responsible for transforming light into signals 是形容词短语作后置定语，修饰 part（负责把光转成信号的部分）；signals 后的 the brain can understand 是省略了 that 的定语从句，修饰 signals。看清“转换信号”的是视网膜、大脑只负责理解，第 28 题 C 项的错就一目了然。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "The treatment was designed for"
+            },
+            {
+              "start": 62,
+              "end": 85,
+              "quote": "that affects the retina"
+            },
+            {
+              "start": 108,
+              "end": 155,
+              "quote": "responsible for transforming light into signals"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-2",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+          "sourceText": "Although further research is still needed to confirm long-term safety, the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope to those living with visual disabilities.",
+          "displayText": "Although further research is still needed to confirm long-term safety, the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope to those living with visual disabilities.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:31"
+          ],
+          "translationZh": "尽管还需要进一步研究来确认长期安全性，但视力障碍基因疗法的前景光明，有望彻底改变治疗方式，并给视力残障人士带来新的希望。",
+          "analysisZh": "主干是 the future of gene treatment for visual disorders is bright（视力障碍基因疗法的前景光明），主语 the future 后面带着 of 和 for 两层修饰。句首 Although 引导让步状语从句，其中 to confirm long-term safety 是不定式作目的状语。主句后的 with the potential to … 是介词短语，补充说明“光明”在哪里：不定式 to 后面接两个并列动词短语 revolutionize treatment options 和 bring new hope to …，共用一个 to。句末 those living with visual disabilities 中，living with … 是现在分词短语作后置定语，修饰 those。让步从句里的保留不推翻主句，这是第 31 题判断态度的关键。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 41,
+              "quote": "Although further research is still needed"
+            },
+            {
+              "start": 71,
+              "end": 130,
+              "quote": "the future of gene treatment for visual disorders is bright"
+            },
+            {
+              "start": 150,
+              "end": 203,
+              "quote": "to revolutionize treatment options and bring new hope"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1"
+              ],
+              "start": 0,
+              "end": 89,
+              "quote": "伦敦的医生借助基因疗法，让天生失明的孩子重见光明，在医学上迈出了重要一步。这种疗法专为一种影响视网膜的罕见遗传性眼病而设计——视网膜是眼睛中负责把光转化成大脑能理解的信号的部分。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2"
+              ],
+              "start": 90,
+              "end": 170,
+              "quote": "接受治疗的孩子患有一种由缺陷基因引起的严重视网膜营养不良。这一缺陷使他们眼中的感光细胞无法正常工作。因此，这些孩子在法律上被认定为盲人，尽管有些人仍能分辨明暗。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:3"
+              ],
+              "start": 171,
+              "end": 271,
+              "quote": "在这项新手术中，外科医生通过一次约一小时的锁孔手术，把该缺陷基因的一份健康拷贝注射进一只眼睛。这个基因被安全地包裹在一种无害的病毒里，精准地送到视网膜的感光层。目的是帮助受损的细胞恢复对光的反应能力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4"
+              ],
+              "start": 272,
+              "end": 483,
+              "quote": "手术后，研究人员对孩子们的情况跟踪观察了数年。研究结果发表在一份权威医学期刊上。许多家庭反映孩子有了显著的改善。一位家长说，治疗前，即使把明亮的物体举到离儿子的脸只有几英寸的地方，孩子也察觉不到。手术后，男孩开始伸手去够玩具，能认出近处的人。他甚至对透过窗户照进来的阳光有了反应——这是他第一次对光有反应。参与这项工作的资深视网膜专家詹姆斯·班布里奇说，这种疗法不仅帮助眼部细胞更好地工作，还促使大脑更有效地解读视觉信号。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5"
+              ],
+              "start": 484,
+              "end": 544,
+              "quote": "尽管还需要进一步研究来确认长期安全性，但视力障碍基因疗法的前景光明，有望彻底改变治疗方式，并给视力残障人士带来新的希望。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:28",
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+                "start": 146,
+                "end": 327,
+                "quote": "The treatment was designed for a rare inherited eye condition that affects the retina – the part of the eye responsible for transforming light into signals the brain can understand."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p1",
+                "start": 37,
+                "end": 89,
+                "quote": "这种疗法专为一种影响视网膜的罕见遗传性眼病而设计——视网膜是眼睛中负责把光转化成大脑能理解的信号的部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+                "start": 0,
+                "end": 245,
+                "quote": "Although further research is still needed to confirm long-term safety, the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope to those living with visual disabilities."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p5",
+                "start": 0,
+                "end": 60,
+                "quote": "尽管还需要进一步研究来确认长期安全性，但视力障碍基因疗法的前景光明，有望彻底改变治疗方式，并给视力残障人士带来新的希望。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+                "start": 118,
+                "end": 206,
+                "quote": "This fault meant that the light-sensing cells in their eyes could not function properly."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p2",
+                "start": 29,
+                "end": 50,
+                "quote": "这一缺陷使他们眼中的感光细胞无法正常工作。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+                "start": 69,
+                "end": 144,
+                "quote": "by helping children born blind to see again through the use of gene therapy"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+                "start": 93,
+                "end": 116,
+                "quote": "caused by a faulty gene"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:3",
+                "start": 22,
+                "end": 91,
+                "quote": "surgeons injected (注射) a healthy copy of the faulty gene into one eye"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p1",
+                "start": 5,
+                "end": 24,
+                "quote": "借助基因疗法，让天生失明的孩子重见光明"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p2",
+                "start": 11,
+                "end": 19,
+                "quote": "由缺陷基因引起的"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p3",
+                "start": 26,
+                "end": 46,
+                "quote": "把该缺陷基因的一份健康拷贝注射进一只眼睛"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+                "start": 145,
+                "end": 192,
+                "quote": "Many families reported remarkable improvements."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+                "start": 328,
+                "end": 422,
+                "quote": "After the operation, the boy began to reach for toys and recognize people at a short distance."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p4",
+                "start": 40,
+                "end": 56,
+                "quote": "许多家庭反映孩子有了显著的改善。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p4",
+                "start": 98,
+                "end": 121,
+                "quote": "手术后，男孩开始伸手去够玩具，能认出近处的人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+                "start": 71,
+                "end": 244,
+                "quote": "the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope to those living with visual disabilities"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c-p5",
+                "start": 20,
+                "end": 59,
+                "quote": "视力障碍基因疗法的前景光明，有望彻底改变治疗方式，并给视力残障人士带来新的希望"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先报道伦敦医生用基因疗法让天生失明的孩子重见光明，再交代病因和手术方法，接着用跟踪结果和一个孩子的实例说明疗效，最后在让步中展望前景。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+            "summary": "伦敦医生用基因疗法让天生失明的孩子重见光明，疗法针对一种影响视网膜的罕见遗传眼病",
+            "function": "开门见山报道成果"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+            "summary": "患儿的病由缺陷基因引起，感光细胞无法正常工作，被认定为法定盲人",
+            "function": "交代病因"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:3",
+            "summary": "医生借无害病毒把健康基因送进视网膜，帮助受损细胞恢复对光的反应",
+            "function": "介绍治疗方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+            "summary": "跟踪数年后许多家庭反映明显改善，一个男孩术后能看见玩具和人；专家说疗法还促使大脑更好地解读视觉信号",
+            "function": "用结果和实例证明疗效"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+            "summary": "尽管长期安全尚待确认，基因疗法前景光明",
+            "function": "展望前景，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出原文对缺陷基因造成什么后果的说明。",
+      "stemTranslationZh": "关于这个缺陷基因，我们可以了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它使感光细胞工作不良。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+              "quote": "This fault meant that the light-sensing cells in their eyes could not function properly.",
+              "anchor": "感光细胞无法正常工作"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它使人无法分辨明暗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "As a result, these children were legally classified as blind, even though some could still tell light from dark.",
+            "sourceHighlight": "some could still tell light from dark",
+            "optionText": "It prevents people distinguishing light from dark.",
+            "optionHighlight": "prevents people distinguishing light from dark",
+            "explanation": "原文说这些孩子虽被认定为盲人，有些仍能分辨明暗（could still tell light from dark），选项却说缺陷基因让人分不清明暗。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+              "quote": "even though some could still tell light from dark",
+              "anchor": "有些仍能分辨明暗"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它影响大脑转换光信号的方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the part of the eye responsible for transforming light into signals the brain can understand",
+            "sourceEntity": "the part of the eye",
+            "optionText": "It affects how the brain transforms the light signals.",
+            "optionEntity": "the brain",
+            "explanation": "把光转成信号的是视网膜（the part of the eye），大脑只负责理解这些信号；原文说缺陷基因影响的是眼中的感光细胞。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+              "quote": "the part of the eye responsible for transforming light into signals the brain can understand",
+              "anchor": "视网膜的作用"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它严重损害眼睛的外部。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a severe form of retinal dystrophy",
+            "optionText": "severe damage",
+            "matchType": "exact",
+            "relationNote": "severe 在原文修饰的是视网膜营养不良这种病（a severe form of retinal dystrophy），病在视网膜；原文没说眼睛外部受损。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+              "quote": "The children in the treatment group suffered from a severe form of retinal dystrophy (营养不良的) caused by a faulty gene.",
+              "anchor": "严重的视网膜营养不良"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "faulty gene",
+          "sourceRole": "stem",
+          "targetText": "This fault meant that the light-sensing cells in their eyes could not function properly.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+          "relationType": "locationCue",
+          "targetCue": "This fault",
+          "sourceZh": "缺陷基因",
+          "targetCueZh": "这一缺陷",
+          "answerText": "the light-sensing cells in their eyes could not function properly",
+          "note": "题干 faulty gene 对应原文 This fault。"
+        },
+        {
+          "sourceText": "makes the light-sensing cells perform poorly",
+          "sourceRole": "correctOption",
+          "targetText": "the light-sensing cells in their eyes could not function properly",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "选项的“感光细胞”沿用原文 light-sensing cells，“工作不良”（perform poorly）就是原文的“无法正常工作”（could not function properly），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把疗法针对的病、病因和治疗方法连起来，说明它为什么称得上重大进步。",
+      "stemTranslationZh": "为什么说这种疗法是“重大的一步”？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 by 后的做法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它缩短了眼部手术所需的时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It shortens the time needed for eye surgery.",
+            "explanation": "原文只说手术持续约一小时（lasted about an hour），没拿它和以前的手术比，进步也不在缩短时间。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它清除了患者眼中的有害病毒。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The gene was carried safely inside a harmless virus and placed precisely in the light-sensitive layer of the retina.",
+            "sourceHighlight": "carried safely inside a harmless virus",
+            "optionText": "It removes a harmful virus from the patients’ eyes.",
+            "optionHighlight": "removes a harmful virus",
+            "explanation": "病毒在这里是无害的运载工具（a harmless virus），用来把健康基因送进眼里，不是要清除的有害病毒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:3",
+              "quote": "The gene was carried safely inside a harmless virus and placed precisely in the light-sensitive layer of the retina.",
+              "anchor": "无害病毒运送基因"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它旨在治愈最常见的视网膜疾病。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "The treatment was designed for a rare inherited eye condition that affects the retina – the part of the eye responsible for transforming light into signals the brain can understand.",
+            "sourceHighlight": "a rare inherited eye condition",
+            "optionText": "It intends to cure the most common retinal diseases.",
+            "optionHighlight": "the most common retinal diseases",
+            "explanation": "疗法针对的是一种罕见的遗传眼病（rare），选项说成治最常见的视网膜疾病，把“罕见的一种”扩大成了“最常见的一类”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+              "quote": "a rare inherited eye condition",
+              "anchor": "罕见的遗传眼病"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它有助于从根源上解决某种眼部问题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+              "quote": "by helping children born blind to see again through the use of gene therapy",
+              "anchor": "用基因疗法让盲童重见光明"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:2",
+              "quote": "caused by a faulty gene",
+              "anchor": "病因是缺陷基因"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:3",
+              "quote": "surgeons injected (注射) a healthy copy of the faulty gene into one eye",
+              "anchor": "注入健康基因"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "a major step forward",
+          "sourceRole": "stem",
+          "targetText": "Doctors in London have taken a major step forward in medical science by helping children born blind to see again through the use of gene therapy.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "helping children born blind to see again through the use of gene therapy",
+          "note": "题干 a major step forward 原词出现在原文。"
+        },
+        {
+          "sourceText": "address a certain eye problem at its root",
+          "sourceRole": "correctOption",
+          "targetText": "through the use of gene therapy",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "“某种眼部问题”指 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:1|a rare inherited eye condition]] 说的那种罕见遗传眼病；“从根源上”要连起来推：这病由缺陷基因引起（caused by a faulty gene），手术正是把一份健康的基因注入眼中（a healthy copy of the faulty gene），对着病因下手，所以称得上重大进步，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:30": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者举父子的例子是为了支撑哪个观点。",
+      "stemTranslationZh": "作者为什么在第 4 段提到那位父亲和他的儿子？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句找这个例子证明什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "陈述事实。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Many families reported remarkable improvements.",
+            "sourceHighlight": "remarkable improvements",
+            "optionText": "To present the fact.",
+            "optionHighlight": "present the fact",
+            "explanation": "父子的经历确实是事实，但作者摆出它是为了证明治疗见效；“陈述事实”太笼统，说不出这个例子在为哪个观点服务。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+              "quote": "Many families reported remarkable improvements.",
+              "anchor": "明显改善"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "证明效果。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+              "quote": "Many families reported remarkable improvements.",
+              "anchor": "许多家庭反映明显改善"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+              "quote": "After the operation, the boy began to reach for toys and recognize people at a short distance.",
+              "anchor": "男孩术后的变化"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "预测趋势。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the future of gene treatment for visual disorders is bright",
+            "sourceEntity": "the future of gene treatment",
+            "optionText": "To predict the trend.",
+            "optionEntity": "predict the trend",
+            "explanation": "展望前景的是 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5]]（the future … is bright），父子的事讲的是已经发生的术后变化，不是预测。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+              "quote": "the future of gene treatment for visual disorders is bright",
+              "anchor": "前景光明"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "解释原理。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To explain the theory.",
+            "explanation": "疗法怎样起作用写在 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:3]]（把健康基因送进视网膜）；父子的事只讲孩子术后看得见了，没有解释原理。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "his son",
+          "sourceRole": "stem",
+          "targetText": "One parent said that before the treatment, his son could not notice bright objects even when they were held just inches from his face.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "Many families reported remarkable improvements",
+          "bridgeZh": "儿子术前术后的变化，是“显著改善”的实例",
+          "note": "题干 his son 原词出现在原文。"
+        },
+        {
+          "sourceText": "prove the effect",
+          "sourceRole": "correctOption",
+          "targetText": "Many families reported remarkable improvements.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“效果”就是前文的“显著改善”（remarkable improvements）。术前把亮东西凑到眼前都看不见，术后能伸手够玩具、认人、对阳光有反应，一前一后摆出来，治疗管用就有了实证，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:31": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者评价这项疗法前景的用词判断其态度。",
+      "stemTranslationZh": "作者对这种疗法的前景持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "看 Although 从句后的主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "赞同的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+              "quote": "the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope to those living with visual disabilities",
+              "anchor": "前景光明"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "漠不关心的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the future of gene treatment for visual disorders is bright",
+            "sourceHighlight": "is bright",
+            "optionText": "Indifferent.",
+            "optionHighlight": "Indifferent",
+            "explanation": "作者说前景光明（bright）、能带来新希望（bring new hope），明显抱有期待，并非漠不关心。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+              "quote": "the future of gene treatment for visual disorders is bright",
+              "anchor": "前景光明"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "怀疑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Although further research is still needed to confirm long-term safety",
+            "sourceHighlight": "further research is still needed",
+            "optionText": "Doubtful.",
+            "optionHighlight": "Doubtful",
+            "explanation": "让步从句只说长期安全还需进一步研究（further research is still needed），这是提醒，不是怀疑；主句明说前景光明。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+              "quote": "Although further research is still needed to confirm long-term safety",
+              "anchor": "长期安全待确认"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不明确的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options",
+            "sourceHighlight": "with the potential to revolutionize treatment options",
+            "optionText": "Unclear.",
+            "optionHighlight": "Unclear",
+            "explanation": "作者的态度写得很明白：不但说前景光明，还说有望彻底改变治疗方式（revolutionize treatment options），谈不上态度不明。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+              "quote": "with the potential to revolutionize treatment options",
+              "anchor": "有望彻底改变治疗"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the future",
+          "sourceRole": "stem",
+          "targetText": "Although further research is still needed to confirm long-term safety, the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope to those living with visual disabilities.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "the future of gene treatment for visual disorders is bright with the potential to revolutionize treatment options and bring new hope",
+          "note": "题干 the future 原词出现在原文。"
+        },
+        {
+          "sourceText": "Favorable",
+          "sourceRole": "correctOption",
+          "targetText": "is bright",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“赞同”（Favorable）概括了主句里的几处正面说法：前景光明（bright），有望彻底改变治疗（revolutionize treatment options），能带来新希望（bring new hope）。Although 只提醒长期安全还要研究，没有改变总体态度，选 A。"
+        }
+      ]
+    }
+  }
+}

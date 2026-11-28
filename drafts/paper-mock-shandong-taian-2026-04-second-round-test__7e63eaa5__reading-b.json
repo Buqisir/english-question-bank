@@ -1,0 +1,845 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b": {
+      "overview": "一位第三文化孩子讲述自己随父母辗转多国的成长经历：身份困惑、缺少根基，却也练就了适应力、开阔了眼界，她认为这段艰难的经历值得。",
+      "fullTranslationZh": "在伦敦生活了十年之后，我最近搬到了柏林。结交新朋友时，照例总会被问到“你来自哪里？”我诚实的回答会是：“我其实也不知道。”\n事实上，我们大多数 TCK（第三文化儿童）——这个说法用来指“在个人身份和文化身份尚未充分形成之前就在不同文化间迁移的孩子”——在成长过程中别无选择，只能跟着父母满世界跑。我们常被告知：“收拾行李，孩子们。我们要搬家了！”一眨眼的工夫，一切都变了。\n到 18 岁时，我已经换过 10 次学校，至少搬过 6 个国家，染上了一口让人摸不着头脑的口音，既爱上了旅行，又渴望安定。作为印度尼西亚和意大利混血儿，我在十几岁时常常感到身份危机压在心头。\n在英国住了十年——这是我在一个地方住得最久的一次——之后又搬到一个新的国家，这让我再次感到那种文化上的困惑。作为 TCK 长大，并不像许多人想象的那样迷人。它既是福也是祸（诅咒），美好却难以预料，充满了冒险。这种缺少根基和稳定的状态，很可能会在日后的生活中带来问题。\n不过孩子的适应力很强。克服文化冲击之后，你会开始调整，看到更大的图景。你会明白世界比你大得多，你的问题其实很小。你还学会承担责任、尊重不同的信仰，并形成自己的观点。交上朋友又失去联系，让你懂得一切都是暂时的。\n作为 TCK 长大，你很少意识到自己的适应力有多强，直到年长的朋友常常说你“比同龄人睿智、成熟”。从小四处旅行让你的眼界超越“超常态化”。它教会你，多样性没什么可怕的。作为 TCK 长大很艰难，但给我什么我都不换。它把我塑造成了今天的我——一个真正的“世界公民”。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-1",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+          "sourceText": "The truth is, most of us TCKs (Third Culture Kids) – a term coined to describe “children who move between cultures before they have had the opportunity to fully develop their personal and cultural identity” – had no choice growing up but to follow our parents around the world.",
+          "displayText": "The truth is, most of us TCKs (Third Culture Kids) – a term coined to describe “children who move between cultures before they have had the opportunity to fully develop their personal and cultural identity” – had no choice growing up but to follow our parents around the world.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:25"
+          ],
+          "translationZh": "事实上，我们大多数 TCK（第三文化儿童）——这个说法用来指“在个人身份和文化身份尚未充分形成之前就在不同文化间迁移的孩子”——在成长过程中别无选择，只能跟着父母满世界跑。",
+          "analysisZh": "先把两个破折号之间的插入部分拿掉，主干就是 most of us TCKs … had no choice growing up but to follow our parents around the world（我们大多数 TCK 在成长中别无选择，只能跟着父母满世界跑）。had no choice but to do 意为“除了做……别无选择”，growing up 插在 choice 和 but 之间，点明是在成长阶段。破折号之间的 a term coined to describe “children who …” 是同位语，解释 TCKs 这个说法：coined to describe 是过去分词短语，修饰 term（“被造出来指……的说法”）；引号里 who 引导定语从句修饰 children，before 引导时间状语从句，说明迁移发生在身份形成之前。句首 The truth is 后省略了 that，意为“事实是”。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 50,
+              "quote": "most of us TCKs (Third Culture Kids)"
+            },
+            {
+              "start": 53,
+              "end": 78,
+              "quote": "a term coined to describe"
+            },
+            {
+              "start": 209,
+              "end": 259,
+              "quote": "had no choice growing up but to follow our parents"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-2",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+          "sourceText": "Growing up as a TCK, you rarely realize how adaptable you are, until your older friends often comment on how “wise and mature” you are for your age.",
+          "displayText": "Growing up as a TCK, you rarely realize how adaptable you are, until your older friends often comment on how “wise and mature” you are for your age.",
+          "relatedQuestionIds": [],
+          "translationZh": "作为 TCK 长大，你很少意识到自己的适应力有多强，直到年长的朋友常常说你“比同龄人睿智、成熟”。",
+          "analysisZh": "主干是 you rarely realize how adaptable you are（你很少意识到自己有多能适应），how adaptable you are 是 realize 的宾语从句，how 后接形容词，问的是程度。rarely … until … 连起来读是“直到……才意识到”：直到年长的朋友常说你“比同龄人睿智、成熟”，你才发觉。until 从句里的 how “wise and mature” you are for your age 又是一个 how 从句，作介词 on 的宾语；for your age 意为“就你的年龄而言”。句首 Growing up as a TCK 是现在分词短语作状语，交代背景。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 61,
+              "quote": "you rarely realize how adaptable you are"
+            },
+            {
+              "start": 63,
+              "end": 104,
+              "quote": "until your older friends often comment on"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1"
+              ],
+              "start": 0,
+              "end": 61,
+              "quote": "在伦敦生活了十年之后，我最近搬到了柏林。结交新朋友时，照例总会被问到“你来自哪里？”我诚实的回答会是：“我其实也不知道。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2"
+              ],
+              "start": 62,
+              "end": 186,
+              "quote": "事实上，我们大多数 TCK（第三文化儿童）——这个说法用来指“在个人身份和文化身份尚未充分形成之前就在不同文化间迁移的孩子”——在成长过程中别无选择，只能跟着父母满世界跑。我们常被告知：“收拾行李，孩子们。我们要搬家了！”一眨眼的工夫，一切都变了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:3"
+              ],
+              "start": 187,
+              "end": 282,
+              "quote": "到 18 岁时，我已经换过 10 次学校，至少搬过 6 个国家，染上了一口让人摸不着头脑的口音，既爱上了旅行，又渴望安定。作为印度尼西亚和意大利混血儿，我在十几岁时常常感到身份危机压在心头。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4"
+              ],
+              "start": 283,
+              "end": 416,
+              "quote": "在英国住了十年——这是我在一个地方住得最久的一次——之后又搬到一个新的国家，这让我再次感到那种文化上的困惑。作为 TCK 长大，并不像许多人想象的那样迷人。它既是福也是祸（诅咒），美好却难以预料，充满了冒险。这种缺少根基和稳定的状态，很可能会在日后的生活中带来问题。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5"
+              ],
+              "start": 417,
+              "end": 521,
+              "quote": "不过孩子的适应力很强。克服文化冲击之后，你会开始调整，看到更大的图景。你会明白世界比你大得多，你的问题其实很小。你还学会承担责任、尊重不同的信仰，并形成自己的观点。交上朋友又失去联系，让你懂得一切都是暂时的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6"
+              ],
+              "start": 522,
+              "end": 654,
+              "quote": "作为 TCK 长大，你很少意识到自己的适应力有多强，直到年长的朋友常常说你“比同龄人睿智、成熟”。从小四处旅行让你的眼界超越“超常态化”。它教会你，多样性没什么可怕的。作为 TCK 长大很艰难，但给我什么我都不换。它把我塑造成了今天的我——一个真正的“世界公民”。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+                "start": 0,
+                "end": 277,
+                "quote": "The truth is, most of us TCKs (Third Culture Kids) – a term coined to describe “children who move between cultures before they have had the opportunity to fully develop their personal and cultural identity” – had no choice growing up but to follow our parents around the world."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p2",
+                "start": 0,
+                "end": 86,
+                "quote": "事实上，我们大多数 TCK（第三文化儿童）——这个说法用来指“在个人身份和文化身份尚未充分形成之前就在不同文化间迁移的孩子”——在成长过程中别无选择，只能跟着父母满世界跑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+                "start": 0,
+                "end": 148,
+                "quote": "Growing up as a TCK, you rarely realize how adaptable you are, until your older friends often comment on how “wise and mature” you are for your age."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p6",
+                "start": 0,
+                "end": 49,
+                "quote": "作为 TCK 长大，你很少意识到自己的适应力有多强，直到年长的朋友常常说你“比同龄人睿智、成熟”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+                "start": 157,
+                "end": 206,
+                "quote": "My honest answer would be, “I don’t really know.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p1",
+                "start": 42,
+                "end": 61,
+                "quote": "我诚实的回答会是：“我其实也不知道。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+                "start": 340,
+                "end": 387,
+                "quote": "in the blink of an eye, everything would change"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+                "start": 209,
+                "end": 276,
+                "quote": "had no choice growing up but to follow our parents around the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p2",
+                "start": 111,
+                "end": 123,
+                "quote": "一眨眼的工夫，一切都变了"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p2",
+                "start": 64,
+                "end": 85,
+                "quote": "在成长过程中别无选择，只能跟着父母满世界跑"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+                "start": 291,
+                "end": 309,
+                "quote": "full of adventures"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5",
+                "start": 188,
+                "end": 273,
+                "quote": "You also learn responsibility, respect different beliefs, and form your own opinions."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+                "start": 276,
+                "end": 344,
+                "quote": "Growing up as a TCK was tough, but I wouldn’t trade it for anything."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p4",
+                "start": 98,
+                "end": 103,
+                "quote": "充满了冒险"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p5",
+                "start": 56,
+                "end": 82,
+                "quote": "你还学会承担责任、尊重不同的信仰，并形成自己的观点。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p6",
+                "start": 84,
+                "end": 107,
+                "quote": "作为 TCK 长大很艰难，但给我什么我都不换。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+                "start": 151,
+                "end": 217,
+                "quote": "Growing up as a TCK isn’t as charming as many people would expect."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+                "start": 276,
+                "end": 344,
+                "quote": "Growing up as a TCK was tough, but I wouldn’t trade it for anything."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+                "start": 209,
+                "end": 276,
+                "quote": "had no choice growing up but to follow our parents around the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p4",
+                "start": 54,
+                "end": 78,
+                "quote": "作为 TCK 长大，并不像许多人想象的那样迷人。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p6",
+                "start": 84,
+                "end": 107,
+                "quote": "作为 TCK 长大很艰难，但给我什么我都不换。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b-p2",
+                "start": 64,
+                "end": 85,
+                "quote": "在成长过程中别无选择，只能跟着父母满世界跑"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者从被问“你来自哪里”答不上来说起，回顾自己作为第三文化孩子四处搬家的成长经历：先写身份困惑与缺少根基的苦处，再用 Yet 转到适应力和眼界上的收获，最后表明这段经历值得。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+            "summary": "作者从伦敦搬到柏林，被问来自哪里时只能说“我其实也不知道”",
+            "function": "以亲身场景引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+            "summary": "解释 TCK 的含义：孩子在身份形成前就随父母在不同文化间迁移，搬家常常说走就走",
+            "function": "交代概念和背景"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:3",
+            "summary": "作者 18 岁前换了 10 次学校、至少搬过 6 个国家，青春期常有身份危机",
+            "function": "用亲身经历具体说明"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+            "summary": "再次搬家唤起文化困惑；TCK 的成长有福有祸、难以预料、充满冒险，缺少根基可能留下问题",
+            "function": "写这种成长的复杂与代价"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5",
+            "summary": "孩子适应力强，克服文化冲击后学会承担责任、尊重不同信仰、看淡自己的问题",
+            "function": "转向成长中的收获"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+            "summary": "作为 TCK 长大虽艰难，作者却不愿交换，这段经历让她成为“世界公民”",
+            "function": "总结态度，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者被新朋友问“你来自哪里”时通常怎样回答。",
+      "stemTranslationZh": "被问到“你来自哪里”时，作者通常怎样回答？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "直接说出自己的国籍。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "My honest answer would be, “I don’t really know.”",
+            "sourceHighlight": "I don’t really know",
+            "optionText": "By stating her nationality directly.",
+            "optionHighlight": "stating her nationality directly",
+            "explanation": "作者是印尼和意大利混血（Indonesian-Italian），却说自己其实不知道该怎么答，并没有直接报出国籍。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+              "quote": "My honest answer would be, “I don’t really know.”",
+              "anchor": "作者的回答"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "诚实地承认自己不确定。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+              "quote": "My honest answer would be, “I don’t really know.”",
+              "anchor": "我其实也不知道"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "简要解释 TCK 这个概念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "a term coined to describe “children who move between cultures before they have had the opportunity to fully develop their personal and cultural identity”",
+            "sourceEntity": "a term coined to describe",
+            "optionText": "By explaining the TCK concept briefly.",
+            "optionEntity": "explaining the TCK concept",
+            "explanation": "[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2]] 解释 TCK 这个说法，是作者写给读者看的；她回答新朋友时只有一句“我其实也不知道”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "a term coined to describe “children who move between cultures before they have had the opportunity to fully develop their personal and cultural identity”",
+              "anchor": "TCK 的解释"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "详细讲述自己的经历。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By describing her experiences in detail.",
+            "explanation": "她的回答只有短短一句，没有细说经历；换学校、搬国家这些经历是 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:3]] 讲给读者听的。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "respond",
+          "sourceRole": "stem",
+          "targetText": "My honest answer would be, “I don’t really know.”",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+          "relationType": "locationCue",
+          "targetCue": "answer",
+          "sourceZh": "回应",
+          "targetCueZh": "回答",
+          "answerText": "honest answer would be, “I don’t really know",
+          "note": "题干 respond 对应原文 answer。"
+        },
+        {
+          "sourceText": "admitting her uncertainty honestly",
+          "sourceRole": "correctOption",
+          "targetText": "My honest answer would be, “I don’t really know.”",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“诚实地”（honestly）来自原文 honest，“承认自己不确定”就是她那句“我其实也不知道”（I don’t really know），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从作者对 TCK 童年的描述里，看孩子们怎样面对一次次搬家。",
+      "stemTranslationZh": "关于 TCK 的童年，作者说了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看搬家是怎么来的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们喜欢规划搬家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "We’d often be told, “Pack your bags, kids. We’re moving!”",
+            "sourceEntity": "We’d often be told",
+            "optionText": "They enjoyed planning their moves.",
+            "optionEntity": "They enjoyed planning",
+            "explanation": "搬家由父母决定，孩子只是被告知“收拾行李，我们要搬家了”（Pack your bags），谈不上自己规划，更没说乐在其中。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "We’d often be told, “Pack your bags, kids. We’re moving!”",
+              "anchor": "父母通知搬家"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们反抗父母的决定。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "had no choice growing up but to follow our parents around the world",
+            "sourceHighlight": "to follow our parents",
+            "optionText": "They resisted their parents’ decisions.",
+            "optionHighlight": "resisted their parents’ decisions",
+            "explanation": "原文说孩子别无选择，只能跟着父母走（follow our parents），是听从安排，没有反抗。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "had no choice growing up but to follow our parents around the world",
+              "anchor": "只能跟着父母"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们保持了个人的生活方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "in the blink of an eye, everything would change",
+            "sourceHighlight": "everything would change",
+            "optionText": "They maintained their personal lifestyle.",
+            "optionHighlight": "maintained their personal lifestyle",
+            "explanation": "原文说一眨眼一切都变了（everything would change），原来的生活方式保不住；连个人身份都还没来得及形成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "in the blink of an eye, everything would change",
+              "anchor": "一切都变了"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们被迫适应突如其来的变化。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "in the blink of an eye, everything would change",
+              "anchor": "一眨眼一切都变"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "had no choice growing up but to follow our parents around the world",
+              "anchor": "别无选择"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "childhood",
+          "sourceRole": "stem",
+          "targetText": "The truth is, most of us TCKs (Third Culture Kids) – a term coined to describe “children who move between cultures before they have had the opportunity to fully develop their personal and cultural identity” – had no choice growing up but to follow our parents around the world.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+          "relationType": "locationCue",
+          "targetCue": "growing up",
+          "sourceZh": "童年",
+          "targetCueZh": "成长过程中",
+          "answerText": "in the blink of an eye, everything would change",
+          "bridgeZh": "后文用父母的一声通知，展开“只能跟着走”",
+          "note": "题干 childhood 对应原文 growing up。"
+        },
+        {
+          "sourceText": "forced to adapt to sudden changes",
+          "sourceRole": "correctOption",
+          "targetText": "in the blink of an eye, everything would change",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项两层意思各有出处：“被迫”落在 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2|had no choice growing up]]（had no choice … but to follow），“突然的变化”落在 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2|in the blink of an eye]]（in the blink of an eye, everything would change）。搬不搬由不得孩子，变了只能去适应，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "用两个词概括 TCK 的成长经历：两个词都要在原文找到依据，还要和作者的总评一致。",
+      "stemTranslationZh": "下列哪一项最能描述 TCK 的经历？",
+      "locateBy": "options",
+      "locateFindZh": "两个词逐个回原文找对应，再对照 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6]] but 后的总评",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "艰难又令人困惑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Growing up as a TCK was tough, but I wouldn’t trade it for anything.",
+            "sourceHighlight": "tough",
+            "optionText": "Tough and confusing.",
+            "optionHighlight": "Tough and confusing",
+            "explanation": "tough（艰难）和 cultural confusion（文化困惑）原文都写了，但只是 but 前那一面；作者紧接着说给什么都不换（wouldn’t trade it），只说苦处盖不住全部经历。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+              "quote": "Growing up as a TCK was tough, but I wouldn’t trade it for anything.",
+              "anchor": "艰难但不换"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "平静而可预料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "It is both a blessing and a curse (诅咒), beautiful but unpredictable, and full of adventures.",
+            "sourceHighlight": "unpredictable",
+            "optionText": "Peaceful and predictable.",
+            "optionHighlight": "predictable",
+            "explanation": "原文说这种成长难以预料（unpredictable），一眨眼一切都变；选项去掉 un-，说成平静、可预料，方向正相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+              "quote": "beautiful but unpredictable",
+              "anchor": "难以预料"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "按部就班却开阔眼界。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "opens your eyes",
+            "optionText": "eye-opening",
+            "matchType": "wordFamily",
+            "relationNote": "eye-opening 借自 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6|opens your eyes]]（opens your eyes），开阔眼界这一半没错；但 routine（按部就班）不对，作者 18 岁前换了 10 次学校、至少搬了 6 个国家。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+              "quote": "Travelling from a young age opens your eyes beyond “Hypernormalization”.",
+              "anchor": "开阔眼界"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "充满冒险却有益。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+              "quote": "full of adventures",
+              "anchor": "充满冒险"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5",
+              "quote": "You also learn responsibility, respect different beliefs, and form your own opinions.",
+              "anchor": "成长中的收获"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+              "quote": "Growing up as a TCK was tough, but I wouldn’t trade it for anything.",
+              "anchor": "给什么都不换"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Adventurous but beneficial",
+          "sourceRole": "correctOption",
+          "targetText": "full of adventures",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+          "relationType": "wordFamily",
+          "note": "“冒险”落在 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4|full of adventures]]（full of adventures），说的是四处搬家、难以预料的那一面；“有益”要自己归纳：[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5]] 说学会担当、尊重不同信仰，[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6|I wouldn’t trade it for anything]] 说给什么都不换。D 两半都有依据，又和 but 后的总评方向一致，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:27": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看各段是否都围绕同一件事展开，选出能盖住全文的标题。",
+      "stemTranslationZh": "下列哪一项适合作本文的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1]] 被问来自哪里说起，看后面各段是否都在讲 TCK 怎样长大",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "作为 TCK 长大",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+              "quote": "Growing up as a TCK isn’t as charming as many people would expect.",
+              "anchor": "作为 TCK 长大并不迷人"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+              "quote": "Growing up as a TCK was tough, but I wouldn’t trade it for anything.",
+              "anchor": "艰难但不换"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2",
+              "quote": "had no choice growing up but to follow our parents around the world",
+              "anchor": "随父母迁移长大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "移民面临的挑战",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "This lack of roots and stability will likely cause issues later in life.",
+            "sourceHighlight": "will likely cause issues",
+            "optionText": "Challenges for Migration",
+            "optionHighlight": "Challenges for Migration",
+            "explanation": "文章讲的是跟着父母迁移长大的孩子，不是泛泛的移民（Migration）；而且只说难处，丢了 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5]] [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6]] 写的适应和收获。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+              "quote": "This lack of roots and stability will likely cause issues later in life.",
+              "anchor": "缺少根基的问题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "如何成为世界公民",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "citizen",
+            "optionText": "Citizen",
+            "matchType": "exact",
+            "relationNote": "Global Citizen 借的是 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6|an actual “citizen of the world”]] 的 citizen，那只是作者对自己的评价；全文讲她怎样长大，没有教人怎样成为世界公民。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6",
+              "quote": "It has shaped me to be the person that I am today – an actual “citizen of the world”.",
+              "anchor": "世界公民"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如何适应多元文化",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Yet kids are adaptable.",
+            "sourceHighlight": "adaptable",
+            "optionText": "How to Adapt to Diverse Cultures",
+            "optionHighlight": "Adapt to Diverse Cultures",
+            "explanation": "适应只是 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5]] [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6]] 讲的收获之一（kids are adaptable），文章也没给出适应的方法，前面写搬家和身份困惑的几段都盖不住。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5",
+              "quote": "Yet kids are adaptable.",
+              "anchor": "孩子适应力强"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Growing up as a TCK",
+          "sourceRole": "correctOption",
+          "targetText": "Growing up as a TCK isn’t as charming as many people would expect.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "各段讲的都是作为第三文化孩子长大这件事：[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:2]] [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:3]] 写跟着父母搬家、身份困惑，[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4]] 写这种成长的苦与乐，[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5]] [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6]] 写学会适应、眼界变宽。Growing up as a TCK 在 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:4]] [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:6]] 反复出现，用它作标题正好盖住全文，选 A。"
+        }
+      ]
+    }
+  }
+}

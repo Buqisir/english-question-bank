@@ -1,0 +1,1843 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:cloze": {
+      "overview": "1980年感恩节前夜，18岁的约翰在暴风雪中车辆滑出路面被困，走进一座无人的农舍打电话求救。农舍主人回家后不但没有生气，还热情款待他，两人此后几十年一直保持联系。",
+      "fullTranslationZh": "那是1980年的感恩节前夜。一场大暴风雪覆盖了密苏里州中部，18岁的约翰·莫里斯被困住了。他在去祖父母家过节的路上，车刚从结冰的路面滑了出去，冲进了一条沟渠。他没有受伤，却束手无策——1980年时没有手机可以打电话求助——约翰意识到，没有拖车，他的车出不来。他只穿着抵御微寒的衣服，挡不住大雪，随着天气越来越糟、夜幕降临，他越来越焦虑。\n约翰发现马路对面的山上有一点灯光，便踩着湿漉漉的积雪走到了一座农舍前。门没有锁，他敲了门却没有人应，于是他小心翼翼地走了进去，希望能用一下电话。屋里空无一人，他拨打了紧急求助电话，被告知由于天气恶劣，他只能等待救援。他决定留下一些钱表示感谢，然后回自己车里过夜。\n就在这时，农舍的主人维吉尔·施密茨和他的妻子回来了。他们没有生气，而是热情地招呼约翰，还和他分享了草莓派。随后，他们安排约翰住进客房，第二天早上又给他端上一顿热乎乎的感恩节早餐。约翰的车后来被认定彻底报废，但他始终没有忘记他们的慷慨。\n如今，约翰和维吉尔仍然保持联系，逢年过节互致问候。真挚的情感和深厚的善意能够跨越时间，连接起甚至相隔几十年的人生。",
+      "mainLine": {
+        "theme": {
+          "text": "真情和善意能跨越时间，把相隔多年的人连在一起（True affection and great kindness can go beyond time）。",
+          "quote": "True affection and great kindness can go beyond time"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+            "text": "感恩节前夜暴风雪中约翰的车滑出路面，他求助无门，越来越焦虑。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+            "text": "他走进无人的农舍打电话求救未果，决定留钱致谢后回车里过夜。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+            "text": "主人回家后没有生气，反而热情款待，约翰一直记着这份慷慨。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+            "text": "两人至今保持联系，作者点出真情善意能跨越时间。"
+          }
+        ],
+        "emotion": "无助→焦虑→忐忑→温暖→感念"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-cloze-1",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+          "sourceText": "Unharmed but __43__—with no cell phone to call for help in 1980 – John __44__ his car couldn’t get out without a tow truck（拖车）.",
+          "displayText": "Unharmed but helpless—with no cell phone to call for help in 1980 – John realized his car couldn’t get out without a tow truck（拖车）.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:43",
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:44"
+          ],
+          "translationZh": "他没有受伤，却束手无策——1980年时没有手机可以打电话求助——约翰意识到，没有拖车，他的车出不来。",
+          "analysisZh": "主干是“约翰意识到……”（John realized），后面是省略了 that 的宾语从句（his car couldn’t get out without a tow truck），说明他意识到的内容：没有拖车，车出不来。句首用 but 连接的两个形容词（Unharmed but helpless）作状语，说明约翰当时的状态：人没受伤，却无能为力。两个破折号之间的 with 结构（with no cell phone to call for help in 1980）是插入成分，解释他为什么无助：1980 年还没有手机可以打电话求救。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Unharmed but helpless"
+            },
+            {
+              "start": 68,
+              "end": 81,
+              "quote": "John realized"
+            },
+            {
+              "start": 82,
+              "end": 126,
+              "quote": "his car couldn’t get out without a tow truck"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-cloze-2",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+          "sourceText": "True affection and great kindness can go beyond time, __55__ lives even decades apart.",
+          "displayText": "True affection and great kindness can go beyond time, bridging lives even decades apart.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:55"
+          ],
+          "translationZh": "真挚的情感和深厚的善意能够跨越时间，连接起甚至相隔几十年的人生。",
+          "analysisZh": "主干是“真情和善意能跨越时间”：主语是 and 连接的两个名词短语（True affection and great kindness），谓语是 can go beyond time。逗号后的现在分词短语（bridging lives even decades apart）作状语，进一步说明怎样跨越时间：把人生连在一起。decades apart（相隔几十年）放在 lives 后面修饰它，even 强调相隔之久。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 33,
+              "quote": "True affection and great kindness"
+            },
+            {
+              "start": 34,
+              "end": 52,
+              "quote": "can go beyond time"
+            },
+            {
+              "start": 54,
+              "end": 87,
+              "quote": "bridging lives even decades apart"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1"
+              ],
+              "start": 0,
+              "end": 168,
+              "quote": "那是1980年的感恩节前夜。一场大暴风雪覆盖了密苏里州中部，18岁的约翰·莫里斯被困住了。他在去祖父母家过节的路上，车刚从结冰的路面滑了出去，冲进了一条沟渠。他没有受伤，却束手无策——1980年时没有手机可以打电话求助——约翰意识到，没有拖车，他的车出不来。他只穿着抵御微寒的衣服，挡不住大雪，随着天气越来越糟、夜幕降临，他越来越焦虑。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2"
+              ],
+              "start": 169,
+              "end": 300,
+              "quote": "约翰发现马路对面的山上有一点灯光，便踩着湿漉漉的积雪走到了一座农舍前。门没有锁，他敲了门却没有人应，于是他小心翼翼地走了进去，希望能用一下电话。屋里空无一人，他拨打了紧急求助电话，被告知由于天气恶劣，他只能等待救援。他决定留下一些钱表示感谢，然后回自己车里过夜。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3"
+              ],
+              "start": 301,
+              "end": 418,
+              "quote": "就在这时，农舍的主人维吉尔·施密茨和他的妻子回来了。他们没有生气，而是热情地招呼约翰，还和他分享了草莓派。随后，他们安排约翰住进客房，第二天早上又给他端上一顿热乎乎的感恩节早餐。约翰的车后来被认定彻底报废，但他始终没有忘记他们的慷慨。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4"
+              ],
+              "start": 419,
+              "end": 476,
+              "quote": "如今，约翰和维吉尔仍然保持联系，逢年过节互致问候。真挚的情感和深厚的善意能够跨越时间，连接起甚至相隔几十年的人生。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+            "text": "It was Thanksgiving Eve 1980. A heavy storm blanketed central Missouri, leaving 18-year-old John Morris trapped. His car had just slid off an icy road and into a channel when he was on his way to his grandparents’ home for the holiday. Unharmed but helpless—with no cell phone to call for help in 1980 – John realized his car couldn’t get out without a tow truck（拖车）. Dressed only for mild cold, not severe snow, he grew anxious as the weather worsened and darkness fell."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+            "text": "Spotting a light on a hill across the road, John hiked through the wet snow to a farmhouse. The door was unlocked, and nobody answered his knocks, so he cautiously entered, hoping to use the phone. The house empty, he dialed the emergency number and was told he had to wait for rescue because of bad weather. He decided to leave some cash as a thank you and stay in his car for the night."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+            "text": "Just then, the farmhouse owners – Virgil Schmitz and his wife – returned. Instead of anger, they greeted John with warmth, sharing strawberry pie. Then, they arranged accommodation for John in a guest room and served him a hot Thanksgiving breakfast the next morning. John’s car was later declared a total loss, but he never forgot their generosity."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+            "text": "Today, John and Virgil remain in touch, exchanging seasonal greetings. True affection and great kindness can go beyond time, bridging lives even decades apart."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 69,
+                "end": 108,
+                "quote": "leaving 18-year-old John Morris trapped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 30,
+                "end": 44,
+                "quote": "18岁的约翰·莫里斯被困住了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:41"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 44,
+                "end": 53,
+                "quote": "blanketed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 20,
+                "end": 22,
+                "quote": "覆盖"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 134,
+                "end": 164,
+                "quote": "an icy road and into a channel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 71,
+                "end": 78,
+                "quote": "冲进了一条沟渠"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:42"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 130,
+                "end": 138,
+                "quote": "slid off"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 66,
+                "end": 70,
+                "quote": "滑了出去"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 251,
+                "end": 294,
+                "quote": "with no cell phone to call for help in 1980"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 92,
+                "end": 109,
+                "quote": "1980年时没有手机可以打电话求助"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:43"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 249,
+                "end": 257,
+                "quote": "helpless"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 86,
+                "end": 90,
+                "quote": "束手无策"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 309,
+                "end": 353,
+                "quote": "his car couldn’t get out without a tow truck"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 117,
+                "end": 128,
+                "quote": "没有拖车，他的车出不来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:44"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 309,
+                "end": 317,
+                "quote": "realized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 113,
+                "end": 116,
+                "quote": "意识到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 422,
+                "end": 460,
+                "quote": "the weather worsened and darkness fell"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 149,
+                "end": 160,
+                "quote": "天气越来越糟、夜幕降临"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:45"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 421,
+                "end": 428,
+                "quote": "anxious"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 165,
+                "end": 167,
+                "quote": "焦虑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 11,
+                "end": 31,
+                "quote": "the farmhouse owners"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 5,
+                "end": 10,
+                "quote": "农舍的主人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:46"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 81,
+                "end": 90,
+                "quote": "farmhouse"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 31,
+                "end": 33,
+                "quote": "农舍"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 196,
+                "end": 211,
+                "quote": "The house empty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 72,
+                "end": 78,
+                "quote": "屋里空无一人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:47"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 119,
+                "end": 125,
+                "quote": "nobody"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 45,
+                "end": 48,
+                "quote": "没有人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 213,
+                "end": 222,
+                "quote": "he dialed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 79,
+                "end": 83,
+                "quote": "他拨打了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:48"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 191,
+                "end": 196,
+                "quote": "phone"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 69,
+                "end": 71,
+                "quote": "电话"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 264,
+                "end": 279,
+                "quote": "wait for rescue"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 103,
+                "end": 107,
+                "quote": "等待救援"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:49"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 229,
+                "end": 238,
+                "quote": "emergency"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 83,
+                "end": 87,
+                "quote": "紧急求助"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 325,
+                "end": 349,
+                "quote": "some cash as a thank you"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 113,
+                "end": 120,
+                "quote": "一些钱表示感谢"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:50"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 323,
+                "end": 328,
+                "quote": "leave"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:2",
+                "start": 111,
+                "end": 113,
+                "quote": "留下"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 98,
+                "end": 122,
+                "quote": "greeted John with warmth"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 35,
+                "end": 42,
+                "quote": "热情地招呼约翰"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:51"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 85,
+                "end": 90,
+                "quote": "anger"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 30,
+                "end": 32,
+                "quote": "生气"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 131,
+                "end": 145,
+                "quote": "strawberry pie"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 49,
+                "end": 52,
+                "quote": "草莓派"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:52"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 123,
+                "end": 130,
+                "quote": "sharing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 46,
+                "end": 48,
+                "quote": "分享"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 158,
+                "end": 205,
+                "quote": "arranged accommodation for John in a guest room"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 58,
+                "end": 66,
+                "quote": "安排约翰住进客房"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:53"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 338,
+                "end": 348,
+                "quote": "generosity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:3",
+                "start": 114,
+                "end": 116,
+                "quote": "慷慨"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 23,
+                "end": 38,
+                "quote": "remain in touch"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 11,
+                "end": 15,
+                "quote": "保持联系"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:54"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 40,
+                "end": 50,
+                "quote": "exchanging"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 20,
+                "end": 22,
+                "quote": "互致"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 128,
+                "end": 152,
+                "quote": "lives even decades apart"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 48,
+                "end": 56,
+                "quote": "相隔几十年的人生"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:55"
+            ],
+            "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 125,
+                "end": 133,
+                "quote": "bridging"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 43,
+                "end": 46,
+                "quote": "连接起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:43",
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:44"
+            ],
+            "selectedSentenceId": "ls-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 304,
+                "end": 317,
+                "quote": "John realized"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 318,
+                "end": 362,
+                "quote": "his car couldn’t get out without a tow truck"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 236,
+                "end": 257,
+                "quote": "Unharmed but helpless"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:1",
+                "start": 79,
+                "end": 129,
+                "quote": "他没有受伤，却束手无策——1980年时没有手机可以打电话求助——约翰意识到，没有拖车，他的车出不来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:55"
+            ],
+            "selectedSentenceId": "ls-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 71,
+                "end": 104,
+                "quote": "True affection and great kindness"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 105,
+                "end": 123,
+                "quote": "can go beyond time"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 125,
+                "end": 158,
+                "quote": "bridging lives even decades apart"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-taian-2026-04-second-round-test:cloze:4",
+                "start": 25,
+                "end": 57,
+                "quote": "真挚的情感和深厚的善意能够跨越时间，连接起甚至相隔几十年的人生。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "无助→焦虑→忐忑→温暖→感念"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:41": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "交代故事背景：暴风雪把密苏里州中部整片地方盖住，要一个“覆盖”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是大暴风雪（A heavy storm），宾语是一片地区（central Missouri），结果是约翰被困（trapped），只能是大雪覆盖这片地区。",
+        "quotes": [
+          "A heavy storm",
+          "central Missouri",
+          "trapped"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "覆盖",
+        "meaning": "大雪铺满",
+        "reason": "交代故事背景：暴风雪把密苏里州中部整片地方盖住，要一个“覆盖”的动作。动词看搭配：主语是大暴风雪（A heavy storm），宾语是一片地区（central Missouri），结果是约翰被困（trapped），只能是大雪覆盖这片地区。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "missed",
+          "meaning": "错过、未击中；暴风雪若没有波及这里，就不会让约翰被困（leaving 18-year-old John Morris trapped）。",
+          "quote": "leaving 18-year-old John Morris trapped"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "crashed",
+          "meaning": "撞毁；风暴不会把一片地区撞毁，后文写的是满地湿雪（the wet snow）。",
+          "quote": "the wet snow"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "surrounded",
+          "meaning": "包围；包围是从四周围住，而暴风雪落在密苏里州中部（central Missouri）这片地方本身，是把它盖住。",
+          "quote": "central Missouri"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "A heavy storm",
+          "signalSide": "context-before",
+          "targetText": "A heavy storm blanketed central Missouri",
+          "relation": "主语是大暴风雪，宾语是一片地区，动词要说大雪把这片地区盖住。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "leaving 18-year-old John Morris trapped",
+          "signalSide": "context-after",
+          "relation": "大雪盖住整片地区，才会让约翰被困在路上。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:42": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:42",
+      "blankNo": 42,
+      "pos": "phrase",
+      "role": "main",
+      "context": "约翰出事的那一刻：车在结冰的路上打滑，离开路面掉进沟渠。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "结冰的路（an icy road）容易打滑，同一个动作还接着进了沟渠（and into a channel），要表示车从路面滑出去。",
+        "quotes": [
+          "an icy road",
+          "and into a channel"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "从……上滑落",
+        "meaning": "打滑冲出路面",
+        "reason": "约翰出事的那一刻：车在结冰的路上打滑，离开路面掉进沟渠。词组看语境义：结冰的路（an icy road）容易打滑，同一个动作还接着进了沟渠（and into a channel），要表示车从路面滑出去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cleared up",
+          "meaning": "清理、放晴；车不会清理结冰的路面，后面还写车进了沟渠（and into a channel）。",
+          "quote": "and into a channel"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "laid across",
+          "meaning": "横放在……上；这个词组要接被放的东西，而车是自己冲进了沟渠（and into a channel）。",
+          "quote": "and into a channel"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "passed by",
+          "meaning": "从旁经过；只是经过结冰的路（an icy road），车就不会掉进沟渠、把他困住。",
+          "quote": "an icy road"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "an icy road",
+          "signalSide": "context-after",
+          "targetText": "slid off an icy road and into a channel",
+          "relation": "车从结冰的路面上滑出去，接着掉进沟渠。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "off",
+          "signalSide": "option",
+          "targetText": "slid off",
+          "relation": "小品词表示离开路面（off），和后面的进了沟渠（into a channel）前后相接。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:43": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "约翰的处境跌到低谷：人没受伤，却没法求救，要一个“无能为力”的状态。",
+      "find": {
+        "check": "affect",
+        "text": "“但是”（but）前是没受伤（Unharmed）这一点好处，破折号后补充没有手机求助（with no cell phone to call for help），情绪翻向负面。",
+        "quotes": [
+          "Unharmed",
+          "with no cell phone to call for help"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "无助的",
+        "reason": "约翰的处境跌到低谷：人没受伤，却没法求救，要一个“无能为力”的状态。形容词看情感：“但是”（but）前是没受伤（Unharmed）这一点好处，破折号后补充没有手机求助（with no cell phone to call for help），情绪翻向负面。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hopeful",
+          "meaning": "抱有希望的；破折号后说没有手机求助（with no cell phone to call for help），他看不到脱困的办法。",
+          "quote": "with no cell phone to call for help"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unexpected",
+          "meaning": "出乎意料的；它形容事情，不形容人，这里写的是没法求助（with no cell phone to call for help）的约翰的处境。",
+          "quote": "with no cell phone to call for help"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "surprised",
+          "meaning": "吃惊的；破折号后解释的是没有手机求助（with no cell phone to call for help），说的是无法求救，不是吃惊。",
+          "quote": "with no cell phone to call for help"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Unharmed but",
+          "signalSide": "context-before",
+          "targetText": "Unharmed but helpless",
+          "relation": "“但是”（but）前是没受伤，后面要接一个不利的处境。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "with no cell phone to call for help",
+          "signalSide": "context-after",
+          "relation": "没有手机求助，正是他无助的原因。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:44": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "detail",
+      "context": "约翰看清了自己的处境，要一个“认识到”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "主语约翰（John）后面接的是一个判断：没有拖车车子出不来（his car couldn’t get out without a tow truck），是他看清处境后想明白的。",
+        "quotes": [
+          "John",
+          "his car couldn’t get out without a tow truck"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "意识到",
+        "reason": "约翰看清了自己的处境，要一个“认识到”的动作。动词看搭配：主语约翰（John）后面接的是一个判断：没有拖车车子出不来（his car couldn’t get out without a tow truck），是他看清处境后想明白的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admitted",
+          "meaning": "承认；这里没有谁在追问他，也没有要认的错，他只是自己看出车出不来（his car couldn’t get out）。",
+          "quote": "his car couldn’t get out"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "memorized",
+          "meaning": "记住、背诵；车出不来（his car couldn’t get out）是眼前看出的情况，不是要背下的内容。",
+          "quote": "his car couldn’t get out"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recognized",
+          "meaning": "认出、承认；它侧重认出熟悉的人或物，这里是被困后才想明白车出不来（his car couldn’t get out）。",
+          "quote": "his car couldn’t get out"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his car couldn’t get out without a tow truck",
+          "signalSide": "context-after",
+          "targetText": "John realized his car couldn’t get out without a tow truck",
+          "relation": "宾语从句是约翰对处境的判断，动词要表示他意识到这一点。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:45": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "main",
+      "context": "天越来越坏、天又黑了，衣着单薄的约翰心里越来越紧张，要一个负面情绪。",
+      "find": {
+        "check": "affect",
+        "text": "只穿着抵御微寒的衣服（Dressed only for mild cold），天气变坏又天黑（the weather worsened and darkness fell），情绪只会更紧。",
+        "quotes": [
+          "Dressed only for mild cold",
+          "the weather worsened and darkness fell"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "焦虑的",
+        "reason": "天越来越坏、天又黑了，衣着单薄的约翰心里越来越紧张，要一个负面情绪。形容词看情感：只穿着抵御微寒的衣服（Dressed only for mild cold），天气变坏又天黑（the weather worsened and darkness fell），情绪只会更紧。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "calm",
+          "meaning": "平静的；天气变坏、天又黑了（the weather worsened and darkness fell），衣着单薄的他不会越来越平静。",
+          "quote": "the weather worsened and darkness fell"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cautious",
+          "meaning": "谨慎的；这是做事的态度，这里写天黑变冷（darkness fell）带来的心情，后文进屋时他才小心（cautiously）。",
+          "quote": "darkness fell"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sensitive",
+          "meaning": "敏感的；天气变坏（the weather worsened）让被困的人着急，不是让人变得敏感。",
+          "quote": "the weather worsened"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he grew",
+          "signalSide": "context-before",
+          "targetText": "he grew anxious",
+          "relation": "变得（grew）后接形容词，表示情绪逐渐变成怎样。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the weather worsened and darkness fell",
+          "signalSide": "context-after",
+          "relation": "天气越来越坏、天黑下来，处境更糟，情绪向负面走。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:46": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "main",
+      "context": "约翰朝灯光走去，找到了可能求助的人家，要一处有人住的房子。",
+      "find": {
+        "check": "echo",
+        "text": "下一段说回来的是农舍的主人（the farmhouse owners），原词复现，他走到的正是这座农舍。",
+        "quotes": [
+          "the farmhouse owners"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "农舍",
+        "reason": "约翰朝灯光走去，找到了可能求助的人家，要一处有人住的房子。名词看复现：下一段说回来的是农舍的主人（the farmhouse owners），原词复现，他走到的正是这座农舍。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "truck",
+          "meaning": "卡车；他朝山上的灯光（a light on a hill）走去，后文还敲门进屋，不是一辆卡车。",
+          "quote": "a light on a hill"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hotel",
+          "meaning": "旅馆；后文写回来的是农舍主人夫妇（the farmhouse owners），这是私人住宅，不是旅馆。",
+          "quote": "the farmhouse owners"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "flat",
+          "meaning": "公寓；后文明说回来的是农舍的主人（the farmhouse owners），这里是乡下的农舍。",
+          "quote": "the farmhouse owners"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "the farmhouse owners",
+          "signalSide": "context-after",
+          "relation": "下一段原词复现，点明他走到的是农舍。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a light on a hill",
+          "signalSide": "context-before",
+          "targetText": "hiked through the wet snow to a farmhouse",
+          "relation": "山上亮着灯，说明那里有一处住人的房子。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:47": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:47",
+      "blankNo": 47,
+      "pos": "other",
+      "role": "main",
+      "context": "敲门没人应，他才小心地自己进屋，要一个“没有人”的意思。",
+      "find": {
+        "check": "echo",
+        "text": "后文说房子空着（The house empty），他也是小心地自己进去（cautiously entered），可见敲门没人应。",
+        "quotes": [
+          "The house empty",
+          "cautiously entered"
+        ],
+        "posLabel": "代词"
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "没有人",
+        "reason": "敲门没人应，他才小心地自己进屋，要一个“没有人”的意思。代词看复现：后文说房子空着（The house empty），他也是小心地自己进去（cautiously entered），可见敲门没人应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "someone",
+          "meaning": "有人；有人应门他就不必小心地自己进去（cautiously entered），后文也说房子空着。",
+          "quote": "cautiously entered"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "both",
+          "meaning": "两者都；前文没有出现两个人，后文还说房子空着（The house empty）。",
+          "quote": "The house empty"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "everyone",
+          "meaning": "每个人；后文说房子空着（The house empty），屋里没人能来应门。",
+          "quote": "The house empty"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "answered his knocks",
+          "signalSide": "context-after",
+          "targetText": "nobody answered his knocks",
+          "relation": "应门的人空缺，才接得上他自己小心进屋。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The house empty",
+          "signalSide": "context-after",
+          "relation": "房子空着，和没人应门前后对应。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:48": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "约翰进屋是为了求救，要一样能联系外界的东西。",
+      "find": {
+        "check": "echo",
+        "text": "前文说他没有手机求助（no cell phone to call for help），后文他拨了号码（he dialed），要借用的是电话。",
+        "quotes": [
+          "no cell phone to call for help",
+          "he dialed"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "电话",
+        "reason": "约翰进屋是为了求救，要一样能联系外界的东西。名词看复现：前文说他没有手机求助（no cell phone to call for help），后文他拨了号码（he dialed），要借用的是电话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "kit",
+          "meaning": "成套工具；他进屋后拨打了号码（he dialed），要用的是电话，不是工具包。",
+          "quote": "he dialed"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "room",
+          "meaning": "房间；他已经进了屋，接着做的是拨号（he dialed），要用的是电话。",
+          "quote": "he dialed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "kitchen",
+          "meaning": "厨房；他进屋后做的是拨号求救（he dialed），用不上厨房。",
+          "quote": "he dialed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "hoping to use the",
+          "signalSide": "context-before",
+          "targetText": "hoping to use the phone",
+          "relation": "进屋希望借用的东西，要能用来求救。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he dialed",
+          "signalSide": "context-after",
+          "relation": "后文拨号，说明借用的是电话。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:49": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "detail",
+      "context": "约翰打电话是为了求救，要一个求救用的号码。",
+      "find": {
+        "check": "collocation",
+        "text": "对方告诉他只能等待救援（wait for rescue），他拨的号码（number）是求救用的紧急电话。",
+        "quotes": [
+          "wait for rescue",
+          "number"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "紧急情况",
+        "meaning": "紧急求助",
+        "reason": "约翰打电话是为了求救，要一个求救用的号码。名词看搭配：对方告诉他只能等待救援（wait for rescue），他拨的号码（number）是求救用的紧急电话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hospital",
+          "meaning": "医院；他没受伤（Unharmed），要的是脱困，对方回复的也是等待救援。",
+          "quote": "Unharmed"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "long-distance",
+          "meaning": "长途的；对方回复的是等待救援（wait for rescue），他打的是求救电话，不是长途电话。",
+          "quote": "wait for rescue"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "bank",
+          "meaning": "银行；电话那头告诉他要等待救援（wait for rescue），银行不管救援。",
+          "quote": "wait for rescue"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "number",
+          "signalSide": "context-after",
+          "targetText": "emergency number",
+          "relation": "和号码搭配，说的是哪一类电话。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "wait for rescue",
+          "signalSide": "context-after",
+          "relation": "对方回复的是救援安排，说明打的是求救电话。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:50": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "main",
+      "context": "约翰借用了电话，想留点心意给主人，然后回车里，要一个“留下”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是一些钱（some cash），作为谢礼（as a thank you），之后他要回车里过夜（stay in his car），钱是留在屋里的。",
+        "quotes": [
+          "some cash",
+          "as a thank you",
+          "stay in his car"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "留下",
+        "reason": "约翰借用了电话，想留点心意给主人，然后回车里，要一个“留下”的动作。动词看搭配：宾语是一些钱（some cash），作为谢礼（as a thank you），之后他要回车里过夜（stay in his car），钱是留在屋里的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "borrow",
+          "meaning": "借；借钱当不了谢礼（as a thank you），而且主人不在家，无处可借。",
+          "quote": "as a thank you"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "contribute",
+          "meaning": "捐款；捐款是为某项事业出钱，这里的钱是给主人的谢礼（as a thank you）。",
+          "quote": "as a thank you"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "withdraw",
+          "meaning": "取款；谢礼（as a thank you）是要留给主人的，不是把钱取走。",
+          "quote": "as a thank you"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "some cash as a thank you",
+          "signalSide": "context-after",
+          "targetText": "leave some cash as a thank you",
+          "relation": "把钱作为谢礼放下，动词要表示留下。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:51": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "主线的转折：陌生人擅自进屋，主人本可能发火，却热情相待，要一个与热情相反的反应。",
+      "find": {
+        "check": "affect",
+        "text": "“没有……而是”（Instead of）引出对照，后面是热情地招呼约翰（greeted John with warmth），空里要相反的情绪。",
+        "quotes": [
+          "Instead of",
+          "greeted John with warmth"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "愤怒",
+        "reason": "主线的转折：陌生人擅自进屋，主人本可能发火，却热情相待，要一个与热情相反的反应。名词看情感：“没有……而是”（Instead of）引出对照，后面是热情地招呼约翰（greeted John with warmth），空里要相反的情绪。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "comfort",
+          "meaning": "安慰；它和热情相待（greeted John with warmth）方向一致，不能用“没有……而是”来对照。",
+          "quote": "greeted John with warmth"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sympathy",
+          "meaning": "同情；同情和热情（greeted John with warmth）是同一方向，构不成“没有……而是”的对照。",
+          "quote": "greeted John with warmth"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disappointment",
+          "meaning": "失望；主人回家前对约翰并无期待，谈不上失望，这里对照的是热情相待（greeted John with warmth）。",
+          "quote": "greeted John with warmth"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "greeted John with warmth",
+          "signalSide": "context-after",
+          "targetText": "Instead of anger, they greeted John with warmth",
+          "relation": "空里的情绪和热情相待对照，要与热情相反。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Instead of",
+          "signalSide": "context-before",
+          "relation": "表示取而代之，前后意思相反。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:52": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "主人热情待客的一个具体动作：拿出草莓派给他吃。",
+      "find": {
+        "check": "collocation",
+        "text": "跟在热情招呼（greeted John with warmth）之后，宾语是草莓派（strawberry pie），是主人把派分给他一起吃。",
+        "quotes": [
+          "greeted John with warmth",
+          "strawberry pie"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "分享",
+        "reason": "主人热情待客的一个具体动作：拿出草莓派给他吃。动词看搭配：跟在热情招呼（greeted John with warmth）之后，宾语是草莓派（strawberry pie），是主人把派分给他一起吃。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "preparing",
+          "meaning": "准备；主人刚进门（returned）就招呼约翰，这里写的是拿派招待他，不是现做。",
+          "quote": "returned"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "selling",
+          "meaning": "出售；主人是热情招待（greeted John with warmth）这位落难的陌生人，不是卖东西给他。",
+          "quote": "greeted John with warmth"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "displaying",
+          "meaning": "展示；热情待客（greeted John with warmth）是让他吃上派，不是把派摆出来给他看。",
+          "quote": "greeted John with warmth"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "strawberry pie",
+          "signalSide": "context-after",
+          "targetText": "sharing strawberry pie",
+          "relation": "和草莓派搭配，说主人怎样用它招待客人。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:53": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "概括主人的一连串好意：分派、留宿、做早餐，这是约翰一直没忘的。",
+      "find": {
+        "check": "echo",
+        "text": "前面分享草莓派、安排住宿（arranged accommodation）、端上早餐（served him a hot Thanksgiving breakfast），都是主人慷慨待人。",
+        "quotes": [
+          "arranged accommodation",
+          "served him a hot Thanksgiving breakfast"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "慷慨",
+        "meaning": "热情款待",
+        "reason": "概括主人的一连串好意：分派、留宿、做早餐，这是约翰一直没忘的。名词看复现：前面分享草莓派、安排住宿（arranged accommodation）、端上早餐（served him a hot Thanksgiving breakfast），都是主人慷慨待人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "bravery",
+          "meaning": "勇敢；主人做的是安排住宿（arranged accommodation）这类待客之事，不涉及冒险。",
+          "quote": "arranged accommodation"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "devotion",
+          "meaning": "奉献、忠诚；它指长期全心投入，主人只是这一晚接待了陌生人（arranged accommodation）。",
+          "quote": "arranged accommodation"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "courage",
+          "meaning": "勇气；主人端上热乎的早餐（served him a hot Thanksgiving breakfast）是待客，用不着勇气。",
+          "quote": "served him a hot Thanksgiving breakfast"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he never forgot their",
+          "signalSide": "context-before",
+          "targetText": "never forgot their generosity",
+          "relation": "他一直记着的是主人的为人，要一个概括好意的名词。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "arranged accommodation",
+          "signalSide": "context-before",
+          "relation": "留宿、做早餐这些具体好意，用一个抽象名词概括。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:54": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "detail",
+      "context": "两人一直保持联系的方式，要一个“互相往来”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是两个人（John and Virgil），保持联系（remain in touch），节日问候（seasonal greetings）是你来我往的。",
+        "quotes": [
+          "John and Virgil",
+          "remain in touch",
+          "seasonal greetings"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "交换",
+        "meaning": "互致",
+        "reason": "两人一直保持联系的方式，要一个“互相往来”的动作。动词看搭配：主语是两个人（John and Virgil），保持联系（remain in touch），节日问候（seasonal greetings）是你来我往的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "accepting",
+          "meaning": "接受；接受只是一方收下，主语是约翰和维吉尔两人（John and Virgil），问候是相互的。",
+          "quote": "John and Virgil"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "drafting",
+          "meaning": "起草；保持联系（remain in touch）靠的是问候来往，不是起草文稿。",
+          "quote": "remain in touch"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "keeping",
+          "meaning": "保存；保持联系（remain in touch）要靠两人互相问候，把问候存起来接不上。",
+          "quote": "remain in touch"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "seasonal greetings",
+          "signalSide": "context-after",
+          "targetText": "exchanging seasonal greetings",
+          "relation": "节日问候在两人之间来往，动词要表示互相交换。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "remain in touch",
+          "signalSide": "context-before",
+          "relation": "保持联系的方式是互致问候。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:55": {
+      "blankId": "blank:paper-mock-shandong-taian-2026-04-second-round-test:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "全文点题：真情和善意跨越时间，把相隔几十年的人连在一起。",
+      "find": {
+        "check": "collocation",
+        "text": "前面说能跨越时间（go beyond time），宾语是相隔几十年的人生（lives even decades apart），要把分开的两头连起来。",
+        "quotes": [
+          "go beyond time",
+          "lives even decades apart"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "连接",
+        "meaning": "让相隔多年的人相连",
+        "reason": "全文点题：真情和善意跨越时间，把相隔几十年的人连在一起。动词看搭配：前面说能跨越时间（go beyond time），宾语是相隔几十年的人生（lives even decades apart），要把分开的两头连起来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "saving",
+          "meaning": "拯救；后面是相隔（apart）几十年的人生，跨越时间（go beyond time）是把两头连起来，不是救人。",
+          "quote": "go beyond time"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cherishing",
+          "meaning": "珍惜；后面写的是相隔几十年的两段人生（lives even decades apart），要的是把它们连起来。",
+          "quote": "lives even decades apart"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "enjoying",
+          "meaning": "享受；享受相隔几十年的人生说不成意思，跨越时间（go beyond time）是把隔开的人连在一起。",
+          "quote": "go beyond time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lives even decades apart",
+          "signalSide": "context-after",
+          "targetText": "bridging lives even decades apart",
+          "relation": "宾语是相隔很久的人生，动词要表示把它们连起来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "go beyond time",
+          "signalSide": "context-before",
+          "relation": "跨越时间，正是把相隔多年的人连在一起。"
+        }
+      ]
+    }
+  }
+}

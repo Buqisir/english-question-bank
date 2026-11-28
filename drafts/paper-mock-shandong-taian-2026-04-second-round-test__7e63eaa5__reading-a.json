@@ -1,0 +1,830 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a": {
+      "overview": "旧金山歌剧院为 2026 年度合唱团招募歌手的试演启事，介绍招聘岗位、报名条件、申请材料与截止日期、试演细则和曲目要求，并附薪酬标准。",
+      "fullTranslationZh": "旧金山歌剧院将于 2025 年 10 月至 11 月举行试演，为其 2026 合同年度的合唱团职位招募受过古典声乐训练的歌手，各声部均有全职和兼职空缺。特别鼓励来自代表性不足背景的人士申请。排练于 2026 年春季开始，演出安排在 6 月（春夏演出季）以及 9 月至 11 月下旬（秋季演出季）。被录用的歌手将收到一份暂定日程表。\n基本要求\n• 至少 4 年古典声乐训练（院校学习或私人授课均可）\n• 出色的乐谱视唱和多语种视读能力\n• 能快速背谱\n• 有相关的歌剧合唱、交响合唱或舞台经验\n• 能配合复杂的排练和演出日程\n申请须知\n试演仅限受邀者参加。你需要向 Nina Pitts（npitts@sfopera.com）提交申请表、演唱履历、两封音乐推荐信、一张专业头像照以及你选择的试演日期。最终申请截止日期为 2025 年 11 月 1 日。过去 5 个演出季曾在合唱团演唱过的人，只需提交申请表。\n试演细则\n符合条件的申请者会收到电子邮件通知（试演前 1 周发出；外地歌手立即通知）。如果在试演前不足 72 小时才提出更改，试演时间将不能更改。\n试演在旧金山战争纪念歌剧院举行。\n核心要求\n注意事项\n3 首歌剧独唱（须有 1 首意大利语）；第 4 首可选（咏叹调或灵歌）\n咏叹调须用原调、原语言演唱；须提交曲目单；所有选曲都须背唱\n视唱测试（可能要求）\n试演最长 5 分钟；不得带客人\n给伴奏者的乐谱（调性正确，不加标注）\n歌剧院提供伴奏者；也可自带伴奏（须提前确认姓名）\n薪酬\n• 增补合唱：每排练小时 67.23 美元；每场演出 311.18 美元\n• 常规合唱：每周 2,110.31 美元（入门级，共 35 周）",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-1",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+          "sourceText": "San Francisco Opera is holding auditions (试演) in October/November 2025 for classically trained singers for its 2026 contract year chorus positions, with full-time and part-time openings across all voice categories.",
+          "displayText": "San Francisco Opera is holding auditions (试演) in October/November 2025 for classically trained singers for its 2026 contract year chorus positions, with full-time and part-time openings across all voice categories.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:21"
+          ],
+          "translationZh": "旧金山歌剧院将于 2025 年 10 月至 11 月举行试演，为其 2026 合同年度的合唱团职位招募受过古典声乐训练的歌手，各声部均有全职和兼职空缺。",
+          "analysisZh": "主干是 San Francisco Opera is holding auditions（旧金山歌剧院要举办试演），现在进行时表示已经安排好的活动。in October/November 2025 是时间状语。后面两个 for 短语都接在 auditions 上：for classically trained singers 说试演面向谁（classically trained 是过去分词短语，修饰 singers，意为“受过古典训练的”）；for its 2026 contract year chorus positions 说为哪些岗位选人。逗号后的 with 短语补充说明空缺情况：各声部（across all voice categories）都有全职和兼职名额（openings）。这一句交代了全文的事由：为招人而办试演。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 40,
+              "quote": "San Francisco Opera is holding auditions"
+            },
+            {
+              "start": 71,
+              "end": 102,
+              "quote": "for classically trained singers"
+            },
+            {
+              "start": 148,
+              "end": 185,
+              "quote": "with full-time and part-time openings"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-2",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+          "sourceText": "For those who sang with the chorus in the past 5 seasons, only an application form is needed.",
+          "displayText": "For those who sang with the chorus in the past 5 seasons, only an application form is needed.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:22"
+          ],
+          "translationZh": "过去 5 个演出季曾在合唱团演唱过的人，只需提交申请表。",
+          "analysisZh": "主干是 only an application form is needed（只需要一份申请表），被动语态；only 修饰 an application form，限定为“只此一样”。句首 For those 是介词短语，说明这条规定适用于哪些人；who sang with the chorus in the past 5 seasons 是定语从句，修饰 those，指过去 5 个演出季在合唱团唱过的人。这句给前面的材料清单开了一个例外，是第 22 题判断“人人必交”的关键。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "For those who sang with the chorus"
+            },
+            {
+              "start": 58,
+              "end": 92,
+              "quote": "only an application form is needed"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1"
+              ],
+              "start": 0,
+              "end": 165,
+              "quote": "旧金山歌剧院将于 2025 年 10 月至 11 月举行试演，为其 2026 合同年度的合唱团职位招募受过古典声乐训练的歌手，各声部均有全职和兼职空缺。特别鼓励来自代表性不足背景的人士申请。排练于 2026 年春季开始，演出安排在 6 月（春夏演出季）以及 9 月至 11 月下旬（秋季演出季）。被录用的歌手将收到一份暂定日程表。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:2"
+              ],
+              "start": 166,
+              "end": 170,
+              "quote": "基本要求"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:3"
+              ],
+              "start": 171,
+              "end": 198,
+              "quote": "• 至少 4 年古典声乐训练（院校学习或私人授课均可）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:4"
+              ],
+              "start": 199,
+              "end": 216,
+              "quote": "• 出色的乐谱视唱和多语种视读能力"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:5"
+              ],
+              "start": 217,
+              "end": 224,
+              "quote": "• 能快速背谱"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:6"
+              ],
+              "start": 225,
+              "end": 245,
+              "quote": "• 有相关的歌剧合唱、交响合唱或舞台经验"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:7"
+              ],
+              "start": 246,
+              "end": 261,
+              "quote": "• 能配合复杂的排练和演出日程"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:8"
+              ],
+              "start": 262,
+              "end": 266,
+              "quote": "申请须知"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9"
+              ],
+              "start": 267,
+              "end": 403,
+              "quote": "试演仅限受邀者参加。你需要向 Nina Pitts（npitts@sfopera.com）提交申请表、演唱履历、两封音乐推荐信、一张专业头像照以及你选择的试演日期。最终申请截止日期为 2025 年 11 月 1 日。过去 5 个演出季曾在合唱团演唱过的人，只需提交申请表。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:10"
+              ],
+              "start": 404,
+              "end": 408,
+              "quote": "试演细则"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:11"
+              ],
+              "start": 409,
+              "end": 477,
+              "quote": "符合条件的申请者会收到电子邮件通知（试演前 1 周发出；外地歌手立即通知）。如果在试演前不足 72 小时才提出更改，试演时间将不能更改。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:12"
+              ],
+              "start": 478,
+              "end": 494,
+              "quote": "试演在旧金山战争纪念歌剧院举行。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-1-1"
+              ],
+              "start": 495,
+              "end": 499,
+              "quote": "核心要求"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-1-2"
+              ],
+              "start": 500,
+              "end": 504,
+              "quote": "注意事项"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-2-1"
+              ],
+              "start": 505,
+              "end": 540,
+              "quote": "3 首歌剧独唱（须有 1 首意大利语）；第 4 首可选（咏叹调或灵歌）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-2-2"
+              ],
+              "start": 541,
+              "end": 570,
+              "quote": "咏叹调须用原调、原语言演唱；须提交曲目单；所有选曲都须背唱"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-3-1"
+              ],
+              "start": 571,
+              "end": 581,
+              "quote": "视唱测试（可能要求）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-3-2"
+              ],
+              "start": 582,
+              "end": 597,
+              "quote": "试演最长 5 分钟；不得带客人"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p19",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-4-1"
+              ],
+              "start": 598,
+              "end": 616,
+              "quote": "给伴奏者的乐谱（调性正确，不加标注）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p20",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-4-2"
+              ],
+              "start": 617,
+              "end": 641,
+              "quote": "歌剧院提供伴奏者；也可自带伴奏（须提前确认姓名）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p21",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:14"
+              ],
+              "start": 642,
+              "end": 644,
+              "quote": "薪酬"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p22",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:15"
+              ],
+              "start": 645,
+              "end": 681,
+              "quote": "• 增补合唱：每排练小时 67.23 美元；每场演出 311.18 美元"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p23",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:16"
+              ],
+              "start": 682,
+              "end": 715,
+              "quote": "• 常规合唱：每周 2,110.31 美元（入门级，共 35 周）"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+                "start": 0,
+                "end": 214,
+                "quote": "San Francisco Opera is holding auditions (试演) in October/November 2025 for classically trained singers for its 2026 contract year chorus positions, with full-time and part-time openings across all voice categories."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p1",
+                "start": 0,
+                "end": 76,
+                "quote": "旧金山歌剧院将于 2025 年 10 月至 11 月举行试演，为其 2026 合同年度的合唱团职位招募受过古典声乐训练的歌手，各声部均有全职和兼职空缺。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+                "start": 268,
+                "end": 361,
+                "quote": "For those who sang with the chorus in the past 5 seasons, only an application form is needed."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p9",
+                "start": 108,
+                "end": 136,
+                "quote": "过去 5 个演出季曾在合唱团演唱过的人，只需提交申请表。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+                "start": 0,
+                "end": 146,
+                "quote": "San Francisco Opera is holding auditions (试演) in October/November 2025 for classically trained singers for its 2026 contract year chorus positions"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+                "start": 31,
+                "end": 191,
+                "quote": "You need to submit an application form, a singing resume, two music recommendation letters, a professional headshot and your audition date choices to Nina Pitts"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+                "start": 214,
+                "end": 267,
+                "quote": "The final application deadline is November 1st, 2025."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p1",
+                "start": 0,
+                "end": 62,
+                "quote": "旧金山歌剧院将于 2025 年 10 月至 11 月举行试演，为其 2026 合同年度的合唱团职位招募受过古典声乐训练的歌手"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p9",
+                "start": 10,
+                "end": 81,
+                "quote": "你需要向 Nina Pitts（npitts@sfopera.com）提交申请表、演唱履历、两封音乐推荐信、一张专业头像照以及你选择的试演日期"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p9",
+                "start": 82,
+                "end": 108,
+                "quote": "最终申请截止日期为 2025 年 11 月 1 日。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+                "start": 268,
+                "end": 361,
+                "quote": "For those who sang with the chorus in the past 5 seasons, only an application form is needed."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+                "start": 31,
+                "end": 69,
+                "quote": "You need to submit an application form"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p9",
+                "start": 108,
+                "end": 136,
+                "quote": "过去 5 个演出季曾在合唱团演唱过的人，只需提交申请表。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p9",
+                "start": 10,
+                "end": 50,
+                "quote": "你需要向 Nina Pitts（npitts@sfopera.com）提交申请表"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-2-2",
+                "start": 62,
+                "end": 94,
+                "quote": "all selections must be memorized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a-p16",
+                "start": 21,
+                "end": 29,
+                "quote": "所有选曲都须背唱"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "这是一则招聘启事：开头说明试演和招聘岗位，随后分块列出报名条件、申请手续、试演细则和曲目要求，最后附上薪酬标准。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+            "summary": "旧金山歌剧院 2025 年秋举行试演，为 2026 年度招募全职和兼职合唱歌手，并交代排练和演出时间",
+            "function": "开篇点明招聘目的和岗位"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:3",
+            "summary": "五项基本条件：至少 4 年古典声乐训练、视读能力强、背谱快、有相关演出经验、能配合复杂日程",
+            "function": "列出报名门槛"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+            "summary": "试演仅限受邀者；新申请者交五样材料，11 月 1 日截止，往届团员只交申请表",
+            "function": "说明怎样申请"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:11",
+            "summary": "符合条件者提前一周收到邮件通知，外地歌手立即通知；离试演不足 72 小时不能改时间",
+            "function": "交代通知和改期规定"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:12",
+            "summary": "试演地点在旧金山战争纪念歌剧院",
+            "function": "交代地点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-1-1",
+            "summary": "表格分曲目、视唱测试和伴奏三行列出要求与注意事项，所有选曲都须背唱",
+            "function": "细化试演当天的要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:14",
+            "summary": "增补合唱按排练小时和演出场次计酬，常规合唱按周计薪",
+            "function": "补充录用后的报酬"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:21": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看这则启事各部分写给谁、要读者做什么，判断全文的写作目的。",
+      "stemTranslationZh": "这篇文章的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1]] 的 holding auditions 读起，再看后面几块各写给谁、要人做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "征集试演申请。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+              "quote": "San Francisco Opera is holding auditions (试演) in October/November 2025 for classically trained singers for its 2026 contract year chorus positions",
+              "anchor": "举办试演、招合唱歌手"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "quote": "You need to submit an application form, a singing resume, two music recommendation letters, a professional headshot and your audition date choices to Nina Pitts",
+              "anchor": "需提交的申请材料"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "quote": "The final application deadline is November 1st, 2025.",
+              "anchor": "申请截止日期"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "解释歌剧院的报酬规则。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Extra Chorus: $67.23 per rehearsal hour; $311.18 per performance",
+            "sourceHighlight": "$67.23 per rehearsal hour",
+            "optionText": "To explain the opera payment rules.",
+            "optionHighlight": "the opera payment rules",
+            "explanation": "报酬只在最后的薪酬（Salary & Wage）一块列了两行，如每排练小时 67.23 美元，是招聘信息的附带内容，盖不住前面的报名条件和试演安排。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:15",
+              "quote": "Extra Chorus: $67.23 per rehearsal hour; $311.18 per performance",
+              "anchor": "增补合唱的报酬"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "宣传演出日程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Rehearsals (排练) start in spring 2026, with performances in June (spring/summer season) and September to late November (fall season).",
+            "sourceHighlight": "with performances in June",
+            "optionText": "To advertise performance schedules.",
+            "optionHighlight": "performance schedules",
+            "explanation": "演出时间只在 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1|Rehearsals (排练) start in spring 2026]] 顺带一提（performances in June …），是告诉应聘者录用后怎么安排；全文的重点是报名和试演，不是宣传演出。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+              "quote": "Rehearsals (排练) start in spring 2026, with performances in June (spring/summer season) and September to late November (fall season).",
+              "anchor": "排练和演出时间"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "介绍合唱训练要求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "At least 4 years of classical voice training (academic/private)",
+            "sourceHighlight": "4 years of classical voice training",
+            "optionText": "To introduce chorus training requirements.",
+            "optionHighlight": "chorus training requirements",
+            "explanation": "基本要求（Basic Requirements）里的 training 指申请者此前受过的声乐训练，只是报名门槛之一；文章没讲合唱团怎样培训，这一块也只占全文一部分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:3",
+              "quote": "At least 4 years of classical voice training (academic/private)",
+              "anchor": "至少 4 年声乐训练"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "call for audition applications",
+          "sourceRole": "correctOption",
+          "targetText": "San Francisco Opera is holding auditions",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "全文围绕一次招人的试演来写：开头说歌剧院要举办试演、招合唱歌手（holding auditions），接着列报名条件、要交的材料和截止日期（deadline），再讲试演安排，最后附上薪酬。这些都是写给想报名的人看的，选项的“征集试演申请”把各块都包进去，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "对照材料清单和往届团员的例外规定，找出所有申请者都必须交的那一项。",
+      "stemTranslationZh": "对所有试演申请者来说，哪一项是必须提交的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读完本段，看谁可以少交",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一份申请表。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "quote": "For those who sang with the chorus in the past 5 seasons, only an application form is needed.",
+              "anchor": "往届团员只交申请表"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "quote": "You need to submit an application form",
+              "anchor": "新申请者的材料清单"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一张专业头像照。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "You need to submit an application form, a singing resume, two music recommendation letters, a professional headshot and your audition date choices to Nina Pitts (npitts@sfopera.com).",
+            "sourceHighlight": "a professional headshot",
+            "optionText": "A professional headshot.",
+            "optionHighlight": "A professional headshot",
+            "explanation": "头像照（headshot）只在新申请者要交的清单里，过去 5 个演出季唱过的人不用交，算不上所有人都必须交。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "quote": "a professional headshot",
+              "anchor": "清单里的头像照"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "三个试演日期选择。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Three audition date choices.",
+            "explanation": "原文只说提交你选择的试演日期（your audition date choices），没规定要选三个；往届团员连这一项也不用交。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "两封推荐信。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "You need to submit an application form, a singing resume, two music recommendation letters, a professional headshot and your audition date choices to Nina Pitts (npitts@sfopera.com).",
+            "sourceHighlight": "two music recommendation letters",
+            "optionText": "Two recommendation letters.",
+            "optionHighlight": "Two recommendation letters",
+            "explanation": "“两封”这个数目和清单一致，但往届团员只需交申请表（only an application form is needed），推荐信对他们可以免交。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "quote": "two music recommendation letters",
+              "anchor": "清单里的推荐信"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "a must",
+          "sourceRole": "stem",
+          "targetText": "You need to submit an application form, a singing resume, two music recommendation letters, a professional headshot and your audition date choices to Nina Pitts (npitts@sfopera.com).",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+          "relationType": "locationCue",
+          "targetCue": "need to submit",
+          "sourceZh": "必须有的",
+          "targetCueZh": "需要提交",
+          "answerText": "only an application form is needed",
+          "bridgeZh": "往届团员其余材料都可免，唯独申请表不免",
+          "note": "题干 a must 对应原文 need to submit。"
+        },
+        {
+          "sourceText": "An application form",
+          "sourceRole": "correctOption",
+          "targetText": "only an application form is needed",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 application form。新申请者交的五样里有它，往届团员唯一要交的也是它，两类申请者都少不了，所以它才是人人必交的，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "逐项回到曲目表和试演细则，核对曲目、通知时间和改期规定。",
+      "stemTranslationZh": "关于试演，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "四项分别回曲目表和试演细则，核对数字和时间",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "第四首歌必须是意大利语灵歌。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "3 operatic solos (1 Italian required); 4th optional (aria/spiritual)",
+            "sourceEntity": "1 Italian required",
+            "optionText": "The 4th song must be an Italian spiritual.",
+            "optionEntity": "The 4th song",
+            "explanation": "必须有一首意大利语的是前三首歌剧独唱（1 Italian required）；第四首可唱可不唱（optional），唱的话选咏叹调或灵歌。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-2-1",
+              "quote": "3 operatic solos (1 Italian required); 4th optional (aria/spiritual)",
+              "anchor": "曲目要求"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "所有规定曲目都需要背唱。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-2-2",
+              "quote": "all selections must be memorized",
+              "anchor": "所有选曲须背唱"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "外地歌手在试演当天收到通知。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "immediate notice for out-of-town singers",
+            "optionText": "Out-of-town singers get notice",
+            "matchType": "exact",
+            "relationNote": "选项照搬 out-of-town singers 和 notice，但原文说外地歌手是立即收到通知（immediate notice），不是等到试演当天。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:11",
+              "quote": "immediate notice for out-of-town singers",
+              "anchor": "外地歌手立即通知"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "歌手提前 48 小时通知就能更改日期。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "You cannot change your audition time if you ask less than 72 hours before.",
+            "sourceHighlight": "cannot change",
+            "optionText": "Singers can change dates with 48 hours’ notice.",
+            "optionHighlight": "can change dates with 48 hours’ notice",
+            "explanation": "原文规定离试演不足 72 小时才提出就不能改（cannot change），提前 48 小时正落在这个范围里，改不了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:11",
+              "quote": "You cannot change your audition time if you ask less than 72 hours before.",
+              "anchor": "不足 72 小时不能改"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "need to be memorized",
+          "sourceRole": "correctOption",
+          "targetText": "all selections must be memorized",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:figure-c9d1a020cd01189c:cell-2-2",
+          "relationType": "paraphrase",
+          "note": "选项的“要背下来”沿用原文 must be memorized；原文说所有选曲都要背（all selections），三首规定曲目当然包括在内，选 B。"
+        }
+      ]
+    }
+  }
+}

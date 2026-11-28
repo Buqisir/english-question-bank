@@ -1,0 +1,820 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d": {
+      "overview": "研究者开发出用人工智能识别恐龙脚印的免费应用：系统改用未标注的数据学习，发现一批三叠纪脚印极像鸟类脚印，但专家认为这还不能证明鸟类更早出现。",
+      "fullTranslationZh": "专家们开发出一款应用程序，利用人工智能，根据恐龙数百万年前留下的脚印来识别它们。\n“我们发现一个恐龙脚印时，会试着像灰姑娘的故事那样，找出与这只‘水晶鞋’相配的那只脚，”史蒂夫·布鲁萨特教授说，“但事情没那么简单，因为脚印的形状不仅取决于恐龙的脚，还取决于它走过的地面类型以及脚的运动方式。”\n以往的人工智能系统是根据被标注为某种恐龙所留的脚印来学习的。然而，如果这些鉴定有误，人工智能系统也会出问题。“你永远不会在发现一个脚印的同时，看到旁边站着留下它的那只恐龙，”格雷戈尔·哈特曼博士说，“所以很可能有些标签是错的。”\n研究人员另辟蹊径，给他们的人工智能系统输入了 2000 个未标注的脚印形状。系统随后判断这些压痕彼此有多相似。他们发现了八个反映压痕形状差异的特征，比如脚趾张开的程度和脚跟的位置。\n研究团队把该系统做成了一款名为 DinoTracker 的免费应用，用户可以上传脚印形状，查找与之最相似的脚印。这一人工智能系统证实了恐龙专家早先注意到的现象：一批来自三叠纪和早侏罗世的脚印极像鸟类的脚印，尽管它们比最古老的鸟类骨骼还要早 6000 万年。布鲁萨特说，这表明这种相似并非一厢情愿的想象。“如果这些足迹是鸟类留下的，那就意味着鸟类的起源比我们过去认为的要古老得多。”\n然而，这件事远未盖棺定论。布鲁萨特补充说：“我认为这些足迹更可能是由其他长着非常像鸟的脚的恐龙留下的。”延斯·巴伦扎克博士给出了另一种解释：新系统识别出的特征未必是根据脚本身的形状得出的，那种像鸟的形状可能是普通恐龙的脚陷进软地造成的。“它们不能证明鸟类很早就出现了，”他说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-1",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+          "sourceText": "But it’s not so simple, because the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot.",
+          "displayText": "But it’s not so simple, because the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:32"
+          ],
+          "translationZh": "但事情没那么简单，因为脚印的形状不仅取决于恐龙的脚，还取决于它走过的地面类型以及脚的运动方式。",
+          "analysisZh": "主干是 it’s not so simple（事情没那么简单），because 引导原因状语从句。从句的骨架是 the shape depends on …（形状取决于……），not only … but also … 连接两组 on 短语：not only on 后面是一样，the dinosaur’s foot；but also on 后面是用 and 连起来的两样，the type of ground it was walking on 和 the motion of its foot。所以影响形状的一共三样：脚本身、地面类型、脚的动作。it was walking on 是省略了 that 的定语从句，修饰 the type of ground，句末的 on 不能丢（walk on the ground）。这句正是第 32 题的答案来源。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 22,
+              "quote": "it’s not so simple"
+            },
+            {
+              "start": 32,
+              "end": 61,
+              "quote": "the shape depends not only on"
+            },
+            {
+              "start": 83,
+              "end": 94,
+              "quote": "but also on"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-2",
+          "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+          "sourceText": "Dr Jens Ballensack offered another explanation: the features identified by the new system were not necessarily based on the shape of the foot itself and the bird-like shape may result from a regular dinosaur’s foot sinking into soft ground.",
+          "displayText": "Dr Jens Ballensack offered another explanation: the features identified by the new system were not necessarily based on the shape of the foot itself and the bird-like shape may result from a regular dinosaur’s foot sinking into soft ground.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-taian-2026-04-second-round-test:35"
+          ],
+          "translationZh": "延斯·巴伦扎克博士给出了另一种解释：新系统识别出的特征未必是根据脚本身的形状得出的，那种像鸟的形状可能是普通恐龙的脚陷进软地造成的。",
+          "analysisZh": "主干是 Dr Jens Ballensack offered another explanation（Ballensack 博士给出了另一种解释），冒号后是解释的内容，由 and 连接两个并列分句。第一个分句的主语 the features 带过去分词短语 identified by the new system 作后置定语（被新系统识别出的特征），谓语是 were not necessarily based on …；not necessarily 是部分否定，意为“未必”，不是“一定不”。第二个分句的主语是 the bird-like shape，谓语是 may result from …（可能源于……）；from 的宾语 a regular dinosaur’s foot sinking into soft ground 可看作动名词的复合结构，a regular dinosaur’s foot 是 sinking 的逻辑主语（普通恐龙的脚陷进软地）。两个分句都在说系统的结论可能有误，对应第 35 题。",
+          "underlineRanges": [
+            {
+              "start": 19,
+              "end": 46,
+              "quote": "offered another explanation"
+            },
+            {
+              "start": 90,
+              "end": 119,
+              "quote": "were not necessarily based on"
+            },
+            {
+              "start": 173,
+              "end": 188,
+              "quote": "may result from"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:1"
+              ],
+              "start": 0,
+              "end": 40,
+              "quote": "专家们开发出一款应用程序，利用人工智能，根据恐龙数百万年前留下的脚印来识别它们。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2"
+              ],
+              "start": 41,
+              "end": 146,
+              "quote": "“我们发现一个恐龙脚印时，会试着像灰姑娘的故事那样，找出与这只‘水晶鞋’相配的那只脚，”史蒂夫·布鲁萨特教授说，“但事情没那么简单，因为脚印的形状不仅取决于恐龙的脚，还取决于它走过的地面类型以及脚的运动方式。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3"
+              ],
+              "start": 147,
+              "end": 261,
+              "quote": "以往的人工智能系统是根据被标注为某种恐龙所留的脚印来学习的。然而，如果这些鉴定有误，人工智能系统也会出问题。“你永远不会在发现一个脚印的同时，看到旁边站着留下它的那只恐龙，”格雷戈尔·哈特曼博士说，“所以很可能有些标签是错的。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:4"
+              ],
+              "start": 262,
+              "end": 352,
+              "quote": "研究人员另辟蹊径，给他们的人工智能系统输入了 2000 个未标注的脚印形状。系统随后判断这些压痕彼此有多相似。他们发现了八个反映压痕形状差异的特征，比如脚趾张开的程度和脚跟的位置。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5"
+              ],
+              "start": 353,
+              "end": 543,
+              "quote": "研究团队把该系统做成了一款名为 DinoTracker 的免费应用，用户可以上传脚印形状，查找与之最相似的脚印。这一人工智能系统证实了恐龙专家早先注意到的现象：一批来自三叠纪和早侏罗世的脚印极像鸟类的脚印，尽管它们比最古老的鸟类骨骼还要早 6000 万年。布鲁萨特说，这表明这种相似并非一厢情愿的想象。“如果这些足迹是鸟类留下的，那就意味着鸟类的起源比我们过去认为的要古老得多。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6"
+              ],
+              "start": 544,
+              "end": 682,
+              "quote": "然而，这件事远未盖棺定论。布鲁萨特补充说：“我认为这些足迹更可能是由其他长着非常像鸟的脚的恐龙留下的。”延斯·巴伦扎克博士给出了另一种解释：新系统识别出的特征未必是根据脚本身的形状得出的，那种像鸟的形状可能是普通恐龙的脚陷进软地造成的。“它们不能证明鸟类很早就出现了，”他说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+                "start": 143,
+                "end": 303,
+                "quote": "But it’s not so simple, because the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p2",
+                "start": 57,
+                "end": 104,
+                "quote": "但事情没那么简单，因为脚印的形状不仅取决于恐龙的脚，还取决于它走过的地面类型以及脚的运动方式。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+                "start": 152,
+                "end": 392,
+                "quote": "Dr Jens Ballensack offered another explanation: the features identified by the new system were not necessarily based on the shape of the foot itself and the bird-like shape may result from a regular dinosaur’s foot sinking into soft ground."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p6",
+                "start": 52,
+                "end": 118,
+                "quote": "延斯·巴伦扎克博士给出了另一种解释：新系统识别出的特征未必是根据脚本身的形状得出的，那种像鸟的形状可能是普通恐龙的脚陷进软地造成的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+                "start": 175,
+                "end": 302,
+                "quote": "the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p2",
+                "start": 68,
+                "end": 103,
+                "quote": "脚印的形状不仅取决于恐龙的脚，还取决于它走过的地面类型以及脚的运动方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+                "start": 109,
+                "end": 201,
+                "quote": "However, if those identifications are incorrect then the AI system will also be problematic."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+                "start": 301,
+                "end": 348,
+                "quote": "So most likely, some of these labels are wrong."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p3",
+                "start": 30,
+                "end": 54,
+                "quote": "然而，如果这些鉴定有误，人工智能系统也会出问题。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p3",
+                "start": 100,
+                "end": 113,
+                "quote": "所以很可能有些标签是错的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+                "start": 215,
+                "end": 304,
+                "quote": "a set of footprints from the Triassic and early Jurassic period were remarkably bird-like"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p5",
+                "start": 80,
+                "end": 102,
+                "quote": "一批来自三叠纪和早侏罗世的脚印极像鸟类的脚印"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-taian-2026-04-second-round-test:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+                "start": 200,
+                "end": 300,
+                "quote": "the features identified by the new system were not necessarily based on the shape of the foot itself"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+                "start": 305,
+                "end": 391,
+                "quote": "the bird-like shape may result from a regular dinosaur’s foot sinking into soft ground"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+                "start": 0,
+                "end": 37,
+                "quote": "However, it was far from case closed."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p6",
+                "start": 70,
+                "end": 93,
+                "quote": "新系统识别出的特征未必是根据脚本身的形状得出的"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p6",
+                "start": 94,
+                "end": 117,
+                "quote": "那种像鸟的形状可能是普通恐龙的脚陷进软地造成的"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+                "paragraphId": "zh-group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d-p6",
+                "start": 0,
+                "end": 13,
+                "quote": "然而，这件事远未盖棺定论。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先介绍一款用人工智能识别恐龙脚印的应用，再说明脚印难认、旧系统依赖可能出错的标签，接着讲新系统改用未标注数据的做法和发现，最后用两位专家的保留意见说明结论尚无定论。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:1",
+            "summary": "专家开发出用人工智能根据脚印识别恐龙的应用",
+            "function": "开篇点明话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+            "summary": "Brusatte 说脚印形状受脚、地面类型和脚的动作共同影响，辨认并不简单",
+            "function": "说明识别难点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+            "summary": "旧 AI 靠人工标签学习，而标签很可能有错，系统也会跟着出问题",
+            "function": "指出旧方法的缺陷"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:4",
+            "summary": "研究者改用 2000 个未标注的脚印，系统比较相似度，找出八个反映形状差异的特征",
+            "function": "介绍新方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+            "summary": "系统做成免费应用 DinoTracker，证实一批三叠纪和早侏罗世脚印极像鸟脚印；若真是鸟所留，鸟类起源将更早",
+            "function": "报告发现及其意义"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+            "summary": "结论远未确定：Brusatte 认为更可能是脚像鸟的恐龙所留，Ballensack 指出系统特征未必可靠、软地也能踩出鸟形",
+            "function": "提出保留意见，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Brusatte 解释的辨认恐龙脚印的难点。",
+      "stemTranslationZh": "是什么让辨认恐龙脚印变得困难？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 because 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "脚印旁边缺少骨头。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "alongside it the dinosaur that made it",
+            "optionText": "alongside footprints",
+            "matchType": "exact",
+            "relationNote": "alongside 出自 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3|You never find a footprint]]，那句是说旧 AI 的标签为什么可能出错，也没提骨头；脚印难认的原因，原文说的是形状受多种因素影响。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+              "quote": "You never find a footprint and alongside it the dinosaur that made it",
+              "anchor": "旁边见不到恐龙"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "恐龙走过的松软地面。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot",
+            "sourceHighlight": "the type of ground it was walking on",
+            "optionText": "The soft ground where dinosaurs walked.",
+            "optionHighlight": "The soft ground",
+            "explanation": "地面只是三样因素之一，Brusatte 说的是地面的类型（the type of ground）；soft ground 出自 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6]] 另一位专家的解释，选项只抓了一样。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+              "quote": "the type of ground it was walking on",
+              "anchor": "地面类型"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "恐龙脚部难以预测的动作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot",
+            "sourceHighlight": "the motion of its foot",
+            "optionText": "Unpredictable movements of dinosaur feet.",
+            "optionHighlight": "Unpredictable movements",
+            "explanation": "脚的动作（the motion of its foot）同样只是三样之一，原文也没说这些动作难以预测。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+              "quote": "the motion of its foot",
+              "anchor": "脚的动作"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "影响脚印形状的多种条件。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+              "quote": "the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot",
+              "anchor": "形状取决于三样"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "difficult",
+          "sourceRole": "stem",
+          "targetText": "But it’s not so simple, because the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "not so simple",
+          "sourceZh": "困难",
+          "targetCueZh": "没那么简单",
+          "answerText": "the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot",
+          "note": "题干 difficult 对应原文 not so simple。"
+        },
+        {
+          "sourceText": "Various conditions affecting footprint shapes",
+          "sourceRole": "correctOption",
+          "targetText": "the shape depends not only on the dinosaur’s foot, but also on the type of ground it was walking on, and the motion of its foot",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "because 后列了三样影响形状（shape）的因素：恐龙的脚、走过的地面类型、脚的运动方式；选项的“多种条件”（Various conditions）把这三样合起来说，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把旧系统的问题和研究者的新做法连起来，推出改用未标注数据的目的。",
+      "stemTranslationZh": "研究人员为什么使用未标注的脚印形状？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找旧做法出了什么问题",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "因为大多数标签是错的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "So most likely, some of these labels are wrong.",
+            "sourceHighlight": "most likely, some of these labels",
+            "optionText": "Because most labels were incorrect.",
+            "optionHighlight": "most labels",
+            "explanation": "原文是“很可能有些标签错了”（most likely, some … are wrong），most 和 likely 连用表示可能性大；选项把 most 挪到 labels 前，成了“大多数标签都错了”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+              "quote": "So most likely, some of these labels are wrong.",
+              "anchor": "很可能有些标签错了"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了检验压痕的相似度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "how similar the imprints (压痕) were to each other",
+            "optionText": "the similarities of the imprints",
+            "matchType": "wordFamily",
+            "relationNote": "比较压痕有多相似（how similar）是喂进数据之后系统做的事，是处理数据的一步；问的是为什么不用标签，原因在旧系统的标签可能出错。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:4",
+              "quote": "The system then determined how similar the imprints (压痕) were to each other.",
+              "anchor": "系统比较相似度"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了避免被错误的标签误导。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+              "quote": "However, if those identifications are incorrect then the AI system will also be problematic.",
+              "anchor": "标签错系统也错"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+              "quote": "So most likely, some of these labels are wrong.",
+              "anchor": "很可能有些标签错了"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "因为人工智能处理未标注的数据效果更好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Because AI works better with unlabelled data.",
+            "explanation": "原文没有泛泛比较 AI 用哪种数据效果更好，只说这批标签可能有错，旧系统会跟着出问题。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "unlabelled footprint shapes",
+          "sourceRole": "stem",
+          "targetText": "Taking a different approach, the researchers fed their AI system with 2,000 unlabelled footprint shapes.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "if those identifications are incorrect then the AI system will also be problematic",
+          "bridgeZh": "旧系统靠标签学，标签一错系统跟着错",
+          "note": "题干 unlabelled footprint shapes 原词出现在原文。"
+        },
+        {
+          "sourceText": "avoid being misled by wrong labels",
+          "sourceRole": "correctOption",
+          "targetText": "if those identifications are incorrect then the AI system will also be problematic",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "原文没直接写目的，要连两步：标签错了系统也会出问题（problematic），专家又说很可能有些标签是错的（some of these labels are wrong）；研究者改用不带标签的数据，就是为了不被错标签带偏，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 AI 对三叠纪那批脚印的发现。",
+      "stemTranslationZh": "关于三叠纪的脚印，人工智能发现了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们有八个新特征。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "They discovered eight features",
+            "optionText": "They had eight new features",
+            "matchType": "exact",
+            "relationNote": "eight features 出自 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:4]]，是系统从 2,000 个脚印里归纳出的形状差异指标，不是三叠纪脚印自己有八个新特征。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:4",
+              "quote": "They discovered eight features that reflected variations in the imprints’ shapes, such as the spread of the toes and heel position.",
+              "anchor": "八个特征"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们是早期鸟类留下的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "If these tracks were made by birds, that would mean birds have a much older ancestry than we used to think.",
+            "sourceHighlight": "If these tracks were made by birds",
+            "optionText": "They were left by early birds.",
+            "optionHighlight": "left by early birds",
+            "explanation": "原文只用 if 假设“如果是鸟留下的”，[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6]] 里 Brusatte 还认为更可能是脚像鸟的其他恐龙留下的；AI 并没有发现它们出自早期鸟类。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+              "quote": "If these tracks were made by birds, that would mean birds have a much older ancestry than we used to think.",
+              "anchor": "if 假设"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们极像鸟类的脚印。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+              "quote": "a set of footprints from the Triassic and early Jurassic period were remarkably bird-like",
+              "anchor": "极像鸟脚印"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们有 6000 万年的历史。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "despite being 60 million years older than the oldest bird bones",
+            "sourceEntity": "60 million years older than the oldest bird bones",
+            "optionText": "They were 60 million years old.",
+            "optionEntity": "60 million years old",
+            "explanation": "原文的 6000 万年是比最古老的鸟类骨骼早出的年数（older than），不是脚印本身的年龄。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+              "quote": "despite being 60 million years older than the oldest bird bones",
+              "anchor": "早 6000 万年"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Triassic",
+          "sourceRole": "stem",
+          "targetText": "The AI system supported what dinosaur experts had noticed: a set of footprints from the Triassic and early Jurassic period were remarkably bird-like, despite being 60 million years older than the oldest bird bones.",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "were remarkably bird-like",
+          "note": "题干 Triassic 原词出现在原文。"
+        },
+        {
+          "sourceText": "strikingly bird-like",
+          "sourceRole": "correctOption",
+          "targetText": "were remarkably bird-like",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“显著地”（strikingly）就是原文的 remarkably，“像鸟的”沿用原文 bird-like，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-taian-2026-04-second-round-test:35": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完两位专家的保留意见，推断这套系统的结论有多可靠。",
+      "stemTranslationZh": "从最后一段可以推断出什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6|far from case closed]] 读起，看两位专家怎样质疑系统得出的结论",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "专家完全信赖这款应用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "However, it was far from case closed.",
+            "sourceHighlight": "far from case closed",
+            "optionText": "Experts place full reliance on this app.",
+            "optionHighlight": "place full reliance",
+            "explanation": "专家对结论仍有保留：事情远没定论（far from case closed），一位认为更可能是别的恐龙，一位说特征未必可靠，谈不上完全信赖。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+              "quote": "However, it was far from case closed.",
+              "anchor": "远没定论"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这些脚印是早期鸟类留下的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "They are not evidence for an early appearance of birds",
+            "sourceHighlight": "not evidence for an early appearance of birds",
+            "optionText": "The footprints were made by early birds.",
+            "optionHighlight": "made by early birds",
+            "explanation": "Ballensack 明说这些脚印不能证明鸟类早就出现（not evidence），Brusatte 也认为更可能是脚像鸟的恐龙留下的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+              "quote": "They are not evidence for an early appearance of birds",
+              "anchor": "不能证明鸟类早出现"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "这款应用的系统有其局限。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+              "quote": "the features identified by the new system were not necessarily based on the shape of the foot itself",
+              "anchor": "特征未必反映脚形"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+              "quote": "the bird-like shape may result from a regular dinosaur’s foot sinking into soft ground",
+              "anchor": "软地也能踩出鸟形"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+              "quote": "However, it was far from case closed.",
+              "anchor": "远没定论"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "研究结果改变了我们对鸟类的认识。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "If these tracks were made by birds, that would mean birds have a much older ancestry than we used to think.",
+            "sourceHighlight": "that would mean",
+            "optionText": "The results changed our knowledge of birds.",
+            "optionHighlight": "changed our knowledge of birds",
+            "explanation": "鸟类起源更早只是 [[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5]] 里 if 假设下的推论（that would mean），[[block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6]] 又说远没定论，研究结果并没有改变我们对鸟类的认识。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:5",
+              "quote": "If these tracks were made by birds, that would mean birds have a much older ancestry than we used to think.",
+              "anchor": "if 假设下的推论"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "has its limitations",
+          "sourceRole": "correctOption",
+          "targetText": "the features identified by the new system were not necessarily based on the shape of the foot itself",
+          "targetParagraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“局限”要从专家的质疑推出：Ballensack 指出系统找出的特征未必反映脚本身的形状（not necessarily based on the shape of the foot），软地也能踩出像鸟的形状；Brusatte 也认为脚印更可能是别的恐龙留下的，事情远没定论（far from case closed）。可见系统的判断不能全信，选 C。"
+        }
+      ]
+    }
+  }
+}
