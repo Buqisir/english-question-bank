@@ -1,0 +1,732 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:reading-d": {
+      "overview": "作者从扔剩饭时的愧疚说起，介绍纽约蓝山餐厅更名 wastED、两周内专用常被丢弃的食材做菜的实验，意在唤起人们对食物浪费的关注，并说明几乎任何食材都能做成美餐。",
+      "fullTranslationZh": "每次扔掉没吃完的食物时，你的灵魂是不是都会死去一点点？我的会。这种感觉也许来自我在南非长大的经历——在那里，“非洲有孩子在挨饿”这句话与其说是饭桌上的祷告，不如说是一个令人不安的、对事实的提醒。\n\n食物浪费在餐饮、超市和供应链行业中日益受到关注。从技术手段到宣传教育活动，食品生产者和销售者都在想办法更充分地利用我们已经种出来的东西。但上个月，纽约一家很受欢迎的餐厅尝试了一种不同的办法：它更换了菜单，专门供应那些原本会被扔掉的食物。\n\n三月里有两周时间，格林尼治村的蓝山餐厅更名为“wastED”，供应油炸鳐鱼软骨、果汁渣汉堡、“垃圾箱潜水者”蔬菜沙拉之类的菜品。每道菜都是为提高人们对食物浪费问题的认识而专门设计的。\n\n食物浪费联盟的一项研究发现，餐厅平均每创收1000美元，就会产生33磅食物垃圾，而其中只有15.7%被捐赠或回收，多达84.3%被直接扔掉。英国的Silo等餐厅已经尝试过零浪费系统，而wastED则把这一理念推向了它合乎逻辑的终点。\n\n需要指出的是，wastED菜单上没有一道菜在严格意义上是用垃圾做的。相反，所用的配料都是大多数餐厅从来不会考虑拿来上桌的肉块和农产品。羽衣甘蓝的茎、鱼领、被挑剩的红薯、黄瓜蒂之类的东西，都被重新利用起来，在一批优秀厨师的帮助下，变成了美味佳肴。\n\n尽管wastED获得了热烈好评，但它从一开始就被设计成一项短期实验；蓝山餐厅此后已恢复了常规菜单。尽管如此，它提醒我们，解决可持续发展问题的途径有很多，而且你几乎可以用任何东西做出一顿美妙的饭菜。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+          "sourceText": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+          "displayText": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:32"
+          ],
+          "translationZh": "这种感觉也许来自我在南非长大的经历——在那里，“非洲有孩子在挨饿”这句话与其说是饭桌上的祷告，不如说是一个令人不安的、对事实的提醒。",
+          "analysisZh": "主干是 that feeling comes from growing up in South Africa：那种感觉来自在南非长大，that feeling 指扔掉食物时的难受。where 引导非限制性定语从句修饰 South Africa；从句主语是 the phrase “there are children starving in Africa”，引号里是这句话的内容，谓语是 was，后面用 more of A than B 比较：与其说是饭桌上的祷告（a prayer at dinner time），不如说是令人不安的事实提醒（an uncomfortable reminder of fact）。也就是说，在南非，孩子挨饿是眼前的现实。",
+          "underlineRanges": [
+            {
+              "start": 6,
+              "end": 56,
+              "quote": "that feeling comes from growing up in South Africa"
+            },
+            {
+              "start": 58,
+              "end": 63,
+              "quote": "where"
+            },
+            {
+              "start": 119,
+              "end": 174,
+              "quote": "more of an uncomfortable reminder of fact than a prayer"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+          "sourceText": "Instead, all the ingredients（配料）used were examples of meat cuts and produce that most restaurants would never consider serving.",
+          "displayText": "Instead, all the ingredients（配料）used were examples of meat cuts and produce that most restaurants would never consider serving.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:34"
+          ],
+          "translationZh": "相反，所用的配料都是大多数餐厅从来不会考虑拿来上桌的肉块和农产品。",
+          "analysisZh": "开头的 Instead 承接上一句：菜不是用垃圾做的，而是用下面这些东西。主干是 all the ingredients used were examples：所用的配料都是……的例子，used 是过去分词作后置定语，意为“被用到的”。表语 examples of meat cuts and produce 里，produce 是名词“农产品”，与 meat cuts（肉块）并列。that 引导定语从句修饰这两样东西：大多数餐厅从来不会考虑拿来上菜的，consider doing 意为“考虑做某事”。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 50,
+              "quote": "all the ingredients（配料）used were examples"
+            },
+            {
+              "start": 76,
+              "end": 126,
+              "quote": "that most restaurants would never consider serving"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-ii:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-d:1"
+              ],
+              "start": 0,
+              "end": 97,
+              "quote": "每次扔掉没吃完的食物时，你的灵魂是不是都会死去一点点？我的会。这种感觉也许来自我在南非长大的经历——在那里，“非洲有孩子在挨饿”这句话与其说是饭桌上的祷告，不如说是一个令人不安的、对事实的提醒。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-d:2",
+                "block:paper-gaokao-2025-ii:reading-d:3"
+              ],
+              "start": 99,
+              "end": 217,
+              "quote": "食物浪费在餐饮、超市和供应链行业中日益受到关注。从技术手段到宣传教育活动，食品生产者和销售者都在想办法更充分地利用我们已经种出来的东西。但上个月，纽约一家很受欢迎的餐厅尝试了一种不同的办法：它更换了菜单，专门供应那些原本会被扔掉的食物。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-d:4"
+              ],
+              "start": 219,
+              "end": 310,
+              "quote": "三月里有两周时间，格林尼治村的蓝山餐厅更名为“wastED”，供应油炸鳐鱼软骨、果汁渣汉堡、“垃圾箱潜水者”蔬菜沙拉之类的菜品。每道菜都是为提高人们对食物浪费问题的认识而专门设计的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-d:5"
+              ],
+              "start": 312,
+              "end": 428,
+              "quote": "食物浪费联盟的一项研究发现，餐厅平均每创收1000美元，就会产生33磅食物垃圾，而其中只有15.7%被捐赠或回收，多达84.3%被直接扔掉。英国的Silo等餐厅已经尝试过零浪费系统，而wastED则把这一理念推向了它合乎逻辑的终点。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-d:6"
+              ],
+              "start": 430,
+              "end": 552,
+              "quote": "需要指出的是，wastED菜单上没有一道菜在严格意义上是用垃圾做的。相反，所用的配料都是大多数餐厅从来不会考虑拿来上桌的肉块和农产品。羽衣甘蓝的茎、鱼领、被挑剩的红薯、黄瓜蒂之类的东西，都被重新利用起来，在一批优秀厨师的帮助下，变成了美味佳肴。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-d:7"
+              ],
+              "start": 554,
+              "end": 652,
+              "quote": "尽管wastED获得了热烈好评，但它从一开始就被设计成一项短期实验；蓝山餐厅此后已恢复了常规菜单。尽管如此，它提醒我们，解决可持续发展问题的途径有很多，而且你几乎可以用任何东西做出一顿美妙的饭菜。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+                "start": 78,
+                "end": 268,
+                "quote": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p1",
+                "start": 31,
+                "end": 97,
+                "quote": "这种感觉也许来自我在南非长大的经历——在那里，“非洲有孩子在挨饿”这句话与其说是饭桌上的祷告，不如说是一个令人不安的、对事实的提醒。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+                "start": 191,
+                "end": 257,
+                "quote": "Each dish was tailor-made to raise awareness regarding food waste."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p3",
+                "start": 64,
+                "end": 91,
+                "quote": "每道菜都是为提高人们对食物浪费问题的认识而专门设计的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+                "start": 0,
+                "end": 93,
+                "quote": "It should be noted that none of the items on wastED’s menu was technically made from garbage."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+                "start": 94,
+                "end": 221,
+                "quote": "Instead, all the ingredients（配料）used were examples of meat cuts and produce that most restaurants would never consider serving."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+                "start": 222,
+                "end": 327,
+                "quote": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p5",
+                "start": 0,
+                "end": 34,
+                "quote": "需要指出的是，wastED菜单上没有一道菜在严格意义上是用垃圾做的。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p5",
+                "start": 34,
+                "end": 67,
+                "quote": "相反，所用的配料都是大多数餐厅从来不会考虑拿来上桌的肉块和农产品。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p5",
+                "start": 67,
+                "end": 101,
+                "quote": "羽衣甘蓝的茎、鱼领、被挑剩的红薯、黄瓜蒂之类的东西，都被重新利用起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+                "start": 45,
+                "end": 154,
+                "quote": "it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+                "start": 0,
+                "end": 22,
+                "quote": "For two weeks in March"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p6",
+                "start": 16,
+                "end": 49,
+                "quote": "但它从一开始就被设计成一项短期实验；蓝山餐厅此后已恢复了常规菜单。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p3",
+                "start": 0,
+                "end": 8,
+                "quote": "三月里有两周时间"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+                "start": 78,
+                "end": 268,
+                "quote": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p1",
+                "start": 31,
+                "end": 97,
+                "quote": "这种感觉也许来自我在南非长大的经历——在那里，“非洲有孩子在挨饿”这句话与其说是饭桌上的祷告，不如说是一个令人不安的、对事实的提醒。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+                "start": 94,
+                "end": 221,
+                "quote": "Instead, all the ingredients（配料）used were examples of meat cuts and produce that most restaurants would never consider serving."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-d-p5",
+                "start": 34,
+                "end": 67,
+                "quote": "相反，所用的配料都是大多数餐厅从来不会考虑拿来上桌的肉块和农产品。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先由作者扔食物时的愧疚引出食物浪费话题，再交代行业都在想办法、一家纽约餐厅另辟蹊径，接着介绍wastED的菜品和目的，用数据说明餐厅浪费之严重，澄清菜品的原料，最后交代实验如期结束并总结启示。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+            "summary": "作者扔食物时心里难受，这种感觉源于在南非长大",
+            "function": "以个人感受开篇，引出食物浪费话题（第32题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-d:2",
+            "summary": "行业都在想办法减少浪费，一家纽约餐厅改用原本要扔的食物做菜",
+            "function": "交代背景，引出蓝山餐厅的新尝试。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+            "summary": "蓝山餐厅更名wastED两周，每道菜都为唤起对浪费的关注而做",
+            "function": "介绍实验的内容和目的（第33题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+            "summary": "餐厅食物浪费数据惊人，wastED把零浪费理念做到极致",
+            "function": "用数据说明问题严重，突出wastED的意义。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+            "summary": "菜品不是用垃圾做的，而是用餐厅平常弃用的食材",
+            "function": "澄清菜品的原料（第34题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+            "summary": "实验获好评后如期结束，提醒人们解决浪费的办法很多",
+            "function": "交代结果并总结启示（第35题）。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-ii:32": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "由“非洲有孩子在挨饿”这句话在南非的分量，推断作者小时候的经历。",
+      "stemTranslationZh": "关于作者的早年生活，可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 where 后那句话在当地的分量",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他目睹过食物短缺。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+              "quote": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+              "anchor": "南非的成长经历"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他喜欢当地的菜肴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文提到饭桌（dinner time），只是说那句话不是饭前祷告，没写他喜欢南非的菜。",
+            "claim": "He enjoyed the local cuisine."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他向非洲人捐赠过食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "donated",
+            "optionText": "donated",
+            "matchType": "exact",
+            "relationNote": "donated 出自[[block:paper-gaokao-2025-ii:reading-d:5|only 15.7% is donated or recycled]]，说的是餐厅的剩余食物只有少量被捐赠或回收，和作者小时候无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+              "quote": "of that waste only 15.7% is donated or recycled",
+              "anchor": "餐厅剩食的捐赠"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他在家帮忙做饭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文写的是那句话在饭桌上被人提起，没提他在家帮忙做饭。",
+            "claim": "He helped to cook at home."
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "early life",
+          "sourceRole": "stem",
+          "targetText": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+          "relationType": "locationCue",
+          "sourceZh": "早年生活",
+          "targetCue": "growing up",
+          "targetCueZh": "成长",
+          "answerText": "the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer",
+          "note": "题干 early life 对应原文 growing up in South Africa，在南非长大就是作者的早年。"
+        },
+        {
+          "sourceText": "He witnessed food shortage.",
+          "sourceRole": "correctOption",
+          "targetText": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "原文没直说作者见过食物短缺，只说他在南非长大，那里“非洲有孩子在挨饿”不是饭前的祷词，而是让人不安的事实（reminder of fact）。由此推出食物短缺就是他成长时身边的现实，他是亲眼见过的，选 A。只能推到“目睹”，推不出他自己挨过饿。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出蓝山餐厅推出 wastED 菜单的目的。",
+      "stemTranslationZh": "蓝山餐厅为什么开展这项实验？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句找做菜的用意",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了给客人定制菜肴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Each dish was tailor-made to raise awareness regarding food waste.",
+            "sourceEntity": "to raise awareness regarding food waste",
+            "optionText": "To customize dishes for guests.",
+            "optionEntity": "for guests",
+            "explanation": "原文的 tailor-made（专门设计）是说每道菜为唤起对浪费的关注而做，选项把它说成按客人的需要定制，服务的对象变了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+              "quote": "Each dish was tailor-made to raise awareness regarding food waste.",
+              "anchor": "菜为何而做"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了让公众意识到食物浪费问题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+              "quote": "Each dish was tailor-made to raise awareness regarding food waste.",
+              "anchor": "菜为何而做"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了测试一种食品加工方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "experiment 一词让人想到试验新工艺，但原文没提任何食品加工方法；菜是厨师用平常弃用的食材做的，为的是唤起关注。",
+            "claim": "To test a food processing method."
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了改进英国的零浪费系统。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Restaurants like Silo in the UK have experimented with zero-waste systems, but wastED took the concept to its logical conclusion.",
+            "sourceEntity": "Silo in the UK",
+            "optionText": "To improve the UK's zero-waste systems.",
+            "optionEntity": "the UK's zero-waste systems",
+            "explanation": "零浪费系统是英国 Silo 等餐厅自己试行的，原文只拿它和 wastED 对比；蓝山餐厅在纽约，没有去改进英国的系统。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+              "quote": "Restaurants like Silo in the UK have experimented with zero-waste systems, but wastED took the concept to its logical conclusion.",
+              "anchor": "英国 Silo 的尝试"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Blue Hill",
+          "sourceRole": "stem",
+          "targetText": "For two weeks in March, Greenwich Village's Blue Hill restaurant was renamed wastED, and served items like fried skate cartilage, a juice pulp burger, and a dumpster diver's vegetable salad.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "to raise awareness regarding food waste",
+          "bridgeZh": "Each dish 指改名后端上的这些菜，接着交代它们为何而做",
+          "note": "题干 Blue Hill 原词出现在原文。"
+        },
+        {
+          "sourceText": "To make the public aware of food waste.",
+          "sourceRole": "correctOption",
+          "targetText": "Each dish was tailor-made to raise awareness regarding food waste.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“让公众意识到”（make the public aware of）就是原文的“提高认识”（raise awareness），说的都是食物浪费（food waste），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:34": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看清这一段从头到尾在说明什么，选出能概括全段的一项。",
+      "stemTranslationZh": "第5段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-gaokao-2025-ii:reading-d:6]]，看 Instead 前后在澄清什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为什么使用这些食材。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "这一段只交代用了哪些食材，没解释为什么用；做这些菜的用意写在[[block:paper-gaokao-2025-ii:reading-d:4]]，是唤起对浪费的关注。",
+            "claim": "Why the ingredients were used."
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "哪些菜最受欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "这一段只说食材被做成了佳肴（excellent cuisine），没比较哪道菜最受欢迎；好评写在[[block:paper-gaokao-2025-ii:reading-d:7]]，评的是整个 wastED。",
+            "claim": "Which dishes were best liked."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "这些菜是用什么做的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "quote": "It should be noted that none of the items on wastED’s menu was technically made from garbage.",
+              "anchor": "不是用垃圾做的"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "quote": "Instead, all the ingredients（配料）used were examples of meat cuts and produce that most restaurants would never consider serving.",
+              "anchor": "餐厅弃用的食材"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "quote": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated",
+              "anchor": "食材举例"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "这些食材是在哪里买的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "这一段写的是食材是什么、本来会被餐厅怎样对待，没提从哪里买来。",
+            "claim": "Where the ingredients were bought."
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What the dishes were made of.",
+          "sourceRole": "correctOption",
+          "targetText": "Instead, all the ingredients（配料）used were examples of meat cuts and produce that most restaurants would never consider serving.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“菜是用什么做的”概括了[[block:paper-gaokao-2025-ii:reading-d:6]]的全部内容：先说菜不是用垃圾做的（not … made from garbage），再说用的是餐厅平常不上桌的肉块和农产品，最后举羽衣甘蓝茎、鱼领等例子，说它们被厨师做成了佳肴。整段都在交代原料，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把各项放回原文，核对 wastED 的结局和外界评价。",
+      "stemTranslationZh": "关于wastED，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "把各项带回 [[block:paper-gaokao-2025-ii:reading-d:6]] [[block:paper-gaokao-2025-ii:reading-d:7]]，核对 wastED 的结局与评价",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它已按计划结束。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+              "quote": "it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu.",
+              "anchor": "短期实验已结束"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+              "quote": "For two weeks in March",
+              "anchor": "只办了两周"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它正在创造新的工作岗位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文提到一批好厨师帮忙做菜（a number of good chefs），没说它创造了新岗位；况且它已经结束，谈不上“正在”。",
+            "claim": "It is creating new jobs."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它重新受到欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文说它开办时好评如潮（enthusiastic reviews），没写它冷落后又重新走红；它办完就结束了，餐厅也换回了常规菜单。",
+            "claim": "It has regained popularity."
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它受到顶级厨师的批评。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Though wastED received enthusiastic reviews, it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu.",
+            "sourceHighlight": "received enthusiastic reviews",
+            "optionText": "It is criticized by top chefs.",
+            "optionHighlight": "criticized",
+            "explanation": "厨师在文中是帮忙把食材做成佳肴的人（good chefs），wastED 得到的是热烈好评（enthusiastic reviews），选项说成被名厨批评，评价反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+              "quote": "Though wastED received enthusiastic reviews",
+              "anchor": "获得热烈好评"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It has ended as planned.",
+          "sourceRole": "correctOption",
+          "targetText": "Though wastED received enthusiastic reviews, it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+          "relationType": "paraphrase",
+          "note": "选项由两处合成：“已结束”落在餐厅已恢复常规菜单（has since returned to its regular menu）；“按计划”落在它从一开始就被设计成短期实验（designed from the start as a short-lived experiment），[[block:paper-gaokao-2025-ii:reading-d:4]]也说只办了两周，选 A。"
+        }
+      ]
+    }
+  }
+}

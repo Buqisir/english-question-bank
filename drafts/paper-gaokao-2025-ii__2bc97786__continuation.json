@@ -1,0 +1,188 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: In a class discussion, I was invited to explain the meaning of my name. I hesitated for a moment, then walked to the board and wrote two Chinese characters. “Qiu means autumn, and yu means rain,” I explained. I told them I was born on a rainy autumn evening, and my parents hoped I would grow up calm and gentle, like that rain. The room went quiet. When the professor tried my name again, I did not give up this time. I said it slowly, sound by sound, and linked each sound to its meaning. Soon the whole class was saying it after me, and nobody laughed.\n\nParagraph 2: Many of my classmates got interested and came up to me after class. One girl asked me to write her name in Chinese, and a boy asked whether his name had a meaning too. I wrote their names down and explained each character. They practiced my name, and I corrected them gently, no longer afraid that they would lose patience. On my way home, I realized my name was more than a sound. It was a small window into where I came from, and I had almost kept it shut. The next week, when a new classmate asked my name, I did not just smile and nod. I said it carefully and added, “It means autumn rain.”",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "主要人物是在爱尔兰留学的“我”（秋雨）。教授和同学是原文里已有的人，续写里由他们来回应我。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”回忆往事，一般过去时，句子不长，多写我的心理和顾虑。原文几乎都是叙述，引号里的话只有 “It's okay, professor” 一句，续写也以叙述和转述为主，只留一两句短的直接引语。",
+          "evidence": [
+            "I really did not know whether I should continue correcting him or simply drop the matter."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在我意识到：为了省事不再纠正别人，可能正在失去分享一点自己文化身份的机会。续写要让我重新开口，把名字背后的东西讲出来。",
+          "evidence": [
+            "I might be losing something more important"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我（Qiuyu，秋雨）",
+          "role": "在爱尔兰读书的中国留学生，故事的叙述者",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "很在意别人怎么看自己，怕同学嫌麻烦，宁可自己让步。",
+              "evidence": "After all, I did care about what others would think of me."
+            },
+            {
+              "label": "此刻",
+              "text": "已经不再纠正别人的发音，只是笑着点头。",
+              "evidence": "I just smiled and nodded approvingly."
+            },
+            {
+              "label": "想要",
+              "text": "开始觉得应该把自己文化里的一小部分分享出去。",
+              "evidence": "the opportunity to share a small part of my cultural identity"
+            }
+          ]
+        },
+        {
+          "name": "教授",
+          "role": "讲课的教授",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "当着全班一遍遍跟我念名字，看得出他想念对，并没有不耐烦。",
+              "evidence": "the professor tried repeating my name after me over and over"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "I feared that my classmates might grow tired of my efforts or even lose patience with me.",
+          "use": "第 1 段让全班安静听、跟着念，打消这份担心；第 2 段我耐心纠正同学，写明不再怕他们不耐烦。"
+        },
+        {
+          "sourceQuote": "I stopped acting as a “Chinese teacher.”",
+          "use": "第 2 段同学围过来学名字、要中文名，我又当起了“中文老师”，这次是心甘情愿的。"
+        },
+        {
+          "sourceQuote": "I just smiled and nodded approvingly.",
+          "use": "第 2 段结尾再有人问名字，我不再只是笑着点头，而是说清楚并讲出含义，和原文形成前后对照。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "第 1 段我借名字的含义讲出“秋雨”的来历，并且这次坚持把读音教会，全班第一次认真跟着念；第 2 段同学课后围过来，我耐心教他们，也想明白名字值得分享，以后介绍自己时会讲出它的意思。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "讲清名字的意思。第二个段首句说同学“got interested”，所以第 1 段结束时同学要已经对我的名字产生兴趣；课后来找我的事留给第 2 段。",
+          "draft": "我在黑板上写下“秋”“雨”两个字，讲出自己生在秋雨的傍晚和父母的期望；教授再念时我没有放弃，把读音和意思连起来教，全班跟着念，这次没人笑。",
+          "bridgeQuote": "Many of my classmates got interested",
+          "bridge": "第 1 段要发生什么，同学才会在课后主动来找我？"
+        },
+        {
+          "paragraph": 2,
+          "must": "写同学课后来找我做什么、我怎样回应，并收住原文“可能失去分享文化身份的机会”这个问题。",
+          "draft": "同学请我写他们名字的中文、问自己的名字有没有含义，又反复练我的名字，我耐心纠正；回家路上我想明白名字是了解我家乡的一扇小窗；下周有新同学问名字，我说清楚并告诉他意思是秋雨。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: In a class discussion, I was invited to explain the meaning of my name. I hesitated for a moment, then walked to the board and wrote two Chinese characters. “Qiu means autumn, and yu means rain,” I explained. I told them I was born on a rainy autumn evening, and my parents hoped I would grow up calm and gentle, like that rain. The room went quiet. When the professor tried my name again, I did not give up this time. I said it slowly, sound by sound, and linked each sound to its meaning. Soon the whole class was saying it after me, and nobody laughed.\n\nParagraph 2: Many of my classmates got interested and came up to me after class. One girl asked me to write her name in Chinese, and a boy asked whether his name had a meaning too. I wrote their names down and explained each character. They practiced my name, and I corrected them gently, no longer afraid that they would lose patience. On my way home, I realized my name was more than a sound. It was a small window into where I came from, and I had almost kept it shut. The next week, when a new classmate asked my name, I did not just smile and nod. I said it carefully and added, “It means autumn rain.”",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "讲出名字的意思和来历，并让同学第一次真正听进去，为第 2 段同学的兴趣做铺垫。",
+          "items": [
+            {
+              "quote": "I hesitated for a moment",
+              "explain": "一句短句写出犹豫。原文里我已经放弃纠正别人，被请上去讲名字时犹豫一下才合人物的处境。"
+            },
+            {
+              "quote": "I told them I was born on a rainy autumn evening, and my parents hoped I would grow up calm and gentle, like that rain.",
+              "explain": "用转述交代名字的来历和父母的期望，不靠大段对话，和原文的叙述方式一致。来历讲得具体，同学的兴趣才有来由。"
+            },
+            {
+              "quote": "I did not give up this time.",
+              "explain": "this time 对照原文那次耸肩放弃，写出我第一次改变做法，情节的转折由我自己的行动推动。"
+            },
+            {
+              "quote": "and nobody laughed",
+              "explain": "回收原文全班哄笑的尴尬场面，用一个相反的结果收住这一段，不用写“我很感动”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写同学课后来找我、我怎样回应，并收住原文“失去分享文化身份的机会”这个问题。",
+          "items": [
+            {
+              "quote": "One girl asked me to write her name in Chinese, and a boy asked whether his name had a meaning too.",
+              "explain": "用两件具体的事写出同学怎样“got interested”，同学不起名字，只做反应，推动情节的还是我。"
+            },
+            {
+              "quote": "no longer afraid that they would lose patience",
+              "explain": "借原文“怕同学不耐烦”的顾虑，写出我心里的变化，读者能看到前后两个我。"
+            },
+            {
+              "quote": "It was a small window into where I came from",
+              "explain": "把名字比作一扇小窗，点出原文说的 cultural identity，但只用一句，不贴大道理。"
+            },
+            {
+              "quote": "I did not just smile and nod.",
+              "explain": "直接对照原文的 smiled and nodded，用一个具体动作收尾，说明问题真的解决了。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I hesitated for a moment",
+          "function": "用动作写犹豫，交代人物从回避到开口之间的那一步。"
+        },
+        {
+          "expression": "said it slowly, sound by sound",
+          "function": "写教名字发音的具体做法，让“这次不放弃”看得见。"
+        },
+        {
+          "expression": "no longer afraid that …",
+          "function": "把原文的顾虑拿回来否定掉，一句话写出人物的变化。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段就写同学下课围上来问名字",
+          "why": "第二个段首句写的才是课后同学来找我，第 1 段提前写掉，第 2 段就没事可写了。"
+        },
+        {
+          "pitfall": "只翻译名字是 autumn rain，没有写我的态度变化",
+          "why": "原文停在我可能失去分享文化身份的机会，续写不让我重新主动开口，这个问题就没有收住。"
+        },
+        {
+          "pitfall": "让教授或某个新人物出面替我解决问题",
+          "why": "原文的问题是我自己选择了沉默，转折要由我的行动推动，靠别人替我开口是天降帮助。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: In a class discussion, I was invited to explain the meaning of my name. For a second I thought about giving the short version and sitting down. Instead, I picked up a piece of chalk and wrote two characters on the board. “Qiu is autumn, and yu is rain,” I said. I told them I had been born on a wet autumn evening, and that my parents wanted me to be like it: quiet, gentle, but never easy to ignore. The room fell silent, and this time the silence did not frighten me. When the professor tried my name again, I did not shrug it off. I broke it into two sounds, tied each one to its picture, and waited. His second try was close; his third was right. A few classmates whispered “autumn rain” to themselves, and when the class laughed this time, it was with me.\n\nParagraph 2: Many of my classmates got interested and came up to me after class. A girl confessed that people always got her own name wrong because it was spelled nothing like it sounded, and a boy asked if I could give him a Chinese name. I tore pages from my notebook and wrote each of them a few characters, explaining what each one meant. They kept trying my name, and I kept correcting them without a trace of embarrassment. Walking back to my room in the light rain, I understood what I had nearly given away. My name was not a problem to hide behind a polite smile; it was a small piece of home I could hand to others. From then on, I stopped nodding along. Whenever someone asked my name, I said it slowly and told them, “It means autumn rain.”",
+      "beyondStandard": [
+        {
+          "quote": "For a second I thought about giving the short version and sitting down.",
+          "explain": "标准版只说犹豫，这里写出我想敷衍过去的具体念头，更贴原文那个怕麻烦、想息事宁人的我。"
+        },
+        {
+          "quote": "His second try was close; his third was right.",
+          "explain": "用两个短分句写教授一步步念对，对照原文他 over and over 也念不对，细节更具体。"
+        },
+        {
+          "quote": "it was a small piece of home I could hand to others",
+          "explain": "hand to others 把“分享”写成递给别人的动作，比 share my culture 更具体，也呼应前面撕本子写名字送给同学。"
+        }
+      ]
+    }
+  }
+}

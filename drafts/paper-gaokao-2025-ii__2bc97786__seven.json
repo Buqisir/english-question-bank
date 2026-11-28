@@ -1,0 +1,1018 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:seven-choices": {
+      "overview": "文章介绍全家一起做志愿者的几项意外收获：让人觉得时间更多，让成年人更健康长寿，让孩子和青少年长期受益，还能增加家人相处的时间、发现孩子的才能。",
+      "fullTranslationZh": "全家一起做志愿者的意外收获\n你在找让一家人更亲近的办法吗？想找一项小孩和大人都能一起参与的爱好吗？全家一起做志愿者也许正是你需要的。你也许知道帮助别人会带来“好心情”，但做志愿者还会以更多意想不到的方式给全家带来积极影响。\n你会觉得自己的时间更多了。\n人们常觉得自己太忙，没空做志愿者。然而研究发现，把时间献给社区公益事业，反而会让你觉得自己的时间更多了。做志愿者让你觉得自己有能力，并激励你过好每一天。\n经常做志愿者，你会更长寿。\n对成年人来说，做志愿者能给身体健康带来显著好处。华盛顿大学发现，55岁及以上做志愿者的成年人记忆力更好，整体健康保持得也比同龄人更久。志愿者也更可能照顾好自己的健康，更注重在生活中增加体育活动。\n做志愿者对孩子和青少年有终身影响。\n青少年时期做志愿者与一些重要的积极影响有关，比如成绩提高、自信增强。这些影响不只是短期的，已有证据表明它们会在今后多年里影响青少年的身心健康。\n你和家人相处的时间会更多。\n一起做志愿者的家庭会有为共同目标努力的独特经历。你甚至可能发现孩子有一项你以前不知道的才能。每个人都能拿出自己独有的东西，并以一种新的方式和彼此建立联系。而且，总有适合各个年龄和能力的任务，所以你的每个孩子都能为自己做的事感到自豪。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "seven-sentence-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+          "sourceText": "You may know the “feel-good” emotions that come with helping others, but there are even more unexpected ways volunteering will positively affect the whole family.",
+          "relatedQuestionIds": [],
+          "translationZh": "你也许知道帮助别人会带来“好心情”，但做志愿者还会以更多意想不到的方式给全家带来积极影响。",
+          "analysisZh": "两个分句由 but 连接。前一分句主干是 You may know the emotions，that come with helping others 是定语从句，说明是哪种情绪；后一分句主干是 there are even more unexpected ways，volunteering will positively affect the whole family 是省略了关系词的定语从句，修饰 ways。but 前讲大家熟悉的好处，后面引出意想不到的好处，下文几个小标题就是这些 ways。",
+          "displayText": "You may know the “feel-good” emotions that come with helping others, but there are even more unexpected ways volunteering will positively affect the whole family.",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 37,
+              "quote": "You may know the “feel-good” emotions"
+            },
+            {
+              "start": 69,
+              "end": 108,
+              "quote": "but there are even more unexpected ways"
+            },
+            {
+              "start": 109,
+              "end": 161,
+              "quote": "volunteering will positively affect the whole family"
+            }
+          ]
+        },
+        {
+          "sentenceId": "seven-sentence-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:6",
+          "sourceText": "Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:38"
+          ],
+          "translationZh": "华盛顿大学发现，55岁及以上做志愿者的成年人记忆力更好，整体健康保持得也比同龄人更久。",
+          "analysisZh": "主干是 Washington University found that…，that 引导宾语从句。从句主语 adults 带两层修饰：55 and older 限定年龄，who volunteered 限定做过志愿者的人；谓语是并列的 had better memory 和 maintained overall health longer，最后 than others their age 是比较对象。这句用数据支撑空里说的成年人身体健康益处。",
+          "displayText": "Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age.",
+          "underlineRanges": [
+            {
+              "start": 33,
+              "end": 68,
+              "quote": "adults 55 and older who volunteered"
+            },
+            {
+              "start": 69,
+              "end": 123,
+              "quote": "had better memory and maintained overall health longer"
+            },
+            {
+              "start": 124,
+              "end": 145,
+              "quote": "than others their age"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "开头用两个问句引出全家一起做志愿者这个办法，并预告还有意想不到的好处；下面四个小标题各讲一种好处：时间感、成年人健康、孩子和青少年的长期收获、家人相处。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Unexpected Benefits of Volunteering as a Family",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-ii:seven-choices:1",
+              "block:paper-gaokao-2025-ii:seven-choices:2"
+            ],
+            "summary": "用问句点出家长想找全家共享的活动，提出全家做志愿者，并引出意想不到的好处。"
+          },
+          {
+            "unitId": "unit-time",
+            "heading": "● You’ll feel like you have more time.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-ii:seven-choices:3",
+              "block:paper-gaokao-2025-ii:seven-choices:4"
+            ],
+            "summary": "人们嫌忙，研究却发现做志愿者让人觉得时间更多、更有能力。"
+          },
+          {
+            "unitId": "unit-longer",
+            "heading": "● You can live longer if you volunteer regularly.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-ii:seven-choices:5",
+              "block:paper-gaokao-2025-ii:seven-choices:6"
+            ],
+            "summary": "成年人做志愿者记忆更好、更健康，也更注意锻炼。"
+          },
+          {
+            "unitId": "unit-teens",
+            "heading": "● __39__",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-ii:seven-choices:7",
+              "block:paper-gaokao-2025-ii:seven-choices:8"
+            ],
+            "summary": "青少年做志愿者成绩更好、更自信，影响延续多年。"
+          },
+          {
+            "unitId": "unit-family",
+            "heading": "● You’ll have more time with family.",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-ii:seven-choices:9",
+              "block:paper-gaokao-2025-ii:seven-choices:10"
+            ],
+            "summary": "全家为共同目标一起做事，发现孩子的才能，每个年龄都有合适的任务。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 37,
+          "secondary": 38,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 community 复现第 37 题空前的 \"community causes\"，像在接着说帮社区的好处。但这一段围绕时间感，空前说 \"have more of it\"，选项谈抑郁率，和时间无关。放到第 38 题，空后讲的是记忆和身体健康，也不是心理问题。",
+          "quotes": [
+            "community causes",
+            "have more of it"
+          ]
+        },
+        "D": {
+          "target": 39,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "C",
+          "shared": [
+            "Volunteering"
+          ],
+          "text": "选项也以 Volunteering 开头讲一种好处，形式像第 39 题的小标题。但下面一段开头是 \"Volunteering during teenage years\"，讲的是成绩和自信，没有一处谈偏见 (prejudice)，对象和好处都对不上。",
+          "quotes": [
+            "Volunteering during teenage years"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "seven-source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "seven-translation-zh",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 13,
+              "quote": "全家一起做志愿者的意外收获"
+            },
+            {
+              "paragraphId": "tr-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:2"
+              ],
+              "start": 14,
+              "end": 111,
+              "quote": "你在找让一家人更亲近的办法吗？想找一项小孩和大人都能一起参与的爱好吗？全家一起做志愿者也许正是你需要的。你也许知道帮助别人会带来“好心情”，但做志愿者还会以更多意想不到的方式给全家带来积极影响。"
+            },
+            {
+              "paragraphId": "tr-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:3"
+              ],
+              "start": 112,
+              "end": 125,
+              "quote": "你会觉得自己的时间更多了。"
+            },
+            {
+              "paragraphId": "tr-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:4"
+              ],
+              "start": 126,
+              "end": 202,
+              "quote": "人们常觉得自己太忙，没空做志愿者。然而研究发现，把时间献给社区公益事业，反而会让你觉得自己的时间更多了。做志愿者让你觉得自己有能力，并激励你过好每一天。"
+            },
+            {
+              "paragraphId": "tr-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:5"
+              ],
+              "start": 203,
+              "end": 216,
+              "quote": "经常做志愿者，你会更长寿。"
+            },
+            {
+              "paragraphId": "tr-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:6"
+              ],
+              "start": 217,
+              "end": 314,
+              "quote": "对成年人来说，做志愿者能给身体健康带来显著好处。华盛顿大学发现，55岁及以上做志愿者的成年人记忆力更好，整体健康保持得也比同龄人更久。志愿者也更可能照顾好自己的健康，更注重在生活中增加体育活动。"
+            },
+            {
+              "paragraphId": "tr-7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:7"
+              ],
+              "start": 315,
+              "end": 332,
+              "quote": "做志愿者对孩子和青少年有终身影响。"
+            },
+            {
+              "paragraphId": "tr-8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:8"
+              ],
+              "start": 333,
+              "end": 404,
+              "quote": "青少年时期做志愿者与一些重要的积极影响有关，比如成绩提高、自信增强。这些影响不只是短期的，已有证据表明它们会在今后多年里影响青少年的身心健康。"
+            },
+            {
+              "paragraphId": "tr-9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:9"
+              ],
+              "start": 405,
+              "end": 418,
+              "quote": "你和家人相处的时间会更多。"
+            },
+            {
+              "paragraphId": "tr-10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:seven-choices:10"
+              ],
+              "start": 419,
+              "end": 535,
+              "quote": "一起做志愿者的家庭会有为共同目标努力的独特经历。你甚至可能发现孩子有一项你以前不知道的才能。每个人都能拿出自己独有的东西，并以一种新的方式和彼此建立联系。而且，总有适合各个年龄和能力的任务，所以你的每个孩子都能为自己做的事感到自豪。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "seven-completed-2",
+            "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+            "text": "Are you looking for a way to bring your family together? Hoping to find a hobby that can be shared by both the little ones and adults? Volunteering as a family may be just the thing you need. You may know the “feel-good” emotions that come with helping others, but there are even more unexpected ways volunteering will positively affect the whole family."
+          },
+          {
+            "textId": "seven-completed-4",
+            "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:4",
+            "text": "People often feel they are too busy to volunteer. Yet, research has found that giving your time to community causes actually makes you feel like you have more of it. Volunteering makes you feel capable and inspires you to make the most of each day."
+          },
+          {
+            "textId": "seven-completed-6",
+            "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:6",
+            "text": "For adults, volunteering can provide significant physical health benefits. Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age. Volunteers are also more likely to look after their own health and are more focused on adding physical activity into their lives."
+          },
+          {
+            "textId": "seven-completed-7",
+            "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:7",
+            "text": "● Volunteering has a lifelong effect on kids and teenagers."
+          },
+          {
+            "textId": "seven-completed-10",
+            "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+            "text": "Families who volunteer together have the unique experience of working toward a common goal. You may even learn that your kid has a talent you didn't know about before. Everyone brings something unique to the table and can connect with each other in a new way. And, there are tasks for every age and ability, so all your children can feel proud of their work."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "seven-evidence-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+                "start": 0,
+                "end": 56,
+                "quote": "Are you looking for a way to bring your family together?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-2",
+                "start": 0,
+                "end": 15,
+                "quote": "你在找让一家人更亲近的办法吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:36"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:36",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-2",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+                "start": 135,
+                "end": 191,
+                "quote": "Volunteering as a family may be just the thing you need."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-2",
+                "start": 35,
+                "end": 52,
+                "quote": "全家一起做志愿者也许正是你需要的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:4",
+                "start": 79,
+                "end": 164,
+                "quote": "giving your time to community causes actually makes you feel like you have more of it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-4",
+                "start": 24,
+                "end": 51,
+                "quote": "把时间献给社区公益事业，反而会让你觉得自己的时间更多了"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:37"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:37",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-4",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:4",
+                "start": 166,
+                "end": 248,
+                "quote": "Volunteering makes you feel capable and inspires you to make the most of each day."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-4",
+                "start": 52,
+                "end": 76,
+                "quote": "做志愿者让你觉得自己有能力，并激励你过好每一天。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:6",
+                "start": 40,
+                "end": 152,
+                "quote": "adults 55 and older who volunteered had better memory and maintained overall health longer than others their age"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-6",
+                "start": 32,
+                "end": 66,
+                "quote": "55岁及以上做志愿者的成年人记忆力更好，整体健康保持得也比同龄人更久"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:38"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:38",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-6",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:6",
+                "start": 0,
+                "end": 74,
+                "quote": "For adults, volunteering can provide significant physical health benefits."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-6",
+                "start": 0,
+                "end": 24,
+                "quote": "对成年人来说，做志愿者能给身体健康带来显著好处。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:8",
+                "start": 0,
+                "end": 80,
+                "quote": "Volunteering during teenage years has been linked to some major positive effects"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-8",
+                "start": 0,
+                "end": 21,
+                "quote": "青少年时期做志愿者与一些重要的积极影响有关"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:39"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:39",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-7",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:7",
+                "start": 2,
+                "end": 59,
+                "quote": "Volunteering has a lifelong effect on kids and teenagers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-7",
+                "start": 0,
+                "end": 17,
+                "quote": "做志愿者对孩子和青少年有终身影响。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+                "start": 99,
+                "end": 144,
+                "quote": "Everyone brings something unique to the table"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-10",
+                "start": 46,
+                "end": 60,
+                "quote": "每个人都能拿出自己独有的东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:40"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:40",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-10",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+                "start": 92,
+                "end": 167,
+                "quote": "You may even learn that your kid has a talent you didn't know about before."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-10",
+                "start": 24,
+                "end": 46,
+                "quote": "你甚至可能发现孩子有一项你以前不知道的才能。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-sentence-1-structure",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "seven-sentence-1",
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+                "start": 142,
+                "end": 304,
+                "quote": "You may know the “feel-good” emotions that come with helping others, but there are even more unexpected ways volunteering will positively affect the whole family."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-2",
+                "start": 52,
+                "end": 97,
+                "quote": "你也许知道帮助别人会带来“好心情”，但做志愿者还会以更多意想不到的方式给全家带来积极影响。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-sentence-2-structure",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:38"
+            ],
+            "selectedSentenceId": "seven-sentence-2",
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:6",
+                "start": 7,
+                "end": 153,
+                "quote": "Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "tr-6",
+                "start": 24,
+                "end": 67,
+                "quote": "华盛顿大学发现，55岁及以上做志愿者的成年人记忆力更好，整体健康保持得也比同龄人更久。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-ii:36": {
+      "blankId": "blank:paper-gaokao-2025-ii:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "bring your family together",
+        "a hobby",
+        "both the little ones and adults",
+        "the whole family"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+        "beforeQuote": "Are you looking for a way to bring your family together? Hoping to find a hobby that can be shared by both the little ones and adults?",
+        "afterQuote": "You may know the “feel-good” emotions that come with helping others"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "bring your family together",
+          "signalSide": "context-before",
+          "targetText": "Volunteering as a family",
+          "relation": "空前问怎样让全家聚到一起，选项用 as a family 给出全家一起做的事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Volunteering as a family",
+          "signalSide": "option",
+          "targetText": "a way / a hobby",
+          "relation": "选项点出这个办法就是全家一起做志愿者，与标题里的 Volunteering as a Family 一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the thing you need",
+          "signalSide": "option",
+          "targetText": "a way / a hobby that can be shared",
+          "relation": "the thing you need 回指空前两个问句里在找的东西。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "helping others",
+          "signalSide": "context-after",
+          "targetText": "Volunteering",
+          "relation": "空后的 helping others 接着谈做志愿者的感受，说明空里已经提出志愿活动。"
+        }
+      ],
+      "lock": [
+        "bring your family together",
+        "the thing you need"
+      ],
+      "find": {
+        "text": "空前连问两句，在找 \"bring your family together\" 的办法，要一句回答；只有 B 的 \"the thing you need\" 接住这个问题，还点明全家一起做。",
+        "quotes": [
+          "bring your family together",
+          "the thing you need"
+        ]
+      },
+      "explain": "开头两个问句替读者说出需求，这句直接亮出答案：全家一起做志愿者。空后由 helping others 的好心情转到意想不到的好处，引出下面几个小标题。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 也说做志愿者的好处，但没提 family，回答不了空前找全家共享爱好的问题。",
+          "quotes": [
+            "family"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "bring your family together / shared by both the little ones and adults",
+            "optionSide": "Volunteering as a family",
+            "relation": "空前要全家共享的活动，选项给出全家一起做志愿者。"
+          },
+          {
+            "contextSide": "Are you looking for a way…? Hoping to find a hobby…?",
+            "optionSide": "may be just the thing you need",
+            "relation": "问句在找办法，选项用 the thing you need 作答。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "开头两个问句替读者说出需求，这句直接亮出答案：全家一起做志愿者。空后由 helping others 的好心情转到意想不到的好处，引出下面几个小标题。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 也说做志愿者的好处，但没提 family，回答不了空前找全家共享爱好的问题。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:37": {
+      "blankId": "blank:paper-gaokao-2025-ii:37",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "too busy to volunteer",
+        "giving your time",
+        "makes you feel like you have more of it",
+        "community causes"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:4",
+        "beforeQuote": "Yet, research has found that giving your time to community causes actually makes you feel like you have more of it.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "makes you feel like you have more of it",
+          "signalSide": "context-before",
+          "targetText": "makes you feel capable",
+          "relation": "空前说做志愿者让人觉得时间更多，选项用同样的 makes you feel 再说一种感受。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "makes you feel capable",
+          "signalSide": "option",
+          "targetText": "makes you feel like you have more of it",
+          "relation": "和空前同一个句式，把感受从时间多推进到自己有能力。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make the most of each day",
+          "signalSide": "option",
+          "targetText": "more of it (time)",
+          "relation": "过好每一天仍落在时间上，和小标题 have more time 呼应。"
+        }
+      ],
+      "lock": [
+        "more of it",
+        "make the most of each day"
+      ],
+      "find": {
+        "text": "空前 \"makes you feel like you have more of it\" 讲时间多了的感受；G 同样 \"makes you feel\"，又落到 \"make the most of each day\"，仍谈时间。",
+        "quotes": [
+          "makes you feel like you have more of it",
+          "makes you feel",
+          "make the most of each day"
+        ]
+      },
+      "explain": "本段先说人们嫌忙，再用研究反驳：做志愿者反而让人觉得时间多。这句收尾，顺着同一个 makes you feel 再补一层：人觉得自己有能力，也更愿意把每一天过充实。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "makes you feel like you have more of it",
+            "optionSide": "makes you feel capable",
+            "relation": "同用 makes you feel，接着说志愿者的另一种感受。"
+          },
+          {
+            "contextSide": "You’ll feel like you have more time.",
+            "optionSide": "make the most of each day",
+            "relation": "小标题谈时间，选项说把每天过充实，仍扣住时间。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "本段先说人们嫌忙，再用研究反驳：做志愿者反而让人觉得时间多。这句收尾，顺着同一个 makes you feel 再补一层：人觉得自己有能力，也更愿意把每一天过充实。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "选项的 community 复现第 37 题空前的 \"community causes\"，像在接着说帮社区的好处。但这一段围绕时间感，空前说 \"have more of it\"，选项谈抑郁率，和时间无关。放到第 38 题，空后讲的是记忆和身体健康，也不是心理问题。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:38": {
+      "blankId": "blank:paper-gaokao-2025-ii:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "adults 55 and older",
+        "better memory",
+        "maintained overall health",
+        "look after their own health",
+        "physical activity"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:6",
+        "beforeQuote": "",
+        "afterQuote": "Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "adults 55 and older",
+          "signalSide": "context-after",
+          "targetText": "For adults",
+          "relation": "空后研究对象是55岁以上成年人，选项先用 For adults 划定对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "For adults",
+          "signalSide": "option",
+          "targetText": "adults 55 and older",
+          "relation": "选项限定成年人，正好由空后的研究数据来证明。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "maintained overall health",
+          "signalSide": "context-after",
+          "targetText": "physical health benefits",
+          "relation": "空后讲保持整体健康，是选项所说身体健康益处的具体表现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "physical health benefits",
+          "signalSide": "option",
+          "targetText": "maintained overall health / physical activity",
+          "relation": "选项概括出身体健康这一类好处，下文逐条举证。"
+        }
+      ],
+      "lock": [
+        "For adults",
+        "adults 55 and older",
+        "overall health"
+      ],
+      "find": {
+        "text": "空后研究对象是 \"adults 55 and older\"，结果是保持 \"overall health\"；E 先点明 \"For adults\" 和身体健康好处，只有它能被这项研究证明。",
+        "quotes": [
+          "adults 55 and older",
+          "overall health",
+          "For adults"
+        ]
+      },
+      "explain": "这句是段首总起：先说对成年人有身体上的好处，后面用华盛顿大学的研究和志愿者更关注锻炼两点作证据，也为小标题里的活得更久给出依据。",
+      "distractors": [
+        {
+          "label": "C",
+          "text": "C 也是一句好处总起，但对象是 kids and teenagers，空后研究的是 \"adults 55 and older\"。",
+          "quotes": [
+            "adults 55 and older"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "adults 55 and older",
+            "optionSide": "For adults",
+            "relation": "对象一致，都是成年人。"
+          },
+          {
+            "contextSide": "better memory / maintained overall health / physical activity",
+            "optionSide": "significant physical health benefits",
+            "relation": "空后几项都是选项所说健康好处的具体内容。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "这句是段首总起：先说对成年人有身体上的好处，后面用华盛顿大学的研究和志愿者更关注锻炼两点作证据，也为小标题里的活得更久给出依据。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 也是一句好处总起，但对象是 kids and teenagers，空后研究的是 \"adults 55 and older\"。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:39": {
+      "blankId": "blank:paper-gaokao-2025-ii:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "teenage years",
+        "major positive effects",
+        "improved grades",
+        "increased self-confidence",
+        "in the years to come"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:7",
+        "headingAnchor": "● __39__",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "teenage years",
+          "signalSide": "context-after",
+          "targetText": "kids and teenagers",
+          "relation": "下面一段讲青少年时期做志愿者，选项的 teenagers 对上了对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "kids and teenagers",
+          "signalSide": "option",
+          "targetText": "teenage years / a teen",
+          "relation": "小标题点明受益的是孩子和青少年。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "aren’t just short-term",
+          "signalSide": "context-after",
+          "targetText": "lifelong effect",
+          "relation": "下面一段说影响不只是短期，会延续多年，对应 lifelong。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "lifelong effect",
+          "signalSide": "option",
+          "targetText": "aren’t just short-term / in the years to come",
+          "relation": "选项概括出影响长久这一特点。"
+        }
+      ],
+      "lock": [
+        "teenage years",
+        "kids and teenagers"
+      ],
+      "find": {
+        "text": "小标题空看下面一段：开头就是 \"Volunteering during teenage years\" 带来的好处，C 的 \"kids and teenagers\" 对上这个对象。",
+        "quotes": [
+          "Volunteering during teenage years",
+          "kids and teenagers"
+        ]
+      },
+      "explain": "下面一段先列成绩和自信两项好处，再说 aren’t just short-term，会影响今后多年；小标题用 lifelong effect 把对象和影响长久两层都概括进来。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Volunteering during teenage years",
+            "optionSide": "kids and teenagers",
+            "relation": "对象一致，都是青少年。"
+          },
+          {
+            "contextSide": "aren’t just short-term / in the years to come",
+            "optionSide": "a lifelong effect",
+            "relation": "影响长久，选项用 lifelong 概括。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "下面一段先列成绩和自信两项好处，再说 aren’t just short-term，会影响今后多年；小标题用 lifelong effect 把对象和影响长久两层都概括进来。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "选项也以 Volunteering 开头讲一种好处，形式像第 39 题的小标题。但下面一段开头是 \"Volunteering during teenage years\"，讲的是成绩和自信，没有一处谈偏见 (prejudice)，对象和好处都对不上。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:40": {
+      "blankId": "blank:paper-gaokao-2025-ii:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "Families who volunteer together",
+        "working toward a common goal",
+        "brings something unique to the table",
+        "connect with each other in a new way"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+        "beforeQuote": "Families who volunteer together have the unique experience of working toward a common goal.",
+        "afterQuote": "Everyone brings something unique to the table and can connect with each other in a new way."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "brings something unique to the table",
+          "signalSide": "context-after",
+          "targetText": "a talent",
+          "relation": "空后说每个人都拿出独有的东西，孩子身上的才能正是一例。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a talent",
+          "signalSide": "option",
+          "targetText": "something unique",
+          "relation": "选项的才能和空后的 something unique 是同一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "even",
+          "signalSide": "option",
+          "targetText": "the unique experience of working toward a common goal",
+          "relation": "even 表示更进一步：一起做事之外，甚至还能发现孩子的新才能。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Families who volunteer together",
+          "signalSide": "context-before",
+          "targetText": "your kid",
+          "relation": "空前讲全家一起做，选项落到家长和孩子身上。"
+        }
+      ],
+      "lock": [
+        "a talent",
+        "something unique"
+      ],
+      "find": {
+        "text": "空后 \"Everyone brings something unique to the table\"，要先有人显出独特之处；F 说发现孩子 \"a talent\"，正好和它对上。",
+        "quotes": [
+          "Everyone brings something unique to the table",
+          "a talent"
+        ]
+      },
+      "explain": "空前说全家为共同目标一起做事，这句用 even 再进一步：一起做事时家长还会看到孩子不为人知的本领；空后把这一点推广到每个人都有独特贡献。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "brings something unique to the table",
+            "optionSide": "a talent you didn't know about before",
+            "relation": "孩子没被发现的才能就是空后说的独特贡献。"
+          },
+          {
+            "contextSide": "Families who volunteer together",
+            "optionSide": "your kid",
+            "relation": "对象从全家落到孩子。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前说全家为共同目标一起做事，这句用 even 再进一步：一起做事时家长还会看到孩子不为人知的本领；空后把这一点推广到每个人都有独特贡献。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

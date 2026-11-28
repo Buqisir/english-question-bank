@@ -1,0 +1,978 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:grammar-fill": {
+      "overview": "一位在美国克利夫兰长大的女士随中国丈夫住到浙江乡下，从起初不适应到渐渐有了家的感觉；最让她惊喜的是阳光晒过的衣服散发的“阳光香味”。",
+      "fullTranslationZh": "我在美国俄亥俄州克利夫兰出生长大。可如今，我和中国丈夫及他的家人住在中国浙江的乡下。在这里，竹子和茶树在山间肆意生长，鸡总是散养的，集中供暖也不存在。\n我以前的生活从没让我为这种生活做好准备——说实话，第一次来这里时，我从没想过自己会在这一带过得自在。但令人惊奇的是，人在新环境中竟能如此适应和学习。随着时间推移，我发现自己在这里感到非常自在，就像在家一样。在这个过程中，我经历了一些时常让我惊讶的事。新晒衣服上的“阳光香味”就是其中之一。\n我小时候，家里人和邻居从不用晾衣绳晒衣服，这让我失去了发现阳光一大奇妙之处的机会——衣服在阳光下晒上一整天后散发出的甜甜的“阳光香味”。在我住的地方，晒干的衣服闻起来格外好闻，这多亏了这里没有雾霾，还有许多蓝天朗朗、空气清新的下午。\n如果你从没闻过晾在阳光下晒了一天的床单或衬衫上的“阳光香味”，那么，你就错过了生活中的一大奇妙之处。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-ls-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+          "sourceText": "Yet now, I live in the countryside of Zhejiang, China with my Chinese husband and his family, __56__ bamboo and tea bushes（灌木）grow wild in the mountains, chickens are always free-range, and __57__ (center) heating doesn’t exist.",
+          "displayText": "Yet now, I live in the countryside of Zhejiang, China with my Chinese husband and his family, where bamboo and tea bushes（灌木）grow wild in the mountains, chickens are always free-range, and central heating doesn’t exist.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:56",
+            "question:paper-gaokao-2025-ii:57"
+          ],
+          "translationZh": "可如今，我和中国丈夫及他的家人住在中国浙江的乡下。在这里，竹子和茶树在山间肆意生长，鸡总是散养的，集中供暖也不存在。",
+          "analysisZh": "主干是 I live in the countryside of Zhejiang, China（我住在中国浙江的乡下），with my Chinese husband and his family 说明和谁同住。逗号后 where 引导非限制性定语从句，修饰 the countryside；从句里三个分句并列，最后一个前用 and：竹子茶树漫山生长（bamboo and tea bushes grow wild）、鸡都是散养的（chickens are always free-range）、没有集中供暖（central heating doesn’t exist），一起描写乡下的样子。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 46,
+              "quote": "I live in the countryside of Zhejiang"
+            },
+            {
+              "start": 94,
+              "end": 121,
+              "quote": "where bamboo and tea bushes"
+            },
+            {
+              "start": 189,
+              "end": 218,
+              "quote": "central heating doesn’t exist"
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-ls-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+          "sourceText": "The sun-dried clothes smell especially pleasant where I live, thanks to the __63__ (absent) of smog and plenty of blue sky __64__ (afternoon) with lots of fresh air.",
+          "displayText": "The sun-dried clothes smell especially pleasant where I live, thanks to the absence of smog and plenty of blue sky afternoons with lots of fresh air.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:63",
+            "question:paper-gaokao-2025-ii:64"
+          ],
+          "translationZh": "在我住的地方，晒干的衣服闻起来格外好闻，这多亏了这里没有雾霾，还有许多蓝天朗朗、空气清新的下午。",
+          "analysisZh": "主干是 The sun-dried clothes smell especially pleasant（晒干的衣服闻起来格外好闻），smell 是系动词，pleasant 作表语。where I live 是地点状语从句，说明在哪里。逗号后的复合介词 thanks to 带两个由 and 并列的宾语：the absence of smog（没有雾霾）和 plenty of blue sky afternoons with lots of fresh air（许多空气清新的晴朗下午），一起交代衣服好闻的原因。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 47,
+              "quote": "smell especially pleasant"
+            },
+            {
+              "start": 62,
+              "end": 91,
+              "quote": "thanks to the absence of smog"
+            },
+            {
+              "start": 96,
+              "end": 125,
+              "quote": "plenty of blue sky afternoons"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 75,
+              "quote": "我在美国俄亥俄州克利夫兰出生长大。可如今，我和中国丈夫及他的家人住在中国浙江的乡下。在这里，竹子和茶树在山间肆意生长，鸡总是散养的，集中供暖也不存在。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:grammar-fill:2"
+              ],
+              "start": 76,
+              "end": 220,
+              "quote": "我以前的生活从没让我为这种生活做好准备——说实话，第一次来这里时，我从没想过自己会在这一带过得自在。但令人惊奇的是，人在新环境中竟能如此适应和学习。随着时间推移，我发现自己在这里感到非常自在，就像在家一样。在这个过程中，我经历了一些时常让我惊讶的事。新晒衣服上的“阳光香味”就是其中之一。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:grammar-fill:3"
+              ],
+              "start": 221,
+              "end": 337,
+              "quote": "我小时候，家里人和邻居从不用晾衣绳晒衣服，这让我失去了发现阳光一大奇妙之处的机会——衣服在阳光下晒上一整天后散发出的甜甜的“阳光香味”。在我住的地方，晒干的衣服闻起来格外好闻，这多亏了这里没有雾霾，还有许多蓝天朗朗、空气清新的下午。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:grammar-fill:4"
+              ],
+              "start": 338,
+              "end": 388,
+              "quote": "如果你从没闻过晾在阳光下晒了一天的床单或衬衫上的“阳光香味”，那么，你就错过了生活中的一大奇妙之处。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+            "text": "I was born and raised in Cleveland, Ohio in the United States. Yet now, I live in the countryside of Zhejiang, China with my Chinese husband and his family, where bamboo and tea bushes（灌木）grow wild in the mountains, chickens are always free-range, and central heating doesn’t exist."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+            "text": "Nothing in my life before prepared me for this one – and to be sure, the first time I came here I never imagined I would ever feel comfortable in this area. But it’s amazing how you can adapt and learn in a new environment. Over time, I’ve found myself feeling extremely at home here. And in the process, I’ve experienced things that really surprise me at times. The “sunshine scent（香味）” of freshly sunned clothes is one of them."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+            "text": "Growing up, my family and our neighbors never used clotheslines to dry clothing, denying me the chance to discover one of the great wonders of sunshine – the sweet “sunshine scent” after sunning clothes for an entire day. The sun-dried clothes smell especially pleasant where I live, thanks to the absence of smog and plenty of blue sky afternoons with lots of fresh air."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:4",
+            "text": "If you’ve never experienced the “sunshine scent” from a sheet or shirt left to sun for a day, well, you're missing out on one of life's wonders."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 82,
+                "end": 109,
+                "quote": "the countryside of Zhejiang"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 36,
+                "end": 41,
+                "quote": "浙江的乡下"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:56"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 157,
+                "end": 162,
+                "quote": "where"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 42,
+                "end": 45,
+                "quote": "在这里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 269,
+                "end": 276,
+                "quote": "heating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 68,
+                "end": 70,
+                "quote": "供暖"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:57"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 252,
+                "end": 259,
+                "quote": "central"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 66,
+                "end": 68,
+                "quote": "集中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 26,
+                "end": 37,
+                "quote": "prepared me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 15,
+                "end": 19,
+                "quote": "做好准备"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:58"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 38,
+                "end": 41,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 10,
+                "end": 19,
+                "quote": "为这种生活做好准备"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 189,
+                "end": 194,
+                "quote": "adapt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 68,
+                "end": 70,
+                "quote": "适应"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:59"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 192,
+                "end": 195,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 70,
+                "end": 71,
+                "quote": "和"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 241,
+                "end": 251,
+                "quote": "I’ve found"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 81,
+                "end": 84,
+                "quote": "我发现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:60"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 246,
+                "end": 252,
+                "quote": "myself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 84,
+                "end": 86,
+                "quote": "自己"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 378,
+                "end": 392,
+                "quote": "sunshine scent"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 132,
+                "end": 136,
+                "quote": "阳光香味"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:61"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 414,
+                "end": 416,
+                "quote": "is"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:2",
+                "start": 137,
+                "end": 139,
+                "quote": "就是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 92,
+                "end": 102,
+                "quote": "the chance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 38,
+                "end": 40,
+                "quote": "机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:62"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 103,
+                "end": 114,
+                "quote": "to discover"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 27,
+                "end": 29,
+                "quote": "发现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 290,
+                "end": 303,
+                "quote": "thanks to the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 89,
+                "end": 92,
+                "quote": "多亏了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:63"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 298,
+                "end": 305,
+                "quote": "absence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 94,
+                "end": 96,
+                "quote": "没有"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 332,
+                "end": 341,
+                "quote": "plenty of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 101,
+                "end": 103,
+                "quote": "许多"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:64"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 337,
+                "end": 347,
+                "quote": "afternoons"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 113,
+                "end": 115,
+                "quote": "下午"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:4",
+                "start": 54,
+                "end": 70,
+                "quote": "a sheet or shirt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:4",
+                "start": 17,
+                "end": 22,
+                "quote": "床单或衬衫"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:65"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:4",
+                "start": 71,
+                "end": 75,
+                "quote": "left"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:4",
+                "start": 7,
+                "end": 12,
+                "quote": "晾在阳光下"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:56",
+              "question:paper-gaokao-2025-ii:57"
+            ],
+            "selectedSentenceId": "grammar-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 63,
+                "end": 282,
+                "quote": "Yet now, I live in the countryside of Zhejiang, China with my Chinese husband and his family, where bamboo and tea bushes（灌木）grow wild in the mountains, chickens are always free-range, and central heating doesn’t exist."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:1",
+                "start": 17,
+                "end": 75,
+                "quote": "可如今，我和中国丈夫及他的家人住在中国浙江的乡下。在这里，竹子和茶树在山间肆意生长，鸡总是散养的，集中供暖也不存在。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:63",
+              "question:paper-gaokao-2025-ii:64"
+            ],
+            "selectedSentenceId": "grammar-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 222,
+                "end": 371,
+                "quote": "The sun-dried clothes smell especially pleasant where I live, thanks to the absence of smog and plenty of blue sky afternoons with lots of fresh air."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:grammar-fill:3",
+                "start": 68,
+                "end": 116,
+                "quote": "在我住的地方，晒干的衣服闻起来格外好闻，这多亏了这里没有雾霾，还有许多蓝天朗朗、空气清新的下午。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-ii:56": {
+      "blankId": "blank:paper-gaokao-2025-ii:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "where",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-adverbial",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导非限制性定语从句，修饰前面的地点「浙江乡下」（the countryside of Zhejiang）。从句竹子茶树在山间生长（bamboo and tea bushes grow wild）主谓齐全，缺的是地点状语，所以用关系副词（where）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the countryside of Zhejiang",
+          "signalSide": "passage",
+          "relation": "先行词是表示地点的浙江乡下，从句描写那里的情形。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "grow wild in the mountains",
+          "signalSide": "passage",
+          "relation": "从句主谓完整，不缺主语宾语，只缺表示“在那里”的状语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:57": {
+      "blankId": "blank:paper-gaokao-2025-ii:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "center",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "central",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格修饰名词「供暖」（heating），要用形容词；名词「中心」（center）的形容词是（central），合起来是集中供暖。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "heating",
+          "signalSide": "passage",
+          "relation": "被修饰的名词是供暖，前面要形容词作定语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:58": {
+      "blankId": "blank:paper-gaokao-2025-ii:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把「这种生活」（this one）接到动词「使……做好准备」（prepared me）上，说明为什么做准备。表示让某人为某事做好准备，用介词（for）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "prepared me",
+          "signalSide": "passage",
+          "relation": "支配词是「使……做好准备」（prepared），后接人，再接为之准备的事。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "this one",
+          "signalSide": "passage",
+          "relation": "这里的「这种」（this one）指作者现在的乡村生活，是准备的对象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:59": {
+      "blankId": "blank:paper-gaokao-2025-ii:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接两个并列的动词「适应」（adapt）和「学习」（learn），二者共用前面的情态动词（can），表示顺承，用（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "adapt",
+          "signalSide": "passage",
+          "relation": "空前的「适应」（adapt）与空后的「学习」（learn）是并列的两个动作。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "learn in a new environment",
+          "signalSide": "passage",
+          "relation": "空后的「学习」（learn）与「适应」同为情态动词后的动词原形。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:60": {
+      "blankId": "blank:paper-gaokao-2025-ii:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "I",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "myself",
+      "role": null,
+      "similarityProfile": {
+        "route": "reflexive-pronoun",
+        "features": []
+      },
+      "reason": "空格作「发现」（found）的宾语，指的还是主语「我」（I），所以要用反身代词（myself）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "I’ve found",
+          "signalSide": "passage",
+          "relation": "主语「我」（I）发出「发现」（found）这个动作，宾语又是自己，要用反身代词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:61": {
+      "blankId": "blank:paper-gaokao-2025-ii:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作句子的谓语，主语中心词是「香味」（scent），后面的「新晒衣服的」（of freshly sunned clothes）只是修饰，按单数。这里说的是作者现在常遇到的惊喜之一，和前句惊讶（surprise）一样用一般现在时，填（is）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "sunshine scent",
+          "signalSide": "passage",
+          "relation": "主语中心词「香味」（scent）是单数，谓语用单数。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "really surprise me",
+          "signalSide": "passage",
+          "relation": "前句用一般现在时说常让我惊讶的事，本句接着说其中之一。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:62": {
+      "blankId": "blank:paper-gaokao-2025-ii:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "discover",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to discover",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-abstract-content",
+        "features": []
+      },
+      "reason": "空格修饰名词「机会」（the chance），说明是什么机会，相当于「我能发现……的机会」（the chance that I could discover），所以用不定式作后置定语（to discover）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the chance",
+          "signalSide": "passage",
+          "relation": "被修饰的名词是机会，不定式说明机会的内容。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:63": {
+      "blankId": "blank:paper-gaokao-2025-ii:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "absent",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "absence",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作复合介词（thanks to）的宾语，前有定冠词（the），后有介词短语（of smog），要用名词；形容词「缺席的」（absent）的名词是（absence），意思是没有雾霾。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "thanks to the",
+          "signalSide": "passage",
+          "relation": "复合介词后接定冠词，空格要名词。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "of smog",
+          "signalSide": "passage",
+          "relation": "介词短语（of smog）修饰空格名词，说明缺少的是雾霾。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:64": {
+      "blankId": "blank:paper-gaokao-2025-ii:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "afternoon",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "afternoons",
+      "role": null,
+      "similarityProfile": {
+        "route": "quantity-determiner",
+        "features": []
+      },
+      "reason": "空格是「大量的」（plenty of）修饰的中心名词，「蓝天」（blue sky）作定语；「下午」（afternoon）可数，跟在（plenty of）后要用复数（afternoons）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "plenty of",
+          "signalSide": "passage",
+          "relation": "大量的（plenty of）修饰可数名词时，名词用复数。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:65": {
+      "blankId": "blank:paper-gaokao-2025-ii:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "leave",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "left",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格修饰前面的「床单或衬衫」（a sheet or shirt），说明是什么样的床单衬衫，相当于「被晾着晒的床单」（a sheet that is left to sun）。床单衬衫是被晾着的，所以用过去分词作后置定语（left）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a sheet or shirt",
+          "signalSide": "passage",
+          "relation": "被修饰的是床单或衬衫，它们与「放置」（leave）是被动关系。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to sun for a day",
+          "signalSide": "passage",
+          "relation": "晾着晒一天（be left to sun），说明床单衬衫被放在那里晒。"
+        }
+      ]
+    }
+  }
+}

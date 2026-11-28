@@ -1,0 +1,136 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Chris,\n\nLast month you kindly agreed to write an article about sports in Canada for our school English newspaper. I'm writing to ask how it is going.\n\nMany readers have been looking forward to it since we announced it in the last issue. Have you finished the first draft yet? If you need any photos or other help, just let me know.\n\nI'd also like to remind you that the article is due by 5 p.m. next Friday, because the sports issue goes to print the following Monday. If that date is difficult for you, please tell me early.\n\nThank you for your time. I can't wait to read it!\n\nBest wishes,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给外教的邮件，用题面给出的称呼和落款，正文分段写",
+        "personTense": "以第一人称“我”写，询问进展用一般现在时和现在完成时，交稿安排用一般将来时",
+        "readerTone": "读者是答应帮忙写稿的外教，语气礼貌、感激，提醒时委婉但把时间说清楚",
+        "goal": "了解文章写到了哪一步，并让 Chris 记住确切的交稿时间"
+      },
+      "taskRequires": [
+        "询问文章的写作进展",
+        "提醒交稿时间"
+      ],
+      "thisEssayChooses": "开头先提 Chris 上个月答应写稿，再问进展；用读者一直在期待说明为什么来问，并主动提出可以提供照片等帮助。交稿时间定在下周五下午 5 点，理由是专刊下周一付印，最后请他时间紧时尽早说。"
+    },
+    "standard": {
+      "essay": "Dear Chris,\n\nLast month you kindly agreed to write an article about sports in Canada for our school English newspaper. I'm writing to ask how it is going.\n\nMany readers have been looking forward to it since we announced it in the last issue. Have you finished the first draft yet? If you need any photos or other help, just let me know.\n\nI'd also like to remind you that the article is due by 5 p.m. next Friday, because the sports issue goes to print the following Monday. If that date is difficult for you, please tell me early.\n\nThank you for your time. I can't wait to read it!\n\nBest wishes,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "询问文章的写作进展",
+          "quote": "Have you finished the first draft yet?"
+        },
+        {
+          "point": "提醒交稿时间",
+          "quote": "I'd also like to remind you that the article is due by 5 p.m. next Friday, because the sports issue goes to print the following Monday."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代写信缘由：对方答应过的事，以及我来信要问什么。",
+          "items": [
+            {
+              "quote": "Last month you kindly agreed to write",
+              "explain": "先提对方的承诺，并用 kindly 表示感谢。这样后面问进展就是顺着这件事来问，不像催债。"
+            },
+            {
+              "quote": "I'm writing to ask how it is going.",
+              "explain": "一句话说清来信目的。how it is going 是问事情进展的常用说法，比 Have you written it? 柔和。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：询问进展，并给出来问的理由。",
+          "items": [
+            {
+              "quote": "Many readers have been looking forward to it since we announced it in the last issue.",
+              "explain": "先说读者在期待，给询问一个站得住的理由：不是我急，是读者在等。现在完成进行时配 since，写出期待从上期一直延续到现在。"
+            },
+            {
+              "quote": "Have you finished the first draft yet?",
+              "explain": "具体问到初稿，Chris 读完能直接回答写到哪了，比笼统问 How is the article? 好回复。"
+            },
+            {
+              "quote": "If you need any photos or other help, just let me know.",
+              "explain": "询问之后马上主动提供帮助，编辑的身份就出来了，也让对方知道遇到困难可以找谁。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：提醒交稿时间，说明原因，并留出商量的余地。",
+          "items": [
+            {
+              "quote": "I'd also like to remind you that",
+              "explain": "I'd like to 比直接说 You must 委婉，also 表明这是信里的第二件事。"
+            },
+            {
+              "quote": "by 5 p.m. next Friday",
+              "explain": "时间写到具体某天几点，对方不用再回信确认。by 表示最晚在这之前交。"
+            },
+            {
+              "quote": "If that date is difficult for you, please tell me early.",
+              "explain": "提醒之后给对方一条退路，读者知道万一来不及该怎么做，提醒就不显得生硬。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "收尾：感谢并表达期待。",
+          "items": [
+            {
+              "quote": "I can't wait to read it!",
+              "explain": "把期待说成自己的心情，比 Looking forward to your reply 更像学生对老师说的话，也落回这篇文章。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I'm writing to ask how it is going.",
+          "function": "开门见山问事情进展，语气不催促，换成别的待办事项也能用。"
+        },
+        {
+          "expression": "I'd also like to remind you that …",
+          "function": "委婉地提醒截止时间，后面接具体的时间和事情。"
+        },
+        {
+          "expression": "If …, just let me know. / please tell me early.",
+          "function": "主动给对方提供帮助或退路，让对方知道下一步可以怎么做。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Chris,\n\nI hope you are enjoying the new term. Last month you kindly agreed to write an article introducing sports in Canada for our school English newspaper, and I'm writing to see how it is coming along.\n\nEver since we mentioned it in the last issue, quite a few readers have stopped me in the hallway to ask when it will come out. Have you had a chance to finish the first draft? If photos or a chat with our team would help, just let me know.\n\nI'd also like to gently remind you that we need the article by 5 p.m. next Friday, since the sports issue goes to print the following Monday. If that turns out to be tight, please tell me early so that we can adjust the layout.\n\nThanks again for your support. We're all looking forward to it!\n\nBest wishes,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "询问文章的写作进展",
+          "quote": "Have you had a chance to finish the first draft?"
+        },
+        {
+          "point": "提醒交稿时间",
+          "quote": "I'd also like to gently remind you that we need the article by 5 p.m. next Friday, since the sports issue goes to print the following Monday."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "quite a few readers have stopped me in the hallway to ask when it will come out",
+          "explain": "标准版只说读者在期待，这里写出读者在走廊拦住我问，期待有了画面，询问的理由更具体。"
+        },
+        {
+          "quote": "Have you had a chance to finish the first draft?",
+          "explain": "Have you had a chance to 是问别人有没有空做某事的地道说法，体谅对方忙，比 Have you finished … yet? 更适合对老师说。"
+        },
+        {
+          "quote": "If that turns out to be tight, please tell me early so that we can adjust the layout.",
+          "explain": "tight 指时间紧，so that 补出提早告知的用处：我们好调整版面。对方明白提早说对双方都有好处。"
+        }
+      ]
+    }
+  }
+}

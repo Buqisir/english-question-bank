@@ -1,0 +1,1853 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:cloze": {
+      "overview": "65岁的奶奶多诺霍七年前因健康危机警醒，开始锻炼并爱上举重，练出肌肉、收获大批粉丝；她分享坚持和帮助他人的心得，用行动证明了嘲笑她太老的人是错的。",
+      "fullTranslationZh": "伊夫琳·多诺霍是一位65岁的奶奶。七年前，在一次给她敲响警钟的经历之后，她才开始锻炼。她一直饱受饮食失调和健康问题的困扰，这最终使她不得不接受手术。有了那次经历，她明白自己必须做出改变。决心扭转人生的多诺霍女士开始健身，遵循健康的生活方式，后来又发现自己热爱举重。\n自踏上这段旅程以来，这位健身爱好者不仅练出了一身令人惊叹的肌肉，还在社交媒体上收获了大批粉丝。\n这位广受喜爱的奶奶经常发布健身内容，解释说别人没有理由不能练得这么好看。她说，这一切都归功于几个关键方面。\n“坚持住：把失败看作通往成功的垫脚石，永不放弃。按你的计划坚持下去。”她说。\n“帮助他人：在你的旅途中拉别人一把。成功与人分享时更加甜美。”她以前解释过：“你不需要拥有一副完美的身材才去锻炼……锻炼的目标是感觉良好，而不是看起来好看。”\n多诺霍女士过去曾因年纪太大还要健身而被人嘲笑，但她以最好的方式证明了那些质疑者是错的，而且确实成了许多社交媒体用户心中鼓舞人心的榜样。",
+      "mainLine": {
+        "theme": {
+          "text": "锻炼不分年龄，重在坚持和感觉良好（to feel good, not look good）。",
+          "quote": "to feel good, not look good"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+            "text": "病痛和手术敲响警钟，她七年前开始健身并爱上举重。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+            "text": "她练出了肌肉，也在社交媒体上收获大批粉丝。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:3",
+            "text": "她常发健身内容，说别人也能做到，并归结为几个要点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
+            "text": "第一个要点：把失败当垫脚石，坚持计划不放弃。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+            "text": "第二个要点：帮助他人；锻炼为了感觉好而非好看。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+            "text": "曾被笑太老，如今证明质疑者错了，激励了许多网友。"
+          }
+        ],
+        "emotion": "病痛挣扎→决心改变→热爱举重→自信并激励他人"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+          "sourceText": "She'd been struggling with eating disorders and health issues, which __43__ led her to getting surgery.",
+          "displayText": "She'd been struggling with eating disorders and health issues, which ultimately led her to getting surgery.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:43"
+          ],
+          "translationZh": "她一直饱受饮食失调和健康问题的困扰，这最终使她不得不接受手术。",
+          "analysisZh": "主干是“她一直在和饮食失调、健康问题作斗争”（She'd been struggling with），过去完成进行时说明这种挣扎在手术之前持续了很久。逗号后 which 引导非限制性定语从句，指代前面这整段挣扎，在从句里作主语；ultimately 修饰 led，说明手术是长期挣扎最后的结果。lead sb to doing 意为“导致某人做某事”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "She'd been struggling with"
+            },
+            {
+              "start": 63,
+              "end": 106,
+              "quote": "which ultimately led her to getting surgery"
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+          "sourceText": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users.",
+          "displayText": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the doubters wrong in the best possible way and has indeed become an inspiration for many social media users.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:54",
+            "question:paper-gaokao-2025-ii:55"
+          ],
+          "translationZh": "多诺霍女士过去曾因年纪太大还要健身而被人嘲笑，但她以最好的方式证明了那些质疑者是错的，而且确实成了许多社交媒体用户心中鼓舞人心的榜样。",
+          "analysisZh": "but 连接前后两个分句，形成“过去被嘲笑”和“如今证明自己”的对照。前一分句主干是 Ms Donohue used to be laughed at（过去常被嘲笑），for being too old to work out 交代被笑的原因。后一分句主语 she 带两个由 and 并列的谓语：has proved the doubters wrong（prove sb wrong，证明某人错了）和 has indeed become an inspiration，现在完成时强调到现在为止的成果；in the best possible way 修饰 proved。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 32,
+              "quote": "used to be laughed at"
+            },
+            {
+              "start": 72,
+              "end": 101,
+              "quote": "has proved the doubters wrong"
+            },
+            {
+              "start": 131,
+              "end": 163,
+              "quote": "has indeed become an inspiration"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:cloze:1"
+              ],
+              "start": 0,
+              "end": 132,
+              "quote": "伊夫琳·多诺霍是一位65岁的奶奶。七年前，在一次给她敲响警钟的经历之后，她才开始锻炼。她一直饱受饮食失调和健康问题的困扰，这最终使她不得不接受手术。有了那次经历，她明白自己必须做出改变。决心扭转人生的多诺霍女士开始健身，遵循健康的生活方式，后来又发现自己热爱举重。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:cloze:2"
+              ],
+              "start": 133,
+              "end": 180,
+              "quote": "自踏上这段旅程以来，这位健身爱好者不仅练出了一身令人惊叹的肌肉，还在社交媒体上收获了大批粉丝。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:cloze:3"
+              ],
+              "start": 181,
+              "end": 234,
+              "quote": "这位广受喜爱的奶奶经常发布健身内容，解释说别人没有理由不能练得这么好看。她说，这一切都归功于几个关键方面。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:cloze:4"
+              ],
+              "start": 235,
+              "end": 273,
+              "quote": "“坚持住：把失败看作通往成功的垫脚石，永不放弃。按你的计划坚持下去。”她说。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:cloze:5"
+              ],
+              "start": 274,
+              "end": 353,
+              "quote": "“帮助他人：在你的旅途中拉别人一把。成功与人分享时更加甜美。”她以前解释过：“你不需要拥有一副完美的身材才去锻炼……锻炼的目标是感觉良好，而不是看起来好看。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:cloze:6"
+              ],
+              "start": 354,
+              "end": 421,
+              "quote": "多诺霍女士过去曾因年纪太大还要健身而被人嘲笑，但她以最好的方式证明了那些质疑者是错的，而且确实成了许多社交媒体用户心中鼓舞人心的榜样。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+            "text": "Evelyn Donohue is a 65-year-old grandma. She only started to exercise seven years ago after having a wake-up call. She'd been struggling with eating disorders and health issues, which ultimately led her to getting surgery. After that experience, she knew that she needed to make a change. Determined to turn her life around, Ms Donohue began to work out and follow a healthy lifestyle, before discovering a passion for weightlifting."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:cloze:2",
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+            "text": "Since setting out on the journey, the fitness lover has not only managed to grow an impressive set of muscles – but also a huge following on social media."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:cloze:3",
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:3",
+            "text": "The well-liked grandma regularly posts workout content, explaining there's no reason others can’t look this good. She said it was all down to some key aspects."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:cloze:4",
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
+            "text": "“Hold on: Consider failure as a stepping stone to success and never give up. Stick to your plan,” she said."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:cloze:5",
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+            "text": "“Help others: Lift others up on your journey. Success is sweeter when shared.” She previously explained that “you do not need to have an amazing body to exercise…the goal is to feel good, not look good.”"
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-ii:cloze:6",
+            "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+            "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the doubters wrong in the best possible way and has indeed become an inspiration for many social media users."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 329,
+                "end": 346,
+                "quote": "began to work out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 105,
+                "end": 109,
+                "quote": "开始健身"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:41"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 61,
+                "end": 69,
+                "quote": "exercise"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 40,
+                "end": 42,
+                "quote": "锻炼"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 139,
+                "end": 173,
+                "quote": "eating disorders and health issues"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 48,
+                "end": 57,
+                "quote": "饮食失调和健康问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:42"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 101,
+                "end": 108,
+                "quote": "wake-up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 26,
+                "end": 30,
+                "quote": "敲响警钟"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 188,
+                "end": 214,
+                "quote": "led her to getting surgery"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 64,
+                "end": 73,
+                "quote": "使她不得不接受手术"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:43"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 184,
+                "end": 194,
+                "quote": "ultimately"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 62,
+                "end": 64,
+                "quote": "最终"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 296,
+                "end": 316,
+                "quote": "turn her life around"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 95,
+                "end": 99,
+                "quote": "扭转人生"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:44"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 281,
+                "end": 287,
+                "quote": "change"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 90,
+                "end": 92,
+                "quote": "改变"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 160,
+                "end": 173,
+                "quote": "health issues"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 53,
+                "end": 57,
+                "quote": "健康问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:45"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 367,
+                "end": 374,
+                "quote": "healthy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 112,
+                "end": 115,
+                "quote": "健康的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+                "start": 45,
+                "end": 50,
+                "quote": "lover"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:2",
+                "start": 14,
+                "end": 17,
+                "quote": "爱好者"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:46"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 407,
+                "end": 414,
+                "quote": "passion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 127,
+                "end": 129,
+                "quote": "热爱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 410,
+                "end": 423,
+                "quote": "weightlifting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 129,
+                "end": 131,
+                "quote": "举重"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:47"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+                "start": 38,
+                "end": 45,
+                "quote": "fitness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:2",
+                "start": 12,
+                "end": 14,
+                "quote": "健身"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+                "start": 82,
+                "end": 110,
+                "quote": "an impressive set of muscles"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:2",
+                "start": 22,
+                "end": 31,
+                "quote": "一身令人惊叹的肌肉"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+                "start": 122,
+                "end": 138,
+                "quote": "a huge following"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:2",
+                "start": 42,
+                "end": 46,
+                "quote": "大批粉丝"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:48"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:2",
+                "start": 76,
+                "end": 80,
+                "quote": "grow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:2",
+                "start": 19,
+                "end": 22,
+                "quote": "练出了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:3",
+                "start": 142,
+                "end": 158,
+                "quote": "some key aspects"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:3",
+                "start": 46,
+                "end": 52,
+                "quote": "几个关键方面"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:49"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:3",
+                "start": 78,
+                "end": 84,
+                "quote": "reason"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:3",
+                "start": 25,
+                "end": 27,
+                "quote": "理由"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
+                "start": 54,
+                "end": 67,
+                "quote": "never give up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:4",
+                "start": 19,
+                "end": 23,
+                "quote": "永不放弃"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:50"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
+                "start": 32,
+                "end": 46,
+                "quote": "stepping stone"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:4",
+                "start": 15,
+                "end": 18,
+                "quote": "垫脚石"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+                "start": 16,
+                "end": 30,
+                "quote": "Lift others up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+                "start": 12,
+                "end": 17,
+                "quote": "拉别人一把"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:51"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+                "start": 1,
+                "end": 5,
+                "quote": "Help"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+                "start": 1,
+                "end": 3,
+                "quote": "帮助"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+                "start": 16,
+                "end": 46,
+                "quote": "Lift others up on your journey"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+                "start": 6,
+                "end": 17,
+                "quote": "在你的旅途中拉别人一把"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:52"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+                "start": 70,
+                "end": 76,
+                "quote": "shared"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+                "start": 22,
+                "end": 24,
+                "quote": "分享"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+                "start": 178,
+                "end": 205,
+                "quote": "to feel good, not look good"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+                "start": 64,
+                "end": 77,
+                "quote": "感觉良好，而不是看起来好看"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:53"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+                "start": 166,
+                "end": 170,
+                "quote": "goal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:5",
+                "start": 61,
+                "end": 63,
+                "quote": "目标"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+                "start": 22,
+                "end": 62,
+                "quote": "laughed at for being too old to work out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:6",
+                "start": 8,
+                "end": 22,
+                "quote": "因年纪太大还要健身而被人嘲笑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:54"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:6",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+                "start": 87,
+                "end": 95,
+                "quote": "doubters"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:6",
+                "start": 36,
+                "end": 39,
+                "quote": "质疑者"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+                "start": 157,
+                "end": 184,
+                "quote": "for many social media users"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:6",
+                "start": 49,
+                "end": 57,
+                "quote": "许多社交媒体用户"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:55"
+            ],
+            "blankId": "blank:paper-gaokao-2025-ii:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:6",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+                "start": 152,
+                "end": 163,
+                "quote": "inspiration"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:6",
+                "start": 59,
+                "end": 66,
+                "quote": "鼓舞人心的榜样"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:43"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+                "start": 115,
+                "end": 222,
+                "quote": "She'd been struggling with eating disorders and health issues, which ultimately led her to getting surgery."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:1",
+                "start": 43,
+                "end": 74,
+                "quote": "她一直饱受饮食失调和健康问题的困扰，这最终使她不得不接受手术。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:54",
+              "question:paper-gaokao-2025-ii:55"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-ii:cloze:6",
+                "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+                "start": 0,
+                "end": 192,
+                "quote": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the doubters wrong in the best possible way and has indeed become an inspiration for many social media users."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-ii:cloze:6",
+                "start": 0,
+                "end": 67,
+                "quote": "多诺霍女士过去曾因年纪太大还要健身而被人嘲笑，但她以最好的方式证明了那些质疑者是错的，而且确实成了许多社交媒体用户心中鼓舞人心的榜样。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "病痛挣扎→决心改变→热爱举重→自信并激励他人"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-ii:41": {
+      "blankId": "blank:paper-gaokao-2025-ii:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "她七年前才开始做的这件事，就是全文讲的健身经历的起点。",
+      "find": {
+        "check": "echo",
+        "text": "后文说她开始健身（began to work out），又说她曾被笑太老不该健身（too old to work out），起步的就是锻炼。",
+        "quotes": [
+          "began to work out",
+          "too old to work out"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "锻炼",
+        "reason": "她七年前才开始做的这件事，就是全文讲的健身经历的起点。动词看复现：后文说她开始健身（began to work out），又说她曾被笑太老不该健身（too old to work out），起步的就是锻炼。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "write",
+          "meaning": "写作；后文讲她开始健身（began to work out）、练出肌肉，七年前开始的不是写作。",
+          "quote": "began to work out"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "travel",
+          "meaning": "旅行；后文讲她练出一身肌肉（an impressive set of muscles），起步的是锻炼不是旅行。",
+          "quote": "an impressive set of muscles"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recover",
+          "meaning": "康复；后文写她手术后决心改变，才开始健身（began to work out），七年前开始的是锻炼。",
+          "quote": "began to work out"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "started to",
+          "signalSide": "context-before",
+          "targetText": "started to exercise",
+          "relation": "开始做某事（started to），后面接她七年前开始的那件事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "began to work out",
+          "signalSide": "context-after",
+          "relation": "后文开始健身（began to work out）复现了锻炼这件事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:42": {
+      "blankId": "blank:paper-gaokao-2025-ii:42",
+      "blankNo": 42,
+      "pos": "phrase",
+      "role": "main",
+      "context": "一件让她猛然警醒、决定改变的事，是她人生的转折点。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后文说她饱受饮食失调和健康问题困扰（eating disorders and health issues），以致手术，这次经历给她敲响了警钟。",
+        "quotes": [
+          "eating disorders and health issues"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "唤醒的",
+        "meaning": "敲响警钟的",
+        "reason": "一件让她猛然警醒、决定改变的事，是她人生的转折点。词组看语境义：后文说她饱受饮食失调和健康问题困扰（eating disorders and health issues），以致手术，这次经历给她敲响了警钟。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "goodwill",
+          "meaning": "善意的；把她逼到手术的是饮食失调和健康问题（eating disorders and health issues），不是一次善意的通话。",
+          "quote": "eating disorders and health issues"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "timeout",
+          "meaning": "叫暂停的；这次经历让她决心扭转人生（turn her life around），不是让她停下来歇一歇。",
+          "quote": "turn her life around"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "long-distance",
+          "meaning": "长途的；促使她开始锻炼的是健康问题（health issues），关键在警醒她，不在电话打得远。",
+          "quote": "health issues"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "call",
+          "signalSide": "context-after",
+          "targetText": "a wake-up call",
+          "relation": "空后的电话（call）与之合成警钟（a wake-up call），指让人醒悟的事。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2025-ii:43": {
+      "blankId": "blank:paper-gaokao-2025-ii:43",
+      "blankNo": 43,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "长期的饮食失调和健康问题，到头来导致她做手术，要表示最后的结果。",
+      "find": {
+        "check": "direction",
+        "text": "前面是一直挣扎（She'd been struggling），后面是导致手术（led her to getting surgery），手术是一路发展的终点。",
+        "quotes": [
+          "She'd been struggling",
+          "led her to getting surgery"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "最终",
+        "reason": "长期的饮食失调和健康问题，到头来导致她做手术，要表示最后的结果。副词看走向：前面是一直挣扎（She'd been struggling），后面是导致手术（led her to getting surgery），手术是一路发展的终点。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "normally",
+          "meaning": "通常；手术是她长期挣扎（been struggling）走到最后的结果，不是平常就会发生的事。",
+          "quote": "been struggling"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suddenly",
+          "meaning": "突然；她长期挣扎（been struggling）才走到手术这一步，不是一下子发生的。",
+          "quote": "been struggling"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "automatically",
+          "meaning": "自动地；是长期的饮食失调和健康问题（eating disorders and health issues）把她拖到手术，不是不经人为就自行发生。",
+          "quote": "eating disorders and health issues"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "led her to getting surgery",
+          "signalSide": "context-after",
+          "targetText": "ultimately led her to getting surgery",
+          "relation": "空格修饰导致手术（led her to getting surgery），说明这是长期挣扎的最终结果。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-gaokao-2025-ii:44": {
+      "blankId": "blank:paper-gaokao-2025-ii:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "main",
+      "context": "手术之后她意识到必须做的事，这是全文的转折：改变生活。",
+      "find": {
+        "check": "echo",
+        "text": "空前是做出（make a），后一句说她决心扭转人生（turn her life around），要的就是改变。",
+        "quotes": [
+          "make a",
+          "turn her life around"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "改变",
+        "reason": "手术之后她意识到必须做的事，这是全文的转折：改变生活。名词看复现：空前是做出（make a），后一句说她决心扭转人生（turn her life around），要的就是改变。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "fortune",
+          "meaning": "财富；放进去成了发财，而她接着决心扭转的是人生（turn her life around）。",
+          "quote": "turn her life around"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wish",
+          "meaning": "愿望；放进去成了许愿，而她手术后是马上开始健身（began to work out）。",
+          "quote": "began to work out"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "deal",
+          "meaning": "交易；她要扭转的是自己的人生（turn her life around），不是跟谁做一笔交易。",
+          "quote": "turn her life around"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "make a",
+          "signalSide": "context-before",
+          "targetText": "make a change",
+          "relation": "做出改变（make a change），名词与前面的动词搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "turn her life around",
+          "signalSide": "context-after",
+          "relation": "扭转人生（turn her life around）复现了改变的意思。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:45": {
+      "blankId": "blank:paper-gaokao-2025-ii:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "与健身并列，这里要一种对身体有益的生活方式。",
+      "find": {
+        "check": "echo",
+        "text": "前文是健康问题（health issues），她要扭转人生（turn her life around），对应健康的生活方式。",
+        "quotes": [
+          "health issues",
+          "turn her life around"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "健康的",
+        "reason": "与健身并列，这里要一种对身体有益的生活方式。形容词看复现：前文是健康问题（health issues），她要扭转人生（turn her life around），对应健康的生活方式。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "risky",
+          "meaning": "有风险的；她是为了摆脱健康问题（health issues）才改变，不会去过冒险的生活。",
+          "quote": "health issues"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "traditional",
+          "meaning": "传统的；她要摆脱的是带来健康问题（health issues）的旧生活，重点在健康，不在守传统。",
+          "quote": "health issues"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "comfortable",
+          "meaning": "舒适的；她同时开始健身（began to work out），这种自律的改变不是图舒服。",
+          "quote": "began to work out"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lifestyle",
+          "signalSide": "context-after",
+          "targetText": "healthy lifestyle",
+          "relation": "空格修饰生活方式（lifestyle），组成健康的生活方式。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "health issues",
+          "signalSide": "context-before",
+          "relation": "前文的健康问题（health issues）与健康的生活方式呼应。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:46": {
+      "blankId": "blank:paper-gaokao-2025-ii:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "main",
+      "context": "她后来对举重产生的感情，是她从被迫改变到真心爱上运动的一步。",
+      "find": {
+        "check": "echo",
+        "text": "下段称她为爱好者（lover），她对举重（for weightlifting）是热爱。",
+        "quotes": [
+          "lover",
+          "for weightlifting"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "热爱",
+        "reason": "她后来对举重产生的感情，是她从被迫改变到真心爱上运动的一步。名词看复现：下段称她为爱好者（lover），她对举重（for weightlifting）是热爱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "demand",
+          "meaning": "需求；下段称她为爱好者（lover），她对举重是喜爱，不是需求。",
+          "quote": "lover"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "secret",
+          "meaning": "秘诀；下段称她为爱好者（lover），她发现的是对举重的喜爱，不是什么秘诀。",
+          "quote": "lover"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cure",
+          "meaning": "疗法；下段称她为爱好者（lover），举重是她爱上的运动，不是用来治病的方法。",
+          "quote": "lover"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for weightlifting",
+          "signalSide": "context-after",
+          "targetText": "a passion for weightlifting",
+          "relation": "对某事的热爱（a passion for），后接举重（weightlifting）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "lover",
+          "signalSide": "context-after",
+          "relation": "下段的爱好者（lover）复现了热爱。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:47": {
+      "blankId": "blank:paper-gaokao-2025-ii:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "detail",
+      "context": "这里换个称呼指代她，要说她爱好的是哪一类事。",
+      "find": {
+        "check": "topic",
+        "text": "前文讲她健身（work out）、爱上举重（weightlifting），用健身爱好者来称呼她。",
+        "quotes": [
+          "work out",
+          "weightlifting"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "健身",
+        "reason": "这里换个称呼指代她，要说她爱好的是哪一类事。名词看话题：前文讲她健身（work out）、爱上举重（weightlifting），用健身爱好者来称呼她。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "peace",
+          "meaning": "和平；她前面爱上的是举重（weightlifting），称她为和平爱好者对不上。",
+          "quote": "weightlifting"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fun",
+          "meaning": "乐趣；后文写她练出肌肉（muscles），称呼要落在健身上，不是泛泛的爱玩之人。",
+          "quote": "muscles"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "nature",
+          "meaning": "自然；她爱上的是举重（weightlifting），不是亲近大自然。",
+          "quote": "weightlifting"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lover",
+          "signalSide": "context-after",
+          "targetText": "fitness lover",
+          "relation": "空格修饰爱好者（lover），组成健身爱好者。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "weightlifting",
+          "signalSide": "context-before",
+          "relation": "举重（weightlifting）属于健身话题。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-gaokao-2025-ii:48": {
+      "blankId": "blank:paper-gaokao-2025-ii:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "要一个能同时带肌肉和粉丝两个宾语的动作，表示一点点长起来。",
+      "find": {
+        "check": "collocation",
+        "text": "空后两个宾语是肌肉（an impressive set of muscles）和大批粉丝（a huge following），都能说长出来、积累起来。",
+        "quotes": [
+          "an impressive set of muscles",
+          "a huge following"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "使增长",
+        "meaning": "练出并积累",
+        "reason": "要一个能同时带肌肉和粉丝两个宾语的动作，表示一点点长起来。动词看搭配：空后两个宾语是肌肉（an impressive set of muscles）和大批粉丝（a huge following），都能说长出来、积累起来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "control",
+          "meaning": "控制；她是练出了一身肌肉（an impressive set of muscles），不是控制住已有的肌肉。",
+          "quote": "an impressive set of muscles"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "activate",
+          "meaning": "激活；并列的另一宾语是大批粉丝（a huge following），粉丝是慢慢积累的，谈不上激活。",
+          "quote": "a huge following"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "relax",
+          "meaning": "放松；她得到的是令人惊叹的肌肉（an impressive set of muscles），放松肌肉算不上成果。",
+          "quote": "an impressive set of muscles"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "an impressive set of muscles",
+          "signalSide": "context-after",
+          "targetText": "grow an impressive set of muscles",
+          "relation": "练出肌肉（grow muscles），动宾搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a huge following",
+          "signalSide": "context-after",
+          "targetText": "grow a huge following",
+          "relation": "积累粉丝（grow a following），同一个动词带第二个宾语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:49": {
+      "blankId": "blank:paper-gaokao-2025-ii:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "detail",
+      "context": "她想告诉大家别人也能做到，要说“没有理由做不到”。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是别人不能这么好看（others can’t look this good），她又把成果归于几个要点（some key aspects），说明人人可学。",
+        "quotes": [
+          "others can’t look this good",
+          "some key aspects"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "理由",
+        "reason": "她想告诉大家别人也能做到，要说“没有理由做不到”。名词看搭配：空后是别人不能这么好看（others can’t look this good），她又把成果归于几个要点（some key aspects），说明人人可学。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "need",
+          "meaning": "需要；她接着把好身材归于几个要点（some key aspects），是在说别人也做得到，不是谈需不需要。",
+          "quote": "some key aspects"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "choice",
+          "meaning": "选择；她接着说一切取决于几个要点（some key aspects），讲的是人人能做到，不是讲选择。",
+          "quote": "some key aspects"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "difference",
+          "meaning": "差别；空后是别人不能这么好看（others can’t look this good），要否定的是做不到的理由，不是谈差别。",
+          "quote": "others can’t look this good"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "there's no",
+          "signalSide": "context-before",
+          "targetText": "there's no reason others can’t look this good",
+          "relation": "没有理由（there's no reason）后接一个否定句，意为别人没有理由做不到。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:50": {
+      "blankId": "blank:paper-gaokao-2025-ii:50",
+      "blankNo": 50,
+      "pos": "phrase",
+      "role": "main",
+      "context": "第一个要点：失败对成功起正面作用，是走向成功的一步。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "要点标题是坚持住（Hold on），后面说永不放弃（never give up），失败成了通往成功（to success）的垫脚石。",
+        "quotes": [
+          "Hold on",
+          "never give up",
+          "to success"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "垫脚石",
+        "meaning": "通往成功的一步",
+        "reason": "第一个要点：失败对成功起正面作用，是走向成功的一步。词组看语境义：要点标题是坚持住（Hold on），后面说永不放弃（never give up），失败成了通往成功（to success）的垫脚石。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "green light",
+          "meaning": "绿灯；绿灯是放行信号，而她说的是失败后不要放弃（never give up），失败要靠坚持跨过去。",
+          "quote": "never give up"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "road block",
+          "meaning": "路障；把失败当路障就会停下，而她紧接着说永不放弃（never give up）。",
+          "quote": "never give up"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "passing mark",
+          "meaning": "及格分；失败本身不算及格，她要说的是失败后坚持计划（Stick to your plan）才能走向成功。",
+          "quote": "Stick to your plan"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to success",
+          "signalSide": "context-after",
+          "targetText": "a stepping stone to success",
+          "relation": "通往成功的垫脚石（a stepping stone to success）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "never give up",
+          "signalSide": "context-after",
+          "relation": "永不放弃（never give up）说明失败不是终点。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2025-ii:51": {
+      "blankId": "blank:paper-gaokao-2025-ii:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "第二个要点的标题，要一个向他人伸出援手的动作。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后解释为在路上把别人拉起来（Lift others up），就是帮助他人。",
+        "quotes": [
+          "Lift others up"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "帮助",
+        "reason": "第二个要点的标题，要一个向他人伸出援手的动作。动词看复现：冒号后解释为在路上把别人拉起来（Lift others up），就是帮助他人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Consult",
+          "meaning": "请教；冒号后说的是把别人拉起来（Lift others up），是她去扶别人，不是向别人求教。",
+          "quote": "Lift others up"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Follow",
+          "meaning": "追随；冒号后要你拉别人一把（Lift others up），是带着别人走，不是跟在别人后面。",
+          "quote": "Lift others up"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Forgive",
+          "meaning": "原谅；冒号后讲的是拉别人一把（Lift others up），说的是扶持别人，不是原谅别人。",
+          "quote": "Lift others up"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "others",
+          "signalSide": "context-after",
+          "targetText": "Help others",
+          "relation": "帮助他人（Help others），动宾搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Lift others up",
+          "signalSide": "context-after",
+          "relation": "拉别人一把（Lift others up）解释了帮助他人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:52": {
+      "blankId": "blank:paper-gaokao-2025-ii:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "main",
+      "context": "接着帮助他人这一点说，成功要和别人一起享有才更甜。",
+      "find": {
+        "check": "echo",
+        "text": "前一句要你在路上拉别人一把（Lift others up on your journey），成功与人分享才更甜（sweeter）。",
+        "quotes": [
+          "Lift others up on your journey",
+          "sweeter"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "分享",
+        "reason": "接着帮助他人这一点说，成功要和别人一起享有才更甜。动词看复现：前一句要你在路上拉别人一把（Lift others up on your journey），成功与人分享才更甜（sweeter）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "accepted",
+          "meaning": "被接受；这一要点讲拉别人一把（Lift others up），重点是和别人一起，不是成功被人接受。",
+          "quote": "Lift others up"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "expected",
+          "meaning": "被预料；前一句是拉别人一把（Lift others up），成功更甜是因为与人同享，不是因为在意料之中。",
+          "quote": "Lift others up"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "celebrated",
+          "meaning": "被庆祝；前一句讲在路上拉别人一把（Lift others up on your journey），更甜是因为有人一起走过来，不在于庆祝。",
+          "quote": "Lift others up on your journey"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Success is sweeter when",
+          "signalSide": "context-before",
+          "targetText": "Success is sweeter when shared",
+          "relation": "成功（Success）被分享时更甜，空格说明成功处在什么状态。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Lift others up on your journey",
+          "signalSide": "context-before",
+          "relation": "拉别人一把（Lift others up）与分享成功呼应。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:53": {
+      "blankId": "blank:paper-gaokao-2025-ii:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "她说锻炼要追求的东西：感觉好，而不是好看。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是要达到的状态（is to feel good, not look good），前面说锻炼不必先有好身材（an amazing body），名词要目标。",
+        "quotes": [
+          "is to feel good, not look good",
+          "an amazing body"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "目标",
+        "reason": "她说锻炼要追求的东西：感觉好，而不是好看。名词看搭配：空后是要达到的状态（is to feel good, not look good），前面说锻炼不必先有好身材（an amazing body），名词要目标。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "case",
+          "meaning": "情况；空后是要追求的结果（to feel good, not look good），不是在说眼下是什么情况。",
+          "quote": "to feel good, not look good"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "duty",
+          "meaning": "责任；她说锻炼不必先有好身材（do not need to have an amazing body），是为了自己感觉好，不是一份义务。",
+          "quote": "do not need to have an amazing body"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cost",
+          "meaning": "代价；感觉良好（to feel good）是锻炼带来的收获，不是要付出的代价。",
+          "quote": "to feel good"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is to feel good",
+          "signalSide": "context-after",
+          "targetText": "the goal is to feel good",
+          "relation": "目标是（the goal is）后接不定式，说明要达到什么。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:54": {
+      "blankId": "blank:paper-gaokao-2025-ii:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "指当初笑她太老的那些人，她用行动证明他们错了。",
+      "find": {
+        "check": "echo",
+        "text": "前半句她曾因太老还健身被嘲笑（laughed at for being too old to work out），证明错了的就是这些怀疑她的人。",
+        "quotes": [
+          "laughed at for being too old to work out"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "怀疑者",
+        "reason": "指当初笑她太老的那些人，她用行动证明他们错了。名词看复现：前半句她曾因太老还健身被嘲笑（laughed at for being too old to work out），证明错了的就是这些怀疑她的人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "instructors",
+          "meaning": "教练；被她证明错了的是嘲笑她太老（laughed at for being too old）的人，不是教她健身的人。",
+          "quote": "laughed at for being too old"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "admirers",
+          "meaning": "仰慕者；仰慕者本就看好她，她证明错了的是当初嘲笑她的人（laughed at）。",
+          "quote": "laughed at"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "beginners",
+          "meaning": "初学者；她要回应的是嘲笑她太老（too old to work out）的人，对方是不是新手不是重点。",
+          "quote": "too old to work out"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "proved the",
+          "signalSide": "context-before",
+          "targetText": "proved the doubters wrong",
+          "relation": "证明某人错了（prove sb wrong），空格是被证明错了的人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "laughed at",
+          "signalSide": "context-before",
+          "relation": "被嘲笑（laughed at）说明当初有人怀疑她。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:55": {
+      "blankId": "blank:paper-gaokao-2025-ii:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "全文收束：她最终成了许多网友眼中激励人心的榜样。",
+      "find": {
+        "check": "echo",
+        "text": "她发健身内容、要拉别人一把（Lift others up），又证明了质疑者是错的（proved the），所以激励了网友。",
+        "quotes": [
+          "Lift others up",
+          "proved the"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "鼓舞人心的人或事",
+        "meaning": "激励别人的榜样",
+        "reason": "全文收束：她最终成了许多网友眼中激励人心的榜样。名词看复现：她发健身内容、要拉别人一把（Lift others up），又证明了质疑者是错的（proved the），所以激励了网友。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "authority",
+          "meaning": "权威；她以年过六旬证明质疑者错了（proved the）来打动网友，靠的是榜样作用，不是专业权威。",
+          "quote": "proved the"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "excuse",
+          "meaning": "借口；她证明了太老不能健身（too old to work out）的说法是错的，成了别人的动力，而非借口。",
+          "quote": "too old to work out"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "option",
+          "meaning": "选择；确实成为（has indeed become an）是在称赞她的成就，把人说成网友的一种选择接不上。",
+          "quote": "has indeed become an"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for many social media users",
+          "signalSide": "context-after",
+          "targetText": "an inspiration for many social media users",
+          "relation": "对许多网友（for many social media users）来说是鼓舞人心的人。"
+        }
+      ]
+    }
+  }
+}

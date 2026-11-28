@@ -1,0 +1,731 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:reading-b": {
+      "overview": "本文介绍在斯坦福一家儿童医院里教高中的凯西·何：她的学生是住院病童，她先照顾他们的身心，再帮他们跟上原校课业；医院专家也认为，学校能让病童的梦想延续下去。",
+      "fullTranslationZh": "凯西·何在斯坦福露西尔·帕卡德儿童医院（LPCH）里教高中。“有时候我不太愿意说自己是老师，”何说，“人们心里对老师做什么有一套想法，但在这里，情况其实不是那样。”\n\n“这里”就是386室。每年，大约有500名LPCH的病人在这里同时成为学生。这所医院学校里没有家长、医生，也没有医疗操作。它是一个学习的地方。何的学生大约一半在这里待一周或更短；另一些则会待上一年多。何的大多数学生都会康复，这意味着让他们做好重返学校的准备，正日益成为护理中重要的一部分。\n\n不过，在386室，学业并不是第一位的。身体健康和心理健康才是首要的。“如果你对某件事感到害怕，满脑子只想着它，你根本不可能学得进去，”何说，“我是教练、顾问，也是安慰者，这就是当一名医院教师的意义。”\n\n何的班上随时都可能有多达30名学生。她通常会和学生原来的老师合作，拿到他们原学校正在用的课程和测验。有些老师不给孩子们布置任何作业，而是表达同情。“我觉得这其实是害了孩子们，”何说，“他们会以为自己的老师并不关心他们的学业。”\n\n何认识到，帮助孩子们跟上医院外的同龄人，对他们的心理大有好处。“我其实认为，对某些问题来说，药物只是很小的一部分，”LPCH疼痛管理服务主任朱莉·古德说，“关键在于围绕‘拥有完整的生活意味着什么’去解决问题。那些孩子有梦想。学校给孩子们学习和成长的途径，能让这些梦想延续下去。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+          "sourceText": "Most of Ho’s students will recover, which means that preparing them to return to school is an increasingly important component of care.",
+          "displayText": "Most of Ho’s students will recover, which means that preparing them to return to school is an increasingly important component of care.",
+          "relatedQuestionIds": [],
+          "translationZh": "何的大多数学生都会康复，这意味着让他们做好重返学校的准备，正日益成为护理中重要的一部分。",
+          "analysisZh": "先读主句 Most of Ho’s students will recover：何的大多数学生都会康复。逗号后 which 引导非限制性定语从句，指代前面整件事（学生会康复），which means that ... 说明这件事意味着什么。that 从句里，主语是动名词短语 preparing them to return to school（让他们做好返校准备），谓语是 is，表语是 an increasingly important component of care（护理中越来越重要的一部分）。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "Most of Ho’s students will recover"
+            },
+            {
+              "start": 36,
+              "end": 52,
+              "quote": "which means that"
+            },
+            {
+              "start": 53,
+              "end": 87,
+              "quote": "preparing them to return to school"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+          "sourceText": "School can keep those dreams alive by giving kids a way to learn and grow.",
+          "displayText": "School can keep those dreams alive by giving kids a way to learn and grow.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:27"
+          ],
+          "translationZh": "学校给孩子们学习和成长的途径，能让这些梦想延续下去。",
+          "analysisZh": "主干是 School can keep those dreams alive：学校能让那些梦想保持鲜活。keep + 宾语 + 形容词是复合结构，alive 说明梦想所处的状态，those dreams 指上一句孩子们的梦想。by giving kids a way to learn and grow 是方式状语，说明靠什么做到：给孩子们一条学习和成长的途径，to learn and grow 修饰 a way。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 34,
+              "quote": "keep those dreams alive"
+            },
+            {
+              "start": 35,
+              "end": 55,
+              "quote": "by giving kids a way"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-ii:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-b:1"
+              ],
+              "start": 0,
+              "end": 82,
+              "quote": "凯西·何在斯坦福露西尔·帕卡德儿童医院（LPCH）里教高中。“有时候我不太愿意说自己是老师，”何说，“人们心里对老师做什么有一套想法，但在这里，情况其实不是那样。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-b:2"
+              ],
+              "start": 84,
+              "end": 228,
+              "quote": "“这里”就是386室。每年，大约有500名LPCH的病人在这里同时成为学生。这所医院学校里没有家长、医生，也没有医疗操作。它是一个学习的地方。何的学生大约一半在这里待一周或更短；另一些则会待上一年多。何的大多数学生都会康复，这意味着让他们做好重返学校的准备，正日益成为护理中重要的一部分。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-b:3"
+              ],
+              "start": 230,
+              "end": 330,
+              "quote": "不过，在386室，学业并不是第一位的。身体健康和心理健康才是首要的。“如果你对某件事感到害怕，满脑子只想着它，你根本不可能学得进去，”何说，“我是教练、顾问，也是安慰者，这就是当一名医院教师的意义。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-b:4"
+              ],
+              "start": 332,
+              "end": 445,
+              "quote": "何的班上随时都可能有多达30名学生。她通常会和学生原来的老师合作，拿到他们原学校正在用的课程和测验。有些老师不给孩子们布置任何作业，而是表达同情。“我觉得这其实是害了孩子们，”何说，“他们会以为自己的老师并不关心他们的学业。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-b:5"
+              ],
+              "start": 447,
+              "end": 586,
+              "quote": "何认识到，帮助孩子们跟上医院外的同龄人，对他们的心理大有好处。“我其实认为，对某些问题来说，药物只是很小的一部分，”LPCH疼痛管理服务主任朱莉·古德说，“关键在于围绕‘拥有完整的生活意味着什么’去解决问题。那些孩子有梦想。学校给孩子们学习和成长的途径，能让这些梦想延续下去。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+                "start": 0,
+                "end": 82,
+                "quote": "“Here” is room 386, where each year, about 500 LPCH patients also become students."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:1",
+                "start": 0,
+                "end": 86,
+                "quote": "Kathy Ho teaches high school inside Lucile Packard Children’s Hospital Stanford（LPCH）."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p2",
+                "start": 0,
+                "end": 38,
+                "quote": "“这里”就是386室。每年，大约有500名LPCH的病人在这里同时成为学生。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p1",
+                "start": 0,
+                "end": 30,
+                "quote": "凯西·何在斯坦福露西尔·帕卡德儿童医院（LPCH）里教高中。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+                "start": 224,
+                "end": 316,
+                "quote": "I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p3",
+                "start": 71,
+                "end": 99,
+                "quote": "我是教练、顾问，也是安慰者，这就是当一名医院教师的意义。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+                "start": 168,
+                "end": 249,
+                "quote": "Some teachers don’t give the kids any assignments; they express sympathy instead."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p4",
+                "start": 50,
+                "end": 73,
+                "quote": "有些老师不给孩子们布置任何作业，而是表达同情。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+                "start": 313,
+                "end": 411,
+                "quote": "Those kids have dreams. School can keep those dreams alive by giving kids a way to learn and grow."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p5",
+                "start": 104,
+                "end": 138,
+                "quote": "那些孩子有梦想。学校给孩子们学习和成长的途径，能让这些梦想延续下去。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+                "start": 274,
+                "end": 409,
+                "quote": "Most of Ho’s students will recover, which means that preparing them to return to school is an increasingly important component of care."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p2",
+                "start": 100,
+                "end": 144,
+                "quote": "何的大多数学生都会康复，这意味着让他们做好重返学校的准备，正日益成为护理中重要的一部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:27"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+                "start": 337,
+                "end": 411,
+                "quote": "School can keep those dreams alive by giving kids a way to learn and grow."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-b-p5",
+                "start": 112,
+                "end": 138,
+                "quote": "学校给孩子们学习和成长的途径，能让这些梦想延续下去。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先由何“不愿说自己是老师”引出医院教师的与众不同，再介绍386室里的病童学生和返校准备的意义，接着说明她以身心为先、身兼数职，以及她与原校老师合作、反对不布置作业，最后借医院专家之口点明学校对病童的价值。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-b:1",
+            "summary": "何在医院教高中，觉得这份工作和人们印象中的老师不同",
+            "function": "开篇引出人物和话题，留下悬念。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+            "summary": "386室的学生是LPCH的病人，帮他们准备返校越来越重要",
+            "function": "交代医院学校是什么、学生是谁（第24题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+            "summary": "在这里身心健康第一，何身兼教练、顾问和安慰者",
+            "function": "说明医院教师工作的特点（第25题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+            "summary": "何与原校老师合作拿课业，认为不布置作业是害了孩子",
+            "function": "具体写她的做法和看法（第26题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+            "summary": "跟上同龄人对孩子有心理益处，学校能让病童的梦想延续",
+            "function": "引专家的话点明医院学校的意义（第27题），收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-ii:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清何在医院里教的学生是什么人。",
+      "stemTranslationZh": "何在LPCH教的是谁？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "患病的孩子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+              "quote": "“Here” is room 386, where each year, about 500 LPCH patients also become students.",
+              "anchor": "病人成了学生"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:1",
+              "quote": "Kathy Ho teaches high school inside Lucile Packard Children’s Hospital Stanford（LPCH）.",
+              "anchor": "儿童医院"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "年轻的护士。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "在医院教书容易让人想到教护士，但原文没提护士；来386室上课的是住院的病人。",
+            "claim": "Young nurses."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "医学院的学生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "medical",
+            "optionText": "Medical",
+            "matchType": "exact",
+            "relationNote": "Medical 借自原文的 medical procedures（医疗操作），那句是说医院学校里没有医疗操作；何的学生是病人，不是学医的学生。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+              "quote": "The hospital school is free of parents, doctors, and medical procedures.",
+              "anchor": "没有医疗操作"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "病人的家长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The hospital school is free of parents, doctors, and medical procedures.",
+            "sourceEntity": "parents",
+            "optionText": "Patients’ parents.",
+            "optionEntity": "Patients’ parents",
+            "explanation": "原文提到家长，恰恰是说医院学校里没有家长（free of parents）；坐在教室里的是病人自己。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+              "quote": "The hospital school is free of parents, doctors, and medical procedures.",
+              "anchor": "没有家长"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "LPCH",
+          "sourceRole": "stem",
+          "targetText": "“Here” is room 386, where each year, about 500 LPCH patients also become students.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "LPCH patients also become students",
+          "note": "题干 LPCH 原词出现在原文。"
+        },
+        {
+          "sourceText": "Sick children.",
+          "sourceRole": "correctOption",
+          "targetText": "“Here” is room 386, where each year, about 500 LPCH patients also become students.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项由两处合成：“患病”落在[[block:paper-gaokao-2025-ii:reading-b:2|LPCH patients also become students]]（patients），来上课的本来就是住院病人；“孩子”落在[[block:paper-gaokao-2025-ii:reading-b:1|Kathy Ho teaches high school]]（Children’s Hospital），这是一家儿童医院，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把何对自己工作的描述概括成一个特点。",
+      "stemTranslationZh": "何的工作有什么特点？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "把学业放在首位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Still, in room 386, academics don’t come first.",
+            "sourceHighlight": "academics don’t come first",
+            "optionText": "Prioritizing academics.",
+            "optionHighlight": "Prioritizing academics",
+            "explanation": "选项借了原文的 academics，可原文说的是学业不排第一（don’t come first），身心健康才是首要的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+              "quote": "Still, in room 386, academics don’t come first.",
+              "anchor": "学业不是第一"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "鼓励创新。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文写何安抚学生、帮他们跟上原校的课程和测验，没提鼓励创新。",
+            "claim": "Encouraging innovation."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "治疗各种疾病。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The hospital school is free of parents, doctors, and medical procedures.",
+            "sourceEntity": "doctors",
+            "optionText": "Treating various diseases.",
+            "optionEntity": "Treating various diseases",
+            "explanation": "看病是医生的事，何是老师；原文还特意说她的教室里没有医生，也没有医疗操作（free of … doctors）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+              "quote": "The hospital school is free of parents, doctors, and medical procedures.",
+              "anchor": "教室里没有医生"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "扮演多重角色。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+              "quote": "I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher.",
+              "anchor": "三个身份"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Ho’s job",
+          "sourceRole": "stem",
+          "targetText": "I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+          "relationType": "locationCue",
+          "sourceZh": "何的工作",
+          "targetCue": "a hospital teacher",
+          "targetCueZh": "医院教师",
+          "answerText": "I’m a coach, an adviser, and a comforter",
+          "note": "题干 Ho’s job 对应原文 to be a hospital teacher，当医院教师就是她的工作。"
+        },
+        {
+          "sourceText": "Playing multiple roles.",
+          "sourceRole": "correctOption",
+          "targetText": "I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“扮演多重角色”（multiple roles）是对原文三个身份的概括：教练、顾问、安慰者（a coach, an adviser, and a comforter），她一个人同时担起这几样，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:26": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据上下文判断画线词 it 指的是前文哪种做法。",
+      "stemTranslationZh": "第4段中画线词“it”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "it 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "提供常规课程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "regular",
+            "optionText": "regular",
+            "matchType": "exact",
+            "relationNote": "regular 和 lessons 都取自何自己的做法：她从原校老师（regular teachers）那里拿课程。放进去就成了“提供常规课程是在害孩子”，和她正在做的事相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+              "quote": "She generally works with their regular teachers to get lessons and tests being used at their home schools.",
+              "anchor": "何拿原校课程"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "给予格外的关注。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "放进去就成了“格外关注孩子是在害孩子”；原文批评的是不给作业，让孩子觉得老师不关心（don't care）他们的功课。",
+            "claim": "Paying extra attention."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "不布置作业。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+              "quote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+              "anchor": "不给作业只表同情"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不表示同情。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+            "sourceHighlight": "express sympathy",
+            "optionText": "Showing no sympathy.",
+            "optionHighlight": "no sympathy",
+            "explanation": "那些老师是表示了同情的（express sympathy），选项加了 no。放进去就成了“不表示同情是在害孩子”，而何批评的是光同情、不给作业。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+              "quote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+              "anchor": "老师表示同情"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "it",
+          "sourceRole": "stem",
+          "targetText": "“I feel like it is a disservice to the kids,” Ho says.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "Some teachers don’t give the kids any assignments",
+          "bridgeZh": "it 指有些老师不给作业、只表示同情这种做法",
+          "note": "题干问画线的 it，原文就在何的这句话里。"
+        },
+        {
+          "sourceText": "Assigning no schoolwork.",
+          "sourceRole": "correctOption",
+          "targetText": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“不布置作业”就是原文的 don’t give … any assignments。it 后面说对孩子有害（a disservice），随后又说孩子会以为老师不关心功课，所以 it 必须是一种和功课有关、让孩子失望的做法。放回去：不给孩子布置作业，是在害孩子，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从古德的话里概括医院学校给病童带来的好处。",
+      "stemTranslationZh": "根据古德的说法，医院学校给学生带来了什么好处？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它减轻了同龄人带来的压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "peers",
+            "optionText": "peer",
+            "matchType": "wordFamily",
+            "relationNote": "peer 取自何的看法：帮孩子跟上医院外的同龄人（keep up with their peers）对心理有好处；说的是跟上同龄人，不是减轻同龄人压力，也不是古德的话。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "quote": "Ho recognizes the psychological benefit of helping kids keep up with their peers（同龄人）outside the hospital.",
+              "anchor": "跟上同龄人"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它帮助他们怀着希望生活。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "quote": "Those kids have dreams. School can keep those dreams alive by giving kids a way to learn and grow.",
+              "anchor": "让梦想延续"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它让他们摆脱疼痛。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "says Julie Good, director of pain management services at LPCH",
+            "sourceEntity": "pain management services",
+            "optionText": "It frees them from aches.",
+            "optionEntity": "aches",
+            "explanation": "古德是疼痛管理服务主任（pain management），选项借这个身份说学校能止痛；她讲学校时说的却是让孩子的梦想延续，还说药物只是一小部分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "quote": "says Julie Good, director of pain management services at LPCH",
+              "anchor": "古德的职务"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它用故事来逗他们开心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "古德说学校给孩子学习和成长的途径（a way to learn and grow），没提讲故事逗他们开心。",
+            "claim": "It entertains them with stories."
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the hospital school",
+          "sourceRole": "stem",
+          "targetText": "School can keep those dreams alive by giving kids a way to learn and grow.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+          "relationType": "locationCue",
+          "targetCue": "School",
+          "answerText": "keep those dreams alive",
+          "note": "题干 the hospital school 在古德的话里就写作 School。"
+        },
+        {
+          "sourceText": "It helps them live in hope.",
+          "sourceRole": "correctOption",
+          "targetText": "School can keep those dreams alive by giving kids a way to learn and grow.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项的“带着希望生活”（live in hope）概括的是原文“让梦想保持鲜活”（keep those dreams alive）：孩子们有梦想，学校让梦想不灭，他们也就心怀希望，选 B。"
+        }
+      ]
+    }
+  }
+}

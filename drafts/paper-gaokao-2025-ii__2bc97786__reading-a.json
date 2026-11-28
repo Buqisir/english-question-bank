@@ -1,0 +1,661 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:reading-a": {
+      "overview": "英国集镇旅游推荐：先说英格兰集镇各有个性、不只能购物，再分别介绍赫里福德的大教堂与《大宪章》抄本、勒德洛的美食、什鲁斯伯里的河湾地形和梅瓦吉西的渔港与馅饼。",
+      "fullTranslationZh": "英国值得一游的英格兰集镇\n\n英格兰的集镇形态各异、大小不一。每座集镇都有自己的个性，这种个性是由几百年来在当地生产和交易的商品与服务塑造的。不过，每座集镇能做的事都不只是购物。\n\n赫里福德，赫里福德郡\n\n自1189年以来，赫里福德一直是一座热闹的集镇。沿着镇广场走一圈，你会看到可爱的商店、餐馆和黑白屋博物馆。赫里福德大教堂是镇上最令人赞叹的建筑。那里还有一座古老的图书馆。《大宪章》四份原始抄本中的一份就陈列在那里。\n\n勒德洛，什罗普郡\n\n勒德洛被誉为“英格兰美食中心”。肉铺、蔬果店、面包房和奶酪店沿着镇广场排开。紧挨着广场的勒德洛城堡是一座“必去探访”的中世纪要塞。为期三天的勒德洛美食节每年九月举行。\n\n什鲁斯伯里，什罗普郡\n\n从伦敦前往什鲁斯伯里镇中心并不容易，但这番奔波是值得的。塞文河在镇上拐了一个大弯，几乎把什鲁斯伯里镇中心变成了一座岛。这种地形造就了一个理想的集市，人们可以把河流当作公路来运出和接收货物。鲜花随处可见——吊篮里、窗台花箱里、花盆里都有——这正是你想象中迷人的英格兰集镇的样子。\n\n梅瓦吉西，康沃尔郡\n\n即使你没去过梅瓦吉西这个小渔村，你也很可能在电影或英国电视剧里见过它。这座至今仍在使用的港口形成于1774年。渔民每天出海，在港边的市场上卖鱼。离开港口之前，一定要尝一尝传统的康沃尔馅饼。味道好极了。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+          "sourceText": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+          "displayText": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:22"
+          ],
+          "translationZh": "塞文河在镇上拐了一个大弯，几乎把什鲁斯伯里镇中心变成了一座岛。",
+          "analysisZh": "主干是 The River Severn has a significant turn：塞文河拐了一个大弯，through town 说明弯道就在镇上。逗号后的 almost making an island of Shrewsbury Town Center 是现在分词短语，表示拐弯带来的结果；make an island of sth 意为“把某地变成一座岛”，almost 说明还差一点，所以镇中心是“几乎”被河水围住，并没有真的成为岛。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 39,
+              "quote": "The River Severn has a significant turn"
+            },
+            {
+              "start": 54,
+              "end": 80,
+              "quote": "almost making an island of"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-a-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-a:2",
+          "sourceText": "Each has a personality shaped by the goods and services produced and traded for centuries.",
+          "displayText": "Each has a personality shaped by the goods and services produced and traded for centuries.",
+          "relatedQuestionIds": [],
+          "translationZh": "每座集镇都有自己的个性，这种个性是由几百年来在当地生产和交易的商品与服务塑造的。",
+          "analysisZh": "主干很短：Each has a personality，每座集镇都有个性，Each 指上一句的 English market towns。后面一层层往后挂修饰：shaped by the goods and services 是过去分词短语，修饰 personality，说明个性由商品和服务塑造；produced and traded for centuries 又是两个并列的过去分词，修饰 the goods and services，说明这些商品和服务在当地被生产、交易了几百年。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 22,
+              "quote": "Each has a personality"
+            },
+            {
+              "start": 23,
+              "end": 32,
+              "quote": "shaped by"
+            },
+            {
+              "start": 56,
+              "end": 75,
+              "quote": "produced and traded"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-ii:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-ii:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:1"
+              ],
+              "start": 0,
+              "end": 12,
+              "quote": "英国值得一游的英格兰集镇"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:2"
+              ],
+              "start": 14,
+              "end": 88,
+              "quote": "英格兰的集镇形态各异、大小不一。每座集镇都有自己的个性，这种个性是由几百年来在当地生产和交易的商品与服务塑造的。不过，每座集镇能做的事都不只是购物。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:3"
+              ],
+              "start": 90,
+              "end": 100,
+              "quote": "赫里福德，赫里福德郡"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:4"
+              ],
+              "start": 102,
+              "end": 209,
+              "quote": "自1189年以来，赫里福德一直是一座热闹的集镇。沿着镇广场走一圈，你会看到可爱的商店、餐馆和黑白屋博物馆。赫里福德大教堂是镇上最令人赞叹的建筑。那里还有一座古老的图书馆。《大宪章》四份原始抄本中的一份就陈列在那里。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:5"
+              ],
+              "start": 211,
+              "end": 219,
+              "quote": "勒德洛，什罗普郡"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:6"
+              ],
+              "start": 221,
+              "end": 304,
+              "quote": "勒德洛被誉为“英格兰美食中心”。肉铺、蔬果店、面包房和奶酪店沿着镇广场排开。紧挨着广场的勒德洛城堡是一座“必去探访”的中世纪要塞。为期三天的勒德洛美食节每年九月举行。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:7"
+              ],
+              "start": 306,
+              "end": 316,
+              "quote": "什鲁斯伯里，什罗普郡"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:8"
+              ],
+              "start": 318,
+              "end": 456,
+              "quote": "从伦敦前往什鲁斯伯里镇中心并不容易，但这番奔波是值得的。塞文河在镇上拐了一个大弯，几乎把什鲁斯伯里镇中心变成了一座岛。这种地形造就了一个理想的集市，人们可以把河流当作公路来运出和接收货物。鲜花随处可见——吊篮里、窗台花箱里、花盆里都有——这正是你想象中迷人的英格兰集镇的样子。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:9"
+              ],
+              "start": 458,
+              "end": 467,
+              "quote": "梅瓦吉西，康沃尔郡"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-a:10"
+              ],
+              "start": 469,
+              "end": 569,
+              "quote": "即使你没去过梅瓦吉西这个小渔村，你也很可能在电影或英国电视剧里见过它。这座至今仍在使用的港口形成于1774年。渔民每天出海，在港边的市场上卖鱼。离开港口之前，一定要尝一尝传统的康沃尔馅饼。味道好极了。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+                "start": 155,
+                "end": 327,
+                "quote": "The Hereford Cathedral is the most impressive building in town. It's also home to an ancient library. One of the four original copies of the Magna Carta is displayed there."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p4",
+                "start": 53,
+                "end": 107,
+                "quote": "赫里福德大教堂是镇上最令人赞叹的建筑。那里还有一座古老的图书馆。《大宪章》四份原始抄本中的一份就陈列在那里。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+                "start": 84,
+                "end": 188,
+                "quote": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p8",
+                "start": 28,
+                "end": 59,
+                "quote": "塞文河在镇上拐了一个大弯，几乎把什鲁斯伯里镇中心变成了一座岛。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+                "start": 237,
+                "end": 310,
+                "quote": "Don’t leave the harbor without a traditional Cornish pie. It’s delicious."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p10",
+                "start": 72,
+                "end": 100,
+                "quote": "离开港口之前，一定要尝一尝传统的康沃尔馅饼。味道好极了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+                "start": 84,
+                "end": 188,
+                "quote": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p8",
+                "start": 28,
+                "end": 59,
+                "quote": "塞文河在镇上拐了一个大弯，几乎把什鲁斯伯里镇中心变成了一座岛。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-a:2",
+                "start": 52,
+                "end": 142,
+                "quote": "Each has a personality shaped by the goods and services produced and traded for centuries."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-a-p2",
+                "start": 16,
+                "end": 56,
+                "quote": "每座集镇都有自己的个性，这种个性是由几百年来在当地生产和交易的商品与服务塑造的。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先总说英格兰集镇各有个性、除了购物还有很多事可做，再按地名逐一介绍四座集镇：赫里福德看历史古迹，勒德洛看美食，什鲁斯伯里看河湾地形和鲜花，梅瓦吉西看渔港和馅饼。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:1",
+            "summary": "英国值得一游的英格兰集镇",
+            "function": "标题，点明全文是一份集镇游览推荐。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:2",
+            "summary": "集镇各有个性，除了购物还有更多可做",
+            "function": "总述，引出下面四座集镇的介绍。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:3",
+            "summary": "赫里福德（赫里福德郡）",
+            "function": "小标题，引出第一座集镇。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+            "summary": "热闹的老集镇，大教堂里陈列《大宪章》抄本",
+            "function": "介绍赫里福德的历史古迹（第21题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:5",
+            "summary": "勒德洛（什罗普郡）",
+            "function": "小标题，引出第二座集镇。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:6",
+            "summary": "美食中心，有食品店、城堡和美食节",
+            "function": "介绍勒德洛的美食特色。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:7",
+            "summary": "什鲁斯伯里（什罗普郡）",
+            "function": "小标题，引出第三座集镇。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+            "summary": "路远难走，但河湾使镇中心几乎成岛，鲜花遍地",
+            "function": "介绍什鲁斯伯里的地形和景致（第22题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:9",
+            "summary": "梅瓦吉西（康沃尔郡）",
+            "function": "小标题，引出第四座集镇。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+            "summary": "上过影视的小渔村，港口热闹，必尝康沃尔馅饼",
+            "function": "介绍梅瓦吉西的渔港并给出建议（第23题），收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-ii:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "根据《大宪章》抄本的陈列地点，找出它所在的具体建筑。",
+      "stemTranslationZh": "在哪里可以看到《大宪章》的一份原始抄本？",
+      "locateBy": "stem",
+      "locateFindZh": "there 指哪里，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "在勒德洛城堡里。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the Ludlow Castle",
+            "optionText": "the Ludlow Castle",
+            "matchType": "exact",
+            "relationNote": "Ludlow Castle 是勒德洛的一座中世纪城堡，原文只说它值得去探访（“must explore”），没说里面有《大宪章》。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:6",
+              "quote": "Bordering the square, the Ludlow Castle is a “must explore” medieval stronghold.",
+              "anchor": "勒德洛城堡"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在英格兰美食中心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the Foodie Center of England",
+            "optionText": "the Foodie Center of England",
+            "matchType": "exact",
+            "relationNote": "Foodie Center of England 是勒德洛的称号，那一段写的是肉铺、面包房和美食节，和《大宪章》无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:6",
+              "quote": "Ludlow is known as the Foodie Center of England.",
+              "anchor": "勒德洛的称号"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在赫里福德大教堂里。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+              "quote": "The Hereford Cathedral is the most impressive building in town. It's also home to an ancient library. One of the four original copies of the Magna Carta is displayed there.",
+              "anchor": "大教堂里的图书馆"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在黑白屋博物馆里。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The Hereford Cathedral is the most impressive building in town.",
+            "sourceEntity": "The Hereford Cathedral",
+            "optionText": "In the Black and White House Museum.",
+            "optionEntity": "the Black and White House Museum",
+            "explanation": "黑白屋博物馆也在赫里福德，但它只是广场边和商店、餐馆并列的一处去处；收藏抄本的图书馆在大教堂里。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+              "quote": "Skirting the town square, you’ll find lovely shops, eateries, and the Black and White House Museum.",
+              "anchor": "广场边的去处"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the Magna Carta",
+          "sourceRole": "stem",
+          "targetText": "One of the four original copies of the Magna Carta is displayed there.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+          "relationType": "locationCue",
+          "answerText": "The Hereford Cathedral",
+          "bridgeZh": "there 指大教堂里那座古老的图书馆",
+          "note": "题干 the Magna Carta 原词出现在原文。"
+        },
+        {
+          "sourceText": "In the Hereford Cathedral.",
+          "sourceRole": "correctOption",
+          "targetText": "The Hereford Cathedral is the most impressive building in town.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 Hereford Cathedral：图书馆就设在大教堂里（home to an ancient library），陈列在图书馆的抄本自然也在大教堂里，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从河流拐弯的描写看出什鲁斯伯里镇中心的地理特点。",
+      "stemTranslationZh": "什鲁斯伯里镇中心有什么特点？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它位于一座大岛附近。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "island",
+            "optionText": "island",
+            "matchType": "exact",
+            "relationNote": "选项借用了 island，但原文说的是镇中心自己几乎成了岛，并不是旁边另有一座大岛。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "quote": "almost making an island of Shrewsbury Town Center.",
+              "anchor": "镇中心几乎成岛"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它几乎被水包围。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "quote": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+              "anchor": "河湾围住镇中心"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它以花卉节闻名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文只说镇上鲜花随处可见（Flowers are everywhere），没提花卉节；文中唯一的节日是勒德洛的美食节。",
+            "claim": "It’s known for its flower festival."
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "从伦敦很容易到达那里。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety.",
+            "sourceHighlight": "challenging",
+            "optionText": "It’s easily accessible from London.",
+            "optionHighlight": "easily accessible",
+            "explanation": "原文说从伦敦去镇中心有难度（challenging），只是值得一去；选项说成很容易到达，难易正好说反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "quote": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety.",
+              "anchor": "从伦敦过去不容易"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Shrewsbury Town Center",
+          "sourceRole": "stem",
+          "targetText": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+          "relationType": "locationCue",
+          "answerText": "has a significant turn through town, almost making an island of",
+          "note": "题干 Shrewsbury Town Center 原词出现在原文。"
+        },
+        {
+          "sourceText": "It’s almost surrounded by water.",
+          "sourceRole": "correctOption",
+          "targetText": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+          "relationType": "paraphrase",
+          "note": "选项的“几乎被水包围”是从原文“几乎成了一座岛”（almost making an island of）推出的：河道拐个大弯把镇中心绕在里面，岛就是四面环水，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在介绍梅瓦吉西的段落里找出作者给游客的建议。",
+      "stemTranslationZh": "作者建议游客在梅瓦吉西做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找给游客的祈使句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "尝尝康沃尔馅饼。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "quote": "Don’t leave the harbor without a traditional Cornish pie. It’s delicious.",
+              "anchor": "别错过康沃尔馅饼"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "看一部英国电视剧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "British TV show",
+            "optionText": "British TV show",
+            "matchType": "exact",
+            "relationNote": "British TV show 出自[[block:paper-gaokao-2025-ii:reading-a:10|probably seen it in a movie]]，那句是说你多半在影视剧里见过这个村子，用来说明它有名，并没有建议游客去看剧。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "quote": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+              "anchor": "影视里见过"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "出海捕鱼。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Fishermen",
+            "optionText": "fishing",
+            "matchType": "wordFamily",
+            "relationNote": "fishing 和原文的 Fishermen 同根：原文说当地渔民每天出海、在港边卖鱼，讲的是渔民的日常，不是让游客出海打鱼。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "quote": "Fishermen go out to sea daily and sell their fish in harbor-side markets.",
+              "anchor": "渔民出海卖鱼"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "给港口拍照。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文介绍港口 1774 年成形、渔民在港边卖鱼，没有建议游客拍照。",
+            "claim": "Take pictures of the harbor."
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Mevagissey",
+          "sourceRole": "stem",
+          "targetText": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+          "relationType": "locationCue",
+          "answerText": "Don’t leave the harbor without a traditional Cornish pie",
+          "bridgeZh": "只有祈使句在叮嘱游客，其余几句都是介绍",
+          "note": "题干 Mevagissey 原词出现在原文。"
+        },
+        {
+          "sourceText": "Try the Cornish pie.",
+          "sourceRole": "correctOption",
+          "targetText": "Don’t leave the harbor without a traditional Cornish pie.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+          "relationType": "paraphrase",
+          "note": "选项的“尝一尝”来自“离开前别落下”（Don’t leave … without）：不吃上馅饼就别走，等于叮嘱游客一定要尝，后面还补了一句很好吃（delicious），选 A。"
+        }
+      ]
+    }
+  }
+}

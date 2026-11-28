@@ -1,0 +1,1053 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Is this bus going to Baxley, Sir?\nM: No, I'm afraid not. See the yellow taxi on the corner. Turn left there to Mavis Street and take bus number four.\nW: All right, thank you.",
+      "translationZh": "女：先生，这辆公交车去巴克斯利吗？\n男：恐怕不去。看到拐角那辆黄色出租车了吗？在那儿左转到梅维斯街，坐四路公交车。\n女：好的，谢谢。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女士问路去巴克斯利，男士说这辆车不去，指点她到梅维斯街坐四路车。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "先生，这辆公交车去巴克斯利吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "恐怕不去。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "看到拐角那辆黄色出租车了吗？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "在那儿左转到梅维斯街，坐四路公交车。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "好的，谢谢。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: So, would you folks like some dessert?\nM: Just bring us the bill, please. We need to get back on the road and continue our journey.\nW: No problem.",
+      "translationZh": "女：那么，各位想来点甜点吗？\n男：请把账单拿来就行。我们得回到路上，继续我们的旅程。\n女：没问题。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "餐厅服务员问要不要甜点，男士只要账单，说还得赶路继续旅行。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "那么，各位想来点甜点吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "请把账单拿来就行。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我们得回到路上，继续我们的旅程。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "没问题。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Dad, I can't afford that computer, but I think I really need it for my research.\nM: Don't worry, Alice. Just pay as much as you can and I'll make up the rest.\nW: Thank you. Then I can place the order.",
+      "translationZh": "女：爸爸，我买不起那台电脑，可我觉得做研究真的需要它。\n男：别担心，艾丽斯。你尽量付，剩下的我来补。\n女：谢谢。那我就可以下单了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "艾丽斯买不起做研究要用的电脑，爸爸让她尽力付，剩下的由他补齐。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "爸爸，我买不起那台电脑，可我觉得做研究真的需要它。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "别担心，艾丽斯。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "你尽量付，剩下的我来补。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "那我就可以下单了。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Hi, I'm Julie. I'm from the Department of Psychology. What about you?\nM: I study Biology. I hope you can understand my English. I'm still learning.\nW: Well, you speak very clearly.",
+      "translationZh": "女：你好，我是朱莉，心理学系的。你呢？\n男：我学生物学。希望你能听懂我的英语，我还在学。\n女：嗯，你说得很清楚。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "心理学系的朱莉和学生物学的男士初次见面，男士担心自己的英语还不够好。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你好，我是朱莉。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我是心理学系的。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我学生物学。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "希望你能听懂我的英语。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "我还在学。"
+        },
+        {
+          "id": "listening-text-4:7",
+          "zh": "嗯，你说得很清楚。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Linda, I need you to help me with my problem.\nW: What did you do?\nM: Gee! You broke Mary's sports watch?\nW: Ah, I wish I didn't touch it.\nM: Well, don't worry, we'll have it fixed.",
+      "translationZh": "男：琳达，我需要你帮我解决个麻烦。\n女：你干了什么？\n男：哎呀！你弄坏了玛丽的运动手表？\n女：唉，我真希望我没碰过它。\n男：好了，别担心，我们会找人把它修好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "有人弄坏了玛丽的运动手表，前来求助，对话最后说别担心，会把表修好。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "琳达，我需要你帮我解决个麻烦。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "你干了什么？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "哎呀！"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "你弄坏了玛丽的运动手表？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "唉，我真希望我没碰过它。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "好了，别担心，我们会找人把它修好的。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Hello?\nM: Hi, Delia. This is Peter. Are you doing anything Tuesday evening?\nW: Not really.\nM: I've got two tickets for the National Theater. Would you like to come?\nW: Thanks, I’d love to. What’s on?\nM: Stoppard’s Leopoldstadt.\nW: Oh! Sonny told me it was very good.\nM: Yes. Everyone says so. Shall I meet you at your office at six o'clock? Then we can go and have a quick snack. The play starts at seven o'clock.\nW: Sounds great. See you Tuesday then.\nM: Goodbye.",
+      "translationZh": "女：喂？\n男：嗨，迪莉娅。我是彼得。你周二晚上有事吗？\n女：没什么事。\n男：我有两张国家剧院的票，你想一起去吗？\n女：谢谢，我很想去。演什么？\n男：斯托帕德的《利奥波德城》。\n女：哦！桑尼跟我说这部戏很好看。\n男：是啊，大家都这么说。我六点到你办公室接你好吗？然后我们可以去简单吃点东西。戏七点开演。\n女：听起来不错。那就周二见。\n男：再见。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "戏剧"
+      },
+      "summaryZh": "彼得有两张国家剧院的票，邀请迪莉娅周二晚上看戏，约好六点在她办公室见。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "喂？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "嗨，迪莉娅。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我是彼得。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "你周二晚上有事吗？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "没什么事。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我有两张国家剧院的票。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "你想一起去吗？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "谢谢，我很想去。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "演什么？"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "斯托帕德的《利奥波德城》。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "哦！"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "桑尼跟我说这部戏很好看。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "大家都这么说。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "我六点到你办公室接你好吗？"
+        },
+        {
+          "id": "listening-text-6:16",
+          "zh": "然后我们可以去简单吃点东西。"
+        },
+        {
+          "id": "listening-text-6:17",
+          "zh": "戏七点开演。"
+        },
+        {
+          "id": "listening-text-6:18",
+          "zh": "听起来不错。"
+        },
+        {
+          "id": "listening-text-6:19",
+          "zh": "那就周二见。"
+        },
+        {
+          "id": "listening-text-6:20",
+          "zh": "再见。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: Hi, Sam. How is your daughter doing at school?\nM: Well, since I bought a smartphone for Jillian last summer, it seems the phone has become an extension of her arm, and it has made it impossible for her to concentrate. That really upsets me.\nW: You are not alone in that. It is said that 95% (ninety-five percent) of teenagers either own or have access to a smartphone. Some schools have put in place policies banning or controlling phone use during school hours.\nM: I'm all in favor of these policies.\nW: Yeah, more and more schools have begun doing this. A friend of mine works at a school, and she told me that these policies had brought about positive changes.",
+      "translationZh": "女：嗨，萨姆。你女儿在学校表现怎么样？\n男：唉，自从去年夏天我给吉莉恩买了部智能手机，那手机好像成了她胳膊的一部分，她根本没法集中注意力。这真让我心烦。\n女：不只你一个人这样。据说 95% 的青少年要么有智能手机，要么能用上智能手机。有些学校已经出台规定，禁止或限制上课时间使用手机。\n男：我完全赞成这些规定。\n女：是啊，越来越多的学校开始这么做了。我有个朋友在学校工作，她告诉我这些规定已经带来了积极的变化。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "社会热点问题"
+      },
+      "summaryZh": "萨姆说女儿有了手机后无法专心，两人谈到学校限制上课时间用手机的规定。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "嗨，萨姆。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你女儿在学校表现怎么样？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "唉，自从去年夏天我给吉莉恩买了部智能手机，那手机好像成了她胳膊的一部分，她根本没法集中注意力。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "这真让我心烦。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "不只你一个人这样。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "据说 95% 的青少年要么有智能手机，要么能用上智能手机。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "有些学校已经出台规定，禁止或限制上课时间使用手机。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我完全赞成这些规定。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "是啊，越来越多的学校开始这么做了。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "我有个朋友在学校工作，她告诉我这些规定已经带来了积极的变化。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "W: Max, are you ready to go?\nM: Sure, honey. Why are you dressed like that? I thought we were going to play table tennis with Billy and Karen.\nW: Oh, change of plan. Billy suggested we go rock climbing instead.\nM: But I was really looking forward to playing table tennis.\nW: You play table tennis all the time. We'd like to go do some outdoor activities for a change, like rock climbing and horseback riding.\nM: Oh, Jesse. I thought the point of this vacation was to relax.\nW: Well, we can do something less demanding tomorrow. How about boating on the lake? What do you think?\nM: That'll be great. I like the idea of spending some time on the water. I'm sure Billy and Karen will like it too.",
+      "translationZh": "女：马克斯，你准备好出发了吗？\n男：当然，亲爱的。你怎么穿成这样？我以为我们要和比利、卡伦去打乒乓球。\n女：哦，计划变了。比利提议我们改去攀岩。\n男：可我真的很想打乒乓球。\n女：你一天到晚都在打乒乓球。我们想换换口味，去做些户外活动，比如攀岩和骑马。\n男：哦，杰西。我以为这次度假就是为了放松。\n女：好吧，明天我们可以做点不那么累的事。去湖上划船怎么样？你觉得呢？\n男：那太好了。我喜欢在水上待一会儿。我相信比利和卡伦也会喜欢的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "度假时比利提议去攀岩，马克斯本想打乒乓球，杰西提议明天去湖上划船。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "马克斯，你准备好出发了吗？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "当然，亲爱的。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "你怎么穿成这样？"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我以为我们要和比利、卡伦去打乒乓球。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "哦，计划变了。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "比利提议我们改去攀岩。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "可我真的很想打乒乓球。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你一天到晚都在打乒乓球。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "我们想换换口味，去做些户外活动，比如攀岩和骑马。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "哦，杰西。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我以为这次度假就是为了放松。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "好吧，明天我们可以做点不那么累的事。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "去湖上划船怎么样？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "你觉得呢？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "那太好了。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "我喜欢在水上待一会儿。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "我相信比利和卡伦也会喜欢的。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: Hi, Susanna. I had an interview with Anderson High Tech, and they offered me the position of sales manager. I want to let you know before I make my decision.\nW: I'm sorry to hear that, Frank, but I appreciate you telling me before you accept the offer.\nM: I really enjoyed my work here. I put in effort for five years to gain more experience, but there seems no hope of being promoted.\nW: What would help you decide to stay?\nM: I would consider staying if I could change my position. I would love working in this same department, but I would like to be doing something different, and they offered me 6% more than my present salary.\nW: When do you have to tell them your decision?\nM: They want me to respond by Friday.\nW: Let me see. I'll talk to the human resources director and let you know the result on Thursday. Can you wait until then?\nM: That will be too late. Wednesday will be better.\nW: Okay, no problem. I'm going to do everything I can to keep you on board.\nM: I appreciate what you are doing for me.",
+      "translationZh": "男：你好，苏珊娜。我去安德森高科技公司面试了，他们给了我销售经理的职位。我想在做决定之前先告诉你。\n女：听到这个我很遗憾，弗兰克，不过谢谢你在接受那份工作之前先告诉我。\n男：我真的很喜欢在这里的工作。我努力了五年积累经验，可升职好像没什么希望。\n女：怎样才能让你决定留下来？\n男：如果能换个职位，我会考虑留下。我很愿意留在这个部门，但我想做点不一样的工作，而且他们给我的工资比现在高 6%。\n女：你什么时候得给他们答复？\n男：他们要我周五前答复。\n女：我想想。我去和人力资源总监谈谈，周四告诉你结果。你能等到那时吗？\n男：那就太晚了。周三更好。\n女：好的，没问题。我会尽一切努力把你留下来。\n男：谢谢你为我做的这些。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "弗兰克获得别家公司的职位，因升职无望想跳槽，上司苏珊娜答应周三前给他答复。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "你好，苏珊娜。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我去安德森高科技公司面试了，他们给了我销售经理的职位。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我想在做决定之前先告诉你。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "听到这个我很遗憾，弗兰克，不过谢谢你在接受那份工作之前先告诉我。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我真的很喜欢在这里的工作。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我努力了五年积累经验，可升职好像没什么希望。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "怎样才能让你决定留下来？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "如果能换个职位，我会考虑留下。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我很愿意留在这个部门，但我想做点不一样的工作，而且他们给我的工资比现在高 6%。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "你什么时候得给他们答复？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "他们要我周五前答复。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我想想。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我去和人力资源总监谈谈，周四告诉你结果。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "你能等到那时吗？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "那就太晚了。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "周三更好。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "好的，没问题。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我会尽一切努力把你留下来。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "谢谢你为我做的这些。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Hello everyone. Welcome to Creative Day School this summer. We provide two full-time summer camp programs. Both will last the entire time the children are out of school. Our first summer camp is for our four-year-olds called Mini Camp. This Mini Camp will still have their normal everyday schedule with a lot of fun activities. At least once a week, our mini campers will go on a field trip. These field trips could consist of a day at the beach or exploring the natural museum. Our older summer camp is provided for ages five through twelve. There are scheduled summer fun activities and games. The children will participate in art, outdoor play, games and much more. Swimming at a nearby pool is often a weekly field trip for ages six and up. Other field trips could include bowling, a day at the movies, or a picnic in the park. Permission of parents and activity fees are required to participate in all field trips. Now let's watch a five-minute film about last year's programs.",
+      "translationZh": "大家好。欢迎今年夏天来到创意日间学校。我们提供两个全天的夏令营项目，都会持续到孩子们放假结束。第一个夏令营面向四岁的孩子，叫“迷你营”。迷你营仍按平常的日程安排，有很多有趣的活动。小营员们每周至少外出参观一次，外出活动可能是在海滩玩一天，或者去自然博物馆探索。大龄夏令营面向五到十二岁的孩子，安排了各种夏季趣味活动和游戏。孩子们会参加美术、户外游戏、各类游戏等等。去附近的游泳池游泳通常是六岁及以上孩子每周的外出活动。其他外出活动可能包括打保龄球、看一天电影或在公园野餐。参加所有外出活动都需要家长同意并缴纳活动费。现在我们来看一段五分钟的短片，介绍去年的项目。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "创意日间学校介绍两个暑期夏令营的对象、活动和外出要求，随后播放短片。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "欢迎今年夏天来到创意日间学校。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "我们提供两个全天的夏令营项目。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "都会持续到孩子们放假结束。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "第一个夏令营面向四岁的孩子，叫“迷你营”。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "迷你营仍按平常的日程安排，有很多有趣的活动。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "小营员们每周至少外出参观一次。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "外出活动可能是在海滩玩一天，或者去自然博物馆探索。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "大龄夏令营面向五到十二岁的孩子。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "安排了各种夏季趣味活动和游戏。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "孩子们会参加美术、户外游戏、各类游戏等等。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "去附近的游泳池游泳通常是六岁及以上孩子每周的外出活动。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "其他外出活动可能包括打保龄球、看一天电影或在公园野餐。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "参加所有外出活动都需要家长同意并缴纳活动费。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "现在我们来看一段五分钟的短片，介绍去年的项目。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士可能怎样去巴克斯利？",
+      "optionTranslationsZh": {
+        "A": "步行。",
+        "B": "坐出租车。",
+        "C": "坐公交车。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Turn left there to Mavis Street and take bus number four."
+      },
+      "reasonZh": "男士说这辆车不去，让她左转到梅维斯街坐四路车（take bus number four），她还是坐公交车去，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "黄色出租车（the yellow taxi）只是男士用来指路的地标，告诉她在那儿左转，并不是让她坐出租车。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士打算做什么？",
+      "optionTranslationsZh": {
+        "A": "吃点甜点。",
+        "B": "付账。",
+        "C": "取消旅行。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Just bring us the bill, please."
+      },
+      "reasonZh": "男士请服务员把账单拿来（bring us the bill），说还要赶路，就是要结账，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "甜点（dessert）是服务员问他们要不要的，男士没接这个话，直接要了账单。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "买电脑。",
+        "B": "做研究。",
+        "C": "攒钱。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Dad, I can't afford that computer, but I think I really need it for my research."
+      },
+      "reasonZh": "女儿说买不起那台电脑，爸爸说剩下的钱他来补（make up the rest），女儿说可以下单（place the order），都围绕买电脑，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "研究（research）是女儿需要电脑的原因，父女俩商量的是怎么凑钱把电脑买下来。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士的专业是什么？",
+      "optionTranslationsZh": {
+        "A": "心理学。",
+        "B": "生物学。",
+        "C": "英语。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I study Biology."
+      },
+      "reasonZh": "男士直接说了自己学生物学（Biology），选项沿用，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "心理学（Psychology）是朱莉自己所在的系，男士介绍的是他学生物学。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "男士说希望对方听得懂他的英语（understand my English），他还在学，说的是他讲英语的能力，不是专业。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "琳达有什么建议？",
+      "optionTranslationsZh": {
+        "A": "买一块运动手表。",
+        "B": "借玛丽的手表。",
+        "C": "找人修手表。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Well, don't worry, we'll have it fixed."
+      },
+      "reasonZh": "对话最后一句说别担心，会找人把表修好（have it fixed），“修手表”就是这个意思，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "运动手表（sports watch）是被弄坏的那块玛丽的表，对话里没人说要买新的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "玛丽的表已经被弄坏了（broke Mary's sports watch），接下来要做的是把它修好，不是去借。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "彼得为什么打电话？",
+      "optionTranslationsZh": {
+        "A": "安排一次拜访。",
+        "B": "发出邀请。",
+        "C": "确认一个约会。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Would you like to come?"
+      },
+      "reasonZh": "彼得先问迪莉娅周二晚上有没有空，再说有两张国家剧院的票（two tickets），问她要不要一起去，这就是邀请，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "见面的时间地点（at your office at six o'clock）是迪莉娅答应以后才商量的，打电话前并没有约好的事要确认。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "说话人周二晚上将在哪里见面？",
+      "optionTranslationsZh": {
+        "A": "在剧院。",
+        "B": "在小吃店。",
+        "C": "在迪莉娅的办公室。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Shall I meet you at your office at six o'clock?"
+      },
+      "reasonZh": "彼得提出六点到迪莉娅的办公室和她见面（meet you at your office），迪莉娅答应了，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "吃点东西（have a quick snack）是两人见面以后才去做的事，不是见面地点。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "剧院是七点看戏的地方（The play starts at seven o'clock），两人六点先在办公室碰头。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "萨姆说了他女儿什么？",
+      "optionTranslationsZh": {
+        "A": "她不喜欢做作业。",
+        "B": "她过度使用智能手机。",
+        "C": "她在学校感到孤独。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Well, since I bought a smartphone for Jillian last summer, it seems the phone has become an extension of her arm, and it has made it impossible for her to concentrate."
+      },
+      "reasonZh": "萨姆说手机成了女儿胳膊的一部分（an extension of her arm），整天不离手，害得她没法专心，就是“过度使用智能手机”，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "女士说的“不只你一个”（You are not alone）是在安慰萨姆，萨姆没说女儿在学校孤单。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "萨姆对学校的规定持什么态度？",
+      "optionTranslationsZh": {
+        "A": "支持。",
+        "B": "不确定。",
+        "C": "反对。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I'm all in favor of these policies."
+      },
+      "reasonZh": "萨姆说完全赞成这些规定（all in favor of），“支持”就是这个意思，选 A。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "说话人最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "游客和导游。",
+        "B": "丈夫和妻子。",
+        "C": "教练和学员。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Sure, honey."
+      },
+      "reasonZh": "马克斯称杰西为亲爱的（honey），两人一起度假（this vacation），还商量明天一起做什么，可推知是夫妻，选 B。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "谁提出了去攀岩的主意？",
+      "optionTranslationsZh": {
+        "A": "比利。",
+        "B": "卡伦。",
+        "C": "马克斯。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Billy suggested we go rock climbing instead."
+      },
+      "reasonZh": "杰西说是比利提议改去攀岩（Billy suggested），选项沿用他的名字，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "卡伦（Karen）只是一起出去玩的同伴，攀岩是比利提的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "马克斯（Max）本来想打乒乓球（looking forward to playing table tennis），并不想去攀岩。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "杰西明天的计划是什么？",
+      "optionTranslationsZh": {
+        "A": "去骑马。",
+        "B": "打乒乓球。",
+        "C": "在湖上划船。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "How about boating on the lake?"
+      },
+      "reasonZh": "杰西先说明天做点不那么累的事（less demanding tomorrow），再提议湖上泛舟（boating on the lake），也就是选项的在湖上划船，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "骑马（horseback riding）是杰西说想换着做的户外活动，和攀岩一起列出，不是明天那件轻松的事。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "打乒乓球（table tennis）是马克斯原来想做的，计划已改，杰西还说他天天都在打。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "弗兰克来找苏珊娜之前做了什么？",
+      "optionTranslationsZh": {
+        "A": "他去了一个科技展会。",
+        "B": "他签了一份合同。",
+        "C": "他参加了一场工作面试。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I had an interview with Anderson High Tech, and they offered me the position of sales manager."
+      },
+      "reasonZh": "弗兰克说他去安德森高科技公司面试了（had an interview），对方给了他销售经理的职位，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "高科技（High Tech）是那家公司名字的一部分，弗兰克去那里是面试，不是逛展会。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "弗兰克说要在做决定之前（before I make my decision）先告诉苏珊娜，还没接受那份工作，更没签合同。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "弗兰克希望得到什么？",
+      "optionTranslationsZh": {
+        "A": "升职。",
+        "B": "休假。",
+        "C": "奖金。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I put in effort for five years to gain more experience, but there seems no hope of being promoted."
+      },
+      "reasonZh": "弗兰克说努力了五年，升职却没希望（no hope of being promoted），可见他想要的是升职，选 A。"
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "弗兰克什么时候会知道公司给的结果？",
+      "optionTranslationsZh": {
+        "A": "周三。",
+        "B": "周四。",
+        "C": "周五。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Wednesday will be better."
+      },
+      "reasonZh": "苏珊娜原说周四告诉他结果，弗兰克嫌太晚，提出周三更好（Wednesday will be better），苏珊娜同意了，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "周四（on Thursday）是苏珊娜原定的时间，弗兰克说太晚了（too late），改到了周三。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "周五（by Friday）是安德森公司要弗兰克答复的期限，不是他知道结果的时间。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "苏珊娜是谁？",
+      "optionTranslationsZh": {
+        "A": "弗兰克的客户。",
+        "B": "弗兰克的律师。",
+        "C": "弗兰克的上司。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I'm going to do everything I can to keep you on board."
+      },
+      "reasonZh": "弗兰克在这里干了五年，要跳槽先来告诉苏珊娜；她去找人力资源总监谈，还说要尽力留住他（keep you on board），可见是他的上司，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "选项里只有弗兰克的名字是听到的；苏珊娜管的是他能否升职和留任，不是来找他办业务的客户。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "选项里只有弗兰克的名字是听到的；苏珊娜要去和人力资源总监谈他的职位，不是替他处理法律事务。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "迷你营面向哪些孩子？",
+      "optionTranslationsZh": {
+        "A": "四岁的孩子。",
+        "B": "五岁的孩子。",
+        "C": "六岁的孩子。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Our first summer camp is for our four-year-olds called Mini Camp."
+      },
+      "reasonZh": "说话人直接说第一个夏令营叫迷你营，面向四岁的孩子（four-year-olds），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "五岁（five）是大龄夏令营的起始年龄（ages five through twelve），不属于迷你营。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "六岁及以上（ages six and up）说的是大龄营里每周去游泳的孩子。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "大龄夏令营组织哪项活动？",
+      "optionTranslationsZh": {
+        "A": "参观博物馆。",
+        "B": "打保龄球。",
+        "C": "家庭聚会。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Other field trips could include bowling, a day at the movies, or a picnic in the park."
+      },
+      "reasonZh": "介绍大龄夏令营时，说其他外出活动包括打保龄球（bowling），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "自然博物馆（the natural museum）是迷你营的外出活动，不是大龄营的。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "参加外出活动有什么要求？",
+      "optionTranslationsZh": {
+        "A": "有露营经验。",
+        "B": "家长同意。",
+        "C": "会游泳。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Permission of parents and activity fees are required to participate in all field trips."
+      },
+      "reasonZh": "“家长同意”就是说话人说的需要家长许可（Permission of parents），参加所有外出活动都要，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "露营只沾了夏令营（summer camp）这个名称的边，说话人列出的条件里不含露营经验。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "游泳（Swimming）是六岁以上孩子常有的每周外出项目，不是参加外出活动的条件。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "收费。",
+        "B": "回答问题。",
+        "C": "放一段短片。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Now let's watch a five-minute film about last year's programs."
+      },
+      "reasonZh": "说话人说现在一起看一段五分钟的影片（a five-minute film），“短片”就是这部五分钟的影片，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "活动费（activity fees）是参加外出活动要交的费用，说话人只是讲明要求，接下来是放影片。"
+        }
+      ]
+    }
+  }
+}

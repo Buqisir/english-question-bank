@@ -1,0 +1,745 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-ii:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-ii:reading-c": {
+      "overview": "本文从一家室内植物网店意外爆单说起，借研究者克努斯的发现说明植物能减轻压力、改善情绪，还能提高学习和工作效率，最后转述店主的话，劝养植物的人别因植物枯死而自责。",
+      "fullTranslationZh": "索尼娅·德特里尼达开网店卖室内植物时，并没有对它抱太大期望。但结果恰恰相反：订单如潮水般涌来，光是2020年6月她就发出了1200份订单。过去一年里，德特里尼达卖出了7万多株植物。她的成功只是一个例子，说明人们居家时间增多，带动了室内植物行业的爆发式增长。\n\n“植物眼下很流行，”佛罗里达大学的研究员梅琳达·克努斯博士说。“生活在植物丰富环境中的人，生活满意度评分更高，”她说，“在我们的环境中增添更多自然元素，能改变我们的情绪和思维方式。”植物能从好几个方面改善我们的心理状态，但最主要的途径是降低我们体内的皮质醇水平——皮质醇是体内的压力激素。\n\n“身边有植物的学生，学习成绩比在没有植物的教室里上课的学生更好，”克努斯说，“这种效率的提升也同样体现在成年人的工作场所。我们的研究显示，在植物丰富的工作场所，人们的病假减少了30%。”\n\n如果你也是那些享受着被植物环绕所带来的身心健康益处的人，那么当一株（或者几株！）植物没能活下来时，别太自责。“医生要在实践中行医，律师要在实践中执业，你也应该允许自己经历养活一株植物所需要的练习。照料植物是对耐心和学习的锻炼。用心照顾它，但如果它死了，就再去买一株，”德特里尼达说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+          "sourceText": "Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone（激素）in our body.",
+          "displayText": "Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone（激素）in our body.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-ii:29"
+          ],
+          "translationZh": "植物能从好几个方面改善我们的心理状态，但最主要的途径是降低我们体内的皮质醇水平——皮质醇是体内的压力激素。",
+          "analysisZh": "but 连接两个分句。前一句主干是 Plants can improve our state of mind：植物能改善我们的心理状态，in a few ways 说明途径不止一种。后一句 the biggest is by decreasing ...，the biggest 后面省略了 way，指“最主要的途径”，表语是 by doing 短语：通过降低皮质醇水平。逗号后的 the stress hormone in our body 是 cortisol 的同位语，解释皮质醇是体内的压力激素。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "Plants can improve our state of mind"
+            },
+            {
+              "start": 55,
+              "end": 83,
+              "quote": "the biggest is by decreasing"
+            },
+            {
+              "start": 107,
+              "end": 125,
+              "quote": "the stress hormone"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2025-ii:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+          "sourceText": "Her success is just one example of increased time at home leading to an explosion in the houseplant industry.",
+          "displayText": "Her success is just one example of increased time at home leading to an explosion in the houseplant industry.",
+          "relatedQuestionIds": [],
+          "translationZh": "她的成功只是一个例子，说明人们居家时间增多，带动了室内植物行业的爆发式增长。",
+          "analysisZh": "主干是 Her success is just one example：她的成功只是一个例子。of 后面说明是什么的例子：increased time at home leading to an explosion ...，其中 increased time at home（居家时间增多）是 leading 的逻辑主语，leading to an explosion in the houseplant industry 说明它带来的结果：室内植物行业爆发。合起来是：她的成功只是“居家时间增多带火植物行业”的一个例证。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "Her success is just one example"
+            },
+            {
+              "start": 35,
+              "end": 57,
+              "quote": "increased time at home"
+            },
+            {
+              "start": 58,
+              "end": 68,
+              "quote": "leading to"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-ii:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-c:1"
+              ],
+              "start": 0,
+              "end": 128,
+              "quote": "索尼娅·德特里尼达开网店卖室内植物时，并没有对它抱太大期望。但结果恰恰相反：订单如潮水般涌来，光是2020年6月她就发出了1200份订单。过去一年里，德特里尼达卖出了7万多株植物。她的成功只是一个例子，说明人们居家时间增多，带动了室内植物行业的爆发式增长。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-c:2"
+              ],
+              "start": 130,
+              "end": 274,
+              "quote": "“植物眼下很流行，”佛罗里达大学的研究员梅琳达·克努斯博士说。“生活在植物丰富环境中的人，生活满意度评分更高，”她说，“在我们的环境中增添更多自然元素，能改变我们的情绪和思维方式。”植物能从好几个方面改善我们的心理状态，但最主要的途径是降低我们体内的皮质醇水平——皮质醇是体内的压力激素。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-c:3"
+              ],
+              "start": 276,
+              "end": 369,
+              "quote": "“身边有植物的学生，学习成绩比在没有植物的教室里上课的学生更好，”克努斯说，“这种效率的提升也同样体现在成年人的工作场所。我们的研究显示，在植物丰富的工作场所，人们的病假减少了30%。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-ii:reading-c:4"
+              ],
+              "start": 371,
+              "end": 512,
+              "quote": "如果你也是那些享受着被植物环绕所带来的身心健康益处的人，那么当一株（或者几株！）植物没能活下来时，别太自责。“医生要在实践中行医，律师要在实践中执业，你也应该允许自己经历养活一株植物所需要的练习。照料植物是对耐心和学习的锻炼。用心照顾它，但如果它死了，就再去买一株，”德特里尼达说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+                "start": 101,
+                "end": 193,
+                "quote": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p1",
+                "start": 30,
+                "end": 69,
+                "quote": "但结果恰恰相反：订单如潮水般涌来，光是2020年6月她就发出了1200份订单。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+                "start": 127,
+                "end": 191,
+                "quote": "This productivity also translates into the workplace for adults."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+                "start": 1,
+                "end": 111,
+                "quote": "Students who are around plants perform better academically than students who are in a classroom without plants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p3",
+                "start": 39,
+                "end": 61,
+                "quote": "这种效率的提升也同样体现在成年人的工作场所。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p3",
+                "start": 1,
+                "end": 31,
+                "quote": "身边有植物的学生，学习成绩比在没有植物的教室里上课的学生更好"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+                "start": 191,
+                "end": 313,
+                "quote": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+                "start": 314,
+                "end": 372,
+                "quote": "Tending to plants is an exercise in patience and learning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p4",
+                "start": 55,
+                "end": 98,
+                "quote": "医生要在实践中行医，律师要在实践中执业，你也应该允许自己经历养活一株植物所需要的练习。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p4",
+                "start": 98,
+                "end": 113,
+                "quote": "照料植物是对耐心和学习的锻炼。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-question:paper-gaokao-2025-ii:31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+                "start": 201,
+                "end": 278,
+                "quote": "“Adding more nature to our environment can change our mood and how we think.”"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+                "start": 279,
+                "end": 329,
+                "quote": "Plants can improve our state of mind in a few ways"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+                "start": 45,
+                "end": 129,
+                "quote": "enjoying the mental and physical health benefits of surrounding yourself with plants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p2",
+                "start": 59,
+                "end": 91,
+                "quote": "“在我们的环境中增添更多自然元素，能改变我们的情绪和思维方式。”"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p2",
+                "start": 91,
+                "end": 109,
+                "quote": "植物能从好几个方面改善我们的心理状态"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p4",
+                "start": 7,
+                "end": 25,
+                "quote": "享受着被植物环绕所带来的身心健康益处"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-ii:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+                "start": 279,
+                "end": 420,
+                "quote": "Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone（激素）in our body."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p2",
+                "start": 91,
+                "end": 144,
+                "quote": "植物能从好几个方面改善我们的心理状态，但最主要的途径是降低我们体内的皮质醇水平——皮质醇是体内的压力激素。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-gaokao-2025-ii:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2025-ii:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+                "start": 257,
+                "end": 366,
+                "quote": "Her success is just one example of increased time at home leading to an explosion in the houseplant industry."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2025-ii:reading-c-p1",
+                "start": 90,
+                "end": 128,
+                "quote": "她的成功只是一个例子，说明人们居家时间增多，带动了室内植物行业的爆发式增长。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用德特里尼达网店爆单的实例引出室内植物热，再引克努斯的话和研究说明植物对情绪、压力和效率的好处，最后借德特里尼达的话劝读者把养植物当作需要耐心练习的事。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+            "summary": "网店开张后出人意料地火爆，印证居家带动植物热",
+            "function": "以实例开篇，引出话题（第28题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+            "summary": "植物流行，能改善情绪、降低压力激素",
+            "function": "引专家观点，说明植物对心理的益处。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+            "summary": "有植物的学生成绩更好，职场病假减少30%",
+            "function": "用研究结果说明植物提高效率（第29题）。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+            "summary": "植物死了别自责，养植物需要反复练习",
+            "function": "给养植物的人提建议（第30题），收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-ii:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "抓住开店时的期望和随后的实际情况，判断网店起步时经营得怎样。",
+      "stemTranslationZh": "德特里尼达的生意刚开始时情况怎样？",
+      "locateBy": "stem",
+      "locateFindZh": "看 But 后的实际情况",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它面临激烈的竞争。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文只写她自己的订单和发货量，没提有别的店和她竞争。",
+            "claim": "It faced tough competition."
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它遭受了巨大损失。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+            "sourceHighlight": "She was flooded",
+            "optionText": "It suffered a great loss.",
+            "optionHighlight": "suffered a great loss",
+            "explanation": "选项顺着她起初不抱希望往下猜，以为生意亏了；可原文一转，说订单多得应接不暇（flooded）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+              "quote": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+              "anchor": "订单如潮"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它得到了大量资金支持。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "文中的大数字是订单和植物数量（1,200 orders、70,000 plants），不是资金；没提有人出钱支持她。",
+            "claim": "It got lots of financial support."
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它经营得出人意料地好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+              "quote": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+              "anchor": "结果正相反"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "started",
+          "sourceRole": "stem",
+          "targetText": "When Sonja Detrinidad opened her online shop selling houseplants, she didn't have high hopes for it.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+          "relationType": "locationCue",
+          "sourceZh": "起步",
+          "targetCue": "opened",
+          "targetCueZh": "开张",
+          "answerText": "But the opposite happened: She was flooded",
+          "bridgeZh": "But 后才是实际情况，和她起初的低期望相反",
+          "note": "题干 when it started 对应原文 When … opened her online shop，问的是网店刚开张时。"
+        },
+        {
+          "sourceText": "It went surprisingly well.",
+          "sourceRole": "correctOption",
+          "targetText": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项分两层落地：“出乎意料”是因为她本没抱什么希望（didn't have high hopes），结果却正相反；“很好”落在订单如潮（flooded），光2020年6月就发出1,200单，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项逐一放回克努斯的话里，找出她说过的植物作用。",
+      "stemTranslationZh": "克努斯关于植物的发现之一是什么？",
+      "locateBy": "options",
+      "locateFindZh": "各项回 [[block:paper-gaokao-2025-ii:reading-c:2]] 和 [[block:paper-gaokao-2025-ii:reading-c:3]] 克努斯的原话里核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们更受学生喜爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "students",
+            "optionText": "students",
+            "matchType": "exact",
+            "relationNote": "students 取自克努斯的比较，但她比的是有植物和没植物的两组学生谁成绩好，不是植物更受学生喜欢。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+              "quote": "Students who are around plants perform better academically than students who are in a classroom without plants",
+              "anchor": "两组学生比成绩"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们能净化环境。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "原文的 environment 说的是植物丰富的环境让人更满意、情绪更好，没说植物能净化环境。",
+            "claim": "They purify the environment."
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们会提高皮质醇水平。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone（激素）in our body.",
+            "sourceHighlight": "decreasing our level of cortisol",
+            "optionText": "They raise the cortisol level.",
+            "optionHighlight": "raise the cortisol level",
+            "explanation": "原文说植物降低（decreasing）体内压力激素皮质醇的水平，选项写成升高，方向反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+              "quote": "Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone（激素）in our body.",
+              "anchor": "降低皮质醇"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们能提高效率。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+              "quote": "This productivity also translates into the workplace for adults.",
+              "anchor": "效率延伸到职场"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+              "quote": "Students who are around plants perform better academically than students who are in a classroom without plants",
+              "anchor": "学生成绩更好"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They enhance productivity.",
+          "sourceRole": "correctOption",
+          "targetText": "This productivity also translates into the workplace for adults.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“提高效率”（enhance productivity）对应原文的 This productivity：身边有植物的学生成绩更好，这种效率也延伸到成人职场，病假少了30%，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:30": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "看清德特里尼达拿医生和律师类比养植物，是要说明什么道理。",
+      "stemTranslationZh": "德特里尼达提到医生和律师，是想说明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 should 后的劝告",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "社交技能的必要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "医生和律师整天和人打交道，选项由此联想到社交能力；她提这两个职业只为说明本行都要靠实践，没谈社交。",
+            "claim": "The necessity of social skills."
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "可持续性的含义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "sustain",
+            "optionText": "sustainability",
+            "matchType": "wordFamily",
+            "relationNote": "sustainability 和原文的 sustain 同根，但 sustain a plant 指把一株植物养活，她没有解释可持续性是什么意思。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "quote": "you should allow yourself the practice it takes to sustain a plant",
+              "anchor": "养活一株植物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "反复努力的重要性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "quote": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+              "anchor": "医生律师的类比"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "quote": "Tending to plants is an exercise in patience and learning.",
+              "anchor": "照料植物要耐心"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "专业意见的价值。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Doctors practice medicine and lawyers practice law",
+            "sourceEntity": "Doctors",
+            "optionText": "The value of professional opinions.",
+            "optionEntity": "professional opinions",
+            "explanation": "医生、律师是专业人士，选项借此说专业意见有价值；可她提他们只为说明本行都得练（practice），并没有劝人听专家的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "quote": "Doctors practice medicine and lawyers practice law",
+              "anchor": "医生律师的类比"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "doctors",
+          "sourceRole": "stem",
+          "targetText": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "allow yourself the practice it takes to sustain a plant",
+          "note": "题干 doctors 原词出现在原文。"
+        },
+        {
+          "sourceText": "The importance of repeated efforts.",
+          "sourceRole": "correctOption",
+          "targetText": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“反复努力”（repeated efforts）对应原文反复出现的 practice（练习）：医生、律师的本行都离不开实践，她借这个类比说养活植物也要花工夫去练，照料植物本就是练耐心（an exercise in patience），死了就再买一株接着练，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-ii:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找出各段共同讲的内容，选出能统领全文的标题。",
+      "stemTranslationZh": "下列哪项适合作本文的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-gaokao-2025-ii:reading-c:1]] 的植物热说起，看 [[block:paper-gaokao-2025-ii:reading-c:2]] [[block:paper-gaokao-2025-ii:reading-c:3]] 讲植物给人带来什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "是时候更换室内植物了",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Be invested in taking care of it, but if it dies, go get another one,",
+            "sourceHighlight": "go get another one",
+            "optionText": "Time to Replace Houseplants",
+            "optionHighlight": "Replace Houseplants",
+            "explanation": "“再买一株”只是[[block:paper-gaokao-2025-ii:reading-c:4]]劝人别因植物死了而自责的一句话，拿它作标题，丢掉了植物对心情和效率的好处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "quote": "Be invested in taking care of it, but if it dies, go get another one,",
+              "anchor": "死了再买一株"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "植物让你心情更好",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+              "quote": "“Adding more nature to our environment can change our mood and how we think.”",
+              "anchor": "植物改变情绪"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+              "quote": "Plants can improve our state of mind in a few ways",
+              "anchor": "改善心理状态"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "quote": "enjoying the mental and physical health benefits of surrounding yourself with plants",
+              "anchor": "身心益处"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "挑选室内植物的窍门",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "全文没讲怎样挑选植物；仅有的建议在[[block:paper-gaokao-2025-ii:reading-c:4]]，是植物死了别自责、再买一株接着养。",
+            "claim": "Tips on Choosing Houseplants"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "植物让你的家更亮丽",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "explanation": "文中的“家”只出现在居家时间增多带火了植物生意（time at home），没写植物把家装点得更漂亮；全文讲的是植物对人的作用。",
+            "claim": "Plants Brighten Your Home"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Plants Boost Your Mood",
+          "sourceRole": "correctOption",
+          "targetText": "“Adding more nature to our environment can change our mood and how we think.”",
+          "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "选项的“提振心情”（Boost Your Mood）概括的是全文的落点：植物改善心情、降低压力激素（change our mood），让学生成绩更好、员工病假更少，[[block:paper-gaokao-2025-ii:reading-c:4]] 又说养植物的人享受着身心益处，最后还劝人别因植物死了而难过。全文都在讲植物让人心情和状态变好，选 B。"
+        }
+      ]
+    }
+  }
+}
