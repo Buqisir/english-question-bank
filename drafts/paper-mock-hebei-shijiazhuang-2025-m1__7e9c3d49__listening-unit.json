@@ -1,0 +1,1001 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Are you going to the party at Sullivan Bistro? I’m not sure how to get there. M: Well, the bus stops right near it, but you’d have to change buses a few times. I’m getting a ride with Farida. She has a car. You may ask her, too.",
+      "translationZh": "你要去沙利文小馆参加聚会吗？我不太清楚怎么去那儿。嗯，公交车站就在它附近，但你得换乘好几次车。我搭法丽达的车去。她有车。你也可以问问她。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人谈论怎样前往沙利文小馆参加聚会，男士说起自己的出行安排。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你要去沙利文小馆参加聚会吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我不太清楚怎么去那儿。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "嗯，公交车站就在它附近，但你得换乘好几次车。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "我搭法丽达的车去。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "她有车。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "你也可以问问她。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: You’re planning to take your vacation next week, right? M: I was, but it didn’t work out. All the hotels are full then. W: It’s really hard to find a place at the beach at this time of year. And it costs more, too.",
+      "translationZh": "你打算下周休假，对吧？本来是这么打算的，但没成。那时候所有酒店都满了。每年这个时候在海边很难找到住处。而且价格也更贵。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士问起男士原定下周的休假计划，两人谈到这个时节海边出游的情况。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "你打算下周休假，对吧？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "本来是这么打算的，但没成。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "那时候所有酒店都满了。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "每年这个时候在海边很难找到住处。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "而且价格也更贵。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: When I think about my upcoming interviews, I feel my heart in my throat. W: That’s not like you. You’re always so cool, calm and collected. M: I know, but this is different. What if I say the wrong thing?",
+      "translationZh": "一想到即将到来的面试，我的心就提到了嗓子眼。这可不像你。你一向那么冷静、沉着、镇定。我知道，但这次不一样。要是我说错话怎么办？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士向女士谈起自己即将参加的几场面试，两人聊到他平时的性格。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "一想到即将到来的面试，我的心就提到了嗓子眼。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "这可不像你。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "你一向那么冷静、沉着、镇定。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我知道，但这次不一样。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "要是我说错话怎么办？"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "M: Hey, Sarah, I got a call from Mr. Henderson about his order. He says the delivery was damaged. W: Oh no! Can you get me the order details? I’ll check the shipping information and see what we can do.",
+      "translationZh": "嘿，萨拉，我接到亨德森先生的电话，说的是他的订单。他说送到的货损坏了。哦，不好！你能把订单详情给我吗？我来查一下发货信息，看看我们能做些什么。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "男士告诉同事萨拉，客户亨德森先生打来电话谈他的订单。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "嘿，萨拉，我接到亨德森先生的电话，说的是他的订单。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "他说送到的货损坏了。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "哦，不好！"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "你能把订单详情给我吗？"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我来查一下发货信息，看看我们能做些什么。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: I’m really struggling with this paper. There’s hardly any information on the topic, and I’m not sure how to get it done in time. W: Have you considered asking the professor to change your topic? Last year, my group had trouble working together, and the professor was pretty understanding about it.",
+      "translationZh": "这篇论文让我很头疼。这个题目几乎找不到什么资料，我也不知道怎么才能按时完成。你有没有考虑过请教授给你换个题目？去年我们小组合作不顺利，教授对此相当体谅。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "一名学生向同学诉说自己的难处，同学给他出主意。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "这篇论文让我很头疼。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "这个题目几乎找不到什么资料，我也不知道怎么才能按时完成。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "你有没有考虑过请教授给你换个题目？"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "去年我们小组合作不顺利，教授对此相当体谅。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Amina, how are the plans progressing for the September release of our new mobile phone model? W: Everything’s going well. Right now, my team is exploring advertising options and figuring out the best way to maximize media exposure. M: Great. And what’s the latest from the factory on when they’ll start production? Last time we spoke, you mentioned the factory was at full capacity with other projects, and I’m worried that might impact our timeline. W: I just spoke with them, and they’ll clear some capacity for us soon.",
+      "translationZh": "阿米娜，我们新款手机九月发布的筹备进展如何？一切顺利。眼下我的团队正在研究各种广告方案，想办法让媒体曝光度最大化。很好。那工厂方面什么时候开始生产，有最新消息吗？上次我们谈的时候，你说工厂正忙着其他项目，产能已满，我担心这会影响我们的进度。我刚和他们通过话，他们很快就会为我们腾出一些产能。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "男士向同事阿米娜询问新款手机九月发布的筹备进展。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "阿米娜，我们新款手机九月发布的筹备进展如何？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "一切顺利。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "眼下我的团队正在研究各种广告方案，想办法让媒体曝光度最大化。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "很好。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "那工厂方面什么时候开始生产，有最新消息吗？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "上次我们谈的时候，你说工厂正忙着其他项目，产能已满，我担心这会影响我们的进度。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我刚和他们通过话，他们很快就会为我们腾出一些产能。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "M: You’re in class early again, Betty. W: I like to get a head start on the reading, Professor Vincent. And I don’t like spending time in my room alone. M: Are you having trouble getting on with people? W: Yeah, everyone already seems to have their own circle of friends. As an exchange student, I always feel like an outsider. But it’s OK. M: Betty, the social aspect of college is very important. You should visit the International Student Resource Center. That’s exactly the kind of assistance they can offer. W: I didn’t know they could do that. Thanks, Professor Vincent.",
+      "translationZh": "贝蒂，你又这么早来上课了。我喜欢提前开始阅读，文森特教授。而且我不喜欢一个人待在房间里。你是跟别人相处有困难吗？是的，大家好像都已经有了自己的朋友圈。作为交换生，我总觉得自己是个局外人。不过没关系。贝蒂，大学生活中的社交很重要。你应该去国际学生资源中心看看。他们能提供的正是这种帮助。我不知道他们还能做这个。谢谢您，文森特教授。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "男士和早早来到教室的贝蒂聊起她最近的校园生活。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "贝蒂，你又这么早来上课了。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "我喜欢提前开始阅读，文森特教授。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "而且我不喜欢一个人待在房间里。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "你是跟别人相处有困难吗？"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "是的，大家好像都已经有了自己的朋友圈。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "作为交换生，我总觉得自己是个局外人。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "不过没关系。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "贝蒂，大学生活中的社交很重要。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "你应该去国际学生资源中心看看。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "他们能提供的正是这种帮助。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我不知道他们还能做这个。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "谢谢您，文森特教授。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "W: So, you’ve applied for the position of personal trainer. I can see you have some experience already. Could you tell me a little about your current job? M: Yes, I currently work at Hanson’s Gym. There are about 100 clients, and there are only two trainers. I have half of the clients as regulars, who I spend 30 – 60 minutes with each session. I work about 35 hours a week, and I love it. W: Why are you thinking of leaving Hanson’s Gym? M: Well, it’s quite a small gym. There’s not much chance of promotion. I’d like to join a bigger team, so I have the opportunity to build my career. W: I see. What would you say are your strengths? M: I think I’m really good at understanding people’s goals and aims, which means I can tailor a workout program specifically for them.",
+      "translationZh": "那么，你申请的是私人教练这个职位。我看得出你已经有一些经验了。能简单说说你现在的工作吗？好的，我目前在汉森健身房工作。那里大约有100名客户，却只有两名教练。其中一半客户是我的固定学员，每次课我陪他们练30到60分钟。我每周工作大约35个小时，我很喜欢这份工作。你为什么想离开汉森健身房呢？嗯，那家健身房很小。升职的机会不多。我想加入一个更大的团队，这样就有机会发展自己的事业。明白了。你认为自己的长处是什么？我觉得自己很善于了解别人的目标和追求，这意味着我能专门为他们量身定制锻炼计划。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "面试官与一名应聘私人教练职位的男士面谈，了解他的工作经历和打算。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "那么，你申请的是私人教练这个职位。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我看得出你已经有一些经验了。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "能简单说说你现在的工作吗？"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "好的，我目前在汉森健身房工作。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "那里大约有100名客户，却只有两名教练。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "其中一半客户是我的固定学员，每次课我陪他们练30到60分钟。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我每周工作大约35个小时，我很喜欢这份工作。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你为什么想离开汉森健身房呢？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "嗯，那家健身房很小。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "升职的机会不多。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我想加入一个更大的团队，这样就有机会发展自己的事业。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "明白了。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "你认为自己的长处是什么？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "我觉得自己很善于了解别人的目标和追求，这意味着我能专门为他们量身定制锻炼计划。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: I hear you have a new play called Innocent opening soon, Jessica. W: Next week! Unlike my last piece, which was about a man that unexpectedly becomes a millionaire, this one follows the adventures of a detective, who crosses two continents searching for a banker who’s disappeared after meeting a strange client. M: Sounds great! Are there other things you’d like to try? W: I’m going to take a short break, and have just signed up for a painting and sculpture course to fill the time. The thought of telling actors how to perform one of my own plays is quite frightening, so I’ve never been eager to try. And I’ve heard that a great deal of what you write gets changed if you work on a film, so I’ve turned down offers to do that. M: And any advice for future playwrights? W: Explore your own routine for writing, but be flexible within that. Reading similar kinds of plays is always a good idea too. And above all, don’t be afraid of receiving criticism. I wouldn’t be where I am without my husband – he looks at everything I’ve written and is totally honest about it.",
+      "translationZh": "杰西卡，听说你的新剧《无辜》马上就要首演了。下周就演！我上一部作品讲的是一个意外成为百万富翁的男人，这一部不同，讲的是一名侦探的冒险经历：他穿越两个大洲，寻找一位在见过一个奇怪客户之后失踪的银行家。听起来很棒！还有别的你想尝试的事情吗？我打算短暂休息一下，刚报名了一个绘画和雕塑课程来打发这段时间。一想到要告诉演员怎样演我自己写的剧，我就相当害怕，所以我从来不想尝试。我还听说，如果参与电影制作，你写的东西很大一部分都会被改掉，所以我拒绝了这类邀约。对未来的剧作家有什么建议吗？摸索出自己的写作习惯，但在此基础上要灵活。多读同类型的剧本也总是个好主意。最重要的是，不要害怕接受批评。没有我丈夫，就没有今天的我——我写的每样东西他都会看，而且总是实话实说。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "戏剧"
+      },
+      "summaryZh": "男士采访剧作家杰西卡，谈她即将上演的新剧和今后的打算。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "杰西卡，听说你的新剧《无辜》马上就要首演了。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "下周就演！"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我上一部作品讲的是一个意外成为百万富翁的男人，这一部不同，讲的是一名侦探的冒险经历：他穿越两个大洲，寻找一位在见过一个奇怪客户之后失踪的银行家。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "听起来很棒！"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "还有别的你想尝试的事情吗？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我打算短暂休息一下，刚报名了一个绘画和雕塑课程来打发这段时间。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "一想到要告诉演员怎样演我自己写的剧，我就相当害怕，所以我从来不想尝试。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "我还听说，如果参与电影制作，你写的东西很大一部分都会被改掉，所以我拒绝了这类邀约。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "对未来的剧作家有什么建议吗？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "摸索出自己的写作习惯，但在此基础上要灵活。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "多读同类型的剧本也总是个好主意。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "最重要的是，不要害怕接受批评。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "没有我丈夫，就没有今天的我——我写的每样东西他都会看，而且总是实话实说。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: Hello everyone! I’d like to talk about an inventor, James Dyson. His ideas come because he sees things that could work better, like the hand dryer. But how did he start? Well, Dyson was born in England in 1947. He studied art and design before he studied engineering. When he saw something that didn’t work well, he got upset and worked to improve it. For example, his first invention was a vehicle with a ball for a wheel. This made it easier to carry heavy things in the garden and over rough ground. It was an interesting new use for a ball. Also, even though he changed majors, he was still interested in art as well as designing. Take a look at this photo. What do you see? It looks like a waterfall made from glass and water, with the water running up instead of falling down. That’s surprising. This was a piece of art that Dyson made in 2003, called Wrong Garden. It tricks the eye. Dyson is still inventing new things. But he is also interested in supporting education for students. He has even donated money to the University of Cambridge to support students and research there with a focus on technology.",
+      "translationZh": "大家好！我想谈谈一位发明家，詹姆斯·戴森。他的点子来自他总能看到可以改进的东西，比如干手机。那他是怎么起步的呢？嗯，戴森1947年出生于英国。他先学了艺术和设计，后来才学工程。每当看到不好用的东西，他就会烦恼，并努力去改进它。比如，他的第一项发明是一辆用球当轮子的车。这让人们在花园里和崎岖的地面上搬运重物更容易。这是球的一种有趣的新用法。另外，虽然他换了专业，他仍然对艺术和设计感兴趣。看看这张照片。你们看到了什么？它看起来像一道用玻璃和水做成的瀑布，水往上流，而不是往下落。真令人惊讶。这是戴森2003年创作的一件艺术品，名叫《错误花园》。它能骗过人的眼睛。戴森至今仍在发明新东西。但他也热心支持学生的教育。他甚至向剑桥大学捐款，支持那里以科技为重点的学生培养和研究。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "创新意识"
+      },
+      "summaryZh": "讲者向听众介绍发明家詹姆斯·戴森的求学、发明和艺术创作经历。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家好！"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我想谈谈一位发明家，詹姆斯·戴森。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "他的点子来自他总能看到可以改进的东西，比如干手机。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "那他是怎么起步的呢？"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "嗯，戴森1947年出生于英国。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "他先学了艺术和设计，后来才学工程。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "每当看到不好用的东西，他就会烦恼，并努力去改进它。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "比如，他的第一项发明是一辆用球当轮子的车。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "这让人们在花园里和崎岖的地面上搬运重物更容易。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "这是球的一种有趣的新用法。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "另外，虽然他换了专业，他仍然对艺术和设计感兴趣。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "看看这张照片。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "你们看到了什么？"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "它看起来像一道用玻璃和水做成的瀑布，水往上流，而不是往下落。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "真令人惊讶。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "这是戴森2003年创作的一件艺术品，名叫《错误花园》。"
+        },
+        {
+          "id": "listening-text-10:17",
+          "zh": "它能骗过人的眼睛。"
+        },
+        {
+          "id": "listening-text-10:18",
+          "zh": "戴森至今仍在发明新东西。"
+        },
+        {
+          "id": "listening-text-10:19",
+          "zh": "但他也热心支持学生的教育。"
+        },
+        {
+          "id": "listening-text-10:20",
+          "zh": "他甚至向剑桥大学捐款，支持那里以科技为重点的学生培养和研究。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "男士建议女士做什么？",
+      "optionTranslationsZh": {
+        "A": "坐公交车。",
+        "B": "借一辆车。",
+        "C": "请人顺路捎带。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "You may ask her, too."
+      },
+      "reasonZh": "男士说自己搭法丽达的车去（getting a ride with Farida），又让女士也去问问她（ask her, too），就是请法丽达顺路捎她，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士提到公交站就在附近，紧接着说得换乘好几次（change buses a few times），并没有建议她坐公交。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "车是法丽达的（She has a car），男士让女士问的是能不能一起搭车，不是借车自己开。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士为什么放弃了他的计划？",
+      "optionTranslationsZh": {
+        "A": "他没订到酒店。",
+        "B": "他发现海滩很拥挤。",
+        "C": "他负担不起这次旅行。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "All the hotels are full then."
+      },
+      "reasonZh": "男士说计划没成（it didn’t work out），因为那时酒店全满了（All the hotels are full），也就是订不到酒店，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "海边（at the beach）是女士说这个时节在海边很难找到住处，讲的还是住宿难订，不是海滩人多。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士只是补了一句价格也更贵（it costs more, too），男士放弃的原因是酒店满了，不是钱不够。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士感觉怎么样？",
+      "optionTranslationsZh": {
+        "A": "兴奋。",
+        "B": "紧张。",
+        "C": "失望。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "When I think about my upcoming interviews, I feel my heart in my throat."
+      },
+      "reasonZh": "男士说一想到面试心就提到嗓子眼（heart in my throat），又担心说错话（say the wrong thing），可见他很紧张，选 B。"
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "亨德森先生为什么打电话？",
+      "optionTranslationsZh": {
+        "A": "为了下订单。",
+        "B": "为了询问信息。",
+        "C": "为了投诉。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "He says the delivery was damaged."
+      },
+      "reasonZh": "亨德森先生来电说送到的货坏了（the delivery was damaged），打电话是为这件事投诉，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "订单（his order）是他已经下过的，他来电是因为这份订单的货送到时坏了。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "查发货信息（check the shipping information）是萨拉要去做的事，用来处理问题，不是亨德森先生来问信息。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一位教授。",
+        "B": "一项作业。",
+        "C": "一个学习小组。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m really struggling with this paper."
+      },
+      "reasonZh": "男士为这篇论文（this paper）发愁，资料少、怕不能按时完成（get it done in time），女士的建议也是换题目，都围绕这项作业，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "教授（the professor）是女士建议他去找来换题目的人，谈话说的是论文怎么写下去。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "小组（my group）是女士举的去年的例子，说小组合作不顺时教授很体谅，只是用来劝他去找教授。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士的团队在做什么？",
+      "optionTranslationsZh": {
+        "A": "制定推广方案。",
+        "B": "收集媒体的反馈。",
+        "C": "测试一款新手机的质量。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Right now, my team is exploring advertising options and figuring out the best way to maximize media exposure."
+      },
+      "reasonZh": "女士的团队在研究广告方案（advertising options），想办法扩大媒体曝光（maximize media exposure），合起来就是在制定推广方案，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "媒体曝光（media exposure）是团队想为新品争取的宣传效果，不是向媒体收集反馈。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "新手机（new mobile phone model）是九月要发布的产品，团队眼下做的是宣传，不是测试质量。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士担心什么？",
+      "optionTranslationsZh": {
+        "A": "生产时间。",
+        "B": "广告活动。",
+        "C": "营销业绩。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Last time we spoke, you mentioned the factory was at full capacity with other projects, and I’m worried that might impact our timeline."
+      },
+      "reasonZh": "男士先问工厂何时开始生产（when they’ll start production），又说工厂产能被其他项目占满，担心影响进度（impact our timeline），他担心的是生产时间，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "广告方案（advertising options）是女士团队正在做的事，男士听后说了声很好（Great），接着担心的是工厂。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "贝蒂有什么问题？",
+      "optionTranslationsZh": {
+        "A": "她觉得阅读很难。",
+        "B": "她找不到室友。",
+        "C": "她无法融入同学当中。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "As an exchange student, I always feel like an outsider."
+      },
+      "reasonZh": "贝蒂说大家好像都有了自己的朋友圈（their own circle of friends），她作为交换生总觉得自己是局外人（an outsider），也就是融不进同学当中，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "贝蒂早到是想提前开始阅读（get a head start on the reading），说明她学习主动，不是觉得阅读难。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人之间是什么关系？",
+      "optionTranslationsZh": {
+        "A": "父母和孩子。",
+        "B": "老师和学生。",
+        "C": "同学。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I like to get a head start on the reading, Professor Vincent."
+      },
+      "reasonZh": "贝蒂称男士为文森特教授（Professor Vincent），男士又说她又早早来上课（in class early），可见两人是师生，选 B。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士有多少名固定客户？",
+      "optionTranslationsZh": {
+        "A": "大约100名。",
+        "B": "大约50名。",
+        "C": "大约35名。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I have half of the clients as regulars, who I spend 30 – 60 minutes with each session."
+      },
+      "reasonZh": "前一句说健身房约有100名客户（about 100 clients），男士带其中一半作固定学员（half of the clients），100 ÷ 2 = 50，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "100 是整个健身房的客户总数（about 100 clients），他的固定学员只占其中一半。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "35 是男士每周的工作时数（about 35 hours a week），不是客户人数。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士为什么想离开这家健身房？",
+      "optionTranslationsZh": {
+        "A": "为了获得更多客户。",
+        "B": "为了减少工作时间。",
+        "C": "为了发展事业。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’d like to join a bigger team, so I have the opportunity to build my career."
+      },
+      "reasonZh": "男士嫌这家健身房小、升职机会少（not much chance of promotion），想去更大的团队发展事业（build my career），选项“发展事业”就是这个意思，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "客户（clients）是男士介绍现在工作时说的，健身房约100名客户，他说离开的原因时没提客户多少。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "男士说每周工作约35小时（35 hours a week），紧接着说很喜欢（I love it），并不是嫌工作时间长。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士的长处是什么？",
+      "optionTranslationsZh": {
+        "A": "制定个性化训练计划。",
+        "B": "维护客户关系。",
+        "C": "会做各种类型的锻炼。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I think I’m really good at understanding people’s goals and aims, which means I can tailor a workout program specifically for them."
+      },
+      "reasonZh": "“个性化训练计划”就是男士说的专门为客户量身定制锻炼计划（tailor a workout program specifically for them），选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "锻炼计划（workout program）是为每位客户定制的一套方案，他说的长处在定制，不是自己会做多种锻炼。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "杰西卡新剧的主角是谁？",
+      "optionTranslationsZh": {
+        "A": "一个百万富翁。",
+        "B": "一位银行家。",
+        "C": "一名侦探。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Unlike my last piece, which was about a man that unexpectedly becomes a millionaire, this one follows the adventures of a detective, who crosses two continents searching for a banker who’s disappeared after meeting a strange client."
+      },
+      "reasonZh": "杰西卡说新剧讲述的是一名侦探的冒险经历（follows the adventures of a detective），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "百万富翁（a millionaire）是她上一部作品（my last piece）的主人公，她说新剧与那部不同。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "银行家（a banker）是侦探要去寻找的失踪者，剧情跟着的是侦探。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "杰西卡接下来打算做什么？",
+      "optionTranslationsZh": {
+        "A": "参加艺术课程。",
+        "B": "再写一部剧。",
+        "C": "去旅行。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’m going to take a short break, and have just signed up for a painting and sculpture course to fill the time."
+      },
+      "reasonZh": "“参加艺术课程”就是杰西卡说的刚报名的绘画和雕塑课程（a painting and sculpture course），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "写剧是她的本行，但她说接下来要先短暂休息（take a short break），用上课来打发这段时间。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "她说的是休息一阵（take a short break），休息期间去上课，不是外出旅行。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "杰西卡为什么拒绝把她的剧改编成电影？",
+      "optionTranslationsZh": {
+        "A": "很难挑选好演员。",
+        "B": "她不擅长改编剧本。",
+        "C": "电影可能不忠于原剧。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "And I’ve heard that a great deal of what you write gets changed if you work on a film, so I’ve turned down offers to do that."
+      },
+      "reasonZh": "杰西卡听说拍电影时写的东西大多会被改掉（a great deal of what you write gets changed），所以拒绝了邀约，即电影可能不忠于原剧，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "演员（actors）出现在前一句，她怕的是亲自指导演员表演（telling actors how to perform），这是说她不想当导演，与挑演员无关。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "她拒绝是因为作品会被大幅改动（gets changed），不是说自己不会改编剧本。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "杰西卡对批评持什么态度？",
+      "optionTranslationsZh": {
+        "A": "漠不关心。",
+        "B": "乐于接受。",
+        "C": "有抵触。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "And above all, don’t be afraid of receiving criticism."
+      },
+      "reasonZh": "杰西卡劝新人别怕接受批评（don’t be afraid of receiving criticism），又说丈夫看她写的每样东西都直言不讳（totally honest），没有他就没有今天的她，可见她乐于接受批评，选 B。"
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "戴森最终学的是什么专业？",
+      "optionTranslationsZh": {
+        "A": "艺术。",
+        "B": "设计。",
+        "C": "工程。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "He studied art and design before he studied engineering."
+      },
+      "reasonZh": "戴森先学艺术和设计，之后才学工程（before he studied engineering），后文也说他换了专业（changed majors），最终的专业是工程，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "艺术（art）是他先学的专业，后来他转学工程，只是仍对艺术感兴趣（still interested in art）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "设计（design）和艺术一样排在工程之前（before he studied engineering），是他换专业前学的。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "戴森的第一项发明有什么用途？",
+      "optionTranslationsZh": {
+        "A": "烘干湿手。",
+        "B": "运送重物。",
+        "C": "改善崎岖的地面。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "This made it easier to carry heavy things in the garden and over rough ground."
+      },
+      "reasonZh": "“运送重物”就是讲者说的这项发明让人在花园里和崎岖地面上搬重东西更容易（carry heavy things），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "干手机（the hand dryer）是开头举例说明戴森爱改进东西，不是他的第一项发明。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "崎岖的地面（rough ground）是搬运重物的地方，发明让人在上面搬东西更省力，并没有改善地面。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "《错误花园》的主要特点是什么？",
+      "optionTranslationsZh": {
+        "A": "它由照片组成。",
+        "B": "它制造了一种视觉错觉。",
+        "C": "它位于一处瀑布附近。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It tricks the eye."
+      },
+      "reasonZh": "“制造视觉错觉”就是讲者说的这件作品能骗过眼睛（tricks the eye），水看上去往上流而不是往下落，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "照片（this photo）是讲者拿给听众看的作品照片，作品本身是用玻璃和水做成的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "瀑布（a waterfall）是说作品看起来像一道瀑布（looks like a waterfall），不是说它建在瀑布旁边。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "讲话结尾，讲者着重讲了什么？",
+      "optionTranslationsZh": {
+        "A": "戴森对教育的贡献。",
+        "B": "戴森在一所大学的职责。",
+        "C": "戴森最新的发明。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But he is also interested in supporting education for students."
+      },
+      "reasonZh": "结尾讲者说戴森热心支持学生教育（supporting education for students），还向剑桥大学捐款（donated money），两处都在讲他对教育的贡献，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "剑桥大学（the University of Cambridge）是戴森捐款支持的地方，讲者说的是他出钱资助学生和研究，不是他在那里任职。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "讲者只用一句带过他仍在发明新东西（still inventing new things），随即用 But 转到支持教育。"
+        }
+      ]
+    }
+  }
+}

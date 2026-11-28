@@ -1,0 +1,809 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a": {
+      "overview": "本文是一份作家纪念馆参观指南，介绍莎士比亚出生地、奥尔科特的果园之家、安徒生博物馆和聂鲁达故居四处，逐一说明参观看点、所在地点和推荐读物。",
+      "fullTranslationZh": "以下是几座纪念著名作家的博物馆，你可以去参观。\n莎士比亚出生地信托基金会\n威廉·莎士比亚或许是英国文学史上最伟大的剧作家，莎士比亚出生地信托基金会是纪念他的地方。你可以参观他童年时的家，探索介绍他生平和作品的展览，还可以在皇家莎士比亚剧院观看现场演出。你还可以参观安妮·海瑟薇的故居，莎士比亚当年就是在那里追求她的。\n地点：英国埃文河畔斯特拉特福\n推荐阅读：《麦克白》\n路易莎·梅·奥尔科特的果园之家\n在路易莎·梅·奥尔科特的故居果园之家，探寻这位《小妇人》作者留下的文学遗产。走进奥尔科特写下这部名作的房间，了解她笔下那些受人喜爱的人物背后的灵感来源。这座房子没有经过大的改动，所以房间看起来和当年差不多。\n地点：美国康科德\n推荐阅读：《小妇人》\n汉斯·克里斯蒂安·安徒生博物馆\n在汉斯·克里斯蒂安·安徒生博物馆，欣赏吸引了一代又一代人的童话。探索这位丹麦作家的生平和想象世界，他写下了《海的女儿》等短篇故事。从你踏进这座建筑的那一刻起，展览就带你一步步深入安徒生的童话。\n地点：丹麦欧登塞\n推荐阅读：《海的女儿》\n巴勃罗·聂鲁达故居\n沉浸在智利诗人巴勃罗·聂鲁达的诗歌之中。巴勃罗·聂鲁达故居展出他收藏的艺术品、诗作和个人物品，带你在诗意中走过他的一生和创作历程。我真希望自己的西班牙语足够好，能读懂聂鲁达用母语写的作品。\n地点：智利圣地亚哥\n推荐阅读：《二十首情诗和一首绝望的歌》",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+          "sourceText": "You can visit his childhood home, explore exhibits about his life and works, and experience live performances in the Royal Shakespeare Theatre.",
+          "displayText": "You can visit his childhood home, explore exhibits about his life and works, and experience live performances in the Royal Shakespeare Theatre.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:21"
+          ],
+          "translationZh": "你可以参观他童年时的家，探索介绍他生平和作品的展览，还可以在皇家莎士比亚剧院观看现场演出。",
+          "analysisZh": "主干是 You can 后面接三个并列的动词短语：visit his childhood home、explore exhibits、experience live performances，前两个用逗号隔开，最后一个前加 and。about his life and works 修饰 exhibits，说明展览的内容；in the Royal Shakespeare Theatre 说明演出的地点。三个动词就是游客在这里能做的三件事。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 13,
+              "quote": "You can visit"
+            },
+            {
+              "start": 34,
+              "end": 50,
+              "quote": "explore exhibits"
+            },
+            {
+              "start": 77,
+              "end": 109,
+              "quote": "and experience live performances"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+          "sourceText": "I wish I knew Spanish well enough to read Neruda’s works in his native language.",
+          "displayText": "I wish I knew Spanish well enough to read Neruda’s works in his native language.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:22"
+          ],
+          "translationZh": "我真希望自己的西班牙语足够好，能读懂聂鲁达用母语写的作品。",
+          "analysisZh": "主干是 I wish 加宾语从句。wish 后面的 I knew Spanish 用过去式，表示和现在事实相反的愿望：作者其实还不太懂西班牙语。well enough to read… 意思是“好到足以读……”，to read 说明要好到什么程度；in his native language 修饰 read Neruda’s works，指读他用母语写的原作。连起来看，聂鲁达的母语就是西班牙语。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 13,
+              "quote": "I wish I knew"
+            },
+            {
+              "start": 22,
+              "end": 41,
+              "quote": "well enough to read"
+            },
+            {
+              "start": 57,
+              "end": 79,
+              "quote": "in his native language"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:1"
+              ],
+              "start": 0,
+              "end": 23,
+              "quote": "以下是几座纪念著名作家的博物馆，你可以去参观。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:2"
+              ],
+              "start": 24,
+              "end": 36,
+              "quote": "莎士比亚出生地信托基金会"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3"
+              ],
+              "start": 37,
+              "end": 158,
+              "quote": "威廉·莎士比亚或许是英国文学史上最伟大的剧作家，莎士比亚出生地信托基金会是纪念他的地方。你可以参观他童年时的家，探索介绍他生平和作品的展览，还可以在皇家莎士比亚剧院观看现场演出。你还可以参观安妮·海瑟薇的故居，莎士比亚当年就是在那里追求她的。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:4"
+              ],
+              "start": 159,
+              "end": 173,
+              "quote": "地点：英国埃文河畔斯特拉特福"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:5"
+              ],
+              "start": 174,
+              "end": 184,
+              "quote": "推荐阅读：《麦克白》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:6"
+              ],
+              "start": 185,
+              "end": 200,
+              "quote": "路易莎·梅·奥尔科特的果园之家"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:7"
+              ],
+              "start": 201,
+              "end": 304,
+              "quote": "在路易莎·梅·奥尔科特的故居果园之家，探寻这位《小妇人》作者留下的文学遗产。走进奥尔科特写下这部名作的房间，了解她笔下那些受人喜爱的人物背后的灵感来源。这座房子没有经过大的改动，所以房间看起来和当年差不多。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:8"
+              ],
+              "start": 305,
+              "end": 313,
+              "quote": "地点：美国康科德"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:9"
+              ],
+              "start": 314,
+              "end": 324,
+              "quote": "推荐阅读：《小妇人》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:10"
+              ],
+              "start": 325,
+              "end": 340,
+              "quote": "汉斯·克里斯蒂安·安徒生博物馆"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:11"
+              ],
+              "start": 341,
+              "end": 437,
+              "quote": "在汉斯·克里斯蒂安·安徒生博物馆，欣赏吸引了一代又一代人的童话。探索这位丹麦作家的生平和想象世界，他写下了《海的女儿》等短篇故事。从你踏进这座建筑的那一刻起，展览就带你一步步深入安徒生的童话。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:12"
+              ],
+              "start": 438,
+              "end": 446,
+              "quote": "地点：丹麦欧登塞"
+            },
+            {
+              "paragraphId": "zh-reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:13"
+              ],
+              "start": 447,
+              "end": 458,
+              "quote": "推荐阅读：《海的女儿》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:14"
+              ],
+              "start": 459,
+              "end": 468,
+              "quote": "巴勃罗·聂鲁达故居"
+            },
+            {
+              "paragraphId": "zh-reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15"
+              ],
+              "start": 469,
+              "end": 563,
+              "quote": "沉浸在智利诗人巴勃罗·聂鲁达的诗歌之中。巴勃罗·聂鲁达故居展出他收藏的艺术品、诗作和个人物品，带你在诗意中走过他的一生和创作历程。我真希望自己的西班牙语足够好，能读懂聂鲁达用母语写的作品。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:16"
+              ],
+              "start": 564,
+              "end": 573,
+              "quote": "地点：智利圣地亚哥"
+            },
+            {
+              "paragraphId": "zh-reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:17"
+              ],
+              "start": 574,
+              "end": 593,
+              "quote": "推荐阅读：《二十首情诗和一首绝望的歌》"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+                "start": 208,
+                "end": 269,
+                "quote": "experience live performances in the Royal Shakespeare Theatre"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 73,
+                "end": 88,
+                "quote": "在皇家莎士比亚剧院观看现场演出"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+                "start": 220,
+                "end": 300,
+                "quote": "I wish I knew Spanish well enough to read Neruda’s works in his native language."
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:17",
+                "start": 19,
+                "end": 59,
+                "quote": "Twenty Love Poems: And a Song of Despair"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p15",
+                "start": 65,
+                "end": 94,
+                "quote": "我真希望自己的西班牙语足够好，能读懂聂鲁达用母语写的作品。"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p17",
+                "start": 5,
+                "end": 19,
+                "quote": "《二十首情诗和一首绝望的歌》"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:1",
+                "start": 14,
+                "end": 48,
+                "quote": "museums in honor of famous writers"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:7",
+                "start": 0,
+                "end": 53,
+                "quote": "Discover the literary legacy（遗产） of Louisa May Alcott"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p1",
+                "start": 5,
+                "end": 15,
+                "quote": "纪念著名作家的博物馆"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 19,
+                "end": 37,
+                "quote": "探寻这位《小妇人》作者留下的文学遗产"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:21"
+            ],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+                "start": 127,
+                "end": 270,
+                "quote": "You can visit his childhood home, explore exhibits about his life and works, and experience live performances in the Royal Shakespeare Theatre."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 44,
+                "end": 89,
+                "quote": "你可以参观他童年时的家，探索介绍他生平和作品的展览，还可以在皇家莎士比亚剧院观看现场演出。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:22"
+            ],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+                "start": 220,
+                "end": 300,
+                "quote": "I wish I knew Spanish well enough to read Neruda’s works in his native language."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p15",
+                "start": 65,
+                "end": 94,
+                "quote": "我真希望自己的西班牙语足够好，能读懂聂鲁达用母语写的作品。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一句交代要介绍纪念著名作家的博物馆，随后依次介绍莎士比亚出生地、奥尔科特的果园之家、安徒生博物馆和聂鲁达故居，每处都写看点、地点和推荐读物。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:1",
+            "summary": "交代全文要介绍几座纪念著名作家、可供参观的博物馆。",
+            "function": "开篇点题，引出下面四处介绍。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:2",
+            "summary": "莎士比亚出生地信托基金会。",
+            "function": "第一处景点的名称。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+            "summary": "介绍这里的看点：莎士比亚童年故居、生平作品展、皇家莎士比亚剧院的现场演出和安妮·海瑟薇故居。",
+            "function": "说明游客在这里能做什么。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:4",
+            "summary": "地点在英国埃文河畔斯特拉特福。",
+            "function": "补充第一处景点的位置。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:5",
+            "summary": "推荐阅读《麦克白》。",
+            "function": "给出与莎士比亚相关的读物。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:6",
+            "summary": "奥尔科特的果园之家。",
+            "function": "第二处景点的名称。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:7",
+            "summary": "奥尔科特在这里写下《小妇人》，房子没有大的改动，房间基本保持原样。",
+            "function": "说明这处故居的看点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:8",
+            "summary": "地点在美国康科德。",
+            "function": "补充第二处景点的位置。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:9",
+            "summary": "推荐阅读《小妇人》。",
+            "function": "给出与奥尔科特相关的读物。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:10",
+            "summary": "安徒生博物馆。",
+            "function": "第三处景点的名称。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:11",
+            "summary": "博物馆展示这位丹麦作家的生平和想象，展览带人一步步走进他的童话。",
+            "function": "说明这座博物馆的看点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:12",
+            "summary": "地点在丹麦欧登塞。",
+            "function": "补充第三处景点的位置。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:13",
+            "summary": "推荐阅读《海的女儿》。",
+            "function": "给出与安徒生相关的读物。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:14",
+            "summary": "聂鲁达故居。",
+            "function": "第四处景点的名称。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+            "summary": "故居展出聂鲁达的艺术收藏、诗作和个人物品；作者希望自己懂西班牙语，能读他的原作。",
+            "function": "说明这处故居的看点，并透露聂鲁达写作所用的语言。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:16",
+            "summary": "地点在智利圣地亚哥。",
+            "function": "补充第四处景点的位置。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:17",
+            "summary": "推荐阅读《二十首情诗和一首绝望的歌》。",
+            "function": "给出与聂鲁达相关的读物。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按题干里的景点名找到对应介绍，看游客在那里能做哪些事。",
+      "stemTranslationZh": "游客在莎士比亚出生地信托基金会可以做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看 You can 列了哪几件事",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "观看现场演出。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+              "quote": "experience live performances in the Royal Shakespeare Theatre",
+              "anchor": "在皇家莎士比亚剧院看现场演出"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "学习写剧本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "playwright",
+            "optionText": "write plays",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 playwright（剧作家）编出“学写剧本”；原文用这个词只是介绍莎士比亚的身份，游客能做的是参观故居、看展览和看演出。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+              "quote": "perhaps the greatest playwright in English literature",
+              "anchor": "莎士比亚是剧作家"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "见到安妮·海瑟薇。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "You can also visit Anne Hathaway’s house, where Shakespeare courted her.",
+            "sourceEntity": "Anne Hathaway’s house",
+            "optionText": "Meet Anne Hathaway.",
+            "optionEntity": "Anne Hathaway",
+            "explanation": "原文能参观的是安妮·海瑟薇的故居（Anne Hathaway’s house），那是莎士比亚当年追求她的地方，见不到她本人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+              "quote": "You can also visit Anne Hathaway’s house, where Shakespeare courted her.",
+              "anchor": "参观安妮·海瑟薇故居"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "阅读《麦克白》的手稿。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Macbeth",
+            "optionText": "Macbeth",
+            "matchType": "exact",
+            "relationNote": "Macbeth 出自[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:5]]的推荐阅读（Reading suggestion），只是建议读者去读这部剧；原文没提馆里能看到它的手稿（drafts）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:5",
+              "quote": "Reading suggestion: Macbeth",
+              "anchor": "推荐阅读《麦克白》"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Shakespeare Birthplace Trust",
+          "sourceRole": "stem",
+          "targetText": "William Shakespeare, perhaps the greatest playwright in English literature, is celebrated at the Shakespeare Birthplace Trust.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+          "relationType": "locationCue",
+          "answerText": "experience live performances",
+          "bridgeZh": "You can 后面列的就是游客在这里能做的事",
+          "note": "题干 Shakespeare Birthplace Trust 原词出现在原文。"
+        },
+        {
+          "sourceText": "Watch live shows",
+          "sourceRole": "correctOption",
+          "targetText": "experience live performances",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "选项的“看现场演出”（live shows）就是原文的“体验现场演出”（experience live performances），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:22": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "原文没直说哪部作品用西班牙语写成，要从作者提到西班牙语的那句话推出是谁的作品。",
+      "stemTranslationZh": "下列哪部作品很可能是用西班牙语写的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找聂鲁达名下推荐的作品",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "《麦克白》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "William Shakespeare, perhaps the greatest playwright in English literature",
+            "sourceEntity": "English literature",
+            "optionText": "Macbeth.",
+            "optionEntity": "Macbeth",
+            "explanation": "《麦克白》列在莎士比亚名下，原文称他是英国文学（English literature）里的剧作家，和西班牙语无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+              "quote": "William Shakespeare, perhaps the greatest playwright in English literature",
+              "anchor": "莎士比亚属于英国文学"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "《小妇人》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Louisa May Alcott, author of Little Women",
+            "sourceEntity": "Louisa May Alcott",
+            "optionText": "Little Women.",
+            "optionEntity": "Little Women",
+            "explanation": "《小妇人》的作者是奥尔科特，她的故居在美国（the US）；原文提到西班牙语，只是为了读聂鲁达的作品。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:7",
+              "quote": "Louisa May Alcott, author of Little Women",
+              "anchor": "奥尔科特写了《小妇人》"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "《海的女儿》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the Danish author behind his short stories like The Little Mermaid",
+            "sourceEntity": "the Danish author",
+            "optionText": "The Little Mermaid.",
+            "optionEntity": "The Little Mermaid",
+            "explanation": "《海的女儿》出自丹麦作家（the Danish author）安徒生之手，西班牙语在文中只和聂鲁达有关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:11",
+              "quote": "the Danish author behind his short stories like The Little Mermaid",
+              "anchor": "安徒生是丹麦作家"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "《二十首情诗和一首绝望的歌》。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+              "quote": "I wish I knew Spanish well enough to read Neruda’s works in his native language.",
+              "anchor": "想懂西班牙语读聂鲁达的母语原作"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:17",
+              "quote": "Suggested reading: Twenty Love Poems: And a Song of Despair",
+              "anchor": "聂鲁达名下的推荐读物"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Spanish",
+          "sourceRole": "stem",
+          "targetText": "I wish I knew Spanish well enough to read Neruda’s works in his native language.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+          "relationType": "locationCue",
+          "answerText": "Twenty Love Poems: And a Song of Despair",
+          "bridgeZh": "这本诗集列在聂鲁达故居的推荐读物里",
+          "note": "题干 Spanish 原词出现在原文。"
+        },
+        {
+          "sourceText": "Twenty Love Poems: And a Song of Despair",
+          "sourceRole": "correctOption",
+          "targetText": "Suggested reading: Twenty Love Poems: And a Song of Despair",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:17",
+          "relationType": "paraphrase",
+          "note": "原文没直说哪本书用西班牙语写成，只说作者要懂西班牙语，才能读聂鲁达用母语写的作品（in his native language），由此推出聂鲁达用西班牙语写作；这本诗集是他的作品，所以很可能是西班牙语写成的，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:23": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文介绍了什么内容、给了哪些建议，推断这份介绍最想吸引哪类读者。",
+      "stemTranslationZh": "本文是写给谁看的？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:1]]看这些博物馆纪念的是什么人，再看每处介绍后面附了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "艺术评论家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "collection of art",
+            "optionText": "Art",
+            "matchType": "exact",
+            "relationNote": "art 只在[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15|showcases his collection of art]]里出现，指聂鲁达故居展出他收藏的艺术品；全文介绍的是作家和他们的作品，不评论艺术。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:15",
+              "quote": "The Pablo Neruda House showcases his collection of art, poetry, and personal artifacts",
+              "anchor": "聂鲁达的艺术收藏"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "文学爱好者。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:1",
+              "quote": "Here are some museums in honor of famous writers you can visit.",
+              "anchor": "纪念著名作家的博物馆"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:7",
+              "quote": "Discover the literary legacy（遗产） of Louisa May Alcott",
+              "anchor": "探寻文学遗产"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "戏剧演员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Royal Shakespeare Theatre",
+            "optionText": "Theatre",
+            "matchType": "exact",
+            "relationNote": "Theatre 出自[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3]]的皇家莎士比亚剧院，那是游客看演出的地方；全文是请人去参观作家纪念馆，不是写给演员的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:3",
+              "quote": "experience live performances in the Royal Shakespeare Theatre",
+              "anchor": "在剧院看演出"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "建筑设计师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "本文是写给建筑设计师的",
+            "explanation": "原文只在[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:7]]说奥尔科特故居没有大的改动、房间保持原样，是让人看作家写作的地方，没谈建筑设计。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Literature enthusiasts",
+          "sourceRole": "correctOption",
+          "targetText": "Here are some museums in honor of famous writers you can visit.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "四处介绍的都是纪念著名作家（famous writers）的博物馆或故居，讲的是莎士比亚、奥尔科特、安徒生和聂鲁达的生平、作品和写作的地方，每处还附上推荐读物（Reading suggestion）。这些内容最能吸引喜欢读文学作品的人，选项的“文学爱好者”正好对应，选 B。"
+        }
+      ]
+    }
+  }
+}

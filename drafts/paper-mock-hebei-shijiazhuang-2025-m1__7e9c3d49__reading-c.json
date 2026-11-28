@@ -1,0 +1,755 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c": {
+      "overview": "作者认为兼顾个人与互动的健身项目 Hyrox 最可能成为2025年度运动，分析了人们转向个人健身的原因，指出个人运动的孤独问题和 Hyrox 的解决办法，并引专家的话说能坚持的运动最有效。",
+      "fullTranslationZh": "现在就把哪项运动称为“2025年度运动”还为时过早，但如果你让我今天就选，我会把这个称号给 Hyrox，它是一项个人参与却又彼此互动的运动。健身爱好者要跑八公里，每跑完一公里停下来做推雪橇或波比跳之类的练习。完成全程越快，在 Hyrox 全球排名中的得分就越高。许多调查显示，如今人们比前几年锻炼得更多了。推动这一增长的正是个人健身活动。\n在我29年的人生里，前一半我是冰球运动员，后一半是长跑运动员。我向往团队运动的共同目标，但也看重朝着自己的跑步目标努力所带来的责任感和清晰的成果。所以，人们更喜欢个人健身而不是团队运动，这让我觉得很奇怪。\n一种常见的解释是，自几年前的疫情以来，有组织的体育运动一直没有恢复过来。人们学会了用更少的钱、器材、空间、时间和组织来锻炼之后，就一直保留着个人运动。与此同时，现在有了健身应用，用户可以根据自己的心率和睡眠质量定制训练。可穿戴设备的兴起也让我们中的一些人迷上了自己的锻炼方式。\n然而，个人运动一个明显的问题是孤独。参加团队运动是公认的缓解孤独的方法，它能提升我们与人交往、建立有意义关系的能力。而 Hyrox 是一项结合型的运动：一项我们和别人一起做的个人运动。每场比赛都采用同样的计分系统，这让人们可以把自己的成绩和世界各地的人比较。\n这类运动已经开始主导健身界。而且，英属哥伦比亚大学的教授盖伊·福克纳认为，只要它能让人走出家门，就是好运动。“最有效的运动形式，”他说，“就是你能坚持下去的那种。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+          "sourceText": "The faster you complete the course, the higher your score is in the Hyrox worldwide rankings.",
+          "displayText": "The faster you complete the course, the higher your score is in the Hyrox worldwide rankings.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:28"
+          ],
+          "translationZh": "完成全程越快，在 Hyrox 全球排名中的得分就越高。",
+          "analysisZh": "这是 the + 比较级…, the + 比较级… 结构，意思是“越……就越……”。前半 The faster you complete the course 是条件，后半 the higher your score is 是结果，还原成正常语序就是 your score is higher；in the Hyrox worldwide rankings 说明这个分数记在全球排名里。这句话说明 Hyrox 按每个人自己的速度计分，同时又和全世界的人排在一起。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 23,
+              "quote": "The faster you complete"
+            },
+            {
+              "start": 36,
+              "end": 60,
+              "quote": "the higher your score is"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+          "sourceText": "Engaging in team sports is a proven way to ease it, which boosts our ability to interact and form meaningful relationships.",
+          "displayText": "Engaging in team sports is a proven way to ease it, which boosts our ability to interact and form meaningful relationships.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:30"
+          ],
+          "translationZh": "参加团队运动是公认的缓解孤独的方法，它能提升我们与人交往、建立有意义关系的能力。",
+          "analysisZh": "主干是 Engaging in team sports is a proven way（参加团队运动是一种公认的方法），动名词短语 Engaging in team sports 作主语。to ease it 是不定式，修饰 way，说明是什么方法，it 指上一句的 loneliness；which 引导非限制性定语从句，指参加团队运动这件事，说明它能提升我们的能力；to interact and form meaningful relationships 修饰 ability，说明是哪方面的能力。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 39,
+              "quote": "Engaging in team sports is a proven way"
+            },
+            {
+              "start": 40,
+              "end": 50,
+              "quote": "to ease it"
+            },
+            {
+              "start": 52,
+              "end": 76,
+              "quote": "which boosts our ability"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1"
+              ],
+              "start": 0,
+              "end": 169,
+              "quote": "现在就把哪项运动称为“2025年度运动”还为时过早，但如果你让我今天就选，我会把这个称号给 Hyrox，它是一项个人参与却又彼此互动的运动。健身爱好者要跑八公里，每跑完一公里停下来做推雪橇或波比跳之类的练习。完成全程越快，在 Hyrox 全球排名中的得分就越高。许多调查显示，如今人们比前几年锻炼得更多了。推动这一增长的正是个人健身活动。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2"
+              ],
+              "start": 170,
+              "end": 272,
+              "quote": "在我29年的人生里，前一半我是冰球运动员，后一半是长跑运动员。我向往团队运动的共同目标，但也看重朝着自己的跑步目标努力所带来的责任感和清晰的成果。所以，人们更喜欢个人健身而不是团队运动，这让我觉得很奇怪。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3"
+              ],
+              "start": 273,
+              "end": 411,
+              "quote": "一种常见的解释是，自几年前的疫情以来，有组织的体育运动一直没有恢复过来。人们学会了用更少的钱、器材、空间、时间和组织来锻炼之后，就一直保留着个人运动。与此同时，现在有了健身应用，用户可以根据自己的心率和睡眠质量定制训练。可穿戴设备的兴起也让我们中的一些人迷上了自己的锻炼方式。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4"
+              ],
+              "start": 412,
+              "end": 541,
+              "quote": "然而，个人运动一个明显的问题是孤独。参加团队运动是公认的缓解孤独的方法，它能提升我们与人交往、建立有意义关系的能力。而 Hyrox 是一项结合型的运动：一项我们和别人一起做的个人运动。每场比赛都采用同样的计分系统，这让人们可以把自己的成绩和世界各地的人比较。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:5"
+              ],
+              "start": 542,
+              "end": 624,
+              "quote": "这类运动已经开始主导健身界。而且，英属哥伦比亚大学的教授盖伊·福克纳认为，只要它能让人走出家门，就是好运动。“最有效的运动形式，”他说，“就是你能坚持下去的那种。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+                "start": 133,
+                "end": 171,
+                "quote": "an individual but interactive activity"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+                "start": 280,
+                "end": 373,
+                "quote": "The faster you complete the course, the higher your score is in the Hyrox worldwide rankings."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 54,
+                "end": 69,
+                "quote": "一项个人参与却又彼此互动的运动"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 104,
+                "end": 131,
+                "quote": "完成全程越快，在 Hyrox 全球排名中的得分就越高。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+                "start": 0,
+                "end": 87,
+                "quote": "One common explanation is that organized sports haven’t bounced back since the pandemic"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2",
+                "start": 276,
+                "end": 332,
+                "quote": "people prefer individual fitness pursuits to team sports"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 0,
+                "end": 35,
+                "quote": "一种常见的解释是，自几年前的疫情以来，有组织的体育运动一直没有恢复过来"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 76,
+                "end": 92,
+                "quote": "人们更喜欢个人健身而不是团队运动"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+                "start": 225,
+                "end": 267,
+                "quote": "an individual sport that we do with others"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+                "start": 319,
+                "end": 392,
+                "quote": "which allows people to compare their results with others around the world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 76,
+                "end": 91,
+                "quote": "一项我们和别人一起做的个人运动"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 107,
+                "end": 128,
+                "quote": "这让人们可以把自己的成绩和世界各地的人比较"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:5",
+                "start": 243,
+                "end": 271,
+                "quote": "is the form you will sustain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 69,
+                "end": 80,
+                "quote": "就是你能坚持下去的那种"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:28"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+                "start": 280,
+                "end": 373,
+                "quote": "The faster you complete the course, the higher your score is in the Hyrox worldwide rankings."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 104,
+                "end": 131,
+                "quote": "完成全程越快，在 Hyrox 全球排名中的得分就越高。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:30"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+                "start": 65,
+                "end": 188,
+                "quote": "Engaging in team sports is a proven way to ease it, which boosts our ability to interact and form meaningful relationships."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 18,
+                "end": 58,
+                "quote": "参加团队运动是公认的缓解孤独的方法，它能提升我们与人交往、建立有意义关系的能力。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先以 Hyrox 引出个人健身兴起的现象，作者结合自身经历表示不解，接着分析原因，再指出个人运动容易孤独、Hyrox 兼顾个人与互动，最后引专家的话肯定能让人坚持的运动。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+            "summary": "作者认为 Hyrox 最有资格成为2025年度运动：它是个人参与又互动的项目，按完成速度进入全球排名；个人健身正推动人们锻炼得更多。",
+            "function": "引出话题 Hyrox 和个人健身兴起的现象。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2",
+            "summary": "作者结合自己打冰球和长跑的经历，说团队运动和个人运动各有可取之处，对人们更偏爱个人健身感到不解。",
+            "function": "提出问题：人们为什么更爱个人健身。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+            "summary": "疫情后有组织的运动没有恢复，人们保留了个人运动；健身应用和可穿戴设备也让人迷上自己的锻炼。",
+            "function": "解释人们转向个人健身的原因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+            "summary": "个人运动的问题是孤独，Hyrox 让人和别人一起做个人运动，并用同一计分系统和全世界的人比较成绩。",
+            "function": "转到个人运动的问题，说明 Hyrox 怎样解决。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:5",
+            "summary": "这类运动正主导健身界；福克纳教授认为能让人走出家门、坚持下去的运动形式最有效。",
+            "function": "借专家观点收尾，肯定 Hyrox 这类运动。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从作者第一次介绍 Hyrox 的地方找出它最主要的特点。",
+      "stemTranslationZh": "Hyrox 的主要特点是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 which 后对它的描述",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它需要团队合作和共同计划。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I long for the common goal of team sports",
+            "sourceEntity": "team sports",
+            "optionText": "It requires teamwork and shared plans.",
+            "optionEntity": "teamwork",
+            "explanation": "有共同目标、需要团队配合的是作者怀念的团队运动（team sports）；Hyrox 是个人项目（individual），按各自完成的速度计分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2",
+              "quote": "I long for the common goal of team sports",
+              "anchor": "团队运动的共同目标"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是为寻找运动伙伴而组织的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Hyrox 是为了帮人找运动伙伴而举办的",
+            "explanation": "原文只说大家一起参加、能和别人比较成绩（compare their results），没说举办它是为了帮人找搭档。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它省去了体能挑战，只为休闲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Fitness fans run eight kilometres and stop after each to perform exercises such as sled pushes or burpees.",
+            "sourceHighlight": "run eight kilometres",
+            "optionText": "It skips physical challenges for leisure.",
+            "optionHighlight": "skips physical challenges",
+            "explanation": "参赛者要跑八公里，每跑一公里还要做推雪橇、波比跳等练习（sled pushes or burpees），体能挑战很重，选项却说省掉了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+              "quote": "Fitness fans run eight kilometres and stop after each to perform exercises such as sled pushes or burpees.",
+              "anchor": "跑八公里加练习"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它自己掌握节奏，却和他人一起排名。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+              "quote": "I would give the title to Hyrox, which is an individual but interactive activity",
+              "anchor": "个人参与又彼此互动"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+              "quote": "The faster you complete the course, the higher your score is in the Hyrox worldwide rankings.",
+              "anchor": "越快得分越高，进入全球排名"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Hyrox",
+          "sourceRole": "stem",
+          "targetText": "It’s too early to name any activity The Sport of 2025, but if you asked me to do it today, I would give the title to Hyrox, which is an individual but interactive activity.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "an individual but interactive activity",
+          "note": "题干 Hyrox 原词出现在原文，第一次介绍它就在这句。"
+        },
+        {
+          "sourceText": "self-paced but ranked with others",
+          "sourceRole": "correctOption",
+          "targetText": "The faster you complete the course, the higher your score is in the Hyrox worldwide rankings.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "“自己掌握节奏”对应“个人参与”（individual）：每人按自己的速度跑完全程，越快得分越高（The faster you complete）；“和他人一起排名”对应“互动”（interactive）：成绩进入全球排名（worldwide rankings）。选项和原文一样用转折把两面连在一起（individual but interactive），选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:29": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看清这一段几句话共同在回答什么问题，概括段落大意。",
+      "stemTranslationZh": "第3段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "看[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3]]开头的 One common explanation 在解释什么，再看后面几句各补了哪条原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "疫情的负面影响。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "organized sports haven’t bounced back since the pandemic",
+            "sourceHighlight": "since the pandemic",
+            "optionText": "Negative effects of the pandemic.",
+            "optionHighlight": "pandemic",
+            "explanation": "疫情只出现在第一条解释里，说的是疫情后人们保留了个人运动；后面的健身应用和可穿戴设备与疫情无关，整段不是讲疫情的坏处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+              "quote": "One common explanation is that organized sports haven’t bounced back since the pandemic",
+              "anchor": "疫情后有组织的运动没恢复"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "挑选可穿戴设备的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "The rise of wearables",
+            "optionText": "wearables",
+            "matchType": "exact",
+            "relationNote": "wearables 出自“可穿戴设备的兴起”（The rise of wearables），说的是它让人迷上自己的锻炼，原文没讲怎么挑选设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+              "quote": "The rise of wearables has also got some of us addicted to our own exercise routines.",
+              "anchor": "可穿戴设备让人迷上锻炼"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们转向个人健身的原因。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+              "quote": "One common explanation is that organized sports haven’t bounced back since the pandemic",
+              "anchor": "一种常见的解释"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2",
+              "quote": "So it’s odd to me that people prefer individual fitness pursuits to team sports.",
+              "anchor": "作者不解人们为何偏爱个人健身"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "用健身应用定制训练。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "there are now fitness apps for users to tailor works based on their heart rates and sleep quality",
+            "sourceHighlight": "fitness apps",
+            "optionText": "Tailored workouts with fitness apps.",
+            "optionHighlight": "Tailored workouts with fitness apps",
+            "explanation": "健身应用只是这段列出的原因之一，和疫情、可穿戴设备并列；选项把其中一条当成了整段的内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+              "quote": "there are now fitness apps for users to tailor works based on their heart rates and sleep quality",
+              "anchor": "健身应用定制训练"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reasons for the shift to individual fitness",
+          "sourceRole": "correctOption",
+          "targetText": "One common explanation is that organized sports haven’t bounced back since the pandemic",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2|it’s odd to me]]提出疑问：人们为什么更爱个人健身。这一段就来回答：疫情后有组织的运动没恢复（haven’t bounced back），人们保留了个人运动；健身应用能定制训练，可穿戴设备让人迷上自己的锻炼。几条都是转向个人健身的原因，选项把它们都包了进去，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "先弄清个人运动的问题是什么，再找 Hyrox 怎样解决它。",
+      "stemTranslationZh": "Hyrox 是如何解决个人运动存在的问题的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找 Hyrox 怎样对付孤独",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "针对害怕在公共场合与人交往的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Hyrox 面向害怕与人交往的人",
+            "explanation": "原文没说 Hyrox 面向害怕与人交往的人；它要解决的是个人运动带来的孤独，办法是让大家一起参与。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过共同的经历把个人联系在一起。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+              "quote": "an individual sport that we do with others",
+              "anchor": "和别人一起做的个人运动"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+              "quote": "Each competition follows the same scoring system, which allows people to compare their results with others around the world.",
+              "anchor": "同一计分系统，和全世界比成绩"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把个人成就放在集体目标之上。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "an individual sport that we do with others",
+            "sourceHighlight": "with others",
+            "optionText": "By prioritizing personal achievements over group goals.",
+            "optionHighlight": "prioritizing personal achievements over group goals",
+            "explanation": "Hyrox 的办法是让个人项目和别人一起做（with others），把人连到一起；选项说看重个人、放下集体，还是一个人练，解决不了孤独。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+              "quote": "an individual sport that we do with others",
+              "anchor": "和别人一起做"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "提供一种针对心理健康问题的治疗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Hyrox 提供心理健康治疗",
+            "explanation": "原文说团队运动能缓解孤独（ease it），Hyrox 靠的是让人一起参与，没说它提供心理疾病的治疗。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "problem",
+          "sourceRole": "stem",
+          "targetText": "However, an obvious problem for individual sports is loneliness.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "an individual sport that we do with others",
+          "bridgeZh": "问题是孤独，Hyrox 的办法是让个人项目和别人一起做",
+          "note": "题干 problem 原词出现在原文，指个人运动的孤独。"
+        },
+        {
+          "sourceText": "connecting individuals with shared experiences",
+          "sourceRole": "correctOption",
+          "targetText": "an individual sport that we do with others",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“把个人联系在一起”就是原文的“和别人一起做的个人运动”（we do with others）；“共同的经历”落在[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:4|Each competition follows the same scoring system]]：大家按同一套计分规则比赛，能和全世界的人比成绩（compare their results）。人不再是独自锻炼，孤独也就缓解了，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:31": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出福克纳教授说的“最有效的运动”是什么样的。",
+      "stemTranslationZh": "盖伊·福克纳认为最有效的运动是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "最省力的运动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "最有效的运动是最省力的",
+            "explanation": "福克纳只说能让人走出家门（out of the door）、能坚持的运动就好，没说要最省力。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "参与人数更多的运动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "最有效的运动是参与人数更多的",
+            "explanation": "他判断的标准是能不能坚持（sustain），没提参加的人多少。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一个人会坚持做的运动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:5",
+              "quote": "“The most effective form of sport,” he said, “is the form you will sustain.”",
+              "anchor": "你能坚持的运动形式"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "见效最快的运动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "clear results",
+            "optionText": "results",
+            "matchType": "exact",
+            "relationNote": "results 出自[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2|clear results that come from]]，是作者说跑步目标带来的清晰成果；福克纳看重的是能否坚持，没提见效快慢。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:2",
+              "quote": "I also value the responsibility and clear results that come from working toward my own running targets",
+              "anchor": "作者看重清晰的成果"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "most effective",
+          "sourceRole": "stem",
+          "targetText": "“The most effective form of sport,” he said, “is the form you will sustain.”",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "is the form you will sustain",
+          "note": "题干 most effective 原词出现在福克纳的原话里。"
+        },
+        {
+          "sourceText": "Sport that one will do consistently",
+          "sourceRole": "correctOption",
+          "targetText": "is the form you will sustain",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“会坚持做”（do consistently）就是原文的“你能坚持下去”（you will sustain），选 C。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Ms. Carter called Jamie to the office. A thick envelope lay on her desk. “A charity in our town wants to help your family,” she said gently. “This money will pay for your sister’s daycare for at least a month.” Jamie stared at the envelope, hardly believing his ears. For weeks he had carried everything alone, and now someone was sharing the weight. His eyes filled with tears. “Thank you, Ms. Carter,” he whispered. “I thought nobody would understand.” She smiled and put the envelope into his hands. “Just bring me your homework when you can.” Holding the envelope tightly, Jamie nodded.\n\nParagraph 2: After school, Jamie got home and handed the envelope to his mom. She opened it with shaking hands and read the charity’s note. Then she reached for Jamie’s hand and held it tight. “We’re not alone after all,” she said softly. The next morning, Jamie took his little sister back to the daycare on his way to school. That evening, for the first time in weeks, he sat at the table with his notebook open. Page by page, the blank notebook began to fill. A few days later, he handed Ms. Carter his finished assignments. “I told you I’d catch up,” he said with a shy smile, the same smile as in the photo on the fridge.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是老师 Ms. Carter 和学生 Jamie；Jamie 的妈妈在第二段出场。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时，叙述者跟着 Ms. Carter 走进 Jamie 的处境。句子短而具体，师生之间有好几处短的直接引语一来一回，描写只挑几个物件（空白的笔记本、微波食品、冰箱上的照片）。续写照样用第三人称过去时，人物用简短的对话交流，描写落在手边的物件上。",
+          "evidence": [
+            "“Stay after class, Jamie,” Ms. Carter said softly one December afternoon."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在慈善机构的负责人把装着资金的信封送到学校，钱够付至少一个月的托儿费。还没解决的是：钱怎样交到 Jamie 一家手里，这家人怎样反应，Jamie 能不能腾出时间、兑现补上功课的承诺。",
+          "evidence": [
+            "which were enough to cover the expenses of daycare for at least one month"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Jamie",
+          "role": "14 岁的学生，妈妈患肺炎，放学后要照顾妹妹",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "好几天没交作业，在班上低着头。",
+              "evidence": "He hadn’t turned in his assignments for several days."
+            },
+            {
+              "label": "性格",
+              "text": "要强，宁可沉默也不诉苦，怕老师以为他在撒谎。",
+              "evidence": "“You’d think I’m lying.” he said, voice shaking."
+            },
+            {
+              "label": "想要",
+              "text": "把落下的功课补上。",
+              "evidence": "“But... I’ll catch up on my study, I promise.”"
+            }
+          ]
+        },
+        {
+          "name": "Ms. Carter",
+          "role": "Jamie 的老师",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "关心学生，发现问题先担心而不是责备。",
+              "evidence": "Her voice wasn’t angry – just worried."
+            },
+            {
+              "label": "表现",
+              "text": "登门了解情况后，当晚就去找慈善机构求助。",
+              "evidence": "Ms. Carter contacted a charity organization in the town"
+            }
+          ]
+        },
+        {
+          "name": "Jamie 的妈妈",
+          "role": "患肺炎卧病在家，付不起托儿费",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "病重不能上班，家里断了收入。",
+              "evidence": "You see, she can’t go to work now."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "The daycare kicked her out last month because Mom missed payments.",
+          "use": "第 1 段老师说明这笔钱付的是妹妹的托儿费；第 2 段妹妹重回托儿所，Jamie 才腾出放学后的时间。"
+        },
+        {
+          "sourceQuote": "sliding his blank notebook across the desk",
+          "use": "第 2 段让这本空白的笔记本一页页写满，用看得见的变化说明 Jamie 回到了学习上。"
+        },
+        {
+          "sourceQuote": "I’ll catch up on my study, I promise.",
+          "use": "第 2 段结尾 Jamie 交上作业，说一句“我说过会补上”，兑现原文的承诺。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "老师在办公室把慈善机构的钱交给 Jamie，他放下独自硬撑的包袱；回家后妈妈得到安慰，妹妹重回托儿所，Jamie 有了时间，补交作业兑现承诺。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "写 Ms. Carter 在办公室把装着资金的信封交给 Jamie。第二段首句说他放学回家把信封交给妈妈，所以第 1 段结束时信封必须已经在 Jamie 手里，而且这一段还没到放学回家。",
+          "draft": "老师说明镇上的慈善机构愿意帮忙，钱够付妹妹至少一个月的托儿费；Jamie 不敢相信，含泪道谢；老师把信封放进他手里，只让他有空时把作业交来，他攥紧信封点头。",
+          "bridgeQuote": "handed the envelope to his mom",
+          "bridge": "妈妈拿到信封后会怎样，这笔钱又怎样改变 Jamie 的日子？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从 Jamie 回家把信封交给妈妈写起，并在这一段收住原文的问题：托儿费有了着落之后，Jamie 怎样回到学习上。妈妈怎么反应、作业怎样补上，是本文的选择。",
+          "draft": "妈妈读了慈善机构的便条，握住 Jamie 的手说他们并不孤单；第二天妹妹回到托儿所；当晚 Jamie 在桌前写作业，空白的笔记本渐渐写满；几天后他把作业交给老师，露出冰箱照片里那样的笑。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Ms. Carter called Jamie to the office. A thick envelope lay on her desk. “A charity in our town wants to help your family,” she said gently. “This money will pay for your sister’s daycare for at least a month.” Jamie stared at the envelope, hardly believing his ears. For weeks he had carried everything alone, and now someone was sharing the weight. His eyes filled with tears. “Thank you, Ms. Carter,” he whispered. “I thought nobody would understand.” She smiled and put the envelope into his hands. “Just bring me your homework when you can.” Holding the envelope tightly, Jamie nodded.\n\nParagraph 2: After school, Jamie got home and handed the envelope to his mom. She opened it with shaking hands and read the charity’s note. Then she reached for Jamie’s hand and held it tight. “We’re not alone after all,” she said softly. The next morning, Jamie took his little sister back to the daycare on his way to school. That evening, for the first time in weeks, he sat at the table with his notebook open. Page by page, the blank notebook began to fill. A few days later, he handed Ms. Carter his finished assignments. “I told you I’d catch up,” he said with a shy smile, the same smile as in the photo on the fridge.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代信封里是什么、为谁而来，写出 Jamie 的反应，并让信封落到他手里。",
+          "items": [
+            {
+              "quote": "This money will pay for your sister’s daycare for at least a month.",
+              "explain": "借老师的话点明钱的用途，正好对上原文托儿所因欠费把妹妹赶出来这件事，第 2 段妹妹重回托儿所就有了原因。"
+            },
+            {
+              "quote": "For weeks he had carried everything alone, and now someone was sharing the weight.",
+              "explain": "用过去完成时回看他这几周独自硬撑，再用 now 转到眼下，眼泪就有了触发，不是突然的煽情。"
+            },
+            {
+              "quote": "“I thought nobody would understand.”",
+              "explain": "回应原文他说老师会以为他在撒谎，写出他沉默的真正原因，人物前后一致。"
+            },
+            {
+              "quote": "She smiled and put the envelope into his hands.",
+              "explain": "把信封交到 Jamie 手里，正是第二段首句“把信封交给妈妈”所需要的状态。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写妈妈的反应和这笔钱带来的变化，最后让 Jamie 兑现补功课的承诺。",
+          "items": [
+            {
+              "quote": "Then she reached for Jamie’s hand and held it tight.",
+              "explain": "妈妈病着，握手这个小动作比大段哭诉更合她的处境，情绪落到了动作上。"
+            },
+            {
+              "quote": "Jamie took his little sister back to the daycare on his way to school",
+              "explain": "钱先解决托儿费，妹妹回到托儿所，Jamie 放学后才有时间，因果一步一步接上。"
+            },
+            {
+              "quote": "Page by page, the blank notebook began to fill.",
+              "explain": "用回原文那本空白的笔记本，“一页页写满”让学习的变化看得见。"
+            },
+            {
+              "quote": "the same smile as in the photo on the fridge",
+              "explain": "收在原文冰箱上那张照片里的笑容，说明 Jamie 又回到了从前的样子，不用另贴一句道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "hardly believing his ears",
+          "function": "写 Jamie 听到好消息时一时不敢相信，比直接说 he was surprised 更具体。"
+        },
+        {
+          "expression": "someone was sharing the weight",
+          "function": "把“有人帮他分担”写成分担重量，贴合他一个人扛起家务和照顾妹妹的处境。"
+        },
+        {
+          "expression": "reached for … hand and held it tight",
+          "function": "用一个手上的动作写出病中妈妈的感激和安心，不必写满屏的眼泪。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段就写 Jamie 回家、妈妈落泪",
+          "why": "第二段首句才写放学回家把信封交给妈妈，第 1 段提前写掉，两段就重复了；第 1 段只写办公室里的事。"
+        },
+        {
+          "pitfall": "让钱治好妈妈的病、一家人从此什么都不愁",
+          "why": "原文只说这笔钱够付至少一个月的托儿费，它解决的是妹妹没人照看、Jamie 没时间学习的问题，不能拔高成万能的救助。"
+        },
+        {
+          "pitfall": "结尾只写“Jamie learned that love can change everything”",
+          "why": "原文留下的问题是他能否补上功课、兑现承诺，结尾应落在交作业这样的具体动作上，而不是一句放到任何故事后都成立的道理。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Ms. Carter called Jamie to the office. She was standing by the window with a thick envelope in her hand. “Sit down, Jamie. I have some good news,” she said, her voice as soft as it had been on that rainy afternoon. She explained that a charity in town had heard about his family and wanted to help. “This should cover your sister’s daycare for at least a month.” Jamie’s mouth fell open. For weeks he had rushed home every afternoon, his bag full of unfinished work, and he had told no one. Now his secret was out, and nobody thought he was lying. His eyes stung. “I… I don’t know what to say,” he managed. Ms. Carter pressed the envelope into his hands. “You don’t need to say anything. Just take it home to your mom.”\n\nParagraph 2: After school, Jamie got home and handed the envelope to his mom. Propped up on the sofa, she opened it slowly and read the charity’s note twice, as if afraid the words might disappear. Then she looked up at her son, her tired eyes shining. “Someone cares about us,” she whispered, squeezing his hand. The next morning, Jamie dropped his sister off at the daycare on his way to school, and the house no longer felt so heavy. That evening, the oxygen machine still hummed beside the sofa, but Jamie sat at the table with his notebook open and his pencil racing across the page. One by one, the blank pages filled up. By Friday, he walked into Ms. Carter’s warm classroom and placed a pile of finished assignments on her desk. “I promised I’d catch up,” he said. For the first time in weeks, he smiled like the boy in the photo on the fridge.",
+      "beyondStandard": [
+        {
+          "quote": "her voice as soft as it had been on that rainy afternoon",
+          "explain": "把老师此刻的语气和原文那个下雨的下午连起来，标准版只写 gently，这里更贴原文的叙述。"
+        },
+        {
+          "quote": "Now his secret was out, and nobody thought he was lying.",
+          "explain": "直接回扣原文他怕老师以为他撒谎的那句话，写出眼泪背后的真正原因，比标准版更紧扣人物。"
+        },
+        {
+          "quote": "the oxygen machine still hummed beside the sofa, but Jamie sat at the table",
+          "explain": "用原文的制氧机提醒读者妈妈仍在病中，再用 but 转到 Jamie 能安心写作业，变化有限但真实，不把钱写成万能。"
+        }
+      ]
+    }
+  }
+}

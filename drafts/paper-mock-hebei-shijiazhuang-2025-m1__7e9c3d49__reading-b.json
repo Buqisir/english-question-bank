@@ -1,0 +1,752 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b": {
+      "overview": "加纳摄影记者宁森在纽约看到大量非洲影像，受此启发回国建起摄影书图书馆迪坎中心，让加纳人了解自己的历史；文章还回顾了他走上摄影之路的经历和参观者的感受。",
+      "fullTranslationZh": "加纳摄影记者保罗·宁森感到很吃惊。五年前他来纽约学习摄影时，发现这座城市的图书馆和博物馆里收藏着大量反映非洲生活的图像。身在离加纳几千英里外的地方，他身边的非洲影像历史竟比他在家乡见过的还要多。\n这激励他在加纳建一座摄影书图书馆，把非洲的故事带回家乡，让人们了解自己的历史，也给他们讲述这片大陆新故事的工具。随着迪坎中心在加纳首都阿克拉建成，这个想法实现了。“迪坎”在阿坎语里的意思是“带头”。\n这并不是宁森唯一一次把目标对准一个看似不可能实现的梦想。在加纳，摄影并不算一条受重视的职业道路。宁森说：“如果你告诉父母你要当摄影师，他们的反应就像是：‘什么？去当律师吧。’”但宁森觉得摄影就是他的使命。他深受祖父母代代相传的家族讲故事传统的影响，后来又被一位朋友拍的照片吸引，爱上了摄影。把两者结合起来对他来说再自然不过，于是他全身心投入其中。凭着极大的决心，他收集了三万多册书。2022年12月，迪坎中心开放了。\n加纳人丹妮拉·阿弗尔被迪坎的展览深深打动，她说展览让她对自己国家的过去和现在有了新的看法。她说：“迪坎让艺术和摄影变得更有意义。它让我们看到了希望：也许不久后加纳就会有一座音乐图书馆。我们还可以在加纳建电影图书馆——什么都行，只要能保存我们的历史、创造历史。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+          "sourceText": "That inspired him to create a library of photobooks in Ghana to bring the African story home, allowing people to learn about their history and giving them tools to tell new stories of the continent.",
+          "displayText": "That inspired him to create a library of photobooks in Ghana to bring the African story home, allowing people to learn about their history and giving them tools to tell new stories of the continent.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:25"
+          ],
+          "translationZh": "这激励他在加纳建一座摄影书图书馆，把非洲的故事带回家乡，让人们了解自己的历史，也给他们讲述这片大陆新故事的工具。",
+          "analysisZh": "主干是 That inspired him to create a library of photobooks（这激励他建一座摄影书图书馆），用的是 inspire sb to do 结构，That 指他在纽约看到大量非洲图像这件事。in Ghana 说明建在哪里，to bring the African story home 说明建馆的目的；句末 allowing… 和 giving… 是两个并列的现在分词短语，说明建馆带来的结果：让人们了解历史，给他们讲新故事的工具。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "That inspired him to create"
+            },
+            {
+              "start": 61,
+              "end": 92,
+              "quote": "to bring the African story home"
+            },
+            {
+              "start": 94,
+              "end": 118,
+              "quote": "allowing people to learn"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+          "sourceText": "He was deeply influenced by the rich family history of storytelling passed down through his grandparents and later, attracted by a friend’s images, developed a love of photography.",
+          "displayText": "He was deeply influenced by the rich family history of storytelling passed down through his grandparents and later, attracted by a friend’s images, developed a love of photography.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:26"
+          ],
+          "translationZh": "他深受祖父母代代相传的家族讲故事传统的影响，后来又被一位朋友拍的照片吸引，爱上了摄影。",
+          "analysisZh": "主语 He 带两个由 and 连接的谓语：was deeply influenced by…（深受……影响）和 later developed a love of photography（后来爱上了摄影）。passed down through his grandparents 是过去分词短语，修饰前面讲故事的家族传统，说明它是祖父母传下来的；attracted by a friend’s images 插在 later 和 developed 之间，交代他爱上摄影的起因。两个谓语正好对应家人和朋友两方面的影响。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "He was deeply influenced by"
+            },
+            {
+              "start": 116,
+              "end": 146,
+              "quote": "attracted by a friend’s images"
+            },
+            {
+              "start": 148,
+              "end": 179,
+              "quote": "developed a love of photography"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1"
+              ],
+              "start": 0,
+              "end": 97,
+              "quote": "加纳摄影记者保罗·宁森感到很吃惊。五年前他来纽约学习摄影时，发现这座城市的图书馆和博物馆里收藏着大量反映非洲生活的图像。身在离加纳几千英里外的地方，他身边的非洲影像历史竟比他在家乡见过的还要多。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2"
+              ],
+              "start": 98,
+              "end": 197,
+              "quote": "这激励他在加纳建一座摄影书图书馆，把非洲的故事带回家乡，让人们了解自己的历史，也给他们讲述这片大陆新故事的工具。随着迪坎中心在加纳首都阿克拉建成，这个想法实现了。“迪坎”在阿坎语里的意思是“带头”。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3"
+              ],
+              "start": 198,
+              "end": 406,
+              "quote": "这并不是宁森唯一一次把目标对准一个看似不可能实现的梦想。在加纳，摄影并不算一条受重视的职业道路。宁森说：“如果你告诉父母你要当摄影师，他们的反应就像是：‘什么？去当律师吧。’”但宁森觉得摄影就是他的使命。他深受祖父母代代相传的家族讲故事传统的影响，后来又被一位朋友拍的照片吸引，爱上了摄影。把两者结合起来对他来说再自然不过，于是他全身心投入其中。凭着极大的决心，他收集了三万多册书。2022年12月，迪坎中心开放了。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:4",
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:5"
+              ],
+              "start": 407,
+              "end": 537,
+              "quote": "加纳人丹妮拉·阿弗尔被迪坎的展览深深打动，她说展览让她对自己国家的过去和现在有了新的看法。她说：“迪坎让艺术和摄影变得更有意义。它让我们看到了希望：也许不久后加纳就会有一座音乐图书馆。我们还可以在加纳建电影图书馆——什么都行，只要能保存我们的历史、创造历史。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+                "start": 123,
+                "end": 169,
+                "quote": "a large collection of images of life in Africa"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 48,
+                "end": 59,
+                "quote": "大量反映非洲生活的图像"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+                "start": 61,
+                "end": 138,
+                "quote": "to bring the African story home, allowing people to learn about their history"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 17,
+                "end": 38,
+                "quote": "把非洲的故事带回家乡，让人们了解自己的历史"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+                "start": 304,
+                "end": 364,
+                "quote": "deeply influenced by the rich family history of storytelling"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+                "start": 413,
+                "end": 443,
+                "quote": "attracted by a friend’s images"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 103,
+                "end": 123,
+                "quote": "深受祖父母代代相传的家族讲故事传统的影响"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 127,
+                "end": 138,
+                "quote": "被一位朋友拍的照片吸引"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:4",
+                "start": 28,
+                "end": 106,
+                "quote": "particularly moved by Dikan’s exhibition, and said it gave her a new viewpoint"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:5",
+                "start": 99,
+                "end": 123,
+                "quote": "It has given us the hope"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 10,
+                "end": 44,
+                "quote": "被迪坎的展览深深打动，她说展览让她对自己国家的过去和现在有了新的看法"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 64,
+                "end": 73,
+                "quote": "它让我们看到了希望"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:25"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+                "start": 0,
+                "end": 198,
+                "quote": "That inspired him to create a library of photobooks in Ghana to bring the African story home, allowing people to learn about their history and giving them tools to tell new stories of the continent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 0,
+                "end": 56,
+                "quote": "这激励他在加纳建一座摄影书图书馆，把非洲的故事带回家乡，让人们了解自己的历史，也给他们讲述这片大陆新故事的工具。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:26"
+            ],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+                "start": 297,
+                "end": 477,
+                "quote": "He was deeply influenced by the rich family history of storytelling passed down through his grandparents and later, attracted by a friend’s images, developed a love of photography."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 102,
+                "end": 145,
+                "quote": "他深受祖父母代代相传的家族讲故事传统的影响，后来又被一位朋友拍的照片吸引，爱上了摄影。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写宁森在纽约的意外发现，再写他回加纳建迪坎中心的目的，接着回顾他选择摄影、坚持建馆的经历，最后用一位参观者的感受说明中心的意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+            "summary": "宁森来纽约学摄影时，惊讶地发现这里收藏的非洲图像比他在加纳见过的还多。",
+            "function": "以宁森的意外发现开篇，引出他建馆的起因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+            "summary": "这一发现促使他在加纳建摄影书图书馆，让人们了解自己的历史；这个想法随着阿克拉的迪坎中心建成而实现。",
+            "function": "交代建馆的目的和结果。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+            "summary": "摄影在加纳不受重视，但宁森受家族讲故事传统和朋友照片的影响爱上摄影，收集了三万多册书，迪坎中心于2022年12月开放。",
+            "function": "回顾他选择摄影的原因和建馆的过程。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:4",
+            "summary": "加纳人阿弗尔被展览打动，认为迪坎让她对国家有了新看法，也带来了建更多图书馆、保存历史的希望。",
+            "function": "借参观者的评价说明迪坎中心的意义。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出宁森在纽约看到了什么而感到吃惊。",
+      "stemTranslationZh": "在纽约，什么让保罗·宁森感到吃惊？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "许多关于非洲的图片。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+              "quote": "he found a large collection of images of life in Africa in the city’s libraries and museums",
+              "anchor": "馆藏大量非洲生活图像"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "历史摄影展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "visual history",
+            "optionText": "Historical",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 visual history（影像历史）拼出“历史摄影展”；原文说的是图书馆和博物馆里收藏的大量非洲图像，没提他看了什么摄影展。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+              "quote": "surrounded by more visual history of Africa than he had ever seen back home",
+              "anchor": "身边的非洲影像历史"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "关于加纳的视频资料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "a large collection of images of life in Africa",
+            "sourceEntity": "images",
+            "optionText": "Video materials about Ghana.",
+            "optionEntity": "Video materials",
+            "explanation": "让他吃惊的是图像（images），内容是整个非洲的生活；选项改成了视频，又把范围缩到加纳一国。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+              "quote": "a large collection of images of life in Africa",
+              "anchor": "非洲生活图像"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "摄影培训课程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "study photography",
+            "optionText": "Photography",
+            "matchType": "exact",
+            "relationNote": "photography 出自[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1|to study photography five years ago]]，说的是他来纽约是为了学摄影；让他吃惊的是馆藏的非洲图像，不是培训课程。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+              "quote": "When he came to New York to study photography five years ago",
+              "anchor": "来纽约学摄影"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "New York",
+          "sourceRole": "stem",
+          "targetText": "When he came to New York to study photography five years ago, he found a large collection of images of life in Africa in the city’s libraries and museums.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "a large collection of images of life in Africa",
+          "note": "题干 New York 原词出现在原文。"
+        },
+        {
+          "sourceText": "Many pictures about Africa",
+          "sourceRole": "correctOption",
+          "targetText": "a large collection of images of life in Africa",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“许多图片”（Many pictures）就是原文的“大量图像”（a large collection of images），“关于非洲”对应“非洲的生活”（life in Africa），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出宁森在加纳建迪坎中心想达到什么目的。",
+      "stemTranslationZh": "宁森为什么在加纳创建迪坎中心？",
+      "locateBy": "stem",
+      "locateFindZh": "看 to bring 后面说的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了在全球传播非洲文化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "to bring the African story home",
+            "sourceHighlight": "home",
+            "optionText": "To spread African culture globally.",
+            "optionHighlight": "globally",
+            "explanation": "原文是把非洲的故事带回家乡（bring … home），让加纳人自己看到；选项说向全世界传播，方向正好反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+              "quote": "to bring the African story home",
+              "anchor": "把非洲故事带回家乡"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了改善人们的生活条件。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "建中心是为了改善人们的生活条件",
+            "explanation": "原文说建馆是让人们了解历史、给他们讲新故事的工具，没提改善生活条件。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了让非洲人了解自己的根。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+              "quote": "to bring the African story home, allowing people to learn about their history",
+              "anchor": "让人们了解自己的历史"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了发展加纳的摄影书市场。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "photobooks",
+            "optionText": "photobook market",
+            "matchType": "exact",
+            "relationNote": "选项借 photobook 编出“摄影书市场”；原文的 photobooks 是图书馆里供人阅读的藏书，他收集书是为了让人了解历史，没提做生意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+              "quote": "to create a library of photobooks in Ghana",
+              "anchor": "建摄影书图书馆"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "create the Dikan Center",
+          "sourceRole": "stem",
+          "sourceZh": "创建迪坎中心",
+          "targetText": "That inspired him to create a library of photobooks in Ghana to bring the African story home, allowing people to learn about their history and giving them tools to tell new stories of the continent.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+          "relationType": "locationCue",
+          "targetCue": "create a library of photobooks",
+          "targetCueZh": "建一座摄影书图书馆",
+          "answerText": "bring the African story home, allowing people to learn about their history",
+          "note": "题干 create the Dikan Center 对应原文 create a library of photobooks，迪坎中心就是这座图书馆。"
+        },
+        {
+          "sourceText": "offer Africans insights into their roots",
+          "sourceRole": "correctOption",
+          "targetText": "allowing people to learn about their history",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“了解自己的根”（insights into their roots）就是原文的“了解自己的历史”（learn about their history）；这里的“人们”（people）就是故事被带回家乡后看到它的加纳人，所以选项说“非洲人”，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出宁森用照片讲故事的原因。",
+      "stemTranslationZh": "宁森为什么选择用照片讲故事？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这在加纳很受欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Photography isn’t exactly valued as a career path in Ghana.",
+            "sourceHighlight": "isn’t exactly valued",
+            "optionText": "It was quite popular in Ghana.",
+            "optionHighlight": "quite popular",
+            "explanation": "原文说在加纳摄影并不被看作好的职业（isn’t exactly valued），选项却说很受欢迎，正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+              "quote": "Photography isn’t exactly valued as a career path in Ghana.",
+              "anchor": "摄影在加纳不受重视"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他的父母鼓励他这样做。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "If you tell your parents you’re going to be a photographer, it was like, ‘What? Go be a lawyer.’",
+            "sourceHighlight": "Go be a lawyer",
+            "optionText": "His parents encouraged him to do so.",
+            "optionHighlight": "encouraged him",
+            "explanation": "宁森说父母一听孩子要当摄影师，就会让他去当律师（Go be a lawyer），这是劝阻，不是鼓励。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+              "quote": "If you tell your parents you’re going to be a photographer, it was like, ‘What? Go be a lawyer.’",
+              "anchor": "父母让人去当律师"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他受到了家人和朋友的影响。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+              "quote": "He was deeply influenced by the rich family history of storytelling passed down through his grandparents and later, attracted by a friend’s images, developed a love of photography.",
+              "anchor": "受家族传统和朋友照片影响"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他曾在纽约学习摄影。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "study photography",
+            "optionText": "study photography in New York",
+            "matchType": "exact",
+            "relationNote": "选项照搬[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1]]的 study photography（学摄影），那只是他来纽约的目的；他为什么选摄影，原文在[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3]]讲的是家里讲故事的传统和朋友的照片。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+              "quote": "When he came to New York to study photography five years ago",
+              "anchor": "来纽约学摄影"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "tell stories",
+          "sourceRole": "stem",
+          "sourceZh": "讲故事",
+          "targetText": "He was deeply influenced by the rich family history of storytelling passed down through his grandparents and later, attracted by a friend’s images, developed a love of photography.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+          "relationType": "locationCue",
+          "targetCue": "storytelling",
+          "targetCueZh": "讲故事的传统",
+          "answerText": "deeply influenced by the rich family history of storytelling passed down through his grandparents and later, attracted by a friend’s images",
+          "note": "题干 tell stories 对应原文 storytelling，同句还有 photography 对应 photographs。"
+        },
+        {
+          "sourceText": "influenced by his family and friend",
+          "sourceRole": "correctOption",
+          "targetText": "deeply influenced by the rich family history of storytelling",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项把两处影响合在一起：“家人”指祖父母传下来的讲故事传统（family history of storytelling），“朋友”指吸引他的朋友的照片（a friend’s images），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:27": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从阿弗尔看展后的反应和她说的话，判断她对展览的评价。",
+      "stemTranslationZh": "丹妮拉·阿弗尔认为迪坎的展览怎么样？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "有挑战性的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "展览有挑战性",
+            "explanation": "她只说展览打动了她、让她有了新看法，没说展览难懂或给她出了难题。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有趣好玩的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "展览很有娱乐性",
+            "explanation": "她看重的是迪坎让艺术和摄影更有意义（more significant）、能保存历史，没说展览好玩。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "令人震惊的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Ghanaian photojournalist Paul Ninson was surprised.",
+            "sourceEntity": "Paul Ninson",
+            "optionText": "Astonishing.",
+            "optionEntity": "Astonishing",
+            "explanation": "文中感到吃惊（surprised）的是[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1]]里在纽约看到大量非洲图像的宁森；阿弗尔对展览是被打动（moved），还得到了新看法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:1",
+              "quote": "Ghanaian photojournalist Paul Ninson was surprised.",
+              "anchor": "宁森感到吃惊"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "鼓舞人心的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:4",
+              "quote": "particularly moved by Dikan’s exhibition, and said it gave her a new viewpoint",
+              "anchor": "被打动，有了新看法"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:5",
+              "quote": "It has given us the hope that we may soon have a music library in Ghana.",
+              "anchor": "带来希望"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Daniella Afful",
+          "sourceRole": "stem",
+          "targetText": "Ghanaian Daniella Afful was particularly moved by Dikan’s exhibition, and said it gave her a new viewpoint",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "particularly moved by Dikan’s exhibition, and said it gave her a new viewpoint",
+          "note": "题干 Daniella Afful 原词出现在原文。"
+        },
+        {
+          "sourceText": "Inspiring",
+          "sourceRole": "correctOption",
+          "targetText": "particularly moved by Dikan’s exhibition",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "原文没直接用 inspiring，而是写她被展览深深打动（particularly moved），展览给了她看国家的新视角（a new viewpoint），她接着又说迪坎带来了希望（given us the hope）；能打动人、给人新想法和希望，就是选项说的“鼓舞人心”，选 D。"
+        }
+      ]
+    }
+  }
+}

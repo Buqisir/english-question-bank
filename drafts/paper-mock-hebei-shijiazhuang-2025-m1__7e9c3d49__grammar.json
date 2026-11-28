@@ -1,0 +1,1142 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill": {
+      "overview": "美国“同一个声音”儿童合唱团在天坛随兴演唱中文歌《如愿》，被路人拍下后在网上走红。文章介绍合唱团的来历、代表曲目和中国巡演，以及指挥福田对文化相通、情感共鸣的感受。",
+      "fullTranslationZh": "“如果你曾因我的甜蜜而受苦，我愿意活成你期望的模样……”《如愿》的副歌在天坛回响，路人们惊讶地发现，这首中文歌竟是由一支美国合唱团——“同一个声音”儿童合唱团演唱的。他们极富感染力的歌声被录成视频，在社交媒体上迅速走红。\n指挥福田介绍说，“同一个声音”当时只是在随意演唱，人们就围了过来，随后这段视频便在网上传开了。“尽管文化不同，我们依然能对这些相同的信息产生共鸣。我希望无论人们正在经历什么，这首歌都能打动他们。”福田说。\n这支合唱团肩负着用孩子们的声音激励世界的使命，由一群在2002年盐湖城冬奥会上演唱时相识的孩子组成。除了《如愿》，《明天会更好》也是他们的一首代表曲目。他们刚刚完成了中国巡演，在多座城市进行了演出。\n在中国的最后一场演出中，福田和孩子们热泪盈眶，不停地向观众挥手告别。“中国人民的热情欢迎深深打动了我们。我真切地感到与观众心意相通，”福田说，“虽然我不认识他们，但我感到我们传递的信息被他们接收到了。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-ls-1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+          "sourceText": "The chorus of As You Wish resounded at the Temple of Heaven and __56__ (passer-by) were surprised to find this Chinese song was performed by a US choir（合唱团）, One Voice Children’s Choir.",
+          "displayText": "The chorus of As You Wish resounded at the Temple of Heaven and passers-by were surprised to find this Chinese song was performed by a US choir（合唱团）, One Voice Children’s Choir.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:56"
+          ],
+          "translationZh": "《如愿》的副歌在天坛回响，路人们惊讶地发现，这首中文歌竟是由一支美国合唱团——“同一个声音”儿童合唱团演唱的。",
+          "analysisZh": "全句是 and 连接的两个并列分句。前一句主干是 The chorus … resounded（副歌回响），at the Temple of Heaven 交代地点；后一句主干是 passers-by were surprised to find …（路人惊讶地发现），find 后接省略 that 的宾语从句 this Chinese song was performed by a US choir，用被动语态说明歌由谁演唱；逗号后的 One Voice Children’s Choir 是 a US choir 的同位语，说出合唱团的名字。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "The chorus of As You Wish resounded"
+            },
+            {
+              "start": 64,
+              "end": 97,
+              "quote": "passers-by were surprised to find"
+            },
+            {
+              "start": 116,
+              "end": 143,
+              "quote": "was performed by a US choir"
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-ls-2",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+          "sourceText": "The choir, with its mission to inspire the world through children’s voices, __61__ (consist) of a group of children who met while singing at the 2002 Salt Lake City Winter Olympics.",
+          "displayText": "The choir, with its mission to inspire the world through children’s voices, consists of a group of children who met while singing at the 2002 Salt Lake City Winter Olympics.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:61"
+          ],
+          "translationZh": "这支合唱团肩负着用孩子们的声音激励世界的使命，由一群在2002年盐湖城冬奥会上演唱时相识的孩子组成。",
+          "analysisZh": "主干是 The choir consists of a group of children（合唱团由一群孩子组成）。两个逗号之间的 with 短语是插入的修饰，说明合唱团的使命，其中 to inspire the world … 作定语修饰 mission；who 引导定语从句修饰 children，从句里的 while singing 是省略了主语的时间状语，说明孩子们是在演唱时相识的。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 9,
+              "quote": "The choir"
+            },
+            {
+              "start": 76,
+              "end": 107,
+              "quote": "consists of a group of children"
+            },
+            {
+              "start": 108,
+              "end": 129,
+              "quote": "who met while singing"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 110,
+              "quote": "“如果你曾因我的甜蜜而受苦，我愿意活成你期望的模样……”《如愿》的副歌在天坛回响，路人们惊讶地发现，这首中文歌竟是由一支美国合唱团——“同一个声音”儿童合唱团演唱的。他们极富感染力的歌声被录成视频，在社交媒体上迅速走红。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2"
+              ],
+              "start": 111,
+              "end": 213,
+              "quote": "指挥福田介绍说，“同一个声音”当时只是在随意演唱，人们就围了过来，随后这段视频便在网上传开了。“尽管文化不同，我们依然能对这些相同的信息产生共鸣。我希望无论人们正在经历什么，这首歌都能打动他们。”福田说。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3"
+              ],
+              "start": 214,
+              "end": 313,
+              "quote": "这支合唱团肩负着用孩子们的声音激励世界的使命，由一群在2002年盐湖城冬奥会上演唱时相识的孩子组成。除了《如愿》，《明天会更好》也是他们的一首代表曲目。他们刚刚完成了中国巡演，在多座城市进行了演出。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4"
+              ],
+              "start": 314,
+              "end": 415,
+              "quote": "在中国的最后一场演出中，福田和孩子们热泪盈眶，不停地向观众挥手告别。“中国人民的热情欢迎深深打动了我们。我真切地感到与观众心意相通，”福田说，“虽然我不认识他们，但我感到我们传递的信息被他们接收到了。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+            "text": "“If you have ever suffered for my sweetness, I’m willing to live as you wish...” The chorus of As You Wish resounded at the Temple of Heaven and passers-by were surprised to find this Chinese song was performed by a US choir（合唱团）, One Voice Children’s Choir. Their infectious singing was recorded in a video and became an instant hit on social media."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+            "text": "Fukuda, the conductor, introduced One Voice was just singing casually when people gathered around, and the video subsequently spread online. “Despite different cultures, we can still relate to those same messages. I hope no matter what people are going through, the song will touch them.” said Fukuda."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+            "text": "The choir, with its mission to inspire the world through children’s voices, consists of a group of children who met while singing at the 2002 Salt Lake City Winter Olympics. In addition to As You Wish, Tomorrow Will Be Better is also a signature song of them. They’ve just completed their China tour, with performances in several cities."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+            "text": "During their final performance in China, Fukuda and the children teared up, continuously waving goodbye to the audience. “The warm welcome from the Chinese people moved us deeply. I really felt connected to the audience,” Fukuda remarked. “Although I don’t know them, I felt that our message was received by them.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 164,
+                "end": 186,
+                "quote": "were surprised to find"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 44,
+                "end": 49,
+                "quote": "惊讶地发现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:56"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 145,
+                "end": 155,
+                "quote": "passers-by"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 41,
+                "end": 44,
+                "quote": "路人们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 289,
+                "end": 296,
+                "quote": "singing"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 267,
+                "end": 272,
+                "quote": "Their"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 91,
+                "end": 93,
+                "quote": "歌声"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 83,
+                "end": 85,
+                "quote": "他们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:57"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 265,
+                "end": 275,
+                "quote": "infectious"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 85,
+                "end": 91,
+                "quote": "极富感染力的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 133,
+                "end": 146,
+                "quote": "spread online"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 40,
+                "end": 46,
+                "quote": "在网上传开了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:58"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 113,
+                "end": 125,
+                "quote": "subsequently"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 33,
+                "end": 35,
+                "quote": "随后"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 190,
+                "end": 196,
+                "quote": "relate"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 204,
+                "end": 223,
+                "quote": "those same messages"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 68,
+                "end": 72,
+                "quote": "产生共鸣"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 61,
+                "end": 68,
+                "quote": "这些相同的信息"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:59"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 190,
+                "end": 192,
+                "quote": "to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 60,
+                "end": 72,
+                "quote": "对这些相同的信息产生共鸣"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 232,
+                "end": 241,
+                "quote": "no matter"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 249,
+                "end": 273,
+                "quote": "people are going through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 76,
+                "end": 78,
+                "quote": "无论"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 78,
+                "end": 84,
+                "quote": "人们正在经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:60"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 231,
+                "end": 235,
+                "quote": "what"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:2",
+                "start": 76,
+                "end": 86,
+                "quote": "无论人们正在经历什么"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 0,
+                "end": 9,
+                "quote": "The choir"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 93,
+                "end": 115,
+                "quote": "of a group of children"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 0,
+                "end": 5,
+                "quote": "这支合唱团"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 23,
+                "end": 49,
+                "quote": "由一群在2002年盐湖城冬奥会上演唱时相识的孩子组成"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:61"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 76,
+                "end": 84,
+                "quote": "consists"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 47,
+                "end": 49,
+                "quote": "组成"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 249,
+                "end": 271,
+                "quote": "signature song of them"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 182,
+                "end": 208,
+                "quote": "In addition to As You Wish"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 71,
+                "end": 75,
+                "quote": "代表曲目"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 50,
+                "end": 56,
+                "quote": "除了《如愿》"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:62"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 234,
+                "end": 235,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 69,
+                "end": 71,
+                "quote": "一首"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 41,
+                "end": 64,
+                "quote": "Fukuda and the children"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 65,
+                "end": 74,
+                "quote": "teared up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 12,
+                "end": 18,
+                "quote": "福田和孩子们"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 18,
+                "end": 22,
+                "quote": "热泪盈眶"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:63"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 89,
+                "end": 95,
+                "quote": "waving"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 29,
+                "end": 31,
+                "quote": "挥手"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 196,
+                "end": 200,
+                "quote": "felt"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 111,
+                "end": 126,
+                "quote": "to the audience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 56,
+                "end": 58,
+                "quote": "感到"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 58,
+                "end": 61,
+                "quote": "与观众"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:64"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 194,
+                "end": 203,
+                "quote": "connected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 61,
+                "end": 65,
+                "quote": "心意相通"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 294,
+                "end": 305,
+                "quote": "our message"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 323,
+                "end": 330,
+                "quote": "by them"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 282,
+                "end": 293,
+                "quote": "I felt that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 85,
+                "end": 92,
+                "quote": "我们传递的信息"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 92,
+                "end": 95,
+                "quote": "被他们"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 82,
+                "end": 85,
+                "quote": "我感到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:65"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 292,
+                "end": 304,
+                "quote": "was received"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:4",
+                "start": 92,
+                "end": 99,
+                "quote": "被他们接收到了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:56"
+            ],
+            "selectedSentenceId": "grammar-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 81,
+                "end": 116,
+                "quote": "The chorus of As You Wish resounded"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 145,
+                "end": 178,
+                "quote": "passers-by were surprised to find"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 197,
+                "end": 224,
+                "quote": "was performed by a US choir"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:1",
+                "start": 28,
+                "end": 83,
+                "quote": "《如愿》的副歌在天坛回响，路人们惊讶地发现，这首中文歌竟是由一支美国合唱团——“同一个声音”儿童合唱团演唱的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:61"
+            ],
+            "selectedSentenceId": "grammar-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 0,
+                "end": 9,
+                "quote": "The choir"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 76,
+                "end": 107,
+                "quote": "consists of a group of children"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 108,
+                "end": 129,
+                "quote": "who met while singing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:grammar-fill:3",
+                "start": 0,
+                "end": 50,
+                "quote": "这支合唱团肩负着用孩子们的声音激励世界的使命，由一群在2002年盐湖城冬奥会上演唱时相识的孩子组成。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:56": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "passer-by",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "passers-by",
+      "role": null,
+      "similarityProfile": {
+        "route": "sentence-number-agreement",
+        "features": []
+      },
+      "reason": "空格作并列分句的主语，谓语是复数（were surprised），所以提示词（passer-by）要变复数。复合名词的复数加在中心词（passer）上，写成（passers-by）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "were surprised to find",
+          "signalSide": "passage",
+          "relation": "并列分句缺主语，谓语用复数（were），主语要用复数名词。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:57": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "infect",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
+      "answer": "infectious",
+      "role": null,
+      "similarityProfile": {
+        "route": "true-derived-adjective",
+        "features": []
+      },
+      "reason": "空格夹在物主代词（Their）和名词「歌声」（singing）之间，修饰歌声，需要形容词。动词（infect）的形容词是（infectious），意为“有感染力的”，与歌声随后爆红相合。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "singing",
+          "signalSide": "passage",
+          "relation": "空格修饰名词歌声，要用形容词。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "Their",
+          "signalSide": "passage",
+          "relation": "物主代词后、名词前是定语的位置。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:58": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "subsequent",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "subsequently",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰谓语「在网上传开」（spread online），需要副词，把形容词（subsequent）变成（subsequently），表示人们围过来之后视频随即传开。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "spread online",
+          "signalSide": "passage",
+          "relation": "空格修饰谓语动词传开，要用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:59": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把宾语「这些相同的信息」（those same messages）接到动词「产生共鸣」（relate）上。表示对某事有共鸣，动词（relate）后用介词（to）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "relate",
+          "signalSide": "passage",
+          "relation": "动词表示产生共鸣，后面接介词引出对象。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "those same messages",
+          "signalSide": "passage",
+          "relation": "这些信息是产生共鸣的对象，作介词宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:60": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "answer": "what",
+      "role": null,
+      "similarityProfile": {
+        "route": "concession",
+        "features": []
+      },
+      "reason": "空格与（no matter）一起引导让步状语从句，修饰后面的主句「这首歌都能打动他们」。从句里短语动词（going through）缺宾语，指人们经历的事情，所以用（what）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "no matter",
+          "signalSide": "passage",
+          "relation": "引导让步状语从句，表示无论……。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "people are going through",
+          "signalSide": "passage",
+          "relation": "从句中经历（going through）后缺宾语，要用（what）充当。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:61": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "consist",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "consists",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格是主句谓语，主语是单数的「合唱团」（The choir），两个逗号之间的介词短语（with its mission …）只是插入修饰。介绍合唱团由谁组成是现在仍成立的情况，用一般现在时第三人称单数（consists）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The choir",
+          "signalSide": "passage",
+          "relation": "主语是单数名词，谓语用第三人称单数。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "of a group of children",
+          "signalSide": "passage",
+          "relation": "由……组成，用主动形式（consist of）。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:62": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-identity-category",
+        "features": [
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词「代表曲目」（signature song）。除了《如愿》，这首歌也（also）是他们几首代表曲目中的一首，需要不定冠词；（signature）以辅音音素开头，用（a）。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "signature song of them",
+          "signalSide": "passage",
+          "relation": "是他们代表曲目中的一首，表示类别中的一个。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "In addition to As You Wish",
+          "signalSide": "passage",
+          "relation": "除了《如愿》还有这首，说明代表曲目不止一首。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:63": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "wave",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "waving",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "空格作伴随状语，逻辑主语是「福田和孩子们」（Fukuda and the children），挥手告别和热泪盈眶（teared up）同时发生，二者是主动关系，用现在分词（waving）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Fukuda and the children",
+          "signalSide": "passage",
+          "relation": "句子主语就是挥手的人，分词与主语是主动关系。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "teared up",
+          "signalSide": "passage",
+          "relation": "挥手与热泪盈眶同时发生，作伴随状语。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:64": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "connect",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "connected",
+      "role": "predicative",
+      "similarityProfile": {
+        "route": "predicative-participle-state",
+        "features": []
+      },
+      "reason": "空格作系动词「感到」（felt）的表语，说明福田的状态。主语「我」（I）是被连接到观众（to the audience）一方的，表示所处的状态，用过去分词（connected）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "felt",
+          "signalSide": "passage",
+          "relation": "系动词后接表语，说明主语的感受。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to the audience",
+          "signalSide": "passage",
+          "relation": "与观众相连（connected to），表示所处的状态。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:65": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "receive",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was received",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "空格是宾语从句（that our message … by them）的谓语。信息是被他们接收的（by them），用被动语态；主句谓语（felt）是过去时，从句主语（our message）是单数，填（was received）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "our message",
+          "signalSide": "passage",
+          "relation": "从句主语是单数，且是被接收的一方。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by them",
+          "signalSide": "passage",
+          "relation": "介词（by）引出动作执行者，说明用被动语态。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "I felt that",
+          "signalSide": "passage",
+          "relation": "主句用过去时，从句谓语随之用过去时。"
+        }
+      ]
+    }
+  }
+}

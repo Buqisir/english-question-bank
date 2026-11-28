@@ -1,0 +1,2006 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:cloze": {
+      "overview": "作者回忆2016年在约旦山谷与牧羊少年费萨尔的一场对话：对方先夸他球技，又笑着承认他踢得差、称赞他陪孩子玩的好心，还送他一句施与受的格言，让作者相信世界大体美好，并感激旅途中的这类对话。",
+      "fullTranslationZh": "我们如何衡量怎样才算一场好的对话？是看我们笑了多少次吗？还是由我们事后的感受来界定——那些话语对我们的影响有多深？有一场对话，我几乎能在脑海里逐字逐句地重放。这些话甚至改变了我的人生轨迹。\n2016年，我走进约旦的一个小山谷。一个名叫费萨尔的小男孩看到我在和几个孩子踢足球，就走到我跟前。\n“我看见你踢球了，”他对我说，“你踢得很好。”\n“谢谢，”我回答，“不过你太过奖了。我踢得并不好。”\n“哦，是的，”他说，“你的球技很糟糕。不过你肯陪男孩们玩，真是好心。”\n他跟我讲了他的两份工作——一份是在山上放羊，一份是照料游客。他说，放羊要轻松些。后来，在思考这个世界是什么样子时，他告诉我一句格言：“给予时不必记挂；接受时不可忘记。”\n费萨尔的成长背景和我的大不相同。然而他却秉持着这种令人钦佩的人生哲学，而且我旅行得越多，就越发现这个世界大体上是美好的。把我们连在一起的东西比把我们分开的更多——对此我深信不疑。\n我将再次有机会参与这些非凡的对话——每一场都会独一无二，甚至可能在我的生命中留下印记——这件事依然是旅行中最让我兴奋的期待之一。为了这种可能，我永远心怀感激。",
+      "mainLine": {
+        "theme": {
+          "text": "旅途中的真诚交谈让作者相信，人与人相连多于相隔（There is more that connects us than divides us）。",
+          "quote": "There is more that connects us than divides us"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+            "text": "作者提出好对话看事后感受，说有一场对话改变了自己。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+            "text": "2016年在约旦山谷，男孩费萨尔看到作者踢球后走上前来。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3",
+            "text": "费萨尔开口夸作者球踢得好。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+            "text": "作者道谢，谦虚地说自己踢得并不好。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+            "text": "费萨尔笑着承认他球技差，却称赞他肯陪孩子们玩。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+            "text": "费萨尔谈起两份工作，又在思考世事时说出一句格言。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+            "text": "作者感叹背景迥异的费萨尔有令人钦佩的人生信条。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+            "text": "接上段，作者越旅行越确信世界大体美好、人心相通。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+            "text": "作者期待再有这样的对话，并为此永远心怀感激。"
+          }
+        ],
+        "emotion": "回味→谦虚→被打动→确信→感激"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+          "sourceText": "The fact that I will again have the __52__ to be part of these remarkable conversations – each will be unique, and may even leave a __53__ in my life – is still one of the most exciting __54__ of travel for me.",
+          "displayText": "The fact that I will again have the chance to be part of these remarkable conversations – each will be unique, and may even leave a mark in my life – is still one of the most exciting prospects of travel for me.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:52",
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:53",
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:54"
+          ],
+          "translationZh": "我将再次有机会参与这些非凡的对话——每一场都会独一无二，甚至可能在我的生命中留下印记——这件事依然是旅行中最让我兴奋的期待之一。",
+          "analysisZh": "主干是 The fact … is still one of the most exciting prospects of travel for me，即“这件事仍是旅行中最让我兴奋的期待之一”。that 引导的从句说明 fact 的具体内容：我将再次有机会参与这些非凡的对话。两个破折号之间是插入语，补充每次对话都独一无二，甚至可能在生命中留下印记。主语很长，读时先跳过从句和插入语，找到谓语 is。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 8,
+              "quote": "The fact"
+            },
+            {
+              "start": 9,
+              "end": 42,
+              "quote": "that I will again have the chance"
+            },
+            {
+              "start": 150,
+              "end": 203,
+              "quote": "is still one of the most exciting prospects of travel"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1"
+              ],
+              "start": 0,
+              "end": 94,
+              "quote": "我们如何衡量怎样才算一场好的对话？是看我们笑了多少次吗？还是由我们事后的感受来界定——那些话语对我们的影响有多深？有一场对话，我几乎能在脑海里逐字逐句地重放。这些话甚至改变了我的人生轨迹。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2"
+              ],
+              "start": 95,
+              "end": 144,
+              "quote": "2016年，我走进约旦的一个小山谷。一个名叫费萨尔的小男孩看到我在和几个孩子踢足球，就走到我跟前。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3"
+              ],
+              "start": 145,
+              "end": 168,
+              "quote": "“我看见你踢球了，”他对我说，“你踢得很好。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4"
+              ],
+              "start": 169,
+              "end": 195,
+              "quote": "“谢谢，”我回答，“不过你太过奖了。我踢得并不好。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5"
+              ],
+              "start": 196,
+              "end": 231,
+              "quote": "“哦，是的，”他说，“你的球技很糟糕。不过你肯陪男孩们玩，真是好心。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6"
+              ],
+              "start": 232,
+              "end": 316,
+              "quote": "他跟我讲了他的两份工作——一份是在山上放羊，一份是照料游客。他说，放羊要轻松些。后来，在思考这个世界是什么样子时，他告诉我一句格言：“给予时不必记挂；接受时不可忘记。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8"
+              ],
+              "start": 317,
+              "end": 406,
+              "quote": "费萨尔的成长背景和我的大不相同。然而他却秉持着这种令人钦佩的人生哲学，而且我旅行得越多，就越发现这个世界大体上是美好的。把我们连在一起的东西比把我们分开的更多——对此我深信不疑。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9"
+              ],
+              "start": 407,
+              "end": 486,
+              "quote": "我将再次有机会参与这些非凡的对话——每一场都会独一无二，甚至可能在我的生命中留下印记——这件事依然是旅行中最让我兴奋的期待之一。为了这种可能，我永远心怀感激。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+            "text": "How do we measure what makes a good conversation? Is it by how many times we laugh? Or is it defined by how we feel afterwards – how deeply the words have affected us? There is one conversation where I can replay almost word-for-word in my head. These words have even changed the course of my life."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+            "text": "In 2016, I walked into a small valley in Jordan. A young boy called Faisal saw me kicking football with some kids and approached me."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+            "text": "“Thanks,” I replied, “but you’re being too generous. I was not good at it.”"
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+            "text": "“Oh yes,” he said. “Your skills are terrible. But it was good of you to play with the boys.”"
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+            "text": "He told me about his two jobs – one looking after sheep in the hills, and one looking after tourists. The sheep were easier, he said. Later, as he reflected on how the world was, he told me a saying: “Give without remembering; take without forgetting.”"
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+            "text": "Faisal’s background was quite different from mine. And yet he held this admirable philosophy, and the more I"
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+            "text": "travel, the more I see that the world is mostly a good place. There is more that connects us than divides us – of that, I’m certain."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+            "text": "The fact that I will again have the chance to be part of these remarkable conversations – each will be unique, and may even leave a mark in my life – is still one of the most exciting prospects of travel for me. For that possibility, I’m forever grateful."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 0,
+                "end": 49,
+                "quote": "How do we measure what makes a good conversation?"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 103,
+                "end": 125,
+                "quote": "how we feel afterwards"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 0,
+                "end": 17,
+                "quote": "我们如何衡量怎样才算一场好的对话？"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 30,
+                "end": 38,
+                "quote": "由我们事后的感受"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:41"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 93,
+                "end": 100,
+                "quote": "defined"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 39,
+                "end": 41,
+                "quote": "界定"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 128,
+                "end": 153,
+                "quote": "how deeply the words have"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 43,
+                "end": 56,
+                "quote": "那些话语对我们的影响有多深"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:42"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 155,
+                "end": 163,
+                "quote": "affected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 51,
+                "end": 53,
+                "quote": "影响"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 210,
+                "end": 241,
+                "quote": "almost word-for-word in my head"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 64,
+                "end": 76,
+                "quote": "几乎能在脑海里逐字逐句地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:43"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 206,
+                "end": 212,
+                "quote": "replay"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 76,
+                "end": 78,
+                "quote": "重放"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 243,
+                "end": 264,
+                "quote": "These words have even"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 272,
+                "end": 293,
+                "quote": "the course of my life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 79,
+                "end": 84,
+                "quote": "这些话甚至"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 87,
+                "end": 93,
+                "quote": "我的人生轨迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:44"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 268,
+                "end": 275,
+                "quote": "changed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 84,
+                "end": 86,
+                "quote": "改变"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+                "start": 75,
+                "end": 113,
+                "quote": "saw me kicking football with some kids"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3",
+                "start": 30,
+                "end": 40,
+                "quote": "he told me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+                "start": 29,
+                "end": 41,
+                "quote": "看到我在和几个孩子踢足球"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3",
+                "start": 10,
+                "end": 14,
+                "quote": "他对我说"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:45"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+                "start": 118,
+                "end": 128,
+                "quote": "approached"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:2",
+                "start": 43,
+                "end": 48,
+                "quote": "走到我跟前"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3",
+                "start": 43,
+                "end": 61,
+                "quote": "You were very good"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+                "start": 51,
+                "end": 71,
+                "quote": "I was not good at it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:3",
+                "start": 16,
+                "end": 21,
+                "quote": "你踢得很好"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+                "start": 18,
+                "end": 24,
+                "quote": "我踢得并不好"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:46"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+                "start": 43,
+                "end": 51,
+                "quote": "generous"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:4",
+                "start": 14,
+                "end": 16,
+                "quote": "过奖"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "start": 1,
+                "end": 7,
+                "quote": "Oh yes"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "start": 44,
+                "end": 88,
+                "quote": "But it was good of you to play with the boys"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "start": 1,
+                "end": 5,
+                "quote": "哦，是的"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "start": 19,
+                "end": 33,
+                "quote": "不过你肯陪男孩们玩，真是好心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:47"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "start": 36,
+                "end": 44,
+                "quote": "terrible"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:5",
+                "start": 16,
+                "end": 18,
+                "quote": "糟糕"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 154,
+                "end": 171,
+                "quote": "how the world was"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 173,
+                "end": 192,
+                "quote": "he told me a saying"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 46,
+                "end": 55,
+                "quote": "这个世界是什么样子"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 57,
+                "end": 65,
+                "quote": "他告诉我一句格言"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:48"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 147,
+                "end": 159,
+                "quote": "reflected on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 44,
+                "end": 46,
+                "quote": "思考"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 195,
+                "end": 219,
+                "quote": "Give without remembering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 67,
+                "end": 74,
+                "quote": "给予时不必记挂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:49"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 240,
+                "end": 250,
+                "quote": "forgetting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 80,
+                "end": 82,
+                "quote": "忘记"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 0,
+                "end": 49,
+                "quote": "Faisal’s background was quite different from mine"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 195,
+                "end": 219,
+                "quote": "Give without remembering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 0,
+                "end": 15,
+                "quote": "费萨尔的成长背景和我的大不相同"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:6",
+                "start": 67,
+                "end": 74,
+                "quote": "给予时不必记挂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:50"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 72,
+                "end": 81,
+                "quote": "admirable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 25,
+                "end": 29,
+                "quote": "令人钦佩"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+                "start": 62,
+                "end": 108,
+                "quote": "There is more that connects us than divides us"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+                "start": 111,
+                "end": 131,
+                "quote": "of that, I’m certain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 60,
+                "end": 79,
+                "quote": "把我们连在一起的东西比把我们分开的更多"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 81,
+                "end": 88,
+                "quote": "对此我深信不疑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:51"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:8",
+                "start": 41,
+                "end": 47,
+                "quote": "mostly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:7",
+                "start": 52,
+                "end": 55,
+                "quote": "大体上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 211,
+                "end": 231,
+                "quote": "For that possibility"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 64,
+                "end": 70,
+                "quote": "为了这种可能"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:52"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 36,
+                "end": 42,
+                "quote": "chance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 5,
+                "end": 7,
+                "quote": "机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 115,
+                "end": 131,
+                "quote": "may even leave a"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 272,
+                "end": 293,
+                "quote": "the course of my life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 28,
+                "end": 40,
+                "quote": "甚至可能在我的生命中留下"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:1",
+                "start": 87,
+                "end": 93,
+                "quote": "我的人生轨迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:53"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 132,
+                "end": 136,
+                "quote": "mark"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 40,
+                "end": 42,
+                "quote": "印记"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 14,
+                "end": 31,
+                "quote": "I will again have"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 211,
+                "end": 231,
+                "quote": "For that possibility"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 0,
+                "end": 7,
+                "quote": "我将再次有机会"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 64,
+                "end": 70,
+                "quote": "为了这种可能"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:54"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 184,
+                "end": 193,
+                "quote": "prospects"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 59,
+                "end": 61,
+                "quote": "期待"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 211,
+                "end": 231,
+                "quote": "For that possibility"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 168,
+                "end": 185,
+                "quote": "the most exciting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 64,
+                "end": 70,
+                "quote": "为了这种可能"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 53,
+                "end": 59,
+                "quote": "最让我兴奋的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:55"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 246,
+                "end": 254,
+                "quote": "grateful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 74,
+                "end": 78,
+                "quote": "心怀感激"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:52",
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:53",
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:54"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 0,
+                "end": 8,
+                "quote": "The fact"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 150,
+                "end": 203,
+                "quote": "is still one of the most exciting prospects of travel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-shijiazhuang-2025-m1:cloze:9",
+                "start": 0,
+                "end": 64,
+                "quote": "我将再次有机会参与这些非凡的对话——每一场都会独一无二，甚至可能在我的生命中留下印记——这件事依然是旅行中最让我兴奋的期待之一。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "回味→谦虚→被打动→确信→感激"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:41": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "上一问说靠笑声多少，这一问换个标准，要表示好对话由事后感受来界定。",
+      "find": {
+        "check": "echo",
+        "text": "首句问怎样衡量（measure）好对话，这里换个说法再问，好对话是否由事后感受（how we feel afterwards）来界定。",
+        "quotes": [
+          "measure",
+          "how we feel afterwards"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "界定",
+        "meaning": "判定什么算好对话",
+        "reason": "上一问说靠笑声多少，这一问换个标准，要表示好对话由事后感受来界定。动词看复现：首句问怎样衡量（measure）好对话，这里换个说法再问，好对话是否由事后感受（how we feel afterwards）来界定。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "surrounded",
+          "meaning": "被包围；这里问的是用什么衡量（measure）好对话，感受不是包围对话的东西。",
+          "quote": "measure"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "replaced",
+          "meaning": "被取代；空后由事后感受（by how we feel afterwards）是在给出评判标准，不是说对话被它取代。",
+          "quote": "by how we feel afterwards"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "accompanied",
+          "meaning": "被陪伴；事后的感受（how we feel afterwards）发生在对话之后，谈不上陪伴对话进行。",
+          "quote": "how we feel afterwards"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "by how we feel afterwards",
+          "signalSide": "context-after",
+          "targetText": "is defined by how we feel afterwards",
+          "relation": "空后介词（by）引出评判依据，空格要表示被动的由……界定。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "measure",
+          "signalSide": "context-before",
+          "relation": "首句的衡量（measure）和这里的界定说的是同一件事。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:42": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "解释事后感受指什么，要表示那些话对人的影响有多深。",
+      "find": {
+        "check": "collocation",
+        "text": "程度词有多深（how deeply）修饰动作，主语是那些话（the words），宾语是我们（us），话语深深影响人。",
+        "quotes": [
+          "how deeply",
+          "the words",
+          "us"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "影响",
+        "reason": "解释事后感受指什么，要表示那些话对人的影响有多深。动词看搭配：程度词有多深（how deeply）修饰动作，主语是那些话（the words），宾语是我们（us），话语深深影响人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "annoyed",
+          "meaning": "惹恼；这里在说好对话（a good conversation）的标准，话说得深深惹恼人不是好对话。",
+          "quote": "a good conversation"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "concerned",
+          "meaning": "使担忧；让人深深担忧不能当作衡量好对话（a good conversation）的标准。",
+          "quote": "a good conversation"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "surprised",
+          "meaning": "使吃惊；吃惊是一时的反应，后文说这些话甚至改变人生道路（the course of my life），讲的是长久影响。",
+          "quote": "the course of my life"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "how deeply the words have",
+          "signalSide": "context-before",
+          "targetText": "how deeply the words have affected us",
+          "relation": "话语深深地作用于我们，动词要表示影响。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:43": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者对这次对话记忆犹新，要表示在脑海里把它重新过一遍。",
+      "find": {
+        "check": "collocation",
+        "text": "几乎逐字逐句（almost word-for-word）和在我脑海里（in my head）都说明是把对话原样重放。",
+        "quotes": [
+          "almost word-for-word",
+          "in my head"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "重放",
+        "reason": "作者对这次对话记忆犹新，要表示在脑海里把它重新过一遍。动词看搭配：几乎逐字逐句（almost word-for-word）和在我脑海里（in my head）都说明是把对话原样重放。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "polish",
+          "meaning": "润色；逐字逐句（word-for-word）说明是原样记着，不是在脑中修饰加工。",
+          "quote": "word-for-word"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "interpret",
+          "meaning": "解读；几乎逐字逐句（almost word-for-word）强调记得原话，不是分析它的含义。",
+          "quote": "almost word-for-word"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "rewrite",
+          "meaning": "改写；逐字逐句（word-for-word）就是一字不改，与改写正相反。",
+          "quote": "word-for-word"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "almost word-for-word in my head",
+          "signalSide": "context-after",
+          "targetText": "replay almost word-for-word in my head",
+          "relation": "在脑海中几乎逐字重现，动词要表示重放。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:44": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "递进一步说这些话影响之大，要表示它让作者的人生走向不同。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是人生道路（the course of my life），甚至（even）在上文深深影响（how deeply）之上递进，话语改变了人生方向。",
+        "quotes": [
+          "the course of my life",
+          "even",
+          "how deeply"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "改变",
+        "reason": "递进一步说这些话影响之大，要表示它让作者的人生走向不同。动词看搭配：宾语是人生道路（the course of my life），甚至（even）在上文深深影响（how deeply）之上递进，话语改变了人生方向。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "restricted",
+          "meaning": "限制；作者把它当作难忘的好对话（a good conversation）来讲，说的是好的影响，不是束缚人生。",
+          "quote": "a good conversation"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dominated",
+          "meaning": "支配；说一席话主宰了人生道路（the course of my life）言过其实，作者讲的是让人生转了方向。",
+          "quote": "the course of my life"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "delayed",
+          "meaning": "推迟；人生道路（the course of my life）被推迟，与作者把这次对话当作难忘的好对话相反。",
+          "quote": "the course of my life"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the course of my life",
+          "signalSide": "context-after",
+          "targetText": "changed the course of my life",
+          "relation": "改变人生轨迹是常见搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "even",
+          "signalSide": "context-before",
+          "relation": "甚至表示在深深影响的基础上更进一步。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:45": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "男孩看到作者踢球，要先来到作者身边，才有下面的对话。",
+      "find": {
+        "check": "action-sequence",
+        "text": "先是看见作者踢球（saw me kicking football），接着就对作者说话（he told me），中间是走上前来。",
+        "quotes": [
+          "saw me kicking football",
+          "he told me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "走近",
+        "reason": "男孩看到作者踢球，要先来到作者身边，才有下面的对话。动词看动作顺序：先是看见作者踢球（saw me kicking football），接着就对作者说话（he told me），中间是走上前来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "challenged",
+          "meaning": "向他挑战；男孩接着夸作者踢得好（You were very good），是来搭话，不是来比赛。",
+          "quote": "You were very good"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "assisted",
+          "meaning": "帮助；男孩接下来只是开口夸作者（he told me），是来搭话而不是帮忙。",
+          "quote": "he told me"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "consulted",
+          "meaning": "向他请教；男孩是来夸作者（You were very good），没有向他请教问题。",
+          "quote": "You were very good"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "saw me kicking football",
+          "signalSide": "context-before",
+          "targetText": "saw me kicking football with some kids and approached me",
+          "relation": "看见在先，走近在后，两个动作由并列连词（and）连起来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "he told me",
+          "signalSide": "context-after",
+          "relation": "走上前之后才有男孩对作者说话。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:46": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:46",
+      "blankNo": 46,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "作者谦虚地回应夸奖，要表示对方夸得太过了。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "对方刚夸作者踢得好（You were very good），作者却说自己踢得不好（I was not good at it），是说对方夸得太大方。",
+        "quotes": [
+          "You were very good",
+          "I was not good at it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "慷慨大方的",
+        "meaning": "夸奖过头",
+        "reason": "作者谦虚地回应夸奖，要表示对方夸得太过了。形容词看语境义：对方刚夸作者踢得好（You were very good），作者却说自己踢得不好（I was not good at it），是说对方夸得太大方。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "humorous",
+          "meaning": "幽默的；作者回应的是一句夸奖（You were very good），谦虚的是夸得过头，不是嫌对方爱开玩笑。",
+          "quote": "You were very good"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "anxious",
+          "meaning": "焦虑的；男孩只是平静地夸作者（You were very good），作者无须说他太焦虑。",
+          "quote": "You were very good"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curious",
+          "meaning": "好奇的；作者接着说自己踢得不好（I was not good at it），是在回应夸奖，与对方好不好奇无关。",
+          "quote": "I was not good at it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "you’re being too",
+          "signalSide": "context-before",
+          "targetText": "you’re being too generous",
+          "relation": "说对方太大方（too generous），在这里是嫌对方夸得过头。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I was not good at it",
+          "signalSide": "context-after",
+          "relation": "作者否认自己踢得好，可见是在说对方过奖。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:47": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "main",
+      "context": "男孩顺着作者的自谦承认他球技差，为下文转而夸他好心作铺垫。",
+      "find": {
+        "check": "affect",
+        "text": "男孩先附和（Oh yes）作者说的踢得不好（I was not good at it），后面用但是（But）转到夸他，前面应是负面评价。",
+        "quotes": [
+          "Oh yes",
+          "I was not good at it",
+          "But"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "糟糕的",
+        "reason": "男孩顺着作者的自谦承认他球技差，为下文转而夸他好心作铺垫。形容词看情感：男孩先附和（Oh yes）作者说的踢得不好（I was not good at it），后面用但是（But）转到夸他，前面应是负面评价。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "unique",
+          "meaning": "独特的；是夸奖，接在附和（Oh yes）作者踢得不好之后自相矛盾。",
+          "quote": "Oh yes"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "practical",
+          "meaning": "实用的；是褒义，男孩附和的是作者踢得不好（I was not good at it）。",
+          "quote": "I was not good at it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "diverse",
+          "meaning": "多样的；夸球技多样，与后面但是（But）转去称赞他好心构不成转折。",
+          "quote": "But"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Your skills are",
+          "signalSide": "context-before",
+          "targetText": "Your skills are terrible",
+          "relation": "球技很糟，形容词修饰作者的技术。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "But it was good of you",
+          "signalSide": "context-after",
+          "relation": "但是（But）之后转为称赞，前面应是负面评价。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:48": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:48",
+      "blankNo": 48,
+      "pos": "phrase",
+      "role": "main",
+      "context": "男孩说出格言之前在想世事，要表示对世界的思考和感悟。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "对象是世界是什么样子（how the world was），接着他说出一句格言（a saying），是先思考再总结。",
+        "quotes": [
+          "how the world was",
+          "a saying"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "思考",
+        "reason": "男孩说出格言之前在想世事，要表示对世界的思考和感悟。词组看语境义：对象是世界是什么样子（how the world was），接着他说出一句格言（a saying），是先思考再总结。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "complained about",
+          "meaning": "抱怨；他随后说的格言（Give without remembering）劝人施与不求回报，不是在抱怨世道。",
+          "quote": "Give without remembering"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "looked into",
+          "meaning": "调查；世界是什么样子（how the world was）不是男孩去调查的事，他是在谈感悟。",
+          "quote": "how the world was"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "benefited from",
+          "meaning": "从中受益；受益于世道接不上随后说出格言（he told me a saying），这里是在谈人生感悟。",
+          "quote": "he told me a saying"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "how the world was",
+          "signalSide": "context-after",
+          "targetText": "reflected on how the world was",
+          "relation": "思考世界是怎样的，宾语是一个抽象问题。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "he told me a saying",
+          "signalSide": "context-after",
+          "relation": "思考之后说出格言，前后连贯。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:49": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "格言前后对称，前半说施与不记挂，后半要说受惠不能忘。",
+      "find": {
+        "check": "echo",
+        "text": "分号前后对称，给予（Give）对接受（take），不记得（without remembering）对的是它的反义词不忘记。",
+        "quotes": [
+          "Give",
+          "take",
+          "without remembering"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "忘记",
+        "reason": "格言前后对称，前半说施与不记挂，后半要说受惠不能忘。动词看复现：分号前后对称，给予（Give）对接受（take），不记得（without remembering）对的是它的反义词不忘记。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "thinking",
+          "meaning": "思考；受惠时不去思考，与前半句不记得（without remembering）构不成反义对照。",
+          "quote": "without remembering"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "noticing",
+          "meaning": "注意到；受惠时不去留意，与不记得（without remembering）对不上，格言劝的是记住恩惠。",
+          "quote": "without remembering"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "announcing",
+          "meaning": "宣布；受惠时不宣扬，与前半句给予（Give）时不记得构不成反义对照。",
+          "quote": "Give"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Give without remembering",
+          "signalSide": "context-before",
+          "targetText": "take without forgetting",
+          "relation": "前后半句对称，不记得（remembering）与不忘记（forgetting）反义复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "take without",
+          "signalSide": "context-before",
+          "targetText": "take without forgetting",
+          "relation": "不（without）后接动名词，说接受时不要忘记。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:50": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:50",
+      "blankNo": 50,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者评价男孩的人生信条，要一个褒义的赞许。",
+      "find": {
+        "check": "affect",
+        "text": "然而（And yet）承接背景迥异（quite different from mine），他仍持有劝人施恩不图报（Give without remembering）的信条，值得赞赏。",
+        "quotes": [
+          "And yet",
+          "quite different from mine",
+          "Give without remembering"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "令人钦佩的",
+        "reason": "作者评价男孩的人生信条，要一个褒义的赞许。形容词看情感：然而（And yet）承接背景迥异（quite different from mine），他仍持有劝人施恩不图报（Give without remembering）的信条，值得赞赏。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "complex",
+          "meaning": "复杂的；这句格言（Give without remembering）短小对称，作者赞的是它的境界，不是说它复杂。",
+          "quote": "Give without remembering"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "adjustable",
+          "meaning": "可调整的；作者称它为人生信条（philosophy）并加以赞赏，不是说它可以随时改动。",
+          "quote": "philosophy"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "flexible",
+          "meaning": "灵活的；格言讲施恩不图报（Give without remembering），作者赞它可贵，不是说它能变通。",
+          "quote": "Give without remembering"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "philosophy",
+          "signalSide": "context-after",
+          "targetText": "this admirable philosophy",
+          "relation": "形容词修饰人生信条，表评价。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "And yet",
+          "signalSide": "context-before",
+          "relation": "背景不同却仍持有这种信条，引出赞许。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:51": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:51",
+      "blankNo": 51,
+      "pos": "adverb",
+      "role": "main",
+      "context": "作者越旅行越确信，要说世界大体上是美好的，承接后句的判断。",
+      "find": {
+        "check": "echo",
+        "text": "后句说相连多于分歧（more that connects us than divides us），作者对此确信（I’m certain），即世界大部分是好的。",
+        "quotes": [
+          "more that connects us than divides us",
+          "I’m certain"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "大部分地",
+        "meaning": "大体上",
+        "reason": "作者越旅行越确信，要说世界大体上是美好的，承接后句的判断。副词看复现：后句说相连多于分歧（more that connects us than divides us），作者对此确信（I’m certain），即世界大部分是好的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rarely",
+          "meaning": "很少；作者确信（I’m certain）相连多于分歧，是肯定世界美好，与很少相反。",
+          "quote": "I’m certain"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "probably",
+          "meaning": "可能；后文说对此确信（I’m certain），与可能的不确定语气矛盾。",
+          "quote": "I’m certain"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "merely",
+          "meaning": "仅仅；后句强调相连多于分歧（more that connects us than divides us），是赞叹，不是贬低成只不过。",
+          "quote": "more that connects us than divides us"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a good place",
+          "signalSide": "context-after",
+          "targetText": "is mostly a good place",
+          "relation": "副词修饰表语，说世界大体上是好地方。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "more that connects us than divides us",
+          "signalSide": "context-after",
+          "relation": "相连多于分歧，说的正是大部分是好的。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:52": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者期待旅途中再遇到这类对话，要一个表示机会的名词。",
+      "find": {
+        "check": "echo",
+        "text": "下一句的那种可能性（that possibility）回指这里，作者将再次（again）有机会参与非凡的对话。",
+        "quotes": [
+          "that possibility",
+          "again"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "机会",
+        "reason": "作者期待旅途中再遇到这类对话，要一个表示机会的名词。名词看复现：下一句的那种可能性（that possibility）回指这里，作者将再次（again）有机会参与非凡的对话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "patience",
+          "meaning": "耐心；下一句称之为那种可能性（that possibility），回指的是机会，不是耐心。",
+          "quote": "that possibility"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "courage",
+          "meaning": "勇气；下一句称它为那种可能性（that possibility），说的是能否遇上，不是敢不敢参与。",
+          "quote": "that possibility"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "right",
+          "meaning": "权利；下一句称之为可能性（that possibility），是旅途中可能遇上的事，不是一种权利。",
+          "quote": "that possibility"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to be part of",
+          "signalSide": "context-after",
+          "targetText": "the chance to be part of",
+          "relation": "有机会（have the chance）后接不定式，说有机会参与对话。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "that possibility",
+          "signalSide": "context-after",
+          "relation": "可能性回指前面的机会。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:53": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "detail",
+      "context": "插入语说这类对话的分量，要表示在生命中留下长久的痕迹。",
+      "find": {
+        "check": "collocation",
+        "text": "留下（leave）和在我生命中（in my life）搭配，留下印记，呼应首段的人生道路（the course of my life）。",
+        "quotes": [
+          "leave",
+          "in my life",
+          "the course of my life"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "印记",
+        "meaning": "持久的影响",
+        "reason": "插入语说这类对话的分量，要表示在生命中留下长久的痕迹。名词看搭配：留下（leave）和在我生命中（in my life）搭配，留下印记，呼应首段的人生道路（the course of my life）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "pity",
+          "meaning": "遗憾；作者把这些对话称为非凡的（remarkable），留下的是好的影响，不是遗憾。",
+          "quote": "remarkable"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "label",
+          "meaning": "标签；非凡的对话（remarkable conversations）带来的是触动，不是给人贴上某种标签。",
+          "quote": "remarkable conversations"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "warning",
+          "meaning": "警告；对话被称为非凡的（remarkable），作者满怀期待，不是被警告。",
+          "quote": "remarkable"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "may even leave a",
+          "signalSide": "context-before",
+          "targetText": "leave a mark in my life",
+          "relation": "留下（leave）与印记（mark）搭配，表示在生命里留下痕迹。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:54": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者把将来再有这类对话看成旅行的盼头，要一个指未来之事的名词。",
+      "find": {
+        "check": "echo",
+        "text": "主语说的是将来（will again have）的事，下一句又称它为那种可能性（that possibility），指的是盼头。",
+        "quotes": [
+          "will again have",
+          "that possibility"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "前景",
+        "meaning": "期待的事",
+        "reason": "作者把将来再有这类对话看成旅行的盼头，要一个指未来之事的名词。名词看复现：主语说的是将来（will again have）的事，下一句又称它为那种可能性（that possibility），指的是盼头。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "breakthroughs",
+          "meaning": "突破；再次参与对话（be part of these remarkable conversations）是作者盼着的事，不是取得的突破。",
+          "quote": "be part of these remarkable conversations"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "adventures",
+          "meaning": "冒险经历；这里说的是将来（will again have）的可能，不是已经有过的冒险。",
+          "quote": "will again have"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "memories",
+          "meaning": "回忆；回忆指过去，而这里说的是将来（will again have）的事。",
+          "quote": "will again have"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the most exciting",
+          "signalSide": "context-before",
+          "targetText": "one of the most exciting prospects of travel",
+          "relation": "最令人兴奋的前景之一，修饰名词。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I will again have",
+          "signalSide": "context-before",
+          "relation": "将来时说明是尚未发生、令人期待的事。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:55": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:55",
+      "blankNo": 55,
+      "pos": "adjective",
+      "role": "main",
+      "context": "全文结尾，作者对旅途中会有这类对话心存感激。",
+      "find": {
+        "check": "affect",
+        "text": "作者为那种可能性（For that possibility）而高兴，前面称它最令人兴奋（most exciting），又说永远（forever），是心怀感激。",
+        "quotes": [
+          "For that possibility",
+          "most exciting",
+          "forever"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "感激的",
+        "reason": "全文结尾，作者对旅途中会有这类对话心存感激。形容词看情感：作者为那种可能性（For that possibility）而高兴，前面称它最令人兴奋（most exciting），又说永远（forever），是心怀感激。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "qualified",
+          "meaning": "有资格的；为那种可能性（For that possibility）说自己有资格，接不上前面的最令人兴奋（most exciting）。",
+          "quote": "most exciting"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "suitable",
+          "meaning": "合适的；为那种可能性（For that possibility）说自己合适，与作者满怀期待的语气不合。",
+          "quote": "For that possibility"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "responsible",
+          "meaning": "负责的；旅途中偶遇的对话，作者谈不上为它负责，前文表达的是兴奋（most exciting）。",
+          "quote": "most exciting"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "For that possibility",
+          "signalSide": "context-before",
+          "targetText": "For that possibility, I’m forever grateful",
+          "relation": "为某事（For）心怀感激，原因就是那种可能性。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "most exciting",
+          "signalSide": "context-before",
+          "relation": "前句的兴奋之情引出结尾的感激。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    }
+  }
+}

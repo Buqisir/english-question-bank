@@ -1,0 +1,136 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Alex,\n\nHow are you? I’m writing to share some exciting news: I took a paper-cutting course this winter vacation and really enjoyed it.\n\nA local artist taught us the basics of this traditional Chinese art. We learned to fold red paper, draw simple patterns and cut them out with scissors. Finally, I could cut out a “double happiness” character and a little snake, since 2025 is the Year of the Snake.\n\nThe course gave me more than a new skill. At first my cuts were messy, but I kept practising and became more patient. I also learned that each pattern carries a good wish, which helped me understand our festivals better.\n\nI’ll send you one of my works soon!\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给外国朋友的电子邮件，沿用题面给出的称呼 Dear Alex, 和落款 Yours, / Li Hua",
+        "personTense": "第一人称；课程已经结束，讲经历用一般过去时，谈现在的体会和打算用一般现在时、一般将来时",
+        "readerTone": "写给外国朋友，语气亲切、轻松，像聊天一样分享；对方不了解剪纸，要说得具体好懂",
+        "goal": "让 Alex 知道我寒假学剪纸学了什么、有什么收获和感受，并愿意继续听我分享"
+      },
+      "taskRequires": [
+        "介绍剪纸课程学习的内容",
+        "说明自己的收获与感想"
+      ],
+      "thisEssayChooses": "开头直接点明寒假上了剪纸课；主体一段用“折纸、画样、剪纸”三个动作写学习内容，并以剪出的“囍”字和应 2025 蛇年的小蛇作成果；另一段写从剪坏到耐心的变化，以及懂得每个图案都寄托祝愿；结尾答应寄作品给朋友。"
+    },
+    "standard": {
+      "essay": "Dear Alex,\n\nHow are you? I’m writing to share some exciting news: I took a paper-cutting course this winter vacation and really enjoyed it.\n\nA local artist taught us the basics of this traditional Chinese art. We learned to fold red paper, draw simple patterns and cut them out with scissors. Finally, I could cut out a “double happiness” character and a little snake, since 2025 is the Year of the Snake.\n\nThe course gave me more than a new skill. At first my cuts were messy, but I kept practising and became more patient. I also learned that each pattern carries a good wish, which helped me understand our festivals better.\n\nI’ll send you one of my works soon!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "介绍剪纸课程学习的内容",
+          "quote": "We learned to fold red paper, draw simple patterns and cut them out with scissors."
+        },
+        {
+          "point": "说明自己的收获与感想",
+          "quote": "At first my cuts were messy, but I kept practising and became more patient."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "问候后马上点题：寒假上了剪纸课，而且很喜欢。",
+          "items": [
+            {
+              "quote": "I’m writing to share some exciting news",
+              "explain": "朋友之间开门见山说“有好消息分享”，Alex 一读就知道这封信要聊什么，比“I’m writing to tell you something”多了一点期待感。"
+            },
+            {
+              "quote": "I took a paper-cutting course this winter vacation and really enjoyed it",
+              "explain": "一句话交代事件和态度，后文的“学了什么”“有什么收获”都从这里展开。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：学习的内容，从基本功写到最后的成果。",
+          "items": [
+            {
+              "quote": "the basics of this traditional Chinese art",
+              "explain": "外国朋友不一定知道剪纸是什么，用 traditional Chinese art 顺手交代它的身份，不用另写一句介绍。"
+            },
+            {
+              "quote": "fold red paper, draw simple patterns and cut them out with scissors",
+              "explain": "用三个动词按步骤写，把“学了剪纸”变成看得见的过程；三个动作并列，句子长而不乱。"
+            },
+            {
+              "quote": "since 2025 is the Year of the Snake",
+              "explain": "用 since 说明为什么剪小蛇：2025 年是蛇年，成果和这个寒假过年联系起来，细节显得真实。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：收获与感想，一个写自身变化，一个写对文化的认识。",
+          "items": [
+            {
+              "quote": "The course gave me more than a new skill.",
+              "explain": "段首句先说收获不止技能，读者知道下面要讲技能以外更深一层的收获，这句就是本段的提纲。"
+            },
+            {
+              "quote": "At first my cuts were messy, but I kept practising",
+              "explain": "先写剪坏，再写坚持，用 but 写出变化，“变得更耐心”这个收获才有依据，不是空喊“我收获很多”。"
+            },
+            {
+              "quote": "which helped me understand our festivals better",
+              "explain": "which 接住前面“每个图案都有好的祝愿”这件事，说明它带来的认识，感想落到节日文化上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "收束：给朋友一个具体的下一步。",
+          "items": [
+            {
+              "quote": "I’ll send you one of my works soon",
+              "explain": "结尾答应寄作品，信写完朋友有东西可期待、可回应，比“希望你也来学”的套话更像朋友间的话。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I’m writing to share some exciting news: …",
+          "function": "给朋友写信分享经历时的开头，冒号后直接说是什么事。"
+        },
+        {
+          "expression": "… gave me more than a new skill.",
+          "function": "引出“收获不止于技能”，用来过渡到成长和感想。"
+        },
+        {
+          "expression": "At first …, but I kept practising, and …",
+          "function": "用前后对比写出自己的变化，让收获有过程、有依据。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Alex,\n\nHow have you been? Guess what? I spent part of my winter vacation on a paper-cutting course, and it turned out to be the highlight of my holiday.\n\nOur teacher, a paper-cutting artist from my town, started with the basics: how to fold red paper, sketch a pattern and follow the lines with small, sharp scissors. My proudest work is a little snake surrounded by flowers. It now hangs on our window for the Spring Festival, as 2025 is the Year of the Snake.\n\nThe course gave me more than a new hobby. My first few pieces kept tearing, so I learned to slow down and stay patient. I also discovered that every pattern carries a wish, such as good luck or a long life, which made this old art feel close to me.\n\nI’ve saved a paper snake for you. Can’t wait to hear what you think!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "介绍剪纸课程学习的内容",
+          "quote": "started with the basics: how to fold red paper, sketch a pattern and follow the lines with small, sharp scissors."
+        },
+        {
+          "point": "说明自己的收获与感想",
+          "quote": "My first few pieces kept tearing, so I learned to slow down and stay patient."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "Guess what?",
+          "explain": "朋友间常用的口语开头，先卖个小关子再说事，比标准版的直接告知更像真实的聊天口吻。"
+        },
+        {
+          "quote": "follow the lines with small, sharp scissors",
+          "explain": "follow the lines 写出剪纸时沿着画好的线走剪刀的动作，比 cut them out 更具体，外国朋友更容易想象。"
+        },
+        {
+          "quote": "such as good luck or a long life, which made this old art feel close to me",
+          "explain": "用 such as 举出图案寄托的具体祝愿，再写“老手艺离我很近”的感受，比标准版的“更懂节日”多了个人的情感。"
+        }
+      ]
+    }
+  }
+}

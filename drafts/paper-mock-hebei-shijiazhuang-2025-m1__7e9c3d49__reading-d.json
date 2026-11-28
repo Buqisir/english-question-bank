@@ -1,0 +1,778 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d": {
+      "overview": "一项新研究发现，随着全球变暖，北极三分之一的冻土、森林和湿地已从储存碳的地方变成碳排放源；冻土融化后碳被释放，又会进一步加剧变暖，研究者认为需要加强监测。",
+      "fullTranslationZh": "一项新研究发现，随着全球变暖终结了数千年的碳储存，北极三分之一的冻土、森林和湿地已经变成了碳排放源。\n数千年来，北极陆地生态系统一直像一台深度冷冻柜，把潜在的排放物封存在冻土中。但发表在《自然·气候变化》上的一项研究得出结论：随着气温上升，该地区的生态系统正向大气中释放更多的二氧化碳。\n分析显示，该地区超过30%的区域是二氧化碳排放源，如果算上野火排放，这一比例升至40%。这项研究利用1990年至2020年间200个研究地点的数据，展示了北极的冻土、森林和湿地正如何因快速变暖而发生转变。\n尽管北极正在变绿，这种转变仍在发生。首席研究员休·娜塔莉亚说：“在我工作的阿拉斯加的一个地方，冻土融化后，吸收二氧化碳的植物长得更多，所以碳储存有时会出现小幅增加。但冻土继续融化，微生物就占了上风。你能亲眼看到地貌的变化。”\n人们越来越担心调节地球气候的自然过程正受到气温上升的影响。地球的海洋、森林、土壤和其他自然碳汇加起来吸收了人类排放的大约一半，但有迹象表明这些碳汇正承受压力。\n数千年来，北极生态系统一直在积聚碳，帮助大气降温。研究人员说，在一个变暖的世界里，它的碳循环正开始改变，需要更好的监测。该研究的作者安娜·维尔卡拉博士说：“北极土壤中的碳接近地球土壤碳库的一半，比大气中的碳多得多。这个巨大的碳库最好留在地下。但现在，气温上升正在加快动植物残骸的分解，把储存的碳以二氧化碳等温室气体的形式释放回空气中，形成一个让变暖进一步加剧的循环。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+          "sourceText": "But now, rising temperatures are speeding the breakdown of plant and animal remains, which releases stored carbon back into the air as greenhouse gases like CO₂, creating a cycle that fuels even more warming.",
+          "displayText": "But now, rising temperatures are speeding the breakdown of plant and animal remains, which releases stored carbon back into the air as greenhouse gases like CO₂, creating a cycle that fuels even more warming.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:34"
+          ],
+          "translationZh": "但现在，气温上升正在加快动植物残骸的分解，把储存的碳以二氧化碳等温室气体的形式释放回空气中，形成一个让变暖进一步加剧的循环。",
+          "analysisZh": "主干是 rising temperatures are speeding the breakdown of plant and animal remains（气温上升正在加快动植物残骸的分解）。which 引导非限制性定语从句，指前面“残骸加快分解”这件事，说明它把储存的碳放回空气；as greenhouse gases like CO₂ 说明碳以什么形式回到空气中。creating a cycle 是现在分词短语，表示由此造成的结果，that fuels even more warming 修饰 cycle：放出的碳让气候更暖，更暖又让分解更快。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 55,
+              "quote": "rising temperatures are speeding the breakdown"
+            },
+            {
+              "start": 85,
+              "end": 113,
+              "quote": "which releases stored carbon"
+            },
+            {
+              "start": 162,
+              "end": 178,
+              "quote": "creating a cycle"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+          "sourceText": "One place where I work in Alaska, when the tundra unfreezes, the plants that absorb CO₂ grow more, so you can sometimes get an uptick in carbon storage",
+          "displayText": "One place where I work in Alaska, when the tundra unfreezes, the plants that absorb CO₂ grow more, so you can sometimes get an uptick in carbon storage",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:33"
+          ],
+          "translationZh": "在我工作的阿拉斯加的一个地方，冻土融化后，吸收二氧化碳的植物长得更多，所以碳储存有时会出现小幅增加。",
+          "analysisZh": "句首 One place where I work in Alaska 是口语里的地点状语，where I work 修饰 place。接着 when the tundra unfreezes 交代时间条件；主句是 the plants that absorb CO₂ grow more，that absorb CO₂ 修饰 plants，说明是能吸收二氧化碳的植物。so 引出结果 you can sometimes get an uptick in carbon storage，前面植物长得更多是原因，所以 uptick 表示碳储存的增加。",
+          "underlineRanges": [
+            {
+              "start": 34,
+              "end": 59,
+              "quote": "when the tundra unfreezes"
+            },
+            {
+              "start": 61,
+              "end": 97,
+              "quote": "the plants that absorb CO₂ grow more"
+            },
+            {
+              "start": 99,
+              "end": 133,
+              "quote": "so you can sometimes get an uptick"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1"
+              ],
+              "start": 0,
+              "end": 50,
+              "quote": "一项新研究发现，随着全球变暖终结了数千年的碳储存，北极三分之一的冻土、森林和湿地已经变成了碳排放源。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2"
+              ],
+              "start": 51,
+              "end": 143,
+              "quote": "数千年来，北极陆地生态系统一直像一台深度冷冻柜，把潜在的排放物封存在冻土中。但发表在《自然·气候变化》上的一项研究得出结论：随着气温上升，该地区的生态系统正向大气中释放更多的二氧化碳。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:3"
+              ],
+              "start": 144,
+              "end": 246,
+              "quote": "分析显示，该地区超过30%的区域是二氧化碳排放源，如果算上野火排放，这一比例升至40%。这项研究利用1990年至2020年间200个研究地点的数据，展示了北极的冻土、森林和湿地正如何因快速变暖而发生转变。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4"
+              ],
+              "start": 247,
+              "end": 359,
+              "quote": "尽管北极正在变绿，这种转变仍在发生。首席研究员休·娜塔莉亚说：“在我工作的阿拉斯加的一个地方，冻土融化后，吸收二氧化碳的植物长得更多，所以碳储存有时会出现小幅增加。但冻土继续融化，微生物就占了上风。你能亲眼看到地貌的变化。”"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:5"
+              ],
+              "start": 360,
+              "end": 439,
+              "quote": "人们越来越担心调节地球气候的自然过程正受到气温上升的影响。地球的海洋、森林、土壤和其他自然碳汇加起来吸收了人类排放的大约一半，但有迹象表明这些碳汇正承受压力。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6"
+              ],
+              "start": 440,
+              "end": 624,
+              "quote": "数千年来，北极生态系统一直在积聚碳，帮助大气降温。研究人员说，在一个变暖的世界里，它的碳循环正开始改变，需要更好的监测。该研究的作者安娜·维尔卡拉博士说：“北极土壤中的碳接近地球土壤碳库的一半，比大气中的碳多得多。这个巨大的碳库最好留在地下。但现在，气温上升正在加快动植物残骸的分解，把储存的碳以二氧化碳等温室气体的形式释放回空气中，形成一个让变暖进一步加剧的循环。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+                "start": 259,
+                "end": 323,
+                "quote": "the tundra continues to unfreeze and the microbes（微生物） take over"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+                "start": 52,
+                "end": 117,
+                "quote": "acted as a deep-freeze, holding potential emissions in the tundra"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 83,
+                "end": 98,
+                "quote": "冻土继续融化，微生物就占了上风"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 15,
+                "end": 37,
+                "quote": "像一台深度冷冻柜，把潜在的排放物封存在冻土中"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+                "start": 122,
+                "end": 158,
+                "quote": "the plants that absorb CO₂ grow more"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 53,
+                "end": 66,
+                "quote": "吸收二氧化碳的植物长得更多"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+                "start": 374,
+                "end": 423,
+                "quote": "This huge pool should ideally stay in the ground."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 107,
+                "end": 121,
+                "quote": "这个巨大的碳库最好留在地下。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1",
+                "start": 60,
+                "end": 100,
+                "quote": "have become a source of carbon emissions"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+                "start": 152,
+                "end": 190,
+                "quote": "releasing more CO₂ into the atmosphere"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 40,
+                "end": 49,
+                "quote": "已经变成了碳排放源"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 77,
+                "end": 91,
+                "quote": "正向大气中释放更多的二氧化碳"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:34"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+                "start": 424,
+                "end": 632,
+                "quote": "But now, rising temperatures are speeding the breakdown of plant and animal remains, which releases stored carbon back into the air as greenhouse gases like CO₂, creating a cycle that fuels even more warming."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 121,
+                "end": 183,
+                "quote": "但现在，气温上升正在加快动植物残骸的分解，把储存的碳以二氧化碳等温室气体的形式释放回空气中，形成一个让变暖进一步加剧的循环。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:33"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+                "start": 61,
+                "end": 212,
+                "quote": "One place where I work in Alaska, when the tundra unfreezes, the plants that absorb CO₂ grow more, so you can sometimes get an uptick in carbon storage"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-shijiazhuang-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 32,
+                "end": 82,
+                "quote": "在我工作的阿拉斯加的一个地方，冻土融化后，吸收二氧化碳的植物长得更多，所以碳储存有时会出现小幅增加。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先给出北极已成为碳排放源的研究发现，再用今昔对比和数据加以说明，接着解释北极变绿也挡不住排放，把问题放到全球碳汇的背景中，最后引研究作者的话说明碳释放会加剧变暖。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1",
+            "summary": "新研究发现，随着全球变暖，北极三分之一的冻土、森林和湿地已变成碳排放源。",
+            "function": "开篇给出研究的核心发现。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+            "summary": "北极陆地数千年来像冷冻柜一样封存排放物，如今随着升温正释放更多二氧化碳。",
+            "function": "对比过去和现在，说明发生的变化。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:3",
+            "summary": "数据显示超过30%的区域是碳源，算上野火达40%；研究依据的是1990至2020年间200个地点的数据。",
+            "function": "用数据支撑研究发现。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+            "summary": "尽管北极变绿、植物有时让碳储存小幅增加，冻土持续融化后微生物占了上风，变化肉眼可见。",
+            "function": "借首席研究员的话说明变绿也挡不住排放。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:5",
+            "summary": "人们担心调节气候的自然碳汇受升温影响，正承受压力。",
+            "function": "把北极的变化放到全球碳汇的大背景中。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+            "summary": "北极碳循环开始改变，需要更好的监测；维尔卡拉指出土壤碳库巨大，本该留在地下，升温却让碳被释放、加剧变暖。",
+            "function": "用研究作者的话说明危害，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出北极土壤里的碳被放出来的主要原因。",
+      "stemTranslationZh": "北极土壤释放碳的主要原因是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找冻土升温后发生了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "冻土解冻。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+              "quote": "But the tundra continues to unfreeze and the microbes（微生物） take over.",
+              "anchor": "冻土持续融化，微生物占上风"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+              "quote": "acted as a deep-freeze, holding potential emissions in the tundra",
+              "anchor": "冻土像冷冻柜封存排放物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "野火爆发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "wildfires",
+            "optionText": "Wildfire",
+            "matchType": "exact",
+            "relationNote": "wildfires 出自[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:3]]，说的是把野火排放算进来，碳源比例才从30%多升到40%；野火是额外加上的一部分，不是主要原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:3",
+              "quote": "rising to 40% when emissions from wildfires were included",
+              "anchor": "算上野火升到40%"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "树木过度砍伐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "碳释放是因为树木被过度砍伐",
+            "explanation": "原文没提砍伐树木；森林（forests）只是和冻土、湿地一起被列为已变成碳源的地方。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "湿地消失。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "wetlands",
+            "optionText": "Wetland",
+            "matchType": "exact",
+            "relationNote": "wetlands 在[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1]]里和冻土、森林并列，是已变成碳源的区域之一；原文没说湿地在消失。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1",
+              "quote": "A third of the Arctic’s tundra （北极冻土）, forests and wetlands have become a source of carbon emissions",
+              "anchor": "冻土、森林和湿地成为碳源"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "release of carbon",
+          "sourceRole": "stem",
+          "sourceZh": "碳的释放",
+          "targetText": "But ecosystems in the region are releasing more CO₂ into the atmosphere with rising temperatures, a study published in Nature Climate Change concluded.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "releasing more CO₂",
+          "targetCueZh": "释放更多二氧化碳",
+          "answerText": "the tundra continues to unfreeze",
+          "bridgeZh": "升温之后冻土里发生的变化，才是碳被放出来的直接原因",
+          "note": "题干 release of carbon 对应原文 releasing more CO₂。"
+        },
+        {
+          "sourceText": "Tundra defrosting",
+          "sourceRole": "correctOption",
+          "targetText": "the tundra continues to unfreeze",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“冻土解冻”（defrosting）就是原文的“冻土继续融化”（continues to unfreeze）。冻土原本像冷冻柜（a deep-freeze）把碳锁在里面，化开后微生物占了上风（microbes take over），碳就被放了出来，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:33": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 uptick 所在句的因果关系推出它的意思。",
+      "stemTranslationZh": "第4段中画线词 uptick 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看 so 前面的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "增加。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+              "quote": "the plants that absorb CO₂ grow more, so you can sometimes get an uptick in carbon storage",
+              "anchor": "植物长得更多，碳储存出现 uptick"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "损失。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "the plants that absorb CO₂ grow more",
+            "sourceHighlight": "grow more",
+            "optionText": "Loss.",
+            "optionHighlight": "Loss",
+            "explanation": "放进去就成了“吸收二氧化碳的植物长得更多，所以碳储存有时会减少”，原因说的是吸收变多，结果却成了变少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+              "quote": "the plants that absorb CO₂ grow more",
+              "anchor": "吸收二氧化碳的植物长得更多"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "限制。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "uptick 意为限制",
+            "explanation": "放进去成了“植物长得更多，所以碳储存有时会受到限制”；植物多吸收二氧化碳，只会让储存的碳变多，原文没说储存受限。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "释放。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "releasing",
+            "optionText": "Release",
+            "matchType": "wordFamily",
+            "relationNote": "release 是全文讲碳排放时用的词（releasing more CO₂）；放进这句就成了“植物长得更多，所以碳储存有时出现释放”，和植物吸收二氧化碳（absorb CO₂）方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+              "quote": "But ecosystems in the region are releasing more CO₂ into the atmosphere",
+              "anchor": "生态系统释放更多二氧化碳"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "uptick",
+          "sourceRole": "stem",
+          "targetText": "“One place where I work in Alaska, when the tundra unfreezes, the plants that absorb CO₂ grow more, so you can sometimes get an uptick in carbon storage”, Sue Natalia, the lead researcher said.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "the plants that absorb CO₂ grow more",
+          "note": "题干 uptick 原词出现在原文。"
+        },
+        {
+          "sourceText": "Boost",
+          "sourceRole": "correctOption",
+          "targetText": "the plants that absorb CO₂ grow more",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "so 前面说吸收二氧化碳的植物长得更多（grow more），so 后面是它带来的结果，所以 uptick 必须是“变多”一类的意思。放回去：植物长得多了，碳储存有时会增加，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从维尔卡拉博士对北极土壤碳库的说法，推断这个碳库应该怎样。",
+      "stemTranslationZh": "根据安娜·维尔卡拉博士的说法，关于北极土壤碳库我们可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看这个碳库该怎样",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它含的碳比空气中少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "much more than in the atmosphere",
+            "sourceHighlight": "much more than",
+            "optionText": "It has less carbon than the air.",
+            "optionHighlight": "less carbon than the air",
+            "explanation": "原文说北极土壤里的碳比大气中多得多（much more than in the atmosphere），选项说比空气少，正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+              "quote": "close to half of the Earth’s soil carbon pool, much more than in the atmosphere",
+              "anchor": "比大气中多得多"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它应当储存在冻土中。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+              "quote": "This huge pool should ideally stay in the ground.",
+              "anchor": "碳库最好留在地下"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它能分解有机物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "rising temperatures are speeding the breakdown of plant and animal remains",
+            "sourceEntity": "rising temperatures",
+            "optionText": "It can break down organic matter.",
+            "optionEntity": "It",
+            "explanation": "加快动植物残骸分解的是气温上升（rising temperatures），碳库里的碳是分解后被放出来的；选项把分解的动作安到了碳库身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+              "quote": "rising temperatures are speeding the breakdown of plant and animal remains",
+              "anchor": "升温加快残骸分解"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它受全球变暖的影响较小。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "But now, rising temperatures are speeding the breakdown of plant and animal remains, which releases stored carbon back into the air",
+            "sourceHighlight": "speeding the breakdown",
+            "optionText": "It is less affected by global warming.",
+            "optionHighlight": "less affected",
+            "explanation": "维尔卡拉说升温正加快残骸分解（speeding the breakdown），把储存的碳放回空中，碳库受变暖影响很大，选项却说影响小。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+              "quote": "But now, rising temperatures are speeding the breakdown of plant and animal remains, which releases stored carbon back into the air",
+              "anchor": "升温让储存的碳回到空中"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Dr Anna Virkkala",
+          "sourceRole": "stem",
+          "targetText": "Dr Anna Virkkala, the author of the study, said, “The carbon in the Arctic soil is close to half of the Earth’s soil carbon pool, much more than in the atmosphere.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+          "relationType": "locationCue",
+          "answerText": "This huge pool should ideally stay in the ground",
+          "bridgeZh": "This huge pool 指北极土壤里的碳库",
+          "note": "题干 Dr Anna Virkkala 原词出现在原文，她的话从这句开始。"
+        },
+        {
+          "sourceText": "It ought to be stored in the tundra",
+          "sourceRole": "correctOption",
+          "targetText": "This huge pool should ideally stay in the ground.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“应当”（ought to）就是原文的“应该”（should），“储存在冻土中”就是“留在地下”（stay in the ground）：这些碳本来就在北极土壤里，也就是冻土里，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:35": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把各段内容合起来，看全文始终围绕哪个变化展开。",
+      "stemTranslationZh": "本文的主旨是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1]]的研究发现入手，再看后面几段是在补数据、讲原因还是谈担忧",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "北极变绿减少了碳排放。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The shift is occurring despite the Arctic becoming greener.",
+            "sourceHighlight": "despite the Arctic becoming greener",
+            "optionText": "Arctic greening cuts carbon emissions.",
+            "optionHighlight": "cuts carbon emissions",
+            "explanation": "[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4]]说尽管北极在变绿（despite … becoming greener），变成碳源的转变照样在发生；选项把变绿说成能减少排放。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4",
+              "quote": "The shift is occurring despite the Arctic becoming greener.",
+              "anchor": "尽管变绿，转变仍在发生"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "北极正在释放更多的碳。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1",
+              "quote": "A third of the Arctic’s tundra （北极冻土）, forests and wetlands have become a source of carbon emissions",
+              "anchor": "北极三分之一区域成为碳源"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+              "quote": "But ecosystems in the region are releasing more CO₂ into the atmosphere with rising temperatures, a study published in Nature Climate Change concluded.",
+              "anchor": "正释放更多二氧化碳"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "北极的碳储存正在快速增长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "as global heating ends thousands of years of carbon storage",
+            "sourceHighlight": "ends thousands of years of carbon storage",
+            "optionText": "Arctic carbon storage is growing rapidly.",
+            "optionHighlight": "growing rapidly",
+            "explanation": "原文说全球变暖正在终结北极数千年的碳储存（ends … carbon storage），碳在往外放；[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:4]]的 uptick 只是个别地方偶尔的小幅增加。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1",
+              "quote": "as global heating ends thousands of years of carbon storage",
+              "anchor": "变暖终结碳储存"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "极端气候使北极变得适宜居住。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "极端气候使北极变得适宜居住",
+            "explanation": "原文讲的是北极从储存碳变成排放碳，没谈气候让北极适不适合人居住。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "More carbon is being released in the Arctic",
+          "sourceRole": "correctOption",
+          "targetText": "But ecosystems in the region are releasing more CO₂ into the atmosphere with rising temperatures, a study published in Nature Climate Change concluded.",
+          "targetParagraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-hebei-shijiazhuang-2025-m1:reading-d:1]]先给出研究发现：北极三分之一的冻土、森林和湿地已变成碳排放源；后面几段补数据、讲冻土融化后微生物占上风，最后引专家的话说升温让储存的碳回到空中。几段都在说北极放出的碳越来越多，选项的“正在释放更多的碳”正对应原文的“释放更多二氧化碳”（releasing more CO₂），选 B。"
+        }
+      ]
+    }
+  }
+}

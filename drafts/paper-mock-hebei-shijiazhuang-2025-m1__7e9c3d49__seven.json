@@ -1,0 +1,1007 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-hebei-shijiazhuang-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices": {
+      "overview": "文章围绕新年怎样挤出时间写作展开：先指出忙碌不是放弃写作的理由，再给出克服自我怀疑、设定 SMART 目标、尝试新方法和把写作放在首位四条建议。",
+      "fullTranslationZh": "抽出时间写作\n新的一年已经开始，时间像一张白纸铺展在我们面前，等着被文字填满。我们都是忙碌的人，有时会觉得生活在和我们的写作抱负作对，把它们挤到一边。然而，最高产的作家恰恰是最忙的人。那么，我们怎样才能确保在2025年完成写作呢？\n克服自我怀疑和恐惧是释放潜能的关键。我们脑子里都有一个声音，不停地告诉我们不会成功。大多数时候，我们逃避写作的真正原因是害怕失败。抱怨自己太忙比直面恐惧要容易。要解决这个问题，我们可以试着弄清自己害怕什么，加以应对，然后专注于继续前进。\n要找到更多写作时间，一个简单的办法是给自己定一个明确的目标。这个目标要符合SMART原则：具体、可衡量、可实现、现实且有时限。例如，一周写1500词可能就是现实的。如果你成功达到了目标，可以给自己一点小奖励：买一个新笔记本或一支新笔，去走很长一段路，或者休息一天不写作，去做点完全不同的事。\n如果你现在的方法不管用，就换一种做法。正如亨利·福特所说：“如果你一直做你一直在做的事，你就只会得到你一直得到的东西！”这可能意味着用笔和笔记本写作，而不用你工作时也在用的电脑。试着变换你的方法，看看是否有帮助。\n最重要的是，你应该把写作放在其他事情之前。大多数成功的作家都要照顾家人，有家庭以外的工作，还有每天必须完成的日常事务。然而他们仍然设法坚持写作。他们的共同点是把写作看得很重要。所以，如果你想让2025年成为你完成写作计划的一年，就用全新的眼光审视你是如何利用时间的。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:1",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+          "sourceText": "Most of the time, the real reason why we avoid writing is that we’re afraid of failing.",
+          "displayText": "Most of the time, the real reason why we avoid writing is that we’re afraid of failing.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-shijiazhuang-2025-m1:37"
+          ],
+          "translationZh": "大多数时候，我们逃避写作的真正原因是害怕失败。",
+          "analysisZh": "主干是 the real reason is that…，“原因是……”。why we avoid writing 是定语从句，修饰 reason，说明是“逃避写作”的原因；that 引导表语从句，交代原因的内容：we’re afraid of failing。句首 Most of the time 限定范围：大多数时候如此，并非每次。这句把空前的“自我怀疑”落到“怕失败”上。",
+          "underlineRanges": [
+            {
+              "start": 18,
+              "end": 33,
+              "quote": "the real reason"
+            },
+            {
+              "start": 34,
+              "end": 54,
+              "quote": "why we avoid writing"
+            },
+            {
+              "start": 55,
+              "end": 62,
+              "quote": "is that"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+          "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+          "sourceText": "So, if you want to make 2025 the year when you get your writing project done, look at how you use your time with a fresh eye.",
+          "displayText": "So, if you want to make 2025 the year when you get your writing project done, look at how you use your time with a fresh eye.",
+          "relatedQuestionIds": [],
+          "translationZh": "所以，如果你想让2025年成为你完成写作计划的一年，就用全新的眼光审视你是如何利用时间的。",
+          "analysisZh": "主干是祈使句 look at how you use your time，“看看你怎样利用时间”，how 引导宾语从句作 look at 的宾语。前面 if 条件状语从句里，make 2025 the year 是“使 2025 年成为那一年”，when you get your writing project done 是定语从句修饰 the year，其中 get…done 表示“把……完成”。句首 So 收束全文，从前面的建议得出行动要求。",
+          "underlineRanges": [
+            {
+              "start": 19,
+              "end": 37,
+              "quote": "make 2025 the year"
+            },
+            {
+              "start": 38,
+              "end": 76,
+              "quote": "when you get your writing project done"
+            },
+            {
+              "start": 78,
+              "end": 107,
+              "quote": "look at how you use your time"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "标题点题后，引言先用“最高产的作家恰恰最忙”推翻“太忙没法写”的想法，再抛出“怎样在 2025 年完成写作”的问题；后面四段逐条作答：克服对失败的恐惧、定一个具体可行的目标并奖励自己、方法不灵就换、把写作放在首位，最后一句收束为重新审视自己如何利用时间。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Make Time to Write",
+            "paragraphIds": [
+              "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:1",
+              "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2"
+            ],
+            "summary": "新年像一张白纸；人人都忙，但最高产的作家最忙，由此提出怎样在 2025 年完成写作。"
+          },
+          {
+            "unitId": "unit-fear",
+            "paragraphIds": [
+              "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3"
+            ],
+            "summary": "建议一：克服自我怀疑和恐惧。逃避写作的真正原因常是怕失败，要弄清怕什么并向前走。"
+          },
+          {
+            "unitId": "unit-goal",
+            "paragraphIds": [
+              "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4"
+            ],
+            "summary": "建议二：定一个符合 SMART 原则的明确目标，举出一周写 1500 词的例子，达成后给自己小奖励。"
+          },
+          {
+            "unitId": "unit-change",
+            "paragraphIds": [
+              "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5"
+            ],
+            "summary": "建议三：现有方法不管用就换，用福特的话说明不变就没有新结果，并举出改用纸笔写作的做法。"
+          },
+          {
+            "unitId": "unit-priority",
+            "paragraphIds": [
+              "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6"
+            ],
+            "summary": "建议四：把写作放在首位。成功作家事务繁多仍坚持写，共同点是看重写作；全文收束为用新眼光审视时间安排。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 36,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "A",
+          "shared": [
+            "we",
+            "writing"
+          ],
+          "text": "选项也是“我们”发问，又谈写作（writing），像能放在第 36 题引言末尾。但 So 要从空前推出结论，空前 “the most productive writers are the busiest” 推不出要不要为 mental health 写作；后文讲的都是怎样挤出时间写。",
+          "quotes": [
+            "writing",
+            "So",
+            "the most productive writers are the busiest",
+            "mental health"
+          ]
+        },
+        "F": {
+          "target": 39,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的电脑（computer）和第 39 题空后 “rather than the computer you also use for work” 撞词。但空后 “This could mean” 要回指一种换掉的做法，F 只说坐在电脑前未必写得顺，没有给出可指的做法，福特的话也是劝人改变。",
+          "quotes": [
+            "computer",
+            "rather than the computer you also use for work",
+            "This could mean"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 6,
+              "quote": "抽出时间写作"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2"
+              ],
+              "start": 7,
+              "end": 115,
+              "quote": "新的一年已经开始，时间像一张白纸铺展在我们面前，等着被文字填满。我们都是忙碌的人，有时会觉得生活在和我们的写作抱负作对，把它们挤到一边。然而，最高产的作家恰恰是最忙的人。那么，我们怎样才能确保在2025年完成写作呢？"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3"
+              ],
+              "start": 116,
+              "end": 234,
+              "quote": "克服自我怀疑和恐惧是释放潜能的关键。我们脑子里都有一个声音，不停地告诉我们不会成功。大多数时候，我们逃避写作的真正原因是害怕失败。抱怨自己太忙比直面恐惧要容易。要解决这个问题，我们可以试着弄清自己害怕什么，加以应对，然后专注于继续前进。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4"
+              ],
+              "start": 235,
+              "end": 380,
+              "quote": "要找到更多写作时间，一个简单的办法是给自己定一个明确的目标。这个目标要符合SMART原则：具体、可衡量、可实现、现实且有时限。例如，一周写1500词可能就是现实的。如果你成功达到了目标，可以给自己一点小奖励：买一个新笔记本或一支新笔，去走很长一段路，或者休息一天不写作，去做点完全不同的事。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5"
+              ],
+              "start": 381,
+              "end": 487,
+              "quote": "如果你现在的方法不管用，就换一种做法。正如亨利·福特所说：“如果你一直做你一直在做的事，你就只会得到你一直得到的东西！”这可能意味着用笔和笔记本写作，而不用你工作时也在用的电脑。试着变换你的方法，看看是否有帮助。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6"
+              ],
+              "start": 488,
+              "end": 621,
+              "quote": "最重要的是，你应该把写作放在其他事情之前。大多数成功的作家都要照顾家人，有家庭以外的工作，还有每天必须完成的日常事务。然而他们仍然设法坚持写作。他们的共同点是把写作看得很重要。所以，如果你想让2025年成为你完成写作计划的一年，就用全新的眼光审视你是如何利用时间的。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:36",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+            "text": "Since a new year has started, time lies before us like a blank page, waiting to be filled with writing. We are all busy people, and we sometimes feel that life is working against our writing ambitions and pushing them aside. Yet the most productive writers are the busiest. Then how can we make sure we get our writing done in 2025?"
+          },
+          {
+            "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:37",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+            "text": "Overcoming self-doubt and fear is the key to unlocking your potential. We all have a voice in our head that keeps telling us we can’t succeed. Most of the time, the real reason why we avoid writing is that we’re afraid of failing. It’s simpler to complain about being too busy than to face our fears. To solve this problem, we can try to understand what we’re scared of, deal with it, and then focus on moving forward."
+          },
+          {
+            "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:38",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+            "text": "A simple way to find more time to write is to give yourself a clear goal. It needs to be SMART: specific, measurable, achievable, realistic and time-bound. For example, writing 1,500 words in a week might be realistic. If you successfully meet your target, you could give yourself a small reward: buy a new notebook or pen, go for a long walk, or take a day off from writing and just do something completely different."
+          },
+          {
+            "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:39",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+            "text": "Do something different if your current approach isn’t working. As Henry Ford once said, “If you do what you’ve always done, you’ll get what you’ve always got”! This could mean writing with a notebook and pen rather than the computer you also use for work. Try varying your approach and see if it helps."
+          },
+          {
+            "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:40",
+            "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+            "text": "Above all, you should prioritize writing over other things. Most successful writers have caring responsibilities, occupations outside the home, and the necessary everyday tasks they all need to complete. Yet they still manage to write. What they have in common is that they treat writing as important. So, if you want to make 2025 the year when you get your writing project done, look at how you use your time with a fresh eye."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-hebei-shijiazhuang-2025-m1:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+                "start": 225,
+                "end": 273,
+                "quote": "Yet the most productive writers are the busiest."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+                "start": 68,
+                "end": 85,
+                "quote": "然而，最高产的作家恰恰是最忙的人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-hebei-shijiazhuang-2025-m1:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 0,
+                "end": 30,
+                "quote": "Overcoming self-doubt and fear"
+              },
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 141,
+                "end": 164,
+                "quote": "we’re afraid of failing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 0,
+                "end": 9,
+                "quote": "克服自我怀疑和恐惧"
+              },
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 60,
+                "end": 64,
+                "quote": "害怕失败"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-hebei-shijiazhuang-2025-m1:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+                "start": 89,
+                "end": 154,
+                "quote": "SMART: specific, measurable, achievable, realistic and time-bound"
+              },
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+                "start": 183,
+                "end": 199,
+                "quote": "meet your target"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+                "start": 37,
+                "end": 62,
+                "quote": "SMART原则：具体、可衡量、可实现、现实且有时限"
+              },
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+                "start": 87,
+                "end": 92,
+                "quote": "达到了目标"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-hebei-shijiazhuang-2025-m1:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+                "start": 33,
+                "end": 101,
+                "quote": "If you do what you’ve always done, you’ll get what you’ve always got"
+              },
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+                "start": 104,
+                "end": 119,
+                "quote": "This could mean"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+                "start": 30,
+                "end": 58,
+                "quote": "如果你一直做你一直在做的事，你就只会得到你一直得到的东西"
+              },
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+                "start": 60,
+                "end": 66,
+                "quote": "这可能意味着"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-hebei-shijiazhuang-2025-m1:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 22,
+                "end": 58,
+                "quote": "prioritize writing over other things"
+              },
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 204,
+                "end": 235,
+                "quote": "Yet they still manage to write."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 9,
+                "end": 20,
+                "quote": "把写作放在其他事情之前"
+              },
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 59,
+                "end": 72,
+                "quote": "然而他们仍然设法坚持写作。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-hebei-shijiazhuang-2025-m1:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:36"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:36",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+                "start": 274,
+                "end": 332,
+                "quote": "Then how can we make sure we get our writing done in 2025?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+                "start": 85,
+                "end": 108,
+                "quote": "那么，我们怎样才能确保在2025年完成写作呢？"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-hebei-shijiazhuang-2025-m1:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:37"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:37",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 71,
+                "end": 142,
+                "quote": "We all have a voice in our head that keeps telling us we can’t succeed."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 18,
+                "end": 42,
+                "quote": "我们脑子里都有一个声音，不停地告诉我们不会成功。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-hebei-shijiazhuang-2025-m1:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:38"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:38",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+                "start": 156,
+                "end": 218,
+                "quote": "For example, writing 1,500 words in a week might be realistic."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+                "start": 63,
+                "end": 82,
+                "quote": "例如，一周写1500词可能就是现实的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-hebei-shijiazhuang-2025-m1:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:39"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:39",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+                "start": 0,
+                "end": 62,
+                "quote": "Do something different if your current approach isn’t working."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+                "start": 0,
+                "end": 19,
+                "quote": "如果你现在的方法不管用，就换一种做法。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-hebei-shijiazhuang-2025-m1:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:40"
+            ],
+            "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-hebei-shijiazhuang-2025-m1:40",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 236,
+                "end": 301,
+                "quote": "What they have in common is that they treat writing as important."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 72,
+                "end": 88,
+                "quote": "他们的共同点是把写作看得很重要。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-shijiazhuang-2025-m1:37"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 78,
+                "end": 165,
+                "quote": "Most of the time, the real reason why we avoid writing is that we’re afraid of failing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+                "start": 42,
+                "end": 65,
+                "quote": "大多数时候，我们逃避写作的真正原因是害怕失败。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 243,
+                "end": 368,
+                "quote": "So, if you want to make 2025 the year when you get your writing project done, look at how you use your time with a fresh eye."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+                "start": 88,
+                "end": 133,
+                "quote": "所以，如果你想让2025年成为你完成写作计划的一年，就用全新的眼光审视你是如何利用时间的。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:36": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a new year has started",
+        "busy people",
+        "writing ambitions",
+        "the most productive writers",
+        "the busiest"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:2",
+        "beforeQuote": "Yet the most productive writers are the busiest.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Yet",
+          "signalSide": "context-before",
+          "targetText": "life is working against our writing ambitions",
+          "relation": "Yet 推翻前一句“生活挤掉写作”的感受：最忙的人反而写得最多。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "option",
+          "targetText": "the most productive writers are the busiest",
+          "relation": "Then 接着空前的结论往下问：既然忙不是借口，那该怎么做。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in 2025",
+          "signalSide": "option",
+          "targetText": "a new year has started",
+          "relation": "in 2025 对应开头的新年刚开始，问的是今年的写作。"
+        }
+      ],
+      "lock": [
+        "the busiest",
+        "Then how"
+      ],
+      "find": {
+        "text": "空在引言段尾。空前 “Yet the most productive writers are the busiest” 推翻了忙的借口，只有 A 用 “Then how” 顺势追问该怎么做。",
+        "quotes": [
+          "Yet the most productive writers are the busiest",
+          "Then how"
+        ]
+      },
+      "explain": "引言先说忙不是借口，这句把话题转成“怎么做”的问题；后面四段依次讲克服恐惧、定目标、换方法、写作优先，逐条作答。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 they 能指空前 “the most productive writers”，但引言末尾要先发问，后面几段才好逐条给方法。",
+          "quotes": [
+            "they",
+            "the most productive writers"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the most productive writers are the busiest",
+            "optionSide": "Then how can we make sure",
+            "relation": "空前说忙人照样高产，选项顺着追问普通人怎样也做到。"
+          },
+          {
+            "contextSide": "a new year has started",
+            "optionSide": "in 2025",
+            "relation": "新年开始与 2025 年对应，问题落在今年的写作计划上。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "引言先说忙不是借口，这句把话题转成“怎么做”的问题；后面四段依次讲克服恐惧、定目标、换方法、写作优先，逐条作答。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 they 能指空前 “the most productive writers”，但引言末尾要先发问，后面几段才好逐条给方法。"
+        },
+        {
+          "optionLabel": "B",
+          "reason": "选项也是“我们”发问，又谈写作（writing），像能放在第 36 题引言末尾。但 So 要从空前推出结论，空前 “the most productive writers are the busiest” 推不出要不要为 mental health 写作；后文讲的都是怎样挤出时间写。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:37": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "self-doubt and fear",
+        "unlocking your potential",
+        "afraid of failing",
+        "face our fears"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:3",
+        "beforeQuote": "Overcoming self-doubt and fear is the key to unlocking your potential.",
+        "afterQuote": "Most of the time, the real reason why we avoid writing is that we’re afraid of failing."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "self-doubt",
+          "signalSide": "context-before",
+          "targetText": "a voice in our head that keeps telling us we can’t succeed",
+          "relation": "空前只说要克服自我怀疑，选项把它具体成脑中不停唱衰的声音。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "can’t succeed",
+          "signalSide": "option",
+          "targetText": "self-doubt / afraid of failing",
+          "relation": "can’t succeed 一边是自我怀疑的内容，一边引出空后的怕失败。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "afraid of failing",
+          "signalSide": "context-after",
+          "targetText": "can’t succeed",
+          "relation": "空后点破逃避写作的原因是怕失败，正是“不会成功”这个声音造成的。"
+        }
+      ],
+      "lock": [
+        "self-doubt",
+        "can’t succeed",
+        "afraid of failing"
+      ],
+      "find": {
+        "text": "空前 “self-doubt” 需要具体化，空后 “afraid of failing” 讲怕失败；G 的 “can’t succeed” 正好是这种自我怀疑的声音。",
+        "quotes": [
+          "self-doubt",
+          "afraid of failing",
+          "can’t succeed"
+        ]
+      },
+      "explain": "空前只提出要克服自我怀疑，这句把它变成人人熟悉的心声；空后再点破：嘴上说太忙，心里其实是怕失败。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "self-doubt and fear",
+            "optionSide": "a voice in our head that keeps telling us we can’t succeed",
+            "relation": "选项把抽象的自我怀疑写成脑中反复出现的声音。"
+          },
+          {
+            "contextSide": "afraid of failing",
+            "optionSide": "we can’t succeed",
+            "relation": "“不会成功”的念头和空后“害怕失败”是同一种担心。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前只提出要克服自我怀疑，这句把它变成人人熟悉的心声；空后再点破：嘴上说太忙，心里其实是怕失败。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:38": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a clear goal",
+        "SMART",
+        "measurable",
+        "time-bound",
+        "meet your target"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:4",
+        "beforeQuote": "It needs to be SMART: specific, measurable, achievable, realistic and time-bound.",
+        "afterQuote": "If you successfully meet your target, you could give yourself a small reward"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "For example",
+          "signalSide": "option",
+          "targetText": "SMART: specific, measurable, achievable, realistic and time-bound",
+          "relation": "For example 给空前抽象的目标标准配一个具体目标。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "realistic",
+          "signalSide": "context-before",
+          "targetText": "might be realistic",
+          "relation": "空前标准里的 realistic 在选项里原词复现，说明这个例子合乎标准。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "meet your target",
+          "signalSide": "context-after",
+          "targetText": "writing 1,500 words in a week",
+          "relation": "空后的 target 就是选项里一周写 1500 词这个具体目标。"
+        }
+      ],
+      "lock": [
+        "For example",
+        "realistic",
+        "meet your target"
+      ],
+      "find": {
+        "text": "空前列出 SMART 标准，C 用 “For example” 举出一个合乎 “realistic” 的具体目标，空后 “meet your target” 说的就是它。",
+        "quotes": [
+          "For example",
+          "realistic",
+          "meet your target"
+        ]
+      },
+      "explain": "空前只讲目标该合乎哪些标准，这句给出一周写多少词的样子；目标有了数字，空后才能说达到了就奖励自己。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "specific, measurable, achievable, realistic and time-bound",
+            "optionSide": "writing 1,500 words in a week might be realistic",
+            "relation": "1500 词可量化、一周有时限、选项还直接说它现实，逐项对上 SMART 标准。"
+          },
+          {
+            "contextSide": "meet your target",
+            "optionSide": "1,500 words in a week",
+            "relation": "空后要达成的目标就是选项给出的周字数。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前只讲目标该合乎哪些标准，这句给出一周写多少词的样子；目标有了数字，空后才能说达到了就奖励自己。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:39": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "what you’ve always done",
+        "what you’ve always got",
+        "rather than the computer",
+        "varying your approach"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": "As Henry Ford once said, “If you do what you’ve always done, you’ll get what you’ve always got”! This could mean writing with a notebook and pen rather than the computer you also use for work."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "Do something different",
+          "relation": "This could mean 里的 This 指“换一种做法”，后面才举出用纸笔代替电脑。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Do something different",
+          "signalSide": "option",
+          "targetText": "what you’ve always done",
+          "relation": "做点不同的事，正是对福特所说“老做法只得老结果”的回应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "what you’ve always done",
+          "signalSide": "context-after",
+          "targetText": "Do something different",
+          "relation": "福特的话从反面说明不改变就没有新结果，支撑选项的主张。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "approach",
+          "signalSide": "option",
+          "targetText": "varying your approach",
+          "relation": "选项的 current approach 与段末 varying your approach 前后呼应。"
+        }
+      ],
+      "lock": [
+        "Do something different",
+        "what you’ve always done",
+        "This could mean"
+      ],
+      "find": {
+        "text": "空在段首。空后福特说照 “what you’ve always done” 只得老结果，“This could mean” 又举换工具的做法，只有 D 讲换种做法。",
+        "quotes": [
+          "what you’ve always done",
+          "This could mean"
+        ]
+      },
+      "explain": "这句先亮出本段主张：方法不灵就换。福特的话从反面说明不变就没有新结果，接着举出改用纸笔写作，段末再劝人试着变换方法。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "If you do what you’ve always done, you’ll get what you’ve always got",
+            "optionSide": "Do something different",
+            "relation": "老做法只换来老结果，所以要做点不同的事。"
+          },
+          {
+            "contextSide": "Try varying your approach",
+            "optionSide": "if your current approach isn’t working",
+            "relation": "段首说现有方法不管用，段末劝人变换方法，首尾同指 approach。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "这句先亮出本段主张：方法不灵就换。福特的话从反面说明不变就没有新结果，接着举出改用纸笔写作，段末再劝人试着变换方法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "选项的电脑（computer）和第 39 题空后 “rather than the computer you also use for work” 撞词。但空后 “This could mean” 要回指一种换掉的做法，F 只说坐在电脑前未必写得顺，没有给出可指的做法，福特的话也是劝人改变。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-shijiazhuang-2025-m1:40": {
+      "blankId": "blank:paper-mock-hebei-shijiazhuang-2025-m1:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "prioritize writing over other things",
+        "Most successful writers",
+        "caring responsibilities",
+        "still manage to write"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-m1:seven-choices:6",
+        "beforeQuote": "Most successful writers have caring responsibilities, occupations outside the home, and the necessary everyday tasks they all need to complete. Yet they still manage to write.",
+        "afterQuote": "So, if you want to make 2025 the year when you get your writing project done, look at how you use your time with a fresh eye."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "they",
+          "signalSide": "option",
+          "targetText": "Most successful writers",
+          "relation": "选项里的 they 指空前事务缠身却仍坚持写作的成功作家。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Most successful writers",
+          "signalSide": "context-before",
+          "targetText": "What they have in common",
+          "relation": "空前一一列出这些作家的负担，选项再总结他们的共同点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "prioritize writing over other things",
+          "signalSide": "context-before",
+          "targetText": "treat writing as important",
+          "relation": "选项的“把写作当回事”回扣本段开头的“写作优先”。"
+        }
+      ],
+      "lock": [
+        "Most successful writers",
+        "still manage to write",
+        "What they have in common"
+      ],
+      "find": {
+        "text": "空前 “Most successful writers” 事多却 “still manage to write”，E 的 “What they have in common” 回指这些作家，说出他们靠什么做到。",
+        "quotes": [
+          "Most successful writers",
+          "still manage to write",
+          "What they have in common"
+        ]
+      },
+      "explain": "前面说成功作家负担重却照样写，这句点出原因：都把写作当回事，呼应段首的写作优先；空后的 So 据此劝读者重新审视时间安排。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Most successful writers … Yet they still manage to write",
+            "optionSide": "What they have in common",
+            "relation": "they 回指成功作家，选项总结他们的共同做法。"
+          },
+          {
+            "contextSide": "prioritize writing over other things",
+            "optionSide": "treat writing as important",
+            "relation": "看重写作就是把写作放在其他事之前，与段首主张一致。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "前面说成功作家负担重却照样写，这句点出原因：都把写作当回事，呼应段首的写作优先；空后的 So 据此劝读者重新审视时间安排。"
+      },
+      "keyDistractors": []
+    }
+  }
+}
