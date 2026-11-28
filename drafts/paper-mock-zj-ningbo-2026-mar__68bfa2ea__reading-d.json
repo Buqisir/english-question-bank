@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:reading-d": {
+      "overview": "本文介绍芝加哥大学研发的便携设备 ABLE：它把空气变成液滴，从而收集并检测空气中的分子；早期测试效果良好，有望实现不抽血的健康检测，还可能为物理等科学研究带来新可能。",
+      "fullTranslationZh": "尽管医学已进步了几十年，检测与健康相关的分子仍要依靠血液等体液，大多数病人都得抽血，尤其是需要频繁扎手指的糖尿病患者。然而，芝加哥大学的研究人员开发出一种名为 ABLE 的便携式设备，它能收集并检测空气中的分子。这台 4×8 英寸的设备有望彻底改变医学和公共卫生领域。\n空气中的分子检测长期落后于液体检测，主要是因为目标微粒极其稀薄——可能一万亿个里只有一个。为解决这个问题，团队把空气变成了液体。这台设备吸入空气，用加湿器加入水蒸气，再进行冷却，把空气变成小液滴。这些液滴捕获微粒后滑入一个小容器，这样就能用液体分析的常用工具轻松检测。\n早期测试证明了它的效果。它捕获了易挥发的咖啡蒸气，检测出呼吸中的葡萄糖，识别出空气中的大肠杆菌，还在肠道细菌不健康的小鼠身上发现了炎症迹象。显然，它解决了捕获易挥发分子的难题——这曾是设备研发过程中的一大担忧。\n这台设备最初的灵感来自重症监护室里早产儿对无创检测的需求。这些脆弱的婴儿容易出现健康问题，反复验血可能让他们陷入危险。医生们希望这台设备能不抽血就追踪健康指标，保护这些高危病人。它在诊断炎症性肠病方面也显示出前景，不过相关的呼吸指标需要先记录下来。团队计划改进设备并把它做小，制成日常使用的可穿戴设备。\n除医学用途外，这一成果还可能为空气杂质和物质状态变化方面的物理学新研究打开大门。作为检测空气化学成分的新工具，ABLE 填补了空气分子分析与液体分子分析之间的空白，为医疗保健和科学领域的各种新发展创造了可能。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+          "sourceText": "Despite decades of medical advances, detecting health-related molecules (分子) still relies on bodily liquids like blood, requiring blood draws from most patients, especially people with diabetes who need frequent finger pricks.",
+          "displayText": "Despite decades of medical advances, detecting health-related molecules (分子) still relies on bodily liquids like blood, requiring blood draws from most patients, especially people with diabetes who need frequent finger pricks.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:32"
+          ],
+          "translationZh": "尽管医学已进步了几十年，检测与健康相关的分子仍要依靠血液等体液，大多数病人都得抽血，尤其是需要频繁扎手指的糖尿病患者。",
+          "analysisZh": "主干是 detecting health-related molecules still relies on bodily liquids（检测健康分子仍要依靠体液），主语是动名词短语 detecting health-related molecules，谓语是 relies on，like blood 举例。句首 Despite decades of medical advances 是让步状语，“尽管医学进步了几十年”。逗号后的 requiring blood draws from most patients 是现在分词短语，说明依靠体液带来的结果：大多数病人得抽血。especially people with diabetes 补充说明 most patients 里最突出的一类，who need frequent finger pricks 是定语从句，修饰 people with diabetes。这句交代的“离不开体液”，正是 ABLE 要解决的问题。",
+          "underlineRanges": [
+            {
+              "start": 37,
+              "end": 71,
+              "quote": "detecting health-related molecules"
+            },
+            {
+              "start": 77,
+              "end": 107,
+              "quote": "still relies on bodily liquids"
+            },
+            {
+              "start": 120,
+              "end": 141,
+              "quote": "requiring blood draws"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+          "sourceText": "Obviously, it solved the problem of capturing molecules that evaporate easily – a major worry during the device’s development.",
+          "displayText": "Obviously, it solved the problem of capturing molecules that evaporate easily – a major worry during the device’s development.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:33"
+          ],
+          "translationZh": "显然，它解决了捕获易挥发分子的难题——这曾是设备研发过程中的一大担忧。",
+          "analysisZh": "主干是 it solved the problem（它解决了难题），it 指这台设备 ABLE。of capturing molecules 是介词 of 加动名词短语，说明是什么难题：捕获分子；that evaporate easily 是定语从句，修饰 molecules，指容易挥发的分子。破折号后的 a major worry during the device’s development 是同位语，补充说明这个难题曾是研发中的一大担忧。把“解决了”和“一大担忧”连起来，就知道它攻克的是关键难题。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 32,
+              "quote": "it solved the problem"
+            },
+            {
+              "start": 56,
+              "end": 77,
+              "quote": "that evaporate easily"
+            },
+            {
+              "start": 80,
+              "end": 93,
+              "quote": "a major worry"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-d:1"
+              ],
+              "start": 0,
+              "end": 134,
+              "quote": "尽管医学已进步了几十年，检测与健康相关的分子仍要依靠血液等体液，大多数病人都得抽血，尤其是需要频繁扎手指的糖尿病患者。然而，芝加哥大学的研究人员开发出一种名为 ABLE 的便携式设备，它能收集并检测空气中的分子。这台 4×8 英寸的设备有望彻底改变医学和公共卫生领域。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-d:2"
+              ],
+              "start": 135,
+              "end": 269,
+              "quote": "空气中的分子检测长期落后于液体检测，主要是因为目标微粒极其稀薄——可能一万亿个里只有一个。为解决这个问题，团队把空气变成了液体。这台设备吸入空气，用加湿器加入水蒸气，再进行冷却，把空气变成小液滴。这些液滴捕获微粒后滑入一个小容器，这样就能用液体分析的常用工具轻松检测。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-d:3"
+              ],
+              "start": 270,
+              "end": 375,
+              "quote": "早期测试证明了它的效果。它捕获了易挥发的咖啡蒸气，检测出呼吸中的葡萄糖，识别出空气中的大肠杆菌，还在肠道细菌不健康的小鼠身上发现了炎症迹象。显然，它解决了捕获易挥发分子的难题——这曾是设备研发过程中的一大担忧。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-d:4"
+              ],
+              "start": 376,
+              "end": 527,
+              "quote": "这台设备最初的灵感来自重症监护室里早产儿对无创检测的需求。这些脆弱的婴儿容易出现健康问题，反复验血可能让他们陷入危险。医生们希望这台设备能不抽血就追踪健康指标，保护这些高危病人。它在诊断炎症性肠病方面也显示出前景，不过相关的呼吸指标需要先记录下来。团队计划改进设备并把它做小，制成日常使用的可穿戴设备。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-d:5"
+              ],
+              "start": 528,
+              "end": 632,
+              "quote": "除医学用途外，这一成果还可能为空气杂质和物质状态变化方面的物理学新研究打开大门。作为检测空气化学成分的新工具，ABLE 填补了空气分子分析与液体分子分析之间的空白，为医疗保健和科学领域的各种新发展创造了可能。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:32"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+                "start": 0,
+                "end": 226,
+                "quote": "Despite decades of medical advances, detecting health-related molecules (分子) still relies on bodily liquids like blood, requiring blood draws from most patients, especially people with diabetes who need frequent finger pricks."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 0,
+                "end": 59,
+                "quote": "尽管医学已进步了几十年，检测与健康相关的分子仍要依靠血液等体液，大多数病人都得抽血，尤其是需要频繁扎手指的糖尿病患者。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:33"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+                "start": 219,
+                "end": 345,
+                "quote": "Obviously, it solved the problem of capturing molecules that evaporate easily – a major worry during the device’s development."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 70,
+                "end": 105,
+                "quote": "显然，它解决了捕获易挥发分子的难题——这曾是设备研发过程中的一大担忧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+                "start": 227,
+                "end": 372,
+                "quote": "However, researchers from the University of Chicago have developed a portable device named ABLE, which collects and detects molecules in the air."
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+                "start": 37,
+                "end": 118,
+                "quote": "detecting health-related molecules (分子) still relies on bodily liquids like blood"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 59,
+                "end": 105,
+                "quote": "然而，芝加哥大学的研究人员开发出一种名为 ABLE 的便携式设备，它能收集并检测空气中的分子"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 12,
+                "end": 31,
+                "quote": "检测与健康相关的分子仍要依靠血液等体液"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+                "start": 219,
+                "end": 345,
+                "quote": "Obviously, it solved the problem of capturing molecules that evaporate easily – a major worry during the device’s development."
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+                "start": 38,
+                "end": 84,
+                "quote": "It caught easily evaporated (挥发的) coffee vapor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 70,
+                "end": 104,
+                "quote": "显然，它解决了捕获易挥发分子的难题——这曾是设备研发过程中的一大担忧"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 12,
+                "end": 24,
+                "quote": "它捕获了易挥发的咖啡蒸气"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+                "start": 0,
+                "end": 127,
+                "quote": "Besides medical uses, this achievement may open the door to new physics research on air impurities and state changes of matter."
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+                "start": 128,
+                "end": 169,
+                "quote": "As a new tool for detecting air chemistry"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 0,
+                "end": 39,
+                "quote": "除医学用途外，这一成果还可能为空气杂质和物质状态变化方面的物理学新研究打开大门"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 40,
+                "end": 54,
+                "quote": "作为检测空气化学成分的新工具"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+                "start": 294,
+                "end": 371,
+                "quote": "a portable device named ABLE, which collects and detects molecules in the air"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+                "start": 128,
+                "end": 232,
+                "quote": "As a new tool for detecting air chemistry, ABLE fills the space between air and liquid molecule analysis"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 75,
+                "end": 105,
+                "quote": "一种名为 ABLE 的便携式设备，它能收集并检测空气中的分子"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 40,
+                "end": 81,
+                "quote": "作为检测空气化学成分的新工具，ABLE 填补了空气分子分析与液体分子分析之间的空白"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先指出健康分子检测离不开体液的现状，引出能检测空气中分子的设备 ABLE；接着讲它把空气变成液体的原理和早期测试结果；然后写研发初衷、医学前景和改进计划；最后写它在医学之外的科研意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+            "summary": "健康分子检测仍要靠血液等体液，研究人员开发出能收集、检测空气中分子的便携设备 ABLE。",
+            "function": "提出问题，引出新设备。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:2",
+            "summary": "空气中的目标微粒太稀薄，团队用加湿、冷却把空气变成液滴，再用液体分析工具检测。",
+            "function": "说明设备的工作原理。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+            "summary": "早期测试中它检测出咖啡蒸气、呼吸中的葡萄糖、大肠杆菌和小鼠的炎症迹象，解决了捕获易挥发分子的难题。",
+            "function": "用测试结果证明设备有效。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+            "summary": "设备的灵感来自早产儿对无创检测的需求，它在诊断肠病上也有前景，团队计划把它做成可穿戴设备。",
+            "function": "写研发初衷、医学前景和改进计划。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+            "summary": "ABLE 还可能推动物理学新研究，填补了空气与液体分子分析之间的空白。",
+            "function": "写医学以外的意义，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zj-ningbo-2026-mar:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把开头讲的检测现状和 ABLE 的功能对照起来，看出研发它要解决什么问题。",
+      "stemTranslationZh": "研究人员为什么要开发 ABLE？",
+      "locateBy": "stem",
+      "locateFindZh": "看句首 However 前后的对比",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了改变医学和公共卫生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "game-changer for medicine and public health",
+            "optionText": "change medicine and public health",
+            "matchType": "wordFamily",
+            "relationNote": "“改变医学和公共卫生”来自[[block:paper-mock-zj-ningbo-2026-mar:reading-d:1|This 4×8-inch device]]的 game-changer，那是对设备前景的评价（potential），说它有望带来改变，不是研发它的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+              "quote": "This 4×8-inch device is a potential game-changer for medicine and public health.",
+              "anchor": "对前景的评价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了取代医院里的验血。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Doctors hope the device can track health signs without taking blood, protecting these high-risk patients.",
+            "sourceHighlight": "without taking blood",
+            "optionText": "To take the place of blood tests in hospitals.",
+            "optionHighlight": "take the place of blood tests in hospitals",
+            "explanation": "[[block:paper-mock-zj-ningbo-2026-mar:reading-d:4]]只说医生希望它能不抽血就追踪早产儿这类高危病人的健康指标，是一种希望，也只针对这类病人，推不出要取代医院里的验血。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+              "quote": "Doctors hope the device can track health signs without taking blood, protecting these high-risk patients.",
+              "anchor": "医生的希望"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了减少糖尿病患者扎手指的次数。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "finger pricks",
+            "optionText": "finger pricks",
+            "matchType": "exact",
+            "relationNote": "糖尿病人频繁扎手指（frequent finger pricks）只是[[block:paper-mock-zj-ningbo-2026-mar:reading-d:1]]举的例子，用来说明检测离不开体液；ABLE 要解决的是这个总问题，原文没说专为糖尿病人而造。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+              "quote": "especially people with diabetes who need frequent finger pricks",
+              "anchor": "举例说明抽血之多"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了不用液体样本就能识别健康分子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+              "quote": "However, researchers from the University of Chicago have developed a portable device named ABLE, which collects and detects molecules in the air.",
+              "anchor": "ABLE 检测空气中的分子"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+              "quote": "detecting health-related molecules (分子) still relies on bodily liquids like blood",
+              "anchor": "现状：检测依靠体液"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "researchers",
+          "sourceRole": "stem",
+          "targetText": "However, researchers from the University of Chicago have developed a portable device named ABLE, which collects and detects molecules in the air.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+          "relationType": "locationCue",
+          "answerText": "collects and detects molecules in the air",
+          "note": "题干 researchers 原词出现在原文。"
+        },
+        {
+          "sourceText": "without liquid samples",
+          "sourceRole": "correctOption",
+          "targetText": "collects and detects molecules in the air",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "两处对照着看：先说检测健康分子仍要靠血液等体液（relies on bodily liquids），接着 However 一转，ABLE 改为从空气中收集、检测分子（detects molecules in the air）；不再依靠体液，就是选项的“无需液体样本”（without liquid samples），选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:33": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "分清原文里哪些是 ABLE 已经做到的，哪些只是计划或希望，再推断它的现状。",
+      "stemTranslationZh": "关于 ABLE，我们可以推断出什么？",
+      "locateBy": "options",
+      "locateFindZh": "各项回原文分清：是已经做到，还是计划和希望",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它小巧、可穿戴，供日常使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The team plans to improve and make it smaller to create a wearable device for daily use.",
+            "sourceHighlight": "plans to",
+            "optionText": "It is small and wearable for daily use.",
+            "optionHighlight": "is small and wearable",
+            "explanation": "[[block:paper-mock-zj-ningbo-2026-mar:reading-d:4|The team plans to improve]]说团队计划把它做小、制成日常可穿戴设备（plans to），这是还没做到的打算；眼下它是一台 4×8 英寸的便携设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+              "quote": "The team plans to improve and make it smaller to create a wearable device for daily use.",
+              "anchor": "团队的计划"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它攻克了一个关键的技术难题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+              "quote": "Obviously, it solved the problem of capturing molecules that evaporate easily – a major worry during the device’s development.",
+              "anchor": "解决了易挥发分子的难题"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+              "quote": "It caught easily evaporated (挥发的) coffee vapor",
+              "anchor": "测试中捕获了易挥发的蒸气"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它已被证明对新生婴儿有用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Doctors hope the device can track health signs without taking blood, protecting these high-risk patients.",
+            "sourceHighlight": "Doctors hope",
+            "optionText": "It has proved useful for newly born babies.",
+            "optionHighlight": "has proved useful",
+            "explanation": "设备的灵感来自早产儿对无创检测的需求，医生也只是希望（hope）它能用在这些婴儿身上；早期测试做的是咖啡蒸气、呼吸、空气和小鼠，没有在婴儿身上证明有效。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+              "quote": "Doctors hope the device can track health signs without taking blood, protecting these high-risk patients.",
+              "anchor": "医生只是希望"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它能轻松诊断炎症性肠病。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "It also shows promise for diagnosing inflammatory bowel disease, though the related breath signs first need to be recorded.",
+            "sourceHighlight": "shows promise",
+            "optionText": "It diagnoses inflammatory bowel disease easily.",
+            "optionHighlight": "diagnoses inflammatory bowel disease easily",
+            "explanation": "原文说它在诊断炎症性肠病上显示出前景（shows promise），还要先记录相关的呼吸指标（first need to be recorded），说明眼下还做不到，更谈不上轻松诊断。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+              "quote": "It also shows promise for diagnosing inflammatory bowel disease, though the related breath signs first need to be recorded.",
+              "anchor": "只是有前景"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "overcome a key technical challenge",
+          "sourceRole": "correctOption",
+          "targetText": "it solved the problem of capturing molecules that evaporate easily",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“攻克”（overcome）对应原文的“解决了”（solved），“关键技术难题”对应捕获易挥发分子这件研发中的大难题（a major worry）；测试中它确实捕获了易挥发的咖啡蒸气，可见难题已被攻克，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把原文写到的设备用途对应到不同职业，排除能受益的人。",
+      "stemTranslationZh": "谁最不可能从 ABLE 中受益？",
+      "locateBy": "options",
+      "locateFindZh": "把每种职业对应到原文写的医学、化学、物理用途",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "化学家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "As a new tool for detecting air chemistry",
+            "sourceHighlight": "detecting air chemistry",
+            "optionText": "A chemist.",
+            "optionHighlight": "chemist",
+            "explanation": "化学家能受益：[[block:paper-mock-zj-ningbo-2026-mar:reading-d:5|a new tool for detecting]]说 ABLE 是检测空气化学成分（air chemistry）的新工具。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+              "quote": "As a new tool for detecting air chemistry",
+              "anchor": "检测空气化学成分"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "心理学家。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+              "quote": "Besides medical uses, this achievement may open the door to new physics research on air impurities and state changes of matter.",
+              "anchor": "医学和物理用途"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+              "quote": "As a new tool for detecting air chemistry",
+              "anchor": "空气化学检测"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "内科医生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Doctors hope the device can track health signs without taking blood, protecting these high-risk patients.",
+            "sourceHighlight": "Doctors hope",
+            "optionText": "A physician.",
+            "optionHighlight": "physician",
+            "explanation": "physician 是医生，不是物理学家；原文写设备的医学用途（medical uses），医生还希望用它不抽血追踪病人健康（Doctors hope），医生显然受益。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+              "quote": "Doctors hope the device can track health signs without taking blood, protecting these high-risk patients.",
+              "anchor": "医生的希望"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "物理学家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "this achievement may open the door to new physics research",
+            "sourceHighlight": "new physics research",
+            "optionText": "A physicist.",
+            "optionHighlight": "physicist",
+            "explanation": "physicist 是物理学家；[[block:paper-mock-zj-ningbo-2026-mar:reading-d:5|Besides medical uses]]说这一成果可能为物理学新研究（new physics research）打开大门，物理学家也能受益。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+              "quote": "this achievement may open the door to new physics research",
+              "anchor": "物理学新研究"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A psychologist",
+          "sourceRole": "correctOption",
+          "targetText": "Besides medical uses, this achievement may open the door to new physics research on air impurities and state changes of matter.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "心理学家是排除出来的：原文写到的用途有医学（medical uses）、物理研究（physics research）和空气化学检测（air chemistry），分别对应医生、物理学家和化学家；全文没有一处涉及心理学，所以心理学家最不可能受益，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "抓住全文反复围绕的核心，即 ABLE 检测空气中分子的本领，选出能统领全文的标题。",
+      "stemTranslationZh": "下列哪一项适合作本文的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-zj-ningbo-2026-mar:reading-d:1]] 看 ABLE 的核心本领，再看原理、测试、用途各段是否都围绕它展开",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一种分析体液的工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "bodily liquids",
+            "optionText": "Bodily Liquid",
+            "matchType": "wordFamily",
+            "relationNote": "体液（bodily liquids）是[[block:paper-mock-zj-ningbo-2026-mar:reading-d:1]]说的旧办法，ABLE 恰恰是不靠体液、从空气中检测分子；它把空气变成液滴，只是检测的手段。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+              "quote": "detecting health-related molecules (分子) still relies on bodily liquids like blood",
+              "anchor": "旧办法靠体液"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一种捕获空气中微粒的工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "These drops trap particles and slide into a small container, making detection easy with common tools used for liquid analysis.",
+            "sourceHighlight": "trap particles",
+            "optionText": "A Tool for Airborne Particle Capture.",
+            "optionHighlight": "Airborne Particle Capture",
+            "explanation": "捕获微粒（trap particles）只是[[block:paper-mock-zj-ningbo-2026-mar:reading-d:2]]讲的一个工作步骤，捕获是为了检测；全文还写了测试结果和医学、科研用途，这个标题只盖住一步。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:2",
+              "quote": "These drops trap particles and slide into a small container, making detection easy with common tools used for liquid analysis.",
+              "anchor": "捕获只是一步"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一种检测空气分子的设备。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+              "quote": "a portable device named ABLE, which collects and detects molecules in the air",
+              "anchor": "ABLE 的核心功能"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:5",
+              "quote": "As a new tool for detecting air chemistry, ABLE fills the space between air and liquid molecule analysis",
+              "anchor": "空气分子分析的新工具"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一种用于无创健康检查的设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The device was first inspired by the need for non-invasive tests for premature babies in ICUs.",
+            "sourceHighlight": "non-invasive tests",
+            "optionText": "A Device for Non-Invasive Health Checks.",
+            "optionHighlight": "Non-Invasive Health Checks",
+            "explanation": "无创检测（non-invasive tests）只是[[block:paper-mock-zj-ningbo-2026-mar:reading-d:4]]讲的医学用途，[[block:paper-mock-zj-ningbo-2026-mar:reading-d:5]]还写到物理研究和空气化学检测，用它作标题范围太窄。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:4",
+              "quote": "The device was first inspired by the need for non-invasive tests for premature babies in ICUs.",
+              "anchor": "只是医学用途"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A Device for Air Molecule Detection",
+          "sourceRole": "correctOption",
+          "targetText": "a portable device named ABLE, which collects and detects molecules in the air",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "几段都围绕“检测空气中的分子”：[[block:paper-mock-zj-ningbo-2026-mar:reading-d:1]]介绍 ABLE 收集、检测空气中的分子（detects molecules in the air），[[block:paper-mock-zj-ningbo-2026-mar:reading-d:2]]讲它怎样把空气变成液体来检测，[[block:paper-mock-zj-ningbo-2026-mar:reading-d:3]]用测试证明有效，[[block:paper-mock-zj-ningbo-2026-mar:reading-d:4]]和[[block:paper-mock-zj-ningbo-2026-mar:reading-d:5]]讲医学和科研用途。选项的“检测空气分子的设备”正好统领全文，选 C。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1052 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:grammar-fill": {
+      "overview": "纪录片《重返狼群》片段引发热议，重提画家李微漪救助狼崽格林、陪它在草原生活七个月并送它回归狼群的故事，折射出人们对真挚情感的向往和日益增强的生态意识。",
+      "fullTranslationZh": "2026年1月，纪录片《重返狼群》中的一段短视频在中国社交媒体上引发热议，把16年前“格林”的故事重新推到聚光灯下。它在全国范围内激起了深切的情感和新的好奇。\n这一现象的核心，是画家李微漪与狼格林之间的特殊情谊。2010年，她在若尔盖草原上救下了格林，那是一只虚弱的新生狼崽，它的母亲被偷猎者投下的毒饵毒死了。她把它带回成都，但随着它长大，它的野性与城市生活产生了冲突。于是，出于爱，李微漪决定让它回归野外，这个决定源于尊重，而非占有。\n整整七个艰苦的月份里，李微漪和格林一起生活在草原上，教它在野外生存的本领。当格林被一个野生狼群接纳时，这段情谊迎来了苦乐交织的高潮。多年以后，据当地牧民讲述，如今已成为头狼的格林被人看到送回了那条红丝带，那是李微漪当年用来包扎它的幼崽受伤爪子的丝带。\n这个故事反映了人们对真挚关系的渴望，以及中国日益增强的生态意识。随着法律保护力度加大，当地狼的种群目前正在顺利恢复。格林的嚎叫曾是为生存发出的呼喊，如今则在呼唤共存，提醒我们：真正的慈悲在于尊重大自然的自由，在人类与荒野之间建立和谐。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-grammar-1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+          "sourceText": "At the heart of this phenomenon is the special bond between artist Li Weiyi and the wolf Green she rescued in 2010 on the Ruo’ergai grasslands, a weak newborn cub __57__ mother was killed by poachers’ poisoned bait.",
+          "displayText": "At the heart of this phenomenon is the special bond between artist Li Weiyi and the wolf Green she rescued in 2010 on the Ruo’ergai grasslands, a weak newborn cub whose mother was killed by poachers’ poisoned bait.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:57"
+          ],
+          "translationZh": "这一现象的核心，是画家李微漪与狼格林之间的特殊情谊。2010年，她在若尔盖草原上救下了格林，那是一只虚弱的新生狼崽，它的母亲被偷猎者投下的毒饵毒死了。",
+          "analysisZh": "这是表语提前的倒装句。还原成正常语序是 the special bond ... is at the heart of this phenomenon，主干是“特殊情谊是这一现象的核心”：表语 At the heart of this phenomenon 放到句首，主语 the special bond 移到 is 后面。between 引出情谊的两方：画家李微漪和狼格林。she rescued in 2010 on the Ruo’ergai grasslands 是省略了关系词的定语从句，修饰 the wolf Green；逗号后的 a weak newborn cub 是 Green 的同位语，whose 引导的定语从句再说明这只狼崽的母亲被毒饵毒死。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "At the heart of this phenomenon is"
+            },
+            {
+              "start": 35,
+              "end": 51,
+              "quote": "the special bond"
+            },
+            {
+              "start": 163,
+              "end": 186,
+              "quote": "whose mother was killed"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-grammar-2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+          "sourceText": "Green’s howl, once a cry for __65__ (survive), now calls for coexistence, reminding us true compassion lies in respecting nature’s freedom and building harmony between humanity and wilderness.",
+          "displayText": "Green’s howl, once a cry for survival, now calls for coexistence, reminding us true compassion lies in respecting nature’s freedom and building harmony between humanity and wilderness.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:65"
+          ],
+          "translationZh": "格林的嚎叫曾是为生存发出的呼喊，如今则在呼唤共存，提醒我们：真正的慈悲在于尊重大自然的自由，在人类与荒野之间建立和谐。",
+          "analysisZh": "主干是“格林的嚎叫如今在呼唤共存”（Green’s howl now calls for coexistence）。两个逗号之间的 once a cry for survival 是插入的同位成分，说明这声嚎叫过去是什么，和 now 形成今昔对照。reminding us ... 是现在分词短语作状语，说明这声呼唤提醒了我们什么；remind 后面是省略了 that 的宾语从句 true compassion lies in ...，从句里介词 in 带两个由 and 并列的动名词短语：respecting nature’s freedom 和 building harmony between humanity and wilderness。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "Green’s howl"
+            },
+            {
+              "start": 39,
+              "end": 64,
+              "quote": "now calls for coexistence"
+            },
+            {
+              "start": 103,
+              "end": 151,
+              "quote": "respecting nature’s freedom and building harmony"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 79,
+              "quote": "2026年1月，纪录片《重返狼群》中的一段短视频在中国社交媒体上引发热议，把16年前“格林”的故事重新推到聚光灯下。它在全国范围内激起了深切的情感和新的好奇。"
+            },
+            {
+              "paragraphId": "tr-2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2"
+              ],
+              "start": 80,
+              "end": 218,
+              "quote": "这一现象的核心，是画家李微漪与狼格林之间的特殊情谊。2010年，她在若尔盖草原上救下了格林，那是一只虚弱的新生狼崽，它的母亲被偷猎者投下的毒饵毒死了。她把它带回成都，但随着它长大，它的野性与城市生活产生了冲突。于是，出于爱，李微漪决定让它回归野外，这个决定源于尊重，而非占有。"
+            },
+            {
+              "paragraphId": "tr-3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3"
+              ],
+              "start": 219,
+              "end": 344,
+              "quote": "整整七个艰苦的月份里，李微漪和格林一起生活在草原上，教它在野外生存的本领。当格林被一个野生狼群接纳时，这段情谊迎来了苦乐交织的高潮。多年以后，据当地牧民讲述，如今已成为头狼的格林被人看到送回了那条红丝带，那是李微漪当年用来包扎它的幼崽受伤爪子的丝带。"
+            },
+            {
+              "paragraphId": "tr-4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4"
+              ],
+              "start": 345,
+              "end": 462,
+              "quote": "这个故事反映了人们对真挚关系的渴望，以及中国日益增强的生态意识。随着法律保护力度加大，当地狼的种群目前正在顺利恢复。格林的嚎叫曾是为生存发出的呼喊，如今则在呼唤共存，提醒我们：真正的慈悲在于尊重大自然的自由，在人类与荒野之间建立和谐。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-1",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:1",
+            "text": "In January 2026, a short video from a documentary Return to the Wolves sparked intense debate on Chinese social media, pushing the 16-year-old story of “Green” back into the spotlight. It aroused deep emotions and fresh curiosity nationally."
+          },
+          {
+            "textId": "done-2",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+            "text": "At the heart of this phenomenon is the special bond between artist Li Weiyi and the wolf Green she rescued in 2010 on the Ruo’ergai grasslands, a weak newborn cub whose mother was killed by poachers’ poisoned bait. She brought him to Chengdu, but his wild nature conflicted with urban life as he grew. So Li decided out of love to return him to the wild, a decision rooted in respect rather than possession."
+          },
+          {
+            "textId": "done-3",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+            "text": "For seven harsh months, Li lived with Green on the grasslands, teaching him skills to survive in the wild. The bond reached a bittersweet climax when he was accepted into a wild pack. Years later, according to accounts from local herders, Green, now a pack leader, was seen returning the red ribbon Li used to bandage his cub’s injured paw."
+          },
+          {
+            "textId": "done-4",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+            "text": "This story reflects people’s desire for authentic relationships and China’s growing ecological consciousness. With stronger legal protection, local wolf populations are recovering well at present. Green’s howl, once a cry for survival, now calls for coexistence, reminding us true compassion lies in respecting nature’s freedom and building harmony between humanity and wilderness."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:1",
+                "start": 188,
+                "end": 195,
+                "quote": "aroused"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-1",
+                "start": 65,
+                "end": 67,
+                "quote": "激起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:56"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:56",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:1",
+                "start": 230,
+                "end": 240,
+                "quote": "nationally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-1",
+                "start": 59,
+                "end": 65,
+                "quote": "在全国范围内"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 144,
+                "end": 162,
+                "quote": "a weak newborn cub"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 170,
+                "end": 187,
+                "quote": "mother was killed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 48,
+                "end": 57,
+                "quote": "一只虚弱的新生狼崽"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 60,
+                "end": 74,
+                "quote": "母亲被偷猎者投下的毒饵毒死了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:57"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:57",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 163,
+                "end": 168,
+                "quote": "whose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 58,
+                "end": 60,
+                "quote": "它的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 264,
+                "end": 274,
+                "quote": "conflicted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 99,
+                "end": 104,
+                "quote": "产生了冲突"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:58"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:58",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 274,
+                "end": 278,
+                "quote": "with"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 94,
+                "end": 104,
+                "quote": "与城市生活产生了冲突"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 358,
+                "end": 368,
+                "quote": "a decision"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 383,
+                "end": 416,
+                "quote": "in respect rather than possession"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 124,
+                "end": 128,
+                "quote": "这个决定"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 130,
+                "end": 137,
+                "quote": "尊重，而非占有"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:59"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:59",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 366,
+                "end": 372,
+                "quote": "rooted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 128,
+                "end": 130,
+                "quote": "源于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+                "start": 178,
+                "end": 187,
+                "quote": "wild pack"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-3",
+                "start": 43,
+                "end": 47,
+                "quote": "野生狼群"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:60"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:60",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+                "start": 171,
+                "end": 172,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-3",
+                "start": 41,
+                "end": 43,
+                "quote": "一个"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+                "start": 232,
+                "end": 250,
+                "quote": "from local herders"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-3",
+                "start": 72,
+                "end": 76,
+                "quote": "当地牧民"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:61"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:61",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+                "start": 210,
+                "end": 218,
+                "quote": "accounts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-3",
+                "start": 76,
+                "end": 78,
+                "quote": "讲述"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+                "start": 278,
+                "end": 286,
+                "quote": "was seen"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-3",
+                "start": 89,
+                "end": 93,
+                "quote": "被人看到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:62"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:62",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:3",
+                "start": 274,
+                "end": 283,
+                "quote": "returning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-3",
+                "start": 93,
+                "end": 95,
+                "quote": "送回"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 20,
+                "end": 63,
+                "quote": "people’s desire for authentic relationships"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 71,
+                "end": 111,
+                "quote": "China’s growing ecological consciousness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 7,
+                "end": 17,
+                "quote": "人们对真挚关系的渴望"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 20,
+                "end": 31,
+                "quote": "中国日益增强的生态意识"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:63"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:63",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 64,
+                "end": 67,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 18,
+                "end": 20,
+                "quote": "以及"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 145,
+                "end": 167,
+                "quote": "local wolf populations"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 190,
+                "end": 200,
+                "quote": "at present"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 43,
+                "end": 49,
+                "quote": "当地狼的种群"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 49,
+                "end": 51,
+                "quote": "目前"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:64"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:64",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 165,
+                "end": 179,
+                "quote": "are recovering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 51,
+                "end": 57,
+                "quote": "正在顺利恢复"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 221,
+                "end": 230,
+                "quote": "a cry for"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 253,
+                "end": 274,
+                "quote": "calls for coexistence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 71,
+                "end": 73,
+                "quote": "呼喊"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 78,
+                "end": 82,
+                "quote": "呼唤共存"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:65"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:65",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 226,
+                "end": 234,
+                "quote": "survival"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 66,
+                "end": 68,
+                "quote": "生存"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:57"
+            ],
+            "selectedSentenceId": "ls-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:2",
+                "start": 0,
+                "end": 214,
+                "quote": "At the heart of this phenomenon is the special bond between artist Li Weiyi and the wolf Green she rescued in 2010 on the Ruo’ergai grasslands, a weak newborn cub whose mother was killed by poachers’ poisoned bait."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-2",
+                "start": 0,
+                "end": 75,
+                "quote": "这一现象的核心，是画家李微漪与狼格林之间的特殊情谊。2010年，她在若尔盖草原上救下了格林，那是一只虚弱的新生狼崽，它的母亲被偷猎者投下的毒饵毒死了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:65"
+            ],
+            "selectedSentenceId": "ls-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:grammar-fill:4",
+                "start": 197,
+                "end": 381,
+                "quote": "Green’s howl, once a cry for survival, now calls for coexistence, reminding us true compassion lies in respecting nature’s freedom and building harmony between humanity and wilderness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-4",
+                "start": 58,
+                "end": 117,
+                "quote": "格林的嚎叫曾是为生存发出的呼喊，如今则在呼唤共存，提醒我们：真正的慈悲在于尊重大自然的自由，在人类与荒野之间建立和谐。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-zj-ningbo-2026-mar:56": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "national",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "nationally",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰谓语“激起”（aroused），说明这些情感和好奇是在多大范围内被激起的。修饰动词要用副词，形容词（national）加词尾 -ly，填（nationally）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "aroused",
+          "signalSide": "passage",
+          "relation": "空格修饰谓语动词，说明激起的范围，所以用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:57": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "whose",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-possessive",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句，修饰“一只虚弱的新生狼崽”（a weak newborn cub），这个名词短语是格林（Green）的同位语。从句（___ mother was killed by poachers’ poisoned bait）主谓齐全，缺的是修饰“母亲”（mother）的所属关系词，表示“它的母亲”，用（whose）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a weak newborn cub",
+          "signalSide": "passage",
+          "relation": "先行词是狼崽，从句说的是它的母亲。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "mother was killed",
+          "signalSide": "passage",
+          "relation": "从句主谓完整，只缺修饰 mother 的所属关系词。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:58": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "with",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把“城市生活”（urban life）接到谓语“冲突”（conflicted）上，说明格林的野性和什么相冲突。表示“与……冲突”，用介词（with）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "conflicted",
+          "signalSide": "passage",
+          "relation": "谓语动词表示冲突，冲突的对象用介词引出。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:59": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "root",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "rooted",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格所在短语作后置定语，修饰名词“决定”（a decision），这个名词短语是对前面“让格林回归野外”这件事的补充说明。决定是“被植根于”尊重之中的（be rooted in），与动词（root）是被动关系，用过去分词（rooted）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a decision",
+          "signalSide": "passage",
+          "relation": "分词短语修饰决定，说明这个决定的来由。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "in respect rather than possession",
+          "signalSide": "passage",
+          "relation": "植根于某物，与决定构成被动关系。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:60": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-first-mention",
+        "features": [
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词“狼群”（pack）。这里第一次提到接纳格林的狼群，只说是“一个野生狼群”，用不定冠词；“野生的”（wild）以辅音音素开头，填（a）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "wild pack",
+          "signalSide": "passage",
+          "relation": "单数可数名词首次出现，需要不定冠词。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:61": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "account",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "accounts",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作复合介词（according to）的宾语，要用名词。这里的“讲述、说法”（account）是可数名词，前面没有冠词，又是来自多位当地牧民（local herders）的说法，用复数（accounts）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "according to",
+          "signalSide": "passage",
+          "relation": "复合介词后接名词作宾语。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "from local herders",
+          "signalSide": "passage",
+          "relation": "说法来自多位牧民，名词用复数。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:62": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "return",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "returning",
+      "role": "subject-complement",
+      "similarityProfile": {
+        "route": "subject-complement-sensory-passive",
+        "features": []
+      },
+      "reason": "空格作主语补足语，接在被动的“被看到”（was seen）后面，说明主语格林（Green）被人看到时在做什么。还原成主动是看到格林正在送回丝带（see Green doing），格林是“送回”的发出者，用现在分词（returning）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "was seen",
+          "signalSide": "passage",
+          "relation": "感官动词的被动式后接分词作主语补足语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Green, now a pack leader",
+          "signalSide": "passage",
+          "relation": "送回丝带的是格林，主动关系。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:63": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接谓语“反映”（reflects）的两个宾语：人们对真挚关系的渴望（people’s desire for authentic relationships）和中国日益增强的生态意识（China’s growing ecological consciousness）。两者是并列递加关系，用（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "people’s desire for authentic relationships",
+          "signalSide": "passage",
+          "relation": "前一个宾语，由名词所有格引出。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "China’s growing ecological consciousness",
+          "signalSide": "passage",
+          "relation": "后一个宾语，结构与前一个相同，二者并列。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:64": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "recover",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are recovering",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-progressive-current-action",
+        "features": []
+      },
+      "reason": "空格是句子的谓语，主语是复数的“当地狼的种群”（local wolf populations），句首的介词短语（With stronger legal protection）只是状语。时间状语“目前”（at present）表示现阶段正在进行，用现在进行时（are recovering）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "local wolf populations",
+          "signalSide": "passage",
+          "relation": "主语是复数，助动词用 are。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "at present",
+          "signalSide": "passage",
+          "relation": "表示目前正在进行，用现在进行时。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:65": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "survive",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "survival",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作介词（for）的宾语，要用名词。动词（survive）的名词形式是（survival），“为生存发出的呼喊”；后面的“呼唤共存”（calls for coexistence）同样接名词，可以印证。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "a cry for",
+          "signalSide": "passage",
+          "relation": "介词后接名词作宾语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "calls for coexistence",
+          "signalSide": "passage",
+          "relation": "后文同样用介词加名词，与空格形成今昔对照。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,737 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:reading-b": {
+      "overview": "本文介绍加拿大青年厨师维多利亚·林斯马：她凭一道融合祖母家常菜与现代技法的招牌菜夺得加拿大赛区冠军，在导师的全方位指导下，将赴米兰与各国厨师同台竞技，把加拿大美食带给世界。",
+      "fullTranslationZh": "维多利亚·林斯马是安大略省米其林推荐餐厅 Hexagon 的副主厨，她在赢得去年的加拿大赛区冠军后，跻身全球 15 位顶尖烹饪人才之列。她的招牌菜“跨越大海，再回家乡”既有个人色彩，又带着鲜明的加拿大特色。这道菜把她祖母家传食谱里的传统东海岸家常菜，与她在 Hexagon 厨房里练就的现代技法融为一体。她认为这道菜是她烹饪历程最纯粹的表达。\n林斯马师从 Hexagon 的行政总厨拉斐尔·科瓦鲁比亚斯，他曾获 2019 年加拿大赛区冠军，并于 2021 年代表加拿大赴米兰参赛。他给予的远不止技术支持，还在心理韧性方面指导她，让她为比赛做好全方位的准备。这种一代厨师托举下一代的传承，帮助加拿大菜以多样性、地域性和创新性享誉全球。\n如今，她将在米兰接受国际评委的检验，以招牌菜角逐 2024—25 年度圣培露青年厨师学院奖。这一平台看重技术能力、创造力、可持续性以及用食物讲故事的能力。对林斯马而言，这是把加拿大食材和加拿大特色带给全球观众的机会。\n在米兰，她将与来自世界各地的同行同台竞技：有来自中国香港、巴拿马、斯洛文尼亚、南非、美国和英国的厨师。每人都将呈上一道由各自文化和训练塑造的独特菜品。他们共同代表着全球饮食文化的未来。\n林斯马对未来的规划既源于记忆，也源于抱负。她把祖母钟爱的东海岸风味融入一道为世界上要求最严苛的烹饪比赛之一而精心打磨的菜中，由此连接起过去与现在、家乡与远方。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:5",
+          "sourceText": "By weaving her grandmother’s beloved East Coast flavours into a dish refined for one of the world’s most demanding culinary competitions, she bridges past and present, home and away.",
+          "displayText": "By weaving her grandmother’s beloved East Coast flavours into a dish refined for one of the world’s most demanding culinary competitions, she bridges past and present, home and away.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:27"
+          ],
+          "translationZh": "她把祖母钟爱的东海岸风味融入一道为世界上要求最严苛的烹饪比赛之一而精心打磨的菜中，由此连接起过去与现在、家乡与远方。",
+          "analysisZh": "主干在逗号后：she bridges past and present, home and away。bridges 带两组并列宾语，每组用 and 连两个相对的词：past and present（过去与现在），home and away（家乡与远方）。句首 By weaving… 是方式状语，用 weave A into B 的结构，A 是祖母钟爱的东海岸风味，B 是 a dish。refined for one of… competitions 是过去分词短语，后置修饰 a dish，说这道菜是为一场顶级比赛精心打磨的。把方式和主干连起来读：靠把老味道融进参赛菜，她连接了过去和现在。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 10,
+              "quote": "By weaving"
+            },
+            {
+              "start": 69,
+              "end": 80,
+              "quote": "refined for"
+            },
+            {
+              "start": 138,
+              "end": 181,
+              "quote": "she bridges past and present, home and away"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+          "sourceText": "That sense of continuity of one generation of chefs lifting the next helps make Canadian cuisine globally renowned for diversity, regionality and innovation.",
+          "displayText": "That sense of continuity of one generation of chefs lifting the next helps make Canadian cuisine globally renowned for diversity, regionality and innovation.",
+          "relatedQuestionIds": [],
+          "translationZh": "这种一代厨师托举下一代的传承，帮助加拿大菜以多样性、地域性和创新性享誉全球。",
+          "analysisZh": "主语很长，中心词是 sense：That sense of continuity（这种传承感），后面的 of one generation of chefs lifting the next 修饰 continuity，说明传承的内容；其中 one generation of chefs 是动名词 lifting 的逻辑主语，the next 是 the next generation 的省略。谓语是 helps make，help 后接省略 to 的 make；make 的宾语是 Canadian cuisine，宾补是 globally renowned for…，for 后有 diversity、regionality、innovation 三个并列名词。先找到 helps make 这个谓语，前面就都是主语。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 24,
+              "quote": "That sense of continuity"
+            },
+            {
+              "start": 69,
+              "end": 79,
+              "quote": "helps make"
+            },
+            {
+              "start": 97,
+              "end": 118,
+              "quote": "globally renowned for"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-b:1"
+              ],
+              "start": 0,
+              "end": 171,
+              "quote": "维多利亚·林斯马是安大略省米其林推荐餐厅 Hexagon 的副主厨，她在赢得去年的加拿大赛区冠军后，跻身全球 15 位顶尖烹饪人才之列。她的招牌菜“跨越大海，再回家乡”既有个人色彩，又带着鲜明的加拿大特色。这道菜把她祖母家传食谱里的传统东海岸家常菜，与她在 Hexagon 厨房里练就的现代技法融为一体。她认为这道菜是她烹饪历程最纯粹的表达。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-b:2"
+              ],
+              "start": 172,
+              "end": 316,
+              "quote": "林斯马师从 Hexagon 的行政总厨拉斐尔·科瓦鲁比亚斯，他曾获 2019 年加拿大赛区冠军，并于 2021 年代表加拿大赴米兰参赛。他给予的远不止技术支持，还在心理韧性方面指导她，让她为比赛做好全方位的准备。这种一代厨师托举下一代的传承，帮助加拿大菜以多样性、地域性和创新性享誉全球。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-b:3"
+              ],
+              "start": 317,
+              "end": 425,
+              "quote": "如今，她将在米兰接受国际评委的检验，以招牌菜角逐 2024—25 年度圣培露青年厨师学院奖。这一平台看重技术能力、创造力、可持续性以及用食物讲故事的能力。对林斯马而言，这是把加拿大食材和加拿大特色带给全球观众的机会。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-b:4"
+              ],
+              "start": 426,
+              "end": 518,
+              "quote": "在米兰，她将与来自世界各地的同行同台竞技：有来自中国香港、巴拿马、斯洛文尼亚、南非、美国和英国的厨师。每人都将呈上一道由各自文化和训练塑造的独特菜品。他们共同代表着全球饮食文化的未来。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-b:5"
+              ],
+              "start": 519,
+              "end": 598,
+              "quote": "林斯马对未来的规划既源于记忆，也源于抱负。她把祖母钟爱的东海岸风味融入一道为世界上要求最严苛的烹饪比赛之一而精心打磨的菜中，由此连接起过去与现在、家乡与远方。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:27"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:5",
+                "start": 69,
+                "end": 251,
+                "quote": "By weaving her grandmother’s beloved East Coast flavours into a dish refined for one of the world’s most demanding culinary competitions, she bridges past and present, home and away."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 21,
+                "end": 79,
+                "quote": "她把祖母钟爱的东海岸风味融入一道为世界上要求最严苛的烹饪比赛之一而精心打磨的菜中，由此连接起过去与现在、家乡与远方。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+                "start": 285,
+                "end": 442,
+                "quote": "That sense of continuity of one generation of chefs lifting the next helps make Canadian cuisine globally renowned for diversity, regionality and innovation."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 106,
+                "end": 144,
+                "quote": "这种一代厨师托举下一代的传承，帮助加拿大菜以多样性、地域性和创新性享誉全球。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+                "start": 181,
+                "end": 273,
+                "quote": "Her signature dish “Across the Sea and Home Again” is both personal and distinctly Canadian."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 84,
+                "end": 102,
+                "quote": "既有个人色彩，又带着鲜明的加拿大特色"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+                "start": 139,
+                "end": 284,
+                "quote": "He offers much more than just technical support; he also coaches her on mental resilience, arming her with all-round preparation for the contest."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 68,
+                "end": 105,
+                "quote": "他给予的远不止技术支持，还在心理韧性方面指导她，让她为比赛做好全方位的准备"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+                "start": 147,
+                "end": 246,
+                "quote": "a platform highlighting technical ability, creativity, sustainability and storytelling through food"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 46,
+                "end": 76,
+                "quote": "这一平台看重技术能力、创造力、可持续性以及用食物讲故事的能力"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+                "start": 274,
+                "end": 426,
+                "quote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+                "start": 248,
+                "end": 338,
+                "quote": "For Rinsma, it’s a chance to bring Canadian ingredients and identity to a global audience."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 103,
+                "end": 151,
+                "quote": "这道菜把她祖母家传食谱里的传统东海岸家常菜，与她在 Hexagon 厨房里练就的现代技法融为一体"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 84,
+                "end": 107,
+                "quote": "这是把加拿大食材和加拿大特色带给全球观众的机会"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先介绍林斯马的成绩和她既有个人色彩又有加拿大特色的招牌菜，再写导师科瓦鲁比亚斯给她的全方位支持，接着写她将赴米兰参加的比赛和同台的各国厨师，最后总结她用这道菜连接过去与现在、家乡与远方。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+            "summary": "林斯马夺得加拿大赛区冠军，跻身全球前 15 名；她的招牌菜融合祖母的家常菜和现代技法。",
+            "function": "介绍人物和招牌菜。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+            "summary": "行政总厨科瓦鲁比亚斯训练她，既给技术支持，也指导心理韧性；这种代代托举让加拿大菜享誉全球。",
+            "function": "写导师的作用和厨师间的传承。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+            "summary": "她将在米兰接受国际评委检验，比赛看重技术、创造力、可持续性和讲故事；她想借此把加拿大食材和特色带给世界。",
+            "function": "介绍比赛和她参赛的意义。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:4",
+            "summary": "她将与来自世界各地的厨师同台，每人呈上体现自己文化的菜品。",
+            "function": "补充比赛的参赛者。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:5",
+            "summary": "她把祖母的东海岸风味融入参赛菜，连接起过去与现在、家乡与远方。",
+            "function": "总结全文，回扣招牌菜。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zj-ningbo-2026-mar:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出原文对林斯马招牌菜特点的直接描述。",
+      "stemTranslationZh": "林斯马的招牌菜有什么特别之处？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "传统的技法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+            "sourceEntity": "traditional East Coast comfort food",
+            "optionText": "Conventional techniques.",
+            "optionEntity": "Conventional techniques",
+            "explanation": "原文说传统的是祖母食谱里的东海岸家常菜（traditional…comfort food），技法恰恰是现代的（contemporary techniques），选项把“传统”安到了技法上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+              "quote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+              "anchor": "传统菜配现代技法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "祖母食谱带来的灵感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+            "sourceHighlight": "her grandmother’s homemade recipes",
+            "optionText": "Grandmother’s recipe inspiration.",
+            "optionHighlight": "Grandmother’s recipe inspiration",
+            "explanation": "祖母的家传食谱（grandmother’s homemade recipes）只是这道菜融合的一半，另一半是现代技法；原文点明的特别之处是既有个人色彩又有加拿大特色，选项只取了一个来源。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+              "quote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+              "anchor": "祖母食谱只是一半"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Hexagon 厨师们的共同努力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Hexagon",
+            "optionText": "Hexagon",
+            "matchType": "exact",
+            "relationNote": "原文提到 Hexagon，只是说现代技法是她自己在 Hexagon 厨房里练成的（she has perfected），没说这道菜是那里的厨师们合作完成的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+              "quote": "contemporary techniques she has perfected in Hexagon kitchen",
+              "anchor": "她自己练成的技法"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有个人色彩和加拿大特色。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+              "quote": "Her signature dish “Across the Sea and Home Again” is both personal and distinctly Canadian.",
+              "anchor": "招牌菜的特点"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "signature dish",
+          "sourceRole": "stem",
+          "targetText": "Her signature dish “Across the Sea and Home Again” is both personal and distinctly Canadian.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "both personal and distinctly Canadian",
+          "note": "题干 signature dish 原词出现在原文。"
+        },
+        {
+          "sourceText": "Personalized and Canadian features",
+          "sourceRole": "correctOption",
+          "targetText": "both personal and distinctly Canadian",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“个人色彩”（Personalized）就是原文的 personal，“加拿大特色”（Canadian features）就是鲜明的加拿大风格（distinctly Canadian），两点都在同一句，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出导师科瓦鲁比亚斯为林斯马具体做了什么，再概括他的作用。",
+      "stemTranslationZh": "拉斐尔·科瓦鲁比亚斯在林斯马的烹饪历程中起了什么作用？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看他为她做了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "和她一起代表加拿大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "represented Canada",
+            "optionText": "Representing Canada",
+            "matchType": "wordFamily",
+            "relationNote": "代表加拿大去米兰（represented Canada in Milan）是科瓦鲁比亚斯自己 2021 年的经历；这次去米兰参赛的是林斯马，原文没说他和她一起代表加拿大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+              "quote": "who won the 2019 Canadian title and represented Canada in Milan in 2021",
+              "anchor": "他 2021 年的经历"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "给予她全方位的支持。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+              "quote": "He offers much more than just technical support; he also coaches her on mental resilience, arming her with all-round preparation for the contest.",
+              "anchor": "技术和心理上的支持"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "塑造了她的获奖菜品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+            "sourceEntity": "she",
+            "optionText": "Shaping her award-winning dish.",
+            "optionEntity": "Shaping her award-winning dish",
+            "explanation": "原文写这道菜融合的是祖母的食谱和她自己练成的技法（she has perfected），没说是科瓦鲁比亚斯塑造的；他做的是训练和指导她本人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+              "quote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+              "anchor": "菜是她自己做成的"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "教她基本的烹饪技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "He offers much more than just technical support; he also coaches her on mental resilience, arming her with all-round preparation for the contest.",
+            "sourceHighlight": "much more than just technical support",
+            "optionText": "Teaching her basic cooking skills.",
+            "optionHighlight": "basic cooking skills",
+            "explanation": "原文强调他给的远不止技术支持（much more than just technical support），还有心理指导；林斯马已是副主厨，原文也没说他教的是基本功。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+              "quote": "He offers much more than just technical support; he also coaches her on mental resilience, arming her with all-round preparation for the contest.",
+              "anchor": "远不止技术支持"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Rafael Covarrubias",
+          "sourceRole": "stem",
+          "targetText": "Rinsma is trained by Hexagon’s executive chef Rafael Covarrubias, who won the 2019 Canadian title and represented Canada in Milan in 2021.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "much more than just technical support; he also coaches her on mental resilience, arming her with all-round preparation",
+          "bridgeZh": "He 指科瓦鲁比亚斯，接着讲他具体怎样帮她",
+          "note": "题干 Rafael Covarrubias 原词出现在原文。"
+        },
+        {
+          "sourceText": "full-range support",
+          "sourceRole": "correctOption",
+          "targetText": "arming her with all-round preparation for the contest",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“全方位支持”（full-range support）概括了原文两层帮助：技术支持之外（much more than just technical support），他还指导她的心理韧性（mental resilience），让她做好全方位准备（all-round preparation），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到介绍米兰这场比赛的句子，看它看重哪些方面。",
+      "stemTranslationZh": "关于米兰的这场烹饪比赛，我们知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看逗号后对这个奖的补充说明",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它要求参赛菜品讲出故事。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+              "quote": "a platform highlighting technical ability, creativity, sustainability and storytelling through food",
+              "anchor": "平台看重的四项能力"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是世界顶级的烹饪比赛。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a dish refined for one of the world’s most demanding culinary competitions",
+            "sourceHighlight": "one of the world’s most demanding",
+            "optionText": "It tops the world’s culinary contest.",
+            "optionHighlight": "tops",
+            "explanation": "[[block:paper-mock-zj-ningbo-2026-mar:reading-b:5]]说它是世界上要求最严苛的烹饪比赛之一（one of the world’s most demanding），既是“之一”，讲的又是要求严，推不出它排名世界第一。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:5",
+              "quote": "a dish refined for one of the world’s most demanding culinary competitions",
+              "anchor": "要求最严的比赛之一"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它把烹饪技术放在首位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a platform highlighting technical ability, creativity, sustainability and storytelling through food",
+            "sourceHighlight": "technical ability",
+            "optionText": "It prioritizes cooking techniques.",
+            "optionHighlight": "prioritizes cooking techniques",
+            "explanation": "技术能力（technical ability）只是平台并列看重的四项之一，和创造力、可持续性、讲故事排在一起，原文没说技术放在首位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+              "quote": "a platform highlighting technical ability, creativity, sustainability and storytelling through food",
+              "anchor": "四项并列"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它面向亚洲地区的厨师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "she will share the stage with fellow chefs from every corner of the world",
+            "sourceHighlight": "every corner of the world",
+            "optionText": "It targets chefs from Asian regions.",
+            "optionHighlight": "Asian regions",
+            "explanation": "同台的厨师来自世界各地（every corner of the world），名单里只有香港在亚洲，其余是巴拿马、斯洛文尼亚、南非、美国和英国，比赛并不专门面向亚洲。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:4",
+              "quote": "she will share the stage with fellow chefs from every corner of the world",
+              "anchor": "厨师来自世界各地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Milan",
+          "sourceRole": "stem",
+          "targetText": "Now she will test her signature dish under the supervision of international judges in Milan for the S.Pellegrino Young Chef Academy Award 2024-25, a platform highlighting technical ability, creativity, sustainability and storytelling through food.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "storytelling through food",
+          "note": "题干 Milan 原词出现在原文，这句写的就是这次比赛。"
+        },
+        {
+          "sourceText": "dish storytelling",
+          "sourceRole": "correctOption",
+          "targetText": "storytelling through food",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“菜品讲故事”（dish storytelling）就是原文的“用食物讲故事”（storytelling through food）；这是比赛平台看重的四项能力之一，评委看重它，参赛菜就得讲出故事，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据林斯马做菜和参赛的具体做法，概括她作为厨师的特点。",
+      "stemTranslationZh": "下列哪一项最能描述作为厨师的林斯马？",
+      "locateBy": "options",
+      "locateFindZh": "每对词拿回她怎样做菜、为何参赛的描述里，两词都要有据",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "谦虚且技艺娴熟。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Modest",
+            "explanation": "技艺娴熟有依据，她跻身全球前 15 名烹饪人才（top 15 culinary talents）；但原文没有一处写她谦虚，只对上一半。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "充满活力且好胜。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Dynamic and competitive",
+            "explanation": "她参赛是想把加拿大食材和特色带给全球观众（bring Canadian ingredients and identity），原文没写她想压倒对手，也没有写她精力充沛的细节。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "富有创意且热爱祖国。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:1",
+              "quote": "It blends traditional East Coast comfort food from her grandmother’s homemade recipes with contemporary techniques she has perfected in Hexagon kitchen.",
+              "anchor": "传统与现代融合"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+              "quote": "For Rinsma, it’s a chance to bring Canadian ingredients and identity to a global audience.",
+              "anchor": "把加拿大特色带给世界"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "谨慎且独立。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cautious and independent",
+            "explanation": "原文写她由行政总厨训练、在心理上受他指导（trained by…coaches her），看不出“独立”；也没有任何细节写她做事谨慎。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Creative and patriotic",
+          "sourceRole": "correctOption",
+          "targetText": "For Rinsma, it’s a chance to bring Canadian ingredients and identity to a global audience.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "两个词各落一处：“有创意”落在[[block:paper-mock-zj-ningbo-2026-mar:reading-b:1|It blends traditional East Coast]]，她把祖母的传统家常菜和现代技法融在一道菜里（blends…with contemporary techniques）；“爱国”落在[[block:paper-mock-zj-ningbo-2026-mar:reading-b:3|For Rinsma, it’s a chance]]，她把参赛看作把加拿大食材和特色带给全球观众的机会（bring Canadian ingredients and identity），选 C。"
+        }
+      ]
+    }
+  }
+}

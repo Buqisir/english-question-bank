@@ -1,0 +1,964 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:seven-choices": {
+      "overview": "文章谈幽默在科学传播中的作用：幽默能让艰深知识变好懂、提高受众参与、拉近科学家与公众的距离，但用错或用过头会误导受众、损害公信力，关键在于把握生动和严谨之间的平衡。",
+      "fullTranslationZh": "人们喜爱幽默，因为它能点亮日常时刻、化解尴尬，让每一次交往都温暖而愉快。幽默的这种魔力不只在日常生活中起作用，在科学领域，尤其是在网络上，也同样大放异彩。一点幽默就能大大提升科学家的传播效果。\n\n首先，幽默能把艰深的科学知识变简单。它能帮助普通人理解复杂的概念。例如，用“机器学习就像笨手笨脚的蹒跚学步的孩子”这样有趣的类比来解释自动驾驶汽车中的人工智能，能让非专业人群轻松理解抽象的概念。幽默还能有效提高受众的参与度。在社交媒体上分享实验室实验中巧妙幽默的故事的科学家，往往比枯燥的学术帖子获得更多互动。此外，幽默还能让科学家更有人情味，这一点在科普讲座中就能看到：轻松的笑话让听众觉得和研究人员更亲近。\n\n不过，幽默在科学传播中是一把双刃剑。其中隐藏的风险值得我们注意。如果内容本身不真实，幽默甚至会取代事实，让受众仅凭自己看到的有趣帖子就对科学知识形成错误的看法。过度使用讽刺或负面的幽默也会适得其反，因为这会很快让科学家失去公众的信任，损害他们的公信力。\n\n恰当地使用幽默，需要在生动的表达和专业的严谨之间取得平衡。它既不应盖过核心的科学信息，也不应浅薄到失去严肃性。用得过多会损害专业性。掌握这种平衡的科学家能有效缩小和公众之间的隔阂，让科学更亲切、更受欢迎。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+          "sourceText": "For example, explaining AI in self-driving cars with a funny analogy about “machines learning like clumsy toddlers” makes abstract ideas easy for non-professional groups to understand.",
+          "displayText": "For example, explaining AI in self-driving cars with a funny analogy about “machines learning like clumsy toddlers” makes abstract ideas easy for non-professional groups to understand.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:37"
+          ],
+          "translationZh": "例如，用“机器学习就像笨手笨脚的蹒跚学步的孩子”这样有趣的类比来解释自动驾驶汽车中的人工智能，能让非专业人群轻松理解抽象的概念。",
+          "analysisZh": "主干是 explaining AI ... makes abstract ideas easy：动名词短语 explaining AI in self-driving cars 作主语，所以谓语用单数 makes。with a funny analogy 说明用什么方法解释，about 引出类比的内容。makes 后面是宾语 abstract ideas 加宾补 easy，for non-professional groups to understand 接在 easy 后，说明对谁来说容易理解。这句是空前那句“幽默让知识变简单”的例子，也给前一空“普通人能懂”作证。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 47,
+              "quote": "explaining AI in self-driving cars"
+            },
+            {
+              "start": 116,
+              "end": 141,
+              "quote": "makes abstract ideas easy"
+            },
+            {
+              "start": 142,
+              "end": 183,
+              "quote": "for non-professional groups to understand"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+          "sourceText": "If the content itself is untrue, humor can even replace facts, leading the audience to form wrong opinions about scientific knowledge just based on the amusing posts they see.",
+          "displayText": "If the content itself is untrue, humor can even replace facts, leading the audience to form wrong opinions about scientific knowledge just based on the amusing posts they see.",
+          "relatedQuestionIds": [],
+          "translationZh": "如果内容本身不真实，幽默甚至会取代事实，让受众仅凭自己看到的有趣帖子就对科学知识形成错误的看法。",
+          "analysisZh": "主干是 humor can even replace facts。句首 If the content itself is untrue 是条件状语从句。逗号后 leading the audience to form wrong opinions 是现在分词短语作结果状语，lead sb to do 表示“导致某人做某事”。just based on the amusing posts they see 说明这些错误看法凭什么形成；they see 是省略了关系代词的定语从句，修饰 posts。",
+          "underlineRanges": [
+            {
+              "start": 33,
+              "end": 61,
+              "quote": "humor can even replace facts"
+            },
+            {
+              "start": 63,
+              "end": 106,
+              "quote": "leading the audience to form wrong opinions"
+            },
+            {
+              "start": 166,
+              "end": 174,
+              "quote": "they see"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先由日常生活中的幽默引到科学传播，提出幽默能提升传播效果；再分三点讲好处；接着转折讲隐藏的风险；最后提出要在生动和严谨之间取得平衡。",
+        "units": [
+          {
+            "unitId": "unit-1",
+            "paragraphIds": [
+              "block:paper-mock-zj-ningbo-2026-mar:seven-choices:1"
+            ],
+            "summary": "从幽默在日常生活中的魔力说到科学领域，提出一点幽默能大大提升科学家的传播效果。"
+          },
+          {
+            "unitId": "unit-2",
+            "paragraphIds": [
+              "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2"
+            ],
+            "summary": "讲幽默的三点好处：让知识好懂、提高受众参与、让科学家更有人情味，各配一个例子。"
+          },
+          {
+            "unitId": "unit-3",
+            "paragraphIds": [
+              "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3"
+            ],
+            "summary": "转折指出幽默是双刃剑，列出两种风险：内容不实时误导受众，滥用讽刺会失去公众信任。"
+          },
+          {
+            "unitId": "unit-4",
+            "paragraphIds": [
+              "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4"
+            ],
+            "summary": "提出用幽默要在生动表达和专业严谨之间取得平衡，掌握平衡的科学家能拉近和公众的距离。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 38,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "B",
+          "shared": [
+            "It"
+          ],
+          "text": "选项也用 It 开头讲幽默的一条好处，放进第 38 题看似顺。但空后 \"attract more interactions\" 讲互动，不讲形象；拉近距离是后文 \"humor humanizes scientists\" 那条，前面有 Additionally，是另起的一点。放进第 37 题也接不上：空后例子只证明 \"easy for non-professional groups to understand\"。",
+          "quotes": [
+            "It",
+            "attract more interactions",
+            "humor humanizes scientists",
+            "Additionally",
+            "easy for non-professional groups to understand"
+          ]
+        },
+        "G": {
+          "target": 39,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "E",
+          "shared": [
+            "humor",
+            "communication"
+          ],
+          "text": "选项说用幽默要 \"with great care\"，像在接第 39 题空后的 \"The hidden risks\"。但 \"such communication\" 要前面刚提过某种交流，上一段讲好懂、互动和拉近距离，没有这个词；它也没有转折词，转不过上一段的好处。放进第 40 题也接不上：那一段同样没有 communication 可指。",
+          "quotes": [
+            "with great care",
+            "The hidden risks",
+            "such communication"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 96,
+              "quote": "人们喜爱幽默，因为它能点亮日常时刻、化解尴尬，让每一次交往都温暖而愉快。幽默的这种魔力不只在日常生活中起作用，在科学领域，尤其是在网络上，也同样大放异彩。一点幽默就能大大提升科学家的传播效果。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2"
+              ],
+              "start": 98,
+              "end": 303,
+              "quote": "首先，幽默能把艰深的科学知识变简单。它能帮助普通人理解复杂的概念。例如，用“机器学习就像笨手笨脚的蹒跚学步的孩子”这样有趣的类比来解释自动驾驶汽车中的人工智能，能让非专业人群轻松理解抽象的概念。幽默还能有效提高受众的参与度。在社交媒体上分享实验室实验中巧妙幽默的故事的科学家，往往比枯燥的学术帖子获得更多互动。此外，幽默还能让科学家更有人情味，这一点在科普讲座中就能看到：轻松的笑话让听众觉得和研究人员更亲近。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3"
+              ],
+              "start": 305,
+              "end": 431,
+              "quote": "不过，幽默在科学传播中是一把双刃剑。其中隐藏的风险值得我们注意。如果内容本身不真实，幽默甚至会取代事实，让受众仅凭自己看到的有趣帖子就对科学知识形成错误的看法。过度使用讽刺或负面的幽默也会适得其反，因为这会很快让科学家失去公众的信任，损害他们的公信力。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4"
+              ],
+              "start": 433,
+              "end": 535,
+              "quote": "恰当地使用幽默，需要在生动的表达和专业的严谨之间取得平衡。它既不应盖过核心的科学信息，也不应浅薄到失去严肃性。用得过多会损害专业性。掌握这种平衡的科学家能有效缩小和公众之间的隔阂，让科学更亲切、更受欢迎。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+            "text": "People favor humor, as it lights up daily moments, eases awkwardness and makes every interaction warm and enjoyable. This magic of humor doesn’t just work in daily life; it also shines in the field of science, especially online. A little humor can greatly enhance scientists’ communication effect."
+          },
+          {
+            "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+            "text": "Firstly, humor simplifies tough scientific knowledge. It’s a helper in making complex concepts understandable to ordinary people. For example, explaining AI in self-driving cars with a funny analogy about “machines learning like clumsy toddlers” makes abstract ideas easy for non-professional groups to understand. It also boosts audience engagement effectively. Scientists sharing clever and humorous stories about laboratory experiments on social media often attract more interactions than dry academic posts. Additionally, humor humanizes scientists, as seen in popular science lectures where light-hearted jokes help audiences feel closer to researchers."
+          },
+          {
+            "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+            "text": "Humor in scientific communication is a double-edged sword, though. The hidden risks deserve our attention. If the content itself is untrue, humor can even replace facts, leading the audience to form wrong opinions about scientific knowledge just based on the amusing posts they see. Overusing sarcasm or negative humor also has the opposite effect, as it will quickly make scientists lose the public’s trust and damage their credibility."
+          },
+          {
+            "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+            "text": "Proper humor use requires a balance between vivid expression and professional precision. It should neither overshadow the core scientific information nor be so shallow that it loses seriousness. Overuse harms professionalism. Scientists who master this balance can effectively narrow the divide with the public, making science more welcoming and popular."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-zj-ningbo-2026-mar:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 0,
+                "end": 53,
+                "quote": "Firstly, humor simplifies tough scientific knowledge."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 0,
+                "end": 18,
+                "quote": "首先，幽默能把艰深的科学知识变简单。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zj-ningbo-2026-mar:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 177,
+                "end": 244,
+                "quote": "makes abstract ideas easy for non-professional groups to understand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 80,
+                "end": 96,
+                "quote": "能让非专业人群轻松理解抽象的概念"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zj-ningbo-2026-mar:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 345,
+                "end": 400,
+                "quote": "often attract more interactions than dry academic posts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 138,
+                "end": 154,
+                "quote": "往往比枯燥的学术帖子获得更多互动"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zj-ningbo-2026-mar:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "start": 7,
+                "end": 46,
+                "quote": "The hidden risks deserve our attention."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "start": 18,
+                "end": 32,
+                "quote": "其中隐藏的风险值得我们注意。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zj-ningbo-2026-mar:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "start": 65,
+                "end": 87,
+                "quote": "professional precision"
+              },
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "start": 176,
+                "end": 193,
+                "quote": "loses seriousness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "start": 17,
+                "end": 22,
+                "quote": "专业的严谨"
+              },
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "start": 49,
+                "end": 54,
+                "quote": "失去严肃性"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zj-ningbo-2026-mar:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:36"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+                "start": 229,
+                "end": 297,
+                "quote": "A little humor can greatly enhance scientists’ communication effect."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+                "start": 77,
+                "end": 96,
+                "quote": "一点幽默就能大大提升科学家的传播效果。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zj-ningbo-2026-mar:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:37"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 54,
+                "end": 129,
+                "quote": "It’s a helper in making complex concepts understandable to ordinary people."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 18,
+                "end": 33,
+                "quote": "它能帮助普通人理解复杂的概念。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zj-ningbo-2026-mar:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:38"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 315,
+                "end": 362,
+                "quote": "It also boosts audience engagement effectively."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 97,
+                "end": 112,
+                "quote": "幽默还能有效提高受众的参与度。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zj-ningbo-2026-mar:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:39"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "start": 0,
+                "end": 66,
+                "quote": "Humor in scientific communication is a double-edged sword, though."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "start": 0,
+                "end": 18,
+                "quote": "不过，幽默在科学传播中是一把双刃剑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zj-ningbo-2026-mar:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:40"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "start": 195,
+                "end": 225,
+                "quote": "Overuse harms professionalism."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+                "start": 55,
+                "end": 66,
+                "quote": "用得过多会损害专业性。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:37"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 61,
+                "end": 245,
+                "quote": "For example, explaining AI in self-driving cars with a funny analogy about “machines learning like clumsy toddlers” makes abstract ideas easy for non-professional groups to understand."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+                "start": 33,
+                "end": 97,
+                "quote": "例如，用“机器学习就像笨手笨脚的蹒跚学步的孩子”这样有趣的类比来解释自动驾驶汽车中的人工智能，能让非专业人群轻松理解抽象的概念。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:group:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "start": 47,
+                "end": 222,
+                "quote": "If the content itself is untrue, humor can even replace facts, leading the audience to form wrong opinions about scientific knowledge just based on the amusing posts they see."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zj-ningbo-2026-mar:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+                "start": 32,
+                "end": 80,
+                "quote": "如果内容本身不真实，幽默甚至会取代事实，让受众仅凭自己看到的有趣帖子就对科学知识形成错误的看法。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zj-ningbo-2026-mar:36": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "magic of humor",
+        "shines in the field of science",
+        "especially online",
+        "Firstly, humor simplifies"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:1",
+        "beforeQuote": "it also shines in the field of science, especially online.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "shines in the field of science",
+          "signalSide": "context-before",
+          "targetText": "scientists’ communication effect",
+          "relation": "空前把幽默的作用推到科学领域，选项接着落到科学家怎样传播上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "scientists’ communication effect",
+          "signalSide": "option",
+          "targetText": "humor simplifies tough scientific knowledge",
+          "relation": "选项提出“幽默提升科学家传播效果”，下一段起逐条展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Firstly",
+          "signalSide": "context-after",
+          "targetText": "A little humor can greatly enhance",
+          "relation": "Firstly 开始列第一条好处，前面要先有一句总的观点。"
+        }
+      ],
+      "lock": [
+        "shines in the field of science",
+        "Firstly"
+      ],
+      "find": {
+        "text": "空前说幽默 \"shines in the field of science\"，下一段用 \"Firstly\" 开始列好处，空里要一句总观点；D 的 \"greatly enhance\" 正好被后面的好处展开。",
+        "quotes": [
+          "shines in the field of science",
+          "Firstly",
+          "greatly enhance"
+        ]
+      },
+      "explain": "开头从日常生活说到科学领域，这句把话题收到科学家的传播上，亮出全文观点；下一段的好处、再往后的风险和分寸，都是围着传播效果说的。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 though 接得上空前说幽默好，但下一段 \"Firstly, humor simplifies tough scientific knowledge\" 还在讲好处，转不到风险。",
+          "quotes": [
+            "though",
+            "Firstly, humor simplifies tough scientific knowledge"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "shines in the field of science, especially online",
+            "optionSide": "scientists’ communication effect",
+            "relation": "空前说幽默在科学领域、网络上也有效，选项具体说成提升科学家的传播效果。"
+          },
+          {
+            "contextSide": "Firstly, humor simplifies tough scientific knowledge",
+            "optionSide": "greatly enhance",
+            "relation": "下一段的第一条好处是在说明“提升”体现在哪里。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "开头从日常生活说到科学领域，这句把话题收到科学家的传播上，亮出全文观点；下一段的好处、再往后的风险和分寸，都是围着传播效果说的。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 though 接得上空前说幽默好，但下一段 \"Firstly, humor simplifies tough scientific knowledge\" 还在讲好处，转不到风险。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:37": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment",
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "simplifies tough scientific knowledge",
+        "abstract ideas",
+        "non-professional groups",
+        "easy",
+        "to understand"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+        "beforeQuote": "Firstly, humor simplifies tough scientific knowledge.",
+        "afterQuote": "For example, explaining AI in self-driving cars with a funny analogy about “machines learning like clumsy toddlers” makes abstract ideas easy for non-professional groups to understand."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "For example",
+          "signalSide": "context-after",
+          "targetText": "making complex concepts understandable to ordinary people",
+          "relation": "For example 后面的例子要证明空里这句话，例子讲的是非专业人群能看懂。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "easy for non-professional groups to understand",
+          "signalSide": "context-after",
+          "targetText": "understandable to ordinary people",
+          "relation": "例子里的 non-professional groups 和 easy to understand 分别对应选项的 ordinary people 和 understandable。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "complex concepts understandable to ordinary people",
+          "signalSide": "option",
+          "targetText": "tough scientific knowledge / abstract ideas",
+          "relation": "complex concepts 换说空前的 tough scientific knowledge、空后的 abstract ideas。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It’s",
+          "signalSide": "option",
+          "targetText": "humor",
+          "relation": "It 指空前句子的主语 humor。"
+        }
+      ],
+      "lock": [
+        "non-professional groups",
+        "ordinary people"
+      ],
+      "find": {
+        "text": "先看空后 \"For example\"：例子落在 \"non-professional groups\" 能懂，F 的 \"ordinary people\" 和 \"understandable\" 正好被它证明。",
+        "quotes": [
+          "For example",
+          "non-professional groups",
+          "ordinary people",
+          "understandable"
+        ]
+      },
+      "explain": "空前只说幽默让知识变简单，这句把“简单”落到听的人身上，说明对谁有用；空后用自动驾驶的有趣比喻举例，三句从观点到对象再到例子。",
+      "distractors": [
+        {
+          "label": "B",
+          "text": "B 的 also 能接空前那条好处，但空后例子只讲 \"easy for non-professional groups to understand\"，不讲互动。",
+          "quotes": [
+            "also",
+            "easy for non-professional groups to understand"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "tough scientific knowledge / abstract ideas",
+            "optionSide": "complex concepts",
+            "relation": "选项的 complex concepts 换说原文的艰深知识、抽象概念。"
+          },
+          {
+            "contextSide": "easy for non-professional groups to understand",
+            "optionSide": "understandable to ordinary people",
+            "relation": "空后的例子正好说明普通人也能看懂。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前只说幽默让知识变简单，这句把“简单”落到听的人身上，说明对谁有用；空后用自动驾驶的有趣比喻举例，三句从观点到对象再到例子。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 的 also 能接空前那条好处，但空后例子只讲 \"easy for non-professional groups to understand\"，不讲互动。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:38": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "social media",
+        "attract more interactions",
+        "dry academic posts",
+        "clever and humorous stories"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:2",
+        "beforeQuote": "makes abstract ideas easy for non-professional groups to understand.",
+        "afterQuote": "Scientists sharing clever and humorous stories about laboratory experiments on social media often attract more interactions than dry academic posts."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "humor simplifies tough scientific knowledge",
+          "relation": "also 在“让知识变简单”这条好处之后再加一条。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "audience engagement",
+          "signalSide": "option",
+          "targetText": "attract more interactions",
+          "relation": "受众参与度高，就是空后说的互动更多。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "attract more interactions",
+          "signalSide": "context-after",
+          "targetText": "audience engagement",
+          "relation": "空后社交媒体上的例子证明选项说的参与度提高。"
+        }
+      ],
+      "lock": [
+        "also",
+        "attract more interactions"
+      ],
+      "find": {
+        "text": "空后例子说幽默故事 \"attract more interactions\"，讲的是互动；B 用 \"also\" 加一条新好处，\"audience engagement\" 正对互动。",
+        "quotes": [
+          "attract more interactions",
+          "also",
+          "audience engagement"
+        ]
+      },
+      "explain": "“好懂”这条好处到空前已经举完例子，这句换到第二条：观众更愿意参与；空后社交媒体上的幽默帖子是它的例子，再往后 Additionally 才引出第三条。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "attract more interactions than dry academic posts",
+            "optionSide": "boosts audience engagement effectively",
+            "relation": "帖子互动更多，就是受众参与度提高。"
+          },
+          {
+            "contextSide": "Firstly, humor simplifies tough scientific knowledge",
+            "optionSide": "also",
+            "relation": "also 接在第一条好处后面，引出第二条。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "“好懂”这条好处到空前已经举完例子，这句换到第二条：观众更愿意参与；空后社交媒体上的幽默帖子是它的例子，再往后 Additionally 才引出第三条。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "选项也用 It 开头讲幽默的一条好处，放进第 38 题看似顺。但空后 \"attract more interactions\" 讲互动，不讲形象；拉近距离是后文 \"humor humanizes scientists\" 那条，前面有 Additionally，是另起的一点。放进第 37 题也接不上：空后例子只证明 \"easy for non-professional groups to understand\"。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:39": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "The hidden risks",
+        "deserve our attention",
+        "replace facts",
+        "the opposite effect",
+        "lose the public’s trust"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "The hidden risks deserve our attention."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "though",
+          "signalSide": "option",
+          "targetText": "humor humanizes scientists / The hidden risks",
+          "relation": "though 把上一段的好处转到这一段的风险上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "double-edged sword",
+          "signalSide": "option",
+          "targetText": "The hidden risks",
+          "relation": "双刃剑既有好处也有坏处，空后接着点出坏处那一面。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "The hidden risks",
+          "signalSide": "context-after",
+          "targetText": "double-edged sword",
+          "relation": "空后的风险正是双刃剑伤人的那一面。"
+        }
+      ],
+      "lock": [
+        "though",
+        "The hidden risks"
+      ],
+      "find": {
+        "text": "上一段全讲好处，空后突然说 \"The hidden risks deserve our attention\"，空里要转折；E 的 \"double-edged sword, though\" 正好把话转过来。",
+        "quotes": [
+          "The hidden risks deserve our attention",
+          "double-edged sword, though"
+        ]
+      },
+      "explain": "这句在段首转向：先用双刃剑承认幽默有好有坏，空后再点出风险，后面两句分别讲内容不实和滥用讽刺，整段都在说坏的那一面。",
+      "distractors": [
+        {
+          "label": "A",
+          "text": "A 的 Overuse 和后文 \"Overusing sarcasm\" 呼应，但段首要从好处转到风险，A 没有转折，也只说了一种风险。",
+          "quotes": [
+            "Overuse",
+            "Overusing sarcasm"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "The hidden risks deserve our attention",
+            "optionSide": "double-edged sword",
+            "relation": "双刃剑的另一面就是空后说的风险。"
+          },
+          {
+            "contextSide": "humor humanizes scientists（上一段的好处）",
+            "optionSide": "though",
+            "relation": "though 表示和上一段的正面评价相对。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "这句在段首转向：先用双刃剑承认幽默有好有坏，空后再点出风险，后面两句分别讲内容不实和滥用讽刺，整段都在说坏的那一面。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 的 Overuse 和后文 \"Overusing sarcasm\" 呼应，但段首要从好处转到风险，A 没有转折，也只说了一种风险。"
+        },
+        {
+          "optionLabel": "G",
+          "reason": "选项说用幽默要 \"with great care\"，像在接第 39 题空后的 \"The hidden risks\"。但 \"such communication\" 要前面刚提过某种交流，上一段讲好懂、互动和拉近距离，没有这个词；它也没有转折词，转不过上一段的好处。放进第 40 题也接不上：那一段同样没有 communication 可指。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:40": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "requires a balance",
+        "professional precision",
+        "loses seriousness",
+        "this balance"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:seven-choices:4",
+        "beforeQuote": "Proper humor use requires a balance between vivid expression and professional precision. It should neither overshadow the core scientific information nor be so shallow that it loses seriousness.",
+        "afterQuote": "Scientists who master this balance can effectively narrow the divide with the public, making science more welcoming and popular."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "professional precision",
+          "signalSide": "context-before",
+          "targetText": "professionalism",
+          "relation": "段首要求顾及专业严谨，选项回扣“专业性”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "loses seriousness",
+          "signalSide": "context-before",
+          "targetText": "harms professionalism",
+          "relation": "空前说幽默不能浅到失去严肃，选项点明用多了的后果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "professionalism",
+          "signalSide": "option",
+          "targetText": "professional precision / seriousness",
+          "relation": "professionalism 和空前的 professional precision 同词根，意思也接得上。"
+        }
+      ],
+      "lock": [
+        "professional precision",
+        "professionalism"
+      ],
+      "find": {
+        "text": "空前要兼顾 \"professional precision\"，又说不能 \"loses seriousness\"；A 的 \"harms professionalism\" 回扣“专业”，说出用过头的代价。",
+        "quotes": [
+          "professional precision",
+          "loses seriousness",
+          "harms professionalism"
+        ]
+      },
+      "explain": "空前从正面讲分寸，这句用一句短话点出越界的代价，让人明白为什么要平衡；空后 \"Scientists who master this balance\" 再讲做到平衡的好处，一反一正收住全文。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "professional precision",
+            "optionSide": "professionalism",
+            "relation": "选项回扣段首“专业严谨”的要求。"
+          },
+          {
+            "contextSide": "so shallow that it loses seriousness",
+            "optionSide": "Overuse harms",
+            "relation": "用得过多、过浅，就会伤到专业性。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前从正面讲分寸，这句用一句短话点出越界的代价，让人明白为什么要平衡；空后 \"Scientists who master this balance\" 再讲做到平衡的好处，一反一正收住全文。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

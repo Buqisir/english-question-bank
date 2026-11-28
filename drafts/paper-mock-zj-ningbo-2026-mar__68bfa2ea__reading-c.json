@@ -1,0 +1,772 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:reading-c": {
+      "overview": "本文介绍阿德莱德大学的一项元分析：人们用无现金方式付款往往花得更多，这种效应出现在彰显身份的消费中，捐款和给小费时却没有；研究还向消费者、企业和政策制定者提出建议，并呼吁深入研究新支付方式。",
+      "fullTranslationZh": "消费者靠各种方式支付日常开销。问题在于，与现金相比，他们使用无现金支付方式时往往花得更多。阿德莱德大学的研究人员最近证实了这种显著的“无现金效应”。\n在博士生拉克伦·肖姆伯格的带领下，研究团队分析了来自 17 个国家的 71 项已发表和未发表的研究，涉及 1.1 万多名不同的参与者。他们发现，无现金支付会让人们在珠宝等彰显身份的商品上花更多的钱，而在捐款或给小费时，这种效应明显不存在。\n“通过这项元分析，我们找出了让无现金效应增强或减弱的关键因素，这是单项研究无法发现的。这样一来，我们获得了一些新的关键认识，而这些认识在其他研究者的单项研究中常常被忽视。”肖姆伯格解释道。\n研究结果表明，消费者应当留意自己为商品或服务付款的方式，因为这有助于少花钱，在当前生活成本危机下尤为关键。为避免超支，建议消费者尽可能带现金而不是银行卡，以此作为一种自我控制的方法。用现金时，他们要清点并递出纸币和硬币，花钱这件事就更显眼。如果没有实物递出去，就很容易弄不清自己花了多少钱。\n这项研究也为企业和政策制定者提供了有用的见解。“企业应该知道，不接受无现金革命可能会在无意中危及盈利潜力，”肖姆伯格说，“政策制定者也应该向不熟悉无现金支付的人，比如没有银行账户的人，说明无现金方式可能导致超支。”\n肖姆伯格强调，亟需对新型支付方式开展深入研究，因为这些方式还很新，关于其具体影响的研究仍然有限。研究这些方式对于跟上不断演变的支付生态、加深对现代消费者消费习惯的理解至关重要。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+          "sourceText": "They’ve found that cashless payments lead people to spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping.",
+          "displayText": "They’ve found that cashless payments lead people to spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:28"
+          ],
+          "translationZh": "他们发现，无现金支付会让人们在珠宝等彰显身份的商品上花更多的钱，而在捐款或给小费时，这种效应明显不存在。",
+          "analysisZh": "主干是 They’ve found that…，that 引导宾语从句，说明发现的内容。从句里用 lead sb to do 的结构：cashless payments lead people to spend more（无现金支付让人多花钱），on status-signalling goods 说钱花在哪类商品上，like jewellery 举例。逗号后的 while 表对比，引出发现的另一半：this effect is notably absent（这种效应明显不存在），this effect 指前面的多花钱效应；in acts of donation or tipping 里，of 后是 donation 和 tipping 两个并列名词。一句话里有“多花”和“不多花”两种场合，正是第 28 题的依据。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "They’ve found that"
+            },
+            {
+              "start": 37,
+              "end": 62,
+              "quote": "lead people to spend more"
+            },
+            {
+              "start": 106,
+              "end": 141,
+              "quote": "while this effect is notably absent"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+          "sourceText": "Schomburgk stresses a need for urgent in-depth studies of new payment methods, as research on their specific impacts remains limited due to their novelty.",
+          "displayText": "Schomburgk stresses a need for urgent in-depth studies of new payment methods, as research on their specific impacts remains limited due to their novelty.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:31"
+          ],
+          "translationZh": "肖姆伯格强调，亟需对新型支付方式开展深入研究，因为这些方式还很新，关于其具体影响的研究仍然有限。",
+          "analysisZh": "主干是 Schomburgk stresses a need（肖姆伯格强调一种需要）。for urgent in-depth studies of new payment methods 修饰 need，说明需要的是对新支付方式的紧急、深入研究。逗号后的 as 引导原因状语从句，从句主干是 research remains limited（研究仍然有限），on their specific impacts 修饰 research，due to their novelty 说明有限的原因；两个 their 都指 new payment methods。读出“因为研究少，所以要多研究”这层因果，就能答第 31 题。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "Schomburgk stresses a need"
+            },
+            {
+              "start": 79,
+              "end": 90,
+              "quote": "as research"
+            },
+            {
+              "start": 117,
+              "end": 132,
+              "quote": "remains limited"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-c:1"
+              ],
+              "start": 0,
+              "end": 74,
+              "quote": "消费者靠各种方式支付日常开销。问题在于，与现金相比，他们使用无现金支付方式时往往花得更多。阿德莱德大学的研究人员最近证实了这种显著的“无现金效应”。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-c:2"
+              ],
+              "start": 75,
+              "end": 194,
+              "quote": "在博士生拉克伦·肖姆伯格的带领下，研究团队分析了来自 17 个国家的 71 项已发表和未发表的研究，涉及 1.1 万多名不同的参与者。他们发现，无现金支付会让人们在珠宝等彰显身份的商品上花更多的钱，而在捐款或给小费时，这种效应明显不存在。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-c:3"
+              ],
+              "start": 195,
+              "end": 289,
+              "quote": "“通过这项元分析，我们找出了让无现金效应增强或减弱的关键因素，这是单项研究无法发现的。这样一来，我们获得了一些新的关键认识，而这些认识在其他研究者的单项研究中常常被忽视。”肖姆伯格解释道。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-c:4"
+              ],
+              "start": 290,
+              "end": 435,
+              "quote": "研究结果表明，消费者应当留意自己为商品或服务付款的方式，因为这有助于少花钱，在当前生活成本危机下尤为关键。为避免超支，建议消费者尽可能带现金而不是银行卡，以此作为一种自我控制的方法。用现金时，他们要清点并递出纸币和硬币，花钱这件事就更显眼。如果没有实物递出去，就很容易弄不清自己花了多少钱。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-c:5"
+              ],
+              "start": 436,
+              "end": 543,
+              "quote": "这项研究也为企业和政策制定者提供了有用的见解。“企业应该知道，不接受无现金革命可能会在无意中危及盈利潜力，”肖姆伯格说，“政策制定者也应该向不熟悉无现金支付的人，比如没有银行账户的人，说明无现金方式可能导致超支。”"
+            },
+            {
+              "paragraphId": "zh-reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-c:6"
+              ],
+              "start": 544,
+              "end": 632,
+              "quote": "肖姆伯格强调，亟需对新型支付方式开展深入研究，因为这些方式还很新，关于其具体影响的研究仍然有限。研究这些方式对于跟上不断演变的支付生态、加深对现代消费者消费习惯的理解至关重要。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:28"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+                "start": 180,
+                "end": 353,
+                "quote": "They’ve found that cashless payments lead people to spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 67,
+                "end": 119,
+                "quote": "他们发现，无现金支付会让人们在珠宝等彰显身份的商品上花更多的钱，而在捐款或给小费时，这种效应明显不存在。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:31"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+                "start": 0,
+                "end": 154,
+                "quote": "Schomburgk stresses a need for urgent in-depth studies of new payment methods, as research on their specific impacts remains limited due to their novelty."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p6",
+                "start": 0,
+                "end": 48,
+                "quote": "肖姆伯格强调，亟需对新型支付方式开展深入研究，因为这些方式还很新，关于其具体影响的研究仍然有限。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+                "start": 199,
+                "end": 352,
+                "quote": "cashless payments lead people to spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 72,
+                "end": 118,
+                "quote": "无现金支付会让人们在珠宝等彰显身份的商品上花更多的钱，而在捐款或给小费时，这种效应明显不存在"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+                "start": 29,
+                "end": 144,
+                "quote": "we identified key factors that make the cashless effect stronger or weaker, which individual studies could not find"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+                "start": 161,
+                "end": 270,
+                "quote": "we uncovered new key understandings that had often been overlooked by other researchers in individual studies"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 9,
+                "end": 42,
+                "quote": "我们找出了让无现金效应增强或减弱的关键因素，这是单项研究无法发现的"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 48,
+                "end": 84,
+                "quote": "我们获得了一些新的关键认识，而这些认识在其他研究者的单项研究中常常被忽视"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+                "start": 74,
+                "end": 193,
+                "quote": "Businesses should know failing to accept the cashless revolution might unintentionally be jeopardising profit potential"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 24,
+                "end": 52,
+                "quote": "企业应该知道，不接受无现金革命可能会在无意中危及盈利潜力"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+                "start": 0,
+                "end": 154,
+                "quote": "Schomburgk stresses a need for urgent in-depth studies of new payment methods, as research on their specific impacts remains limited due to their novelty."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p6",
+                "start": 7,
+                "end": 47,
+                "quote": "亟需对新型支付方式开展深入研究，因为这些方式还很新，关于其具体影响的研究仍然有限"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先提出无现金支付让人多花钱这一现象，并引出阿德莱德大学的研究；接着介绍研究方法、发现和元分析的价值；然后分别写研究对消费者、企业和政策制定者的启示；最后呼吁深入研究新支付方式。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:1",
+            "summary": "人们用无现金方式付款往往比用现金花得多，这一效应最近被阿德莱德大学的研究人员证实。",
+            "function": "提出现象，引出研究。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+            "summary": "团队分析了 71 项研究，发现无现金支付让人在彰显身份的商品上多花钱，捐款和给小费时却没有这种效应。",
+            "function": "介绍研究方法和主要发现。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+            "summary": "肖姆伯格说，元分析找到了单项研究发现不了的关键因素和常被忽视的认识。",
+            "function": "说明采用元分析的价值。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:4",
+            "summary": "研究建议消费者留意付款方式，尽量带现金，因为数钱递钱让花销更显眼。",
+            "function": "写对消费者的启示。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+            "summary": "企业拒绝无现金支付可能危及利润，政策制定者应提醒不熟悉它的人注意超支。",
+            "function": "写对企业和政策制定者的启示。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+            "summary": "新支付方式的具体影响研究还很有限，肖姆伯格呼吁尽快深入研究。",
+            "function": "提出展望，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zj-ningbo-2026-mar:28": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到研究发现的句子，概括无现金效应出现在哪些场合、不出现在哪些场合。",
+      "stemTranslationZh": "关于无现金效应，这项研究发现了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 while 前后的对比",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它存在于捐款行为中。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "this effect is notably absent in acts of donation or tipping",
+            "sourceHighlight": "notably absent",
+            "optionText": "It exists in acts of donation.",
+            "optionHighlight": "exists",
+            "explanation": "原文说捐款时这种效应明显不存在（notably absent），选项借用 acts of donation，却说效应存在，方向正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+              "quote": "this effect is notably absent in acts of donation or tipping",
+              "anchor": "捐款时效应不存在"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "现金用得越多，它就越弱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "weaker",
+            "optionText": "weakens",
+            "matchType": "wordFamily",
+            "relationNote": "[[block:paper-mock-zj-ningbo-2026-mar:reading-c:3]]只说找到了让效应变强或变弱（stronger or weaker）的因素，没说是哪些；多带现金少花钱是[[block:paper-mock-zj-ningbo-2026-mar:reading-c:4]]给消费者的建议，不是发现效应随现金使用而减弱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+              "quote": "we identified key factors that make the cashless effect stronger or weaker",
+              "anchor": "效应变强或变弱的因素"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它与生活成本危机有关。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "cost-of-living crisis",
+            "optionText": "living cost crisis",
+            "matchType": "wordFamily",
+            "relationNote": "生活成本危机（cost-of-living crisis）出现在[[block:paper-mock-zj-ningbo-2026-mar:reading-c:4]]，说的是在这种时候少花钱尤其重要，不是研究发现无现金效应和这场危机有关联。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:4",
+              "quote": "especially critical in the current cost-of-living crisis",
+              "anchor": "危机下少花钱更重要"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它在特定的消费中起作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+              "quote": "cashless payments lead people to spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping",
+              "anchor": "效应出现与不出现的场合"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "found",
+          "sourceRole": "stem",
+          "targetText": "They’ve found that cashless payments lead people to spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "spend more on status-signalling goods like jewellery, while this effect is notably absent in acts of donation or tipping",
+          "note": "题干 found 原词出现在原文。"
+        },
+        {
+          "sourceText": "works in specific consumption",
+          "sourceRole": "correctOption",
+          "targetText": "spend more on status-signalling goods like jewellery",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "原文没直接说“特定消费”，而是说无现金支付让人在珠宝这类彰显身份的商品上多花钱（status-signalling goods），捐款、给小费时却没有这种效应（notably absent）；效应只出现在某些消费里，可见它作用于特定消费，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从肖姆伯格对元分析的说明里，找出团队采用这种方法的原因。",
+      "stemTranslationZh": "研究团队为什么采用元分析？",
+      "locateBy": "stem",
+      "locateFindZh": "看句末 which 引出的补充",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了解决超支问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "overspending",
+            "optionText": "overspending",
+            "matchType": "exact",
+            "relationNote": "避免超支（overspending）是[[block:paper-mock-zj-ningbo-2026-mar:reading-c:4]]根据研究结果给消费者的建议；团队用元分析，是为了找出单项研究找不到的因素，不是为了解决超支。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:4",
+              "quote": "To avoid overspending, they’re advised to carry cash instead of cards whenever possible as a self-control method.",
+              "anchor": "给消费者的建议"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了比较现金支付和无现金支付。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "in comparison to cash",
+            "optionText": "compare cash and cashless payments",
+            "matchType": "wordFamily",
+            "relationNote": "“与现金相比”（in comparison to cash）出自[[block:paper-mock-zj-ningbo-2026-mar:reading-c:1]]，是在说明无现金效应；用元分析的理由在[[block:paper-mock-zj-ningbo-2026-mar:reading-c:3]]：找出单项研究找不到的因素，不是比较两种支付。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:1",
+              "quote": "they tend to spend more with cashless payment methods in comparison to cash",
+              "anchor": "无现金效应的说明"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了确认导致该效应的因素。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "confirmed",
+            "optionText": "confirm",
+            "matchType": "wordFamily",
+            "relationNote": "[[block:paper-mock-zj-ningbo-2026-mar:reading-c:1]]被证实（confirmed）的是无现金效应本身；[[block:paper-mock-zj-ningbo-2026-mar:reading-c:3]]的因素是元分析新找到的增强或减弱效应的因素，用元分析是因为单项研究找不到，不是去确认致因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:1",
+              "quote": "This striking cashless effect has recently been confirmed by researchers from the University of Adelaide.",
+              "anchor": "被证实的是效应"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了突破单项研究的局限。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+              "quote": "we identified key factors that make the cashless effect stronger or weaker, which individual studies could not find",
+              "anchor": "单项研究找不到"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+              "quote": "we uncovered new key understandings that had often been overlooked by other researchers in individual studies",
+              "anchor": "单项研究常忽视"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "meta-analysis",
+          "sourceRole": "stem",
+          "targetText": "“Through this meta-analysis, we identified key factors that make the cashless effect stronger or weaker, which individual studies could not find.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "which individual studies could not find",
+          "note": "题干 meta-analysis 原词出现在原文。"
+        },
+        {
+          "sourceText": "single studies",
+          "sourceRole": "correctOption",
+          "targetText": "which individual studies could not find",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“单项研究”（single studies）就是原文的 individual studies；元分析找到了单项研究找不到（could not find）的因素，也得到了单项研究常忽视（overlooked）的认识，这正是“突破单项研究的局限”，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:30": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据无现金支付让人多花钱这一发现，推出企业拒绝它会对利润造成什么影响，从而猜出词义。",
+      "stemTranslationZh": "第 5 段中画线词 “jeopardising” 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看 failing to 引出的做法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使冒风险。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+              "quote": "Businesses should know failing to accept the cashless revolution might unintentionally be jeopardising profit potential",
+              "anchor": "拒绝无现金支付的后果"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "保护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "might unintentionally be jeopardising profit potential",
+            "sourceHighlight": "jeopardising",
+            "optionText": "Preserving.",
+            "optionHighlight": "Preserving",
+            "explanation": "放进去就成了“拒绝无现金革命会在无意中保住盈利潜力”；可企业被提醒“应当知道”（should know）的是一个坏后果，unintentionally 也说明这不是企业想要的结果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+              "quote": "might unintentionally be jeopardising profit potential",
+              "anchor": "被提醒的坏后果"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "转移。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Shifting",
+            "explanation": "放进去就成了“在无意中转移盈利潜力”，原文没说利润转到哪里去；前文讲的是无现金支付让人多花钱，拒绝它的企业只会少赚。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "提升。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "might unintentionally be jeopardising profit potential",
+            "sourceHighlight": "jeopardising",
+            "optionText": "Boosting.",
+            "optionHighlight": "Boosting",
+            "explanation": "放进去就成了“拒绝无现金革命会在无意中提升盈利潜力”，和[[block:paper-mock-zj-ningbo-2026-mar:reading-c:2|cashless payments lead people]]的发现相反：顾客刷卡会多花钱，拒收只会让企业少赚。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+              "quote": "might unintentionally be jeopardising profit potential",
+              "anchor": "拒收只会少赚"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "jeopardising",
+          "sourceRole": "stem",
+          "targetText": "“Businesses should know failing to accept the cashless revolution might unintentionally be jeopardising profit potential,” Schomburgk says.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "failing to accept the cashless revolution",
+          "note": "题干 jeopardising 原词出现在原文。"
+        },
+        {
+          "sourceText": "Risking",
+          "sourceRole": "correctOption",
+          "targetText": "failing to accept the cashless revolution",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "由[[block:paper-mock-zj-ningbo-2026-mar:reading-c:2|cashless payments lead people]]可知，无现金支付让顾客多花钱（spend more），不接受它的企业就会少赚，所以 jeopardising 必须是对利润不利的意思。放回去：不接受无现金革命，可能在无意中让盈利潜力受到威胁，正是 Risking（使冒风险），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从肖姆伯格对新支付方式的看法里，判断他认为接下来该怎么做。",
+      "stemTranslationZh": "根据肖姆伯格的说法，关于新型支付方式可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们需要被推广。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They need to be popularized.",
+            "explanation": "肖姆伯格在[[block:paper-mock-zj-ningbo-2026-mar:reading-c:6]]呼吁的是研究新支付方式，不是推广；他在[[block:paper-mock-zj-ningbo-2026-mar:reading-c:5]]给政策制定者的建议，也是提醒人们无现金方式可能导致超支（lead to overspending）。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们正在迅速发展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Studying these methods is vital to keep pace with the evolving payment ecosystem",
+            "sourceHighlight": "evolving",
+            "optionText": "They are developing rapidly.",
+            "optionHighlight": "developing rapidly",
+            "explanation": "原文只说支付生态在不断演变（evolving），新方式还很新（novelty），没说它们发展得快，“迅速”是选项加上去的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+              "quote": "Studying these methods is vital to keep pace with the evolving payment ecosystem",
+              "anchor": "支付生态在演变"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们应当被进一步研究。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+              "quote": "Schomburgk stresses a need for urgent in-depth studies of new payment methods, as research on their specific impacts remains limited due to their novelty.",
+              "anchor": "呼吁深入研究"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们将影响消费习惯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "spending habits",
+            "optionText": "spending habits",
+            "matchType": "exact",
+            "relationNote": "消费习惯（spending habits）出自[[block:paper-mock-zj-ningbo-2026-mar:reading-c:6|Studying these methods is vital]]，说的是研究新方式能加深对消费习惯的理解；原文还承认它们的具体影响研究有限（remains limited），推不出“将影响消费习惯”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+              "quote": "deepen understanding of modern consumers’ spending habits",
+              "anchor": "加深对消费习惯的理解"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "new payments",
+          "sourceRole": "stem",
+          "targetText": "Schomburgk stresses a need for urgent in-depth studies of new payment methods, as research on their specific impacts remains limited due to their novelty.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+          "relationType": "locationCue",
+          "targetCue": "new payment methods",
+          "sourceZh": "新型支付",
+          "targetCueZh": "新型支付方式",
+          "answerText": "a need for urgent in-depth studies of new payment methods",
+          "note": "题干 new payments 对应原文 new payment methods。"
+        },
+        {
+          "sourceText": "further studied",
+          "sourceRole": "correctOption",
+          "targetText": "a need for urgent in-depth studies of new payment methods",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "选项的“进一步研究”（further studied）对应原文的“亟需深入研究”（urgent in-depth studies）；他这样说，是因为相关研究仍然有限（remains limited），选 C。"
+        }
+      ]
+    }
+  }
+}

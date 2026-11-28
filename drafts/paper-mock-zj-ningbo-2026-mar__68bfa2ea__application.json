@@ -1,0 +1,142 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Peter,\n\nI'm glad you're inviting the exchange students from other classes to dinner. I'd recommend Ningbo Taste, a local restaurant just a ten-minute walk from our school.\n\nHere are my three reasons. First, it serves classic Ningbo dishes such as tangyuan and yellow croaker soup, and most of them are mild rather than spicy, so guests from different countries can enjoy them. Second, it has a big round table for twelve and a menu in both Chinese and English, which makes ordering easy. Third, it costs only about 60 yuan per person, which suits a student's budget.\n\nIf you like, I can book a table for you. Just tell me the date and how many people are coming.\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "回复 Peter 来信的书信，沿用题面给出的称呼 Dear Peter 和落款 Yours, / Li Hua",
+        "personTense": "用第一人称推荐，介绍餐厅用一般现在时，提出帮忙用 I can / I’d be happy to",
+        "readerTone": "写给同班的交换生朋友，语气热情、随和，像朋友之间出主意",
+        "goal": "推荐一家适合招待各班交换生的餐厅，用理由让 Peter 放心选它，并告诉他下一步怎么订座"
+      },
+      "taskRequires": [
+        "推荐一家适合交换生聚餐的餐厅",
+        "说明推荐的理由"
+      ],
+      "thisEssayChooses": "推荐学校附近一家本地菜馆 Ningbo Taste（范文虚构的店名），从三方面说理由：能吃到宁波特色菜且口味清淡，有十二人大圆桌和中英文菜单，人均约 60 元；结尾主动提出帮忙订座，请他告诉我日期和人数。"
+    },
+    "standard": {
+      "essay": "Dear Peter,\n\nI'm glad you're inviting the exchange students from other classes to dinner. I'd recommend Ningbo Taste, a local restaurant just a ten-minute walk from our school.\n\nHere are my three reasons. First, it serves classic Ningbo dishes such as tangyuan and yellow croaker soup, and most of them are mild rather than spicy, so guests from different countries can enjoy them. Second, it has a big round table for twelve and a menu in both Chinese and English, which makes ordering easy. Third, it costs only about 60 yuan per person, which suits a student's budget.\n\nIf you like, I can book a table for you. Just tell me the date and how many people are coming.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "你的推荐",
+          "quote": "I'd recommend Ningbo Taste, a local restaurant just a ten-minute walk from our school."
+        },
+        {
+          "point": "说明理由",
+          "quote": "First, it serves classic Ningbo dishes such as tangyuan and yellow croaker soup, and most of them are mild rather than spicy, so guests from different countries can enjoy them."
+        },
+        {
+          "point": "说明理由",
+          "quote": "Second, it has a big round table for twelve and a menu in both Chinese and English, which makes ordering easy."
+        },
+        {
+          "point": "说明理由",
+          "quote": "Third, it costs only about 60 yuan per person, which suits a student's budget."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "回应来信，直接给出推荐",
+          "items": [
+            {
+              "quote": "I'm glad you're inviting the exchange students from other classes to dinner.",
+              "explain": "先接住 Peter 信里说的事，让他知道我读懂了他要请的是别班的交换生，后面的推荐都围着这群客人来选。"
+            },
+            {
+              "quote": "I'd recommend Ningbo Taste, a local restaurant just a ten-minute walk from our school.",
+              "explain": "第二句就给出答案。店名后面用同位语交代“本地菜馆、离学校步行十分钟”，一句话说清是什么店、在哪里，Peter 不用再追问。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "分三点说明理由，每点都从客人的需要出发",
+          "items": [
+            {
+              "quote": "Here are my three reasons.",
+              "explain": "先说有三点理由，再用 First、Second、Third 逐条展开，读者一眼看出这一段的结构。"
+            },
+            {
+              "quote": "most of them are mild rather than spicy, so guests from different countries can enjoy them",
+              "explain": "不只说菜好吃，而是替客人想到外国同学可能怕辣，用 rather than 对比、so 引出结果，理由落到对方身上。"
+            },
+            {
+              "quote": "which makes ordering easy",
+              "explain": "大圆桌和中英文菜单是两个具体细节，which 引导的从句接着说出它们带来的方便，把“有什么”和“有什么用”连在一起。"
+            },
+            {
+              "quote": "which suits a student's budget",
+              "explain": "人均 60 元是可以核对的具体数字，后面点出适合学生的钱包，回应聚餐的人都是学生这一实际情况。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "主动帮忙，告诉 Peter 下一步",
+          "items": [
+            {
+              "quote": "If you like, I can book a table for you.",
+              "explain": "用 If you like 把帮忙说得客气，不替对方做决定；比“希望你们玩得开心”这类套话更有用。"
+            },
+            {
+              "quote": "Just tell me the date and how many people are coming.",
+              "explain": "订座需要日期和人数，题面没有给，所以请 Peter 来告诉我，他读完就知道该回复什么。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I'd recommend ..., a local restaurant just a ten-minute walk from ...",
+          "function": "推荐时店名后紧跟同位语，一次交代店的类型和距离。"
+        },
+        {
+          "expression": "... rather than ..., so ... can enjoy them",
+          "function": "用对比加结果说明为什么适合这群客人，理由从读者出发。"
+        },
+        {
+          "expression": "If you like, I can ... Just tell me ...",
+          "function": "朋友间主动帮忙并请对方提供信息，结尾落在下一步行动上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Peter,\n\nIt's so nice of you to bring the exchange students from different classes together over a meal. Ningbo Taste, a local restaurant only ten minutes' walk from our school, would be my top choice.\n\nTo begin with, it's the perfect place to try real Ningbo food. Its tangyuan and yellow croaker soup are famous, and since most dishes are mild rather than spicy, even guests new to Chinese food will enjoy them. What's more, the restaurant has a quiet private room with a big round table, so everyone can chat freely without shouting across the room. The picture menu in English also makes ordering easy. Best of all, a full meal there costs only about 60 yuan per person.\n\nI've eaten there several times with my family, so I'd be happy to book the room for you. Just let me know the date and the number of guests.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "你的推荐",
+          "quote": "Ningbo Taste, a local restaurant only ten minutes' walk from our school, would be my top choice."
+        },
+        {
+          "point": "说明理由",
+          "quote": "Its tangyuan and yellow croaker soup are famous, and since most dishes are mild rather than spicy, even guests new to Chinese food will enjoy them."
+        },
+        {
+          "point": "说明理由",
+          "quote": "What's more, the restaurant has a quiet private room with a big round table, so everyone can chat freely without shouting across the room."
+        },
+        {
+          "point": "说明理由",
+          "quote": "Best of all, a full meal there costs only about 60 yuan per person."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "It's so nice of you to bring the exchange students from different classes together over a meal.",
+          "explain": "开头先肯定 Peter 请客的心意，bring ... together over a meal 点出聚餐是为了让大家认识，比标准版的 I'm glad 更贴近朋友关系。"
+        },
+        {
+          "quote": "so everyone can chat freely without shouting across the room",
+          "explain": "标准版只说有大圆桌，这里多想一步：来自不同班级的人第一次聚在一起，安静的包间才方便聊天，理由更贴合“聚餐交朋友”的目的。"
+        },
+        {
+          "quote": "I've eaten there several times with my family, so I'd be happy to book the room for you.",
+          "explain": "用自己去过几次的经历说明推荐有把握，也顺理成章地引出由我订座，比标准版的 If you like 多了一层可信度。"
+        }
+      ]
+    }
+  }
+}

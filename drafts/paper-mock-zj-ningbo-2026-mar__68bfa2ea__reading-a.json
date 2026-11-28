@@ -1,0 +1,684 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:reading-a": {
+      "overview": "本文是一篇休闲去处推荐文，为想暂离忙碌的读者介绍四处宜人的地方：可与马亲近的铜木小径农场、新开壁画露台的四季酒店、设有烹饪学校的河畔小屋，以及注重环保的家庭花园绿山花园。",
+      "fullTranslationZh": "当日常琐事和压力让生活变得乏味时，我们身边总有美好的小乐趣和独特的体验等待发现。在这里，我们为你收集了一些可爱的去处，希望你能从忙碌中停下脚步，享受这些点亮生活的美好时刻。\n铜木小径\n铜木小径连接人与马，在惠特彻奇-斯托夫维尔提供各种各样的体验。从与马相伴的乡村咖啡、马辅助学习课程，到马匹行为和肢体语言的入门课程，这里人人都能找到适合自己的项目。这座宁静的家庭农场致力于为所有渴望亲近动物和自然的游客，提供一个安全、安静的乡村休憩之所。\n四季酒店\n为迎接夏天的到来，四季酒店开放了季节性露台。露台推出新菜单，并设置每年一换的壁画装置，向法国里维埃拉和地中海海岸线致敬。壁画由维多利亚·塞凯拉创作，她说：“我想为客人开启一段视觉之旅——一段充满温暖、宁静和一丝地中海魔力的旅程。”\n河畔小屋\n自 1999 年在英国电视台第四频道首次亮相以来，河畔小屋对英国人的饮食习惯以及动物和鱼类的福利都产生了积极影响。如今这里设有烹饪学校，提供餐饮体验，还有一整年的活动安排。这处迷人的庄园还在农舍里提供住宿，并能欣赏周围阿克斯河谷的绝美风光。\n绿山花园\n绿山花园隐匿于宁静的乡间，由一个家族经营，已有几十年的历史。这里提供温和的自然体验，如导览散步、赏花游、草本手工工作坊和玻璃温室下午茶。作为一处宁静的自然休憩地，花园采用环保做法保护当地野生动物，邀请游客放慢脚步，享受大自然朴素的美。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+          "sourceText": "From country coffee in the company of horses and Equine Assisted Learning sessions, to introductory courses on horse behaviour and body language, it has something for everyone.",
+          "displayText": "From country coffee in the company of horses and Equine Assisted Learning sessions, to introductory courses on horse behaviour and body language, it has something for everyone.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:23"
+          ],
+          "translationZh": "从与马相伴的乡村咖啡、马辅助学习课程，到马匹行为和肢体语言的入门课程，这里人人都能找到适合自己的项目。",
+          "analysisZh": "主干在最后一个逗号后：it has something for everyone，it 指铜木小径，意思是人人都能找到适合的项目。前面的 From…to… 是状语，列出项目从哪类到哪类：From 后是两个并列名词，与马相伴的乡村咖啡（country coffee in the company of horses）和马辅助学习课程（Equine Assisted Learning sessions）；to 后是入门课程（introductory courses），介词 on 带两个并列宾语 horse behaviour 和 body language，说明课程讲马的行为和肢体语言。先抓主干，再看 From…to… 的范围，就知道这句在说项目多样。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 4,
+              "quote": "From"
+            },
+            {
+              "start": 84,
+              "end": 107,
+              "quote": "to introductory courses"
+            },
+            {
+              "start": 146,
+              "end": 175,
+              "quote": "it has something for everyone"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+          "sourceText": "As a calm natural retreat, the garden follows eco-friendly practices to protect local wildlife, inviting visitors to slow down and enjoy nature’s simple beauty.",
+          "displayText": "As a calm natural retreat, the garden follows eco-friendly practices to protect local wildlife, inviting visitors to slow down and enjoy nature’s simple beauty.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:23"
+          ],
+          "translationZh": "作为一处宁静的自然休憩地，花园采用环保做法保护当地野生动物，邀请游客放慢脚步，享受大自然朴素的美。",
+          "analysisZh": "主干是 the garden follows eco-friendly practices（花园采用环保做法）。句首 As a calm natural retreat 是介词短语，说明花园的身份：一处宁静的自然休憩地。to protect local wildlife 是不定式，说明采用环保做法的目的。逗号后的 inviting… 是现在分词短语，逻辑主语仍是 the garden，用 invite sb to do 的结构，to 后有两个并列动作 slow down 和 enjoy nature’s simple beauty。这句也说明环保做法只是绿山花园的介绍内容。",
+          "underlineRanges": [
+            {
+              "start": 27,
+              "end": 68,
+              "quote": "the garden follows eco-friendly practices"
+            },
+            {
+              "start": 69,
+              "end": 79,
+              "quote": "to protect"
+            },
+            {
+              "start": 96,
+              "end": 136,
+              "quote": "inviting visitors to slow down and enjoy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:1"
+              ],
+              "start": 0,
+              "end": 86,
+              "quote": "当日常琐事和压力让生活变得乏味时，我们身边总有美好的小乐趣和独特的体验等待发现。在这里，我们为你收集了一些可爱的去处，希望你能从忙碌中停下脚步，享受这些点亮生活的美好时刻。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:2"
+              ],
+              "start": 87,
+              "end": 91,
+              "quote": "铜木小径"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:3"
+              ],
+              "start": 92,
+              "end": 219,
+              "quote": "铜木小径连接人与马，在惠特彻奇-斯托夫维尔提供各种各样的体验。从与马相伴的乡村咖啡、马辅助学习课程，到马匹行为和肢体语言的入门课程，这里人人都能找到适合自己的项目。这座宁静的家庭农场致力于为所有渴望亲近动物和自然的游客，提供一个安全、安静的乡村休憩之所。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:4"
+              ],
+              "start": 220,
+              "end": 224,
+              "quote": "四季酒店"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:5"
+              ],
+              "start": 225,
+              "end": 340,
+              "quote": "为迎接夏天的到来，四季酒店开放了季节性露台。露台推出新菜单，并设置每年一换的壁画装置，向法国里维埃拉和地中海海岸线致敬。壁画由维多利亚·塞凯拉创作，她说：“我想为客人开启一段视觉之旅——一段充满温暖、宁静和一丝地中海魔力的旅程。”"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:6"
+              ],
+              "start": 341,
+              "end": 345,
+              "quote": "河畔小屋"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:7"
+              ],
+              "start": 346,
+              "end": 466,
+              "quote": "自 1999 年在英国电视台第四频道首次亮相以来，河畔小屋对英国人的饮食习惯以及动物和鱼类的福利都产生了积极影响。如今这里设有烹饪学校，提供餐饮体验，还有一整年的活动安排。这处迷人的庄园还在农舍里提供住宿，并能欣赏周围阿克斯河谷的绝美风光。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:8"
+              ],
+              "start": 467,
+              "end": 471,
+              "quote": "绿山花园"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:reading-a:9"
+              ],
+              "start": 472,
+              "end": 589,
+              "quote": "绿山花园隐匿于宁静的乡间，由一个家族经营，已有几十年的历史。这里提供温和的自然体验，如导览散步、赏花游、草本手工工作坊和玻璃温室下午茶。作为一处宁静的自然休憩地，花园采用环保做法保护当地野生动物，邀请游客放慢脚步，享受大自然朴素的美。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "structure-reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:23"
+            ],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+                "start": 112,
+                "end": 288,
+                "quote": "From country coffee in the company of horses and Equine Assisted Learning sessions, to introductory courses on horse behaviour and body language, it has something for everyone."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 31,
+                "end": 82,
+                "quote": "从与马相伴的乡村咖啡、马辅助学习课程，到马匹行为和肢体语言的入门课程，这里人人都能找到适合自己的项目。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:23"
+            ],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+                "start": 220,
+                "end": 380,
+                "quote": "As a calm natural retreat, the garden follows eco-friendly practices to protect local wildlife, inviting visitors to slow down and enjoy nature’s simple beauty."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 68,
+                "end": 117,
+                "quote": "作为一处宁静的自然休憩地，花园采用环保做法保护当地野生动物，邀请游客放慢脚步，享受大自然朴素的美。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:1",
+                "start": 136,
+                "end": 176,
+                "quote": "we’ve gathered some lovely finds for you"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+                "start": 341,
+                "end": 367,
+                "quote": "a safe, quiet rural escape"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+                "start": 220,
+                "end": 245,
+                "quote": "As a calm natural retreat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p1",
+                "start": 44,
+                "end": 58,
+                "quote": "我们为你收集了一些可爱的去处"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 114,
+                "end": 126,
+                "quote": "安全、安静的乡村休憩之所"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 68,
+                "end": 80,
+                "quote": "作为一处宁静的自然休憩地"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+                "start": 0,
+                "end": 80,
+                "quote": "To mark the arrival of summer, Four Seasons Hotel has opened its seasonal patio."
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+                "start": 81,
+                "end": 196,
+                "quote": "With a new menu and annual mural installation, it shows respect for the French Riviera and Mediterranean coastline."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p5",
+                "start": 9,
+                "end": 21,
+                "quote": "四季酒店开放了季节性露台"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p5",
+                "start": 30,
+                "end": 42,
+                "quote": "并设置每年一换的壁画装置"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+                "start": 289,
+                "end": 314,
+                "quote": "This peaceful family farm"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+                "start": 38,
+                "end": 71,
+                "quote": "the family-run Green Hill Gardens"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 82,
+                "end": 91,
+                "quote": "这座宁静的家庭农场"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 13,
+                "end": 20,
+                "quote": "由一个家族经营"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一段先点出写作意图：生活乏味时身边仍有美好去处，作者为读者收集了几处；随后按四个小标题逐一介绍铜木小径、四季酒店、河畔小屋和绿山花园，每处写它的特色项目和氛围。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:1",
+            "summary": "生活被琐事和压力弄得乏味时，身边仍有小乐趣；作者为读者收集了一些去处，希望大家停下来享受。",
+            "function": "引出话题，交代全文是为读者推荐去处。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+            "summary": "铜木小径是家庭农场，提供与马有关的咖啡、学习和入门课程，给想亲近动物和自然的人一个安静的乡村休憩处。",
+            "function": "介绍第一个去处。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+            "summary": "四季酒店为迎夏开放露台，推出新菜单和每年一换的壁画，画家希望给客人一段温暖宁静的视觉之旅。",
+            "function": "介绍第二个去处。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:7",
+            "summary": "河畔小屋因电视节目出名，影响了英国人的饮食习惯，现有烹饪学校、餐饮、活动、住宿和河谷风景。",
+            "function": "介绍第三个去处。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+            "summary": "绿山花园由家族经营、历史悠久，提供散步、赏花、手工和下午茶，并用环保做法保护野生动物。",
+            "function": "介绍第四个去处。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zj-ningbo-2026-mar:21": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "判断全文的写作目的：看开头交代了什么，再看四个小标题下写的是什么。",
+      "stemTranslationZh": "本文的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-zj-ningbo-2026-mar:reading-a:1]] 看作者为读者做了什么，再看四个小标题下各写的是怎样的地方",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "介绍减压的窍门。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "stress",
+            "optionText": "stress-relieving",
+            "matchType": "wordFamily",
+            "relationNote": "压力（stress）只在[[block:paper-mock-zj-ningbo-2026-mar:reading-a:1|When daily chores and stress]]用来引出话题，下文介绍的是四个具体去处，没有教读者减压的方法（tips）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:1",
+              "quote": "When daily chores and stress make life dull",
+              "anchor": "开头提到压力"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为热门景点做广告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "popular attractions",
+            "explanation": "原文把这些地方称作作者为读者收集的可爱去处（lovely finds），强调安静、能让人放松，没说它们热门，也不是在替哪一家招揽生意。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "推荐宜人的休闲去处。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:1",
+              "quote": "we’ve gathered some lovely finds for you",
+              "anchor": "为读者收集去处"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+              "quote": "a safe, quiet rural escape",
+              "anchor": "农场是乡村休憩处"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+              "quote": "As a calm natural retreat",
+              "anchor": "花园是自然休憩地"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "探索亲近自然的方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "the garden follows eco-friendly practices to protect local wildlife",
+            "sourceHighlight": "eco-friendly practices",
+            "optionText": "To explore nature-friendly ways.",
+            "optionHighlight": "nature-friendly ways",
+            "explanation": "只有[[block:paper-mock-zj-ningbo-2026-mar:reading-a:9]]的花园写到环保做法（eco-friendly practices），酒店露台、烹饪学校都与此无关；全文在推荐去处，不是探讨环保方法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+              "quote": "the garden follows eco-friendly practices to protect local wildlife",
+              "anchor": "只有花园写环保"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "recommend pleasant getaways",
+          "sourceRole": "correctOption",
+          "targetText": "we’ve gathered some lovely finds for you",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-zj-ningbo-2026-mar:reading-a:1]]说作者为读者收集了一些可爱的去处（lovely finds），希望大家从忙碌中停下来；四个小标题下都是让人放松的地方，农场是安静的乡村休憩处（quiet rural escape），花园是宁静的自然休憩地（calm natural retreat）。选项的“推荐宜人的去处”把这四处都包进去，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按“喜欢壁画”这个条件，在四个去处里找出写到壁画的那一处。",
+      "stemTranslationZh": "如果你是壁画爱好者，你会选择哪里？",
+      "locateBy": "stem",
+      "locateFindZh": "it 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "铜木小径。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Copperwood Trail has a mural",
+            "explanation": "铜木小径写的是与马相伴的咖啡和马术相关课程，主打亲近动物，介绍里没有壁画。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "四季酒店。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+              "quote": "To mark the arrival of summer, Four Seasons Hotel has opened its seasonal patio.",
+              "anchor": "四季酒店开放露台"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+              "quote": "With a new menu and annual mural installation, it shows respect for the French Riviera and Mediterranean coastline.",
+              "anchor": "露台设壁画装置"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "河畔小屋。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "River Cottage has a mural",
+            "explanation": "河畔小屋因电视节目出名，介绍的是烹饪学校、餐饮、住宿和河谷风景，没写到壁画。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "绿山花园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Green Hill Gardens has a mural",
+            "explanation": "绿山花园提供散步、赏花、草本手工和温室下午茶，看的是自然风光，介绍里没有壁画。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mural",
+          "sourceRole": "stem",
+          "targetText": "With a new menu and annual mural installation, it shows respect for the French Riviera and Mediterranean coastline.",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+          "relationType": "locationCue",
+          "answerText": "Four Seasons Hotel",
+          "bridgeZh": "it 指四季酒店新开的露台，壁画就装在那里",
+          "note": "题干 mural 原词出现在原文。"
+        },
+        {
+          "sourceText": "Four Seasons Hotel",
+          "sourceRole": "correctOption",
+          "targetText": "Four Seasons Hotel has opened its seasonal patio",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:5",
+          "relationType": "locationCue",
+          "note": "选项沿用原文店名 Four Seasons Hotel；四处地方里只有它写到壁画，露台设有每年一换的壁画装置（annual mural installation），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "比较铜木小径和绿山花园两处介绍，找出两处都具备的一点。",
+      "stemTranslationZh": "铜木小径和绿山花园有什么共同之处？",
+      "locateBy": "options",
+      "locateFindZh": "选项拿回铜木小径和绿山花园两段核对，两处都有才算",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们都由一个家族经营。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:3",
+              "quote": "This peaceful family farm",
+              "anchor": "家庭农场"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+              "quote": "the family-run Green Hill Gardens",
+              "anchor": "家族经营的花园"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们都采用环保做法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "the garden follows eco-friendly practices to protect local wildlife",
+            "sourceHighlight": "eco-friendly practices",
+            "optionText": "They have eco-friendly practices.",
+            "optionHighlight": "eco-friendly practices",
+            "explanation": "环保做法（eco-friendly practices）只出现在[[block:paper-mock-zj-ningbo-2026-mar:reading-a:9]]绿山花园的介绍里；铜木小径只说提供安全、安静的乡村休憩，没提环保，不是两处共有。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+              "quote": "the garden follows eco-friendly practices to protect local wildlife",
+              "anchor": "只有花园写环保"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们都注重保护动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the garden follows eco-friendly practices to protect local wildlife",
+            "sourceHighlight": "to protect local wildlife",
+            "optionText": "They focus on animal protection.",
+            "optionHighlight": "focus on animal protection",
+            "explanation": "铜木小径让游客亲近动物（close contact with animals），讲的是体验，不是保护；绿山花园保护野生动物（protect local wildlife）也只是环保做法的目的之一，两处都不以保护动物为重点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+              "quote": "the garden follows eco-friendly practices to protect local wildlife",
+              "anchor": "花园保护野生动物"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们都提供许多手工活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "It offers gentle nature experiences like guided walks, flower tours, herb craft workshops and glasshouse afternoon tea.",
+            "sourceHighlight": "herb craft workshops",
+            "optionText": "They provide many craft activities.",
+            "optionHighlight": "many craft activities",
+            "explanation": "手工活动只有绿山花园的草本手工工作坊（herb craft workshops）一项，铜木小径提供的是与马有关的咖啡和课程，谈不上两处都有许多手工活动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+              "quote": "It offers gentle nature experiences like guided walks, flower tours, herb craft workshops and glasshouse afternoon tea.",
+              "anchor": "花园的手工工作坊"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "managed by a family",
+          "sourceRole": "correctOption",
+          "targetText": "the family-run Green Hill Gardens",
+          "targetParagraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "两处合起来看：铜木小径在[[block:paper-mock-zj-ningbo-2026-mar:reading-a:3|This peaceful family farm]]被称作家庭农场（family farm），绿山花园在[[block:paper-mock-zj-ningbo-2026-mar:reading-a:9|the family-run Green Hill Gardens]]写明由家族经营（family-run）；两处都由家族打理，就是选项的“由一个家族经营”，选 A。"
+        }
+      ]
+    }
+  }
+}

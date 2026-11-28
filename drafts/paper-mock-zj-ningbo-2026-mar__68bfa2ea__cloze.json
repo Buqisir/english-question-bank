@@ -1,0 +1,1870 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zj-ningbo-2026-mar:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zj-ningbo-2026-mar:cloze": {
+      "overview": "夏宇杰中学时左手致残，留学学法后发现残障者缺少放松社交的场所，于是在上海开出中国首家无障碍酒吧。店内处处是贴心设计，吸引了傅明等常客，也让包容走进日常。",
+      "fullTranslationZh": "夏宇杰是中国首家无障碍酒吧——“HandyCup”酒吧的老板，他在中学时因一次医疗事故左手致残。这段经历让他对残障和人生有了独特的视角，也激起了他打造一个包容性社交空间的愿望。他获得奖学金先后在中国和美国学习法律，之后注意到一个缺口：公共场所已有基本的无障碍设施，但残障人士缺少可以放松的无障碍社交场所。\n这一发现激发了他开一家人人可去的酒吧的梦想。经过几个月的筹备，酒吧于2024年5月在上海新华路开业。店里每个角落都经过精心设计，设有坡道、宽敞的轮椅通道、可调节的桌子和高低两种吧台，方便大家轻松交流。\n店里处处是实用的细节：盲文地图、圆角桌子和免费的助听器电池，都是在照顾视障和听障人士。酒吧的名字化用了“handicap”（残障）一词，是以包容打破隔阂的一个寓意深刻的象征。\n这里已成为一家深受所有人喜爱的酒吧，其中就有38岁的傅明，他是一位残障企业主，致力于推广无障碍理念。作为一名忠实的常客，他坐着轮椅在店里行动自如，也认同夏宇杰的愿景：无障碍意味着所有人享有同等的便利。\n夏宇杰把自己看作残障人士与健全人之间的一座桥梁。酒吧让他摆脱了法律工作的严肃，使他能尽情施展好奇心和创造力来经营生意。在他看来，这里远不只是一门生意，而是一个温暖的空间，它模糊了人与人之间的界限，让包容成为日常。",
+      "mainLine": {
+        "theme": {
+          "text": "一家处处为残障者着想的酒吧，能打破人与人的隔阂，让包容成为日常（making inclusion a daily reality）。",
+          "quote": "making inclusion a daily reality"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+            "text": "夏宇杰因伤致残，留学后发现残障者缺少放松社交的地方。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+            "text": "这一发现催生梦想，精心设计的酒吧在上海开业。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+            "text": "实用细节照顾视障听障者，店名寓意以包容打破隔阂。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+            "text": "残障企业主傅明成为常客，认同夏宇杰的无障碍理念。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+            "text": "夏宇杰自视桥梁，酒吧远不只是生意，让包容走进日常。"
+          }
+        ],
+        "emotion": ""
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-cloze-1",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+          "sourceText": "After studying law in China and the US on a scholarship, he noticed a __43__: public places had basic accessible facilities, but the disabled lacked relaxing, barrier-free social spots.",
+          "displayText": "After studying law in China and the US on a scholarship, he noticed a gap: public places had basic accessible facilities, but the disabled lacked relaxing, barrier-free social spots.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:43"
+          ],
+          "translationZh": "他获得奖学金先后在中国和美国学习法律，之后注意到一个缺口：公共场所已有基本的无障碍设施，但残障人士缺少可以放松的无障碍社交场所。",
+          "analysisZh": "主干是“他注意到一个缺口”（he noticed a gap）。句首 After studying law ... 是时间状语，交代他留学学法之后。冒号后面具体说明这个缺口，由 but 连接两个分句：前一句说公共场所已有基本设施，后一句说残障人士缺少放松的社交场所，一有一缺，正好构成缺口。",
+          "underlineRanges": [
+            {
+              "start": 57,
+              "end": 73,
+              "quote": "he noticed a gap"
+            },
+            {
+              "start": 75,
+              "end": 120,
+              "quote": "public places had basic accessible facilities"
+            },
+            {
+              "start": 122,
+              "end": 145,
+              "quote": "but the disabled lacked"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-cloze-2",
+          "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+          "sourceText": "To him, it’s __54__ just a business, but a warm space blurring __55__ between people and making inclusion a daily reality.",
+          "displayText": "To him, it’s far from just a business, but a warm space blurring boundaries between people and making inclusion a daily reality.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zj-ningbo-2026-mar:54",
+            "question:paper-mock-zj-ningbo-2026-mar:55"
+          ],
+          "translationZh": "在他看来，这里远不只是一门生意，而是一个温暖的空间，它模糊了人与人之间的界限，让包容成为日常。",
+          "analysisZh": "主干是“它远不只是一门生意，而是一个温暖的空间”（it’s far from just a business, but a warm space）：far from 在这里起否定作用，与 but 形成“不是……而是……”的前后对照，两个表语分别是 just a business 和 a warm space。后面 blurring boundaries between people 和 making inclusion a daily reality 是由 and 连接的两个现在分词短语，一起作后置定语修饰 a warm space，说明这个空间做了什么。句首 To him 表示“在他看来”。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 55,
+              "quote": "far from just a business, but a warm space"
+            },
+            {
+              "start": 56,
+              "end": 90,
+              "quote": "blurring boundaries between people"
+            },
+            {
+              "start": 95,
+              "end": 127,
+              "quote": "making inclusion a daily reality"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:cloze:1"
+              ],
+              "start": 0,
+              "end": 152,
+              "quote": "夏宇杰是中国首家无障碍酒吧——“HandyCup”酒吧的老板，他在中学时因一次医疗事故左手致残。这段经历让他对残障和人生有了独特的视角，也激起了他打造一个包容性社交空间的愿望。他获得奖学金先后在中国和美国学习法律，之后注意到一个缺口：公共场所已有基本的无障碍设施，但残障人士缺少可以放松的无障碍社交场所。"
+            },
+            {
+              "paragraphId": "tr-2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:cloze:2"
+              ],
+              "start": 153,
+              "end": 253,
+              "quote": "这一发现激发了他开一家人人可去的酒吧的梦想。经过几个月的筹备，酒吧于2024年5月在上海新华路开业。店里每个角落都经过精心设计，设有坡道、宽敞的轮椅通道、可调节的桌子和高低两种吧台，方便大家轻松交流。"
+            },
+            {
+              "paragraphId": "tr-3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:cloze:3"
+              ],
+              "start": 254,
+              "end": 341,
+              "quote": "店里处处是实用的细节：盲文地图、圆角桌子和免费的助听器电池，都是在照顾视障和听障人士。酒吧的名字化用了“handicap”（残障）一词，是以包容打破隔阂的一个寓意深刻的象征。"
+            },
+            {
+              "paragraphId": "tr-4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:cloze:4"
+              ],
+              "start": 342,
+              "end": 442,
+              "quote": "这里已成为一家深受所有人喜爱的酒吧，其中就有38岁的傅明，他是一位残障企业主，致力于推广无障碍理念。作为一名忠实的常客，他坐着轮椅在店里行动自如，也认同夏宇杰的愿景：无障碍意味着所有人享有同等的便利。"
+            },
+            {
+              "paragraphId": "tr-5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zj-ningbo-2026-mar:cloze:5"
+              ],
+              "start": 443,
+              "end": 549,
+              "quote": "夏宇杰把自己看作残障人士与健全人之间的一座桥梁。酒吧让他摆脱了法律工作的严肃，使他能尽情施展好奇心和创造力来经营生意。在他看来，这里远不只是一门生意，而是一个温暖的空间，它模糊了人与人之间的界限，让包容成为日常。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-1",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+            "text": "Xia Yujie, owner of China’s first accessible pub – Pub HandyCup, had his left hand disabled in a middle school medical accident. The experience gave him a unique perspective on disability and life, fueling his wish to build a(n) inclusive social space. After studying law in China and the US on a scholarship, he noticed a gap: public places had basic accessible facilities, but the disabled lacked relaxing, barrier-free social spots."
+          },
+          {
+            "textId": "done-2",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+            "text": "This observation inspired his dream of a pub for all. After months of preparation, it opened on Shanghai’s Xinhua Road in May 2024. Every corner is thoughtfully designed, with ramps, wide wheelchair passages, adjustable tables and dual-height bars for easy socializing."
+          },
+          {
+            "textId": "done-3",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+            "text": "Practical details fill the space: Braille (盲文) maps, rounded table corners and free hearing-aid batteries, all attending to the visually and hearing-impaired. The pub’s name, a take on “handicap”, is a meaningful symbol of breaking barriers with inclusion."
+          },
+          {
+            "textId": "done-4",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+            "text": "It has been a popular pub for all, including 38-year-old Fu Ming, a disabled business owner, dedicated to promoting accessibility. As a loyal regular, he moves around the pub with ease in a wheelchair and shares Xia’s vision that accessibility means equal convenience for all."
+          },
+          {
+            "textId": "done-5",
+            "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+            "text": "Xia sees himself as a bridge between the disabled and able-bodied. The pub frees him from the seriousness of his legal work, letting him fully embrace his sense of wonder and creativity to run his business. To him, it’s far from just a business, but a warm space blurring boundaries between people and making inclusion a daily reality."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+                "start": 169,
+                "end": 191,
+                "quote": "on disability and life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-1",
+                "start": 54,
+                "end": 60,
+                "quote": "对残障和人生"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:41"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:41",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+                "start": 162,
+                "end": 173,
+                "quote": "perspective"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-1",
+                "start": 65,
+                "end": 67,
+                "quote": "视角"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 37,
+                "end": 50,
+                "quote": "a pub for all"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 11,
+                "end": 18,
+                "quote": "人人可去的酒吧"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:42"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:42",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+                "start": 229,
+                "end": 238,
+                "quote": "inclusive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-1",
+                "start": 77,
+                "end": 80,
+                "quote": "包容性"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+                "start": 387,
+                "end": 429,
+                "quote": "lacked relaxing, barrier-free social spots"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-1",
+                "start": 137,
+                "end": 151,
+                "quote": "缺少可以放松的无障碍社交场所"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:43"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:43",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+                "start": 323,
+                "end": 326,
+                "quote": "gap"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-1",
+                "start": 114,
+                "end": 116,
+                "quote": "缺口"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 0,
+                "end": 16,
+                "quote": "This observation"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 24,
+                "end": 50,
+                "quote": "his dream of a pub for all"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 0,
+                "end": 4,
+                "quote": "这一发现"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 8,
+                "end": 21,
+                "quote": "开一家人人可去的酒吧的梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:44"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:44",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 17,
+                "end": 25,
+                "quote": "inspired"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 4,
+                "end": 6,
+                "quote": "激发"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 52,
+                "end": 79,
+                "quote": "After months of preparation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 22,
+                "end": 30,
+                "quote": "经过几个月的筹备"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:45"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:45",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 86,
+                "end": 92,
+                "quote": "opened"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 47,
+                "end": 49,
+                "quote": "开业"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 163,
+                "end": 239,
+                "quote": "with ramps, wide wheelchair passages, adjustable tables and dual-height bars"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 64,
+                "end": 90,
+                "quote": "设有坡道、宽敞的轮椅通道、可调节的桌子和高低两种吧台"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:46"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:46",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:2",
+                "start": 148,
+                "end": 160,
+                "quote": "thoughtfully"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-2",
+                "start": 59,
+                "end": 61,
+                "quote": "精心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 52,
+                "end": 104,
+                "quote": "rounded table corners and free hearing-aid batteries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 16,
+                "end": 29,
+                "quote": "圆角桌子和免费的助听器电池"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:47"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:47",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 10,
+                "end": 17,
+                "quote": "details"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 8,
+                "end": 10,
+                "quote": "细节"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 117,
+                "end": 150,
+                "quote": "the visually and hearing-impaired"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 35,
+                "end": 42,
+                "quote": "视障和听障人士"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:48"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:48",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 111,
+                "end": 123,
+                "quote": "attending to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 33,
+                "end": 35,
+                "quote": "照顾"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 152,
+                "end": 166,
+                "quote": "The pub’s name"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 216,
+                "end": 248,
+                "quote": "breaking barriers with inclusion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 43,
+                "end": 48,
+                "quote": "酒吧的名字"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 69,
+                "end": 76,
+                "quote": "以包容打破隔阂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:49"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:49",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 213,
+                "end": 219,
+                "quote": "symbol"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 84,
+                "end": 86,
+                "quote": "象征"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+                "start": 100,
+                "end": 126,
+                "quote": "to promoting accessibility"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-4",
+                "start": 42,
+                "end": 49,
+                "quote": "推广无障碍理念"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:50"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:50",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+                "start": 93,
+                "end": 102,
+                "quote": "dedicated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-4",
+                "start": 39,
+                "end": 42,
+                "quote": "致力于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+                "start": 150,
+                "end": 180,
+                "quote": "moves around the pub with ease"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-4",
+                "start": 65,
+                "end": 72,
+                "quote": "在店里行动自如"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:51"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:51",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+                "start": 142,
+                "end": 149,
+                "quote": "regular"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-4",
+                "start": 57,
+                "end": 59,
+                "quote": "常客"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+                "start": 246,
+                "end": 271,
+                "quote": "equal convenience for all"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-4",
+                "start": 89,
+                "end": 99,
+                "quote": "所有人享有同等的便利"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:52"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:52",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:4",
+                "start": 218,
+                "end": 224,
+                "quote": "vision"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-4",
+                "start": 80,
+                "end": 82,
+                "quote": "愿景"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+                "start": 75,
+                "end": 123,
+                "quote": "frees him from the seriousness of his legal work"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-5",
+                "start": 26,
+                "end": 38,
+                "quote": "让他摆脱了法律工作的严肃"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:53"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:53",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+                "start": 143,
+                "end": 150,
+                "quote": "embrace"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-5",
+                "start": 44,
+                "end": 46,
+                "quote": "施展"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+                "start": 243,
+                "end": 259,
+                "quote": "but a warm space"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-5",
+                "start": 75,
+                "end": 84,
+                "quote": "而是一个温暖的空间"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:54"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:54",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+                "start": 220,
+                "end": 228,
+                "quote": "far from"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-5",
+                "start": 66,
+                "end": 70,
+                "quote": "远不只是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:3",
+                "start": 216,
+                "end": 233,
+                "quote": "breaking barriers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-3",
+                "start": 72,
+                "end": 76,
+                "quote": "打破隔阂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:55"
+            ],
+            "blankId": "blank:paper-mock-zj-ningbo-2026-mar:55",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+                "start": 272,
+                "end": 282,
+                "quote": "boundaries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-5",
+                "start": 95,
+                "end": 97,
+                "quote": "界限"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:43"
+            ],
+            "selectedSentenceId": "ls-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+                "start": 253,
+                "end": 435,
+                "quote": "After studying law in China and the US on a scholarship, he noticed a gap: public places had basic accessible facilities, but the disabled lacked relaxing, barrier-free social spots."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-1",
+                "start": 88,
+                "end": 152,
+                "quote": "他获得奖学金先后在中国和美国学习法律，之后注意到一个缺口：公共场所已有基本的无障碍设施，但残障人士缺少可以放松的无障碍社交场所。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zj-ningbo-2026-mar:54",
+              "question:paper-mock-zj-ningbo-2026-mar:55"
+            ],
+            "selectedSentenceId": "ls-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:5",
+                "start": 207,
+                "end": 335,
+                "quote": "To him, it’s far from just a business, but a warm space blurring boundaries between people and making inclusion a daily reality."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-5",
+                "start": 59,
+                "end": 106,
+                "quote": "在他看来，这里远不只是一门生意，而是一个温暖的空间，它模糊了人与人之间的界限，让包容成为日常。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-zj-ningbo-2026-mar:41": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "左手致残的经历让他对残障和人生有了自己独特的看法，这是他后来创业的起点。",
+      "find": {
+        "check": "collocation",
+        "text": "空后接对残障和人生（on disability and life），后文他又注意到（noticed）问题，经历给他的是看问题的角度。",
+        "quotes": [
+          "on disability and life",
+          "noticed"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "视角",
+        "reason": "左手致残的经历让他对残障和人生有了自己独特的看法，这是他后来创业的起点。名词看搭配：空后接对残障和人生（on disability and life），后文他又注意到（noticed）问题，经历给他的是看问题的角度。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "comment",
+          "meaning": "评论；经历（The experience）带给他的是心里的认识，评论是说出口的话，不是经历能给的东西。",
+          "quote": "The experience"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "decision",
+          "meaning": "决定；建社交空间这时还只是他的愿望（his wish to build），经历给他的是看法，不是决定。",
+          "quote": "his wish to build"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "influence",
+          "meaning": "影响；放进去成了他对残障施加影响，可这句是经历给了他（gave him）东西，他是接受的一方。",
+          "quote": "gave him"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "on disability and life",
+          "signalSide": "context-after",
+          "targetText": "a unique perspective on disability and life",
+          "relation": "视角后接对什么的看法，这里是对残障和人生。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "gave him a unique",
+          "signalSide": "context-before",
+          "relation": "经历给了他一种独特的东西，接受方是他本人。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:42": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:42",
+      "blankNo": 42,
+      "pos": "adjective",
+      "role": "main",
+      "context": "他想建的社交空间要让残障者和健全人都能来，这是全文一再强调的愿望。",
+      "find": {
+        "check": "echo",
+        "text": "下一段说他梦想一家人人可去的酒吧（a pub for all），末句又说让包容成为日常（making inclusion a daily reality）。",
+        "quotes": [
+          "a pub for all",
+          "making inclusion a daily reality"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "包容的",
+        "meaning": "接纳所有人的",
+        "reason": "他想建的社交空间要让残障者和健全人都能来，这是全文一再强调的愿望。形容词看复现：下一段说他梦想一家人人可去的酒吧（a pub for all），末句又说让包容成为日常（making inclusion a daily reality）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cosy",
+          "meaning": "舒适的；他要的是人人都能进来的空间（a pub for all），重点不在环境舒服。",
+          "quote": "a pub for all"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "affordable",
+          "meaning": "实惠的；他看到的问题是残障者缺少无障碍的社交场所（barrier-free social spots），与花费高低无关。",
+          "quote": "barrier-free social spots"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "functional",
+          "meaning": "实用的；基本的无障碍设施（basic accessible facilities）已经有了，他缺的不是实用，而是人人能放松社交的地方。",
+          "quote": "basic accessible facilities"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "social space",
+          "signalSide": "context-after",
+          "targetText": "inclusive social space",
+          "relation": "形容词修饰社交空间，说明这个空间对谁开放。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a pub for all",
+          "signalSide": "context-after",
+          "relation": "人人可去的酒吧，就是包容的社交空间。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:43": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "冒号后讲他发现的问题：设施有了，放松社交的地方却没有，空格要概括这种该有而没有的空当。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后先说已有基本设施（had basic accessible facilities），接着转而说缺少（lacked）社交场所。",
+        "quotes": [
+          "had basic accessible facilities",
+          "lacked"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "缺口",
+        "meaning": "社交场所的空缺",
+        "reason": "冒号后讲他发现的问题：设施有了，放松社交的地方却没有，空格要概括这种该有而没有的空当。名词看复现：冒号后先说已有基本设施（had basic accessible facilities），接着转而说缺少（lacked）社交场所。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "conflict",
+          "meaning": "冲突；冒号后说的是缺少（lacked）社交场所，是不够，不是两方相争。",
+          "quote": "lacked"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fault",
+          "meaning": "过错；冒号后只说残障者缺少放松的社交场所（lacked relaxing），没有把责任推给谁。",
+          "quote": "lacked relaxing"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dilemma",
+          "meaning": "两难困境；冒号后是缺少社交场所（lacked），不是要在两个选择之间取舍。",
+          "quote": "lacked"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he noticed a",
+          "signalSide": "context-before",
+          "targetText": "he noticed a gap",
+          "relation": "注意到一个什么，冒号后给出具体内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "lacked relaxing, barrier-free social spots",
+          "signalSide": "context-after",
+          "relation": "缺少社交场所，正是空格概括的缺口。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:44": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "他发现的缺口催生了开一家人人可去的酒吧的梦想，故事从发现问题转入行动。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是这一发现（This observation），宾语是他的梦想（his dream of a pub for all），发现只能激发梦想。",
+        "quotes": [
+          "This observation",
+          "his dream of a pub for all"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "激发",
+        "reason": "他发现的缺口催生了开一家人人可去的酒吧的梦想，故事从发现问题转入行动。动词看搭配：主语是这一发现（This observation），宾语是他的梦想（his dream of a pub for all），发现只能激发梦想。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "followed",
+          "meaning": "追随；追梦的应是人，这里主语是这一发现（This observation）。",
+          "quote": "This observation"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "realized",
+          "meaning": "实现；后面还要经过几个月筹备（After months of preparation）才开张，发现本身实现不了梦想。",
+          "quote": "After months of preparation"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recorded",
+          "meaning": "记录；这句讲发现怎样引出梦想，下一句就写筹备开张（After months of preparation），与记下梦想无关。",
+          "quote": "After months of preparation"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "This observation",
+          "signalSide": "context-before",
+          "targetText": "This observation inspired his dream",
+          "relation": "主语是前文的发现，它引出了后面的梦想。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "his dream of a pub for all",
+          "signalSide": "context-after",
+          "relation": "宾语是梦想，能被激发。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:45": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "几个月筹备之后，酒吧在新华路正式迎客，梦想落了地。",
+      "find": {
+        "check": "action-sequence",
+        "text": "先是几个月的筹备（After months of preparation），再给出地点和时间（in May 2024），接下来的一步是开张。",
+        "quotes": [
+          "After months of preparation",
+          "in May 2024"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "开张",
+        "reason": "几个月筹备之后，酒吧在新华路正式迎客，梦想落了地。动词看动作顺序：先是几个月的筹备（After months of preparation），再给出地点和时间（in May 2024），接下来的一步是开张。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "floated",
+          "meaning": "漂浮；酒吧是开在路边的店（on Shanghai’s Xinhua Road），谈不上漂浮。",
+          "quote": "on Shanghai’s Xinhua Road"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "boomed",
+          "meaning": "兴旺；刚筹备完（After months of preparation），酒吧才起步，还谈不上生意兴旺。",
+          "quote": "After months of preparation"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "expanded",
+          "meaning": "扩张；筹备数月（After months of preparation）之后是第一次开门，还没有可以扩大的店面。",
+          "quote": "After months of preparation"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "on Shanghai’s Xinhua Road",
+          "signalSide": "context-after",
+          "targetText": "opened on Shanghai’s Xinhua Road in May 2024",
+          "relation": "地点和时间说明酒吧在哪里、何时开张。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "After months of preparation",
+          "signalSide": "context-before",
+          "relation": "筹备之后紧接着的一步是开业。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:46": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:46",
+      "blankNo": 46,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "每个角落的设计都为残障者着想，后面列出的设施就是例证。",
+      "find": {
+        "check": "collocation",
+        "text": "副词修饰设计（designed），后面列出坡道、可调节的桌子（adjustable tables），处处为方便社交（for easy socializing）。",
+        "quotes": [
+          "designed",
+          "adjustable tables",
+          "for easy socializing"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "深思熟虑地",
+        "meaning": "精心",
+        "reason": "每个角落的设计都为残障者着想，后面列出的设施就是例证。副词看搭配：副词修饰设计（designed），后面列出坡道、可调节的桌子（adjustable tables），处处为方便社交（for easy socializing）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "randomly",
+          "meaning": "随意地；后面列出坡道、宽轮椅通道（wide wheelchair passages），都是有意的安排。",
+          "quote": "wide wheelchair passages"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "roughly",
+          "meaning": "粗略地；连吧台都做成两种高度（dual-height bars），设计细到这种程度，不是粗略。",
+          "quote": "dual-height bars"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "beautifully",
+          "meaning": "漂亮地；后面列的设施都为了方便交流（for easy socializing），讲的是方便，不是外观。",
+          "quote": "for easy socializing"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "designed",
+          "signalSide": "context-after",
+          "targetText": "thoughtfully designed",
+          "relation": "副词修饰设计，说明设计得怎样。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "for easy socializing",
+          "signalSide": "context-after",
+          "relation": "设施为方便社交而设，说明设计考虑周到。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:47": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "detail",
+      "context": "冒号后列出盲文地图、圆角桌子等小东西，空格要把它们概括成一类。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后列的圆角桌子和免费助听器电池（rounded table corners and free hearing-aid batteries）都是不起眼的小地方。",
+        "quotes": [
+          "rounded table corners and free hearing-aid batteries"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "细节",
+        "reason": "冒号后列出盲文地图、圆角桌子等小东西，空格要把它们概括成一类。名词看复现：冒号后列的圆角桌子和免费助听器电池（rounded table corners and free hearing-aid batteries）都是不起眼的小地方。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "warnings",
+          "meaning": "警告；圆角桌子（rounded table corners）是防磕碰的贴心设计，不是警示。",
+          "quote": "rounded table corners"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "appliances",
+          "meaning": "电器；冒号后的圆角桌子（rounded table corners）和盲文地图都不是电器。",
+          "quote": "rounded table corners"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "demands",
+          "meaning": "要求；冒号后是店里已经备好的东西（free hearing-aid batteries），不是顾客提出的要求。",
+          "quote": "free hearing-aid batteries"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Practical",
+          "signalSide": "context-before",
+          "targetText": "Practical details",
+          "relation": "实用的什么，冒号后列出的就是。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "rounded table corners",
+          "signalSide": "context-after",
+          "relation": "圆角桌子是一处具体的细节。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:48": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:48",
+      "blankNo": 48,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "这些细节是在照顾视障和听障人士，空格说细节为谁服务。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "盲文地图对应视障（visually），助听器电池对应听障（hearing-impaired），各自照顾一类人。",
+        "quotes": [
+          "visually",
+          "hearing-impaired"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "照顾",
+        "meaning": "满足特殊需要",
+        "reason": "这些细节是在照顾视障和听障人士，空格说细节为谁服务。词组看语境义：盲文地图对应视障（visually），助听器电池对应听障（hearing-impaired），各自照顾一类人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "providing for",
+          "meaning": "供养；盲文地图等是给残障顾客的便利（the visually and hearing-impaired），不是负担他们的生活。",
+          "quote": "the visually and hearing-impaired"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "siding with",
+          "meaning": "站在一边；有争执才谈得上支持谁，这里是用盲文地图等方便视障和听障人士（the visually and hearing-impaired）。",
+          "quote": "the visually and hearing-impaired"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "relying on",
+          "meaning": "依靠；全都（all）指前面那些细节，是细节服务视障听障者，不是细节依靠他们。",
+          "quote": "all"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "attending",
+          "signalSide": "option",
+          "targetText": "attending to",
+          "relation": "照顾，指满足某些人的需要。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the visually and hearing-impaired",
+          "signalSide": "context-after",
+          "targetText": "attending to the visually and hearing-impaired",
+          "relation": "照顾的对象是视障和听障人士。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:49": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "main",
+      "context": "店名化用残障一词，代表以包容打破隔阂的理念，空格说名字在代表什么。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是店名（The pub’s name），后接打破隔阂（breaking barriers with inclusion），名字能代表一种理念。",
+        "quotes": [
+          "The pub’s name",
+          "breaking barriers with inclusion"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "象征",
+        "reason": "店名化用残障一词，代表以包容打破隔阂的理念，空格说名字在代表什么。名词看搭配：主语是店名（The pub’s name），后接打破隔阂（breaking barriers with inclusion），名字能代表一种理念。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tradition",
+          "meaning": "传统；酒吧2024年5月才开张（in May 2024），店名谈不上传统。",
+          "quote": "in May 2024"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dimension",
+          "meaning": "方面；店名（The pub’s name）是寄托寓意的，说成打破隔阂的一个方面接不上名字。",
+          "quote": "The pub’s name"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pattern",
+          "meaning": "模式；一个店名（The pub’s name）代表一种理念，不是一套做事的模式。",
+          "quote": "The pub’s name"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The pub’s name",
+          "signalSide": "context-before",
+          "targetText": "a meaningful symbol of breaking barriers",
+          "relation": "主语是店名，名字可以作为象征。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "of breaking barriers with inclusion",
+          "signalSide": "context-after",
+          "relation": "象征的内容是以包容打破隔阂。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:50": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:50",
+      "blankNo": 50,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "傅明这位残障企业主一心投入推广无障碍的事业。",
+      "find": {
+        "check": "collocation",
+        "text": "四个词后面都能接介词加动名词，空后是推广无障碍（to promoting accessibility），残障企业主是在投身这项事业。",
+        "quotes": [
+          "to promoting accessibility"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "致力于的",
+        "reason": "傅明这位残障企业主一心投入推广无障碍的事业。形容词看搭配：四个词后面都能接介词加动名词，空后是推广无障碍（to promoting accessibility），残障企业主是在投身这项事业。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "addicted",
+          "meaning": "上瘾的；推广无障碍（promoting accessibility）是正面的事业，用沉迷来形容不得体。",
+          "quote": "promoting accessibility"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "accustomed",
+          "meaning": "习惯于的；他是主动推广无障碍（promoting accessibility），不是对这件事习以为常。",
+          "quote": "promoting accessibility"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "exposed",
+          "meaning": "接触到的；放进去只说他碰到过推广工作，而他身为企业主在推广无障碍（promoting accessibility），是主动投身。",
+          "quote": "promoting accessibility"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to promoting accessibility",
+          "signalSide": "context-after",
+          "targetText": "dedicated to promoting accessibility",
+          "relation": "致力于做某事，后接介词加动名词。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:51": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "傅明是常来这家酒吧的老顾客。",
+      "find": {
+        "check": "collocation",
+        "text": "忠实的（loyal）修饰空格，他又在店里行动自如（moves around the pub with ease），是常来的顾客。",
+        "quotes": [
+          "loyal",
+          "moves around the pub with ease"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "常客",
+        "reason": "傅明是常来这家酒吧的老顾客。名词看搭配：忠实的（loyal）修饰空格，他又在店里行动自如（moves around the pub with ease），是常来的顾客。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "participant",
+          "meaning": "参与者；他是来店里消费的顾客（moves around the pub），酒吧不是一项要参加的活动。",
+          "quote": "moves around the pub"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "colleague",
+          "meaning": "同事；傅明是另一位企业主（a disabled business owner），不是夏宇杰的同事。",
+          "quote": "a disabled business owner"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "tourist",
+          "meaning": "游客；忠实的（loyal）指常来常往，游客只是偶尔经过。",
+          "quote": "loyal"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "As a loyal",
+          "signalSide": "context-before",
+          "targetText": "As a loyal regular",
+          "relation": "忠实的常客是常见搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "moves around the pub with ease",
+          "signalSide": "context-after",
+          "relation": "对店里很熟，说明他常来。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:52": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "傅明认同夏宇杰对无障碍的看法，说明这家店的理念得到了顾客的共鸣。",
+      "find": {
+        "check": "echo",
+        "text": "后面的从句说无障碍就是人人同样方便（equal convenience for all），呼应前文人人可去的酒吧（a pub for all）。",
+        "quotes": [
+          "equal convenience for all",
+          "a pub for all"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "愿景",
+        "meaning": "对无障碍的理念",
+        "reason": "傅明认同夏宇杰对无障碍的看法，说明这家店的理念得到了顾客的共鸣。名词看复现：后面的从句说无障碍就是人人同样方便（equal convenience for all），呼应前文人人可去的酒吧（a pub for all）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "promise",
+          "meaning": "承诺；后面的从句是对无障碍含义的认识（accessibility means），不是谁许下的保证。",
+          "quote": "accessibility means"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "memory",
+          "meaning": "记忆；后面的从句是一个观点（accessibility means equal convenience），不是过去发生的事。",
+          "quote": "accessibility means equal convenience"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "experience",
+          "meaning": "经历；后面的从句是对无障碍含义的判断（accessibility means），经历要讲发生过什么事。",
+          "quote": "accessibility means"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "shares Xia’s",
+          "signalSide": "context-before",
+          "targetText": "shares Xia’s vision that",
+          "relation": "认同某人的看法，后面用 that 说明内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "equal convenience for all",
+          "signalSide": "context-after",
+          "relation": "人人同样方便，与前文人人可去的酒吧是同一理念。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:53": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "detail",
+      "context": "摆脱了严肃的法律工作，他终于能尽情放开自己的好奇心和创造力。",
+      "find": {
+        "check": "collocation",
+        "text": "前面说酒吧让他摆脱严肃（frees him from the seriousness），宾语是好奇心和创造力（his sense of wonder and creativity），要尽情施展。",
+        "quotes": [
+          "frees him from the seriousness",
+          "his sense of wonder and creativity"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "欣然接受",
+        "meaning": "尽情施展",
+        "reason": "摆脱了严肃的法律工作，他终于能尽情放开自己的好奇心和创造力。动词看搭配：前面说酒吧让他摆脱严肃（frees him from the seriousness），宾语是好奇心和创造力（his sense of wonder and creativity），要尽情施展。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hide",
+          "meaning": "隐藏；酒吧让他摆脱了严肃（frees him from the seriousness），正是要放开天性，不会去隐藏。",
+          "quote": "frees him from the seriousness"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ignore",
+          "meaning": "忽视；他要靠好奇心和创造力来经营生意（to run his business），不会忽视它们。",
+          "quote": "to run his business"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "achieve",
+          "meaning": "实现；好奇心和创造力（his sense of wonder and creativity）是他本来就有的，谈不上实现。",
+          "quote": "his sense of wonder and creativity"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his sense of wonder and creativity",
+          "signalSide": "context-after",
+          "targetText": "embrace his sense of wonder and creativity",
+          "relation": "宾语是好奇心和创造力，要尽情施展。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "frees him from the seriousness",
+          "signalSide": "context-before",
+          "relation": "摆脱严肃之后，正可以放开天性。"
+        }
+      ]
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:54": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:54",
+      "blankNo": 54,
+      "pos": "phrase",
+      "role": "main",
+      "context": "后面转而说它是温暖的空间，这里要先否定它只是一门生意，点出酒吧的意义。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "空后是只是一门生意（just a business），接着转到温暖的空间（but a warm space），前否后肯。",
+        "quotes": [
+          "just a business",
+          "but a warm space"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "远非",
+        "meaning": "远不只是",
+        "reason": "后面转而说它是温暖的空间，这里要先否定它只是一门生意，点出酒吧的意义。词组看语境义：空后是只是一门生意（just a business），接着转到温暖的空间（but a warm space），前否后肯。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "more like",
+          "meaning": "更像；放进去成了更像一门生意，与后面的温暖空间（but a warm space）方向相反。",
+          "quote": "but a warm space"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "along with",
+          "meaning": "连同；连同一门生意（just a business）一起，就没有了先否定生意、再说温暖空间的对照。",
+          "quote": "just a business"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "other than",
+          "meaning": "除了；放进去成了除了只是一门生意，缺少对生意的否定，接不上后面的温暖空间（but a warm space）。",
+          "quote": "but a warm space"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "just a business, but a warm space",
+          "signalSide": "context-after",
+          "targetText": "far from just a business, but a warm space",
+          "relation": "前面否定只是生意，后面 but 肯定是温暖空间。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "far",
+          "signalSide": "option",
+          "targetText": "far from",
+          "relation": "远远，说明相差很远。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-zj-ningbo-2026-mar:55": {
+      "blankId": "blank:paper-mock-zj-ningbo-2026-mar:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "温暖的空间要模糊的是隔开人群的界线，呼应店名打破隔阂的寓意。",
+      "find": {
+        "check": "echo",
+        "text": "模糊（blurring）的是人与人之间（between people）的东西，呼应前文打破隔阂（breaking barriers），指隔开人的界线。",
+        "quotes": [
+          "between people",
+          "breaking barriers"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "界限",
+        "reason": "温暖的空间要模糊的是隔开人群的界线，呼应店名打破隔阂的寓意。名词看复现：模糊（blurring）的是人与人之间（between people）的东西，呼应前文打破隔阂（breaking barriers），指隔开人的界线。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "similarities",
+          "meaning": "相似之处；模糊相似之处，与打破隔阂（breaking barriers）的方向相反。",
+          "quote": "breaking barriers"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "friendships",
+          "meaning": "友谊；酒吧要让包容成为日常（making inclusion a daily reality），模糊友谊会让人更疏远。",
+          "quote": "making inclusion a daily reality"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "connections",
+          "meaning": "联系；模糊人与人的联系，与让包容成为日常（making inclusion a daily reality）相反。",
+          "quote": "making inclusion a daily reality"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "between people",
+          "signalSide": "context-after",
+          "targetText": "boundaries between people",
+          "relation": "人与人之间的界限，是常见搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "breaking barriers",
+          "signalSide": "context-before",
+          "relation": "打破隔阂与模糊界限意思相近。"
+        }
+      ]
+    }
+  }
+}

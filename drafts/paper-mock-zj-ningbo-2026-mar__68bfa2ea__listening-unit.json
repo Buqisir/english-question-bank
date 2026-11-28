@@ -1,0 +1,1011 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-zj-ningbo-2026-mar",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: We should bring in some new people.\nW: Well, I think we need to replace some old computers around here first.\nM: That’s true. Hopefully, we can afford to hire someone after buying the new equipment.",
+      "translationZh": "男：我们应该招些新人进来。\n女：嗯，我觉得我们得先把这里的一些旧电脑换掉。\n男：没错。希望买完新设备之后，我们还雇得起人。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "两位同事商量工作安排：是先招新人，还是先换掉办公室的旧电脑。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我们应该招些新人进来。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "嗯，我觉得我们得先把这里的一些旧电脑换掉。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "希望买完新设备之后，我们还雇得起人。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: Grace, has that shipment of lab equipment arrived? It was supposed to arrive this afternoon.\nW: The supplier called this morning and said there was a delay. Didn’t you get my email about it?\nM: I must have missed it.",
+      "translationZh": "男：格蕾丝，那批实验器材到了吗？本来应该今天下午到的。\n女：供货商今天早上打电话来，说货物延误了。你没收到我关于这件事的邮件吗？\n男：我一定是漏看了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "男士问格蕾丝实验器材到了没有，格蕾丝说起供货商早上来电的事。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "格蕾丝，那批实验器材到了吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "本来应该今天下午到的。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "供货商今天早上打电话来，说货物延误了。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "你没收到我关于这件事的邮件吗？"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我一定是漏看了。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: I thought the film was really exciting as it has lots of action.\nW: Well, I almost fell asleep when I watched it. I’d prefer some romance, not just car chases and fights.",
+      "translationZh": "男：我觉得这部电影真的很刺激，因为里面有很多动作场面。\n女：嗯，我看的时候差点睡着了。我更想看点浪漫的情节，而不只是飞车追逐和打斗。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "一男一女看过同一部电影后，各自谈对这部影片的感受。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "我觉得这部电影真的很刺激，因为里面有很多动作场面。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "嗯，我看的时候差点睡着了。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我更想看点浪漫的情节，而不只是飞车追逐和打斗。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: What makes you different from other people?\nM: Mmm ... some people say I’m good at drawing, but I hardly ever practice. What about you?\nW: I’m quite an inventor. I have ideas for new things and then try to make them work.",
+      "translationZh": "女：你和别人有什么不一样的地方？\n男：嗯……有人说我很会画画，不过我几乎从不练习。你呢？\n女：我很有发明家的劲头。我会想出新东西的点子，然后设法把它们做出来。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "认识自我"
+      },
+      "summaryZh": "两人互相询问自己与别人有什么不同，各自说起擅长的事。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你和别人有什么不一样的地方？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "嗯……"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "有人说我很会画画，不过我几乎从不练习。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我很有发明家的劲头。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "我会想出新东西的点子，然后设法把它们做出来。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: So how did you and Jennifer meet, Ben? I heard you met at a dancing club.\nM: Well, it’s not true. Actually, my cousin David introduced us when we met during the break at college.",
+      "translationZh": "女：本，你和詹妮弗是怎么认识的？我听说你们是在舞蹈俱乐部认识的。\n男：嗯，不是这样的。其实是我表哥戴维介绍我们认识的，那时我们在大学课间碰到了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女士问本是怎么认识詹妮弗的，本纠正传言，说出两人相识的经过。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "本，你和詹妮弗是怎么认识的？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "我听说你们是在舞蹈俱乐部认识的。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "嗯，不是这样的。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "其实是我表哥戴维介绍我们认识的，那时我们在大学课间碰到了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Did you enjoy your evening at that Italian restaurant?\nM: Yeah, it was good. I must say though, they could do with giving people a bit more space. We could hear every word the couple next to us were saying!\nW: Hmm ... Hardly ideal when you’re out for a meal. So how was the food?\nM: Not bad at all. And there’s something for everyone, whether you’re a fish person, a meat lover, or a vegetarian. They have lovely staff too, really enthusiastic.\nW: Maybe I’ll give it a try next weekend. It’s my sister’s birthday then.",
+      "translationZh": "女：你在那家意大利餐厅的晚上过得开心吗？\n男：嗯，挺好的。不过我得说，他们该给客人留出多一点空间。旁边那对情侣说的每个字我们都听得见！\n女：嗯……出去吃饭碰上这种事可不太理想。那菜怎么样？\n男：一点都不差。而且人人都能找到合口味的，不管你爱吃鱼、爱吃肉，还是吃素。他们的员工也很好，热情得很。\n女：也许我下周末去试试。那天是我姐姐的生日。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士向女士讲述在一家意大利餐厅吃晚饭的体验，女士也打算去试试。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你在那家意大利餐厅的晚上过得开心吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "嗯，挺好的。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "不过我得说，他们该给客人留出多一点空间。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "旁边那对情侣说的每个字我们都听得见！"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "嗯……"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "出去吃饭碰上这种事可不太理想。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那菜怎么样？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "一点都不差。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "而且人人都能找到合口味的，不管你爱吃鱼、爱吃肉，还是吃素。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "他们的员工也很好，热情得很。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "也许我下周末去试试。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "那天是我姐姐的生日。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: Professor Tomlinson, may I ask you a few questions about the reflective journal?\nM: Yes, of course. What are you having trouble with?\nW: Well, everything really. To start with, what should be included first in the journal? Perhaps suggestions from others?\nM: No, no. You should include the study goals you set yourself at the beginning of your journal. This section should have been discussed in some detail towards the beginning of the course by Professor May. You should be able to find her suggestions on the slides she has provided to the class online.\nW: Okay, thank you, Professor.",
+      "translationZh": "女：汤姆林森教授，我可以问您几个关于反思日志的问题吗？\n男：当然可以。你在哪方面遇到困难了？\n女：嗯，其实哪方面都有。首先，日志里最先应该写什么？也许是别人的建议？\n男：不，不是。你应该在日志开头写上你给自己定的学习目标。梅教授在课程开始的时候应该已经比较详细地讲过这一部分。你应该能在她在线发给全班的幻灯片上找到她的建议。\n女：好的，谢谢您，教授。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "善于学习"
+      },
+      "summaryZh": "一名学生向汤姆林森教授请教反思日志该怎么写，教授逐一回答。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "汤姆林森教授，我可以问您几个关于反思日志的问题吗？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "当然可以。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "你在哪方面遇到困难了？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "嗯，其实哪方面都有。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "首先，日志里最先应该写什么？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "也许是别人的建议？"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "不，不是。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "你应该在日志开头写上你给自己定的学习目标。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "梅教授在课程开始的时候应该已经比较详细地讲过这一部分。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "你应该能在她在线发给全班的幻灯片上找到她的建议。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "好的，谢谢您，教授。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "M: Hello there. I was asked to tell you about the extent of the damage to the main building, caused by the recent storm.\nW: Oh, that’s right. I take it that most of the damage is just to the main building.\nM: It is indeed. However, luckily, the damage is minor, and all of it can be fixed in one day.\nW: What will you be doing first? I understand you start at 8 in the morning.\nM: That’s right. We were going to remove the fallen trees, but we’ve been told there are exams in the morning, and I’m sure the sound will disturb all the students, so instead we’ll fix that leaky roof first. That’s a four-hour job since it involves considerable repair, not like fixing broken windows, which can be done quite quickly.\nW: So you'll fix the broken windows after that, from midday?\nM: That’s right.",
+      "translationZh": "男：你好。我受托来向你说明最近这场暴风雨对主楼造成的损坏程度。\n女：哦，对。我想大部分损坏都只在主楼吧。\n男：确实如此。不过幸运的是，损坏不严重，一天之内就能全部修好。\n女：你们先做什么？我知道你们早上 8 点开工。\n男：没错。我们本来打算先清理倒下的树，但有人告诉我们上午有考试，我肯定那声音会打扰所有学生，所以我们改成先修那个漏雨的屋顶。那要干四个小时，因为要做不少修补，不像修破窗户，那个很快就能弄好。\n女：那你们修完屋顶以后，从中午开始修破窗户？\n男：对。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "自然灾害与防范"
+      },
+      "summaryZh": "一名男士向女士汇报暴风雨对主楼造成的损坏，并说明维修的先后安排。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "你好。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我受托来向你说明最近这场暴风雨对主楼造成的损坏程度。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "哦，对。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我想大部分损坏都只在主楼吧。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "确实如此。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "不过幸运的是，损坏不严重，一天之内就能全部修好。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "你们先做什么？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "我知道你们早上 8 点开工。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我们本来打算先清理倒下的树，但有人告诉我们上午有考试，我肯定那声音会打扰所有学生，所以我们改成先修那个漏雨的屋顶。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "那要干四个小时，因为要做不少修补，不像修破窗户，那个很快就能弄好。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "那你们修完屋顶以后，从中午开始修破窗户？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "对。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: Good morning, Madam. My name is Bob Smith. I’m doing a survey of people’s shopping preferences. Could you spare a few minutes?\nW: Sure, but who are you doing this for? I don’t want to go out giving information that will help those big companies sell more junk food to children.\nM: Don’t worry. It’s the opposite. I work for the Green Market Research company. We help eco-friendly companies tell consumers why they should buy their products.\nW: So, what kind of questions are you asking?\nM: Well, do you like to buy organic food and look for products with simple packaging?\nW: I do try to buy organic whenever I can, and I definitely avoid products with over-packaging even if they’re bright and luxurious. It’s just so wasteful.\nM: Great! Do you think the price difference affects your decision? Sometimes eco-friendly products can be more expensive.\nW: Yes, it does. But I’m willing to support sustainable practices. I think it’s necessary in the long run.\nM: That’s a fantastic point. We’ve found that many consumers share your views.",
+      "translationZh": "男：早上好，女士。我叫鲍勃·史密斯。我在做一项关于人们购物偏好的调查。您能抽出几分钟吗？\n女：可以，不过你是替谁做调查的？我可不想随便提供信息，帮那些大公司向孩子们卖更多垃圾食品。\n男：别担心。恰恰相反。我在绿色市场调研公司工作。我们帮助环保企业告诉消费者为什么应该买他们的产品。\n女：那你要问些什么问题呢？\n男：嗯，您喜欢买有机食品、挑包装简单的产品吗？\n女：只要有可能，我都尽量买有机的；包装过度的产品，哪怕外观鲜亮、看着高档，我也坚决不买。那实在太浪费了。\n男：太好了！您觉得价格差别会影响您的决定吗？环保产品有时会贵一些。\n女：会影响。但我愿意支持可持续的做法。我觉得从长远看这是必要的。\n男：说得太好了。我们发现很多消费者和您看法一致。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人与环境"
+      },
+      "summaryZh": "调查员鲍勃在街头请一位女士做购物偏好调查，两人一问一答。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "早上好，女士。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我叫鲍勃·史密斯。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我在做一项关于人们购物偏好的调查。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "您能抽出几分钟吗？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "可以，不过你是替谁做调查的？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我可不想随便提供信息，帮那些大公司向孩子们卖更多垃圾食品。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "恰恰相反。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我在绿色市场调研公司工作。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我们帮助环保企业告诉消费者为什么应该买他们的产品。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "那你要问些什么问题呢？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "嗯，您喜欢买有机食品、挑包装简单的产品吗？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "只要有可能，我都尽量买有机的；包装过度的产品，哪怕外观鲜亮、看着高档，我也坚决不买。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "那实在太浪费了。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "太好了！"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "您觉得价格差别会影响您的决定吗？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "环保产品有时会贵一些。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "会影响。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "但我愿意支持可持续的做法。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "我觉得从长远看这是必要的。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "说得太好了。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "我们发现很多消费者和您看法一致。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: Thank you for inviting me. I remember I wanted to become a painter in college, so I worked hard to get my degree in Fine Arts. However, when I left college, I started drawing pictures for books. I was no longer producing images from the heart but developing images for money. Then I began to develop a collection of my drawings and started to carry them around with me to show potential clients and employers. Having a wonderful collection of original artwork is the first step, but most potential clients would like to see printed artwork as evidence of quality, and without this “evidence”, they will be hesitant about offering a contract. Well, here are my suggestions for you to prepare your collections of your best artwork. The first way is by submitting your artwork for a competition. Competitions offer you an opportunity to show your artwork. The other approach is to place some of your drawings next to some text to demonstrate how your artwork would look when it is printed. Nevertheless, when you’re going for an interview, it’s important to separate your artwork into different types. That’s all from me. Thank you for listening.",
+      "translationZh": "男：谢谢邀请我来。我记得上大学时我想当一名画家，所以努力拿到了美术学位。然而大学毕业后，我开始给书画插图。我不再是用心去创作画面，而是为了钱去制作画面。后来我开始整理自己的画作集，并随身带着，给潜在的客户和雇主看。拥有一套出色的原创作品集是第一步，但大多数潜在客户希望看到印刷出来的作品，作为质量的证明；没有这份“证明”，他们就会迟迟不愿签合同。好，下面是我给大家的建议，帮助你们把最好的作品整理成作品集。第一种方法是拿作品去参加比赛。比赛给你提供展示作品的机会。另一种方法是把一些画放在文字旁边，展示你的作品印出来会是什么样子。不过，去面试的时候，把作品分门别类很重要。我就讲到这里。谢谢大家的聆听。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "绘画领域的代表性作品和人物"
+      },
+      "summaryZh": "一位插画师应邀给听众讲自己的从业经历，并介绍怎样准备个人作品集。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "谢谢邀请我来。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我记得上大学时我想当一名画家，所以努力拿到了美术学位。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "然而大学毕业后，我开始给书画插图。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我不再是用心去创作画面，而是为了钱去制作画面。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "后来我开始整理自己的画作集，并随身带着，给潜在的客户和雇主看。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "拥有一套出色的原创作品集是第一步，但大多数潜在客户希望看到印刷出来的作品，作为质量的证明；没有这份“证明”，他们就会迟迟不愿签合同。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "好，下面是我给大家的建议，帮助你们把最好的作品整理成作品集。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "第一种方法是拿作品去参加比赛。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "比赛给你提供展示作品的机会。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "另一种方法是把一些画放在文字旁边，展示你的作品印出来会是什么样子。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "不过，去面试的时候，把作品分门别类很重要。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "我就讲到这里。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "谢谢大家的聆听。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "说话人会先做什么？",
+      "optionTranslationsZh": {
+        "A": "招更多员工。",
+        "B": "购买一些电脑。",
+        "C": "升级电脑系统。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Well, I think we need to replace some old computers around here first."
+      },
+      "reasonZh": "女士说先把旧电脑换掉（replace some old computers … first），换掉旧的就是买新的，男士也说买完新设备再雇人，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音说的是把旧电脑换成新的（replace some old computers），不是给现有电脑升级系统。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "实验器材怎么了？",
+      "optionTranslationsZh": {
+        "A": "送货延误了。",
+        "B": "因运输被取消了。",
+        "C": "被供货商更换了。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The supplier called this morning and said there was a delay."
+      },
+      "reasonZh": "器材本该今天下午到，供货商来电说有延误（there was a delay），也就是送货晚了，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "供货商（supplier）只是打电话通知延误的人，录音没说他换了货。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士觉得这部电影怎么样？",
+      "optionTranslationsZh": {
+        "A": "浪漫。",
+        "B": "刺激。",
+        "C": "无聊。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Well, I almost fell asleep when I watched it."
+      },
+      "reasonZh": "女士说看的时候差点睡着（almost fell asleep），可见她觉得片子沉闷无聊，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "觉得刺激（really exciting）的是男士，女士接着就说自己差点睡着。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "女士说更想看浪漫情节（I’d prefer some romance），是在抱怨片子里缺少这些，不是说它浪漫。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "他们的日常活动。",
+        "B": "他们的个人特点。",
+        "C": "他们的职业规划。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "What makes you different from other people?"
+      },
+      "reasonZh": "女士问对方和别人有什么不同，男士说别人夸他会画画（good at drawing），女士说自己像个发明家（quite an inventor），两人谈的都是自身特点，选 B。"
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "戴维和詹妮弗可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "表亲。",
+        "B": "俱乐部成员。",
+        "C": "同学。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Actually, my cousin David introduced us when we met during the break at college."
+      },
+      "reasonZh": "本说戴维介绍他和詹妮弗认识，当时是在大学课间（during the break at college），戴维能在学校引见詹妮弗，两人很可能是同学，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "表哥（my cousin）是戴维和本的关系，不是戴维和詹妮弗的关系。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "舞蹈俱乐部（a dancing club）是女士听来的说法，本马上否认（it’s not true）。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士不喜欢这家餐厅的哪一点？",
+      "optionTranslationsZh": {
+        "A": "空间。",
+        "B": "员工。",
+        "C": "菜品。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I must say though, they could do with giving people a bit more space."
+      },
+      "reasonZh": "男士说餐厅该给客人多留点空间（a bit more space），连邻桌说话都听得见，他不满的是空间太挤，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "男士说员工很好、很热情（lovely staff … really enthusiastic），这是夸奖。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士下周末可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "做几道鱼菜。",
+        "B": "庆祝她的生日。",
+        "C": "去这家餐厅。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Maybe I’ll give it a try next weekend."
+      },
+      "reasonZh": "听完男士介绍，女士说下周末去试试（give it a try），it 指的就是这家餐厅，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "下周末是她姐姐的生日（my sister’s birthday），不是她自己的。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "鱼（a fish person）是男士说餐厅菜单照顾爱吃鱼的人，不是女士要下厨。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "反思日志的第一部分应该写什么？",
+      "optionTranslationsZh": {
+        "A": "个人学习目标。",
+        "B": "别人的建议。",
+        "C": "教授布置的问题。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You should include the study goals you set yourself at the beginning of your journal."
+      },
+      "reasonZh": "教授说日志开头要写你给自己定的学习目标（the study goals you set yourself），就是个人学习目标，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "别人的建议（suggestions from others）是女士的猜测，教授当即否定（No, no）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士只是向教授提问（ask you a few questions），录音没说教授布置过问题。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "制作一些幻灯片。",
+        "B": "上网。",
+        "C": "见梅教授。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "You should be able to find her suggestions on the slides she has provided to the class online."
+      },
+      "reasonZh": "教授说梅教授的建议在她发到网上的幻灯片里（on the slides … online），女士道谢后要去查，就得上网，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "幻灯片（slides）是梅教授已经发给全班的，女士要做的是去看，不是自己做。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "教授只说这部分梅教授讲过（by Professor May），建议去网上找，没让女士去见她。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士可能是什么身份？",
+      "optionTranslationsZh": {
+        "A": "维修工人。",
+        "B": "施工经理。",
+        "C": "学校工作人员。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I was asked to tell you about the extent of the damage to the main building, caused by the recent storm."
+      },
+      "reasonZh": "男士受托向女士汇报主楼受损情况，又说上午有考试、会吵到学生（exams … students），女士是听汇报、管这所学校的人，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "修理（considerable repair）是男士一方要做的活，女士只是听他汇报安排。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "是什么改变了男士原来的计划？",
+      "optionTranslationsZh": {
+        "A": "考试的安排。",
+        "B": "暴风雨的强度。",
+        "C": "损坏的程度。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We were going to remove the fallen trees, but we’ve been told there are exams in the morning, and I’m sure the sound will disturb all the students, so instead we’ll fix that leaky roof first."
+      },
+      "reasonZh": "男士原想先清理倒树，因为得知上午有考试（there are exams in the morning），怕噪声打扰学生才改了顺序，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "暴风雨（the recent storm）是造成损坏的原因，不是改计划的原因。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "损坏程度（the extent of the damage）是男士来汇报的内容，而且损坏不大，与改顺序无关。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "最先处理的是什么？",
+      "optionTranslationsZh": {
+        "A": "倒下的树。",
+        "B": "损坏的屋顶。",
+        "C": "破了的窗户。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We were going to remove the fallen trees, but we’ve been told there are exams in the morning, and I’m sure the sound will disturb all the students, so instead we’ll fix that leaky roof first."
+      },
+      "reasonZh": "“损坏的屋顶”就是男士说的漏雨屋顶（fix that leaky roof first），改了计划后先修它，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "先清理倒树（were going to remove the fallen trees）是原计划，因为考试已经改掉了。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "破窗户（broken windows）要等屋顶修完、从中午才开始修。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "调查开始之前女士做了什么？",
+      "optionTranslationsZh": {
+        "A": "她询问男士的雇主。",
+        "B": "她评论了一些公司。",
+        "C": "她分享了自己的购物偏好。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Sure, but who are you doing this for?"
+      },
+      "reasonZh": "女士先问男士是替谁做调查（who are you doing this for），就是问他的雇主，男士随后说自己在绿色市场调研公司工作，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "大公司（those big companies）是女士解释自己为什么要问时顺带提到的，她这时做的是提问。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "购物偏好（shopping preferences）是调查本身的内容，女士谈自己的选择是在调查开始以后。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士做调查的目的是什么？",
+      "optionTranslationsZh": {
+        "A": "为了卖儿童食品。",
+        "B": "为了推广环保购物。",
+        "C": "为了降低某些产品的成本。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We help eco-friendly companies tell consumers why they should buy their products."
+      },
+      "reasonZh": "男士说他们帮环保企业告诉消费者为什么该买其产品（tell consumers why they should buy），这就是推广环保购物，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "卖垃圾食品给孩子（sell more junk food to children）是女士的担心，男士回答恰恰相反（It’s the opposite）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音只提到环保产品有时更贵（more expensive），问的是价格是否影响决定，没说要降低成本。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士支持哪种产品包装？",
+      "optionTranslationsZh": {
+        "A": "豪华的。",
+        "B": "鲜亮的。",
+        "C": "简单的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I do try to buy organic whenever I can, and I definitely avoid products with over-packaging even if they’re bright and luxurious."
+      },
+      "reasonZh": "男士问她是否挑包装简单的产品（simple packaging），她说坚决不买过度包装的（avoid products with over-packaging），可见支持简单包装，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说过度包装哪怕看着高档（even if they’re … luxurious）也不买，luxurious 是她拒绝的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "鲜亮（bright）同样在 even if 后面，是她不买的过度包装的样子。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士对购买环保产品有什么看法？",
+      "optionTranslationsZh": {
+        "A": "很麻烦。",
+        "B": "很必要。",
+        "C": "很普遍。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I think it’s necessary in the long run."
+      },
+      "reasonZh": "女士说愿意支持可持续做法，并认为从长远看这是必要的（necessary），选项沿用原词，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士承认价格会影响决定（Yes, it does），但接着说愿意支持（But I’m willing），没说麻烦。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "很多消费者看法相同（many consumers share your views）是男士说的调查发现，不是女士的看法。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人可能在哪里？",
+      "optionTranslationsZh": {
+        "A": "在一个美术讲习会上。",
+        "B": "在一家书店里。",
+        "C": "在一间音乐教室里。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, here are my suggestions for you to prepare your collections of your best artwork."
+      },
+      "reasonZh": "男士应邀来讲（Thank you for inviting me），讲自己画画的经历，再教听众整理作品集（prepare your collections … artwork），这是美术讲习会的场合，选 A。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人大学毕业后做了什么？",
+      "optionTranslationsZh": {
+        "A": "他出版了一本书。",
+        "B": "他当了收藏家。",
+        "C": "他给书画插图。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "However, when I left college, I started drawing pictures for books."
+      },
+      "reasonZh": "大学毕业（when I left college）就是题干的 graduating，之后他开始给书画插图（drawing pictures for books），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "书（books）是他给别人的书画插图，录音没说他自己出了书。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "努力（worked hard）是说他在大学努力拿学位；他整理的是自己的画作集（a collection of my drawings），不是当收藏家。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "潜在客户希望艺术家有什么？",
+      "optionTranslationsZh": {
+        "A": "印刷出来的作品。",
+        "B": "参赛经历。",
+        "C": "现代艺术作品集。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Having a wonderful collection of original artwork is the first step, but most potential clients would like to see printed artwork as evidence of quality, and without this “evidence”, they will be hesitant about offering a contract."
+      },
+      "reasonZh": "男士说多数潜在客户想看印刷出来的作品（printed artwork）作为质量证明，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "参加比赛（a competition）是男士后来给听众整理作品集的建议，不是客户的要求。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "原创作品集（a wonderful collection of original artwork）只是第一步，but 后面才是客户想要的。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "听众可以怎样准备最好的作品集？",
+      "optionTranslationsZh": {
+        "A": "参加美术讲习会。",
+        "B": "把作品和文字一起展示。",
+        "C": "把作品放到网站上。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The other approach is to place some of your drawings next to some text to demonstrate how your artwork would look when it is printed."
+      },
+      "reasonZh": "“把作品和文字一起展示”就是男士说的把画放在文字旁边（next to some text），展示印出来的样子，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "录音里的放（place）是把画放在文字旁边，没有说放到网站上。"
+        }
+      ]
+    }
+  }
+}

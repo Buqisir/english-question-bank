@@ -1,0 +1,196 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Considering the mailbox too old, Tom decided to build a new one. “Don’t worry, Grandma. Leave it to me,” he said, helping her to her feet. First, he picked up the newspapers from the ground and put them into her bamboo basket. Then he drew a design. The new mailbox would have three small doors, one for each family, and it would stand a little lower so that Grandma would not have to reach up with her bent back. After that, he bought boards, nails, a new hinge and blue paint from a hardware store. By evening, all the wood had been cut and the tools lay ready at the corner.\n\nParagraph 2: When all the preparations were done, the dog owner arrived. He was carrying a toolbox, his face red with embarrassment. He said sorry again and again. When he saw Tom’s design, he smiled and offered to help. Together they nailed the boards, fixed the new hinge and painted the box the same blue as the old one. Soon the new mailbox stood firmly at the corner. Grandma ran her hand over its smooth surface, her worried look turning into a bright smile. Then the man picked up the bamboo basket and said, “Let me take the newspapers to your neighbors today.” Grandma nodded, and they set off for Mr. Smith’s and Ms. Brown’s doors together.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "要动笔的是学建筑的大学生 Tom、二十年来天天替邻居取报纸的 Grandma，以及撞坏邮箱后留了道歉条的遛狗人。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时，镜头跟着 Tom 走，写他看到什么、想到什么。句子不长，常用分词短语开头（Seeing…、Watching…）。人物的话很少，只有纸条和 Grandma 的一句自语，其余都是叙述。续写也以叙述为主，只在关键处留一两句短的直接引语。",
+          "evidence": [
+            "Watching Grandma’s helpless expression, he felt a strong desire in his heart.",
+            "murmured in a low voice, “What shall I do now?”"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在 Tom 心里涌起一股强烈的冲动，还没有行动。留下两件事：邮箱坏了，两位邻居的报纸怎么按时送到；狗主人说会来修，他会不会来、来了怎么办。",
+          "evidence": [
+            "Without the mailbox, how could they get the news on time?"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Tom",
+          "role": "学建筑的大学生，常来看望 Grandma",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "他清楚两位老邻居离不开报纸，想让他们照常看到报纸，也不让 Grandma 发愁。",
+              "evidence": "Tom knew the elderly neighbors were heavily dependent on the newspapers."
+            },
+            {
+              "label": "此刻",
+              "text": "看着 Grandma 无助的样子，他心里有股想做点什么的冲动，这正是第一段首句里“决定新做一个”的来由。",
+              "evidence": "he felt a strong desire in his heart"
+            }
+          ]
+        },
+        {
+          "name": "Grandma",
+          "role": "每天早上替 Mr. Smith 和 Ms. Brown 取报纸的老人",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "她弯着背、提着竹篮，多年如一日替邻居取报纸，这份善意靠的就是这只邮箱。",
+              "evidence": "Grandma’s small act of kindness had quietly lasted for years"
+            },
+            {
+              "label": "此刻",
+              "text": "邮箱摔碎了，她叹气、发愁，不知道怎么办。",
+              "evidence": "her eyes filled with worry"
+            }
+          ]
+        },
+        {
+          "name": "遛狗的男人（狗主人）",
+          "role": "他的大狗撞倒了邮箱",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "他没有一走了之，而是留了纸条道歉，答应过后来修。",
+              "evidence": "I’ll come to fix it later."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "walk slowly to the corner with her slightly bent back",
+          "use": "第 1 段 Tom 设计新邮箱时，把它做得低一点，让 Grandma 不用弯着背去够，设计就有了理由。"
+        },
+        {
+          "sourceQuote": "with a chipped blue coat",
+          "use": "第 2 段刷漆时用回旧邮箱的蓝色，新邮箱换了模样，却还是 Grandma 熟悉的那一只。"
+        },
+        {
+          "sourceQuote": "I’ll come to fix it later.",
+          "use": "第 2 段狗主人带着工具赶来，兑现纸条上的话，再从“来修”变成和 Tom 一起做新邮箱。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "Tom 觉得旧邮箱修不好，画图、买料准备新做一个；狗主人守约赶来，和他一起做好新邮箱，并帮 Grandma 把当天的报纸送到两位邻居家。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "写 Tom 为什么不修而要新做，并把准备工作做完。第二段首句说准备都做完时狗主人才到，所以第 1 段停在“准备好了”，新邮箱还不能做成。",
+          "draft": "Tom 安慰 Grandma，先把地上的报纸收进她的竹篮；接着画了一张三个小门、高度放低的设计图，去五金店买来木板、钉子、新合页和蓝漆，傍晚前把木料锯好、工具摆在路口。",
+          "bridgeQuote": "When all the preparations were done, the dog owner arrived.",
+          "bridge": "狗主人是按纸条上说的来修旧邮箱的，看到 Tom 已经准备新做一个，他会怎么做？"
+        },
+        {
+          "paragraph": 2,
+          "must": "狗主人到场后要有交代：他和 Tom、Grandma 怎么相处，邮箱的问题怎样解决；结尾还要收住原文担心的“邻居的报纸能不能按时送到”。",
+          "draft": "狗主人带着工具箱、红着脸道歉，看了设计图后主动帮忙；两人钉好木板、装上合页、刷成旧邮箱的蓝色，新邮箱立在路口，Grandma 露出笑容；最后狗主人提起竹篮，和 Grandma、Tom 一起把报纸送到 Mr. Smith 和 Ms. Brown 家。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Considering the mailbox too old, Tom decided to build a new one. “Don’t worry, Grandma. Leave it to me,” he said, helping her to her feet. First, he picked up the newspapers from the ground and put them into her bamboo basket. Then he drew a design. The new mailbox would have three small doors, one for each family, and it would stand a little lower so that Grandma would not have to reach up with her bent back. After that, he bought boards, nails, a new hinge and blue paint from a hardware store. By evening, all the wood had been cut and the tools lay ready at the corner.\n\nParagraph 2: When all the preparations were done, the dog owner arrived. He was carrying a toolbox, his face red with embarrassment. He said sorry again and again. When he saw Tom’s design, he smiled and offered to help. Together they nailed the boards, fixed the new hinge and painted the box the same blue as the old one. Soon the new mailbox stood firmly at the corner. Grandma ran her hand over its smooth surface, her worried look turning into a bright smile. Then the man picked up the bamboo basket and said, “Let me take the newspapers to your neighbors today.” Grandma nodded, and they set off for Mr. Smith’s and Ms. Brown’s doors together.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "从 Tom 的决定写到准备工作全部完成",
+          "items": [
+            {
+              "quote": "First, he picked up the newspapers from the ground and put them into her bamboo basket.",
+              "explain": "先处理最急的事：报纸不能丢在地上。用回原文的竹篮，也给第 2 段送报纸留下伏笔。"
+            },
+            {
+              "quote": "so that Grandma would not have to reach up with her bent back",
+              "explain": "设计不是空说“很漂亮”，而是针对原文里 Grandma 弯着的背，so that 说明目的，把学建筑的 Tom 和关心奶奶连在一起。"
+            },
+            {
+              "quote": "By evening, all the wood had been cut and the tools lay ready at the corner.",
+              "explain": "用过去完成时交代准备已经做完，正好停在第二段首句 \"When all the preparations were done\" 要求的状态。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "狗主人守约到来，新邮箱做成，报纸的问题得到解决",
+          "items": [
+            {
+              "quote": "He was carrying a toolbox, his face red with embarrassment.",
+              "explain": "工具箱说明他是来兑现纸条上 \"I’ll come to fix it later.\" 的；red with embarrassment 把愧疚写在脸上，不用直接说“他很抱歉”。"
+            },
+            {
+              "quote": "painted the box the same blue as the old one",
+              "explain": "回收原文 \"a chipped blue coat\"，新邮箱保留了旧的颜色，二十年的情分没有因为换新而断掉。"
+            },
+            {
+              "quote": "her worried look turning into a bright smile",
+              "explain": "和原文 \"her eyes filled with worry\" 前后呼应，用一个看得见的表情变化写出情绪的转变。"
+            },
+            {
+              "quote": "Then the man picked up the bamboo basket and said, “Let me take the newspapers to your neighbors today.”",
+              "explain": "结尾落在送报纸这个动作上，收住原文 \"how could they get the news on time\" 的担心；由狗主人来提竹篮，也写出他真心弥补。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "his face red with embarrassment",
+          "function": "名词加形容词短语作伴随状语，用脸色写出狗主人的愧疚。"
+        },
+        {
+          "expression": "so that Grandma would not have to reach up with her bent back",
+          "function": "交代设计的目的，把 Tom 的专业和对 Grandma 的体贴连在一起。"
+        },
+        {
+          "expression": "her worried look turning into a bright smile",
+          "function": "用表情的变化写情绪转折，比直接说 she was happy 更具体。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段就把新邮箱做好、立起来",
+          "why": "第二段首句是 \"When all the preparations were done\"，第 2 段开头还停在准备刚做完的时刻，第 1 段写完成就和它冲突。"
+        },
+        {
+          "pitfall": "把狗主人写成赖账的人，或让 Tom 和他大吵一架",
+          "why": "原文纸条写着 \"I’ll come to fix it later.\"，第二段首句又说他来了，看不出他想赖账；写成吵架也和全文邻里互助的温暖调子不合。"
+        },
+        {
+          "pitfall": "只写做邮箱，忘了邻居的报纸",
+          "why": "原文明确担心 \"how could they get the news on time\"，结尾不回到报纸，原文留下的问题就没有收住。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Considering the mailbox too old, Tom decided to build a new one. The hinge had rusted through and the split wood was too dry to hold a nail, so mending it would only buy a few weeks. “Don’t worry, Grandma. Leave it to me,” he said, helping her to her feet. He gathered the newspapers scattered among the pieces and laid them neatly in her bamboo basket. Then he sketched a design the way his teachers had taught him. The new box would have three little doors, one for each family, and it would sit a few inches lower, so that Grandma could reach in without straining her bent back. Within an hour he was back from the hardware store with boards, nails, a shiny hinge and a can of sky-blue paint just like the old coat. By sunset the boards were measured and cut, and the tools lay in a neat row at the corner.\n\nParagraph 2: When all the preparations were done, the dog owner arrived. He was holding a toolbox in one hand and a lead in the other, his face red with embarrassment. He apologized again and again. When Tom showed him the design, the man’s eyes lit up, and he rolled up his sleeves without a word. Together they nailed the boards, fitted the new hinge and brushed on the blue paint, while Grandma held the nails for them. Before long, a bright little mailbox stood firmly at the corner. Grandma stroked its smooth new wood, and the worry in her eyes melted into a smile. Then the man picked up the bamboo basket. “Allow me to take these up to your neighbors today,” he said. Grandma nodded, and the three of them walked off toward Mr. Smith’s and Ms. Brown’s doors, the dog trotting beside them.",
+      "beyondStandard": [
+        {
+          "quote": "The hinge had rusted through and the split wood was too dry to hold a nail, so mending it would only buy a few weeks.",
+          "explain": "标准版没说旧邮箱为什么修不好，这句用原文的生锈合页和裂开的木头说明理由，回应段首句里的 \"too old\"，也像学建筑的人会做的判断。"
+        },
+        {
+          "quote": "he sketched a design the way his teachers had taught him",
+          "explain": "用 sketched 代替 drew，并点出这是课上学到的本事，Tom 的专业身份在动作里体现出来。"
+        },
+        {
+          "quote": "while Grandma held the nails for them",
+          "explain": "标准版里 Grandma 只在最后笑，这里让她也动手帮忙，三个人一起做成邮箱，更贴近原文邻里互助的口吻。"
+        }
+      ]
+    }
+  }
+}
