@@ -1,0 +1,778 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b": {
+      "overview": "艺术家 Puett 用金属、蜂蜡和活蜂群创作“蜂雕”四十年，借艺术提醒人们关注受威胁的蜜蜂。他出身四代养蜂世家，经营蜂场时遭遇蜜蜂大量死亡，公众对蜜蜂的态度也随之好转。",
+      "fullTranslationZh": "要看加内特·普埃特在哈默博物馆的最新雕塑，你得走进一间由一道道厚重帘子遮挡的暗室。室内，发光的红色灯光照亮了一个玻璃笼子。笼子里有三个人像，一大群昆虫在人像身上爬动。蜜蜂在人像的脸上缓缓移动。有些地方蜂群密得像长在雕像上的皮毛——会动的皮毛。\n“哇。”“我从没见过。”观众走进这间寂静的屋子时这样说。\n四十年来，普埃特一直在用金属、蜂蜡和活蜂群创作他的“蜂雕”。这是有目的的艺术：普埃特想让观众记住蜜蜂的力量和创造力，而蜜蜂的生存正在全世界受到威胁。“这算是一种潜意识里的广告，”普埃特说，“蜜蜂是好的。”\n20世纪80年代，普埃特的蜜蜂雕塑刚在艺术界走红时，人们只当他是个玩蜜蜂的人。实际上，他用蜜蜂创作源于深厚的家族传统。他是家族第四代养蜂人，家里从18世纪起就和蜜蜂打交道。他的曾祖父培育蜂王，又把这门生意传给了儿子和孙子。普埃特十几岁时就在这些蜂场干活，从最简单的活儿做起。蜂场的经历让他用蜂群创作的艺术十分精准。\n此后四十年里，这位生态艺术家多少退出了艺术圈。他搬到夏威夷，和家人一起经营一座有机蜂蜜农场，至今已有三十年。这份工作很有挑战，也很耗体力。这份工作让他站到了应对蜜蜂种群威胁的第一线。外来物种害死了他家农场上的大量蜜蜂，过去15年里，存活的蜂巢从4000个减少到约2000个。\n“以前要是蜂巢打扰到别人，人们会气冲冲地打电话给我，说些我没法复述的话，”普埃特笑着说，“但自从我们在两年内失去了一半蜜蜂，人们更加意识到蜜蜂的重要性，也变得更加体谅、更懂得欣赏了。这是所有这些困难里唯一的好处。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+          "sourceText": "He grew up as a fourth-generation beekeeper, whose family had worked with bees since the 1700s.",
+          "displayText": "He grew up as a fourth-generation beekeeper, whose family had worked with bees since the 1700s.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:26"
+          ],
+          "translationZh": "他是家族第四代养蜂人，家里从18世纪起就和蜜蜂打交道。",
+          "analysisZh": "主干是 He grew up as a fourth-generation beekeeper（他作为第四代养蜂人长大）。逗号后 whose 引导非限制性定语从句，修饰 beekeeper，whose family 就是“他的家族”；从句用过去完成时 had worked … since the 1700s，说明从18世纪起家里就一直和蜜蜂打交道。这句给前一句的“家族传统”填上了具体内容。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 43,
+              "quote": "He grew up as a fourth-generation beekeeper"
+            },
+            {
+              "start": 45,
+              "end": 57,
+              "quote": "whose family"
+            },
+            {
+              "start": 79,
+              "end": 94,
+              "quote": "since the 1700s"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+          "sourceText": "But since we lost half the bee population within two years, people are more aware of their importance and are far more understanding and appreciative.",
+          "displayText": "But since we lost half the bee population within two years, people are more aware of their importance and are far more understanding and appreciative.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:27"
+          ],
+          "translationZh": "但自从我们在两年内失去了一半蜜蜂，人们更加意识到蜜蜂的重要性，也变得更加体谅、更懂得欣赏了。",
+          "analysisZh": "先找主干：people are more aware of their importance and are far more understanding and appreciative，两个 are 由 and 并列，说人们的两点变化；their 指蜜蜂，far 修饰比较级，表示“远比以前”。句首 since 引导状语从句，交代这一变化从蜜蜂大量死亡开始，也含有“正因为”的意思。But 和前一句人们以前气冲冲打电话形成对比。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 41,
+              "quote": "since we lost half the bee population"
+            },
+            {
+              "start": 60,
+              "end": 101,
+              "quote": "people are more aware of their importance"
+            },
+            {
+              "start": 110,
+              "end": 149,
+              "quote": "far more understanding and appreciative"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:1"
+              ],
+              "start": 0,
+              "end": 121,
+              "quote": "要看加内特·普埃特在哈默博物馆的最新雕塑，你得走进一间由一道道厚重帘子遮挡的暗室。室内，发光的红色灯光照亮了一个玻璃笼子。笼子里有三个人像，一大群昆虫在人像身上爬动。蜜蜂在人像的脸上缓缓移动。有些地方蜂群密得像长在雕像上的皮毛——会动的皮毛。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2"
+              ],
+              "start": 122,
+              "end": 150,
+              "quote": "“哇。”“我从没见过。”观众走进这间寂静的屋子时这样说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3"
+              ],
+              "start": 151,
+              "end": 253,
+              "quote": "四十年来，普埃特一直在用金属、蜂蜡和活蜂群创作他的“蜂雕”。这是有目的的艺术：普埃特想让观众记住蜜蜂的力量和创造力，而蜜蜂的生存正在全世界受到威胁。“这算是一种潜意识里的广告，”普埃特说，“蜜蜂是好的。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4"
+              ],
+              "start": 254,
+              "end": 411,
+              "quote": "20世纪80年代，普埃特的蜜蜂雕塑刚在艺术界走红时，人们只当他是个玩蜜蜂的人。实际上，他用蜜蜂创作源于深厚的家族传统。他是家族第四代养蜂人，家里从18世纪起就和蜜蜂打交道。他的曾祖父培育蜂王，又把这门生意传给了儿子和孙子。普埃特十几岁时就在这些蜂场干活，从最简单的活儿做起。蜂场的经历让他用蜂群创作的艺术十分精准。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:5"
+              ],
+              "start": 412,
+              "end": 549,
+              "quote": "此后四十年里，这位生态艺术家多少退出了艺术圈。他搬到夏威夷，和家人一起经营一座有机蜂蜜农场，至今已有三十年。这份工作很有挑战，也很耗体力。这份工作让他站到了应对蜜蜂种群威胁的第一线。外来物种害死了他家农场上的大量蜜蜂，过去15年里，存活的蜂巢从4000个减少到约2000个。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6"
+              ],
+              "start": 550,
+              "end": 657,
+              "quote": "“以前要是蜂巢打扰到别人，人们会气冲冲地打电话给我，说些我没法复述的话，”普埃特笑着说，“但自从我们在两年内失去了一半蜜蜂，人们更加意识到蜜蜂的重要性，也变得更加体谅、更懂得欣赏了。这是所有这些困难里唯一的好处。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-q24-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2",
+                "start": 0,
+                "end": 26,
+                "quote": "“Woah.” “I’ve never seen.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p2",
+                "start": 0,
+                "end": 12,
+                "quote": "“哇。”“我从没见过。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-q25-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+                "start": 141,
+                "end": 206,
+                "quote": "Puett wants to remind viewers of the power and creativity of bees"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+                "start": 310,
+                "end": 326,
+                "quote": "“Bees are good.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p3",
+                "start": 39,
+                "end": 57,
+                "quote": "普埃特想让观众记住蜜蜂的力量和创造力"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p3",
+                "start": 94,
+                "end": 102,
+                "quote": "“蜜蜂是好的。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-q26-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+                "start": 125,
+                "end": 185,
+                "quote": "Actually, his use of bees came from a deep family tradition."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+                "start": 451,
+                "end": 539,
+                "quote": "His bee farm experience has resulted in precision in the art he makes with bee colonies."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p4",
+                "start": 39,
+                "end": 59,
+                "quote": "实际上，他用蜜蜂创作源于深厚的家族传统。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p4",
+                "start": 137,
+                "end": 157,
+                "quote": "蜂场的经历让他用蜂群创作的艺术十分精准。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-q27-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+                "start": 190,
+                "end": 279,
+                "quote": "people are more aware of their importance and are far more understanding and appreciative"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p6",
+                "start": 62,
+                "end": 90,
+                "quote": "人们更加意识到蜜蜂的重要性，也变得更加体谅、更懂得欣赏了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+                "start": 186,
+                "end": 281,
+                "quote": "He grew up as a fourth-generation beekeeper, whose family had worked with bees since the 1700s."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p4",
+                "start": 59,
+                "end": 86,
+                "quote": "他是家族第四代养蜂人，家里从18世纪起就和蜜蜂打交道。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:27"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+                "start": 130,
+                "end": 280,
+                "quote": "But since we lost half the bee population within two years, people are more aware of their importance and are far more understanding and appreciative."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b-p6",
+                "start": 45,
+                "end": 91,
+                "quote": "但自从我们在两年内失去了一半蜜蜂，人们更加意识到蜜蜂的重要性，也变得更加体谅、更懂得欣赏了。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先描写 Puett 蜂雕的震撼场面和观众的惊叹，再说明他用活蜂创作是为了让人们关注受威胁的蜜蜂，接着交代他四代养蜂的家族背景，最后讲他经营蜂场时遭遇蜜蜂大量死亡，以及公众态度因此好转。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:1",
+            "summary": "暗室里的玻璃笼中，三个人像爬满活蜂，像长了会动的皮毛。",
+            "function": "描写场景，引出蜂雕作品"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2",
+            "summary": "观众走进展厅时连声惊叹。",
+            "function": "展示观众的反应"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+            "summary": "Puett 用金属、蜂蜡和活蜂创作四十年，想借此提醒人们重视处境危险的蜜蜂。",
+            "function": "说明创作目的"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+            "summary": "他用蜜蜂创作源于四代养蜂的家族传统，蜂场经历让他的作品十分精准。",
+            "function": "交代创作背景"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:5",
+            "summary": "他退居夏威夷经营蜂蜜农场，外来物种让他家的蜂巢在15年里减少约一半。",
+            "function": "讲述蜜蜂面临的威胁"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+            "summary": "Puett 说蜜蜂大量死亡后，人们更认识到蜜蜂的重要，也更体谅了。",
+            "function": "用本人的话收尾，点出困境中的好处"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:24": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从观众进门时说的话，推断他们对这件蜂雕的看法。",
+      "stemTranslationZh": "观众觉得普埃特的蜜蜂雕塑怎么样？",
+      "locateBy": "stem",
+      "locateFindZh": "往前看他们说的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它很残忍。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is cruel.",
+            "explanation": "原文写蜜蜂爬满人像、像会动的皮毛，观众只是连声惊叹，没人说这件作品残忍。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它很有创意。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2",
+              "quote": "“I’ve never seen.”",
+              "anchor": "我从没见过"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2",
+              "quote": "“Woah.”",
+              "anchor": "哇"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它有教育意义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Puett wants to remind viewers of the power and creativity of bees",
+            "sourceEntity": "Puett",
+            "optionText": "It is educational.",
+            "optionEntity": "It is educational",
+            "explanation": "让观众记住蜜蜂的力量（remind viewers of the power…）是 Puett 本人的创作用意；题目问观众怎么看，观众进门只是惊叹从没见过，没谈受到什么教育。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+              "quote": "Puett wants to remind viewers of the power and creativity of bees",
+              "anchor": "Puett 的创作用意"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它很吓人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is frightening.",
+            "explanation": "暗室、红光和爬满人像的蜜蜂会让人以为观众害怕，但他们说的是从没见过（I’ve never seen），是惊奇，不是恐惧。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "visitors",
+          "sourceRole": "stem",
+          "targetText": "Visitors say as they enter the silent room.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "I’ve never seen.",
+          "bridgeZh": "say 说的就是引号里这两句惊叹",
+          "note": "题干 visitors 原词出现在原文。"
+        },
+        {
+          "sourceText": "It is creative.",
+          "sourceRole": "correctOption",
+          "targetText": "“I’ve never seen.”",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“有创意”（creative）是从观众的反应推出来的：一进门就惊叹（Woah），还说从没见过（I’ve never seen），可见他们觉得这件作品新奇独特，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Puett 创作“蜂雕”的目的。",
+      "stemTranslationZh": "普埃特为什么创作他的“蜂雕”？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看冒号后的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过艺术为蜜蜂发声。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+              "quote": "It’s art with a purpose: Puett wants to remind viewers of the power and creativity of bees, whose survival is under threat around the world.",
+              "anchor": "提醒观众蜜蜂的力量"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+              "quote": "“It’s sort of subconscious advertising,” Puett said.",
+              "anchor": "一种潜意识里的广告"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+              "quote": "“Bees are good.”",
+              "anchor": "蜜蜂是好的"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "把他的蜂产品商业化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“It’s sort of subconscious advertising,” Puett said.",
+            "sourceEntity": "advertising",
+            "optionText": "To commercialize his bee products.",
+            "optionEntity": "his bee products",
+            "explanation": "Puett 说的广告（advertising）宣传的是“蜜蜂是好的”（Bees are good），不是推销自家蜂产品；他经营蜂蜜农场是[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:5]]讲的另一件事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+              "quote": "“It’s sort of subconscious advertising,” Puett said.",
+              "anchor": "潜意识里的广告"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为受威胁的蜜蜂提供庇护所。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "threat",
+            "optionText": "threatened",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了原文的 threat。原文说蜜蜂的生存在全世界受到威胁（under threat），这是他想唤起关注的原因；玻璃笼里的蜂雕是展品，不是给蜜蜂建的庇护所。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+              "quote": "whose survival is under threat around the world",
+              "anchor": "蜜蜂生存受威胁"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "展示一种新的雕塑方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To illustrate a new method of sculpture.",
+            "explanation": "原文介绍了他用金属、蜂蜡和活蜂群创作，但讲的用意是让人们记住蜜蜂，没说要展示一种新的雕塑方法。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "apisculptures",
+          "sourceRole": "stem",
+          "targetText": "Puett has been making his “apisculptures”, using metal, beeswax（蜂蜡）and colonies of live bees, for four decades now.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "Puett wants to remind viewers of the power and creativity of bees",
+          "bridgeZh": "It 指他的蜂雕，冒号后交代创作用意",
+          "note": "题干 apisculptures 原词出现在原文。"
+        },
+        {
+          "sourceText": "To advocate for bees through art.",
+          "sourceRole": "correctOption",
+          "targetText": "Puett wants to remind viewers of the power and creativity of bees",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“借艺术为蜜蜂发声”（advocate for bees through art）合起了两处：蜂雕要让观众记住蜜蜂的力量和创造力（remind viewers of the power…）；Puett 又自称这是一种广告（advertising），宣传的正是“蜜蜂是好的”，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:26": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括题干指定的那一段，看各句共同交代了什么。",
+      "stemTranslationZh": "第4段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4]] 的 Actually 读起，看他用蜜蜂创作的来历",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "蜜蜂艺术的背景。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+              "quote": "Actually, his use of bees came from a deep family tradition.",
+              "anchor": "源于家族传统"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+              "quote": "His bee farm experience has resulted in precision in the art he makes with bee colonies.",
+              "anchor": "蜂场经历成就作品"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "养蜂业的历史。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "whose family had worked with bees since the 1700s",
+            "sourceHighlight": "family",
+            "optionText": "The history of beekeeping.",
+            "optionHighlight": "The history of beekeeping",
+            "explanation": "段中“从18世纪起”（since the 1700s）只说他家从18世纪起就养蜂，用来交代他个人的家族背景，没有讲整个养蜂业的历史。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+              "quote": "whose family had worked with bees since the 1700s",
+              "anchor": "家里从18世纪起养蜂"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "面向孩子的蜜蜂主题活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Bee-themed activities for kids.",
+            "explanation": "段中只说他十几岁时在家族蜂场从最简单的活干起（as a teenager），这是他的成长经历，没提给孩子办的蜜蜂主题活动。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "四世同堂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "fourth-generation",
+            "optionText": "Four generations",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了 fourth-generation。原文指他是家里第四代养蜂人，讲的是这门生意代代相传（passing the business down），不是四代人住在一起。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+              "quote": "He grew up as a fourth-generation beekeeper",
+              "anchor": "第四代养蜂人"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A background in bee art.",
+          "sourceRole": "correctOption",
+          "targetText": "Actually, his use of bees came from a deep family tradition.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "这一段先说人们以为他只是在玩蜜蜂，接着用“实际上”（Actually）交代真正的来历：四代养蜂的家族传统，少年时在蜂场干活，最后说这段经历让他的蜂群艺术十分精准。各句讲的都是他做蜂艺术的背景，选项的“蜂艺术的背景”（A background in bee art）把它们都包进去，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出蜜蜂大量死亡带来了什么影响。",
+      "stemTranslationZh": "蜜蜂数量锐减带来了什么影响？",
+      "locateBy": "stem",
+      "locateFindZh": "since 引出原因，结果看主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "普埃特缩小了养蜂规模。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Foreign species have killed numerous bees on his family’s farm",
+            "sourceEntity": "Foreign species",
+            "optionText": "Puett downsized his beekeeping.",
+            "optionEntity": "Puett",
+            "explanation": "蜂巢从4000个减到约2000个，是外来物种害死蜜蜂造成的（Foreign species have killed），这是损失本身，不是 Puett 主动缩小养蜂规模。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:5",
+              "quote": "Foreign species have killed numerous bees on his family’s farm",
+              "anchor": "外来物种害死蜜蜂"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人们变得能容忍普埃特了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "people are more aware of their importance",
+            "sourceEntity": "their importance",
+            "optionText": "People became tolerant of Puett.",
+            "optionEntity": "Puett",
+            "explanation": "原文说人们更明白的是蜜蜂的重要（their importance，their 指蜜蜂），变化落在对蜜蜂的认识上；没说人们由此容忍了 Puett 本人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+              "quote": "people are more aware of their importance and are far more understanding and appreciative",
+              "anchor": "人们更认识到蜜蜂的重要"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "普埃特把重心转向了雕塑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "In the four decades since, the eco-artist withdrew somewhat from the art world.",
+            "sourceHighlight": "withdrew somewhat from the art world",
+            "optionText": "Puett shifted his focus to his sculptures.",
+            "optionHighlight": "shifted his focus to his sculptures",
+            "explanation": "原文说这些年他反而多少退出了艺术圈（withdrew somewhat from the art world），去夏威夷经营蜂蜜农场，也没说蜂群损失让他转回雕塑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:5",
+              "quote": "In the four decades since, the eco-artist withdrew somewhat from the art world.",
+              "anchor": "退出艺术圈"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "公众对蜜蜂的看法有所改善。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+              "quote": "But since we lost half the bee population within two years, people are more aware of their importance and are far more understanding and appreciative.",
+              "anchor": "人们更重视、更体谅"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "bee population loss",
+          "sourceRole": "stem",
+          "targetText": "But since we lost half the bee population within two years, people are more aware of their importance and are far more understanding and appreciative.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+          "relationType": "locationCue",
+          "targetCue": "lost half the bee population",
+          "sourceZh": "蜜蜂数量减少",
+          "targetCueZh": "失去一半蜜蜂",
+          "answerText": "people are more aware of their importance and are far more understanding and appreciative",
+          "note": "题干 bee population loss 对应原文 lost half the bee population。"
+        },
+        {
+          "sourceText": "Public perception of bees has been improved.",
+          "sourceRole": "correctOption",
+          "targetText": "people are more aware of their importance and are far more understanding and appreciative",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "选项的“公众对蜜蜂的看法改善了”（perception … improved）概括了原文两点变化：人们更意识到蜜蜂的重要（more aware of their importance，their 指蜜蜂），也更加体谅、欣赏（understanding and appreciative），选 D。"
+        }
+      ]
+    }
+  }
+}

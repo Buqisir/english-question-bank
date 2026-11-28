@@ -1,0 +1,1106 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill": {
+      "overview": "短文介绍中国山水画：它描绘理想化的山水，被视为书法的延伸，以墨为主装裱在丝绸上；唐代后期成为独立画种，表达人与自然合一的愿望，至今仍是中国艺术的重要灵感来源。",
+      "fullTranslationZh": "中国山水画\n几千年来，山水画一直是中国艺术的重要组成部分。中国画家通常画的不是真实的地方，而是想象中的、理想化的山水。在中国，山与宗教联系在一起，因为山高高耸向天际。因此人们相信，观赏山的画作对心灵有益。\n山水画被看作书法的延伸。它色彩克制，通常以墨在纸上作画，只施少量水彩。这些画以手卷、册页、扇面等不同形式装裱在丝绸上。\n到唐代后期，山水画已经发展成一个独立的画种。这种艺术形式被推向了极致，画家们借此表达与自然融为一体的愿望。关于中国哪一幅山水画最早让这种艺术形式诞生，长期以来一直存在争论，但许多艺术评论家确实认为《洛神赋图》是这类画作中的第一幅。这幅画一直象征着人们心中与自然合一的隐秘渴望。\n直到今天，自然的意象一直是艺术家的灵感来源。中国的艺术表达深深烙上了自然世界的印记。这些画也真实描绘了画家内心的感受、思想以及挣扎。观赏中国山水画时，我们永远不应停止欣赏和理解中国山水艺术非凡的美。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+          "sourceText": "There have been long-held arguments over __61__ landscape painting in China was the first one to bring this art form to life, but many art critics do believe The Nymph of the Luo River to be the first of its kind.",
+          "displayText": "There have been long-held arguments over which landscape painting in China was the first one to bring this art form to life, but many art critics do believe The Nymph of the Luo River to be the first of its kind.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:61"
+          ],
+          "translationZh": "关于中国哪一幅山水画最早让这种艺术形式诞生，长期以来一直存在争论，但许多艺术评论家确实认为《洛神赋图》是这类画作中的第一幅。",
+          "analysisZh": "这是 but 连接的两个分句。前一分句主干是 There have been long-held arguments（长期存在争论），over 引出争论的内容，介词后是 which 引导的宾语从句，从句里不定式 to bring this art form to life 修饰 the first one。后一分句主干是 many art critics do believe A to be B（认为 A 是 B），do 加强语气，The Nymph of the Luo River 是画名。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "There have been long-held arguments"
+            },
+            {
+              "start": 36,
+              "end": 92,
+              "quote": "over which landscape painting in China was the first one"
+            },
+            {
+              "start": 146,
+              "end": 211,
+              "quote": "do believe The Nymph of the Luo River to be the first of its kind"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+          "sourceText": "The genre of such an art form was taken to extreme __60__ (height), with painters expressing their desire to be at one with nature.",
+          "displayText": "The genre of such an art form was taken to extreme heights, with painters expressing their desire to be at one with nature.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:60"
+          ],
+          "translationZh": "这种艺术形式被推向了极致，画家们借此表达与自然融为一体的愿望。",
+          "analysisZh": "主干是 The genre was taken to extreme heights（这一画种被推向极致），of such an art form 修饰 genre。逗号后的 with painters expressing … 是 with 复合结构，painters 与 expressing 是主动关系，补充说明画家们在表达愿望；不定式 to be at one with nature 说明愿望的内容。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 58,
+              "quote": "The genre of such an art form was taken to extreme heights"
+            },
+            {
+              "start": 60,
+              "end": 97,
+              "quote": "with painters expressing their desire"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 5,
+              "quote": "中国山水画"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2"
+              ],
+              "start": 6,
+              "end": 102,
+              "quote": "几千年来，山水画一直是中国艺术的重要组成部分。中国画家通常画的不是真实的地方，而是想象中的、理想化的山水。在中国，山与宗教联系在一起，因为山高高耸向天际。因此人们相信，观赏山的画作对心灵有益。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3"
+              ],
+              "start": 103,
+              "end": 162,
+              "quote": "山水画被看作书法的延伸。它色彩克制，通常以墨在纸上作画，只施少量水彩。这些画以手卷、册页、扇面等不同形式装裱在丝绸上。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4"
+              ],
+              "start": 163,
+              "end": 301,
+              "quote": "到唐代后期，山水画已经发展成一个独立的画种。这种艺术形式被推向了极致，画家们借此表达与自然融为一体的愿望。关于中国哪一幅山水画最早让这种艺术形式诞生，长期以来一直存在争论，但许多艺术评论家确实认为《洛神赋图》是这类画作中的第一幅。这幅画一直象征着人们心中与自然合一的隐秘渴望。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5"
+              ],
+              "start": 302,
+              "end": 401,
+              "quote": "直到今天，自然的意象一直是艺术家的灵感来源。中国的艺术表达深深烙上了自然世界的印记。这些画也真实描绘了画家内心的感受、思想以及挣扎。观赏中国山水画时，我们永远不应停止欣赏和理解中国山水艺术非凡的美。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+            "text": "For thousands of years, landscape paintings, or Shan Shui Hua, have been a major part of Chinese art. Chinese artists don’t usually paint real places but imaginary, idealized landscapes. In China, mountains are associated with religion because they reach up towards the heavens. People therefore believe that looking at paintings of mountains is good for the soul."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+            "text": "Landscape paintings are seen as an extension of calligraphy. The colors are restrained and the paintings are usually created in ink on paper, with a small amount of watercolor. They are mounted（装裱）on silk in different formats such as handscrolls, album leaves and fan paintings."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+            "text": "By the late Tang Dynasty, landscape painting had evolved into an independent genre. The genre of such an art form was taken to extreme heights, with painters expressing their desire to be at one with nature. There have been long-held arguments over which landscape painting in China was the first one to bring this art form to life, but many art critics do believe The Nymph of the Luo River to be the first of its kind. The painting has stood as symbols of man’s hidden desire to be united with nature."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+            "text": "Images of nature have remained a source of inspiration for artists down to the present day. Chinese artistic expression is deeply imprinted with images of the natural world. The paintings are also a true portrayal of their artists’ inner feelings and thoughts as well as struggles. Viewing Chinese landscape paintings, we should never stop appreciating and understanding the extraordinary beauty of Chinese landscape art."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 118,
+                "end": 149,
+                "quote": "don’t usually paint real places"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 157,
+                "end": 188,
+                "quote": "imaginary, idealized landscapes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 29,
+                "end": 38,
+                "quote": "画的不是真实的地方"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 41,
+                "end": 52,
+                "quote": "想象中的、理想化的山水"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:56"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 150,
+                "end": 153,
+                "quote": "but"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 39,
+                "end": 41,
+                "quote": "而是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 190,
+                "end": 209,
+                "quote": "In China, mountains"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 229,
+                "end": 242,
+                "quote": "with religion"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 251,
+                "end": 284,
+                "quote": "they reach up towards the heavens"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 57,
+                "end": 61,
+                "quote": "山与宗教"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 69,
+                "end": 76,
+                "quote": "山高高耸向天际"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:57"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 207,
+                "end": 221,
+                "quote": "are associated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:2",
+                "start": 61,
+                "end": 66,
+                "quote": "联系在一起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 20,
+                "end": 34,
+                "quote": "are seen as an"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 51,
+                "end": 65,
+                "quote": "of calligraphy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 3,
+                "end": 6,
+                "quote": "被看作"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 6,
+                "end": 9,
+                "quote": "书法的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:58"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 35,
+                "end": 44,
+                "quote": "extension"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 9,
+                "end": 11,
+                "quote": "延伸"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 218,
+                "end": 287,
+                "quote": "different formats such as handscrolls, album leaves and fan paintings"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 39,
+                "end": 52,
+                "quote": "手卷、册页、扇面等不同形式"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:59"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 205,
+                "end": 207,
+                "quote": "in"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:3",
+                "start": 38,
+                "end": 52,
+                "quote": "以手卷、册页、扇面等不同形式"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 114,
+                "end": 134,
+                "quote": "was taken to extreme"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 28,
+                "end": 32,
+                "quote": "被推向了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:60"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 135,
+                "end": 142,
+                "quote": "heights"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 32,
+                "end": 34,
+                "quote": "极致"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 242,
+                "end": 256,
+                "quote": "arguments over"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 264,
+                "end": 309,
+                "quote": "landscape painting in China was the first one"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 79,
+                "end": 85,
+                "quote": "一直存在争论"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 104,
+                "end": 114,
+                "quote": "是这类画作中的第一幅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:61"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 249,
+                "end": 254,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 57,
+                "end": 60,
+                "quote": "哪一幅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 487,
+                "end": 518,
+                "quote": "desire to be united with nature"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 127,
+                "end": 133,
+                "quote": "与自然合一的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:62"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 464,
+                "end": 470,
+                "quote": "hidden"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 133,
+                "end": 135,
+                "quote": "隐秘"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 0,
+                "end": 16,
+                "quote": "Images of nature"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 69,
+                "end": 92,
+                "quote": "down to the present day"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 5,
+                "end": 10,
+                "quote": "自然的意象"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 0,
+                "end": 4,
+                "quote": "直到今天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:63"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 17,
+                "end": 30,
+                "quote": "have remained"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 10,
+                "end": 13,
+                "quote": "一直是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 115,
+                "end": 145,
+                "quote": "expression is deeply imprinted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 27,
+                "end": 34,
+                "quote": "表达深深烙上了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:64"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 100,
+                "end": 108,
+                "quote": "artistic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 25,
+                "end": 27,
+                "quote": "艺术"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 331,
+                "end": 351,
+                "quote": "we should never stop"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 75,
+                "end": 83,
+                "quote": "我们永远不应停止"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:65"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 282,
+                "end": 289,
+                "quote": "Viewing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:5",
+                "start": 66,
+                "end": 68,
+                "quote": "观赏"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:61"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 208,
+                "end": 248,
+                "quote": "There have been long-held arguments over"
+              },
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 337,
+                "end": 364,
+                "quote": "many art critics do believe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 75,
+                "end": 85,
+                "quote": "长期以来一直存在争论"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 87,
+                "end": 98,
+                "quote": "许多艺术评论家确实认为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:60"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 84,
+                "end": 134,
+                "quote": "The genre of such an art form was taken to extreme"
+              },
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 144,
+                "end": 181,
+                "quote": "with painters expressing their desire"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 22,
+                "end": 34,
+                "quote": "这种艺术形式被推向了极致"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:grammar-fill:4",
+                "start": 35,
+                "end": 52,
+                "quote": "画家们借此表达与自然融为一体的愿望"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:56": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "but",
+      "role": null,
+      "similarityProfile": {
+        "route": "not-but",
+        "features": []
+      },
+      "reason": "空格连接两个并列的宾语：「真实的地方」（real places）和「想象中的、理想化的山水」（imaginary, idealized landscapes）。前面谓语是否定（don’t usually paint），两者构成「不是……而是……」（not … but …），填（but）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "real places",
+          "signalSide": "passage",
+          "relation": "画的不是真实的地方，与后面的理想化山水并列对照。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "don’t usually paint",
+          "signalSide": "passage",
+          "relation": "前面的否定与空格一起构成「不是……而是……」。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:57": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "associate",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are associated",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作主语「山」（mountains）的谓语。山是被人与宗教联系起来的，用被动（be associated with）；这里讲中国一贯的看法，原因从句也用一般现在时（reach），主语是复数，填（are associated）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "mountains",
+          "signalSide": "passage",
+          "relation": "复数主语，谓语用（are）。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "with religion",
+          "signalSide": "passage",
+          "relation": "与宗教联系在一起，用（be associated with）。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "they reach up towards the heavens",
+          "signalSide": "passage",
+          "relation": "原因从句用一般现在时，说明这是普遍看法。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:58": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "extend",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "extension",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作不定冠词（an）后的中心名词，和（of calligraphy）一起说明山水画被看作什么。要把动词（extend）变成名词（extension），单数与（an）一致。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "an",
+          "signalSide": "passage",
+          "relation": "不定冠词后接单数名词。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "of calligraphy",
+          "signalSide": "passage",
+          "relation": "名词后接（of）短语，说明是书法的延伸。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:59": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "in",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把「不同的形式」（different formats）接到「装裱在丝绸上」（mounted on silk）后面，说明以什么形式装裱。表示「以某种形式」用介词（in），即（in … formats）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "different formats",
+          "signalSide": "passage",
+          "relation": "形式（formats）前用（in），表示以某种形式。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "mounted",
+          "signalSide": "passage",
+          "relation": "装裱以什么形式进行，由介词短语补充。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:60": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "height",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "heights",
+      "role": null,
+      "similarityProfile": {
+        "route": "countable-sense-shift",
+        "features": []
+      },
+      "reason": "空格作介词（to）的宾语，受形容词（extreme）修饰。（height）表示「顶峰、极点」时是可数名词，这里前面没有冠词，要用复数，（take … to extreme heights）就是推向极致，填（heights）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "was taken to extreme",
+          "signalSide": "passage",
+          "relation": "推向极致，说成（to extreme heights）。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "extreme",
+          "signalSide": "passage",
+          "relation": "形容词前没有冠词，可数名词要用复数。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:61": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "object-clause"
+        ]
+      },
+      "reason": "空格引导介词（over）后的宾语从句，同时修饰从句主语「山水画」（landscape painting），意思是「哪一幅山水画是第一幅」。既要连接从句又要限定名词，表示「哪一个」，填（which）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "arguments over",
+          "signalSide": "passage",
+          "relation": "介词（over）后接宾语从句，说明争论的内容。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "landscape painting in China was the first one",
+          "signalSide": "passage",
+          "relation": "从句主谓齐全，空格只需修饰（painting），问的是哪一幅。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:62": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "hide",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "hidden",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格修饰名词「渴望」（desire），作定语。渴望是被藏在心里的，与动词（hide）是被动关系，要用过去分词（hidden），放在名词前。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "desire",
+          "signalSide": "passage",
+          "relation": "过去分词修饰（desire），说明这种渴望是隐藏的。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "man’s",
+          "signalSide": "passage",
+          "relation": "名词所有格后、名词前，只能放修饰语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:63": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "remain",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "have remained",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "空格作主语「自然的意象」（Images of nature）的谓语。后面「直到今天」（down to the present day）说明从过去一直延续到现在，用现在完成时；主语是复数（Images），填（have remained）。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "down to the present day",
+          "signalSide": "passage",
+          "relation": "直到今天，表示从过去延续到现在，用现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Images of nature",
+          "signalSide": "passage",
+          "relation": "主语中心词（Images）是复数，助动词用（have）。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:64": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "art",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "artistic",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格修饰名词「表达」（expression），需要形容词。名词（art）的形容词形式是（artistic），意思是「中国的艺术表达」。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "expression",
+          "signalSide": "passage",
+          "relation": "形容词修饰名词（expression）。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:65": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "view",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Viewing",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "空格所在短语作主句的状语，逻辑主语是主句主语「我们」（we）。是我们主动观看山水画，用现在分词（Viewing），在句首首字母大写。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "we should never stop",
+          "signalSide": "passage",
+          "relation": "主句主语（we）是观看这一动作的执行者，用主动的（-ing）形式。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "Chinese landscape paintings",
+          "signalSide": "passage",
+          "relation": "分词带宾语，说明是主动观看。"
+        }
+      ]
+    }
+  }
+}

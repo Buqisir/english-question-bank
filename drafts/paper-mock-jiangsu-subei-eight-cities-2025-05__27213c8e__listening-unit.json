@@ -1,0 +1,1019 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "I arranged for Wi-Fi to be installed at my home on Thursday. Yes, that’s correct. Everything is booked in, so don’t worry. Sorry, but a problem came up and I won’t be home. I definitely need it set up soon, though. How can you help me?",
+      "translationZh": "我约了周四到我家安装无线网络。是的，没错。一切都已经登记好了，请放心。抱歉，我临时有事，那天不在家。不过我确实需要尽快装好。你们能怎么帮我？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士预约了周四在家安装无线网络，临时有事，打电话和工作人员沟通安装安排。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我约了周四到我家安装无线网络。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "是的，没错。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "一切都已经登记好了，请放心。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "抱歉，我临时有事，那天不在家。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "不过我确实需要尽快装好。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "你们能怎么帮我？"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "I love a relaxing weekend. Any ideas? I found a cat cafe downtown where you can have a cup of coffee and read books while playing with cats. Oh, wow, that sounds perfect. I’ll definitely check it out.",
+      "translationZh": "我喜欢过个轻松的周末。有什么好主意吗？我在市中心发现了一家猫咖，你可以一边喝咖啡、看书，一边和猫玩。哇，听起来太棒了。我一定去看看。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士想过个轻松的周末，向女士讨主意，女士介绍了市中心的一家店。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "我喜欢过个轻松的周末。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "有什么好主意吗？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我在市中心发现了一家猫咖，你可以一边喝咖啡、看书，一边和猫玩。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "哇，听起来太棒了。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我一定去看看。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "I saw this heckin' Joker movie last night. I had no idea it was a musical. The first one wasn’t. Yes. I liked the characters and story, but it was a bit long, and I didn’t think it needed music. I agree.",
+      "translationZh": "我昨晚看了这部《小丑》电影。我完全没想到它是一部音乐片。第一部可不是。是啊。我喜欢里面的人物和故事，但是有点长，而且我觉得它不需要配那么多音乐。我同意。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "男士昨晚看了第二部《小丑》电影，和女士交流观影感受。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "我昨晚看了这部《小丑》电影。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我完全没想到它是一部音乐片。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "第一部可不是。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我喜欢里面的人物和故事，但是有点长，而且我觉得它不需要配那么多音乐。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "我同意。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "I heard music coming from your street last night. It was the festival. We lit lanterns, ate sweet rice balls, and watched the dragon dance. No wonder you were tired this morning.",
+      "translationZh": "我昨晚听到你们那条街上传来音乐声。那是过节。我们点了灯笼，吃了甜汤圆，还看了舞龙。难怪你今天早上那么累。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "传统节日"
+      },
+      "summaryZh": "男士昨晚听到女士那条街上传来音乐，女士讲起昨晚街上的活动。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "我昨晚听到你们那条街上传来音乐声。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "那是过节。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我们点了灯笼，吃了甜汤圆，还看了舞龙。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "难怪你今天早上那么累。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "My alarm clock never wakes me up. Looks like I need to change its battery. Is it set correctly? Oops, I set it to p.m. instead of a.m.",
+      "translationZh": "我的闹钟从来叫不醒我。看来我得换电池了。闹钟设置对了吗？哎呀，我把时间设成了下午，而不是上午。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士的闹钟总叫不醒他，他和女士一起查找闹钟出了什么问题。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "我的闹钟从来叫不醒我。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "看来我得换电池了。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "闹钟设置对了吗？"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "哎呀，我把时间设成了下午，而不是上午。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "Have you considered using ChatGPT for your degree thesis? I’ve heard it is not against the rules as long as you cite it. Yes, I’ve considered it. It seems helpful since it can cut down on the hours spent searching for accurate sources. I’m cautious about fully trusting information generated by artificial intelligence without double-checking it, though. I do see your point. ChatGPT might increase your efficiency, but you should definitely cross-check its results with other sources. Exactly. We need to balance speed with reliability. Plus, we need to make sure our thesis has a human touch.",
+      "translationZh": "你考虑过用 ChatGPT 写学位论文吗？我听说只要注明引用，就不违反规定。是的，我考虑过。它似乎挺有用，因为它能减少查找准确资料所花的时间。不过，对于人工智能生成的信息，不经过核实就完全相信，我还是很谨慎。我明白你的意思。ChatGPT 也许能提高你的效率，但你一定要用其他资料来核对它给出的结果。没错。我们需要在速度和可靠性之间取得平衡。另外，我们还得确保论文有人的温度。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "科学与技术",
+        "subtopic": "信息技术创新"
+      },
+      "summaryZh": "两人讨论写学位论文时能否借助 ChatGPT，以及使用时要注意什么。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你考虑过用 ChatGPT 写学位论文吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "我听说只要注明引用，就不违反规定。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "是的，我考虑过。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "它似乎挺有用，因为它能减少查找准确资料所花的时间。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "不过，对于人工智能生成的信息，不经过核实就完全相信，我还是很谨慎。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我明白你的意思。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "ChatGPT 也许能提高你的效率，但你一定要用其他资料来核对它给出的结果。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我们需要在速度和可靠性之间取得平衡。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "另外，我们还得确保论文有人的温度。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "I still don’t know what to do. Renting with friends sounds fun, but moving in with my cousin feels more stable. Do you want more independence or comfort? That’s the problem. I want both, but in different ways. I understand. Being with friends could be more social and relaxed. What about costs? My cousin’s flat would be £750 a month, sharing a house with 3 friends would be £420 each. Don’t forget you’ll have bills too. Let’s guess that bills will be about £140 each in the house share. How much is that altogether? Gosh, I can’t work it out. I think the flat is cheaper, but the house is in a nicer area. You just need to figure out where you’d feel happiest and what you can afford. I know. I don’t want to regret it either way.",
+      "translationZh": "我还是不知道该怎么办。和朋友合租听起来很有意思，但搬去和我表亲住感觉更稳定。你想要更多的独立还是更多的舒适？这就是问题所在。我两样都想要，只是方式不同。我理解。和朋友住可能更热闹、更放松。费用怎么样？我表亲的公寓每月 750 英镑，和 3 个朋友合租一栋房子每人 420 英镑。别忘了还有各种账单。我们估计合租的话，每人账单大约 140 英镑。那加起来一共多少？天哪，我算不出来。我觉得公寓更便宜，但那栋房子所在的地段更好。你只需要弄清楚住在哪里你会最开心，以及你能负担得起什么。我知道。不管选哪个，我都不想后悔。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士考虑和朋友合租还是搬去表亲家住，男士和她一起比较两处住所的利弊和费用。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "我还是不知道该怎么办。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "和朋友合租听起来很有意思，但搬去和我表亲住感觉更稳定。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "你想要更多的独立还是更多的舒适？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "这就是问题所在。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "我两样都想要，只是方式不同。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "我理解。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "和朋友住可能更热闹、更放松。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "费用怎么样？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "我表亲的公寓每月 750 英镑，和 3 个朋友合租一栋房子每人 420 英镑。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "别忘了还有各种账单。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我们估计合租的话，每人账单大约 140 英镑。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "那加起来一共多少？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "天哪，我算不出来。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "我觉得公寓更便宜，但那栋房子所在的地段更好。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "你只需要弄清楚住在哪里你会最开心，以及你能负担得起什么。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "我知道。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "不管选哪个，我都不想后悔。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Excuse me, I think this might be yours. What is it? A bank card. I saw you get off the tube, and it was right under the seat you were sitting in. Oh, that’s definitely mine. I didn’t even realize it was missing. You were sitting by the window, right? I noticed the name as the train doors were closing, so I jumped off to catch you. I must have dropped it when I took my travel card out. You have to be more careful. Yeah. Honestly, thank you. I’ve been so busy this morning, rushing between meetings. I wouldn’t have noticed until lunchtime. No worries. I’ve lost things on a bus before. It was really a horrible feeling. You’ve saved me a lot of trouble. Let me treat you to a coffee. That’s kind, but I have to hurry for a connection. Just happy I caught you. Well, thank you. Really.",
+      "translationZh": "打扰一下，我想这可能是你的。是什么？一张银行卡。我看见你下了地铁，它就在你坐过的座位下面。哦，这确实是我的。我都没发现它丢了。你刚才坐在靠窗的位置，对吧？车门快关上的时候我看到了卡上的名字，就跳下车来追你。我一定是拿交通卡的时候把它弄掉了。你得更小心些。是啊。真的谢谢你。我今天上午太忙了，一直在几个会议之间赶来赶去。要到午饭时候我才会发现。不客气。我以前在公交车上丢过东西。那种感觉真的很糟糕。你帮我省了好多麻烦。我请你喝杯咖啡吧。你真好，不过我得赶去换乘。能追上你我就很高兴了。好吧，谢谢你。真的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "优秀品行"
+      },
+      "summaryZh": "男士捡到女士遗落的银行卡，追上她归还，两人简单交谈了几句。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "打扰一下，我想这可能是你的。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "是什么？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "一张银行卡。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我看见你下了地铁，它就在你坐过的座位下面。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "哦，这确实是我的。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我都没发现它丢了。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "你刚才坐在靠窗的位置，对吧？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "车门快关上的时候我看到了卡上的名字，就跳下车来追你。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "我一定是拿交通卡的时候把它弄掉了。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "你得更小心些。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "真的谢谢你。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我今天上午太忙了，一直在几个会议之间赶来赶去。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "要到午饭时候我才会发现。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "不客气。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "我以前在公交车上丢过东西。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "那种感觉真的很糟糕。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "你帮我省了好多麻烦。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "我请你喝杯咖啡吧。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "你真好，不过我得赶去换乘。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "能追上你我就很高兴了。"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "好吧，谢谢你。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "真的。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "Hi, Layla. Do you remember me? Hi, James. Of course I do. It’s great to see you. You haven’t changed much. It must be nearly 5 years since we last met. Yes. I left school in year 10, remember? Yes, you had to be in hospital for quite a while, didn’t you? Yes, I was in hospital in Grimsby for one year. My parents thought the medical care there was better. Since then I’ve been taking online classes. Is studying online better than being at school? In some ways, yes. I can work at my own pace, and it’s much quieter. My grades haven’t suffered. But I miss seeing people every day. That makes sense. I’m doing my A-levels now at the college in town. Oh, great. Do you still hang out with anyone from our old class? A few of them. You should come to our meetup next month. I’d love to. Message me the details. Will do. It’s really nice to see you again. You too.",
+      "translationZh": "嗨，莱拉。你还记得我吗？嗨，詹姆斯。当然记得。见到你真好。你没怎么变。我们上次见面差不多是 5 年前了吧。是啊。我十年级就离开学校了，记得吗？记得，你得住院很长一段时间，对吧？是的，我在格里姆斯比住了一年院。我父母觉得那里的医疗条件更好。从那以后我一直在上网课。网上学习比在学校好吗？在某些方面是的。我可以按自己的节奏学习，而且安静得多。我的成绩也没受影响。但我很想念每天和大家见面的日子。可以理解。我现在在城里的学院读 A-level 课程。哦，太好了。你还和我们原来班上的人一起玩吗？和其中几个还来往。你应该来参加我们下个月的聚会。我很乐意去。把详细信息发给我吧。好的。再见到你真好。我也是。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "詹姆斯和多年未见的莱拉重逢，两人聊起她离校后的经历和各自近况。"
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "If you’d told me a year ago that I’d be jumping out of a plane, I’d have laughed. I hated heights. It’s not the kind of thing I enjoy doing with friends, but something changed after my granddad passed away from Alzheimer’s. I wanted to do something meaningful that could help others affected by the same disease. So I signed up for a charity skydive. I’d never even done a bake sale before. We watched a safety video, and we jumped from 4,000 meters. The free fall lasted for one minute, and we dropped at 200 kilometers per hour. I worked out that meant I fell roughly 3,300 meters before the parachute opened. It was peaceful. You’d expect panic, but instead, I felt calm. Everything looked so small, and yet I felt part of something huge. The great part? We raised £8,452, the highest amount anyone in our area has ever raised for Alzheimer’s. But even better than the total was hearing people talk about their experience with this illness. So many had been through the same as my granddad. I still don’t love heights, so I’ve not overcome that fear. But I’ve learned that sometimes doing something scary opens doors and hearts.",
+      "translationZh": "如果一年前你告诉我我会从飞机上跳下去，我一定会笑出来。我以前很怕高。这也不是我喜欢和朋友一起做的事，但我祖父因阿尔茨海默病去世后，一切都变了。我想做点有意义的事，帮助其他受这种病影响的人。于是我报名参加了一次慈善跳伞。我以前连义卖烘焙都没做过。我们看了安全视频，然后从 4000 米高空跳下。自由落体持续了一分钟，我们以每小时 200 公里的速度下落。我算了一下，这意味着在降落伞打开前我下落了大约 3300 米。那种感觉很平静。你可能以为会惊慌，但我反而感到很平静。一切看起来都那么小，可我却觉得自己是某个宏大事物的一部分。最棒的部分是什么？我们筹到了 8452 英镑，这是我们地区为阿尔茨海默病筹款的最高金额。但比筹款总额更好的，是听人们讲述他们与这种病相关的经历。很多人都和我祖父经历过同样的事。我现在还是不喜欢高处，所以我并没有克服这种恐惧。但我明白了，有时候去做一件令人害怕的事，能打开一扇扇门，也能打开人心。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "公益事业"
+      },
+      "summaryZh": "说话人讲述祖父去世后自己参加慈善跳伞的经过和感受。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "如果一年前你告诉我我会从飞机上跳下去，我一定会笑出来。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我以前很怕高。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "这也不是我喜欢和朋友一起做的事，但我祖父因阿尔茨海默病去世后，一切都变了。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我想做点有意义的事，帮助其他受这种病影响的人。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "于是我报名参加了一次慈善跳伞。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "我以前连义卖烘焙都没做过。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "我们看了安全视频，然后从 4000 米高空跳下。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "自由落体持续了一分钟，我们以每小时 200 公里的速度下落。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "我算了一下，这意味着在降落伞打开前我下落了大约 3300 米。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "那种感觉很平静。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "你可能以为会惊慌，但我反而感到很平静。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "一切看起来都那么小，可我却觉得自己是某个宏大事物的一部分。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "最棒的部分是什么？"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "我们筹到了 8452 英镑，这是我们地区为阿尔茨海默病筹款的最高金额。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "但比筹款总额更好的，是听人们讲述他们与这种病相关的经历。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "很多人都和我祖父经历过同样的事。"
+        },
+        {
+          "id": "listening-text-10:17",
+          "zh": "我现在还是不喜欢高处，所以我并没有克服这种恐惧。"
+        },
+        {
+          "id": "listening-text-10:18",
+          "zh": "但我明白了，有时候去做一件令人害怕的事，能打开一扇扇门，也能打开人心。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "男士需要什么帮助？",
+      "optionTranslationsZh": {
+        "A": "更改上门服务时间。",
+        "B": "修理他很差的网络。",
+        "C": "取消他的无线网络服务。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Sorry, but a problem came up and I won’t be home."
+      },
+      "reasonZh": "男士约了周四装网（on Thursday），却说那天有事不在家（won’t be home），又要尽快装好，所以是请对方改个上门时间，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "男士说的是还要尽快装好（need it set up soon），他要的是改时间，不是取消无线网络服务。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士推荐了什么？",
+      "optionTranslationsZh": {
+        "A": "一家新书店。",
+        "B": "一些好喝的咖啡。",
+        "C": "一家有宠物的咖啡店。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I found a cat cafe downtown where you can have a cup of coffee and read books while playing with cats."
+      },
+      "reasonZh": "“有宠物的咖啡店”就是女士说的猫咖（a cat cafe），在那里能边喝咖啡边和猫玩（playing with cats），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "咖啡（a cup of coffee）只是在猫咖里能做的事之一，女士推荐的是这家店本身。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "看书（read books）也是在猫咖里能做的事，女士没提到书店。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "关于第二部《小丑》电影，什么让男士感到意外？",
+      "optionTranslationsZh": {
+        "A": "它有新的角色。",
+        "B": "它充满了音乐。",
+        "C": "它太长了。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I had no idea it was a musical."
+      },
+      "reasonZh": "“充满音乐”就是男士说的没想到它是一部音乐片（a musical），“没想到”（had no idea）正是让他意外的地方，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "人物（characters）出现在“喜欢人物和故事”这句评价里，说的是喜欢，不是意外，也没说有新角色。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "有点长（a bit long）是看完后的不满，不是让人意外的地方；让他没想到的是音乐片这一点。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士昨晚做了什么？",
+      "optionTranslationsZh": {
+        "A": "她做了汤圆。",
+        "B": "她在街上唱歌。",
+        "C": "她参加了一场庆祝活动。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We lit lanterns, ate sweet rice balls, and watched the dragon dance."
+      },
+      "reasonZh": "点灯笼、吃汤圆、看舞龙，都是过节（the festival）时的活动，合起来就是参加了一场庆祝活动，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说的是吃了甜汤圆（ate sweet rice balls），不是自己做汤圆。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "街上（your street）是男士听到音乐传来的地方，女士没说自己在街上唱歌。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男士的闹钟为什么叫不醒他？",
+      "optionTranslationsZh": {
+        "A": "电池没电了。",
+        "B": "声音不够大。",
+        "C": "他把时间设错了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Oops, I set it to p.m. instead of a.m."
+      },
+      "reasonZh": "男士把闹钟设成了下午而不是上午（p.m. instead of a.m.），就是把时间设错了，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "换电池（change its battery）是男士一开始的猜测，女士一问设置，他才发现是时间设错了。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士认为 ChatGPT 怎么样？",
+      "optionTranslationsZh": {
+        "A": "它能节省时间。",
+        "B": "它能表达人类的情感。",
+        "C": "它能为论文提供可靠的信息。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It seems helpful since it can cut down on the hours spent searching for accurate sources."
+      },
+      "reasonZh": "“节省时间”就是男士说的它能减少查资料花的时间（cut down on the hours），选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "男士说对人工智能生成的信息（information generated by artificial intelligence）不核实就全信，他很谨慎，可见他不认为它可靠。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "人的温度（a human touch）是两人说论文要自己保留的东西，不是 ChatGPT 能做到的。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "这段对话的主题是什么？",
+      "optionTranslationsZh": {
+        "A": "在学术写作中使用人工智能。",
+        "B": "提高写作质量的方法。",
+        "C": "写一篇论文所需要的时间。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Have you considered using ChatGPT for your degree thesis?"
+      },
+      "reasonZh": "两人从要不要用 ChatGPT 写学位论文（degree thesis）谈起，接着说它的好处、要核对结果，都围绕在论文写作中用人工智能，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "论文（thesis）是用 ChatGPT 的场合；说到的时间只是查资料省下的时间，不是写论文要多久。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士现在感觉如何？",
+      "optionTranslationsZh": {
+        "A": "后悔的。",
+        "B": "犹豫的。",
+        "C": "开心的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I still don’t know what to do."
+      },
+      "reasonZh": "女士说她还是不知道该怎么办（still don’t know what to do），一会儿说合租好玩，一会儿说住表亲家稳定，正是犹豫，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士最后说的是不管选哪个都不想后悔（don’t want to regret it），她还没做决定，谈不上后悔。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "开心（feel happiest）是男士劝她考虑住哪里最开心，不是她现在的心情。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "如果和朋友住，女士每月要花多少钱？",
+      "optionTranslationsZh": {
+        "A": "大约 420 英镑。",
+        "B": "大约 560 英镑。",
+        "C": "大约 750 英镑。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Let’s guess that bills will be about £140 each in the house share."
+      },
+      "reasonZh": "女士先说和朋友合租每人房租 420 英镑（£420 each），男士又估计合租每人账单约 140 英镑，420 + 140 = 560 英镑，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "420 英镑只是合租的房租，男士提醒还要加上每人约 140 英镑的账单。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "750 英镑是表亲公寓的月租（My cousin’s flat），不是和朋友合租的花费。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士建议女士做什么？",
+      "optionTranslationsZh": {
+        "A": "和她的表亲谈谈。",
+        "B": "独立生活。",
+        "C": "在花费和享受之间取得平衡。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "You just need to figure out where you’d feel happiest and what you can afford."
+      },
+      "reasonZh": "男士让她想清楚住哪里最开心（feel happiest），又要看能负担得起什么（what you can afford），就是在花费和享受之间权衡，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "表亲（cousin）只是女士考虑的一个住处，男士没有建议她去和表亲谈。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "独立（independence）出现在男士的问话里，他是问她更看重什么，并没有建议她独立生活。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "说话人可能在哪里？",
+      "optionTranslationsZh": {
+        "A": "在公交车上。",
+        "B": "在银行柜台。",
+        "C": "在地铁站附近。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I saw you get off the tube, and it was right under the seat you were sitting in."
+      },
+      "reasonZh": "男士看见女士下了地铁（get off the tube），自己也跳下车追上她（jumped off to catch you），两人应在刚下车的地铁站，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "公交车（a bus）是男士说自己以前丢东西的地方，不是现在所在的地方。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "银行卡（A bank card）是女士丢的东西，两人并不在银行。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "这段对话发生在什么时候？",
+      "optionTranslationsZh": {
+        "A": "上午。",
+        "B": "中午。",
+        "C": "下午。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ve been so busy this morning, rushing between meetings."
+      },
+      "reasonZh": "女士说今天上午一直很忙（this morning），又说要到午饭时候才会发现卡丢了，可见现在还没到午饭，是上午，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "午饭时候（until lunchtime）是女士说她本来才会发现卡丢了的时间，说明现在还没到中午。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士接下来要去哪里？",
+      "optionTranslationsZh": {
+        "A": "去咖啡馆。",
+        "B": "去车站。",
+        "C": "去开会。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "That’s kind, but I have to hurry for a connection."
+      },
+      "reasonZh": "男士谢绝喝咖啡，说要赶去换乘（hurry for a connection），他是跳下地铁来追人的，要赶回车站转车，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "咖啡（a coffee）是女士想请他喝，男士说要赶时间，谢绝了。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "在会议之间赶来赶去（rushing between meetings）的是女士，不是男士。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士为什么离开学校？",
+      "optionTranslationsZh": {
+        "A": "她转到了另一所学校。",
+        "B": "她的家人搬家了。",
+        "C": "她生病了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yes, I was in hospital in Grimsby for one year."
+      },
+      "reasonZh": "男士问她是不是得住院很久（in hospital），女士确认自己住院一年，可见是生病才离开学校，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士离校后一直上网课（taking online classes），没有说转去另一所学校。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士认为网上学习的一个缺点是什么？",
+      "optionTranslationsZh": {
+        "A": "她不能经常见到同学。",
+        "B": "她的成绩逐渐下降。",
+        "C": "太安静了。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But I miss seeing people every day."
+      },
+      "reasonZh": "“不能常见同学”就是女士说的想念每天见到大家（miss seeing people every day），选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "女士说安静得多（much quieter）是网课的好处，和按自己节奏学习并列，不是缺点。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "女士说的是成绩没受影响（grades haven’t suffered），并没有下降。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "安排一次聚会。",
+        "B": "和他的朋友出去玩。",
+        "C": "给女士发信息。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Will do."
+      },
+      "reasonZh": "女士让男士把聚会详情发给她（Message me the details），男士答应了，所以他接下来要给女士发信息，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "出去玩（hang out）出现在女士的问话里，她问男士还和老同学来往吗，不是男士接下来要做的事。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "聚会（our meetup）是男士他们下个月本来就有的，他接下来要做的是把详情发给女士。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人之间是什么关系？",
+      "optionTranslationsZh": {
+        "A": "老师和学生。",
+        "B": "老同学。",
+        "C": "医生和病人。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Do you still hang out with anyone from our old class?"
+      },
+      "reasonZh": "女士问男士还和“我们原来班上”（our old class）的人来往吗，加上两人多年未见、女士十年级离校，可见是老同学，选 B。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人的祖父是怎么去世的？",
+      "optionTranslationsZh": {
+        "A": "因为一种疾病。",
+        "B": "在一次慈善活动中。",
+        "C": "因为一次飞机失事。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s not the kind of thing I enjoy doing with friends, but something changed after my granddad passed away from Alzheimer’s."
+      },
+      "reasonZh": "说话人说祖父死于阿尔茨海默病（passed away from Alzheimer’s），这是一种疾病，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "慈善跳伞（a charity skydive）是祖父去世后说话人报名参加的，不是祖父去世的场合。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "跳出飞机（jumping out of a plane）说的是说话人自己跳伞，和祖父的死因无关。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人为什么决定去跳伞？",
+      "optionTranslationsZh": {
+        "A": "为了帮助一些病人。",
+        "B": "为了和朋友一起玩。",
+        "C": "为了克服恐高。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I wanted to do something meaningful that could help others affected by the same disease."
+      },
+      "reasonZh": "“帮助一些病人”就是说话人说的帮助其他受这种病影响的人（help others affected by the same disease），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "说话人说跳伞不是自己喜欢和朋友一起做的事（not the kind of thing I enjoy doing with friends）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "说话人最后说自己还是不喜欢高处，并没有克服这种恐惧（not overcome that fear），这也不是跳伞的原因。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人认为这次跳伞最好的方面是什么？",
+      "optionTranslationsZh": {
+        "A": "从 2000 米高空落下。",
+        "B": "听人们讲关于阿尔茨海默病的经历。",
+        "C": "筹到一大笔钱。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But even better than the total was hearing people talk about their experience with this illness."
+      },
+      "reasonZh": "说话人说比筹款总额更好的（even better than the total）是听人们讲与这种病相关的经历，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "筹到 8452 英镑是“很棒的部分”，但说话人接着说听人们讲经历比这个总额更好。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "录音里是从 4000 米跳下、降落伞打开前下落约 3300 米，没有 2000 米这个数字，下落也不是说话人说的最好的方面。"
+        }
+      ]
+    }
+  }
+}

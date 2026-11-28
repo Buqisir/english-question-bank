@@ -1,0 +1,773 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c": {
+      "overview": "法国研究者让同性陌生人两两隔帘观看不同情绪的视频，发现共同经历强烈情绪能增强彼此的联结感，但前提是两人能看见对方。这一发现或许能解释人们为何热衷于情绪强烈的集体活动。",
+      "fullTranslationZh": "去任何一家电影院或体育场馆看看，你就会明显感觉到：和旁人肩并肩一起笑、一起哭、一起感受时，人与人之间会形成一种无形的纽带。研究人员早已证实了这种联结感，但这一现象的某些方面仍不清楚。如今，一项新研究提供了新的见解。\n法国巴黎高等师范学院的维克多·钟及其团队在《皇家学会开放科学》期刊上撰文，报告了他们研究这一问题的方法：邀请同性陌生人两两结对，一起观看视频。\n结对的陌生人一起观看三类视频：积极的、消极的和中性的，两人之间隔着一道帘子，帘子有时拉开，有时合上。实验开始时，研究人员问每位参与者是否愿意再次见到同组的另一个人。每看完一段视频，参与者都要报告自己的情绪和联结感；三段视频全部看完后，他们又一次被问到对另一位参与者的感受。\n结果显示，带有情绪的影片比中性影片引起的反应更强烈。关键在于，研究团队称，参与者体验到更强烈的情绪时，组内的联结感会增强。然而，只有当参与者在两人之间的帘子拉开的情况下观看影片时，情况才是如此。研究人员说，两人能否看到对方，并不影响他们对影片的正面或负面感受。\n“我们发现，和另一个人一起默默观看情绪性影片与建立社会联结有关，即使对方是陌生人，即使彼此没有任何口头交流，”该研究的作者钟说。\n研究团队补充说，这些发现或许有助于解释为什么人们会主动寻求能激发强烈情绪的集体活动，“甚至参加会带来负面情绪的悲伤悼念活动”。换句话说，因为情绪把我们联结在一起，而人类又有一种归属的根本渴望，所以我们愿意去经历那些人们本以为我们自然会想回避的事情。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+          "sourceText": "Go to any movie theater or sports venue, and it’s obvious there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others.",
+          "displayText": "Go to any movie theater or sports venue, and it’s obvious there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:28"
+          ],
+          "translationZh": "去任何一家电影院或体育场馆看看，你就会明显感觉到：和旁人肩并肩一起笑、一起哭、一起感受时，人与人之间会形成一种无形的纽带。",
+          "analysisZh": "这是“祈使句 + and + 陈述句”的结构，Go to … 相当于“只要你去……”，and 后面是结果。结果部分的主干是 it’s obvious（很明显），it 是形式主语，真正的主语是省略了 that 的 there’s an invisible bond。that forms from … 是定语从句，修饰 bond；from 后面三个并列的动名词 laughing, crying, and simply feeling 说明纽带从哪里来，while brushing shoulders with others 交代当时的情形：和旁人肩并肩。第28题的 the phenomenon 指的就是这种纽带。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 44,
+              "quote": "Go to any movie theater or sports venue, and"
+            },
+            {
+              "start": 58,
+              "end": 83,
+              "quote": "there’s an invisible bond"
+            },
+            {
+              "start": 84,
+              "end": 136,
+              "quote": "that forms from laughing, crying, and simply feeling"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+          "sourceText": "In other words, because emotion bonds us, and humans have a fundamental desire to belong, we’re up for experiences one might think we’d naturally want to avoid.",
+          "displayText": "In other words, because emotion bonds us, and humans have a fundamental desire to belong, we’re up for experiences one might think we’d naturally want to avoid.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:31"
+          ],
+          "translationZh": "换句话说，因为情绪把我们联结在一起，而人类又有一种归属的根本渴望，所以我们愿意去经历那些人们本以为我们自然会想回避的事情。",
+          "analysisZh": "主干是 we’re up for experiences（我们乐意去经历一些事），be up for 意为“愿意做、乐于参加”。前面 because 引导原因状语从句，里面是两个并列分句 emotion bonds us 和 humans have a fundamental desire to belong。experiences 后面接省略了关系词的定语从句 one might think we’d naturally want to avoid，one might think 是插入的“人们会以为”，合起来指“本以为我们自然会回避的经历”，比如悲伤的悼念。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 40,
+              "quote": "because emotion bonds us"
+            },
+            {
+              "start": 90,
+              "end": 114,
+              "quote": "we’re up for experiences"
+            },
+            {
+              "start": 115,
+              "end": 159,
+              "quote": "one might think we’d naturally want to avoid"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1"
+              ],
+              "start": 0,
+              "end": 107,
+              "quote": "去任何一家电影院或体育场馆看看，你就会明显感觉到：和旁人肩并肩一起笑、一起哭、一起感受时，人与人之间会形成一种无形的纽带。研究人员早已证实了这种联结感，但这一现象的某些方面仍不清楚。如今，一项新研究提供了新的见解。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:2"
+              ],
+              "start": 108,
+              "end": 179,
+              "quote": "法国巴黎高等师范学院的维克多·钟及其团队在《皇家学会开放科学》期刊上撰文，报告了他们研究这一问题的方法：邀请同性陌生人两两结对，一起观看视频。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3"
+              ],
+              "start": 180,
+              "end": 316,
+              "quote": "结对的陌生人一起观看三类视频：积极的、消极的和中性的，两人之间隔着一道帘子，帘子有时拉开，有时合上。实验开始时，研究人员问每位参与者是否愿意再次见到同组的另一个人。每看完一段视频，参与者都要报告自己的情绪和联结感；三段视频全部看完后，他们又一次被问到对另一位参与者的感受。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4"
+              ],
+              "start": 317,
+              "end": 447,
+              "quote": "结果显示，带有情绪的影片比中性影片引起的反应更强烈。关键在于，研究团队称，参与者体验到更强烈的情绪时，组内的联结感会增强。然而，只有当参与者在两人之间的帘子拉开的情况下观看影片时，情况才是如此。研究人员说，两人能否看到对方，并不影响他们对影片的正面或负面感受。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:5"
+              ],
+              "start": 448,
+              "end": 512,
+              "quote": "“我们发现，和另一个人一起默默观看情绪性影片与建立社会联结有关，即使对方是陌生人，即使彼此没有任何口头交流，”该研究的作者钟说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6"
+              ],
+              "start": 513,
+              "end": 637,
+              "quote": "研究团队补充说，这些发现或许有助于解释为什么人们会主动寻求能激发强烈情绪的集体活动，“甚至参加会带来负面情绪的悲伤悼念活动”。换句话说，因为情绪把我们联结在一起，而人类又有一种归属的根本渴望，所以我们愿意去经历那些人们本以为我们自然会想回避的事情。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-q28-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+                "start": 58,
+                "end": 173,
+                "quote": "there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p1",
+                "start": 25,
+                "end": 60,
+                "quote": "和旁人肩并肩一起笑、一起哭、一起感受时，人与人之间会形成一种无形的纽带"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-q29-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+                "start": 320,
+                "end": 386,
+                "quote": "participants reported their emotions and feelings of connectedness"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+                "start": 422,
+                "end": 499,
+                "quote": "they were asked once again about their feelings towards the other participant"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p3",
+                "start": 90,
+                "end": 106,
+                "quote": "参与者都要报告自己的情绪和联结感"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p3",
+                "start": 117,
+                "end": 135,
+                "quote": "他们又一次被问到对另一位参与者的感受"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-q30-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+                "start": 231,
+                "end": 334,
+                "quote": "However, this was only the case when participants watched the films with the curtain between them open."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p4",
+                "start": 61,
+                "end": 97,
+                "quote": "然而，只有当参与者在两人之间的帘子拉开的情况下观看影片时，情况才是如此。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-q31-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+                "start": 20,
+                "end": 116,
+                "quote": "the findings may help explain why people seek out group activities that generate strong emotions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p6",
+                "start": 8,
+                "end": 41,
+                "quote": "这些发现或许有助于解释为什么人们会主动寻求能激发强烈情绪的集体活动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:28"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+                "start": 0,
+                "end": 174,
+                "quote": "Go to any movie theater or sports venue, and it’s obvious there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p1",
+                "start": 0,
+                "end": 61,
+                "quote": "去任何一家电影院或体育场馆看看，你就会明显感觉到：和旁人肩并肩一起笑、一起哭、一起感受时，人与人之间会形成一种无形的纽带。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+                "start": 186,
+                "end": 346,
+                "quote": "In other words, because emotion bonds us, and humans have a fundamental desire to belong, we’re up for experiences one might think we’d naturally want to avoid."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c-p6",
+                "start": 63,
+                "end": 124,
+                "quote": "换句话说，因为情绪把我们联结在一起，而人类又有一种归属的根本渴望，所以我们愿意去经历那些人们本以为我们自然会想回避的事情。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章从影院、球场里人与人之间的无形联结引出话题，介绍一项让陌生人隔帘看视频的实验，再呈现结果：情绪越强联结越强，但前提是能看见对方；最后引用作者的话概括发现，并指出它对理解人们参与集体活动的意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+            "summary": "影院、球场里的人会因共同的情绪形成无形联结，新研究对此提供了新见解。",
+            "function": "引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:2",
+            "summary": "Chung 团队邀请同性陌生人两两结对一起看视频，研究这一问题。",
+            "function": "介绍研究者和研究方式"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+            "summary": "参与者隔着时开时合的帘子看三类视频，并在实验开始、每段视频后和全部看完后报告感受。",
+            "function": "交代实验过程"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+            "summary": "情绪越强烈联结感越强，但只在帘子拉开时成立；能否看见对方不影响对影片的感受。",
+            "function": "呈现实验结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:5",
+            "summary": "Chung 总结：即使是陌生人、不交谈，一起默看情绪性影片也和建立联结有关。",
+            "function": "引用作者的话概括发现"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+            "summary": "研究或许能解释人们为何主动参加情绪强烈的集体活动：情绪联结人，人又渴望归属。",
+            "function": "指出研究的潜在意义"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:28": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据上下文判断 the phenomenon 指代的内容。",
+      "stemTranslationZh": "第1段中的“the phenomenon”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找这个现象指什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "共同的情绪让人产生联结。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+              "quote": "Go to any movie theater or sports venue, and it’s obvious there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others.",
+              "anchor": "一起哭笑形成无形纽带"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+              "quote": "Researchers have long backed up this sense of connection",
+              "anchor": "这种联结感"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "身体接触有助于缓解压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "while brushing shoulders with others",
+            "sourceEntity": "brushing shoulders",
+            "optionText": "Physical touch helps tackle stress.",
+            "optionEntity": "Physical touch",
+            "explanation": "“肩并肩”（brushing shoulders）只是说和旁人挨着坐、一起看，原文讲的是由此形成的联结；放进去就成了“身体接触缓解压力这一现象”，全段没提压力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+              "quote": "while brushing shoulders with others",
+              "anchor": "和旁人肩并肩"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一次偶遇发展成一段友谊。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A chance encounter leads to a friendship.",
+            "explanation": "放进去就成了“偶遇发展成友谊这一现象”，可[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1]]讲的是同场观众一起哭笑时的联结感（this sense of connection），没说偶遇的人成了朋友。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "娱乐是人类生活的重要组成部分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Go to any movie theater or sports venue",
+            "sourceEntity": "movie theater or sports venue",
+            "optionText": "Entertainment is a crucial part of human life.",
+            "optionEntity": "Entertainment",
+            "explanation": "电影院和体育场只是举例说明在哪里能感到这种联结；放进去就成了“娱乐是生活重要部分这一现象”，和后文研究的联结感接不上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+              "quote": "Go to any movie theater or sports venue",
+              "anchor": "电影院或体育场"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the phenomenon",
+          "sourceRole": "stem",
+          "targetText": "Researchers have long backed up this sense of connection, but some aspects of the phenomenon remained unclear.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others",
+          "bridgeZh": "the phenomenon 指大家一起笑、一起哭时形成的无形纽带",
+          "note": "题干 the phenomenon 原词出现在原文。"
+        },
+        {
+          "sourceText": "Shared emotions bond people.",
+          "sourceRole": "correctOption",
+          "targetText": "there’s an invisible bond that forms from laughing, crying, and simply feeling while brushing shoulders with others",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“共同情绪让人产生联结”（Shared emotions bond people）概括了原文的“一起笑、一起哭、一起感受时形成的纽带”（an invisible bond that forms from…）。放回去：研究者早已证实这种联结感，但“共同情绪把人连在一起”这一现象还有些方面不清楚，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清研究者靠什么办法得出研究结果。",
+      "stemTranslationZh": "研究人员是如何得出研究结果的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找看完视频后又问了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过分析参与者的情绪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "participants reported their emotions and feelings of connectedness",
+            "sourceHighlight": "their emotions",
+            "optionText": "By analyzing participants’ emotions.",
+            "optionHighlight": "analyzing participants’ emotions",
+            "explanation": "原文的情绪（emotions）是参与者自己报告的，和联结感一起报；结论来自前后两次自述的对照，只说“分析情绪”，漏了联结感和比较这一步。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+              "quote": "participants reported their emotions and feelings of connectedness",
+              "anchor": "参与者报告情绪和联结感"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过比较参与者的自我报告。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+              "quote": "After watching each video, participants reported their emotions and feelings of connectedness, and after seeing all three videos they were asked once again about their feelings towards the other participant.",
+              "anchor": "报告感受，看完再问一次"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+              "quote": "At the start of the experiment the researchers asked each participant whether they’d like to meet the other member of their pair again.",
+              "anchor": "实验开始时先问一次"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过记录参与者看视频时的反应。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "responses",
+            "optionText": "responses",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 responses。原文说结果显示情绪性影片引起的反应更强，这是研究的发现；数据来自参与者自己报告，没说研究者记录他们看视频时的反应。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+              "quote": "The results showed the emotional films generated stronger responses than the neutral film.",
+              "anchor": "情绪性影片反应更强"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过激发参与者的互动欲望。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By stimulating participants’ desire for interaction.",
+            "explanation": "研究者问参与者想不想再见对方（whether they’d like to meet），只是询问意愿；两人全程没有交谈（without any verbal communication），没说研究者设法激发他们互动。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the researchers",
+          "sourceRole": "stem",
+          "targetText": "At the start of the experiment the researchers asked each participant whether they’d like to meet the other member of their pair again.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "participants reported their emotions and feelings of connectedness, and after seeing all three videos they were asked once again about their feelings towards the other participant",
+          "bridgeZh": "看完视频后再问一次，好和开头的回答对照",
+          "note": "题干 the researchers 原词出现在原文。"
+        },
+        {
+          "sourceText": "By comparing participants’ self-reports.",
+          "sourceRole": "correctOption",
+          "targetText": "participants reported their emotions and feelings of connectedness",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“自我报告”（self-reports）就是参与者自己报告情绪和联结感（reported），数据来自他们自己的回答；把开头和看完后的两次回答放在一起看，就是“比较”（comparing），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出组内联结感增强所需的条件。",
+      "stemTranslationZh": "研究发现，只有在____时，结对的两人之间才确实建立起牢固的联结。",
+      "locateBy": "stem",
+      "locateFindZh": "看 However 后的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们彼此熟悉",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "even when this person is a stranger",
+            "sourceEntity": "a stranger",
+            "optionText": "they were familiar with each other",
+            "optionEntity": "familiar with each other",
+            "explanation": "参与者本来就是陌生人（strangers），Chung 还强调即使对方是陌生人（even when this person is a stranger）也能产生联结，彼此熟悉不是条件。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:5",
+              "quote": "even when this person is a stranger",
+              "anchor": "即使对方是陌生人"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们一起看中性影片",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The results showed the emotional films generated stronger responses than the neutral film.",
+            "sourceEntity": "the emotional films",
+            "optionText": "they watched neutral films together",
+            "optionEntity": "neutral films",
+            "explanation": "联结感增强靠的是更强烈的情绪，原文说带情绪的影片引起的反应比中性影片强（stronger … than the neutral film），条件里没有中性影片。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+              "quote": "The results showed the emotional films generated stronger responses than the neutral film.",
+              "anchor": "情绪性影片反应更强"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们意识到彼此在场",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "with a curtain between them that was either open or closed",
+            "sourceHighlight": "either open or closed",
+            "optionText": "they were aware of the presence of each other",
+            "optionHighlight": "aware of the presence of each other",
+            "explanation": "帘子合上时两人也知道对方就在旁边，可原文说只有帘子拉开、能看见对方时联结才增强；只知道对方在场还不够。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:3",
+              "quote": "with a curtain between them that was either open or closed",
+              "anchor": "帘子时开时合"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们看影片时能看见彼此",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+              "quote": "However, this was only the case when participants watched the films with the curtain between them open.",
+              "anchor": "帘子拉开时才如此"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+              "quote": "Crucially, the team said participants’ feelings of connectedness within the pairs were boosted when they experienced more intense emotions.",
+              "anchor": "情绪越强联结越强"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "only when",
+          "sourceRole": "stem",
+          "targetText": "However, this was only the case when participants watched the films with the curtain between them open.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+          "relationType": "locationCue",
+          "targetCue": "only the case when",
+          "answerText": "with the curtain between them open",
+          "note": "题干 only when 对应原文 only the case when。"
+        },
+        {
+          "sourceText": "they could see each other while watching the films",
+          "sourceRole": "correctOption",
+          "targetText": "with the curtain between them open",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“看影片时能看见彼此”（could see each other）对应原文的“两人之间的帘子拉开”（with the curtain between them open）：帘子开着，两人才看得见对方，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完最后一段，判断它呈现的是研究结果的哪方面内容。",
+      "stemTranslationZh": "文章最后一段呈现了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6]] 的 may help explain，看研究结果能用来说明什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对研究结果的解读。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "We found that silently watching emotional films together with another individual is associated with social bonding",
+            "sourceEntity": "We found that",
+            "optionText": "An interpretation of the findings.",
+            "optionEntity": "interpretation",
+            "explanation": "对结果本身的说明在[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:5]]，是 Chung 讲“我们发现……”（We found that）；[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6]]是拿结果去解释另一类现象，即人为何主动参加情绪强烈的集体活动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:5",
+              "quote": "We found that silently watching emotional films together with another individual is associated with social bonding",
+              "anchor": "Chung 概括发现"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "研究结果的潜在意义。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+              "quote": "The team added that the findings may help explain why people seek out group activities that generate strong emotions",
+              "anchor": "或许有助于解释"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+              "quote": "In other words, because emotion bonds us, and humans have a fundamental desire to belong, we’re up for experiences one might think we’d naturally want to avoid.",
+              "anchor": "换句话说"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "支持研究结果的证据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Supporting evidence for the findings.",
+            "explanation": "[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6]]没有给出新的实验或数据，悲伤的悼念活动（sad memorials）是结果可能解释的例子，不是证明结果的证据。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "研究结果背后的内在逻辑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "because emotion bonds us, and humans have a fundamental desire to belong",
+            "sourceEntity": "humans have a fundamental desire to belong",
+            "optionText": "The underlying logic behind the findings.",
+            "optionEntity": "The underlying logic",
+            "explanation": "“因为”（because）这句说明的是人们为何愿意经历本想回避的事，解释的是这种生活现象，不是研究结果本身为什么成立。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+              "quote": "because emotion bonds us, and humans have a fundamental desire to belong",
+              "anchor": "情绪联结人、人渴望归属"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Potential implication of the findings.",
+          "sourceRole": "correctOption",
+          "targetText": "the findings may help explain why people seek out group activities that generate strong emotions",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "这一段先说研究结果或许有助于解释（may help explain）人们为何主动参加情绪强烈的集体活动；“换句话说”（In other words）再把道理说透：情绪联结我们，人又渴望归属。两句都把结果推到研究之外的生活现象上，“或许”（may）又只表示可能，正是选项的“潜在意义”（Potential implication），选 B。"
+        }
+      ]
+    }
+  }
+}

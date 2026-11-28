@@ -1,0 +1,144 @@
+{
+  "taskType": "application",
+  "modelAnswer": "My dear classmates,\n\nMore and more schools are now taking students on spring outings. In my view, this is a practice well worth supporting.\n\nFor one thing, after weeks in classrooms, a day in the fresh air helps us relax and return to our books with more energy. For another, climbing a hill or sharing a picnic shows us a different side of our classmates and teachers, which brings us closer.\n\nHowever, a good outing needs careful planning. I suggest that schools choose a safe place nearby and let each class design its own activities. Before we set off, we should wear comfortable shoes and follow our teachers’ instructions.\n\nLet’s make our next spring outing safe, fun and worth remembering!\n\nThat’s all. Thank you!",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "一分钟演讲稿，沿用题面给出的称呼和结束语，正文不加标题",
+        "personTense": "用第一人称表明看法，以一般现在时为主，提建议时用 suggest that 和 let’s",
+        "readerTone": "对全班同学当面讲，语气真诚、有号召力，不用书面公文腔",
+        "goal": "亮明对学校组织春季远足的态度，并就怎样把远足办好、玩好提出具体建议"
+      },
+      "taskRequires": [
+        "陈述对部分学校举行春季远足这一现象的看法",
+        "提出建议"
+      ],
+      "thisEssayChooses": "标准版持支持态度，用“放松身心、重新投入学习”和“看到同学老师的另一面、拉近关系”两点作理由；建议分两头说：学校选近处的安全地点、让各班自定活动，同学们穿舒适的鞋、听从老师安排。"
+    },
+    "standard": {
+      "essay": "My dear classmates,\n\nMore and more schools are now taking students on spring outings. In my view, this is a practice well worth supporting.\n\nFor one thing, after weeks in classrooms, a day in the fresh air helps us relax and return to our books with more energy. For another, climbing a hill or sharing a picnic shows us a different side of our classmates and teachers, which brings us closer.\n\nHowever, a good outing needs careful planning. I suggest that schools choose a safe place nearby and let each class design its own activities. Before we set off, we should wear comfortable shoes and follow our teachers’ instructions.\n\nLet’s make our next spring outing safe, fun and worth remembering!\n\nThat’s all. Thank you!",
+      "pointMap": [
+        {
+          "point": "陈述看法",
+          "quote": "In my view, this is a practice well worth supporting."
+        },
+        {
+          "point": "陈述看法（理由）",
+          "quote": "For one thing, after weeks in classrooms, a day in the fresh air helps us relax and return to our books with more energy."
+        },
+        {
+          "point": "提出建议",
+          "quote": "I suggest that schools choose a safe place nearby and let each class design its own activities."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "开场先交代话题，再亮出立场，听众一听就知道你站哪边。",
+          "items": [
+            {
+              "quote": "More and more schools are now taking students on spring outings.",
+              "explain": "用一句话复述题面里的现象，now 加现在进行时表示“眼下正在发生”，演讲一开头就和听众对上话题。"
+            },
+            {
+              "quote": "In my view, this is a practice well worth supporting.",
+              "explain": "立场放在第二句就说清楚。well worth supporting 比 good 更准：不只说远足好，还表明“值得支持”这一态度。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "用两条理由撑起看法，一条讲对学习的好处，一条讲对人际关系的好处。",
+          "items": [
+            {
+              "quote": "after weeks in classrooms",
+              "explain": "先点出同学们整天坐在教室里的处境，再说远足的好处，理由就有了针对性，不是空喊“有益身心”。"
+            },
+            {
+              "quote": "return to our books with more energy",
+              "explain": "把放松和学习连起来：远足不是耽误学习，而是让人更有劲学。这一步回应了“会不会影响学习”的顾虑。"
+            },
+            {
+              "quote": "which brings us closer",
+              "explain": "非限制性定语从句接在整件事后面，交代“看到另一面”带来的结果，因果不跳步。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：建议分学校和学生两方来提，每条都做得到。",
+          "items": [
+            {
+              "quote": "However, a good outing needs careful planning.",
+              "explain": "先用 However 一转：远足好，但要办好得靠精心安排。这样后面的建议就有了来由，也显得考虑周全。"
+            },
+            {
+              "quote": "I suggest that schools choose a safe place nearby",
+              "explain": "suggest that 后用动词原形 choose。“安全”“近处”两个限定都切合学校组织活动的真实顾虑。"
+            },
+            {
+              "quote": "we should wear comfortable shoes and follow our teachers’ instructions",
+              "explain": "最后把建议落到在座同学自己身上，听众听完就知道出发前要做什么。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "一句号召收尾，接上给定的结束语。",
+          "items": [
+            {
+              "quote": "Let’s make our next spring outing safe, fun and worth remembering!",
+              "explain": "用 Let’s 把讲者和听众放在一起；safe 回应前面的安全建议，fun 回应放松和亲近的好处，不另起空洞的大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "In my view, this is a practice well worth supporting.",
+          "function": "演讲里亮明立场的说法，比 I think it is good 更明确地表示赞成。"
+        },
+        {
+          "expression": "I suggest that schools choose ...",
+          "function": "向学校一方提建议，语气客气而具体；注意 suggest that 后的动词用原形。"
+        },
+        {
+          "expression": "Let’s make ... safe, fun and worth remembering!",
+          "function": "演讲结尾号召同学一起行动，把讲者和听众拉到同一边。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "My dear classmates,\n\nSpring outings are now held in a growing number of schools, and I’d like to share my views on them. To me, a well-planned outing is not a break from learning but another way of learning.\n\nAfter months buried in textbooks, we need a chance to breathe fresh air and stretch our legs, and a day outdoors leaves us refreshed for the hard work ahead. What’s more, it is on a mountain path or around a picnic blanket that we discover a different side of our classmates and teachers.\n\nTo get the most out of an outing, I suggest that schools pick a safe destination within easy reach and give each class a say in planning the activities. We students, in turn, should bring sensible shoes and a water bottle and stick to the safety rules.\n\nSo let’s step out and enjoy the spring together!\n\nThat’s all. Thank you!",
+      "pointMap": [
+        {
+          "point": "陈述看法",
+          "quote": "To me, a well-planned outing is not a break from learning but another way of learning."
+        },
+        {
+          "point": "陈述看法（理由）",
+          "quote": "After months buried in textbooks, we need a chance to breathe fresh air and stretch our legs, and a day outdoors leaves us refreshed for the hard work ahead."
+        },
+        {
+          "point": "提出建议",
+          "quote": "To get the most out of an outing, I suggest that schools pick a safe destination within easy reach and give each class a say in planning the activities."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "not a break from learning but another way of learning",
+          "explain": "标准版只说值得支持，这里用 not ... but ... 直接回应“远足耽误学习”的说法，立场更鲜明，也更像在说服听众。"
+        },
+        {
+          "quote": "it is on a mountain path or around a picnic blanket that we discover a different side of our classmates and teachers",
+          "explain": "强调句把“在山路上、野餐布旁”这两个具体场景推到前面，比标准版的 climbing a hill or sharing a picnic 画面感更强，也把“看到另一面”放在句子重心上。"
+        },
+        {
+          "quote": "give each class a say in planning the activities",
+          "explain": "have a say 是“有发言权”，比 let each class design 更地道，也点出让学生参与筹划的用意。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: We worked out an exercise plan that suited all three of us. Every morning before Dad left for his bus, we went for a twenty-minute jog in the park. In the evening, Mum led us through some simple exercises at home, and Dad taught me to skip, starting with just fifty jumps. I also swapped my crisps for their porridge and salads. The first week was hard. My legs ached, and twice I almost gave up and asked about the surgery again. Each time, Mum reminded me why we had started, and Dad skipped beside me, counting my jumps aloud. Slowly, fifty jumps became a hundred, and the morning jog no longer felt like a punishment.\n\nParagraph 2: Now I can feel the benefits. I have lost five kilos, and I can run up the stairs without stopping to catch my breath. At my check-up last week, the doctor told me that the lump had stopped growing and was even a little smaller, so I would not need surgery as long as I kept going. On the way home, I thanked my parents for not letting me take the easy option. Dad just smiled and handed me his skipping rope. I finally see what a great resource they have been all along, and this time I am following their example.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是“我”和父母三个人：父母多年坚持健康饮食和锻炼，“我”懒散不爱运动，刚被脖子上的肿块吓了一跳。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”讲自己和父母，讲过去的事用一般过去时，讲父母的习惯用一般现在时和现在完成时；句子短而平实，描写不多，全文没有带引号的对话，父母的话是用冒号转述的。续写第一段写过去的经历用一般过去时，第二段段首句 Now I can feel 转入现在时；人物的话以转述为主。",
+          "evidence": [
+            "My parents said to me: don’t get surgery"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”的犹豫上：想图省事做手术，又觉得这也许是开始锻炼的警钟。续写要交代“我”怎样选、怎样坚持下来，肿块和身体最后有什么变化。",
+          "evidence": [
+            "I wanted to take the easy option and have it removed."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "故事的讲述者，家里唯一的孩子",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "不爱运动，怕吃苦，遇事想走捷径",
+              "evidence": "I hated fitness and was lazy and unfit."
+            },
+            {
+              "label": "此刻",
+              "text": "脖子上长了脂肪肿块，不减肥可能会变严重，正在手术和锻炼之间犹豫",
+              "evidence": "unless I lose weight, or I have surgery, it could get worse"
+            }
+          ]
+        },
+        {
+          "name": "爸爸和妈妈",
+          "role": "“我”的父母，爸爸是公交司机，妈妈做兼职售货员",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "多年吃新鲜、未加工的食物，而且一直坚持",
+              "evidence": "Their diet is extremely healthy and they stick to it."
+            },
+            {
+              "label": "表现",
+              "text": "爸爸六岁起跳绳，在网上小有名气；妈妈在健身房赢过比赛",
+              "evidence": "My dad started skipping at the age of six."
+            },
+            {
+              "label": "想要",
+              "text": "不想让“我”做手术，愿意亲自带“我”锻炼",
+              "evidence": "let us train you and you’ll feel much better"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "My dad started skipping at the age of six.",
+          "use": "第 1 段让爸爸教“我”跳绳、在旁边陪跳数数；第 2 段爸爸把跳绳递给“我”，他的特长变成了“我”的习惯。"
+        },
+        {
+          "sourceQuote": "Part of their success is how efficiently they control what they eat.",
+          "use": "第 1 段写“我”把零食换成父母吃的粥和沙拉，计划里除了运动还有饮食。"
+        },
+        {
+          "sourceQuote": "unless I lose weight, or I have surgery, it could get worse",
+          "use": "第 2 段复查时肿块不再长大、还小了一点，医生说坚持下去就不用手术，收住原文留下的健康问题。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”放弃手术，和父母一起按计划锻炼、改吃健康饮食，熬过最初的辛苦坚持下来；几周后体重下降、精力变好，复查时肿块不再长大，“我”终于开始效仿父母。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "写出三人一起定下、三人都适合的锻炼计划；第二段首句说“现在能感到好处”，所以第一段结束时“我”必须已经按计划坚持了一段时间，不能还在犹豫或刚刚开始。",
+          "draft": "早上三人在公园慢跑，晚上妈妈带做简单练习，爸爸教“我”跳绳；“我”把零食换成父母吃的粥和沙拉。第一周腿酸得厉害，两次想放弃去做手术，妈妈提醒初衷，爸爸陪跳数数，跳绳从五十下涨到一百下。",
+          "bridgeQuote": "Now I can feel the benefits.",
+          "bridge": "“我”坚持了这么久，身体和那个肿块究竟有了哪些看得见的变化？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以段首句开头，写出坚持锻炼后看得见的具体好处；原文留下的肿块和手术问题要有交代，怎么交代由你选。",
+          "draft": "“我”瘦了五公斤，上楼不喘；复查时医生说肿块不再长大、还小了一点，坚持下去就不用手术；“我”感谢父母，爸爸笑着把跳绳递给“我”，“我”开始效仿父母。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: We worked out an exercise plan that suited all three of us. Every morning before Dad left for his bus, we went for a twenty-minute jog in the park. In the evening, Mum led us through some simple exercises at home, and Dad taught me to skip, starting with just fifty jumps. I also swapped my crisps for their porridge and salads. The first week was hard. My legs ached, and twice I almost gave up and asked about the surgery again. Each time, Mum reminded me why we had started, and Dad skipped beside me, counting my jumps aloud. Slowly, fifty jumps became a hundred, and the morning jog no longer felt like a punishment.\n\nParagraph 2: Now I can feel the benefits. I have lost five kilos, and I can run up the stairs without stopping to catch my breath. At my check-up last week, the doctor told me that the lump had stopped growing and was even a little smaller, so I would not need surgery as long as I kept going. On the way home, I thanked my parents for not letting me take the easy option. Dad just smiled and handed me his skipping rope. I finally see what a great resource they have been all along, and this time I am following their example.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把“适合三个人的计划”写具体，再写“我”怎样熬过最难的头几天坚持下来，为第二段的“好处”打好底。",
+          "items": [
+            {
+              "quote": "Every morning before Dad left for his bus, we went for a twenty-minute jog in the park.",
+              "explain": "计划一开头就落到具体时间和动作上。“爸爸出车前”照顾到他是公交司机，扣住段首句的 suited all three of us。"
+            },
+            {
+              "quote": "Dad taught me to skip, starting with just fifty jumps",
+              "explain": "用上原文爸爸六岁起跳绳的伏笔，让他的特长在计划里起作用；从五十下开始，说明计划照顾到“我”不爱运动的底子。"
+            },
+            {
+              "quote": "twice I almost gave up and asked about the surgery again",
+              "explain": "把原文里图省事去做手术的念头再拿出来，困难有了具体的诱惑，坚持下来才显得不容易。"
+            },
+            {
+              "quote": "Slowly, fifty jumps became a hundred",
+              "explain": "用数字的变化写进步，第一段结束时“我”已经坚持下来，第二段说“现在能感到好处”才接得上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "把“好处”写成看得见的变化，收住肿块问题，最后落在“我”和父母的关系上。",
+          "items": [
+            {
+              "quote": "I have lost five kilos, and I can run up the stairs without stopping to catch my breath.",
+              "explain": "好处写成体重和爬楼两件能看见的事，而不是一句“我更健康了”；现在完成时接住段首句的 Now。"
+            },
+            {
+              "quote": "the lump had stopped growing and was even a little smaller, so I would not need surgery as long as I kept going",
+              "explain": "回到原文留下的肿块：原文说不减肥可能变严重，这里写它不再长大，结论有分寸，没写成一下子消失。医生的话用转述，和原文写法一致。"
+            },
+            {
+              "quote": "Dad just smiled and handed me his skipping rope.",
+              "explain": "用一个动作代替长篇的感谢，跳绳又回到爸爸的特长上，感情落在一件物品上。"
+            },
+            {
+              "quote": "this time I am following their example",
+              "explain": "呼应原文的 I had never bothered to follow their example，结尾落在“我”的改变上，不贴空泛的道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "almost gave up",
+          "function": "写坚持中的动摇，比直接说 it was hard 更具体，也给后面父母的鼓励留出位置。"
+        },
+        {
+          "expression": "without stopping to catch my breath",
+          "function": "用一个日常动作写体能的变化，第二段写好处时好用。"
+        },
+        {
+          "expression": "as long as I kept going",
+          "function": "把医生的结论和“我”的坚持连在一起，说明好处要靠继续锻炼才保得住。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段写“我”还在犹豫要不要手术，或刚开练就结束",
+          "why": "段首句已经说三人定好了计划，第二段又说“现在能感到好处”，第一段必须写到“我”按计划坚持了一段时间。"
+        },
+        {
+          "pitfall": "计划只写父母在旁边督促“我”",
+          "why": "段首句强调 suited all three of us，计划要写出三个人一起参与、各有分工，而不是父母监督“我”一个人练。"
+        },
+        {
+          "pitfall": "让“我”最后还是做了手术，或写几天之内肿块就没了",
+          "why": "前者和第二段“锻炼带来好处”的方向冲突；后者和原文“要靠减肥才能控制”的说法不合，变化来得太快就不可信。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: We worked out an exercise plan that suited all three of us. Before Dad set off for his early shift, the three of us jogged two laps around the park. After dinner, Mum turned our living room into a mini gym and led us through squats and stretches, while Dad patiently taught me to skip, beginning with a modest fifty jumps. At the table, my crisps and fizzy drinks gave way to their porridge, wholemeal sandwiches and boiled vegetables. The first week nearly broke me. My legs burned, my chest felt tight, and more than once I was tempted to ring the hospital and book the surgery after all. Each time, Mum quietly reminded me of the lump, and Dad picked up his rope and skipped beside me, counting every jump aloud as if it were a competition. Little by little, fifty jumps grew into two hundred, and the morning jog stopped feeling like a punishment.\n\nParagraph 2: Now I can feel the benefits. I have lost six kilos, my jeans hang loosely around my waist, and I can take the stairs two at a time without gasping for breath. At my check-up last week, the doctor pressed the lump on my neck and smiled. It had stopped growing and was even a little smaller, she told me, so surgery would not be necessary as long as I kept up the good work. That evening, Dad handed me his very first skipping rope, worn thin at the handles, and Mum simply squeezed my hand. I used to look at my parents and wonder how I would ever get to be like them. I am not there yet, but for the first time I am following their example instead of just admiring it.",
+      "beyondStandard": [
+        {
+          "quote": "Mum turned our living room into a mini gym",
+          "explain": "比标准版的 led us through some simple exercises at home 更有画面，也呼应妈妈在健身房赢过比赛的身份。"
+        },
+        {
+          "quote": "counting every jump aloud as if it were a competition",
+          "explain": "把爸爸陪跳写成比赛的样子，带出他跳绳高手的身份和对“我”的鼓劲，比标准版的 counting my jumps aloud 多了一层人物性格。"
+        },
+        {
+          "quote": "I am following their example instead of just admiring it",
+          "explain": "接住原文“我”看着父母心想怎样才能像他们的那句，把变化说成从羡慕到效仿，比标准版结尾更贴原文的叙述口吻。"
+        }
+      ]
+    }
+  }
+}

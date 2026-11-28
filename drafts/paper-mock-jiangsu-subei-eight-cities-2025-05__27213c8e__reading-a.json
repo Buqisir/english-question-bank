@@ -1,0 +1,704 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a": {
+      "overview": "安德森山庄是家庭经营的休养中心，有主山庄和山顶别墅两处场地，风景优美，适合20到80人以上的团体入住。文章介绍了山庄概况、过夜价格及入住、退房、宠物和噪音等规定。",
+      "fullTranslationZh": "安德森山庄\n简介\n安德森山庄是由阿尔维德·安德森和维姬·安德森夫妇拥有、由家庭经营的场所，有两处独立的场地：主山庄和山顶别墅。安德森山庄于2004年11月作为休养中心开业。当你浏览我们网站上的众多照片时，你会想：“真美啊！”安德森山庄确实很美！但照片并不能展现它全部的美。在主山庄看苔藓优雅垂挂的参天大树，或在山顶别墅眺望秀丽的山景，那种感受无可比拟。\n主山庄和山顶别墅各自设施齐全，两地相距一英里，分别配有单人床和双人床。团体客人可以享受优质住宿，这里非常适合20到80位乃至更多过夜客人的团体。我们有独立房间、家庭房、宿舍式房间和小木屋。欢迎联系我们预约参观，您会亲眼看到安德森山庄有多么神奇。\n价格\n过夜价格表——主山庄或山顶别墅：每晚基础价825美元；基础价包含的客人数为15位；超出基础人数的客人每位加收：50人以内每人10美元，超过50人后每人8美元。\n须知\n·标准入住时间：下午2:00。如日程允许，可提前至中午12:00入住（不收费）。\n·标准退房时间：上午10:00。中午12:00以后退房，每小时收费100美元。\n·安德森山庄禁止携带宠物，宠物不得留宿。服务性动物可以进入。\n·午夜12:00前须调低音乐和宾客的音量。午夜12:00前须把聚会移到室内。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:3",
+          "sourceText": "There is nothing like seeing the tall trees with moss cascading elegantly at the Main Lodge or viewing the scenic mountain at our Hilltop House site.",
+          "displayText": "There is nothing like seeing the tall trees with moss cascading elegantly at the Main Lodge or viewing the scenic mountain at our Hilltop House site.",
+          "relatedQuestionIds": [],
+          "translationZh": "在主山庄看苔藓优雅垂挂的参天大树，或在山顶别墅眺望秀丽的山景，那种感受无可比拟。",
+          "analysisZh": "主干是 There is nothing like doing，意思是“没有什么比得上做某事”。like 后面跟两个由 or 连接的动名词短语：seeing the tall trees（看大树）和 viewing the scenic mountain（看山景），各自带地点 at the Main Lodge 和 at our Hilltop House site。with moss cascading elegantly 是 with 复合结构，修饰 trees，说明苔藓优雅地垂挂在树上。整句用“无可比拟”来夸山庄的实景比照片更美。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "There is nothing like"
+            },
+            {
+              "start": 22,
+              "end": 43,
+              "quote": "seeing the tall trees"
+            },
+            {
+              "start": 95,
+              "end": 122,
+              "quote": "viewing the scenic mountain"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4",
+          "sourceText": "Groups enjoy the quality accommodations well suited for groups ranging from 20-80 overnight guests and more!",
+          "displayText": "Groups enjoy the quality accommodations well suited for groups ranging from 20-80 overnight guests and more!",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:21"
+          ],
+          "translationZh": "团体客人可以享受优质住宿，这里非常适合20到80位乃至更多过夜客人的团体。",
+          "analysisZh": "主干是 Groups enjoy the quality accommodations（团体享受优质住宿）。well suited for groups 是过去分词短语作后置定语，修饰 accommodations，说明这些住宿很适合团体；ranging from 20-80 overnight guests and more 是现在分词短语，修饰后一个 groups，交代团体的规模从20人到80人，甚至更多。第21题“适合聚会”就落在 well suited for groups 上。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 39,
+              "quote": "Groups enjoy the quality accommodations"
+            },
+            {
+              "start": 40,
+              "end": 62,
+              "quote": "well suited for groups"
+            },
+            {
+              "start": 63,
+              "end": 98,
+              "quote": "ranging from 20-80 overnight guests"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:1"
+              ],
+              "start": 0,
+              "end": 5,
+              "quote": "安德森山庄"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:2"
+              ],
+              "start": 6,
+              "end": 8,
+              "quote": "简介"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:3"
+              ],
+              "start": 9,
+              "end": 176,
+              "quote": "安德森山庄是由阿尔维德·安德森和维姬·安德森夫妇拥有、由家庭经营的场所，有两处独立的场地：主山庄和山顶别墅。安德森山庄于2004年11月作为休养中心开业。当你浏览我们网站上的众多照片时，你会想：“真美啊！”安德森山庄确实很美！但照片并不能展现它全部的美。在主山庄看苔藓优雅垂挂的参天大树，或在山顶别墅眺望秀丽的山景，那种感受无可比拟。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4"
+              ],
+              "start": 177,
+              "end": 299,
+              "quote": "主山庄和山顶别墅各自设施齐全，两地相距一英里，分别配有单人床和双人床。团体客人可以享受优质住宿，这里非常适合20到80位乃至更多过夜客人的团体。我们有独立房间、家庭房、宿舍式房间和小木屋。欢迎联系我们预约参观，您会亲眼看到安德森山庄有多么神奇。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:5"
+              ],
+              "start": 300,
+              "end": 302,
+              "quote": "价格"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p6",
+              "sourceParagraphIds": [
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:1:1",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:1:2",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:1:3",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:1:4",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:1",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:2",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:3",
+                "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:4"
+              ],
+              "start": 303,
+              "end": 382,
+              "quote": "过夜价格表——主山庄或山顶别墅：每晚基础价825美元；基础价包含的客人数为15位；超出基础人数的客人每位加收：50人以内每人10美元，超过50人后每人8美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:7"
+              ],
+              "start": 383,
+              "end": 385,
+              "quote": "须知"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:8"
+              ],
+              "start": 386,
+              "end": 426,
+              "quote": "·标准入住时间：下午2:00。如日程允许，可提前至中午12:00入住（不收费）。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:9"
+              ],
+              "start": 427,
+              "end": 466,
+              "quote": "·标准退房时间：上午10:00。中午12:00以后退房，每小时收费100美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:10"
+              ],
+              "start": 467,
+              "end": 497,
+              "quote": "·安德森山庄禁止携带宠物，宠物不得留宿。服务性动物可以进入。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:11"
+              ],
+              "start": 498,
+              "end": 536,
+              "quote": "·午夜12:00前须调低音乐和宾客的音量。午夜12:00前须把聚会移到室内。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-q21-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4",
+                "start": 126,
+                "end": 234,
+                "quote": "Groups enjoy the quality accommodations well suited for groups ranging from 20-80 overnight guests and more!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p4",
+                "start": 35,
+                "end": 72,
+                "quote": "团体客人可以享受优质住宿，这里非常适合20到80位乃至更多过夜客人的团体。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-q22-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:2",
+                "start": 0,
+                "end": 4,
+                "quote": "$825"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:3",
+                "start": 0,
+                "end": 2,
+                "quote": "15"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:4",
+                "start": 0,
+                "end": 24,
+                "quote": "Up to 50: $10 per person"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p6",
+                "start": 16,
+                "end": 26,
+                "quote": "每晚基础价825美元"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p6",
+                "start": 27,
+                "end": 40,
+                "quote": "基础价包含的客人数为15位"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p6",
+                "start": 55,
+                "end": 66,
+                "quote": "50人以内每人10美元"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-q23-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:11",
+                "start": 1,
+                "end": 53,
+                "quote": "Lower the volume of music and attendees by 12:00 am."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p11",
+                "start": 1,
+                "end": 21,
+                "quote": "午夜12:00前须调低音乐和宾客的音量。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:3",
+                "start": 359,
+                "end": 508,
+                "quote": "There is nothing like seeing the tall trees with moss cascading elegantly at the Main Lodge or viewing the scenic mountain at our Hilltop House site."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p3",
+                "start": 127,
+                "end": 167,
+                "quote": "在主山庄看苔藓优雅垂挂的参天大树，或在山顶别墅眺望秀丽的山景，那种感受无可比拟。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4",
+                "start": 126,
+                "end": 234,
+                "quote": "Groups enjoy the quality accommodations well suited for groups ranging from 20-80 overnight guests and more!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a-p4",
+                "start": 35,
+                "end": 72,
+                "quote": "团体客人可以享受优质住宿，这里非常适合20到80位乃至更多过夜客人的团体。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "这是一则山庄介绍：About 部分介绍经营者、开业时间、风景和适合团体的住宿条件，Pricing 部分用表格列出过夜价格，Directions 部分列出入住、退房、宠物和噪音等规定。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:1",
+            "summary": "点出介绍对象安德森山庄。",
+            "function": "标题，点明主题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:2",
+            "summary": "引出山庄的基本介绍。",
+            "function": "提示下文是山庄简介"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:3",
+            "summary": "介绍山庄由安德森夫妇家庭经营、2004年开业，有主山庄和山顶别墅两处场地，实景比网站照片更美。",
+            "function": "介绍山庄概况和风景，吸引读者"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4",
+            "summary": "两处场地相距一英里、设施独立，房型多样，适合20到80人乃至更多人的团体，欢迎预约参观。",
+            "function": "介绍住宿条件，突出适合团体入住"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:5",
+            "summary": "引出收费标准。",
+            "function": "提示下文是价格表"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:7",
+            "summary": "引出入住期间的各项规定。",
+            "function": "提示下文是住宿须知"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:8",
+            "summary": "标准入住时间是下午2点，日程允许时可以免费提前到中午12点。",
+            "function": "说明入住规定"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:9",
+            "summary": "标准退房时间是上午10点，中午12点以后退房每小时收费100美元。",
+            "function": "说明退房规定"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:10",
+            "summary": "山庄不允许宠物留宿，服务性动物除外。",
+            "function": "说明宠物规定"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:11",
+            "summary": "午夜前要调低音乐和人声，并把聚会移到室内。",
+            "function": "说明噪音规定"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项分别放回山庄简介核对，找出与介绍相符的一项。",
+      "stemTranslationZh": "关于安德森山庄，我们可以知道什么？",
+      "locateBy": "options",
+      "locateFindZh": "逐项回简介里找开业年份、照片用途、接待对象和经营者",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它历史悠久。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Anderson Lodge opened as a retreat center in November of 2004.",
+            "sourceHighlight": "in November of 2004",
+            "optionText": "It has a long history.",
+            "optionHighlight": "a long history",
+            "explanation": "原文只交代山庄2004年11月才作为休养中心开业（opened … in November of 2004），没讲它有悠久的历史或传统。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:3",
+              "quote": "Anderson Lodge opened as a retreat center in November of 2004.",
+              "anchor": "2004年开业"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它举办摄影比赛。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "photos",
+            "optionText": "photo",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了原文的 photos。原文是请读者翻看网站上的山庄照片，还说照片拍不出实景的美（don’t do it justice），没提举办摄影比赛。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:3",
+              "quote": "As you scroll through the many photos on our site",
+              "anchor": "浏览网站照片"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它适合团体聚会。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4",
+              "quote": "Groups enjoy the quality accommodations well suited for groups ranging from 20-80 overnight guests and more!",
+              "anchor": "适合20到80人以上的团体"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它与一家旅行社合作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It works with a travel agency.",
+            "explanation": "原文说山庄由安德森夫妇自家经营（family-run），想参观就直接联系山庄（contact us for a tour），没提和旅行社合作。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is suitable for gatherings.",
+          "sourceRole": "correctOption",
+          "targetText": "well suited for groups ranging from 20-80 overnight guests and more",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:4",
+          "relationType": "paraphrase",
+          "note": "选项的“适合聚会”（suitable for gatherings）就是原文说的“很适合团体”（well suited for groups）：20到80人乃至更多人都能一起住下，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读价格表，用基础价、基础人数和加人费算出25人住两晚的总价。",
+      "stemTranslationZh": "一个25人的团体在山顶别墅住两晚，要付多少钱？",
+      "locateBy": "options",
+      "locateFindZh": "回价格表找基础价、含几人、超出每人加多少",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "2350美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "$2350.",
+            "explanation": "按价格表算不出这个数：两晚基础价共1650美元，多出的10人两晚共加200美元，总价1850美元，比2350美元少500美元。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "1850美元。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:2",
+              "quote": "$825",
+              "anchor": "每晚基础价825美元"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:3",
+              "quote": "15",
+              "anchor": "基础价含15人"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:4",
+              "quote": "Up to 50: $10 per person",
+              "anchor": "50人以内每人加10美元"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "1750美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Up to 50: $10 per person",
+            "sourceHighlight": "$10 per person",
+            "optionText": "$1750.",
+            "optionHighlight": "$1750",
+            "explanation": "1750美元是两晚基础价1650美元只加了一次100美元。这是过夜价格表（Overnight pricing chart），加人费也按晚收，两晚要加200美元。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:4",
+              "quote": "Up to 50: $10 per person",
+              "anchor": "每人加10美元"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "1650美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Guests covered in base price",
+            "sourceHighlight": "Guests covered",
+            "optionText": "$1650.",
+            "optionHighlight": "$1650",
+            "explanation": "1650美元只是每晚825美元乘两晚的基础价。基础价只包含15人（Guests covered in base price），另外10人每晚还要加钱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:3",
+              "quote": "15",
+              "anchor": "基础价含15人"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "$1850.",
+          "sourceRole": "correctOption",
+          "targetText": "$825",
+          "targetParagraphId": "cell:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:ocr-916a21169272a7ae:2:2",
+          "relationType": "calculation",
+          "note": "选项的1850美元原文没写，要从价格表算出：每晚基础价825美元含15人，25人多出10人，每人加10美元共100美元，每晚925美元；住两晚 925×2=1850 美元，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把选项放回须知里的各条规定，分清哪条是必须做的，哪条只是允许。",
+      "stemTranslationZh": "客人被要求做什么？",
+      "locateBy": "options",
+      "locateFindZh": "按选项找对应条目，看是必须做还是只是允许",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "带上服务性动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Service animals",
+            "optionText": "service animals",
+            "matchType": "exact",
+            "relationNote": "选项照搬了 service animals。原文说服务性动物可以进入（are permitted），是允许带，不是要求客人必须带。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:10",
+              "quote": "Service animals are permitted.",
+              "anchor": "服务性动物可以进入"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "中午12点以后退房。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "after 12:00 pm",
+            "optionText": "after 12:00 pm",
+            "matchType": "exact",
+            "relationNote": "原文的 after 12:00 pm 说的是超时退房：标准退房是上午10点，12点以后退房要按每小时100美元另收费（at $100/hr），不是规定客人这样做。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:9",
+              "quote": "Check-out after 12:00 pm, at $100/hr.",
+              "anchor": "12点后退房要收费"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "午夜以后降低噪音。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:11",
+              "quote": "Lower the volume of music and attendees by 12:00 am.",
+              "anchor": "午夜前调低音量"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:11",
+              "quote": "You are to bring the party indoors by 12:00 am.",
+              "anchor": "午夜前把聚会移到室内"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在入住时间之前到达。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Early check-in of 12:00 pm may be permitted (no cost) if schedule allows.",
+            "sourceHighlight": "may be permitted",
+            "optionText": "Arrive prior to check-in time.",
+            "optionHighlight": "Arrive prior to check-in time",
+            "explanation": "原文说日程允许时才可以提前到中午12点入住（may be permitted … if schedule allows），这是可选的方便，不是客人必须做的事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:8",
+              "quote": "Early check-in of 12:00 pm may be permitted (no cost) if schedule allows.",
+              "anchor": "可提前入住"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reduce noise after midnight.",
+          "sourceRole": "correctOption",
+          "targetText": "Lower the volume of music and attendees by 12:00 am.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-a:11",
+          "relationType": "paraphrase",
+          "note": "选项的“降低噪音”（Reduce noise）就是原文的“调低音乐和人声的音量”（Lower the volume of music and attendees）。这条用祈使句定下规矩，最迟到午夜（by 12:00 am）就要调低，也就是午夜以后要保持安静，选 C。"
+        }
+      ]
+    }
+  }
+}

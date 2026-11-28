@@ -1,0 +1,785 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d": {
+      "overview": "这是一篇书评，介绍德国林务员渥雷本的《树木的力量》。书用接地气的语言讲森林对气候的重要作用，批评人们只把树当作储碳单元的狭隘看法，并主张少开发自然、让森林自我照料。",
+      "fullTranslationZh": "下次你在炎热的日子里穿过公园时，不妨花点时间坐到一棵古老的大树下。你会发现，这里的温度比待在伞下要低大约2°C。为什么呢？因为一棵成年大树会从叶子里释放出大量水分，让周围的空气降温，就像出汗让我们的身体降温一样。\n所以，一棵树就能影响它周围的小气候——那么一整片森林呢？这正是德国林务员彼得·渥雷本在《树木的力量》一书中探讨的问题。他以清新、生动的笔调书写树木、生态系统、树根以及生活在树木之中和周围的众多生物。他认为，森林和树木会为自己的生存做出决定，会保护和照顾它们的幼苗。\n对读者来说，这样的语言有些听起来很熟悉，也有些读者也许知道，这种写法过去曾招来嘲笑。然而，正是这种接地气、像聊天一样的风格让这本书鲜活起来，也让复杂的科学变得通俗易懂。他用简单的日常用语解释各种过程，比如树木在一年中不同时期如何获取和利用糖分。\n渥雷本的文风平静，但他掩饰不住自己的愤怒：如今的人们——包括许多环保人士——“把树木几乎只看作二氧化碳的生物储存单元，无论树木是活着还是死去”。这种狭隘的看法忽视了森林为调节全球气温带来的巨大益处。他的观点和批评有新兴科学和新研究的支持，也有实地观察作依据：森林的存在会如何改变周边的地貌。\n这本书充满智慧，发人深省。在强调狼作为顶级捕食者在保护森林中所起作用的那一章里，渥雷本写道：“我们可以从任何方向着手保护森林，但结果总是一样的。我们必须少开发自然，减轻对它的压力。我们必须让森林自己照顾自己，以此增强森林的力量。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+          "sourceText": "However, it’s this down-to-earth, conversational style that makes the book come to life and makes complex science accessible.",
+          "displayText": "However, it’s this down-to-earth, conversational style that makes the book come to life and makes complex science accessible.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:33"
+          ],
+          "translationZh": "然而，正是这种接地气、像聊天一样的风格让这本书鲜活起来，也让复杂的科学变得通俗易懂。",
+          "analysisZh": "这是强调句 it is … that …，被强调的是 this down-to-earth, conversational style（这种接地气、像聊天的风格）。去掉 it’s 和 that，句子就还原成 this style makes the book come to life and makes complex science accessible。that 后两个 makes 并列：make the book come to life 是“使……做”，make complex science accessible 是“使……变得怎样”。However 承接前句“这种写法曾遭嘲笑”，转而为这种风格说好话。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 13,
+              "quote": "it’s"
+            },
+            {
+              "start": 55,
+              "end": 87,
+              "quote": "that makes the book come to life"
+            },
+            {
+              "start": 92,
+              "end": 124,
+              "quote": "makes complex science accessible"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+          "sourceText": "Wohlleben writes in a calm style, but he can’t hide his anger with the way people today – including many environmentalists – now “think of trees as little more than biological storage units for carbon dioxide either while they are alive or when they are dead”.",
+          "displayText": "Wohlleben writes in a calm style, but he can’t hide his anger with the way people today – including many environmentalists – now “think of trees as little more than biological storage units for carbon dioxide either while they are alive or when they are dead”.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:34"
+          ],
+          "translationZh": "渥雷本的文风平静，但他掩饰不住自己的愤怒：如今的人们——包括许多环保人士——“把树木几乎只看作二氧化碳的生物储存单元，无论树木是活着还是死去”。",
+          "analysisZh": "but 连接两个分句：前面 Wohlleben writes in a calm style，后面主干是 he can’t hide his anger with the way …（对……的方式掩不住愤怒）。the way 后接省略了关系词的定语从句 people today now “think of trees as …”；两个破折号之间的 including many environmentalists 是插入语，补充 people 的范围。think of A as B 意为“把 A 看作 B”，little more than 意为“只不过是”，either while … or when … 说明不论树是活是死。",
+          "underlineRanges": [
+            {
+              "start": 38,
+              "end": 61,
+              "quote": "he can’t hide his anger"
+            },
+            {
+              "start": 90,
+              "end": 122,
+              "quote": "including many environmentalists"
+            },
+            {
+              "start": 130,
+              "end": 164,
+              "quote": "think of trees as little more than"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:1"
+              ],
+              "start": 0,
+              "end": 106,
+              "quote": "下次你在炎热的日子里穿过公园时，不妨花点时间坐到一棵古老的大树下。你会发现，这里的温度比待在伞下要低大约2°C。为什么呢？因为一棵成年大树会从叶子里释放出大量水分，让周围的空气降温，就像出汗让我们的身体降温一样。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2"
+              ],
+              "start": 107,
+              "end": 239,
+              "quote": "所以，一棵树就能影响它周围的小气候——那么一整片森林呢？这正是德国林务员彼得·渥雷本在《树木的力量》一书中探讨的问题。他以清新、生动的笔调书写树木、生态系统、树根以及生活在树木之中和周围的众多生物。他认为，森林和树木会为自己的生存做出决定，会保护和照顾它们的幼苗。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3"
+              ],
+              "start": 240,
+              "end": 362,
+              "quote": "对读者来说，这样的语言有些听起来很熟悉，也有些读者也许知道，这种写法过去曾招来嘲笑。然而，正是这种接地气、像聊天一样的风格让这本书鲜活起来，也让复杂的科学变得通俗易懂。他用简单的日常用语解释各种过程，比如树木在一年中不同时期如何获取和利用糖分。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4"
+              ],
+              "start": 363,
+              "end": 508,
+              "quote": "渥雷本的文风平静，但他掩饰不住自己的愤怒：如今的人们——包括许多环保人士——“把树木几乎只看作二氧化碳的生物储存单元，无论树木是活着还是死去”。这种狭隘的看法忽视了森林为调节全球气温带来的巨大益处。他的观点和批评有新兴科学和新研究的支持，也有实地观察作依据：森林的存在会如何改变周边的地貌。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5"
+              ],
+              "start": 509,
+              "end": 624,
+              "quote": "这本书充满智慧，发人深省。在强调狼作为顶级捕食者在保护森林中所起作用的那一章里，渥雷本写道：“我们可以从任何方向着手保护森林，但结果总是一样的。我们必须少开发自然，减轻对它的压力。我们必须让森林自己照顾自己，以此增强森林的力量。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-q32-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+                "start": 0,
+                "end": 89,
+                "quote": "So a single tree influences the microclimate around it – but what about an entire forest?"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+                "start": 90,
+                "end": 140,
+                "quote": "That’s the question explored in The Power of Trees"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p2",
+                "start": 0,
+                "end": 28,
+                "quote": "所以，一棵树就能影响它周围的小气候——那么一整片森林呢？"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p2",
+                "start": 28,
+                "end": 59,
+                "quote": "这正是德国林务员彼得·渥雷本在《树木的力量》一书中探讨的问题。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-q33-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+                "start": 144,
+                "end": 254,
+                "quote": "this down-to-earth, conversational style that makes the book come to life and makes complex science accessible"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+                "start": 355,
+                "end": 380,
+                "quote": "in simple, everyday terms"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p3",
+                "start": 45,
+                "end": 83,
+                "quote": "正是这种接地气、像聊天一样的风格让这本书鲜活起来，也让复杂的科学变得通俗易懂"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p3",
+                "start": 84,
+                "end": 99,
+                "quote": "他用简单的日常用语解释各种过程"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-q34-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+                "start": 378,
+                "end": 547,
+                "quote": "His claims and criticisms are backed by emerging science and new research, as well as practical observations of how the presence of forests changes the landscape nearby."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p4",
+                "start": 99,
+                "end": 145,
+                "quote": "他的观点和批评有新兴科学和新研究的支持，也有实地观察作依据：森林的存在会如何改变周边的地貌。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-q35-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+                "start": 260,
+                "end": 323,
+                "quote": "We must put less pressure on nature by exploiting (开发) it less."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+                "start": 324,
+                "end": 395,
+                "quote": "We must strengthen forests by allowing them to take care of themselves."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p5",
+                "start": 72,
+                "end": 90,
+                "quote": "我们必须少开发自然，减轻对它的压力。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p5",
+                "start": 90,
+                "end": 114,
+                "quote": "我们必须让森林自己照顾自己，以此增强森林的力量。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+                "start": 130,
+                "end": 255,
+                "quote": "However, it’s this down-to-earth, conversational style that makes the book come to life and makes complex science accessible."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p3",
+                "start": 42,
+                "end": 84,
+                "quote": "然而，正是这种接地气、像聊天一样的风格让这本书鲜活起来，也让复杂的科学变得通俗易懂。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+                "start": 0,
+                "end": 260,
+                "quote": "Wohlleben writes in a calm style, but he can’t hide his anger with the way people today – including many environmentalists – now “think of trees as little more than biological storage units for carbon dioxide either while they are alive or when they are dead”."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d-p4",
+                "start": 0,
+                "end": 72,
+                "quote": "渥雷本的文风平静，但他掩饰不住自己的愤怒：如今的人们——包括许多环保人士——“把树木几乎只看作二氧化碳的生物储存单元，无论树木是活着还是死去”。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "这是一篇书评：先用大树下比伞下凉快的生活现象引出“整片森林有何作用”的问题和《树木的力量》，再评价书中平易近人的语言，接着介绍作者对“树只是储碳单元”这一狭隘看法的批评，最后引用书中让森林自我照料的主张，称赞此书发人深省。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:1",
+            "summary": "大树从叶子释放水分，让树下比伞下凉快约2°C。",
+            "function": "以生活现象引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+            "summary": "一棵树能影响周围的小气候，那整片森林呢？这是渥雷本在《树木的力量》中探讨的问题，他把树写得生动鲜活。",
+            "function": "引出这本书和它的主题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+            "summary": "这种接地气、像聊天的写法曾遭嘲笑，却让书生动起来，让复杂的科学通俗易懂。",
+            "function": "评价书的语言风格"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+            "summary": "作者批评人们只把树看作储碳单元，忽视了森林调节气温的巨大益处，他的观点有新研究和实地观察支撑。",
+            "function": "介绍作者的批评及依据"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+            "summary": "书充满智慧；作者主张少开发自然，让森林自我照料。",
+            "function": "引用书中观点，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出《树木的力量》一书探讨的问题。",
+      "stemTranslationZh": "《树木的力量》探讨了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "That 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "气温调节。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "temperature management",
+            "optionText": "Temperature management",
+            "matchType": "exact",
+            "relationNote": "选项照搬了 temperature management。原文说这是森林带来的巨大益处之一（for global temperature management），书探讨的是森林的整体作用，气温调节只是其中一方面。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+              "quote": "This narrow perspective ignores the vast beneficial effects that forests generate for global temperature management.",
+              "anchor": "森林调节全球气温"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "叶子中水分的流失。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "water",
+            "optionText": "water",
+            "matchType": "exact",
+            "relationNote": "选项借了[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:1]]的 water 和 leaves。大树从叶子释放水分（releases … water from its leaves）是解释树下为何凉快的开头例子，用来引出话题，不是书探讨的内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:1",
+              "quote": "a mature tree releases a massive amount of water from its leaves",
+              "anchor": "大树从叶子释放水分"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "小气候的形成。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "microclimate",
+            "optionText": "microclimates",
+            "matchType": "wordFamily",
+            "relationNote": "原文先说一棵树能影响周围的小气候（influences the microclimate），接着用“但是”（but）转到整片森林，书要问的是后者；小气候只是铺垫，原文也没讲它怎样形成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+              "quote": "So a single tree influences the microclimate around it",
+              "anchor": "一棵树影响小气候"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "森林所起的重要作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+              "quote": "So a single tree influences the microclimate around it – but what about an entire forest?",
+              "anchor": "整片森林呢"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+              "quote": "This narrow perspective ignores the vast beneficial effects that forests generate for global temperature management.",
+              "anchor": "森林的巨大益处"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The Power of Trees",
+          "sourceRole": "stem",
+          "targetText": "That’s the question explored in The Power of Trees by German forester Peter Wohlleben.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "but what about an entire forest?",
+          "bridgeZh": "That 指整片森林能起什么作用这个问题",
+          "note": "题干 The Power of Trees 原词出现在原文。"
+        },
+        {
+          "sourceText": "The vital role that forests play.",
+          "sourceRole": "correctOption",
+          "targetText": "but what about an entire forest?",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“森林的重要作用”（vital role that forests play）概括了书要回答的问题：一棵树尚且能改变身边的小气候，整片森林又能做什么；[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4|This narrow perspective ignores]]还说森林带来巨大益处（vast beneficial effects），选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "根据书评对写法的评价，选出最能描述书中语言的词。",
+      "stemTranslationZh": "下列哪一项可以描述这本书的语言？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看 However 后的评价",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "复杂的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "complex",
+            "optionText": "Complex",
+            "matchType": "exact",
+            "relationNote": "选项照搬了 complex。原文的 complex 修饰的是科学本身，说他的语言让复杂的科学变得好懂（makes complex science accessible），语言本身并不复杂。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+              "quote": "However, it’s this down-to-earth, conversational style that makes the book come to life and makes complex science accessible.",
+              "anchor": "让复杂科学好懂"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "华丽的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Fancy.",
+            "explanation": "原文说他用简单的日常用语（simple, everyday terms）讲解，写法像聊天，没说语言华丽。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "平易近人的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+              "quote": "However, it’s this down-to-earth, conversational style that makes the book come to life and makes complex science accessible.",
+              "anchor": "接地气、像聊天"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+              "quote": "He explains processes, such as the way trees access and use sugars at different times of the year, in simple, everyday terms.",
+              "anchor": "简单的日常用语"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "专业的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "German forester Peter Wohlleben",
+            "sourceEntity": "forester",
+            "optionText": "Professional.",
+            "optionEntity": "Professional",
+            "explanation": "林务员（forester）的身份和书里的科学内容会让人想到专业，但原文说他的写法接地气、像聊天（conversational），不是专业腔。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:2",
+              "quote": "German forester Peter Wohlleben",
+              "anchor": "德国林务员"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "language",
+          "sourceRole": "stem",
+          "targetText": "For readers, some of this language is familiar, and some may know that this style has been a source of derision (嘲笑) in the past.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "this down-to-earth, conversational style that makes the book come to life and makes complex science accessible",
+          "bridgeZh": "However 后才是对这种语言的正面评价",
+          "note": "题干 language 原词出现在原文。"
+        },
+        {
+          "sourceText": "Approachable.",
+          "sourceRole": "correctOption",
+          "targetText": "this down-to-earth, conversational style that makes the book come to life and makes complex science accessible",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“平易近人”（Approachable）对应原文的“接地气、像聊天”（down-to-earth, conversational）和“让复杂的科学变得好懂”（accessible）；他还用简单的日常用语（simple, everyday terms）讲树获取和利用糖分这类过程，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "推断 Wohlleben 怎样对待人们对森林的狭隘看法。",
+      "stemTranslationZh": "渥雷本如何对待人们对森林的狭隘看法？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看他怎样回应这种看法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他对此轻描淡写。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Wohlleben writes in a calm style, but he can’t hide his anger",
+            "sourceHighlight": "can’t hide his anger",
+            "optionText": "He treats it lightly.",
+            "optionHighlight": "treats it lightly",
+            "explanation": "他文风平静（calm style），容易让人以为他不当回事；但后半句说他对这种看法掩不住愤怒（can’t hide his anger），并没有轻描淡写。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+              "quote": "Wohlleben writes in a calm style, but he can’t hide his anger",
+              "anchor": "掩不住愤怒"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他对此充耳不闻。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This narrow perspective ignores the vast beneficial effects",
+            "sourceEntity": "This narrow perspective",
+            "optionText": "He turns a deaf ear to it.",
+            "optionEntity": "He",
+            "explanation": "原文里“忽视”（ignores）的主语是这种狭隘看法，是它忽视了森林的巨大益处；Wohlleben 并没有充耳不闻，而是提出批评。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+              "quote": "This narrow perspective ignores the vast beneficial effects",
+              "anchor": "狭隘看法忽视益处"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他有选择地提及它。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He refers to it selectively.",
+            "explanation": "原文没说他只挑一部分来谈；他是直接批评这种看法，并拿新研究和实地观察来支撑。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他令人信服地反驳它。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+              "quote": "His claims and criticisms are backed by emerging science and new research, as well as practical observations of how the presence of forests changes the landscape nearby.",
+              "anchor": "批评有科学和观察支撑"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+              "quote": "he can’t hide his anger with the way people today",
+              "anchor": "掩不住愤怒"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "narrow perspective",
+          "sourceRole": "stem",
+          "targetText": "This narrow perspective ignores the vast beneficial effects that forests generate for global temperature management.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "His claims and criticisms are backed by emerging science and new research",
+          "bridgeZh": "His criticisms 针对的正是这种狭隘看法",
+          "note": "题干 narrow perspective 原词出现在原文。"
+        },
+        {
+          "sourceText": "He argues against it convincingly.",
+          "sourceRole": "correctOption",
+          "targetText": "His claims and criticisms are backed by emerging science and new research",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项有两层意思：“反驳”落在他提出的批评（criticisms），他对这种看法也掩不住愤怒（can’t hide his anger）；“令人信服”落在这些批评有新兴科学、新研究和实地观察撑腰（backed by emerging science and new research），选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Wohlleben 为保护森林提出的建议。",
+      "stemTranslationZh": "渥雷本对保护森林提出了什么建议？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找 must 开头的建议",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "应对气候变化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Fighting climate change.",
+            "explanation": "原文提到森林有助于调节全球气温，但 Wohlleben 给的保护办法是少开发、让森林自己照料，没提应对气候变化。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "不去干预它们。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+              "quote": "We must strengthen forests by allowing them to take care of themselves.",
+              "anchor": "让森林自己照顾自己"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+              "quote": "We must put less pressure on nature by exploiting (开发) it less.",
+              "anchor": "少开发自然"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "退耕还林。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Returning farmland to forest.",
+            "explanation": "原文没提退耕还林；他主张的是少插手，让森林自己照顾自己，而不是由人去扩种森林。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把狼赶走。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "highlighting the role of wolves as top predators (捕食者) in preserving the forest",
+            "sourceHighlight": "in preserving the forest",
+            "optionText": "Driving wolves away.",
+            "optionHighlight": "Driving wolves away",
+            "explanation": "选项借了原文的狼（wolves）。原文说狼作为顶级捕食者在保护森林中起作用（in preserving the forest），把狼赶走正好与此相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+              "quote": "highlighting the role of wolves as top predators (捕食者) in preserving the forest",
+              "anchor": "狼有助于保护森林"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "protecting forests",
+          "sourceRole": "stem",
+          "targetText": "In his chapter highlighting the role of wolves as top predators (捕食者) in preserving the forest, Wohlleben writes: “We can come at protecting forests from whatever direction we want, but the results are always the same.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "allowing them to take care of themselves",
+          "bridgeZh": "but 后说结果都一样，接着两个 must 给出做法",
+          "note": "题干 protecting forests 原词出现在原文。"
+        },
+        {
+          "sourceText": "Leaving them alone.",
+          "sourceRole": "correctOption",
+          "targetText": "We must strengthen forests by allowing them to take care of themselves.",
+          "targetParagraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“不去干预它们”（Leaving them alone）对应原文的“让森林自己照顾自己”（allowing them to take care of themselves）；[[block:paper-mock-jiangsu-subei-eight-cities-2025-05:reading-d:5|We must put less pressure]]说少开发、少给自然施压（exploiting … less），也是少插手的意思，选 B。"
+        }
+      ]
+    }
+  }
+}

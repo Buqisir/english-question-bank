@@ -1,0 +1,1003 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices": {
+      "overview": "文章讲怎样在工作会议上让别人听到自己的想法：先说明想法不说出来就没有价值，再给出四条建议，即有备而来、直奔主题、把讲话变成对话、对自己有信心。",
+      "fullTranslationZh": "会议是让自己被人注意到的重要途径。当你在会上“表现不俗”时，你就表明了自己很自信，这能让你脱颖而出，被看作未来的领导者。遗憾的是，同事们读不懂你的心思。所以，无论你脑子里有多少好点子，在你把它们说出来之前，它们对你、你的团队和你的单位都毫无用处。下面就是让你在会上说出自己声音的指南。\n有备而来。表达想法之前，先计划好几个要点。和一位信得过的同事练一练，他能帮你理顺各种问题。设想一下别人对你的想法可能会有哪些反应。尽可能从更多别人的角度去审视它。针对你的想法，可能会冒出哪些问题？你会怎样回答这些问题？\n直奔主题。先用想法的要点吸引大家，再深入细节。开头有力，就给了他们继续听下去的理由。时间是宝贵的。人们在工作中被无数待办的事情压得喘不过气。“注意力只有八秒”或许只是个传说，但如今人们无疑比以往任何时候都更看重简短。\n把它变成一场对话。人们听冗长的讲话时会失去兴趣。邀请他们参与到你的想法中来。组织论证时，要让他们想提问、想了解更多。给他们时间提问，他们就会更感兴趣、更专注、更投入。你越能调动他们参与，他们就越会真正倾听。\n对自己有信心。你越相信自己，表达想法时这份自信就越会流露出来。你说话时，别人能从你的声音里听出自信，从你的肢体语言里看出自信。如果你任由自己觉得紧张，你就会让自己真的紧张起来。花一点时间摆一个力量姿势来对抗紧张。这能给你时间让头脑安静下来、集中注意力。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sent-seven-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+          "sourceText": "So no matter how many great ideas you have in your head, they’re useless to you, your team, and your organization until you express them.",
+          "displayText": "So no matter how many great ideas you have in your head, they’re useless to you, your team, and your organization until you express them.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:36"
+          ],
+          "translationZh": "所以，无论你脑子里有多少好点子，在你把它们说出来之前，它们对你、你的团队和你的单位都毫无用处。",
+          "analysisZh": "主干是 they’re useless to you, your team, and your organization，they 指 great ideas。句首 no matter how many 引导让步状语从句，意思是“不管有多少”；句末 until you express them 是时间状语，和 useless 合起来表示“说出来以前一直没用”。句首 So 表明这是由前一句“同事读不懂心思”推出的结论。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 21,
+              "quote": "no matter how many"
+            },
+            {
+              "start": 57,
+              "end": 72,
+              "quote": "they’re useless"
+            },
+            {
+              "start": 114,
+              "end": 136,
+              "quote": "until you express them"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sent-seven-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+          "sourceText": "While the eight second attention span may be a myth, people certainly appreciate brevity (简短) now more than ever.",
+          "displayText": "While the eight second attention span may be a myth, people certainly appreciate brevity (简短) now more than ever.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:38"
+          ],
+          "translationZh": "“注意力只有八秒”或许只是个传说，但如今人们无疑比以往任何时候都更看重简短。",
+          "analysisZh": "主干是 people certainly appreciate brevity，后面的 now more than ever 是比较状语，“比以往任何时候都更”。句首 While 引导让步状语从句，相当于“虽然”：先承认八秒注意力的说法 may be a myth，再用 certainly 把重点落在人们确实偏爱简短上，这正是“时间宝贵”的依据。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 5,
+              "quote": "While"
+            },
+            {
+              "start": 53,
+              "end": 88,
+              "quote": "people certainly appreciate brevity"
+            },
+            {
+              "start": 94,
+              "end": 112,
+              "quote": "now more than ever"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "开头一段说在会上表现好能让人脱颖而出，但同事读不懂心思，想法必须说出来，由此引出指南；后面四段各以一句祈使句开头，依次给出四条建议，每条后面说明怎么做、为什么。",
+        "units": [
+          {
+            "unitId": "unit-seven-1",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1"
+            ],
+            "summary": "会议是让人注意到你的好机会，但想法不说出来就没用，引出发言指南。"
+          },
+          {
+            "unitId": "unit-seven-2",
+            "heading": "Come prepared.",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2"
+            ],
+            "summary": "有备而来：先列要点、找同事演练，并从别人的角度预想可能的问题。"
+          },
+          {
+            "unitId": "unit-seven-3",
+            "heading": "Get to the point.",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3"
+            ],
+            "summary": "直奔主题：先讲要点再讲细节，因为大家时间宝贵、偏爱简短。"
+          },
+          {
+            "unitId": "unit-seven-4",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4"
+            ],
+            "summary": "把讲话变成对话：避免长篇独白，邀请听众参与提问，让他们真正倾听。"
+          },
+          {
+            "unitId": "unit-seven-5",
+            "heading": "Have confidence in yourself.",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:5"
+            ],
+            "summary": "对自己有信心：自信会从声音和姿态中流露，紧张时可以摆力量姿势让自己静下来。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 39,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项是祈使句，和各段开头的 \"Come prepared.\" \"Get to the point.\" 写法一样，最像第 39 题。但空后从 \"a long talk\" 让人走神讲到 \"Invite them to be a part of your idea\"，要的是请听众参与，不是说得优雅。",
+          "quotes": [
+            "Come prepared.",
+            "Get to the point.",
+            "a long talk",
+            "Invite them to be a part of your idea"
+          ]
+        },
+        "G": {
+          "target": 36,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "B",
+          "shared": [
+            "make"
+          ],
+          "text": "选项的 \"This\" 和 \"show\" 像在接第 36 题空前的 \"this can mark you out\" 和 \"you show that you’re confident\"。但空后 \"So\" 推出想法 \"until you express them\" 才有用，留好印象推不出要开口。也可能误填第 40 题，那里讲 \"Fight nerves\"，不是给别人留印象。",
+          "quotes": [
+            "This",
+            "show",
+            "this can mark you out",
+            "you show that you’re confident",
+            "So",
+            "until you express them",
+            "Fight nerves"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-seven",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-seven",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 142,
+              "quote": "会议是让自己被人注意到的重要途径。当你在会上“表现不俗”时，你就表明了自己很自信，这能让你脱颖而出，被看作未来的领导者。遗憾的是，同事们读不懂你的心思。所以，无论你脑子里有多少好点子，在你把它们说出来之前，它们对你、你的团队和你的单位都毫无用处。下面就是让你在会上说出自己声音的指南。"
+            },
+            {
+              "paragraphId": "tr-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2"
+              ],
+              "start": 143,
+              "end": 252,
+              "quote": "有备而来。表达想法之前，先计划好几个要点。和一位信得过的同事练一练，他能帮你理顺各种问题。设想一下别人对你的想法可能会有哪些反应。尽可能从更多别人的角度去审视它。针对你的想法，可能会冒出哪些问题？你会怎样回答这些问题？"
+            },
+            {
+              "paragraphId": "tr-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3"
+              ],
+              "start": 253,
+              "end": 361,
+              "quote": "直奔主题。先用想法的要点吸引大家，再深入细节。开头有力，就给了他们继续听下去的理由。时间是宝贵的。人们在工作中被无数待办的事情压得喘不过气。“注意力只有八秒”或许只是个传说，但如今人们无疑比以往任何时候都更看重简短。"
+            },
+            {
+              "paragraphId": "tr-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4"
+              ],
+              "start": 362,
+              "end": 465,
+              "quote": "把它变成一场对话。人们听冗长的讲话时会失去兴趣。邀请他们参与到你的想法中来。组织论证时，要让他们想提问、想了解更多。给他们时间提问，他们就会更感兴趣、更专注、更投入。你越能调动他们参与，他们就越会真正倾听。"
+            },
+            {
+              "paragraphId": "tr-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:5"
+              ],
+              "start": 466,
+              "end": 592,
+              "quote": "对自己有信心。你越相信自己，表达想法时这份自信就越会流露出来。你说话时，别人能从你的声音里听出自信，从你的肢体语言里看出自信。如果你任由自己觉得紧张，你就会让自己真的紧张起来。花一点时间摆一个力量姿势来对抗紧张。这能给你时间让头脑安静下来、集中注意力。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-seven-p1",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+            "text": "Meetings are a key way to get yourself noticed. When you “hold your own” in a meeting, you show that you’re confident, and this can mark you out as a future leader. Unluckily, your colleagues can’t read minds. So no matter how many great ideas you have in your head, they’re useless to you, your team, and your organization until you express them. Here is the guide to getting your voice heard at meetings."
+          },
+          {
+            "textId": "done-seven-p2",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2",
+            "text": "Come prepared. Have some talking points planned out before you express your idea. Practice with a trusted colleague who can help you iron out any problems. Imagine the possible reactions people might have to your idea. Look at it from as many other perspectives as possible. What are some questions that might come up in response to your idea? How will you answer those questions?"
+          },
+          {
+            "textId": "done-seven-p3",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+            "text": "Get to the point. Engage people with the main points of the idea, then dive into the details. When you start strong you’ll give them a reason to continue listening. Time is precious. People are overwhelmed with numerous things to do at work. While the eight second attention span may be a myth, people certainly appreciate brevity (简短) now more than ever."
+          },
+          {
+            "textId": "done-seven-p4",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4",
+            "text": "Make it a conversation. People lose interest when they’re listening to a long talk. Invite them to be a part of your idea. Organize your argument in a way that makes them want to ask questions and learn more. When you give them time to ask questions, they’ll be more interested, attentive, and engaged. The more you can engage them, the more they’ll truly listen."
+          },
+          {
+            "textId": "done-seven-p5",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:5",
+            "text": "Have confidence in yourself. The more you believe yourself, the more that shows through when you express an idea. People can hear the confidence in your voice when you speak and see it in your body language. If you allow yourself to think that you’re nervous, you’ll convince yourself to be. Fight nerves by taking a few moments to stand in a power pose. It gives you time to quiet your mind and focus."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+                "start": 286,
+                "end": 308,
+                "quote": "until you express them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p1",
+                "start": 92,
+                "end": 102,
+                "quote": "在你把它们说出来之前"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:36"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:36",
+            "sourceRanges": [
+              {
+                "textId": "done-seven-p1",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+                "start": 165,
+                "end": 209,
+                "quote": "Unluckily, your colleagues can’t read minds."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p1",
+                "start": 60,
+                "end": 76,
+                "quote": "遗憾的是，同事们读不懂你的心思。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2",
+                "start": 156,
+                "end": 218,
+                "quote": "Imagine the possible reactions people might have to your idea."
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2",
+                "start": 226,
+                "end": 294,
+                "quote": "What are some questions that might come up in response to your idea?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p2",
+                "start": 45,
+                "end": 65,
+                "quote": "设想一下别人对你的想法可能会有哪些反应。"
+              },
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p2",
+                "start": 81,
+                "end": 98,
+                "quote": "针对你的想法，可能会冒出哪些问题？"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:37"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:37",
+            "sourceRanges": [
+              {
+                "textId": "done-seven-p2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2",
+                "start": 219,
+                "end": 274,
+                "quote": "Look at it from as many other perspectives as possible."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p2",
+                "start": 65,
+                "end": 81,
+                "quote": "尽可能从更多别人的角度去审视它。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+                "start": 172,
+                "end": 230,
+                "quote": "People are overwhelmed with numerous things to do at work."
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+                "start": 284,
+                "end": 319,
+                "quote": "people certainly appreciate brevity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p3",
+                "start": 49,
+                "end": 70,
+                "quote": "人们在工作中被无数待办的事情压得喘不过气。"
+              },
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p3",
+                "start": 90,
+                "end": 107,
+                "quote": "人们无疑比以往任何时候都更看重简短"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:38"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:38",
+            "sourceRanges": [
+              {
+                "textId": "done-seven-p3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+                "start": 165,
+                "end": 182,
+                "quote": "Time is precious."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p3",
+                "start": 42,
+                "end": 49,
+                "quote": "时间是宝贵的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4",
+                "start": 7,
+                "end": 66,
+                "quote": "People lose interest when they’re listening to a long talk."
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4",
+                "start": 143,
+                "end": 175,
+                "quote": "makes them want to ask questions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p4",
+                "start": 9,
+                "end": 24,
+                "quote": "人们听冗长的讲话时会失去兴趣。"
+              },
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p4",
+                "start": 44,
+                "end": 51,
+                "quote": "要让他们想提问"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:39"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:39",
+            "sourceRanges": [
+              {
+                "textId": "done-seven-p4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4",
+                "start": 0,
+                "end": 23,
+                "quote": "Make it a conversation."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p4",
+                "start": 0,
+                "end": 9,
+                "quote": "把它变成一场对话。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:5",
+                "start": 292,
+                "end": 354,
+                "quote": "Fight nerves by taking a few moments to stand in a power pose."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p5",
+                "start": 88,
+                "end": 106,
+                "quote": "花一点时间摆一个力量姿势来对抗紧张。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:40"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:40",
+            "sourceRanges": [
+              {
+                "textId": "done-seven-p5",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:5",
+                "start": 355,
+                "end": 402,
+                "quote": "It gives you time to quiet your mind and focus."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p5",
+                "start": 106,
+                "end": 126,
+                "quote": "这能给你时间让头脑安静下来、集中注意力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sent-seven-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:36"
+            ],
+            "selectedSentenceId": "sent-seven-1",
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+                "start": 175,
+                "end": 193,
+                "quote": "no matter how many"
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+                "start": 229,
+                "end": 244,
+                "quote": "they’re useless"
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+                "start": 286,
+                "end": 308,
+                "quote": "until you express them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p1",
+                "start": 76,
+                "end": 123,
+                "quote": "所以，无论你脑子里有多少好点子，在你把它们说出来之前，它们对你、你的团队和你的单位都毫无用处。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sent-seven-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:38"
+            ],
+            "selectedSentenceId": "sent-seven-2",
+            "sourceRanges": [
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+                "start": 231,
+                "end": 236,
+                "quote": "While"
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+                "start": 284,
+                "end": 319,
+                "quote": "people certainly appreciate brevity"
+              },
+              {
+                "textId": "src-seven",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+                "start": 325,
+                "end": 343,
+                "quote": "now more than ever"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-seven",
+                "paragraphId": "tr-p3",
+                "start": 70,
+                "end": 108,
+                "quote": "“注意力只有八秒”或许只是个传说，但如今人们无疑比以往任何时候都更看重简短。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:36": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "great ideas you have in your head",
+        "useless",
+        "until you express them",
+        "hold your own"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:1",
+        "beforeQuote": "this can mark you out as a future leader.",
+        "afterQuote": "So no matter how many great ideas you have in your head, they’re useless to you, your team, and your organization until you express them."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "So",
+          "signalSide": "context-after",
+          "targetText": "your colleagues can’t read minds",
+          "relation": "So 引出结论：既然同事读不懂心思，想法不说出来就没用。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Unluckily",
+          "signalSide": "option",
+          "targetText": "mark you out as a future leader",
+          "relation": "Unluckily 把话从会上表现的好处转到想法别人看不见的难处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "read minds",
+          "signalSide": "option",
+          "targetText": "great ideas you have in your head",
+          "relation": "想法只装在脑子里，别人读不到，对上 in your head。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "until you express them",
+          "signalSide": "context-after",
+          "targetText": "can’t read minds",
+          "relation": "要说出来别人才知道，正好回应读不懂心思。"
+        }
+      ],
+      "lock": [
+        "read minds",
+        "until you express them"
+      ],
+      "find": {
+        "text": "先看空后 \"So\"：想法不说出来就 \"useless\"，空里得给出原因。只有 \"can’t read minds\" 能推出不说别人就不知道。",
+        "quotes": [
+          "So",
+          "useless",
+          "can’t read minds"
+        ]
+      },
+      "explain": "空前说会上表现好能显出领导力，这句用 Unluckily 一转，点出想法光放在心里没人知道；空后的 So 顺着推出必须开口，再引出全文的发言指南。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "great ideas you have in your head / until you express them",
+            "optionSide": "your colleagues can’t read minds",
+            "relation": "同事读不懂心思，所以脑子里的好点子不说出来就没人知道。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前说会上表现好能显出领导力，这句用 Unluckily 一转，点出想法光放在心里没人知道；空后的 So 顺着推出必须开口，再引出全文的发言指南。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "选项的 \"This\" 和 \"show\" 像在接第 36 题空前的 \"this can mark you out\" 和 \"you show that you’re confident\"。但空后 \"So\" 推出想法 \"until you express them\" 才有用，留好印象推不出要开口。也可能误填第 40 题，那里讲 \"Fight nerves\"，不是给别人留印象。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:37": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "possible reactions people might have",
+        "your idea",
+        "questions that might come up",
+        "in response to your idea"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:2",
+        "beforeQuote": "Imagine the possible reactions people might have to your idea.",
+        "afterQuote": "What are some questions that might come up in response to your idea?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "option",
+          "targetText": "your idea",
+          "relation": "it 回指空前的 your idea，要换角度看的就是你的想法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "your idea",
+          "signalSide": "context-before",
+          "targetText": "it",
+          "relation": "your idea 是选项里 it 的先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "other perspectives",
+          "signalSide": "option",
+          "targetText": "possible reactions people might have",
+          "relation": "站到别人的角度看，正是设想别人会有什么反应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "questions that might come up",
+          "signalSide": "context-after",
+          "targetText": "other perspectives",
+          "relation": "换到别人的立场，才能预想别人会提什么问题。"
+        }
+      ],
+      "lock": [
+        "your idea",
+        "perspectives"
+      ],
+      "find": {
+        "text": "空前要设想 \"possible reactions people might have\"，空后列出别人会提的问题。\"other perspectives\" 讲站到别人那边看，\"it\" 回指 \"your idea\"。",
+        "quotes": [
+          "possible reactions people might have",
+          "other perspectives",
+          "it",
+          "your idea"
+        ]
+      },
+      "explain": "空前只说设想别人的反应，这句把它变成具体做法：从尽量多的立场审视自己的想法；空后那两个问句，就是换位之后能预想到的提问和应对。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "possible reactions people might have to your idea",
+            "optionSide": "Look at it from as many other perspectives as possible",
+            "relation": "设想别人的反应，就要从别人的角度看自己的想法。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前只说设想别人的反应，这句把它变成具体做法：从尽量多的立场审视自己的想法；空后那两个问句，就是换位之后能预想到的提问和应对。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:38": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Get to the point",
+        "start strong",
+        "overwhelmed with numerous things to do",
+        "appreciate brevity"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:3",
+        "beforeQuote": "When you start strong you’ll give them a reason to continue listening.",
+        "afterQuote": "People are overwhelmed with numerous things to do at work. While the eight second attention span may be a myth, people certainly appreciate brevity (简短) now more than ever."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "precious",
+          "signalSide": "option",
+          "targetText": "overwhelmed with numerous things to do",
+          "relation": "要做的事太多，时间才显得金贵。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "overwhelmed with numerous things to do",
+          "signalSide": "context-after",
+          "targetText": "Time is precious",
+          "relation": "空后用工作繁忙说明时间为什么宝贵。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "brevity",
+          "signalSide": "context-after",
+          "targetText": "Time",
+          "relation": "大家看重简短，是因为不愿浪费时间。"
+        }
+      ],
+      "lock": [
+        "numerous things to do",
+        "brevity"
+      ],
+      "find": {
+        "text": "先看空后：人们 \"overwhelmed with numerous things to do\"，又看重 \"brevity\"，讲的都是大家没空。只有 \"Time is precious\" 能被这两句撑住。",
+        "quotes": [
+          "overwhelmed with numerous things to do",
+          "brevity",
+          "Time is precious"
+        ]
+      },
+      "explain": "本段劝人开门见山。空前说开头有力才留得住听众，这句给出理由；空后用工作繁忙、偏爱简短把理由坐实，回过头支撑直奔主题的建议。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 也有 \"time\"，但说的是给自己时间去 \"quiet your mind\"；空后讲听众太忙，对象不对。",
+          "quotes": [
+            "time",
+            "quiet your mind"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "overwhelmed with numerous things to do / appreciate brevity",
+            "optionSide": "Time is precious",
+            "relation": "事情多、偏爱简短，都说明听众的时间宝贵。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "本段劝人开门见山。空前说开头有力才留得住听众，这句给出理由；空后用工作繁忙、偏爱简短把理由坐实，回过头支撑直奔主题的建议。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 也有 \"time\"，但说的是给自己时间去 \"quiet your mind\"；空后讲听众太忙，对象不对。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:39": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "a long talk",
+        "Invite them to be a part of your idea",
+        "ask questions",
+        "give them time to ask questions"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "People lose interest when they’re listening to a long talk. Invite them to be a part of your idea. Organize your argument in a way that makes them want to ask questions and learn more."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "conversation",
+          "signalSide": "option",
+          "targetText": "ask questions / Invite them",
+          "relation": "对话要双方都参与，对上邀请听众加入、让他们提问。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a long talk",
+          "signalSide": "context-after",
+          "targetText": "conversation",
+          "relation": "一个人的长篇讲话正是对话的反面，所以要改成对话。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "ask questions",
+          "signalSide": "context-after",
+          "targetText": "conversation",
+          "relation": "让听众提问，讲话就成了你来我往。"
+        }
+      ],
+      "lock": [
+        "a long talk",
+        "Invite them",
+        "ask questions"
+      ],
+      "find": {
+        "text": "空后先说 \"a long talk\" 让人走神，再要 \"Invite them\" 参与、让他们 \"ask questions\"，讲的是你来我往。只有 \"conversation\" 概括这层意思。",
+        "quotes": [
+          "a long talk",
+          "Invite them",
+          "ask questions",
+          "conversation"
+        ]
+      },
+      "explain": "这句是本段的建议，和其他几段开头一样先亮出做法；后文先说一个人讲太久听众会走神，再讲怎样请听众参与和提问，一步步说明怎样把讲话变成交流。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a long talk / Invite them to be a part of your idea / ask questions",
+            "optionSide": "Make it a conversation",
+            "relation": "不做单向长谈，而让听众加入、提问，就是把讲话变成对话。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "这句是本段的建议，和其他几段开头一样先亮出做法；后文先说一个人讲太久听众会走神，再讲怎样请听众参与和提问，一步步说明怎样把讲话变成交流。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "选项是祈使句，和各段开头的 \"Come prepared.\" \"Get to the point.\" 写法一样，最像第 39 题。但空后从 \"a long talk\" 让人走神讲到 \"Invite them to be a part of your idea\"，要的是请听众参与，不是说得优雅。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:40": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Fight nerves",
+        "taking a few moments",
+        "stand in a power pose",
+        "nervous"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:seven-choices:5",
+        "beforeQuote": "Fight nerves by taking a few moments to stand in a power pose.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "taking a few moments to stand in a power pose",
+          "relation": "It 指空前花几分钟摆力量姿势这件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "taking a few moments to stand in a power pose",
+          "signalSide": "context-before",
+          "targetText": "It",
+          "relation": "这是 It 的所指，也是选项要解释的做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "quiet your mind",
+          "signalSide": "option",
+          "targetText": "Fight nerves",
+          "relation": "让头脑安静下来，就是在对抗紧张。"
+        }
+      ],
+      "lock": [
+        "taking a few moments",
+        "Fight nerves"
+      ],
+      "find": {
+        "text": "空在段尾，空前刚说 \"taking a few moments\" 摆姿势。\"It gives you time\" 的 \"It\" 正指这件事，\"quiet your mind\" 又对上 \"Fight nerves\"。",
+        "quotes": [
+          "taking a few moments",
+          "It gives you time",
+          "It",
+          "quiet your mind",
+          "Fight nerves"
+        ]
+      },
+      "explain": "空前给出对付紧张的办法：摆个力量姿势，这句补上它为什么管用：这几分钟让心静下来、注意力集中，讲自信的这一段到这里收住。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Fight nerves by taking a few moments to stand in a power pose",
+            "optionSide": "It gives you time to quiet your mind and focus",
+            "relation": "几分钟的姿势给了时间，让人静下心来，从而压住紧张。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前给出对付紧张的办法：摆个力量姿势，这句补上它为什么管用：这几分钟让心静下来、注意力集中，讲自信的这一段到这里收住。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

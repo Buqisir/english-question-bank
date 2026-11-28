@@ -1,0 +1,1977 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-jiangsu-subei-eight-cities-2025-05",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze": {
+      "overview": "作者回忆自己读英文书的经历：起初逐词查太累，后来像练举重一样读略难的书、按感受调整难度，放下逐词细节后，阅读变成了有趣的习惯，自己也沉浸在故事中，期待有一天能畅游书海。",
+      "fullTranslationZh": "小时候，我在小学读小说时，常常问父母书里的英语生词是什么意思。不管我能看懂多少，我都会一再回去读这些书，因为阅读本身就令人愉快。\n当然，一句话里每个词都要查，那可一点意思都没有。所以在尝试读英文书时，我采用了一种类似举重训练的固定流程：找到自己的舒适区，然后稍稍超出一点，休息一下，再接着尝试。一开始确实很难熬，但没过多久，我就能应对更复杂的内容了。我给自己定了个目标：阅读略高于自己舒适水平的材料；如果读完时感到自信，我选的下一本书就会稍难一些。如果感到沮丧，我就把难度调低一些。\n我乐于练习；即使理解得并不完美，我能看懂的那些词也足以让我读下去。阅读从自我强加的“学习”变成了一种有趣、能长期坚持的习惯。放下对细节的执着——接受自己并非每个词都懂的事实——让我读得更多，在成百上千个语境中一遍又一遍地见到短语和词汇，尽管并不完美。我也沉浸在故事里；我渐渐喜欢上书中的人物，想知道接下来会发生什么。\n仿佛一片海洋在我面前展开，而现在我只是在浅水处蹚水——但我知道，总有一天我会在其中畅游。",
+      "mainLine": {
+        "theme": {
+          "text": "读外语书不必懂每个词，接受这一点（embracing the fact that I didn’t understand every word），阅读才能坚持并越读越好。",
+          "quote": "embracing the fact that I didn’t understand every word"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+            "text": "小时候读小说常问生词，阅读本身就让作者快乐。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+            "text": "读英文书时，作者像练举重一样逐步加难，太难就降一档。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+            "text": "作者不再纠结每个词，阅读从学习变成了习惯。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+            "text": "在大量语境中反复见词，作者沉浸故事、喜欢上人物。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+            "text": "作者把阅读比作大海，相信终有一天能畅游其中。"
+          }
+        ],
+        "emotion": "乐在其中→起初难熬→渐有自信→投入故事→满怀期待"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+          "sourceText": "So when I was trying to read books in English, I adopted something similar to a weightlifting __42__: finding my comfort zone, then pushing a bit beyond it, __43__, and trying again.",
+          "displayText": "So when I was trying to read books in English, I adopted something similar to a weightlifting routine: finding my comfort zone, then pushing a bit beyond it, resting, and trying again.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:42",
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:43"
+          ],
+          "translationZh": "所以在尝试读英文书时，我采用了一种类似举重训练的固定流程：找到自己的舒适区，然后稍稍超出一点，休息一下，再接着尝试。",
+          "analysisZh": "主干是 I adopted something（我采用了某种东西），前面的 when 从句交代时间：在尝试读英文书时。similar to a weightlifting routine 是后置修饰，说明这东西像举重训练的固定流程。冒号后的 finding、pushing、resting、trying 四个动名词并列，按先后顺序把这套流程一步步展开。",
+          "underlineRanges": [
+            {
+              "start": 47,
+              "end": 66,
+              "quote": "I adopted something"
+            },
+            {
+              "start": 67,
+              "end": 101,
+              "quote": "similar to a weightlifting routine"
+            },
+            {
+              "start": 103,
+              "end": 183,
+              "quote": "finding my comfort zone, then pushing a bit beyond it, resting, and trying again"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+          "sourceText": "I made a goal to __45__ material just above my comfortable level; if I felt __46__ when I finished, the next book I chose would be a bit harder.",
+          "displayText": "I made a goal to read material just above my comfortable level; if I felt confident when I finished, the next book I chose would be a bit harder.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:45",
+            "question:paper-mock-jiangsu-subei-eight-cities-2025-05:46"
+          ],
+          "translationZh": "我给自己定了个目标：阅读略高于自己舒适水平的材料；如果读完时感到自信，我选的下一本书就会稍难一些。",
+          "analysisZh": "分号前主干是 I made a goal（我定了个目标），不定式 to read material 说明目标内容，just above my comfortable level 修饰 material，指略高于舒适水平。分号后是条件句：if 从句里又套着 when I finished，说读完时的感受；主句主语 the next book I chose 中，I chose 是省略了关系词的定语从句，would be a bit harder 说下一本会稍难。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "I made a goal to read material"
+            },
+            {
+              "start": 64,
+              "end": 99,
+              "quote": "if I felt confident when I finished"
+            },
+            {
+              "start": 101,
+              "end": 122,
+              "quote": "the next book I chose"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1"
+              ],
+              "start": 0,
+              "end": 64,
+              "quote": "小时候，我在小学读小说时，常常问父母书里的英语生词是什么意思。不管我能看懂多少，我都会一再回去读这些书，因为阅读本身就令人愉快。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2"
+              ],
+              "start": 65,
+              "end": 241,
+              "quote": "当然，一句话里每个词都要查，那可一点意思都没有。所以在尝试读英文书时，我采用了一种类似举重训练的固定流程：找到自己的舒适区，然后稍稍超出一点，休息一下，再接着尝试。一开始确实很难熬，但没过多久，我就能应对更复杂的内容了。我给自己定了个目标：阅读略高于自己舒适水平的材料；如果读完时感到自信，我选的下一本书就会稍难一些。如果感到沮丧，我就把难度调低一些。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4"
+              ],
+              "start": 242,
+              "end": 400,
+              "quote": "我乐于练习；即使理解得并不完美，我能看懂的那些词也足以让我读下去。阅读从自我强加的“学习”变成了一种有趣、能长期坚持的习惯。放下对细节的执着——接受自己并非每个词都懂的事实——让我读得更多，在成百上千个语境中一遍又一遍地见到短语和词汇，尽管并不完美。我也沉浸在故事里；我渐渐喜欢上书中的人物，想知道接下来会发生什么。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5"
+              ],
+              "start": 401,
+              "end": 445,
+              "quote": "仿佛一片海洋在我面前展开，而现在我只是在浅水处蹚水——但我知道，总有一天我会在其中畅游。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+            "text": "Growing up, I would constantly ask my parents what new words meant in English when I was reading novels in primary school. Regardless of how much I understood, I returned to these books because reading in itself was enjoyable."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+            "text": "Of course, looking up every word in a sentence is no fun. So when I was trying to read books in English, I adopted something similar to a weightlifting routine: finding my comfort zone, then pushing a bit beyond it, resting, and trying again. It did suck at the beginning but it wasn’t long before I could tackle more complexity. I made a goal to read material just above my comfortable level; if I felt confident when I finished, the next book I chose would be a bit harder. If I got frustrated, I dialled down the difficulty."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+            "text": "I embraced practice; the words I could understand were enough to keep me going, even if my comprehension wasn’t perfect. Reading turned from self-imposed (自我强加的) “study” to a fun, sustainable habit. Letting go of the specifics—embracing the fact that I didn’t understand every word – helped me cover more ground, allowing"
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+            "text": "me to see phrases and vocabulary over and over in hundreds of contexts, however imperfect. And I became invested in the stories; I grew fond of the characters and wanted to know what happened next."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+            "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+            "text": "It’s as though an ocean has opened up before me, and for now I’m just wading（蹚水）in the shallows – knowing that I’ll swim someday."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "start": 123,
+                "end": 158,
+                "quote": "Regardless of how much I understood"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "start": 162,
+                "end": 185,
+                "quote": "returned to these books"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "start": 31,
+                "end": 39,
+                "quote": "不管我能看懂多少"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "start": 43,
+                "end": 51,
+                "quote": "一再回去读这些书"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:41"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "start": 216,
+                "end": 225,
+                "quote": "enjoyable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:1",
+                "start": 59,
+                "end": 63,
+                "quote": "令人愉快"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 160,
+                "end": 183,
+                "quote": "finding my comfort zone"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 185,
+                "end": 213,
+                "quote": "then pushing a bit beyond it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 53,
+                "end": 61,
+                "quote": "找到自己的舒适区"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 62,
+                "end": 70,
+                "quote": "然后稍稍超出一点"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:42"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 152,
+                "end": 159,
+                "quote": "routine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 48,
+                "end": 52,
+                "quote": "固定流程"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 190,
+                "end": 213,
+                "quote": "pushing a bit beyond it"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 223,
+                "end": 239,
+                "quote": "and trying again"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 62,
+                "end": 70,
+                "quote": "然后稍稍超出一点"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 76,
+                "end": 81,
+                "quote": "再接着尝试"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:43"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 216,
+                "end": 223,
+                "quote": "resting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 71,
+                "end": 75,
+                "quote": "休息一下"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 241,
+                "end": 269,
+                "quote": "It did suck at the beginning"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 311,
+                "end": 326,
+                "quote": "more complexity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 82,
+                "end": 90,
+                "quote": "一开始确实很难熬"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 102,
+                "end": 108,
+                "quote": "更复杂的内容"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:44"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 306,
+                "end": 312,
+                "quote": "tackle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 100,
+                "end": 102,
+                "quote": "应对"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 72,
+                "end": 103,
+                "quote": "trying to read books in English"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 411,
+                "end": 426,
+                "quote": "when I finished"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 27,
+                "end": 33,
+                "quote": "尝试读英文书"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 137,
+                "end": 140,
+                "quote": "读完时"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:45"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 347,
+                "end": 351,
+                "quote": "read"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 120,
+                "end": 122,
+                "quote": "阅读"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 473,
+                "end": 492,
+                "quote": "If I got frustrated"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 459,
+                "end": 471,
+                "quote": "a bit harder"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 159,
+                "end": 165,
+                "quote": "如果感到沮丧"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 154,
+                "end": 158,
+                "quote": "稍难一些"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:46"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 404,
+                "end": 413,
+                "quote": "confident"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 142,
+                "end": 144,
+                "quote": "自信"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 459,
+                "end": 471,
+                "quote": "a bit harder"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 496,
+                "end": 508,
+                "quote": "dialled down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 154,
+                "end": 158,
+                "quote": "稍难一些"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 171,
+                "end": 173,
+                "quote": "调低"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:47"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 516,
+                "end": 526,
+                "quote": "difficulty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 169,
+                "end": 171,
+                "quote": "难度"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 21,
+                "end": 49,
+                "quote": "the words I could understand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 16,
+                "end": 24,
+                "quote": "我能看懂的那些词"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:48"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 91,
+                "end": 104,
+                "quote": "comprehension"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 8,
+                "end": 10,
+                "quote": "理解"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 134,
+                "end": 146,
+                "quote": "self-imposed"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 168,
+                "end": 184,
+                "quote": "fun, sustainable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 36,
+                "end": 41,
+                "quote": "自我强加的"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 50,
+                "end": 59,
+                "quote": "有趣、能长期坚持的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:49"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 192,
+                "end": 197,
+                "quote": "habit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 59,
+                "end": 61,
+                "quote": "习惯"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 218,
+                "end": 272,
+                "quote": "embracing the fact that I didn’t understand every word"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 72,
+                "end": 86,
+                "quote": "接受自己并非每个词都懂的事实"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:50"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 217,
+                "end": 226,
+                "quote": "specifics"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 65,
+                "end": 67,
+                "quote": "细节"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 292,
+                "end": 303,
+                "quote": "more ground"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 6,
+                "end": 46,
+                "quote": "see phrases and vocabulary over and over"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 104,
+                "end": 117,
+                "quote": "一遍又一遍地见到短语和词汇"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:51"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 294,
+                "end": 299,
+                "quote": "cover"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 90,
+                "end": 94,
+                "quote": "读得更多"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 6,
+                "end": 46,
+                "quote": "see phrases and vocabulary over and over"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 104,
+                "end": 117,
+                "quote": "一遍又一遍地见到短语和词汇"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:52"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 62,
+                "end": 70,
+                "quote": "contexts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 101,
+                "end": 103,
+                "quote": "语境"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 161,
+                "end": 194,
+                "quote": "wanted to know what happened next"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 146,
+                "end": 157,
+                "quote": "想知道接下来会发生什么"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:53"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 104,
+                "end": 112,
+                "quote": "invested"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 127,
+                "end": 129,
+                "quote": "沉浸"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 139,
+                "end": 156,
+                "quote": "of the characters"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 161,
+                "end": 194,
+                "quote": "wanted to know what happened next"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 140,
+                "end": 145,
+                "quote": "书中的人物"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 146,
+                "end": 157,
+                "quote": "想知道接下来会发生什么"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:54"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:4",
+                "start": 136,
+                "end": 140,
+                "quote": "fond"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:3",
+                "start": 137,
+                "end": 140,
+                "quote": "喜欢上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "start": 15,
+                "end": 23,
+                "quote": "an ocean"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "start": 80,
+                "end": 95,
+                "quote": "in the shallows"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "start": 2,
+                "end": 6,
+                "quote": "一片海洋"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "start": 19,
+                "end": 25,
+                "quote": "在浅水处蹚水"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:55"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "start": 116,
+                "end": 120,
+                "quote": "swim"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:5",
+                "start": 41,
+                "end": 43,
+                "quote": "畅游"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:42",
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:43"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 105,
+                "end": 151,
+                "quote": "I adopted something similar to a weightlifting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 35,
+                "end": 52,
+                "quote": "我采用了一种类似举重训练的固定流程"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:45",
+              "question:paper-mock-jiangsu-subei-eight-cities-2025-05:46"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 330,
+                "end": 346,
+                "quote": "I made a goal to"
+              },
+              {
+                "textId": "done-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 431,
+                "end": 474,
+                "quote": "the next book I chose would be a bit harder"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 110,
+                "end": 119,
+                "quote": "我给自己定了个目标"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-subei-eight-cities-2025-05:cloze:2",
+                "start": 145,
+                "end": 158,
+                "quote": "我选的下一本书就会稍难一些"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "乐在其中→起初难熬→渐有自信→投入故事→满怀期待"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:41": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "main",
+      "context": "不管懂多少都一再回去读，阅读本身得是让人乐在其中的事。",
+      "find": {
+        "check": "affect",
+        "text": "不管懂多少（Regardless of how much I understood）都回去读（returned to these books），要一个正面感受。",
+        "quotes": [
+          "Regardless of how much I understood",
+          "returned to these books"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "令人愉快的",
+        "reason": "不管懂多少都一再回去读，阅读本身得是让人乐在其中的事。形容词看情感：不管懂多少（Regardless of how much I understood）都回去读（returned to these books），要一个正面感受。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "complex",
+          "meaning": "复杂的；作者一再回去读（returned to these books），复杂难懂不会是吸引他回去的理由。",
+          "quote": "returned to these books"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "demanding",
+          "meaning": "费力的；下段说逐词查才没意思（no fun），作者回去读是因为阅读本身有乐趣。",
+          "quote": "no fun"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "personal",
+          "meaning": "个人的；这说不出作者为何一再回去读（returned to these books），原因应是阅读带来的乐趣。",
+          "quote": "returned to these books"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "returned to these books",
+          "signalSide": "context-before",
+          "relation": "一再回去读这些书，说明阅读给作者带来的是正面感受。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "reading in itself was",
+          "signalSide": "context-before",
+          "targetText": "reading in itself was enjoyable",
+          "relation": "阅读本身（reading in itself）是这个形容词描述的对象，说的是阅读带来的感受。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:42": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "冒号后列出一套步骤，这里要一个概括这套训练步骤的名词。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后列出找舒适区（finding my comfort zone）、再突破一点（then pushing a bit beyond it）等一步步的做法，概括起来就是一套固定流程。",
+        "quotes": [
+          "finding my comfort zone",
+          "then pushing a bit beyond it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "例行程序",
+        "meaning": "举重训练的固定步骤",
+        "reason": "冒号后列出一套步骤，这里要一个概括这套训练步骤的名词。名词看复现：冒号后列出找舒适区（finding my comfort zone）、再突破一点（then pushing a bit beyond it）等一步步的做法，概括起来就是一套固定流程。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "movement",
+          "meaning": "动作；冒号后是找舒适区、突破、再尝试几步（finding my comfort zone），是一整套流程，不是单个动作。",
+          "quote": "finding my comfort zone"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "technique",
+          "meaning": "技巧；冒号后是先后相接的几步（then pushing a bit beyond it），说的是反复照做的流程，不是某个窍门。",
+          "quote": "then pushing a bit beyond it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "attempt",
+          "meaning": "尝试；一次尝试装不下冒号后反复进行的几步，句末还有再次尝试（and trying again）。",
+          "quote": "and trying again"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "finding my comfort zone, then pushing a bit beyond it",
+          "signalSide": "context-after",
+          "relation": "冒号后的几步具体说明了这套举重式的流程。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "weightlifting",
+          "signalSide": "context-before",
+          "targetText": "weightlifting routine",
+          "relation": "举重（weightlifting）修饰这个名词，指举重训练里按部就班的那套做法。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:43": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "detail",
+      "context": "突破一点之后、再试之前，要一个像举重组间那样缓一缓的动作。",
+      "find": {
+        "check": "action-sequence",
+        "text": "前一步是稍稍突破（pushing a bit beyond it），后一步是再次尝试（and trying again），中间该停下来缓一缓。",
+        "quotes": [
+          "pushing a bit beyond it",
+          "and trying again"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "休息",
+        "reason": "突破一点之后、再试之前，要一个像举重组间那样缓一缓的动作。动词看动作顺序：前一步是稍稍突破（pushing a bit beyond it），后一步是再次尝试（and trying again），中间该停下来缓一缓。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sharing",
+          "meaning": "分享；这几步都是作者自己练读（finding my comfort zone），中间插入与人分享接不上。",
+          "quote": "finding my comfort zone"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "practising",
+          "meaning": "练习；突破和再试（and trying again）本身就在练，夹在中间的一步应是停下来缓一缓。",
+          "quote": "and trying again"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "quitting",
+          "meaning": "放弃；后面还要再次尝试（and trying again），放弃了就不会再试。",
+          "quote": "and trying again"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "and trying again",
+          "signalSide": "context-after",
+          "targetText": "resting, and trying again",
+          "relation": "休息后再接着尝试，两个动作用并列连词（and）相连，先后相接。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:44": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "开头难熬，转折之后要说出作者能对付更复杂的内容了。",
+      "find": {
+        "check": "collocation",
+        "text": "开头很难熬（It did suck at the beginning），转折后（but it wasn’t long before）接更复杂的内容（more complexity），要能应对它。",
+        "quotes": [
+          "It did suck at the beginning",
+          "more complexity"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "应对",
+        "reason": "开头难熬，转折之后要说出作者能对付更复杂的内容了。动词看搭配：开头很难熬（It did suck at the beginning），转折后（but it wasn’t long before）接更复杂的内容（more complexity），要能应对它。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "justify",
+          "meaning": "为……辩解；转折后说的是能力进步（it wasn’t long before），不是为复杂内容辩解。",
+          "quote": "it wasn’t long before"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "create",
+          "meaning": "创造；作者是读者，面对的是书里更复杂的内容（more complexity），不是自己去造出复杂。",
+          "quote": "more complexity"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "skip",
+          "meaning": "跳过；开头难熬（It did suck at the beginning），转折后该写进步，跳过复杂内容算不上进步。",
+          "quote": "It did suck at the beginning"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "more complexity",
+          "signalSide": "context-after",
+          "targetText": "tackle more complexity",
+          "relation": "应对更复杂的内容，动词要能接复杂（complexity）这类难题作宾语。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "It did suck at the beginning",
+          "signalSide": "context-before",
+          "relation": "开头难熬，后面用转折词（but）转到进步。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:45": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者给自己定的目标，是去读略高于舒适水平的材料。",
+      "find": {
+        "check": "echo",
+        "text": "前文说在尝试读英文书（trying to read books in English），后面又说读完（when I finished），这里还是读。",
+        "quotes": [
+          "trying to read books in English",
+          "when I finished"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "阅读",
+        "reason": "作者给自己定的目标，是去读略高于舒适水平的材料。动词看复现：前文说在尝试读英文书（trying to read books in English），后面又说读完（when I finished），这里还是读。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "edit",
+          "meaning": "编辑；后面说读完（when I finished）再挑下一本书，作者是在读书，不是编辑材料。",
+          "quote": "when I finished"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "supply",
+          "meaning": "提供；作者是给自己挑书读（the next book I chose），不是给别人提供材料。",
+          "quote": "the next book I chose"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "collect",
+          "meaning": "收集；收集材料接不上后面读完（when I finished）时的感受。",
+          "quote": "when I finished"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "trying to read books in English",
+          "signalSide": "context-before",
+          "relation": "前文已说在读英文书，这里的目标仍是读。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "material just above my comfortable level",
+          "signalSide": "context-after",
+          "targetText": "read material just above my comfortable level",
+          "relation": "阅读略高于舒适水平的材料，材料（material）作这个动词的宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:46": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:46",
+      "blankNo": 46,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "读完后的感受要正面，下一本书才会加难。",
+      "find": {
+        "check": "affect",
+        "text": "和后句的沮丧（If I got frustrated）相对，后面又换更难的书（a bit harder），要读完时有把握的感觉。",
+        "quotes": [
+          "If I got frustrated",
+          "a bit harder"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "自信的",
+        "reason": "读完后的感受要正面，下一本书才会加难。形容词看情感：和后句的沮丧（If I got frustrated）相对，后面又换更难的书（a bit harder），要读完时有把握的感觉。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "challenged",
+          "meaning": "受到挑战的；觉得吃力就该维持难度，后面却换更难的书（a bit harder）。",
+          "quote": "a bit harder"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "lost",
+          "meaning": "迷茫的；迷茫对应的是后句沮丧时调低难度（dialled down），不会接着换更难的书。",
+          "quote": "dialled down"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sympathetic",
+          "meaning": "同情的；同情谈不上读完一本书的感受，接不上下一本稍难（a bit harder）。",
+          "quote": "a bit harder"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "If I got frustrated",
+          "signalSide": "context-after",
+          "relation": "后句的沮丧与这里的感受正好相反。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "if I felt",
+          "signalSide": "context-before",
+          "targetText": "if I felt confident",
+          "relation": "感到（felt）后接形容词，说读完时的感受。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:47": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "detail",
+      "context": "沮丧时要降低的，正是前句书变难的那个方面。",
+      "find": {
+        "check": "echo",
+        "text": "和前句的更难（a bit harder）、更复杂（more complexity）相对，沮丧时调低（dialled down）的是书的难度。",
+        "quotes": [
+          "a bit harder",
+          "more complexity",
+          "dialled down"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "难度",
+        "reason": "沮丧时要降低的，正是前句书变难的那个方面。名词看复现：和前句的更难（a bit harder）、更复杂（more complexity）相对，沮丧时调低（dialled down）的是书的难度。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "intensity",
+          "meaning": "强度；前句调的是书的难易（a bit harder），这里降下的也是难度，不是阅读强度。",
+          "quote": "a bit harder"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "effort",
+          "meaning": "努力程度；作者调整的是下一本书的选择（the next book I chose），降的是书的难度，不是自己的努力。",
+          "quote": "the next book I chose"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "volume",
+          "meaning": "分量；前句说的是书更难（a bit harder），沮丧时降回的也是难度，不是阅读量。",
+          "quote": "a bit harder"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "a bit harder",
+          "signalSide": "context-before",
+          "relation": "前句说书更难一些，这里反过来把难度调低。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "dialled down the",
+          "signalSide": "context-before",
+          "targetText": "dialled down the difficulty",
+          "relation": "调低（dialled down）后接要降低的东西，即难度。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:48": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "detail",
+      "context": "让步部分要说读懂的程度并不完美。",
+      "find": {
+        "check": "echo",
+        "text": "前半句说能看懂的词（the words I could understand），让步部分（even if）说的还是读懂这件事。",
+        "quotes": [
+          "the words I could understand",
+          "even if"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "理解",
+        "reason": "让步部分要说读懂的程度并不完美。名词看复现：前半句说能看懂的词（the words I could understand），让步部分（even if）说的还是读懂这件事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "presentation",
+          "meaning": "陈述；作者是在读书（the words I could understand），没有要做陈述。",
+          "quote": "the words I could understand"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "preparation",
+          "meaning": "准备；句子讲的是读懂多少（the words I could understand），准备是否完美与此无关。",
+          "quote": "the words I could understand"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "impression",
+          "meaning": "印象；前半句说能看懂的词（the words I could understand），让步说的也是读懂，不是印象。",
+          "quote": "the words I could understand"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "the words I could understand",
+          "signalSide": "context-before",
+          "relation": "能看懂的词与这里的理解是同一件事。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "wasn’t perfect",
+          "signalSide": "context-after",
+          "targetText": "my comprehension wasn’t perfect",
+          "relation": "理解不完美，说的是读懂得不全。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:49": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "main",
+      "context": "阅读从被迫的学习变成一件有趣又能长期做下去的事，这是转折点。",
+      "find": {
+        "check": "collocation",
+        "text": "从自我强加的学习（self-imposed）转为有趣、能长久坚持的（fun, sustainable）事，长期自然去做的就是习惯。",
+        "quotes": [
+          "self-imposed",
+          "fun, sustainable"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "习惯",
+        "reason": "阅读从被迫的学习变成一件有趣又能长期做下去的事，这是转折点。名词看搭配：从自我强加的学习（self-imposed）转为有趣、能长久坚持的（fun, sustainable）事，长期自然去做的就是习惯。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "duty",
+          "meaning": "责任；责任正像自我强加的学习（self-imposed），与“有趣的”相反。",
+          "quote": "self-imposed"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "concept",
+          "meaning": "概念；阅读变成的是能长久坚持的（fun, sustainable）日常活动，不是抽象概念。",
+          "quote": "fun, sustainable"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "trick",
+          "meaning": "诀窍；诀窍谈不上有趣又能长久坚持（fun, sustainable），这里说阅读成了日常要做的事。",
+          "quote": "fun, sustainable"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "fun, sustainable",
+          "signalSide": "context-before",
+          "targetText": "a fun, sustainable habit",
+          "relation": "有趣、能长久坚持修饰这个名词，指日常坚持做的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "self-imposed",
+          "signalSide": "context-before",
+          "relation": "从自我强加的学习转出来，后面是与之相对的自然习惯。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:50": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者要放下的东西，就是破折号后说的不懂的每个词，这是全文点题处。",
+      "find": {
+        "check": "echo",
+        "text": "破折号后解释为接受没懂每个词（didn’t understand every word），放下的就是逐词的细节。",
+        "quotes": [
+          "didn’t understand every word"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "细节",
+        "meaning": "每个词的确切意思",
+        "reason": "作者要放下的东西，就是破折号后说的不懂的每个词，这是全文点题处。名词看复现：破折号后解释为接受没懂每个词（didn’t understand every word），放下的就是逐词的细节。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "requirements",
+          "meaning": "要求；破折号后说接受没懂每个词（didn’t understand every word），放下的是逐词细节，不是要求。",
+          "quote": "didn’t understand every word"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mistakes",
+          "meaning": "错误；破折号后说的是没弄懂的词（didn’t understand every word），不是读错的地方。",
+          "quote": "didn’t understand every word"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "beliefs",
+          "meaning": "信念；作者放下的是对每个词的纠结（every word），并没有放弃信念。",
+          "quote": "every word"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "embracing the fact that I didn’t understand every word",
+          "signalSide": "context-after",
+          "relation": "破折号后的内容重述了要放下的是逐词的细节。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Letting go of the",
+          "signalSide": "context-before",
+          "targetText": "Letting go of the specifics",
+          "relation": "放下（Letting go of）后接要放下的东西。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:51": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "detail",
+      "context": "放下逐词细节后，作者能读得更多更远。",
+      "find": {
+        "check": "collocation",
+        "text": "和地面（more ground）搭配成读得更多，后面又说反复见到短语和词汇（see phrases and vocabulary over and over）。",
+        "quotes": [
+          "more ground",
+          "see phrases and vocabulary over and over"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "走过（路程）",
+        "meaning": "读得更多",
+        "reason": "放下逐词细节后，作者能读得更多更远。动词看搭配：和地面（more ground）搭配成读得更多，后面又说反复见到短语和词汇（see phrases and vocabulary over and over）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "regain",
+          "meaning": "重新获得；作者是往前读更多（more ground），并没有先失去什么再夺回来。",
+          "quote": "more ground"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "survey",
+          "meaning": "勘察；后面说反复见到短语和词汇（see phrases and vocabulary over and over），是实际读得更多。",
+          "quote": "see phrases and vocabulary over and over"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "describe",
+          "meaning": "描述；描述更多地面接不上后面反复见到短语和词汇（see phrases and vocabulary）。",
+          "quote": "see phrases and vocabulary"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "more ground",
+          "signalSide": "context-after",
+          "targetText": "cover more ground",
+          "relation": "与地面（ground）搭配，表示走得更远，这里指读得更多。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:52": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "detail",
+      "context": "短语和词汇反复出现的地方，是一篇篇读到的上下文。",
+      "find": {
+        "check": "collocation",
+        "text": "反复见到短语和词汇（see phrases and vocabulary over and over），是在上百篇读物的上下文里。",
+        "quotes": [
+          "see phrases and vocabulary over and over"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "语境",
+        "reason": "短语和词汇反复出现的地方，是一篇篇读到的上下文。名词看搭配：反复见到短语和词汇（see phrases and vocabulary over and over），是在上百篇读物的上下文里。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tests",
+          "meaning": "测试；作者已把阅读变成能长久坚持的习惯（sustainable），是在读书中见词，不是在测试里。",
+          "quote": "sustainable"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "posts",
+          "meaning": "帖子；作者读的是故事（the stories），后面还说关心人物，不是网上帖子。",
+          "quote": "the stories"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "courses",
+          "meaning": "课程；作者靠自己读故事（the stories）见词，不是上了上百门课。",
+          "quote": "the stories"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "see phrases and vocabulary over and over",
+          "signalSide": "context-before",
+          "targetText": "see phrases and vocabulary over and over in hundreds of contexts",
+          "relation": "在一个个语境中反复见到短语和词汇。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:53": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:53",
+      "blankNo": 53,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者开始全身心进入故事，这是阅读变成享受的结果。",
+      "find": {
+        "check": "affect",
+        "text": "后面说喜欢上人物（the characters），还想知道接下来发生什么（wanted to know what happened next），要一个投入的状态。",
+        "quotes": [
+          "the characters",
+          "wanted to know what happened next"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "投入的",
+        "meaning": "沉浸于故事中",
+        "reason": "作者开始全身心进入故事，这是阅读变成享受的结果。形容词看情感：后面说喜欢上人物（the characters），还想知道接下来发生什么（wanted to know what happened next），要一个投入的状态。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "stuck",
+          "meaning": "卡住的；后面说想知道接下来发生什么（wanted to know what happened next），是被故事吸引。",
+          "quote": "wanted to know what happened next"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "imaginative",
+          "meaning": "富于想象的；后面说的是关心情节发展（what happened next），重在投入故事，不是想象力强。",
+          "quote": "what happened next"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "innovative",
+          "meaning": "创新的；读故事谈不上创新，后文写的是关心情节发展（what happened next）。",
+          "quote": "what happened next"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "wanted to know what happened next",
+          "signalSide": "context-after",
+          "relation": "想知道接下来发生什么，说明作者已被故事吸引。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "in the stories",
+          "signalSide": "context-after",
+          "targetText": "invested in the stories",
+          "relation": "投入于故事（in the stories），介词引出投入的对象。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:54": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "作者对书中人物的感情要是喜爱。",
+      "find": {
+        "check": "collocation",
+        "text": "和介词（of the characters）搭配，后面又想知道接下来发生什么（wanted to know what happened next），是喜爱人物。",
+        "quotes": [
+          "of the characters",
+          "wanted to know what happened next"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "喜爱的",
+        "reason": "作者对书中人物的感情要是喜爱。形容词看搭配：和介词（of the characters）搭配，后面又想知道接下来发生什么（wanted to know what happened next），是喜爱人物。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "envious",
+          "meaning": "嫉妒的；后面说想知道接下来发生什么（wanted to know what happened next），是喜爱人物，不是嫉妒。",
+          "quote": "wanted to know what happened next"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ashamed",
+          "meaning": "羞愧的；作者正投入故事（in the stories），没有什么让他为人物羞愧。",
+          "quote": "in the stories"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proud",
+          "meaning": "自豪的；人物不是作者的成果，想知道情节发展（what happened next）出于喜爱，不是自豪。",
+          "quote": "what happened next"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of the characters",
+          "signalSide": "context-after",
+          "targetText": "grew fond of the characters",
+          "relation": "喜爱某人（fond of），介词引出喜爱的对象。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-subei-eight-cities-2025-05:55": {
+      "blankId": "blank:paper-mock-jiangsu-subei-eight-cities-2025-05:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "现在只在浅滩蹚水，将来要在海里自如前进，收住全文的比喻。",
+      "find": {
+        "check": "topic",
+        "text": "把阅读比作大海（an ocean），现在只是在浅水处蹚水（in the shallows），将来要游起来。",
+        "quotes": [
+          "an ocean",
+          "in the shallows"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "游泳",
+        "meaning": "自如地读外语书",
+        "reason": "现在只在浅滩蹚水，将来要在海里自如前进，收住全文的比喻。动词看话题：把阅读比作大海（an ocean），现在只是在浅水处蹚水（in the shallows），将来要游起来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "float",
+          "meaning": "漂浮；现在蹚水（wading）是自己一步步往前走，将来是主动游，不是被动漂着。",
+          "quote": "wading"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "survive",
+          "meaning": "幸存；作者对展开的大海满怀期待（an ocean has opened up），不是在说能否活下来。",
+          "quote": "an ocean has opened up"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wander",
+          "meaning": "漫步；现在在浅滩蹚水（in the shallows），将来是进到深水去游，不是在海里漫步。",
+          "quote": "in the shallows"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the shallows",
+          "signalSide": "context-before",
+          "targetText": "wading in the shallows",
+          "relation": "现在在浅水处蹚水，与将来在海里游泳一浅一深相对。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "an ocean has opened up before me",
+          "signalSide": "context-before",
+          "relation": "把阅读比作大海，游泳接上这个比喻。"
+        }
+      ]
+    }
+  }
+}
