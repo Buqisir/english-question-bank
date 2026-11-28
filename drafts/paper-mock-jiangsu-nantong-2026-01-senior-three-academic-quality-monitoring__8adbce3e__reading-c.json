@@ -1,0 +1,860 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c": {
+      "overview": "本文介绍斯坦福大学一项关于短信缩写的研究：多数人以为别人不介意缩写，研究却发现缩写会让对方觉得发信人不用心、不真诚，对话也更快冷场；研究者建议按场合决定是否使用。",
+      "fullTranslationZh": "随着数字通信成为许多人彼此联系的主要方式，我们在这些空间里使用的语言也在不断演变。发短信已经形成了自己的“方言”，充斥着“hru?”（how are you?，你好吗？）这样的缩写。虽然几乎所有发短信的人都用这些简写，但研究结果表明，匆匆打出一句“hru?”，可能不如花时间完整拼出“How are you?”显得真诚。\n“虽然缩写可以节省时间和精力，但我们的研究表明，它们也可能拖慢有效的沟通，并对人际印象产生负面影响。”作者们在《实验心理学杂志》上写道。\n这些发现挑战了人们对短信文化的普遍看法。虽然 99% 的人表示自己会用缩写，84% 的人认为别人并不介意，但研究显示，带缩写的消息总会给人留下负面印象。也许最能说明问题的是，只有 15.8% 的参与者正确预料到了这种负面影响，而 80% 的人以为别人对缩写无所谓。\n斯坦福大学的戴维·方和同事们开展了这些研究，探究缩写在不同聊天情景中的影响。他们分析了来自五大洲 37 个国家 686 名用户的 20 多万次对话。研究人员计算了参与者消息中缩写所占的比例。他们发现了一个清晰的规律：缩写越多的对话，总是越快冷场。\n“我们的研究表明，短信缩写会降低对方感受到的用心程度，从而对人际沟通产生负面影响，而这又进一步让对方觉得发信人不够真诚、回应不够积极。归根结底，我们的研究结果突显出，在数字时代，必须重视不断演变的语言用法对人际沟通质量的影响。”方和同事们总结道。\n方说，如果人们发现，由于自己的短信得到的回复越来越少或不够积极，社交纽带随着时间推移逐渐减弱，那么短信缩写就可能加剧孤独感。但他并不认为人们应该完全不用缩写。\n“我们往往会根据一段关系的重要程度，来调整自己在对话中投入的精力。在某些情况下，少花些心思是合理的，比如匆匆给快递员发条消息。”方说，“不过，当我们想要加强社会联系时，比如在一段关系刚开始，或者需要给人留下好印象的时候，我们的研究发现就格外有参考意义。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+          "sourceText": "Our research reveals that texting abbreviations negatively affect interpersonal communication by decreasing perceived effort, which in turn leads to lower perceived sincerity and responsiveness.",
+          "displayText": "Our research reveals that texting abbreviations negatively affect interpersonal communication by decreasing perceived effort, which in turn leads to lower perceived sincerity and responsiveness.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:30"
+          ],
+          "translationZh": "“我们的研究表明，短信缩写会降低对方感受到的用心程度，从而对人际沟通产生负面影响，而这又进一步让对方觉得发信人不够真诚、回应不够积极。",
+          "analysisZh": "主干是 Our research reveals that ...（我们的研究表明……），that 引导宾语从句。从句的主干是 texting abbreviations negatively affect interpersonal communication（短信缩写对人际沟通有负面影响），by decreasing perceived effort 说明这种影响怎样产生：让对方感到的用心程度降低。逗号后 which 引导非限制性定语从句，指代前面“用心程度降低”这件事；in turn 意为“进而”，leads to 的宾语是 lower perceived sincerity and responsiveness，sincerity 和 responsiveness 两个名词并列，共用 lower perceived 修饰。",
+          "underlineRanges": [
+            {
+              "start": 26,
+              "end": 65,
+              "quote": "texting abbreviations negatively affect"
+            },
+            {
+              "start": 94,
+              "end": 124,
+              "quote": "by decreasing perceived effort"
+            },
+            {
+              "start": 126,
+              "end": 148,
+              "quote": "which in turn leads to"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+          "sourceText": "While 99% of people report using abbreviations and 84% believe others don’t mind them, the research shows that abbreviated messages consistently create negative impressions.",
+          "displayText": "While 99% of people report using abbreviations and 84% believe others don’t mind them, the research shows that abbreviated messages consistently create negative impressions.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:29"
+          ],
+          "translationZh": "虽然 99% 的人表示自己会用缩写，84% 的人认为别人并不介意，但研究显示，带缩写的消息总会给人留下负面印象。",
+          "analysisZh": "主干是 the research shows that ...（研究显示……），that 引导宾语从句：abbreviated messages consistently create negative impressions（带缩写的消息总会给人留下负面印象）。句首 While 引导让步状语从句，里面是 and 连接的两个并列分句：99% of people report using abbreviations 和 84% believe others don’t mind them，believe 后省略了 that，them 指缩写。前半句是人们的看法，主句是研究的结论，两相对照。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 5,
+              "quote": "While"
+            },
+            {
+              "start": 47,
+              "end": 62,
+              "quote": "and 84% believe"
+            },
+            {
+              "start": 87,
+              "end": 110,
+              "quote": "the research shows that"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1"
+              ],
+              "start": 0,
+              "end": 160,
+              "quote": "随着数字通信成为许多人彼此联系的主要方式，我们在这些空间里使用的语言也在不断演变。发短信已经形成了自己的“方言”，充斥着“hru?”（how are you?，你好吗？）这样的缩写。虽然几乎所有发短信的人都用这些简写，但研究结果表明，匆匆打出一句“hru?”，可能不如花时间完整拼出“How are you?”显得真诚。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:2"
+              ],
+              "start": 161,
+              "end": 229,
+              "quote": "“虽然缩写可以节省时间和精力，但我们的研究表明，它们也可能拖慢有效的沟通，并对人际印象产生负面影响。”作者们在《实验心理学杂志》上写道。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3"
+              ],
+              "start": 230,
+              "end": 362,
+              "quote": "这些发现挑战了人们对短信文化的普遍看法。虽然 99% 的人表示自己会用缩写，84% 的人认为别人并不介意，但研究显示，带缩写的消息总会给人留下负面印象。也许最能说明问题的是，只有 15.8% 的参与者正确预料到了这种负面影响，而 80% 的人以为别人对缩写无所谓。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:4"
+              ],
+              "start": 363,
+              "end": 486,
+              "quote": "斯坦福大学的戴维·方和同事们开展了这些研究，探究缩写在不同聊天情景中的影响。他们分析了来自五大洲 37 个国家 686 名用户的 20 多万次对话。研究人员计算了参与者消息中缩写所占的比例。他们发现了一个清晰的规律：缩写越多的对话，总是越快冷场。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5"
+              ],
+              "start": 487,
+              "end": 610,
+              "quote": "“我们的研究表明，短信缩写会降低对方感受到的用心程度，从而对人际沟通产生负面影响，而这又进一步让对方觉得发信人不够真诚、回应不够积极。归根结底，我们的研究结果突显出，在数字时代，必须重视不断演变的语言用法对人际沟通质量的影响。”方和同事们总结道。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6"
+              ],
+              "start": 611,
+              "end": 690,
+              "quote": "方说，如果人们发现，由于自己的短信得到的回复越来越少或不够积极，社交纽带随着时间推移逐渐减弱，那么短信缩写就可能加剧孤独感。但他并不认为人们应该完全不用缩写。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7"
+              ],
+              "start": 691,
+              "end": 818,
+              "quote": "“我们往往会根据一段关系的重要程度，来调整自己在对话中投入的精力。在某些情况下，少花些心思是合理的，比如匆匆给快递员发条消息。”方说，“不过，当我们想要加强社会联系时，比如在一段关系刚开始，或者需要给人留下好印象的时候，我们的研究发现就格外有参考意义。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+                "start": 326,
+                "end": 385,
+                "quote": "might not appear as genuine as taking the time to spell out"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+                "start": 150,
+                "end": 175,
+                "quote": "lower perceived sincerity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p1",
+                "start": 130,
+                "end": 159,
+                "quote": "可能不如花时间完整拼出“How are you?”显得真诚"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p5",
+                "start": 47,
+                "end": 59,
+                "quote": "让对方觉得发信人不够真诚"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+                "start": 119,
+                "end": 153,
+                "quote": "84% believe others don’t mind them"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+                "start": 341,
+                "end": 397,
+                "quote": "80% assumed others would be indifferent to abbreviations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p3",
+                "start": 38,
+                "end": 52,
+                "quote": "84% 的人认为别人并不介意"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p3",
+                "start": 115,
+                "end": 131,
+                "quote": "80% 的人以为别人对缩写无所谓"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+                "start": 27,
+                "end": 125,
+                "quote": "texting abbreviations negatively affect interpersonal communication by decreasing perceived effort"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p5",
+                "start": 9,
+                "end": 40,
+                "quote": "短信缩写会降低对方感受到的用心程度，从而对人际沟通产生负面影响"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7",
+                "start": 101,
+                "end": 197,
+                "quote": "In some cases, it makes sense to invest less effort, like quickly texting with a delivery driver"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7",
+                "start": 221,
+                "end": 296,
+                "quote": "our findings are especially relevant when we want to strengthen social ties"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+                "start": 185,
+                "end": 258,
+                "quote": "But he doesn’t believe people should stop using abbreviations altogether."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p7",
+                "start": 33,
+                "end": 62,
+                "quote": "在某些情况下，少花些心思是合理的，比如匆匆给快递员发条消息"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p7",
+                "start": 71,
+                "end": 83,
+                "quote": "当我们想要加强社会联系时"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p6",
+                "start": 62,
+                "end": 79,
+                "quote": "但他并不认为人们应该完全不用缩写。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+                "start": 1,
+                "end": 195,
+                "quote": "Our research reveals that texting abbreviations negatively affect interpersonal communication by decreasing perceived effort, which in turn leads to lower perceived sincerity and responsiveness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p5",
+                "start": 0,
+                "end": 67,
+                "quote": "“我们的研究表明，短信缩写会降低对方感受到的用心程度，从而对人际沟通产生负面影响，而这又进一步让对方觉得发信人不够真诚、回应不够积极。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+                "start": 68,
+                "end": 241,
+                "quote": "While 99% of people report using abbreviations and 84% believe others don’t mind them, the research shows that abbreviated messages consistently create negative impressions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c-p3",
+                "start": 20,
+                "end": 76,
+                "quote": "虽然 99% 的人表示自己会用缩写，84% 的人认为别人并不介意，但研究显示，带缩写的消息总会给人留下负面印象。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先由短信缩写引出研究结论，再用数据说明人们的普遍看法与研究结果相反，接着介绍研究过程和结论，最后转述研究者对如何使用缩写的看法。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+            "summary": "短信形成了自己的缩写“方言”，但研究表明缩写不如完整拼写显得真诚。",
+            "function": "引出话题和研究发现"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:2",
+            "summary": "作者指出缩写虽省时省力，却会拖慢沟通、影响人际印象。",
+            "function": "引用论文观点"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+            "summary": "多数人用缩写且以为别人不介意，研究却发现缩写总留下负面印象。",
+            "function": "用数据对比普遍看法与研究结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:4",
+            "summary": "方的团队分析了 20 多万次对话，发现缩写多的对话冷场更快。",
+            "function": "介绍研究过程和发现"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+            "summary": "缩写降低对方感受到的用心程度，进而显得不真诚、回应不积极。",
+            "function": "总结研究结论"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+            "summary": "缩写可能加剧孤独感，但方并不主张完全不用。",
+            "function": "由结论转到使用建议"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7",
+            "summary": "方认为可按关系的重要程度决定，想加深关系时尤需注意。",
+            "function": "说明分场合使用的看法"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:28": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究结果对缩写的判断，看缩写让发信人给人什么印象。",
+      "stemTranslationZh": "关于短信缩写，研究结果表明了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们让发信人显得不真诚。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+              "quote": "dashing off a swift “hru?” might not appear as genuine as taking the time to spell out",
+              "anchor": "缩写不如完整拼写真诚"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+              "quote": "which in turn leads to lower perceived sincerity and responsiveness",
+              "anchor": "显得不够真诚"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们经过了很长时间的演变。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "is constantly evolving",
+            "optionText": "evolved",
+            "matchType": "wordFamily",
+            "relationNote": "evolved 来自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1|is constantly evolving]] 的 evolving，那句说网络交流的用语在不断变化，是全文的背景；研究并没有说缩写由来已久。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+              "quote": "the language we use in these spaces is constantly evolving",
+              "anchor": "用语不断变化"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们重塑了数字通信。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "As digital communication becomes the primary way many people connect",
+            "optionText": "digital communication",
+            "matchType": "exact",
+            "relationNote": "digital communication 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1|As digital communication becomes]]，那里只说数字通信成了人们联系的主要方式；研究发现的是缩写让人显得不真诚，没说它重塑了数字通信。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+              "quote": "As digital communication becomes the primary way many people connect",
+              "anchor": "数字通信成为主要方式"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们是学习方言的捷径。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Texting has developed its own dialect",
+            "optionText": "dialects",
+            "matchType": "wordFamily",
+            "relationNote": "dialect 和 shortcuts 都出自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1]]：短信形成了自己的“方言”，缩写是图省事的简写；选项拼成“学方言的捷径”，原文没有学方言这回事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+              "quote": "Texting has developed its own dialect",
+              "anchor": "短信的“方言”"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "findings indicate",
+          "sourceRole": "stem",
+          "targetText": "While nearly all texters use these shortcuts, the findings suggest that dashing off a swift “hru?” might not appear as genuine as taking the time to spell out: “How are you?”",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "findings suggest",
+          "sourceZh": "研究结果表明",
+          "targetCueZh": "研究结果显示",
+          "answerText": "might not appear as genuine as taking the time to spell out",
+          "note": "题干 findings indicate 对应原文 findings suggest。"
+        },
+        {
+          "sourceText": "They make senders seem insincere",
+          "sourceRole": "correctOption",
+          "targetText": "might not appear as genuine as taking the time to spell out",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“显得不真诚”（seem insincere）就是原文的“不如……显得真诚”（not appear as genuine）：匆匆打个 hru? 不如完整拼写真诚；[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5]] 也说缩写让人觉得不够真诚（lower perceived sincerity），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出多数发短信的人对缩写的看法，注意和研究结论分开。",
+      "stemTranslationZh": "发短信的人通常怎样看待缩写？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找多数人以为什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们可能会流行起来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They could become trendy.",
+            "explanation": "原文用 99% 的人都在用缩写说明它已经很普遍，没说人们认为缩写会流行起来。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们不会打扰别人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+              "quote": "While 99% of people report using abbreviations and 84% believe others don’t mind them",
+              "anchor": "84% 认为别人不介意"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+              "quote": "80% assumed others would be indifferent to abbreviations",
+              "anchor": "80% 以为别人无所谓"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们可能破坏沟通。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "84% believe others don’t mind them",
+            "sourceHighlight": "don’t mind",
+            "optionText": "They could ruin communication.",
+            "optionHighlight": "ruin communication",
+            "explanation": "缩写会妨碍沟通是研究的结论（[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:2]] 说 slow down effective communication），发信人自己却以为别人不介意（don’t mind）；选项把研究结论当成了大家的想法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+              "quote": "84% believe others don’t mind them",
+              "anchor": "多数人以为别人不介意"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们会损害社会联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "social bonds weaken over time",
+            "optionText": "social",
+            "matchType": "exact",
+            "relationNote": "social 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6]]，那是方推测缩写可能让社交纽带变弱（social bonds weaken），是研究者的担忧；发信人普遍以为别人根本不在意缩写。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+              "quote": "Texting abbreviations could contribute to loneliness if people find that social bonds weaken over time",
+              "anchor": "研究者的推测"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "commonly assume",
+          "sourceRole": "stem",
+          "targetText": "The findings challenge the common assumption about texting culture.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+          "relationType": "locationCue",
+          "targetCue": "common assumption",
+          "sourceZh": "普遍以为",
+          "targetCueZh": "普遍看法",
+          "answerText": "84% believe others don’t mind them",
+          "bridgeZh": "While 从句里的两个比例说的就是这种普遍看法",
+          "note": "题干 commonly assume 对应原文 common assumption。"
+        },
+        {
+          "sourceText": "They would not bother others",
+          "sourceRole": "correctOption",
+          "targetText": "84% believe others don’t mind them",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“不会打扰别人”（would not bother others）就是原文的“别人不介意”（others don’t mind them）；[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:3|Perhaps most tellingly, only]] 的 80% 以为别人无所谓（indifferent）也印证这是多数人的想法，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究结论里缩写让收信人产生的感受。",
+      "stemTranslationZh": "方的研究揭示，使用缩写被看作________。",
+      "locateBy": "stem",
+      "locateFindZh": "看 by 后缩写怎样起作用",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "语言的演变",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the impact of evolving language use",
+            "optionText": "evolution",
+            "matchType": "wordFamily",
+            "relationNote": "evolution 由 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5|Ultimately, our findings highlight]] 里的 evolving 变来，那句说要重视不断变化的语言用法对沟通质量的影响，没说人们把缩写看作语言的演变。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+              "quote": "the importance of considering the impact of evolving language use in the digital era",
+              "anchor": "重视语言用法的变化"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "发信人付出的心思更少",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+              "quote": "texting abbreviations negatively affect interpersonal communication by decreasing perceived effort",
+              "anchor": "降低感受到的用心程度"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对话质量的提升",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "texting abbreviations negatively affect interpersonal communication",
+            "sourceHighlight": "negatively affect",
+            "optionText": "an improved conversational quality",
+            "optionHighlight": "improved",
+            "explanation": "原文说缩写对人际沟通有负面影响（negatively affect），还让人显得不真诚、回应不积极；选项写成对话质量提升，方向正相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+              "quote": "texting abbreviations negatively affect interpersonal communication",
+              "anchor": "对沟通有负面影响"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "偏爱更短的对话",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "conversations containing more abbreviations consistently died out faster",
+            "optionText": "conversation",
+            "matchType": "wordFamily",
+            "relationNote": "conversation 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:4|They discovered a clear pattern]]：缩写多的对话冷场更快（died out faster），这是统计出的结果；原文没说人们觉得用缩写的人想早点结束对话。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:4",
+              "quote": "conversations containing more abbreviations consistently died out faster",
+              "anchor": "缩写多的对话冷场快"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "research reveals",
+          "sourceRole": "stem",
+          "targetText": "“Our research reveals that texting abbreviations negatively affect interpersonal communication by decreasing perceived effort, which in turn leads to lower perceived sincerity and responsiveness.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "decreasing perceived effort",
+          "note": "题干 research reveals 原词出现在原文。"
+        },
+        {
+          "sourceText": "a lower effort from the sender",
+          "sourceRole": "correctOption",
+          "targetText": "decreasing perceived effort",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“发信人付出的心思更少”（a lower effort）就是原文的“降低对方感受到的用心程度”（decreasing perceived effort）：收到缩写，对方觉得你没花心思，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:31": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读方关于用不用缩写的几句话，概括他的看法。",
+      "stemTranslationZh": "方对使用缩写持什么看法？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他分场合说的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它能增进社会联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "social bonds weaken over time",
+            "sourceHighlight": "weaken",
+            "optionText": "It enhances social ties.",
+            "optionHighlight": "enhances",
+            "explanation": "原文说缩写可能让社交纽带变弱（social bonds weaken），想加强联系（strengthen social ties）时恰恰要留意；选项说它能增进联系，方向反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+              "quote": "social bonds weaken over time",
+              "anchor": "社交纽带变弱"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "应该弃用缩写。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "But he doesn’t believe people should stop using abbreviations altogether.",
+            "sourceHighlight": "doesn’t believe people should stop",
+            "optionText": "It should be abandoned.",
+            "optionHighlight": "should be abandoned",
+            "explanation": "方明说他并不认为人们应该完全不用缩写（doesn’t believe … should stop），选项把这层否定丢了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+              "quote": "But he doesn’t believe people should stop using abbreviations altogether.",
+              "anchor": "不主张完全不用"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "要视情况而定。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7",
+              "quote": "In some cases, it makes sense to invest less effort, like quickly texting with a delivery driver",
+              "anchor": "有些场合可少花心思"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7",
+              "quote": "our findings are especially relevant when we want to strengthen social ties",
+              "anchor": "想加深关系时要留意"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+              "quote": "But he doesn’t believe people should stop using abbreviations altogether.",
+              "anchor": "不主张完全不用"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它能简化内容。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "While abbreviations can save time and effort",
+            "sourceEntity": "time and effort",
+            "optionText": "It can simplify the content.",
+            "optionEntity": "the content",
+            "explanation": "[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:2]] 只说缩写能省时省力（save time and effort），省的是发信人的工夫，不是把内容变简单；而且那是论文作者的话，方谈看法时讲的是分场合使用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:2",
+              "quote": "While abbreviations can save time and effort",
+              "anchor": "省时省力"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "view",
+          "sourceRole": "stem",
+          "targetText": "But he doesn’t believe people should stop using abbreviations altogether.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:6",
+          "relationType": "locationCue",
+          "targetCue": "believe",
+          "sourceZh": "看法",
+          "targetCueZh": "认为",
+          "answerText": "In some cases, it makes sense to invest less effort",
+          "bridgeZh": "他不主张完全不用，接着分场合说明什么时候可以省事",
+          "note": "题干 view 对应原文 believe。"
+        },
+        {
+          "sourceText": "It depends on the context",
+          "sourceRole": "correctOption",
+          "targetText": "In some cases, it makes sense to invest less effort",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:7",
+          "relationType": "paraphrase",
+          "note": "选项是把他的两句话合起来概括的：先说有些场合少花心思也合理（In some cases），比如给快递员发消息；接着说想加深关系、给人留好印象时，研究发现就格外要紧（especially relevant）。用不用缩写看场合，选 C。"
+        }
+      ]
+    }
+  }
+}

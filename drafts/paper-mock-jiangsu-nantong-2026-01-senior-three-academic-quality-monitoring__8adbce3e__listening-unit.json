@@ -1,0 +1,1093 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Our skiing holiday is booked for next week, isn’t it?\nW: Yes, all sorted. Do you need to adjust anything?\nM: I decided it might be better if the kids stayed with their grandparents. (1) They’ll enjoy the quality time.",
+      "translationZh": "男：我们的滑雪假期订在下周，对吧？\n女：对，都安排好了。你要调整什么吗？\n男：我决定，让孩子们和他们的祖父母待在一起可能更好。他们会享受这段美好的相处时光。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "一对夫妻确认下周的滑雪假期，男士说出自己对行程的一个新决定。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我们的滑雪假期订在下周，对吧？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "对，都安排好了。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "你要调整什么吗？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "我决定，让孩子们和他们的祖父母待在一起可能更好。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "他们会享受这段美好的相处时光。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: I’ve got an eye test booked at your clinic next Monday.\nW: Yes, Mr. Brown, that's confirmed. I'll arrange the doctor for you. Are you ringing just to check the appointment?\nM: Actually, could I reschedule? I had a car accident, and buses don't run regularly where I live. (2)",
+      "translationZh": "男：我在你们诊所约了下周一做视力检查。\n女：是的，布朗先生，已经确认了。我会为您安排医生。您打电话来只是为了确认预约吗？\n男：其实，我能改个时间吗？我出了车祸，而且我住的地方公交车班次不规律。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士打电话到诊所，谈下周一视力检查的预约，想改个时间。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "我在你们诊所约了下周一做视力检查。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "是的，布朗先生，已经确认了。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我会为您安排医生。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "您打电话来只是为了确认预约吗？"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "其实，我能改个时间吗？"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "我出了车祸，而且我住的地方公交车班次不规律。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: Have you seen Zootopia 2? My kids say it's a movie worth seeing.\nW: No, not yet. But I've heard good things about its vivid new characters and the funny interactions between Judy and Nick.\nM: Yeah, but some reviews say it lacks new ideas. (3)",
+      "translationZh": "男：你看过《疯狂动物城2》吗？我孩子说这是一部值得一看的电影。\n女：还没呢。不过我听说它的新角色很生动，朱迪和尼克之间的互动也很有趣。\n男：是啊，不过有些影评说它缺少新意。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "两人聊起电影《疯狂动物城2》，交流孩子的推荐和各自听到的评价。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "你看过《疯狂动物城2》吗？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我孩子说这是一部值得一看的电影。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "还没呢。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "不过我听说它的新角色很生动，朱迪和尼克之间的互动也很有趣。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "是啊，不过有些影评说它缺少新意。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: It feels like we celebrate everything with fireworks nowadays – Diwali, Chinese New Year, and even weddings.\nM: Wow, really? I always thought they were just for New Year and bonfire nights. (4)",
+      "translationZh": "女：感觉如今我们庆祝什么都放烟花——排灯节、中国春节，甚至婚礼。\n男：哇，真的吗？我一直以为烟花只在新年和篝火之夜才放。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "文化习俗"
+      },
+      "summaryZh": "女士和男士谈起如今人们会在哪些节日和场合放烟花庆祝。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "感觉如今我们庆祝什么都放烟花——排灯节、中国春节，甚至婚礼。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "哇，真的吗？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我一直以为烟花只在新年和篝火之夜才放。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: James, how long have you been organizing school trips?\nM: Around a year now.\nW: Well, you've really picked up the safety rules quickly – I noticed how carefully you double-checked we had all the right equipment today. (5)",
+      "translationZh": "女：詹姆斯，你组织学校出游多久了？\n男：现在大概一年了。\n女：嗯，你安全规定真的掌握得很快——我注意到你今天非常仔细地反复核对，确保我们该带的装备都带齐了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士问詹姆斯组织学校出游多久了，并评价他今天的表现。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "詹姆斯，你组织学校出游多久了？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "现在大概一年了。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "嗯，你安全规定真的掌握得很快——我注意到你今天非常仔细地反复核对，确保我们该带的装备都带齐了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Have you both got your tickets? And your phones charged?\nM: Yes, Mom. We've been ready for ages. We can't be late.\nW: I know, I just want to make sure you're safe.\nM: You said we could go by ourselves. We're 15.\nW: I did, and I'll be waiting right outside afterwards. Text me if anything feels wrong.\nM: It won't, it's going to be amazing. We've waited months for this concert.\nW: I want you to have fun, really. I just can't believe how grown up you are.\nM: We'll be fine. We'll send you a video of our favorite song, —The Summer.\nW: No need, just have fun.",
+      "translationZh": "女：你们俩票都带了吗？手机也充好电了吗？\n男：带了，妈妈。我们早就准备好了。我们可不能迟到。\n女：我知道，我只是想确保你们安全。\n男：你说过我们可以自己去的。我们15岁了。\n女：我是说过，结束后我会就在外面等着。要是觉得哪里不对劲，就给我发短信。\n男：不会的，肯定会很精彩。我们等这场音乐会等了好几个月了。\n女：我真心希望你们玩得开心。我只是不敢相信你们已经长这么大了。\n男：我们不会有事的。我们会给你发一段我们最喜欢的歌《夏天》的视频。\n女：不用了，玩得开心就好。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "两个孩子要自己去听音乐会，妈妈反复叮嘱，儿子让她放心。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你们俩票都带了吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "手机也充好电了吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "带了，妈妈。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我们早就准备好了。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我们可不能迟到。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我知道，我只是想确保你们安全。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "你说过我们可以自己去的。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "我们15岁了。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我是说过，结束后我会就在外面等着。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "要是觉得哪里不对劲，就给我发短信。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "不会的，肯定会很精彩。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "我们等这场音乐会等了好几个月了。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "我真心希望你们玩得开心。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "我只是不敢相信你们已经长这么大了。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "我们不会有事的。"
+        },
+        {
+          "id": "listening-text-6:16",
+          "zh": "我们会给你发一段我们最喜欢的歌《夏天》的视频。"
+        },
+        {
+          "id": "listening-text-6:17",
+          "zh": "不用了，玩得开心就好。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: So, what did you think of the mindfulness（正念）book?\nM: I thought it would be boring, but it actually helped. That's why I'm returning it early. I read it quickly. (8)\nW: Was there anything in particular that stood out?\nM: The breathing exercises. I've used one before my presentation last week.\nW: Did it help you calm down?\nM: Yeah. The book suggests breathing in for four seconds, pausing for four, and then breathing out for six, which adds up to 14 seconds per cycle. I tried that five times. (9) It really worked.\nW: I tried that, I only do it once, and it still makes a difference.\nM: I might try that gratitude journal idea next.\nW: It’s worth a go.\nM: I think more students should read that book. It felt real. (10)",
+      "translationZh": "女：那么，你觉得那本关于正念的书怎么样？\n男：我原以为它会很无聊，但它其实很有帮助。所以我才提前还书。我读得很快。\n女：书里有什么特别让你印象深刻的吗？\n男：呼吸练习。上周做展示之前我用过其中一个。\n女：它帮你平静下来了吗？\n男：是的。书上建议吸气四秒，停四秒，然后呼气六秒，每一轮加起来是14秒。我做了五次。确实管用。\n女：我也试过，我只做一次，也照样有效果。\n男：我接下来可能要试试那个写感恩日记的点子。\n女：值得一试。\n男：我觉得应该有更多学生读读那本书。它读起来很真实。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "男士来还一本讲正念的书，和女士聊书里的呼吸练习等内容。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "那么，你觉得那本关于正念的书怎么样？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "我原以为它会很无聊，但它其实很有帮助。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "所以我才提前还书。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我读得很快。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "书里有什么特别让你印象深刻的吗？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "呼吸练习。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "上周做展示之前我用过其中一个。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "它帮你平静下来了吗？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "书上建议吸气四秒，停四秒，然后呼气六秒，每一轮加起来是14秒。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我做了五次。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "确实管用。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我也试过，我只做一次，也照样有效果。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "我接下来可能要试试那个写感恩日记的点子。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "值得一试。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "我觉得应该有更多学生读读那本书。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "它读起来很真实。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Which do you think is most meaningful – Hanfu, classical Chinese music or ancient poetry?\nM: That’s a difficult question. I think Hanfu is amazing. Just wearing it feels like stepping into the past. (11) The style is so different from modern clothes. We all wore it to my sister's wedding.\nW: Yeah, it's beautiful and comfortable to wear. And it's not just clothing; it shows the fashion from ancient dynasties. But I still think classical music connects us more. (12) There are some very famous performers too. You don't have to understand the language to feel something. (12)\nM: True, when someone plays instruments like the guzheng, it really makes you stop to listen. But also poetry is magical. Some of those old lines say a lot in just a few words.\nW: I know what you mean. So, I guess Hanfu shows tradition through fashion, music through sound, and poetry through writing. (13) I think they are all studied in schools now.\nM: Right, that makes sense. (13)\nW: They are all ways of keeping culture alive.\nM: Yeah. They remind us where we come from and what matters.",
+      "translationZh": "女：你觉得哪个最有意义——汉服、中国古典音乐还是古诗？\n男：这个问题很难。我觉得汉服很了不起。光是穿上它，就像走进了过去。它的样式和现代服装很不一样。我们去我姐姐的婚礼时都穿了汉服。\n女：是啊，它漂亮，穿着也舒服。而且它不只是衣服，它展现了古代各朝的服饰风尚。不过我还是觉得古典音乐更能把我们联系在一起。也有一些非常有名的演奏家。你不需要懂语言，也能有所感触。\n男：没错，有人弹奏古筝这样的乐器时，真的会让你停下来倾听。不过诗歌也很神奇。有些古老的诗句寥寥几字就意蕴丰富。\n女：我明白你的意思。所以，我想汉服通过服饰展现传统，音乐通过声音，诗歌通过文字。我想它们现在都在学校里学。\n男：对，有道理。\n女：它们都是让文化延续下去的方式。\n男：是啊。它们提醒我们从哪里来，什么才是重要的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "文化习俗"
+      },
+      "summaryZh": "两人讨论汉服、古典音乐和古诗哪个最有意义，各自说出看法。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "你觉得哪个最有意义——汉服、中国古典音乐还是古诗？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "这个问题很难。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "我觉得汉服很了不起。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "光是穿上它，就像走进了过去。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "它的样式和现代服装很不一样。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我们去我姐姐的婚礼时都穿了汉服。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "是啊，它漂亮，穿着也舒服。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "而且它不只是衣服，它展现了古代各朝的服饰风尚。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "不过我还是觉得古典音乐更能把我们联系在一起。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "也有一些非常有名的演奏家。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "你不需要懂语言，也能有所感触。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "没错，有人弹奏古筝这样的乐器时，真的会让你停下来倾听。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "不过诗歌也很神奇。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "有些古老的诗句寥寥几字就意蕴丰富。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "我明白你的意思。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "所以，我想汉服通过服饰展现传统，音乐通过声音，诗歌通过文字。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "我想它们现在都在学校里学。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "对，有道理。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "它们都是让文化延续下去的方式。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "它们提醒我们从哪里来，什么才是重要的。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "M: I didn't expect to see you here, Miss Smith. I thought you were busy running that team building event this weekend.\nW: I was, and it went really well. We had a stress relief session using pets.\nM: I've heard of it. It's the use of an animal to provide comfort to people with health problems, right?\nW: Yes, we brought in trained therapy dogs during the team building event. To help with stress relief, employees could spend time with them in special areas.\nM: That sounds wonderful, but wasn't there a risk that some people would find the dogs too noisy?\nW: At first, some were unsure, especially those who don't usually spend time with pets. I guess they were maybe a little bit afraid of the dogs, but didn't actually say that. However, once they saw how calm and relaxed the dogs made everyone feel, they were more open to it. Some employees even mentioned how much more comfortable they felt during group activities. (15)\nM: I never thought about how much of a positive impact comfort could have.\nW: It's incredible. Animals help people feel more at ease and connected, which really improves teamwork and communication.\nM: Well, you never say never. Now that we've spoken, I wouldn't rule out doing something similar. (15)",
+      "translationZh": "男：没想到在这儿见到你，史密斯小姐。我还以为你这个周末忙着办那个团建活动呢。\n女：是在忙，而且活动办得很成功。我们安排了一场借助宠物减压的活动。\n男：我听说过。就是用动物给有健康问题的人带来安慰，对吧？\n女：对，团建期间我们请来了训练有素的治疗犬。为了帮助减压，员工们可以在专门的区域和它们待在一起。\n男：听起来很棒，可难道不会有人觉得狗太吵吗？\n女：一开始有些人拿不准，尤其是那些平时不怎么和宠物待在一起的人。我猜他们可能有点怕狗，只是没说出来。不过，一旦看到狗让大家都变得那么平静放松，他们就更愿意接受了。有些员工甚至提到，在团体活动中他们感觉自在多了。\n男：我从没想过这种安慰能带来这么大的积极影响。\n女：真是不可思议。动物让人更放松、更有联结感，这确实能改善团队合作和沟通。\n男：嗯，凡事别把话说死。既然我们聊过了，我也不排除做类似的事。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "男士偶遇史密斯小姐，两人聊起她周末团建中请治疗犬帮员工减压的活动。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "没想到在这儿见到你，史密斯小姐。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我还以为你这个周末忙着办那个团建活动呢。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "是在忙，而且活动办得很成功。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "我们安排了一场借助宠物减压的活动。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我听说过。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "就是用动物给有健康问题的人带来安慰，对吧？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "对，团建期间我们请来了训练有素的治疗犬。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "为了帮助减压，员工们可以在专门的区域和它们待在一起。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "听起来很棒，可难道不会有人觉得狗太吵吗？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "一开始有些人拿不准，尤其是那些平时不怎么和宠物待在一起的人。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我猜他们可能有点怕狗，只是没说出来。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "不过，一旦看到狗让大家都变得那么平静放松，他们就更愿意接受了。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "有些员工甚至提到，在团体活动中他们感觉自在多了。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "我从没想过这种安慰能带来这么大的积极影响。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "真是不可思议。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "动物让人更放松、更有联结感，这确实能改善团队合作和沟通。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "嗯，凡事别把话说死。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "既然我们聊过了，我也不排除做类似的事。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: I used to think talent was everything. If you were naturally good at something, you’d succeed. If not, you wouldn’t. I thought I wasn’t good at languages, so I could never get better. Then I learned about the growth mindset, and it changed my mind. (17)\nThe theory comes from psychologist Caral Dweck (1) She says people with a growth mindset believe they can improve through practice, while those with a fixed mindset think talent is fixed.\nSome schools now encourage students to focus on effort and improvement, believing that a growth mindset eventually leads to better results. (18) And in sports or business, the same idea applies. You can learn from failure, keep going, and your brain grows through challenges.\nBut not everyone agrees Some researchers say the idea is too simple. If someone lacks support or resources, effort alone might not be enough. (19) Others argue that praising effort too much could make people ignore smart strategies\nStill, I’ve seen it work. When my son stopped saying “I can’t learn languages” and started saying “I can’t do verbs yet but I will improve”, things changed. He ended up doing much better in those important exams. (20)\nAfter all, the mind, like a muscle, grows with use-but only if you believe it can.",
+      "translationZh": "男：我过去认为天赋就是一切。如果你天生擅长某件事，你就会成功；如果不擅长，就不会。我以为自己没有语言天赋，所以永远也学不好。后来我了解到成长型思维，它改变了我的看法。\n这个理论来自心理学家卡罗尔·德韦克。她说，具有成长型思维的人相信自己能通过练习进步，而具有固定型思维的人认为天赋是固定不变的。\n如今一些学校鼓励学生关注努力和进步，相信成长型思维最终会带来更好的成绩。在体育或商业领域，同样的道理也适用。你可以从失败中学习，坚持下去，你的大脑会在挑战中成长。\n但并非所有人都认同。一些研究者说这个观点太简单了。如果一个人缺乏支持或资源，光靠努力可能还不够。另一些人认为，过分表扬努力可能会让人忽视聪明的策略。\n尽管如此，我亲眼见过它起作用。当我儿子不再说“我学不会语言”，而开始说“我还不会动词，但我会进步”时，情况就变了。他最终在那些重要考试中考得好多了。\n毕竟，头脑就像肌肉，越用越强——但前提是你相信它能做到。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "积极的生活态度"
+      },
+      "summaryZh": "男士讲成长型思维理论，介绍支持和质疑的观点，并谈到儿子的经历。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "我过去认为天赋就是一切。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "如果你天生擅长某件事，你就会成功。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "如果不擅长，就不会。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我以为自己没有语言天赋，所以永远也学不好。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "后来我了解到成长型思维，它改变了我的看法。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "这个理论来自心理学家卡罗尔·德韦克。她说，具有成长型思维的人相信自己能通过练习进步，而具有固定型思维的人认为天赋是固定不变的。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "如今一些学校鼓励学生关注努力和进步，相信成长型思维最终会带来更好的成绩。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "在体育或商业领域，同样的道理也适用。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "你可以从失败中学习，坚持下去，你的大脑会在挑战中成长。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "但并非所有人都认同。一些研究者说这个观点太简单了。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "如果一个人缺乏支持或资源，光靠努力可能还不够。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "另一些人认为，过分表扬努力可能会让人忽视聪明的策略。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "尽管如此，我亲眼见过它起作用。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "当我儿子不再说“我学不会语言”，而开始说“我还不会动词，但我会进步”时，情况就变了。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "他最终在那些重要考试中考得好多了。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "毕竟，头脑就像肌肉，越用越强——但前提是你相信它能做到。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "关于滑雪假期，男士决定了什么？",
+      "optionTranslationsZh": {
+        "A": "邀请他的祖父母同去。",
+        "B": "把假期改到别的时间。",
+        "C": "不带孩子们去。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I decided it might be better if the kids stayed with their grandparents."
+      },
+      "reasonZh": "男士决定让孩子们和祖父母待在一起（the kids stayed with their grandparents），也就是孩子们不跟着去滑雪，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "祖父母（grandparents）是孩子们留下来陪伴的人，而且是孩子们的祖父母，男士没有请谁同去。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "女士问要不要调整（adjust anything），男士调整的是孩子的去留，假期仍订在下周（booked for next week）。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "两位说话人是什么关系？",
+      "optionTranslationsZh": {
+        "A": "医生和病人。",
+        "B": "接待员和顾客。",
+        "C": "公交车司机和乘客。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I'll arrange the doctor for you."
+      },
+      "reasonZh": "女士替布朗先生核对预约，还说会给他安排医生（arrange the doctor），可见她是诊所负责预约的接待员，男士是来预约的顾客，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "医生（doctor）是女士要替男士安排的人，她自己负责确认预约，不是给他看病的医生。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "公交车（buses）是男士解释为什么要改期时提到的：他出了车祸，住处公交又不规律。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士对《疯狂动物城2》有什么担心？",
+      "optionTranslationsZh": {
+        "A": "它不够有创意。",
+        "B": "朱迪和尼克不好笑。",
+        "C": "新角色不生动。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Yeah, but some reviews say it lacks new ideas."
+      },
+      "reasonZh": "“不够有创意”就是男士转述的影评说法：这部电影缺少新意（lacks new ideas），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "朱迪和尼克的互动有趣（funny interactions）是女士听来的好评，男士用 Yeah 接下，并没有反驳这一点。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "新角色生动（vivid new characters）也是女士听到的好评，选项把这条好评说反了。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "什么让男士感到惊讶？",
+      "optionTranslationsZh": {
+        "A": "烟花被用于许多场合。",
+        "B": "婚礼上很少见到烟花。",
+        "C": "烟花在排灯节最受欢迎。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It feels like we celebrate everything with fireworks nowadays – Diwali, Chinese New Year, and even weddings."
+      },
+      "reasonZh": "“许多场合”概括了女士列举的排灯节、春节甚至婚礼；男士一直以为烟花只在新年和篝火之夜放（just for New Year and bonfire nights），所以才问“真的吗”，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说连婚礼都放烟花（even weddings），选项说婚礼上很少见，意思正好相反。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "排灯节（Diwali）只是女士列举的场合之一，她没有比较哪个节日放烟花最多。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士是什么意思？",
+      "optionTranslationsZh": {
+        "A": "詹姆斯学东西慢。",
+        "B": "詹姆斯能胜任这份工作。",
+        "C": "詹姆斯有时过于谨慎。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Well, you've really picked up the safety rules quickly – I noticed how carefully you double-checked we had all the right equipment today."
+      },
+      "reasonZh": "詹姆斯才组织了一年左右，女士夸他安全规定掌握得快（picked up … quickly），今天核对装备又很仔细，可见他能胜任这份工作，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说他掌握得很快（quickly），和学得慢正好相反。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "仔细核对装备（carefully you double-checked）是女士在称赞他做事认真，她没有嫌他过分小心。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士感觉怎么样？",
+      "optionTranslationsZh": {
+        "A": "生气。",
+        "B": "紧张。",
+        "C": "兴奋。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It won't, it's going to be amazing."
+      },
+      "reasonZh": "儿子说这场演出一定很精彩（going to be amazing），又说他们等了好几个月（waited months），可见他很兴奋，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "儿子提醒妈妈说过让他们自己去（You said we could go by ourselves），是让她放心，后面还说要给她发视频，并没有生气。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "放心不下、反复叮嘱的是妈妈（make sure you're safe），儿子一直说他们不会有事（We'll be fine）。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "这段对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在家里。",
+        "B": "在售票处。",
+        "C": "在音乐会场馆。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Have you both got your tickets?"
+      },
+      "reasonZh": "妈妈在核对孩子们票和手机带齐没有，又说结束后她会在外面等（waiting right outside afterwards），可见他们还没出发，最可能在家里，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "票（tickets）孩子们已经拿到了，妈妈只是确认有没有带上，不是在售票处买票。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "音乐会（concert）是孩子们等会儿要去的地方，妈妈说结束后才去外面等他们，现在还没到场馆。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士为什么提前还书？",
+      "optionTranslationsZh": {
+        "A": "他觉得书太无聊。",
+        "B": "他读过类似的书。",
+        "C": "他很快就读完了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I read it quickly."
+      },
+      "reasonZh": "男士说提前还书时补了一句读得很快（read it quickly），“很快就读完了”就是这个意思，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "无聊（boring）是男士读之前的想法，他接着用 but 说这本书其实有帮助（actually helped）。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "这个呼吸练习男士总共做了多长时间？",
+      "optionTranslationsZh": {
+        "A": "14秒。",
+        "B": "50秒。",
+        "C": "70秒。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I tried that five times."
+      },
+      "reasonZh": "书上建议的一轮是吸气 4 秒、停 4 秒、呼气 6 秒，共 14 秒（14 seconds per cycle）；男士做了五次，14 秒 × 5 = 70 秒，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "14 秒（14 seconds per cycle）只是一轮的时长，男士做了五次。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "50 秒是漏掉中间停的 4 秒（pausing for four），按（4 + 6）秒 × 5 算出来的。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士觉得这本书怎么样？",
+      "optionTranslationsZh": {
+        "A": "有帮助。",
+        "B": "有挑战性。",
+        "C": "幽默。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I thought it would be boring, but it actually helped."
+      },
+      "reasonZh": "男士直接说这本书其实有帮助（actually helped），选项沿用 help 这个词；他后面还说呼吸练习确实管用（really worked），选 A。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士为什么说汉服有意义？",
+      "optionTranslationsZh": {
+        "A": "它在婚礼上很流行。",
+        "B": "它让历史显得更近。",
+        "C": "它适合每天穿，很舒服。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Just wearing it feels like stepping into the past."
+      },
+      "reasonZh": "“让历史显得更近”就是男士说的一穿上就像走进了过去（stepping into the past），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "婚礼（wedding）是男士说家人去姐姐婚礼时都穿了汉服，只是一次经历，没说汉服在婚礼上流行。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "穿着舒服（comfortable to wear）是女士接话时说的，也没说每天穿；男士说汉服有意义，理由是穿上像回到过去。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士认为音乐有什么特别之处？",
+      "optionTranslationsZh": {
+        "A": "它讲述演奏家的故事。",
+        "B": "它不靠言语也能打动人。",
+        "C": "它依赖对语言的理解。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "You don't have to understand the language to feel something."
+      },
+      "reasonZh": "“不靠言语也能打动人”就是女士说的不懂语言也能有所感触（feel something），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "有名的演奏家（famous performers）只是女士顺带一提，她没说音乐讲演奏家的故事。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "语言（language）出现在女士的原话里，但她说的是不必懂语言（don't have to understand），选项把意思说反了。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "两位说话人都持有哪种看法？",
+      "optionTranslationsZh": {
+        "A": "有些传统已经没用了。",
+        "B": "所有传统都应该在学校里教。",
+        "C": "传统以不同的方式与人们产生联系。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "So, I guess Hanfu shows tradition through fashion, music through sound, and poetry through writing."
+      },
+      "reasonZh": "女士总结汉服、音乐、诗歌分别通过服饰、声音、文字（through fashion … sound … writing）展现传统，男士接着表示赞同（that makes sense），这就是两人共同的看法，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "学校（schools）出自女士说它们现在都在学校里学（all studied in schools now），讲的是现状，不是主张所有传统都应该教。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人主要在讨论什么？",
+      "optionTranslationsZh": {
+        "A": "工作压力的成因。",
+        "B": "用动物帮人放松的好处。",
+        "C": "组织团建活动的方法。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Animals help people feel more at ease and connected, which really improves teamwork and communication."
+      },
+      "reasonZh": "两人从借助宠物减压的活动谈起，说到治疗犬让大家平静放松、员工在团体活动中更自在，女士最后总结动物让人更放松（feel more at ease），都围绕用动物放松的好处，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "减压（stress relief）谈的是怎样缓解压力，两人没有讨论压力从哪里来。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "团建活动（team building event）只是这次请治疗犬的场合，两人没谈怎样组织活动。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士注意到了什么积极的结果？",
+      "optionTranslationsZh": {
+        "A": "大多数员工说工作效率提高了。",
+        "B": "所有员工都克服了对狗的恐惧。",
+        "C": "团队讨论变得更开放、更轻松。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Some employees even mentioned how much more comfortable they felt during group activities."
+      },
+      "reasonZh": "“团队讨论更轻松”合并了女士说的两处：有些员工在团体活动中自在多了（more comfortable … during group activities），动物还改善了团队沟通（improves teamwork and communication），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士只说一开始犹豫的人后来更愿意接受（more open to it），没说所有人都不再怕狗；说自在多了的也只是有些员工（Some employees）。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "最后男士对这项活动怎么看？",
+      "optionTranslationsZh": {
+        "A": "他有兴趣试一试。",
+        "B": "他不确定是否有效。",
+        "C": "他担心可能出现的问题。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Now that we've spoken, I wouldn't rule out doing something similar."
+      },
+      "reasonZh": "“有兴趣试一试”就是男士最后说的不排除做类似的事（wouldn't rule out doing something similar），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "拿不准（unsure）是女士说的一开始有些员工的态度，不是男士最后的想法。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "男士前面担心过狗太吵（too noisy），听完女士的讲述，最后表示愿意考虑。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "是什么改变了说话人对努力的看法？",
+      "optionTranslationsZh": {
+        "A": "每天更努力地练习。",
+        "B": "语言考试不及格。",
+        "C": "了解一种新理论。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Then I learned about the growth mindset, and it changed my mind."
+      },
+      "reasonZh": "说话人了解到成长型思维（learned about the growth mindset），下一句就称它为理论（The theory），是它改变了他的看法，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "考试（exams）出现在结尾，讲的是儿子后来考得好多了，说话人没说自己考试不及格。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "一些学校注重努力的原因是什么？",
+      "optionTranslationsZh": {
+        "A": "为了提高学生的成绩。",
+        "B": "为了鼓励更聪明的策略。",
+        "C": "为了教学生了解固定的天赋。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Some schools now encourage students to focus on effort and improvement, believing that a growth mindset eventually leads to better results."
+      },
+      "reasonZh": "“提高成绩”就是学校相信的成长型思维最终会带来更好的成绩（leads to better results），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "聪明的策略（smart strategies）出自反对者的担心：过分表扬努力会让人忽视策略，不是学校注重努力的理由。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "天赋固定（talent is fixed）是德韦克描述的固定型思维者的想法，学校鼓励的恰恰是努力和进步。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "研究者对成长型思维有什么担忧？",
+      "optionTranslationsZh": {
+        "A": "它可能被误解为万能的解决办法。",
+        "B": "它鼓励学生单独学习。",
+        "C": "它让人害怕冒险。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "If someone lacks support or resources, effort alone might not be enough."
+      },
+      "reasonZh": "研究者先说这个观点太简单（too simple），又说缺少支持或资源时光靠努力可能不够（effort alone），也就是不能把它当成万能办法，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "单独（alone）出现在光靠努力（effort alone）里，指只靠努力，不是让学生一个人学习。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人为什么谈到他的儿子？",
+      "optionTranslationsZh": {
+        "A": "为了证明学习语言的重要性。",
+        "B": "为了说明成长型思维的效果。",
+        "C": "为了解释如何提高考试成绩。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "When my son stopped saying “I can’t learn languages” and started saying “I can’t do verbs yet but I will improve”, things changed."
+      },
+      "reasonZh": "说话人先说自己亲眼见过它起作用（I’ve seen it work），接着讲儿子换了想法后情况好转、考得好多了，正是用来说明成长型思维的效果，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "学语言（learn languages）是儿子原先说自己学不会时的话，这个例子讲的是他想法改变后的变化，不是语言多重要。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "考得好多了（doing much better）是儿子改变想法的结果，说话人没讲提分的方法。"
+        }
+      ]
+    }
+  }
+}

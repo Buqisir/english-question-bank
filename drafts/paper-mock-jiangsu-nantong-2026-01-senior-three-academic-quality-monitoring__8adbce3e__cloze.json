@@ -1,0 +1,1819 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze": {
+      "overview": "作者曾像多数青少年一样用手机随手拍照、发到网上给同伴看。翻看家庭老相册后，作者意识到照片承载着家族的历史，于是改用胶片相机，用心为自己和亲友留住重要时刻。",
+      "fullTranslationZh": "像大多数在数字时代长大的青少年一样，我拍照全靠手机——一张张快照被分享出去，却很少再被翻看。我的 Instagram 主页是一组精心修饰过的这类照片，目的是给同龄人留下好印象。\n从分享图片转向为自己记录回忆，这个转变并非一蹴而就。它始于一个简单的举动：翻看家庭相册。我被家族往昔的照片吸引住了。它们并不精致，却承载着文字常常无法传达的故事——关于生日、仪式和全家福的故事。在那些照片里，我看到了联系。我意识到，每一张照片都是某种更大整体的一部分：一段代代相传的历史。\n正是这份领悟让我拿起了胶片相机。每卷胶卷只有36张，每张照片都需要用心，需要放慢脚步去观察身边的世界。如今我拍下最重要的东西：朋友的婚礼、假日和点滴的快乐时刻。如果一张照片没有拍成我希望的样子，也没关系。那些瑕疵成了故事的一部分。这些照片不是为了点赞或评论——它们是为我自己、为家人和朋友而拍的。\n当我终于打开装着冲洗好的照片的信封时，会有一种重新发现的感觉。我被带回到那些时刻。从这个意义上说，我转向胶片摄影，就像是渴望重新找回把一段记忆握在手中时所带来的那份恒久与亲近。",
+      "mainLine": {
+        "theme": {
+          "text": "照片的意义在于为自己和亲友留住记忆，而不是给别人看（they were meant for me, for family and friends）。",
+          "quote": "they were meant for me, for family and friends"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+            "text": "作者像多数青少年一样用手机拍照，发到网上给同龄人看。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+            "text": "翻看家庭相册，作者从老照片里看到家族的历史和联系。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+            "text": "这份领悟让作者拿起胶片相机，用心拍下重要的人和事。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+            "text": "冲洗照片时重温往日，作者明白转向胶片是想留住记忆。"
+          }
+        ],
+        "emotion": "随手分享→被老照片吸引→领悟→珍惜"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+          "sourceText": "They weren’t polished, but they held stories that words often couldn’t __46__ — of birthdays, ceremonies and family portraits.",
+          "displayText": "They weren’t polished, but they held stories that words often couldn’t convey — of birthdays, ceremonies and family portraits.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46"
+          ],
+          "translationZh": "它们并不精致，却承载着文字常常无法传达的故事——关于生日、仪式和全家福的故事。",
+          "analysisZh": "主干是 but 连接的两个分句：它们不精致（They weren’t polished），却承载着故事（they held stories）。that 引导定语从句修饰 stories，从句里 words 作主语、couldn’t convey 作谓语，stories 是 convey 的宾语。破折号后的 of birthdays, ceremonies and family portraits 仍修饰 stories，说明是什么故事，因为中间隔着定语从句才放到句末；of 后是三个并列名词。",
+          "underlineRanges": [
+            {
+              "start": 27,
+              "end": 44,
+              "quote": "they held stories"
+            },
+            {
+              "start": 45,
+              "end": 77,
+              "quote": "that words often couldn’t convey"
+            },
+            {
+              "start": 80,
+              "end": 125,
+              "quote": "of birthdays, ceremonies and family portraits"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+          "sourceText": "With just 36 exposures per roll, each photo required __50__, a slowing down to see the world around me.",
+          "displayText": "With just 36 exposures per roll, each photo required intention, a slowing down to see the world around me.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50"
+          ],
+          "translationZh": "每卷胶卷只有36张，每张照片都需要用心，需要放慢脚步去观察身边的世界。",
+          "analysisZh": "主干是每张照片都需要用心（each photo required intention）。句首 with 短语作状语，交代条件：每卷只有36张。逗号后的 a slowing down 是 intention 的同位语，具体说明这份用心就是放慢脚步；不定式 to see the world around me 说明放慢是为了观察身边的世界。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "With just 36 exposures per roll"
+            },
+            {
+              "start": 33,
+              "end": 62,
+              "quote": "each photo required intention"
+            },
+            {
+              "start": 64,
+              "end": 105,
+              "quote": "a slowing down to see the world around me"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1"
+              ],
+              "start": 0,
+              "end": 88,
+              "quote": "像大多数在数字时代长大的青少年一样，我拍照全靠手机——一张张快照被分享出去，却很少再被翻看。我的 Instagram 主页是一组精心修饰过的这类照片，目的是给同龄人留下好印象。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2"
+              ],
+              "start": 89,
+              "end": 233,
+              "quote": "从分享图片转向为自己记录回忆，这个转变并非一蹴而就。它始于一个简单的举动：翻看家庭相册。我被家族往昔的照片吸引住了。它们并不精致，却承载着文字常常无法传达的故事——关于生日、仪式和全家福的故事。在那些照片里，我看到了联系。我意识到，每一张照片都是某种更大整体的一部分：一段代代相传的历史。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3"
+              ],
+              "start": 234,
+              "end": 382,
+              "quote": "正是这份领悟让我拿起了胶片相机。每卷胶卷只有36张，每张照片都需要用心，需要放慢脚步去观察身边的世界。如今我拍下最重要的东西：朋友的婚礼、假日和点滴的快乐时刻。如果一张照片没有拍成我希望的样子，也没关系。那些瑕疵成了故事的一部分。这些照片不是为了点赞或评论——它们是为我自己、为家人和朋友而拍的。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4"
+              ],
+              "start": 383,
+              "end": 471,
+              "quote": "当我终于打开装着冲洗好的照片的信封时，会有一种重新发现的感觉。我被带回到那些时刻。从这个意义上说，我转向胶片摄影，就像是渴望重新找回把一段记忆握在手中时所带来的那份恒久与亲近。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+            "text": "Like most teenagers growing up in the digital age, I relied on my phone for photos – quick snaps (快照) that were shared but rarely revisited. My profile on Instagram was a polished collection of such photos intended to impress my peers."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+            "text": "The transition from sharing images to capturing memories for myself wasn’t immediate. It began with a simple act: flipping (翻) through family photo albums. I was attracted by the images from my family’s past. They weren’t polished, but they held stories that words often couldn’t convey — of birthdays, ceremonies and family portraits. In those photographs, I saw connection. I realized that every image was a piece of something larger: a history that had been passed down."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+            "text": "It was this realization that led me to pick up my film camera. With just 36 exposures per roll, each photo required intention, a slowing down to see the world around me. I now take photos of the things that matter most: friends’ weddings, holidays and small moments of joy. If a picture didn’t turn out as I had hoped, it didn’t matter. The imperfections became part of the story. They weren’t meant for likes or comments – they were meant for me, for family and friends."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+            "text": "There’s a sense of rediscovery when I finally open an envelope of developed prints. I’m transported back to those moments. And in that sense, my shift to film photography feels like a desire to regain the permanence and closeness that comes with holding a memory in your hands."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 20,
+                "end": 34,
+                "quote": "sharing images"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 1,
+                "end": 5,
+                "quote": "分享图片"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:41"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "start": 112,
+                "end": 118,
+                "quote": "shared"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "start": 33,
+                "end": 37,
+                "quote": "分享出去"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "start": 225,
+                "end": 233,
+                "quote": "my peers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "start": 79,
+                "end": 82,
+                "quote": "同龄人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:42"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "start": 218,
+                "end": 225,
+                "quote": "impress"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+                "start": 82,
+                "end": 87,
+                "quote": "留下好印象"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 54,
+                "end": 64,
+                "quote": "for myself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 7,
+                "end": 10,
+                "quote": "为自己"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:43"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 38,
+                "end": 47,
+                "quote": "capturing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 10,
+                "end": 14,
+                "quote": "记录回忆"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 114,
+                "end": 154,
+                "quote": "flipping (翻) through family photo albums"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 37,
+                "end": 43,
+                "quote": "翻看家庭相册"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:44"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 109,
+                "end": 112,
+                "quote": "act"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 34,
+                "end": 36,
+                "quote": "举动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 435,
+                "end": 470,
+                "quote": "a history that had been passed down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 134,
+                "end": 143,
+                "quote": "一段代代相传的历史"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:45"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 203,
+                "end": 207,
+                "quote": "past"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 48,
+                "end": 50,
+                "quote": "往昔"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 261,
+                "end": 281,
+                "quote": "words often couldn’t"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 69,
+                "end": 75,
+                "quote": "文字常常无法"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 280,
+                "end": 286,
+                "quote": "convey"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 75,
+                "end": 77,
+                "quote": "传达"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 406,
+                "end": 426,
+                "quote": "a piece of something"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 123,
+                "end": 133,
+                "quote": "某种更大整体的一部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:47"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 364,
+                "end": 374,
+                "quote": "connection"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 108,
+                "end": 110,
+                "quote": "联系"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 435,
+                "end": 470,
+                "quote": "a history that had been passed down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 134,
+                "end": 143,
+                "quote": "一段代代相传的历史"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:48"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 429,
+                "end": 435,
+                "quote": "larger"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 125,
+                "end": 127,
+                "quote": "更大"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 374,
+                "end": 384,
+                "quote": "I realized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 111,
+                "end": 115,
+                "quote": "我意识到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:49"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 12,
+                "end": 23,
+                "quote": "realization"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 4,
+                "end": 6,
+                "quote": "领悟"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 63,
+                "end": 89,
+                "quote": "just 36 exposures per roll"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 16,
+                "end": 25,
+                "quote": "每卷胶卷只有36张"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 116,
+                "end": 125,
+                "quote": "intention"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 33,
+                "end": 35,
+                "quote": "用心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 279,
+                "end": 309,
+                "quote": "didn’t turn out as I had hoped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 86,
+                "end": 96,
+                "quote": "没有拍成我希望的样子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:51"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 341,
+                "end": 354,
+                "quote": "imperfections"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 104,
+                "end": 106,
+                "quote": "瑕疵"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 396,
+                "end": 407,
+                "quote": "or comments"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 125,
+                "end": 128,
+                "quote": "或评论"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:52"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 404,
+                "end": 409,
+                "quote": "likes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 123,
+                "end": 125,
+                "quote": "点赞"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 90,
+                "end": 111,
+                "quote": "back to those moments"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 36,
+                "end": 40,
+                "quote": "那些时刻"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:53"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 19,
+                "end": 30,
+                "quote": "rediscovery"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 23,
+                "end": 27,
+                "quote": "重新发现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 90,
+                "end": 97,
+                "quote": "back to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 34,
+                "end": 36,
+                "quote": "回到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:54"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 88,
+                "end": 99,
+                "quote": "transported"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 32,
+                "end": 36,
+                "quote": "被带回到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 142,
+                "end": 161,
+                "quote": "to film photography"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 52,
+                "end": 56,
+                "quote": "胶片摄影"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:55"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 145,
+                "end": 150,
+                "quote": "shift"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:4",
+                "start": 50,
+                "end": 52,
+                "quote": "转向"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 209,
+                "end": 335,
+                "quote": "They weren’t polished, but they held stories that words often couldn’t convey — of birthdays, ceremonies and family portraits."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:2",
+                "start": 58,
+                "end": 97,
+                "quote": "它们并不精致，却承载着文字常常无法传达的故事——关于生日、仪式和全家福的故事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 63,
+                "end": 169,
+                "quote": "With just 36 exposures per roll, each photo required intention, a slowing down to see the world around me."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+                "start": 16,
+                "end": 51,
+                "quote": "每卷胶卷只有36张，每张照片都需要用心，需要放慢脚步去观察身边的世界。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "随手分享→被老照片吸引→领悟→珍惜"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:41": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "开头交代手机快照的去处：发给别人看，却很少再翻。",
+      "find": {
+        "check": "echo",
+        "text": "下段开头说转变是从分享图片（sharing images）开始的，回指这里快照的去处，也和放在网上主页（profile on Instagram）给人看对得上。",
+        "quotes": [
+          "sharing images",
+          "profile on Instagram"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "分享",
+        "reason": "开头交代手机快照的去处：发给别人看，却很少再翻。动词看复现：下段开头说转变是从分享图片（sharing images）开始的，回指这里快照的去处，也和放在网上主页（profile on Instagram）给人看对得上。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "copied",
+          "meaning": "复制；下段说转变的起点是分享图片（sharing images），快照是发出去给人看的，不是被复制。",
+          "quote": "sharing images"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "printed",
+          "meaning": "冲印；手机快照放在网上的主页（profile on Instagram）给人看，冲洗照片是后来改用胶片才有的事。",
+          "quote": "profile on Instagram"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "downloaded",
+          "meaning": "下载；快照是作者自己用手机拍的（relied on my phone for photos），不是从网上下载来的。",
+          "quote": "relied on my phone for photos"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "rarely revisited",
+          "signalSide": "context-after",
+          "targetText": "shared but rarely revisited",
+          "relation": "被分享出去却很少再看，but 把照片的两种去向对照起来。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "sharing images",
+          "signalSide": "context-after",
+          "relation": "下段的分享图片回指这里快照被分享出去。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:42": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "main",
+      "context": "精心修饰的主页是做给同龄人看的，要让他们觉得好，这是转变前的状态。",
+      "find": {
+        "check": "collocation",
+        "text": "主页上是一组修饰过的照片（a polished collection），对象是同龄人（my peers），展示的目的是让人看了欣赏。",
+        "quotes": [
+          "a polished collection",
+          "my peers"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "给……留下深刻印象",
+        "meaning": "让同龄人觉得好",
+        "reason": "精心修饰的主页是做给同龄人看的，要让他们觉得好，这是转变前的状态。动词看搭配：主页上是一组修饰过的照片（a polished collection），对象是同龄人（my peers），展示的目的是让人看了欣赏。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "change",
+          "meaning": "改变；照片是修饰好拿来展示的（polished），目的是让同龄人欣赏，不是去改变他们。",
+          "quote": "polished"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "support",
+          "meaning": "支持；主页展示的是作者自己光鲜的一面（a polished collection），不是去帮衬同龄人。",
+          "quote": "a polished collection"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "instruct",
+          "meaning": "指导；作者只是展示修饰过的照片（a polished collection of such photos），并没有教同龄人做什么。",
+          "quote": "a polished collection of such photos"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my peers",
+          "signalSide": "context-after",
+          "targetText": "impress my peers",
+          "relation": "宾语是同龄人，修饰过的照片要在他们眼里留下好印象。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "polished collection",
+          "signalSide": "context-before",
+          "relation": "精心修饰过的照片合集是拿来展示、让人欣赏的。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:43": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "main",
+      "context": "转变的另一头：照片不再为了分享，而是为自己拍下回忆。",
+      "find": {
+        "check": "collocation",
+        "text": "与分享图片（sharing images）相对，宾语是为自己（for myself）留的回忆，后文作者拿起相机拍照（take photos），就是记录。",
+        "quotes": [
+          "sharing images",
+          "for myself",
+          "take photos"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "捕捉",
+        "meaning": "拍照留住",
+        "reason": "转变的另一头：照片不再为了分享，而是为自己拍下回忆。动词看搭配：与分享图片（sharing images）相对，宾语是为自己（for myself）留的回忆，后文作者拿起相机拍照（take photos），就是记录。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "recalling",
+          "meaning": "回想；后文作者拿起胶片相机去拍照（take photos），是在留下新的回忆，不是回想旧事。",
+          "quote": "take photos"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "organizing",
+          "meaning": "整理；后文写的是拍下最重要的东西（take photos of the things that matter most），不是整理旧照片。",
+          "quote": "take photos of the things that matter most"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sharpening",
+          "meaning": "使变清晰；与分享图片（sharing images）相对，这里讲照片为谁而拍，不是记忆清不清楚。",
+          "quote": "sharing images"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "memories for myself",
+          "signalSide": "context-after",
+          "targetText": "capturing memories for myself",
+          "relation": "宾语是为自己留的回忆，动作是把回忆拍下来。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "take photos",
+          "signalSide": "context-after",
+          "relation": "后文作者拿起胶片相机拍照，正是记录回忆的做法。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:44": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "冒号后的翻看家庭相册是一件小事，空格要说它是一个简单的举动。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后是具体做的事：翻看（flipping）家庭相册（family photo albums），前面用一个名词把它概括成一个举动。",
+        "quotes": [
+          "flipping",
+          "family photo albums"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "行为",
+        "meaning": "举动",
+        "reason": "冒号后的翻看家庭相册是一件小事，空格要说它是一个简单的举动。名词看复现：冒号后是具体做的事：翻看（flipping）家庭相册（family photo albums），前面用一个名词把它概括成一个举动。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fact",
+          "meaning": "事实；冒号后的翻看（flipping）是作者做的一件事，不是一个陈述出来的事实。",
+          "quote": "flipping"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "task",
+          "meaning": "任务；翻看家庭相册（family photo albums）是作者自己随手做的，并不是谁交给作者的差事。",
+          "quote": "family photo albums"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "rule",
+          "meaning": "规则；冒号后是翻看相册（flipping）这一动作，不是一条要遵守的规定。",
+          "quote": "flipping"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a simple",
+          "signalSide": "context-before",
+          "targetText": "a simple act",
+          "relation": "简单的修饰空格里的名词，指一个小小的举动。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "flipping",
+          "signalSide": "context-after",
+          "relation": "冒号后的翻看就是这个举动的具体内容。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:45": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "吸引作者的是家族旧日的照片，后文说它们属于一段传下来的历史。",
+      "find": {
+        "check": "echo",
+        "text": "后文说每张照片属于一段传下来的历史（a history that had been passed down），照片来自家族的过去。",
+        "quotes": [
+          "a history that had been passed down"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "过去",
+        "meaning": "家族往昔",
+        "reason": "吸引作者的是家族旧日的照片，后文说它们属于一段传下来的历史。名词看复现：后文说每张照片属于一段传下来的历史（a history that had been passed down），照片来自家族的过去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "duty",
+          "meaning": "职责；照片里是生日、仪式和全家福（birthdays, ceremonies and family portraits），是家里过去的生活，不是职责。",
+          "quote": "birthdays, ceremonies and family portraits"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "business",
+          "meaning": "生意；相册里是全家福（family portraits）这类家事旧照，讲的是家族往事，不是家里的生意。",
+          "quote": "family portraits"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "goal",
+          "meaning": "目标；后文说这是传下来的（passed down）历史，指向过去，不是家族将来要达到的目标。",
+          "quote": "passed down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my family’s",
+          "signalSide": "context-before",
+          "targetText": "my family’s past",
+          "relation": "家族的过去，照片来自家里从前的日子。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a history that had been passed down",
+          "signalSide": "context-after",
+          "relation": "传下来的历史和家族的过去前后呼应。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "照片里的故事，常常是文字讲不出来的。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是文字（words），宾语是照片里的故事（stories），文字能做的是把故事表达出来，前面的做不到（couldn’t）说它常常办不到。",
+        "quotes": [
+          "words",
+          "stories",
+          "couldn’t"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "传达",
+        "reason": "照片里的故事，常常是文字讲不出来的。动词看搭配：主语是文字（words），宾语是照片里的故事（stories），文字能做的是把故事表达出来，前面的做不到（couldn’t）说它常常办不到。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "prove",
+          "meaning": "证明；文字要做的是讲出照片里的故事（stories），不是证明这些故事的真假。",
+          "quote": "stories"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mask",
+          "meaning": "掩盖；转折后在夸这些不精致（weren’t polished）的照片装满故事，说文字掩盖不了故事就不是在夸照片了。",
+          "quote": "weren’t polished"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "continue",
+          "meaning": "继续；后面列出生日、仪式这些故事（birthdays, ceremonies），文字的问题是讲不出，不是接着讲下去。",
+          "quote": "birthdays, ceremonies"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "words often couldn’t",
+          "signalSide": "context-before",
+          "relation": "文字作主语，常常无法把故事表达出来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "stories",
+          "signalSide": "context-before",
+          "targetText": "stories that words often couldn’t convey",
+          "relation": "故事是空格动词的逻辑宾语，要被讲出来。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:47": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者从老照片里看到了把家人和过去连在一起的东西，这是领悟的开始。",
+      "find": {
+        "check": "echo",
+        "text": "下一句说每张照片是更大整体的一部分（a piece of something），结尾又说想找回亲近感（closeness），看到的是联系。",
+        "quotes": [
+          "a piece of something",
+          "closeness"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "联系",
+        "reason": "作者从老照片里看到了把家人和过去连在一起的东西，这是领悟的开始。名词看复现：下一句说每张照片是更大整体的一部分（a piece of something），结尾又说想找回亲近感（closeness），看到的是联系。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hope",
+          "meaning": "希望；下一句说照片属于传下来的历史（passed down），作者看到的是把家人连起来的纽带，不是对将来的期待。",
+          "quote": "passed down"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "trust",
+          "meaning": "信任；下一句说每张照片是更大整体的一部分（a piece of something），作者看到的是彼此相连，不是人与人的信任。",
+          "quote": "a piece of something"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ambition",
+          "meaning": "抱负；作者看到的是照片属于一段家族历史（a history），不是谁的雄心壮志。",
+          "quote": "a history"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I saw",
+          "signalSide": "context-before",
+          "targetText": "I saw connection",
+          "relation": "作者在老照片里看到的东西作宾语。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a piece of something",
+          "signalSide": "context-after",
+          "relation": "每张照片都连着一个更大的整体，说明作者看到的是联系。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:48": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:48",
+      "blankNo": 48,
+      "pos": "adjective",
+      "role": "main",
+      "context": "每张照片只是一小片，它属于一个更大的整体，就是冒号后的家族历史。",
+      "find": {
+        "check": "collocation",
+        "text": "一小片（a piece of）属于一个更大的整体，冒号后的传下来的历史（a history that had been passed down）就是它。",
+        "quotes": [
+          "a piece of",
+          "a history that had been passed down"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "更大的",
+        "reason": "每张照片只是一小片，它属于一个更大的整体，就是冒号后的家族历史。形容词看搭配：一小片（a piece of）属于一个更大的整体，冒号后的传下来的历史（a history that had been passed down）就是它。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "stranger",
+          "meaning": "更陌生的；照片属于自家传下来的历史（passed down），对作者是更亲近，不是更陌生。",
+          "quote": "passed down"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "simpler",
+          "meaning": "更简单的；一张照片只是一小片（a piece of），它所属的家族历史更大、更完整，不是更简单。",
+          "quote": "a piece of"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fresher",
+          "meaning": "更新鲜的；冒号后是一段传下来的历史（a history that had been passed down），是旧的，不是更新的。",
+          "quote": "a history that had been passed down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a piece of something",
+          "signalSide": "context-before",
+          "targetText": "a piece of something larger",
+          "relation": "一小片和更大的整体相对。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a history that had been passed down",
+          "signalSide": "context-after",
+          "relation": "冒号后具体说明这个更大的整体是代代相传的历史。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:49": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "main",
+      "context": "用一个名词概括上段结尾作者想明白的事，正是它让作者拿起胶片相机。",
+      "find": {
+        "check": "echo",
+        "text": "这一（this）回指上段结尾作者意识到（I realized）的那件事，把动词换成名词，就是这份领悟。",
+        "quotes": [
+          "I realized"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "领悟",
+        "meaning": "意识到照片承载历史",
+        "reason": "用一个名词概括上段结尾作者想明白的事，正是它让作者拿起胶片相机。名词看复现：这一（this）回指上段结尾作者意识到（I realized）的那件事，把动词换成名词，就是这份领悟。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "appreciation",
+          "meaning": "欣赏；上段结尾说的是作者意识到（I realized）照片属于家族历史，这一（this）回指的是这份领悟，不是对照片的欣赏。",
+          "quote": "I realized"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "observation",
+          "meaning": "观察；翻相册时作者不只是在看，上段结尾落在意识到（I realized），这一（this）回指的是想明白的道理。",
+          "quote": "I realized"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "prediction",
+          "meaning": "预测；上段讲的是已经传下来的历史（had been passed down），作者意识到的是过去的事，不是对将来的预测。",
+          "quote": "had been passed down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It was this",
+          "signalSide": "context-before",
+          "targetText": "It was this realization that led me",
+          "relation": "强调句强调主语，this 回指上段的内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I realized",
+          "signalSide": "context-before",
+          "relation": "上段的意识到在这里变成名词形式的领悟。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "胶卷张数有限，每张都要想好再拍，逗号后的放慢脚步就是对空格的解释。",
+      "find": {
+        "check": "echo",
+        "text": "逗号后放慢脚步去看（a slowing down to see the world around me）解释了空格，每卷只有36张（just 36 exposures per roll）也要求拍前用心。",
+        "quotes": [
+          "a slowing down to see the world around me",
+          "just 36 exposures per roll"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "意图",
+        "meaning": "拍之前想清楚",
+        "reason": "胶卷张数有限，每张都要想好再拍，逗号后的放慢脚步就是对空格的解释。名词看复现：逗号后放慢脚步去看（a slowing down to see the world around me）解释了空格，每卷只有36张（just 36 exposures per roll）也要求拍前用心。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "improvement",
+          "meaning": "改进；逗号后解释的是放慢脚步（a slowing down），说的是拍之前的用心，不是拍得越来越好。",
+          "quote": "a slowing down"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "background",
+          "meaning": "背景；每卷只有36张（just 36 exposures per roll）限制的是张数，要求的是用心挑选，不是照片背景。",
+          "quote": "just 36 exposures per roll"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teamwork",
+          "meaning": "团队合作；作者是自己放慢脚步观察身边（see the world around me），拍照不需要和别人合作。",
+          "quote": "see the world around me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "required",
+          "signalSide": "context-before",
+          "targetText": "each photo required intention",
+          "relation": "每张照片都要求某种东西，要的是拍前的用心。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a slowing down",
+          "signalSide": "context-after",
+          "relation": "同位语放慢脚步具体解释了这份用心。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:51": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "用一个名词概括前一句没拍成预想样子的照片，这些缺憾也成了故事的一部分。",
+      "find": {
+        "check": "echo",
+        "text": "前一句说照片没拍成希望的样子（didn’t turn out as I had hoped），空格用一个名词把这种不完美概括起来。",
+        "quotes": [
+          "didn’t turn out as I had hoped"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "瑕疵",
+        "meaning": "没拍好的地方",
+        "reason": "用一个名词概括前一句没拍成预想样子的照片，这些缺憾也成了故事的一部分。名词看复现：前一句说照片没拍成希望的样子（didn’t turn out as I had hoped），空格用一个名词把这种不完美概括起来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "colors",
+          "meaning": "颜色；前一句讲照片没拍成希望的样子（didn’t turn out as I had hoped），说的是不完美，不是颜色。",
+          "quote": "didn’t turn out as I had hoped"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "inconveniences",
+          "meaning": "不便之处；前一句说的是拍出来不如意（didn’t turn out as I had hoped），是照片的缺憾，不是拍照过程中的麻烦。",
+          "quote": "didn’t turn out as I had hoped"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "patterns",
+          "meaning": "图案；没拍成预想样子（didn’t turn out as I had hoped）说的是照片效果，空格要概括这些缺憾，图案接不上。",
+          "quote": "didn’t turn out as I had hoped"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "became part of the story",
+          "signalSide": "context-after",
+          "relation": "这些缺憾也成了故事的一部分，作者不再介意。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "didn’t turn out as I had hoped",
+          "signalSide": "context-before",
+          "relation": "前一句没拍成希望的样子，就是这里概括的不完美。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:52": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "照片不再为了网上的反馈，和开头发到网上给同龄人看形成对照。",
+      "find": {
+        "check": "topic",
+        "text": "和评论（comments）并列，开头又写到网上主页（profile on Instagram），都是社交网络上的反馈，就是点赞。",
+        "quotes": [
+          "comments",
+          "profile on Instagram"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "点赞",
+        "reason": "照片不再为了网上的反馈，和开头发到网上给同龄人看形成对照。名词看话题：和评论（comments）并列，开头又写到网上主页（profile on Instagram），都是社交网络上的反馈，就是点赞。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "jokes",
+          "meaning": "笑话；与评论（comments）并列的是网上对照片的反馈，照片不是拿来逗乐的。",
+          "quote": "comments"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "deals",
+          "meaning": "交易；和评论（comments）并列、对照开头网上主页的是网友的反馈，不是买卖。",
+          "quote": "comments"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "games",
+          "meaning": "游戏；破折号后说照片是给自己和亲友的（meant for me, for family and friends），与之相对的是网上点赞，不是游戏。",
+          "quote": "meant for me, for family and friends"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "or comments",
+          "signalSide": "context-after",
+          "targetText": "likes or comments",
+          "relation": "和评论并列，同属社交网络上的反馈。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "profile on Instagram",
+          "signalSide": "context-before",
+          "relation": "开头的 Instagram 主页点明社交网络这个话题。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:53": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "打开冲洗好的照片，重新看到拍下的瞬间，要一种再次发现的感觉。",
+      "find": {
+        "check": "echo",
+        "text": "下一句说作者被带回那些时刻（back to those moments），打开照片就是重新看见当时拍下的瞬间。",
+        "quotes": [
+          "back to those moments"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "重新发现",
+        "meaning": "重温拍下的瞬间",
+        "reason": "打开冲洗好的照片，重新看到拍下的瞬间，要一种再次发现的感觉。名词看复现：下一句说作者被带回那些时刻（back to those moments），打开照片就是重新看见当时拍下的瞬间。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "safety",
+          "meaning": "安全感；下一句写作者被带回那些时刻（back to those moments），感受的是重温往日，不是免于危险的安心。",
+          "quote": "back to those moments"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "emptiness",
+          "meaning": "空虚；打开照片后作者被带回那些时刻（back to those moments），是有所收获，不是心里空落落。",
+          "quote": "back to those moments"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "relief",
+          "meaning": "如释重负；终于（finally）只说等冲洗等了很久，下一句写的是回到那些时刻（back to those moments），是重温而不是松口气。",
+          "quote": "back to those moments"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a sense of",
+          "signalSide": "context-before",
+          "targetText": "a sense of rediscovery",
+          "relation": "某种感觉，后面接名词说明是什么感觉。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "back to those moments",
+          "signalSide": "context-after",
+          "relation": "被带回那些时刻，说明是在重新看见过去。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:54": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "detail",
+      "context": "看着照片，作者仿佛被带回拍照时的那些时刻。",
+      "find": {
+        "check": "collocation",
+        "text": "后接回到（back to）那些时刻（those moments），能接回到、表示人仿佛被带回过去的是这个词。",
+        "quotes": [
+          "back to",
+          "those moments"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "运送",
+        "meaning": "仿佛被带回",
+        "reason": "看着照片，作者仿佛被带回拍照时的那些时刻。动词看搭配：后接回到（back to）那些时刻（those moments），能接回到、表示人仿佛被带回过去的是这个词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "forced",
+          "meaning": "被迫；打开照片是作者期待已久的事（finally open），被带回那些时刻是愉快的，不是被迫。",
+          "quote": "finally open"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "withdrawn",
+          "meaning": "退缩；打开照片时有种重新发现的感觉（a sense of），作者是被带回往日，不是往后缩。",
+          "quote": "a sense of"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "kicked",
+          "meaning": "被踢；回到那些时刻（back to those moments）是看照片带来的美好感受，不是被粗暴地踢回去。",
+          "quote": "back to those moments"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "back to those moments",
+          "signalSide": "context-after",
+          "targetText": "transported back to those moments",
+          "relation": "被带回那些时刻，表示看照片时仿佛回到过去。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:55": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "概括全文的转变：从手机分享转到胶片摄影。",
+      "find": {
+        "check": "echo",
+        "text": "前文开头说的转变（The transition）在这里换成一个词，后面转向胶片摄影（to film photography）说明转到哪里。",
+        "quotes": [
+          "The transition",
+          "to film photography"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "转变",
+        "reason": "概括全文的转变：从手机分享转到胶片摄影。名词看复现：前文开头说的转变（The transition）在这里换成一个词，后面转向胶片摄影（to film photography）说明转到哪里。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "claim",
+          "meaning": "主张；前文说的转变（The transition）是作者实际换了拍照方式，不是提出什么主张。",
+          "quote": "The transition"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "response",
+          "meaning": "回应；拿起胶片相机是领悟引出来的（led me to pick up my film camera），不是在回应别人。",
+          "quote": "led me to pick up my film camera"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "shortcut",
+          "meaning": "捷径；每张照片都要放慢脚步（a slowing down），胶片摄影是更慢的路，不是捷径。",
+          "quote": "a slowing down"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to film photography",
+          "signalSide": "context-after",
+          "targetText": "shift to film photography",
+          "relation": "转向胶片摄影，to 说明转变的方向。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The transition",
+          "signalSide": "context-before",
+          "relation": "前文的转变在结尾换词复现。"
+        }
+      ]
+    }
+  }
+}

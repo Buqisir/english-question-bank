@@ -1,0 +1,192 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: The next morning, true to their word, they arrived ready to help. Sam took charge of the heavy work, lowering the roof and taking down the poles, while Hillary showed me how to fold the canvas and pack our gear neatly into boxes. What had been a two-person job now had three pairs of hands. Even my dog seemed to understand, lying quietly under a tree and watching us. By noon, the trailer was packed, closed and hitched to our car. I stood beside it, too moved to say anything but “Thank you.”\n\nParagraph 2: But their kindness didn’t stop there. Noticing that I had hardly eaten for two days, Hillary invited me to share their lunch, and Sam took my dog for the long walk it had been waiting for. Before I drove off to the hospital, they wrote down their phone number and told me to call them if anything went wrong on the road. That evening, sitting by my husband’s bed, I told him the whole story. He smiled and said, “So Tasmania gave us a hug after all.” Holding his hand, I made up my mind that one day I would pass that hug on to someone else.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "「我」独自守着营地，又累又愁；新邻居 Sam 和妻子 Hillary 听完「我」的遭遇，主动提出帮忙收拾拖车；住院的丈夫只在背景里出现。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称「我」讲述，一般过去时。句子多为中短句，夹着几句很短的感叹（如狗要遛），心理和动作描写都点到为止；人物的话很少，只有夫妇俩两句短的直接引语。续写照样用 I、过去时和短句，直接引语只留一两句。",
+          "evidence": [
+            "And my dog needed a walk!",
+            "“Tasmania has given us a warm hug,” they said."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在夫妇俩答应第二天替「我」收拾一切。还没解决的是：拖车怎样收好、狗怎么办、「我」怎样去到丈夫身边；夫妇俩说要把「温暖的拥抱」传下去，这句话也等着在结尾有回应。",
+          "evidence": [
+            "I was now solely responsible for the dog, the vehicle and the camper trailer"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我（讲述者）",
+          "role": "讲述者，丈夫受伤住院后独自留在营地的妻子",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "又累又担心，独自面对狗、车和拖车。",
+              "evidence": "Exhausted and worried"
+            },
+            {
+              "label": "表现",
+              "text": "两天里一直闷着，被 Sam 一问才把事情全说出来。",
+              "evidence": "after two days of silent stress, the whole story poured out"
+            }
+          ]
+        },
+        {
+          "name": "Sam",
+          "role": "营地的新邻居",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "细心、话不多，先听后做。",
+              "evidence": "He nodded, said little, and returned to his own camp."
+            },
+            {
+              "label": "想要",
+              "text": "和妻子一起把在塔斯马尼亚得到的善意传给「我」。",
+              "evidence": "Now we want to pass that hug on."
+            }
+          ]
+        },
+        {
+          "name": "Hillary",
+          "role": "Sam 的妻子",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "和丈夫一起毫不犹豫地答应替「我」收拾。",
+              "evidence": "With no hesitation, they told me they’d pack everything up for me."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "Packing up the trailer was a two-person job.",
+          "use": "第 1 段用它写收拾的场面：原本要两个人干的活，现在有三双手，说明「我」不再孤立无援。"
+        },
+        {
+          "sourceQuote": "And my dog needed a walk!",
+          "use": "第 2 段让 Sam 去遛狗，把原文这件小烦恼落到他们的又一份善意上。"
+        },
+        {
+          "sourceQuote": "Now we want to pass that hug on.",
+          "use": "第 2 段结尾让丈夫说出 hug，「我」决定以后也把这个拥抱传下去，回扣原文。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "第 1 段三人一起把拖车收好挂上车，第 2 段夫妇俩又管饭、遛狗、留电话，「我」到医院把经过讲给丈夫听，决定将来也把这份善意传下去。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "夫妇俩第二天一早来帮忙，按原文的约定把拖车收拾好；第二段首句说善意「没有停在这里」，所以第 1 段结束时收拾这件事要已经做完。",
+          "draft": "Sam 干重活、Hillary 教「我」叠篷布装箱，狗在树下看着；中午前拖车收好挂上车，「我」只说得出一句谢谢。",
+          "bridgeQuote": "But their kindness didn’t stop there.",
+          "bridge": "收好拖车之后，他们还为「我」做了什么？"
+        },
+        {
+          "paragraph": 2,
+          "must": "写出收拾拖车之外的另一件或几件善举，并把原文留下的问题收住。",
+          "draft": "Hillary 请「我」吃午饭，Sam 去遛狗；临走前两人留下电话；晚上在医院，丈夫笑着说塔斯马尼亚终究给了我们一个拥抱，「我」决定将来把它传下去。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: The next morning, true to their word, they arrived ready to help. Sam took charge of the heavy work, lowering the roof and taking down the poles, while Hillary showed me how to fold the canvas and pack our gear neatly into boxes. What had been a two-person job now had three pairs of hands. Even my dog seemed to understand, lying quietly under a tree and watching us. By noon, the trailer was packed, closed and hitched to our car. I stood beside it, too moved to say anything but “Thank you.”\n\nParagraph 2: But their kindness didn’t stop there. Noticing that I had hardly eaten for two days, Hillary invited me to share their lunch, and Sam took my dog for the long walk it had been waiting for. Before I drove off to the hospital, they wrote down their phone number and told me to call them if anything went wrong on the road. That evening, sitting by my husband’s bed, I told him the whole story. He smiled and said, “So Tasmania gave us a hug after all.” Holding his hand, I made up my mind that one day I would pass that hug on to someone else.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把「收拾拖车」这件事做完，写清谁干了什么。",
+          "items": [
+            {
+              "quote": "Sam took charge of the heavy work, lowering the roof and taking down the poles, while Hillary showed me how to fold the canvas and pack our gear neatly into boxes.",
+              "explain": "用 while 把两个人同时做的事放进一句：Sam 干重活，Hillary 带着「我」做细活。分工写具体，比一句 they helped me pack 更像真的在干活。"
+            },
+            {
+              "quote": "What had been a two-person job now had three pairs of hands.",
+              "explain": "借原文的 a two-person job，说明难题怎样被解决：原来缺一个人，现在多出一个人。读者一看就明白「我」为什么松了口气。"
+            },
+            {
+              "quote": "By noon, the trailer was packed, closed and hitched to our car.",
+              "explain": "用时间和三个过去分词交代结果，第 1 段在这里把收拾拖车做完，第 2 段首句的 there 才有所指。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写收拾之外的善意，并在医院收住全文。",
+          "items": [
+            {
+              "quote": "Sam took my dog for the long walk it had been waiting for",
+              "explain": "回扣原文的 my dog needed a walk!。it 指狗（Sam 用 he，不会混），「它等了好久的那次散步」带一点轻松，也说明他们连小事都替「我」想到了。"
+            },
+            {
+              "quote": "they wrote down their phone number and told me to call them if anything went wrong on the road",
+              "explain": "善意从眼前延伸到路上，又用转述交代他们的话，和原文很少用引号的写法一致。"
+            },
+            {
+              "quote": "I made up my mind that one day I would pass that hug on to someone else.",
+              "explain": "接住原文的 pass that hug on：受了帮助的「我」也想把它传下去。结尾落在一个具体的决定上，不另讲大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "take charge of the heavy work",
+          "function": "写分工时说清谁负责最重的活，让帮忙的场面有主次。"
+        },
+        {
+          "expression": "too moved to say anything but “Thank you.”",
+          "function": "用 too ... to 加一句最短的话写出感动，不用写眼泪。"
+        },
+        {
+          "expression": "make up one’s mind that ...",
+          "function": "结尾写人物作出的决定，把情绪落到行动上。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段只写他们来了、开始收拾，没写收完。",
+          "why": "第二段首句说善意「没有停在这里」，「这里」就是收拾拖车；第 1 段不收尾，第 2 段就接不上。"
+        },
+        {
+          "pitfall": "让丈夫突然出院回来帮忙，或让西澳的家人赶来。",
+          "why": "原文说丈夫摔断了腿、被直升机送进医院，家人远在 4,000 公里外；这样写和原文的处境矛盾，也抢了 Sam 夫妇的戏。"
+        },
+        {
+          "pitfall": "新加一个有名字的营地管理员或路人来解决问题。",
+          "why": "帮忙的是 Sam 和 Hillary，新人物会分走他们的戏；营地里的其他人最多做背景。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: The next morning, true to their word, they arrived ready to help. Sam studied the trailer, then got to work, unhooking the awning and lowering the heavy roof as if he had done it a hundred times. Hillary handed me one end of the canvas, and together we folded it into a neat square, laughing when the wind tried to snatch it away. Bit by bit, the mountain of bikes, surfboards and camping gear found its proper place. My dog, usually restless, lay in the shade with his chin on his paws, as if he knew this was serious work. By noon, the trailer was locked and hitched to our car. The job I had dreaded for two days had taken three people just one morning. All I managed was a shaky “Thank you.”\n\nParagraph 2: But their kindness didn’t stop there. Hillary had guessed that I’d been living on biscuits, so she pressed a warm sandwich and a flask of tea into my hands and refused to take no for an answer. Meanwhile, Sam clipped on my dog’s lead and disappeared down the beach track, coming back half an hour later with a muddy but very happy dog. When it was time for me to drive to the hospital, Sam checked the hitch one last time and wrote their phone number on the back of an old receipt. “Call us if anything goes wrong,” he said. That night, sitting beside my husband’s bed, I told him everything, from Sam’s first gentle question to the last wave goodbye. “Tasmania really did give us a hug,” he whispered. I tucked the receipt into my wallet. It is still there today, reminding me that one day it will be my turn to pass that hug on.",
+      "beyondStandard": [
+        {
+          "quote": "laughing when the wind tried to snatch it away",
+          "explain": "标准版只说 Hillary 教「我」叠篷布，这里加上风把篷布吹起、两人一起笑的细节，写出「我」两天来第一次放松，情绪藏在动作里。"
+        },
+        {
+          "quote": "Hillary had guessed that I’d been living on biscuits, so she pressed a warm sandwich and a flask of tea into my hands and refused to take no for an answer.",
+          "explain": "press ... into my hands、refuse to take no for an answer 都是地道搭配，写出 Hillary 不容推辞的热心，比 invited me to share their lunch 更具体。"
+        },
+        {
+          "quote": "I tucked the receipt into my wallet. It is still there today",
+          "explain": "让一张写着电话的旧收据留到今天，结尾落在一件小物件上，让传递善意的决定有了看得见的提醒。"
+        }
+      ]
+    }
+  }
+}

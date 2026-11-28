@@ -1,0 +1,753 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a": {
+      "overview": "本文是图书馆“超越书本”阅读项目的介绍，说明项目帮助阅读起步儿童的宗旨、会员可享的权益和报名办法，并列出学前班、幼儿园每周课程及早送晚接托管的收费。",
+      "fullTranslationZh": "“超越书本”是一个项目，旨在帮助正在培养阅读能力的孩子，以及那些尚未达到“解码门槛”的孩子——解码门槛是指学生能够准确、高效地阅读文本的那个节点。我们具有独特的条件，能够激发小读者的好奇心，并为家庭提供他们所需的工具，帮助孩子成长为自信的读者。我们鼓励孩子和看护人一起探索我们图书馆提供的丰富资源，打造一个让孩子作为读者和终身学习者茁壮成长的社区。\n您的“超越书本”会员权益包括：\n* 每月一期简讯，提供专家为初学阅读的孩子准备的技巧和窍门。\n* 免费获赠一本当季推荐图书，并附有趣味性和教育性兼具的活动。\n* 作家讲座、新书发布会和签售会的专属邀请。\n* 额外福利：您家有图书馆借书证吗？如果没有，孩子报名参加“超越书本”时，看护人就可以办一张华盛顿特区公共图书馆借书证！\n报名方式：前往您附近的社区图书馆；或填写在线报名表，然后到附近的社区图书馆领取会员卡。\n每周收费\n学前班：半日班（周一至周五，上午 8:00—中午 12:00）600 美元；全日班（周一至周五，上午 8:00—下午 2:00）700 美元。幼儿园：半日班（周一至周五，上午 8:00—中午 12:00）700 美元；全日班（周一至周五，上午 8:00—下午 2:00）800 美元。\n如果家长需要提早送孩子或晚些接孩子，我们将提供上午托管班和下午托管班。收费如下。\n上午：1 天 70 美元，2 天 100 美元，3 天 125 美元，4 天 150 美元，5 天 170 美元。下午：1 天 90 美元，2 天 120 美元，3 天 145 美元，4 天 170 美元，5 天 190 美元。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+          "sourceText": "Beyond the Book is a program designed to support children who are developing their reading skills, and those who are below the “decoding threshold” – the point at which students can read text accurately and efficiently.",
+          "displayText": "Beyond the Book is a program designed to support children who are developing their reading skills, and those who are below the “decoding threshold” – the point at which students can read text accurately and efficiently.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:21"
+          ],
+          "translationZh": "“超越书本”是一个项目，旨在帮助正在培养阅读能力的孩子，以及那些尚未达到“解码门槛”的孩子——解码门槛是指学生能够准确、高效地阅读文本的那个节点。",
+          "analysisZh": "主干是 Beyond the Book is a program（“超越书本”是一个项目）。designed to support 是过去分词短语，放在 program 后面作定语，说明项目为谁而设。support 带两个并列宾语：children who are developing their reading skills（正在培养阅读能力的孩子）和 and 后的 those who are below the “decoding threshold”（尚未达到“解码门槛”的孩子），those 指“那些孩子”，两个 who 从句分别说明是哪一类孩子。破折号后的 the point at which ... 是同位语，解释“解码门槛”是什么，其中 at which 引导定语从句修饰 point。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 48,
+              "quote": "is a program designed to support"
+            },
+            {
+              "start": 99,
+              "end": 112,
+              "quote": "and those who"
+            },
+            {
+              "start": 150,
+              "end": 168,
+              "quote": "the point at which"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+          "sourceText": "We are uniquely positioned to stimulate curiosity in young readers and empower families with the tools they need to support their child’s growth as a confident reader.",
+          "displayText": "We are uniquely positioned to stimulate curiosity in young readers and empower families with the tools they need to support their child’s growth as a confident reader.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:21"
+          ],
+          "translationZh": "我们具有独特的条件，能够激发小读者的好奇心，并为家庭提供他们所需的工具，帮助孩子成长为自信的读者。",
+          "analysisZh": "主干是 We are uniquely positioned to ...（我们有独特的条件去做……）。to 后面是 and 连接的两个并列动词短语：stimulate curiosity in young readers（激发小读者的好奇心）和 empower families with the tools（为家庭提供工具）。they need to support their child’s growth 是省略关系词的定语从句，修饰 tools，说明这是家庭支持孩子成长所需要的工具；as a confident reader 说明孩子要成长为什么样的读者。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 29,
+              "quote": "are uniquely positioned to"
+            },
+            {
+              "start": 30,
+              "end": 49,
+              "quote": "stimulate curiosity"
+            },
+            {
+              "start": 67,
+              "end": 87,
+              "quote": "and empower families"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1"
+              ],
+              "start": 0,
+              "end": 174,
+              "quote": "“超越书本”是一个项目，旨在帮助正在培养阅读能力的孩子，以及那些尚未达到“解码门槛”的孩子——解码门槛是指学生能够准确、高效地阅读文本的那个节点。我们具有独特的条件，能够激发小读者的好奇心，并为家庭提供他们所需的工具，帮助孩子成长为自信的读者。我们鼓励孩子和看护人一起探索我们图书馆提供的丰富资源，打造一个让孩子作为读者和终身学习者茁壮成长的社区。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:2"
+              ],
+              "start": 175,
+              "end": 190,
+              "quote": "您的“超越书本”会员权益包括："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:3"
+              ],
+              "start": 191,
+              "end": 221,
+              "quote": "* 每月一期简讯，提供专家为初学阅读的孩子准备的技巧和窍门。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:4"
+              ],
+              "start": 222,
+              "end": 253,
+              "quote": "* 免费获赠一本当季推荐图书，并附有趣味性和教育性兼具的活动。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:5"
+              ],
+              "start": 254,
+              "end": 276,
+              "quote": "* 作家讲座、新书发布会和签售会的专属邀请。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:6"
+              ],
+              "start": 277,
+              "end": 337,
+              "quote": "* 额外福利：您家有图书馆借书证吗？如果没有，孩子报名参加“超越书本”时，看护人就可以办一张华盛顿特区公共图书馆借书证！"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:7"
+              ],
+              "start": 338,
+              "end": 381,
+              "quote": "报名方式：前往您附近的社区图书馆；或填写在线报名表，然后到附近的社区图书馆领取会员卡。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:8"
+              ],
+              "start": 382,
+              "end": 386,
+              "quote": "每周收费"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p9",
+              "sourceParagraphIds": [
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:1:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:1:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:2:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:2:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:3:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:3:2"
+              ],
+              "start": 387,
+              "end": 529,
+              "quote": "学前班：半日班（周一至周五，上午 8:00—中午 12:00）600 美元；全日班（周一至周五，上午 8:00—下午 2:00）700 美元。幼儿园：半日班（周一至周五，上午 8:00—中午 12:00）700 美元；全日班（周一至周五，上午 8:00—下午 2:00）800 美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:10"
+              ],
+              "start": 530,
+              "end": 570,
+              "quote": "如果家长需要提早送孩子或晚些接孩子，我们将提供上午托管班和下午托管班。收费如下。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p11",
+              "sourceParagraphIds": [
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:1:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:1:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:2:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:2:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:3:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:3:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:5:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:5:2",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:6:1",
+                "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:6:2"
+              ],
+              "start": 571,
+              "end": 685,
+              "quote": "上午：1 天 70 美元，2 天 100 美元，3 天 125 美元，4 天 150 美元，5 天 170 美元。下午：1 天 90 美元，2 天 120 美元，3 天 145 美元，4 天 170 美元，5 天 190 美元。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+                "start": 250,
+                "end": 286,
+                "quote": "stimulate curiosity in young readers"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+                "start": 29,
+                "end": 97,
+                "quote": "designed to support children who are developing their reading skills"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p1",
+                "start": 85,
+                "end": 94,
+                "quote": "激发小读者的好奇心"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p1",
+                "start": 12,
+                "end": 27,
+                "quote": "旨在帮助正在培养阅读能力的孩子"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:3",
+                "start": 2,
+                "end": 74,
+                "quote": "A monthly newsletter with expert tips and tricks for developing readers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p3",
+                "start": 2,
+                "end": 30,
+                "quote": "每月一期简讯，提供专家为初学阅读的孩子准备的技巧和窍门。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:3:2",
+                "start": 0,
+                "end": 57,
+                "quote": "Full Day Program 8:00 AM – 2:00 PM (Monday – Friday) $800"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:10",
+                "start": 55,
+                "end": 119,
+                "quote": "pick up later, we will provide a morning and afternoon playgroup"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:2",
+                "start": 0,
+                "end": 13,
+                "quote": "3 days — $145"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p9",
+                "start": 109,
+                "end": 141,
+                "quote": "全日班（周一至周五，上午 8:00—下午 2:00）800 美元"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p10",
+                "start": 12,
+                "end": 34,
+                "quote": "晚些接孩子，我们将提供上午托管班和下午托管班"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p11",
+                "start": 81,
+                "end": 91,
+                "quote": "3 天 145 美元"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+                "start": 0,
+                "end": 219,
+                "quote": "Beyond the Book is a program designed to support children who are developing their reading skills, and those who are below the “decoding threshold” – the point at which students can read text accurately and efficiently."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p1",
+                "start": 0,
+                "end": 73,
+                "quote": "“超越书本”是一个项目，旨在帮助正在培养阅读能力的孩子，以及那些尚未达到“解码门槛”的孩子——解码门槛是指学生能够准确、高效地阅读文本的那个节点。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+                "start": 220,
+                "end": 387,
+                "quote": "We are uniquely positioned to stimulate curiosity in young readers and empower families with the tools they need to support their child’s growth as a confident reader."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a-p1",
+                "start": 73,
+                "end": 122,
+                "quote": "我们具有独特的条件，能够激发小读者的好奇心，并为家庭提供他们所需的工具，帮助孩子成长为自信的读者。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先说明项目宗旨，再列出会员权益和报名方式，最后给出课程价目和早送晚接的托管收费。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+            "summary": "“超越书本”面向阅读起步的孩子，要激发他们的好奇心，并帮助家庭支持孩子阅读。",
+            "function": "介绍项目对象和宗旨"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:2",
+            "summary": "引出会员能享受的几项权益。",
+            "function": "引出下面的权益清单"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:3",
+            "summary": "会员每月收到一期简讯，内有专家给的阅读技巧。",
+            "function": "列出第一项权益"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:4",
+            "summary": "会员免费获得当季推荐书和配套活动。",
+            "function": "列出第二项权益"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:5",
+            "summary": "会员受邀参加作家讲座、新书发布会和签售会。",
+            "function": "列出第三项权益"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:6",
+            "summary": "孩子报名后，没有借书证的看护人可以办证。",
+            "function": "补充额外福利"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:7",
+            "summary": "可到社区图书馆报名，或网上报名后再去领会员卡。",
+            "function": "说明报名方式"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:8",
+            "summary": "每周收费表：学前班和幼儿园的半日班、全日班价格。",
+            "function": "引出价目表"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:10",
+            "summary": "为需要早送或晚接的家长提供上午、下午托管，按天数收费。",
+            "function": "补充托管服务及收费"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出项目介绍里说明项目要为孩子做什么的话，判断它的目标。",
+      "stemTranslationZh": "“超越书本”项目的目标是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看它要为孩子做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "激励小读者。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+              "quote": "We are uniquely positioned to stimulate curiosity in young readers",
+              "anchor": "激发小读者的好奇心"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+              "quote": "designed to support children who are developing their reading skills",
+              "anchor": "为阅读起步的孩子而设"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "营造阅读文化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "creating a community where children can thrive as readers",
+            "optionText": "Creating",
+            "matchType": "exact",
+            "relationNote": "Creating 借自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1|creating a community where]]，那里打造的是让孩子成长为读者的社区，是鼓励亲子使用图书馆资源带来的结果；原文没提营造阅读文化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+              "quote": "creating a community where children can thrive as readers and lifelong learners",
+              "anchor": "打造让孩子成长的社区"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "促进家庭情感联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "We encourage both children and caregivers",
+            "optionText": "Encouraging",
+            "matchType": "exact",
+            "relationNote": "原文 encourage 的是孩子和看护人一起去探索图书馆资源，给家庭（families）提供工具也是为了支持孩子阅读；没说要增进家人感情。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+              "quote": "We encourage both children and caregivers to explore the vast resources our library offers",
+              "anchor": "鼓励亲子探索图书馆资源"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "增强看护人的自信。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "support their child’s growth as a confident reader",
+            "sourceEntity": "child’s",
+            "optionText": "Boosting confidence in caregivers.",
+            "optionEntity": "caregivers",
+            "explanation": "原文的 confident（自信）说的是孩子要成长为自信的读者，选项把“自信”安到了看护人身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+              "quote": "support their child’s growth as a confident reader",
+              "anchor": "孩子成长为自信的读者"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "aimed at",
+          "sourceRole": "stem",
+          "targetText": "Beyond the Book is a program designed to support children who are developing their reading skills, and those who are below the “decoding threshold” – the point at which students can read text accurately and efficiently.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+          "relationType": "locationCue",
+          "targetCue": "designed to",
+          "sourceZh": "目标是",
+          "targetCueZh": "旨在",
+          "answerText": "stimulate curiosity in young readers",
+          "bridgeZh": "We 就是项目方，这句接着说项目要为小读者做什么",
+          "note": "题干 aimed at 对应原文 designed to，都是说项目为了什么而设。"
+        },
+        {
+          "sourceText": "Inspiring young readers",
+          "sourceRole": "correctOption",
+          "targetText": "stimulate curiosity in young readers",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:1",
+          "relationType": "paraphrase",
+          "note": "选项的“激励”（Inspiring）就是原文的“激发好奇心”（stimulate curiosity），对象都是小读者（young readers），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项逐一放回会员权益清单，找出会员确实能得到的一项。",
+      "stemTranslationZh": "“超越书本”的会员有权享有什么？",
+      "locateBy": "options",
+      "locateFindZh": "把各选项拿回会员权益清单逐条对照",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "良好的教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "educational activities",
+            "optionText": "education",
+            "matchType": "wordFamily",
+            "relationNote": "education 由 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:4]] 的 educational（有教育意义的）变来，那里只是随推荐书附赠一些寓教于乐的活动，并不是给会员一份良好的教育。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:4",
+              "quote": "A free copy of the seasonal Featured Book and fun, educational activities.",
+              "anchor": "推荐书和教育性活动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "受邀给书签名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Exclusive invites to author talks, book launch parties and book signings",
+            "optionText": "Invitations to sign books",
+            "matchType": "wordFamily",
+            "relationNote": "原文 invites 是邀请会员去参加签售会（book signings），签名的是作家；选项写成邀请会员去给书签名，签名的人换了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:5",
+              "quote": "Exclusive invites to author talks, book launch parties and book signings.",
+              "anchor": "签售会邀请"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "优质的阅读指导。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:3",
+              "quote": "A monthly newsletter with expert tips and tricks for developing readers.",
+              "anchor": "专家阅读技巧简讯"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "每周免费送书上门。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "A free copy of the seasonal Featured Book",
+            "sourceHighlight": "seasonal",
+            "optionText": "Weekly free book delivery.",
+            "optionHighlight": "Weekly",
+            "explanation": "原文免费送的是每季一本推荐书（seasonal），选项改成每周送书上门；weekly 在原文只出现在课程收费表的标题里。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:4",
+              "quote": "A free copy of the seasonal Featured Book",
+              "anchor": "每季一本免费推荐书"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Quality reading guidance",
+          "sourceRole": "correctOption",
+          "targetText": "expert tips and tricks for developing readers",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "选项的“优质”（Quality）对应出自专家之手（expert），“阅读指导”对应写给初学阅读者的技巧窍门（tips and tricks for developing readers），这是会员每月简讯的内容，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从两张价目表里分别查出幼儿园全日班的周费和三次晚接的托管费，再相加。",
+      "stemTranslationZh": "幼儿园全日班一周有 3 天晚接，每周费用是多少？",
+      "locateBy": "options",
+      "locateFindZh": "先在课程表找幼儿园全日班，再查下午托管三天价",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "925 美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "3 days — $125",
+            "sourceEntity": "$125",
+            "optionText": "$ 925.",
+            "optionEntity": "925",
+            "explanation": "925 是 800 加上午托管三天的 125 美元算出来的；晚接孩子（pick up later）要用下午托管，三天是 145 美元。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:1",
+              "quote": "3 days — $125",
+              "anchor": "上午托管三天价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "945 美元。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-916a21169272a7ae:3:2",
+              "quote": "Full Day Program 8:00 AM – 2:00 PM (Monday – Friday) $800",
+              "anchor": "幼儿园全日班周费"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:10",
+              "quote": "pick up later, we will provide a morning and afternoon playgroup",
+              "anchor": "晚接用下午托管"
+            },
+            {
+              "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:2",
+              "quote": "3 days — $145",
+              "anchor": "下午托管三天价"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "1175 美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "3 days — $125",
+            "sourceEntity": "3 days — $125",
+            "optionText": "$ 1175.",
+            "optionEntity": "1175",
+            "explanation": "1175 是 800 加 125×3 算出来的：既把晚接错查成上午托管，又把“3 天共 125 美元”当成每天 125 美元。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:1",
+              "quote": "3 days — $125",
+              "anchor": "上午托管三天价"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "1235 美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "3 days — $145",
+            "sourceHighlight": "3 days",
+            "optionText": "$ 1235.",
+            "optionHighlight": "1235",
+            "explanation": "1235 是 800 加 145×3 算出来的，把下午托管“3 天 145 美元”当成了每天 145 美元；表里 145 已经是三天的总价。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:2",
+              "quote": "3 days — $145",
+              "anchor": "下午托管三天总价"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "$ 945.",
+          "sourceRole": "correctOption",
+          "targetText": "3 days — $145",
+          "targetParagraphId": "cell:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-a:ocr-d5f77c6d0f150554:4:2",
+          "relationType": "calculation",
+          "note": "945 是两笔钱相加：幼儿园全日班每周 800 美元（$800）；晚接孩子（pick up later）要上下午托管班，三天共 145 美元（$145）；800＋145＝945 美元，选 B。"
+        }
+      ]
+    }
+  }
+}

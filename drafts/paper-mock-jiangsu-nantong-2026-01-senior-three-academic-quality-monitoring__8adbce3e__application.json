@@ -1,0 +1,118 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear readers,\n\nWe’re excited to announce the launch of our new column, “The Labor Diary”. Most of us spend our days at our desks and seldom get our hands dirty. This column is meant to remind us that labor is part of growing up and to give every hard-working classmate a place to be seen.\n\nHere you will read true stories from our lives, such as cooking for tired parents, cleaning the classroom after a sports meet or growing vegetables in the school garden. Besides what you did, we also welcome what you learned along the way, whether a new skill or a new respect for workers around you.\n\nSo pick up your pen and hand your story in to the editorial office. Your diary may inspire another reader to pick up a mop.\n\nThe editorial department",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "校英文报新栏目的创刊词，沿用题面给出的称呼、开头句和落款",
+        "personTense": "以编辑部的身份用 we 说话，说目的和内容用一般现在时，说读者会读到什么用一般将来时",
+        "readerTone": "写给全校读者，语气热情、亲切，像在邀请同学一起参与",
+        "goal": "让读者知道为什么开这个栏目、栏目登什么，并愿意来投稿"
+      },
+      "taskRequires": [
+        "说明开设 “The Labor Diary” 栏目的目的",
+        "介绍栏目内容"
+      ],
+      "thisEssayChooses": "从同学们整天坐在书桌前、很少动手说起，引出创刊目的：提醒大家劳动是成长的一部分，也让劳动的人被看见；栏目介绍选了给父母做饭、运动会后打扫教室、在学校菜园种菜三个例子，并说明也欢迎写劳动中的收获；结尾请读者把稿件交到编辑部。"
+    },
+    "standard": {
+      "essay": "Dear readers,\n\nWe’re excited to announce the launch of our new column, “The Labor Diary”. Most of us spend our days at our desks and seldom get our hands dirty. This column is meant to remind us that labor is part of growing up and to give every hard-working classmate a place to be seen.\n\nHere you will read true stories from our lives, such as cooking for tired parents, cleaning the classroom after a sports meet or growing vegetables in the school garden. Besides what you did, we also welcome what you learned along the way, whether a new skill or a new respect for workers around you.\n\nSo pick up your pen and hand your story in to the editorial office. Your diary may inspire another reader to pick up a mop.\n\nThe editorial department",
+      "pointMap": [
+        {
+          "point": "说明开设栏目的目的",
+          "quote": "This column is meant to remind us that labor is part of growing up and to give every hard-working classmate a place to be seen."
+        },
+        {
+          "point": "介绍栏目内容",
+          "quote": "Here you will read true stories from our lives, such as cooking for tired parents, cleaning the classroom after a sports meet or growing vegetables in the school garden."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接着给定的开头句说明为什么要办这个栏目。",
+          "items": [
+            {
+              "quote": "Most of us spend our days at our desks and seldom get our hands dirty.",
+              "explain": "先说读者熟悉的现状：整天坐着学习、很少动手。有了这个问题，后面的目的才不显得空。get our hands dirty 是「动手干活」的地道说法。"
+            },
+            {
+              "quote": "to remind us that labor is part of growing up and to give every hard-working classmate a place to be seen",
+              "explain": "用两个并列的 to do 说出两层目的：一层对所有读者（劳动是成长的一部分），一层对投稿的同学（让他们被看见）。用 us 把编辑部和读者放在一起。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "介绍栏目：登什么样的故事，还欢迎写什么。",
+          "items": [
+            {
+              "quote": "such as cooking for tired parents, cleaning the classroom after a sports meet or growing vegetables in the school garden",
+              "explain": "用家里、班上、校园三个场景举例，读者一看就知道自己的哪件事可以写。三个动名词短语并列，结构整齐。"
+            },
+            {
+              "quote": "Besides what you did, we also welcome what you learned along the way",
+              "explain": "用两个 what 从句对比「做了什么」和「学到什么」，告诉读者栏目不只要经过，也要收获。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "请读者行动：投稿，交到哪里。",
+          "items": [
+            {
+              "quote": "So pick up your pen and hand your story in to the editorial office.",
+              "explain": "结尾直接告诉读者下一步做什么、稿子交给谁。题目没给截稿时间，这里也不编时间。"
+            },
+            {
+              "quote": "Your diary may inspire another reader to pick up a mop.",
+              "explain": "用 pick up a mop 呼应前一句的 pick up your pen：写下来的故事也许会让别人动手，把投稿的意义说具体，不喊口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "This column is meant to do ...",
+          "function": "说明栏目创办目的，比 The purpose of this column is ... 更自然，后面可以并列两个 to do。"
+        },
+        {
+          "expression": "Besides ..., we also welcome ...",
+          "function": "在介绍栏目时补充第二类稿件，让读者知道投稿范围。"
+        },
+        {
+          "expression": "hand ... in to the editorial office",
+          "function": "告诉读者稿件交到哪里，让结尾落在具体行动上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear readers,\n\nWe’re excited to announce the launch of our new column, “The Labor Diary”. Between classes and exams, many of us hardly ever hold a broom or cook a meal, and we risk forgetting what our own hands can do. This column is here to bring labor back into our daily lives and to honor the quiet effort that keeps our homes and school running.\n\nEvery story in the column will come from you. It might be the first dumplings you wrapped for your grandparents, an afternoon spent sweeping fallen leaves on campus, or a weekend of volunteering in your neighborhood. Don’t stop at what happened, though. Tell us how your back ached, what went wrong and what the work taught you.\n\nReady to share? Write down your story and drop it off at the editorial office. We can’t wait to read it and share it with the whole school.\n\nThe editorial department",
+      "pointMap": [
+        {
+          "point": "说明开设栏目的目的",
+          "quote": "This column is here to bring labor back into our daily lives and to honor the quiet effort that keeps our homes and school running."
+        },
+        {
+          "point": "介绍栏目内容",
+          "quote": "It might be the first dumplings you wrapped for your grandparents, an afternoon spent sweeping fallen leaves on campus, or a weekend of volunteering in your neighborhood."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "we risk forgetting what our own hands can do",
+          "explain": "标准版只说很少动手，这里说出后果：会忘了自己的双手能做什么，让办栏目的理由更有分量。"
+        },
+        {
+          "quote": "to honor the quiet effort that keeps our homes and school running",
+          "explain": "quiet effort 说的是平时没人注意的付出，keep ... running 是「让……正常运转」的地道搭配，比标准版的 a place to be seen 更具体地说出栏目要表彰什么。"
+        },
+        {
+          "quote": "Tell us how your back ached, what went wrong and what the work taught you.",
+          "explain": "三个并列的宾语从句给出写作提示：累在哪里、出了什么岔子、学到什么。标准版只说欢迎写收获，这里教读者怎么写才真实。"
+        }
+      ]
+    }
+  }
+}

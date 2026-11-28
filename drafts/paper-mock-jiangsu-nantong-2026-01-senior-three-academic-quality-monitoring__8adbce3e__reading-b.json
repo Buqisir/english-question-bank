@@ -1,0 +1,813 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b": {
+      "overview": "本文介绍约旦建筑师迪玛·阿萨夫受一部影片启发转行造林，用宫胁造林法在干旱的约旦营造本土森林；她坚信绿化能让自然自我修复，并强调发动公众一起参与造林。",
+      "fullTranslationZh": "迪玛·阿萨夫缓步穿过约旦为数不多的森林之一——比尔吉什森林，小心翼翼地不踩到娇嫩的野生兰花。“我们这里曾经森林茂密，”她说，“那时有大象、犀牛和亚洲狮，这些动物过去和人类一起生活在这里。”她抬头望着一棵老橡树的树顶说：“发现这一点让我换了一个角度看待这片土地。想到如果人类的干预没有给生态系统带来负面影响，这里会蕴藏怎样的潜力，就令人着迷。”\n阿萨夫是一名建筑师，也是一名城市林业工作者。在做了十多年全职建筑师之后，阿萨夫辞去工作，去寻找更有意义的事。一部关于摩洛哥一片有 2000 年历史的森林的影片启发了她。在影片中，她看到一个干旱国家里有一片人造森林，高处枝叶交织如穹顶，四周果树排列如墙。她认定，这正是她想在祖国约旦做的事。\n她的研究让她找到了宫胁造林法，这种方法营造出高度生物多样、多层次的本土森林，速度比大自然自己长成森林快十倍。她的做法不只是种下一棵棵树，而是要建立一个复杂而充满活力的植物“群落”，让数千年来共同演化的本土物种重新联结在一起。\n约旦是世界上最干旱的国家之一，75% 的国土是沙漠，降雨稀少。尽管面临这一挑战，阿萨夫认为行动起来至关重要。“不是干旱导致土地裸露，而是裸露的土地导致干旱。”阿萨夫说。她认为：“我们在绿化上做得越多，就越能让大自然拥有自我修复的能力。”\n阿萨夫从小处做起。她的第一块造林地只有 107 平方米。她逐步建起了约旦本土森林营造数据库。到目前为止，她已经种下四片森林，栽了 2700 多株本土植物幼苗。她还为他人收集种子，其中包括约旦濒危物种的种子。\n阿萨夫总是强调，让人们参与造林很重要。她经常与学校、大学、城市和企业合作。“我把它看作一种由公民主导的物种恢复干预行动，做我们认为正确的事，成为解决问题的一份力量。”阿萨夫解释说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+          "sourceText": "“It is not drought that causes bare ground, it is bare ground that causes drought,” Assaf said.",
+          "displayText": "“It is not drought that causes bare ground, it is bare ground that causes drought,” Assaf said.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:26"
+          ],
+          "translationZh": "“不是干旱导致土地裸露，而是裸露的土地导致干旱。”阿萨夫说。",
+          "analysisZh": "主干是引语加 Assaf said。引语由两个强调句组成：It is not drought that causes bare ground 和 it is bare ground that causes drought。It is ... that 把要强调的主语 drought、bare ground 夹在中间，去掉 It is ... that 就还原成 Drought does not cause bare ground 和 Bare ground causes drought。前一句否定、后一句肯定，合起来是“不是干旱造成裸地，而是裸地造成干旱”，把因果倒过来说。原句两个分句之间只用逗号隔开，这是口语引语里的说法，书面语一般用分号隔开：It is not drought that causes bare ground; it is bare ground that causes drought.",
+          "underlineRanges": [
+            {
+              "start": 1,
+              "end": 23,
+              "quote": "It is not drought that"
+            },
+            {
+              "start": 44,
+              "end": 66,
+              "quote": "it is bare ground that"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3",
+          "sourceText": "Her research led her to the Miyawaki method, which creates highly biodiverse, multi-layered native forests ten times faster than nature itself does.",
+          "displayText": "Her research led her to the Miyawaki method, which creates highly biodiverse, multi-layered native forests ten times faster than nature itself does.",
+          "relatedQuestionIds": [],
+          "translationZh": "她的研究让她找到了宫胁造林法，这种方法营造出高度生物多样、多层次的本土森林，速度比大自然自己长成森林快十倍。",
+          "analysisZh": "主干是 Her research led her to the Miyawaki method（她的研究把她引向了宫胁造林法）。逗号后 which 引导非限制性定语从句，补充说明这种方法：creates ... native forests（营造本土森林），highly biodiverse 和 multi-layered 是两个并列的形容词，一起修饰 native forests。ten times faster than nature itself does 是比较结构，does 代替 creates native forests，意思是比大自然自己长成森林快十倍。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 23,
+              "quote": "Her research led her to"
+            },
+            {
+              "start": 43,
+              "end": 58,
+              "quote": ", which creates"
+            },
+            {
+              "start": 107,
+              "end": 147,
+              "quote": "ten times faster than nature itself does"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1"
+              ],
+              "start": 0,
+              "end": 171,
+              "quote": "迪玛·阿萨夫缓步穿过约旦为数不多的森林之一——比尔吉什森林，小心翼翼地不踩到娇嫩的野生兰花。“我们这里曾经森林茂密，”她说，“那时有大象、犀牛和亚洲狮，这些动物过去和人类一起生活在这里。”她抬头望着一棵老橡树的树顶说：“发现这一点让我换了一个角度看待这片土地。想到如果人类的干预没有给生态系统带来负面影响，这里会蕴藏怎样的潜力，就令人着迷。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2"
+              ],
+              "start": 172,
+              "end": 316,
+              "quote": "阿萨夫是一名建筑师，也是一名城市林业工作者。在做了十多年全职建筑师之后，阿萨夫辞去工作，去寻找更有意义的事。一部关于摩洛哥一片有 2000 年历史的森林的影片启发了她。在影片中，她看到一个干旱国家里有一片人造森林，高处枝叶交织如穹顶，四周果树排列如墙。她认定，这正是她想在祖国约旦做的事。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3"
+              ],
+              "start": 317,
+              "end": 429,
+              "quote": "她的研究让她找到了宫胁造林法，这种方法营造出高度生物多样、多层次的本土森林，速度比大自然自己长成森林快十倍。她的做法不只是种下一棵棵树，而是要建立一个复杂而充满活力的植物“群落”，让数千年来共同演化的本土物种重新联结在一起。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4"
+              ],
+              "start": 430,
+              "end": 548,
+              "quote": "约旦是世界上最干旱的国家之一，75% 的国土是沙漠，降雨稀少。尽管面临这一挑战，阿萨夫认为行动起来至关重要。“不是干旱导致土地裸露，而是裸露的土地导致干旱。”阿萨夫说。她认为：“我们在绿化上做得越多，就越能让大自然拥有自我修复的能力。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:5"
+              ],
+              "start": 549,
+              "end": 652,
+              "quote": "阿萨夫从小处做起。她的第一块造林地只有 107 平方米。她逐步建起了约旦本土森林营造数据库。到目前为止，她已经种下四片森林，栽了 2700 多株本土植物幼苗。她还为他人收集种子，其中包括约旦濒危物种的种子。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6"
+              ],
+              "start": 653,
+              "end": 743,
+              "quote": "阿萨夫总是强调，让人们参与造林很重要。她经常与学校、大学、城市和企业合作。“我把它看作一种由公民主导的物种恢复干预行动，做我们认为正确的事，成为解决问题的一份力量。”阿萨夫解释说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+                "start": 177,
+                "end": 281,
+                "quote": "There were elephants, rhinos and the Asiatic lion, animals which used to live together with people here."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p1",
+                "start": 63,
+                "end": 93,
+                "quote": "那时有大象、犀牛和亚洲狮，这些动物过去和人类一起生活在这里。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+                "start": 348,
+                "end": 417,
+                "quote": "She decided that this was what she wanted to do in her native Jordan."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+                "start": 234,
+                "end": 289,
+                "quote": "In the film, she saw a man-made forest in a dry country"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p2",
+                "start": 126,
+                "end": 144,
+                "quote": "她认定，这正是她想在祖国约旦做的事。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p2",
+                "start": 84,
+                "end": 106,
+                "quote": "在影片中，她看到一个干旱国家里有一片人造森林"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+                "start": 96,
+                "end": 155,
+                "quote": "Despite the challenge, Assaf believes it is crucial to act."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+                "start": 200,
+                "end": 237,
+                "quote": "it is bare ground that causes drought"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+                "start": 269,
+                "end": 352,
+                "quote": "the more we work on greening, the more we give nature the ability to restore itself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p4",
+                "start": 31,
+                "end": 54,
+                "quote": "尽管面临这一挑战，阿萨夫认为行动起来至关重要。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p4",
+                "start": 66,
+                "end": 77,
+                "quote": "而是裸露的土地导致干旱"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p4",
+                "start": 89,
+                "end": 116,
+                "quote": "我们在绿化上做得越多，就越能让大自然拥有自我修复的能力"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+                "start": 0,
+                "end": 86,
+                "quote": "Assaf always emphasizes it is important to have people participate in growing forests."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p6",
+                "start": 0,
+                "end": 19,
+                "quote": "阿萨夫总是强调，让人们参与造林很重要。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+                "start": 156,
+                "end": 251,
+                "quote": "“It is not drought that causes bare ground, it is bare ground that causes drought,” Assaf said."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p4",
+                "start": 54,
+                "end": 84,
+                "quote": "“不是干旱导致土地裸露，而是裸露的土地导致干旱。”阿萨夫说。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3",
+                "start": 0,
+                "end": 148,
+                "quote": "Her research led her to the Miyawaki method, which creates highly biodiverse, multi-layered native forests ten times faster than nature itself does."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b-p3",
+                "start": 0,
+                "end": 54,
+                "quote": "她的研究让她找到了宫胁造林法，这种方法营造出高度生物多样、多层次的本土森林，速度比大自然自己长成森林快十倍。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "从阿萨夫在森林里的感慨引出人物，再交代她转行造林的起因、采用的方法、面对干旱的信念、取得的成果，最后落到她对公众参与的强调。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+            "summary": "阿萨夫走在比尔吉什森林里，回忆这里曾有森林和与人共处的野生动物，并感慨人类干预对生态的影响。",
+            "function": "以场景开篇，引出人物和话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+            "summary": "阿萨夫辞去建筑师工作，受一部摩洛哥森林影片启发，决定在约旦造林。",
+            "function": "交代她投身造林的起因"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3",
+            "summary": "她采用宫胁造林法，重建本土物种共生的植物群落。",
+            "function": "介绍她的造林方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+            "summary": "约旦极度干旱，但她认为必须行动，绿化能让自然自我修复。",
+            "function": "说明她对绿化的信念"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:5",
+            "summary": "她从小块地起步，建数据库、种下四片森林并收集种子。",
+            "function": "列举她的成果"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+            "summary": "她强调让公众参与造林，常与学校、城市和企业合作。",
+            "function": "收束于公众参与这一关键"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:24": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Discovering that 的语境判断 that 指她发现的哪件事。",
+      "stemTranslationZh": "第 1 段中画线词“that”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "that 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "那棵老橡树。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "She looked up at the top of an old oak tree",
+            "sourceEntity": "an old oak tree",
+            "optionText": "The old oak tree.",
+            "optionEntity": "The old oak tree",
+            "explanation": "橡树就在 that 前面，最近的名词最像所指；放进去成了“发现这棵老橡树让我换了角度看这片土地”，可她刚说的是这里曾有大象、犀牛和狮子与人同住。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+              "quote": "She looked up at the top of an old oak tree",
+              "anchor": "抬头看老橡树"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "森林的保护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "We once had thick forests",
+            "optionText": "forests",
+            "matchType": "exact",
+            "relationNote": "forests 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1|We once had thick forests]]，那句只说这里过去森林茂密，没谈保护森林；她发现的是动物曾和人一起生活。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+              "quote": "We once had thick forests",
+              "anchor": "过去森林茂密"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人类干预的影响。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "if human intervention were not affecting ecosystems negatively",
+            "optionText": "human intervention",
+            "matchType": "exact",
+            "relationNote": "human intervention 出现在 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1|It is fascinating to see]]，是她有了这一发现后的设想：假如人类不破坏生态会怎样；这是发现之后的感想，不是发现的内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+              "quote": "if human intervention were not affecting ecosystems negatively",
+              "anchor": "假如人类干预不破坏生态"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人与野生动物的共存。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+              "quote": "There were elephants, rhinos and the Asiatic lion, animals which used to live together with people here.",
+              "anchor": "动物曾与人共同生活"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "that",
+          "sourceRole": "stem",
+          "targetText": "She looked up at the top of an old oak tree and said, “Discovering that made me see the landscape from a different perspective.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "animals which used to live together with people here",
+          "bridgeZh": "that 指大象、犀牛等动物曾与人类一起生活这件事",
+          "note": "题干的 that 原词出现在 Discovering that 里。"
+        },
+        {
+          "sourceText": "The co-existence between man and wildlife",
+          "sourceRole": "correctOption",
+          "targetText": "animals which used to live together with people here",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "Discovering that 让她换个角度看这片土地，所以 that 必须是她发现的一件事实；选项的“人与野生动物共存”就是“动物曾和人一起生活”（used to live together with people）。放回去：发现这里人与野生动物曾经共处，让她用不同的眼光看这片土地，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:25": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出影片给阿萨夫的启发，并概括她因此决定在约旦做的事。",
+      "stemTranslationZh": "那部影片促使阿萨夫去做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找她看完影片决定做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "让当地生态重焕生机。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+              "quote": "She decided that this was what she wanted to do in her native Jordan.",
+              "anchor": "决定在约旦这样做"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+              "quote": "In the film, she saw a man-made forest in a dry country",
+              "anchor": "干旱国家的人造森林"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "辞去建筑师的工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "Assaf left her job to look for something more meaningful",
+            "sourceHighlight": "left her job",
+            "optionText": "Quit her job as an architect.",
+            "optionHighlight": "Quit her job",
+            "explanation": "原文先写她为了找更有意义的事辞去建筑师工作（left her job），再写影片带给她启发；影片促成的是她在约旦要做的事，不是辞职。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+              "quote": "After working as a full-time architect for more than ten years, Assaf left her job to look for something more meaningful.",
+              "anchor": "辞职在前"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "促进景观的连通。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "reconnecting native species",
+            "optionText": "connectivity",
+            "matchType": "wordFamily",
+            "relationNote": "connectivity 由 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3]] 的 reconnecting 变来，那里说的是让共同演化的本土物种重新联结，是她后来研究出的造林思路；landscape 只出现在 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1]] 她换角度看土地的话里。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3",
+              "quote": "reconnecting native species that co-evolved together for thousands of years",
+              "anchor": "重新联结本土物种"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "监测生物多样性保护情况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "highly biodiverse",
+            "optionText": "biodiversity",
+            "matchType": "wordFamily",
+            "relationNote": "biodiversity 由 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3]] 的 biodiverse（生物多样的）变来，那是宫胁法造出的森林的特点；她是亲手造林，原文没说她去监测保护工作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3",
+              "quote": "creates highly biodiverse, multi-layered native forests",
+              "anchor": "营造生物多样的森林"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "video",
+          "sourceRole": "stem",
+          "targetText": "She was inspired by a video about a 2,000-year-old forest in Morocco.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "She decided that this was what she wanted to do in her native Jordan",
+          "bridgeZh": "this 指影片里干旱国家的那片人造森林",
+          "note": "题干 video 原词出现在原文。"
+        },
+        {
+          "sourceText": "Rejuvenate local ecology",
+          "sourceRole": "correctOption",
+          "targetText": "She decided that this was what she wanted to do in her native Jordan",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项是推出来的一步：她要在家乡约旦（her native Jordan）也造出影片里那样的森林，让本地重新长出森林，就是“让当地生态重焕生机”；后文她用本土物种造林正是在做这件事，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:26": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "先看这一段交代的背景，再看阿萨夫的两句话，概括她强调的观点。",
+      "stemTranslationZh": "阿萨夫在第 4 段中强调了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4]] 先写约旦干旱，Despite 之后才是她的看法，看她两句话都落在什么上",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "绿化的重要性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+              "quote": "Despite the challenge, Assaf believes it is crucial to act.",
+              "anchor": "困难面前必须行动"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+              "quote": "the more we work on greening, the more we give nature the ability to restore itself",
+              "anchor": "绿化让自然自我修复"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+              "quote": "it is bare ground that causes drought",
+              "anchor": "裸地导致干旱"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "土地沙漠化的成因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "it is bare ground that causes drought",
+            "optionText": "causes",
+            "matchType": "exact",
+            "relationNote": "causes 取自她说的“是裸地导致干旱”，这句讲干旱从哪来，是为了说明要先让土地绿起来；全段没有分析土地沙漠化的成因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+              "quote": "it is bare ground that causes drought",
+              "anchor": "裸地导致干旱"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保护自然的紧迫性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Assaf believes it is crucial to act",
+            "sourceEntity": "act",
+            "optionText": "The urgency to conserve nature.",
+            "optionEntity": "conserve nature",
+            "explanation": "crucial to act 说的是要行动起来，她接着讲的行动是绿化，让自然自我修复（restore itself），是让裸地重新长绿，不是保护现有的自然。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+              "quote": "Assaf believes it is crucial to act",
+              "anchor": "必须行动"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "抗击干旱的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "It is not drought that causes bare ground",
+            "optionText": "drought",
+            "matchType": "exact",
+            "relationNote": "干旱只是 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4|Jordan is one of the driest]] 交代的背景，Despite the challenge 一转，她强调的是困难面前也要去绿化；drought 在她话里是裸地造成的结果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+              "quote": "Jordan is one of the driest countries in the world, with 75 percent desert and little rainfall.",
+              "anchor": "约旦极度干旱"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The importance of greening",
+          "sourceRole": "correctOption",
+          "targetText": "the more we work on greening, the more we give nature the ability to restore itself",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "这一段先摆出约旦干旱少雨的难处，再用 Despite 转到她的看法：必须行动（crucial to act）。她先说是裸地导致干旱，再说绿化做得越多，自然越能自我修复（the more we work on greening）。两句话都落在让土地绿起来上，选项的“绿化的重要性”正好概括这层意思，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出阿萨夫明确强调对造林很重要的那件事。",
+      "stemTranslationZh": "阿萨夫认为什么对她的使命至关重要？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "选址。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Her first site was only 107 square meters",
+            "optionText": "Site",
+            "matchType": "exact",
+            "relationNote": "site 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:5|Her first site was]]，那句只说她第一块造林地只有 107 平方米，讲她从小处起步，没说选址是关键。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:5",
+              "quote": "Her first site was only 107 square meters.",
+              "anchor": "第一块林地面积"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "建立数据库。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "She has gradually built a database",
+            "optionText": "Database",
+            "matchType": "exact",
+            "relationNote": "database 出自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:5|She has gradually built]]，那是她已经做成的一件事；原文没说它对使命至关重要，她特别强调的是让人们参与。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:5",
+              "quote": "She has gradually built a database for native forest creation in Jordan.",
+              "anchor": "建数据库"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "扩大业务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "She often works in collaboration with schools, universities, cities, and companies",
+            "sourceEntity": "companies",
+            "optionText": "Business expansion.",
+            "optionEntity": "Business",
+            "explanation": "企业（companies）在原文只是她的合作对象之一，和学校、城市并列，为的是让更多人参与造林；她并没有要扩大生意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+              "quote": "She often works in collaboration with schools, universities, cities, and companies.",
+              "anchor": "与各方合作"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "社区参与。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+              "quote": "Assaf always emphasizes it is important to have people participate in growing forests.",
+              "anchor": "让人们参与造林"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+              "quote": "She often works in collaboration with schools, universities, cities, and companies.",
+              "anchor": "与各方合作"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "crucial",
+          "sourceRole": "stem",
+          "targetText": "Assaf always emphasizes it is important to have people participate in growing forests.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+          "relationType": "locationCue",
+          "targetCue": "important",
+          "sourceZh": "至关重要",
+          "targetCueZh": "重要",
+          "answerText": "have people participate in growing forests",
+          "note": "题干 crucial 对应原文 important，同句的 always emphasizes 说明这是她一贯强调的。"
+        },
+        {
+          "sourceText": "Community engagement",
+          "sourceRole": "correctOption",
+          "targetText": "have people participate in growing forests",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "选项的“社区参与”（Community engagement）就是让大家一起参与种树（have people participate）。[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:4|Despite the challenge, Assaf]] 也有 crucial，但那里说的是要行动，没说什么是使命的关键，选 D。"
+        }
+      ]
+    }
+  }
+}

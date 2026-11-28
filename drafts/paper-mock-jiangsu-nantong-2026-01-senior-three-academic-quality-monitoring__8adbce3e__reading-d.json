@@ -1,0 +1,736 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d": {
+      "overview": "本文围绕生成式 AI 的版权问题，介绍 Vermillio 公司的 Trace ID 如何用“神经指纹”测算 AI 作品与原作的重合度，并呈现创作者索要报酬的诉求，以及该公司倡导分享、追踪内容以实现共赢的主张。",
+      "fullTranslationZh": "让谷歌的 AI 视频工具制作一部影片，讲一位乘着蓝色英国电话亭四处飞行的时间旅行医生，结果不出所料，它很像《神秘博士》。如果你让 OpenAI 的技术做同样的事，情况也差不多。你可能会想，这有什么问题呢？答案可能是 AI 领军者面临的最大问题之一，因为他们这项划时代的技术正越来越广泛地进入我们的生活。\n谷歌和 OpenAI 的生成式人工智能本应名副其实——“生成式”，也就是能为我们的问题给出新颖的答案。但它的产出中有多少是原创的呢？问题在于弄清楚 Sora 2 和 Veo 3 这样的 AI 工具在多大程度上依赖别人的作品来做出它们自己的“发明”。不过，有一家公司声称能够揭示这个问题。\nVermillio 公司的 Trace ID 能够检测出 AI 生成内容在多大比例上以受版权保护的素材为基础。该平台的功能之一是为品牌、角色或其他知识产权建立神经指纹。这些指纹充当数字标识，描绘出某一内容的独特特征。通过把这种指纹与 AI 生成的内容进行比对，它就能判断新内容与原作的重合程度，给出百分比形式的匹配结果。\n这项研究以《神秘博士》和《007》等知名影片为案例，展示了这一过程的实际运作。结果如何？Sora 与《007》指纹的匹配度高达 62%，谷歌的 Veo 3 与《神秘博士》指纹的匹配度为 80%，这意味着它们在生成内容时严重依赖受版权保护的作品。\n许多创意工作者要求获得补偿，并要求在获得许可之前停止未经授权使用他们的作品。他们认为，AI 工具不付报酬就借用他们的作品，生产出与之竞争的作品，削弱了他们所在的行业。\nVermillio 公司负责人凯瑟琳·格雷斯说：“只要我们稍停片刻，想出一种分享和追踪内容的办法，大家都能成为赢家。这会鼓励版权所有者向 AI 公司开放更多数据，也会让 AI 公司获得更多有意思的数据集。届时不再是把钱全都给 AI 公司，而是会形成一个美好的生态系统。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+          "sourceText": "By comparing this fingerprint against AI-generated content, it can determine how much the new content overlaps（重合）with the original, offering a percentage-based match.",
+          "displayText": "By comparing this fingerprint against AI-generated content, it can determine how much the new content overlaps（重合）with the original, offering a percentage-based match.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:33"
+          ],
+          "translationZh": "通过把这种指纹与 AI 生成的内容进行比对，它就能判断新内容与原作的重合程度，给出百分比形式的匹配结果。",
+          "analysisZh": "主干是 it can determine how much ...（它能判断……的程度），it 指 Trace ID 平台。句首 By comparing this fingerprint against AI-generated content 是方式状语，说明靠什么判断：把指纹和 AI 生成的内容比对。how much 引导宾语从句，作 determine 的宾语：the new content overlaps with the original（新内容和原作重合多少）。句末 offering a percentage-based match 是现在分词短语，补充判断的结果：给出百分比形式的匹配度。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 37,
+              "quote": "By comparing this fingerprint against"
+            },
+            {
+              "start": 60,
+              "end": 85,
+              "quote": "it can determine how much"
+            },
+            {
+              "start": 133,
+              "end": 166,
+              "quote": "offering a percentage-based match"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+          "sourceText": "They argue AI tools build on their work without remuneration, producing competing creations that undercut their industries.",
+          "displayText": "They argue AI tools build on their work without remuneration, producing competing creations that undercut their industries.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:34"
+          ],
+          "translationZh": "他们认为，AI 工具不付报酬就借用他们的作品，生产出与之竞争的作品，削弱了他们所在的行业。",
+          "analysisZh": "主干是 They argue ...（他们认为……），argue 后省略了 that，后面整个是宾语从句：AI tools build on their work without remuneration（AI 工具不付报酬就借用他们的作品）。producing competing creations 是现在分词短语作结果状语，逻辑主语仍是 AI tools，说明这样做的后果：生产出与之竞争的作品；that undercut their industries 是定语从句，修饰 creations，说明这些作品削弱了他们的行业。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 10,
+              "quote": "They argue"
+            },
+            {
+              "start": 62,
+              "end": 91,
+              "quote": "producing competing creations"
+            },
+            {
+              "start": 92,
+              "end": 122,
+              "quote": "that undercut their industries"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1"
+              ],
+              "start": 0,
+              "end": 151,
+              "quote": "让谷歌的 AI 视频工具制作一部影片，讲一位乘着蓝色英国电话亭四处飞行的时间旅行医生，结果不出所料，它很像《神秘博士》。如果你让 OpenAI 的技术做同样的事，情况也差不多。你可能会想，这有什么问题呢？答案可能是 AI 领军者面临的最大问题之一，因为他们这项划时代的技术正越来越广泛地进入我们的生活。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2"
+              ],
+              "start": 152,
+              "end": 295,
+              "quote": "谷歌和 OpenAI 的生成式人工智能本应名副其实——“生成式”，也就是能为我们的问题给出新颖的答案。但它的产出中有多少是原创的呢？问题在于弄清楚 Sora 2 和 Veo 3 这样的 AI 工具在多大程度上依赖别人的作品来做出它们自己的“发明”。不过，有一家公司声称能够揭示这个问题。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3"
+              ],
+              "start": 296,
+              "end": 456,
+              "quote": "Vermillio 公司的 Trace ID 能够检测出 AI 生成内容在多大比例上以受版权保护的素材为基础。该平台的功能之一是为品牌、角色或其他知识产权建立神经指纹。这些指纹充当数字标识，描绘出某一内容的独特特征。通过把这种指纹与 AI 生成的内容进行比对，它就能判断新内容与原作的重合程度，给出百分比形式的匹配结果。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:4"
+              ],
+              "start": 457,
+              "end": 579,
+              "quote": "这项研究以《神秘博士》和《007》等知名影片为案例，展示了这一过程的实际运作。结果如何？Sora 与《007》指纹的匹配度高达 62%，谷歌的 Veo 3 与《神秘博士》指纹的匹配度为 80%，这意味着它们在生成内容时严重依赖受版权保护的作品。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5"
+              ],
+              "start": 580,
+              "end": 663,
+              "quote": "许多创意工作者要求获得补偿，并要求在获得许可之前停止未经授权使用他们的作品。他们认为，AI 工具不付报酬就借用他们的作品，生产出与之竞争的作品，削弱了他们所在的行业。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6"
+              ],
+              "start": 664,
+              "end": 799,
+              "quote": "Vermillio 公司负责人凯瑟琳·格雷斯说：“只要我们稍停片刻，想出一种分享和追踪内容的办法，大家都能成为赢家。这会鼓励版权所有者向 AI 公司开放更多数据，也会让 AI 公司获得更多有意思的数据集。届时不再是把钱全都给 AI 公司，而是会形成一个美好的生态系统。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+                "start": 257,
+                "end": 320,
+                "quote": "rely on someone else’s art to come up with their own inventions"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1",
+                "start": 123,
+                "end": 174,
+                "quote": "the result, unsurprisingly, resembles（类似）Doctor Who"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p2",
+                "start": 104,
+                "end": 123,
+                "quote": "依赖别人的作品来做出它们自己的“发明”"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p1",
+                "start": 43,
+                "end": 59,
+                "quote": "结果不出所料，它很像《神秘博士》"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+                "start": 113,
+                "end": 213,
+                "quote": "One of the platform’s abilities is to create neural fingerprints for brands, characters or other IP."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+                "start": 325,
+                "end": 383,
+                "quote": "By comparing this fingerprint against AI-generated content"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p3",
+                "start": 55,
+                "end": 84,
+                "quote": "该平台的功能之一是为品牌、角色或其他知识产权建立神经指纹。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p3",
+                "start": 108,
+                "end": 129,
+                "quote": "通过把这种指纹与 AI 生成的内容进行比对"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+                "start": 0,
+                "end": 47,
+                "quote": "Many creative professionals demand compensation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p5",
+                "start": 0,
+                "end": 13,
+                "quote": "许多创意工作者要求获得补偿"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+                "start": 42,
+                "end": 128,
+                "quote": "We can all win if we just take a beat and figure out a way to share and track content."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+                "start": 274,
+                "end": 361,
+                "quote": "Instead of giving all the money to AI companies, there would be this amazing ecosystem."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p6",
+                "start": 25,
+                "end": 58,
+                "quote": "只要我们稍停片刻，想出一种分享和追踪内容的办法，大家都能成为赢家。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p6",
+                "start": 102,
+                "end": 134,
+                "quote": "届时不再是把钱全都给 AI 公司，而是会形成一个美好的生态系统。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+                "start": 325,
+                "end": 492,
+                "quote": "By comparing this fingerprint against AI-generated content, it can determine how much the new content overlaps（重合）with the original, offering a percentage-based match."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p3",
+                "start": 108,
+                "end": 160,
+                "quote": "通过把这种指纹与 AI 生成的内容进行比对，它就能判断新内容与原作的重合程度，给出百分比形式的匹配结果。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+                "start": 124,
+                "end": 247,
+                "quote": "They argue AI tools build on their work without remuneration, producing competing creations that undercut their industries."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d-p5",
+                "start": 38,
+                "end": 83,
+                "quote": "他们认为，AI 工具不付报酬就借用他们的作品，生产出与之竞争的作品，削弱了他们所在的行业。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用 AI 生成影片酷似《神秘博士》引出版权问题，再介绍 Trace ID 的检测原理和测试结果，接着呈现创作者的诉求，最后以 Vermillio 负责人倡导共享、共赢的话收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1",
+            "summary": "AI 生成的时间旅行医生影片酷似《神秘博士》，这可能是 AI 业界面临的大问题。",
+            "function": "用实例引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+            "summary": "生成式 AI 的产出有多少是原创、在多大程度上依赖别人的作品，是难点，有公司声称能弄清。",
+            "function": "点明问题，引出 Trace ID"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+            "summary": "Trace ID 为作品建立神经指纹，再与 AI 内容比对，给出重合百分比。",
+            "function": "说明 Trace ID 的工作原理"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:4",
+            "summary": "测试中 Sora、Veo 3 与《007》《神秘博士》的指纹高度重合。",
+            "function": "用测试结果说明 AI 依赖版权作品"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+            "summary": "创作者要求补偿并停止未经授权使用，认为 AI 削弱了他们的行业。",
+            "function": "呈现创作者的诉求"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+            "summary": "格雷斯认为分享并追踪内容能让版权方和 AI 公司共赢。",
+            "function": "提出解决思路，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读开头的影片例子和随后的问题，说出文章提出的问题是什么。",
+      "stemTranslationZh": "文章开头提出了什么问题？",
+      "locateBy": "stem",
+      "locateFindZh": "issue 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "生成式 AI 革新了电影制作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "create a film of a time-travelling doctor",
+            "optionText": "film",
+            "matchType": "exact",
+            "relationNote": "film 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1]] 的例子：让 AI 生成一部时间旅行医生的影片，结果很像《神秘博士》；这个例子要引出的是 AI 借用别人的作品，不是它革新了电影制作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1",
+              "quote": "create a film of a time-travelling doctor",
+              "anchor": "让 AI 生成影片"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "生成式 AI 的能力在不断扩展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Google and OpenAI’s generative artificial intelligence",
+            "optionText": "generative AI",
+            "matchType": "exact",
+            "relationNote": "generative 出自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2|Google and OpenAI’s generative]]，那句说生成式 AI 本该给出新颖答案，紧接着用 But 质疑它有多少是原创；作者是在怀疑，不是说它能力在增强。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+              "quote": "Google and OpenAI’s generative artificial intelligence is supposed to be just that",
+              "anchor": "本该具有生成性"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "生成式 AI 正变得越来越普及。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "becomes ever more widespread in our lives",
+            "optionText": "widespread",
+            "matchType": "exact",
+            "relationNote": "widespread 出自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1|The answer could be]]，AI 越来越普及只是 as 引出的背景，说明这个问题为什么越来越要紧；这句真正提出的是“最大的问题之一”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1",
+              "quote": "as their era-defining technology becomes ever more widespread in our lives",
+              "anchor": "技术日益普及"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "AI 生成的内容中使用了受版权保护的素材。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+              "quote": "The problem is working out how much AI tools like Sora 2 and Veo 3 rely on someone else’s art to come up with their own inventions.",
+              "anchor": "依赖别人的作品"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:1",
+              "quote": "the result, unsurprisingly, resembles（类似）Doctor Who",
+              "anchor": "生成的影片像《神秘博士》"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "issue",
+          "sourceRole": "stem",
+          "targetText": "One firm, however, claims to be able to shine a light on the issue.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "rely on someone else’s art to come up with their own inventions",
+          "bridgeZh": "the issue 指人工智能工具多大程度上依赖别人的作品",
+          "note": "题干 issue 原词出现在原文。"
+        },
+        {
+          "sourceText": "Copyrighted materials are used in AI-generated content",
+          "sourceRole": "correctOption",
+          "targetText": "rely on someone else’s art to come up with their own inventions",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项是把开头两段合起来说的：先是 AI 生成的影片很像《神秘博士》（resembles Doctor Who），接着点明问题在于 AI 有多依赖别人的作品（rely on someone else’s art）；别人的作品就是受版权保护的素材，[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3]] 也直说 copyrighted materials，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:33": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看这一段几句话依次讲了什么，概括段落主要内容。",
+      "stemTranslationZh": "第 3 段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3]] 先说它能测出什么，再看后几句怎样建指纹、怎样比对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "谁在使用 Trace ID。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Who uses TraceID.",
+            "explanation": "这一段只讲平台能测什么、怎样测，没交代谁在用它；文中出现的人物只有 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6]] Vermillio 的负责人。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Trace ID 如何运作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+              "quote": "One of the platform’s abilities is to create neural fingerprints for brands, characters or other IP.",
+              "anchor": "建立神经指纹"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+              "quote": "By comparing this fingerprint against AI-generated content",
+              "anchor": "与 AI 内容比对"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为什么开发 Trace ID。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Why TraceID is developed.",
+            "explanation": "这一段没讲开发它的原因；[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2|One firm, however, claims]] 只说有家公司声称能弄清这个问题，接着 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3]] 就直接讲平台怎样检测。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Trace ID 用在哪里。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Where TraceID is used.",
+            "explanation": "拿哪些影片做测试是 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:4]] 的内容（以《神秘博士》《007》为案例）；[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3]] 没说平台用在什么场合。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How TraceID works",
+          "sourceRole": "correctOption",
+          "targetText": "By comparing this fingerprint against AI-generated content",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "这一段一步步讲 Trace ID 怎样工作：先说它能测出 AI 内容有多大比例来自受版权保护的素材，再说它给品牌、角色建立神经指纹（neural fingerprints），最后把指纹和 AI 生成的内容比对（By comparing），给出重合百分比。几句都在讲检测的过程，选项的“如何运作”正好概括，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:34": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借上一句创作者的诉求，推断 remuneration 的意思。",
+      "stemTranslationZh": "第 5 段中画线词“remuneration”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找他们要求什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "延误。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Delay.",
+            "explanation": "放进去成了“AI 工具毫无延误地借用他们的作品”，和创作者要补偿、要停止未经授权使用的诉求毫无关联。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "报酬。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+              "quote": "Many creative professionals demand compensation and an end to unauthorized use of their work until permissions are granted.",
+              "anchor": "要求获得补偿"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "努力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Effort.",
+            "explanation": "放进去成了“AI 工具不费力气就借用他们的作品”，可创作者抱怨的是没拿到补偿（demand compensation），不是 AI 费没费力。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "警告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Warning.",
+            "explanation": "放进去成了“不打招呼就借用作品”，原文要的是先获得许可（permissions）并给补偿，不是事先警告。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "remuneration",
+          "sourceRole": "stem",
+          "targetText": "They argue AI tools build on their work without remuneration, producing competing creations that undercut their industries.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "demand compensation",
+          "bridgeZh": "without remuneration 缺的正是他们要求的 compensation",
+          "note": "题干 remuneration 原词出现在原文。"
+        },
+        {
+          "sourceText": "Pay",
+          "sourceRole": "correctOption",
+          "targetText": "demand compensation",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "without remuneration 说 AI 用了作品却没给什么，创作者因此不满，所以这个词必须是创作者应得的东西；他们要求的正是补偿（compensation）。放回去：AI 工具用了他们的作品却不付报酬，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:35": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读格雷斯的三句话，概括她想传达的核心意思。",
+      "stemTranslationZh": "凯瑟琳·格雷斯想传达什么信息？",
+      "locateBy": "stem",
+      "locateFindZh": "看 if 后的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "限制数据会妨碍科学进步。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Limiting data hurts scientific progress.",
+            "explanation": "她讲的是分享并追踪内容能让版权方和 AI 公司都受益，没谈限制数据，也没提科学进步。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "版权所有者应该开放更多数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "This would encourage copyright holders to release more data to AI companies",
+            "optionText": "release more data",
+            "matchType": "exact",
+            "relationNote": "release more data 取自 [[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6|This would encourage copyright]]，那只是分享机制带来的一个好处：会鼓励版权方多开放数据；她没要求版权方应该这样做，要传达的是大家都能赢。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+              "quote": "This would encourage copyright holders to release more data to AI companies",
+              "anchor": "鼓励版权方开放数据"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "公平的数据共享生态让各方受益。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+              "quote": "We can all win if we just take a beat and figure out a way to share and track content.",
+              "anchor": "分享追踪内容大家都赢"
+            },
+            {
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+              "quote": "Instead of giving all the money to AI companies, there would be this amazing ecosystem.",
+              "anchor": "不再把钱全给 AI 公司"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "AI 公司必须公开使用受版权保护内容的情况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "AI firms must disclose copyrighted content use.",
+            "explanation": "她说的是双方一起分享、追踪内容（share and track content），没有要求 AI 公司必须公开自己用了哪些受版权保护的内容。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Kathleen Grace",
+          "sourceRole": "stem",
+          "targetText": "Kathleen Grace, head of Vermillio, said: “We can all win if we just take a beat and figure out a way to share and track content.",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+          "relationType": "locationCue",
+          "answerText": "We can all win if we just take a beat and figure out a way to share and track content",
+          "note": "题干 Kathleen Grace 原词出现在原文。"
+        },
+        {
+          "sourceText": "A fair data-sharing ecosystem benefits all",
+          "sourceRole": "correctOption",
+          "targetText": "We can all win if we just take a beat and figure out a way to share and track content",
+          "targetParagraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项是她三句话的概括：“大家都能赢”（We can all win）就是 benefits all；条件是找到分享并追踪内容的办法（share and track content），即数据共享；[[block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6|Instead of giving all the]] 说钱不再全给 AI 公司，形成美好的生态（amazing ecosystem），这就是“公平”的生态，选 C。"
+        }
+      ]
+    }
+  }
+}

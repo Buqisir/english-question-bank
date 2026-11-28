@@ -1,0 +1,935 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices": {
+      "overview": "文章鼓励读者与同龄人分享自己的经历，指出经历不分大小都有价值，并给出三条建议：讲清细节、站在听者角度解释用词、勇敢说出自己的看法。",
+      "fullTranslationZh": "分享是我们日常生活中必不可少的一部分。当你和同龄人分享自己的经历时，他们会更愿意放心地分享自己的经历。分享对你重要的事情，没有任何限制。如果你觉得自己没有什么大的经历可讲，分享经历的念头因此让你望而却步，那就马上克服它，因为所有的经历都同样有价值。下面是让你的分享更有效的几条建议。\n分享细节。一定要讲得尽可能详细。试着把你的经历描绘给别人看，让他们也能感同身受。告诉他们你有什么感受，以及为什么会有这样的感受。先讲你是什么时候想到要分享这件事的，再讲发生了什么或者你当时是怎么想的。最后讲讲它为什么对你很重要，或者你为什么会这样想。\n解释用词。从别人的角度想一想这个问题。如果你来自另一个群体，你能听懂你所说的每一个词吗？如果不能，就考虑解释一下其中的术语。比如，不要对来自世界各地的同龄人说：“我喜欢卡塔卡利，你以后一定要去看看。”而要这样说：“我喜欢卡塔卡利，它是一种民间舞蹈，舞者戴着独特的面具表演一出戏剧。你以后应该去看看。”\n无所畏惧。分享经历时，你不必难为情，也不必害怕敞开心扉。你完全有权利勇敢而坦率。例如，假设你们在讨论性别平等，有些同龄人认为女性只能从事某些职业，而你不同意。那么，不要担心自己说出与众不同的观点后别人会怎么想，直接说出来就好。\n既然你已经读了我关于分享的建议，那就去和世界上其他人分享你自己的经历、想法和思考吧。记住，经历没有太大或太小之分。所有的经历都有各自的价值。无论你分享什么，对于经历和你不同、看法和你不同的人来说，都会是独特而新鲜的。所以，继续分享吧。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "seven-sentence-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1",
+          "sourceText": "If the thought of sharing your experiences holds you back because you believe that you don’t have big experiences to share, then, you should get over it right away because all experiences are equally valuable.",
+          "displayText": "If the thought of sharing your experiences holds you back because you believe that you don’t have big experiences to share, then, you should get over it right away because all experiences are equally valuable.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36"
+          ],
+          "translationZh": "如果你觉得自己没有什么大的经历可讲，分享经历的念头因此让你望而却步，那就马上克服它，因为所有的经历都同样有价值。",
+          "analysisZh": "主干在 then 后面：you should get over it right away（你应该马上克服它）。前面 If 引导条件从句，主语是 the thought of sharing your experiences（分享经历的念头），谓语是 holds you back；从句里又套一个 because 从句说明退缩的原因，其中 that 从句作 believe 的宾语。主句的 it 指这个让人退缩的念头，句末第二个 because 给出应当克服它的理由。",
+          "underlineRanges": [
+            {
+              "start": 43,
+              "end": 57,
+              "quote": "holds you back"
+            },
+            {
+              "start": 130,
+              "end": 163,
+              "quote": "you should get over it right away"
+            },
+            {
+              "start": 164,
+              "end": 208,
+              "quote": "because all experiences are equally valuable"
+            }
+          ]
+        },
+        {
+          "sentenceId": "seven-sentence-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4",
+          "sourceText": "Then, instead of fearing what people would think if you said something unconventional, just say it.",
+          "displayText": "Then, instead of fearing what people would think if you said something unconventional, just say it.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39"
+          ],
+          "translationZh": "那么，不要担心自己说出与众不同的观点后别人会怎么想，直接说出来就好。",
+          "analysisZh": "主干是祈使句 just say it（直接说出来）。前面 instead of 是介词，后面接动名词 fearing，表示「不去担心」；fearing 的宾语是 what 引导的从句 what people would think，从句里再带 if you said something unconventional，用 said 和 would think 表示假设的情况：万一你说了与众不同的话，别人会怎么想。",
+          "underlineRanges": [
+            {
+              "start": 6,
+              "end": 24,
+              "quote": "instead of fearing"
+            },
+            {
+              "start": 25,
+              "end": 48,
+              "quote": "what people would think"
+            },
+            {
+              "start": 87,
+              "end": 98,
+              "quote": "just say it"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "全文按「提出观点 → 分条建议 → 总结号召」展开：首段说分享重要、经历不论大小都值得讲，并引出建议；中间三段各以一个祈使句小标题开头，分别讲细节、用词和勇气；末段回到经历不分大小，号召继续分享。",
+        "units": [
+          {
+            "unitId": "seven-unit-1",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1"
+            ],
+            "summary": "分享能让同伴也敞开心扉；不必因为觉得经历不够大而退缩，所有经历都同样有价值，下面给出建议。"
+          },
+          {
+            "unitId": "seven-unit-2",
+            "heading": "Share the details.",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:2"
+            ],
+            "summary": "第一条建议：把经历讲细，讲出感受和原因，并按想法产生、事情经过、为何重要的顺序讲。"
+          },
+          {
+            "unitId": "seven-unit-3",
+            "heading": "Explain the words.",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3"
+            ],
+            "summary": "第二条建议：站在来自其他群体的听者角度，解释他们可能听不懂的术语，并举介绍卡塔卡利舞的例子。"
+          },
+          {
+            "unitId": "seven-unit-4",
+            "heading": "Be fearless.",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4"
+            ],
+            "summary": "第三条建议：分享时不必害怕，有不同意见就直接说出来，并以讨论性别平等为例。"
+          },
+          {
+            "unitId": "seven-unit-5",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:5"
+            ],
+            "summary": "总结：经历不分大小，各有价值，对不同的人都新鲜，鼓励读者继续分享。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": null,
+          "secondary": null,
+          "kind": "topic",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项和原文没有共用的词，只是用感叹语气肯定某件事成立，像在呼应全文「经历都有价值」。最接近的是第 40 题：it 只能指空前的 experience，但空前 \"no experience is too big or too small\" 用的是 is，does 找不到可替代的动作，句子说不通。",
+          "quotes": [
+            "no experience is too big or too small"
+          ]
+        },
+        "C": {
+          "target": 37,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "D",
+          "shared": [
+            "experiences"
+          ],
+          "text": "选项和 \"Explain the words.\"、\"Be fearless.\" 一样是祈使句，又和空后 \"picturise your experience for others\" 都说经历，放第 37 题段首很像。但空后 \"as much detail as possible\" 要的是把细节讲给别人，不是自己理清经历。放进第 38 题也接不上：make sense 像空后的 understand，可 \"if you were from another community\" 要的是换位想听者。",
+          "quotes": [
+            "Explain the words.",
+            "Be fearless.",
+            "picturise your experience for others",
+            "as much detail as possible",
+            "if you were from another community"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "seven-source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "seven-translation-zh",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "seven-zh-1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 141,
+              "quote": "分享是我们日常生活中必不可少的一部分。当你和同龄人分享自己的经历时，他们会更愿意放心地分享自己的经历。分享对你重要的事情，没有任何限制。如果你觉得自己没有什么大的经历可讲，分享经历的念头因此让你望而却步，那就马上克服它，因为所有的经历都同样有价值。下面是让你的分享更有效的几条建议。"
+            },
+            {
+              "paragraphId": "seven-zh-2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:2"
+              ],
+              "start": 142,
+              "end": 267,
+              "quote": "分享细节。一定要讲得尽可能详细。试着把你的经历描绘给别人看，让他们也能感同身受。告诉他们你有什么感受，以及为什么会有这样的感受。先讲你是什么时候想到要分享这件事的，再讲发生了什么或者你当时是怎么想的。最后讲讲它为什么对你很重要，或者你为什么会这样想。"
+            },
+            {
+              "paragraphId": "seven-zh-3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3"
+              ],
+              "start": 268,
+              "end": 418,
+              "quote": "解释用词。从别人的角度想一想这个问题。如果你来自另一个群体，你能听懂你所说的每一个词吗？如果不能，就考虑解释一下其中的术语。比如，不要对来自世界各地的同龄人说：“我喜欢卡塔卡利，你以后一定要去看看。”而要这样说：“我喜欢卡塔卡利，它是一种民间舞蹈，舞者戴着独特的面具表演一出戏剧。你以后应该去看看。”"
+            },
+            {
+              "paragraphId": "seven-zh-4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4"
+              ],
+              "start": 419,
+              "end": 532,
+              "quote": "无所畏惧。分享经历时，你不必难为情，也不必害怕敞开心扉。你完全有权利勇敢而坦率。例如，假设你们在讨论性别平等，有些同龄人认为女性只能从事某些职业，而你不同意。那么，不要担心自己说出与众不同的观点后别人会怎么想，直接说出来就好。"
+            },
+            {
+              "paragraphId": "seven-zh-5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:5"
+              ],
+              "start": 533,
+              "end": 650,
+              "quote": "既然你已经读了我关于分享的建议，那就去和世界上其他人分享你自己的经历、想法和思考吧。记住，经历没有太大或太小之分。所有的经历都有各自的价值。无论你分享什么，对于经历和你不同、看法和你不同的人来说，都会是独特而新鲜的。所以，继续分享吧。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "seven-completed-1",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1",
+            "text": "Sharing is an essential part of our daily lives. When you share your experiences with your peers, they are more likely to feel comfortable sharing their own. There are no restrictions on sharing what matters to you. If the thought of sharing your experiences holds you back because you believe that you don’t have big experiences to share, then, you should get over it right away because all experiences are equally valuable. Here are the tips to make your sharing experience more effective."
+          },
+          {
+            "textId": "seven-completed-2",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:2",
+            "text": "Share the details. Make sure that you go into as much detail as possible. Try to picturise your experience for others so that they can just feel like you do. Share with them what you feel and why you feel that way. Start by sharing when you had the idea for what you are sharing. Then share what happened or what you thought. After that, share why it is important to you or why you think the way you do."
+          },
+          {
+            "textId": "seven-completed-3",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3",
+            "text": "Explain the words. Think about this from another person’s perspective. Would you understand every word of your dialogue if you were from another community? If not, consider defining the jargon（术语）. As an alternative to saying to your global peers, “I love Kathakali and you should definitely watch it someday.” Say something like: “I love Kathakali, which is a form of folk dance, in which the dancers present a drama wearing unique masks. You should watch it someday.”"
+          },
+          {
+            "textId": "seven-completed-4",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4",
+            "text": "Be fearless. While sharing an experience, you do not have to be embarrassed, afraid to open up. You have every right to be brave and frank. For example, suppose you are discussing gender equality, and some of your peers support the idea that women can only work in certain professions, and you disagree with them. Then, instead of fearing what people would think if you said something unconventional, just say it."
+          },
+          {
+            "textId": "seven-completed-5",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:5",
+            "text": "Now that you have read my tips for sharing, go share your own experiences, ideas, and thoughts with the rest of the world. Remember that no experience is too big or too small. All experiences matter in their own way. Whatever you share would be unique and new to someone who has had different experiences or has different perspectives from you. So, continue to share."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "seven-insert-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-1",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1",
+                "start": 158,
+                "end": 215,
+                "quote": "There are no restrictions on sharing what matters to you."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-1",
+                "start": 51,
+                "end": 68,
+                "quote": "分享对你重要的事情，没有任何限制。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insert-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:37"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:37",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:2",
+                "start": 0,
+                "end": 18,
+                "quote": "Share the details."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-2",
+                "start": 0,
+                "end": 5,
+                "quote": "分享细节。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insert-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:38"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:38",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3",
+                "start": 19,
+                "end": 70,
+                "quote": "Think about this from another person’s perspective."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-3",
+                "start": 5,
+                "end": 19,
+                "quote": "从别人的角度想一想这个问题。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insert-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-4",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4",
+                "start": 96,
+                "end": 139,
+                "quote": "You have every right to be brave and frank."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-4",
+                "start": 28,
+                "end": 40,
+                "quote": "你完全有权利勇敢而坦率。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insert-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:40"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:40",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed-5",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:5",
+                "start": 176,
+                "end": 216,
+                "quote": "All experiences matter in their own way."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-5",
+                "start": 57,
+                "end": 70,
+                "quote": "所有的经历都有各自的价值。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1",
+                "start": 208,
+                "end": 222,
+                "quote": "holds you back"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-1",
+                "start": 97,
+                "end": 101,
+                "quote": "望而却步"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:2",
+                "start": 34,
+                "end": 60,
+                "quote": "as much detail as possible"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-2",
+                "start": 8,
+                "end": 15,
+                "quote": "讲得尽可能详细"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3",
+                "start": 75,
+                "end": 109,
+                "quote": "if you were from another community"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-3",
+                "start": 19,
+                "end": 29,
+                "quote": "如果你来自另一个群体"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4",
+                "start": 364,
+                "end": 375,
+                "quote": "just say it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-4",
+                "start": 105,
+                "end": 112,
+                "quote": "直接说出来就好"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:5",
+                "start": 137,
+                "end": 174,
+                "quote": "no experience is too big or too small"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-5",
+                "start": 45,
+                "end": 56,
+                "quote": "经历没有太大或太小之分"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36"
+            ],
+            "selectedSentenceId": "seven-sentence-1",
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1",
+                "start": 165,
+                "end": 374,
+                "quote": "If the thought of sharing your experiences holds you back because you believe that you don’t have big experiences to share, then, you should get over it right away because all experiences are equally valuable."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-1",
+                "start": 68,
+                "end": 124,
+                "quote": "如果你觉得自己没有什么大的经历可讲，分享经历的念头因此让你望而却步，那就马上克服它，因为所有的经历都同样有价值。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39"
+            ],
+            "selectedSentenceId": "seven-sentence-2",
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4",
+                "start": 277,
+                "end": 376,
+                "quote": "Then, instead of fearing what people would think if you said something unconventional, just say it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation-zh",
+                "paragraphId": "seven-zh-4",
+                "start": 79,
+                "end": 113,
+                "quote": "那么，不要担心自己说出与众不同的观点后别人会怎么想，直接说出来就好。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "sharing their own",
+        "holds you back",
+        "get over it right away",
+        "big experiences to share"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:1",
+        "beforeQuote": "When you share your experiences with your peers, they are more likely to feel comfortable sharing their own.",
+        "afterQuote": "If the thought of sharing your experiences holds you back because you believe that you don’t have big experiences to share, then, you should get over it right away because all experiences are equally valuable."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no restrictions",
+          "signalSide": "option",
+          "targetText": "holds you back / get over it",
+          "relation": "选项先说分享不设限，空后马上点出一道心里的限制并劝人克服，两句说的是同一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "holds you back",
+          "signalSide": "context-after",
+          "targetText": "no restrictions",
+          "relation": "holds you back 是拦住人的顾虑，正是选项所说「限制」的具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "what matters to you",
+          "signalSide": "option",
+          "targetText": "big experiences",
+          "relation": "选项说「对你重要的事」都能讲，空后才否定「经历必须够大」的想法。"
+        }
+      ],
+      "lock": [
+        "no restrictions",
+        "holds you back"
+      ],
+      "find": {
+        "text": "先看空后 \"holds you back\"：作者要拆掉一道心里的顾虑，前面得先说分享不设限，只有 \"no restrictions\" 能起这个头。",
+        "quotes": [
+          "holds you back",
+          "no restrictions"
+        ]
+      },
+      "explain": "空前说分享能让同伴也放开，这句再说想分享什么都可以；空后紧接着点出最常见的顾虑：觉得自己的经历不够大，并劝读者放下。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 也说经历都有价值，但空后句末 \"all experiences are equally valuable\" 已说了这层，放 D 就重复，也引不出 \"holds you back\"。",
+          "quotes": [
+            "all experiences are equally valuable",
+            "holds you back"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "holds you back / get over it right away",
+            "optionSide": "There are no restrictions",
+            "relation": "空后说的顾虑要被克服，选项先给出「分享没有限制」的总说法。"
+          },
+          {
+            "contextSide": "big experiences to share",
+            "optionSide": "what matters to you",
+            "relation": "空后否定「只有大经历才值得讲」，选项说对你重要的就能讲。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前说分享能让同伴也放开，这句再说想分享什么都可以；空后紧接着点出最常见的顾虑：觉得自己的经历不够大，并劝读者放下。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 也说经历都有价值，但空后句末 \"all experiences are equally valuable\" 已说了这层，放 D 就重复，也引不出 \"holds you back\"。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:37": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:37",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "as much detail as possible",
+        "picturise your experience",
+        "what you feel and why",
+        "Start by sharing",
+        "Then share what happened"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:2",
+        "beforeQuote": "",
+        "afterQuote": "Make sure that you go into as much detail as possible."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "details",
+          "signalSide": "option",
+          "targetText": "as much detail as possible",
+          "relation": "选项的 details 在空后以 detail 原词复现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "as much detail as possible",
+          "signalSide": "context-after",
+          "targetText": "Share the details",
+          "relation": "空后第一句就要求讲得越细越好，是这条建议的展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Share",
+          "signalSide": "option",
+          "targetText": "Share with them what you feel",
+          "relation": "段里一连串 Share、Start by sharing、Then share 都在说怎样把细节讲出来。"
+        }
+      ],
+      "lock": [
+        "details",
+        "as much detail as possible"
+      ],
+      "find": {
+        "text": "上一段末尾说 \"Here are the tips\"，这里是第一条建议的小标题；空后 \"as much detail as possible\" 复现 \"details\"。",
+        "quotes": [
+          "Here are the tips",
+          "as much detail as possible",
+          "details"
+        ]
+      },
+      "explain": "这句是本段的小标题，后面几句依次教怎样讲细：先讲感受和原因，再按想法产生、事情经过、它为何重要的顺序讲下去。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "as much detail as possible / picturise your experience",
+            "optionSide": "the details",
+            "relation": "空后各句都在说把经历讲具体，选项用 details 概括。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "这句是本段的小标题，后面几句依次教怎样讲细：先讲感受和原因，再按想法产生、事情经过、它为何重要的顺序讲下去。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "选项和 \"Explain the words.\"、\"Be fearless.\" 一样是祈使句，又和空后 \"picturise your experience for others\" 都说经历，放第 37 题段首很像。但空后 \"as much detail as possible\" 要的是把细节讲给别人，不是自己理清经历。放进第 38 题也接不上：make sense 像空后的 understand，可 \"if you were from another community\" 要的是换位想听者。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:38": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Explain the words",
+        "understand every word of your dialogue",
+        "from another community",
+        "defining the jargon"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3",
+        "beforeQuote": "Explain the words.",
+        "afterQuote": "Would you understand every word of your dialogue if you were from another community?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this",
+          "signalSide": "option",
+          "targetText": "Would you understand every word of your dialogue",
+          "relation": "this 指空前小标题说的用词问题，空后的问句把它具体问出来：换个人听得懂吗。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "another person’s perspective",
+          "signalSide": "option",
+          "targetText": "if you were from another community",
+          "relation": "选项要求站到别人的位置，空后用假设句让读者想象自己来自另一个群体。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "if you were from another community",
+          "signalSide": "context-after",
+          "targetText": "another person’s perspective",
+          "relation": "假设自己是另一个群体的人，就是选项说的换位思考。"
+        }
+      ],
+      "lock": [
+        "another person’s perspective",
+        "another community"
+      ],
+      "find": {
+        "text": "先看空后：问句让你假设 \"if you were from another community\"，就是换到别人的位置，F 的 \"another person’s perspective\" 先提出这个要求。",
+        "quotes": [
+          "if you were from another community",
+          "another person’s perspective"
+        ]
+      },
+      "explain": "小标题要求解释用词，这句先让读者换位思考；空后的问句把换位落到听者能否听懂每个词上，再给出解释术语的办法和例子。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "if you were from another community",
+            "optionSide": "from another person’s perspective",
+            "relation": "空后的假设就是选项说的换个角度。"
+          },
+          {
+            "contextSide": "Explain the words / understand every word",
+            "optionSide": "Think about this",
+            "relation": "this 指用词能否被听懂这件事。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "小标题要求解释用词，这句先让读者换位思考；空后的问句把换位落到听者能否听懂每个词上，再给出解释术语的办法和例子。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Be fearless",
+        "afraid to open up",
+        "you disagree with them",
+        "instead of fearing",
+        "just say it"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:4",
+        "beforeQuote": "While sharing an experience, you do not have to be embarrassed, afraid to open up.",
+        "afterQuote": "For example, suppose you are discussing gender equality, and some of your peers support the idea that women can only work in certain professions, and you disagree with them. Then, instead of fearing what people would think if you said something unconventional, just say it."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "For example",
+          "signalSide": "context-after",
+          "targetText": "You have every right to be brave and frank",
+          "relation": "For example 后面的情形要证明前一句的说法，空里得是一个能被例子证明的观点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "brave and frank",
+          "signalSide": "option",
+          "targetText": "just say it",
+          "relation": "例子最后落在直接说出不同意见，正是敢说、直说。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "afraid to open up",
+          "signalSide": "context-before",
+          "targetText": "brave",
+          "relation": "空前说不必害怕开口，选项从正面说要勇敢。"
+        }
+      ],
+      "lock": [
+        "brave and frank",
+        "For example",
+        "just say it"
+      ],
+      "find": {
+        "text": "先看空后 \"For example\"：例子落在 \"just say it\"，即说出不同意见，前面要有一句能被它证明的话，\"brave and frank\" 正是敢说直说。",
+        "quotes": [
+          "For example",
+          "just say it",
+          "brave and frank"
+        ]
+      },
+      "explain": "空前从反面说不必难为情、不必害怕，这句从正面说你有权大胆直言；空后用讨论性别平等时说出不同意见的例子把它落实。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 说分享不设限，看似也能引出例子，但例子落在 \"instead of fearing what people would think\"，讲的是不怕别人怎么看。",
+          "quotes": [
+            "instead of fearing what people would think"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "afraid to open up / instead of fearing",
+            "optionSide": "brave",
+            "relation": "前后都在说克服害怕，选项用 brave 概括。"
+          },
+          {
+            "contextSide": "just say it / you disagree with them",
+            "optionSide": "frank",
+            "relation": "例子里直接说出不同意见，就是 frank。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前从反面说不必难为情、不必害怕，这句从正面说你有权大胆直言；空后用讨论性别平等时说出不同意见的例子把它落实。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 说分享不设限，看似也能引出例子，但例子落在 \"instead of fearing what people would think\"，讲的是不怕别人怎么看。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:40": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "no experience is too big or too small",
+        "unique and new to someone",
+        "different experiences",
+        "different perspectives",
+        "continue to share"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:5",
+        "beforeQuote": "Remember that no experience is too big or too small.",
+        "afterQuote": "Whatever you share would be unique and new to someone who has had different experiences or has different perspectives from you."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "All experiences matter",
+          "signalSide": "option",
+          "targetText": "no experience is too big or too small",
+          "relation": "空前说经历不分大小，选项接着正面肯定每段经历都有价值。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in their own way",
+          "signalSide": "option",
+          "targetText": "unique and new to someone",
+          "relation": "空后说明「各自的方式」是什么：对不同的人来说都独特、新鲜。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "unique and new to someone",
+          "signalSide": "context-after",
+          "targetText": "in their own way",
+          "relation": "空后给出经历有价值的理由，回应选项的 in their own way。"
+        }
+      ],
+      "lock": [
+        "too big or too small",
+        "in their own way",
+        "unique and new"
+      ],
+      "find": {
+        "text": "空前 \"too big or too small\" 说经历不分大小，接着该正面说都有价值；空后 \"unique and new to someone\" 解释了 \"in their own way\"。",
+        "quotes": [
+          "too big or too small",
+          "unique and new to someone",
+          "in their own way"
+        ]
+      },
+      "explain": "空前否定大小之分，这句正面肯定每段经历各有价值；空后说明价值在哪：对经历、看法不同的人来说都是新鲜的，最后号召继续分享。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "no experience is too big or too small",
+            "optionSide": "All experiences matter",
+            "relation": "一反一正说同一个意思。"
+          },
+          {
+            "contextSide": "unique and new to someone",
+            "optionSide": "in their own way",
+            "relation": "空后具体说出每段经历以什么方式有价值。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前否定大小之分，这句正面肯定每段经历各有价值；空后说明价值在哪：对经历、看法不同的人来说都是新鲜的，最后号召继续分享。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

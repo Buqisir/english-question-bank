@@ -1,0 +1,983 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill": {
+      "overview": "短文介绍中国四大石窟之一的麦积山石窟：它由开凿在山崖上的一系列洞窟组成，藏有七千多尊以泥塑为主的造像，开凿历时约一千五百年，展现了中国雕塑的发展和佛教在中国的传播。",
+      "fullTranslationZh": "麦积山石窟是中国四大石窟之一。与其他三座石窟不同，麦积山石窟是开凿在麦积山山崖侧面的一系列洞窟。这些洞窟无疑是一座大型雕塑博物馆。\n194个洞窟内有7200尊塑像，它们的高度从20厘米到15米不等。这里的岩石太软，所以造像都是泥塑。少数用岩石雕成的雕像是从别处运来的。从塑像的形象和服饰来看，其中大多数体现了汉族的特点。\n这些石窟的开凿历时1500年，从公元384年开始，一直持续到二十世纪初。洞窟不易到达，因而在历史上的动荡时期躲过了大部分破坏。通往石窟、环绕石窟的阶梯原本是木制的，但出于安全考虑，这些阶梯已逐步被金属支架取代。\n这些雕塑展现了中国雕塑和建筑的阶段性发展。最早的作品显示出印度风格的影响，后来中国本土风格越来越流行。所有的设计都致力于对佛法的追求。这些雕塑不仅帮助考古学家追踪中国雕塑的成长与进步，而且帮助他们追溯佛教在中国的历史与传播。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+          "sourceText": "Inside the 194 caves are 7,200 statues, __58__ heights vary from 20 centimeters to 15 meters.",
+          "displayText": "Inside the 194 caves are 7,200 statues, whose heights vary from 20 centimeters to 15 meters.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58"
+          ],
+          "translationZh": "194个洞窟内有7200尊塑像，它们的高度从20厘米到15米不等。",
+          "analysisZh": "这是一个倒装句：地点状语（Inside the 194 caves）放在句首，谓语 are 提到主语前，主语是 7,200 statues，正常语序是 7,200 statues are inside the 194 caves。逗号后 whose 引导非限制性定语从句，修饰 statues；从句主干是 heights vary（高度不同），from 20 centimeters to 15 meters 说明变化的范围。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "Inside the 194 caves"
+            },
+            {
+              "start": 21,
+              "end": 38,
+              "quote": "are 7,200 statues"
+            },
+            {
+              "start": 40,
+              "end": 58,
+              "quote": "whose heights vary"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+          "sourceText": "The stairs leading up and around the grottoes were originally made of wood but these have been steadily replaced by metal supports __63__ safety reasons.",
+          "displayText": "The stairs leading up and around the grottoes were originally made of wood but these have been steadily replaced by metal supports for safety reasons.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63"
+          ],
+          "translationZh": "通往石窟、环绕石窟的阶梯原本是木制的，但出于安全考虑，这些阶梯已逐步被金属支架取代。",
+          "analysisZh": "主干是 but 连接的两个分句：阶梯原本是木制的（The stairs … were originally made of wood），这些阶梯已被金属支架逐步取代（these have been steadily replaced by metal supports）。现在分词短语 leading up and around the grottoes 作后置定语修饰 stairs，说明是哪些阶梯；these 回指 the stairs；for safety reasons 说明替换的原因。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 45,
+              "quote": "The stairs leading up and around the grottoes"
+            },
+            {
+              "start": 46,
+              "end": 74,
+              "quote": "were originally made of wood"
+            },
+            {
+              "start": 79,
+              "end": 112,
+              "quote": "these have been steadily replaced"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 65,
+              "quote": "麦积山石窟是中国四大石窟之一。与其他三座石窟不同，麦积山石窟是开凿在麦积山山崖侧面的一系列洞窟。这些洞窟无疑是一座大型雕塑博物馆。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2"
+              ],
+              "start": 66,
+              "end": 160,
+              "quote": "194个洞窟内有7200尊塑像，它们的高度从20厘米到15米不等。这里的岩石太软，所以造像都是泥塑。少数用岩石雕成的雕像是从别处运来的。从塑像的形象和服饰来看，其中大多数体现了汉族的特点。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3"
+              ],
+              "start": 161,
+              "end": 266,
+              "quote": "这些石窟的开凿历时1500年，从公元384年开始，一直持续到二十世纪初。洞窟不易到达，因而在历史上的动荡时期躲过了大部分破坏。通往石窟、环绕石窟的阶梯原本是木制的，但出于安全考虑，这些阶梯已逐步被金属支架取代。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4"
+              ],
+              "start": 267,
+              "end": 379,
+              "quote": "这些雕塑展现了中国雕塑和建筑的阶段性发展。最早的作品显示出印度风格的影响，后来中国本土风格越来越流行。所有的设计都致力于对佛法的追求。这些雕塑不仅帮助考古学家追踪中国雕塑的成长与进步，而且帮助他们追溯佛教在中国的历史与传播。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+            "text": "Maijishan Grottoes is one of the four greatest grottoes in China. Different from the other three, Maijishan Grottoes are a series of caves, excavated (开凿) into the side of the mountain Maijishan. The caves are undoubtedly a large sculpture museum."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+            "text": "Inside the 194 caves are 7,200 statues, whose heights vary from 20 centimeters to 15 meters. The rock here is too soft, so the figures are, instead, clay models. The few sculptures created from rock have been brought in from elsewhere. Judging from the figures and costumes of the statues, most of them reflect the characteristics of Han nationality."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+            "text": "The grottoes were carved over a period of 1.500 years, starting in 384 AD, right up to the beginning of the twentieth century. The caves were not easily accessible, thus escaping much of the destruction throughout tumultuous (动荡的) periods in history. The stairs leading up and around the grottoes were originally made of wood but these have been steadily replaced by metal supports for safety reasons."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+            "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+            "text": "The sculptures represent the phased development of Chinese sculpture and architecture. The earliest examples demonstrate an influence of Indian design, with later native Chinese styles becoming more popular. All designs are dedicated to the pursuit of Buddhism. The sculptures have helped archeologists to not only track the growth and advance of Chinese sculpture but the history and expansion of Buddhism in China."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 128,
+                "end": 143,
+                "quote": "series of caves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 42,
+                "end": 47,
+                "quote": "一系列洞窟"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:56"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 121,
+                "end": 122,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 42,
+                "end": 45,
+                "quote": "一系列"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 234,
+                "end": 258,
+                "quote": "a large sculpture museum"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 55,
+                "end": 64,
+                "quote": "一座大型雕塑博物馆"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:57"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 210,
+                "end": 221,
+                "quote": "undoubtedly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:1",
+                "start": 52,
+                "end": 54,
+                "quote": "无疑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 25,
+                "end": 38,
+                "quote": "7,200 statues"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 8,
+                "end": 15,
+                "quote": "7200尊塑像"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 40,
+                "end": 45,
+                "quote": "whose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 16,
+                "end": 21,
+                "quote": "它们的高度"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 208,
+                "end": 243,
+                "quote": "have been brought in from elsewhere"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 60,
+                "end": 67,
+                "quote": "是从别处运来的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:59"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 181,
+                "end": 188,
+                "quote": "created"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 55,
+                "end": 57,
+                "quote": "雕成"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 260,
+                "end": 289,
+                "quote": "from the figures and costumes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 72,
+                "end": 77,
+                "quote": "形象和服饰"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:60"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 236,
+                "end": 243,
+                "quote": "Judging"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 68,
+                "end": 79,
+                "quote": "从塑像的形象和服饰来看"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 58,
+                "end": 76,
+                "quote": "starting in 384 AD"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 15,
+                "end": 24,
+                "quote": "从公元384年开始"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:61"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 13,
+                "end": 24,
+                "quote": "were carved"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 5,
+                "end": 7,
+                "quote": "开凿"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 182,
+                "end": 193,
+                "quote": "much of the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 57,
+                "end": 60,
+                "quote": "大部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:62"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 191,
+                "end": 202,
+                "quote": "destruction"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 60,
+                "end": 62,
+                "quote": "破坏"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 397,
+                "end": 411,
+                "quote": "safety reasons"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 85,
+                "end": 89,
+                "quote": "安全考虑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 382,
+                "end": 385,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 83,
+                "end": 89,
+                "quote": "出于安全考虑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 238,
+                "end": 264,
+                "quote": "to the pursuit of Buddhism"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 60,
+                "end": 66,
+                "quote": "对佛法的追求"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:64"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 220,
+                "end": 233,
+                "quote": "are dedicated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 57,
+                "end": 60,
+                "quote": "致力于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 310,
+                "end": 318,
+                "quote": "not only"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 71,
+                "end": 73,
+                "quote": "不仅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:65"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 365,
+                "end": 368,
+                "quote": "but"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+                "start": 92,
+                "end": 94,
+                "quote": "而且"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 0,
+                "end": 92,
+                "quote": "Inside the 194 caves are 7,200 statues, whose heights vary from 20 centimeters to 15 meters."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:2",
+                "start": 0,
+                "end": 33,
+                "quote": "194个洞窟内有7200尊塑像，它们的高度从20厘米到15米不等。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 251,
+                "end": 401,
+                "quote": "The stairs leading up and around the grottoes were originally made of wood but these have been steadily replaced by metal supports for safety reasons."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:3",
+                "start": 63,
+                "end": 105,
+                "quote": "通往石窟、环绕石窟的阶梯原本是木制的，但出于安全考虑，这些阶梯已逐步被金属支架取代。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:56": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-structural",
+        "features": [
+          "fixed-indefinite-phrase",
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格要限定名词「系列」（series），和后面的（of caves）合成「一系列洞窟」（a series of），表示麦积山石窟是一组洞窟，用不定冠词。series 以辅音音素开头，所以用（a）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "series of caves",
+          "signalSide": "passage",
+          "relation": "空格限定 series，构成一系列洞窟的说法。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:57": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "undoubted",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "undoubtedly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-sentence",
+        "features": []
+      },
+      "reason": "空格不是表语，表语是「一座大型雕塑博物馆」（a large sculpture museum）；空格修饰整个判断，表示\"毫无疑问地\"，所以形容词（undoubted）要变成副词（undoubtedly）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a large sculpture museum",
+          "signalSide": "passage",
+          "relation": "这是句子的表语，空格不占表语位置，只修饰整句判断。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "whose",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-possessive",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导逗号后的非限制性定语从句，修饰先行词「7200尊塑像」（7,200 statues）；从句里高度（heights）作主语、不等（vary）作谓语，已经完整，空格要作 heights 的定语，表示\"塑像的高度\"，所以用（whose）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "7,200 statues",
+          "signalSide": "passage",
+          "relation": "先行词是塑像，从句说的是它们的高度。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "heights vary",
+          "signalSide": "passage",
+          "relation": "从句主谓齐全，只缺 heights 前表示所属的词。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:59": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "create",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "created",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "句子的谓语是「已被运来」（have been brought），空格不能再作谓语，只能作后置定语修饰「雕像」（sculptures）。雕像是用岩石被创作出来的，用过去分词（created），相当于（that were created from rock）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "The few sculptures",
+          "signalSide": "passage",
+          "relation": "空格后置修饰这些雕像，说明是哪些雕像。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "have been brought in",
+          "signalSide": "passage",
+          "relation": "句子已有谓语，空格只能用非谓语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:60": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "judge",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Judging",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "逗号后是完整的句子（most of them reflect…），空格所在短语作状语，表示\"从……来判断\"。这是固定说法（judging from），站在说话人的角度判断，不要求和句子主语一致，用 -ing 形式；放在句首要大写，填（Judging）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "from the figures and costumes",
+          "signalSide": "passage",
+          "relation": "后接 from，构成从……来判断的固定说法。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "most of them reflect",
+          "signalSide": "passage",
+          "relation": "逗号后主谓齐全，空格所在部分只能作状语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:61": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "carve",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were carved",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "句子缺谓语，主语「石窟」（The grottoes）是被人开凿的，要用被动语态。开凿从公元384年（in 384 AD）一直持续到二十世纪初，是过去发生的事，用一般过去时；主语是复数，填（were carved）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The grottoes",
+          "signalSide": "passage",
+          "relation": "主语是石窟，是被开凿的对象，所以用被动。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "starting in 384 AD",
+          "signalSide": "passage",
+          "relation": "时间在过去，用一般过去时。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:62": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "destroy",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "destruction",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作动名词（escaping）的宾语中心词，前面有限定成分（much of the），要用名词；动词（destroy）的名词是（destruction）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "much of the",
+          "signalSide": "passage",
+          "relation": "the 后面要接名词，much of 说明躲过的是大部分破坏。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "escaping",
+          "signalSide": "passage",
+          "relation": "空格是 escaping 的宾语，表示躲过的东西。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把「安全原因」（safety reasons）接到「被逐步替换」（have been steadily replaced）上，说明替换的原因。表示\"出于……原因\"，用介词（for）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "safety reasons",
+          "signalSide": "passage",
+          "relation": "原因名词前用 for，表示出于某种原因。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "have been steadily replaced",
+          "signalSide": "passage",
+          "relation": "介词短语说明阶梯被替换的原因。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:64": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "dedicate",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are dedicated",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "句子缺谓语，主语「所有设计」（All designs）是被献给（dedicate … to）佛法追求的，要用被动语态。这里说明这些设计的性质，和本段的（represent）（demonstrate）一样用一般现在时；主语是复数，填（are dedicated）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "All designs",
+          "signalSide": "passage",
+          "relation": "设计是被献给佛法追求的对象，用被动，复数主语配 are。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to the pursuit of Buddhism",
+          "signalSide": "passage",
+          "relation": "dedicate … to 表示献给，to 后是所献给的对象。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:65": {
+      "blankId": "blank:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "but",
+      "role": null,
+      "similarityProfile": {
+        "route": "not-only-but-also",
+        "features": []
+      },
+      "reason": "空格和前面的（not only）呼应，连接雕塑帮助考古学家做到的两件事：追踪中国雕塑的发展，以及了解佛教在中国的历史和传播，用（but）。原句 not only 放在动词（track）前，but 后却只接名词短语，前后不完全对称；规范写法是（track not only … but also …）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "not only",
+          "signalSide": "passage",
+          "relation": "与 not only 呼应，后面用 but 引出第二项。"
+        }
+      ]
+    }
+  }
+}
