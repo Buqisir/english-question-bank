@@ -155,6 +155,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
   }
   const groups = [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
   if (!Array.isArray(review.groups) || review.groups.length !== groups.length) fail('incomplete group coverage')
+  const rawWindows = review.method === 'agent_asr_comparison' ? ruleNotes[0].rawEvidence : null
   let lastEnd = 0
   for (const [index, group] of review.groups.entries()) {
     const source = groups[index]
@@ -171,6 +172,9 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
     }
     if (!exactKeys(group.playback, ['startSeconds', 'endSeconds']) || !range(group.playback, subject.durationSeconds)
       || group.playback.startSeconds < lastEnd || group.occurrences.length === 0) fail('invalid/overlapping playback range')
+    if (rawWindows && !listeningAsrWindowsCover(rawWindows.map(file => file.window), group.playback)) {
+      fail('raw ASR evidence does not cover playback')
+    }
     let occurrenceEnd = group.playback.startSeconds
     for (const occurrence of group.occurrences) {
       if (!exactKeys(occurrence, ['startSeconds', 'endSeconds', 'evidencePaths'])
@@ -180,7 +184,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
         || new Set(occurrence.evidencePaths).size !== occurrence.evidencePaths.length
         || occurrence.evidencePaths.some(relative => !paths.has(relative))) fail('invalid occurrence/evidence binding')
       if (['asr_source_comparison', 'agent_asr_comparison'].includes(review.method)) {
-        const windows = review.evidence.filter(file => file.kind === 'asr_window'
+        const windows = (rawWindows ?? review.evidence).filter(file => file.kind === 'asr_window'
           && occurrence.evidencePaths.includes(file.path)).map(file => file.window)
         if (!listeningAsrWindowsCover(windows, occurrence)) fail('ASR evidence does not cover the occurrence')
       }

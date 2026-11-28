@@ -1,3 +1,4 @@
+import { projectListeningSpokenText } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
 import { digestJson, exactKeys, sha256 } from './stable.mjs'
 
 export const LISTENING_RULE_EVIDENCE_VERSION = 'listening-rule-evidence-v2'
@@ -45,10 +46,10 @@ export function listeningAsrWindowsCover(windows, { startSeconds, endSeconds }) 
 
 const edgeWordText = text => text.toLowerCase().replace(/\p{P}/gu, '').trim()
 
-const spokenWords = group => (group?.sourceProjection?.text ?? group?.sourceText ?? '')
-  .match(/[A-Za-z]+(?:['’][A-Za-z]+)*/gu)?.map(edgeWordText) ?? []
+const touches = (span, word) => span.startSeconds <= word.runEndSeconds + 1e-9
+  && span.endSeconds >= word.runStartSeconds - 1e-9
 
-function assertUsableAdjustment(machine, adjusted, asrByPath, windows, neighbors, observedEdges, fail) {
+function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source, previous, next: following, observedEdges, machinePaths }, fail) {
   if (!Array.isArray(adjusted.occurrences) || machine.occurrences.length !== adjusted.occurrences.length) {
     fail(`${machine.segmentId}: usable adjustment must preserve occurrence count`)
   }
@@ -66,7 +67,8 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, neighbors
     if (original.startSeconds - start > 1 + 1e-9 || end - original.endSeconds > 1 + 1e-9) {
       fail(`${label}: usable adjustment cannot widen more than 1 second per edge`)
     }
-    const machineWords = occurrence.evidencePaths.flatMap(path => asrByPath.get(path)?.words || [])
+    const originalStreams = occurrence.evidencePaths.filter(path => machinePaths.has(path))
+      .map(path => asrByPath.get(path)?.words ?? [])
     const edges = [
       ['start', { startSeconds: start, endSeconds: original.startSeconds },
         word => word.startBoundary && Math.abs(word.runStartSeconds - occurrence.startSeconds) <= 1e-9],
@@ -78,7 +80,8 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, neighbors
       if (!listeningAsrWindowsCover(windows, extension)) {
         fail(`${label} ${side}: ASR evidence does not cover the widened range`)
       }
-      const boundaryWords = new Set(machineWords.filter(atMachineEdge).map(word => edgeWordText(word.expressionText)))
+      const anchors = originalStreams.flatMap(words => words.filter(atMachineEdge))
+      const boundaryWords = new Set(anchors.map(word => edgeWordText(word.expressionText)))
       const [boundaryWord] = boundaryWords
       const echo = boundaryWords.size === 1 && boundaryWord && !/\s/u.test(boundaryWord) ? boundaryWord : null
       const overlaps = span => span.endSeconds > span.startSeconds
@@ -86,28 +89,29 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, neighbors
         : side === 'end'
           ? span.startSeconds > extension.startSeconds && span.startSeconds <= extension.endSeconds
           : span.startSeconds >= extension.startSeconds && span.startSeconds < extension.endSeconds
-      const source = spokenWords(machine)
       const ownWords = side === 'end' ? source.slice(-2) : source.slice(0, 2)
-      const neighbor = side === 'end' ? spokenWords(neighbors.next)[0] : spokenWords(neighbors.previous).at(-1)
-      const judged = observedEdges[side].filter(word => ownWords.includes(edgeWordText(word.text)))
+      const neighbor = side === 'end' ? following?.[0] : previous?.at(-1)
+      const originals = originalStreams.flatMap(words => words.flatMap((word, index) => {
+        if (!atMachineEdge(word)) return []
+        return side === 'end' ? words.slice(Math.max(0, index - 1), index + 1) : words.slice(index, index + 2)
+      }))
+      const judged = observedEdges[side].filter(word => ownWords.includes(edgeWordText(word.text))
+        && originals.some(original => edgeWordText(original.expressionText) === edgeWordText(word.text) && touches(word, original)))
       for (const [path, { words, speech }] of asrByPath) {
         const conflicts = (span, text) => {
           const token = edgeWordText(text)
           if (!overlaps(span)) return false
-          if (token === 'text') return true
-          if (token === echo && token !== neighbor) return false
+          if (token === 'text' || token === neighbor) return true
+          if (token === echo && ownWords.includes(token) && anchors.some(word => touches(span, word))) return false
           if (judged.some(word => word.path === path && edgeWordText(word.text) === token
             && word.startSeconds <= span.startSeconds && word.endSeconds >= span.endSeconds)) return false
           // A cropped window can report a different word within the same spoken syllables.
           // Only independent, timed source words can account for that part of the extension.
-          if (token === neighbor || !/^[a-z]+$/u.test(token)) return true
+          if (!/^[a-z]+$/u.test(token)) return true
           const corroborating = judged.filter(word => word.path !== path)
           if (span.startSeconds === span.endSeconds) return !corroborating.some(word =>
-            word.startSeconds <= span.startSeconds && span.endSeconds <= word.endSeconds)
-          return !listeningAsrWindowsCover(corroborating, {
-            startSeconds: Math.max(span.startSeconds, extension.startSeconds),
-            endSeconds: Math.min(span.endSeconds, extension.endSeconds),
-          })
+            word.startSeconds <= span.startSeconds && word.endSeconds >= span.endSeconds)
+          return !listeningAsrWindowsCover(corroborating, span)
         }
         if (words.some(word => conflicts(word, word.expressionText))
           || speech.some(span => conflicts(span, span.text))) {
@@ -143,6 +147,8 @@ export function assertListeningRuleEvidence(value, review, transcript, asrByPath
     || digestJson(value.rule) !== digestJson(value.input.rule)
     || digestJson(value.normalization) !== digestJson(value.input.normalization)) fail('inconsistent rule/input binding')
   const windows = value.rawEvidence.map(file => file.window)
+  const spoken = new Map(transcript.map(group => [group.segmentId, projectListeningSpokenText(group, transcript).text
+    .match(/[A-Za-z]+(?:['’][A-Za-z]+)*/gu)?.map(edgeWordText) ?? []]))
   for (const [i, group] of value.groups.entries()) {
     if (group.segmentId !== review.groups[i].segmentId
       || group.sourceText !== transcript.find(source => source.segmentId === group.segmentId)?.text
@@ -174,6 +180,12 @@ export function assertListeningRuleEvidence(value, review, transcript, asrByPath
             || !review.evidence.some(file => file.kind === 'asr_window' && file.path === word.evidencePath)) {
             fail('invalid agent ASR boundary basis')
           }
+          if (!machinePaths.has(word.evidencePath)) {
+            const key = side === 'start' ? 'startSeconds' : 'endSeconds'
+            const candidate = review.groups[i].playback?.[key], original = group.playback?.[key]
+            const widened = side === 'start' ? candidate < original : candidate > original
+            if (group.decision !== 'usable' || !widened) fail('supplemental ASR requires a widened usable edge')
+          }
           const nearby = side === 'start' ? word.startSeconds - review.groups[i].playback?.startSeconds
             : review.groups[i].playback?.endSeconds - word.endSeconds
           const observed = asrByPath.get(word.evidencePath)?.words.find(observed => observed.rawRunText === word.text
@@ -184,8 +196,10 @@ export function assertListeningRuleEvidence(value, review, transcript, asrByPath
             startSeconds: observed.runStartSeconds, endSeconds: observed.runEndSeconds })
         }
       }
-      if (differs && group.decision === 'usable') assertUsableAdjustment(group, review.groups[i], asrByPath, windows,
-        { previous: value.groups[i - 1], next: value.groups[i + 1] }, observedEdges, fail)
+      if (differs && group.decision === 'usable') assertUsableAdjustment(group, review.groups[i], asrByPath, windows, {
+        source: spoken.get(group.segmentId), previous: spoken.get(value.groups[i - 1]?.segmentId),
+        next: spoken.get(value.groups[i + 1]?.segmentId), observedEdges, machinePaths,
+      }, fail)
     }
   }
   const d = value.diagnostic
