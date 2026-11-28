@@ -1,0 +1,802 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:reading-b": {
+      "overview": "教师阿比·哈拉米略在四所低收入学校办起菜园项目“城市新芽”。起初讨厌蔬菜、怕虫嫌脏的学生，通过种菜、做菜爱上了蔬菜，改变延伸到家庭饮食、课外种植和情绪。",
+      "fullTranslationZh": "翻土、拔草、收卷心菜，对初高中学生来说听起来是件苦差事。阿比·哈拉米略说，起初确实如此。她和另一位老师在四所低收入学校创办了学校菜园项目“城市新芽”。该项目旨在帮助学生培养科学技能、环保意识和健康的生活方式。\n\n哈拉米略的学生住在难以找到新鲜食物和绿地的街区，那里的快餐店比杂货店还多。“孩子们真的是带着一袋袋零食和一大瓶一大瓶的汽水来上学，”她说，“他们来的时候觉得蔬菜难吃，泥土讨厌，虫子也讨厌。”虽然有些孩子起初害怕虫子、嫌弃泥土，但大多数人都渴望尝试新东西。\n\n“城市新芽”的课程开设在两所初中和两所高中，包括动手实验，比如土壤检测、花和种子解剖、品尝新鲜或晒干的农产品，以及在菜园里劳动。学生们每年会有几次烹饪自己种的蔬菜，偶尔还为全校师生做沙拉。\n\n项目评估显示，孩子们上了这些课后吃的蔬菜更多了。“有学生说，他们回家跟父母聊了之后，现在全家的饮食都不一样了，”哈拉米略说。\n\n她还说，这个项目的益处不止于营养方面。有些学生对园艺产生了浓厚兴趣，把种子带回家，开辟起自己的菜园。此外，在菜园里劳动似乎让哈拉米略特殊教育班的学生平静下来，他们中很多人有情绪控制方面的问题。“他们来到户外，”她说，“就会有成就感。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+          "sourceText": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools.",
+          "displayText": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:24"
+          ],
+          "translationZh": "阿比·哈拉米略说，起初确实如此。她和另一位老师在四所低收入学校创办了学校菜园项目“城市新芽”。",
+          "analysisZh": "先找主干：says Abby Jaramillo 是倒装的“某人说”，她说的话是 And at first it is，it 指上一句的 tough work，is 后省略了 tough work，意思是“起初确实辛苦”。接着 who 引导定语从句修饰 Abby Jaramillo，说明她和另一位老师创办了 Urban Sprouts；a school garden program at four low-income schools 是 Urban Sprouts 的同位语，解释它是什么项目。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 18,
+              "quote": "at first it is"
+            },
+            {
+              "start": 41,
+              "end": 87,
+              "quote": "who with another teacher started Urban Sprouts"
+            },
+            {
+              "start": 89,
+              "end": 112,
+              "quote": "a school garden program"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+          "sourceText": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues.",
+          "displayText": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:26"
+          ],
+          "translationZh": "此外，在菜园里劳动似乎让哈拉米略特殊教育班的学生平静下来，他们中很多人有情绪控制方面的问题。",
+          "analysisZh": "主语是动名词短语 working in the garden（在菜园里劳动），谓语 seems to have a calming effect on …（似乎对……有镇定作用）。many of whom 引导非限制性定语从句，whom 指前面的 special education students，补充说明这些学生很多有情绪控制问题。Besides 表示递进，说明项目的益处在营养之外又多了一层。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 30,
+              "quote": "working in the garden"
+            },
+            {
+              "start": 40,
+              "end": 64,
+              "quote": "have a calming effect on"
+            },
+            {
+              "start": 105,
+              "end": 117,
+              "quote": "many of whom"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-ii:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-b:1"
+              ],
+              "start": 0,
+              "end": 104,
+              "quote": "翻土、拔草、收卷心菜，对初高中学生来说听起来是件苦差事。阿比·哈拉米略说，起初确实如此。她和另一位老师在四所低收入学校创办了学校菜园项目“城市新芽”。该项目旨在帮助学生培养科学技能、环保意识和健康的生活方式。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-b:2"
+              ],
+              "start": 106,
+              "end": 233,
+              "quote": "哈拉米略的学生住在难以找到新鲜食物和绿地的街区，那里的快餐店比杂货店还多。“孩子们真的是带着一袋袋零食和一大瓶一大瓶的汽水来上学，”她说，“他们来的时候觉得蔬菜难吃，泥土讨厌，虫子也讨厌。”虽然有些孩子起初害怕虫子、嫌弃泥土，但大多数人都渴望尝试新东西。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-b:3"
+              ],
+              "start": 235,
+              "end": 329,
+              "quote": "“城市新芽”的课程开设在两所初中和两所高中，包括动手实验，比如土壤检测、花和种子解剖、品尝新鲜或晒干的农产品，以及在菜园里劳动。学生们每年会有几次烹饪自己种的蔬菜，偶尔还为全校师生做沙拉。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-b:4"
+              ],
+              "start": 331,
+              "end": 393,
+              "quote": "项目评估显示，孩子们上了这些课后吃的蔬菜更多了。“有学生说，他们回家跟父母聊了之后，现在全家的饮食都不一样了，”哈拉米略说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-b:5"
+              ],
+              "start": 395,
+              "end": 512,
+              "quote": "她还说，这个项目的益处不止于营养方面。有些学生对园艺产生了浓厚兴趣，把种子带回家，开辟起自己的菜园。此外，在菜园里劳动似乎让哈拉米略特殊教育班的学生平静下来，他们中很多人有情绪控制方面的问题。“他们来到户外，”她说，“就会有成就感。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+                "start": 107,
+                "end": 247,
+                "quote": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p1",
+                "start": 44,
+                "end": 75,
+                "quote": "她和另一位老师在四所低收入学校创办了学校菜园项目“城市新芽”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+                "start": 332,
+                "end": 444,
+                "quote": "Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+                "start": 249,
+                "end": 331,
+                "quote": "“They come to us thinking vegetables are awful, dirt is awful, insects are awful.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p2",
+                "start": 95,
+                "end": 127,
+                "quote": "虽然有些孩子起初害怕虫子、嫌弃泥土，但大多数人都渴望尝试新东西。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p2",
+                "start": 69,
+                "end": 95,
+                "quote": "“他们来的时候觉得蔬菜难吃，泥土讨厌，虫子也讨厌。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+                "start": 0,
+                "end": 57,
+                "quote": "She adds that the program’s benefits go beyond nutrition."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+                "start": 109,
+                "end": 186,
+                "quote": "they went home and talked to their parents and now they’re eating differently"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+                "start": 108,
+                "end": 166,
+                "quote": "they bring home seeds to start their own vegetable gardens"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p5",
+                "start": 0,
+                "end": 19,
+                "quote": "她还说，这个项目的益处不止于营养方面。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p4",
+                "start": 30,
+                "end": 54,
+                "quote": "他们回家跟父母聊了之后，现在全家的饮食都不一样了"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p5",
+                "start": 34,
+                "end": 49,
+                "quote": "把种子带回家，开辟起自己的菜园"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+                "start": 0,
+                "end": 82,
+                "quote": "Program evaluations show that kids eat more vegetables as a result of the classes."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+                "start": 249,
+                "end": 331,
+                "quote": "“They come to us thinking vegetables are awful, dirt is awful, insects are awful.”"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:3",
+                "start": 207,
+                "end": 267,
+                "quote": "Several times a year, students cook the vegetables they grow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p4",
+                "start": 0,
+                "end": 24,
+                "quote": "项目评估显示，孩子们上了这些课后吃的蔬菜更多了。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p2",
+                "start": 69,
+                "end": 95,
+                "quote": "“他们来的时候觉得蔬菜难吃，泥土讨厌，虫子也讨厌。”"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p3",
+                "start": 64,
+                "end": 81,
+                "quote": "学生们每年会有几次烹饪自己种的蔬菜"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+                "start": 107,
+                "end": 247,
+                "quote": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p1",
+                "start": 28,
+                "end": 75,
+                "quote": "阿比·哈拉米略说，起初确实如此。她和另一位老师在四所低收入学校创办了学校菜园项目“城市新芽”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+                "start": 168,
+                "end": 316,
+                "quote": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-b",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-b-p5",
+                "start": 50,
+                "end": 96,
+                "quote": "此外，在菜园里劳动似乎让哈拉米略特殊教育班的学生平静下来，他们中很多人有情绪控制方面的问题。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先引出学校菜园项目和创办人，再写学生起初的饮食环境和对蔬菜、泥土、虫子的反感，接着介绍课程内容，最后写项目效果：多吃蔬菜、带动家庭，并延伸到课外种植和情绪。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+            "summary": "园艺活起初对学生是苦差事；哈拉米略和另一位老师创办了菜园项目“城市新芽”，并说明项目目标。",
+            "function": "引出话题，介绍项目和创办人。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+            "summary": "学生住处缺新鲜食物和绿地，常吃零食汽水，起初觉得蔬菜、泥土、虫子都讨厌，但大多愿意尝试。",
+            "function": "交代学生的起点和项目起初遇到的困难。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-b:3",
+            "summary": "课程包括土壤检测、解剖花和种子、品尝农产品、菜园劳动，学生还烹饪自己种的菜。",
+            "function": "介绍项目具体做什么。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+            "summary": "评估显示学生吃的蔬菜更多了，还把新吃法带回家里。",
+            "function": "写项目对饮食的效果。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+            "summary": "益处不止营养：有学生回家自己种菜，特教班学生在菜园里平静下来、有成就感。",
+            "function": "把效果延伸到营养之外，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-ii:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到介绍哈拉米略身份的句子，核对她和这个项目的关系。",
+      "stemTranslationZh": "关于阿比·哈拉米略，我们知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看人名后 who 从句的介绍",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她过去是一名医务工作者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She used to be a health worker.",
+            "explanation": "原文只说她和另一位老师（another teacher）办项目，项目目标里有健康生活方式，但没提她做过医务工作。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她在低收入家庭长大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "low-income",
+            "optionText": "low-income",
+            "matchType": "exact",
+            "relationNote": "“低收入”（low-income）在原文修饰的是项目所在的四所学校（four low-income schools），选项把它安到她本人的出身上，原文没写她怎样长大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "quote": "a school garden program at four low-income schools",
+              "anchor": "四所低收入学校"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她开了一家快餐店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "fast food restaurants",
+            "optionText": "fast food restaurant",
+            "matchType": "wordFamily",
+            "relationNote": "“快餐店”（fast food restaurants）出自介绍学生住处的句子，说那里快餐店比杂货店多（outnumber grocery stores），和她开店毫无关系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "quote": "fast food restaurants outnumber grocery stores",
+              "anchor": "街区快餐店多"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她是“城市新芽”的发起人之一。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "quote": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools.",
+              "anchor": "和另一位老师创办了项目"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Abby Jaramillo",
+          "sourceRole": "stem",
+          "targetText": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "who with another teacher started Urban Sprouts",
+          "note": "题干 Abby Jaramillo 原词出现在原文。"
+        },
+        {
+          "sourceText": "an initiator of Urban Sprouts",
+          "sourceRole": "correctOption",
+          "targetText": "who with another teacher started Urban Sprouts",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“发起人”（initiator）就是原文的“创办了”（started）；她是和另一位老师一起办的，所以选项说她是发起人之一（an initiator），选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到写学生起初反应的句子，看项目刚开始时遇到了什么麻烦。",
+      "stemTranslationZh": "项目开始时，哈拉米略面临的一个问题是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 Though 引出的前半句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "孩子们的父母不信任她。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "parents",
+            "optionText": "parents",
+            "matchType": "exact",
+            "relationNote": "“父母”（parents）出现在 [[block:paper-gaokao-2023-ii:reading-b:4]] 讲项目见效的地方：学生回家和父母聊，全家吃法跟着变（eating differently），没说父母不信任她。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+              "quote": "they went home and talked to their parents and now they’re eating differently",
+              "anchor": "回家和父母聊"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "学生几乎没时间上她的课。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Students had little time for her classes.",
+            "explanation": "原文写了课上做什么（[[block:paper-gaokao-2023-ii:reading-b:3]]），还说大多数学生渴望尝试新东西（eager to try something new），没提学生没时间上课。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有些孩子不喜欢菜园里的活。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "quote": "Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
+              "anchor": "有些孩子起初怕虫子、嫌泥土"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "quote": "“They come to us thinking vegetables are awful, dirt is awful, insects are awful.”",
+              "anchor": "觉得蔬菜、泥土、虫子都讨厌"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "没有地方开辟学校菜园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
+            "sourceEntity": "neighborhoods",
+            "optionText": "There was no space for school gardens.",
+            "optionEntity": "school gardens",
+            "explanation": "缺绿地（green space）说的是学生住的街区，不是学校；学校菜园已经办起来，课上还有菜园劳动（work in the garden）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "quote": "neighborhoods where fresh food and green space are not easy to find",
+              "anchor": "街区缺绿地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "at the start",
+          "sourceRole": "stem",
+          "targetText": "Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+          "relationType": "locationCue",
+          "targetCue": "initially",
+          "sourceZh": "在开始时",
+          "targetCueZh": "起初",
+          "answerText": "some are initially scared of the insects and turned off by the dirt",
+          "note": "题干 at the start 对应原文 initially，两者都指项目刚开始的时候。"
+        },
+        {
+          "sourceText": "Some kids disliked garden work",
+          "sourceRole": "correctOption",
+          "targetText": "some are initially scared of the insects and turned off by the dirt",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "“不喜欢菜园里的活”概括了两种反应：害怕虫子（scared of the insects）、嫌弃泥土（turned off by the dirt），虫子和泥土正是菜园劳动要碰的；原文说的是部分孩子（some），选项也只说有些孩子，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把项目带来的几方面变化合起来，判断哪个词最能概括项目的影响。",
+      "stemTranslationZh": "下列哪一项最能描述这个项目的影响？",
+      "locateBy": "stem",
+      "locateFindZh": "看 beyond 后面延伸到哪些方面",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "影响深远的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "quote": "She adds that the program’s benefits go beyond nutrition.",
+              "anchor": "益处不止于营养"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+              "quote": "they went home and talked to their parents and now they’re eating differently",
+              "anchor": "全家饮食改变"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "quote": "they bring home seeds to start their own vegetable gardens",
+              "anchor": "回家自己种菜"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "可预料的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Predictable.",
+            "explanation": "原文报告的是评估结果和学生身上的变化，没说这些效果事先就能料到。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "短暂的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+            "sourceHighlight": "start their own vegetable gardens",
+            "optionText": "Short-lived.",
+            "optionHighlight": "Short-lived",
+            "explanation": "有学生回家自己开菜园（start their own vegetable gardens），影响延续到课后和家里，和“短暂”方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "quote": "they bring home seeds to start their own vegetable gardens",
+              "anchor": "回家自己种菜"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "无法确定的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+            "sourceHighlight": "Program evaluations show",
+            "optionText": "Unidentifiable.",
+            "optionHighlight": "Unidentifiable",
+            "explanation": "项目评估已经查明效果：孩子们因为上课而多吃了蔬菜（eat more vegetables），影响是看得出来的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+              "quote": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+              "anchor": "评估显示多吃蔬菜"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "impact",
+          "sourceRole": "stem",
+          "targetText": "She adds that the program’s benefits go beyond nutrition.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+          "relationType": "locationCue",
+          "targetCue": "benefits",
+          "sourceZh": "影响",
+          "targetCueZh": "益处",
+          "answerText": "the program’s benefits go beyond nutrition",
+          "note": "题干 impact 对应原文 benefits，都指项目带来的作用。"
+        },
+        {
+          "sourceText": "Far-reaching",
+          "sourceRole": "correctOption",
+          "targetText": "the program’s benefits go beyond nutrition",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "“影响深远”是把几处益处合起来得出的：先是 [[block:paper-gaokao-2023-ii:reading-b:4]] 学生回家后全家吃法都变了（eating differently），接着益处又不止于营养，有学生把种子带回家自己种菜（bring home seeds），特教班学生也平静下来。影响从课堂伸到家庭和情绪，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:27": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文怎样写学生对蔬菜态度的变化，选出能盖住全文的标题。",
+      "stemTranslationZh": "哪一项可以作为本文的合适标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-ii:reading-b:1]] 开办学校菜园，[[block:paper-gaokao-2023-ii:reading-b:2]] 学生 thinking vegetables are awful，[[block:paper-gaokao-2023-ii:reading-b:4]] 课后 eat more vegetables；标题要抓住学生对蔬菜的转变",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "拯救学校菜园",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Rescuing School Gardens",
+            "explanation": "文中的学校菜园是新办起来的（started Urban Sprouts），没有菜园面临关闭、需要挽救的情节。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "体验乡村生活",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Experiencing Country Life",
+            "explanation": "学生是在城里学校的菜园种菜，项目名里就有“城市”（Urban），文章没写乡村生活。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "培养爱吃蔬菜的人",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+              "quote": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+              "anchor": "上课后多吃蔬菜"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "quote": "“They come to us thinking vegetables are awful, dirt is awful, insects are awful.”",
+              "anchor": "起初觉得蔬菜难吃"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:3",
+              "quote": "Several times a year, students cook the vegetables they grow",
+              "anchor": "烹饪自己种的菜"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "改变当地面貌",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
+            "sourceEntity": "neighborhoods",
+            "optionText": "Changing Local Landscape",
+            "optionEntity": "Local Landscape",
+            "explanation": "街区缺绿地只是交代学生的生活背景（green space），文中没写当地面貌有什么改变；变化都落在学生身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "quote": "neighborhoods where fresh food and green space are not easy to find",
+              "anchor": "街区缺绿地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Growing Vegetable Lovers",
+          "sourceRole": "correctOption",
+          "targetText": "kids eat more vegetables as a result of the classes",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "几段写的都是学生和蔬菜关系的变化：起初觉得蔬菜难吃（vegetables are awful），在园里亲手种、亲手做之后多吃了蔬菜，还带动家里改变吃法。标题的“培养”（Growing）既指在菜园里种菜，也指把学生培养成爱吃蔬菜的人，正好把种菜和转变都包进去，选 C。"
+        }
+      ]
+    }
+  }
+}

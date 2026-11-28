@@ -1,0 +1,752 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:reading-d": {
+      "overview": "城市扩张让居民难以接触野性自然。一项新研究收集320份游客与自然互动的记述，编码归类后归纳出“自然语言”，帮助人们把自然体验带回日常生活，研究者也呼吁保护自然。",
+      "fullTranslationZh": "随着城市急剧扩张，城市居民越来越难以接触到自然。如果你运气好，家附近也许有一座口袋公园，但在城市里很难找到相对原生态的地方。\n\n以往的研究已经发现自然对人类健康和身心有益，而一项新研究表明，城市地区的野性自然对人类的幸福极其重要。\n\n研究团队以一座大型城市公园为研究对象。他们调查了几百名公园游客，请他们在线提交一份书面总结，记述自己在公园里与自然之间一次有意义的互动。随后，研究人员仔细查看了这些提交的材料，把其中的经历编码归入不同类别。例如，一位参与者的经历“我们在海滩上坐了一会儿，听着海浪声”被归入“坐在海滩上”和“听海浪”两个类别。\n\n在全部320份提交材料中，一种被研究人员称为“自然语言”的类别模式开始显现。所有材料编码完成后，有六个类别最常被游客认为是重要的，其中包括遇见野生动物、沿水边散步，以及沿着已有的步道行走。\n\n为每一种自然体验命名，就形成了一套可用的语言，它能帮助人们认识并参与那些最让自己满足、最有意义的活动。例如，沿水边散步的体验，可能会让一位年轻上班族在周末去公园远足时感到满足。工作日回到市中心，他们可以在午休时沿着喷泉散步，享受这种互动更居家的形式。\n\n“我们正努力创造一种语言，帮助把人与自然的互动带回我们的日常生活。而要做到这一点，我们还需要保护自然，这样我们才能与之互动，”该研究的资深作者彼得·卡恩说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+          "sourceText": "Naming each nature experience creates a usable language, which helps people recognize and take part in the activities that are most satisfying and meaningful to them.",
+          "displayText": "Naming each nature experience creates a usable language, which helps people recognize and take part in the activities that are most satisfying and meaningful to them.",
+          "relatedQuestionIds": [],
+          "translationZh": "为每一种自然体验命名，就形成了一套可用的语言，它能帮助人们认识并参与那些最让自己满足、最有意义的活动。",
+          "analysisZh": "主语是动名词短语 Naming each nature experience（给每一种自然体验命名），谓语 creates，宾语 a usable language。which 引导非限制性定语从句，指前面的 a usable language，说明这套语言帮人 recognize and take part in 某些活动；that 从句再修饰 the activities，限定是对他们最满足、最有意义的活动。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 29,
+              "quote": "Naming each nature experience"
+            },
+            {
+              "start": 30,
+              "end": 55,
+              "quote": "creates a usable language"
+            },
+            {
+              "start": 57,
+              "end": 75,
+              "quote": "which helps people"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+          "sourceText": "And for that to happen, we also need to protect nature so that we can interact with it,",
+          "displayText": "And for that to happen, we also need to protect nature so that we can interact with it,",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:35"
+          ],
+          "translationZh": "而要做到这一点，我们还需要保护自然，这样我们才能与之互动，",
+          "analysisZh": "主干是 we also need to protect nature（我们还需要保护自然）。句首 for that to happen 是“for + 名词 + 不定式”结构，that 指前一句说的把人与自然的互动带回日常，意思是“要让这件事实现”。so that 引导目的状语从句，说明保护自然是为了能和它互动，it 指 nature。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 22,
+              "quote": "for that to happen"
+            },
+            {
+              "start": 24,
+              "end": 54,
+              "quote": "we also need to protect nature"
+            },
+            {
+              "start": 55,
+              "end": 62,
+              "quote": "so that"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-ii:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-d:1"
+              ],
+              "start": 0,
+              "end": 62,
+              "quote": "随着城市急剧扩张，城市居民越来越难以接触到自然。如果你运气好，家附近也许有一座口袋公园，但在城市里很难找到相对原生态的地方。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-d:2"
+              ],
+              "start": 64,
+              "end": 115,
+              "quote": "以往的研究已经发现自然对人类健康和身心有益，而一项新研究表明，城市地区的野性自然对人类的幸福极其重要。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-d:3"
+              ],
+              "start": 117,
+              "end": 271,
+              "quote": "研究团队以一座大型城市公园为研究对象。他们调查了几百名公园游客，请他们在线提交一份书面总结，记述自己在公园里与自然之间一次有意义的互动。随后，研究人员仔细查看了这些提交的材料，把其中的经历编码归入不同类别。例如，一位参与者的经历“我们在海滩上坐了一会儿，听着海浪声”被归入“坐在海滩上”和“听海浪”两个类别。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-d:4"
+              ],
+              "start": 273,
+              "end": 367,
+              "quote": "在全部320份提交材料中，一种被研究人员称为“自然语言”的类别模式开始显现。所有材料编码完成后，有六个类别最常被游客认为是重要的，其中包括遇见野生动物、沿水边散步，以及沿着已有的步道行走。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-d:5"
+              ],
+              "start": 369,
+              "end": 494,
+              "quote": "为每一种自然体验命名，就形成了一套可用的语言，它能帮助人们认识并参与那些最让自己满足、最有意义的活动。例如，沿水边散步的体验，可能会让一位年轻上班族在周末去公园远足时感到满足。工作日回到市中心，他们可以在午休时沿着喷泉散步，享受这种互动更居家的形式。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-d:6"
+              ],
+              "start": 496,
+              "end": 574,
+              "quote": "“我们正努力创造一种语言，帮助把人与自然的互动带回我们的日常生活。而要做到这一点，我们还需要保护自然，这样我们才能与之互动，”该研究的资深作者彼得·卡恩说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+                "start": 176,
+                "end": 242,
+                "quote": "but it’s unusual to find places in a city that are relatively wild"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+                "start": 0,
+                "end": 108,
+                "quote": "As cities balloon with growth, access to nature for people living in urban areas is becoming harder to find."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p1",
+                "start": 44,
+                "end": 61,
+                "quote": "但在城市里很难找到相对原生态的地方"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p1",
+                "start": 0,
+                "end": 24,
+                "quote": "随着城市急剧扩张，城市居民越来越难以接触到自然。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+                "start": 0,
+                "end": 109,
+                "quote": "Across the 320 submissions, a pattern of categories the researchers call a “nature language\" began to emerge."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p4",
+                "start": 0,
+                "end": 38,
+                "quote": "在全部320份提交材料中，一种被研究人员称为“自然语言”的类别模式开始显现。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+                "start": 306,
+                "end": 443,
+                "quote": "Back downtown during a workday, they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+                "start": 180,
+                "end": 304,
+                "quote": "the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p5",
+                "start": 88,
+                "end": 125,
+                "quote": "工作日回到市中心，他们可以在午休时沿着喷泉散步，享受这种互动更居家的形式。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p5",
+                "start": 54,
+                "end": 87,
+                "quote": "沿水边散步的体验，可能会让一位年轻上班族在周末去公园远足时感到满足"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+                "start": 135,
+                "end": 197,
+                "quote": "we also need to protect nature so that we can interact with it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p6",
+                "start": 41,
+                "end": 61,
+                "quote": "我们还需要保护自然，这样我们才能与之互动"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+                "start": 0,
+                "end": 166,
+                "quote": "Naming each nature experience creates a usable language, which helps people recognize and take part in the activities that are most satisfying and meaningful to them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p5",
+                "start": 0,
+                "end": 51,
+                "quote": "为每一种自然体验命名，就形成了一套可用的语言，它能帮助人们认识并参与那些最让自己满足、最有意义的活动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+                "start": 111,
+                "end": 198,
+                "quote": "And for that to happen, we also need to protect nature so that we can interact with it,"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-d",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-d-p6",
+                "start": 33,
+                "end": 62,
+                "quote": "而要做到这一点，我们还需要保护自然，这样我们才能与之互动，"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先摆出城市里难觅野性自然的现象，引出新研究的发现；接着写研究怎样收集并编码游客的记述、归纳出“自然语言”，再举例说明这种语言怎样帮人把自然体验带进日常，最后以研究者的话收尾：创造语言的同时要保护自然。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+            "summary": "城市扩张，居民越来越难接触自然，相对原生态的地方更少见。",
+            "function": "摆出现象，引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-d:2",
+            "summary": "以往研究发现自然有益健康，新研究表明城市里的野性自然对幸福极其重要。",
+            "function": "引出新研究及其结论。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+            "summary": "研究者请几百名游客写下与自然的有意义互动，再把经历编码归类，并举例说明怎样归类。",
+            "function": "介绍研究方法。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+            "summary": "320份记述中显现出“自然语言”这种类别模式，六类体验最受看重。",
+            "function": "交代研究的发现。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+            "summary": "给自然体验命名形成可用的语言；沿水边散步在公园和市区可以有不同形式。",
+            "function": "说明“自然语言”的用处并举例。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+            "summary": "卡恩说要用这种语言把人与自然的互动带回日常，同时必须保护自然。",
+            "function": "引用研究者的话，点明意义和前提。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-ii:32": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读开头一段的两句，概括作者摆出的城市现象。",
+      "stemTranslationZh": "作者在文章开头描述了什么现象？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-ii:reading-d:1]] 先说城市扩张、接触自然越来越难，再用 but 转到 relatively wild 的地方少；现象要把两句都盖住",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "口袋公园如今很受欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "pocket park",
+            "optionText": "Pocket park",
+            "matchType": "exact",
+            "relationNote": "原文说运气好（If you’re lucky）家附近才可能有座口袋公园（pocket park），讲的是这类公园难得，没说它受欢迎。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+              "quote": "If you’re lucky, there might be a pocket park near where you live",
+              "anchor": "运气好才有口袋公园"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "城市里很难找到野性自然。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+              "quote": "but it’s unusual to find places in a city that are relatively wild",
+              "anchor": "城里少有相对原生态的地方"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+              "quote": "As cities balloon with growth, access to nature for people living in urban areas is becoming harder to find.",
+              "anchor": "接触自然越来越难"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "许多城市人口过多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "As cities balloon with growth, access to nature for people living in urban areas is becoming harder to find.",
+            "sourceHighlight": "As cities balloon with growth",
+            "optionText": "Many cities are overpopulated.",
+            "optionHighlight": "overpopulated",
+            "explanation": "城市扩张（balloon with growth）只是交代背景，作者要说的是因此难以接触自然，没说城市人口已经过多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+              "quote": "As cities balloon with growth",
+              "anchor": "城市扩张"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人们喜欢住得离自然近。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "People enjoy living close to nature.",
+            "explanation": "[[block:paper-gaokao-2023-ii:reading-d:1]] 写的是城里人越来越难接触自然（harder to find），没说人们喜欢住在自然附近；这是凭常识补的想法。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Wild nature is hard to find in cities",
+          "sourceRole": "correctOption",
+          "targetText": "it’s unusual to find places in a city that are relatively wild",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-gaokao-2023-ii:reading-d:1]] 两句说的是一件事：城市扩张让人越来越难接触自然（harder to find），口袋公园或许有，相对原生态的地方却少见（unusual to find … relatively wild）。选项的“城里难觅野性自然”把这两层合在一起，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从研究者编码归类之后得到了什么，推出编码的目的。",
+      "stemTranslationZh": "研究人员为什么要把参与者提交的材料编码归类？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找编码之后显出了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了比较不同类型的公园游客。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "park-goers",
+            "optionText": "park-goers",
+            "matchType": "exact",
+            "relationNote": "“公园游客”出自 [[block:paper-gaokao-2023-ii:reading-d:3|They surveyed several hundred park-goers]]，研究归类的是他们写下的经历（experiences），不是把游客分成几类来比较。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "quote": "They surveyed several hundred park-goers",
+              "anchor": "调查了几百名游客"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了解释这座公园为什么吸引游客。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To explain why the park attracts tourists.",
+            "explanation": "研究收集的是游客与自然的有意义互动，要看的是人们看重哪些自然体验，没讨论公园为什么吸引游客。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了分析这座公园的主要特点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The researchers then examined these submissions, coding (编码)experiences into different categories.",
+            "sourceEntity": "experiences",
+            "optionText": "To analyze the main features of the park.",
+            "optionEntity": "main features of the park",
+            "explanation": "被归类的是游客的经历（experiences），如坐在海滩、听海浪，不是公园本身的特点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "quote": "coding (编码)experiences into different categories",
+              "anchor": "给经历编码"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了找出游客总结中的规律。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+              "quote": "Across the 320 submissions, a pattern of categories the researchers call a “nature language\" began to emerge.",
+              "anchor": "类别规律开始显现"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "code",
+          "sourceRole": "stem",
+          "targetText": "The researchers then examined these submissions, coding (编码)experiences into different categories.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+          "relationType": "locationCue",
+          "targetCue": "coding",
+          "sourceZh": "编码",
+          "targetCueZh": "给经历编码",
+          "answerText": "Across the 320 submissions, a pattern of categories",
+          "bridgeZh": "编码归类之后，规律才显现出来，这就是编码要得到的结果",
+          "note": "题干 code 对应原文 coding，说的是同一个编码动作。"
+        },
+        {
+          "sourceText": "find patterns in the visitors' summaries",
+          "sourceRole": "correctOption",
+          "targetText": "a pattern of categories",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“找出规律”（find patterns）对应原文的“类别规律开始显现”（a pattern of categories … began to emerge），“游客的总结”就是那320份书面总结（submissions），选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把例子里周末和工作日两种做法放在一起，看它说明了什么。",
+      "stemTranslationZh": "从第5段所举的例子中我们可以了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看回到市区怎么做",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "散步是接触自然的最佳方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "For example, the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park.",
+            "sourceHighlight": "might be satisfying",
+            "optionText": "Walking is the best way to gain access to nature.",
+            "optionHighlight": "the best way",
+            "explanation": "例子只说沿水边散步可能让人满足（might be satisfying），没把散步说成接触自然最好的办法；[[block:paper-gaokao-2023-ii:reading-d:4]] 列的体验还有遇见野生动物等。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "quote": "might be satisfying for a young professional",
+              "anchor": "可能让人满足"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "年轻人太忙，没时间与自然互动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Back downtown during a workday, they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break.",
+            "sourceHighlight": "they can enjoy",
+            "optionText": "Young people are too busy to interact with nature.",
+            "optionHighlight": "too busy to interact",
+            "explanation": "例子里的年轻上班族（young professional）工作日午休时也能绕着喷泉走走，说明再忙也能接触自然，和“太忙没法互动”方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "quote": "they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break",
+              "anchor": "午休也能享受"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "同一种自然体验可以有不同形式。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "quote": "Back downtown during a workday, they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break.",
+              "anchor": "更居家的互动形式"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "quote": "the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park",
+              "anchor": "周末在公园沿水边走"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "自然语言能提高工作表现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The nature language enhances work performance.",
+            "explanation": "例子提到工作日和午休（lunch break），只说上班族在喷泉边也能找回亲近水的体验，没提工作表现会提高。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "example",
+          "sourceRole": "stem",
+          "targetText": "For example, the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "a more domestic form of this interaction",
+          "bridgeZh": "this interaction 指周末在公园沿水边散步",
+          "note": "题干 example 原词出现在 For example 一句。"
+        },
+        {
+          "sourceText": "The same nature experience takes different forms",
+          "sourceRole": "correctOption",
+          "targetText": "a more domestic form of this interaction",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "两句写的是同一种体验的两个样子：周末在公园沿水边走，工作日回到市区就沿着喷泉走（walking along a fountain），原文称后者是“更居家的形式”（a more domestic form）。同一体验换了形式，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到卡恩说的话，看他认为与自然互动之前必须先做什么。",
+      "stemTranslationZh": "根据卡恩的说法，在我们能与自然互动之前应该做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 so that 前要做的事",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "语言学习。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "language",
+            "optionText": "Language",
+            "matchType": "exact",
+            "relationNote": "“语言”出自 [[block:paper-gaokao-2023-ii:reading-d:6|We’re trying to generate a language]]，指研究团队要创造的一套“自然语言”，是研究目标，不是人们和自然互动前要先学的东西。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+              "quote": "“We’re trying to generate a language that helps bring the human-nature interactions back into our daily lives.",
+              "anchor": "创造一种语言"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "环境保护。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+              "quote": "we also need to protect nature so that we can interact with it",
+              "anchor": "需要保护自然"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "公众教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Public education.",
+            "explanation": "卡恩只说要保护自然（protect nature），没提开展公众教育。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "跨文化交流。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Intercultural communication.",
+            "explanation": "全文讲的是人与自然的互动（human-nature interactions），没涉及不同文化之间的交流。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Kahn",
+          "sourceRole": "stem",
+          "targetText": "And for that to happen, we also need to protect nature so that we can interact with it,\" said Peter Kahn, a senior author of the study.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+          "relationType": "locationCue",
+          "answerText": "we also need to protect nature",
+          "note": "题干 Kahn 原词出现在原文。"
+        },
+        {
+          "sourceText": "Environmental conservation",
+          "sourceRole": "correctOption",
+          "targetText": "protect nature",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“环境保护”（Environmental conservation）就是原文的“保护自然”（protect nature）；so that 后的“才能与之互动”说明保护在前、互动在后，选 B。"
+        }
+      ]
+    }
+  }
+}

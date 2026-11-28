@@ -1,0 +1,789 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:reading-c": {
+      "overview": "本文介绍画册《阅读艺术：献给爱书人的艺术》：近三百件以书和阅读为题材的艺术品展现跨越时代的共通人性；文章还谈到书在艺术中的角色，以及纸质书仍有的互动性和私密性。",
+      "fullTranslationZh": "《阅读艺术：献给爱书人的艺术》是对一件日常物品——书——的颂扬，书中用来自世界各地博物馆的近三百件艺术作品来呈现它。读者的形象贯穿历史，在我们今天所知的书籍出现之前很久创作的艺术作品中就已出现。在艺术家对书和阅读的描绘中，我们看到了超越文化与时代、人类共通的瞬间。\n\n在这本“书中之书”里，艺术作品的挑选和编排方式突出了不同时代、不同文化之间的这些联系。我们看到孩子们在家中或学校里学习阅读的场景，书成为几代人之间关系的焦点。成年人被描绘成独自身处各种场景、摆出各种姿势——或沉浸在一本书里，或陷入沉思，或享受片刻闲暇。这些场景也许是几百年前画下的，但它们记录的是我们都能理解、产生共鸣的瞬间。\n\n在画作中，书本身可以作为象征，展示画中人物的才智、财富或信仰。在印刷机广泛使用之前，书是珍贵的物品，本身就可以是艺术品。近来，随着书变得便宜甚至可以随手丢弃，艺术家们把它们当作艺术创作的原材料——把封面、书页乃至整本书改造成绘画和雕塑。\n\n通信技术的不断发展曾被认为会让印刷书页过时。从21世纪的角度看，印刷书籍无疑很古老，但它依然和任何电池供电的电子阅读器一样具有互动性。要发挥作用，一本书必须由使用者来激活：翻开封面，翻动书页，浏览内容，也许还会记下笔记或给词句画线。我们的生活日益联网，所接收的信息受到监控和追踪，与此相比，一本印刷书仍然提供了一种完全私密的“离线”活动的机会。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+          "sourceText": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
+          "displayText": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:28",
+            "question:paper-gaokao-2023-ii:29"
+          ],
+          "translationZh": "《阅读艺术：献给爱书人的艺术》是对一件日常物品——书——的颂扬，书中用来自世界各地博物馆的近三百件艺术作品来呈现它。",
+          "analysisZh": "主干是 Reading Art: Art for Book Lovers is a celebration of an everyday object：书名作主语，说这本书是对一件日常物品的颂扬。破折号后的 the book 是同位语，点明这件物品就是书；过去分词短语 represented here in almost three hundred artworks … 修饰 the book，说书在这里由近三百件艺术品来呈现，here 指这本画册。",
+          "underlineRanges": [
+            {
+              "start": 33,
+              "end": 71,
+              "quote": "is a celebration of an everyday object"
+            },
+            {
+              "start": 74,
+              "end": 82,
+              "quote": "the book"
+            },
+            {
+              "start": 84,
+              "end": 133,
+              "quote": "represented here in almost three hundred artworks"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+          "sourceText": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "displayText": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:31"
+          ],
+          "translationZh": "从21世纪的角度看，印刷书籍无疑很古老，但它依然和任何电池供电的电子阅读器一样具有互动性。",
+          "analysisZh": "句首 From a 21st-century point of view 交代看问题的角度。but 连接两个分句：前一句 the printed book is certainly ancient 先承认纸质书古老，后一句 it remains as interactive as any battery-powered e-reader 用 as … as 同级比较，说它的互动性和电子阅读器一样。重点在 but 之后。",
+          "underlineRanges": [
+            {
+              "start": 55,
+              "end": 72,
+              "quote": "certainly ancient"
+            },
+            {
+              "start": 74,
+              "end": 88,
+              "quote": "but it remains"
+            },
+            {
+              "start": 89,
+              "end": 106,
+              "quote": "as interactive as"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-ii:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-c:1"
+              ],
+              "start": 0,
+              "end": 132,
+              "quote": "《阅读艺术：献给爱书人的艺术》是对一件日常物品——书——的颂扬，书中用来自世界各地博物馆的近三百件艺术作品来呈现它。读者的形象贯穿历史，在我们今天所知的书籍出现之前很久创作的艺术作品中就已出现。在艺术家对书和阅读的描绘中，我们看到了超越文化与时代、人类共通的瞬间。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-c:2"
+              ],
+              "start": 134,
+              "end": 297,
+              "quote": "在这本“书中之书”里，艺术作品的挑选和编排方式突出了不同时代、不同文化之间的这些联系。我们看到孩子们在家中或学校里学习阅读的场景，书成为几代人之间关系的焦点。成年人被描绘成独自身处各种场景、摆出各种姿势——或沉浸在一本书里，或陷入沉思，或享受片刻闲暇。这些场景也许是几百年前画下的，但它们记录的是我们都能理解、产生共鸣的瞬间。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-c:3"
+              ],
+              "start": 299,
+              "end": 417,
+              "quote": "在画作中，书本身可以作为象征，展示画中人物的才智、财富或信仰。在印刷机广泛使用之前，书是珍贵的物品，本身就可以是艺术品。近来，随着书变得便宜甚至可以随手丢弃，艺术家们把它们当作艺术创作的原材料——把封面、书页乃至整本书改造成绘画和雕塑。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-c:4"
+              ],
+              "start": 419,
+              "end": 591,
+              "quote": "通信技术的不断发展曾被认为会让印刷书页过时。从21世纪的角度看，印刷书籍无疑很古老，但它依然和任何电池供电的电子阅读器一样具有互动性。要发挥作用，一本书必须由使用者来激活：翻开封面，翻动书页，浏览内容，也许还会记下笔记或给词句画线。我们的生活日益联网，所接收的信息受到监控和追踪，与此相比，一本印刷书仍然提供了一种完全私密的“离线”活动的机会。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+                "start": 0,
+                "end": 164,
+                "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+                "start": 0,
+                "end": 139,
+                "quote": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p1",
+                "start": 0,
+                "end": 58,
+                "quote": "《阅读艺术：献给爱书人的艺术》是对一件日常物品——书——的颂扬，书中用来自世界各地博物馆的近三百件艺术作品来呈现它。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p2",
+                "start": 0,
+                "end": 43,
+                "quote": "在这本“书中之书”里，艺术作品的挑选和编排方式突出了不同时代、不同文化之间的这些联系。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+                "start": 284,
+                "end": 400,
+                "quote": "In artists' representations of books and reading, we see moments of shared humanity that go beyond culture and time."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+                "start": 74,
+                "end": 133,
+                "quote": "the book, represented here in almost three hundred artworks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p1",
+                "start": 97,
+                "end": 132,
+                "quote": "在艺术家对书和阅读的描绘中，我们看到了超越文化与时代、人类共通的瞬间。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p1",
+                "start": 32,
+                "end": 57,
+                "quote": "书中用来自世界各地博物馆的近三百件艺术作品来呈现它"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+                "start": 399,
+                "end": 502,
+                "quote": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+                "start": 334,
+                "end": 399,
+                "quote": "we see moments of shared humanity that go beyond culture and time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p2",
+                "start": 126,
+                "end": 163,
+                "quote": "这些场景也许是几百年前画下的，但它们记录的是我们都能理解、产生共鸣的瞬间。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p1",
+                "start": 111,
+                "end": 131,
+                "quote": "我们看到了超越文化与时代、人类共通的瞬间"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+                "start": 107,
+                "end": 243,
+                "quote": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+                "start": 0,
+                "end": 106,
+                "quote": "Continued developments in communication technologies were once believed to make the printed page outdated."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p4",
+                "start": 22,
+                "end": 67,
+                "quote": "从21世纪的角度看，印刷书籍无疑很古老，但它依然和任何电池供电的电子阅读器一样具有互动性。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p4",
+                "start": 0,
+                "end": 22,
+                "quote": "通信技术的不断发展曾被认为会让印刷书页过时。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:28",
+              "question:paper-gaokao-2023-ii:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+                "start": 0,
+                "end": 164,
+                "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p1",
+                "start": 0,
+                "end": 58,
+                "quote": "《阅读艺术：献给爱书人的艺术》是对一件日常物品——书——的颂扬，书中用来自世界各地博物馆的近三百件艺术作品来呈现它。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+                "start": 107,
+                "end": 243,
+                "quote": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-c",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-c-p4",
+                "start": 22,
+                "end": 67,
+                "quote": "从21世纪的角度看，印刷书籍无疑很古老，但它依然和任何电池供电的电子阅读器一样具有互动性。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先报出书名并点明全书收录以书和阅读为题材的艺术品，再写作品怎样编排、呈现跨越时代的阅读场景，接着讲书在艺术中的象征和材料用途，最后回应纸质书已过时的看法，说明它仍有互动性和私密性。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+            "summary": "这本书收录近三百件艺术品，颂扬书这一日常物品；读者形象贯穿历史，体现共通的人性。",
+            "function": "引出所介绍的书及其主题。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+            "summary": "作品的编排突出不同时代和文化的联系：孩子学读书、成人独自读书，这些场景今人都能理解。",
+            "function": "具体说明书中作品呈现的阅读场景。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+            "summary": "书在画中可象征才智、财富或信仰；过去书很珍贵，如今艺术家把书改造成艺术品。",
+            "function": "讲书在艺术中的不同角色。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+            "summary": "纸质书曾被认为会过时，但它和电子阅读器一样有互动性，还能提供私密的离线阅读。",
+            "function": "回应过时的看法，肯定纸质书的价值，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-ii:28": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从文章围绕哪本书、怎样介绍它，判断文章的出处。",
+      "stemTranslationZh": "本文最可能选自哪里？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-gaokao-2023-ii:reading-c:1]] 开头就报书名 Reading Art，[[block:paper-gaokao-2023-ii:reading-c:2]] 自称 book of books，讲作品怎样 selected；出处要扣住这本书本身",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本书的引言。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
+              "anchor": "报出书名和收录内容"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "quote": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures.",
+              "anchor": "介绍作品的挑选和编排"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一篇关于写作艺术的文章。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "artworks",
+            "optionText": "art",
+            "matchType": "wordFamily",
+            "relationNote": "文中的“艺术”指画作、雕塑等艺术品（artworks），选项借这个词说成写作的艺术；全文讲的是艺术里的书和阅读，没谈怎样写作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "quote": "represented here in almost three hundred artworks",
+              "anchor": "近三百件艺术品"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一本博物馆导览手册。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "museum",
+            "optionText": "museum",
+            "matchType": "exact",
+            "relationNote": "原文提博物馆只是交代作品的来源（from museums around the world），文中没有参观路线、开放时间这类导览信息。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "quote": "from museums around the world",
+              "anchor": "作品来自各地博物馆"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇现代绘画评论。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to.",
+            "sourceEntity": "painted hundreds of years ago",
+            "optionText": "A review of modern paintings.",
+            "optionEntity": "modern paintings",
+            "explanation": "书里的画不少是几百年前画的（painted hundreds of years ago），还有雕塑；文章介绍的是这本书收了什么、怎样编排，不是评论现代画作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "quote": "These scenes may have been painted hundreds of years ago",
+              "anchor": "几百年前的画"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "An introduction to a book",
+          "sourceRole": "correctOption",
+          "targetText": "Reading Art: Art for Book Lovers",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "全文围绕一本书来写：[[block:paper-gaokao-2023-ii:reading-c:1]] 报出书名，说书里用近三百件艺术品呈现书（almost three hundred artworks），[[block:paper-gaokao-2023-ii:reading-c:2]] 称它为“书中之书”，交代作品怎样挑选和编排（selected and arranged）。介绍一本书收了什么、怎样编，正是书的引言要做的事，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到说明书中艺术作品题材的句子，看这些作品画的是什么。",
+      "stemTranslationZh": "入选的艺术作品是关于什么的？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "财富和才智。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "intellect",
+            "optionText": "intellect",
+            "matchType": "exact",
+            "relationNote": "才智和财富出自 [[block:paper-gaokao-2023-ii:reading-c:3|used symbolically in paintings]]，是画中的书可能象征的东西，只说某些画里书的寓意，不是整批作品的题材。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "quote": "Books themselves may be used symbolically in paintings to demonstrate the intellect (才智), wealth or faith of the subject.",
+              "anchor": "书象征才智、财富"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "家庭和学校。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "school",
+            "optionText": "school",
+            "matchType": "exact",
+            "relationNote": "“家庭和学校”出自孩子学读书的场景（learning to read at home or at school），只是读书的地点，画里的主角仍是读书这件事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "quote": "We see scenes of children learning to read at home or at school",
+              "anchor": "在家或学校学读书"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "书和阅读。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "quote": "In artists' representations of books and reading, we see moments of shared humanity that go beyond culture and time.",
+              "anchor": "艺术家对书和阅读的描绘"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "quote": "the book, represented here in almost three hundred artworks",
+              "anchor": "近三百件作品呈现书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "工作和闲暇。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "leisure",
+            "optionText": "leisure",
+            "matchType": "exact",
+            "relationNote": "“闲暇”出自成年人读书的样子（lost in a moment of leisure），说的是读书时的片刻悠闲；文中没有描写工作的画面。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "quote": "absorbed in a volume, deep in thought or lost in a moment of leisure",
+              "anchor": "读书时的闲暇"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "artworks",
+          "sourceRole": "stem",
+          "targetText": "In artists' representations of books and reading, we see moments of shared humanity that go beyond culture and time.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "artists' representations",
+          "sourceZh": "艺术作品",
+          "targetCueZh": "艺术家的描绘",
+          "answerText": "artists' representations of books and reading",
+          "note": "题干 artworks 对应原文 artists' representations，艺术家的描绘就是艺术作品。"
+        },
+        {
+          "sourceText": "Books and reading",
+          "sourceRole": "correctOption",
+          "targetText": "books and reading",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "原文用的就是 books and reading，选项沿用；[[block:paper-gaokao-2023-ii:reading-c:2]] 里孩子学读书、成人埋头读书的场景，都是这类作品的例子，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:30": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据画线短语所在句的 but 前后对照，推出 relate to 在这里的意思。",
+      "stemTranslationZh": "第2段画线词“relate to”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 前后的对照",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "理解。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "quote": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to.",
+              "anchor": "几百年前的画，今人都能理解"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "quote": "we see moments of shared humanity that go beyond culture and time",
+              "anchor": "超越时代的共通人性"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "描绘。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "painted",
+            "optionText": "Paint",
+            "matchType": "wordFamily",
+            "relationNote": "“描绘”借了同句的“画下”（painted）；放进去成了“我们都能画下的瞬间”，可作画的是几百年前的画家，but 后讲的是今天的观者怎样看这些画面。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "quote": "These scenes may have been painted hundreds of years ago",
+              "anchor": "几百年前画下"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "抓住。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Seize.",
+            "explanation": "放进去成了“记录的是我们都能抓住的瞬间”；but 前后说的是古画和今人的距离，后半要的是今人仍能体会，不是去把握什么时机。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "改变。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "transforming",
+            "optionText": "Transform",
+            "matchType": "wordFamily",
+            "relationNote": "“改变”借了 [[block:paper-gaokao-2023-ii:reading-c:3]] 的“改造”（transforming），那里说艺术家把旧书改造成艺术品；放进来成了“记录的是我们都能改变的瞬间”，画里的瞬间并不需要观者去改。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "quote": "transforming covers, pages or even complete volumes into paintings and sculptures",
+              "anchor": "把书改造成艺术品"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "relate to",
+          "sourceRole": "stem",
+          "targetText": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "may have been painted hundreds of years ago, but they record moments we can all",
+          "note": "题干 relate to 原词出现在原文。"
+        },
+        {
+          "sourceText": "Understand",
+          "sourceRole": "correctOption",
+          "targetText": "may have been painted hundreds of years ago, but they record moments we can all",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "but 前说这些画也许是几百年前画的，后面说我们都能 relate to 画里的瞬间，所以 relate to 必须是跨过几百年仍能体会的意思，和 [[block:paper-gaokao-2023-ii:reading-c:1|moments of shared humanity]] 呼应。放回去：画虽古老，记录的却是我们都能理解的瞬间，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:31": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "看作者拿电子阅读器和纸质书比什么，推出这次比较要说明的观点。",
+      "stemTranslationZh": "作者提到电子阅读器想说明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 后对纸质书的评价",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "纸质书并没有完全过时。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "quote": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+              "anchor": "古老但仍有互动性"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "quote": "Continued developments in communication technologies were once believed to make the printed page outdated.",
+              "anchor": "曾被认为会过时"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "技术改变了我们的阅读方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "technologies",
+            "optionText": "Technology",
+            "matchType": "wordFamily",
+            "relationNote": "“技术”出自过去的看法：人们曾以为通信技术会让纸质书过时（once believed）；作者提电子阅读器是要说纸质书仍有互动性，没讲阅读方式变了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "quote": "Continued developments in communication technologies were once believed to make the printed page outdated.",
+              "anchor": "技术曾被认为让纸书过时"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "我们21世纪的生活是联网的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "networked",
+            "optionText": "networked",
+            "matchType": "exact",
+            "relationNote": "“联网的生活”在 [[block:paper-gaokao-2023-ii:reading-c:4|in contrast to our increasingly networked lives]] 里只是对比的一方，用来衬托纸质书能给人私密的离线活动，不是作者提电子阅读器要说的话。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "quote": "in contrast to our increasingly networked lives",
+              "anchor": "日益联网的生活"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如今人们很少有耐心读书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "People now rarely have the patience to read.",
+            "explanation": "原文写读纸质书要翻封面、翻页、记笔记（the pages parted），说的是书要靠读者动手，没提人们缺乏读书的耐心。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "e-reader",
+          "sourceRole": "stem",
+          "targetText": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader",
+          "note": "题干 e-reader 原词出现在原文。"
+        },
+        {
+          "sourceText": "The printed book is not totally out of date",
+          "sourceRole": "correctOption",
+          "targetText": "the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "作者拿电子阅读器作比：纸质书看着古老（certainly ancient），互动性却不输电子阅读器（as interactive as）。这回应了 [[block:paper-gaokao-2023-ii:reading-c:4|were once believed to make the printed page outdated]] 的旧看法，可见纸质书并没有完全过时，选 A。"
+        }
+      ]
+    }
+  }
+}

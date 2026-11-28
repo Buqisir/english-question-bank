@@ -1,0 +1,1851 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:cloze": {
+      "overview": "托皮卡一家搬家时付不起爱犬蒂菲的运费，作者作为PNP志愿飞行员与卡伦接力，把蒂菲平安送到弗吉尼亚，主人满怀感激，作者也为帮这家人团聚而欣慰。",
+      "fullTranslationZh": "去年四月，我在PNP（飞行员与爪子）网站上看到托皮卡一户人家发的帖子。他们不得不搬去弗吉尼亚州，可手头的预算非常紧。他们付不起爱犬蒂菲的运输费用，却极其渴望带上她一起走。\n恰巧我正和另一名飞行员卡伦计划再飞一趟PNP航班，卡伦主动提出把蒂菲从堪萨斯城送到弗吉尼亚州。我要做的是飞到托皮卡去接蒂菲。\n我见到蒂菲的主人时，他们显得非常紧张。丈夫乔治努力保持镇定，但我看得出来，这对他来说很难受：他得把自己的狗交给一个陌生人，还要相信一切都会顺利。\n道别之后，我请乔治和他妻子帮我把蒂菲装上飞机。我答应会照顾好蒂菲，一到堪萨斯城就给他们打电话。\n这次飞行平安无事，蒂菲是个很棒的乘客。第二天，她和卡伦一起飞走，几天之内就回到了弗吉尼亚州的乔治身边。乔治非常感激，给我发来一封暖心的电子邮件，还附上了照片。知道自己帮这一家人重新团聚，我感觉好极了。",
+      "mainLine": {
+        "theme": {
+          "text": "出力帮一家人重新团聚，本身就让人快乐（helped bring this family together again）。",
+          "quote": "helped bring this family together again"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+            "text": "托皮卡一家要搬家却手头紧，付不起狗的运费，又很想带上它。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+            "text": "碰巧卡伦愿意飞后半程，作者负责先去托皮卡接狗。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+            "text": "主人交出爱犬时很紧张，乔治强作镇定，心里难受。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+            "text": "作者请主人帮忙把蒂菲装上飞机，答应一落地就打电话。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+            "text": "一路平安，蒂菲回到乔治身边，乔治感激，作者欣慰。"
+          }
+        ],
+        "emotion": "主人为难→紧张不舍→感激；作者欣慰"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2023-ii:cloze:1",
+          "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+          "sourceText": "George, the husband, was trying to be calm, but I could tell this was __48__ for him, having to leave his dog to a __49__ and trust that everything would __50__.",
+          "displayText": "George, the husband, was trying to be calm, but I could tell this was hard for him, having to leave his dog to a stranger and trust that everything would work out.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:48",
+            "question:paper-gaokao-2023-ii:49",
+            "question:paper-gaokao-2023-ii:50"
+          ],
+          "translationZh": "丈夫乔治努力保持镇定，但我看得出来，这对他来说很难受：他得把自己的狗交给一个陌生人，还要相信一切都会顺利。",
+          "analysisZh": "主干是 but 连接的两个分句：乔治努力保持镇定，但我看得出这件事对他很难。the husband 是插入的同位语，说明乔治的身份。having to 后接 leave 和 trust 两个并列动作，补充说明 this 指什么：把狗交给陌生人，并相信一切会顺利。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 42,
+              "quote": "was trying to be calm"
+            },
+            {
+              "start": 48,
+              "end": 82,
+              "quote": "I could tell this was hard for him"
+            },
+            {
+              "start": 84,
+              "end": 99,
+              "quote": "having to leave"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2023-ii:cloze:2",
+          "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+          "sourceText": "It just __44__ that I was planning another PNP flight with another pilot, Karen, who __45__ to take Tiffy from Kansas City to Virginia.",
+          "displayText": "It just happened that I was planning another PNP flight with another pilot, Karen, who offered to take Tiffy from Kansas City to Virginia.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:44",
+            "question:paper-gaokao-2023-ii:45"
+          ],
+          "translationZh": "恰巧我正和另一名飞行员卡伦计划再飞一趟PNP航班，卡伦主动提出把蒂菲从堪萨斯城送到弗吉尼亚州。",
+          "analysisZh": "It just happened that 是一个整体，说后面的事碰巧发生；that 从句的主干是我正在计划另一趟PNP航班。Karen 补充说明另一名飞行员是谁，who 从句接着交代卡伦主动承担从堪萨斯城到弗吉尼亚这一段。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "It just happened that"
+            },
+            {
+              "start": 22,
+              "end": 55,
+              "quote": "I was planning another PNP flight"
+            },
+            {
+              "start": 83,
+              "end": 108,
+              "quote": "who offered to take Tiffy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2023-ii:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:cloze:1"
+              ],
+              "start": 0,
+              "end": 85,
+              "quote": "去年四月，我在PNP（飞行员与爪子）网站上看到托皮卡一户人家发的帖子。他们不得不搬去弗吉尼亚州，可手头的预算非常紧。他们付不起爱犬蒂菲的运输费用，却极其渴望带上她一起走。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:cloze:2"
+              ],
+              "start": 86,
+              "end": 148,
+              "quote": "恰巧我正和另一名飞行员卡伦计划再飞一趟PNP航班，卡伦主动提出把蒂菲从堪萨斯城送到弗吉尼亚州。我要做的是飞到托皮卡去接蒂菲。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:cloze:3"
+              ],
+              "start": 149,
+              "end": 221,
+              "quote": "我见到蒂菲的主人时，他们显得非常紧张。丈夫乔治努力保持镇定，但我看得出来，这对他来说很难受：他得把自己的狗交给一个陌生人，还要相信一切都会顺利。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:cloze:4"
+              ],
+              "start": 222,
+              "end": 269,
+              "quote": "道别之后，我请乔治和他妻子帮我把蒂菲装上飞机。我答应会照顾好蒂菲，一到堪萨斯城就给他们打电话。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:cloze:5"
+              ],
+              "start": 270,
+              "end": 370,
+              "quote": "这次飞行平安无事，蒂菲是个很棒的乘客。第二天，她和卡伦一起飞走，几天之内就回到了弗吉尼亚州的乔治身边。乔治非常感激，给我发来一封暖心的电子邮件，还附上了照片。知道自己帮这一家人重新团聚，我感觉好极了。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:cloze:1",
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+            "text": "In April last year, I saw a post on the PNP (Pilots N Paws) website from a family in Topeka. They had to move to Virginia but they were on a very tight budget. They could not afford to pay for transportation for their dog, Tiffy, and desperately wanted to take her with them."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:cloze:2",
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+            "text": "It just happened that I was planning another PNP flight with another pilot, Karen, who offered to take Tiffy from Kansas City to Virginia. What I was to do was fly to Topeka to pick up Tiffy."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+            "text": "When I met Tiffy’s owners, they seemed very nervous. George, the husband, was trying to be calm, but I could tell this was hard for him, having to leave his dog to a stranger and trust that everything would work out."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:cloze:4",
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+            "text": "After some goodbyes, I asked George and his wife to help me load Tiffy into the plane. I promised to take care of Tiffy and call them as soon as we got to Kansas City."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:cloze:5",
+            "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+            "text": "The flight was uneventful, and Tiffy was a great passenger. The next day, she flew with Karen and made it back to George in Virginia within a few days. He was so thankful and sent me a nice e-mail with pictures. It felt great to know that I had helped bring this family together again."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+                "start": 165,
+                "end": 188,
+                "quote": "could not afford to pay"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+                "start": 60,
+                "end": 63,
+                "quote": "付不起"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:41"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+                "start": 152,
+                "end": 158,
+                "quote": "budget"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+                "start": 52,
+                "end": 54,
+                "quote": "预算"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+                "start": 243,
+                "end": 261,
+                "quote": "take her with them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+                "start": 78,
+                "end": 84,
+                "quote": "带上她一起走"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:42"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+                "start": 193,
+                "end": 207,
+                "quote": "transportation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+                "start": 68,
+                "end": 72,
+                "quote": "运输费用"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+                "start": 233,
+                "end": 261,
+                "quote": "wanted to take her with them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+                "start": 60,
+                "end": 72,
+                "quote": "付不起爱犬蒂菲的运输费用"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:43"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+                "start": 234,
+                "end": 245,
+                "quote": "desperately"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:1",
+                "start": 74,
+                "end": 78,
+                "quote": "极其渴望"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 20,
+                "end": 53,
+                "quote": "I was planning another PNP flight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 2,
+                "end": 24,
+                "quote": "我正和另一名飞行员卡伦计划再飞一趟PNP航班"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:44"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 8,
+                "end": 16,
+                "quote": "happened"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 0,
+                "end": 2,
+                "quote": "恰巧"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 92,
+                "end": 134,
+                "quote": "to take Tiffy from Kansas City to Virginia"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 31,
+                "end": 46,
+                "quote": "把蒂菲从堪萨斯城送到弗吉尼亚州"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:45"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 87,
+                "end": 94,
+                "quote": "offered"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 27,
+                "end": 31,
+                "quote": "主动提出"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 157,
+                "end": 170,
+                "quote": "fly to Topeka"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 52,
+                "end": 57,
+                "quote": "飞到托皮卡"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:46"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 177,
+                "end": 184,
+                "quote": "pick up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 57,
+                "end": 59,
+                "quote": "去接"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 77,
+                "end": 94,
+                "quote": "trying to be calm"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 23,
+                "end": 29,
+                "quote": "努力保持镇定"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:47"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 44,
+                "end": 51,
+                "quote": "nervous"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 16,
+                "end": 18,
+                "quote": "紧张"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 138,
+                "end": 161,
+                "quote": "having to leave his dog"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 48,
+                "end": 60,
+                "quote": "把自己的狗交给一个陌生人"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:48"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 123,
+                "end": 127,
+                "quote": "hard"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 43,
+                "end": 45,
+                "quote": "难受"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 148,
+                "end": 166,
+                "quote": "leave his dog to a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 48,
+                "end": 55,
+                "quote": "把自己的狗交给"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:49"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 166,
+                "end": 174,
+                "quote": "stranger"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 57,
+                "end": 60,
+                "quote": "陌生人"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 178,
+                "end": 205,
+                "quote": "trust that everything would"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 63,
+                "end": 67,
+                "quote": "相信一切"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:50"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 207,
+                "end": 215,
+                "quote": "work out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 69,
+                "end": 71,
+                "quote": "顺利"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+                "start": 67,
+                "end": 87,
+                "quote": "Tiffy into the plane"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:4",
+                "start": 20,
+                "end": 22,
+                "quote": "飞机"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:51"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+                "start": 60,
+                "end": 64,
+                "quote": "load"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:4",
+                "start": 18,
+                "end": 20,
+                "quote": "装上"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+                "start": 138,
+                "end": 170,
+                "quote": "as soon as we got to Kansas City"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:4",
+                "start": 33,
+                "end": 39,
+                "quote": "一到堪萨斯城"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:52"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+                "start": 124,
+                "end": 128,
+                "quote": "call"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:4",
+                "start": 43,
+                "end": 46,
+                "quote": "打电话"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+                "start": 27,
+                "end": 54,
+                "quote": "Tiffy was a great passenger"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+                "start": 9,
+                "end": 18,
+                "quote": "蒂菲是个很棒的乘客"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:53"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:5",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+                "start": 15,
+                "end": 25,
+                "quote": "uneventful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+                "start": 4,
+                "end": 8,
+                "quote": "平安无事"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+                "start": 81,
+                "end": 130,
+                "quote": "with Karen and made it back to George in Virginia"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+                "start": 24,
+                "end": 29,
+                "quote": "和卡伦一起"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:54"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:5",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+                "start": 78,
+                "end": 82,
+                "quote": "flew"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+                "start": 29,
+                "end": 31,
+                "quote": "飞走"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+                "start": 171,
+                "end": 206,
+                "quote": "sent me a nice e-mail with pictures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+                "start": 60,
+                "end": 71,
+                "quote": "发来一封暖心的电子邮件"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:55"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:5",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+                "start": 162,
+                "end": 170,
+                "quote": "thankful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:5",
+                "start": 55,
+                "end": 57,
+                "quote": "感激"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2023-ii:cloze:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:48",
+              "question:paper-gaokao-2023-ii:49",
+              "question:paper-gaokao-2023-ii:50"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2023-ii:cloze:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 74,
+                "end": 95,
+                "quote": "was trying to be calm"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 101,
+                "end": 135,
+                "quote": "I could tell this was hard for him"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:3",
+                "start": 137,
+                "end": 152,
+                "quote": "having to leave"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 23,
+                "end": 29,
+                "quote": "努力保持镇定"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:3",
+                "start": 37,
+                "end": 45,
+                "quote": "这对他来说很难受"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2023-ii:cloze:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:44",
+              "question:paper-gaokao-2023-ii:45"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2023-ii:cloze:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 0,
+                "end": 21,
+                "quote": "It just happened that"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:cloze:2",
+                "start": 83,
+                "end": 108,
+                "quote": "who offered to take Tiffy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 0,
+                "end": 2,
+                "quote": "恰巧"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:cloze",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:cloze:2",
+                "start": 25,
+                "end": 46,
+                "quote": "卡伦主动提出把蒂菲从堪萨斯城送到弗吉尼亚州"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "主人为难→紧张不舍→感激；作者欣慰"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-ii:41": {
+      "blankId": "blank:paper-gaokao-2023-ii:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "一家人搬家时遇到的难处，能用很紧来形容，又要引出下一句付不起运费。",
+      "find": {
+        "check": "echo",
+        "text": "下一句说付不起（could not afford to pay）狗的运费，紧的是钱，所以是预算紧。",
+        "quotes": [
+          "could not afford to pay"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "预算",
+        "meaning": "可以花的钱",
+        "reason": "一家人搬家时遇到的难处，能用很紧来形容，又要引出下一句付不起运费。名词看复现：下一句说付不起（could not afford to pay）狗的运费，紧的是钱，所以是预算紧。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "turn",
+          "meaning": "轮次；下一句说付不起运费（could not afford to pay），难处在钱，不在轮到谁。",
+          "quote": "could not afford to pay"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "schedule",
+          "meaning": "日程；日程也能说紧，但下一句是付不起运费（could not afford to pay），紧的是钱不是时间。",
+          "quote": "could not afford to pay"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "connection",
+          "meaning": "联系；下一句交代的是付不起运费（could not afford to pay），一家人缺的是钱。",
+          "quote": "could not afford to pay"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "very tight",
+          "signalSide": "context-before",
+          "targetText": "very tight budget",
+          "relation": "预算可以用很紧（very tight）来形容，指钱不宽裕。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "could not afford to pay",
+          "signalSide": "context-after",
+          "relation": "付不起运费把预算紧说得更具体。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:42": {
+      "blankId": "blank:paper-gaokao-2023-ii:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "一家人付不起的那笔费用，要和后面想把狗带走对上。",
+      "find": {
+        "check": "topic",
+        "text": "网站叫飞行员与爪子（Pilots N Paws），后面又说想带她一起走（take her with them），付不起的是把狗运过去的费用。",
+        "quotes": [
+          "Pilots N Paws",
+          "take her with them"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "运输",
+        "meaning": "把狗运过去的费用",
+        "reason": "一家人付不起的那笔费用，要和后面想把狗带走对上。名词看话题：网站叫飞行员与爪子（Pilots N Paws），后面又说想带她一起走（take her with them），付不起的是把狗运过去的费用。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "food",
+          "meaning": "食物；一家人想带狗一起走（take her with them），付不起的是搬运的钱，不是喂狗的钱。",
+          "quote": "take her with them"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "shelter",
+          "meaning": "住处；一家人想带她一起走（take her with them），不是要另找地方安置她。",
+          "quote": "take her with them"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "medicine",
+          "meaning": "药物；接着说的是想带她一起走（take her with them），缺钱的地方是路费，不是给狗治病。",
+          "quote": "take her with them"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "pay for",
+          "signalSide": "context-before",
+          "targetText": "pay for transportation",
+          "relation": "付钱买的（pay for）是一项服务，这里是运狗。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Pilots N Paws",
+          "signalSide": "context-before",
+          "relation": "飞行员帮宠物出行的网站，话题就是运送宠物。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-gaokao-2023-ii:43": {
+      "blankId": "blank:paper-gaokao-2023-ii:43",
+      "blankNo": 43,
+      "pos": "adverb",
+      "role": "main",
+      "context": "付不起运费却还想带上狗，要一个说明想得有多迫切的程度副词。",
+      "find": {
+        "check": "affect",
+        "text": "前面说付不起运费（could not afford to pay），后面仍想带她走（wanted to take her with them），可见想得很迫切。",
+        "quotes": [
+          "could not afford to pay",
+          "wanted to take her with them"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "极度渴望地",
+        "reason": "付不起运费却还想带上狗，要一个说明想得有多迫切的程度副词。副词看情感：前面说付不起运费（could not afford to pay），后面仍想带她走（wanted to take her with them），可见想得很迫切。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "temporarily",
+          "meaning": "暂时地；他们是要搬去弗吉尼亚（move to Virginia），想把狗一直带在身边，不是暂时带着。",
+          "quote": "move to Virginia"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "secretly",
+          "meaning": "秘密地；他们在网站上公开发帖（saw a post）求助，想带狗走并不是秘密。",
+          "quote": "saw a post"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "originally",
+          "meaning": "起初；用了它就成了后来不想带了，可他们正为带狗发帖求助（saw a post）。",
+          "quote": "saw a post"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wanted to take her",
+          "signalSide": "context-after",
+          "targetText": "desperately wanted to take her",
+          "relation": "副词修饰想要（wanted），说明想带她走的程度。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "could not afford to pay",
+          "signalSide": "context-before",
+          "relation": "付不起钱还想带走，说明愿望十分强烈。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-gaokao-2023-ii:44": {
+      "blankId": "blank:paper-gaokao-2023-ii:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者当时恰好也在安排一次飞行，要表示事情碰巧如此。",
+      "find": {
+        "check": "collocation",
+        "text": "空格接在形式主语后（It just），后面是从句（that I was planning），合起来表示事情碰巧如此。",
+        "quotes": [
+          "It just",
+          "that I was planning"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "碰巧",
+        "reason": "作者当时恰好也在安排一次飞行，要表示事情碰巧如此。动词看搭配：空格接在形式主语后（It just），后面是从句（that I was planning），合起来表示事情碰巧如此。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "appeared",
+          "meaning": "似乎；那样就成了看起来，可作者自己在计划飞行（I was planning）是确定的事，用不着猜。",
+          "quote": "I was planning"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "proved",
+          "meaning": "证明是；要有事后验证的结论，这里只是交代作者当时正在安排飞行（I was planning another PNP flight）。",
+          "quote": "I was planning another PNP flight"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "showed",
+          "meaning": "表明；那样是说某事说明了道理，这里交代的是作者正好在安排飞行（I was planning）。",
+          "quote": "I was planning"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It just",
+          "signalSide": "context-before",
+          "targetText": "It just happened that",
+          "relation": "形式主语加碰巧发生（happened that），说后面的事是凑巧。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:45": {
+      "blankId": "blank:paper-gaokao-2023-ii:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "卡伦承担从堪萨斯城到弗吉尼亚这一段，要表示她主动愿意去做。",
+      "find": {
+        "check": "collocation",
+        "text": "空后接不定式（to take Tiffy），卡伦是来帮忙的志愿飞行员，要的是主动提出去做。",
+        "quotes": [
+          "to take Tiffy"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "主动提出",
+        "reason": "卡伦承担从堪萨斯城到弗吉尼亚这一段，要表示她主动愿意去做。动词看搭配：空后接不定式（to take Tiffy），卡伦是来帮忙的志愿飞行员，要的是主动提出去做。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "waited",
+          "meaning": "等待；那样成了等着去送，可后文蒂菲第二天就跟卡伦飞走了（with Karen and made it back），说的是她主动承担。",
+          "quote": "with Karen and made it back"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hurried",
+          "meaning": "匆忙；后文是第二天才跟卡伦飞（The next day），这里讲谁来承担这一段，不是赶时间。",
+          "quote": "The next day"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "failed",
+          "meaning": "未能；后文蒂菲正是跟着卡伦回到乔治身边（with Karen and made it back），卡伦并没有失败。",
+          "quote": "with Karen and made it back"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to take Tiffy",
+          "signalSide": "context-after",
+          "targetText": "offered to take Tiffy",
+          "relation": "空后的不定式（to take Tiffy）说明卡伦主动承担的事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:46": {
+      "blankId": "blank:paper-gaokao-2023-ii:46",
+      "blankNo": 46,
+      "pos": "phrase",
+      "role": "main",
+      "context": "作者飞到托皮卡要做的事，是把蒂菲带上自己的飞机。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "作者飞到托皮卡（fly to Topeka），后来请主人帮忙让蒂菲上飞机（into the plane），合起来是去把蒂菲接走。",
+        "quotes": [
+          "fly to Topeka",
+          "into the plane"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "接载",
+        "meaning": "把蒂菲接走",
+        "reason": "作者飞到托皮卡要做的事，是把蒂菲带上自己的飞机。词组看语境义：作者飞到托皮卡（fly to Topeka），后来请主人帮忙让蒂菲上飞机（into the plane），合起来是去把蒂菲接走。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "see off",
+          "meaning": "送行；作者要带蒂菲一起飞走（into the plane），不是在机场送她离开。",
+          "quote": "into the plane"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "look for",
+          "meaning": "寻找；作者一到就见到了蒂菲的主人（met Tiffy’s owners），蒂菲就在主人身边，不用去找。",
+          "quote": "met Tiffy’s owners"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hand over",
+          "meaning": "交出；交出蒂菲的是主人（leave his dog to a），作者是来接收的一方。",
+          "quote": "leave his dog to a"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "fly to Topeka",
+          "signalSide": "context-before",
+          "targetText": "fly to Topeka to pick up Tiffy",
+          "relation": "飞到托皮卡的目的是把蒂菲接走。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "up",
+          "signalSide": "option",
+          "targetText": "pick up",
+          "relation": "小品词（up）和动词合起来表示把人或动物接走。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2023-ii:47": {
+      "blankId": "blank:paper-gaokao-2023-ii:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "main",
+      "context": "主人要把狗交给别人运走时的情绪，要和后面强作镇定对上。",
+      "find": {
+        "check": "affect",
+        "text": "后面说乔治努力保持镇定（trying to be calm），要努力才能镇定，说明他们心里紧张。",
+        "quotes": [
+          "trying to be calm"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "紧张的",
+        "reason": "主人要把狗交给别人运走时的情绪，要和后面强作镇定对上。形容词看情感：后面说乔治努力保持镇定（trying to be calm），要努力才能镇定，说明他们心里紧张。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confused",
+          "meaning": "困惑的；他们清楚要把狗交给作者，乔治努力保持镇定（trying to be calm），是在压住紧张。",
+          "quote": "trying to be calm"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "annoyed",
+          "meaning": "恼怒的；作者是应他们的帖子（a post）来帮忙的，他们没有理由恼火。",
+          "quote": "a post"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curious",
+          "meaning": "好奇的；乔治要努力保持镇定（trying to be calm），说明心里不安，不是好奇。",
+          "quote": "trying to be calm"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "seemed very",
+          "signalSide": "context-before",
+          "targetText": "seemed very nervous",
+          "relation": "系动词（seemed）后接形容词，说明主人看上去的状态。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "trying to be calm",
+          "signalSide": "context-after",
+          "relation": "努力保持镇定，反衬出内心紧张。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2023-ii:48": {
+      "blankId": "blank:paper-gaokao-2023-ii:48",
+      "blankNo": 48,
+      "pos": "adjective",
+      "role": "main",
+      "context": "把爱犬交给别人对乔治意味着什么，要一个负面的感受。",
+      "find": {
+        "check": "affect",
+        "text": "转折前他努力保持镇定（trying to be calm），转折后作者看出他心里不好受，因为得把狗交出去（having to leave his dog）。",
+        "quotes": [
+          "trying to be calm",
+          "having to leave his dog"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "艰难的",
+        "meaning": "让人难受",
+        "reason": "把爱犬交给别人对乔治意味着什么，要一个负面的感受。形容词看情感：转折前他努力保持镇定（trying to be calm），转折后作者看出他心里不好受，因为得把狗交出去（having to leave his dog）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "fine",
+          "meaning": "好的；转折前是强作镇定（trying to be calm），转折后要说出他心里的难受，不能是没事。",
+          "quote": "trying to be calm"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "common",
+          "meaning": "常见的；把爱犬交给别人（having to leave his dog）对乔治不是平常事，这句讲的是他的感受。",
+          "quote": "having to leave his dog"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lucky",
+          "meaning": "幸运的；乔治得把狗交出去（having to leave his dog），此时谈不上幸运。",
+          "quote": "having to leave his dog"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "this was",
+          "signalSide": "context-before",
+          "targetText": "this was hard for him",
+          "relation": "空格作表语（this was），说明这件事对乔治怎么样。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "but I could tell",
+          "signalSide": "context-before",
+          "relation": "转折（but）把表面的镇定转到内心的难受。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2023-ii:49": {
+      "blankId": "blank:paper-gaokao-2023-ii:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "detail",
+      "context": "乔治要把狗交给的人就是作者，对他来说是素不相识的人。",
+      "find": {
+        "check": "collocation",
+        "text": "把狗交给（leave his dog to a）一个人还得相信一切顺利，这人是刚见面的作者（When I met Tiffy’s owners）。",
+        "quotes": [
+          "leave his dog to a",
+          "When I met Tiffy’s owners"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "陌生人",
+        "meaning": "刚见面的作者",
+        "reason": "乔治要把狗交给的人就是作者，对他来说是素不相识的人。名词看搭配：把狗交给（leave his dog to a）一个人还得相信一切顺利，这人是刚见面的作者（When I met Tiffy’s owners）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "coworker",
+          "meaning": "同事；作者和主人是刚见面（When I met Tiffy’s owners），不是一起工作的人。",
+          "quote": "When I met Tiffy’s owners"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "passenger",
+          "meaning": "乘客；乘客是蒂菲（a great passenger），乔治是把狗交给飞行员。",
+          "quote": "a great passenger"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "neighbor",
+          "meaning": "邻居；作者是专门飞到托皮卡（fly to Topeka）来接狗的，不住在乔治家附近。",
+          "quote": "fly to Topeka"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "leave his dog to a",
+          "signalSide": "context-before",
+          "targetText": "leave his dog to a stranger",
+          "relation": "把狗托付给某人，空格是接手的人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:50": {
+      "blankId": "blank:paper-gaokao-2023-ii:50",
+      "blankNo": 50,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "乔治要相信的结果，是事情最后会顺利。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "主语是一切（everything would），乔治要相信（trust that）的是好结果，即事情顺利解决。",
+        "quotes": [
+          "everything would",
+          "trust that"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "进展顺利",
+        "reason": "乔治要相信的结果，是事情最后会顺利。词组看语境义：主语是一切（everything would），乔治要相信（trust that）的是好结果，即事情顺利解决。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "speed up",
+          "meaning": "加快；乔治要相信（trust that）的是狗能平安到达，不是事情快慢。",
+          "quote": "trust that"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "come back",
+          "meaning": "回来；回到乔治身边的是蒂菲（made it back to George），这里的主语是一切，要的是顺利的结果。",
+          "quote": "made it back to George"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "take off",
+          "meaning": "起飞；起飞的是飞机，这里主语是一切（everything would），说的是事情的结果。",
+          "quote": "everything would"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "everything would",
+          "signalSide": "context-before",
+          "targetText": "everything would work out",
+          "relation": "主语是一切，空格说一切最后怎么样。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2023-ii:51": {
+      "blankId": "blank:paper-gaokao-2023-ii:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者请主人帮忙做的事，是把蒂菲弄进飞机。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是把蒂菲送进飞机（Tiffy into the plane），把动物装进交通工具，要的是装载这个动作。",
+        "quotes": [
+          "Tiffy into the plane"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "装载",
+        "meaning": "让蒂菲进飞机",
+        "reason": "作者请主人帮忙做的事，是把蒂菲弄进飞机。动词看搭配：空后是把蒂菲送进飞机（Tiffy into the plane），把动物装进交通工具，要的是装载这个动作。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "feed",
+          "meaning": "喂食；后面是进入飞机（Tiffy into the plane），要的是把狗送进机舱的动作，不是喂它。",
+          "quote": "Tiffy into the plane"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "follow",
+          "meaning": "跟随；跟着进飞机的应是作者自己，主人是帮忙把蒂菲送进飞机（Tiffy into the plane）。",
+          "quote": "Tiffy into the plane"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "change",
+          "meaning": "改变；那样成了把蒂菲变成飞机，这里是让狗进机舱（Tiffy into the plane）。",
+          "quote": "Tiffy into the plane"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into the plane",
+          "signalSide": "context-after",
+          "targetText": "load Tiffy into the plane",
+          "relation": "把动物装进飞机，动词要和进入（into）搭配。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:52": {
+      "blankId": "blank:paper-gaokao-2023-ii:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者答应一到堪萨斯城就和主人联系，让他们放心。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是他们（them）和一到堪萨斯城（as soon as we got to Kansas City），刚落地能马上做的是给主人打电话。",
+        "quotes": [
+          "them",
+          "as soon as we got to Kansas City"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "打电话给",
+        "reason": "作者答应一到堪萨斯城就和主人联系，让他们放心。动词看搭配：空后是他们（them）和一到堪萨斯城（as soon as we got to Kansas City），刚落地能马上做的是给主人打电话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "join",
+          "meaning": "加入；主人要搬去弗吉尼亚（move to Virginia），作者到堪萨斯城后不会和他们会合。",
+          "quote": "move to Virginia"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "leave",
+          "meaning": "离开；作者此时已带狗离开主人，到堪萨斯城（got to Kansas City）后再说离开，前后颠倒。",
+          "quote": "got to Kansas City"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "serve",
+          "meaning": "服务；作者答应的是照顾好蒂菲（take care of Tiffy），一到地方要做的是报平安。",
+          "quote": "take care of Tiffy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as soon as we got to Kansas City",
+          "signalSide": "context-after",
+          "targetText": "call them as soon as we got to Kansas City",
+          "relation": "一到堪萨斯城就联系主人，报个平安。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:53": {
+      "blankId": "blank:paper-gaokao-2023-ii:53",
+      "blankNo": 53,
+      "pos": "adjective",
+      "role": "main",
+      "context": "说这次飞行怎么样，要和蒂菲是个很棒的乘客同向，即一路平安。",
+      "find": {
+        "check": "affect",
+        "text": "并列的后半句说蒂菲是个很棒的乘客（Tiffy was a great passenger），前后同向，飞行也平静顺利。",
+        "quotes": [
+          "Tiffy was a great passenger"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "平静无事的",
+        "meaning": "一路平安",
+        "reason": "说这次飞行怎么样，要和蒂菲是个很棒的乘客同向，即一路平安。形容词看情感：并列的后半句说蒂菲是个很棒的乘客（Tiffy was a great passenger），前后同向，飞行也平静顺利。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unnecessary",
+          "meaning": "不必要的；这趟飞行正是帮这家人团聚（bring this family together），不是多余的。",
+          "quote": "bring this family together"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "unexpected",
+          "meaning": "出乎意料的；飞行是事先计划好的（planning another PNP flight），后面又说蒂菲很乖，没出意外。",
+          "quote": "planning another PNP flight"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unavoidable",
+          "meaning": "不可避免的；后半句说蒂菲是个很棒的乘客（a great passenger），要描述的是飞行过程好不好，不是能否避免。",
+          "quote": "a great passenger"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The flight was",
+          "signalSide": "context-before",
+          "targetText": "The flight was uneventful",
+          "relation": "空格作飞行的表语，说这趟飞得怎么样。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Tiffy was a great passenger",
+          "signalSide": "context-after",
+          "relation": "并列的后半句是正面描述，飞行也是顺利平静的。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2023-ii:54": {
+      "blankId": "blank:paper-gaokao-2023-ii:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "第二天蒂菲和卡伦走完后半程，要一个赶路的动作。",
+      "find": {
+        "check": "echo",
+        "text": "前文说卡伦负责把蒂菲从堪萨斯城送到弗吉尼亚（take Tiffy from Kansas City to Virginia），卡伦是飞行员，所以是跟她飞走。",
+        "quotes": [
+          "take Tiffy from Kansas City to Virginia"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "飞行",
+        "meaning": "乘飞机前往",
+        "reason": "第二天蒂菲和卡伦走完后半程，要一个赶路的动作。动词看复现：前文说卡伦负责把蒂菲从堪萨斯城送到弗吉尼亚（take Tiffy from Kansas City to Virginia），卡伦是飞行员，所以是跟她飞走。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "returned",
+          "meaning": "返回；蒂菲是从堪萨斯城去弗吉尼亚（from Kansas City to Virginia），这段路她没走过，谈不上返回。",
+          "quote": "from Kansas City to Virginia"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fought",
+          "meaning": "打斗；蒂菲是个很棒的乘客（a great passenger），没有和卡伦打架。",
+          "quote": "a great passenger"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "agreed",
+          "meaning": "同意；后面接的是回到乔治身边（made it back to George），要的是赶路的动作，不是表态。",
+          "quote": "made it back to George"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with Karen",
+          "signalSide": "context-after",
+          "targetText": "flew with Karen",
+          "relation": "和飞行员卡伦一起完成后半程。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "another PNP flight",
+          "signalSide": "context-before",
+          "relation": "前文的飞行计划在这里落实。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:55": {
+      "blankId": "blank:paper-gaokao-2023-ii:55",
+      "blankNo": 55,
+      "pos": "adjective",
+      "role": "main",
+      "context": "蒂菲回来后乔治的心情，要能引出他给作者发感谢邮件。",
+      "find": {
+        "check": "affect",
+        "text": "后面说乔治给作者发来一封暖心的邮件和照片（sent me a nice e-mail with pictures），是在向帮忙的人道谢。",
+        "quotes": [
+          "sent me a nice e-mail with pictures"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "感激的",
+        "reason": "蒂菲回来后乔治的心情，要能引出他给作者发感谢邮件。形容词看情感：后面说乔治给作者发来一封暖心的邮件和照片（sent me a nice e-mail with pictures），是在向帮忙的人道谢。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "generous",
+          "meaning": "慷慨的；乔治是受帮助的一方，发邮件（sent me a nice e-mail）是表达心情，不是慷慨给予。",
+          "quote": "sent me a nice e-mail"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proud",
+          "meaning": "自豪的；蒂菲是别人帮着送回来的（made it back to George），乔治没有什么值得自豪的成就。",
+          "quote": "made it back to George"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sympathetic",
+          "meaning": "同情的；蒂菲平安回到他身边（made it back to George），乔治没有要同情的对象。",
+          "quote": "made it back to George"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "He was so",
+          "signalSide": "context-before",
+          "targetText": "He was so thankful",
+          "relation": "空格作乔治的表语，说他此时的心情。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "sent me a nice e-mail",
+          "signalSide": "context-after",
+          "relation": "发暖心邮件致谢，说明心存感激。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    }
+  }
+}

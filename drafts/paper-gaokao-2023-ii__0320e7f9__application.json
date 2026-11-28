@@ -1,0 +1,148 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Ryan,\n\nI’m Li Hua, from Class 3. I’ve heard that you plan to pair us up randomly for after-class speaking practice. I really like the idea of practising more, but I’m afraid random pairs may not work well.\n\nFirst, a confident speaker may end up with a shy one. Then one does all the talking while the other just listens. Also, some partners live in different dorms or have different free time, so they can hardly meet after class.\n\nSo could we choose partners whose free time matches ours? You could also pair students of similar levels and change partners every two weeks. That way, everyone gets a fair chance to speak.\n\nIf you agree, I’d be glad to collect everyone’s free time this week.\n\nYours, sincerely\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给外教的邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "以第一人称“我”写，说问题用一般现在时，提建议多用 could、how about",
+        "readerTone": "写给外教 Ryan，学生对老师，礼貌委婉，先肯定练口语的初衷",
+        "goal": "让外教看到随机分组的问题，并考虑换一种更可行的分组办法"
+      },
+      "taskRequires": [
+        "说明随机两人一组练口语存在什么问题",
+        "提出改进分组的建议"
+      ],
+      "thisEssayChooses": "标准版挑了两个问题：水平差太多时一人包办、一人只听；住处和空闲时间不同，课后凑不到一起。建议对应这两点：按空闲时间配对、水平相近的人一组，再每两周换搭档。结尾主动提出帮老师统计大家的空闲时间。"
+    },
+    "standard": {
+      "essay": "Dear Ryan,\n\nI’m Li Hua, from Class 3. I’ve heard that you plan to pair us up randomly for after-class speaking practice. I really like the idea of practising more, but I’m afraid random pairs may not work well.\n\nFirst, a confident speaker may end up with a shy one. Then one does all the talking while the other just listens. Also, some partners live in different dorms or have different free time, so they can hardly meet after class.\n\nSo could we choose partners whose free time matches ours? You could also pair students of similar levels and change partners every two weeks. That way, everyone gets a fair chance to speak.\n\nIf you agree, I’d be glad to collect everyone’s free time this week.\n\nYours, sincerely\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明问题",
+          "quote": "First, a confident speaker may end up with a shy one. Then one does all the talking while the other just listens."
+        },
+        {
+          "point": "说明问题",
+          "quote": "Also, some partners live in different dorms or have different free time, so they can hardly meet after class."
+        },
+        {
+          "point": "提出建议",
+          "quote": "So could we choose partners whose free time matches ours? You could also pair students of similar levels and change partners every two weeks."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接在给定首句后面说明写信缘由，先肯定老师的想法，再点出担心。",
+          "items": [
+            {
+              "quote": "I’ve heard that you plan to pair us up randomly for after-class speaking practice.",
+              "explain": "先把老师的安排复述清楚，老师一读就知道说的是哪件事；pair us up 是“给我们配对”的地道说法。"
+            },
+            {
+              "quote": "I really like the idea of practising more, but I’m afraid random pairs may not work well.",
+              "explain": "先认可多练口语，再用 I’m afraid 委婉提出异议。学生给老师提意见，这样不显得在否定老师。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：说清随机分组的两个具体问题。",
+          "items": [
+            {
+              "quote": "a confident speaker may end up with a shy one",
+              "explain": "不笼统说“水平不同”，而写出敢说的和害羞的碰到一起，老师能想象到那个画面。end up with 表示“结果跟……分到一起”，点出随机的意味。"
+            },
+            {
+              "quote": "Then one does all the talking while the other just listens.",
+              "explain": "紧接着写后果：一个包办，一个只听。while 把两个人的状态并排对比，问题就落在“有人练不到”上。"
+            },
+            {
+              "quote": "so they can hardly meet after class",
+              "explain": "第二个问题落在“课后”这个关键词上：题面要求课后练，见不到面就练不成。can hardly 比 can’t 更委婉，也更准确。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：建议和上一段的两个问题一一对应。",
+          "items": [
+            {
+              "quote": "So could we choose partners whose free time matches ours?",
+              "explain": "用 could we 的问句提建议，礼貌又留给老师决定的余地；按空闲时间配对，正好解决见不到面的问题。"
+            },
+            {
+              "quote": "pair students of similar levels and change partners every two weeks",
+              "explain": "水平相近解决一人包办，定期换搭档又让大家能和更多同学练，建议具体到“两周一换”，老师拿来就能用。"
+            },
+            {
+              "quote": "That way, everyone gets a fair chance to speak.",
+              "explain": "用 That way 收住建议，从全班同学的角度说好处，理由站在老师关心的“人人都练到”上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "给出下一步：主动帮忙，让老师容易采纳。",
+          "items": [
+            {
+              "quote": "If you agree, I’d be glad to collect everyone’s free time this week.",
+              "explain": "不用“希望您考虑”这类空话收尾，而是给出一件马上能做的事和时间，老师回一句“好”就能推进。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I’m afraid ... may not work well",
+          "function": "委婉地向老师提出不同意见，先软化语气再说问题。"
+        },
+        {
+          "expression": "could we ...? / You could also ...",
+          "function": "用商量的口吻提建议，学生对老师不显得命令。"
+        },
+        {
+          "expression": "If you agree, I’d be glad to ...",
+          "function": "在结尾主动揽下一件具体的事，让建议更容易落地。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Ryan,\n\nI’m Li Hua, from Class 3. I was excited to hear that you want us to practise speaking in pairs after class. However, I’m a little worried that pairing us at random could cause a few problems.\n\nTo begin with, if a confident speaker is matched with a quiet classmate, the conversation easily becomes a one-person show, and the quieter student loses the very practice he or she needs most. What’s more, our timetables vary a lot. Partners who live in different dorms or have different free periods may struggle to find even ten minutes together.\n\nInstead, how about letting us write down our free periods and speaking levels first? Pairs could then be formed from students who can actually meet and who are close in level. Swapping partners every two weeks would also keep the practice fresh.\n\nIf this sounds workable, I’d be happy to put together the list for you by Friday.\n\nYours, sincerely\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明问题",
+          "quote": "To begin with, if a confident speaker is matched with a quiet classmate, the conversation easily becomes a one-person show, and the quieter student loses the very practice he or she needs most."
+        },
+        {
+          "point": "说明问题",
+          "quote": "Partners who live in different dorms or have different free periods may struggle to find even ten minutes together."
+        },
+        {
+          "point": "提出建议",
+          "quote": "Instead, how about letting us write down our free periods and speaking levels first?"
+        },
+        {
+          "point": "提出建议",
+          "quote": "Pairs could then be formed from students who can actually meet and who are close in level."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "the quieter student loses the very practice he or she needs most",
+          "explain": "标准版只说“另一个人只听”，这里点出吃亏的正是最需要练的人，问题说得更重，也更能打动老师。the very 强调“恰恰是”。"
+        },
+        {
+          "quote": "may struggle to find even ten minutes together",
+          "explain": "用“连十分钟都凑不出”这个具体数字代替 can hardly meet，老师更能感到时间冲突是真问题。"
+        },
+        {
+          "quote": "how about letting us write down our free periods and speaking levels first?",
+          "explain": "标准版只提了配对原则，这里给出先登记、再配对的操作步骤，老师照着就能做，结尾帮忙整理名单也就顺理成章。"
+        }
+      ]
+    }
+  }
+}

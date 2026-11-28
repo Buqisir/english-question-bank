@@ -1,0 +1,1045 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:grammar-fill": {
+      "overview": "作者在柏林动物园教大熊猫饲养员英语，帮他们自信地与国际游客、来访的中国同行和记者交流，并借此间接实现了儿时想当饲养员的梦想。",
+      "fullTranslationZh": "每当我告诉别人我在柏林动物园教英语时，几乎总会换来一个疑惑的眼神。这眼神背后，对方正想弄明白我到底教的是谁……难道是动物？\n自2017年6月起，就在两只新来的大熊猫梦梦和娇庆到达之前，我一直在帮动物园的大熊猫饲养员们在说英语时更自在、更自信。那么他们跟谁说英语呢？\n不是跟大熊猫说，尽管用于医疗训练指令的语言其实就是英语。他们要和大批国际游客交流，还要和常来照看大熊猫的来访中国饲养员交流，这些大熊猫是从中国租借来的。他们还需要随时准备好用英语接受国际记者的采访。这就是他们需要一位英语培训师的原因。\n那么，他们在学什么呢？基本上就是如何描述一只大熊猫的生活。能看着大熊猫项目不断发展，并看着大熊猫在新家安顿下来，是一种荣幸。我还是个小女孩时，就希望长大后能当一名动物园饲养员。如今，我通过帮助大熊猫饲养员用英语做好他们的工作，间接实现了这个梦想。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2023-ii:grammar-fill:1",
+          "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+          "sourceText": "Since June 2017, right before the __56__ (arrive) of the two new pandas, Meng Meng and Jiao Qing, I have been helping the panda keepers at the zoo to feel more comfortable and __57__ (confidence) speaking English.",
+          "displayText": "Since June 2017, right before the arrival of the two new pandas, Meng Meng and Jiao Qing, I have been helping the panda keepers at the zoo to feel more comfortable and confident speaking English.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:56",
+            "question:paper-gaokao-2023-ii:57"
+          ],
+          "translationZh": "自2017年6月起，就在两只新来的大熊猫梦梦和娇庆到达之前，我一直在帮动物园的大熊猫饲养员们在说英语时更自在、更自信。",
+          "analysisZh": "主干是我一直在帮饲养员们感到更自在、更自信（I have been helping the panda keepers to feel …）。句首的时间起点（Since June 2017）决定了用现在完成进行时；right before 短语补充这个时间点在两只新熊猫到达之前，梦梦和娇庆是 pandas 的同位语。feel 后两个形容词并列作表语，speaking English 说明在哪方面自在、自信。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 15,
+              "quote": "Since June 2017"
+            },
+            {
+              "start": 90,
+              "end": 127,
+              "quote": "I have been helping the panda keepers"
+            },
+            {
+              "start": 139,
+              "end": 177,
+              "quote": "to feel more comfortable and confident"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-gaokao-2023-ii:grammar-fill:2",
+          "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+          "sourceText": "They talk to the flood of international tourists and to __60__ (visit) Chinese zookeepers who often come to check on the pandas, which are on loan from China.",
+          "displayText": "They talk to the flood of international tourists and to visiting Chinese zookeepers who often come to check on the pandas, which are on loan from China.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:60"
+          ],
+          "translationZh": "他们要和大批国际游客交流，还要和常来照看大熊猫的来访中国饲养员交流，这些大熊猫是从中国租借来的。",
+          "analysisZh": "主干是他们和两类人交流（They talk to … and to …），两个 to 短语由 and 并列。who 从句修饰 zookeepers，说这些饲养员常来照看熊猫；which 从句跟在逗号后，修饰 pandas，补充说明熊猫是从中国租借来的。两个从句的先行词不同，要分清各自修饰谁。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "They talk to"
+            },
+            {
+              "start": 84,
+              "end": 121,
+              "quote": "who often come to check on the pandas"
+            },
+            {
+              "start": 123,
+              "end": 151,
+              "quote": "which are on loan from China"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 61,
+              "quote": "每当我告诉别人我在柏林动物园教英语时，几乎总会换来一个疑惑的眼神。这眼神背后，对方正想弄明白我到底教的是谁……难道是动物？"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:grammar-fill:2"
+              ],
+              "start": 62,
+              "end": 132,
+              "quote": "自2017年6月起，就在两只新来的大熊猫梦梦和娇庆到达之前，我一直在帮动物园的大熊猫饲养员们在说英语时更自在、更自信。那么他们跟谁说英语呢？"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:grammar-fill:3"
+              ],
+              "start": 133,
+              "end": 250,
+              "quote": "不是跟大熊猫说，尽管用于医疗训练指令的语言其实就是英语。他们要和大批国际游客交流，还要和常来照看大熊猫的来访中国饲养员交流，这些大熊猫是从中国租借来的。他们还需要随时准备好用英语接受国际记者的采访。这就是他们需要一位英语培训师的原因。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:grammar-fill:4"
+              ],
+              "start": 251,
+              "end": 374,
+              "quote": "那么，他们在学什么呢？基本上就是如何描述一只大熊猫的生活。能看着大熊猫项目不断发展，并看着大熊猫在新家安顿下来，是一种荣幸。我还是个小女孩时，就希望长大后能当一名动物园饲养员。如今，我通过帮助大熊猫饲养员用英语做好他们的工作，间接实现了这个梦想。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+            "text": "Since June 2017, right before the arrival of the two new pandas, Meng Meng and Jiao Qing, I have been helping the panda keepers at the zoo to feel more comfortable and confident speaking English. And who do they speak English with?"
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+            "text": "Not the pandas, even though the language used for the medical training instructions is actually English. They talk to the flood of international tourists and to visiting Chinese zookeepers who often come to check on the pandas, which are on loan from China. They also need to be ready to give interviews in English with international journalists. This is why they need an English trainer."
+          },
+          {
+            "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+            "text": "So, what are they learning? Basically, how to describe a panda’s life. It’s been an honor to watch the panda programme develop and to see the pandas settle into their new home. As a little girl, I wished to be a zookeeper when I grew up. Now, I’m living out that dream indirectly by helping the panda keepers do their job in English."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 50,
+                "end": 71,
+                "quote": "of the two new pandas"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 12,
+                "end": 20,
+                "quote": "两只新来的大熊猫"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:56"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:56",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 34,
+                "end": 41,
+                "quote": "arrival"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 25,
+                "end": 27,
+                "quote": "到达"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 155,
+                "end": 175,
+                "quote": "more comfortable and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 51,
+                "end": 54,
+                "quote": "更自在"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:57"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:57",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 168,
+                "end": 177,
+                "quote": "confident"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 56,
+                "end": 58,
+                "quote": "自信"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 218,
+                "end": 243,
+                "quote": "who do they speak English"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 61,
+                "end": 68,
+                "quote": "他们跟谁说英语"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:58"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:58",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 226,
+                "end": 230,
+                "quote": "with"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 63,
+                "end": 65,
+                "quote": "跟谁"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 35,
+                "end": 86,
+                "quote": "language used for the medical training instructions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 10,
+                "end": 21,
+                "quote": "用于医疗训练指令的语言"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:59"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:59",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 28,
+                "end": 31,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 10,
+                "end": 21,
+                "quote": "用于医疗训练指令的语言"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 179,
+                "end": 235,
+                "quote": "Chinese zookeepers who often come to check on the pandas"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 44,
+                "end": 52,
+                "quote": "常来照看大熊猫的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:60"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:60",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 161,
+                "end": 169,
+                "quote": "visiting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 52,
+                "end": 54,
+                "quote": "来访"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 288,
+                "end": 301,
+                "quote": "ready to give"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 81,
+                "end": 91,
+                "quote": "随时准备好用英语接受"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:61"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:61",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 293,
+                "end": 303,
+                "quote": "interviews"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 96,
+                "end": 98,
+                "quote": "采访"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 364,
+                "end": 371,
+                "quote": "This is"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 379,
+                "end": 407,
+                "quote": "they need an English trainer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 99,
+                "end": 102,
+                "quote": "这就是"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:62"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:62",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 355,
+                "end": 358,
+                "quote": "why"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 113,
+                "end": 116,
+                "quote": "的原因"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 44,
+                "end": 74,
+                "quote": "how to describe a panda’s life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 16,
+                "end": 28,
+                "quote": "如何描述一只大熊猫的生活"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:63"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:63",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 28,
+                "end": 37,
+                "quote": "Basically"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 11,
+                "end": 14,
+                "quote": "基本上"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 95,
+                "end": 131,
+                "quote": "to watch the panda programme develop"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 139,
+                "end": 163,
+                "quote": "to see the pandas settle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 29,
+                "end": 41,
+                "quote": "能看着大熊猫项目不断发展"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:64"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:64",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 127,
+                "end": 130,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 42,
+                "end": 43,
+                "quote": "并"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-ii:65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 185,
+                "end": 201,
+                "quote": "As a little girl"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 237,
+                "end": 251,
+                "quote": "when I grew up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 62,
+                "end": 70,
+                "quote": "我还是个小女孩时"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-ii:65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:65"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:65",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 197,
+                "end": 203,
+                "quote": "wished"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:4",
+                "start": 72,
+                "end": 74,
+                "quote": "希望"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2023-ii:grammar-fill:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:56",
+              "question:paper-gaokao-2023-ii:57"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2023-ii:grammar-fill:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 0,
+                "end": 15,
+                "quote": "Since June 2017"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 90,
+                "end": 127,
+                "quote": "I have been helping the panda keepers"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 139,
+                "end": 177,
+                "quote": "to feel more comfortable and confident"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 0,
+                "end": 9,
+                "quote": "自2017年6月起"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:2",
+                "start": 30,
+                "end": 46,
+                "quote": "我一直在帮动物园的大熊猫饲养员们"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-gaokao-2023-ii:grammar-fill:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:60"
+            ],
+            "selectedSentenceId": "sentence:group:paper-gaokao-2023-ii:grammar-fill:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 105,
+                "end": 117,
+                "quote": "They talk to"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 189,
+                "end": 226,
+                "quote": "who often come to check on the pandas"
+              },
+              {
+                "textId": "completed:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 228,
+                "end": 256,
+                "quote": "which are on loan from China"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 44,
+                "end": 59,
+                "quote": "常来照看大熊猫的来访中国饲养员"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-ii:grammar-fill",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:grammar-fill:3",
+                "start": 62,
+                "end": 75,
+                "quote": "这些大熊猫是从中国租借来的"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-ii:56": {
+      "blankId": "blank:paper-gaokao-2023-ii:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "arrive",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "arrival",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格在定冠词（the）后、介词短语（of the two new pandas）前，作介词（before）的宾语，要用名词，所以把动词（arrive）变成名词（arrival）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "right before the",
+          "signalSide": "passage",
+          "relation": "定冠词后要接名词，这个名词作介词（before）的宾语。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "of the two new pandas",
+          "signalSide": "passage",
+          "relation": "后面的介词短语（of）说明是谁到达，前面的词是名词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:57": {
+      "blankId": "blank:paper-gaokao-2023-ii:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "confidence",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "confident",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格和形容词「自在」（comfortable）由（and）并列，一起作系动词（feel）的表语，所以名词（confidence）要变成形容词（confident）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "more comfortable and",
+          "signalSide": "passage",
+          "relation": "并列连词（and）前是形容词（comfortable），空格也要用形容词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "to feel",
+          "signalSide": "passage",
+          "relation": "系动词（feel）后接形容词作表语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:58": {
+      "blankId": "blank:paper-gaokao-2023-ii:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "with",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格给提到句首的疑问词（who）当介词宾语找介词；还原语序是他们和谁说英语（speak English with who），表示说话的对象，用（with）。后文又说他们要和游客交流（talk to），也印证问的是交流对象。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "who do they speak English",
+          "signalSide": "passage",
+          "relation": "疑问词（who）提到句首，句末缺一个支配它的介词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "speak English",
+          "signalSide": "passage",
+          "relation": "和某人说英语，要用介词（with）引出说话对象。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:59": {
+      "blankId": "blank:paper-gaokao-2023-ii:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-postmodified-specific",
+        "features": []
+      },
+      "reason": "空格限定名词「语言」（language），后面的过去分词短语（used for the medical training instructions）把它限定为用于医疗训练指令的那种语言，是特指，用定冠词（the）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "language used for the medical training instructions",
+          "signalSide": "passage",
+          "relation": "后置的过去分词短语限定语言（language），使它成为特指。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:60": {
+      "blankId": "blank:paper-gaokao-2023-ii:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "visit",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "visiting",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "active-relation"
+        ]
+      },
+      "reason": "空格作定语，修饰名词「中国饲养员」（Chinese zookeepers）；这些饲养员是来访的人，和动词（visit）是主动关系，所以用现在分词（visiting）放在名词前作定语。后面的从句（who often come to check on the pandas）说他们常来，也印证是来访者。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "Chinese zookeepers",
+          "signalSide": "passage",
+          "relation": "空格修饰中国饲养员（Chinese zookeepers），他们是主动来访的人。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "who often come to check on the pandas",
+          "signalSide": "passage",
+          "relation": "定语从句说他们常来照看熊猫，印证来访的意思。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:61": {
+      "blankId": "blank:paper-gaokao-2023-ii:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "interview",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "interviews",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作动词（give）的宾语；可数名词（interview）前没有冠词，又是泛指他们要随时应对的多次采访，所以用复数（interviews）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "ready to give",
+          "signalSide": "passage",
+          "relation": "空格作动词（give）的宾语，可数名词前没有冠词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "in English with international journalists",
+          "signalSide": "passage",
+          "relation": "要应对的是多位国际记者的采访，泛指多次。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:62": {
+      "blankId": "blank:paper-gaokao-2023-ii:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "why",
+      "role": null,
+      "similarityProfile": {
+        "route": "when-where-why-how",
+        "features": [
+          "predicative-clause"
+        ]
+      },
+      "reason": "空格引导作表语的从句，接在这就是（This is）后面；从句（they need an English trainer）主谓宾齐全，不缺成分，前文列出的是他们要用英语的种种场合，这里说的是需要培训师的原因，用（why）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "This is",
+          "signalSide": "passage",
+          "relation": "这就是（This is）后接表语从句，空格是连接词。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "they need an English trainer",
+          "signalSide": "passage",
+          "relation": "从句成分完整，连接词只表原因。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:63": {
+      "blankId": "blank:paper-gaokao-2023-ii:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "basic",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "Basically",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-sentence",
+        "features": []
+      },
+      "reason": "空格在句首，用逗号和后面隔开，修饰整句回答（how to describe a panda’s life），要用副词，所以形容词（basic）变成副词（basically），句首字母大写。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "how to describe a panda’s life",
+          "signalSide": "passage",
+          "relation": "空格修饰后面整个回答，用副词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:64": {
+      "blankId": "blank:paper-gaokao-2023-ii:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接两个不定式短语（to watch the panda programme develop 和 to see the pandas settle），二者都说作者觉得荣幸的事，是并列关系，用（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "to watch the panda programme develop",
+          "signalSide": "passage",
+          "relation": "前一个不定式短语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "to see the pandas settle",
+          "signalSide": "passage",
+          "relation": "后一个不定式短语，与前一个并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:65": {
+      "blankId": "blank:paper-gaokao-2023-ii:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "wish",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "wished",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "空格作主语（I）的谓语；小时候（As a little girl）说的是过去的事，同句从句也用了过去式（grew up），所以用一般过去时（wished）。下一句用现在（Now）转回现在。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "As a little girl",
+          "signalSide": "passage",
+          "relation": "作者小时候，是过去的事。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "when I grew up",
+          "signalSide": "passage",
+          "relation": "从句用过去式，主句谓语同用过去时。"
+        }
+      ]
+    }
+  }
+}

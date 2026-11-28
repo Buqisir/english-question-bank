@@ -1,0 +1,1125 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Jack, are you going camping with your friends this weekend?\nM: It depends. If it’s sunny, we’ll go.\nW: The weatherman says it’s going to rain.\nM: In that case, we’ll go to the cinema instead.",
+      "translationZh": "女：杰克，你这个周末要和朋友去露营吗？\n男：看情况。要是天晴，我们就去。\n女：天气预报员说要下雨。\n男：那样的话，我们就改去电影院。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "杰克本想周末和朋友去露营，听说要下雨，就改去看电影。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "杰克，你这个周末要和朋友去露营吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "看情况。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "要是天晴，我们就去。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "天气预报员说要下雨。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "那样的话，我们就改去电影院。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Excuse me, could you mind my bags for a moment? I want to buy some food at the convenience store.\nM: No problem. But be quick. It was announced that my train would arrive in 10 minutes.",
+      "translationZh": "女：打扰一下，你能帮我看一会儿包吗？我想去便利店买点吃的。\n男：没问题。不过要快点。广播说我的火车十分钟后就到。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女士请男士帮忙看一会儿包，自己去便利店买吃的，男士答应了但让她快去快回。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "打扰一下，你能帮我看一会儿包吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我想去便利店买点吃的。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "不过要快点。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "广播说我的火车十分钟后就到。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Bob came out of hospital last Friday. Have you got a chance to visit him?\nM: I plan to see him this Saturday.\nW: Aren’t you going to the conference then?\nM: No. It has been rescheduled for next Monday.",
+      "translationZh": "女：鲍勃上周五出院了。你有机会去看他吗？\n男：我打算这周六去看他。\n女：那时你不是要去开会吗？\n男：不去了。会议改到下周一了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "鲍勃上周五出院，男士打算这周六去看他；原定的会议已改到下周一。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "鲍勃上周五出院了。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你有机会去看他吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我打算这周六去看他。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "那时你不是要去开会吗？"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "不去了。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "会议改到下周一了。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "M: Sorry, Miss. We made a terrible mistake adding up the bill. Here is the ten dollars we have to return to you.\nW: Oh, I didn’t notice that. It’s OK. Don’t blame the waiter. He’s been really nice.",
+      "translationZh": "男：对不起，女士。我们算账单时犯了个严重的错误。这是我们要退给您的十美元。\n女：哦，我都没注意到。没关系。别怪那位服务员。他一直都很好。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "餐厅男士因算错账单向女士道歉并退还十美元，女士表示没关系，还替服务员说好话。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "对不起，女士。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我们算账单时犯了个严重的错误。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "这是我们要退给您的十美元。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "哦，我都没注意到。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "没关系。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "别怪那位服务员。"
+        },
+        {
+          "id": "listening-text-4:7",
+          "zh": "他一直都很好。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Do you think we should get Steve a book for the new year?\nM: Books are good. But Steve wouldn’t take just any book. He has had this particular one on geography.",
+      "translationZh": "女：你觉得我们新年该给史蒂夫买本书吗？\n男：书挺好的。可史蒂夫不会随便什么书都要。他已经有这本讲地理的书了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "两人商量新年给史蒂夫买书当礼物，男士说史蒂夫对书很挑剔。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你觉得我们新年该给史蒂夫买本书吗？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "书挺好的。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "可史蒂夫不会随便什么书都要。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "他已经有这本讲地理的书了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Hello, Sara.\nW: Hello, David. I can’t come for dinner tonight. Sorry.\nM: Oh, what happened?\nW: We’ve got a new case and things get pretty crazy here in the office.\nM: Well, then I’ll come to you.\nW: No, no, not tonight. Let me see if I can arrange another night.\nM: Sara, please. We need to talk. It’s about my job.\nW: Then tell me on the phone.\nM: No, it’s better if we do it in person. How about tomorrow night?\nW: I’m not sure. You can give me a call tomorrow afternoon.\nM: OK.",
+      "translationZh": "男：你好，萨拉。\n女：你好，大卫。我今晚不能来吃晚饭了。对不起。\n男：哦，出什么事了？\n女：我们接了个新案子，办公室这边忙得一团糟。\n男：那好，我去你那儿吧。\n女：不，不，今晚不行。我看看能不能另约一个晚上。\n男：萨拉，拜托了。我们得谈谈。是关于我工作的事。\n女：那就在电话里跟我说吧。\n男：不，最好当面谈。明天晚上怎么样？\n女：我说不准。你明天下午给我打个电话吧。\n男：好的。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "萨拉因工作忙取消今晚的晚饭，大卫坚持要当面谈自己工作的事，约好明天下午再打电话。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你好，萨拉。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "你好，大卫。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我今晚不能来吃晚饭了。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "对不起。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "哦，出什么事了？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我们接了个新案子，办公室这边忙得一团糟。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那好，我去你那儿吧。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "不，不，今晚不行。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我看看能不能另约一个晚上。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "萨拉，拜托了。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "我们得谈谈。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "是关于我工作的事。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "那就在电话里跟我说吧。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "不，最好当面谈。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "明天晚上怎么样？"
+        },
+        {
+          "id": "listening-text-6:16",
+          "zh": "我说不准。"
+        },
+        {
+          "id": "listening-text-6:17",
+          "zh": "你明天下午给我打个电话吧。"
+        },
+        {
+          "id": "listening-text-6:18",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: Jim will call on us this afternoon. Do you know where he is now?\nM: Er... wait. Let me see. He has sent two messages saying that he’s done with his work at the office and got a taxi and... and he’ll arrive in twenty minutes.\nW: We can’t keep him waiting outside our home. We have to hurry.\nM: But it takes at least half an hour to get to the city center by bus. Look at the traffic.\nW: Let’s get off. We can save at least twenty minutes by walking through the park.\nM: Are you sure?\nW: Yes. A hundred percent.",
+      "translationZh": "女：吉姆今天下午要来拜访我们。你知道他现在在哪儿吗？\n男：呃……等等。我看看。他发来两条消息，说他已经在办公室忙完工作，打上了出租车，还有……还说他二十分钟后就到。\n女：我们不能让他在家门外等着。我们得抓紧。\n男：可坐公交到市中心至少要半个小时。看看这路况。\n女：我们下车吧。穿过公园走过去，至少能省二十分钟。\n男：你确定吗？\n女：确定。百分之百。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "吉姆已打车往两人家里赶，两人坐的公交遇上堵车，女士提议下车穿过公园走回家。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "吉姆今天下午要来拜访我们。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你知道他现在在哪儿吗？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "呃……"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "等等。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "我看看。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "他发来两条消息，说他已经在办公室忙完工作，打上了出租车，还有……"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "还说他二十分钟后就到。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我们不能让他在家门外等着。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "我们得抓紧。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "可坐公交到市中心至少要半个小时。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "看看这路况。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "我们下车吧。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "穿过公园走过去，至少能省二十分钟。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "你确定吗？"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "确定。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "百分之百。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Morning, Mark.\nM: Morning, Clara. How was your weekend?\nW: Great. I went to my grandpa’s. He invited us to pick vegetables on his farm. My daughter had a great time there. What about you?\nM: Oh, I had a truly incredible experience. I dropped by a yard sale on Saturday and got several books.\nW: Novels?\nM: A novel and two poetry collections. As I leafed through the novel, a piece of paper fell out. It was an air ticket from 2012. The flight was from Los Angeles to Chicago and the name on the ticket was Ashley Louis.\nW: Was it?\nM: Yes. Ashley, my sister. In 2012, she lived in Los Angeles and her husband worked in Chicago. Both of them often flew between two cities. I asked the seller where he got the book. He said it was bought at a second-hand bookstore in Los Angeles three years ago. Last year, he and his family moved from Los Angeles to Philadelphia.\nW: So, all the way across the country, your sister’s old book landed in your hands. That’s really crazy.",
+      "translationZh": "女：早上好，马克。\n男：早上好，克拉拉。周末过得怎么样？\n女：很好。我去了我爷爷家。他邀请我们去他的农场摘菜。我女儿在那儿玩得很开心。你呢？\n男：哦，我有一段真是不可思议的经历。我周六顺路去了一个庭院旧货出售，买了几本书。\n女：是小说吗？\n男：一本小说和两本诗集。我翻那本小说的时候，一张纸掉了出来。那是一张2012年的机票。航班是从洛杉矶飞芝加哥，票上的名字是阿什莉·路易斯。\n女：是吗？\n男：是的。阿什莉，是我姐姐。2012年，她住在洛杉矶，她丈夫在芝加哥工作。他们俩经常在两座城市之间飞来飞去。我问卖家这本书是从哪儿来的。他说这是三年前在洛杉矶一家二手书店买的。去年，他和家人从洛杉矶搬到了费城。\n女：这么说，你姐姐的旧书横跨了整个国家，落到了你手里。这真是太神奇了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "马克在旧货出售中买到一本小说，书里掉出姐姐多年前的机票，旧书辗转横跨美国到了他手里。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "早上好，马克。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "早上好，克拉拉。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "周末过得怎么样？"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "很好。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "我去了我爷爷家。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "他邀请我们去他的农场摘菜。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我女儿在那儿玩得很开心。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "哦，我有一段真是不可思议的经历。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我周六顺路去了一个庭院旧货出售，买了几本书。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "是小说吗？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "一本小说和两本诗集。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我翻那本小说的时候，一张纸掉了出来。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "那是一张2012年的机票。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "航班是从洛杉矶飞芝加哥，票上的名字是阿什莉·路易斯。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "是吗？"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "阿什莉，是我姐姐。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "2012年，她住在洛杉矶，她丈夫在芝加哥工作。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "他们俩经常在两座城市之间飞来飞去。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "我问卖家这本书是从哪儿来的。"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "他说这是三年前在洛杉矶一家二手书店买的。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "去年，他和家人从洛杉矶搬到了费城。"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "这么说，你姐姐的旧书横跨了整个国家，落到了你手里。"
+        },
+        {
+          "id": "listening-text-8:25",
+          "zh": "这真是太神奇了。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Victor, you’ve been here in Indiana for six weeks now. How are you feeling?\nM: I think I’ve got used to college life, going to classes, working out and hanging out with my friends. Though there’s pressure to meet deadlines, life here is never boring.\nW: What’s been hard about being an Indianan basketball player?\nM: Well, the training is very competitive, weightlifting and running every day. It’s not like high school. In high school, I really didn’t have to do that. I’m just trying to get used to it. And I think I am.\nW: At this point, how do you see yourself fitting into this group?\nM: I think we’re all different. George is from Britain. Chris and Leo are from Australia. I’m from France. And the rest are Americans. But I get along with everybody. You know, we are really starting to bond. It’s great to see how we grow each day as a team.\nW: Thanks, Victor. I wish you a very happy and fruitful stay in Indiana.",
+      "translationZh": "女：维克多，你来印第安纳已经六周了。感觉怎么样？\n男：我想我已经适应了大学生活，上课、健身、和朋友出去玩。虽然有按时完成任务的压力，但这里的生活从不无聊。\n女：作为印第安纳的篮球队员，什么让你觉得难？\n男：嗯，训练竞争非常激烈，每天都要举重和跑步。这跟高中不一样。上高中时，我真的不用这样练。我正努力去适应。我觉得我在适应了。\n女：到目前为止，你觉得自己融入这个集体的情况怎么样？\n男：我觉得我们每个人都不一样。乔治来自英国。克里斯和利奥来自澳大利亚。我来自法国。其余的人是美国人。不过我和每个人都相处得很好。你知道，我们真的开始凝聚在一起了。看到我们作为一个团队每天都在成长，真是太棒了。\n女：谢谢你，维克多。祝你在印第安纳过得愉快、收获满满。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "记者采访篮球队员维克多，他谈到适应大学生活和高强度训练，以及与多国队友日益团结。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "维克多，你来印第安纳已经六周了。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "感觉怎么样？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我想我已经适应了大学生活，上课、健身、和朋友出去玩。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "虽然有按时完成任务的压力，但这里的生活从不无聊。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "作为印第安纳的篮球队员，什么让你觉得难？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "嗯，训练竞争非常激烈，每天都要举重和跑步。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "这跟高中不一样。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "上高中时，我真的不用这样练。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我正努力去适应。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我觉得我在适应了。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "到目前为止，你觉得自己融入这个集体的情况怎么样？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我觉得我们每个人都不一样。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "乔治来自英国。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "克里斯和利奥来自澳大利亚。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "我来自法国。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "其余的人是美国人。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "不过我和每个人都相处得很好。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "你知道，我们真的开始凝聚在一起了。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "看到我们作为一个团队每天都在成长，真是太棒了。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "谢谢你，维克多。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "祝你在印第安纳过得愉快、收获满满。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Good evening, dear listeners. When was the last time you enjoyed leisure activities? Do you want to live a full and happy life? Today, I’m going to introduce to you a magazine that features the art of living. The Idler was launched by Tom Hodgkinson, back in 1993. With the intention of providing a bit of fun, freedom and achievement in the busy world, it is now published bimonthly. In every issue, you will find an interesting mix of interviews and essays on the good life, history, philosophy, arts and fashion photography. You will find much to laugh at and much useful stuff as well, from recipes for making bacon to guides to housekeeping. If you ever felt that there is more to life than boring jobs, then why not subscribe to it? The Idler is a cheering read that makes you feel better about life. You can download the application and subscribe today to get your first issue free.",
+      "translationZh": "女：亲爱的听众们，晚上好。你上一次享受休闲活动是什么时候？你想过充实而快乐的生活吗？今天，我要向大家介绍一本以生活艺术为特色的杂志。《闲人》是汤姆·霍奇金森早在1993年创办的。它的初衷是在忙碌的世界里给人带来一点乐趣、自由和成就感，现在每两个月出版一期。每一期里，你都会看到有趣的访谈和文章，内容涉及美好生活、历史、哲学、艺术和时尚摄影。你会发现很多让人发笑的内容，也有很多实用的东西，从做培根的食谱到持家指南。如果你曾觉得生活不只是无聊的工作，那为什么不订阅它呢？《闲人》是一本让人振奋的读物，能让你对生活感觉更好。你可以下载应用程序，今天订阅就能免费获得第一期。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "积极的生活态度"
+      },
+      "summaryZh": "主持人介绍汤姆·霍奇金森创办的生活艺术杂志《闲人》，介绍其丰富内容并鼓励听众订阅。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "亲爱的听众们，晚上好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "你上一次享受休闲活动是什么时候？"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "你想过充实而快乐的生活吗？"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "今天，我要向大家介绍一本以生活艺术为特色的杂志。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "《闲人》是汤姆·霍奇金森早在1993年创办的。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "它的初衷是在忙碌的世界里给人带来一点乐趣、自由和成就感，现在每两个月出版一期。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "每一期里，你都会看到有趣的访谈和文章，内容涉及美好生活、历史、哲学、艺术和时尚摄影。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "你会发现很多让人发笑的内容，也有很多实用的东西，从做培根的食谱到持家指南。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "如果你曾觉得生活不只是无聊的工作，那为什么不订阅它呢？"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "《闲人》是一本让人振奋的读物，能让你对生活感觉更好。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "你可以下载应用程序，今天订阅就能免费获得第一期。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "杰克这个周末可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "去露营。",
+        "B": "拜访朋友。",
+        "C": "看电影。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "In that case, we’ll go to the cinema instead."
+      },
+      "reasonZh": "杰克说天晴才去露营，女士说天气预报要下雨，他便说那就改去电影院（go to the cinema instead），去电影院就是看电影，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "露营（camping）是天晴才去的计划，天气预报说要下雨，杰克已经改了主意。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "朋友（friends）是要和杰克一起去露营的人，杰克没说要去拜访朋友。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士请男士做什么？",
+      "optionTranslationsZh": {
+        "A": "照看她的包。",
+        "B": "帮她打包食物。",
+        "C": "查看火车时刻表。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Excuse me, could you mind my bags for a moment?"
+      },
+      "reasonZh": "“照看她的包”就是女士说的帮她看一会儿包（mind my bags），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "买吃的（buy some food）是女士自己要去便利店做的事，她没让男士帮她打包食物。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "火车（my train）是男士说自己的车十分钟后到，用来催女士快点，不是要查时刻表。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士什么时候去看鲍勃？",
+      "optionTranslationsZh": {
+        "A": "这周五。",
+        "B": "这周六。",
+        "C": "下周一。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I plan to see him this Saturday."
+      },
+      "reasonZh": "男士直接说了这周六（this Saturday）去看鲍勃，选项沿用，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "周五是鲍勃出院的日子，而且是上周五（last Friday），不是这周五。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "下周一（next Monday）是会议改期后的时间，男士正因会议改期，周六才有空去看鲍勃。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士为什么道歉？",
+      "optionTranslationsZh": {
+        "A": "因为饭菜难吃。",
+        "B": "因为多收了钱。",
+        "C": "因为服务员态度粗鲁。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We made a terrible mistake adding up the bill."
+      },
+      "reasonZh": "男士说算账单时出了大错（mistake adding up the bill），接着要退还女士十美元（ten dollars we have to return），可见是多收了钱，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "糟糕（terrible）说的是算账出的错很严重（terrible mistake），不是饭菜难吃。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "服务员（waiter）是女士提到的，她让对方别怪服务员，还说他一直很好（He’s been really nice）。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "写一本书。",
+        "B": "举办庆祝活动。",
+        "C": "买礼物。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Do you think we should get Steve a book for the new year?"
+      },
+      "reasonZh": "女士提议新年给史蒂夫买本书（get Steve a book for the new year），男士接着说他挑书，两人在商量送他什么，也就是买礼物，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "书（book）是打算买来送给史蒂夫的，两人没谈写书。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "新年（the new year）只是送书的时机，两人谈的是给史蒂夫买什么书。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "萨拉为什么打这个电话？",
+      "optionTranslationsZh": {
+        "A": "征求建议。",
+        "B": "安排一次出游。",
+        "C": "取消一次约会。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I can’t come for dinner tonight."
+      },
+      "reasonZh": "“取消约会”就是萨拉一开口说的今晚不能来吃饭了（can’t come for dinner tonight），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "安排（arrange）是萨拉说再看看能不能另约一晚（arrange another night），这是推掉今晚之后的补话，而且约的是吃饭，不是出游。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "大卫想做什么？",
+      "optionTranslationsZh": {
+        "A": "去参加晚宴。",
+        "B": "和萨拉当面谈。",
+        "C": "处理新案子。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "No, it’s better if we do it in person."
+      },
+      "reasonZh": "大卫说要谈自己工作的事，萨拉让他在电话里说，他坚持最好当面谈（in person），选项沿用，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "晚饭（dinner）是萨拉原本要来吃的那顿饭，她已经说来不了，大卫没提要去什么晚宴。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "新案子（a new case）是萨拉办公室的事，是她来不了的原因；大卫要谈的是自己的工作（about my job）。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "吉姆现在在哪里？",
+      "optionTranslationsZh": {
+        "A": "在出租车上。",
+        "B": "在公交车上。",
+        "C": "在他的办公室。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "He has sent two messages saying that he’s done with his work at the office and got a taxi and..."
+      },
+      "reasonZh": "男士说吉姆发消息称已在办公室忙完、打上了出租车（got a taxi），接下来半句又说他二十分钟后到（he’ll arrive in twenty minutes），可见他正坐出租车赶来，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "公交（by bus）是两位说话人自己坐的车，男士说坐公交到市中心至少要半小时。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "办公室（office）是吉姆刚忙完工作的地方，他已经离开，打了车往这边赶。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士的建议是什么？",
+      "optionTranslationsZh": {
+        "A": "去市中心。",
+        "B": "抄近路回家。",
+        "C": "在公园和吉姆见面。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We can save at least twenty minutes by walking through the park."
+      },
+      "reasonZh": "女士要赶在吉姆之前到家，提议下车（Let’s get off），穿过公园走能省至少二十分钟（save at least twenty minutes），这就是抄近路回家，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "市中心（city center）是男士说的，坐公交去那里至少要半小时，女士正是嫌慢才提议下车步行。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "公园（park）是步行要穿过的地方；吉姆要来的是他们家（outside our home），没约在公园见。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "克拉拉周末做了什么？",
+      "optionTranslationsZh": {
+        "A": "她种了蔬菜。",
+        "B": "她去了庭院旧货出售。",
+        "C": "她去看望了爷爷。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I went to my grandpa’s."
+      },
+      "reasonZh": "男士称女士为克拉拉，她说周末去了爷爷家（went to my grandpa’s），也就是看望爷爷，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "蔬菜（vegetables）是爷爷请他们去农场摘的（pick vegetables），不是克拉拉种的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "庭院旧货出售（yard sale）是马克周六去的地方，不是克拉拉。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "马克在他买的一本书里发现了什么？",
+      "optionTranslationsZh": {
+        "A": "一张飞机票。",
+        "B": "一张全家福。",
+        "C": "一张明信片。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It was an air ticket from 2012."
+      },
+      "reasonZh": "马克翻小说时掉出一张纸，他说那是一张 2012 年的机票（air ticket），“飞机票”与机票同义，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "家人（family）是卖家说他和家人去年搬去了费城，书里掉出来的只是一张机票。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "马克住在哪里？",
+      "optionTranslationsZh": {
+        "A": "洛杉矶。",
+        "B": "芝加哥。",
+        "C": "费城。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Last year, he and his family moved from Los Angeles to Philadelphia."
+      },
+      "reasonZh": "马克是在卖家的庭院旧货出售上买到书的，卖家去年全家搬到了费城（moved … to Philadelphia），克拉拉又说旧书横跨整个国家到了他手里（all the way across the country），可见马克住在费城，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "洛杉矶（Los Angeles）是阿什莉 2012 年住的地方，也是这本书最初被买走的城市。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "芝加哥（Chicago）是机票上航班的目的地，也是阿什莉丈夫当年工作的地方。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "马克和阿什莉是什么关系？",
+      "optionTranslationsZh": {
+        "A": "兄妹或姐弟。",
+        "B": "夫妻。",
+        "C": "父女。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Ashley, my sister."
+      },
+      "reasonZh": "马克直接说阿什莉是他的姐妹（my sister），一男一女，正是兄妹或姐弟，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "丈夫（her husband）指阿什莉的丈夫，当年在芝加哥工作，不是马克。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女儿（My daughter）是克拉拉说自己的女儿在农场玩得很开心，与马克和阿什莉无关。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士可能是做什么的？",
+      "optionTranslationsZh": {
+        "A": "老师。",
+        "B": "记者。",
+        "C": "运动员。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "What’s been hard about being an Indianan basketball player?"
+      },
+      "reasonZh": "女士依次问维克多来了六周感觉如何、当篮球队员难在哪、怎么融入队伍，最后祝他在印第安纳过得愉快，这是记者采访的问法，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "运动员是被采访的维克多，他是篮球队员；女士是一直在提问的一方。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "作为篮球队员，维克多觉得什么难？",
+      "optionTranslationsZh": {
+        "A": "让自己适应高强度训练。",
+        "B": "应对来自教练的压力。",
+        "C": "找回高中时学的技术。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, the training is very competitive, weightlifting and running every day."
+      },
+      "reasonZh": "“适应高强度训练”就是维克多说的训练竞争激烈、天天举重跑步（very competitive … every day），他还说正努力适应（trying to get used to it），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "压力（pressure）是他谈大学生活时说的赶截止日期的压力（pressure to meet deadlines），不是来自教练。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "高中（high school）是拿来对比的：高中时他根本不用这样练（didn’t have to do that），不是要找回高中的技术。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "维克多是怎么说队员们的？",
+      "optionTranslationsZh": {
+        "A": "他们年龄相同。",
+        "B": "他们性格相似。",
+        "C": "他们来自不同国家。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I think we’re all different."
+      },
+      "reasonZh": "维克多说大家都不一样，接着列出队友来自英国、澳大利亚、法国和美国（from Britain … Australia … France），概括起来就是来自不同国家，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "他说和每个人都相处得好（get along with everybody），讲的是关系融洽，不是性格相似。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "维克多现在觉得他的球队怎么样？",
+      "optionTranslationsZh": {
+        "A": "快要解散了。",
+        "B": "是印第安纳最好的。",
+        "C": "越来越强了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It’s great to see how we grow each day as a team."
+      },
+      "reasonZh": "“越来越强”就是维克多说的大家开始凝聚（starting to bond）、作为团队每天都在成长（grow each day as a team），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "维克多说队员们真正开始凝聚在一起（really starting to bond），与快要解散正相反。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "印第安纳（Indiana）是他所在的地方，他没拿球队和别的队比，没说是那里最好的。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "汤姆·霍奇金森是谁？",
+      "optionTranslationsZh": {
+        "A": "一本杂志的创办人。",
+        "B": "一部小说的出版人。",
+        "C": "一家报纸的编辑。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The Idler was launched by Tom Hodgkinson, back in 1993."
+      },
+      "reasonZh": "“杂志创办人”就是说话人说的《闲人》这本杂志由他在 1993 年创办（launched by Tom Hodgkinson），选 A。"
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "关于《闲人》的内容，我们知道什么？",
+      "optionTranslationsZh": {
+        "A": "它很守旧。",
+        "B": "它涉及面很广。",
+        "C": "它以学生为对象。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "In every issue, you will find an interesting mix of interviews and essays on the good life, history, philosophy, arts and fashion photography."
+      },
+      "reasonZh": "每期既有访谈又有文章，谈美好生活、历史、哲学、艺术和时尚摄影，后面还说有培根食谱和持家指南（recipes … guides to housekeeping），概括起来就是内容广泛，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "1993 年（back in 1993）只是创刊时间，说话人没说内容守旧，还提到了时尚摄影（fashion photography）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "说话人面向所有听众（dear listeners），劝的是觉得工作无聊的人订阅（more to life than boring jobs），没说专为学生办。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人为什么做这段讲话？",
+      "optionTranslationsZh": {
+        "A": "做推广。",
+        "B": "讨论一个问题。",
+        "C": "介绍一位讲座人。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You can download the application and subscribe today to get your first issue free."
+      },
+      "reasonZh": "说话人介绍完杂志，先问听众为什么不订阅（why not subscribe to it），最后说今天下载应用订阅、首期免费（first issue free），这是在推广杂志，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "期（issue）在这里指杂志的一期（first issue），不是要讨论的问题。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "介绍（introduce）的是一本杂志（introduce to you a magazine），不是一位讲座人。"
+        }
+      ]
+    }
+  }
+}

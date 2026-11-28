@@ -1,0 +1,711 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:reading-a": {
+      "overview": "黄石国家公园介绍今夏四项护林员活动：野生动物观赏讲习、少年护林员野生动物奥运会、艺术家观景点峡谷讲座和摄影工作坊，逐项写明日期、内容和集合地点。",
+      "fullTranslationZh": "黄石国家公园全年在园区各处开展多种护林员活动。以下是今年夏季护林员活动的介绍。\n\n体验黄石野生动物（5月26日至9月2日）\n\n无论你是在偏远地区的小径上徒步、露营，还是只在路边欣赏园内令人惊叹的野生动物，这个简短的讲习活动都适合你和家人。了解去哪里寻找动物，以及如何安全地享受观赏野生动物的乐趣。在峡谷村商店集合。\n\n少年护林员野生动物奥运会（6月5日至8月21日）\n\n孩子们可以测试自己的本领，和黄石的动物比一比能力。停留时间长短随你的安排而定。在游客教育中心门前集合。\n\n艺术家观景点峡谷讲座（6月9日至9月2日）\n\n在一处经典观景点，欣赏下瀑布、黄石河和峡谷令人叹为观止的色彩，同时了解这一地区的自然史和人文史。探究艺术家和摄影师为何一直被这个特别的地方吸引。参加这场简短讲座，请在南缘路艺术家观景点的下层平台集合。\n\n摄影工作坊（6月19日和7月10日）\n\n提升你的摄影技能——跟随黄石公园的摄影师参加一场动手实践活动，激发你用新颖而富有创意的方式欣赏黄石的美丽与奇妙。\n\n6月19日——瀑布与广角：在艺术家观景点集合。\n\n7月10日——野花与白平衡：在奇滕登停车区的沃什伯恩步道起点集合。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+          "sourceText": "Whether you’re hiking a backcountry trail (小径), camping, or just enjoying the park’s amazing wildlife from the road, this quick workshop is for you and your family.",
+          "displayText": "Whether you’re hiking a backcountry trail (小径), camping, or just enjoying the park’s amazing wildlife from the road, this quick workshop is for you and your family.",
+          "relatedQuestionIds": [],
+          "translationZh": "无论你是在偏远地区的小径上徒步、露营，还是只在路边欣赏园内令人惊叹的野生动物，这个简短的讲习活动都适合你和家人。",
+          "analysisZh": "主干在逗号后面：this quick workshop is for you and your family（这个简短的讲习适合你和家人）。前面的 Whether 从句列出三种情况：hiking、camping 和 just enjoying … from the road，三个 -ing 并列，意思是不管你怎么游览公园，这项活动都适合你。读这类句子先跳过 Whether 从句找到主语 this quick workshop，再回头看它适用的范围。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 7,
+              "quote": "Whether"
+            },
+            {
+              "start": 117,
+              "end": 163,
+              "quote": "this quick workshop is for you and your family"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-ii:reading-a-2",
+          "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+          "sourceText": "From a classic viewpoint, enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history.",
+          "displayText": "From a classic viewpoint, enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:22"
+          ],
+          "translationZh": "在一处经典观景点，欣赏下瀑布、黄石河和峡谷令人叹为观止的色彩，同时了解这一地区的自然史和人文史。",
+          "analysisZh": "这是祈使句，主干是 enjoy 加三个并列宾语：Lower Falls、the Yellowstone River 和 the breathtaking colors of the canyon。句首 From a classic viewpoint 交代在哪里看；句末 while learning about … 表示一边看一边了解，宾语 the area’s natural and human history 正是这场讲座讲的内容。",
+          "underlineRanges": [
+            {
+              "start": 26,
+              "end": 31,
+              "quote": "enjoy"
+            },
+            {
+              "start": 115,
+              "end": 135,
+              "quote": "while learning about"
+            },
+            {
+              "start": 147,
+              "end": 172,
+              "quote": "natural and human history"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-ii:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:1"
+              ],
+              "start": 0,
+              "end": 39,
+              "quote": "黄石国家公园全年在园区各处开展多种护林员活动。以下是今年夏季护林员活动的介绍。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:2"
+              ],
+              "start": 41,
+              "end": 61,
+              "quote": "体验黄石野生动物（5月26日至9月2日）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:3"
+              ],
+              "start": 63,
+              "end": 157,
+              "quote": "无论你是在偏远地区的小径上徒步、露营，还是只在路边欣赏园内令人惊叹的野生动物，这个简短的讲习活动都适合你和家人。了解去哪里寻找动物，以及如何安全地享受观赏野生动物的乐趣。在峡谷村商店集合。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:4"
+              ],
+              "start": 159,
+              "end": 183,
+              "quote": "少年护林员野生动物奥运会（6月5日至8月21日）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:5"
+              ],
+              "start": 185,
+              "end": 236,
+              "quote": "孩子们可以测试自己的本领，和黄石的动物比一比能力。停留时间长短随你的安排而定。在游客教育中心门前集合。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:6"
+              ],
+              "start": 238,
+              "end": 259,
+              "quote": "艺术家观景点峡谷讲座（6月9日至9月2日）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:7"
+              ],
+              "start": 261,
+              "end": 361,
+              "quote": "在一处经典观景点，欣赏下瀑布、黄石河和峡谷令人叹为观止的色彩，同时了解这一地区的自然史和人文史。探究艺术家和摄影师为何一直被这个特别的地方吸引。参加这场简短讲座，请在南缘路艺术家观景点的下层平台集合。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:8"
+              ],
+              "start": 363,
+              "end": 381,
+              "quote": "摄影工作坊（6月19日和7月10日）"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:9"
+              ],
+              "start": 383,
+              "end": 439,
+              "quote": "提升你的摄影技能——跟随黄石公园的摄影师参加一场动手实践活动，激发你用新颖而富有创意的方式欣赏黄石的美丽与奇妙。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:10"
+              ],
+              "start": 441,
+              "end": 464,
+              "quote": "6月19日——瀑布与广角：在艺术家观景点集合。"
+            },
+            {
+              "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:reading-a:11"
+              ],
+              "start": 466,
+              "end": 499,
+              "quote": "7月10日——野花与白平衡：在奇滕登停车区的沃什伯恩步道起点集合。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-a:2",
+                "start": 0,
+                "end": 60,
+                "quote": "Experiencing Wildlife in Yellowstone (May 26 to September 2)"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-a:4",
+                "start": 33,
+                "end": 52,
+                "quote": "June 5 to August 21"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p2",
+                "start": 0,
+                "end": 20,
+                "quote": "体验黄石野生动物（5月26日至9月2日）"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p4",
+                "start": 13,
+                "end": 23,
+                "quote": "6月5日至8月21日"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+                "start": 0,
+                "end": 173,
+                "quote": "From a classic viewpoint, enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p7",
+                "start": 0,
+                "end": 48,
+                "quote": "在一处经典观景点，欣赏下瀑布、黄石河和峡谷令人叹为观止的色彩，同时了解这一地区的自然史和人文史。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-question:paper-gaokao-2023-ii:23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-a:11",
+                "start": 0,
+                "end": 87,
+                "quote": "7/10-Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p11",
+                "start": 0,
+                "end": 33,
+                "quote": "7月10日——野花与白平衡：在奇滕登停车区的沃什伯恩步道起点集合。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+                "start": 0,
+                "end": 164,
+                "quote": "Whether you’re hiking a backcountry trail (小径), camping, or just enjoying the park’s amazing wildlife from the road, this quick workshop is for you and your family."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p3",
+                "start": 0,
+                "end": 56,
+                "quote": "无论你是在偏远地区的小径上徒步、露营，还是只在路边欣赏园内令人惊叹的野生动物，这个简短的讲习活动都适合你和家人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-group:paper-gaokao-2023-ii:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-ii:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+                "start": 0,
+                "end": 173,
+                "quote": "From a classic viewpoint, enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-ii:reading-a",
+                "paragraphId": "zh-group:paper-gaokao-2023-ii:reading-a-p7",
+                "start": 0,
+                "end": 48,
+                "quote": "在一处经典观景点，欣赏下瀑布、黄石河和峡谷令人叹为观止的色彩，同时了解这一地区的自然史和人文史。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头总说今夏有一组护林员活动，随后按活动名称逐项介绍：每项先在名称后标出日期，再写活动内容和集合地点；摄影工作坊分两场，各自列出主题和集合地。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:1",
+            "summary": "黄石公园全年开展护林员活动，下面介绍今夏的几项。",
+            "function": "总起，交代这是一份活动介绍。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:2",
+            "summary": "野生动物观赏活动的名称，日期是5月26日至9月2日。",
+            "function": "第一项活动的名称和起止日期。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+            "summary": "这项简短讲习适合各类游客和家庭，教人到哪里找动物、怎样安全观赏，在峡谷村商店集合。",
+            "function": "说明第一项活动的对象、内容和集合地点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:4",
+            "summary": "少年护林员野生动物奥运会的名称，日期是6月5日至8月21日。",
+            "function": "第二项活动的名称和起止日期。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:5",
+            "summary": "孩子们和动物比本领，停留时间自定，在游客教育中心门前集合。",
+            "function": "说明第二项活动的内容、时间安排和集合地点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:6",
+            "summary": "艺术家观景点峡谷讲座的名称，日期是6月9日至9月2日。",
+            "function": "第三项活动的名称和起止日期。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+            "summary": "边看峡谷景色边了解这一地区的自然史和人文史，在艺术家观景点下层平台集合。",
+            "function": "说明讲座内容和集合地点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:8",
+            "summary": "摄影工作坊的名称，只有6月19日和7月10日两场。",
+            "function": "第四项活动的名称和两场日期。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:9",
+            "summary": "跟公园摄影师动手实践，提升摄影技能。",
+            "function": "说明摄影工作坊的目标和形式。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:10",
+            "summary": "6月19日一场拍瀑布与广角，在艺术家观景点集合。",
+            "function": "列出第一场的主题和集合地。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-ii:reading-a:11",
+            "summary": "7月10日一场拍野花与白平衡，在沃什伯恩步道起点集合。",
+            "function": "列出第二场的主题和集合地。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-ii:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "比较四项活动名称后括号里的开始日期，找出最早开始的一项。",
+      "stemTranslationZh": "四项活动中哪一项开始得最早？",
+      "locateBy": "options",
+      "locateFindZh": "四个活动名逐个找标题括号里的头一个日期比早晚",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "摄影工作坊。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Photography Workshops (June 19 &July 10)",
+            "sourceEntity": "June 19",
+            "optionText": "Photography Workshops.",
+            "optionEntity": "Photography Workshops",
+            "explanation": "摄影工作坊第一场在6月19日（June 19），是四项里开始最晚的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:8",
+              "quote": "Photography Workshops (June 19 &July 10)",
+              "anchor": "6月19日起"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "少年护林员野生动物奥运会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Junior Ranger Wildlife Olympics (June 5 to August 21)",
+            "sourceEntity": "June 5",
+            "optionText": "Junior Ranger Wildlife Olympics.",
+            "optionEntity": "Junior Ranger Wildlife Olympics",
+            "explanation": "少年护林员奥运会从6月5日开始（June 5），在6月的三项里最早，但仍比5月26日晚。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:4",
+              "quote": "Junior Ranger Wildlife Olympics (June 5 to August 21)",
+              "anchor": "6月5日起"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "艺术家观景点峡谷讲座。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Canyon Talks at Artist Point (June 9 to September 2)",
+            "sourceEntity": "June 9",
+            "optionText": "Canyon Talks at Artist Point.",
+            "optionEntity": "Canyon Talks at Artist Point",
+            "explanation": "峡谷讲座6月9日才开始（June 9）；它和野生动物体验同在9月2日结束，结束日期相同，开始却晚了两周。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:6",
+              "quote": "Canyon Talks at Artist Point (June 9 to September 2)",
+              "anchor": "6月9日起"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "体验黄石野生动物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:2",
+              "quote": "Experiencing Wildlife in Yellowstone (May 26 to September 2)",
+              "anchor": "5月26日开始"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:4",
+              "quote": "June 5 to August 21",
+              "anchor": "其余三项中最早的6月5日"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Experiencing Wildlife in Yellowstone",
+          "sourceRole": "correctOption",
+          "targetText": "May 26 to September 2",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-a:2",
+          "relationType": "calculation",
+          "note": "括号里的头一个日期是开始时间：野生动物体验从5月26日开始（May 26），另外三项分别从6月5日、6月9日、6月19日开始，5月早于6月，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到“简短讲座”指的是哪项活动，再读这项活动介绍里讲座的内容。",
+      "stemTranslationZh": "在艺术家观景点举行的简短讲座是关于什么的？",
+      "locateBy": "stem",
+      "locateFindZh": "this 指哪场讲座，往前读它的内容",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "著名艺术家的作品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "artists",
+            "optionText": "artists",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的“艺术家”（artists）；原文说的是艺术家为何总被这里的景色吸引（drawn to this special place），讲座并不介绍他们的作品。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+              "quote": "Discover why artists and photographers continue to be drawn to this special place.",
+              "anchor": "艺术家被这里吸引"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "野生动物保护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Learn where to look for animals and how to safely enjoy your wildlife watching experience.",
+            "sourceEntity": "wildlife watching experience",
+            "optionText": "Protection of wild animals.",
+            "optionEntity": "wild animals",
+            "explanation": "讲动物的是 [[block:paper-gaokao-2023-ii:reading-a:3]] 的野生动物观赏讲习，教的也只是怎样安全观赏（safely enjoy）；峡谷讲座讲的是峡谷景色和历史。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+              "quote": "Learn where to look for animals and how to safely enjoy your wildlife watching experience.",
+              "anchor": "安全观赏动物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "基本摄影技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Enhance your photography skills-join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+            "sourceEntity": "photography skills",
+            "optionText": "Basic photography skills.",
+            "optionEntity": "photography skills",
+            "explanation": "提升摄影技能（photography skills）写在 [[block:paper-gaokao-2023-ii:reading-a:9]] 的摄影工作坊里；峡谷讲座只提到摄影师被这里吸引，不教拍照。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:9",
+              "quote": "Enhance your photography skills",
+              "anchor": "摄影工作坊教技能"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "峡谷地区的历史。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+              "quote": "From a classic viewpoint, enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history.",
+              "anchor": "了解这一地区的自然史和人文史"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "short talk",
+          "sourceRole": "stem",
+          "targetText": "Meet on the lower platform at Artist Point on the South Rim Drive for this short talk.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+          "relationType": "locationCue",
+          "answerText": "learning about the area’s natural and human history",
+          "bridgeZh": "this short talk 就是这一项介绍的峡谷讲座",
+          "note": "题干 short talk 原词出现在集合地点那句的 this short talk 里。"
+        },
+        {
+          "sourceText": "History of the canyon area",
+          "sourceRole": "correctOption",
+          "targetText": "the area’s natural and human history",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项的“峡谷地区的历史”就是原文的“这一地区的自然史和人文史”（the area’s … history），“这一地区”指讲座所在的峡谷一带，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按日期找到7月10日那一场摄影工作坊，读出它的集合地点。",
+      "stemTranslationZh": "参加7月10日摄影工作坊的人将在哪里集合？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "艺术家观景点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "6/19-Waterfalls &Wide Angles: meet at Artist Point.",
+            "sourceEntity": "6/19",
+            "optionText": "Artist Point.",
+            "optionEntity": "Artist Point",
+            "explanation": "艺术家观景点是6月19日那一场的集合地（6/19），7月10日那一场换了地方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:10",
+              "quote": "6/19-Waterfalls &Wide Angles: meet at Artist Point.",
+              "anchor": "6月19日在艺术家观景点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "沃什伯恩步道起点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:11",
+              "quote": "7/10-Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+              "anchor": "7月10日在沃什伯恩步道起点集合"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "峡谷村商店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Meet at the Canyon Village Store.",
+            "sourceEntity": "Canyon Village Store",
+            "optionText": "Canyon Village Store.",
+            "optionEntity": "Canyon Village Store",
+            "explanation": "峡谷村商店是 [[block:paper-gaokao-2023-ii:reading-a:3]] 野生动物观赏讲习的集合地，和摄影工作坊无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+              "quote": "Meet at the Canyon Village Store.",
+              "anchor": "野生动物讲习集合地"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "游客教育中心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Meet in front of the Visitor Education Center.",
+            "sourceEntity": "Visitor Education Center",
+            "optionText": "Visitor Education Center.",
+            "optionEntity": "Visitor Education Center",
+            "explanation": "在游客教育中心门前集合的是 [[block:paper-gaokao-2023-ii:reading-a:5]] 的少年护林员奥运会，参加者是孩子们。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:5",
+              "quote": "Meet in front of the Visitor Education Center.",
+              "anchor": "儿童活动集合地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "July 10",
+          "sourceRole": "stem",
+          "targetText": "7/10-Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-a:11",
+          "relationType": "locationCue",
+          "targetCue": "7/10",
+          "sourceZh": "7月10日",
+          "targetCueZh": "7月10日",
+          "answerText": "meet at Washburn Trailhead",
+          "note": "题干 July 10 在原文写成日期缩写 7/10。"
+        },
+        {
+          "sourceText": "Washburn Trailhead",
+          "sourceRole": "correctOption",
+          "targetText": "meet at Washburn Trailhead",
+          "targetParagraphId": "block:paper-gaokao-2023-ii:reading-a:11",
+          "relationType": "paraphrase",
+          "note": "这一场写明在沃什伯恩步道起点集合（meet at Washburn Trailhead），选项沿用原文地名，选 B。"
+        }
+      ]
+    }
+  }
+}

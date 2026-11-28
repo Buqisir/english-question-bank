@@ -1,0 +1,965 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-ii:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-ii:seven-choices": {
+      "overview": "一位在社交媒体上分享创作的艺术家给初学者提建议：从小幅习作做起并保留旧作，常画多写生，走出舒适区，愿意时分享作品听取反馈，遇到挫折也要坚持。",
+      "fullTranslationZh": "作为一名在社交媒体上分享自己艺术历程的艺术家，常有好奇的关注者问我怎样开始学艺术。遗憾的是，我给不出什么神奇的清单。不过，我确实还记得自己完全是个新手时的样子。所以我整理了几条开始艺术之旅的好建议。\n\n●从小处做起。我建议用素描本做些小幅习作。这些小习作能带来灵感，将来也可能成为创作更复杂作品的跳板。别把你初学时的作品扔掉。你会想回顾自己的历程，看看自己已经走了多远。\n\n●常画，并且写生。想进步，没有比多动笔更好的办法了。不管你画静物、肖像还是风景，都要尽可能对着实物画。你会练出只有靠反复练习才能形成的绘画肌肉记忆。\n\n●不断挑战自己，尝试新东西。走出你的舒适区。艺术上的成长可能有点痛苦。欢迎入伙，我们都经历过。我喜欢接受挑战。我曾经接受过一项挑战：一个月里每天画一幅画，并把作品发到网上。\n\n●如果你觉得自在，就分享你的作品。寻求并接受建设性的反馈对成长至关重要。我把作品发到社交媒体上，也因此结识了一些特别友善的人。无论我的艺术水平如何，他们都让我觉得自己受重视、被尊重。\n\n你所走的这条路不会是一条直路。你会遇到障碍，有时也会感到灰心。坚持下去，给自己时间，并付出努力。你终将收获艺术人生的回报。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:paper-gaokao-2023-ii:seven:1",
+          "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+          "sourceText": "These small studies provide inspiration and may be a springboard for more complex works in the future.",
+          "displayText": "These small studies provide inspiration and may be a springboard for more complex works in the future.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:36"
+          ],
+          "translationZh": "这些小习作能带来灵感，将来也可能成为创作更复杂作品的跳板。",
+          "analysisZh": "主语是 These small studies，后面两个谓语用 and 并列：provide inspiration 说眼下能带来灵感，may be a springboard 说将来可能成为跳板。for more complex works in the future 修饰 springboard，交代跳向哪里。may 只表示可能，不是一定。这句把小习作和“将来”连起来，后面才接得上留着旧作、日后回看。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "These small studies"
+            },
+            {
+              "start": 20,
+              "end": 39,
+              "quote": "provide inspiration"
+            },
+            {
+              "start": 44,
+              "end": 64,
+              "quote": "may be a springboard"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:paper-gaokao-2023-ii:seven:2",
+          "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+          "sourceText": "I post my work on social media and, in turn, have met some of the kindest people.",
+          "displayText": "I post my work on social media and, in turn, have met some of the kindest people.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-ii:39"
+          ],
+          "translationZh": "我把作品发到社交媒体上，也因此结识了一些特别友善的人。",
+          "analysisZh": "主语 I 带两个并列谓语：post my work on social media 是先做的事，have met some of the kindest people 是由此得到的结果。插入的 in turn 意思是“随之、因此”，点明前后是因果。the kindest 是最高级，some of 把范围限定在其中一些人。这句用作者亲身经历支撑本段的建议：分享作品。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 14,
+              "quote": "I post my work"
+            },
+            {
+              "start": 36,
+              "end": 43,
+              "quote": "in turn"
+            },
+            {
+              "start": 45,
+              "end": 80,
+              "quote": "have met some of the kindest people"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "开头交代作者为什么给建议，中间四段各用一个小标题给一条建议，结尾提醒学艺术会有挫折，鼓励读者坚持。",
+        "units": [
+          {
+            "unitId": "unit:seven:intro",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-ii:seven-choices:1"
+            ],
+            "summary": "作者常被问怎样入门，没有神奇清单，就凭自己当新手的记忆整理建议。"
+          },
+          {
+            "unitId": "unit:seven:start",
+            "heading": "Start small.",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-ii:seven-choices:2"
+            ],
+            "summary": "用素描本做小习作，并留着初学作品，日后回看自己的进步。"
+          },
+          {
+            "unitId": "unit:seven:paint",
+            "heading": "Paint often and paint from life.",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-ii:seven-choices:3"
+            ],
+            "summary": "多动笔、多写生，靠反复练习练出手上的熟练。"
+          },
+          {
+            "unitId": "unit:seven:challenge",
+            "heading": "Continually challenge yourself to try something new.",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-ii:seven-choices:4"
+            ],
+            "summary": "走出舒适区，成长难免难受，作者以自己每天一画的挑战为例。"
+          },
+          {
+            "unitId": "unit:seven:share",
+            "heading": "Share your work if you feel comfortable doing so.",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-ii:seven-choices:5"
+            ],
+            "summary": "分享作品换来建设性反馈，作者也因此结识友善的人。"
+          },
+          {
+            "unitId": "unit:seven:closing",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-ii:seven-choices:6"
+            ],
+            "summary": "路不会笔直，会有障碍和灰心，坚持投入终有回报。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "F": {
+          "target": 39,
+          "secondary": 36,
+          "kind": "shadow",
+          "shadowOf": "D",
+          "shared": [
+            "your",
+            "if"
+          ],
+          "text": "第 39 题空后谈 \"constructive feedback\"，选项的 \"Evaluate your performance\" 像在说评价作品。但反馈来自别人，段里作者靠 \"I post my work\" 结识友善的人，全文也没有要 \"redefine your role\" 的角色。也可能误填第 36 题：空后 \"how far you’ve come\" 像评价表现，但那里缺的是留住旧作这一步。",
+          "quotes": [
+            "constructive feedback",
+            "Evaluate your performance",
+            "I post my work",
+            "redefine your role",
+            "how far you’ve come"
+          ]
+        },
+        "B": {
+          "target": 39,
+          "secondary": null,
+          "kind": "topic",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项和各条小标题一样是祈使句建议，又和学艺术的话题沾边，容易填进第 39 题。但那一段空后讲的是 \"constructive feedback\" 和作者 \"I post my work on social media\"，全文都没提职业规划和目标（career plans、goals）。",
+          "quotes": [
+            "constructive feedback",
+            "I post my work on social media"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "text:paper-gaokao-2023-ii:seven:source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "text:paper-gaokao-2023-ii:seven:translation",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 99,
+              "quote": "作为一名在社交媒体上分享自己艺术历程的艺术家，常有好奇的关注者问我怎样开始学艺术。遗憾的是，我给不出什么神奇的清单。不过，我确实还记得自己完全是个新手时的样子。所以我整理了几条开始艺术之旅的好建议。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:seven-choices:2"
+              ],
+              "start": 101,
+              "end": 185,
+              "quote": "●从小处做起。我建议用素描本做些小幅习作。这些小习作能带来灵感，将来也可能成为创作更复杂作品的跳板。别把你初学时的作品扔掉。你会想回顾自己的历程，看看自己已经走了多远。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:seven-choices:3"
+              ],
+              "start": 187,
+              "end": 261,
+              "quote": "●常画，并且写生。想进步，没有比多动笔更好的办法了。不管你画静物、肖像还是风景，都要尽可能对着实物画。你会练出只有靠反复练习才能形成的绘画肌肉记忆。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:seven-choices:4"
+              ],
+              "start": 263,
+              "end": 349,
+              "quote": "●不断挑战自己，尝试新东西。走出你的舒适区。艺术上的成长可能有点痛苦。欢迎入伙，我们都经历过。我喜欢接受挑战。我曾经接受过一项挑战：一个月里每天画一幅画，并把作品发到网上。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:seven-choices:5"
+              ],
+              "start": 351,
+              "end": 442,
+              "quote": "●如果你觉得自在，就分享你的作品。寻求并接受建设性的反馈对成长至关重要。我把作品发到社交媒体上，也因此结识了一些特别友善的人。无论我的艺术水平如何，他们都让我觉得自己受重视、被尊重。"
+            },
+            {
+              "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-ii:seven-choices:6"
+              ],
+              "start": 444,
+              "end": 505,
+              "quote": "你所走的这条路不会是一条直路。你会遇到障碍，有时也会感到灰心。坚持下去，给自己时间，并付出努力。你终将收获艺术人生的回报。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "text:paper-gaokao-2023-ii:seven:completed:36",
+            "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+            "text": "●Start small. I suggest using a sketchbook (素描本) for small studies. These small studies provide inspiration and may be a springboard for more complex works in the future. Don’t throw away your beginner art. You’ll want to look back on your journey to see how far you’ve come."
+          },
+          {
+            "textId": "text:paper-gaokao-2023-ii:seven:completed:37",
+            "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+            "text": "●Paint often and paint from life. There’s no better way to improve than to put in those brush miles. Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible. You’ll develop that painting muscle memory that only comes with repetition."
+          },
+          {
+            "textId": "text:paper-gaokao-2023-ii:seven:completed:38",
+            "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+            "text": "●Continually challenge yourself to try something new. Get out of your comfort zone. Artistic growth can be a bit painful. Welcome to the club; we’ve all been there. I love taking on challenges. I once took up a challenge to create a painting every day for a month and post the works online."
+          },
+          {
+            "textId": "text:paper-gaokao-2023-ii:seven:completed:39",
+            "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+            "text": "● Share your work if you feel comfortable doing so. Seeking and accepting constructive feedback(反馈) is crucial to growth. I post my work on social media and, in turn, have met some of the kindest people. They make me feel valued and respected, no matter my level of artistic ability."
+          },
+          {
+            "textId": "text:paper-gaokao-2023-ii:seven:completed:40",
+            "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
+            "text": "The journey you’re on won’t follow a straight path. You’ll hit roadblocks, and you’ll feel discouraged at times. Push through, give it time and put in the effort. You will harvest the rewards of an artistic life."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "annotation:seven:36:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+                "start": 178,
+                "end": 246,
+                "quote": "You’ll want to look back on your journey to see how far you’ve come."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:2",
+                "start": 62,
+                "end": 84,
+                "quote": "你会想回顾自己的历程，看看自己已经走了多远。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:36:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:36"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:36",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:completed:36",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+                "start": 171,
+                "end": 206,
+                "quote": "Don’t throw away your beginner art."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:2",
+                "start": 50,
+                "end": 62,
+                "quote": "别把你初学时的作品扔掉。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:37:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+                "start": 34,
+                "end": 100,
+                "quote": "There’s no better way to improve than to put in those brush miles."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:3",
+                "start": 9,
+                "end": 26,
+                "quote": "想进步，没有比多动笔更好的办法了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:37:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:37"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:37",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:completed:37",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+                "start": 195,
+                "end": 270,
+                "quote": "You’ll develop that painting muscle memory that only comes with repetition."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:3",
+                "start": 51,
+                "end": 74,
+                "quote": "你会练出只有靠反复练习才能形成的绘画肌肉记忆。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:38:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+                "start": 61,
+                "end": 98,
+                "quote": "Artistic growth can be a bit painful."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:4",
+                "start": 22,
+                "end": 35,
+                "quote": "艺术上的成长可能有点痛苦。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:38:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:38"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:38",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:completed:38",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+                "start": 54,
+                "end": 83,
+                "quote": "Get out of your comfort zone."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:4",
+                "start": 14,
+                "end": 22,
+                "quote": "走出你的舒适区。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:39:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+                "start": 79,
+                "end": 109,
+                "quote": "I post my work on social media"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:5",
+                "start": 36,
+                "end": 47,
+                "quote": "我把作品发到社交媒体上"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:39:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:39"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:39",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:completed:39",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+                "start": 2,
+                "end": 51,
+                "quote": "Share your work if you feel comfortable doing so."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:5",
+                "start": 1,
+                "end": 17,
+                "quote": "如果你觉得自在，就分享你的作品。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:40:evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
+                "start": 59,
+                "end": 108,
+                "quote": "Push through, give it time and put in the effort."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:6",
+                "start": 31,
+                "end": 48,
+                "quote": "坚持下去，给自己时间，并付出努力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:40:insertion",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:40"
+            ],
+            "blankId": "blank:paper-gaokao-2023-ii:40",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:completed:40",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
+                "start": 52,
+                "end": 112,
+                "quote": "You’ll hit roadblocks, and you’ll feel discouraged at times."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:6",
+                "start": 15,
+                "end": 31,
+                "quote": "你会遇到障碍，有时也会感到灰心。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:1:structure",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:36"
+            ],
+            "selectedSentenceId": "sentence:paper-gaokao-2023-ii:seven:1",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+                "start": 68,
+                "end": 170,
+                "quote": "These small studies provide inspiration and may be a springboard for more complex works in the future."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:2",
+                "start": 21,
+                "end": 50,
+                "quote": "这些小习作能带来灵感，将来也可能成为创作更复杂作品的跳板。"
+              }
+            ]
+          },
+          {
+            "annotationId": "annotation:seven:2:structure",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-ii:39"
+            ],
+            "selectedSentenceId": "sentence:paper-gaokao-2023-ii:seven:2",
+            "sourceRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:source",
+                "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+                "start": 79,
+                "end": 160,
+                "quote": "I post my work on social media and, in turn, have met some of the kindest people."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:paper-gaokao-2023-ii:seven:translation",
+                "paragraphId": "translation:block:paper-gaokao-2023-ii:seven-choices:5",
+                "start": 36,
+                "end": 63,
+                "quote": "我把作品发到社交媒体上，也因此结识了一些特别友善的人。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-ii:36": {
+      "blankId": "blank:paper-gaokao-2023-ii:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "small studies",
+        "a springboard",
+        "in the future",
+        "look back on your journey",
+        "how far you’ve come"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+        "beforeQuote": "These small studies provide inspiration and may be a springboard for more complex works in the future.",
+        "afterQuote": "You’ll want to look back on your journey to see how far you’ve come."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "look back on your journey",
+          "signalSide": "context-after",
+          "targetText": "Don’t throw away your beginner art",
+          "relation": "回看自己走过的路，得有当初的作品留着做对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "beginner art",
+          "signalSide": "option",
+          "targetText": "small studies",
+          "relation": "beginner art 指初学时画的东西，就是本段说的小习作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Don’t throw away",
+          "signalSide": "option",
+          "targetText": "how far you’ve come",
+          "relation": "不扔掉旧作，空后看出自己进步多少才有依据。"
+        }
+      ],
+      "lock": [
+        "look back on your journey",
+        "beginner art"
+      ],
+      "find": {
+        "text": "先看空后 \"look back on your journey\"：要回头看走了多远，手里得留着当初的画，只有 \"Don’t throw away your beginner art\" 给出这一步。",
+        "quotes": [
+          "look back on your journey",
+          "Don’t throw away your beginner art"
+        ]
+      },
+      "explain": "空前讲小习作眼下的用处，这句把话题引向以后怎么处理它们；空后给出理由：将来回看来路时，靠这些旧作对照出进步。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "look back on your journey to see how far you’ve come",
+            "optionSide": "Don’t throw away your beginner art",
+            "relation": "留着初学作品，回看时才有对照，看得出进步。"
+          },
+          {
+            "contextSide": "small studies",
+            "optionSide": "beginner art",
+            "relation": "初学作品就是前面建议做的小习作。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前讲小习作眼下的用处，这句把话题引向以后怎么处理它们；空后给出理由：将来回看来路时，靠这些旧作对照出进步。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2023-ii:37": {
+      "blankId": "blank:paper-gaokao-2023-ii:37",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Paint often",
+        "improve",
+        "put in those brush miles",
+        "as much as possible"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+        "beforeQuote": "There’s no better way to improve than to put in those brush miles. Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "put in those brush miles",
+          "signalSide": "context-before",
+          "targetText": "repetition",
+          "relation": "“画笔走过的里程”指大量动笔，正是选项说的反复练习。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "as much as possible",
+          "signalSide": "context-before",
+          "targetText": "repetition",
+          "relation": "要求尽量多写生，练习的次数堆上去才谈得上重复。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "only comes with repetition",
+          "signalSide": "option",
+          "targetText": "put in those brush miles",
+          "relation": "说明多画的回报只能靠反复练出来，回应空前的多动笔。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "painting muscle memory",
+          "signalSide": "option",
+          "targetText": "improve",
+          "relation": "把空前笼统的“进步”落到手上的熟练记忆。"
+        }
+      ],
+      "lock": [
+        "brush miles",
+        "repetition"
+      ],
+      "find": {
+        "text": "段尾空看空前：先要 \"put in those brush miles\"，再要 \"as much as possible\" 地写生，都是多画；G 的 \"only comes with repetition\" 说的正是多画的回报。",
+        "quotes": [
+          "put in those brush miles",
+          "as much as possible",
+          "only comes with repetition"
+        ]
+      },
+      "explain": "本段前面几句都是要求：常画、写生、不论画什么都尽量多画。这句放在段尾说回报，回答为什么要这样不停动笔，给这条建议收尾。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "put in those brush miles / as much as possible",
+            "optionSide": "only comes with repetition",
+            "relation": "大量动笔就是反复练习，回报只能这样得来。"
+          },
+          {
+            "contextSide": "improve",
+            "optionSide": "painting muscle memory",
+            "relation": "进步具体表现为手上形成熟练的绘画记忆。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "本段前面几句都是要求：常画、写生、不论画什么都尽量多画。这句放在段尾说回报，回答为什么要这样不停动笔，给这条建议收尾。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2023-ii:38": {
+      "blankId": "blank:paper-gaokao-2023-ii:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "challenge yourself",
+        "try something new",
+        "a bit painful",
+        "Welcome to the club",
+        "taking on challenges"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+        "beforeQuote": "Continually challenge yourself to try something new.",
+        "afterQuote": "Artistic growth can be a bit painful. Welcome to the club; we’ve all been there."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "try something new",
+          "signalSide": "context-before",
+          "targetText": "Get out of your comfort zone",
+          "relation": "尝试新东西，就意味着离开自己熟悉、轻松的范围。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "comfort zone",
+          "signalSide": "option",
+          "targetText": "a bit painful",
+          "relation": "离开舒适区会不舒服，空后才说成长有点痛苦。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a bit painful",
+          "signalSide": "context-after",
+          "targetText": "comfort zone",
+          "relation": "痛苦来自离开舒适区，空后承认这一点再安慰读者。"
+        }
+      ],
+      "lock": [
+        "try something new",
+        "comfort zone",
+        "a bit painful"
+      ],
+      "find": {
+        "text": "空前要 \"try something new\"，空后马上说 \"a bit painful\"。A 的 \"comfort zone\" 两头都接：尝新就得离开舒服的地方，离开了才会难受。",
+        "quotes": [
+          "try something new",
+          "a bit painful",
+          "comfort zone"
+        ]
+      },
+      "explain": "小标题让人挑战自己，这句把挑战说成离开熟悉的范围；空后先承认这样会难受，再用 Welcome to the club 告诉读者人人都经历过，接着讲作者自己接受挑战的事。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 \"feel discouraged\" 和空后 \"a bit painful\" 都说难受，但空前 \"try something new\" 要的是一个行动，E 只说遭遇，接不上挑战自己。",
+          "quotes": [
+            "feel discouraged",
+            "a bit painful",
+            "try something new"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "challenge yourself to try something new",
+            "optionSide": "Get out of your comfort zone",
+            "relation": "挑战新东西，就是不再待在熟悉轻松的范围里。"
+          },
+          {
+            "contextSide": "Artistic growth can be a bit painful",
+            "optionSide": "comfort zone",
+            "relation": "离开舒适区带来的不适，就是空后说的痛苦。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "小标题让人挑战自己，这句把挑战说成离开熟悉的范围；空后先承认这样会难受，再用 Welcome to the club 告诉读者人人都经历过，接着讲作者自己接受挑战的事。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 \"feel discouraged\" 和空后 \"a bit painful\" 都说难受，但空前 \"try something new\" 要的是一个行动，E 只说遭遇，接不上挑战自己。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:39": {
+      "blankId": "blank:paper-gaokao-2023-ii:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "constructive feedback",
+        "crucial to growth",
+        "I post my work",
+        "social media",
+        "the kindest people"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": "Seeking and accepting constructive feedback(反馈) is crucial to growth. I post my work on social media and, in turn, have met some of the kindest people."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "I post my work",
+          "signalSide": "context-after",
+          "targetText": "Share your work",
+          "relation": "作者把作品发到网上，就是在做标题要求的分享作品。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Share your work",
+          "signalSide": "option",
+          "targetText": "I post my work",
+          "relation": "标题里的 your work 在段里换成作者自己的 my work。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "constructive feedback",
+          "signalSide": "context-after",
+          "targetText": "Share your work",
+          "relation": "作品先给别人看，才有人给出反馈。"
+        }
+      ],
+      "lock": [
+        "Share your work",
+        "I post my work"
+      ],
+      "find": {
+        "text": "小标题空，先跳过，做完后面几段再回来。段里有 \"constructive feedback\"，作者又说 \"I post my work\"，D 的 \"Share your work\" 把两句都管住了。",
+        "quotes": [
+          "constructive feedback",
+          "I post my work",
+          "Share your work"
+        ]
+      },
+      "explain": "这是本段的小标题，和前几条一样用祈使句提建议。段里先说别人的反馈对成长要紧，再拿作者在网上发作品、结识友善网友的经历来撑这条建议。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "I post my work on social media",
+            "optionSide": "Share your work",
+            "relation": "在社交媒体上发作品就是分享作品。"
+          },
+          {
+            "contextSide": "Seeking and accepting constructive feedback",
+            "optionSide": "Share your work",
+            "relation": "作品让别人看到，才能得到反馈。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "这是本段的小标题，和前几条一样用祈使句提建议。段里先说别人的反馈对成长要紧，再拿作者在网上发作品、结识友善网友的经历来撑这条建议。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "第 39 题空后谈 \"constructive feedback\"，选项的 \"Evaluate your performance\" 像在说评价作品。但反馈来自别人，段里作者靠 \"I post my work\" 结识友善的人，全文也没有要 \"redefine your role\" 的角色。也可能误填第 36 题：空后 \"how far you’ve come\" 像评价表现，但那里缺的是留住旧作这一步。"
+        },
+        {
+          "optionLabel": "B",
+          "reason": "选项和各条小标题一样是祈使句建议，又和学艺术的话题沾边，容易填进第 39 题。但那一段空后讲的是 \"constructive feedback\" 和作者 \"I post my work on social media\"，全文都没提职业规划和目标（career plans、goals）。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-ii:40": {
+      "blankId": "blank:paper-gaokao-2023-ii:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "won’t follow a straight path",
+        "Push through",
+        "give it time",
+        "put in the effort"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
+        "beforeQuote": "The journey you’re on won’t follow a straight path.",
+        "afterQuote": "Push through, give it time and put in the effort."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "won’t follow a straight path",
+          "signalSide": "context-before",
+          "targetText": "hit roadblocks",
+          "relation": "路不直是比方，选项把它说成实实在在会碰上的障碍。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "hit roadblocks",
+          "signalSide": "option",
+          "targetText": "Push through",
+          "relation": "有了路障，空后才说要冲过去。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "feel discouraged",
+          "signalSide": "option",
+          "targetText": "give it time",
+          "relation": "灰心时需要的是耐心，空后让人给自己时间。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Push through",
+          "signalSide": "context-after",
+          "targetText": "roadblocks",
+          "relation": "冲过去的对象就是前面说的障碍。"
+        }
+      ],
+      "lock": [
+        "straight path",
+        "roadblocks",
+        "Push through"
+      ],
+      "find": {
+        "text": "空前说路 \"won’t follow a straight path\"，空后让人 \"Push through\"：中间得先说碰上什么，E 的 \"hit roadblocks\" 正好是要冲过去的东西。",
+        "quotes": [
+          "won’t follow a straight path",
+          "Push through",
+          "hit roadblocks"
+        ]
+      },
+      "explain": "空前用一条不直的路打比方，这句把比方落到具体的挫折和情绪上；空后的坚持、给时间、下功夫，正是对付这些挫折的办法。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "won’t follow a straight path",
+            "optionSide": "hit roadblocks",
+            "relation": "路不直，具体就是会碰上路障。"
+          },
+          {
+            "contextSide": "Push through, give it time",
+            "optionSide": "feel discouraged",
+            "relation": "灰心时要坚持、给时间，空后给出了办法。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前用一条不直的路打比方，这句把比方落到具体的挫折和情绪上；空后的坚持、给时间、下功夫，正是对付这些挫折的办法。"
+      },
+      "keyDistractors": []
+    }
+  }
+}
