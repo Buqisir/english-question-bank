@@ -66,8 +66,12 @@ function renderTeachingLines(entry) {
 // The secondary blank closes the item: the text speaks of "这一空" (the target),
 // so naming another blank before it would make "这一空" read as that one.
 function renderExtraAtBlank(label, extra, optionText) {
-  const also = Number.isInteger(extra?.secondary) ? `也可能误填第 ${extra.secondary} 空。` : ''
-  return `<div class="distractor extra-option"><p><span class="extra-tag">多余项</span><b>${escapeHtml(label)} 项</b>${optionText ? `（<span lang="en">${escapeHtml(optionText)}</span>）` : ''}${quoteBold(nonEmptyString(extra?.text), extra?.quotes)}${also}</p></div>`
+  const text = nonEmptyString(extra?.text)
+  const secondary = extra?.secondary
+  const also = Number.isInteger(secondary) && !new RegExp(`误填\\s*第\\s*${secondary}(?!\\d)`, 'u').test(text)
+    ? `也可能误填第 ${secondary} 空。`
+    : ''
+  return `<div class="distractor extra-option"><p><span class="extra-tag">多余项</span><b>${escapeHtml(label)} 项</b>${optionText ? `（<span lang="en">${escapeHtml(optionText)}</span>）` : ''}${quoteBold(text, extra?.quotes)}${also}</p></div>`
 }
 
 // A spare option that fits no blank (话题项) has no blank to sit under: it closes the group.

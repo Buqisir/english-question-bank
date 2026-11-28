@@ -16,12 +16,13 @@ const list = (value) => (Array.isArray(value) ? value : [])
 const normalize = (value) => String(value || '').replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ')
 const includesLoose = (haystack, needle) => normalize(haystack).includes(normalize(needle))
 const includesFolded = (haystack, needle) => normalize(haystack).toLowerCase().includes(normalize(needle).toLowerCase())
+const hasWordsOrNumbers = (value) => /[\p{L}\p{N}]/u.test(value)
 
 export function hasSevenChoicesTeachingLines(entry) {
   return Boolean(text(entry?.find?.text) && text(entry?.explain))
 }
 
-// 空在哪一段、段里空前空后各是什么。空位后面残留的题序小数字（如 `__31__ 1`）算空白。
+// 空在哪一段、段里空前空后各是什么。单独的标点和空位后残留的题序小数字算空白。
 export function locateSevenChoicesBlank(paragraphs, questionNo, paragraphId) {
   const list = Array.isArray(paragraphs) ? paragraphs : []
   const marker = `__${questionNo}__`
@@ -30,42 +31,53 @@ export function locateSevenChoicesBlank(paragraphs, questionNo, paragraphId) {
   if (found < 0) return null
   const [rawBefore, ...rest] = String(list[found].text).split(marker)
   const rawAfter = rest.join(marker)
-  const before = rawBefore.replace(/^[\s●•]+/, '').trim()
+  const before = rawBefore.replace(/^[\s●•·]+/, '').trim()
   const after = rawAfter.replace(/^\s*\d{1,2}(?=\s|$)/, '').trim()
-  return { index: found, paragraph: list[found], before, after }
+  const beforeIsPunctuation = Boolean(rawBefore.replace(/^[\s●•]+/, '')) && !hasWordsOrNumbers(before)
+  const afterIsPunctuation = Boolean(after) && !hasWordsOrNumbers(after)
+  return {
+    index: found, paragraph: list[found],
+    before: beforeIsPunctuation ? '' : before,
+    after: afterIsPunctuation ? '' : after,
+    beforeIsPunctuation, afterIsPunctuation,
+  }
 }
 
 // 卷面上空前、答案、空后三行印什么。导出照这个印，校验照这个查：找法引文和锁定词都要落在这三行里。
 const SENTENCE_BREAK = /(?<=[.!?。！？]["”’)]?)\s+/
 const looseIncludes = (haystack, needle) => Boolean(needle) && includesLoose(haystack, needle)
-// A heading line: short, and either bulleted or without a full stop. Some papers bullet
-// whole paragraphs (「• Before you open the book, … __37__ 2」); those are not headings.
-const isHeading = (value) => value.trim().length < 80 && (/^\s*[●•]/.test(value) || !/[.!?。！？]["”’)]?\s*$/.test(value))
-const tidy = (value) => String(value || '').replace(/^\s*[●•]\s*/, '').replace(/(__\d+__)\s+\d{1,2}(?=\s|$)/g, '$1')
+// A middle dot can introduce a whole sentence. Judge the line after removing it.
+const isHeading = (value) => {
+  const line = value.trim().replace(/^·\s*/, '')
+  return line.length < 80 && (/^[●•]/.test(line) || !/[.!?。！？]["”’)]?$/.test(line))
+}
+const tidy = (value) => String(value || '').replace(/^\s*[●•·]\s*/, '').replace(/(__\d+__)\s+\d{1,2}(?=\s|$)/g, '$1')
   .replace(/\s+/g, ' ').replace(/ ([,.;:!?])/g, '$1').trim()
 const sentencesOf = (value) => tidy(value).split(SENTENCE_BREAK).filter(Boolean)
-const onlyGap = (value) => !/[A-Za-z0-9]/.test(value.replace(/^\s*\d{1,2}(?=\s|$)/, ''))
+const onlyGap = (value) => !hasWordsOrNumbers(value.replace(/^\s*\d{1,2}(?=\s|$)/, ''))
 
 
 // The paragraph next to the blank's own one, shown only when the analysis uses
 // it: its 找法 quotes or 锁定词 come from there, or an older analysis quoted it as
 // 空前 or 空后. Owner 2026-11-23: a blank at a paragraph's start shows 上段末尾,
 // one at the end shows 下段开头; nothing is printed where the passage begins or ends.
-function neighbourRow(paragraph, side, used) {
+function neighbourRow(paragraph, side, used, omitLeadingBlank) {
   if (!paragraph) return null
   const raw = String(paragraph.text || '')
   if (!used.some((quote) => looseIncludes(raw, quote))) return null
   if (isHeading(raw)) return { label: '小标题', text: tidy(raw) }
   const sentences = sentencesOf(raw)
+  // A neighbour exposed by ignoring punctuation may start with another blank marker.
+  const show = (sentence) => omitLeadingBlank ? sentence?.replace(/^_{2,}\d+_{2,}\s*/, '') : sentence
   if (side === 'before') {
     const last = sentences.length - 1
     const at = sentences.findIndex((sentence) => used.some((quote) => looseIncludes(sentence, quote)))
-    if (at === -1 || at === last) return { label: '上段末尾', text: sentences[last] }
-    return { label: '上段', text: `${sentences.slice(at, at + 1).join(' ')} ……` }
+    if (at === -1 || at === last) return { label: '上段末尾', text: show(sentences[last]) }
+    return { label: '上段', text: `${show(sentences[at])} ……` }
   }
   const at = sentences.findIndex((sentence) => used.some((quote) => looseIncludes(sentence, quote)))
-  if (at <= 0) return { label: '下段开头', text: sentences[0] }
-  return { label: '下段', text: `…… ${sentences[at]}` }
+  if (at <= 0) return { label: '下段开头', text: show(sentences[0]) }
+  return { label: '下段', text: `…… ${show(sentences[at])}` }
 }
 
 // A quote from the blank's own paragraph; 「……」 marks words left out between it and the blank.
@@ -95,10 +107,10 @@ export function contextChainRows(entry, paragraphs, questionNo) {
   const all = list(paragraphs)
   const before = located.before
     ? ownRow(beforeQuote, 'before', located.before) || { label: '空前', text: nearestSentence(located.before, 'before') }
-    : neighbourRow(all[located.index - 1], 'before', used)
+    : neighbourRow(all[located.index - 1], 'before', used, located.beforeIsPunctuation)
   const after = located.after
     ? ownRow(afterQuote, 'after', located.after) || { label: '空后', text: nearestSentence(located.after, 'after') }
-    : neighbourRow(all[located.index + 1], 'after', used)
+    : neighbourRow(all[located.index + 1], 'after', used, located.afterIsPunctuation)
   return { before, after }
 }
 
