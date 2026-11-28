@@ -1,0 +1,653 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:reading-a": {
+      "overview": "MacBike 是阿姆斯特丹最大的自行车租赁公司。这则广告介绍了骑车游城的好处、公司规模与车型、按车型和时长计价的租金表，以及从水坝广场出发的2.5小时城市导览骑行。",
+      "fullTranslationZh": "自行车租赁与导览游\n欢迎来到阿姆斯特丹，欢迎来到 MacBike。坐在自行车座上，你能看到更多风景！骑行是游览这座城市最经济、最可持续也最有趣的方式，城里有美丽的运河、公园、广场和数不清的灯光。你还可以骑车到阿姆斯特丹城外，沿途欣赏宜人的风景。\n为什么选择 MacBike\nMacBike 已经开办了近30年，是阿姆斯特丹最大的自行车租赁公司。我们在五家位置优越的租车店里存放着2500多辆自行车，确保随时都有车可租。我们提供种类繁多的最新款自行车，包括带脚刹的基础款自行车、带手刹和排挡的自行车、带儿童座椅的自行车以及儿童自行车。\n价格\n车型：手刹、三挡｜脚刹、无挡\n1小时：7.50欧元｜5.00欧元\n3小时：11.00欧元｜7.50欧元\n1天（24小时）：14.75欧元｜9.75欧元\n每增加1天：8.00欧元｜6.00欧元\n城市导览游\n这条2.5小时的骑行路线途经古耶风车、瘦桥、荷兰国立博物馆、喜力啤酒厂等众多景点。导览团每天从下午1点开始，每逢整点从水坝广场出发。你可以在 MacBike 门店购票，也可以在线预订。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-a-1",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+          "sourceText": "With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you.",
+          "displayText": "With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:21"
+          ],
+          "translationZh": "我们在五家位置优越的租车店里存放着2500多辆自行车，确保随时都有车可租。",
+          "analysisZh": "先找主干：we make sure 是主句，后面省略 that 的宾语从句 there is always a bike available for you 说明“确保什么”，available for you 后置修饰 a bike。句首 With over 2,500 bikes stored in … 是“with + 名词 + 过去分词”结构，stored 与 bikes 是被动关系（车被存放），交代能做到“随时有车”的条件；at strategic locations 修饰 five rental shops。注意 2,500 修饰的是 bikes，店只有 five 家。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "With over 2,500 bikes stored"
+            },
+            {
+              "start": 78,
+              "end": 90,
+              "quote": "we make sure"
+            },
+            {
+              "start": 91,
+              "end": 123,
+              "quote": "there is always a bike available"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-i:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-i:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:1"
+              ],
+              "start": 0,
+              "end": 9,
+              "quote": "自行车租赁与导览游"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:2"
+              ],
+              "start": 10,
+              "end": 122,
+              "quote": "欢迎来到阿姆斯特丹，欢迎来到 MacBike。坐在自行车座上，你能看到更多风景！骑行是游览这座城市最经济、最可持续也最有趣的方式，城里有美丽的运河、公园、广场和数不清的灯光。你还可以骑车到阿姆斯特丹城外，沿途欣赏宜人的风景。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:3"
+              ],
+              "start": 123,
+              "end": 136,
+              "quote": "为什么选择 MacBike"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:4"
+              ],
+              "start": 137,
+              "end": 266,
+              "quote": "MacBike 已经开办了近30年，是阿姆斯特丹最大的自行车租赁公司。我们在五家位置优越的租车店里存放着2500多辆自行车，确保随时都有车可租。我们提供种类繁多的最新款自行车，包括带脚刹的基础款自行车、带手刹和排挡的自行车、带儿童座椅的自行车以及儿童自行车。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:5"
+              ],
+              "start": 267,
+              "end": 269,
+              "quote": "价格"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-1-2",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-1-3"
+              ],
+              "start": 270,
+              "end": 284,
+              "quote": "车型：手刹、三挡｜脚刹、无挡"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-2-1",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-2-2",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-2-3"
+              ],
+              "start": 285,
+              "end": 302,
+              "quote": "1小时：7.50欧元｜5.00欧元"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-3-1",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-3-2",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-3-3"
+              ],
+              "start": 303,
+              "end": 321,
+              "quote": "3小时：11.00欧元｜7.50欧元"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-1",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-2",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-3"
+              ],
+              "start": 322,
+              "end": 345,
+              "quote": "1天（24小时）：14.75欧元｜9.75欧元"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-1",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-2",
+                "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-3"
+              ],
+              "start": 346,
+              "end": 365,
+              "quote": "每增加1天：8.00欧元｜6.00欧元"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:7"
+              ],
+              "start": 366,
+              "end": 371,
+              "quote": "城市导览游"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-a:8"
+              ],
+              "start": 372,
+              "end": 464,
+              "quote": "这条2.5小时的骑行路线途经古耶风车、瘦桥、荷兰国立博物馆、喜力啤酒厂等众多景点。导览团每天从下午1点开始，每逢整点从水坝广场出发。你可以在 MacBike 门店购票，也可以在线预订。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-a-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+                "start": 100,
+                "end": 232,
+                "quote": "With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 35,
+                "end": 72,
+                "quote": "我们在五家位置优越的租车店里存放着2500多辆自行车，确保随时都有车可租。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+                "start": 233,
+                "end": 279,
+                "quote": "We offer the newest bicycles in a wide variety"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 72,
+                "end": 87,
+                "quote": "我们提供种类繁多的最新款自行车"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-2",
+                "start": 0,
+                "end": 6,
+                "quote": "€14.75"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-2",
+                "start": 0,
+                "end": 5,
+                "quote": "€8.00"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 9,
+                "end": 16,
+                "quote": "14.75欧元"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "zh-reading-a-p10",
+                "start": 6,
+                "end": 12,
+                "quote": "8.00欧元"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+                "start": 114,
+                "end": 146,
+                "quote": "The tour departs from Dam Square"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 54,
+                "end": 65,
+                "quote": "每逢整点从水坝广场出发"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "广告先用骑行看城的好处吸引游客，再分三个小标题依次介绍公司实力与车型、租车价格和城市导览游，信息逐块排列，便于读者按需查找。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-a:1",
+            "summary": "点明广告的两项业务：租车和导览骑行",
+            "function": "统领全文"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-a:2",
+            "summary": "欢迎游客，说明骑车是游览阿姆斯特丹最经济、环保又有趣的方式，城外也能骑",
+            "function": "引出租车服务，吸引读者"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+            "summary": "介绍公司近30年历史、五家门店的2500多辆车，以及多种车型",
+            "function": "说明选择 MacBike 的理由"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-a:5",
+            "summary": "用表格列出两类车按1小时、3小时、1天和续租每天计算的价格",
+            "function": "提供租车费用信息"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+            "summary": "介绍2.5小时导览路线的景点、出发地点和时间以及购票方式",
+            "function": "提供导览游信息"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-i:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "从广告各部分找出 MacBike 真正写到的优势，逐项排除折扣、免费导览和店数这几处细节错误。",
+      "stemTranslationZh": "MacBike 的一个优势是什么？",
+      "locateBy": "options",
+      "locateFindZh": "把儿童折扣、车型、免费导览、店数逐个带回原文核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它给儿童打折。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "children’s bikes",
+            "optionText": "children",
+            "matchType": "exact",
+            "relationNote": "选项借了 [[block:paper-gaokao-2023-i:reading-a:4|We offer the newest bicycles]] 里的 children（儿童），原文说的是有儿童自行车和儿童座椅车可租；价格表只按车型和时长定价，没提儿童打折。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+              "quote": "bikes with child seats, and children’s bikes",
+              "anchor": "车型列举"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它提供多种类型的自行车。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+              "quote": "We offer the newest bicycles in a wide variety, including basic bikes with foot brake(刹车), bikes with hand brake and gears (排挡), bikes with child seats, and children’s bikes.",
+              "anchor": "车型种类繁多"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它组织免费的骑行游。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "You can buy your ticket in a MacBike shop or book online.",
+            "sourceHighlight": "buy your ticket",
+            "optionText": "It organizes free cycle tours.",
+            "optionHighlight": "free",
+            "explanation": "MacBike 确实组织城市导览骑行，但 [[block:paper-gaokao-2023-i:reading-a:8|You can buy your ticket]] 说要在门店买票（buy your ticket）或网上预订，是收费的，不是免费的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "quote": "You can buy your ticket in a MacBike shop or book online.",
+              "anchor": "导览要买票"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它有2500多家租车店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you.",
+            "sourceEntity": "over 2,500 bikes",
+            "optionText": "It has over 2,500 rental shops.",
+            "optionEntity": "over 2,500 rental shops",
+            "explanation": "2500多指的是自行车的数量（over 2,500 bikes），租车店只有五家（five rental shops），选项把车数安到了店数上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+              "quote": "With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you.",
+              "anchor": "车数与店数"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "many types of bikes",
+          "sourceRole": "correctOption",
+          "targetText": "the newest bicycles in a wide variety",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-a:4",
+          "relationType": "paraphrase",
+          "note": "选项的“多种类型”（many types）就是原文的“种类繁多”（in a wide variety），后面还列出脚刹车、手刹排挡车、儿童座椅车和童车几类，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在价格表里找准车型那一列，分清首日价和续租价，算出租两天的总费用。",
+      "stemTranslationZh": "租一辆带手刹和三挡的自行车两天，要付多少钱？",
+      "locateBy": "options",
+      "locateFindZh": "在手刹三挡一列查1天价和续租1天价，相加后对选项",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "15.75欧元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "€9.75",
+            "sourceEntity": "€9.75",
+            "optionText": "€15.75.",
+            "optionEntity": "€15.75",
+            "explanation": "这是脚刹无挡那一列的两天价：9.75＋6.00＝15.75欧元，天数算对了，车型看错了列。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-3",
+              "quote": "€9.75",
+              "anchor": "脚刹车1天价"
+            },
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-3",
+              "quote": "€6.00",
+              "anchor": "脚刹车续租价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "19.50欧元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "€9.75",
+            "sourceEntity": "€9.75",
+            "optionText": "€19.50.",
+            "optionEntity": "€19.50",
+            "explanation": "这是把脚刹车的1天价 9.75 欧元直接乘 2 得出的数：既看错了车型，又漏了第二天按续租价收费。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-3",
+              "quote": "€9.75",
+              "anchor": "脚刹车1天价"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "22.75欧元。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-2",
+              "quote": "€14.75",
+              "anchor": "手刹三挡车1天价"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-2",
+              "quote": "€8.00",
+              "anchor": "手刹三挡车每增加1天"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "29.50欧元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Each additional day",
+            "sourceHighlight": "additional day",
+            "optionText": "€29.50.",
+            "optionHighlight": "€29.50",
+            "explanation": "车型选对了，但把1天价 14.75 欧元乘了 2；表里第二天按“每增加1天”（Each additional day）只收 8.00 欧元。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-1",
+              "quote": "Each additional day",
+              "anchor": "续租一行"
+            },
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-5-2",
+              "quote": "€8.00",
+              "anchor": "手刹车续租价"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "€22.75",
+          "sourceRole": "correctOption",
+          "targetText": "€14.75",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-2",
+          "relationType": "calculation",
+          "note": "两天要分开算：手刹三挡车第一天按1天价（1 day）付 14.75 欧元，第二天按续租一天（Each additional day）付 8.00 欧元，14.75＋8.00＝22.75欧元，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在导览介绍里分清出发地点和途经景点。",
+      "stemTranslationZh": "城市导览游从哪里出发？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "古耶风车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Gooyer Windmill",
+            "optionText": "Gooyer Windmill",
+            "matchType": "exact",
+            "relationNote": "Gooyer Windmill 出自 [[block:paper-gaokao-2023-i:reading-a:8|The 2.5-hour tour covers]]，是路线途经（covers）的景点，而且排在最前面，但它不是出发地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "quote": "The 2.5-hour tour covers the Gooyer Windmill",
+              "anchor": "途经景点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "瘦桥。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Skinny Bridge",
+            "optionText": "Skinny Bridge",
+            "matchType": "exact",
+            "relationNote": "瘦桥（Skinny Bridge）同样列在路线经过的景点里，导览只是骑到那里，不从那里出发。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "quote": "the Skinny Bridge",
+              "anchor": "途经景点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "喜力啤酒厂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Heineken Brewery",
+            "optionText": "Heineken Brewery",
+            "matchType": "exact",
+            "relationNote": "喜力啤酒厂（Heineken Brewery）也是途经景点之一，后面还跟着“等众多景点”（and much more），并非起点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "quote": "Heineken Brewery and much more",
+              "anchor": "途经景点"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "水坝广场。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "quote": "The tour departs from Dam Square every hour on the hour, starting at 1:00 pm every day.",
+              "anchor": "导览出发地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "start",
+          "sourceRole": "stem",
+          "targetText": "The tour departs from Dam Square every hour on the hour, starting at 1:00 pm every day.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-a:8",
+          "relationType": "locationCue",
+          "targetCue": "departs from",
+          "sourceZh": "出发",
+          "targetCueZh": "从……出发",
+          "answerText": "departs from Dam Square",
+          "note": "题干 start 对应原文 departs from。"
+        },
+        {
+          "sourceText": "Dam Square",
+          "sourceRole": "correctOption",
+          "targetText": "departs from Dam Square",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-a:8",
+          "relationType": "paraphrase",
+          "note": "原文说导览从水坝广场出发（departs from），选项沿用地名 Dam Square，选 D。"
+        }
+      ]
+    }
+  }
+}

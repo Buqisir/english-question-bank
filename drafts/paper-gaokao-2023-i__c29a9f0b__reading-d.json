@@ -1,0 +1,811 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:reading-d": {
+      "overview": "文章介绍高尔顿1907年揭示的“群体智慧”效应及其原理：独立估计的误差会相互抵消。纳瓦哈斯的新研究却发现，分组讨论后的平均估计更准，后续研究显示关键在于成员分享论点、共同推理。",
+      "fullTranslationZh": "1907年3月7日，英国统计学家弗朗西斯·高尔顿发表了一篇论文，阐明了后来被称为“群体智慧”的效应。他所做的估算实验表明，在某些情况下，大量独立估计的平均值可能相当准确。\n这一效应利用了这样一个事实：人们犯错时，犯的错并不总是一样的。有些人往往会高估，有些人则往往会低估。当足够多的这类误差被平均在一起时，它们就会相互抵消，从而得出更准确的估计。如果人们彼此相似、往往犯同样的错误，他们的误差就不会相互抵消。用更专业的话说，群体智慧要求人们的估计彼此独立。如果出于某种原因，人们的误差变得相互关联或相互依赖，估计的准确性就会下降。\n但由华金·纳瓦哈斯领导的一项新研究给这一经典现象带来了有趣的转折。这项研究的主要发现是：当群体被进一步分成可以讨论的小组时，这些小组得出的平均值比同等数量的独立个体得出的平均值更准确。例如，由四个五人讨论小组的估计得出的平均值，明显比20个独立个体的估计得出的平均值准确。\n在一项有100名大学生参与的后续研究中，研究人员想更清楚地了解小组成员在讨论中实际做了什么。他们是否倾向于听从对自己的估计最有把握的人？他们是否追随最不愿改变主意的人？这种情况有时会发生，但并不是主要的反应。最常见的情况是，各小组报告说他们“分享论点、共同推理”。不知怎么的，这些论点和推理使误差整体减少了。\n尽管纳瓦哈斯领导的这些研究存在局限，许多问题也有待解答，但它们对小组讨论和决策的潜在意义是巨大的。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-d-1",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+          "sourceText": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+          "displayText": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:33"
+          ],
+          "translationZh": "这项研究的主要发现是：当群体被进一步分成可以讨论的小组时，这些小组得出的平均值比同等数量的独立个体得出的平均值更准确。",
+          "analysisZh": "主干是 The key finding … was that …，that 引导表语从句，说出“发现是什么”。表语从句里先有 when 引导的时间状语从句，其中 that were allowed to have a discussion 是定语从句，修饰 smaller groups；从句的主干是 the averages … were more accurate than those …，those 指代 the averages，比较的两边是“讨论小组的平均值”和“同等数量独立个体的平均值”。抓住 allowed to have a discussion 和 more accurate，就能看出讨论反而让结果更准。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 37,
+              "quote": "The key finding of the study was that"
+            },
+            {
+              "start": 91,
+              "end": 129,
+              "quote": "that were allowed to have a discussion"
+            },
+            {
+              "start": 162,
+              "end": 191,
+              "quote": "were more accurate than those"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-d-2",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+          "sourceText": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
+          "displayText": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:32"
+          ],
+          "translationZh": "当足够多的这类误差被平均在一起时，它们就会相互抵消，从而得出更准确的估计。",
+          "analysisZh": "主干是 they cancel each other out（它们相互抵消），they 指前句的高估和低估这些误差。句首 When enough of these errors are averaged together 是时间状语从句，are averaged 为被动语态。句尾 resulting in a more accurate estimate 是现在分词短语作结果状语，“从而得出更准的估计”。这句正是群体智慧效应成立的原因。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 49,
+              "quote": "When enough of these errors are averaged together"
+            },
+            {
+              "start": 51,
+              "end": 77,
+              "quote": "they cancel each other out"
+            },
+            {
+              "start": 78,
+              "end": 115,
+              "quote": "resulting in a more accurate estimate"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-i:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-d:1"
+              ],
+              "start": 0,
+              "end": 85,
+              "quote": "1907年3月7日，英国统计学家弗朗西斯·高尔顿发表了一篇论文，阐明了后来被称为“群体智慧”的效应。他所做的估算实验表明，在某些情况下，大量独立估计的平均值可能相当准确。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-d:2"
+              ],
+              "start": 86,
+              "end": 265,
+              "quote": "这一效应利用了这样一个事实：人们犯错时，犯的错并不总是一样的。有些人往往会高估，有些人则往往会低估。当足够多的这类误差被平均在一起时，它们就会相互抵消，从而得出更准确的估计。如果人们彼此相似、往往犯同样的错误，他们的误差就不会相互抵消。用更专业的话说，群体智慧要求人们的估计彼此独立。如果出于某种原因，人们的误差变得相互关联或相互依赖，估计的准确性就会下降。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-d:3"
+              ],
+              "start": 266,
+              "end": 402,
+              "quote": "但由华金·纳瓦哈斯领导的一项新研究给这一经典现象带来了有趣的转折。这项研究的主要发现是：当群体被进一步分成可以讨论的小组时，这些小组得出的平均值比同等数量的独立个体得出的平均值更准确。例如，由四个五人讨论小组的估计得出的平均值，明显比20个独立个体的估计得出的平均值准确。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-d:4"
+              ],
+              "start": 403,
+              "end": 557,
+              "quote": "在一项有100名大学生参与的后续研究中，研究人员想更清楚地了解小组成员在讨论中实际做了什么。他们是否倾向于听从对自己的估计最有把握的人？他们是否追随最不愿改变主意的人？这种情况有时会发生，但并不是主要的反应。最常见的情况是，各小组报告说他们“分享论点、共同推理”。不知怎么的，这些论点和推理使误差整体减少了。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-d:5"
+              ],
+              "start": 558,
+              "end": 607,
+              "quote": "尽管纳瓦哈斯领导的这些研究存在局限，许多问题也有待解答，但它们对小组讨论和决策的潜在意义是巨大的。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-d-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+                "start": 99,
+                "end": 339,
+                "quote": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 33,
+                "end": 92,
+                "quote": "这项研究的主要发现是：当群体被进一步分成可以讨论的小组时，这些小组得出的平均值比同等数量的独立个体得出的平均值更准确。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+                "start": 169,
+                "end": 285,
+                "quote": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 50,
+                "end": 87,
+                "quote": "当足够多的这类误差被平均在一起时，它们就会相互抵消，从而得出更准确的估计。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+                "start": 0,
+                "end": 102,
+                "quote": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+                "start": 169,
+                "end": 285,
+                "quote": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 0,
+                "end": 31,
+                "quote": "这一效应利用了这样一个事实：人们犯错时，犯的错并不总是一样的。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 50,
+                "end": 87,
+                "quote": "当足够多的这类误差被平均在一起时，它们就会相互抵消，从而得出更准确的估计。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+                "start": 175,
+                "end": 279,
+                "quote": "smaller groups that were allowed to have a discussion, the averages from these groups were more accurate"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+                "start": 389,
+                "end": 483,
+                "quote": "In more technical terms, the wisdom of crowds requires that people’s estimates be independent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 53,
+                "end": 91,
+                "quote": "可以讨论的小组时，这些小组得出的平均值比同等数量的独立个体得出的平均值更准确"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 118,
+                "end": 142,
+                "quote": "用更专业的话说，群体智慧要求人们的估计彼此独立。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
+                "start": 98,
+                "end": 153,
+                "quote": "what the group members actually did in their discussion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 31,
+                "end": 45,
+                "quote": "小组成员在讨论中实际做了什么"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+                "start": 80,
+                "end": 160,
+                "quote": "the potential implications for group discussion and decision-making are enormous"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+                "start": 39,
+                "end": 67,
+                "quote": "offered an interesting twist"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 29,
+                "end": 48,
+                "quote": "它们对小组讨论和决策的潜在意义是巨大的"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 27,
+                "end": 32,
+                "quote": "有趣的转折"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先介绍经典的“群体智慧”效应，再解释它成立的原理和前提，接着用 But 转到纳瓦哈斯的新发现及后续研究，最后评价这些研究的意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+            "summary": "高尔顿1907年的论文提出“群体智慧”效应：大量独立估计的平均值可能相当准确",
+            "function": "引出话题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+            "summary": "这一效应靠高估和低估的误差相互抵消，前提是估计彼此独立",
+            "function": "解释效应的原理和前提"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+            "summary": "纳瓦哈斯的研究发现，分组讨论后的平均估计比同等数量独立个人的更准",
+            "function": "用转折引出新发现"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
+            "summary": "后续研究考察讨论过程，发现小组主要靠分享论点、共同推理减少误差",
+            "function": "深入说明新发现的原因"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+            "summary": "作者承认研究有局限，但认为其对小组讨论和决策意义重大",
+            "function": "评价研究，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-i:32": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括第2段围绕“群体智慧”效应讲了什么。",
+      "stemTranslationZh": "文章第2段主要讲什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-gaokao-2023-i:reading-d:2]] 开头 This effect 那句读起，看后面几句怎样围绕误差展开",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "估算的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "estimate",
+            "optionText": "estimation",
+            "matchType": "wordFamily",
+            "relationNote": "estimation 和 [[block:paper-gaokao-2023-i:reading-d:2]] 反复出现的 estimate（估计）同根，但这一段讲的是众人估计的误差为什么能抵消，没介绍怎样去估算。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "quote": "resulting in a more accurate estimate",
+              "anchor": "估计更准"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这一效应背后的逻辑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "quote": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same.",
+              "anchor": "效应所依据的事实"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "quote": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
+              "anchor": "误差相互抵消"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们犯错的原因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "people’s errors",
+            "optionText": "people’s errors",
+            "matchType": "exact",
+            "relationNote": "people’s errors 出自 [[block:paper-gaokao-2023-i:reading-d:2|If, for whatever reasons]]，这一段讲误差怎样相互抵消、什么时候抵消不了；至于人为什么会出错，只用“不管出于什么原因”（for whatever reasons）一笔带过。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "quote": "If, for whatever reasons, people’s errors become correlated or dependent",
+              "anchor": "不论原因"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "高尔顿实验的设计。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The experiment of estimation he conducted showed that in some cases, the average of a large number of independent estimates could be quite accurate.",
+            "sourceEntity": "The experiment of estimation he conducted",
+            "optionText": "The design of Galton’s experiment.",
+            "optionEntity": "Galton’s experiment",
+            "explanation": "高尔顿的实验在 [[block:paper-gaokao-2023-i:reading-d:1]] 只交代了结论，[[block:paper-gaokao-2023-i:reading-d:2]] 讲的是这一效应背后的道理，两段都没介绍实验怎样设计。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "quote": "The experiment of estimation he conducted showed",
+              "anchor": "高尔顿的实验"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "underlying logic",
+          "sourceRole": "correctOption",
+          "targetText": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "全段都在讲平均值为什么会准：先说人们的误差各不相同（aren’t always the same），有人高估、有人低估，平均后相互抵消（cancel each other out）；再反过来说误差雷同或相互关联时，准确性就会下降。讲的都是效应成立的道理，正是“背后的逻辑”（underlying logic），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:33": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把纳瓦哈斯研究的发现和群体智慧要求估计独立的前提对照，推出“即使”后面的条件。",
+      "stemTranslationZh": "纳瓦哈斯的研究发现，即使____，平均准确性也可能提高。",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "群体规模相对较小",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+            "sourceEntity": "smaller groups",
+            "optionText": "the crowds were relatively small",
+            "optionEntity": "the crowds",
+            "explanation": "变小的是讨论小组（smaller groups），比较的两边人数相同（an equal number）：四个五人小组对20个独立个人，研究没说群体总人数少也能更准。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "when crowds were further divided into smaller groups",
+              "anchor": "群体再分成小组"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "偶尔会出现低估",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "underestimate",
+            "optionText": "underestimates",
+            "matchType": "wordFamily",
+            "relationNote": "underestimates 借自 [[block:paper-gaokao-2023-i:reading-d:2|Some people will tend to]] 的 underestimate（低估），那是高尔顿效应里本来就有的情况，正是有高估有低估误差才会抵消，不是纳瓦哈斯研究的新发现。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "quote": "Some people will tend to overestimate, and some to underestimate.",
+              "anchor": "有人高估有人低估"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "个体之间不交流",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+            "sourceHighlight": "allowed to have a discussion",
+            "optionText": "individuals did not communicate",
+            "optionHighlight": "did not communicate",
+            "explanation": "更准的恰恰是可以讨论的小组（allowed to have a discussion），彼此不交流的独立个人那一方反而不如它们。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "smaller groups that were allowed to have a discussion",
+              "anchor": "小组可以讨论"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "估计并非完全独立",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+              "anchor": "研究的主要发现"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "quote": "In more technical terms, the wisdom of crowds requires that people’s estimates be independent.",
+              "anchor": "群体智慧要求估计独立"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "study found",
+          "sourceRole": "stem",
+          "targetText": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:3",
+          "relationType": "locationCue",
+          "targetCue": "key finding",
+          "sourceZh": "研究发现",
+          "targetCueZh": "主要发现",
+          "answerText": "smaller groups that were allowed to have a discussion, the averages from these groups were more accurate",
+          "note": "题干 study found 对应原文 key finding。"
+        },
+        {
+          "sourceText": "estimates were not fully independent",
+          "sourceRole": "correctOption",
+          "targetText": "In more technical terms, the wisdom of crowds requires that people’s estimates be independent.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项要往前推一步：[[block:paper-gaokao-2023-i:reading-d:2|In more technical terms, the]] 说群体智慧要求估计彼此独立（be independent），而小组成员讨论过后（allowed to have a discussion），估计会互相影响，不再完全独立；可这些小组的平均值反而更准（more accurate），所以是“即使估计并非完全独立”，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出后续研究想弄清的问题，并概括成研究重点。",
+      "stemTranslationZh": "后续研究关注的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "小组的规模。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "For instance, the average obtained from the estimates of four discussion groups of five was significantly more accurate than the average obtained from 20 independent individuals.",
+            "sourceEntity": "four discussion groups of five",
+            "optionText": "The size of the groups.",
+            "optionEntity": "The size of the groups",
+            "explanation": "小组规模（四个五人小组）是 [[block:paper-gaokao-2023-i:reading-d:3]] 举例时交代的条件；后续研究的100名大学生只是参与人数，研究想弄清的是讨论中发生了什么。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "four discussion groups of five",
+              "anchor": "五人小组"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "占主导地位的成员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "dominant",
+            "optionText": "dominant",
+            "matchType": "exact",
+            "relationNote": "dominant 出自 [[block:paper-gaokao-2023-i:reading-d:4|but it wasn’t the dominant]]，在原文形容“主要的反应”；而且原文说听从最自信或最固执的人并不是主要情况，研究也不是专门看强势成员。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
+              "quote": "This happened some of the time, but it wasn’t the dominant response.",
+              "anchor": "不是主要反应"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "讨论的过程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
+              "quote": "In a follow-up study with 100 university students, the researchers tried to get a better sense of what the group members actually did in their discussion.",
+              "anchor": "后续研究的问题"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "个人的估计。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals.",
+            "sourceEntity": "independent individuals",
+            "optionText": "The individual estimates.",
+            "optionEntity": "individual estimates",
+            "explanation": "独立个人的估计是 [[block:paper-gaokao-2023-i:reading-d:3]] 里拿来和讨论小组比较的另一方；后续研究看的是小组成员在讨论中怎么做。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "than those from an equal number of independent individuals",
+              "anchor": "独立个人一方"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "follow-up study",
+          "sourceRole": "stem",
+          "targetText": "In a follow-up study with 100 university students, the researchers tried to get a better sense of what the group members actually did in their discussion.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "what the group members actually did in their discussion",
+          "note": "题干 follow-up study 原词出现在原文。"
+        },
+        {
+          "sourceText": "The discussion process.",
+          "sourceRole": "correctOption",
+          "targetText": "what the group members actually did in their discussion",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "原文说研究者想弄清组员在讨论中实际做了什么（actually did in their discussion），也就是讨论是怎样进行的，即“讨论的过程”（discussion process），选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:35": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "抓住让步句的主句，判断作者对纳瓦哈斯研究的态度。",
+      "stemTranslationZh": "作者对纳瓦哈斯的研究持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "看 Although 让步后的主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "不明确的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+            "sourceHighlight": "are enormous",
+            "optionText": "Unclear.",
+            "optionHighlight": "Unclear",
+            "explanation": "作者在主句明确说这些研究的潜在意义巨大（enormous），态度并不含糊。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+              "quote": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+              "anchor": "意义巨大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "不屑一顾的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "But a new study led by Joaquin Navajas offered an interesting twist（转折）on this classic phenomenon.",
+            "sourceHighlight": "an interesting twist",
+            "optionText": "Dismissive.",
+            "optionHighlight": "Dismissive",
+            "explanation": "作者介绍这项研究时称它带来“有趣的转折”（an interesting twist），[[block:paper-gaokao-2023-i:reading-d:5]] 又说意义巨大，并没有看轻它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "But a new study led by Joaquin Navajas offered an interesting twist",
+              "anchor": "有趣的转折"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "怀疑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+            "sourceHighlight": "have limitations and many questions remain",
+            "optionText": "Doubtful.",
+            "optionHighlight": "Doubtful",
+            "explanation": "作者承认研究有局限、问题尚存（have limitations），但这只是 Although 引出的让步，主句落在意义巨大上，选项把让步的保留放大成了整体的怀疑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+              "quote": "Although the studies led by Navajas have limitations and many questions remain",
+              "anchor": "让步部分"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "赞同的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+              "quote": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+              "anchor": "研究意义巨大"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "quote": "But a new study led by Joaquin Navajas offered an interesting twist（转折）on this classic phenomenon.",
+              "anchor": "有趣的转折"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Navajas studies",
+          "sourceRole": "stem",
+          "targetText": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:5",
+          "relationType": "locationCue",
+          "targetCue": "studies led by Navajas",
+          "answerText": "the potential implications for group discussion and decision-making are enormous",
+          "note": "题干 Navajas studies 对应原文 studies led by Navajas。"
+        },
+        {
+          "sourceText": "Approving",
+          "sourceRole": "correctOption",
+          "targetText": "the potential implications for group discussion and decision-making are enormous",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项是从作者的评价推出来的：Although 引出的局限只是让步，主句说研究对小组讨论和决策的潜在意义巨大（enormous），[[block:paper-gaokao-2023-i:reading-d:3|But a new study led]] 也称它带来“有趣的转折”（an interesting twist）。可见作者是肯定、赞同的，选 D。"
+        }
+      ]
+    }
+  }
+}

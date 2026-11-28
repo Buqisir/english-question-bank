@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:reading-b": {
+      "overview": "文章介绍约翰·托德：他从小观察大自然怎样净化溪水，后来用动植物组合造出“生态机器”，成功把污泥分解为清水，并用它处理生活污水、净化福州运河，他称之为“生态设计”。",
+      "fullTranslationZh": "约翰·托德小时候喜欢在家附近的树林里探索，观察大自然是怎样解决问题的。比如，一条脏兮兮的小溪流过植物、流经住着微小生物的岩石之后，往往就变清了。长大后，约翰开始思考，这一过程能否用来清理人类制造的污染。\n在大学学习了农学、医学和渔业之后，约翰又回到观察自然、提出问题的路上。为什么某些植物能困住有害细菌？哪些鱼能吃掉致癌化学物质？他想，只要把动物和植物恰当地组合起来，也许就能像大自然那样清除废物。他决定建造一种后来被他称为“生态机器”的装置。\n约翰给自己定下的任务是去除一些污泥中的有害物质。首先，他造了一组彼此相连的透明玻璃纤维水箱。接着，他到当地的池塘和溪流里带回一些植物和动物，把它们放进水箱，然后等待。渐渐地，这些不同的生物相互适应，形成了自己的生态系统。几周后，约翰加入了污泥。\n结果让他大吃一惊。生态机器里的植物和动物把污泥当作食物，开始吃了起来！几周之内，污泥就全部被消化掉了，只剩下纯净的水。\n这些年来，约翰承接了许多大型项目。他开发了一种类似温室的设施，处理了南伯灵顿1600户人家的生活污水。他还设计了一台生态机器，用来净化中国东南部城市福州的运河水。\n“生态设计”是约翰给自己所做工作起的名字。“地球上的生命有点像给发明家准备的一箱备用零件，”他说，“你把生物放进新的关系里，观察会发生什么。然后让这些新系统自己发展出自我修复的方式。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-b-1",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+          "sourceText": "When he got older, John started to wonder if this process could be used to clean up the messes people were making.",
+          "displayText": "When he got older, John started to wonder if this process could be used to clean up the messes people were making.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:24"
+          ],
+          "translationZh": "长大后，约翰开始思考，这一过程能否用来清理人类制造的污染。",
+          "analysisZh": "主干是 John started to wonder（约翰开始思考），句首 When he got older 是时间状语。wonder 后接 if 引导的宾语从句，表示“是否”；从句里 this process 指前一句脏溪流过植物和岩石后变清的过程，could be used to clean up 是被动语态加目的不定式。末尾 the messes people were making 中，people were making 是省略了关系词 that 的定语从句，修饰 the messes。",
+          "underlineRanges": [
+            {
+              "start": 19,
+              "end": 41,
+              "quote": "John started to wonder"
+            },
+            {
+              "start": 42,
+              "end": 71,
+              "quote": "if this process could be used"
+            },
+            {
+              "start": 84,
+              "end": 113,
+              "quote": "the messes people were making"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-b-2",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+          "sourceText": "With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did.",
+          "displayText": "With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did.",
+          "relatedQuestionIds": [],
+          "translationZh": "他想，只要把动物和植物恰当地组合起来，也许就能像大自然那样清除废物。",
+          "analysisZh": "主干是 he could clean up waste（他能清除废物）；he figured 是插入语，交代这是他的设想，maybe 再把语气放轻。句首 With the right combination of animals and plants 表条件，“有了恰当的动植物组合”。句尾 the way nature did 是方式状语，the way 后省略了 that 或 in which，did 替代 cleaned up waste，意思是“像大自然清除废物那样”，点出他向自然学习的思路。",
+          "underlineRanges": [
+            {
+              "start": 50,
+              "end": 60,
+              "quote": "he figured"
+            },
+            {
+              "start": 68,
+              "end": 91,
+              "quote": "he could clean up waste"
+            },
+            {
+              "start": 92,
+              "end": 110,
+              "quote": "the way nature did"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-i:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-b:1"
+              ],
+              "start": 0,
+              "end": 101,
+              "quote": "约翰·托德小时候喜欢在家附近的树林里探索，观察大自然是怎样解决问题的。比如，一条脏兮兮的小溪流过植物、流经住着微小生物的岩石之后，往往就变清了。长大后，约翰开始思考，这一过程能否用来清理人类制造的污染。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-b:2"
+              ],
+              "start": 102,
+              "end": 222,
+              "quote": "在大学学习了农学、医学和渔业之后，约翰又回到观察自然、提出问题的路上。为什么某些植物能困住有害细菌？哪些鱼能吃掉致癌化学物质？他想，只要把动物和植物恰当地组合起来，也许就能像大自然那样清除废物。他决定建造一种后来被他称为“生态机器”的装置。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-b:3"
+              ],
+              "start": 223,
+              "end": 345,
+              "quote": "约翰给自己定下的任务是去除一些污泥中的有害物质。首先，他造了一组彼此相连的透明玻璃纤维水箱。接着，他到当地的池塘和溪流里带回一些植物和动物，把它们放进水箱，然后等待。渐渐地，这些不同的生物相互适应，形成了自己的生态系统。几周后，约翰加入了污泥。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-b:4"
+              ],
+              "start": 346,
+              "end": 405,
+              "quote": "结果让他大吃一惊。生态机器里的植物和动物把污泥当作食物，开始吃了起来！几周之内，污泥就全部被消化掉了，只剩下纯净的水。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-b:5"
+              ],
+              "start": 406,
+              "end": 487,
+              "quote": "这些年来，约翰承接了许多大型项目。他开发了一种类似温室的设施，处理了南伯灵顿1600户人家的生活污水。他还设计了一台生态机器，用来净化中国东南部城市福州的运河水。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-b:6"
+              ],
+              "start": 488,
+              "end": 580,
+              "quote": "“生态设计”是约翰给自己所做工作起的名字。“地球上的生命有点像给发明家准备的一箱备用零件，”他说，“你把生物放进新的关系里，观察会发生什么。然后让这些新系统自己发展出自我修复的方式。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-b-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+                "start": 235,
+                "end": 349,
+                "quote": "When he got older, John started to wonder if this process could be used to clean up the messes people were making."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 72,
+                "end": 101,
+                "quote": "长大后，约翰开始思考，这一过程能否用来清理人类制造的污染。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-s2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+                "start": 226,
+                "end": 337,
+                "quote": "With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 63,
+                "end": 97,
+                "quote": "他想，只要把动物和植物恰当地组合起来，也许就能像大自然那样清除废物。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+                "start": 76,
+                "end": 112,
+                "quote": "observing how nature solved problems"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+                "start": 254,
+                "end": 348,
+                "quote": "John started to wonder if this process could be used to clean up the messes people were making"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+                "start": 64,
+                "end": 119,
+                "quote": "John went back to observing nature and asking questions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 21,
+                "end": 34,
+                "quote": "观察大自然是怎样解决问题的"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 76,
+                "end": 100,
+                "quote": "约翰开始思考，这一过程能否用来清理人类制造的污染"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 17,
+                "end": 34,
+                "quote": "约翰又回到观察自然、提出问题的路上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+                "start": 34,
+                "end": 79,
+                "quote": "to remove harmful substances from some sludge"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:4",
+                "start": 0,
+                "end": 29,
+                "quote": "He was amazed at the results."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 11,
+                "end": 23,
+                "quote": "去除一些污泥中的有害物质"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 0,
+                "end": 9,
+                "quote": "结果让他大吃一惊。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+                "start": 0,
+                "end": 48,
+                "quote": "Over the years, John has taken on many big jobs."
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+                "start": 160,
+                "end": 214,
+                "quote": "designed an eco-machine to clean canal water in Fuzhou"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 0,
+                "end": 17,
+                "quote": "这些年来，约翰承接了许多大型项目。"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 53,
+                "end": 80,
+                "quote": "设计了一台生态机器，用来净化中国东南部城市福州的运河水"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:6",
+                "start": 236,
+                "end": 273,
+                "quote": "develop their own ways to self-repair"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+                "start": 114,
+                "end": 234,
+                "quote": "A dirty stream, for example, often became clear after flowing through plants and along rocks where tiny creatures lived."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p6",
+                "start": 78,
+                "end": 90,
+                "quote": "自己发展出自我修复的方式"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 35,
+                "end": 72,
+                "quote": "比如，一条脏兮兮的小溪流过植物、流经住着微小生物的岩石之后，往往就变清了。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章按时间顺序写约翰·托德：先写童年的观察和疑问，再写他造生态机器并首次试验成功，接着列举后来的大型项目，最后用他本人的话点明“生态设计”的理念。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+            "summary": "童年的约翰观察到脏溪流经植物和岩石后变清，长大后想用这一过程治理污染",
+            "function": "交代他工作的灵感来源"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+            "summary": "大学毕业后他继续观察、提问，决定用动植物组合建造生态机器",
+            "function": "引出生态机器的设想"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+            "summary": "他搭建水箱、放入动植物，待其形成生态系统后加入污泥",
+            "function": "叙述试验的步骤"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-b:4",
+            "summary": "动植物把污泥当食物吃掉，几周后只剩纯净的水",
+            "function": "交代试验结果"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+            "summary": "多年来他承接了南伯灵顿污水处理、福州运河净化等大项目",
+            "function": "举例说明他的理念得到应用"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-b:6",
+            "summary": "约翰把自己的工作称为“生态设计”，并用备用零件作比解释这种做法",
+            "function": "点明他的理念，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-i:24": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从前两段约翰反复做的事归纳出他的性格特点。",
+      "stemTranslationZh": "从前两段我们能了解到约翰的什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-gaokao-2023-i:reading-b:1]] 和 [[block:paper-gaokao-2023-i:reading-b:2]] 时圈出约翰的动作，看他一直在做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他喜欢旅行。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "he loved to explore the woods around his house",
+            "sourceEntity": "explore the woods around his house",
+            "optionText": "He was fond of traveling.",
+            "optionEntity": "traveling",
+            "explanation": "原文的“喜欢”（loved）落在去家附近的树林里探索（explore the woods around his house），是在身边观察大自然，没写他爱出门旅行。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "quote": "he loved to explore the woods around his house",
+              "anchor": "在家附近探索"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他喜欢独处。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He enjoyed being alone.",
+            "explanation": "两段只写他观察自然、上大学、琢磨问题，没提他是一个人还是和别人在一起，更没说他喜欢独处。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他有一颗爱探究的心。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "quote": "observing how nature solved problems",
+              "anchor": "小时候观察自然"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "quote": "John started to wonder if this process could be used to clean up the messes people were making",
+              "anchor": "长大后开始思考"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+              "quote": "John went back to observing nature and asking questions",
+              "anchor": "大学后继续观察提问"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他渴望成为一名医生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "After studying agriculture, medicine, and fisheries in college, John went back to observing nature and asking questions.",
+            "sourceEntity": "medicine",
+            "optionText": "He longed to be a doctor.",
+            "optionEntity": "a doctor",
+            "explanation": "[[block:paper-gaokao-2023-i:reading-b:2]] 只说他在大学学过医学（medicine），和农学、渔业并列，学完他又回去观察自然，没说他想当医生。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+              "quote": "After studying agriculture, medicine, and fisheries in college",
+              "anchor": "大学所学"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "an inquiring mind",
+          "sourceRole": "correctOption",
+          "targetText": "asking questions",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项是把两段的做法归纳成一个特点：小时候观察大自然怎样解决问题（observing），长大后琢磨这一过程能否用来治污（started to wonder），大学毕业又回去观察、提问（asking questions）。他一路都在好奇、追问，正是“爱探究的心”（an inquiring mind），选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:25": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把约翰给自己定的任务和加入污泥这一步联系起来，推出他这样做的目的。",
+      "stemTranslationZh": "约翰为什么把污泥放进水箱？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找他给自己定的任务",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了喂养动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "food",
+            "optionText": "feed",
+            "matchType": "wordFamily",
+            "relationNote": "feed（喂养）和 [[block:paper-gaokao-2023-i:reading-b:4|took the sludge as food]] 里的 food（食物）同根；动植物把污泥当食物是加入后出现的结果，约翰加污泥是为了去除其中的有害物质。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:4",
+              "quote": "The plants and animals in the eco-machine took the sludge as food and began to eat it!",
+              "anchor": "污泥被当作食物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了建立一个生态系统。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "Little by little, these different kinds of life got used to one another and formed their own ecosystem.",
+            "sourceHighlight": "formed their own ecosystem",
+            "optionText": "To build an ecosystem.",
+            "optionHighlight": "build an ecosystem",
+            "explanation": "生态系统是动植物相互适应后先形成的（formed their own ecosystem），又过了几周才加入污泥，污泥不是用来建系统的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "quote": "Little by little, these different kinds of life got used to one another and formed their own ecosystem.",
+              "anchor": "系统先形成"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了保护植物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To protect the plants.",
+            "explanation": "原文没提保护植物；加入污泥后，是植物和动物把污泥吃掉、消化掉，污泥是被处理的对象。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了检验生态机器。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "quote": "The task John set for himself was to remove harmful substances from some sludge(污泥).",
+              "anchor": "他给自己定的任务"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:4",
+              "quote": "He was amazed at the results.",
+              "anchor": "加入后看结果"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "put the sludge",
+          "sourceRole": "stem",
+          "targetText": "After a few weeks, John added the sludge.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:3",
+          "relationType": "locationCue",
+          "targetCue": "added the sludge",
+          "sourceZh": "放入污泥",
+          "targetCueZh": "加入污泥",
+          "answerText": "to remove harmful substances from some sludge",
+          "bridgeZh": "机器本就是为去除污泥里的有害物质而造",
+          "note": "题干 put the sludge 对应原文 added the sludge。"
+        },
+        {
+          "sourceText": "test the eco-machine",
+          "sourceRole": "correctOption",
+          "targetText": "He was amazed at the results.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "原文没写“检验”一词，要推一步：生态机器本就是为去除污泥里的有害物质而造（remove harmful substances），等系统成形后才加入污泥，接着 [[block:paper-gaokao-2023-i:reading-b:4|He was amazed at the]] 写他看到了结果（results）。可见加污泥就是看机器能不能完成这项任务，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:26": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者提到福州这一例子是为了说明什么。",
+      "stemTranslationZh": "作者提到福州的目的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句看这个例子说明什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了回顾约翰的研究计划。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+            "sourceEntity": "designed an eco-machine",
+            "optionText": "To review John’s research plans.",
+            "optionEntity": "research plans",
+            "explanation": "福州一例用过去时 designed（设计了），说的是他已经做成的项目，不是还没实施的研究计划。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+              "quote": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+              "anchor": "已完成的项目"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了展示约翰理念的一次应用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+              "quote": "Over the years, John has taken on many big jobs.",
+              "anchor": "他承接了许多大项目"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+              "quote": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+              "anchor": "福州运河项目"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了比较约翰的不同项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To compare John’s different jobs.",
+            "explanation": "南伯灵顿处理污水和福州净化运河水两例用 also（还）并列，作者只是逐一列举，没有比较两者的异同或高下。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了消除人们对约翰发明的疑虑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To erase doubts about John’s invention.",
+            "explanation": "全文没写有人怀疑生态机器，作者举福州一例是接着讲他把机器用到了哪里，不是在回应质疑。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Fuzhou",
+          "sourceRole": "stem",
+          "targetText": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "John has taken on many big jobs",
+          "bridgeZh": "福州治运河是他承接的大项目之一",
+          "note": "题干 Fuzhou 原词出现在原文。"
+        },
+        {
+          "sourceText": "an application of John’s idea",
+          "sourceRole": "correctOption",
+          "targetText": "Over the years, John has taken on many big jobs.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "作者先说约翰多年来承接了许多大项目（many big jobs），再举南伯灵顿处理污水和福州净化运河水两例。福州这一例让读者看到，生态机器真的被用到了一座城市的运河治理上，这就是“他的理念的一次应用”（an application），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从约翰对自己工作的解释和他的灵感来源，推出他的工作建立在什么认识之上。",
+      "stemTranslationZh": "约翰工作的依据是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他引号里的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "大自然能够自我修复。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:6",
+              "quote": "Then you let these new systems develop their own ways to self-repair.",
+              "anchor": "让系统自我修复"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "quote": "A dirty stream, for example, often became clear after flowing through plants and along rocks where tiny creatures lived.",
+              "anchor": "脏溪自己变清"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "生物需要水才能生存。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Organisms need water to survive.",
+            "explanation": "文中的水是被净化的对象，污泥消化后只剩纯净的水（pure water）；原文没讨论生物要靠水生存。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "地球上的生命是多种多样的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Life on Earth",
+            "optionText": "Life on Earth",
+            "matchType": "exact",
+            "relationNote": "Life on Earth 出自约翰的比喻 [[block:paper-gaokao-2023-i:reading-b:6|Life on Earth is kind]]，他把地球生命比作发明家的一箱备用零件，要说的是这些零件可以重新组合，而后让系统自我修复，不是在讲生命多样。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:6",
+              "quote": "Life on Earth is kind of a box of spare parts for the inventor",
+              "anchor": "备用零件的比喻"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "大多数微小生物群居生活。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tiny creatures",
+            "optionText": "tiny creatures",
+            "matchType": "exact",
+            "relationNote": "tiny creatures 出自 [[block:paper-gaokao-2023-i:reading-b:1|A dirty stream, for example]]，只说岩石上住着微小生物，没说它们大多群居，这也不是约翰工作的出发点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "quote": "along rocks where tiny creatures lived",
+              "anchor": "岩石上的微小生物"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "John’s work",
+          "sourceRole": "stem",
+          "targetText": "“Ecological design” is the name John gives to what he does.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:6",
+          "relationType": "locationCue",
+          "targetCue": "what he does",
+          "sourceZh": "约翰的工作",
+          "targetCueZh": "他所做的事",
+          "answerText": "develop their own ways to self-repair",
+          "bridgeZh": "后面引号里是他本人对这种做法的解释",
+          "note": "题干 John’s work 对应原文 what he does。"
+        },
+        {
+          "sourceText": "Nature can repair itself.",
+          "sourceRole": "correctOption",
+          "targetText": "Then you let these new systems develop their own ways to self-repair.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "选项的“自身能修复”（repair itself）对应他说的“自我修复”（self-repair）：把生物放进新关系后，让系统自己找到修复的办法。[[block:paper-gaokao-2023-i:reading-b:1|A dirty stream, for example]] 里脏溪流过植物和岩石后自己变清，也是这个道理，选 A。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1002 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:grammar-fill": {
+      "overview": "作者介绍自己最爱的中国街头小吃小笼包：一口咬破还是整只入口的吃法难题，发源地南翔手工压皮的做法，好汤包应有的皮、馅和汤，以及每次都吃不够的感受。",
+      "fullTranslationZh": "小笼包，那一个个精致的面皮里包着滚烫鲜美的汤汁和甘甜新鲜的肉馅的奇妙作品，无疑是我最爱的中国街头小吃。汤包端上来时热气腾腾，烫得吓人。要吃一个，你得决定是先在上面咬个小口，放出热气，冒着汤汁溢出的风险，还是把整个汤包放进嘴里，任滚烫的汤汁在舌尖上迸开。\n上海或许是公认的汤包之乡，但美食史学家其实会告诉你，邻近的水乡古镇南翔才是小笼包的发源地。在那里，你会发现汤包的做法不一样：皮多汤少，面皮是用手压出来的，而不是擀出来的。\n撇开南翔不说，最好的小笼包皮薄而细，能让人把它们从蒸笼里夹出来，既不破皮，也不洒出里面的任何汤馅。肉馅应当新鲜，带一丝甜味；汤汁要烫、清，而且鲜美。\n无论在哪儿买，一笼很少够吃，可两笼又显得贪心，所以我总是意犹未尽，盼着下次吃更多。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-1",
+          "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+          "sourceText": "To eat one, you have to decide whether __57__ (bite) a small hole in it first, releasing the steam and risking a spill（溢出）, __58__ to put the whole dumpling in your mouth, letting the hot soup explode on your tongue.",
+          "displayText": "To eat one, you have to decide whether to bite a small hole in it first, releasing the steam and risking a spill（溢出）, or to put the whole dumpling in your mouth, letting the hot soup explode on your tongue.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:57",
+            "question:paper-gaokao-2023-i:58"
+          ],
+          "translationZh": "要吃一个，你得决定是先在上面咬个小口，放出热气，冒着汤汁溢出的风险，还是把整个汤包放进嘴里，任滚烫的汤汁在舌尖上迸开。",
+          "analysisZh": "主干是 you have to decide，句首 To eat one 说明目的。decide 的宾语是 whether to bite … or to put …，两个不定式短语用 or 并列，是要二选一的两种吃法。每个选项后面各跟一个分词短语：releasing … and risking … 说咬口子的后果，letting the hot soup explode … 说整个放进嘴里的后果。",
+          "underlineRanges": [
+            {
+              "start": 12,
+              "end": 30,
+              "quote": "you have to decide"
+            },
+            {
+              "start": 31,
+              "end": 46,
+              "quote": "whether to bite"
+            },
+            {
+              "start": 118,
+              "end": 160,
+              "quote": "or to put the whole dumpling in your mouth"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-2",
+          "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+          "sourceText": "Nanxiang aside, the best Xiao long bao have a fine skin, allowing them __61__ (lift) out of the steamer basket without tearing or spilling any of __62__ (they) contents.",
+          "displayText": "Nanxiang aside, the best Xiao long bao have a fine skin, allowing them to be lifted out of the steamer basket without tearing or spilling any of their contents.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:61",
+            "question:paper-gaokao-2023-i:62"
+          ],
+          "translationZh": "撇开南翔不说，最好的小笼包皮薄而细，能让人把它们从蒸笼里夹出来，既不破皮，也不洒出里面的任何汤馅。",
+          "analysisZh": "主干是 the best Xiao long bao have a fine skin，句首 Nanxiang aside 意为撇开南翔不谈。逗号后的 allowing them to be lifted … 是现在分词短语，说明皮好带来的结果；without tearing or spilling … 用两个动名词说明夹起时不破皮、不洒汤，any of their contents 是 spilling 的宾语。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 55,
+              "quote": "the best Xiao long bao have a fine skin"
+            },
+            {
+              "start": 57,
+              "end": 83,
+              "quote": "allowing them to be lifted"
+            },
+            {
+              "start": 110,
+              "end": 137,
+              "quote": "without tearing or spilling"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-i:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-grammar-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 126,
+              "quote": "小笼包，那一个个精致的面皮里包着滚烫鲜美的汤汁和甘甜新鲜的肉馅的奇妙作品，无疑是我最爱的中国街头小吃。汤包端上来时热气腾腾，烫得吓人。要吃一个，你得决定是先在上面咬个小口，放出热气，冒着汤汁溢出的风险，还是把整个汤包放进嘴里，任滚烫的汤汁在舌尖上迸开。"
+            },
+            {
+              "paragraphId": "zh-grammar-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:grammar-fill:2"
+              ],
+              "start": 127,
+              "end": 212,
+              "quote": "上海或许是公认的汤包之乡，但美食史学家其实会告诉你，邻近的水乡古镇南翔才是小笼包的发源地。在那里，你会发现汤包的做法不一样：皮多汤少，面皮是用手压出来的，而不是擀出来的。"
+            },
+            {
+              "paragraphId": "zh-grammar-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:grammar-fill:3"
+              ],
+              "start": 213,
+              "end": 287,
+              "quote": "撇开南翔不说，最好的小笼包皮薄而细，能让人把它们从蒸笼里夹出来，既不破皮，也不洒出里面的任何汤馅。肉馅应当新鲜，带一丝甜味；汤汁要烫、清，而且鲜美。"
+            },
+            {
+              "paragraphId": "zh-grammar-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:grammar-fill:4"
+              ],
+              "start": 288,
+              "end": 329,
+              "quote": "无论在哪儿买，一笼很少够吃，可两笼又显得贪心，所以我总是意犹未尽，盼着下次吃更多。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+            "text": "Xiao long bao(soup dumplings), those amazing constructions of delicate dumpling wrappers, encasing hot, tasty soup and sweet, fresh meat, are far and away my favorite Chinese street food. The dumplings arrive steaming and dangerously hot. To eat one, you have to decide whether to bite a small hole in it first, releasing the steam and risking a spill（溢出）, or to put the whole dumpling in your mouth, letting the hot soup explode on your tongue."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:2",
+            "text": "Shanghai may be the recognized home of the soup dumplings but food historians will actually point you to the neighboring canal town of Nanxiang as Xiao long bao’s birthplace. There you will find them prepared differently – more dumpling and less soup, and the wrappers are pressed by hand rather than rolled."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+            "text": "Nanxiang aside, the best Xiao long bao have a fine skin, allowing them to be lifted out of the steamer basket without tearing or spilling any of their contents. The meat should be fresh with a touch of sweetness and the soup hot, clear and delicious."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:4",
+            "text": "No matter where I buy them, one steamer is rarely enough, yet two seems greedy, so I am always left wanting more next time."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-grammar-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 90,
+                "end": 103,
+                "quote": "encasing hot,"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 14,
+                "end": 18,
+                "quote": "包着滚烫"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:56"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:56",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 104,
+                "end": 109,
+                "quote": "tasty"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 18,
+                "end": 20,
+                "quote": "鲜美"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 272,
+                "end": 286,
+                "quote": "decide whether"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 74,
+                "end": 77,
+                "quote": "决定是"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:57"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:57",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 278,
+                "end": 285,
+                "quote": "to bite"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 81,
+                "end": 85,
+                "quote": "咬个小口"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 379,
+                "end": 418,
+                "quote": "to put the whole dumpling in your mouth"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 103,
+                "end": 112,
+                "quote": "把整个汤包放进嘴里"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:58"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:58",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 357,
+                "end": 359,
+                "quote": "or"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 101,
+                "end": 103,
+                "quote": "还是"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:2",
+                "start": 39,
+                "end": 65,
+                "quote": "home of the soup dumplings"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 8,
+                "end": 12,
+                "quote": "汤包之乡"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:59"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:59",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:2",
+                "start": 20,
+                "end": 30,
+                "quote": "recognized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 5,
+                "end": 8,
+                "quote": "公认的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:2",
+                "start": 296,
+                "end": 319,
+                "quote": "hand rather than rolled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 71,
+                "end": 83,
+                "quote": "手压出来的，而不是擀出来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:60"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:60",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:2",
+                "start": 281,
+                "end": 283,
+                "quote": "by"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-2",
+                "start": 70,
+                "end": 72,
+                "quote": "用手"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 57,
+                "end": 70,
+                "quote": "allowing them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 18,
+                "end": 24,
+                "quote": "能让人把它们"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:61"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:61",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 71,
+                "end": 83,
+                "quote": "to be lifted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 28,
+                "end": 31,
+                "quote": "夹出来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 16,
+                "end": 38,
+                "quote": "the best Xiao long bao"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 7,
+                "end": 13,
+                "quote": "最好的小笼包"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:62"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:62",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 145,
+                "end": 150,
+                "quote": "their"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 41,
+                "end": 48,
+                "quote": "里面的任何汤馅"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 207,
+                "end": 225,
+                "quote": "touch of sweetness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 57,
+                "end": 61,
+                "quote": "一丝甜味"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:63"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:63",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 191,
+                "end": 192,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 57,
+                "end": 59,
+                "quote": "一丝"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:4",
+                "start": 65,
+                "end": 85,
+                "quote": "yet two seems greedy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 14,
+                "end": 22,
+                "quote": "可两笼又显得贪心"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:64"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:64",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:4",
+                "start": 43,
+                "end": 49,
+                "quote": "rarely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 9,
+                "end": 11,
+                "quote": "很少"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-grammar-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:4",
+                "start": 92,
+                "end": 106,
+                "quote": "am always left"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 26,
+                "end": 32,
+                "quote": "总是意犹未尽"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-grammar-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:65"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:65",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:4",
+                "start": 100,
+                "end": 107,
+                "quote": "wanting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-4",
+                "start": 33,
+                "end": 35,
+                "quote": "盼着"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:57",
+              "question:paper-gaokao-2023-i:58"
+            ],
+            "selectedSentenceId": "sentence-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+                "start": 248,
+                "end": 464,
+                "quote": "To eat one, you have to decide whether __57__ (bite) a small hole in it first, releasing the steam and risking a spill（溢出）, __58__ to put the whole dumpling in your mouth, letting the hot soup explode on your tongue."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-1",
+                "start": 67,
+                "end": 126,
+                "quote": "要吃一个，你得决定是先在上面咬个小口，放出热气，冒着汤汁溢出的风险，还是把整个汤包放进嘴里，任滚烫的汤汁在舌尖上迸开。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:61",
+              "question:paper-gaokao-2023-i:62"
+            ],
+            "selectedSentenceId": "sentence-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:3",
+                "start": 0,
+                "end": 169,
+                "quote": "Nanxiang aside, the best Xiao long bao have a fine skin, allowing them __61__ (lift) out of the steamer basket without tearing or spilling any of __62__ (they) contents."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:grammar-fill",
+                "paragraphId": "zh-grammar-3",
+                "start": 0,
+                "end": 49,
+                "quote": "撇开南翔不说，最好的小笼包皮薄而细，能让人把它们从蒸笼里夹出来，既不破皮，也不洒出里面的任何汤馅。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-i:56": {
+      "blankId": "blank:paper-gaokao-2023-i:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "taste",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "tasty",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格与“滚烫的”（hot）并列，一起修饰名词“汤”（soup），要用形容词。由名词“味道”（taste）变来、表示“美味的”形容词是（tasty）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "soup and sweet, fresh meat",
+          "signalSide": "passage",
+          "relation": "被修饰的是汤，空格要作它的定语，用形容词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "hot,",
+          "signalSide": "passage",
+          "relation": "与前面的形容词并列，词性一致。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:57": {
+      "blankId": "blank:paper-gaokao-2023-i:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "bite",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to bite",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-wh-infinitive",
+        "features": []
+      },
+      "reason": "空格接在“是否”（whether）后面，和它一起作“决定”（decide）的宾语。whether 后面没有主语和谓语，只能用不定式（to bite）；后面并列的（to put the whole dumpling）也是不定式，可以印证。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "decide whether",
+          "signalSide": "passage",
+          "relation": "决定是否做某事，whether 后接不定式作宾语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "to put the whole dumpling",
+          "signalSide": "passage",
+          "relation": "并列的另一个选择也是不定式，两边形式一致。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:58": {
+      "blankId": "blank:paper-gaokao-2023-i:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "or",
+      "role": null,
+      "similarityProfile": {
+        "route": "whether-or",
+        "features": []
+      },
+      "reason": "空格连接两个并列的不定式短语（to bite … / to put …），它们是要做决定的两个选项。与前面的“是否”（whether）配成“是……还是……”，填（or）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "whether",
+          "signalSide": "passage",
+          "relation": "前面已有 whether，两个选项之间要用表选择的连词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "to put the whole dumpling in your mouth",
+          "signalSide": "passage",
+          "relation": "空格后是第二个选项，与前一个不定式并列。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:59": {
+      "blankId": "blank:paper-gaokao-2023-i:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "recognize",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "recognized",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格放在冠词（the）和名词“故乡”（home）之间，作定语修饰 home。上海是被人们公认的汤包之乡，故乡与“认可”是被动关系，用过去分词（recognized）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "home of the soup dumplings",
+          "signalSide": "passage",
+          "relation": "被修饰的名词是故乡，它是被认可的对象。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "Shanghai may be the",
+          "signalSide": "passage",
+          "relation": "冠词后、名词前的位置要一个修饰语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:60": {
+      "blankId": "blank:paper-gaokao-2023-i:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "by",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把“手”（hand）接到“被压制”（are pressed）上，说明面皮用什么方式做成。表示“用手工”用介词（by），与后面的“擀出来”（rolled）形成方式对比。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the wrappers are pressed",
+          "signalSide": "passage",
+          "relation": "被压出来的方式，后面要接表示方式的介词短语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "hand rather than rolled",
+          "signalSide": "passage",
+          "relation": "手工与擀制对比，说的都是做法。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:61": {
+      "blankId": "blank:paper-gaokao-2023-i:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "lift",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to be lifted",
+      "role": "object-complement",
+      "similarityProfile": {
+        "route": "object-complement-general",
+        "features": []
+      },
+      "reason": "空格作“允许”（allowing）的宾语补足语，说明汤包（them）能怎样。allow sb to do 要用不定式；汤包是被人从蒸笼里夹出来的，要用被动式（to be lifted）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "allowing them",
+          "signalSide": "passage",
+          "relation": "允许某人或某物做某事，宾语后接不定式作补足语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "them",
+          "signalSide": "passage",
+          "relation": "汤包是被夹出来的一方，与动作是被动关系。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:62": {
+      "blankId": "blank:paper-gaokao-2023-i:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "they",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "their",
+      "role": null,
+      "similarityProfile": {
+        "route": "possessive-determiner",
+        "features": []
+      },
+      "reason": "空格修饰名词“里面的东西”（contents），要用形容词性物主代词。指的是汤包（they）自己的汤和馅，所以填（their）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "contents",
+          "signalSide": "passage",
+          "relation": "名词前要一个限定它的物主代词。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "the best Xiao long bao",
+          "signalSide": "passage",
+          "relation": "汤馅属于这些小笼包，指代复数的它们。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:63": {
+      "blankId": "blank:paper-gaokao-2023-i:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-structural",
+        "features": [
+          "fixed-indefinite-phrase",
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词“少许”（touch），这里说带一点甜味，要用不定冠词，构成（a touch of）。touch 以辅音音素开头，填（a）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "touch of sweetness",
+          "signalSide": "passage",
+          "relation": "一点点甜味，前面用不定冠词表示“少许”。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "fresh with",
+          "signalSide": "passage",
+          "relation": "介词后接单数可数名词，需要冠词限定。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:64": {
+      "blankId": "blank:paper-gaokao-2023-i:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "rare",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "rarely",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格在系动词（is）和表语（enough）之间，说明“一笼够吃”这种情况多久出现一次，要用副词，由形容词变为（rarely）。后面说两笼又显得贪心（yet two seems greedy），总想下次吃更多，印证一笼很少够。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "one steamer is",
+          "signalSide": "passage",
+          "relation": "修饰的是“一笼够吃”这个谓语部分，要用副词。"
+        },
+        {
+          "type": "connector",
+          "signalText": "yet two seems greedy",
+          "signalSide": "passage",
+          "relation": "转折后说两笼太多，可见一笼常常不够。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:65": {
+      "blankId": "blank:paper-gaokao-2023-i:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "want",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "wanting",
+      "role": "subject-complement",
+      "similarityProfile": {
+        "route": "subject-complement-special-passive",
+        "features": []
+      },
+      "reason": "空格作主语补足语，补充说明“我”（I）被留在什么状态。这是 leave sb doing 的被动式（am always left），“我”自己想要更多，是主动的，用现在分词（wanting）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "am always left",
+          "signalSide": "passage",
+          "relation": "被留在某种状态，后接分词作主语补足语。"
+        },
+        {
+          "type": "subject",
+          "signalText": "so I",
+          "signalSide": "passage",
+          "relation": "想要更多的是我自己，与动作是主动关系。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: A few weeks later, when I almost forgot the contest, there came the news. My essay about Paul Revere’s horse had won first prize! At first I thought there must be a mistake. How could someone who found writing so painful beat everyone else? But my teacher showed me the letter, and there was my name. At the award presentation, I walked onto the stage with shaking legs. As the prize was handed to me, I looked for my teacher in the crowd. He was clapping louder than anyone else.\n\nParagraph 2: I went to my teacher’s office after the award presentation. I wanted to thank him, but the words got stuck in my throat. He smiled and said, “I told you that you had a good shot.” I admitted that I had almost refused to try, and that without his push I would never have known I could write. He laughed and said the horse was not the only one who had kept going. Then he handed me a notice about another writing contest. This time I did not say no. I took it, thanked him again, and walked out already wondering what story I would tell next.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写里动笔的是两个人：原本怕写作、被老师劝去参赛的“我”，和欣赏“我”讲故事、又逼“我”一遍遍重写的社会学老师。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”回忆中学往事，一般过去时；短句很多，带一点自嘲的幽默；人物的话很少，只有老师两处短的直接引语，其余都靠叙述。续写也用第一人称过去时，多用短句，直接引语只留一两句。",
+          "evidence": [
+            "I got tired. I had doubts. I wanted to quit."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”终于写完文章、享受写作、不再在乎输赢；还没交代的是比赛结果，以及“我”对一直推着自己的老师怎样回应。",
+          "evidence": [
+            "If I didn’t win, I wouldn’t care."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "来自巴西家庭、英语是第二语言的中学生，故事的讲述者",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "怕写作，但答应了就肯下苦功，一遍遍查拼写、请姐姐改语法。",
+              "evidence": "I worked hard. I checked my spelling."
+            },
+            {
+              "label": "此刻",
+              "text": "从一心想赢变成享受写作本身，输赢已经不重要。",
+              "evidence": "the thought of winning had given way to the enjoyment of writing"
+            }
+          ]
+        },
+        {
+          "name": "my social studies teacher",
+          "role": "“我”的社会学老师，劝“我”参赛的人",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "看中“我”会讲故事，想让“我”发挥这个长处。",
+              "evidence": "Because I love your stories."
+            },
+            {
+              "label": "表现",
+              "text": "爱笑，看“我”表演时笑得最响，读到文章也会大笑。",
+              "evidence": "No one laughed harder than he did."
+            },
+            {
+              "label": "性格",
+              "text": "鼓励之外也严格，夸完就让“我”重写。",
+              "evidence": "Great. Now, write it again."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "No one laughed harder than he did.",
+          "use": "第 1 段颁奖时，让老师在台下鼓掌最响，呼应他当年看“我”表演时笑得最响。"
+        },
+        {
+          "sourceQuote": "I think you have a good shot at this.",
+          "use": "第 2 段在办公室里，老师用 good shot 提醒“我”他当初就相信“我”能行。"
+        },
+        {
+          "sourceQuote": "I said no without thinking.",
+          "use": "第 2 段结尾老师递来下一次比赛的通知，“我”这次没有拒绝，和开头的不假思索地拒绝形成对照。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "第 1 段写获奖消息和颁奖时的反应，第 2 段在老师办公室道谢，用“我”接过下一次比赛的通知收住“我”对写作的转变。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "说清传来的是比赛的消息；第二段首句说“颁奖之后”，所以第一段要写到颁奖仪式，并让“我”在场。“我”得奖是原文最支持的路线，得几等奖是本文的选择。",
+          "draft": "“我”得知写保罗·里维尔的马的文章得了一等奖，不敢相信；看到通知上的名字才信了。颁奖时“我”腿发抖上台，看到老师在人群里鼓掌最响。",
+          "bridgeQuote": "after the award presentation",
+          "bridge": "颁奖一结束，“我”特意去找老师，是要对他说什么？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以“我”到老师办公室开头，写清两人见面说了什么、做了什么，并收住原文留下的问题：这次经历让“我”怎样看待写作。",
+          "draft": "“我”想道谢却说不出口；老师提起当初那句 good shot，“我”承认差点不敢试。老师笑着说坚持下来的不只是那匹马，又递给“我”下一次写作比赛的通知，“我”这次没有拒绝。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: A few weeks later, when I almost forgot the contest, there came the news. My essay about Paul Revere’s horse had won first prize! At first I thought there must be a mistake. How could someone who found writing so painful beat everyone else? But my teacher showed me the letter, and there was my name. At the award presentation, I walked onto the stage with shaking legs. As the prize was handed to me, I looked for my teacher in the crowd. He was clapping louder than anyone else.\n\nParagraph 2: I went to my teacher’s office after the award presentation. I wanted to thank him, but the words got stuck in my throat. He smiled and said, “I told you that you had a good shot.” I admitted that I had almost refused to try, and that without his push I would never have known I could write. He laughed and said the horse was not the only one who had kept going. Then he handed me a notice about another writing contest. This time I did not say no. I took it, thanked him again, and walked out already wondering what story I would tell next.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代消息是什么，写“我”从不信到确认，再把场景推到颁奖台上，为第二段的“颁奖之后”铺好路。",
+          "items": [
+            {
+              "quote": "At first I thought there must be a mistake.",
+              "explain": "一个怕写作的人得了奖，第一反应是不信，这比直接写“我高兴极了”更符合原文里“我”的样子。"
+            },
+            {
+              "quote": "How could someone who found writing so painful beat everyone else?",
+              "explain": "借原文 difficult and painful 的意思，用一个问句写出“我”的怀疑，也让读者想起“我”原来多怕写作。"
+            },
+            {
+              "quote": "He was clapping louder than anyone else.",
+              "explain": "呼应原文 No one laughed harder than he did：老师还是那个最捧场的人。用动作写老师的骄傲，不用写“他很为我自豪”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "在办公室里写“我”向老师道谢，把原文的伏笔一一收回，最后落在一个具体动作上。",
+          "items": [
+            {
+              "quote": "the words got stuck in my throat",
+              "explain": "想说却说不出来，用一个看得见的反应写激动和感激，不堆眼泪和拥抱。"
+            },
+            {
+              "quote": "“I told you that you had a good shot.”",
+              "explain": "全文唯一一句直接引语，借原文老师的 good shot，让他用自己的话轻轻点出“我早说过”。"
+            },
+            {
+              "quote": "the horse was not the only one who had kept going",
+              "explain": "回收原文 like Revere’s horse, I kept going，老师用玩笑把“我”和那匹马连在一起，幽默也合原文语气。"
+            },
+            {
+              "quote": "This time I did not say no.",
+              "explain": "和开头 I said no without thinking 对照，短短一句就写出“我”的变化，不需要再讲道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "the words got stuck in my throat",
+          "function": "写感激或激动到说不出话，比 I was very moved 具体，适合第二段见老师的场面。"
+        },
+        {
+          "expression": "walked onto the stage with shaking legs",
+          "function": "用身体反应写紧张，让怕写作的“我”上台领奖的场面可信。"
+        },
+        {
+          "expression": "walked out already wondering what story I would tell next",
+          "function": "用一个正在进行的念头收尾，写出“我”已经开始期待下一次写作，不用喊口号。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写“我”跑去找老师、写两人的对话",
+          "why": "第二段首句才写“我”颁奖后去老师办公室，第一段提前写见面，第二段就没东西可写，还会前后重复。"
+        },
+        {
+          "pitfall": "结尾写“我”从此爱上写作、成了作家，或加一句“坚持就是胜利”",
+          "why": "原文已经说 the enjoyment of writing，再升华只是重复；结尾应落在一件具体的事上，比如接过新的比赛通知。"
+        },
+        {
+          "pitfall": "让父母、姐姐或新同学来推动情节，比如由别人告诉“我”去感谢老师",
+          "why": "续写的主角是“我”和老师；姐姐在原文只帮忙改语法，让旁人推动转折会分走两个主要人物的戏。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: A few weeks later, when I almost forgot the contest, there came the news. My teacher stopped me in the hallway, waving a letter, and announced that Paul Revere’s horse had galloped all the way to first place. I stared at him, sure he was joking. Me, the kid who had once acted out the Titanic because a written paper felt impossible? But my name was printed right there on the letter. On the day of the award presentation, my knees shook as I climbed onto the stage, and my hands were so wet that I nearly dropped the certificate. When I looked down at the audience, I spotted my teacher in the front row. Just as he had laughed harder than anyone at my play, he now clapped harder than anyone else.\n\nParagraph 2: I went to my teacher’s office after the award presentation. He was marking papers, but he put down his pen the moment I knocked. I had practised a thank-you speech all the way there, yet all that came out was, “I really didn’t think I could do it.” He leaned back and grinned. He reminded me that I had once turned him down without a second thought, and said that a horse who kept going through the night deserved a writer who did the same. Then he pulled a sheet of paper from his drawer. It was a notice for next year’s contest. “Well?” he asked. This time I didn’t need to be persuaded. I folded the notice into my pocket, thanked him again, and hurried home to hunt for a new subject, one that, like Revere’s horse, nobody else would think of.",
+      "beyondStandard": [
+        {
+          "quote": "Paul Revere’s horse had galloped all the way to first place",
+          "explain": "用 galloped 把获奖说成那匹马一路跑到第一，延续原文拿马开玩笑的口吻，比 had won first prize 更有味道。"
+        },
+        {
+          "quote": "Me, the kid who had once acted out the Titanic because a written paper felt impossible?",
+          "explain": "用原文“演泰坦尼克号”的旧事写怀疑，细节更具体，也更像原文叙述者的自嘲。"
+        },
+        {
+          "quote": "a horse who kept going through the night deserved a writer who did the same",
+          "explain": "老师的话改成转述，又把马和“我”并列，比标准版的玩笑更完整，也合原文少用直接引语的写法。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Ryan,\n\nI’m Li Hua, from Class 3. I’m writing about your plan to pair us randomly for after-class speaking practice, which I’m afraid may not work well.\n\nThe main problem is that a random partner may not be the right one. A confident speaker paired with a shy one will do most of the talking, while the shy one just listens. Besides, partners who live far apart may hardly ever meet.\n\nInstead, could you let us choose partners we feel comfortable with, as long as we are at a similar level? Also, a weekly topic and a short recording from each pair for you to check would keep us practising.\n\nThank you for considering this. I’m sure more of us would enjoy speaking then.\n\nYours, sincerely\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给外教的邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "第一人称，以一般现在时为主，设想后果时用将来时和情态动词",
+        "readerTone": "写给自己的外教，礼貌、坦诚，提意见不顶撞",
+        "goal": "说明随机两人一组练口语的问题，并提出可行的分组建议"
+      },
+      "taskRequires": [
+        "说明随机分组存在的问题",
+        "提出改进建议"
+      ],
+      "thisEssayChooses": "标准版抓两个问题：性格和自信程度不同的两人练不起来，住得远的两人课后难见面；建议让学生在水平相近的前提下自选搭档，并每周给话题、让每组录一段对话交老师检查。"
+    },
+    "standard": {
+      "essay": "Dear Ryan,\n\nI’m Li Hua, from Class 3. I’m writing about your plan to pair us randomly for after-class speaking practice, which I’m afraid may not work well.\n\nThe main problem is that a random partner may not be the right one. A confident speaker paired with a shy one will do most of the talking, while the shy one just listens. Besides, partners who live far apart may hardly ever meet.\n\nInstead, could you let us choose partners we feel comfortable with, as long as we are at a similar level? Also, a weekly topic and a short recording from each pair for you to check would keep us practising.\n\nThank you for considering this. I’m sure more of us would enjoy speaking then.\n\nYours, sincerely\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明随机分组存在的问题",
+          "quote": "The main problem is that a random partner may not be the right one."
+        },
+        {
+          "point": "提出改进建议",
+          "quote": "Instead, could you let us choose partners we feel comfortable with, as long as we are at a similar level?"
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接着给定首句交代写信缘由，并先亮出态度：这个计划可能有问题。",
+          "items": [
+            {
+              "quote": "your plan to pair us randomly for after-class speaking practice",
+              "explain": "把题面里的计划用一个短语复述清楚：随机、两人一组、课后练口语，老师一读就知道说的是哪件事。"
+            },
+            {
+              "quote": "which I’m afraid may not work well",
+              "explain": "I’m afraid 和 may 把反对意见说得委婉，对老师提意见先放软语气。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：说明问题，并给出两个具体情形。",
+          "items": [
+            {
+              "quote": "a random partner may not be the right one",
+              "explain": "random 和 right 对照，一句话点出问题的核心：随机分到的人不一定合适。"
+            },
+            {
+              "quote": "A confident speaker paired with a shy one will do most of the talking, while the shy one just listens.",
+              "explain": "用一个具体画面代替“效果不好”这种空话，while 把两个人的不同表现并排摆出来。"
+            },
+            {
+              "quote": "partners who live far apart may hardly ever meet",
+              "explain": "第二个问题落在课后见面难上，hardly ever 说明不是偶尔见不上，而是几乎见不上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：针对上一段的两个问题各给一条建议。",
+          "items": [
+            {
+              "quote": "could you let us choose partners we feel comfortable with",
+              "explain": "用 could you 问句提建议，对老师比 you should 客气；自选搭档对应上一段“性格放不开”的问题。"
+            },
+            {
+              "quote": "as long as we are at a similar level",
+              "explain": "加一个条件，免得老师担心学生只挑好朋友聊天，也回应了水平不同的问题。"
+            },
+            {
+              "quote": "a short recording from each pair for you to check",
+              "explain": "给出老师能马上照做的办法：每组录一段对话交给老师检查，住得远的两人不见面也能完成练习。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "简短致谢，并说明建议采纳后的好处，收住全文。",
+          "items": [
+            {
+              "quote": "I’m sure more of us would enjoy speaking then.",
+              "explain": "结尾落在老师最关心的结果上：更多同学愿意开口，比空泛的“希望采纳”更有说服力。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "… which I’m afraid may not work well.",
+          "function": "向老师提反对意见时先放软语气，再在后文说清具体问题。"
+        },
+        {
+          "expression": "Could you let us …, as long as …?",
+          "function": "用请求的口吻提建议，再加一个条件打消老师的顾虑，适合写给老师的建议信。"
+        },
+        {
+          "expression": "… would keep us practising.",
+          "function": "说清建议带来的效果，让老师明白这个办法解决了什么问题。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Ryan,\n\nI’m Li Hua, from Class 3. I really appreciate your idea of getting us to practise speaking after class, but I have some concerns about putting us into random pairs.\n\nTo begin with, random pairing ignores how different we are. When a fluent speaker ends up with someone who hardly dares to speak, the conversation soon turns into a one-man show, and neither of them gains much. What’s more, partners who live in different neighbourhoods or have clashing schedules may find it almost impossible to meet regularly.\n\nSo here are two suggestions. First, you could let us pick our own partners, or match us according to our speaking levels and free time. Second, a weekly topic plus a two-minute recording sent to you would keep every pair on track.\n\nI hope these ideas are helpful. Thanks for all the effort you put into our speaking!\n\nYours, sincerely\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明随机分组存在的问题",
+          "quote": "To begin with, random pairing ignores how different we are."
+        },
+        {
+          "point": "提出改进建议",
+          "quote": "First, you could let us pick our own partners, or match us according to our speaking levels and free time."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "I really appreciate your idea of getting us to practise speaking after class, but I have some concerns",
+          "explain": "先感谢老师让大家课后练口语的用心，再用 have some concerns 引出意见，比标准版更照顾师生关系。"
+        },
+        {
+          "quote": "the conversation soon turns into a one-man show, and neither of them gains much",
+          "explain": "one-man show 是地道说法，形象写出一人独讲的局面；neither of them gains much 又说清两个人都吃亏，理由更完整。"
+        },
+        {
+          "quote": "or match us according to our speaking levels and free time",
+          "explain": "给老师两个可选方案，并把水平和空闲时间都考虑进去，正好回应上一段的两个问题。"
+        }
+      ]
+    }
+  }
+}

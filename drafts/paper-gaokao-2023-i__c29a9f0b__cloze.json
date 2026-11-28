@@ -1,0 +1,1834 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:cloze": {
+      "overview": "越野赛中，贝利看到前方跑者勒努膝盖受伤痛哭，便停下搀扶，扶不动就背着她跑过终点、送到救助点。贝利不解众人为何看重此事，两人从此成了朋友，善意成了真正的赢家。",
+      "fullTranslationZh": "10 月 11 日，数百名跑者参加了明尼苏达州的一场越野赛。梅兰妮·贝利本该比实际更早跑完全程。她之所以晚到，是因为她背着一名参赛者跨过了终点线。\n\n据当地一家报纸报道，贝利跑完比赛三分之二多的路程时，她前面的一名跑者疼得哭了起来。她停下来帮助这位同场跑者丹妮尔·勒努。贝利扶住她的胳膊，看她能否在搀扶下往前走。她走不了。于是贝利弯下腰，让勒努爬到自己背上，一路把她背到终点线，接着又背了 300 英尺，到了勒努能得到医疗救治的地方。\n\n到了那里，勒努接受了伤情评估，随后被送往医院，得知自己一侧膝盖严重受伤。要是没有贝利的帮助，她得忍着剧烈的疼痛才能艰难地挪到那个救助点。\n\n至于贝利，她更多的是困惑：为什么自己的举动会被看成一件了不起的大事。“她当时一个劲儿地哭。我不能丢下她，”贝利对记者说，“我觉得我只是在做对的事。”\n\n虽然这两位年轻女子在这次比赛前素不相识，但从那以后她们成了朋友。两人都没有赢得比赛，但她们所展现的人间善意赢得了这一天。",
+      "mainLine": {
+        "theme": {
+          "text": "比赛无人夺冠，但贝利帮助对手所展现的人间善意赢得了这一天（human kindness won the day）。",
+          "quote": "human kindness won the day"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+            "text": "越野赛中贝利比本该的时间晚到，因为她背着一名对手冲线。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+            "text": "途中对手疼得哭，贝利停下搀扶，扶不动就背她到终点和救助点。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+            "text": "勒努膝盖重伤，没有贝利帮忙只能忍着剧痛硬撑。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+            "text": "贝利不解大家为何看重此事，说自己只是做了该做的事。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+            "text": "两人由陌生人成了朋友，无人夺冠，善意赢得了这一天。"
+          }
+        ],
+        "emotion": "见对手痛哭而不忍→对赞誉感到困惑→由陌生人成为朋友的温暖"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+          "sourceText": "Bailey then __47__ to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get __48__ attention.",
+          "displayText": "Bailey then bent down to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get medical attention.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:47",
+            "question:paper-gaokao-2023-i:48"
+          ],
+          "translationZh": "于是贝利弯下腰，让勒努爬到自己背上，一路把她背到终点线，接着又背了 300 英尺，到了勒努能得到医疗救治的地方。",
+          "analysisZh": "主干是两个并列谓语：贝利先弯下腰（bent down），再一路背着她（carried her all the way）。to let Lenoue climb onto her back 说明弯腰的目的；then another 300 feet 省去了动词，意思是又背了 300 英尺；to where 引出终点之后的去处，where 从句说明那里能得到医疗救治。整句按动作顺序写出了这次救助的全过程。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Bailey then bent down"
+            },
+            {
+              "start": 60,
+              "end": 102,
+              "quote": "carried her all the way to the finish line"
+            },
+            {
+              "start": 126,
+              "end": 169,
+              "quote": "to where Lenoue could get medical attention"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+          "sourceText": "She would have struggled with extreme __50__ to make it to that aid checkpoint without Bailey’s help.",
+          "displayText": "She would have struggled with extreme pain to make it to that aid checkpoint without Bailey’s help.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:50"
+          ],
+          "translationZh": "要是没有贝利的帮助，她得忍着剧烈的疼痛才能艰难地挪到那个救助点。",
+          "analysisZh": "主干是 She would have struggled，would have 加过去分词表示对过去情况的假设：事实上她得到了帮助。条件不用 if 从句，而由句末的 without Bailey’s help 暗含，意思是“要是没有贝利的帮助”。with extreme pain 说明她挣扎时的状态，to make it to that aid checkpoint 说明她挣扎着要做到什么，make it to 是设法到达。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 24,
+              "quote": "would have struggled"
+            },
+            {
+              "start": 77,
+              "end": 98,
+              "quote": "without Bailey’s help"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-i:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-i:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-cloze-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:cloze:1"
+              ],
+              "start": 0,
+              "end": 73,
+              "quote": "10 月 11 日，数百名跑者参加了明尼苏达州的一场越野赛。梅兰妮·贝利本该比实际更早跑完全程。她之所以晚到，是因为她背着一名参赛者跨过了终点线。"
+            },
+            {
+              "paragraphId": "zh-cloze-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:cloze:2"
+              ],
+              "start": 75,
+              "end": 217,
+              "quote": "据当地一家报纸报道，贝利跑完比赛三分之二多的路程时，她前面的一名跑者疼得哭了起来。她停下来帮助这位同场跑者丹妮尔·勒努。贝利扶住她的胳膊，看她能否在搀扶下往前走。她走不了。于是贝利弯下腰，让勒努爬到自己背上，一路把她背到终点线，接着又背了 300 英尺，到了勒努能得到医疗救治的地方。"
+            },
+            {
+              "paragraphId": "zh-cloze-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:cloze:3"
+              ],
+              "start": 219,
+              "end": 287,
+              "quote": "到了那里，勒努接受了伤情评估，随后被送往医院，得知自己一侧膝盖严重受伤。要是没有贝利的帮助，她得忍着剧烈的疼痛才能艰难地挪到那个救助点。"
+            },
+            {
+              "paragraphId": "zh-cloze-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:cloze:4"
+              ],
+              "start": 289,
+              "end": 363,
+              "quote": "至于贝利，她更多的是困惑：为什么自己的举动会被看成一件了不起的大事。“她当时一个劲儿地哭。我不能丢下她，”贝利对记者说，“我觉得我只是在做对的事。”"
+            },
+            {
+              "paragraphId": "zh-cloze-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:cloze:5"
+              ],
+              "start": 365,
+              "end": 425,
+              "quote": "虽然这两位年轻女子在这次比赛前素不相识，但从那以后她们成了朋友。两人都没有赢得比赛，但她们所展现的人间善意赢得了这一天。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:cloze:1",
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+            "text": "On Oct.11, hundreds of runners competed in a cross-country race in Minnesota. Melanie Bailey should have finished the course earlier than she did. Her delay came because she was carrying a competitor across the finish line."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:cloze:2",
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+            "text": "As reported by a local newspaper, Bailey was more than two-thirds of the way through her race when a runner in front of her began crying in pain. She stopped to help her fellow runner, Danielle Lenoue. Bailey took her arm to see if she could walk forward with aid. She couldn’t. Bailey then bent down to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get medical attention."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:cloze:3",
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+            "text": "Once there, Lenoue was assessed and later taken to a hospital, where she learned that she had serious injuries in one of her knees. She would have struggled with extreme pain to make it to that aid checkpoint without Bailey’s help."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:cloze:4",
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+            "text": "As for Bailey, she is more confused about why her act is considered a big deal. “She was just crying. I couldn’t leave her,” Bailey told the reporter. “I feel like I was just doing the right thing.”"
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2023-i:cloze:5",
+            "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+            "text": "Although the two young women were strangers before the meet, they’ve since become friends. Neither won the race, but the display of human kindness won the day."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-cloze-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+                "start": 123,
+                "end": 143,
+                "quote": "earlier than she did"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 38,
+                "end": 43,
+                "quote": "比实际更早"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:41"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:41",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+                "start": 105,
+                "end": 113,
+                "quote": "finished"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 43,
+                "end": 45,
+                "quote": "跑完"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+                "start": 123,
+                "end": 143,
+                "quote": "earlier than she did"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 38,
+                "end": 43,
+                "quote": "比实际更早"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:42"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:42",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+                "start": 151,
+                "end": 156,
+                "quote": "delay"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 52,
+                "end": 54,
+                "quote": "晚到"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 167,
+                "end": 184,
+                "quote": "her fellow runner"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 49,
+                "end": 53,
+                "quote": "同场跑者"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:43"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:43",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:1",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+                "start": 189,
+                "end": 199,
+                "quote": "competitor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 63,
+                "end": 66,
+                "quote": "参赛者"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+                "start": 43,
+                "end": 63,
+                "quote": "a cross-country race"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-1",
+                "start": 26,
+                "end": 29,
+                "quote": "越野赛"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:44"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:44",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 89,
+                "end": 93,
+                "quote": "race"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 14,
+                "end": 16,
+                "quote": "比赛"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 126,
+                "end": 146,
+                "quote": "began crying in pain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 34,
+                "end": 40,
+                "quote": "疼得哭了起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:45"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:45",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 150,
+                "end": 157,
+                "quote": "stopped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 42,
+                "end": 45,
+                "quote": "停下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 210,
+                "end": 222,
+                "quote": "took her arm"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 62,
+                "end": 68,
+                "quote": "扶住她的胳膊"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:46"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:46",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 260,
+                "end": 263,
+                "quote": "aid"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 74,
+                "end": 76,
+                "quote": "搀扶"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 316,
+                "end": 335,
+                "quote": "climb onto her back"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 97,
+                "end": 103,
+                "quote": "爬到自己背上"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:47"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:47",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 291,
+                "end": 300,
+                "quote": "bent down"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 90,
+                "end": 93,
+                "quote": "弯下腰"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+                "start": 194,
+                "end": 208,
+                "quote": "aid checkpoint"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 64,
+                "end": 67,
+                "quote": "救助点"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:48"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:48",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 431,
+                "end": 438,
+                "quote": "medical"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 134,
+                "end": 136,
+                "quote": "医疗"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+                "start": 34,
+                "end": 59,
+                "quote": "later taken to a hospital"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 15,
+                "end": 22,
+                "quote": "随后被送往医院"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:49"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:49",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+                "start": 23,
+                "end": 31,
+                "quote": "assessed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 12,
+                "end": 14,
+                "quote": "评估"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+                "start": 92,
+                "end": 108,
+                "quote": "serious injuries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 31,
+                "end": 35,
+                "quote": "严重受伤"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:50"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:50",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+                "start": 170,
+                "end": 174,
+                "quote": "pain"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 53,
+                "end": 55,
+                "quote": "疼痛"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+                "start": 153,
+                "end": 198,
+                "quote": "I feel like I was just doing the right thing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 61,
+                "end": 73,
+                "quote": "我觉得我只是在做对的事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:51"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:51",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+                "start": 27,
+                "end": 35,
+                "quote": "confused"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 10,
+                "end": 12,
+                "quote": "困惑"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+                "start": 52,
+                "end": 71,
+                "quote": "is considered a big"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 22,
+                "end": 31,
+                "quote": "被看成一件了不起的"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:52"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:52",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+                "start": 74,
+                "end": 78,
+                "quote": "deal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 31,
+                "end": 33,
+                "quote": "大事"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+                "start": 81,
+                "end": 101,
+                "quote": "She was just crying."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 35,
+                "end": 45,
+                "quote": "她当时一个劲儿地哭。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:53"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:53",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+                "start": 113,
+                "end": 118,
+                "quote": "leave"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-4",
+                "start": 48,
+                "end": 50,
+                "quote": "丢下"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+                "start": 29,
+                "end": 54,
+                "quote": "were strangers before the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 15,
+                "end": 19,
+                "quote": "素不相识"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:54"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:54",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+                "start": 55,
+                "end": 59,
+                "quote": "meet"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 12,
+                "end": 14,
+                "quote": "比赛"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-cloze-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+                "start": 133,
+                "end": 159,
+                "quote": "human kindness won the day"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 49,
+                "end": 59,
+                "quote": "人间善意赢得了这一天"
+              }
+            ]
+          },
+          {
+            "annotationId": "insert-cloze-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:55"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:55",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2023-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+                "start": 121,
+                "end": 128,
+                "quote": "display"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-5",
+                "start": 46,
+                "end": 48,
+                "quote": "展现"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:47",
+              "question:paper-gaokao-2023-i:48"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
+                "start": 283,
+                "end": 449,
+                "quote": "Bailey then __47__ to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get __48__ attention."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-2",
+                "start": 86,
+                "end": 142,
+                "quote": "于是贝利弯下腰，让勒努爬到自己背上，一路把她背到终点线，接着又背了 300 英尺，到了勒努能得到医疗救治的地方。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:50"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+                "start": 130,
+                "end": 231,
+                "quote": "She would have struggled with extreme __50__ to make it to that aid checkpoint without Bailey’s help."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:cloze",
+                "paragraphId": "zh-cloze-3",
+                "start": 36,
+                "end": 68,
+                "quote": "要是没有贝利的帮助，她得忍着剧烈的疼痛才能艰难地挪到那个救助点。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "见对手痛哭而不忍→对赞誉感到困惑→由陌生人成为朋友的温暖"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2023-i:41": {
+      "blankId": "blank:paper-gaokao-2023-i:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她本该更早跑完却晚到了，要一个把赛程“完成”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是赛程（the course），又和“比实际更早”（earlier than she did）比时间，只能是跑完。",
+        "quotes": [
+          "the course",
+          "earlier than she did"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "完成",
+        "reason": "她本该更早跑完却晚到了，要一个把赛程“完成”的动作。动词看搭配：宾语是赛程（the course），又和“比实际更早”（earlier than she did）比时间，只能是跑完。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "designed",
+          "meaning": "设计；贝利是参赛跑者（runners competed），比的是她跑完的早晚，不是设计赛道。",
+          "quote": "runners competed"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "followed",
+          "meaning": "沿着走；后句写她背人跨过终点线（across the finish line），比的是到达终点的早晚，不是走哪条路。",
+          "quote": "across the finish line"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "changed",
+          "meaning": "改变；她晚到是因为背着人（she was carrying a），与改动赛道毫无关系。",
+          "quote": "she was carrying a"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the course",
+          "signalSide": "context-after",
+          "targetText": "finished the course",
+          "relation": "赛程是跑者要跑完的路线，和“完成”搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "earlier than she did",
+          "signalSide": "context-after",
+          "relation": "和实际到达的时间相比，说的是跑完的早晚。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:42": {
+      "blankId": "blank:paper-gaokao-2023-i:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "把前句“本该更早跑完却晚了”概括成一个词，引出后面晚到的原因。",
+      "find": {
+        "check": "echo",
+        "text": "前句说本该比实际更早跑完（earlier than she did），这个名词把“晚到”这件事概括成一个词。",
+        "quotes": [
+          "earlier than she did"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "耽搁",
+        "meaning": "晚到终点",
+        "reason": "把前句“本该更早跑完却晚了”概括成一个词，引出后面晚到的原因。名词看复现：前句说本该比实际更早跑完（earlier than she did），这个名词把“晚到”这件事概括成一个词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "chance",
+          "meaning": "机会；后面交代的是她背着人冲线（across the finish line）才晚到，不是得到了什么机会。",
+          "quote": "across the finish line"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "trouble",
+          "meaning": "麻烦；她觉得自己只是做了对的事（doing the right thing），这里交代晚到的原因，不是惹了麻烦。",
+          "quote": "doing the right thing"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "excuse",
+          "meaning": "借口；后面直接说出真实原因（came because she was carrying），她并没有为晚到找托词。",
+          "quote": "came because she was carrying"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "earlier than she did",
+          "signalSide": "context-before",
+          "relation": "比实际更早却没做到，就是晚到，这个名词概括前句的事实。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "came because",
+          "signalSide": "context-after",
+          "targetText": "Her delay came because",
+          "relation": "晚到“是因为”后面的事，名词作主语引出原因。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:43": {
+      "blankId": "blank:paper-gaokao-2023-i:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "她背着冲过终点线的是谁，要交代此人在比赛中的身份。",
+      "find": {
+        "check": "echo",
+        "text": "后文称伤者为她的同场跑者（her fellow runner），首句也说是众人参赛（competed），对上参赛者。",
+        "quotes": [
+          "her fellow runner",
+          "competed"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "参赛者",
+        "meaning": "同场的另一名跑者",
+        "reason": "她背着冲过终点线的是谁，要交代此人在比赛中的身份。名词看复现：后文称伤者为她的同场跑者（her fellow runner），首句也说是众人参赛（competed），对上参赛者。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "judge",
+          "meaning": "裁判；被背的是跑在她前面、疼得哭的人（a runner in front of her），是跑者不是裁判。",
+          "quote": "a runner in front of her"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "volunteer",
+          "meaning": "志愿者；后文明确称伤者为她的同场跑者（her fellow runner），是一同比赛的人。",
+          "quote": "her fellow runner"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "classmate",
+          "meaning": "同学；两人赛前素不相识（were strangers before），不可能是同学。",
+          "quote": "were strangers before"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "her fellow runner",
+          "signalSide": "context-after",
+          "relation": "同场跑者就是一起参赛的人，与参赛者复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "carrying a",
+          "signalSide": "context-before",
+          "targetText": "carrying a competitor",
+          "relation": "她背着的是一个人，宾语要是人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:44": {
+      "blankId": "blank:paper-gaokao-2023-i:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "她跑完了大半程，要指她正在跑的这场比赛。",
+      "find": {
+        "check": "echo",
+        "text": "首句交代这是一场越野赛（a cross-country race），这里复现同一场比赛。",
+        "quotes": [
+          "a cross-country race"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "赛跑",
+        "reason": "她跑完了大半程，要指她正在跑的这场比赛。名词看复现：首句交代这是一场越野赛（a cross-country race），这里复现同一场比赛。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "school",
+          "meaning": "学校；跑了三分之二多（two-thirds of the way）说的是赛程进度，与上学无关。",
+          "quote": "two-thirds of the way"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "town",
+          "meaning": "城镇；前方有跑者疼得哭（a runner in front of her），她正身处赛道，不是在穿过城镇。",
+          "quote": "a runner in front of her"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "training",
+          "meaning": "训练；首句写的是正式比赛（competed in a cross-country race），她此时在比赛中，不是在训练。",
+          "quote": "competed in a cross-country race"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "a cross-country race",
+          "signalSide": "context-before",
+          "relation": "首句的越野赛就是她正在跑的这场比赛。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "two-thirds of the way through",
+          "signalSide": "context-before",
+          "targetText": "two-thirds of the way through her race",
+          "relation": "表示一段路程已走过多少，后接所跑的比赛。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:45": {
+      "blankId": "blank:paper-gaokao-2023-i:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "见前方跑者疼哭，她中断比赛去帮忙，这是故事转折的第一个动作。",
+      "find": {
+        "check": "collocation",
+        "text": "后面接不定式去帮同伴（to help her fellow runner），她正在跑，想帮人就得先停下。",
+        "quotes": [
+          "to help her fellow runner"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "停下",
+        "reason": "见前方跑者疼哭，她中断比赛去帮忙，这是故事转折的第一个动作。动词看搭配：后面接不定式去帮同伴（to help her fellow runner），她正在跑，想帮人就得先停下。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "agreed",
+          "meaning": "同意；同意要有人先请求，前文只写对方疼得哭（began crying in pain），没有人开口求助。",
+          "quote": "began crying in pain"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "returned",
+          "meaning": "返回；伤者就在她前方（in front of her），她是赶上去帮，无须折回。",
+          "quote": "in front of her"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promised",
+          "meaning": "答应；她紧接着就扶住对方胳膊（took her arm），是当场出手，不是许诺以后再帮。",
+          "quote": "took her arm"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to help her fellow runner",
+          "signalSide": "context-after",
+          "targetText": "stopped to help",
+          "relation": "停下来去做某事，后接帮助同伴。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "began crying in pain",
+          "signalSide": "context-before",
+          "relation": "前方有人疼得哭，促使她中断比赛。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:46": {
+      "blankId": "blank:paper-gaokao-2023-i:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "看对方在扶持下能否继续往前走，要一个“帮助”意思的名词。",
+      "find": {
+        "check": "echo",
+        "text": "前句说她停下是为了帮忙（to help），扶住胳膊（took her arm）就是这种帮助，作借助（walk forward with）的宾语。",
+        "quotes": [
+          "to help",
+          "took her arm",
+          "walk forward with"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "帮助",
+        "meaning": "搀扶",
+        "reason": "看对方在扶持下能否继续往前走，要一个“帮助”意思的名词。名词看复现：前句说她停下是为了帮忙（to help），扶住胳膊（took her arm）就是这种帮助，作借助（walk forward with）的宾语。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "courage",
+          "meaning": "勇气；她后来查出膝盖严重受伤（serious injuries），走不动是伤的缘故，与勇气无关。",
+          "quote": "serious injuries"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "patience",
+          "meaning": "耐心；她疼得直哭（crying in pain），扶着往前走靠的是外力支撑，不是耐心。",
+          "quote": "crying in pain"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "advice",
+          "meaning": "建议；贝利是扶住她胳膊（took her arm）帮她走，给的是身体上的支撑，不是出主意。",
+          "quote": "took her arm"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "to help",
+          "signalSide": "context-before",
+          "relation": "前句的帮忙与此处的帮助同义复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "walk forward with",
+          "signalSide": "context-before",
+          "targetText": "walk forward with aid",
+          "relation": "借助某种帮助往前走，介词后接名词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:47": {
+      "blankId": "blank:paper-gaokao-2023-i:47",
+      "blankNo": 47,
+      "pos": "phrase",
+      "role": "main",
+      "context": "扶着走不了，她改为背人，要一个让对方能爬上背的身体动作。",
+      "find": {
+        "check": "action-sequence",
+        "text": "后面是让她爬上背（climb onto her back），先弯下身子对方才爬得上去。",
+        "quotes": [
+          "climb onto her back"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "弯下腰",
+        "reason": "扶着走不了，她改为背人，要一个让对方能爬上背的身体动作。词组看动作顺序：后面是让她爬上背（climb onto her back），先弯下身子对方才爬得上去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "went away",
+          "meaning": "走开；她随后一路背着对方（carried her all the way），人并没有离开。",
+          "quote": "carried her all the way"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "stood up",
+          "meaning": "站起来；她本就站着，要让对方爬上背（climb onto her back）得先把身子放低。",
+          "quote": "climb onto her back"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "stepped aside",
+          "meaning": "让到一边；她紧接着背起对方（carried her），让开就没法背人。",
+          "quote": "carried her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to let Lenoue climb onto her back",
+          "signalSide": "context-after",
+          "relation": "弯腰的目的是让对方爬到背上。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "bent",
+          "signalSide": "option",
+          "targetText": "bent down",
+          "relation": "弯（bent）加向下（down）表示把身子放低。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:48": {
+      "blankId": "blank:paper-gaokao-2023-i:48",
+      "blankNo": 48,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "伤者被送到能得到救治的地方，要一个修饰“照料”的形容词。",
+      "find": {
+        "check": "collocation",
+        "text": "和照料（attention）搭配，下段又写到救助点（aid checkpoint）和送医（taken to a hospital）。",
+        "quotes": [
+          "attention",
+          "aid checkpoint",
+          "taken to a hospital"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "医疗的",
+        "reason": "伤者被送到能得到救治的地方，要一个修饰“照料”的形容词。形容词看搭配：和照料（attention）搭配，下段又写到救助点（aid checkpoint）和送医（taken to a hospital）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "public",
+          "meaning": "公众的；伤者随后被送往医院（taken to a hospital），要的是治伤，不是公众关注。",
+          "quote": "taken to a hospital"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "constant",
+          "meaning": "持续的；多背 300 英尺（another 300 feet）是为送到救助点（aid checkpoint）治伤，不在照看是否持续。",
+          "quote": "aid checkpoint"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "equal",
+          "meaning": "平等的；她需要处理的是膝伤（injuries in one of her knees），与是否得到平等对待无关。",
+          "quote": "injuries in one of her knees"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "attention",
+          "signalSide": "context-after",
+          "targetText": "medical attention",
+          "relation": "医疗照料是固定搭配，指救治。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "aid checkpoint",
+          "signalSide": "context-after",
+          "relation": "下段的救助点就是能得到救治的地方。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:49": {
+      "blankId": "blank:paper-gaokao-2023-i:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "detail",
+      "context": "到了救助点，先对伤者做了什么，之后才送医院，要一个查看伤情的动作。",
+      "find": {
+        "check": "action-sequence",
+        "text": "到了那里（Once there）先做这个动作，随后才送医院（later taken to a hospital）。",
+        "quotes": [
+          "Once there",
+          "later taken to a hospital"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "评估",
+        "meaning": "检查伤情",
+        "reason": "到了救助点，先对伤者做了什么，之后才送医院，要一个查看伤情的动作。动词看动作顺序：到了那里（Once there）先做这个动作，随后才送医院（later taken to a hospital）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "interrupted",
+          "meaning": "被打断；她早已被背着走（climb onto her back），到站后接受的是伤情处理，没什么可打断。",
+          "quote": "climb onto her back"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "identified",
+          "meaning": "被认出；之后查出膝盖重伤（serious injuries），救助点要查的是伤情，不是辨认她是谁。",
+          "quote": "serious injuries"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "appreciated",
+          "meaning": "被感激；该被感激的是出手相助的贝利（without Bailey’s help），受伤的勒努到站后是接受处理。",
+          "quote": "without Bailey’s help"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "later taken to a hospital",
+          "signalSide": "context-after",
+          "relation": "先评估伤情，再决定送医，两个动作前后相接。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Once there",
+          "signalSide": "context-before",
+          "relation": "到了救助点之后发生的第一件事。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-gaokao-2023-i:50": {
+      "blankId": "blank:paper-gaokao-2023-i:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "detail",
+      "context": "没有帮助她就得忍着极度的某种感受硬撑，要伤者身体上的感受。",
+      "find": {
+        "check": "echo",
+        "text": "前文她疼得哭（crying in pain），又查出膝盖重伤（serious injuries），复现同一个词。",
+        "quotes": [
+          "crying in pain",
+          "serious injuries"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "疼痛",
+        "reason": "没有帮助她就得忍着极度的某种感受硬撑，要伤者身体上的感受。名词看复现：前文她疼得哭（crying in pain），又查出膝盖重伤（serious injuries），复现同一个词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hunger",
+          "meaning": "饥饿；她的问题是膝盖重伤（serious injuries），硬撑着走要忍的是伤痛，不是饿。",
+          "quote": "serious injuries"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cold",
+          "meaning": "寒冷；文中写的是她一侧膝盖受伤（one of her knees），要忍的是伤痛，与天冷无关。",
+          "quote": "one of her knees"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tiredness",
+          "meaning": "疲劳；她是疼得哭（crying in pain），走不了是因为伤，不是跑累了。",
+          "quote": "crying in pain"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "crying in pain",
+          "signalSide": "context-before",
+          "relation": "前文的疼痛在这里原词复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "struggled with extreme",
+          "signalSide": "context-before",
+          "targetText": "struggled with extreme pain",
+          "relation": "忍受极度的某种痛苦，后接名词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:51": {
+      "blankId": "blank:paper-gaokao-2023-i:51",
+      "blankNo": 51,
+      "pos": "adjective",
+      "role": "main",
+      "context": "大家看重她的举动，她本人却想不通为什么，要一种“不解”的态度。",
+      "find": {
+        "check": "affect",
+        "text": "后接为什么（about why）引出她想不通的问题，她又说只是做了对的事（just doing the right thing）。",
+        "quotes": [
+          "about why",
+          "just doing the right thing"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "困惑的",
+        "reason": "大家看重她的举动，她本人却想不通为什么，要一种“不解”的态度。形容词看情感：后接为什么（about why）引出她想不通的问题，她又说只是做了对的事（just doing the right thing）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "worried",
+          "meaning": "担心的；别人把她的举动看得很重（is considered a big），她的反应是想不通，不是忧虑。",
+          "quote": "is considered a big"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ashamed",
+          "meaning": "羞愧的；她认为自己做的是对的事（the right thing），没有可羞愧之处。",
+          "quote": "the right thing"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "discouraged",
+          "meaning": "灰心的；她说的是不能丢下哭着的对方（She was just crying），语气坦然，并不泄气。",
+          "quote": "She was just crying"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "about why her act is considered",
+          "signalSide": "context-after",
+          "targetText": "confused about why",
+          "relation": "对“为什么”（about why）感到困惑，引出她想不通的事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "just doing the right thing",
+          "signalSide": "context-after",
+          "relation": "她觉得这是理所应当的事，所以不解别人为何看重。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2023-i:52": {
+      "blankId": "blank:paper-gaokao-2023-i:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "detail",
+      "context": "别人把她的举动看成什么，要能和“大”连用、指了不起的事的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "和前面的“大”（a big）连用，指了不起的大事，与她说只是做了对的事对照。",
+        "quotes": [
+          "a big"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "重要的事",
+        "reason": "别人把她的举动看成什么，要能和“大”连用、指了不起的事的名词。名词看搭配：和前面的“大”（a big）连用，指了不起的大事，与她说只是做了对的事对照。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "game",
+          "meaning": "比赛；她不解的是自己的举动（her act）为何被看重，说的是这件善举，不是比赛。",
+          "quote": "her act"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "problem",
+          "meaning": "问题；她说自己只是做了对的事（doing the right thing），这不是麻烦，而是被别人看得很重。",
+          "quote": "doing the right thing"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lesson",
+          "meaning": "教训；别人看重她的举动（her act is considered），说的是这件事分量大，不是从中吸取教训。",
+          "quote": "her act is considered"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a big",
+          "signalSide": "context-before",
+          "targetText": "a big deal",
+          "relation": "“大”加这个名词表示了不起的大事。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "her act is considered",
+          "signalSide": "context-before",
+          "relation": "被看作什么，主语是她的举动。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:53": {
+      "blankId": "blank:paper-gaokao-2023-i:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "对方一直在哭，她说自己没法怎样对待她，这交代了她出手的原因。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是正在哭的伤者（She was just crying），她做不到的是丢下对方不管，后句说这是对的事。",
+        "quotes": [
+          "She was just crying"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "离开",
+        "meaning": "丢下不管",
+        "reason": "对方一直在哭，她说自己没法怎样对待她，这交代了她出手的原因。动词看搭配：宾语是正在哭的伤者（She was just crying），她做不到的是丢下对方不管，后句说这是对的事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cure",
+          "meaning": "治愈；治伤是后来送医院（taken to a hospital）的事，不能治好她接不上她说自己做了对的事。",
+          "quote": "taken to a hospital"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bother",
+          "meaning": "打扰；对方正在哭（She was just crying），说不能打扰她就成了不该上前，与她背人冲线相反。",
+          "quote": "She was just crying"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understand",
+          "meaning": "理解；对方疼得哭（crying in pain），处境一看就明白，说不能理解她接不上她当即出手。",
+          "quote": "crying in pain"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I couldn’t",
+          "signalSide": "context-before",
+          "targetText": "couldn’t leave her",
+          "relation": "她做不到的动作，宾语是正在哭的勒努。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "She was just crying.",
+          "signalSide": "context-before",
+          "relation": "对方一直在哭，让她不忍丢下。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:54": {
+      "blankId": "blank:paper-gaokao-2023-i:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "detail",
+      "context": "两人在什么之前还是陌生人，要指她们相识的这场比赛。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "这个熟词作名词指运动会、比赛，与首句的越野赛（a cross-country race）是同一场。",
+        "quotes": [
+          "a cross-country race"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "运动会",
+        "meaning": "这场越野赛",
+        "reason": "两人在什么之前还是陌生人，要指她们相识的这场比赛。名词看语境义：这个熟词作名词指运动会、比赛，与首句的越野赛（a cross-country race）是同一场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ride",
+          "meaning": "乘车；勒努是被背着走的（climb onto her back），两人相识于比赛，不是一次乘车。",
+          "quote": "climb onto her back"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "test",
+          "meaning": "测验；首句说这是一场越野赛（a cross-country race），不是一次考试。",
+          "quote": "a cross-country race"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "show",
+          "meaning": "演出；她们参加的是赛跑（hundreds of runners competed），不是一场表演。",
+          "quote": "hundreds of runners competed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "strangers before the",
+          "signalSide": "context-before",
+          "targetText": "strangers before the meet",
+          "relation": "在某件事之前互不相识，后接两人一同参加的比赛。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a cross-country race",
+          "signalSide": "context-before",
+          "relation": "首句的越野赛就是这里所说的比赛。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:55": {
+      "blankId": "blank:paper-gaokao-2023-i:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "两人都没夺冠，赢得这一天的是善意的“表现出来”，点明全文主题。",
+      "find": {
+        "check": "echo",
+        "text": "把贝利停下扶人、背她冲线（carried her all the way to the finish line）概括成善意的一次展现。",
+        "quotes": [
+          "carried her all the way to the finish line"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "展现",
+        "reason": "两人都没夺冠，赢得这一天的是善意的“表现出来”，点明全文主题。名词看复现：把贝利停下扶人、背她冲线（carried her all the way to the finish line）概括成善意的一次展现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secret",
+          "meaning": "秘密；她的举动被当地报纸报道（reported by a local newspaper），善意是公开的，不是秘密。",
+          "quote": "reported by a local newspaper"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "benefit",
+          "meaning": "好处；后半句说的是善意本身胜出（won the day），贝利只觉得做了对的事，并不图好处。",
+          "quote": "won the day"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "exchange",
+          "meaning": "交换；贝利只说自己做了对的事（doing the right thing），这份善意是单方面的付出，不是互换。",
+          "quote": "doing the right thing"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of human kindness",
+          "signalSide": "context-after",
+          "targetText": "display of human kindness",
+          "relation": "展现的对象是人间善意。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "carried her all the way to the finish line",
+          "signalSide": "context-before",
+          "relation": "贝利背人冲线就是善意被表现出来的具体行动。"
+        }
+      ]
+    }
+  }
+}

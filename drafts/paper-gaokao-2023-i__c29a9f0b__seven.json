@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:seven-choices": {
+      "overview": "文章谈犯错后怎样原谅自己。作者介绍一个写作练习：分别列出个人优点和为他人做过的好事，还可请亲友一起做；最后指出错误不是性格里固定的部分，而是成长的途径。",
+      "fullTranslationZh": "个人宽恕\n为错误承担责任是积极的一步，但不要因此过分自责。人非圣贤，孰能无过。同样重要的是，也要给自己一些宽恕。你可以用下面这个写作练习来帮助自己做到这一点。\n在日记本或一张纸上写下标题“个人优点”。现在把你喜欢的自己身上的所有特点都列出来。你有爱心吗？有创造力吗？慷慨大方吗？善于倾听吗？和你在一起很有趣吗？这些优点不必能改变世界，只要是你个性中让自己感到自豪的方面就行。\n在第二页的顶端写下标题“善举”。在这一页上，列出你为别人做过的所有好事。可能是你帮朋友做作业的那次，你没人吩咐就主动熨衣服的那次，或者家人度过疲惫的一天后你烤饼干的那次。不管是什么事，无论它看起来多么微不足道，都把它写下来。\n你可以请一位朋友或家人帮你补充清单。他们甚至可能也想试着做做这个练习。这样，你们就可以交流想法，谈谈是什么让你们各自与众不同，以及你们个性中闪光的地方。事实上，不要等到犯了错才尝试这个练习——它随时都是增强自信的好方法。\n大多数人不是从成功中而是从错误中学习，这几乎成了一句陈词滥调。问题是，这话确实没错。无论犯了什么错，都要记住它并不是你个性中固定不变的一部分。我们都在不断地变化和学习，而错误是让我们发展和成长的积极途径。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:seven:1",
+          "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+          "sourceText": "It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day.",
+          "displayText": "It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:38"
+          ],
+          "translationZh": "可能是你帮朋友做作业的那次，你没人吩咐就主动熨衣服的那次，或者家人度过疲惫的一天后你烤饼干的那次。",
+          "analysisZh": "主干是 It might be the time：It 指上一句要列的“为别人做过的好事”，the time 是“那一次”。后面三个 when 从句并列，都修饰 the time，用 or 连起三种可能：帮朋友写作业、没人吩咐就熨衣服、家人累了一天后烤饼干。without being asked 是介词加被动动名词，意思是“没被要求就去做”；had had 是过去完成时，表示家人累了一天在烤饼干之前。三个例子都是日常小事，正好为段尾那句“再小也要写下来”铺路。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "It might be the time"
+            },
+            {
+              "start": 67,
+              "end": 91,
+              "quote": "when you did the ironing"
+            },
+            {
+              "start": 92,
+              "end": 111,
+              "quote": "without being asked"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:seven:2",
+          "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+          "sourceText": "That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through.",
+          "displayText": "That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:39"
+          ],
+          "translationZh": "这样，你们就可以交流想法，谈谈是什么让你们各自与众不同，以及你们个性中闪光的地方。",
+          "analysisZh": "主干是 you could exchange thoughts：你们可以交流想法。That way 是“这样一来”，指上一句请亲友也来做练习。on 后面带两个并列宾语，用 and 连接：一个是 what 引导的宾语从句 what makes each of you special（是什么让你们每个人与众不同），一个是名词短语 the aspects of your personality，后面再接定语从句 that shine through 修饰 aspects。each of you 说明交流的是双方，这正是空里要先让亲友也做练习的原因。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 8,
+              "quote": "That way"
+            },
+            {
+              "start": 20,
+              "end": 37,
+              "quote": "exchange thoughts"
+            },
+            {
+              "start": 52,
+              "end": 63,
+              "quote": "each of you"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "标题点出“个人宽恕”。第一段提出观点：为错误负责之外，同样要原谅自己，并引出一个写作练习。接下来分两页讲练习：第一页列个人优点，第二页列为他人做过的好事。再说可以请亲友补充、一起做，平时也能用来增强自信。最后一段回到错误本身：人人都从错误中学习，错误不是固定不变的性格，而是成长的途径。",
+        "units": [
+          {
+            "unitId": "unit:seven:1",
+            "heading": "Personal Forgiveness",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-i:seven-choices:1",
+              "block:paper-gaokao-2023-i:seven-choices:2"
+            ],
+            "summary": "提出观点：别因错误过分自责，要给自己一些宽恕，并引出写作练习。"
+          },
+          {
+            "unitId": "unit:seven:2",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-i:seven-choices:3",
+              "block:paper-gaokao-2023-i:seven-choices:4"
+            ],
+            "summary": "练习第一页：在“个人优点”标题下列出自己喜欢的性格特点，不必惊天动地。"
+          },
+          {
+            "unitId": "unit:seven:3",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-i:seven-choices:5"
+            ],
+            "summary": "练习第二页：在“善举”标题下列出为别人做过的好事，再小也写下来。"
+          },
+          {
+            "unitId": "unit:seven:4",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-i:seven-choices:6"
+            ],
+            "summary": "请亲友帮忙补充，也请他们自己做，互相交流；这个练习随时都能增强自信。"
+          },
+          {
+            "unitId": "unit:seven:5",
+            "paragraphIds": [
+              "block:paper-gaokao-2023-i:seven-choices:7"
+            ],
+            "summary": "收束全文：人从错误中学习，错误不是固定的性格，而是成长的途径。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 36,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "D",
+          "shared": [
+            "forgiveness"
+          ],
+          "text": "选项的 self-forgiveness 扣住标题 Personal Forgiveness，also 也像接在第 36 题空前 a positive step 后再加一层。但空后 help you do this 要回指一个能去做的动作，选项只评价自我宽恕作用大（goes a long way），没有动作给 do this 指。",
+          "quotes": [
+            "self-forgiveness",
+            "Personal Forgiveness",
+            "a positive step",
+            "help you do this",
+            "goes a long way"
+          ]
+        },
+        "E": {
+          "target": 36,
+          "secondary": 40,
+          "kind": "topic",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项讲别忽视、别忘记发生过的事，像给第 36 题空前 don’t beat yourself up 补一句。但空后 help you do this 要一个正面动作，选项只有被否定的 ignore 和 forget。也可能误填第 40 题，但那里空后 We’re all changing 讲人在变，选项没有这层意思。",
+          "quotes": [
+            "don’t beat yourself up",
+            "help you do this",
+            "ignore",
+            "forget",
+            "We’re all changing"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-gaokao-2023-i:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tp:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 4,
+              "quote": "个人宽恕"
+            },
+            {
+              "paragraphId": "tp:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:seven-choices:2"
+              ],
+              "start": 5,
+              "end": 79,
+              "quote": "为错误承担责任是积极的一步，但不要因此过分自责。人非圣贤，孰能无过。同样重要的是，也要给自己一些宽恕。你可以用下面这个写作练习来帮助自己做到这一点。"
+            },
+            {
+              "paragraphId": "tp:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:seven-choices:3",
+                "block:paper-gaokao-2023-i:seven-choices:4"
+              ],
+              "start": 80,
+              "end": 187,
+              "quote": "在日记本或一张纸上写下标题“个人优点”。现在把你喜欢的自己身上的所有特点都列出来。你有爱心吗？有创造力吗？慷慨大方吗？善于倾听吗？和你在一起很有趣吗？这些优点不必能改变世界，只要是你个性中让自己感到自豪的方面就行。"
+            },
+            {
+              "paragraphId": "tp:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:seven-choices:5"
+              ],
+              "start": 188,
+              "end": 300,
+              "quote": "在第二页的顶端写下标题“善举”。在这一页上，列出你为别人做过的所有好事。可能是你帮朋友做作业的那次，你没人吩咐就主动熨衣服的那次，或者家人度过疲惫的一天后你烤饼干的那次。不管是什么事，无论它看起来多么微不足道，都把它写下来。"
+            },
+            {
+              "paragraphId": "tp:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:seven-choices:6"
+              ],
+              "start": 301,
+              "end": 411,
+              "quote": "你可以请一位朋友或家人帮你补充清单。他们甚至可能也想试着做做这个练习。这样，你们就可以交流想法，谈谈是什么让你们各自与众不同，以及你们个性中闪光的地方。事实上，不要等到犯了错才尝试这个练习——它随时都是增强自信的好方法。"
+            },
+            {
+              "paragraphId": "tp:7",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:seven-choices:7"
+              ],
+              "start": 412,
+              "end": 514,
+              "quote": "大多数人不是从成功中而是从错误中学习，这几乎成了一句陈词滥调。问题是，这话确实没错。无论犯了什么错，都要记住它并不是你个性中固定不变的一部分。我们都在不断地变化和学习，而错误是让我们发展和成长的积极途径。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:blank:paper-gaokao-2023-i:36",
+            "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+            "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them. To err（犯错）is human. It’s just as important to show yourself some forgiveness. You can use the following writing exercise to help you do this."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2023-i:37",
+            "paragraphId": "block:paper-gaokao-2023-i:seven-choices:3",
+            "text": "In a journal or on a piece of paper, put the heading “Personal strengths.” Now list all the characteristics you like about yourself. Are you caring? Creative?"
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2023-i:38",
+            "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+            "text": "At the top of a second page, put the heading “Acts of kindness.” On this one, list all the positive things you’ve done for others. It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day. Whatever it is, no matter how small it might seem, write it down."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2023-i:39",
+            "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+            "text": "You could ask a friend or family member to help add to your list. They might even like to have a go at doing the exercise. That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through. In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time."
+          },
+          {
+            "textId": "completed:blank:paper-gaokao-2023-i:40",
+            "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
+            "text": "It’s something of a cliché（陈词滥调）that most people learn not from their successes but their mistakes. The thing is, it’s true. Whatever the mistake, remember it isn’t a fixed aspect of your personality. We’re all changing and learning all the time and mistakes are a positive way to develop and grow."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-i:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+                "start": 167,
+                "end": 183,
+                "quote": "help you do this"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:2",
+                "start": 64,
+                "end": 73,
+                "quote": "帮助自己做到这一点"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-i:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:3",
+                "start": 53,
+                "end": 74,
+                "quote": "“Personal strengths.”"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:3",
+                "start": 82,
+                "end": 107,
+                "quote": "Are you caring? Creative?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:3",
+                "start": 13,
+                "end": 19,
+                "quote": "“个人优点”"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:3",
+                "start": 41,
+                "end": 53,
+                "quote": "你有爱心吗？有创造力吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-i:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+                "start": 78,
+                "end": 129,
+                "quote": "list all the positive things you’ve done for others"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+                "start": 198,
+                "end": 242,
+                "quote": "when you did the ironing without being asked"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:5",
+                "start": 22,
+                "end": 35,
+                "quote": "列出你为别人做过的所有好事"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:5",
+                "start": 50,
+                "end": 64,
+                "quote": "你没人吩咐就主动熨衣服的那次"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-i:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+                "start": 14,
+                "end": 39,
+                "quote": "a friend or family member"
+              },
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+                "start": 114,
+                "end": 144,
+                "quote": "what makes each of you special"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:6",
+                "start": 4,
+                "end": 11,
+                "quote": "一位朋友或家人"
+              },
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:6",
+                "start": 50,
+                "end": 62,
+                "quote": "是什么让你们各自与众不同"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2023-i:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
+                "start": 132,
+                "end": 176,
+                "quote": "We’re all changing and learning all the time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:7",
+                "start": 71,
+                "end": 83,
+                "quote": "我们都在不断地变化和学习"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-i:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:36"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2023-i:36",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+                "start": 114,
+                "end": 171,
+                "quote": "It’s just as important to show yourself some forgiveness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:2",
+                "start": 34,
+                "end": 51,
+                "quote": "同样重要的是，也要给自己一些宽恕。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-i:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:37"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2023-i:37",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:3",
+                "start": 75,
+                "end": 132,
+                "quote": "Now list all the characteristics you like about yourself."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:3",
+                "start": 20,
+                "end": 41,
+                "quote": "现在把你喜欢的自己身上的所有特点都列出来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-i:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:38"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2023-i:38",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+                "start": 309,
+                "end": 374,
+                "quote": "Whatever it is, no matter how small it might seem, write it down."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:5",
+                "start": 85,
+                "end": 112,
+                "quote": "不管是什么事，无论它看起来多么微不足道，都把它写下来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-i:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:39"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2023-i:39",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+                "start": 66,
+                "end": 122,
+                "quote": "They might even like to have a go at doing the exercise."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:6",
+                "start": 18,
+                "end": 35,
+                "quote": "他们甚至可能也想试着做做这个练习。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2023-i:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:40"
+            ],
+            "blankId": "blank:paper-gaokao-2023-i:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-gaokao-2023-i:40",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
+                "start": 125,
+                "end": 200,
+                "quote": "Whatever the mistake, remember it isn’t a fixed aspect of your personality."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:7",
+                "start": 42,
+                "end": 71,
+                "quote": "无论犯了什么错，都要记住它并不是你个性中固定不变的一部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:38"
+            ],
+            "selectedSentenceId": "sentence:seven:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+                "start": 131,
+                "end": 308,
+                "quote": "It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:5",
+                "start": 36,
+                "end": 85,
+                "quote": "可能是你帮朋友做作业的那次，你没人吩咐就主动熨衣服的那次，或者家人度过疲惫的一天后你烤饼干的那次。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:39"
+            ],
+            "selectedSentenceId": "sentence:seven:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+                "start": 73,
+                "end": 200,
+                "quote": "That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-gaokao-2023-i:seven-choices",
+                "paragraphId": "tp:6",
+                "start": 35,
+                "end": 76,
+                "quote": "这样，你们就可以交流想法，谈谈是什么让你们各自与众不同，以及你们个性中闪光的地方。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-i:36": {
+      "blankId": "blank:paper-gaokao-2023-i:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Personal Forgiveness",
+        "Taking responsibility for mistakes",
+        "don’t beat yourself up",
+        "To err（犯错）is human",
+        "writing exercise"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+        "headingAnchor": "Personal Forgiveness",
+        "beforeQuote": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them. To err（犯错）is human.",
+        "afterQuote": "You can use the following writing exercise to help you do this."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "do this",
+          "signalSide": "context-after",
+          "targetText": "show yourself some forgiveness",
+          "relation": "do this 回指空里要做的事，前面必须先出现一个动作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "show yourself some forgiveness",
+          "signalSide": "option",
+          "targetText": "do this",
+          "relation": "这是一个动词短语，给空后的 do this 提供了可以去做的动作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "don’t beat yourself up",
+          "signalSide": "context-before",
+          "targetText": "forgiveness",
+          "relation": "空前劝人别过分自责，选项接着说要原谅自己，两句说的是同一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "just as important",
+          "signalSide": "option",
+          "targetText": "Taking responsibility for mistakes is a positive step",
+          "relation": "空前肯定负责是积极的一步，just as important 说明原谅自己同样要紧。"
+        }
+      ],
+      "lock": [
+        "do this",
+        "show yourself some forgiveness"
+      ],
+      "find": {
+        "text": "先看空后 help you do this：do this 要回指一个能去做的动作，七个里只有 show yourself some forgiveness 是这样的动作。",
+        "quotes": [
+          "help you do this",
+          "show yourself some forgiveness"
+        ]
+      },
+      "explain": "空前先肯定为错误负责，再劝别过分自责；这句用 just as important 把同样的分量给到善待自己，空后的写作练习就是帮人做到这件事的办法。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "don’t beat yourself up / help you do this",
+            "optionSide": "show yourself some forgiveness",
+            "relation": "别过分自责的正面说法就是原谅自己；这个动作又正好让空后的 do this 有所指。"
+          },
+          {
+            "contextSide": "Taking responsibility for mistakes is a positive step",
+            "optionSide": "just as important",
+            "relation": "前面说负责重要，选项说原谅自己同样重要，两件事并列摆出。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前先肯定为错误负责，再劝别过分自责；这句用 just as important 把同样的分量给到善待自己，空后的写作练习就是帮人做到这件事的办法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "选项的 self-forgiveness 扣住标题 Personal Forgiveness，also 也像接在第 36 题空前 a positive step 后再加一层。但空后 help you do this 要回指一个能去做的动作，选项只评价自我宽恕作用大（goes a long way），没有动作给 do this 指。"
+        },
+        {
+          "optionLabel": "E",
+          "reason": "选项讲别忽视、别忘记发生过的事，像给第 36 题空前 don’t beat yourself up 补一句。但空后 help you do this 要一个正面动作，选项只有被否定的 ignore 和 forget。也可能误填第 40 题，但那里空后 We’re all changing 讲人在变，选项没有这层意思。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:37": {
+      "blankId": "blank:paper-gaokao-2023-i:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "“Personal strengths.”",
+        "put the heading",
+        "Are you caring?",
+        "Creative?"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-i:seven-choices:3",
+        "beforeQuote": "In a journal or on a piece of paper, put the heading “Personal strengths.”",
+        "afterQuote": "Are you caring? Creative?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Personal strengths",
+          "signalSide": "context-before",
+          "targetText": "characteristics you like about yourself",
+          "relation": "标题是个人优点，选项说的“自己喜欢的特点”就是标题下要填的内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "characteristics you like about yourself",
+          "signalSide": "option",
+          "targetText": "Personal strengths / Are you caring? Creative?",
+          "relation": "characteristics 上接标题里的 strengths，下接空后问到的各种性格。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Are you caring?",
+          "signalSide": "context-after",
+          "targetText": "characteristics",
+          "relation": "空后一连串问句是在提示可以列哪些性格特点，caring 就是其中一项。"
+        }
+      ],
+      "lock": [
+        "Personal strengths",
+        "characteristics",
+        "Are you caring?"
+      ],
+      "find": {
+        "text": "空前写下标题 Personal strengths，空后连问 Are you caring? Creative?，都在说性格优点；B 的 characteristics 正好夹在中间。",
+        "quotes": [
+          "Personal strengths",
+          "Are you caring? Creative?",
+          "characteristics"
+        ]
+      },
+      "explain": "空前只交代写个标题，这句给出真正的任务：在标题下列清单；空后一串问句是在提示清单里可以写哪些优点，后面的 They 也接着指这些特点。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "F 也是让人写下来，但 Whatever it is 里的 it 在这里没有所指，空前只有一个标题。",
+          "quotes": [
+            "Whatever it is"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "“Personal strengths.” / Are you caring? Creative?",
+            "optionSide": "list all the characteristics you like about yourself",
+            "relation": "标题定下要写优点，问句举出优点的样子，选项把“列出优点”这个动作说出来。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "空前只交代写个标题，这句给出真正的任务：在标题下列清单；空后一串问句是在提示清单里可以写哪些优点，后面的 They 也接着指这些特点。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 也是让人写下来，但 Whatever it is 里的 it 在这里没有所指，空前只有一个标题。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:38": {
+      "blankId": "blank:paper-gaokao-2023-i:38",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "“Acts of kindness.”",
+        "list all the positive things you’ve done for others",
+        "helped a friend with their homework",
+        "did the ironing without being asked",
+        "baked cookies"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+        "beforeQuote": "On this one, list all the positive things you’ve done for others. It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Whatever it is",
+          "signalSide": "option",
+          "targetText": "the positive things you’ve done for others",
+          "relation": "Whatever it is 里的 it 指空前列出的每一件好事，不管是哪一件。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the positive things you’ve done for others",
+          "signalSide": "context-before",
+          "targetText": "Whatever it is / write it down",
+          "relation": "空前要人列出做过的好事，选项的 it 和 write it down 都落在这些好事上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "did the ironing",
+          "signalSide": "context-before",
+          "targetText": "no matter how small it might seem",
+          "relation": "熨衣服、烤饼干都是小事，选项的“再小也算”正是对这些例子的回应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no matter how small",
+          "signalSide": "option",
+          "targetText": "did the ironing / baked cookies",
+          "relation": "small 概括空前三个日常小例子。"
+        }
+      ],
+      "lock": [
+        "did the ironing",
+        "no matter how small"
+      ],
+      "find": {
+        "text": "空前举 did the ironing、baked cookies 这类小事，no matter how small it might seem 正接这些例子，write it down 又回到 list all the positive things。",
+        "quotes": [
+          "did the ironing",
+          "baked cookies",
+          "no matter how small it might seem",
+          "write it down",
+          "list all the positive things"
+        ]
+      },
+      "explain": "空前一口气举了三个例子，这句在段尾把例子收回到动作上，提醒小事也要上清单；下一段接着说可以请亲友帮着补充这份清单。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 也以 Whatever 开头，但本段列的是 the positive things you’ve done for others，不是错误，Whatever the mistake 接不上。",
+          "quotes": [
+            "the positive things you’ve done for others",
+            "Whatever the mistake"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "helped a friend with their homework / did the ironing without being asked / baked cookies",
+            "optionSide": "no matter how small it might seem",
+            "relation": "三个例子都是日常小事，选项说再小也要记下，正是对例子的总结。"
+          },
+          {
+            "contextSide": "list all the positive things you’ve done for others",
+            "optionSide": "write it down",
+            "relation": "段首要求“列出”，段尾回到“写下来”，前后是同一个动作。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前一口气举了三个例子，这句在段尾把例子收回到动作上，提醒小事也要上清单；下一段接着说可以请亲友帮着补充这份清单。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 也以 Whatever 开头，但本段列的是 the positive things you’ve done for others，不是错误，Whatever the mistake 接不上。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:39": {
+      "blankId": "blank:paper-gaokao-2023-i:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a friend or family member",
+        "help add to your list",
+        "That way",
+        "exchange thoughts",
+        "each of you"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+        "beforeQuote": "You could ask a friend or family member to help add to your list.",
+        "afterQuote": "That way, you could exchange thoughts on what makes each of you special"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They",
+          "signalSide": "option",
+          "targetText": "a friend or family member",
+          "relation": "They 指空前请来帮忙的朋友或家人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "a friend or family member",
+          "signalSide": "context-before",
+          "targetText": "They",
+          "relation": "空前先出现朋友或家人，选项的 They 才有先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "each of you",
+          "signalSide": "context-after",
+          "targetText": "doing the exercise",
+          "relation": "空后说你们每个人的特别之处，说明对方也做了练习，选项正交代这一步。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "doing the exercise",
+          "signalSide": "option",
+          "targetText": "writing exercise",
+          "relation": "the exercise 就是第一段说的写作练习。"
+        }
+      ],
+      "lock": [
+        "They",
+        "a friend or family member",
+        "each of you"
+      ],
+      "find": {
+        "text": "空后 each of you 说明双方都做了练习；C 的 They 指空前的 a friend or family member，让对方也来做一遍。",
+        "quotes": [
+          "each of you",
+          "They",
+          "a friend or family member"
+        ]
+      },
+      "explain": "空前请亲友帮忙补清单，这句再进一步，请他们也写自己的清单；有了这一步，空后 That way 才能说双方交换看法，谈各自的特别之处。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a friend or family member",
+            "optionSide": "They",
+            "relation": "代词回指空前的朋友或家人。"
+          },
+          {
+            "contextSide": "That way / each of you",
+            "optionSide": "have a go at doing the exercise",
+            "relation": "对方也做了练习，空后“这样你们就能交流各自的优点”才说得通。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前请亲友帮忙补清单，这句再进一步，请他们也写自己的清单；有了这一步，空后 That way 才能说双方交换看法，谈各自的特别之处。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2023-i:40": {
+      "blankId": "blank:paper-gaokao-2023-i:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "learn not from their successes but their mistakes",
+        "it’s true",
+        "We’re all changing and learning all the time",
+        "develop and grow"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
+        "beforeQuote": "It’s something of a cliché（陈词滥调）that most people learn not from their successes but their mistakes. The thing is, it’s true.",
+        "afterQuote": "We’re all changing and learning all the time and mistakes are a positive way to develop and grow."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "We’re all changing",
+          "signalSide": "context-after",
+          "targetText": "isn’t a fixed aspect",
+          "relation": "空后说人一直在变，正好解释错误为什么不是固定不变的性格。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "fixed aspect",
+          "signalSide": "option",
+          "targetText": "We’re all changing",
+          "relation": "fixed 和空后的 changing 意思相反，一句否定固定，一句说在变化。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "their mistakes",
+          "signalSide": "context-before",
+          "targetText": "Whatever the mistake",
+          "relation": "空前在谈从错误中学习，选项接着谈怎样看待错误。"
+        }
+      ],
+      "lock": [
+        "fixed aspect",
+        "We’re all changing"
+      ],
+      "find": {
+        "text": "先看空后 We’re all changing and learning all the time：人一直在变，正好说明 G 的 isn’t a fixed aspect of your personality。",
+        "quotes": [
+          "We’re all changing and learning all the time",
+          "isn’t a fixed aspect of your personality"
+        ]
+      },
+      "explain": "空前承认人靠错误学习，这句接着把错误和人分开，犯错不等于你就是这样的人；空后用人人都在变化给出理由，并把错误说成成长的途径，收住全文。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "We’re all changing and learning all the time",
+            "optionSide": "it isn’t a fixed aspect of your personality",
+            "relation": "人在变，所以错误不会固定成性格的一部分；空后给出的是选项的理由。"
+          },
+          {
+            "contextSide": "learn not from their successes but their mistakes",
+            "optionSide": "Whatever the mistake",
+            "relation": "空前讲人从错误中学习，选项顺着谈对待任何错误的态度。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前承认人靠错误学习，这句接着把错误和人分开，犯错不等于你就是这样的人；空后用人人都在变化给出理由，并把错误说成成长的途径，收住全文。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

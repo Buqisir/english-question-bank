@@ -1,0 +1,746 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2023-i:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2023-i:reading-c": {
+      "overview": "这是一本讲“数字极简主义”的书的前言节选。作者说明本书旨在倡导这一理念，并介绍全书结构：第一部分讲哲学基础、“数字清理”方法和实验案例，第二部分讲培养这种生活方式的理念和实践。",
+      "fullTranslationZh": "本书的目标是为数字极简主义提出论证，包括详细探讨它要求什么、为什么有效，然后在你认定它适合你的情况下，教你如何践行这一理念。\n为此，我把全书分为两部分。在第一部分，我阐述数字极简主义的哲学基础：先考察那些让许多人的数字生活越来越难以忍受的力量，再详细讨论数字极简主义这一理念。\n第一部分的结尾介绍我建议的践行这一理念的方法：数字清理。这一过程要求你在三十天里远离可有可无的网络活动。三十天结束时，你再重新加入少量精心挑选的、你认为会给你所珍视的事物带来巨大益处的网络活动。\n在第一部分的最后一章，我将指导你完成自己的数字清理。在此过程中，我会借用我在2018年做的一项实验，当时有1600多人同意进行数字清理。你会听到这些参与者的故事，了解哪些策略对他们很有效，以及他们遇到了哪些你应当避开的陷阱。\n本书第二部分会更深入地探讨一些有助于你培养可持续的数字极简生活方式的理念。在这些章节中，我探讨了诸如独处的重要性，以及培养高质量休闲活动、用来取代如今大多数人花在无意识使用设备上的时间的必要性等问题。每章结尾都附有一组实践方法，旨在帮助你把本章的重要理念付诸行动。你可以把这些实践方法看作一个工具箱，用来帮助你努力打造适合自身具体情况的极简生活方式。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-c-1",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+          "sourceText": "At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value.",
+          "displayText": "At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2023-i:29"
+          ],
+          "translationZh": "三十天结束时，你再重新加入少量精心挑选的、你认为会给你所珍视的事物带来巨大益处的网络活动。",
+          "analysisZh": "主干是 you will then add back … online activities（你再加回网络活动），句首 At the end of the thirty days 是时间状语。a small number of carefully chosen 修饰 online activities，强调“少量、精选”。that 引导定语从句修饰 activities，从句里 you believe 是插入成分，真正的结构是 that will provide massive benefits to …；末尾 the things you value 又是省略 that 的定语从句。add back 说明是先清空、再加回，正好帮助理解 declutter。",
+          "underlineRanges": [
+            {
+              "start": 31,
+              "end": 53,
+              "quote": "you will then add back"
+            },
+            {
+              "start": 107,
+              "end": 136,
+              "quote": "that you believe will provide"
+            },
+            {
+              "start": 157,
+              "end": 177,
+              "quote": "the things you value"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-gaokao-2023-i:reading-c-2",
+          "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+          "sourceText": "In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy.",
+          "displayText": "In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy.",
+          "relatedQuestionIds": [],
+          "translationZh": "在第一部分，我阐述数字极简主义的哲学基础：先考察那些让许多人的数字生活越来越难以忍受的力量，再详细讨论数字极简主义这一理念。",
+          "analysisZh": "主干是 I describe the philosophical foundations（我阐述哲学基础）。后面 starting with … 是现在分词短语作伴随状语，说明从哪里讲起；其中 that are making … increasingly intolerable 是定语从句修饰 the forces，make + 宾语 + 形容词表示“使……变得难以忍受”。before moving on to … 再交代接下来讲什么。starting with 和 before moving on to 一前一后，把第一部分的讲述顺序串了起来。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 53,
+              "quote": "I describe the philosophical foundations"
+            },
+            {
+              "start": 77,
+              "end": 90,
+              "quote": "starting with"
+            },
+            {
+              "start": 193,
+              "end": 212,
+              "quote": "before moving on to"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2023-i:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-c:1"
+              ],
+              "start": 0,
+              "end": 62,
+              "quote": "本书的目标是为数字极简主义提出论证，包括详细探讨它要求什么、为什么有效，然后在你认定它适合你的情况下，教你如何践行这一理念。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-c:2"
+              ],
+              "start": 63,
+              "end": 138,
+              "quote": "为此，我把全书分为两部分。在第一部分，我阐述数字极简主义的哲学基础：先考察那些让许多人的数字生活越来越难以忍受的力量，再详细讨论数字极简主义这一理念。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-c:3"
+              ],
+              "start": 139,
+              "end": 236,
+              "quote": "第一部分的结尾介绍我建议的践行这一理念的方法：数字清理。这一过程要求你在三十天里远离可有可无的网络活动。三十天结束时，你再重新加入少量精心挑选的、你认为会给你所珍视的事物带来巨大益处的网络活动。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-c:4"
+              ],
+              "start": 237,
+              "end": 349,
+              "quote": "在第一部分的最后一章，我将指导你完成自己的数字清理。在此过程中，我会借用我在2018年做的一项实验，当时有1600多人同意进行数字清理。你会听到这些参与者的故事，了解哪些策略对他们很有效，以及他们遇到了哪些你应当避开的陷阱。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2023-i:reading-c:5"
+              ],
+              "start": 350,
+              "end": 525,
+              "quote": "本书第二部分会更深入地探讨一些有助于你培养可持续的数字极简生活方式的理念。在这些章节中，我探讨了诸如独处的重要性，以及培养高质量休闲活动、用来取代如今大多数人花在无意识使用设备上的时间的必要性等问题。每章结尾都附有一组实践方法，旨在帮助你把本章的重要理念付诸行动。你可以把这些实践方法看作一个工具箱，用来帮助你努力打造适合自身具体情况的极简生活方式。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-c-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+                "start": 195,
+                "end": 373,
+                "quote": "At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 52,
+                "end": 97,
+                "quote": "三十天结束时，你再重新加入少量精心挑选的、你认为会给你所珍视的事物带来巨大益处的网络活动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-s2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-gaokao-2023-i:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+                "start": 45,
+                "end": 317,
+                "quote": "In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 13,
+                "end": 75,
+                "quote": "在第一部分，我阐述数字极简主义的哲学基础：先考察那些让许多人的数字生活越来越难以忍受的力量，再详细讨论数字极简主义这一理念。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:1",
+                "start": 28,
+                "end": 64,
+                "quote": "make the case for digital minimalism"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 6,
+                "end": 17,
+                "quote": "为数字极简主义提出论证"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+                "start": 136,
+                "end": 193,
+                "quote": "step away from optional online activities for thirty days"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+                "start": 240,
+                "end": 301,
+                "quote": "add back a small number of carefully chosen online activities"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 35,
+                "end": 51,
+                "quote": "在三十天里远离可有可无的网络活动"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 61,
+                "end": 72,
+                "quote": "重新加入少量精心挑选的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+                "start": 116,
+                "end": 216,
+                "quote": "draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+                "start": 218,
+                "end": 257,
+                "quote": "You’ll hear these participants’ stories"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 34,
+                "end": 67,
+                "quote": "借用我在2018年做的一项实验，当时有1600多人同意进行数字清理"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 68,
+                "end": 80,
+                "quote": "你会听到这些参与者的故事"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2023-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "block:paper-gaokao-2023-i:reading-c:5",
+                "start": 457,
+                "end": 593,
+                "quote": "view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2023-i:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 135,
+                "end": 174,
+                "quote": "把这些实践方法看作一个工具箱，用来帮助你努力打造适合自身具体情况的极简生活方式"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先点明本书目标，再按“第一部分—第一部分结尾—第一部分最后一章—第二部分”的顺序介绍各部分内容，由理念到方法、再到案例和实践，层层推进。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-c:1",
+            "summary": "本书旨在为数字极简主义提出论证，并教读者如何践行",
+            "function": "开门见山，点明全书目标"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+            "summary": "全书分两部分，第一部分先阐述数字极简主义的哲学基础",
+            "function": "引出全书结构，介绍第一部分"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+            "summary": "第一部分结尾介绍“数字清理”：远离可有可无的网络活动三十天，再加回少量精选活动",
+            "function": "介绍践行理念的方法"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+            "summary": "第一部分最后一章借用2018年1600多人参与的实验，讲参与者的经验和教训",
+            "function": "介绍用实例指导读者的章节"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2023-i:reading-c:5",
+            "summary": "第二部分探讨独处、高质量休闲等理念，每章附有可按需取用的实践方法",
+            "function": "介绍第二部分的内容和用法"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2023-i:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到作者直接交代本书目标的句子，并认出“数字极简主义”在选项里的对应说法。",
+      "stemTranslationZh": "这本书的目的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "教授批判性思维技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "teach",
+            "optionText": "Teaching",
+            "matchType": "wordFamily",
+            "relationNote": "Teaching 和原文的 teach（教）同根，但书要教的是怎样践行数字极简主义（how to adopt this philosophy），不是批判性思维技能。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:1",
+              "quote": "to teach you how to adopt this philosophy",
+              "anchor": "教你践行理念"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "倡导一种简单的数字生活方式。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:1",
+              "quote": "The goal of this book is to make the case for digital minimalism, including a detailed exploration of what it asks and why it works, and then to teach you how to adopt this philosophy if you decide it’s right for you.",
+              "anchor": "本书的目标"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "解决哲学问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "philosophical",
+            "optionText": "philosophical",
+            "matchType": "exact",
+            "relationNote": "philosophical 出自 [[block:paper-gaokao-2023-i:reading-c:2|I describe the philosophical foundations]]，指第一部分先讲这一理念的哲学基础（philosophical foundations），书的目标并不是解决哲学问题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+              "quote": "I describe the philosophical foundations of digital minimalism",
+              "anchor": "哲学基础"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "推广使用数码设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the necessity of cultivating high-quality leisure to replace the time most now spend on mindless device use",
+            "sourceHighlight": "replace the time most now spend on mindless device use",
+            "optionText": "Promoting the use of a digital device.",
+            "optionHighlight": "Promoting the use",
+            "explanation": "书要人远离可有可无的网络活动，还主张用高质量的休闲取代无意识使用设备的时间（replace … mindless device use），是让人少用设备，不是推广使用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:5",
+              "quote": "the necessity of cultivating high-quality leisure to replace the time most now spend on mindless device use",
+              "anchor": "取代无意识用设备"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "aimed at",
+          "sourceRole": "stem",
+          "targetText": "The goal of this book is to make the case for digital minimalism, including a detailed exploration of what it asks and why it works, and then to teach you how to adopt this philosophy if you decide it’s right for you.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:1",
+          "relationType": "locationCue",
+          "targetCue": "The goal of",
+          "sourceZh": "旨在",
+          "targetCueZh": "……的目标",
+          "answerText": "make the case for digital minimalism",
+          "note": "题干 aimed at 对应原文 The goal of。"
+        },
+        {
+          "sourceText": "Advocating a simple digital lifestyle",
+          "sourceRole": "correctOption",
+          "targetText": "make the case for digital minimalism",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项的“倡导”（Advocating）就是原文的“为……提出论证”（make the case for），“简单的数字生活方式”就是“数字极简主义”（digital minimalism），选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:29": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据后文对这一方法步骤的解释，推断画线词 declutter 的意思。",
+      "stemTranslationZh": "第3段中画线词“declutter”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找这个方法具体要你做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "清理。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+              "quote": "This process requires you to step away from optional online activities for thirty days.",
+              "anchor": "远离网络活动三十天"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+              "quote": "At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value.",
+              "anchor": "之后只加回少量活动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "附加。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "add",
+            "optionText": "Add",
+            "matchType": "exact",
+            "relationNote": "Add 借自 [[block:paper-gaokao-2023-i:reading-c:3|you will then add back]]，可那是三十天后才加回少量活动；放进去，这个方法就成了“数字附加”，和它先要人远离网络活动相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+              "quote": "you will then add back a small number of carefully chosen online activities",
+              "anchor": "三十天后才加回"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "登记。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Check-in.",
+            "explanation": "放进去成了“数字登记”，可后文讲的是远离网络活动、再精选少量加回，没有任何登记、报到的意思。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "接管。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "This process requires you to step away from optional online activities for thirty days.",
+            "sourceHighlight": "step away from",
+            "optionText": "Take-over.",
+            "optionHighlight": "Take-over",
+            "explanation": "放进去成了“数字接管”，像是让网络占据生活，而这个方法恰恰要人远离网络活动（step away from）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+              "quote": "This process requires you to step away from optional online activities for thirty days.",
+              "anchor": "远离网络活动"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "declutter",
+          "sourceRole": "stem",
+          "targetText": "Part one concludes by introducing my suggested method for adopting this philosophy: the digital declutter.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "step away from optional online activities for thirty days",
+          "bridgeZh": "This process 指数字清理，这句说出它要做的事",
+          "note": "题干 declutter 原词出现在原文。"
+        },
+        {
+          "sourceText": "Clear-up",
+          "sourceRole": "correctOption",
+          "targetText": "step away from optional online activities",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "后文说这个方法要你三十天远离可有可无的网络活动（step away from），之后只加回少量精选的活动（add back a small number），所以“declutter”必须是“先清掉、再精挑”的意思。放回去：践行理念的方法就是“数字清理”，正是 Clear-up（清理），选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:30": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂第一部分最后一章借用了什么材料，并把它概括成一类内容。",
+      "stemTranslationZh": "第一部分的最后一章呈现了什么内容？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找指导时借用了什么材料",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "理论模型。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In part one, I describe the philosophical foundations of digital minimalism",
+            "sourceEntity": "philosophical foundations",
+            "optionText": "Theoretical models.",
+            "optionEntity": "Theoretical models",
+            "explanation": "偏理论的内容是 [[block:paper-gaokao-2023-i:reading-c:2]] 说的第一部分前面讲的哲学基础（philosophical foundations）；最后一章转向带读者动手做清理，也没有提出什么模型。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+              "quote": "In part one, I describe the philosophical foundations of digital minimalism",
+              "anchor": "前面讲哲学基础"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "统计方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Statistical methods.",
+            "explanation": "最后一章虽提到1600多人参加实验（over 1,600 people），讲的却是他们的故事和成败经验，没介绍统计方法。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "实践实例。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+              "quote": "In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter.",
+              "anchor": "借用2018年的实验"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+              "quote": "You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid.",
+              "anchor": "参与者的故事和经验"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "历史分析。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Historical analyses.",
+            "explanation": "2018 年的实验是作者自己近年做的，用来提供参与者的经验；这一章没有回顾、分析历史。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "final chapter of part one",
+          "sourceRole": "stem",
+          "targetText": "In the final chapter of part one, I’ll guide you through carrying out your own digital declutter.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter",
+          "bridgeZh": "In doing so 指带你完成数字清理的过程",
+          "note": "题干 final chapter of part one 原词出现在原文。"
+        },
+        {
+          "sourceText": "Practical examples",
+          "sourceRole": "correctOption",
+          "targetText": "You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "原文没用“例子”一词，要把两处合起来看：作者指导时借用自己2018年的实验（an experiment），[[block:paper-gaokao-2023-i:reading-c:4|You’ll hear these participants’ stories]] 又说读者会听到参与者的故事（participants’ stories）、学到哪些策略管用。这些真人真事的做法就是“实践实例”，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2023-i:31": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者把实践方法比作工具箱的说法，推断他希望读者怎样对待这些方法。",
+      "stemTranslationZh": "作者建议读者如何对待第二部分提供的实践方法？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "根据需要使用它们。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:5",
+              "quote": "You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances.",
+              "anchor": "把实践看作工具箱"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "把它们推荐给朋友。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Recommend them to friends.",
+            "explanation": "作者说这些方法是帮读者自己打造适合自身情况的生活方式，没提推荐给朋友。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "评估它们的效果。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Evaluate their effects.",
+            "explanation": "作者让读者把这些方法当工具来帮自己（aid your efforts），没要读者去评估它们效果如何。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "找出它们背后的理念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "ideas",
+            "optionText": "ideas",
+            "matchType": "exact",
+            "relationNote": "ideas 出自 [[block:paper-gaokao-2023-i:reading-c:5|designed to help you act on]]，这些方法是帮你把每章的重要理念付诸行动（act on），理念书里已经讲了，不用读者回头去找。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:5",
+              "quote": "which are designed to help you act on the big ideas of the chapter",
+              "anchor": "把理念付诸行动"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "practices",
+          "sourceRole": "stem",
+          "targetText": "You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances",
+          "note": "题干 practices 原词出现在原文。"
+        },
+        {
+          "sourceText": "Use them as needed.",
+          "sourceRole": "correctOption",
+          "targetText": "You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances.",
+          "targetParagraphId": "block:paper-gaokao-2023-i:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "作者建议把这些方法看作一个工具箱（a toolbox），工具箱里的东西是用到哪样拿哪样；他又说要适合你的具体情况（your particular circumstances），可见是让读者按自己的需要选用，选 A。"
+        }
+      ]
+    }
+  }
+}
