@@ -1,0 +1,1827 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:cloze": {
+      "overview": "作者自幼迷恋昆虫，给蚂蚁搭小房子起步，成为微雕艺术家；创作虽艰辛，却让他见到女王、两创吉尼斯纪录。曾被老师看作失败者的他视自闭症为天赋，并到学校与孩子分享。",
+      "fullTranslationZh": "我在英国长大，小时候就对昆虫着迷。为了保护它们，我开始用小木片和树叶给蚂蚁搭小房子。母亲看到我的作品后告诉我，我把东西做得越小，名气就会越大。\n随着岁月流逝，我的设计越来越复杂。我还用上了许多不同的材料，比如蜘蛛丝。我有时一天连续工作 16 个小时，中间不休息，完成一件雕塑要花上长达三个月的时间。雕刻过程中我得屏住呼吸。这个过程其实并不令人享受——只有完成之后我才能享受它。\n我的雕塑带我去了许多不可思议的地方。2012 年，我见到了女王，送给她一顶放在针头上的微型王冠。2013 年，我因创作出世界上最小的手工雕塑获得了第一项吉尼斯世界纪录，那是一辆金摩托，能放进一根被钻空的头发里。2017 年，我用一件人类胎儿雕塑打破了自己的纪录，它的尺寸只有 0.078 毫米 × 0.053 毫米。\n我成年后被诊断出患有自闭症。上学时，老师们曾把我当作失败者；如今，我把自闭症看作一份天赋。它推动我做到最好。我在学校为孩子们举办讲习班，与他们分享我的人生和作品，帮助他们创作自己的微型雕像。我们要懂得珍视生活中的小东西。小东西也可以很有力量。",
+      "mainLine": {
+        "theme": {
+          "text": "小东西也能有大力量，要懂得珍视生活中的小事物（Small things can also be mighty）。",
+          "quote": "Small things can also be mighty"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+            "text": "作者儿时迷上昆虫，给蚂蚁搭小房子，母亲鼓励他越做越小。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+            "text": "作品越来越复杂，创作极耗时费力，完成后才有乐趣。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+            "text": "微雕带他见到女王，并两次创下吉尼斯世界纪录。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:4",
+            "text": "上段跨页的续句，交代破纪录胎儿雕塑的尺寸。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+            "text": "曾被看作失败者的他视自闭症为天赋，到学校与孩子分享。"
+          }
+        ],
+        "emotion": "着迷→煎熬中坚持→自豪→坦然自信"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+          "sourceText": "In 2013, I __48__ my first Guinness World Record for creating the smallest sculpture made by hand, a gold motorbike that __49__ inside a drilled out hair.",
+          "displayText": "In 2013, I received my first Guinness World Record for creating the smallest sculpture made by hand, a gold motorbike that fitted inside a drilled out hair.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:48",
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:49"
+          ],
+          "translationZh": "2013 年，我因创作出世界上最小的手工雕塑获得了第一项吉尼斯世界纪录，那是一辆金摩托，能放进一根被钻空的头发里。",
+          "analysisZh": "主干是我获得了第一项吉尼斯世界纪录（I received my first Guinness World Record），介词短语（for creating the smallest sculpture made by hand）说明获奖原因，其中过去分词（made by hand）修饰雕塑。逗号后的名词短语（a gold motorbike）是同位语，具体说明这件最小的雕塑是什么，后面的定语从句（that fitted inside a drilled out hair）再说明它小到能放进一根钻空的头发里。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 50,
+              "quote": "received my first Guinness World Record"
+            },
+            {
+              "start": 51,
+              "end": 86,
+              "quote": "for creating the smallest sculpture"
+            },
+            {
+              "start": 101,
+              "end": 129,
+              "quote": "a gold motorbike that fitted"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+          "sourceText": "When my mother saw my __42__, she told me that the smaller I made things, the bigger my name would become.",
+          "displayText": "When my mother saw my work, she told me that the smaller I made things, the bigger my name would become.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:42"
+          ],
+          "translationZh": "母亲看到我的作品后告诉我，我把东西做得越小，名气就会越大。",
+          "analysisZh": "主干是她告诉我一件事（she told me that…），前面的时间状语从句（When my mother saw my work）交代母亲说这话的时机。宾语从句里是「越……越……」的结构（the smaller …, the bigger …）：前半句说他把东西做得越小，后半句说他的名气就会越大，前后是条件和结果。",
+          "underlineRanges": [
+            {
+              "start": 28,
+              "end": 44,
+              "quote": "she told me that"
+            },
+            {
+              "start": 45,
+              "end": 70,
+              "quote": "the smaller I made things"
+            },
+            {
+              "start": 72,
+              "end": 103,
+              "quote": "the bigger my name would become"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1"
+              ],
+              "start": 0,
+              "end": 71,
+              "quote": "我在英国长大，小时候就对昆虫着迷。为了保护它们，我开始用小木片和树叶给蚂蚁搭小房子。母亲看到我的作品后告诉我，我把东西做得越小，名气就会越大。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2"
+              ],
+              "start": 72,
+              "end": 188,
+              "quote": "随着岁月流逝，我的设计越来越复杂。我还用上了许多不同的材料，比如蜘蛛丝。我有时一天连续工作 16 个小时，中间不休息，完成一件雕塑要花上长达三个月的时间。雕刻过程中我得屏住呼吸。这个过程其实并不令人享受——只有完成之后我才能享受它。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:4"
+              ],
+              "start": 189,
+              "end": 347,
+              "quote": "我的雕塑带我去了许多不可思议的地方。2012 年，我见到了女王，送给她一顶放在针头上的微型王冠。2013 年，我因创作出世界上最小的手工雕塑获得了第一项吉尼斯世界纪录，那是一辆金摩托，能放进一根被钻空的头发里。2017 年，我用一件人类胎儿雕塑打破了自己的纪录，它的尺寸只有 0.078 毫米 × 0.053 毫米。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5"
+              ],
+              "start": 348,
+              "end": 469,
+              "quote": "我成年后被诊断出患有自闭症。上学时，老师们曾把我当作失败者；如今，我把自闭症看作一份天赋。它推动我做到最好。我在学校为孩子们举办讲习班，与他们分享我的人生和作品，帮助他们创作自己的微型雕像。我们要懂得珍视生活中的小东西。小东西也可以很有力量。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-1",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+            "text": "Growing up as a kid in the U. K., I was fascinated by insects. Wanting to protect them, I started building little houses for ants, using little pieces of wood and leaves. When my mother saw my work, she told me that the smaller I made things, the bigger my name would become."
+          },
+          {
+            "textId": "done-2",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+            "text": "As the years went by, my designs became more complicated. And I used many different materials, such as spider web threads. I sometimes work for 16 hours on end a day without breaks, and it takes me up to three months to finish a(n) sculpture. I have to hold my breath during the sculpting process. It isn’t actually an enjoyable process – I can only enjoy it once I’ve finished it."
+          },
+          {
+            "textId": "done-3",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+            "text": "My sculptures have taken me to incredible places. In 2012, I met the queen, giving her a tiny crown on the head of a pin. In 2013, I received my first Guinness World Record for creating the smallest sculpture made by hand, a gold motorbike that fitted inside a drilled out hair. In 2017, I beat my record with a sculpture of a"
+          },
+          {
+            "textId": "done-4",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:4",
+            "text": "human fetus(胎儿) that measured 0.078mm by 0.053mm."
+          },
+          {
+            "textId": "done-5",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+            "text": "I was diagnosed with autism(自闭症) as an adult. In school, my teachers had pointed me out as a failure; now, I see my autism as a gift. It has pushed me to be the best I can be. I hold workshops in schools for children, sharing with them my life and work and helping them create their own miniature figures. We need to appreciate the little things in life. Small things can also be mighty, too."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 97,
+                "end": 128,
+                "quote": "building little houses for ants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 34,
+                "end": 41,
+                "quote": "给蚂蚁搭小房子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:41"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:41",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 74,
+                "end": 81,
+                "quote": "protect"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 19,
+                "end": 21,
+                "quote": "保护"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 106,
+                "end": 128,
+                "quote": "little houses for ants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 38,
+                "end": 41,
+                "quote": "小房子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:42"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:42",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 193,
+                "end": 197,
+                "quote": "work"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 48,
+                "end": 50,
+                "quote": "作品"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 100,
+                "end": 118,
+                "quote": "spider web threads"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 32,
+                "end": 35,
+                "quote": "蜘蛛丝"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:43"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:43",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 84,
+                "end": 93,
+                "quote": "materials"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 27,
+                "end": 29,
+                "quote": "材料"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 163,
+                "end": 177,
+                "quote": "without breaks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 53,
+                "end": 58,
+                "quote": "中间不休息"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:44"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:44",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 153,
+                "end": 159,
+                "quote": "on end"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 41,
+                "end": 43,
+                "quote": "连续"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 269,
+                "end": 290,
+                "quote": "the sculpting process"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 77,
+                "end": 81,
+                "quote": "雕刻过程"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:45"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:45",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 232,
+                "end": 241,
+                "quote": "sculpture"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 63,
+                "end": 65,
+                "quote": "雕塑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 331,
+                "end": 372,
+                "quote": "I can only enjoy it once I’ve finished it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 103,
+                "end": 115,
+                "quote": "只有完成之后我才能享受它"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:46"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:46",
+            "sourceRanges": [
+              {
+                "textId": "done-2",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 307,
+                "end": 315,
+                "quote": "actually"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:2",
+                "start": 93,
+                "end": 95,
+                "quote": "其实"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 55,
+                "end": 70,
+                "quote": "I met the queen"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 25,
+                "end": 31,
+                "quote": "我见到了女王"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:47"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:47",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 31,
+                "end": 41,
+                "quote": "incredible"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 10,
+                "end": 14,
+                "quote": "不可思议"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 136,
+                "end": 166,
+                "quote": "my first Guinness World Record"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 73,
+                "end": 83,
+                "quote": "第一项吉尼斯世界纪录"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:48"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:48",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 133,
+                "end": 141,
+                "quote": "received"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 70,
+                "end": 72,
+                "quote": "获得"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 246,
+                "end": 271,
+                "quote": "inside a drilled out hair"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 95,
+                "end": 104,
+                "quote": "一根被钻空的头发里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:49"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:49",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 245,
+                "end": 251,
+                "quote": "fitted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 93,
+                "end": 95,
+                "quote": "放进"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 291,
+                "end": 300,
+                "quote": "my record"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 125,
+                "end": 130,
+                "quote": "自己的纪录"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:50"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:50",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 290,
+                "end": 294,
+                "quote": "beat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 122,
+                "end": 124,
+                "quote": "打破"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:4",
+                "start": 28,
+                "end": 46,
+                "quote": "0.078mm by 0.053mm"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 138,
+                "end": 157,
+                "quote": "0.078 毫米 × 0.053 毫米"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:51"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:51",
+            "sourceRanges": [
+              {
+                "textId": "done-4",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:4",
+                "start": 21,
+                "end": 29,
+                "quote": "measured"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 133,
+                "end": 137,
+                "quote": "尺寸只有"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 125,
+                "end": 131,
+                "quote": "a gift"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 40,
+                "end": 44,
+                "quote": "一份天赋"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:52"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:52",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 93,
+                "end": 100,
+                "quote": "failure"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 26,
+                "end": 29,
+                "quote": "失败者"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 150,
+                "end": 173,
+                "quote": "to be the best I can be"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 49,
+                "end": 53,
+                "quote": "做到最好"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:53"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:53",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 141,
+                "end": 147,
+                "quote": "pushed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 46,
+                "end": 48,
+                "quote": "推动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 224,
+                "end": 250,
+                "quote": "with them my life and work"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 73,
+                "end": 80,
+                "quote": "我的人生和作品"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:54"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:54",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 218,
+                "end": 225,
+                "quote": "sharing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 71,
+                "end": 73,
+                "quote": "分享"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 285,
+                "end": 294,
+                "quote": "miniature"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 90,
+                "end": 92,
+                "quote": "微型"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:55"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:55",
+            "sourceRanges": [
+              {
+                "textId": "done-5",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 297,
+                "end": 304,
+                "quote": "figures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:5",
+                "start": 92,
+                "end": 94,
+                "quote": "雕像"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:48",
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:49"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-3",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 122,
+                "end": 278,
+                "quote": "In 2013, I received my first Guinness World Record for creating the smallest sculpture made by hand, a gold motorbike that fitted inside a drilled out hair."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:3",
+                "start": 48,
+                "end": 105,
+                "quote": "2013 年，我因创作出世界上最小的手工雕塑获得了第一项吉尼斯世界纪录，那是一辆金摩托，能放进一根被钻空的头发里。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:42"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-1",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 171,
+                "end": 275,
+                "quote": "When my mother saw my work, she told me that the smaller I made things, the bigger my name would become."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-2024-12-famous-schools-joint:cloze:1",
+                "start": 42,
+                "end": 71,
+                "quote": "母亲看到我的作品后告诉我，我把东西做得越小，名气就会越大。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "着迷→煎熬中坚持→自豪→坦然自信"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:41": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "他迷上昆虫，接着给蚂蚁搭小房子，空格要一个对昆虫友好的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语它们（them）指前句的昆虫（insects），紧接着他给蚂蚁搭小房子（building little houses for ants），想的是护着它们。",
+        "quotes": [
+          "them",
+          "insects",
+          "building little houses for ants"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "保护",
+        "reason": "他迷上昆虫，接着给蚂蚁搭小房子，空格要一个对昆虫友好的动作。动词看搭配：宾语它们（them）指前句的昆虫（insects），紧接着他给蚂蚁搭小房子（building little houses for ants），想的是护着它们。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "choke",
+          "meaning": "使窒息；他随后给蚂蚁搭小房子（building little houses for ants），是在照顾它们，不是要伤害它们。",
+          "quote": "building little houses for ants"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "disturb",
+          "meaning": "打扰；搭小房子（building little houses for ants）是给蚂蚁安个住处，不是去惊扰它们。",
+          "quote": "building little houses for ants"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "adopt",
+          "meaning": "收养；他只是用木片和树叶（little pieces of wood and leaves）给蚂蚁搭房子，并没有把昆虫领回家养。",
+          "quote": "little pieces of wood and leaves"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "them",
+          "signalSide": "context-after",
+          "targetText": "protect them",
+          "relation": "宾语指前面的昆虫，空格是对昆虫做的动作。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "building little houses for ants",
+          "signalSide": "context-after",
+          "relation": "给蚂蚁搭小房子，说明他想保护这些昆虫。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:42": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "母亲看到的是他亲手搭出来的那些蚂蚁小房子，空格要指这些成品。",
+      "find": {
+        "check": "echo",
+        "text": "前一句搭的蚂蚁小房子（little houses for ants）就是母亲看到的东西，空格用一个名词把它们说成他的作品。",
+        "quotes": [
+          "little houses for ants"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "作品",
+        "reason": "母亲看到的是他亲手搭出来的那些蚂蚁小房子，空格要指这些成品。名词看复现：前一句搭的蚂蚁小房子（little houses for ants）就是母亲看到的东西，空格用一个名词把它们说成他的作品。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "invention",
+          "meaning": "发明；用小木片和树叶（little pieces of wood and leaves）搭房子是手工制作，算不上新发明。",
+          "quote": "little pieces of wood and leaves"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hobby",
+          "meaning": "爱好；母亲看到（saw）的是摆在眼前的东西，接着说的是把东西做小（the smaller I made things）。",
+          "quote": "the smaller I made things"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fabric",
+          "meaning": "织物；小房子用的是木片和树叶（little pieces of wood and leaves），不是布料。",
+          "quote": "little pieces of wood and leaves"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my mother saw my",
+          "signalSide": "context-before",
+          "targetText": "saw my work",
+          "relation": "母亲看到的是他做出来的东西，空格作看见的宾语。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "little houses for ants",
+          "signalSide": "context-before",
+          "relation": "前面搭的蚂蚁小房子，就是这里说的作品。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:43": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "detail",
+      "context": "设计越来越复杂，他用上的各种东西需要一个统称。",
+      "find": {
+        "check": "echo",
+        "text": "举例词（such as）后面的蜘蛛丝（spider web threads）是做雕塑的一种原料，空格是它的上位词。",
+        "quotes": [
+          "such as",
+          "spider web threads"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "材料",
+        "reason": "设计越来越复杂，他用上的各种东西需要一个统称。名词看复现：举例词（such as）后面的蜘蛛丝（spider web threads）是做雕塑的一种原料，空格是它的上位词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "necessities",
+          "meaning": "必需品；举的例子蜘蛛丝（spider web threads）是做雕塑的原料，不是生活必需品。",
+          "quote": "spider web threads"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "facilities",
+          "meaning": "设施；举的例子蜘蛛丝（spider web threads）是一种细线，不是场地设备。",
+          "quote": "spider web threads"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "venues",
+          "meaning": "场所；举的例子蜘蛛丝（spider web threads）不是地点，与举例对不上。",
+          "quote": "spider web threads"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I used many different",
+          "signalSide": "context-before",
+          "targetText": "used many different materials",
+          "relation": "用了许多不同的什么，空格作用的宾语。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "spider web threads",
+          "signalSide": "context-after",
+          "relation": "蜘蛛丝是一种材料，举例和空格是上下位关系。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:44": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:44",
+      "blankNo": 44,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "一天里工作 16 个小时，空格要表示这段时间一直不停。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后面紧跟着不休息（without breaks），说明这 16 个小时（16 hours）是连着干下来的。",
+        "quotes": [
+          "without breaks",
+          "16 hours"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "连续地",
+        "reason": "一天里工作 16 个小时，空格要表示这段时间一直不停。词组看语境义：后面紧跟着不休息（without breaks），说明这 16 个小时（16 hours）是连着干下来的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "for good",
+          "meaning": "永远；后面是每天（a day）16 个小时，说的是一天之内，不是永久。",
+          "quote": "a day"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "in turn",
+          "meaning": "依次，轮流；干活的只有作者一人（I sometimes work），谈不上轮流。",
+          "quote": "I sometimes work"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "after all",
+          "meaning": "毕竟；这句只交代不休息（without breaks）的工作时长，前面没有需要解释的理由。",
+          "quote": "without breaks"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "16 hours",
+          "signalSide": "context-before",
+          "targetText": "16 hours on end",
+          "relation": "放在时长后面，说明这段时间连续不断。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "without breaks",
+          "signalSide": "context-after",
+          "relation": "不休息与连续工作意思一致。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:45": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "他花三个月完成的就是他的作品，空格要一件雕刻出来的东西。",
+      "find": {
+        "check": "echo",
+        "text": "下一句的雕刻过程（sculpting process）和下一段的我的雕塑（My sculptures）都在复现这个词。",
+        "quotes": [
+          "sculpting process",
+          "My sculptures"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "雕塑",
+        "reason": "他花三个月完成的就是他的作品，空格要一件雕刻出来的东西。名词看复现：下一句的雕刻过程（sculpting process）和下一段的我的雕塑（My sculptures）都在复现这个词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "antique",
+          "meaning": "古董；他是自己动手刻出来的（sculpting process），完成的是新作品，不是老物件。",
+          "quote": "sculpting process"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "essay",
+          "meaning": "文章；下一句说的是雕刻过程（sculpting process），他完成的是雕刻品，不是文章。",
+          "quote": "sculpting process"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "patent",
+          "meaning": "专利；他屏住呼吸（hold my breath）三个月做出的是作品，不是一项专利。",
+          "quote": "hold my breath"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to finish a(n)",
+          "signalSide": "context-before",
+          "targetText": "finish a(n) sculpture",
+          "relation": "完成的对象是一件作品，空格作完成的宾语。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the sculpting process",
+          "signalSide": "context-after",
+          "relation": "雕刻过程复现了空格所说的雕塑。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:46": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:46",
+      "blankNo": 46,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "要说明创作过程其实并不享受，空格强调实际情况。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "破折号后说只有完成后才能享受（only enjoy it once I’ve finished it），可见过程本身其实不享受。",
+        "quotes": [
+          "only enjoy it once I’ve finished it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "实际上",
+        "reason": "要说明创作过程其实并不享受，空格强调实际情况。副词看语境义：破折号后说只有完成后才能享受（only enjoy it once I’ve finished it），可见过程本身其实不享受。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "randomly",
+          "meaning": "随机地；作者说的是整个过程都不愉快，只有完成后（once I’ve finished it）才享受，与随不随机无关。",
+          "quote": "once I’ve finished it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "briefly",
+          "meaning": "短暂地；创作要长达三个月（up to three months），说的是整个过程不享受，不是短暂不享受。",
+          "quote": "up to three months"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ultimately",
+          "meaning": "最终；完成后他确实能享受（once I’ve finished it），说最终不享受与此矛盾。",
+          "quote": "once I’ve finished it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It isn’t",
+          "signalSide": "context-before",
+          "targetText": "It isn’t actually an enjoyable process",
+          "relation": "否定句里加副词，强调过程实际上并不享受。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I can only enjoy it once I’ve finished it",
+          "signalSide": "context-after",
+          "relation": "只有完成后才享受，说明过程本身不享受。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:47": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "main",
+      "context": "后面列出见女王、创世界纪录，空格要一个说明这些地方非同寻常的正面词。",
+      "find": {
+        "check": "affect",
+        "text": "后面紧接着是见到女王（I met the queen）、创下吉尼斯世界纪录（Guinness World Record），都是常人难有的经历。",
+        "quotes": [
+          "I met the queen",
+          "Guinness World Record"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "难以置信的",
+        "meaning": "非同寻常的",
+        "reason": "后面列出见女王、创世界纪录，空格要一个说明这些地方非同寻常的正面词。形容词看情感：后面紧接着是见到女王（I met the queen）、创下吉尼斯世界纪录（Guinness World Record），都是常人难有的经历。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "forbidden",
+          "meaning": "禁止进入的；他见到女王（I met the queen）是凭作品获得的荣耀，不是闯进禁地。",
+          "quote": "I met the queen"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "peaceful",
+          "meaning": "宁静的；后面列的是见女王（I met the queen）和创纪录，强调的是不寻常，不是安静。",
+          "quote": "I met the queen"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "conventional",
+          "meaning": "普通的；见女王（I met the queen）、创世界纪录都非比寻常，与普通正好相反。",
+          "quote": "I met the queen"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "places",
+          "signalSide": "context-after",
+          "targetText": "incredible places",
+          "relation": "修饰地方，说明他去过的地方不同寻常。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I met the queen",
+          "signalSide": "context-after",
+          "relation": "见女王是很难得的经历，空格要正面的评价。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:48": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "他凭最小的手工雕塑拿到第一个世界纪录，空格要表示获得。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是第一项吉尼斯世界纪录（my first Guinness World Record），理由是创作了最小的雕塑（creating the smallest sculpture），只能是获得。",
+        "quotes": [
+          "my first Guinness World Record",
+          "creating the smallest sculpture"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "获得",
+        "reason": "他凭最小的手工雕塑拿到第一个世界纪录，空格要表示获得。动词看搭配：宾语是第一项吉尼斯世界纪录（my first Guinness World Record），理由是创作了最小的雕塑（creating the smallest sculpture），只能是获得。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rejected",
+          "meaning": "拒绝；他因最小的手工雕塑（creating the smallest sculpture）创下纪录，后来还刷新它，不会拒绝。",
+          "quote": "creating the smallest sculpture"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "maintained",
+          "meaning": "保持；这是他的第一项（my first）纪录，刚刚拿到，谈不上保持。",
+          "quote": "my first"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "anticipated",
+          "meaning": "预料；句子交代的是他因作品（for creating the smallest sculpture）拿到纪录这一结果，不是事先预料。",
+          "quote": "for creating the smallest sculpture"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my first Guinness World Record",
+          "signalSide": "context-after",
+          "targetText": "received my first Guinness World Record",
+          "relation": "纪录是获得的对象，空格作谓语。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "for creating the smallest sculpture",
+          "signalSide": "context-after",
+          "relation": "因做出最小雕塑而获得纪录。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:49": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "detail",
+      "context": "金摩托小到能放进一根钻空的头发里，空格要表示装得下。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是金摩托（a gold motorbike），后接放在钻空的头发里面（inside a drilled out hair），只能是装得进去。",
+        "quotes": [
+          "a gold motorbike",
+          "inside a drilled out hair"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "放得进",
+        "reason": "金摩托小到能放进一根钻空的头发里，空格要表示装得下。动词看搭配：主语是金摩托（a gold motorbike），后接放在钻空的头发里面（inside a drilled out hair），只能是装得进去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "emerged",
+          "meaning": "出现，冒出；摩托放在钻空的头发里（inside a drilled out hair）是为了显出它小，不是从里面冒出来。",
+          "quote": "inside a drilled out hair"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "collapsed",
+          "meaning": "倒塌；这句在夸作品最小（the smallest sculpture），说它在头发里塌掉与夸奖不符。",
+          "quote": "the smallest sculpture"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "departed",
+          "meaning": "离开；摩托是一件雕塑（a gold motorbike），放在头发里展示，不会自己离开。",
+          "quote": "a gold motorbike"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "inside a drilled out hair",
+          "signalSide": "context-after",
+          "targetText": "fitted inside a drilled out hair",
+          "relation": "放进头发里，说明摩托小到能装进去。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a gold motorbike",
+          "signalSide": "context-before",
+          "relation": "主语是金摩托，是被放进头发的东西。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:50": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "main",
+      "context": "2017 年他用更小的新作品超过了自己的纪录，空格要表示打破。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是自己的纪录（my record），后面是一件只有 0.078 毫米宽的胎儿雕塑（0.078mm by 0.053mm），比上次更小。",
+        "quotes": [
+          "my record",
+          "0.078mm by 0.053mm"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "打破",
+        "reason": "2017 年他用更小的新作品超过了自己的纪录，空格要表示打破。动词看搭配：宾语是自己的纪录（my record），后面是一件只有 0.078 毫米宽的胎儿雕塑（0.078mm by 0.053mm），比上次更小。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "denied",
+          "meaning": "否认；他用新雕塑（with a sculpture of a）再进一步，是刷新纪录，不是否认它。",
+          "quote": "with a sculpture of a"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "leaked",
+          "meaning": "泄露；纪录（my record）是公开的成就，谈不上泄露。",
+          "quote": "my record"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "investigated",
+          "meaning": "调查；他拿一件新雕塑（with a sculpture of a）去对待纪录，雕塑只能用来刷新纪录，不能用来调查。",
+          "quote": "with a sculpture of a"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my record",
+          "signalSide": "context-after",
+          "targetText": "beat my record",
+          "relation": "纪录是打破的对象，空格作谓语。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "with a sculpture of a",
+          "signalSide": "context-after",
+          "relation": "靠一件新雕塑打破纪录。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:51": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "detail",
+      "context": "交代胎儿雕塑的尺寸，空格要表示尺寸是多少。",
+      "find": {
+        "check": "collocation",
+        "text": "后面紧跟长宽数字（0.078mm by 0.053mm），表示东西的尺寸为多少，用这个动词。",
+        "quotes": [
+          "0.078mm by 0.053mm"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "尺寸为",
+        "reason": "交代胎儿雕塑的尺寸，空格要表示尺寸是多少。动词看搭配：后面紧跟长宽数字（0.078mm by 0.053mm），表示东西的尺寸为多少，用这个动词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "dominated",
+          "meaning": "支配；后面接的是尺寸（0.078mm by 0.053mm），雕塑不能支配一个尺寸。",
+          "quote": "0.078mm by 0.053mm"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "multiplied",
+          "meaning": "成倍增加；这件作品是用来刷新最小纪录的（my record），尺寸更小而不是成倍变大。",
+          "quote": "my record"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "comprised",
+          "meaning": "由……组成；后面是长宽数字（0.078mm by 0.053mm），不是组成部分。",
+          "quote": "0.078mm by 0.053mm"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "0.078mm by 0.053mm",
+          "signalSide": "context-after",
+          "targetText": "measured 0.078mm by 0.053mm",
+          "relation": "后面是长乘宽的尺寸，空格表示尺寸为多少。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:52": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "老师当年对他的看法与如今的天赋相对，这是他人生的低谷，空格要一个负面身份。",
+      "find": {
+        "check": "echo",
+        "text": "分号后用如今（now）把自闭症看作天赋（a gift），空格与天赋意思相反。",
+        "quotes": [
+          "now",
+          "a gift"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "失败者",
+        "reason": "老师当年对他的看法与如今的天赋相对，这是他人生的低谷，空格要一个负面身份。名词看复现：分号后用如今（now）把自闭症看作天赋（a gift），空格与天赋意思相反。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "resident",
+          "meaning": "居民；分号后把自闭症看作天赋（a gift），前后比的是评价的好坏，与是不是居民无关。",
+          "quote": "a gift"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cheat",
+          "meaning": "骗子；分号后与天赋（a gift）对照，说的是能力被看低，而不是品行不端。",
+          "quote": "a gift"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "guide",
+          "meaning": "向导；老师的评价要和天赋（a gift）形成反差，向导是正面角色，构不成前后对比。",
+          "quote": "a gift"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "pointed me out as a",
+          "signalSide": "context-before",
+          "targetText": "pointed me out as a failure",
+          "relation": "老师把他指认为某种人，空格作身份。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a gift",
+          "signalSide": "context-after",
+          "relation": "如今的天赋与当年的失败者形成反义对照。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:53": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "自闭症这份天赋带给他的作用，空格要一个推人向上的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "后接我（me）和做到最好（to be the best I can be），主语是被看作天赋（a gift）的自闭症，要表示推动他。",
+        "quotes": [
+          "to be the best I can be",
+          "a gift"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "促使",
+        "reason": "自闭症这份天赋带给他的作用，空格要一个推人向上的动作。动词看搭配：后接我（me）和做到最好（to be the best I can be），主语是被看作天赋（a gift）的自闭症，要表示推动他。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "threatened",
+          "meaning": "威胁；上一句他把自闭症看作天赋（a gift），不会说天赋威胁他做到最好。",
+          "quote": "a gift"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "appointed",
+          "meaning": "任命；做到最好（the best I can be）是一种追求，不是职位，不能被任命。",
+          "quote": "the best I can be"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "intended",
+          "meaning": "打算；主语是自闭症（my autism），它不会有打算，前句强调的是它像天赋一样推动他。",
+          "quote": "my autism"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "me to be the best I can be",
+          "signalSide": "context-after",
+          "targetText": "pushed me to be the best I can be",
+          "relation": "促使某人做到某事，空格接人加不定式。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a gift",
+          "signalSide": "context-before",
+          "relation": "自闭症是天赋，所以起的是正面推动作用。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:54": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "他在讲习班上把自己的经历讲给孩子们听，空格要表示分享。",
+      "find": {
+        "check": "collocation",
+        "text": "后面是和他们（with them）加上我的人生和作品（my life and work），这是与某人分享某物，宾语放到了后面。",
+        "quotes": [
+          "with them",
+          "my life and work"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "分享",
+        "reason": "他在讲习班上把自己的经历讲给孩子们听，空格要表示分享。动词看搭配：后面是和他们（with them）加上我的人生和作品（my life and work），这是与某人分享某物，宾语放到了后面。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "experimenting",
+          "meaning": "做实验；后面接的是他的人生和作品（my life and work），是讲给孩子听的，不是实验对象。",
+          "quote": "my life and work"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "imagining",
+          "meaning": "想象；他讲的是自己真实的人生和作品（my life and work），用不着想象。",
+          "quote": "my life and work"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "restoring",
+          "meaning": "修复；人生和作品（my life and work）是拿来讲给孩子们听的，不需要修复。",
+          "quote": "my life and work"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with them my life and work",
+          "signalSide": "context-after",
+          "targetText": "sharing with them my life and work",
+          "relation": "与某人分享某物，宾语较长被放到后面。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I hold workshops in schools for children",
+          "signalSide": "context-before",
+          "relation": "办讲习班就是要和孩子们分享经验。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:55": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "detail",
+      "context": "他帮孩子们动手做的是他们自己的微型作品，空格要一种小雕像。",
+      "find": {
+        "check": "topic",
+        "text": "前面有微型的（miniature）修饰，又是帮孩子们创作（helping them create）的东西，对应全文的微雕话题。",
+        "quotes": [
+          "miniature",
+          "helping them create"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "塑像",
+        "meaning": "小雕像",
+        "reason": "他帮孩子们动手做的是他们自己的微型作品，空格要一种小雕像。名词看话题：前面有微型的（miniature）修饰，又是帮孩子们创作（helping them create）的东西，对应全文的微雕话题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "territories",
+          "meaning": "领土；孩子们动手创作（create their own miniature）的是雕塑作品，领土没法做出来。",
+          "quote": "create their own miniature"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "occupations",
+          "meaning": "职业；微型的（miniature）只能修饰具体的小东西，职业没有大小。",
+          "quote": "miniature"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "episodes",
+          "meaning": "片段，插曲；孩子们动手做的（create their own miniature）是看得见的小作品，不是故事片段。",
+          "quote": "create their own miniature"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "create their own miniature",
+          "signalSide": "context-before",
+          "targetText": "create their own miniature figures",
+          "relation": "创作微型的某物，空格作创作的宾语。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "sculptures",
+          "signalSide": "context-before",
+          "relation": "全文讲微雕，孩子们做的也是小雕像。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    }
+  }
+}

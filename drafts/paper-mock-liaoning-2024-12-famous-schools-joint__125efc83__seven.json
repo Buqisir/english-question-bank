@@ -1,0 +1,1002 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices": {
+      "overview": "作者从出国旅行接触异国文化谈起，转到各国货币：不少国家共用欧元美元，他却喜欢换用不同的钱；再写加元上的英国女王和野生动物，以及英镑上的新人物和聚合物材料。",
+      "fullTranslationZh": "接触不同的文化是我喜欢去其他国家旅行的主要原因之一。那里有别样的食物、有趣的人和新鲜的经历。到了一个新的国家，还有一件事值得一提，那就是不同的货币。\n一个国家通常有自己的货币，比如中国的人民币、印度的卢比和马尔代夫的拉菲亚。当然，也有很多国家使用欧元或美元。这会让在这些国家之间旅行容易、方便得多。不过在我看来，我喜欢旅行时使用各种不同的货币，并慢慢适应它们。拿着外国的钱本身就是文化体验的一部分。上个月我去泰国和越南时，要适应1英镑能换42泰铢多、27000越南盾这件事，对我的数学能力也是一次不小的考验！\n如果你去过英国，就会知道每一张纸币、每一枚硬币上都印着女王的头像。去年我住在加拿大魁北克省，那里的钱让我大吃一惊。加拿大人的20元纸币上印着英国女王。这是因为她也是加拿大的国家元首。加拿大钱币上的图案多种多样，有前总理，也有河狸、北美驯鹿和北极熊等加拿大野生动物。\n英镑纸币上出现了新的历史人物。战时首相温斯顿·丘吉尔印在5英镑纸币上，作家简·奥斯汀印在10英镑纸币上。这些纸币还改用一种叫聚合物的材料制作，而不是用纸。加拿大已经在使用聚合物纸币了，有些人甚至觉得那里的钱闻起来有枫糖浆的味道——枫糖浆大概是这个国家最有名的食物了！",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:seven-choices:1",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+          "sourceText": "When I visited Thailand and Vietnam last month, getting used to the fact that £1 is equal to over 42 Thai baht and 27,000 Vietnamese dong was also quite a good test for my maths skills!",
+          "displayText": "When I visited Thailand and Vietnam last month, getting used to the fact that £1 is equal to over 42 Thai baht and 27,000 Vietnamese dong was also quite a good test for my maths skills!",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:38"
+          ],
+          "translationZh": "上个月我去泰国和越南时，要适应1英镑能换42泰铢多、27000越南盾这件事，对我的数学能力也是一次不小的考验！",
+          "analysisZh": "先找主干：主语是动名词短语 getting used to the fact，谓语是 was，表语是 quite a good test，意思是「适应这件事是一次考验」。that £1 is equal to … 是同位语从句，说明 the fact 的具体内容；句首 When 从句交代时间。主语很长，读时先跳过 that 从句找到 was。句中的 also 表示这是在「文化体验」之外的又一个好处，正好回扣前一句。",
+          "underlineRanges": [
+            {
+              "start": 48,
+              "end": 72,
+              "quote": "getting used to the fact"
+            },
+            {
+              "start": 138,
+              "end": 164,
+              "quote": "was also quite a good test"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:seven-choices:2",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4",
+          "sourceText": "In Canada, they are already using polymer banknotes and some people even think that the money smells of maple syrup(枫糖浆), probably the country’s most well-known food!",
+          "displayText": "In Canada, they are already using polymer banknotes and some people even think that the money smells of maple syrup(枫糖浆), probably the country’s most well-known food!",
+          "relatedQuestionIds": [],
+          "translationZh": "加拿大已经在使用聚合物纸币了，有些人甚至觉得那里的钱闻起来有枫糖浆的味道——枫糖浆大概是这个国家最有名的食物了！",
+          "analysisZh": "这是 and 连接的两个分句：前一句 they are already using polymer banknotes，说加拿大早已用上聚合物纸币；后一句主干是 some people even think，think 后接 that 宾语从句，从句里 smells of 表示「闻起来有……的味道」。句末 probably the country’s most well-known food 是同位语，补充说明 maple syrup。",
+          "underlineRanges": [
+            {
+              "start": 56,
+              "end": 78,
+              "quote": "some people even think"
+            },
+            {
+              "start": 94,
+              "end": 115,
+              "quote": "smells of maple syrup"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "首段由出国体验引出货币话题；第二段先说各国货币和共用货币的便利，再转到作者喜欢换用不同货币的理由；第三段写加元上的英国女王和多样图案；末段写英镑的新人物、新材料，并与加拿大比较。",
+        "units": [
+          {
+            "unitId": "unit:seven-choices:intro",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:1"
+            ],
+            "summary": "出国能接触不同文化，其中一项就是不同的货币。"
+          },
+          {
+            "unitId": "unit:seven-choices:currencies",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2"
+            ],
+            "summary": "各国多有自己的货币，也有共用的；作者喜欢换用外币，既是文化体验，也练了数学。"
+          },
+          {
+            "unitId": "unit:seven-choices:canada",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3"
+            ],
+            "summary": "加元上印着英国女王，还有前总理和本国野生动物。"
+          },
+          {
+            "unitId": "unit:seven-choices:pound",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4"
+            ],
+            "summary": "英镑换上新的历史人物，并改用聚合物材料，加拿大早已使用这种纸币。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 36,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "country"
+          ],
+          "text": "选项也谈一个国家（a country）和钱，像能接首段出国话题。但第 36 题要在食物、人、经历之后再添一项，下一段开头只说各国有自己的钱（its own money），没谈偏好与发展。放在第 40 题也不行，该段讲英镑上的人物和材料。",
+          "quotes": [
+            "a country",
+            "its own money"
+          ]
+        },
+        "E": {
+          "target": 40,
+          "secondary": 39,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "money"
+          ],
+          "text": "选项的钱上图案（the images on the money）和第 40 题空后丘吉尔印上纸币沾边，但该段讲的是英镑（£5 banknotes），E 没说哪国的钱，也没提新人物。第 39 题空前虽有 surprised me，空后的 she 在 E 里找不到先行词。",
+          "quotes": [
+            "the images on the money",
+            "£5 banknotes",
+            "surprised me"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 74,
+              "quote": "接触不同的文化是我喜欢去其他国家旅行的主要原因之一。那里有别样的食物、有趣的人和新鲜的经历。到了一个新的国家，还有一件事值得一提，那就是不同的货币。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2"
+              ],
+              "start": 75,
+              "end": 254,
+              "quote": "一个国家通常有自己的货币，比如中国的人民币、印度的卢比和马尔代夫的拉菲亚。当然，也有很多国家使用欧元或美元。这会让在这些国家之间旅行容易、方便得多。不过在我看来，我喜欢旅行时使用各种不同的货币，并慢慢适应它们。拿着外国的钱本身就是文化体验的一部分。上个月我去泰国和越南时，要适应1英镑能换42泰铢多、27000越南盾这件事，对我的数学能力也是一次不小的考验！"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3"
+              ],
+              "start": 255,
+              "end": 387,
+              "quote": "如果你去过英国，就会知道每一张纸币、每一枚硬币上都印着女王的头像。去年我住在加拿大魁北克省，那里的钱让我大吃一惊。加拿大人的20元纸币上印着英国女王。这是因为她也是加拿大的国家元首。加拿大钱币上的图案多种多样，有前总理，也有河狸、北美驯鹿和北极熊等加拿大野生动物。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4"
+              ],
+              "start": 388,
+              "end": 521,
+              "quote": "英镑纸币上出现了新的历史人物。战时首相温斯顿·丘吉尔印在5英镑纸币上，作家简·奥斯汀印在10英镑纸币上。这些纸币还改用一种叫聚合物的材料制作，而不是用纸。加拿大已经在使用聚合物纸币了，有些人甚至觉得那里的钱闻起来有枫糖浆的味道——枫糖浆大概是这个国家最有名的食物了！"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:seven-choices:1",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:1",
+            "text": "Exposure to different cultures is one of the main reasons I enjoy visiting other countries. There are other types of food, interesting people, and new experiences. One more thing to mention in a new country is a different currency."
+          },
+          {
+            "textId": "completed:seven-choices:2",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+            "text": "A country usually has its own money such as RMB in China, rupee in India, and rufiyaa in Maldives. Of course, there’re many countries using euros or U. S. dollars. This can make travel among such countries much easier and more convenient. In my opinion, however, I like having different kinds of money to use and get used to that while I travel. It’s part of the cultural experience to hold foreign money. When I visited Thailand and Vietnam last month, getting used to the fact that £1 is equal to over 42 Thai baht and 27,000 Vietnamese dong was also quite a good test for my maths skills!"
+          },
+          {
+            "textId": "completed:seven-choices:3",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3",
+            "text": "If you’ve ever been to the U. K., you will know the Queen’s head is on every banknote and every coin. I was living in the Quebec province of Canada last year and money there surprised me greatly. They have the British Queen on their $20 banknotes. This is because she’s, also Canada’s Head of State. Images on the Canadian money are various, including former prime ministers, as well as Canadian wildlife like the beaver, caribou and polar bear."
+          },
+          {
+            "textId": "completed:seven-choices:4",
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4",
+            "text": "There are new historical figures on the pound notes. Wartime Prime Minister Winston Churchill appears on £5 banknotes and writer Jane Austen £10 banknotes. The banknotes are also made of a material called polymer rather than paper. In Canada, they are already using polymer banknotes and some people even think that the money smells of maple syrup(枫糖浆), probably the country’s most well-known food!"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:seven-choices:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:1",
+                "start": 102,
+                "end": 162,
+                "quote": "other types of food, interesting people, and new experiences"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 0,
+                "end": 35,
+                "quote": "A country usually has its own money"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:1",
+                "start": 29,
+                "end": 45,
+                "quote": "别样的食物、有趣的人和新鲜的经历"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 0,
+                "end": 12,
+                "quote": "一个国家通常有自己的货币"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven-choices:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:36"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:1",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:1",
+                "start": 164,
+                "end": 231,
+                "quote": "One more thing to mention in a new country is a different currency."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:1",
+                "start": 46,
+                "end": 74,
+                "quote": "到了一个新的国家，还有一件事值得一提，那就是不同的货币。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven-choices:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 22,
+                "end": 35,
+                "quote": "its own money"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 106,
+                "end": 180,
+                "quote": "This can make travel among such countries much easier and more convenient."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 6,
+                "end": 12,
+                "quote": "有自己的货币"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 54,
+                "end": 74,
+                "quote": "这会让在这些国家之间旅行容易、方便得多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven-choices:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:37"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:2",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 99,
+                "end": 163,
+                "quote": "Of course, there’re many countries using euros or U. S. dollars."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 37,
+                "end": 54,
+                "quote": "当然，也有很多国家使用欧元或美元。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven-choices:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 205,
+                "end": 250,
+                "quote": "I like having different kinds of money to use"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 433,
+                "end": 479,
+                "quote": "was also quite a good test for my maths skills"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 81,
+                "end": 96,
+                "quote": "我喜欢旅行时使用各种不同的货币"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 162,
+                "end": 178,
+                "quote": "对我的数学能力也是一次不小的考验"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven-choices:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:38"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:2",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 346,
+                "end": 405,
+                "quote": "It’s part of the cultural experience to hold foreign money."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 105,
+                "end": 124,
+                "quote": "拿着外国的钱本身就是文化体验的一部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven-choices:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3",
+                "start": 162,
+                "end": 194,
+                "quote": "money there surprised me greatly"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3",
+                "start": 203,
+                "end": 254,
+                "quote": "This is because she’s, also Canada’s Head of State."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 46,
+                "end": 56,
+                "quote": "那里的钱让我大吃一惊"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 75,
+                "end": 91,
+                "quote": "这是因为她也是加拿大的国家元首。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven-choices:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:39"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:3",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3",
+                "start": 196,
+                "end": 247,
+                "quote": "They have the British Queen on their $20 banknotes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 57,
+                "end": 75,
+                "quote": "加拿大人的20元纸币上印着英国女王。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven-choices:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4",
+                "start": 7,
+                "end": 109,
+                "quote": "Wartime Prime Minister Winston Churchill appears on £5 banknotes and writer Jane Austen £10 banknotes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 15,
+                "end": 52,
+                "quote": "战时首相温斯顿·丘吉尔印在5英镑纸币上，作家简·奥斯汀印在10英镑纸币上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven-choices:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:40"
+            ],
+            "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:4",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4",
+                "start": 0,
+                "end": 52,
+                "quote": "There are new historical figures on the pound notes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 0,
+                "end": 15,
+                "quote": "英镑纸币上出现了新的历史人物。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:38"
+            ],
+            "selectedSentenceId": "sentence:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+                "start": 295,
+                "end": 480,
+                "quote": "When I visited Thailand and Vietnam last month, getting used to the fact that £1 is equal to over 42 Thai baht and 27,000 Vietnamese dong was also quite a good test for my maths skills!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 124,
+                "end": 179,
+                "quote": "上个月我去泰国和越南时，要适应1英镑能换42泰铢多、27000越南盾这件事，对我的数学能力也是一次不小的考验！"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4",
+                "start": 186,
+                "end": 352,
+                "quote": "In Canada, they are already using polymer banknotes and some people even think that the money smells of maple syrup(枫糖浆), probably the country’s most well-known food!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 77,
+                "end": 133,
+                "quote": "加拿大已经在使用聚合物纸币了，有些人甚至觉得那里的钱闻起来有枫糖浆的味道——枫糖浆大概是这个国家最有名的食物了！"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:36": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "Exposure to different cultures",
+        "visiting other countries",
+        "other types of food",
+        "new experiences"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:1",
+        "beforeQuote": "There are other types of food, interesting people, and new experiences.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "One more thing",
+          "signalSide": "option",
+          "targetText": "other types of food, interesting people, and new experiences",
+          "relation": "空前已列出食物、人和经历三项，One more thing 再添一项。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "new experiences",
+          "signalSide": "context-before",
+          "targetText": "One more thing to mention in a new country",
+          "relation": "列举的最后一项，选项接着往下数。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "currency",
+          "signalSide": "option",
+          "targetText": "its own money",
+          "relation": "currency 就是下一段开头说的 money，把话题交给下一段。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "its own money",
+          "signalSide": "context-after",
+          "targetText": "a different currency",
+          "relation": "下一段从各国有自己的钱谈起，接住选项引出的货币话题。"
+        }
+      ],
+      "lock": [
+        "One more thing",
+        "currency",
+        "its own money"
+      ],
+      "find": {
+        "text": "空前列出 \"other types of food, interesting people, and new experiences\"，下一段开头谈 \"its own money\"；F 用 \"One more thing\" 接着数，又用 \"currency\" 引出钱。",
+        "quotes": [
+          "other types of food, interesting people, and new experiences",
+          "its own money",
+          "One more thing",
+          "currency"
+        ]
+      },
+      "explain": "首段说接触不同文化是作者爱出国的一大原因，已举了食物、人和经历；这句在段尾再补一项——换一种货币，把全文话题从旅行转到钱上，下一段就接着讲各国用什么钱。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 的 \"cultural experience\" 能呼应首段的文化，但首段还没提到钱，\"foreign money\" 来得太突然。",
+          "quotes": [
+            "cultural experience",
+            "foreign money"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "matchedClues": [
+          {
+            "contextSide": "other types of food, interesting people, and new experiences",
+            "optionSide": "One more thing to mention",
+            "relation": "空前列了三样新国家里的新东西，选项再补一样。"
+          },
+          {
+            "contextSide": "its own money",
+            "optionSide": "a different currency",
+            "relation": "选项提出货币，下一段展开各国的货币。"
+          }
+        ],
+        "fitSummary": "首段说接触不同文化是作者爱出国的一大原因，已举了食物、人和经历；这句在段尾再补一项——换一种货币，把全文话题从旅行转到钱上，下一段就接着讲各国用什么钱。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 的 \"cultural experience\" 能呼应首段的文化，但首段还没提到钱，\"foreign money\" 来得太突然。"
+        },
+        {
+          "optionLabel": "C",
+          "reason": "选项也谈一个国家（a country）和钱，像能接首段出国话题。但第 36 题要在食物、人、经历之后再添一项，下一段开头只说各国有自己的钱（its own money），没谈偏好与发展。放在第 40 题也不行，该段讲英镑上的人物和材料。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:37": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "its own money",
+        "RMB in China",
+        "rupee in India",
+        "travel among such countries",
+        "easier and more convenient"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+        "beforeQuote": "A country usually has its own money such as RMB in China, rupee in India, and rufiyaa in Maldives.",
+        "afterQuote": "This can make travel among such countries much easier and more convenient."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "such countries",
+          "signalSide": "context-after",
+          "targetText": "many countries using euros or U. S. dollars",
+          "relation": "such countries 回指选项里共用欧元、美元的那些国家。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "many countries using euros or U. S. dollars",
+          "signalSide": "option",
+          "targetText": "This / such countries",
+          "relation": "选项先交代共用货币的国家，空后的 This 和 such countries 才有着落。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Of course",
+          "signalSide": "option",
+          "targetText": "its own money",
+          "relation": "Of course 先让一步：一般各有各的钱，当然也有共用的。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "its own money",
+          "signalSide": "context-before",
+          "targetText": "many countries using euros",
+          "relation": "空前说各国有自己的钱，选项补上相反的情况。"
+        }
+      ],
+      "lock": [
+        "such countries",
+        "Of course"
+      ],
+      "find": {
+        "text": "先看空后 \"such countries\" 和 \"This\"：前面要先出现一批共用同一种钱的国家，只有 D 的 \"many countries using euros\" 能铺垫。",
+        "quotes": [
+          "such countries",
+          "This",
+          "many countries using euros"
+        ]
+      },
+      "explain": "空前说一个国家通常有自己的钱；这句用 Of course 让一步，补上相反情况：不少国家共用欧元或美元。空后 This 指的就是这种共用，说它让在这些国家间旅行更方便。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "matchedClues": [
+          {
+            "contextSide": "travel among such countries",
+            "optionSide": "many countries using euros or U. S. dollars",
+            "relation": "such countries 指共用欧元、美元的国家。"
+          },
+          {
+            "contextSide": "its own money",
+            "optionSide": "Of course, there’re many countries",
+            "relation": "先说一般情况，再让步补充例外。"
+          }
+        ],
+        "fitSummary": "空前说一个国家通常有自己的钱；这句用 Of course 让一步，补上相反情况：不少国家共用欧元或美元。空后 This 指的就是这种共用，说它让在这些国家间旅行更方便。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:38": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "different kinds of money",
+        "get used to that while I travel",
+        "Thailand and Vietnam",
+        "a good test for my maths skills"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:2",
+        "beforeQuote": "In my opinion, however, I like having different kinds of money to use and get used to that while I travel.",
+        "afterQuote": "When I visited Thailand and Vietnam last month, getting used to the fact that £1 is equal to over 42 Thai baht and 27,000 Vietnamese dong was also quite a good test for my maths skills!"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "part of the cultural experience",
+          "relation": "also 表示练数学是又一个好处，前面得先有一个好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "part of the cultural experience",
+          "signalSide": "option",
+          "targetText": "also quite a good test for my maths skills",
+          "relation": "文化体验是第一个好处，空后用 also 补第二个。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "foreign money",
+          "signalSide": "option",
+          "targetText": "different kinds of money",
+          "relation": "外国的钱就是空前说的各种不同的钱。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "different kinds of money",
+          "signalSide": "context-before",
+          "targetText": "foreign money",
+          "relation": "作者喜欢换用不同的钱，选项说明为什么喜欢。"
+        }
+      ],
+      "lock": [
+        "different kinds of money",
+        "foreign money",
+        "also"
+      ],
+      "find": {
+        "text": "空前说喜欢 \"different kinds of money\"，G 的 \"foreign money\" 接得上；空后 \"also\" 说明前面已有一条好处，G 给的正是这条。",
+        "quotes": [
+          "different kinds of money",
+          "foreign money",
+          "also"
+        ]
+      },
+      "explain": "作者刚表态喜欢用各国不同的钱，这句给出第一条理由：拿着外国钱本身就是文化体验；空后再用在泰国、越南换算钱的经历补上第二条好处——顺便练了数学。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "F 的 \"a different currency\" 也说不同的钱，但它是引出新话题的话，本段早在谈钱了。",
+          "quotes": [
+            "a different currency"
+          ]
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "matchedClues": [
+          {
+            "contextSide": "different kinds of money",
+            "optionSide": "foreign money",
+            "relation": "同指旅行中用到的别国货币。"
+          },
+          {
+            "contextSide": "was also quite a good test for my maths skills",
+            "optionSide": "part of the cultural experience",
+            "relation": "两条好处并列，also 连接第二条。"
+          }
+        ],
+        "fitSummary": "作者刚表态喜欢用各国不同的钱，这句给出第一条理由：拿着外国钱本身就是文化体验；空后再用在泰国、越南换算钱的经历补上第二条好处——顺便练了数学。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 的 \"a different currency\" 也说不同的钱，但它是引出新话题的话，本段早在谈钱了。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:39": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "the Queen’s head",
+        "every banknote and every coin",
+        "money there surprised me greatly",
+        "Canada’s Head of State"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:3",
+        "beforeQuote": "I was living in the Quebec province of Canada last year and money there surprised me greatly.",
+        "afterQuote": "This is because she’s, also Canada’s Head of State."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "she’s",
+          "signalSide": "context-after",
+          "targetText": "the British Queen",
+          "relation": "空后的 she 要有一位女性先行词，指的是选项里的英国女王。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the British Queen",
+          "signalSide": "option",
+          "targetText": "she’s, also Canada’s Head of State",
+          "relation": "选项先说出女王，空后才能用 she 指她。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "$20 banknotes",
+          "signalSide": "option",
+          "targetText": "money there",
+          "relation": "具体说出加拿大哪种钱让作者吃惊。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "money there surprised me",
+          "signalSide": "context-before",
+          "targetText": "They have the British Queen on their $20 banknotes",
+          "relation": "空前说吃惊，选项交代吃惊的内容。"
+        }
+      ],
+      "lock": [
+        "surprised me",
+        "British Queen",
+        "she’s"
+      ],
+      "find": {
+        "text": "空后 she 是加拿大的 \"Head of State\"，前面必须先出现一位女性；七个选项里只有 B 的 \"the British Queen\" 能让 she 有着落。",
+        "quotes": [
+          "Head of State",
+          "the British Queen"
+        ]
+      },
+      "explain": "空前说加拿大的钱让作者很吃惊，这句交代吃惊在哪里：加元上也印着英国女王；空后用 This is because 解释原因，接着再谈加元上的其他图案。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "matchedClues": [
+          {
+            "contextSide": "she’s, also Canada’s Head of State",
+            "optionSide": "the British Queen",
+            "relation": "she 指英国女王。"
+          },
+          {
+            "contextSide": "money there surprised me greatly",
+            "optionSide": "on their $20 banknotes",
+            "relation": "吃惊的具体内容是加元纸币上的女王像。"
+          }
+        ],
+        "fitSummary": "空前说加拿大的钱让作者很吃惊，这句交代吃惊在哪里：加元上也印着英国女王；空后用 This is because 解释原因，接着再谈加元上的其他图案。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:40": {
+      "blankId": "blank:paper-mock-liaoning-2024-12-famous-schools-joint:40",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "Wartime Prime Minister Winston Churchill",
+        "writer Jane Austen",
+        "£5 banknotes",
+        "£10 banknotes"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "Wartime Prime Minister Winston Churchill appears on £5 banknotes and writer Jane Austen £10 banknotes."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "historical figures",
+          "signalSide": "option",
+          "targetText": "Wartime Prime Minister Winston Churchill / writer Jane Austen",
+          "relation": "历史人物概括空后的丘吉尔和奥斯汀。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Wartime Prime Minister Winston Churchill",
+          "signalSide": "context-after",
+          "targetText": "historical figures",
+          "relation": "空后第一个例子就是一位历史人物。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "pound notes",
+          "signalSide": "option",
+          "targetText": "£5 banknotes",
+          "relation": "pound notes 就是空后 £5、£10 的英镑纸币。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "£5 banknotes",
+          "signalSide": "context-after",
+          "targetText": "pound notes",
+          "relation": "£ 是英镑符号，对上选项的 pound。"
+        }
+      ],
+      "lock": [
+        "historical figures",
+        "pound notes"
+      ],
+      "find": {
+        "text": "空后丘吉尔、奥斯汀都是历史人物，又印在 \"£5 banknotes\" 上；A 的 \"historical figures\" 和 \"pound notes\" 两头都对上。",
+        "quotes": [
+          "£5 banknotes",
+          "historical figures",
+          "pound notes"
+        ]
+      },
+      "explain": "上一段讲的是加元，这句开段把话题拉回英镑：英镑上换了新的历史人物；空后先举丘吉尔、奥斯汀两例，再用 also 补上材料也变了，最后拿加拿大作比较。",
+      "distractors": [],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "matchedClues": [
+          {
+            "contextSide": "Wartime Prime Minister Winston Churchill / writer Jane Austen",
+            "optionSide": "new historical figures",
+            "relation": "两个例子都是历史人物。"
+          },
+          {
+            "contextSide": "£5 banknotes / £10 banknotes",
+            "optionSide": "the pound notes",
+            "relation": "同指英镑纸币。"
+          }
+        ],
+        "fitSummary": "上一段讲的是加元，这句开段把话题拉回英镑：英镑上换了新的历史人物；空后先举丘吉尔、奥斯汀两例，再用 also 补上材料也变了，最后拿加拿大作比较。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "选项的钱上图案（the images on the money）和第 40 题空后丘吉尔印上纸币沾边，但该段讲的是英镑（£5 banknotes），E 没说哪国的钱，也没提新人物。第 39 题空前虽有 surprised me，空后的 she 在 E 里找不到先行词。"
+        }
+      ]
+    }
+  }
+}

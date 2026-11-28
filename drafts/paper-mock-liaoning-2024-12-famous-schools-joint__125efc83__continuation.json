@@ -1,0 +1,199 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Kelly rushed down to the sidewalk but couldn’t reach her crying daughter. The awning was far above her head, and Anne was sitting near its edge in the rain. Isabelle, who had followed her down, looked up and saw a window right above the awning. “The second-floor apartment!” she cried. They hurried back inside and knocked hard on the neighbor’s door. The neighbor listened for only a moment and led them straight to the window. Pushing it open, the neighbor held Kelly’s arm while she leaned out over the wet awning. Slowly, she pulled Anne inside and hugged her tightly.\n\nParagraph 2: “She’s the luckiest kid in the world,” said the neighbor. Kelly nodded, still shaking. Apart from a red mark on her arm, Anne seemed fine, but Kelly took her to the hospital to make sure. The doctor found only a few bruises. Back home, Isabelle stood at the bedroom door with red eyes. “I’m so sorry,” she whispered. Kelly held her hand. “You opened the window, but you also kept calm and found a way to save her.” That night, Kelly told Alex everything, and the next morning he called the homeowner about window guards and safety bars. Before bed, Isabelle closed the window and checked the latch twice.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是妈妈 Kelly、姐姐 Isabelle 和掉到雨篷上的两岁的 Anne；第二段首句还带出一位邻居，原文没写过这个人。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时，叙述者在外面讲，句子不长，动作一个接一个；人物的话很少，只在结尾有 Isabelle 的两句直接引语。续写也以叙述动作为主，只在关键处留一两句短的直接引语。",
+          "evidence": [
+            "Isabelle turned pale and realized something went wrong."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在 Isabelle 喊大家下楼救人：Anne 还在雨篷上哭，大家还不知道怎么把她弄下来、她伤得怎样；前文提过的窗户隐患也还没解决。",
+          "evidence": [
+            "We need to go downstairs to get Anne down from the awning"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Kelly",
+          "role": "三个孩子的妈妈",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "她以为窗户从不开、Anne 太小打不开插销，所以没急着装防护栏。",
+              "evidence": "her mom Kelly thought that Anne was too small to work the latch"
+            },
+            {
+              "label": "此刻",
+              "text": "冲进房间看到女儿掉下去，吓得说不出话，还没回过神来。",
+              "evidence": "Kelly ran into Anne’s room and was too shocked to speak."
+            }
+          ]
+        },
+        {
+          "name": "Isabelle",
+          "role": "11 岁的大姐，窗户是她打开的",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "她很自责，认定是自己开窗闯了祸。",
+              "evidence": "“It’s all my fault, Mom. I shouldn’t have opened that window,”"
+            },
+            {
+              "label": "表现",
+              "text": "惊叫过后很快稳住了，主动提出马上下楼救妹妹。",
+              "evidence": "Isabelle managed to keep calm."
+            }
+          ]
+        },
+        {
+          "name": "Anne",
+          "role": "两岁的小女儿",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "从六楼窗台掉下，落在大楼入口上方的雨篷上，正在哭。",
+              "evidence": "saw Anne was on the awning(雨篷) over the entrance to the building"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "Isabelle managed to keep calm.",
+          "use": "第 1 段让 Isabelle 冷静下来抬头找办法，是她想到雨篷上方二楼的窗户；第 2 段妈妈再用 kept calm 肯定她，把她的自责和她的补救接起来。"
+        },
+        {
+          "sourceQuote": "they needed window guards and safety bars to protect Anne and Vicky",
+          "use": "第 2 段让 Alex 第二天就打电话找房东装防护栏，兑现原文 Alex 一直坚持却还没做的事。"
+        },
+        {
+          "sourceQuote": "Anne was too small to work the latch",
+          "use": "第 2 段结尾让 Isabelle 关窗后把插销检查两遍，回收原文的插销细节，把故事落在一个动作上。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "妈妈在楼下够不着，冷静下来的 Isabelle 想到雨篷上方二楼的窗户，邻居开窗帮忙把 Anne 抱进屋；第二段交代 Anne 只受了轻伤，妈妈安慰 Isabelle，全家去办防护栏。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从 Kelly 在人行道够不着女儿写起，所以不能让她在楼下直接把 Anne 抱下来。第二段一开头邻居就在场评论 Anne，所以第一段结束时 Anne 必须已经被救下，邻居也必须已经出场。",
+          "draft": "Isabelle 抬头看到雨篷正上方有一扇二楼的窗，母女俩回楼敲邻居家的门，邻居开窗拉住 Kelly，Kelly 探身把 Anne 抱进屋。",
+          "bridgeQuote": "“She’s the luckiest kid in the world,” said the neighbor.",
+          "bridge": "邻居为什么说 Anne 是世上最幸运的孩子，她到底伤得怎么样？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以邻居的话开头；要让「最幸运」站得住，这一段得交代 Anne 只受了轻伤。",
+          "draft": "医院检查只有几处淤青；Isabelle 道歉，妈妈肯定她冷静找到了办法；Alex 第二天联系房东装防护栏，Isabelle 关窗检查插销。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Kelly rushed down to the sidewalk but couldn’t reach her crying daughter. The awning was far above her head, and Anne was sitting near its edge in the rain. Isabelle, who had followed her down, looked up and saw a window right above the awning. “The second-floor apartment!” she cried. They hurried back inside and knocked hard on the neighbor’s door. The neighbor listened for only a moment and led them straight to the window. Pushing it open, the neighbor held Kelly’s arm while she leaned out over the wet awning. Slowly, she pulled Anne inside and hugged her tightly.\n\nParagraph 2: “She’s the luckiest kid in the world,” said the neighbor. Kelly nodded, still shaking. Apart from a red mark on her arm, Anne seemed fine, but Kelly took her to the hospital to make sure. The doctor found only a few bruises. Back home, Isabelle stood at the bedroom door with red eyes. “I’m so sorry,” she whispered. Kelly held her hand. “You opened the window, but you also kept calm and found a way to save her.” That night, Kelly told Alex everything, and the next morning he called the homeowner about window guards and safety bars. Before bed, Isabelle closed the window and checked the latch twice.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "先写清为什么够不着，再让 Isabelle 找到办法、邻居帮忙，把 Anne 救进屋，第二段邻居的话才有了场景。",
+          "items": [
+            {
+              "quote": "The awning was far above her head, and Anne was sitting near its edge in the rain.",
+              "explain": "把段首句的 couldn’t reach 说具体：雨篷太高，Anne 又在边上，读者明白必须换个办法，也接住了原文的 rainy evening。"
+            },
+            {
+              "quote": "Isabelle, who had followed her down, looked up and saw a window right above the awning.",
+              "explain": "让原文里“稳住了”的 Isabelle 来发现窗户，转折有触发，不靠凭空出现的救兵；看见窗户这个动作直接引出下一步。"
+            },
+            {
+              "quote": "The neighbor listened for only a moment and led them straight to the window.",
+              "explain": "邻居在这里出场，为第二段首句里的 the neighbor 铺好路；listened for only a moment 写出事情紧急。"
+            },
+            {
+              "quote": "Pushing it open, the neighbor held Kelly’s arm while she leaned out over the wet awning.",
+              "explain": "用现在分词和 while 把两个人同时做的动作放进一句，救人的过程清楚可信。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "用医院检查坐实“最幸运”，解开 Isabelle 的自责，再落到装防护栏、检查插销，收住原文的窗户隐患。",
+          "items": [
+            {
+              "quote": "Apart from a red mark on her arm, Anne seemed fine, but Kelly took her to the hospital to make sure.",
+              "explain": "紧接邻居的话说明幸运在哪；seemed 和 to make sure 留有分寸，不一口咬定毫发无伤。"
+            },
+            {
+              "quote": "“You opened the window, but you also kept calm and found a way to save her.”",
+              "explain": "妈妈的话先承认事实再肯定她，用回原文的 keep calm，把 Isabelle 的自责接住，不写空洞的“没关系”。"
+            },
+            {
+              "quote": "the next morning he called the homeowner about window guards and safety bars",
+              "explain": "兑现原文 Alex 坚持要做却一直没做的事，故事的隐患有了着落。"
+            },
+            {
+              "quote": "Before bed, Isabelle closed the window and checked the latch twice.",
+              "explain": "结尾落在一个具体动作上，回收原文的插销细节；checked twice 写出她的后怕，不用贴一句大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "leaned out over the wet awning",
+          "function": "写探身救人的动作，over 交代位置，wet 呼应雨夜，让救援过程看得见。"
+        },
+        {
+          "expression": "Kelly nodded, still shaking.",
+          "function": "用一个动作加 still shaking 写出妈妈惊魂未定，比 she was very afraid 更具体。"
+        },
+        {
+          "expression": "checked the latch twice",
+          "function": "用“检查两遍”这个小动作写出后怕和吸取教训，适合做结尾。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "让 Kelly 在人行道上直接跳起来或爬上雨篷把 Anne 抱下来",
+          "why": "段首句已经写明她 couldn’t reach，第一段必须另找办法；硬写她够到了，就和段首句矛盾。"
+        },
+        {
+          "pitfall": "第一段只写救人，不让邻居出场，或者到第二段才冒出邻居",
+          "why": "第二段首句一开头就是 said the neighbor，邻居得在第一段末已经在场，否则这句话接不上。"
+        },
+        {
+          "pitfall": "写 Anne 摔得很重、被救护车送去抢救，或者靠消防员等新人物把她救下",
+          "why": "邻居说她是 the luckiest kid，伤得重就撑不住这句话；让陌生新人物来解决问题，原文的人物就没戏了。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Kelly rushed down to the sidewalk but couldn’t reach her crying daughter. The awning hung far above her head, and Anne was sitting near its edge, her small hands gripping the wet cloth. Kelly jumped and stretched, but her fingers caught only rain. Isabelle, who had raced down behind her, wiped the water from her eyes and looked up. Just above the awning was a window. “The second-floor apartment, Mom! We can reach her from there!” They dashed back inside and pounded on the neighbor’s door. The neighbor took one look at their faces, asked nothing and led them straight to the window. Pushing it open, the neighbor held on to Kelly’s arm while she leaned out over the awning. “Come to Mom, sweetheart,” she said softly. Anne crawled toward her voice, and Kelly lifted her in and pressed her against her chest.\n\nParagraph 2: “She’s the luckiest kid in the world,” said the neighbor. Kelly could only nod; her legs were still shaking. Apart from a red mark on her right arm, Anne seemed unhurt, but Kelly took her to the hospital anyway. The doctor found nothing more than a few bruises. Back home, Isabelle stood at the bedroom door, her eyes red. “It was my fault,” she said quietly. Kelly pulled her into a hug. “You opened the window, but you also found the way to bring her back. That counts too.” That night Kelly phoned Alex, and the next morning he called the homeowner. Within a week, window guards and safety bars were fixed in the girls’ room. Before bed, Isabelle shut the window and checked the latch twice, while Anne slept soundly beneath her rainbow-colored name.",
+      "beyondStandard": [
+        {
+          "quote": "Kelly jumped and stretched, but her fingers caught only rain.",
+          "explain": "标准版只说雨篷太高，这里用跳、伸手、只抓到雨水三个动作把 couldn’t reach 演出来，也更贴雨夜的场景。"
+        },
+        {
+          "quote": "“Come to Mom, sweetheart,” she said softly. Anne crawled toward her voice",
+          "explain": "加了一句妈妈哄孩子的话和 Anne 循声爬过来的动作，救援不再只是“拉进来”，母女的关系也写出来了。"
+        },
+        {
+          "quote": "while Anne slept soundly beneath her rainbow-colored name",
+          "explain": "回收原文墙上的彩虹名字，结尾从关窗的姐姐转到熟睡的妹妹，用画面收住“幸运”，不用说教。"
+        }
+      ]
+    }
+  }
+}

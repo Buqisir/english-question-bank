@@ -1,0 +1,791 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b": {
+      "overview": "作者曾热衷寻鬼多年，在葛底斯堡夜探时被人误当成鬼，对方不听他解释，他由此醒悟自己常为追求刺激而忽视合理解释；后来他学习摄影知识，转而教人用批判性思维看待怪事。",
+      "fullTranslationZh": "如果要我指出自己对鬼魂的信念是从哪一刻开始动摇的，我会选在宾夕法尼亚州葛底斯堡被人误当成鬼的那一次。在那之前，我已经享受了好几年寻鬼的乐趣，并且坚信自己遇到过许多超自然的东西。\n我在上世纪 80 年代长大，观看记录各种未解现象的电视节目激起了我对神秘事物的兴趣。我加入了当地一个寻鬼小组，到那些据说灵异活动频繁的地方去探访。在我们看来，照片里出现的怪东西，比如薄雾，就预示着有鬼魂，录音里录到的任何意外声响也一样。\n葛底斯堡的一场会议引出了那次决定性的遭遇。会上我们得知有一片据说鬼魂很多的区域，后来便动身前去探查。我们正在架设相机时，来了三辆车。一群人下了车，挥舞着激光笔。我很恼火，朝他们跑过去，一边大喊一边挥舞手臂。这些新来的人往后退，很快开车走了。第二天早上，有传言说一群人看见了鬼。我听说他们看到的“鬼”从树林里冒出来，用怪异的声音尖叫着。“你们在开玩笑吧？那是我！”我说。\n我从自己的角度讲述了事情经过，可他们就是不听。就在那一刻，我恍然大悟：有多少次，我仅仅因为享受那份刺激，就回避了显而易见的解释？意识到自己传播了错误信息，这种感觉太可怕了。\n我研读了摄影知识，得知所谓的“雾”是我自己呼出的气在镜头前升腾，而那些“鬼影”是长时间曝光造成的。回想起来，我真的很后悔：有那么多次，我坐实了人们的猜疑，让他们心怀恐惧，自己却去追逐下一次刺激。如今，教人们运用批判性思维自己去解读情况，让我获得了大得多的满足感。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b-1",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+          "sourceText": "To us, strange things in our photos, such as mist, signaled spirits, as did any unexpected noise caught on tape.",
+          "displayText": "To us, strange things in our photos, such as mist, signaled spirits, as did any unexpected noise caught on tape.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:24"
+          ],
+          "translationZh": "在我们看来，照片里出现的怪东西，比如薄雾，就预示着有鬼魂，录音里录到的任何意外声响也一样。",
+          "analysisZh": "主干是 strange things … signaled spirits（怪东西预示着鬼魂），To us 表示“在我们看来”，in our photos 修饰 strange things，such as mist 是插入的举例。as did any unexpected noise 是倒装：as 后助动词 did 提到主语前，代替 signaled spirits，意思是“意外的声响也同样预示着鬼魂”；caught on tape 是过去分词短语，修饰 noise。这句写的是他入团以后怎样看照片和录音，第 24 题 D 项就借了这里的照片。",
+          "underlineRanges": [
+            {
+              "start": 7,
+              "end": 21,
+              "quote": "strange things"
+            },
+            {
+              "start": 51,
+              "end": 67,
+              "quote": "signaled spirits"
+            },
+            {
+              "start": 69,
+              "end": 96,
+              "quote": "as did any unexpected noise"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b-2",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+          "sourceText": "Looking back, I feel really regretful for the times I confirmed the suspicions of people, leaving them scared while I chased the next thrill.",
+          "displayText": "Looking back, I feel really regretful for the times I confirmed the suspicions of people, leaving them scared while I chased the next thrill.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:27"
+          ],
+          "translationZh": "回想起来，我真的很后悔：有那么多次，我坐实了人们的猜疑，让他们心怀恐惧，自己却去追逐下一次刺激。",
+          "analysisZh": "主干是 I feel really regretful for the times（我为那些时候感到后悔），Looking back 是现在分词作状语。the times 后面省略了关系词 when，I confirmed the suspicions of people 是定语从句，说明是哪些时候；leaving them scared 是现在分词作结果状语，交代坐实猜疑的后果；while I chased the next thrill 是时间状语从句，和前面形成对比：别人在害怕，他却在追刺激。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 51,
+              "quote": "I feel really regretful for the times"
+            },
+            {
+              "start": 90,
+              "end": 109,
+              "quote": "leaving them scared"
+            },
+            {
+              "start": 110,
+              "end": 140,
+              "quote": "while I chased the next thrill"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:1"
+              ],
+              "start": 0,
+              "end": 88,
+              "quote": "如果要我指出自己对鬼魂的信念是从哪一刻开始动摇的，我会选在宾夕法尼亚州葛底斯堡被人误当成鬼的那一次。在那之前，我已经享受了好几年寻鬼的乐趣，并且坚信自己遇到过许多超自然的东西。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2"
+              ],
+              "start": 89,
+              "end": 207,
+              "quote": "我在上世纪 80 年代长大，观看记录各种未解现象的电视节目激起了我对神秘事物的兴趣。我加入了当地一个寻鬼小组，到那些据说灵异活动频繁的地方去探访。在我们看来，照片里出现的怪东西，比如薄雾，就预示着有鬼魂，录音里录到的任何意外声响也一样。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3"
+              ],
+              "start": 208,
+              "end": 392,
+              "quote": "葛底斯堡的一场会议引出了那次决定性的遭遇。会上我们得知有一片据说鬼魂很多的区域，后来便动身前去探查。我们正在架设相机时，来了三辆车。一群人下了车，挥舞着激光笔。我很恼火，朝他们跑过去，一边大喊一边挥舞手臂。这些新来的人往后退，很快开车走了。第二天早上，有传言说一群人看见了鬼。我听说他们看到的“鬼”从树林里冒出来，用怪异的声音尖叫着。“你们在开玩笑吧？那是我！”我说。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:5"
+              ],
+              "start": 393,
+              "end": 479,
+              "quote": "我从自己的角度讲述了事情经过，可他们就是不听。就在那一刻，我恍然大悟：有多少次，我仅仅因为享受那份刺激，就回避了显而易见的解释？意识到自己传播了错误信息，这种感觉太可怕了。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6"
+              ],
+              "start": 480,
+              "end": 611,
+              "quote": "我研读了摄影知识，得知所谓的“雾”是我自己呼出的气在镜头前升腾，而那些“鬼影”是长时间曝光造成的。回想起来，我真的很后悔：有那么多次，我坐实了人们的猜疑，让他们心怀恐惧，自己却去追逐下一次刺激。如今，教人们运用批判性思维自己去解读情况，让我获得了大得多的满足感。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-b-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+                "start": 235,
+                "end": 347,
+                "quote": "To us, strange things in our photos, such as mist, signaled spirits, as did any unexpected noise caught on tape."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 73,
+                "end": 118,
+                "quote": "在我们看来，照片里出现的怪东西，比如薄雾，就预示着有鬼魂，录音里录到的任何意外声响也一样。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:27"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+                "start": 157,
+                "end": 298,
+                "quote": "Looking back, I feel really regretful for the times I confirmed the suspicions of people, leaving them scared while I chased the next thrill."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 49,
+                "end": 97,
+                "quote": "回想起来，我真的很后悔：有那么多次，我坐实了人们的猜疑，让他们心怀恐惧，自己却去追逐下一次刺激。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+                "start": 71,
+                "end": 131,
+                "quote": "watching TV shows documenting cases of unexplained phenomena"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 14,
+                "end": 29,
+                "quote": "观看记录各种未解现象的电视节目"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+                "start": 0,
+                "end": 26,
+                "quote": "A conference in Gettysburg"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 0,
+                "end": 9,
+                "quote": "葛底斯堡的一场会议"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+                "start": 0,
+                "end": 68,
+                "quote": "I described the event from my perspective, but they wouldn’t listen."
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+                "start": 69,
+                "end": 91,
+                "quote": "That’s when it clicked"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 0,
+                "end": 23,
+                "quote": "我从自己的角度讲述了事情经过，可他们就是不听。"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 23,
+                "end": 34,
+                "quote": "就在那一刻，我恍然大悟"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+                "start": 42,
+                "end": 155,
+                "quote": "the “mist” was my own breath rising in front of the lens, and that the “ghosts” were the result of long exposures"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+                "start": 171,
+                "end": 245,
+                "quote": "I feel really regretful for the times I confirmed the suspicions of people"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+                "start": 341,
+                "end": 423,
+                "quote": "teaching people how to use critical thinking to interpret the situation themselves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 11,
+                "end": 48,
+                "quote": "所谓的“雾”是我自己呼出的气在镜头前升腾，而那些“鬼影”是长时间曝光造成的"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 54,
+                "end": 76,
+                "quote": "我真的很后悔：有那么多次，我坐实了人们的猜疑"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 100,
+                "end": 117,
+                "quote": "教人们运用批判性思维自己去解读情况"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先点明信鬼动摇的转折点是在葛底斯堡被误认成鬼，再回顾自己怎样迷上寻鬼，接着详述那次遭遇和他的醒悟，最后写他弄清真相后的悔意和如今的做法。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:1",
+            "summary": "作者说自己对鬼的信念开始动摇，是在葛底斯堡被人误当成鬼的时候；此前他寻鬼多年、深信不疑。",
+            "function": "开门见山，点出转折点"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+            "summary": "童年看未解现象的电视节目激起兴趣，后来加入寻鬼小组，把照片里的雾和录音里的怪声都当成鬼魂的迹象。",
+            "function": "回顾信鬼的由来"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+            "summary": "他去葛底斯堡开会，夜探闹鬼区域时冲向挥激光笔的人，第二天却听说别人把他当成了鬼。",
+            "function": "叙述被误认成鬼的经过"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+            "summary": "他解释经过，对方不听，他由此醒悟自己常因贪图刺激而回避显而易见的解释，并为传播错误信息而难过。",
+            "function": "写醒悟的时刻"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+            "summary": "学习摄影后，他弄清“雾”和“鬼影”的来历，后悔曾让别人担惊受怕，如今以教人运用批判性思维为乐。",
+            "function": "写反思和转变"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者最初相信有鬼的起因，注意和入团后的经历区分先后。",
+      "stemTranslationZh": "起初是什么让作者相信有鬼？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "遇到了奇怪的生物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "encountered",
+            "optionText": "Encountering",
+            "matchType": "wordFamily",
+            "relationNote": "Encountering 和 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:1|was convinced I’d encountered many supernatural things]] 里的 encountered 同词根，那是他寻鬼多年后自认为遇到过怪事，是后来的结果，不是起初的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:1",
+              "quote": "Until then, I’d enjoyed several years of ghost-hunting and was convinced I’d encountered many supernatural things.",
+              "anchor": "寻鬼多年后的自认"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "从媒体上了解到怪事。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+              "quote": "Growing up in the 80s, my interest in mysterious things was excited by watching TV shows documenting cases of unexplained phenomena.",
+              "anchor": "电视节目激起兴趣"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "参加灵异活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "ghostly activities",
+            "optionText": "ghostly activities",
+            "matchType": "exact",
+            "relationNote": "ghostly activities 在原文指据说灵异活动频繁的地方，是他加入寻鬼小组后才去的；兴趣先被电视节目激起，入团在后。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+              "quote": "I joined a local ghost-hunting group, going on trips to places said to be full of ghostly activities.",
+              "anchor": "入团后才去灵异地点"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在照片里发现神秘的东西。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "To us, strange things in our photos, such as mist, signaled spirits, as did any unexpected noise caught on tape.",
+            "sourceHighlight": "strange things in our photos",
+            "optionText": "Finding mysterious things in photos.",
+            "optionHighlight": "mysterious things in photos",
+            "explanation": "照片里的怪东西（strange things in our photos）是入团后寻鬼时拍到的，那时他早就信了；最初的起因是电视节目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+              "quote": "To us, strange things in our photos, such as mist, signaled spirits, as did any unexpected noise caught on tape.",
+              "anchor": "入团后看照片"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "initially",
+          "sourceRole": "stem",
+          "targetText": "Growing up in the 80s, my interest in mysterious things was excited by watching TV shows documenting cases of unexplained phenomena.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+          "relationType": "locationCue",
+          "sourceZh": "起初",
+          "targetCue": "Growing up",
+          "targetCueZh": "成长时期",
+          "answerText": "watching TV shows documenting cases of unexplained phenomena",
+          "note": "题干 initially 问最早的起因，对应原文从成长时期（Growing up）讲起的这一句。"
+        },
+        {
+          "sourceText": "Learning of odd things from media",
+          "sourceRole": "correctOption",
+          "targetText": "Growing up in the 80s, my interest in mysterious things was excited by watching TV shows documenting cases of unexplained phenomena.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“从媒体上了解怪事”就是原文的“看记录未解现象的电视节目”：电视节目（TV shows）属于媒体，未解现象（unexplained phenomena）就是怪事。选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者去葛底斯堡的目的，和到那以后才临时决定的事区分开。",
+      "stemTranslationZh": "作者为什么去葛底斯堡？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "去探索一个谜。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "explore",
+            "optionText": "explore",
+            "matchType": "exact",
+            "relationNote": "explore 出自 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3|we later set off to explore it]]：他们是在会上听说闹鬼地点之后（later）才去探查的，这不是他来葛底斯堡的目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+              "quote": "At the conference we learned of an area believed to have many ghosts, and we later set off to explore it.",
+              "anchor": "会后才去探查"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "去看望一位朋友。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To visit a friend.",
+            "explanation": "原文没提看望朋友，只说他是因为一场会议（conference）到了葛底斯堡。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "去参加一个会议。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+              "quote": "A conference in Gettysburg led to that fateful encounter.",
+              "anchor": "葛底斯堡的会议"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+              "quote": "At the conference we learned of an area believed to have many ghosts, and we later set off to explore it.",
+              "anchor": "人在会上"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "去领奖。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To receive a prize.",
+            "explanation": "原文没提领奖，会上他们只是听说了一个据说闹鬼的地方。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Gettysburg",
+          "sourceRole": "stem",
+          "targetText": "A conference in Gettysburg led to that fateful encounter.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "A conference in Gettysburg",
+          "note": "题干 Gettysburg 原词出现在原文。"
+        },
+        {
+          "sourceText": "To attend a meeting",
+          "sourceRole": "correctOption",
+          "targetText": "A conference in Gettysburg led to that fateful encounter.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“开会”（meeting）就是原文的 conference（会议）；[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3|At the conference we learned of an area]] 也说明他人就在会上。选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者醒悟的具体时刻，理清事件先后。",
+      "stemTranslationZh": "作者是什么时候意识到自己的错误的？",
+      "locateBy": "stem",
+      "locateFindZh": "That’s when 指哪一刻，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "当没有人接受他的解释时。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+              "quote": "I described the event from my perspective, but they wouldn’t listen.",
+              "anchor": "解释没人听"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+              "quote": "That’s when it clicked: How many times",
+              "anchor": "就在那时醒悟"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在他研读了摄影知识之后。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "I read up on photography and learned that the “mist” was my own breath rising in front of the lens, and that the “ghosts” were the result of long exposures.",
+            "sourceHighlight": "I read up on photography",
+            "optionText": "After he had read up on photography.",
+            "optionHighlight": "read up on photography",
+            "explanation": "研读摄影写在 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6]]，是醒悟之后才做的事，他借此弄清了“雾”和“鬼影”的来历。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "I read up on photography and learned that the “mist” was my own breath rising in front of the lens, and that the “ghosts” were the result of long exposures.",
+              "anchor": "醒悟后才学摄影"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "当那群人逃离现场时。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "The newcomers backed off and quickly drove away.",
+            "sourceHighlight": "quickly drove away",
+            "optionText": "When the group escaped from the scene.",
+            "optionHighlight": "the group escaped from the scene",
+            "explanation": "那群人开车离开（drove away）时，他只当是赶走了捣乱的人；第二天听到闹鬼传闻、解释没人听，他才醒悟。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:3",
+              "quote": "The newcomers backed off and quickly drove away.",
+              "anchor": "当时还没醒悟"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在他和新来的人吵了一架之后。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "After he quarreled with the newcomers.",
+            "explanation": "他只是冲那群人大喊、挥手（shouting and waving my arms），对方随即退走，双方没有吵架。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "realize",
+          "sourceRole": "stem",
+          "targetText": "That’s when it clicked: How many times",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+          "relationType": "locationCue",
+          "sourceZh": "意识到",
+          "targetCue": "it clicked",
+          "targetCueZh": "恍然大悟",
+          "answerText": "I described the event from my perspective, but they wouldn’t listen.",
+          "bridgeZh": "That’s when 指他们不肯听他解释的那一刻",
+          "note": "题干 realize 对应原文 it clicked（一下子明白了）。"
+        },
+        {
+          "sourceText": "nobody accepted his explanation",
+          "sourceRole": "correctOption",
+          "targetText": "I described the event from my perspective, but they wouldn’t listen.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“他的解释”对应原文“从自己的角度讲述经过”（described the event from my perspective），“没人接受”对应“他们就是不听”（wouldn’t listen）。选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据最后一段作者的发现、悔意和现在的做法，推断他今后的态度。",
+      "stemTranslationZh": "最后一段暗示了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6]]：他学摄影后发现了什么、后悔什么、现在做什么，推他今后怎样下判断",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "人们常常被惊险刺激的鬼吓到。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "scared",
+            "optionText": "scared",
+            "matchType": "exact",
+            "relationNote": "scared 出自 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6|leaving them scared while I chased the next thrill]]：害怕的是被他坐实猜疑的人，追刺激的是作者自己；他也已弄清那些“鬼”另有原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "Looking back, I feel really regretful for the times I confirmed the suspicions of people, leaving them scared while I chased the next thrill.",
+              "anchor": "被吓到的是被他误导的人"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "批判性思维给了作者更多满足感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Now, I gain much greater fulfillment from teaching people how to use critical thinking to interpret the situation themselves.",
+            "sourceEntity": "teaching people how to use critical thinking",
+            "optionText": "Critical thinking gave the author more fulfillment.",
+            "optionEntity": "Critical thinking",
+            "explanation": "让他满足的是“教别人运用批判性思维”（teaching people how to use），不是批判性思维本身；这也是原文明说的，不是暗示。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "Now, I gain much greater fulfillment from teaching people how to use critical thinking to interpret the situation themselves.",
+              "anchor": "满足来自教别人"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作者本人将替人们评估情况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Now, I gain much greater fulfillment from teaching people how to use critical thinking to interpret the situation themselves.",
+            "sourceHighlight": "interpret the situation themselves",
+            "optionText": "The author himself will assess situations for people.",
+            "optionHighlight": "himself will assess situations for people",
+            "explanation": "原文是教人们自己（themselves）去判断情况，选项改成作者替别人判断，做判断的人换了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "Now, I gain much greater fulfillment from teaching people how to use critical thinking to interpret the situation themselves.",
+              "anchor": "让人们自己判断"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者会对自己的判断保持谨慎。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "Looking back, I feel really regretful for the times I confirmed the suspicions of people, leaving them scared while I chased the next thrill.",
+              "anchor": "后悔轻易坐实猜疑"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "I read up on photography and learned that the “mist” was my own breath rising in front of the lens, and that the “ghosts” were the result of long exposures.",
+              "anchor": "怪事都有普通解释"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+              "quote": "Now, I gain much greater fulfillment from teaching people how to use critical thinking to interpret the situation themselves.",
+              "anchor": "教人独立判断"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The author will be cautious about his judgement",
+          "sourceRole": "correctOption",
+          "targetText": "Looking back, I feel really regretful for the times I confirmed the suspicions of people, leaving them scared while I chased the next thrill.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "原文没直接说他以后会谨慎，要推一步：先是他查资料发现“雾”和“鬼影”都有普通的解释（my own breath, long exposures）；接着他后悔当年轻易坐实别人的猜疑（confirmed the suspicions）；如今他还教人自己判断。一个为草率下结论后悔、又教别人独立思考的人，对自己的判断会更谨慎，选 D。"
+        }
+      ]
+    }
+  }
+}

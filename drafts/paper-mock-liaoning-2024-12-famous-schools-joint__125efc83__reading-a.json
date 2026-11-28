@@ -1,0 +1,751 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a": {
+      "overview": "本文推荐四本儿童读物：渴望自由的狗 Johannes 的故事、男孩在树林里走出丧父之痛的故事、作者根据自己营地辅导经历写画的图像小说，以及一位墨西哥女性反抗者的真实故事，并注明各书适读年龄。",
+      "fullTranslationZh": "《眼睛与不可能》\nDave Eggers 著，Shawn Harris 绘\n有些儿童读物借用动物的声音，或是变成动物的玩具的声音，它们是那样纯粹、那样真挚，以至于成了我们自己声音的一部分。Dave Eggers 的《眼睛与不可能》就是其中之一。Johannes 奔跑起来像一道光，它看得见你，你却从来看不见它；这只狗别无所求，只想获得自由。配上 Shawn Harris 直接承袭哈德逊河画派风格的宏大插图，Johannes 成了一位永恒的英雄。（适合 8 至 12 岁）\n《林中漫步》\nNikki Grimes 著，Jerry Pinkney、Brian Pinkney 绘\n一个男孩循着一张藏宝图走进树林，那是他从前常和已故的父亲一起去的地方。真诚、治愈——这是一个关于力量与慰藉、令人难忘的故事。这是那种你会想永远珍藏的书，它抚慰人心的笔调和充满爱的智慧让人一读再读。书末的附记向 Jerry Pinkney 及其作品致敬，对任何深切关心儿童读物、关心我们当中创作这些读物的杰出者的人来说，都是必读之作。（适合 4 至 8 岁）\n《阳光：一部图像小说》\nJarrett J. Krosoczka 著\n《阳光》是美国国家图书奖入围作品《嘿，孩子》的续作，后者同样出自 Jarrett J. Krosoczka 之手。在《阳光》中，少年 Krosoczka 在营地担任辅导员，陪伴身患重病的孩子及其家人，他学会了在心碎中寻找希望。他用自己的文字和插图，带我们和他一起踏上旅程，去更好地理解他人——也更好地理解自己。读者或许也会由此获得新的视角。（适合 12 岁及以上）\n《一位墨西哥自由战士的故事》\nAida Salazar 著，Molly Mendoza 绘\n这是一个鼓舞人心的真实故事：一位女性为了拯救自己的社区，不惜违背社区对她的期望。Aida Salazar 以诗意的笔触，讲述一个年轻人如何熬过暴力和伤痛，坚持下来，最终成为反抗墨西哥政府的领袖。Molly Mendoza 的插画有力地捕捉到了这个人物的精神。（适合 6 至 9 岁）",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a-1",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3",
+          "sourceText": "Certain children’s books take the voices of animals, or toys that become animals, and are so pure, so sincere, that they become part of our own voices.",
+          "displayText": "Certain children’s books take the voices of animals, or toys that become animals, and are so pure, so sincere, that they become part of our own voices.",
+          "relatedQuestionIds": [],
+          "translationZh": "有些儿童读物借用动物的声音，或是变成动物的玩具的声音，它们是那样纯粹、那样真挚，以至于成了我们自己声音的一部分。",
+          "analysisZh": "主语是 Certain children’s books，后面并列两个谓语：take the voices of …（借用……的声音）和 are so pure, so sincere（如此纯粹、真挚）。take 的宾语里，or 并列 animals 和 toys，that become animals 是定语从句，修饰 toys。第二个谓语接 so … that 结果状语从句：正因为这样纯粹真挚，它们才成了我们自己声音的一部分。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 24,
+              "quote": "Certain children’s books"
+            },
+            {
+              "start": 25,
+              "end": 43,
+              "quote": "take the voices of"
+            },
+            {
+              "start": 90,
+              "end": 115,
+              "quote": "so pure, so sincere, that"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a-2",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+          "sourceText": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+          "displayText": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:23"
+          ],
+          "translationZh": "Aida Salazar 以诗意的笔触，讲述一个年轻人如何熬过暴力和伤痛，坚持下来，最终成为反抗墨西哥政府的领袖。",
+          "analysisZh": "主干是 Aida Salazar shows how …（Aida Salazar 讲述……怎样……），With her poetic touch 是方式状语。how 引导宾语从句，从句里 a youngster persevered through violence and heartache（一个年轻人熬过暴力和伤痛坚持下来），to become a leader 表示坚持的结果；standing against the Mexican government 是现在分词短语，修饰 a leader，说明这位领袖在反抗政府。第 23 题判断她的性格，靠的就是这里的 persevered 和 standing against。",
+          "underlineRanges": [
+            {
+              "start": 23,
+              "end": 45,
+              "quote": "Aida Salazar shows how"
+            },
+            {
+              "start": 58,
+              "end": 99,
+              "quote": "persevered through violence and heartache"
+            },
+            {
+              "start": 100,
+              "end": 118,
+              "quote": "to become a leader"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:1"
+              ],
+              "start": 0,
+              "end": 8,
+              "quote": "《眼睛与不可能》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:2"
+              ],
+              "start": 9,
+              "end": 37,
+              "quote": "Dave Eggers 著，Shawn Harris 绘"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3",
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:4"
+              ],
+              "start": 38,
+              "end": 236,
+              "quote": "有些儿童读物借用动物的声音，或是变成动物的玩具的声音，它们是那样纯粹、那样真挚，以至于成了我们自己声音的一部分。Dave Eggers 的《眼睛与不可能》就是其中之一。Johannes 奔跑起来像一道光，它看得见你，你却从来看不见它；这只狗别无所求，只想获得自由。配上 Shawn Harris 直接承袭哈德逊河画派风格的宏大插图，Johannes 成了一位永恒的英雄。（适合 8 至 12 岁）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:5"
+              ],
+              "start": 237,
+              "end": 243,
+              "quote": "《林中漫步》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:6"
+              ],
+              "start": 244,
+              "end": 288,
+              "quote": "Nikki Grimes 著，Jerry Pinkney、Brian Pinkney 绘"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7"
+              ],
+              "start": 289,
+              "end": 467,
+              "quote": "一个男孩循着一张藏宝图走进树林，那是他从前常和已故的父亲一起去的地方。真诚、治愈——这是一个关于力量与慰藉、令人难忘的故事。这是那种你会想永远珍藏的书，它抚慰人心的笔调和充满爱的智慧让人一读再读。书末的附记向 Jerry Pinkney 及其作品致敬，对任何深切关心儿童读物、关心我们当中创作这些读物的杰出者的人来说，都是必读之作。（适合 4 至 8 岁）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:8"
+              ],
+              "start": 468,
+              "end": 479,
+              "quote": "《阳光：一部图像小说》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:9"
+              ],
+              "start": 480,
+              "end": 502,
+              "quote": "Jarrett J. Krosoczka 著"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10"
+              ],
+              "start": 503,
+              "end": 685,
+              "quote": "《阳光》是美国国家图书奖入围作品《嘿，孩子》的续作，后者同样出自 Jarrett J. Krosoczka 之手。在《阳光》中，少年 Krosoczka 在营地担任辅导员，陪伴身患重病的孩子及其家人，他学会了在心碎中寻找希望。他用自己的文字和插图，带我们和他一起踏上旅程，去更好地理解他人——也更好地理解自己。读者或许也会由此获得新的视角。（适合 12 岁及以上）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:11"
+              ],
+              "start": 686,
+              "end": 700,
+              "quote": "《一位墨西哥自由战士的故事》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:12"
+              ],
+              "start": 701,
+              "end": 731,
+              "quote": "Aida Salazar 著，Molly Mendoza 绘"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13"
+              ],
+              "start": 732,
+              "end": 873,
+              "quote": "这是一个鼓舞人心的真实故事：一位女性为了拯救自己的社区，不惜违背社区对她的期望。Aida Salazar 以诗意的笔触，讲述一个年轻人如何熬过暴力和伤痛，坚持下来，最终成为反抗墨西哥政府的领袖。Molly Mendoza 的插画有力地捕捉到了这个人物的精神。（适合 6 至 9 岁）"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-a-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3",
+                "start": 0,
+                "end": 151,
+                "quote": "Certain children’s books take the voices of animals, or toys that become animals, and are so pure, so sincere, that they become part of our own voices."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 0,
+                "end": 56,
+                "quote": "有些儿童读物借用动物的声音，或是变成动物的玩具的声音，它们是那样纯粹、那样真挚，以至于成了我们自己声音的一部分。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+                "start": 107,
+                "end": 266,
+                "quote": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 40,
+                "end": 97,
+                "quote": "Aida Salazar 以诗意的笔触，讲述一个年轻人如何熬过暴力和伤痛，坚持下来，最终成为反抗墨西哥政府的领袖。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+                "start": 44,
+                "end": 90,
+                "quote": "he used to visit together with his late father"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+                "start": 92,
+                "end": 107,
+                "quote": "Honest, healing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p6",
+                "start": 16,
+                "end": 34,
+                "quote": "那是他从前常和已故的父亲一起去的地方"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p6",
+                "start": 35,
+                "end": 40,
+                "quote": "真诚、治愈"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:9",
+                "start": 0,
+                "end": 20,
+                "quote": "Jarrett J. Krosoczka"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10",
+                "start": 232,
+                "end": 267,
+                "quote": "Through his words and illustrations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p8",
+                "start": 0,
+                "end": 22,
+                "quote": "Jarrett J. Krosoczka 著"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 113,
+                "end": 123,
+                "quote": "他用自己的文字和插图"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+                "start": 165,
+                "end": 265,
+                "quote": "persevered through violence and heartache to become a leader standing against the Mexican government"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+                "start": 39,
+                "end": 105,
+                "quote": "went against the expectations of her community in order to save it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 69,
+                "end": 96,
+                "quote": "熬过暴力和伤痛，坚持下来，最终成为反抗墨西哥政府的领袖"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 18,
+                "end": 39,
+                "quote": "为了拯救自己的社区，不惜违背社区对她的期望"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "四段书评并列推荐四本书，每本依次给出书名、作者与绘者、内容简介和适读年龄，读者可按书名逐本查找。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:1",
+            "summary": "第一本书的书名《眼睛与不可能》。",
+            "function": "引出第一本书"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:2",
+            "summary": "作者 Dave Eggers，绘者 Shawn Harris。",
+            "function": "交代作者与绘者"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3",
+            "summary": "书中的狗 Johannes 渴望自由，配有哈德逊河画派风格的宏大插图，适合 8 至 12 岁。",
+            "function": "介绍内容、插图和适读年龄"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:5",
+            "summary": "第二本书的书名《林中漫步》。",
+            "function": "引出第二本书"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:6",
+            "summary": "作者 Nikki Grimes，绘者 Jerry Pinkney 和 Brian Pinkney。",
+            "function": "交代作者与绘者"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+            "summary": "男孩循着藏宝图走进曾与亡父同去的树林，故事真诚治愈，适合 4 至 8 岁。",
+            "function": "介绍内容、特色和适读年龄"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:8",
+            "summary": "第三本书的书名《阳光：一部图像小说》。",
+            "function": "引出第三本书"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:9",
+            "summary": "只署作者 Jarrett J. Krosoczka 一人，没有另列绘者。",
+            "function": "交代作者"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10",
+            "summary": "作者以少年营地辅导员的亲身经历，用自己的文字和插图讲述在心碎中寻找希望，适合 12 岁及以上。",
+            "function": "介绍内容、创作方式和适读年龄"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:11",
+            "summary": "第四本书的书名《一位墨西哥自由战士的故事》。",
+            "function": "引出第四本书"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:12",
+            "summary": "作者 Aida Salazar，绘者 Molly Mendoza。",
+            "function": "交代作者与绘者"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+            "summary": "一位女性为救社区违背众人期待，熬过暴力与伤痛，成为反抗政府的领袖，适合 6 至 9 岁。",
+            "function": "介绍内容、人物和适读年龄"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:21": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "根据《林中漫步》的内容和基调，判断哪类读者最可能喜欢这本书。",
+      "stemTranslationZh": "谁可能会喜欢读《林中漫步》？",
+      "locateBy": "stem",
+      "locateFindZh": "往下读书评，看男孩经历了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对动物感兴趣的学生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Certain children’s books take the voices of animals, or toys that become animals, and are so pure, so sincere, that they become part of our own voices.",
+            "sourceEntity": "animals",
+            "optionText": "A student interested in animals.",
+            "optionEntity": "animals",
+            "explanation": "借动物发声的是 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3]] 介绍的小狗 Johannes 那本书；《林中漫步》写的是男孩和父亲，主角不是动物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3",
+              "quote": "Johannes, who runs like light, who sees you but is never seen, is a dog who wants nothing more than to be free.",
+              "anchor": "主角是狗的是另一本书"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "热爱自己社区的孩子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "An inspiring true story of a woman who went against the expectations of her community in order to save it.",
+            "sourceEntity": "her community",
+            "optionText": "A kid loving his community.",
+            "optionEntity": "his community",
+            "explanation": "community 出自墨西哥女战士那本书 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13|went against the expectations of her community]]，写她为救社区而抗争；《林中漫步》没写社区。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+              "quote": "An inspiring true story of a woman who went against the expectations of her community in order to save it.",
+              "anchor": "社区属于另一本书"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "刚失去一位家人的孩子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+              "quote": "A boy follows a treasure map into the woods he used to visit together with his late father.",
+              "anchor": "男孩怀念已故的父亲"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+              "quote": "Honest, healing – this is a memorable story of strength and comfort.",
+              "anchor": "故事治愈、给人慰藉"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "刚刚赢了一场比赛的青少年。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A teenager just winning a game.",
+            "explanation": "这本书写的是失去父亲后的力量与慰藉，适读年龄是 4 到 8 岁（ages 4 to 8），书评没提比赛或获胜。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A Walk in the Woods",
+          "sourceRole": "stem",
+          "targetText": "A Walk in the Woods",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:5",
+          "relationType": "locationCue",
+          "answerText": "he used to visit together with his late father",
+          "bridgeZh": "书名只是标题，书里讲什么要看它的书评",
+          "note": "题干书名 A Walk in the Woods 原样就是这本书的小标题。"
+        },
+        {
+          "sourceText": "losing a family member",
+          "sourceRole": "correctOption",
+          "targetText": "A boy follows a treasure map into the woods he used to visit together with his late father.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项的“失去家人”（losing a family member）对应原文的“已故的父亲”（late father）：书里的男孩刚失去父亲。书评又说这本书治愈（healing）、给人慰藉（comfort），最适合同样失去亲人的孩子，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把《阳光》的署名和介绍与其他三本书对比，找出它独有的特点。",
+      "stemTranslationZh": "《阳光：一部图像小说》这本书有什么特别之处？",
+      "locateBy": "stem",
+      "locateFindZh": "往后两句看 his 指谁",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这本书获得了一项国家级奖项。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "secondaryType": "scopeShift",
+            "sourceQuote": "Sunshine is a follow-up to a National Book Award finalist, Hey, Kiddo, also by Jarrett J. Krosoczka.",
+            "sourceEntity": "Hey, Kiddo",
+            "optionText": "The book won a National Prize.",
+            "optionEntity": "The book",
+            "explanation": "进入国家图书奖决选的是前作《嘿，孩子》，而且只是入围（finalist），没有获奖；《阳光》本身没提奖项。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10",
+              "quote": "Sunshine is a follow-up to a National Book Award finalist, Hey, Kiddo, also by Jarrett J. Krosoczka.",
+              "anchor": "入围的是前作"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这个故事唤起读者的回忆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "memorable",
+            "optionText": "memories",
+            "matchType": "wordFamily",
+            "relationNote": "memorable 出自《林中漫步》的书评 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7|this is a memorable story of strength and comfort]]，意思是“令人难忘的”；《阳光》只说读者可能获得新视角（a new perspective），没提回忆。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:7",
+              "quote": "Honest, healing – this is a memorable story of strength and comfort.",
+              "anchor": "memorable 属于另一本书"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "主人公是一只英勇的狗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "With Shawn Harris' grand illustrations, straight from the Hudson River School, Johannes is a hero for all time.",
+            "sourceEntity": "Johannes",
+            "optionText": "The main character is a heroic dog.",
+            "optionEntity": "a heroic dog",
+            "explanation": "英雄小狗 Johannes 是 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3]] 那本书的主角；《阳光》的主角是当营地辅导员的少年 Krosoczka 本人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:3",
+              "quote": "With Shawn Harris' grand illustrations, straight from the Hudson River School, Johannes is a hero for all time.",
+              "anchor": "英雄小狗属于另一本书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者同时也是插画师。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10",
+              "quote": "Through his words and illustrations, he takes us with him on a journey to a better understanding of others – and of himself.",
+              "anchor": "文字和插图都出自他"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:9",
+              "quote": "Jarrett J. Krosoczka",
+              "anchor": "署名只有作者一人"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Sunshine",
+          "sourceRole": "stem",
+          "targetText": "Sunshine is a follow-up to a National Book Award finalist, Hey, Kiddo, also by Jarrett J. Krosoczka.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10",
+          "relationType": "locationCue",
+          "answerText": "Through his words and illustrations",
+          "bridgeZh": "his 指作者 Krosoczka 本人",
+          "note": "题干书名 Sunshine 原词出现在这段书评开头。"
+        },
+        {
+          "sourceText": "The author also acts as the illustrator",
+          "sourceRole": "correctOption",
+          "targetText": "Through his words and illustrations, he takes us with him on a journey to a better understanding of others – and of himself.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:10",
+          "relationType": "paraphrase",
+          "note": "“作者兼任插画师”由两处合成：先是 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:9]] 只署了 Krosoczka 一个人，不像另外三本都写着“由某人绘”（illustrated by）；接着书评说文字和插图（words and illustrations）都是他的。选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:23": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从书评描写的经历推断这位墨西哥自由战士的性格。",
+      "stemTranslationZh": "哪个词最能描述这位墨西哥自由战士的性格？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "意志坚强的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+              "quote": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+              "anchor": "熬过磨难坚持抗争"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+              "quote": "An inspiring true story of a woman who went against the expectations of her community in order to save it.",
+              "anchor": "敢违背社区期望"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "慷慨的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Generous.",
+            "explanation": "书评写的是她坚持抗争、拯救社区，表现的是勇气和毅力，没写她把钱物分给别人。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "谦虚的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Modest.",
+            "explanation": "书评写她违背期望、成为领袖，没写她谦让低调的言行。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "宽容的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+            "sourceHighlight": "standing against the Mexican government",
+            "optionText": "Tolerant.",
+            "optionHighlight": "Tolerant",
+            "explanation": "宽容是对别人忍让包容；她却站出来反抗政府（standing against），写的是不妥协。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+              "quote": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+              "anchor": "她选择反抗"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Mexican",
+          "sourceRole": "stem",
+          "targetText": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+          "relationType": "locationCue",
+          "answerText": "persevered through violence and heartache",
+          "note": "题干 Mexican 原词出现在原文。"
+        },
+        {
+          "sourceText": "Strong-willed",
+          "sourceRole": "correctOption",
+          "targetText": "With her poetic touch, Aida Salazar shows how a youngster persevered through violence and heartache to become a leader standing against the Mexican government.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13",
+          "relationType": "paraphrase",
+          "note": "原文没直接给性格词，要从经历推：她熬过暴力和伤痛还坚持下来（persevered），最后成了反抗政府的领袖；[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-a:13|went against the expectations of her community]] 还写她敢违背社区的期望去救它。顶住压力、坚持到底，就是意志坚强，选 A。"
+        }
+      ]
+    }
+  }
+}

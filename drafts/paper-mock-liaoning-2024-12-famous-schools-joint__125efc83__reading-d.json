@@ -1,0 +1,767 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d": {
+      "overview": "海水变暖威胁珊瑚礁。美国研究人员首次把成年珊瑚冷冻保存后成功复苏，但珊瑚几天后被细菌杀死，研究者正尝试用抗生素延长其存活时间。",
+      "fullTranslationZh": "全球海水变暖正危及珊瑚礁——一个让海洋生物得以生存繁衍的关键生态系统。据最近一项研究，作为拯救珊瑚礁、使其免于灭绝的一种新办法，科学家近日首次将成群的成年珊瑚冷冻，随后又使它们复苏。\n据《科学时报》网站介绍，冷冻生物材料，即对其进行“低温保存”，是指在不影响细胞活性的前提下将它们长期深度冷冻。这种方法通常把它们冷却到极低的温度，一般是零下 196°C。由于在这样的低温下细胞内部会结冰，细胞通常会死亡，因此科学家需要监控冷冻速率，并谨慎选择冷冻介质。\n美国研究人员用夏威夷一种常见珊瑚的豌豆大小的碎块做冷冻实验。他们先清除珊瑚上的微生物，再把珊瑚密封在装有化学溶液的金属容器中，这种溶液使珊瑚部分脱水，并有助于控制冰的生长。当珊瑚降到约零下 200°C 时，珊瑚体内剩余的水分凝固成玻璃状。珊瑚仍然活着，只是维持生命的各项机能变得极其缓慢。低温保存几分钟后，研究人员把珊瑚取出，放进温水中。两分钟内，珊瑚开始消耗氧气——这是它们仍然存活的迹象。\n据 2018 年的一项研究，此前研究人员已经成功低温保存了珊瑚幼虫。然而，只有在珊瑚大量产卵时才能采集到幼虫，而这每年只发生在少数几个夜晚。“这就等于把很多鸡蛋放在一个篮子里。”美国海洋科学家 Liza Roger 对《科学新闻》说。\nRoger 说，这一突破给世界各地的珊瑚带来了更多希望。不过，还有更多工作要做。复温几天后，珊瑚因这一过程而“压力过大”，被平时与它们和谐共处的细菌杀死。研究人员正在尝试使用抗生素，帮助它们存活更长时间。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d-1",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+          "sourceText": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+          "displayText": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:32",
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:35"
+          ],
+          "translationZh": "据最近一项研究，作为拯救珊瑚礁、使其免于灭绝的一种新办法，科学家近日首次将成群的成年珊瑚冷冻，随后又使它们复苏。",
+          "analysisZh": "主干是 scientists have frozen … and then revived them（科学家冷冻了……随后又使它们复苏），and 连接两个并列谓语，先冻后救。句首 As a novel approach to saving them from extinction 是介词短语作状语，说明这样做的身份和目的：作为拯救珊瑚的新办法，to 是介词，后接动名词 saving。for the first time 强调“首次”，according to a recent study 交代来源。第 32、35 题都要从这里抓住“新办法 = 冷冻再复苏”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "As a novel approach"
+            },
+            {
+              "start": 52,
+              "end": 83,
+              "quote": "scientists have recently frozen"
+            },
+            {
+              "start": 126,
+              "end": 147,
+              "quote": "and then revived them"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d-2",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+          "sourceText": "Since cells would normally die at such a low temperature due to the formation of ice inside, scientists need to monitor the freezing rate and choose the freezing medium carefully.",
+          "displayText": "Since cells would normally die at such a low temperature due to the formation of ice inside, scientists need to monitor the freezing rate and choose the freezing medium carefully.",
+          "relatedQuestionIds": [],
+          "translationZh": "由于在这样的低温下细胞内部会结冰，细胞通常会死亡，因此科学家需要监控冷冻速率，并谨慎选择冷冻介质。",
+          "analysisZh": "主句是 scientists need to monitor … and choose …（科学家需要监控……并选择……），两个不定式由 and 并列。Since 引导原因状语从句，交代为什么要这样小心：细胞在这么低的温度下通常会死，due to the formation of ice inside 又说明死因是内部结冰。读懂这层因果，就明白下一段为什么要用溶液脱水、控制冰的生长。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "Since cells would normally die"
+            },
+            {
+              "start": 57,
+              "end": 91,
+              "quote": "due to the formation of ice inside"
+            },
+            {
+              "start": 93,
+              "end": 119,
+              "quote": "scientists need to monitor"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1"
+              ],
+              "start": 0,
+              "end": 91,
+              "quote": "全球海水变暖正危及珊瑚礁——一个让海洋生物得以生存繁衍的关键生态系统。据最近一项研究，作为拯救珊瑚礁、使其免于灭绝的一种新办法，科学家近日首次将成群的成年珊瑚冷冻，随后又使它们复苏。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2"
+              ],
+              "start": 92,
+              "end": 226,
+              "quote": "据《科学时报》网站介绍，冷冻生物材料，即对其进行“低温保存”，是指在不影响细胞活性的前提下将它们长期深度冷冻。这种方法通常把它们冷却到极低的温度，一般是零下 196°C。由于在这样的低温下细胞内部会结冰，细胞通常会死亡，因此科学家需要监控冷冻速率，并谨慎选择冷冻介质。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3"
+              ],
+              "start": 227,
+              "end": 423,
+              "quote": "美国研究人员用夏威夷一种常见珊瑚的豌豆大小的碎块做冷冻实验。他们先清除珊瑚上的微生物，再把珊瑚密封在装有化学溶液的金属容器中，这种溶液使珊瑚部分脱水，并有助于控制冰的生长。当珊瑚降到约零下 200°C 时，珊瑚体内剩余的水分凝固成玻璃状。珊瑚仍然活着，只是维持生命的各项机能变得极其缓慢。低温保存几分钟后，研究人员把珊瑚取出，放进温水中。两分钟内，珊瑚开始消耗氧气——这是它们仍然存活的迹象。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:4"
+              ],
+              "start": 424,
+              "end": 541,
+              "quote": "据 2018 年的一项研究，此前研究人员已经成功低温保存了珊瑚幼虫。然而，只有在珊瑚大量产卵时才能采集到幼虫，而这每年只发生在少数几个夜晚。“这就等于把很多鸡蛋放在一个篮子里。”美国海洋科学家 Liza Roger 对《科学新闻》说。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5"
+              ],
+              "start": 542,
+              "end": 644,
+              "quote": "Roger 说，这一突破给世界各地的珊瑚带来了更多希望。不过，还有更多工作要做。复温几天后，珊瑚因这一过程而“压力过大”，被平时与它们和谐共处的细菌杀死。研究人员正在尝试使用抗生素，帮助它们存活更长时间。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-d-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:32",
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+                "start": 121,
+                "end": 298,
+                "quote": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 35,
+                "end": 91,
+                "quote": "据最近一项研究，作为拯救珊瑚礁、使其免于灭绝的一种新办法，科学家近日首次将成群的成年珊瑚冷冻，随后又使它们复苏。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+                "start": 276,
+                "end": 455,
+                "quote": "Since cells would normally die at such a low temperature due to the formation of ice inside, scientists need to monitor the freezing rate and choose the freezing medium carefully."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 85,
+                "end": 134,
+                "quote": "由于在这样的低温下细胞内部会结冰，细胞通常会死亡，因此科学家需要监控冷冻速率，并谨慎选择冷冻介质。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+                "start": 184,
+                "end": 227,
+                "quote": "have recently frozen groups of adult corals"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+                "start": 219,
+                "end": 254,
+                "quote": "cools them to very low temperatures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 71,
+                "end": 81,
+                "quote": "将成群的成年珊瑚冷冻"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 61,
+                "end": 72,
+                "quote": "把它们冷却到极低的温度"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+                "start": 627,
+                "end": 651,
+                "quote": "started consuming oxygen"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 176,
+                "end": 182,
+                "quote": "开始消耗氧气"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+                "start": 314,
+                "end": 359,
+                "quote": "help them survive for a longer period of time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 91,
+                "end": 101,
+                "quote": "帮助它们存活更长时间"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+                "start": 121,
+                "end": 171,
+                "quote": "As a novel approach to saving them from extinction"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+                "start": 0,
+                "end": 56,
+                "quote": "This breakthrough offers more hope to the world’s corals"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 43,
+                "end": 63,
+                "quote": "作为拯救珊瑚礁、使其免于灭绝的一种新办法"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 8,
+                "end": 27,
+                "quote": "这一突破给世界各地的珊瑚带来了更多希望"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先交代珊瑚礁受威胁和冷冻复苏成年珊瑚的新办法，再解释冷冻保存的原理，接着详述实验过程，然后与此前只能冷冻幼虫的做法对比，最后指出成果的意义和仍待解决的问题。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+            "summary": "海水变暖危及珊瑚礁，科学家首次冷冻成年珊瑚并使其复苏。",
+            "function": "引出话题和新方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+            "summary": "低温保存是在不损伤细胞活性的前提下长期深冻，通常降到零下 196°C，要防止细胞内结冰。",
+            "function": "解释冷冻保存的原理"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+            "summary": "研究人员除去微生物，用化学溶液让珊瑚脱水控冰，冷到约零下 200°C，回暖后珊瑚开始耗氧，证明仍然活着。",
+            "function": "介绍实验过程和结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:4",
+            "summary": "此前只能冷冻珊瑚幼虫，而幼虫一年只有几个夜晚能采集，风险集中。",
+            "function": "对比旧方法的局限"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+            "summary": "这一突破带来希望，但珊瑚复温几天后被细菌杀死，研究者正试用抗生素延长其存活。",
+            "function": "指出意义和后续研究方向"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:32": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清拯救珊瑚的新办法是什么，再找出它起决定作用的条件。",
+      "stemTranslationZh": "拯救珊瑚的新方法中，关键因素是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看这种冷冻办法怎么做",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "金属容器。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "metal containers",
+            "optionText": "Metal containers",
+            "matchType": "exact",
+            "relationNote": "metal containers 出自 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3|they sealed the corals in metal containers]]，只是实验中装珊瑚的器具，起决定作用的是低温冷冻。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+              "quote": "After removing the microbes on the corals, they sealed the corals in metal containers filled with a chemical solution that partially dehydrated(脱水) them and helped control ice growth.",
+              "anchor": "容器只是器具"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "低温。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+              "quote": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+              "anchor": "新办法是冷冻"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+              "quote": "This method usually cools them to very low temperatures, commonly to -196°C.",
+              "anchor": "冷却到极低温度"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "干冰。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "ice",
+            "optionText": "ice",
+            "matchType": "exact",
+            "relationNote": "ice 在 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2]] 指细胞内部会结的冰（the formation of ice inside），结冰会让细胞死亡，正是要防的；原文没提用干冰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+              "quote": "Since cells would normally die at such a low temperature due to the formation of ice inside, scientists need to monitor the freezing rate and choose the freezing medium carefully.",
+              "anchor": "冰是要防的"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "合适的细胞。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "cell",
+            "optionText": "cells",
+            "matchType": "wordFamily",
+            "relationNote": "cells 借自 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2]] 的 cell’s viability（细胞活性）：原文说冷冻不能损伤细胞活性，细胞是要保护的对象，不是要挑选的条件。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+              "quote": "Freezing biological materials, or “cryopreserving” them, refers to keeping them in a deep freeze for long periods without affecting the cell’s viability (活性), according to the Science Times website.",
+              "anchor": "细胞是保护对象"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "new method",
+          "sourceRole": "stem",
+          "targetText": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+          "relationType": "locationCue",
+          "sourceZh": "新方法",
+          "targetCue": "novel approach",
+          "targetCueZh": "新颖的办法",
+          "answerText": "very low temperatures",
+          "bridgeZh": "新办法就是冷冻，冷冻要把珊瑚降到极低温度",
+          "note": "题干 new method 对应原文 novel approach。"
+        },
+        {
+          "sourceText": "Low temperature",
+          "sourceRole": "correctOption",
+          "targetText": "This method usually cools them to very low temperatures, commonly to -196°C.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“低温”就是原文的“极低的温度”（very low temperatures），一般是零下 196°C；冷冻正是靠这样的低温实现的，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究人员判断冷冻后的珊瑚仍然活着的依据。",
+      "stemTranslationZh": "研究人员是如何确认经过低温保存的珊瑚还活着的？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们突然收缩。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They shrank abruptly.",
+            "explanation": "原文只说溶液让珊瑚部分脱水（partially dehydrated），没写突然收缩，更没把收缩当作活着的证据。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们开始活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "started",
+            "optionText": "started",
+            "matchType": "exact",
+            "relationNote": "started 出自 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3|they started consuming oxygen]]，开始的是消耗氧气，不是身体活动；原文没写珊瑚会动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+              "quote": "In two minutes, they started consuming oxygen – a sign of them staying alive.",
+              "anchor": "开始的是耗氧"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们开始呼吸。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+              "quote": "In two minutes, they started consuming oxygen – a sign of them staying alive.",
+              "anchor": "开始耗氧"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们伸展开来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They stretched out.",
+            "explanation": "原文没写珊瑚伸展，研究人员判断它们活着，凭的是放进温水后开始耗氧。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "alive",
+          "sourceRole": "stem",
+          "targetText": "In two minutes, they started consuming oxygen – a sign of them staying alive.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "started consuming oxygen",
+          "note": "题干 alive 原词出现在原文。"
+        },
+        {
+          "sourceText": "They began to breathe",
+          "sourceRole": "correctOption",
+          "targetText": "In two minutes, they started consuming oxygen – a sign of them staying alive.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“开始呼吸”就是原文的“开始消耗氧气”（started consuming oxygen）：耗氧就是呼吸，破折号后还点明这是活着的标志。选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "根据研究目前遇到的问题和正在尝试的办法，判断今后的研究重点。",
+      "stemTranslationZh": "今后的研究可能会侧重于什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "帮助幼虫产下更多卵。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "However, the larvae can only be collected when corals produce eggs in large quantities, which happens just a few nights each year.",
+            "sourceEntity": "corals produce eggs",
+            "optionText": "Helping larvae lay more eggs.",
+            "optionEntity": "larvae lay more eggs",
+            "explanation": "产卵的是成年珊瑚（corals produce eggs），幼虫只能在产卵期采集；这讲的是旧方法的局限，不是今后的研究方向。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:4",
+              "quote": "However, the larvae can only be collected when corals produce eggs in large quantities, which happens just a few nights each year.",
+              "anchor": "产卵的是成年珊瑚"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "稳定温度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Stabilizing the temperature.",
+            "explanation": "原文提到温度都是在讲冷冻过程，珊瑚已经冷冻并复苏成功；遗留的问题是被细菌杀死，没提要稳定温度。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "小心地给珊瑚复温。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "warming up",
+            "optionText": "Warming up",
+            "matchType": "exact",
+            "relationNote": "warming up 出自 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5|A few days after warming up]]，只交代出问题的时间：复温几天后珊瑚被细菌杀死；对策是用抗生素，不是改进复温。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+              "quote": "A few days after warming up, the corals became “stressed out” from the process and were killed by the bacteria they normally live in harmony with.",
+              "anchor": "复温只是时间点"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "延长珊瑚的寿命。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+              "quote": "The researchers are working on using antibiotics (抗生素) to help them survive for a longer period of time.",
+              "anchor": "帮珊瑚活得更久"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+              "quote": "A few days after warming up, the corals became “stressed out” from the process and were killed by the bacteria they normally live in harmony with.",
+              "anchor": "复温几天后死亡"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "focus on",
+          "sourceRole": "stem",
+          "targetText": "The researchers are working on using antibiotics (抗生素) to help them survive for a longer period of time.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+          "relationType": "locationCue",
+          "sourceZh": "侧重于",
+          "targetCue": "are working on",
+          "targetCueZh": "正在着手做",
+          "answerText": "help them survive for a longer period of time",
+          "note": "题干 focus on 对应原文 are working on。"
+        },
+        {
+          "sourceText": "Extending the life of the corals",
+          "sourceRole": "correctOption",
+          "targetText": "The researchers are working on using antibiotics (抗生素) to help them survive for a longer period of time.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“延长珊瑚的寿命”就是原文的“帮它们存活更长时间”（survive for a longer period of time）。起因是 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5|were killed by the bacteria they normally live in harmony with]]：珊瑚复温几天后就被细菌杀死，所以下一步要让它们活得更久，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:35": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文围绕的中心：用什么办法、为了什么。",
+      "stemTranslationZh": "这篇文章主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1]] 的 novel approach 读起，看后面几段怎样展开这个新办法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "冷冻珊瑚以备将来使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+            "sourceHighlight": "saving them from extinction",
+            "optionText": "Freezing corals for future use.",
+            "optionHighlight": "for future use",
+            "explanation": "冷冻只是手段，文章讲的是借此拯救珊瑚、使其免于灭绝（saving them from extinction），还写到复苏和后续问题；“留作将来用”原文没提。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+              "quote": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+              "anchor": "冷冻是为了拯救珊瑚"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "用一种新方式保护珊瑚。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+              "quote": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+              "anchor": "新办法拯救珊瑚"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+              "quote": "This breakthrough offers more hope to the world’s corals, said Roger.",
+              "anchor": "突破带来希望"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "发现一种降温方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "This method usually cools them to very low temperatures, commonly to -196°C.",
+            "sourceHighlight": "cools them to very low temperatures",
+            "optionText": "Discovering a cooling method.",
+            "optionHighlight": "Discovering a cooling method",
+            "explanation": "[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2]] 讲降温只是在解释原理，这种方法也不是新发现，[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:4]] 说 2018 年就冷冻过珊瑚幼虫；全文讲的是用它保护珊瑚。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2",
+              "quote": "This method usually cools them to very low temperatures, commonly to -196°C.",
+              "anchor": "降温是原理说明"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "杀死细菌来拯救珊瑚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The researchers are working on using antibiotics (抗生素) to help them survive for a longer period of time.",
+            "sourceHighlight": "using antibiotics",
+            "optionText": "Killing bacteria to rescue corals.",
+            "optionHighlight": "Killing bacteria",
+            "explanation": "用抗生素对付细菌只在 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5]] 作为后续工作提了一句，是一个细节，撑不起全文。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5",
+              "quote": "The researchers are working on using antibiotics (抗生素) to help them survive for a longer period of time.",
+              "anchor": "只是后续工作"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Conserving corals in a new way",
+          "sourceRole": "correctOption",
+          "targetText": "As a novel approach to saving them from extinction, scientists have recently frozen groups of adult corals for the first time and then revived them, according to a recent study.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "几段写的都是同一件事：[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:1]] 提出冷冻再复苏的新办法来拯救珊瑚，[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:2]] 解释冷冻保存的原理，[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:3]] 讲实验经过，[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:4]] 对比以往只能冷冻幼虫的局限，[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-d:5]] 说这项突破带来希望但仍有问题。选项的“用新办法保护珊瑚”把目的和办法都包进去了，选 B。"
+        }
+      ]
+    }
+  }
+}

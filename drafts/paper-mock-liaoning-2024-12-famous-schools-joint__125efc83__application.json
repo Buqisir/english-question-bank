@@ -1,0 +1,139 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Mr. Smith,\n\nHere are my thoughts on \"To Civilize Campus Is My Responsibility\". A civilized campus is not built by teachers or rules alone. It depends on what each of us does every day.\n\nGood manners start with small things. In the dining hall, we can queue patiently and take only as much food as we can finish. In the library and classrooms, we should keep our voices low. When we meet teachers, a smile and a greeting make them feel welcome.\n\nIn my opinion, being civilized means caring about others, not just obeying rules. If each of us picks up litter or holds the door for others, our campus will be a better place. Let us start today.\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "投给英文校刊的征稿文章，用题面给出的称呼 Dear Mr. Smith 和落款 Yours, / Li Hua",
+        "personTense": "以第一人称“我”和“我们”来写，谈做法和观点用一般现在时",
+        "readerTone": "写给校刊负责人 Smith 先生，也写给全校读者，语气真诚、积极，不说教",
+        "goal": "说明文明校园要靠每个人，列出日常可做的文明行为，并亮出自己的看法、号召大家行动"
+      },
+      "taskRequires": [
+        "说明“文明校园，人人有责”",
+        "写出日常校园生活中良好的行为规范",
+        "表达个人观点"
+      ],
+      "thisEssayChooses": "标准版先说文明校园不能只靠老师和校规，要靠每个人的日常行为；再从食堂、图书馆和教室、见到老师三个场景各举一条做法；最后表明“文明就是为别人着想”的看法，用捡垃圾、扶门两件小事号召大家从今天做起。"
+    },
+    "standard": {
+      "essay": "Dear Mr. Smith,\n\nHere are my thoughts on \"To Civilize Campus Is My Responsibility\". A civilized campus is not built by teachers or rules alone. It depends on what each of us does every day.\n\nGood manners start with small things. In the dining hall, we can queue patiently and take only as much food as we can finish. In the library and classrooms, we should keep our voices low. When we meet teachers, a smile and a greeting make them feel welcome.\n\nIn my opinion, being civilized means caring about others, not just obeying rules. If each of us picks up litter or holds the door for others, our campus will be a better place. Let us start today.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "文明校园，人人有责",
+          "quote": "A civilized campus is not built by teachers or rules alone. It depends on what each of us does every day."
+        },
+        {
+          "point": "日常校园生活中良好的行为规范",
+          "quote": "In the dining hall, we can queue patiently and take only as much food as we can finish."
+        },
+        {
+          "point": "表达个人观点",
+          "quote": "In my opinion, being civilized means caring about others, not just obeying rules."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "点明这是一篇征稿，并把题目里的“人人有责”说成读者能认同的道理。",
+          "items": [
+            {
+              "quote": "Here are my thoughts on \"To Civilize Campus Is My Responsibility\".",
+              "explain": "第一句就说清这是一篇征稿，并直接用活动名称，编辑一看就知道这是投给哪个栏目的稿子。"
+            },
+            {
+              "quote": "A civilized campus is not built by teachers or rules alone.",
+              "explain": "先否定“只靠老师和校规”这种想法，再引出下一句“靠每个人”，比直接写 everyone has a responsibility 更有说服力。"
+            },
+            {
+              "quote": "It depends on what each of us does every day.",
+              "explain": "each of us 和 every day 把“人人有责”落到每个人的日常，为下一段写具体做法铺路。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写第二个要点：按食堂、图书馆和教室、见到老师三个场景，各写一条做得到的文明行为。",
+          "items": [
+            {
+              "quote": "Good manners start with small things.",
+              "explain": "一句短的主题句先定调：文明是小事，读者马上知道这一段要列做法。"
+            },
+            {
+              "quote": "take only as much food as we can finish",
+              "explain": "as much … as 说清“吃多少拿多少”，比 do not waste food 更具体，学生在食堂真能照做。"
+            },
+            {
+              "quote": "In the library and classrooms, we should keep our voices low.",
+              "explain": "用地点开头，和上一句 In the dining hall 形成并列，几条做法一眼分得清。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "写第三个要点：亮出个人观点，再用两件小事号召大家行动。",
+          "items": [
+            {
+              "quote": "being civilized means caring about others, not just obeying rules",
+              "explain": "“不只是守规矩，而是为别人着想”是自己的判断，不是复述题目，观点要点有了实在内容。"
+            },
+            {
+              "quote": "If each of us picks up litter or holds the door for others",
+              "explain": "用 If 条件句把观点落到两个人人做得到的动作上，回扣首段的 each of us。"
+            },
+            {
+              "quote": "Let us start today.",
+              "explain": "短句收尾，给读者一个马上能做的下一步，比“文明校园很重要”这类套话更有力。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "It depends on what each of us does every day.",
+          "function": "把“人人有责”说成每个人每天的行为，适合写责任类话题的开头。"
+        },
+        {
+          "expression": "take only as much food as we can finish",
+          "function": "具体写出节约粮食的做法，比 save food 这类口号更像真实的校园规范。"
+        },
+        {
+          "expression": "being civilized means caring about others, not just obeying rules",
+          "function": "用 not just 对比两种理解，清楚地表明自己的观点。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Mr. Smith,\n\nI am writing to share my thoughts on \"To Civilize Campus Is My Responsibility\". A civilized campus is not something the school can hand to us. It is built by the choices each of us makes every day, so the responsibility belongs to all of us.\n\nGood manners often show in small moments. In the dining hall, we can wait patiently in line and take only as much food as we can finish. In the library, keeping our voices down shows respect for those still working. When we pass teachers or visitors, a smile and a greeting cost nothing but make them feel at home.\n\nPersonally, I believe being civilized is less about following rules and more about thinking of others. If each of us picks up a piece of litter or holds the door for the person behind, these small acts will add up. Why not start today?\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "文明校园，人人有责",
+          "quote": "It is built by the choices each of us makes every day, so the responsibility belongs to all of us."
+        },
+        {
+          "point": "日常校园生活中良好的行为规范",
+          "quote": "In the dining hall, we can wait patiently in line and take only as much food as we can finish."
+        },
+        {
+          "point": "表达个人观点",
+          "quote": "Personally, I believe being civilized is less about following rules and more about thinking of others."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "It is built by the choices each of us makes every day, so the responsibility belongs to all of us.",
+          "explain": "用 the choices each of us makes 说明文明是每个人的选择，再用 so 推出“责任属于大家”，把标准版的两句合成一条完整的因果。"
+        },
+        {
+          "quote": "keeping our voices down shows respect for those still working",
+          "explain": "标准版只说该怎么做，这里用动名词作主语，补出这样做的理由：尊重还在学习的人。"
+        },
+        {
+          "quote": "is less about following rules and more about thinking of others",
+          "explain": "less about … more about … 比 not just 对比得更鲜明，观点更有分量，也是地道的表态说法。"
+        }
+      ]
+    }
+  }
+}

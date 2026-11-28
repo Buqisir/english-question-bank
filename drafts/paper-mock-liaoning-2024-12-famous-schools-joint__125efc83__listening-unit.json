@@ -1,0 +1,1001 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M:What are you up to?\nW: Checking my college application form. I’ve finally come to a decision about what to study in college.\nM:Is engineering still your top choice?\nW: Yeah, I was thinking of studying computer science, but I decided against it in the end.",
+      "translationZh": "男：你在忙什么？\n女：在检查我的大学申请表。我终于决定好上大学学什么了。\n男：工程学还是你的首选吗？\n女：是的，我之前想过学计算机科学，但最后决定不学了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "未来规划"
+      },
+      "summaryZh": "女士在检查大学申请表，已放弃计算机科学，定下了大学专业。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你在忙什么？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "在检查我的大学申请表。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我终于决定好上大学学什么了。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "工程学还是你的首选吗？"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "是的，我之前想过学计算机科学，但最后决定不学了。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W:May I help you, sir?\nM: Yes, I’m looking to replace my old laptop bag. I go on a lot of business trips, so I’m looking for something with wheels.",
+      "translationZh": "女：先生，需要帮忙吗？\n男：是的，我想换掉我的旧电脑包。我经常出差，所以想找个带轮子的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士常出差，想买一个带轮子的新电脑包换掉旧的。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "先生，需要帮忙吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "是的，我想换掉我的旧电脑包。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我经常出差，所以想找个带轮子的。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W:When will you be arriving, Mr. Baranski?\nM: Let me see. It’s Monday today, so on Thursday, the\n16th of May.\nW: And how long will you be staying?\nM: Two nights, leaving on Saturday.",
+      "translationZh": "女：巴兰斯基先生，您什么时候到？\n男：我看看。今天是星期一，那就是星期四，5 月 16 日。\n女：您要住多久？\n男：住两晚，星期六离开。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士预订住宿，周四即 16 日到达，住两晚后周六离开。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "巴兰斯基先生，您什么时候到？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我看看。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "今天是星期一，那就是星期四，"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "5 月 16 日。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "您要住多久？"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "住两晚，星期六离开。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "M: I’m leaving next week for the trip and I still don’t know what to do with my Cooper.\nW: Well, you know I am sensitive to animals so I can’t help. Hey! I just remembered I have a friend that has a pet hotel.\nM:I guess I can do that.",
+      "translationZh": "男：我下周就要出发去旅行了，还不知道该怎么安顿我的库珀。\n女：嗯，你知道我对动物过敏，所以帮不上忙。嘿！我刚想起来，我有个朋友开了一家宠物旅馆。\n男：我想我可以这么办。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "人与动植物"
+      },
+      "summaryZh": "男士下周出行，不知如何安顿宠物，女士建议送到朋友的宠物旅馆。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "我下周就要出发去旅行了，还不知道该怎么安顿我的库珀。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "嗯，你知道我对动物过敏，所以帮不上忙。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "嘿！"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我刚想起来，我有个朋友开了一家宠物旅馆。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我想我可以这么办。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: You look stressed. Is there something wrong?\nW: I’ve been trying to delete a table from my report but every time I do, it ruins the file format.\nM: I’ll fix it for you, if you agree to help me with the shopping later.",
+      "translationZh": "男：你看起来压力很大。出什么事了吗？\n女：我一直想从报告里删掉一个表格，可我每次这么做，都会把文件格式弄乱。\n男：我来帮你弄好，条件是你待会儿帮我去购物。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "女士删表格时总弄乱报告格式，男士答应帮忙，条件是她帮他购物。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你看起来压力很大。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "出什么事了吗？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我一直想从报告里删掉一个表格，可我每次这么做，都会把文件格式弄乱。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "我来帮你弄好，条件是你待会儿帮我去购物。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Hi Barbara, how’s the new house?\nW: We still have to decorate the living room and the bedrooms, but that’s because I spent the last two months working outside, planting flowers and trees trying to make it look beautiful. You know me, I’ll never be inside if I can be out in the fresh air.\nM: I bet you miss all the conveniences of the city, don’t you?\nW: Not really. I like living in a village.\nM:I hope Brian shares your views and isn’t missing city life too much.",
+      "translationZh": "男：嗨，芭芭拉，新房子怎么样？\n女：我们还得装修客厅和卧室，不过那是因为我过去两个月一直在外面干活，种花种树，想把房子周围弄得漂漂亮亮的。你了解我的，只要能待在外面呼吸新鲜空气，我就绝不待在屋里。\n男：我猜你一定很怀念城里的各种便利吧？\n女：不怎么怀念。我喜欢住在村子里。\n男：希望布赖恩和你想法一样，别太想念城市生活。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "芭芭拉搬进村里新房，两个月来一直在园子里种花种树，很喜欢乡村生活。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "嗨，芭芭拉，新房子怎么样？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "我们还得装修客厅和卧室，不过那是因为我过去两个月一直在外面干活，种花种树，想把房子周围弄得漂漂亮亮的。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "你了解我的，只要能待在外面呼吸新鲜空气，我就绝不待在屋里。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我猜你一定很怀念城里的各种便利吧？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "不怎么怀念。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我喜欢住在村子里。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "希望布赖恩和你想法一样，别太想念城市生活。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Mike, did you notice the slow service tonight? It’s unusually crowded.\nM: Yeah. Our orders took forever to arrive, and they got mine wrong.\nW: Same here. And the waitstaff seem busy and understaffed. I saw a few tables complaining about their orders too. I think we should talk to the manager before leaving.\nM: Definitely. This level of service isn’t acceptable for such a reputable restaurant.\nW: Let’s do that. Maybe they can improve service for future diners. And it could help them understand what went wrong tonight.\nM: Good idea. I’ll ask for the manager once we finish our meal.\nW: It’s important to address these issues constructively rather than just leaving without saying anything.\nM: Absolutely, Amanda.",
+      "translationZh": "女：迈克，你注意到今晚上菜很慢吗？今天人格外多。\n男：是啊。我们点的菜等了好久才上，而且我的还上错了。\n女：我的也是。服务员看起来很忙，人手也不够。我看到有好几桌也在抱怨他们点的菜。我觉得我们走之前应该和经理谈谈。\n男：当然。对这样一家有名气的餐厅来说，这种服务水平是不能接受的。\n女：就这么办吧。也许他们能为以后的顾客改进服务。这也能帮他们弄清楚今晚是哪里出了问题。\n男：好主意。我们一吃完饭我就去找经理。\n女：重要的是要建设性地处理这些问题，而不是一言不发就走人。\n男：完全同意，阿曼达。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "两人用餐时遇到餐厅服务慢、上错菜，商定吃完饭找经理反映问题。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "迈克，你注意到今晚上菜很慢吗？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "今天人格外多。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "是啊。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我们点的菜等了好久才上，而且我的还上错了。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "我的也是。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "服务员看起来很忙，人手也不够。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "我看到有好几桌也在抱怨他们点的菜。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我觉得我们走之前应该和经理谈谈。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "对这样一家有名气的餐厅来说，这种服务水平是不能接受的。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "就这么办吧。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "也许他们能为以后的顾客改进服务。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "这也能帮他们弄清楚今晚是哪里出了问题。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "好主意。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "我们一吃完饭我就去找经理。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "重要的是要建设性地处理这些问题，而不是一言不发就走人。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "完全同意，阿曼达。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: I’ve just seen Mel. She was telling me about that qualification she’s doing. It’s something about life coaching, isn’t it?\nM: That’s right. She’ll be great at it. You know how many times she has helped us with our problems?\nW: Is that all life coaching means?\nM: Well, life coaches show their clients how to adopt new approaches or new routines, and this enables them to make permanent changes. It’s about much more than analyzing a specific problem and fixing it.\nW: You sound like Mel! I’m still lost, though.\nM: Look, take something you’re always complaining about. Like, having to do chores around the house. A life coach would help you address this by helping you change your attitude to doing the chores in the first place. By working on your mindset, that will help you go forward.\nW: Oh, that makes sense. Mel would be brilliant at that.",
+      "translationZh": "女：我刚见到梅尔了。她跟我说了她正在考的那个资格证。是关于生活教练的，对吧？\n男：没错。她一定会做得很好。你知道她帮我们解决过多少次问题吗？\n女：生活教练就只是这个意思吗？\n男：嗯，生活教练会教客户如何采用新的方法或新的日常习惯，这能让他们做出长久的改变。它远不只是分析某个具体问题再把它解决掉。\n女：你说话跟梅尔一个样！不过我还是没明白。\n男：这么说吧，拿一件你总在抱怨的事来说。比如，得在家里做家务。生活教练会帮你从根本上改变对做家务的态度，以此来解决这件事。通过调整你的心态，你就能向前迈进。\n女：哦，这就说得通了。梅尔做这个一定很出色。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "积极的生活态度"
+      },
+      "summaryZh": "男士借女士讨厌做家务的例子，解释生活教练是帮人改变态度和心态。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "我刚见到梅尔了。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "她跟我说了她正在考的那个资格证。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "是关于生活教练的，对吧？"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "她一定会做得很好。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "你知道她帮我们解决过多少次问题吗？"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "生活教练就只是这个意思吗？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "嗯，生活教练会教客户如何采用新的方法或新的日常习惯，这能让他们做出长久的改变。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "它远不只是分析某个具体问题再把它解决掉。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "你说话跟梅尔一个样！"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "不过我还是没明白。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "这么说吧，拿一件你总在抱怨的事来说。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "比如，得在家里做家务。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "生活教练会帮你从根本上改变对做家务的态度，以此来解决这件事。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "通过调整你的心态，你就能向前迈进。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "哦，这就说得通了。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "梅尔做这个一定很出色。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Trent, how did you get into mountain climbing?\nM:Many people start climbing because they’ve watched a television documentary about climbing a mountain and a good friend enjoyed reading the biography of a famous climber. My experience was more unusual, though. When I was nine, I started at a new school where there was an amazing artwork on the wall. It showed some snow-covered mountains and I thought, I want to climb those!\nW: You climbed your first big mountain when you were ten. How did you feel beforehand?\nM: I was convinced I’d be really nervous before we set off, but the opposite was actually true, which I couldn’t quite believe. I went with very experienced climbers whom I trusted.\nW: You decided to climb the highest peak on each of the seven continents. Why was that?\nM: My grandfather became ill and there wasn’t much financial support for scientists trying to find a cure, so I asked people to sponsor me to climb the seven peaks.\nI became the youngest person ever to climb them, though that wasn’t my reason for doing it.",
+      "translationZh": "女：特伦特，你是怎么开始登山的？\n男：很多人开始登山，是因为看过一部讲登山的电视纪录片；我有个好朋友，则是因为爱读一位著名登山家的传记。不过我的经历比较特别。九岁那年，我转到一所新学校，学校墙上有一幅很棒的艺术作品。画上是几座白雪覆盖的山，我当时就想：我要去爬那些山！\n女：你十岁时登上了第一座大山。出发前你感觉怎么样？\n男：我原以为出发前自己会非常紧张，可实际情况正好相反，连我自己都不太敢相信。我是和几位我信得过的、经验非常丰富的登山者一起去的。\n女：你决定攀登七大洲的最高峰。为什么呢？\n男：我祖父病了，而那些努力寻找治疗方法的科学家得不到多少资金支持，所以我请人们赞助我去攀登七座高峰。我成了登顶这七座山峰最年轻的人，不过那并不是我这么做的原因。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "体育精神"
+      },
+      "summaryZh": "特伦特讲自己因一幅画爱上登山，并为给祖父的病筹集研究经费攀登七大洲最高峰。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "特伦特，你是怎么开始登山的？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "很多人开始登山，是因为看过一部讲登山的电视纪录片；我有个好朋友，则是因为爱读一位著名登山家的传记。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "不过我的经历比较特别。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "九岁那年，我转到一所新学校，学校墙上有一幅很棒的艺术作品。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "画上是几座白雪覆盖的山，我当时就想：我要去爬那些山！"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "你十岁时登上了第一座大山。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "出发前你感觉怎么样？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "我原以为出发前自己会非常紧张，可实际情况正好相反，连我自己都不太敢相信。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我是和几位我信得过的、经验非常丰富的登山者一起去的。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "你决定攀登七大洲的最高峰。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "为什么呢？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我祖父病了，而那些努力寻找治疗方法的科学家得不到多少资金支持，所以我请人们赞助我去攀登七座高峰。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我成了登顶这七座山峰最年轻的人，不过那并不是我这么做的原因。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: Hi, my talk today is about an invention, the modern car seat belt.\nThe inventor of the modern car seat belt was a Swedish man called Nils Bohlin. Bohlin had trained as a mechanical engineer at college before gaining his first employment as an aircraft designer. He did well, so was invited to join a car manufacturing company as a safety engineer.\nBohlin had often worked on improving seats and seat belts for planes since starting his working life in 1942. After joining the car manufacturer in 1958, he spent the following 12 months developing his ideas for cars, and then a car featuring Bohlin’s creation on both front seats was introduced, making it the earliest example of a vehicle with modern seat belts.\nHowever, it took many years for them to become widely accepted. Japan made it a rule that everyone must wear seat belts in their cars across the whole country in\n1971. A year earlier, two of the six states in Australia had\nintroduced similar rules. France was the first European nation to create seat belt laws several years later. It’s incredible to think that some investment in research and development in the manufacturing industry has had such a huge global impact.",
+      "translationZh": "男：大家好，我今天要讲的是一项发明：现代汽车安全带。现代汽车安全带的发明者是一位名叫尼尔斯·博林的瑞典人。博林在大学里学的是机械工程，之后找到第一份工作，当飞机设计师。他干得很出色，于是被邀请到一家汽车制造公司当安全工程师。从 1942 年参加工作起，博林就经常从事改进飞机座椅和安全带的工作。1958 年加入那家汽车制造商后，他用接下来的 12 个月把自己的想法用到汽车上，随后一款两个前排座位都装有博林发明的汽车面世，成为最早配备现代安全带的车辆。然而，安全带过了很多年才被广泛接受。日本规定全国所有人坐车都必须系安全带，那是在1971 年。早一年，澳大利亚六个州中已有两个州出台了类似的规定。几年后，法国成为第一个制定安全带法律的欧洲国家。想到在制造业研发上的一些投入竟对全球产生了如此巨大的影响，真是令人惊叹。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "科学与技术",
+        "subtopic": "科技发展"
+      },
+      "summaryZh": "讲座介绍现代汽车安全带发明者博林的经历，以及各国安全带法规的先后出台。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家好，我今天要讲的是一项发明：现代汽车安全带。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "现代汽车安全带的发明者是一位名叫尼尔斯·博林的瑞典人。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "博林在大学里学的是机械工程，之后找到第一份工作，当飞机设计师。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "他干得很出色，于是被邀请到一家汽车制造公司当安全工程师。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "从 1942 年参加工作起，博林就经常从事改进飞机座椅和安全带的工作。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "1958 年加入那家汽车制造商后，他用接下来的 12 个月把自己的想法用到汽车上，随后一款两个前排座位都装有博林发明的汽车面世，成为最早配备现代安全带的车辆。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "然而，安全带过了很多年才被广泛接受。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "日本规定全国所有人坐车都必须系安全带，那是在"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "1971 年。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "早一年，澳大利亚六个州中已有两个州"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "出台了类似的规定。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "几年后，法国成为第一个制定安全带法律的欧洲国家。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "想到在制造业研发上的一些投入竟对全球产生了如此巨大的影响，真是令人惊叹。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士已经做完了什么？",
+      "optionTranslationsZh": {
+        "A": "选定专业。",
+        "B": "用电脑工作。",
+        "C": "寄出申请表。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ve finally come to a decision about what to study in college."
+      },
+      "reasonZh": "“选定专业”就是女士说的终于决定好大学学什么（come to a decision about what to study），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "电脑出现在计算机科学（computer science）这个专业名里，而且女士已决定不学它，她并没有在用电脑。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "女士说的是正在检查申请表（Checking my college application form），只是在核对，没说已经寄出。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士要买什么？",
+      "optionTranslationsZh": {
+        "A": "一个包。",
+        "B": "一台笔记本电脑。",
+        "C": "一辆汽车。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Yes, I’m looking to replace my old laptop bag."
+      },
+      "reasonZh": "男士要换掉的是旧电脑包（replace my old laptop bag），还想要带轮子的，买的是包，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "笔记本电脑（laptop）只是用来说明是什么包，他要换的是装电脑的包，不是电脑本身。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士什么时候退房？",
+      "optionTranslationsZh": {
+        "A": "16 日。",
+        "B": "17 日。",
+        "C": "18 日。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Two nights, leaving on Saturday."
+      },
+      "reasonZh": "男士周四即 16 日到，住两晚（Two nights），16 日 + 2 晚 = 18 日周六离开（leaving on Saturday），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "16 日（the 16th of May）是男士到达的日子，问的是退房，要再加上住的两晚。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "去度假。",
+        "B": "应对过敏问题。",
+        "C": "照顾宠物。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I just remembered I have a friend that has a pet hotel."
+      },
+      "reasonZh": "男士不知怎么安顿库珀（what to do with my Cooper），女士自己帮不上，就推荐朋友的宠物旅馆，两人一直在商量谁来照顾这只宠物，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "下周去旅行（leaving next week for the trip）只是起因，两人商量的是旅行期间宠物交给谁。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "女士对动物过敏（sensitive to animals）只是她帮不上忙的理由，随后话题就转到宠物旅馆。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男士可能会为女士做什么？",
+      "optionTranslationsZh": {
+        "A": "清理桌子。",
+        "B": "帮她处理报告。",
+        "C": "帮着拎购物的东西。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll fix it for you, if you agree to help me with the shopping later."
+      },
+      "reasonZh": "女士删表格时报告格式总被弄乱，男士说帮她弄好（I’ll fix it for you），这里的 it 指报告的问题，所以是帮她处理报告，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 table 是报告里要删的表格（delete a table from my report），不是要清理的桌子。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "购物（the shopping）是男士要女士帮他做的事，方向反了，而且没说要帮着拎东西。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "芭芭拉两个月前开始做什么？",
+      "optionTranslationsZh": {
+        "A": "打理花园。",
+        "B": "收拾卧室。",
+        "C": "装修客厅。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We still have to decorate the living room and the bedrooms, but that’s because I spent the last two months working outside, planting flowers and trees trying to make it look beautiful."
+      },
+      "reasonZh": "“打理花园”概括了芭芭拉说的过去两个月在外面干活、种花种树（working outside, planting flowers and trees），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "卧室和客厅一起出现在“还得装修”（still have to decorate）里，是还没开始做的事，并且说的是装修，不是收拾。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "装修客厅（decorate the living room）前面有 still have to，说明还没做，正是因为两个月都花在了屋外。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "布赖恩可能是谁？",
+      "optionTranslationsZh": {
+        "A": "芭芭拉的邻居。",
+        "B": "芭芭拉的丈夫。",
+        "C": "芭芭拉的园丁。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I hope Brian shares your views and isn’t missing city life too much."
+      },
+      "reasonZh": "芭芭拉说“我们”还得装修新房（We still have to decorate），男士又盼布赖恩也别太想念城市生活，可见布赖恩和她一起从城里搬进新家，最可能是她丈夫，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士担心布赖恩会想念城市生活（missing city life），说明他是和芭芭拉一起从城里搬进新家的人，不是住在附近的邻居。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "种花种树是芭芭拉自己干的（I spent the last two months working outside），录音里没有请园丁，男士关心的是布赖恩适不适应乡村。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "这段对话发生在什么时候？",
+      "optionTranslationsZh": {
+        "A": "点菜之前。",
+        "B": "用餐期间。",
+        "C": "用餐之后。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll ask for the manager once we finish our meal."
+      },
+      "reasonZh": "菜已经上了还上错了（Our orders took forever to arrive），男士又说等吃完饭再去找经理（once we finish our meal），可见两人正在吃饭，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "他们点的菜已经上了，还上错了（they got mine wrong），早过了点菜的时候。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "男士说的是吃完饭后（once we finish our meal）再去找经理，说明这顿饭还没吃完。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "关于这家餐厅我们知道什么？",
+      "optionTranslationsZh": {
+        "A": "它环境很好。",
+        "B": "它搬了新地址。",
+        "C": "它名气很好。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "This level of service isn’t acceptable for such a reputable restaurant."
+      },
+      "reasonZh": "“名气很好”就是男士说的有名气的餐厅（such a reputable restaurant），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 address 是动词，指处理这些问题（address these issues），不是地址。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人决定做什么？",
+      "optionTranslationsZh": {
+        "A": "反映服务问题。",
+        "B": "投诉经理。",
+        "C": "换个人少的地方。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I think we should talk to the manager before leaving."
+      },
+      "reasonZh": "女士提议走前找经理谈谈（talk to the manager），好让餐厅改进服务、弄清今晚哪里出了问题，男士同意，所以是去反映服务问题，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "抱怨（complaining）的是别桌对上菜的不满，经理是他们要去反映问题的对象，不是被投诉的人。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "人多（unusually crowded）只是服务慢的原因，两人打算吃完饭找经理，没说要换地方。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士对什么感到好奇？",
+      "optionTranslationsZh": {
+        "A": "生活教练是做什么的。",
+        "B": "梅尔为什么考这个资格证。",
+        "C": "梅尔是否擅长解决问题。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Is that all life coaching means?"
+      },
+      "reasonZh": "女士追问生活教练是否就只是帮人解决问题（Is that all life coaching means），后面又说还是没明白（I’m still lost），她想弄清的是生活教练做什么，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "资格证（qualification）是女士开头转述梅尔在考的东西，她没有问梅尔为什么要考。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "帮人解决问题是男士夸梅尔的话（she has helped us with our problems），女士接着问的是生活教练的含义，不是梅尔行不行。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士讨厌做什么？",
+      "optionTranslationsZh": {
+        "A": "谈论她的家庭情况。",
+        "B": "分析个人问题。",
+        "C": "做家务。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Like, having to do chores around the house."
+      },
+      "reasonZh": "男士让女士拿她总在抱怨的事（always complaining about）举例，随即说出就是做家务（do chores around the house），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "分析问题（analyzing a specific problem）是男士说生活教练不只做的事，跟女士讨厌什么无关。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "按男士的说法，女士怎样解决她的问题？",
+      "optionTranslationsZh": {
+        "A": "寻求合作。",
+        "B": "改变她的态度。",
+        "C": "开始一种新的日常习惯。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "A life coach would help you address this by helping you change your attitude to doing the chores in the first place."
+      },
+      "reasonZh": "男士说生活教练会帮她改变对做家务的态度（change your attitude），接着又说调整心态（working on your mindset），选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "新的日常习惯（new routines）是男士笼统介绍生活教练时说的，落到女士做家务这件事上，他说的是改变态度。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "是什么激发了特伦特开始登山？",
+      "optionTranslationsZh": {
+        "A": "一幅山的画。",
+        "B": "一部电视纪录片。",
+        "C": "一本登山家的传记。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It showed some snow-covered mountains and I thought, I want to climb those!"
+      },
+      "reasonZh": "“一幅山的画”就是特伦特说的新学校墙上那幅艺术作品，画着雪山（showed some snow-covered mountains），他看了就想去爬，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "电视纪录片（television documentary）是很多人开始登山的原因，特伦特随后说自己的经历更特别（more unusual）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "登山家的传记（biography of a famous climber）同样是在说别人的起因，不是特伦特自己的。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "特伦特第一次攀登大山时感觉如何？",
+      "optionTranslationsZh": {
+        "A": "紧张。",
+        "B": "自信。",
+        "C": "惊奇。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I was convinced I’d be really nervous before we set off, but the opposite was actually true, which I couldn’t quite believe."
+      },
+      "reasonZh": "特伦特本以为会很紧张，实际正好相反（the opposite was actually true），又说同行的是他信得过的老手（whom I trusted），所以他心里有底，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "紧张（really nervous）是他事先以为会有的感觉，后面用 but 转了，实际正好相反。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "特伦特为什么决定攀登七座高峰？",
+      "optionTranslationsZh": {
+        "A": "为了克服恐惧。",
+        "B": "为了实现他长久以来的梦想。",
+        "C": "为了给祖父筹钱。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "My grandfather became ill and there wasn’t much financial support for scientists trying to find a cure, so I asked people to sponsor me to climb the seven peaks."
+      },
+      "reasonZh": "祖父生病，研究治疗方法的科学家缺钱（wasn’t much financial support），他就请人赞助他登七峰（sponsor me），是为祖父的病筹钱，选 C。"
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "特伦特在攀登七峰的人中有什么特别之处？",
+      "optionTranslationsZh": {
+        "A": "他由祖父陪同。",
+        "B": "他攀登了白雪覆盖的山。",
+        "C": "他比其他任何登山者都年轻。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I became the youngest person ever to climb them, though that wasn’t my reason for doing it."
+      },
+      "reasonZh": "“比其他任何登山者都年轻”就是特伦特说的登七峰最年轻的人（the youngest person ever），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "白雪覆盖的山（snow-covered mountains）是他小时候在学校墙上那幅画里看到的，与他在七峰登山者中的特别之处无关。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "博林第一份工作做什么？",
+      "optionTranslationsZh": {
+        "A": "他在大学教书。",
+        "B": "他设计飞机。",
+        "C": "他生产汽车。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Bohlin had trained as a mechanical engineer at college before gaining his first employment as an aircraft designer."
+      },
+      "reasonZh": "“设计飞机”就是说话人说的第一份工作是飞机设计师（first employment as an aircraft designer），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "大学（at college）是博林学机械工程的地方，他在那里是受训，不是教书。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "汽车是他后来受邀进汽车公司当安全工程师才接触的（join a car manufacturing company），不是第一份工作，而且他在那里当的是安全工程师，不是生产汽车。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "第一条现代汽车安全带是什么时候出现的？",
+      "optionTranslationsZh": {
+        "A": "1942 年。",
+        "B": "1958 年。",
+        "C": "1959 年。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "After joining the car manufacturer in 1958, he spent the following 12 months developing his ideas for cars, and then a car featuring Bohlin’s creation on both front seats was introduced, making it the earliest example of a vehicle with modern seat belts."
+      },
+      "reasonZh": "博林 1958 年进汽车公司，又花了 12 个月（the following 12 months）研发，然后装他发明的车才面世，1958 + 1 年 = 1959 年，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "1942 年是博林参加工作、开始改进飞机座椅和安全带的时间（since starting his working life in 1942），那时还没有汽车安全带。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "1958 年是他加入汽车公司的时间，之后还研发了 12 个月，车才推出。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "哪个国家最先推行汽车安全带法规？",
+      "optionTranslationsZh": {
+        "A": "日本。",
+        "B": "澳大利亚。",
+        "C": "法国。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "A year earlier, two of the six states in Australia had"
+      },
+      "reasonZh": "日本 1971 年立规，澳大利亚两个州比它早一年（A year earlier）就出台了类似规定，即 1970 年，最早，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "日本 1971 年才规定全国必须系安全带，澳大利亚比它早一年（A year earlier）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "法国只是第一个立法的欧洲国家（the first European nation），而且还在几年后（several years later）。"
+        }
+      ]
+    }
+  }
+}

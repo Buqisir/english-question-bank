@@ -1,0 +1,766 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-2024-12-famous-schools-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c": {
+      "overview": "文章分析电动车更容易让人晕车的原因：单踏板驾驶使减速过急，车内屏幕过多让乘客不看窗外；又指出自动驾驶汽车可能带来新挑战，车企正用更好的技术应对。",
+      "fullTranslationZh": "比起燃油车，你坐电动车时晕车更厉害吗？不只你一个人这样——而说到自动驾驶汽车，情况可能更糟。\n尽管科学家还不完全确定晕车的成因，但它与乘客失去预判车辆接下来如何移动的能力有关。你在车里看杂志时，眼睛会向大脑发出车子静止不动的信号。然而，大脑却能察觉到车子的振动和转弯。这会让大脑感到混乱，使你开始觉得难受。\n就电动车而言，据美国能源部称，单踏板驾驶常被认为是让人晕车的原因。这一个踏板同时负责加速和刹车——司机踩下踏板来提速，松开踏板来减速。如果停止加速，单踏板系统就会自动让车减速并停下。因此，这种系统造成的减速比燃油车更急，这可能会引起晕车。\n另一项可能也与晕车有关的技术进步，是电动车内越来越大、数量也越来越多的屏幕。据《对话》网站报道，这些屏幕用过多的视觉信息让使用者应接不暇，使他们不愿往车外看。乘客因此接收不到“正确”的视觉信号，比如移动的周围景物，这就可能引发晕车。\n遗憾的是，即便人们适应了电动车的行驶方式、晕车有所减轻，自动驾驶汽车可能又会给他们带来新的挑战。一项研究显示，多达 12% 的美国人在乘坐自动驾驶汽车时可能会晕车。\n为了确保新型汽车得到广泛使用，汽车制造商正努力用更好的技术解决这类问题。例如，据《汽车杂志》报道，日本本田公司正通过改进发动机来减轻汽车“猛烈”的加速。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c-1",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+          "sourceText": "Although scientists aren’t exactly sure what causes motion sickness, it has to do with passengers being deprived of the ability to predict future movements.",
+          "displayText": "Although scientists aren’t exactly sure what causes motion sickness, it has to do with passengers being deprived of the ability to predict future movements.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:28"
+          ],
+          "translationZh": "尽管科学家还不完全确定晕车的成因，但它与乘客失去预判车辆接下来如何移动的能力有关。",
+          "analysisZh": "主句是 it has to do with …（它与……有关），it 指晕车。Although 引导让步状语从句，从句里 what causes motion sickness 是 sure 后的宾语从句。with 后面是动名词复合结构 passengers being deprived of …：passengers 是 being deprived 的逻辑主语，be deprived of 表示“被夺去、失去”，宾语是 the ability to predict future movements（预判接下来动作的能力）。第 28 题考的就是这个短语。",
+          "underlineRanges": [
+            {
+              "start": 69,
+              "end": 86,
+              "quote": "it has to do with"
+            },
+            {
+              "start": 87,
+              "end": 115,
+              "quote": "passengers being deprived of"
+            },
+            {
+              "start": 116,
+              "end": 155,
+              "quote": "the ability to predict future movements"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c-2",
+          "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+          "sourceText": "These screens overburden users with visual information, which discourages them from looking outside, according to The Conversation.",
+          "displayText": "These screens overburden users with visual information, which discourages them from looking outside, according to The Conversation.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-2024-12-famous-schools-joint:29"
+          ],
+          "translationZh": "据《对话》网站报道，这些屏幕用过多的视觉信息让使用者应接不暇，使他们不愿往车外看。",
+          "analysisZh": "主干是 These screens overburden users with visual information（这些屏幕用视觉信息让使用者负担过重）。which 引导非限制性定语从句，指代前面整件事；discourage sb from doing 表示“使某人不愿做某事”，所以是信息过多让人不往外看。according to The Conversation 交代消息来源。第 29 题的答案就落在 which 从句上。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "These screens overburden users"
+            },
+            {
+              "start": 56,
+              "end": 99,
+              "quote": "which discourages them from looking outside"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1"
+              ],
+              "start": 0,
+              "end": 46,
+              "quote": "比起燃油车，你坐电动车时晕车更厉害吗？不只你一个人这样——而说到自动驾驶汽车，情况可能更糟。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2"
+              ],
+              "start": 47,
+              "end": 153,
+              "quote": "尽管科学家还不完全确定晕车的成因，但它与乘客失去预判车辆接下来如何移动的能力有关。你在车里看杂志时，眼睛会向大脑发出车子静止不动的信号。然而，大脑却能察觉到车子的振动和转弯。这会让大脑感到混乱，使你开始觉得难受。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:3"
+              ],
+              "start": 154,
+              "end": 273,
+              "quote": "就电动车而言，据美国能源部称，单踏板驾驶常被认为是让人晕车的原因。这一个踏板同时负责加速和刹车——司机踩下踏板来提速，松开踏板来减速。如果停止加速，单踏板系统就会自动让车减速并停下。因此，这种系统造成的减速比燃油车更急，这可能会引起晕车。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4"
+              ],
+              "start": 274,
+              "end": 390,
+              "quote": "另一项可能也与晕车有关的技术进步，是电动车内越来越大、数量也越来越多的屏幕。据《对话》网站报道，这些屏幕用过多的视觉信息让使用者应接不暇，使他们不愿往车外看。乘客因此接收不到“正确”的视觉信号，比如移动的周围景物，这就可能引发晕车。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:5"
+              ],
+              "start": 391,
+              "end": 473,
+              "quote": "遗憾的是，即便人们适应了电动车的行驶方式、晕车有所减轻，自动驾驶汽车可能又会给他们带来新的挑战。一项研究显示，多达 12% 的美国人在乘坐自动驾驶汽车时可能会晕车。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6"
+              ],
+              "start": 474,
+              "end": 550,
+              "quote": "为了确保新型汽车得到广泛使用，汽车制造商正努力用更好的技术解决这类问题。例如，据《汽车杂志》报道，日本本田公司正通过改进发动机来减轻汽车“猛烈”的加速。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-c-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:28"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+                "start": 0,
+                "end": 156,
+                "quote": "Although scientists aren’t exactly sure what causes motion sickness, it has to do with passengers being deprived of the ability to predict future movements."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 0,
+                "end": 41,
+                "quote": "尽管科学家还不完全确定晕车的成因，但它与乘客失去预判车辆接下来如何移动的能力有关。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+                "start": 144,
+                "end": 275,
+                "quote": "These screens overburden users with visual information, which discourages them from looking outside, according to The Conversation."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 38,
+                "end": 79,
+                "quote": "据《对话》网站报道，这些屏幕用过多的视觉信息让使用者应接不暇，使他们不愿往车外看。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+                "start": 98,
+                "end": 155,
+                "quote": "being deprived of the ability to predict future movements"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+                "start": 192,
+                "end": 249,
+                "quote": "your eyes will signal to your brain that the car is still"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 22,
+                "end": 38,
+                "quote": "失去预判车辆接下来如何移动的能力"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 50,
+                "end": 67,
+                "quote": "眼睛会向大脑发出车子静止不动的信号"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+                "start": 200,
+                "end": 243,
+                "quote": "which discourages them from looking outside"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+                "start": 276,
+                "end": 401,
+                "quote": "Passengers thereby fail to take in the “correct” visual signals, such as the moving surroundings, which can trigger sickness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 69,
+                "end": 78,
+                "quote": "使他们不愿往车外看"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 79,
+                "end": 116,
+                "quote": "乘客因此接收不到“正确”的视觉信号，比如移动的周围景物，这就可能引发晕车。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+                "start": 57,
+                "end": 128,
+                "quote": "car producers are working to solve such problems with better technology"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p6",
+                "start": 15,
+                "end": 35,
+                "quote": "汽车制造商正努力用更好的技术解决这类问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-2024-12-famous-schools-joint:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1",
+                "start": 0,
+                "end": 74,
+                "quote": "Do you experience worse car sickness in electric cars than in petrol cars?"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:3",
+                "start": 22,
+                "end": 84,
+                "quote": "one-pedal driving is often blamed for feelings of car sickness"
+              },
+              {
+                "textId": "source-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+                "start": 0,
+                "end": 70,
+                "quote": "Another technological advance that can also be related to car sickness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 0,
+                "end": 19,
+                "quote": "比起燃油车，你坐电动车时晕车更厉害吗？"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 15,
+                "end": 32,
+                "quote": "单踏板驾驶常被认为是让人晕车的原因"
+              },
+              {
+                "textId": "translation-group:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 0,
+                "end": 16,
+                "quote": "另一项可能也与晕车有关的技术进步"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先以电动车让人更晕车的问题开篇，再讲晕车的一般机理，接着分析电动车的两个具体原因，然后指出自动驾驶车的新挑战，最后说车企正在用技术解决。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1",
+            "summary": "问读者坐电动车是否更晕车，并说自动驾驶车可能更糟。",
+            "function": "提出问题，引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+            "summary": "晕车与乘客无法预判车的动作有关：看杂志时眼睛以为车不动，大脑却感到振动和转弯。",
+            "function": "解释晕车的一般机理"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:3",
+            "summary": "单踏板驾驶一松脚就自动减速，减速比燃油车更急，可能引起晕车。",
+            "function": "分析第一个原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+            "summary": "车内屏幕越来越多，视觉信息过量让乘客不看窗外，接收不到正确的视觉信号。",
+            "function": "分析第二个原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:5",
+            "summary": "即便适应了电动车，自动驾驶车仍可能让多达 12% 的美国人晕车。",
+            "function": "指出新的挑战"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+            "summary": "车企正用更好的技术解决问题，如本田改进发动机以减轻猛烈加速。",
+            "function": "说明应对措施"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:28": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借后文读杂志晕车的例子，推断短语 being deprived of 在句中的意思。",
+      "stemTranslationZh": "第 2 段中短语 “being deprived of” 的意思可能是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看读杂志的例子",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "失去。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+              "quote": "Although scientists aren’t exactly sure what causes motion sickness, it has to do with passengers being deprived of the ability to predict future movements.",
+              "anchor": "短语所在句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+              "quote": "When you read a magazine in a car, your eyes will signal to your brain that the car is still.",
+              "anchor": "眼睛以为车没动"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+              "quote": "However, your brain will recognize the vibrations(振动) and turns that the car makes.",
+              "anchor": "大脑却感到车在动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "局限于。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Restricted to.",
+            "explanation": "放进去就成了“乘客只局限于预判车辆动作的能力”，像是还剩这种能力；例子里乘客恰恰预判不了。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "被注满了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Fueled with.",
+            "explanation": "放进去就成了“乘客满怀预判车辆动作的能力”，与眼睛以为车静止、乘客预判不了正相反。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "正在培养。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Developing.",
+            "explanation": "放进去就成了“晕车与乘客正在培养预判能力有关”，可例子讲的是预判不了才晕车。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "being deprived of",
+          "sourceRole": "stem",
+          "targetText": "Although scientists aren’t exactly sure what causes motion sickness, it has to do with passengers being deprived of the ability to predict future movements.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "your eyes will signal to your brain that the car is still",
+          "bridgeZh": "读杂志的例子说明乘客没法预判车怎么动",
+          "note": "题干短语 being deprived of 原词出现在原文。"
+        },
+        {
+          "sourceText": "Losing",
+          "sourceRole": "correctOption",
+          "targetText": "Although scientists aren’t exactly sure what causes motion sickness, it has to do with passengers being deprived of the ability to predict future movements.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "短语后面跟着 the ability to predict（预判的能力），而例子说明乘客恰恰预判不了车的动作，所以这个短语必须表示“没有了这种能力”。放回去：晕车与乘客失去预判车辆下一步动作的能力有关，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把各选项放回单踏板和车内屏幕两处原因里核对，找出原文给出的晕车原因。",
+      "stemTranslationZh": "什么可能导致人们在电动车里晕车更严重？",
+      "locateBy": "options",
+      "locateFindZh": "按选项回单踏板和车内屏幕两处，核对原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "单踏板系统没法让车足够快地停下。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The deceleration caused by this system is thus more rapid than that of petrol cars, which may lead to motion sickness.",
+            "sourceHighlight": "more rapid",
+            "optionText": "The one-pedal system couldn’t stop the car fast enough.",
+            "optionHighlight": "couldn’t stop the car fast enough",
+            "explanation": "原文说单踏板减速比燃油车更急（more rapid），减得太快才晕车；选项说成停得不够快，方向反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:3",
+              "quote": "The deceleration caused by this system is thus more rapid than that of petrol cars, which may lead to motion sickness.",
+              "anchor": "减速更急"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "车内屏幕不提供吸引人的画面。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The screens inside do not provide appealing images.",
+            "explanation": "原文说屏幕的问题是视觉信息太多（overburden users with visual information），让人顾不上看窗外，没说画面不吸引人。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "乘客被分散了注意力，不去看车外的景色。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+              "quote": "These screens overburden users with visual information, which discourages them from looking outside, according to The Conversation.",
+              "anchor": "屏幕让人不往外看"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+              "quote": "Passengers thereby fail to take in the “correct” visual signals, such as the moving surroundings, which can trigger sickness.",
+              "anchor": "看不到外景引发晕车"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人们适应创新设计需要时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "Unfortunately, even when people adjust to the movements of electric cars and experience less car sickness, self-driving vehicles might be another challenge for them.",
+            "sourceHighlight": "adjust to the movements of electric cars and experience less car sickness",
+            "optionText": "It takes time for people to get adapted to creative designs.",
+            "optionHighlight": "get adapted to creative designs",
+            "explanation": "[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:5]] 说人们适应（adjust to）电动车后晕车会减轻，适应是让晕车减轻的事，原文没把“适应要花时间”列为晕车原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:5",
+              "quote": "Unfortunately, even when people adjust to the movements of electric cars and experience less car sickness, self-driving vehicles might be another challenge for them.",
+              "anchor": "适应后晕车减轻"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Passengers are distracted from looking at outside views",
+          "sourceRole": "correctOption",
+          "targetText": "These screens overburden users with visual information, which discourages them from looking outside, according to The Conversation.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“分心不看窗外”对应原文“屏幕信息太多，使人不愿往外看”（discourages them from looking outside）；接着原文说乘客因此看不到移动的外景（the moving surroundings），从而引发晕车。选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据车企正在采取的措施，推断晕车问题的前景，并把握结论的分寸。",
+      "stemTranslationZh": "读者能从文中预测出什么？",
+      "locateBy": "passage",
+      "locateFindZh": "预测看结尾：读 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6]] 车企正在做什么，再推晕车问题今后会怎样",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "新型汽车前景暗淡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "To ensure the widespread usage of new types of vehicles, car producers are working to solve such problems with better technology.",
+            "sourceHighlight": "To ensure the widespread usage of new types of vehicles",
+            "optionText": "New types of vehicles have no bright future.",
+            "optionHighlight": "have no bright future",
+            "explanation": "车企努力解决晕车，正是为了让新型汽车广泛使用（widespread usage），原文对新车的前景是积极的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+              "quote": "To ensure the widespread usage of new types of vehicles, car producers are working to solve such problems with better technology.",
+              "anchor": "为推广新车而努力"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "晕车问题最终有可能被避免。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+              "quote": "To ensure the widespread usage of new types of vehicles, car producers are working to solve such problems with better technology.",
+              "anchor": "车企正用技术解决"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+              "quote": "For example, Japanese company Honda is working on reducing the car’s “violent” acceleration by making changes to the engine, said Car Magazine.",
+              "anchor": "本田改进发动机"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们很快就会克服晕车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "To ensure the widespread usage of new types of vehicles, car producers are working to solve such problems with better technology.",
+            "sourceHighlight": "are working to solve such problems",
+            "optionText": "People will get over car sickness pretty soon.",
+            "optionHighlight": "pretty soon",
+            "explanation": "车企还在努力（are working to），[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:5]] 也说自动驾驶车可能带来新挑战，推不出“很快”就能克服。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+              "quote": "To ensure the widespread usage of new types of vehicles, car producers are working to solve such problems with better technology.",
+              "anchor": "还在努力解决"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "车内的电子设备将被拆除。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Electronic devices inside cars will be removed.",
+            "explanation": "原文只说屏幕过多可能引发晕车，车企的办法是改进技术，比如改发动机，没说要拆掉车内设备。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Car sickness can possibly be avoided in time",
+          "sourceRole": "correctOption",
+          "targetText": "To ensure the widespread usage of new types of vehicles, car producers are working to solve such problems with better technology.",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "原文没说晕车已经解决，只说车企正在用更好的技术解决这类问题（are working to solve），比如本田在改进发动机、减轻“猛烈”的加速。由此推出：随着技术改进，晕车有可能逐渐避免。选项用 possibly 和 in time 说到“有可能、要些时间”，没有说过头，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-2024-12-famous-schools-joint:31": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从开篇的问题和各段内容判断作者写这篇文章的目的。",
+      "stemTranslationZh": "作者写这篇文章的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1]] 提出的问题读起，看后面几段是在讲原因还是给办法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "推荐避免晕车的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To recommend ways to avoid car sickness.",
+            "explanation": "全文没有教读者怎样防晕车；只有 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:6]] 提到车企在改进技术，那是厂家的做法，不是给读者的建议。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "推销自动驾驶汽车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Unfortunately, even when people adjust to the movements of electric cars and experience less car sickness, self-driving vehicles might be another challenge for them.",
+            "sourceHighlight": "self-driving vehicles might be another challenge",
+            "optionText": "To promote the sales of self-driving cars.",
+            "optionHighlight": "promote the sales of self-driving cars",
+            "explanation": "提到自动驾驶车时，原文说它可能是新的挑战（another challenge），还说多达 12% 的人可能晕车，并不是在推销。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:5",
+              "quote": "Unfortunately, even when people adjust to the movements of electric cars and experience less car sickness, self-driving vehicles might be another challenge for them.",
+              "anchor": "自动驾驶车是新挑战"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "澄清对电动车的误解。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To clear misunderstandings of electric cars.",
+            "explanation": "原文没说人们误解了电动车，[[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1|You’re not alone]] 反而承认坐电动车确实可能更晕。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "分析晕车的可能原因。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1",
+              "quote": "Do you experience worse car sickness in electric cars than in petrol cars?",
+              "anchor": "开篇提出问题"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:3",
+              "quote": "As for electric cars, one-pedal driving is often blamed for feelings of car sickness, according to the U. S. Department of Energy.",
+              "anchor": "原因一：单踏板"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:4",
+              "quote": "Another technological advance that can also be related to car sickness is the larger and increasing number of screens inside electric vehicles.",
+              "anchor": "原因二：屏幕"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To analyze possible causes of car sickness",
+          "sourceRole": "correctOption",
+          "targetText": "Do you experience worse car sickness in electric cars than in petrol cars?",
+          "targetParagraphId": "block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "全文围绕 [[block:paper-mock-liaoning-2024-12-famous-schools-joint:reading-c:1]] 抛出的问题展开：电动车为什么更容易让人晕车。先讲晕车的一般机理，再分别讲单踏板减速太急和车内屏幕太多，又说自动驾驶车可能更糟，用的多是 may、can 这类留余地的词。选项的“分析晕车的可能原因”正好概括这些内容，选 D。"
+        }
+      ]
+    }
+  }
+}
