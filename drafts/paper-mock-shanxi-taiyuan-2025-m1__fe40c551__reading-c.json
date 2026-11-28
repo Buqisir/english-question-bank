@@ -1,0 +1,730 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-c": {
+      "overview": "文章指出键盘正在取代手写，而手写需要手指、视觉和大脑协同配合，对孩子学字母、成人消化信息都有好处；作者认为在屏幕上用电子笔书写同样能保留这些好处。",
+      "fullTranslationZh": "如果你精通数字技能，那么你可能已经有一段时间没怎么手写了。在这个屏幕主导的世界里，一笔一画在纸上写下想法的费力过程正在成为过去，短信和用拇指敲出的购物清单已经取代了手写的信件和便利贴。为了跟上时代，许多学校早在学前阶段就开始引入电脑，这意味着一些孩子可能先学会打字的基础，后学会手写。尽管电子键盘有明显的效率优势，但放弃手写可能要付出很大的代价。\n打字不关注字母的形状——只涉及相对简单而统一的动作。相比之下，手写是一项复杂的任务。运动系统必须精细地调整每根手指施加在笔上的压力，才能写出每个字母。更复杂的是，你的视觉系统必须在字母成形时持续处理它，大脑则实时调整手指，写出字母的形状。“这个过程让你的身体和你所看到的东西协调配合，”北卡罗来纳大学的认知心理学家罗伯特·怀利说，他还补充道，“这种复杂性对智力发展至关重要。”\n屏幕和键盘取代纸笔，可能会影响孩子学习字母的能力，而这种能力实际上是预测其日后阅读和数学成绩的重要指标。如果幼儿得不到任何书写训练，他们的大脑就无法充分发挥潜能。对成年人来说，打字往往导致无法真正处理信息。听讲座时，他们有可能把听到的内容逐字打下来。但他们常常只是盲目地打字，没能把信息变成自己的东西。另一方面，手写笔记迫使他们只写关键词，并借助图画或箭头来理清思路。\n其实，我们不必放弃绘图板、智能笔这类数字工具，也能利用手写的力量。最近的研究表明，在屏幕上书写与在纸上书写会激活相同的大脑通路。重要的是书写动作本身，而不是它最终呈现的形式。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+          "sourceText": "Adding to the complexity, your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time to create the letters’ shapes.",
+          "displayText": "Adding to the complexity, your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time to create the letters’ shapes.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:29"
+          ],
+          "translationZh": "更复杂的是，你的视觉系统必须在字母成形时持续处理它，大脑则实时调整手指，写出字母的形状。",
+          "analysisZh": "主干是 your visual system must continuously process that letter（视觉系统必须持续处理那个字母）。句首 Adding to the complexity 是现在分词短语，意思是“使情况更复杂的是”，承接上句手指用力的内容。as it’s formed 是时间状语，it 指 that letter；with your brain making adjustments … 是 with 复合结构，表示同时发生的情况：大脑实时调整手指，to create the letters’ shapes 表示目的。眼睛和手同时配合，正是后文 mesh 的意思来源。",
+          "underlineRanges": [
+            {
+              "start": 26,
+              "end": 70,
+              "quote": "your visual system must continuously process"
+            },
+            {
+              "start": 83,
+              "end": 97,
+              "quote": "as it’s formed"
+            },
+            {
+              "start": 99,
+              "end": 133,
+              "quote": "with your brain making adjustments"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+          "sourceText": "The laborious process of tracing out our thoughts, letter by letter, on the page is becoming a thing of the past in our screen-dominated world, where text messages and thumb-typed grocery lists have replaced handwritten letters and sticky notes.",
+          "displayText": "The laborious process of tracing out our thoughts, letter by letter, on the page is becoming a thing of the past in our screen-dominated world, where text messages and thumb-typed grocery lists have replaced handwritten letters and sticky notes.",
+          "relatedQuestionIds": [],
+          "translationZh": "在这个屏幕主导的世界里，一笔一画在纸上写下想法的费力过程正在成为过去，短信和用拇指敲出的购物清单已经取代了手写的信件和便利贴。",
+          "analysisZh": "主语很长：The laborious process of tracing out our thoughts, letter by letter, on the page（一笔一画在纸上写出想法这个费力的过程），谓语是 is becoming a thing of the past（正在成为过去）。in our screen-dominated world 是地点状语；where 引导非限制性定语从句修饰 world，说明这个世界里发生了什么：短信和拇指敲出的购物清单取代了手写信和便利贴。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "The laborious process"
+            },
+            {
+              "start": 81,
+              "end": 112,
+              "quote": "is becoming a thing of the past"
+            },
+            {
+              "start": 144,
+              "end": 149,
+              "quote": "where"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1"
+              ],
+              "start": 0,
+              "end": 173,
+              "quote": "如果你精通数字技能，那么你可能已经有一段时间没怎么手写了。在这个屏幕主导的世界里，一笔一画在纸上写下想法的费力过程正在成为过去，短信和用拇指敲出的购物清单已经取代了手写的信件和便利贴。为了跟上时代，许多学校早在学前阶段就开始引入电脑，这意味着一些孩子可能先学会打字的基础，后学会手写。尽管电子键盘有明显的效率优势，但放弃手写可能要付出很大的代价。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2"
+              ],
+              "start": 174,
+              "end": 362,
+              "quote": "打字不关注字母的形状——只涉及相对简单而统一的动作。相比之下，手写是一项复杂的任务。运动系统必须精细地调整每根手指施加在笔上的压力，才能写出每个字母。更复杂的是，你的视觉系统必须在字母成形时持续处理它，大脑则实时调整手指，写出字母的形状。“这个过程让你的身体和你所看到的东西协调配合，”北卡罗来纳大学的认知心理学家罗伯特·怀利说，他还补充道，“这种复杂性对智力发展至关重要。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3"
+              ],
+              "start": 363,
+              "end": 547,
+              "quote": "屏幕和键盘取代纸笔，可能会影响孩子学习字母的能力，而这种能力实际上是预测其日后阅读和数学成绩的重要指标。如果幼儿得不到任何书写训练，他们的大脑就无法充分发挥潜能。对成年人来说，打字往往导致无法真正处理信息。听讲座时，他们有可能把听到的内容逐字打下来。但他们常常只是盲目地打字，没能把信息变成自己的东西。另一方面，手写笔记迫使他们只写关键词，并借助图画或箭头来理清思路。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4"
+              ],
+              "start": 548,
+              "end": 635,
+              "quote": "其实，我们不必放弃绘图板、智能笔这类数字工具，也能利用手写的力量。最近的研究表明，在屏幕上书写与在纸上书写会激活相同的大脑通路。重要的是书写动作本身，而不是它最终呈现的形式。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+                "start": 557,
+                "end": 609,
+                "quote": "giving up handwriting may come at a significant cost"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p1",
+                "start": 158,
+                "end": 172,
+                "quote": "放弃手写可能要付出很大的代价"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+                "start": 270,
+                "end": 458,
+                "quote": "Adding to the complexity, your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time to create the letters’ shapes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p2",
+                "start": 81,
+                "end": 118,
+                "quote": "你的视觉系统必须在字母成形时持续处理它，大脑则实时调整手指，写出字母的形状"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+                "start": 537,
+                "end": 642,
+                "quote": "taking notes by hand forces them to write only key words and use drawings or arrows to work through ideas"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p3",
+                "start": 156,
+                "end": 183,
+                "quote": "手写笔记迫使他们只写关键词，并借助图画或箭头来理清思路"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+                "start": 10,
+                "end": 126,
+                "quote": "we don’t have to drop digital tools, like graphics tablets and smart pens, to capitalize on the power of handwriting"
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+                "start": 128,
+                "end": 232,
+                "quote": "Recent research suggests that writing on a screen activates the same brain pathways as writing on paper."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p4",
+                "start": 3,
+                "end": 32,
+                "quote": "我们不必放弃绘图板、智能笔这类数字工具，也能利用手写的力量"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p4",
+                "start": 33,
+                "end": 63,
+                "quote": "最近的研究表明，在屏幕上书写与在纸上书写会激活相同的大脑通路"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+                "start": 270,
+                "end": 458,
+                "quote": "Adding to the complexity, your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time to create the letters’ shapes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p2",
+                "start": 75,
+                "end": 118,
+                "quote": "更复杂的是，你的视觉系统必须在字母成形时持续处理它，大脑则实时调整手指，写出字母的形状"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+                "start": 99,
+                "end": 344,
+                "quote": "The laborious process of tracing out our thoughts, letter by letter, on the page is becoming a thing of the past in our screen-dominated world, where text messages and thumb-typed grocery lists have replaced handwritten letters and sticky notes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-c-p1",
+                "start": 29,
+                "end": 91,
+                "quote": "在这个屏幕主导的世界里，一笔一画在纸上写下想法的费力过程正在成为过去，短信和用拇指敲出的购物清单已经取代了手写的信件和便利贴"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先说手写正被键盘取代，并提出放弃手写有代价；再从大脑协同、孩子学字母和成人记笔记几方面说明手写的好处；最后指出数字书写工具同样能保留这些好处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+            "summary": "手写正被打字取代，学校很早就引入电脑，但放弃手写可能代价很大",
+            "function": "引出话题，亮出观点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+            "summary": "手写比打字复杂，要手指、视觉和大脑实时配合，对智力发展很重要",
+            "function": "从大脑机制说明手写的价值"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+            "summary": "不练手写会影响孩子学字母；成人打字常常不过脑，手写笔记更能理清思路",
+            "function": "分孩子和成人说明手写的好处"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+            "summary": "不必丢掉数字工具，屏幕书写和纸上书写激活相同的大脑通路",
+            "function": "提出兼顾的办法，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:28": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完开头这段，分清作者描述的现状和他真正想表达的观点。",
+      "stemTranslationZh": "作者在第1段想要表达什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读完 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1]]，看 Although 让步之后作者的主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "放弃手写是不明智的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+              "quote": "giving up handwriting may come at a significant cost",
+              "anchor": "放弃手写代价大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "如今数字素养必不可少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "digitally skilled",
+            "optionText": "Digital literacy",
+            "matchType": "wordFamily",
+            "relationNote": "选项从 digitally skilled（精通数字技能）变来，这句只是开头用来描述读者的现状，作者并没有主张数字素养必不可少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+              "quote": "If you’re digitally skilled, it has likely been a while since you spent much time writing by hand.",
+              "anchor": "精通数字技能"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "手写交流已经过时了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Although electronic keyboards offer obvious efficiency benefits, giving up handwriting may come at a significant cost.",
+            "sourceHighlight": "giving up handwriting may come at a significant cost",
+            "optionHighlight": "out of date",
+            "explanation": "手写正在成为过去（a thing of the past）是作者描述的现状；他接着用 Although 一转，强调放弃手写会付出代价，并不认为手写过时了。",
+            "optionText": "Handwritten communication is out of date."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+              "quote": "is becoming a thing of the past in our screen-dominated world",
+              "anchor": "手写渐成过去"
+            },
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+              "quote": "Although electronic keyboards offer obvious efficiency benefits, giving up handwriting may come at a significant cost.",
+              "anchor": "放弃手写有代价"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "学前教育急需开设电脑课程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "as early as preschool",
+            "optionText": "in preschools",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了 preschool（学前阶段），原文只是陈述很多学校这么早就引入电脑，用来说明手写正被挤掉，没说急需开设电脑课。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+              "quote": "To keep up, many schools are introducing computers as early as preschool",
+              "anchor": "学前就引入电脑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Abandoning handwriting is unwise",
+          "sourceRole": "correctOption",
+          "targetText": "Although electronic keyboards offer obvious efficiency benefits, giving up handwriting may come at a significant cost.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "“放弃手写”（Abandoning handwriting）就是原文的 giving up handwriting；原文说这样做可能付出很大代价（may come at a significant cost），由此推出“不明智”。前面写手写渐渐成为过去、学校早早引入电脑，都是在为这句观点铺垫，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:29": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 mesh 前面对手写过程的描述，推断它在句中的意思。",
+      "stemTranslationZh": "第2段中画线词 mesh 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "This process 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "建立。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "mesh 意为“建立”",
+            "explanation": "放进去成了“这个过程让你的身体和你看到的东西建立起来”，可前文讲的是手指和视觉怎样配合，没有要建立什么东西。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "快速运转。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "mesh 意为“快速运转”",
+            "explanation": "放进去成了“这个过程让你的身体和你看到的东西飞快运转”；前文的 in real time 说的是边看边调，讲的是两边同步配合，没说要快。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "搞乱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "such complexity is crucial to mental development",
+            "sourceHighlight": "crucial to mental development",
+            "optionHighlight": "Mess up",
+            "explanation": "mess 和 mesh 拼写相近；放进去成了“这个过程让你的身体和你看到的东西乱成一团”，可 Wiley 紧接着说这种复杂过程对智力发展至关重要（crucial to mental development），是在肯定手写。",
+            "optionText": "Mess up."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+              "quote": "such complexity is crucial to mental development",
+              "anchor": "对智力发展至关重要"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "协同运作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+              "quote": "Adding to the complexity, your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time to create the letters’ shapes.",
+              "anchor": "视觉与手指实时配合"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mesh",
+          "sourceRole": "stem",
+          "targetText": "“This process lets you make your body and what you are seeing mesh,” says Robert Wiley, a cognitive psychologist at the University of North Carolina, adding “such complexity is crucial to mental development.”",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time",
+          "bridgeZh": "This process 指眼睛边看、大脑边调手指的过程",
+          "note": "题干 mesh 原词出现在原文。"
+        },
+        {
+          "sourceText": "Work together",
+          "sourceRole": "correctOption",
+          "targetText": "your visual system must continuously process that letter as it’s formed, with your brain making adjustments to fingers in real time to create the letters’ shapes",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "mesh 连着“你的身体”和“你看到的东西”两样，前文说眼睛一边看字母成形、大脑一边实时调手指（in real time），所以 mesh 必须表示两者配合。放回去：这个过程让你的身体和你看到的东西协同运作，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "比较打字记笔记和手写记笔记的不同效果，推出手写笔记的好处。",
+      "stemTranslationZh": "从第3段可以推断出什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3]]，比较大人打字和手写记笔记的不同效果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "盲打有助于大脑发育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "But often, they’re just typing blindly, failing to make information their own.",
+            "sourceHighlight": "failing to make information their own",
+            "optionHighlight": "contributes to brain development",
+            "explanation": "原文说盲目打字让人没能把信息变成自己的（failing to make information their own），讲的是它的坏处，不是说它促进大脑发育。",
+            "optionText": "Blind typing contributes to brain development."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+              "quote": "But often, they’re just typing blindly, failing to make information their own.",
+              "anchor": "盲目打字"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "孩子偏爱屏幕和键盘。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Screens and keyboards",
+            "optionText": "screens and keyboards",
+            "matchType": "exact",
+            "relationNote": "选项借了 screens and keyboards（屏幕和键盘），原文讲的是它们取代纸笔可能影响孩子学字母（affect kids’ ability to learn letters），没说孩子更喜欢它们。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+              "quote": "Screens and keyboards replacing pen and paper might affect kids’ ability to learn letters",
+              "anchor": "屏幕键盘影响学字母"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "手写的标记有助于把想法联系起来。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+              "quote": "taking notes by hand forces them to write only key words and use drawings or arrows to work through ideas",
+              "anchor": "手写笔记用图和箭头理思路"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "成年人有能力记住复杂的信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "information",
+            "optionText": "information",
+            "matchType": "exact",
+            "relationNote": "选项借了 information（信息），原文说大人打字虽能把听到的逐字打下来（word for word），却常常没真正处理信息（failing to actually process information），没说他们能记住复杂信息。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+              "quote": "For adults, typing often results in failing to actually process information.",
+              "anchor": "大人打字不过脑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Handwritten markers are good for getting ideas linked",
+          "sourceRole": "correctOption",
+          "targetText": "On the other hand, taking notes by hand forces them to write only key words and use drawings or arrows to work through ideas.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "“手写的标记”指手写笔记里画的图和箭头（drawings or arrows），原文说用它们来理清思路（work through ideas）；箭头本来就是把一个想法指向另一个，由此推出这些标记有助于把想法连起来，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:31": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者对智能笔这类数字书写工具的评价，判断他的态度。",
+      "stemTranslationZh": "作者对使用电子笔持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "怀疑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Recent research suggests that writing on a screen activates the same brain pathways as writing on paper.",
+            "sourceHighlight": "the same brain pathways",
+            "optionHighlight": "Doubtful",
+            "explanation": "作者没有怀疑电子笔的效果，反而拿研究作证：屏幕书写和纸上书写激活的是相同的大脑通路（the same brain pathways）。",
+            "optionText": "Doubtful."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+              "quote": "Recent research suggests that writing on a screen activates the same brain pathways as writing on paper.",
+              "anchor": "研究证明效果相同"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "批评的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "For adults, typing often results in failing to actually process information.",
+            "sourceEntity": "typing",
+            "optionEntity": "Critical",
+            "explanation": "作者批评的是打字（typing），说它常让人没真正消化信息；对电子笔，他说不必丢掉（don’t have to drop），是赞成的。",
+            "optionText": "Critical."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:3",
+              "quote": "For adults, typing often results in failing to actually process information.",
+              "anchor": "批评打字"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "赞成的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+              "quote": "we don’t have to drop digital tools, like graphics tablets and smart pens, to capitalize on the power of handwriting",
+              "anchor": "不必丢掉数字工具"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+              "quote": "Recent research suggests that writing on a screen activates the same brain pathways as writing on paper.",
+              "anchor": "屏幕书写效果相同"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不明确的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "It’s the movement that counts, not its final form.",
+            "sourceHighlight": "It’s the movement that counts",
+            "optionHighlight": "Unclear",
+            "explanation": "作者把话说得很明白：要紧的是书写动作本身，不在于写在纸上还是屏幕上（It’s the movement that counts），态度并不含糊。",
+            "optionText": "Unclear."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+              "quote": "It’s the movement that counts, not its final form.",
+              "anchor": "作者的结论"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "digital pens",
+          "sourceRole": "stem",
+          "targetText": "Actually, we don’t have to drop digital tools, like graphics tablets and smart pens, to capitalize on the power of handwriting.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+          "relationType": "locationCue",
+          "targetCue": "smart pens",
+          "sourceZh": "电子笔",
+          "targetCueZh": "智能笔",
+          "answerText": "we don’t have to drop digital tools, like graphics tablets and smart pens, to capitalize on the power of handwriting",
+          "note": "题干 digital pens 对应原文 smart pens。"
+        },
+        {
+          "sourceText": "Favorable",
+          "sourceRole": "correctOption",
+          "targetText": "Recent research suggests that writing on a screen activates the same brain pathways as writing on paper.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "作者说不必丢掉智能笔这类工具（don’t have to drop）也能发挥手写的力量，又用研究说明屏幕书写和纸上书写激活相同的大脑通路（the same brain pathways），可见他赞成用电子笔，选 C。"
+        }
+      ]
+    }
+  }
+}

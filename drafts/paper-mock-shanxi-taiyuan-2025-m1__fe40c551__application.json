@@ -1,0 +1,122 @@
+{
+  "taskType": "application",
+  "modelAnswer": "I’m Li Hua. It is a great honor for me to be named Star Reporter. I want to thank our school newspaper for giving my stories a place, and all of you for reading them.\n\nWriting for the English edition has taught me a lot. To cover the sports meeting and the science fair, I had to ask good questions and listen carefully. Rewriting each article several times made my English more accurate and natural. Most importantly, I learned that a good report is built on facts, not just feelings.\n\nFrom now on, I plan to start a column called Campus Faces, telling the stories of classmates and teachers around us. I also hope to help new reporters with their writing. Please keep reading and send me your ideas!",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "刊登在校报上的获奖感言，开头沿用题面给出的两句",
+        "personTense": "第一人称；谈收获用现在完成时和一般过去时，谈计划用一般将来时",
+        "readerTone": "读者是全校师生，语气真诚、谦逊，带一点感谢和热情",
+        "goal": "让读者知道我当小记者学到了什么、以后打算怎么做，并感谢大家的支持"
+      },
+      "taskRequires": [
+        "分享当小记者的收获",
+        "说明未来的计划"
+      ],
+      "thisEssayChooses": "开头先感谢校报和读者；收获选“采访学会提问倾听”“反复修改让英语更准确”“报道要靠事实”三点，用运动会和科技节两次报道作例子；计划选开设人物专栏 Campus Faces，并帮助新记者写稿。"
+    },
+    "standard": {
+      "essay": "I’m Li Hua. It is a great honor for me to be named Star Reporter. I want to thank our school newspaper for giving my stories a place, and all of you for reading them.\n\nWriting for the English edition has taught me a lot. To cover the sports meeting and the science fair, I had to ask good questions and listen carefully. Rewriting each article several times made my English more accurate and natural. Most importantly, I learned that a good report is built on facts, not just feelings.\n\nFrom now on, I plan to start a column called Campus Faces, telling the stories of classmates and teachers around us. I also hope to help new reporters with their writing. Please keep reading and send me your ideas!",
+      "pointMap": [
+        {
+          "point": "分享收获",
+          "quote": "Rewriting each article several times made my English more accurate and natural."
+        },
+        {
+          "point": "未来计划",
+          "quote": "From now on, I plan to start a column called Campus Faces, telling the stories of classmates and teachers around us."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住题面给出的两句，先致谢，把感言的场合和读者交代清楚。",
+          "items": [
+            {
+              "quote": "I want to thank our school newspaper for giving my stories a place, and all of you for reading them.",
+              "explain": "获奖感言先谢人。一句话同时谢了校报和读者，用 thank A for doing 和 and 并列，比单写 Thank you very much 更具体，也照顾到报纸的读者。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：分享收获，用两次真实报道把收获说具体。",
+          "items": [
+            {
+              "quote": "Writing for the English edition has taught me a lot.",
+              "explain": "段首句先给这一段定方向，用现在完成时说明收获一直延续到现在，后面的句子都在展开它。"
+            },
+            {
+              "quote": "To cover the sports meeting and the science fair, I had to ask good questions and listen carefully.",
+              "explain": "用运动会、科技节两次报道作例子，读者一看就知道是哪些报道；To do 放句首说目的，学到的“提问和倾听”就有了来处。"
+            },
+            {
+              "quote": "Most importantly, I learned that a good report is built on facts, not just feelings.",
+              "explain": "用 Most importantly 把最重要的收获放在最后；facts, not just feelings 的对比让认识落到新闻写作本身，不是空泛的“我成长了”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：未来计划，再请读者参与，给感言收尾。",
+          "items": [
+            {
+              "quote": "I plan to start a column called Campus Faces",
+              "explain": "计划写成一件能做的事：开一个有名字的专栏，比“我会继续努力写作”具体得多。"
+            },
+            {
+              "quote": "I also hope to help new reporters with their writing.",
+              "explain": "第二个计划把自己的收获传给别人，和上一段的“反复修改”呼应，也显得谦逊。"
+            },
+            {
+              "quote": "Please keep reading and send me your ideas!",
+              "explain": "结尾落在读者能做的事上：继续读、给我投点子，比一句空泛的感谢更像校报上的真实感言。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "thank sb. for doing sth.",
+          "function": "获奖感言开头致谢时，说清感谢谁、为了什么。"
+        },
+        {
+          "expression": "X has taught me a lot.",
+          "function": "谈收获的段首句，先概括，再用例子展开。"
+        },
+        {
+          "expression": "I plan to start ... called ...",
+          "function": "把未来计划写成一件有名字、能落实的具体事情。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "I’m Li Hua. It is a great honor for me to be named Star Reporter. I owe this honor to our school newspaper, which gave my stories a home, and to every reader who took the time to read them.\n\nWriting for the English edition has been far more than a hobby. Covering the sports meeting and the science fair pushed me out of my comfort zone: I learned to prepare sharper questions and to listen closely to every answer. Each article went through three or four drafts, and with every rewrite my English became clearer and more natural. Above all, I came to see that a good report lets facts speak for themselves.\n\nLooking ahead, I plan to launch a column called Campus Faces, telling the stories of classmates, teachers and even the cleaning staff who keep our school running. I would also love to pass on what I have learned to new reporters. Please keep reading, and keep your ideas coming!",
+      "pointMap": [
+        {
+          "point": "分享收获",
+          "quote": "Each article went through three or four drafts, and with every rewrite my English became clearer and more natural."
+        },
+        {
+          "point": "未来计划",
+          "quote": "Looking ahead, I plan to launch a column called Campus Faces, telling the stories of classmates, teachers and even the cleaning staff who keep our school running."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "I owe this honor to our school newspaper, which gave my stories a home",
+          "explain": "owe this honor to 把荣誉归功于校报，比 I want to thank 更谦逊；gave my stories a home 比 a place 更有温度。"
+        },
+        {
+          "quote": "pushed me out of my comfort zone: I learned to prepare sharper questions and to listen closely to every answer",
+          "explain": "先说采访逼着我走出舒适区，冒号后再说具体学会了什么，收获的因果比标准版多交代了一步。"
+        },
+        {
+          "quote": "even the cleaning staff who keep our school running",
+          "explain": "用 even 把采访对象扩展到常被忽视的保洁人员，专栏计划更具体，也让读者看到小记者关注身边每一个人。"
+        }
+      ]
+    }
+  }
+}

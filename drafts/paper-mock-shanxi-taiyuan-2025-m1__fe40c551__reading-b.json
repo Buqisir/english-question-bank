@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-b": {
+      "overview": "作者被《哪吒2》逼真的音效吸引，进而了解拟音师：文章介绍拟音一词的由来、拟音师的工作方式和必备素质，以及这门手艺从业者稀少却可能随技术而变的处境。",
+      "fullTranslationZh": "春节期间，《哪吒2》成了现象级动画电影，影院上座率超过90%。当哪吒和敖丙与无量仙翁激战时，逼真的音效让我仿佛身临其境。突然，一个问题跳进我的脑海：这些震撼的声音是怎么制作出来的？出于好奇，我回家后开始搜索，随即走进了拟音师的神秘世界。\n“拟音”（Foley）一词是为了纪念杰克·弗利（Jack Foley）及其对音效艺术的贡献而创造的。在电影刚开始加入音效时，他首创了一种独特的音效制作方法：把声音录到单独一条音轨上，再按照银幕上发生的动作相应地配上去。\n拟音师就像声音的魔术师，为电影增添活力。他们的工作场景看似简单，实则摆满了各种工具和设备。普通物品常常被变成精准的音效：抖动雨伞可以模拟狂风暴雨的呼啸；把两半椰子壳相互敲击，听起来就像马蹄嗒嗒走过。尽管拟音师常常在幕后工作，但他们与演员的配合对捕捉电影的精髓至关重要。“你得把这场戏演出来……你得成为演员，像演员在片场那样投入故事的情境之中。这会带来很大的不同。”杰克·弗利曾这样强调。\n总的来说，关注细节是成功拟音师的根本。他们还需要具备自己重现声音的能力，这需要创造力和想象力。要得到完美的声音需要反复试错，这就是为什么耐心和毅力同样重要。为了模拟角色在泥地里奔跑的声音，拟音师必须尝试无数种材料，不断调整踩踏的力度和节奏。\n在深入探究的过程中，诸如《全球仍活跃的拟音师不足100人》这样的标题确实深深触动了我。我偶然发现了一个令人难过的事实：虽然拟音工作为电影增色不少，但如今从业者数量稀少，可能使它走上成为一门消亡艺术的道路。不过，令我欣慰的是，随着虚拟现实的发展，拟音工作可能会发生变化。下次你看电影时，记得留意那些细微的声音。它们就像拟音师发出的秘密信息，提醒我们他们一直都在。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+          "sourceText": "When sound effects were first added into movies, he innovated a unique way of creating sound effects, recording sounds onto a single track of audio and adding them to actions happening on the screen accordingly.",
+          "displayText": "When sound effects were first added into movies, he innovated a unique way of creating sound effects, recording sounds onto a single track of audio and adding them to actions happening on the screen accordingly.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:24"
+          ],
+          "translationZh": "在电影刚开始加入音效时，他首创了一种独特的音效制作方法：把声音录到单独一条音轨上，再按照银幕上发生的动作相应地配上去。",
+          "analysisZh": "主干是 he innovated a unique way（他首创了一种独特的方法），of creating sound effects 说明是什么方法。句首 When 从句交代时间：音效刚被加进电影的时候。逗号后 recording … and adding … 是两个并列的现在分词短语，具体解释这种方法分两步：先把声音录到一条音轨上，再把它们配到银幕上相应的动作上；happening on the screen 修饰 actions。",
+          "underlineRanges": [
+            {
+              "start": 49,
+              "end": 74,
+              "quote": "he innovated a unique way"
+            },
+            {
+              "start": 102,
+              "end": 118,
+              "quote": "recording sounds"
+            },
+            {
+              "start": 152,
+              "end": 174,
+              "quote": "adding them to actions"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+          "sourceText": "I stumbled upon the sad truth that while Foley work is an incredible addition to movies, the small number of working artists today may put it on the path to becoming a dying art.",
+          "displayText": "I stumbled upon the sad truth that while Foley work is an incredible addition to movies, the small number of working artists today may put it on the path to becoming a dying art.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:26"
+          ],
+          "translationZh": "我偶然发现了一个令人难过的事实：虽然拟音工作为电影增色不少，但如今从业者数量稀少，可能使它走上成为一门消亡艺术的道路。",
+          "analysisZh": "主干是 I stumbled upon the sad truth（我偶然发现了一个令人难过的事实）。that 引导同位语从句，说明这个事实是什么；从句里先用 while 引出让步（虽然拟音为电影增色不少），再接从句主干 the small number of working artists today may put it on the path to becoming a dying art（如今从业者太少，可能让它走向消亡）。it 指 Foley work，to 是介词，后面接动名词 becoming。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 29,
+              "quote": "I stumbled upon the sad truth"
+            },
+            {
+              "start": 35,
+              "end": 40,
+              "quote": "while"
+            },
+            {
+              "start": 131,
+              "end": 153,
+              "quote": "may put it on the path"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:1"
+              ],
+              "start": 0,
+              "end": 118,
+              "quote": "春节期间，《哪吒2》成了现象级动画电影，影院上座率超过90%。当哪吒和敖丙与无量仙翁激战时，逼真的音效让我仿佛身临其境。突然，一个问题跳进我的脑海：这些震撼的声音是怎么制作出来的？出于好奇，我回家后开始搜索，随即走进了拟音师的神秘世界。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2"
+              ],
+              "start": 119,
+              "end": 228,
+              "quote": "“拟音”（Foley）一词是为了纪念杰克·弗利（Jack Foley）及其对音效艺术的贡献而创造的。在电影刚开始加入音效时，他首创了一种独特的音效制作方法：把声音录到单独一条音轨上，再按照银幕上发生的动作相应地配上去。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3"
+              ],
+              "start": 229,
+              "end": 422,
+              "quote": "拟音师就像声音的魔术师，为电影增添活力。他们的工作场景看似简单，实则摆满了各种工具和设备。普通物品常常被变成精准的音效：抖动雨伞可以模拟狂风暴雨的呼啸；把两半椰子壳相互敲击，听起来就像马蹄嗒嗒走过。尽管拟音师常常在幕后工作，但他们与演员的配合对捕捉电影的精髓至关重要。“你得把这场戏演出来……你得成为演员，像演员在片场那样投入故事的情境之中。这会带来很大的不同。”杰克·弗利曾这样强调。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:4",
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:5"
+              ],
+              "start": 423,
+              "end": 543,
+              "quote": "总的来说，关注细节是成功拟音师的根本。他们还需要具备自己重现声音的能力，这需要创造力和想象力。要得到完美的声音需要反复试错，这就是为什么耐心和毅力同样重要。为了模拟角色在泥地里奔跑的声音，拟音师必须尝试无数种材料，不断调整踩踏的力度和节奏。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6"
+              ],
+              "start": 544,
+              "end": 724,
+              "quote": "在深入探究的过程中，诸如《全球仍活跃的拟音师不足100人》这样的标题确实深深触动了我。我偶然发现了一个令人难过的事实：虽然拟音工作为电影增色不少，但如今从业者数量稀少，可能使它走上成为一门消亡艺术的道路。不过，令我欣慰的是，随着虚拟现实的发展，拟音工作可能会发生变化。下次你看电影时，记得留意那些细微的声音。它们就像拟音师发出的秘密信息，提醒我们他们一直都在。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+                "start": 100,
+                "end": 200,
+                "quote": "When sound effects were first added into movies, he innovated a unique way of creating sound effects"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p2",
+                "start": 50,
+                "end": 77,
+                "quote": "在电影刚开始加入音效时，他首创了一种独特的音效制作方法"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+                "start": 536,
+                "end": 638,
+                "quote": "You have to be the actors and get into the spirit of the story the same as the actors did, on the set."
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+                "start": 429,
+                "end": 504,
+                "quote": "their cooperation with actors is crucial to capturing the essence of a film"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p3",
+                "start": 146,
+                "end": 170,
+                "quote": "你得成为演员，像演员在片场那样投入故事的情境之中"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p3",
+                "start": 113,
+                "end": 133,
+                "quote": "他们与演员的配合对捕捉电影的精髓至关重要"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+                "start": 292,
+                "end": 366,
+                "quote": "However, Foley work, to my relief, may change as virtual reality develops."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p5",
+                "start": 102,
+                "end": 133,
+                "quote": "不过，令我欣慰的是，随着虚拟现实的发展，拟音工作可能会发生变化"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+                "start": 0,
+                "end": 68,
+                "quote": "Foley artists are like magicians of sound, adding vitality to films."
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+                "start": 0,
+                "end": 99,
+                "quote": "The term Foley was coined in memory of Jack Foley and his contribution to the art of sound effects."
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+                "start": 154,
+                "end": 200,
+                "quote": "Foley work is an incredible addition to movies"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p3",
+                "start": 0,
+                "end": 19,
+                "quote": "拟音师就像声音的魔术师，为电影增添活力"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p2",
+                "start": 0,
+                "end": 49,
+                "quote": "“拟音”（Foley）一词是为了纪念杰克·弗利（Jack Foley）及其对音效艺术的贡献而创造的"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p5",
+                "start": 61,
+                "end": 72,
+                "quote": "拟音工作为电影增色不少"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+                "start": 100,
+                "end": 311,
+                "quote": "When sound effects were first added into movies, he innovated a unique way of creating sound effects, recording sounds onto a single track of audio and adding them to actions happening on the screen accordingly."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p2",
+                "start": 50,
+                "end": 108,
+                "quote": "在电影刚开始加入音效时，他首创了一种独特的音效制作方法：把声音录到单独一条音轨上，再按照银幕上发生的动作相应地配上去"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+                "start": 113,
+                "end": 291,
+                "quote": "I stumbled upon the sad truth that while Foley work is an incredible addition to movies, the small number of working artists today may put it on the path to becoming a dying art."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-b-p5",
+                "start": 43,
+                "end": 101,
+                "quote": "我偶然发现了一个令人难过的事实：虽然拟音工作为电影增色不少，但如今从业者数量稀少，可能使它走上成为一门消亡艺术的道路"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "由观影时的疑问引出话题，接着依次讲拟音的由来、拟音师的工作方式和所需素质，最后谈这一行的现状与前景，并请读者留意电影里的细微声音。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:1",
+            "summary": "看《哪吒2》时被音效吸引，好奇声音怎样做出来，由此走进拟音师的世界",
+            "function": "由个人经历引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+            "summary": "拟音一词纪念 Jack Foley，他首创了把录好的声音按画面动作配上去的方法",
+            "function": "交代拟音的由来"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+            "summary": "拟音师用普通物品模拟声音，还要和演员配合，像演员一样入戏",
+            "function": "介绍拟音师怎样工作"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:4",
+            "summary": "成功的拟音师要注重细节，有创造力和想象力，还要耐心坚持、反复试验",
+            "function": "说明拟音师需要的素质"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+            "summary": "从业者不足百人，拟音可能衰落，但会随虚拟现实发展而改变；请读者留意细微的声音",
+            "function": "谈现状与前景，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出 Jack Foley 在音效制作上做了什么开创性的事。",
+      "stemTranslationZh": "Jack Foley 对电影行业做出了什么贡献？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看 he 做了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他改进了背景音乐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "he innovated a unique way of creating sound effects",
+            "sourceEntity": "sound effects",
+            "optionEntity": "background music",
+            "explanation": "他革新的是音效（sound effects）的制作，也就是风暴声、马蹄声这类配合动作的声音；背景音乐全文没谈。",
+            "optionText": "He improved background music."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+              "quote": "he innovated a unique way of creating sound effects",
+              "anchor": "革新音效制作"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他发明了录音设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "recording sounds",
+            "optionText": "recording equipment",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 recording（录制），原文说他把声音录到一条音轨上，讲的是一种做法（a unique way），没说他发明了录音设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+              "quote": "recording sounds onto a single track of audio",
+              "anchor": "录到一条音轨上"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他开创了音效制作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+              "quote": "When sound effects were first added into movies, he innovated a unique way of creating sound effects",
+              "anchor": "首创音效制作方法"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他改进了现场录音的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "adding them to actions happening on the screen accordingly",
+            "sourceEntity": "adding them to actions happening on the screen",
+            "optionEntity": "live recording methods",
+            "explanation": "原文说他把录好的声音按银幕上的动作配上去（adding them to actions happening on the screen），是给画面配声音，不是改进拍摄现场的同期录音。",
+            "optionText": "He advanced live recording methods."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+              "quote": "adding them to actions happening on the screen accordingly",
+              "anchor": "按画面配声音"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "contribution",
+          "sourceRole": "stem",
+          "targetText": "The term Foley was coined in memory of Jack Foley and his contribution to the art of sound effects.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "When sound effects were first added into movies, he innovated a unique way of creating sound effects",
+          "bridgeZh": "he 指 Jack Foley，这里展开讲他的贡献具体是什么",
+          "note": "题干 contribution 原词出现在原文。"
+        },
+        {
+          "sourceText": "pioneered sound effect creation",
+          "sourceRole": "correctOption",
+          "targetText": "he innovated a unique way of creating sound effects",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "“开创”（pioneered）由两处合成：音效刚被加进电影时（first added），他就创出了独特的方法（innovated a unique way）；“音效制作”就是原文的 creating sound effects，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:25": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Jack Foley 本人的原话里找出他强调的做法。",
+      "stemTranslationZh": "Jack Foley 最看重什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往前读引号里他说的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "与演员融为一体。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+              "quote": "You have to be the actors and get into the spirit of the story the same as the actors did, on the set.",
+              "anchor": "Jack Foley 的原话"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+              "quote": "their cooperation with actors is crucial to capturing the essence of a film",
+              "anchor": "与演员配合至关重要"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "反复试错。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "trial and error",
+            "optionText": "trial and error",
+            "matchType": "exact",
+            "relationNote": "trial and error（反复试错）是作者介绍拟音师素质时说的，指做出完美的声音要反复尝试，不是 Jack Foley 本人强调的话。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:5",
+              "quote": "Getting the perfect sound requires trial and error, which is why patience and persistence are equally important.",
+              "anchor": "需要反复试错"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对细节敏感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "attention to detail",
+            "optionText": "sensitive to details",
+            "matchType": "wordFamily",
+            "relationNote": "选项从 attention to detail（关注细节）变来，这是作者对成功拟音师的总体要求（In general）；Jack Foley 在引号里强调的是像演员一样入戏。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:4",
+              "quote": "In general, attention to detail is fundamental to successful Foley artists.",
+              "anchor": "关注细节"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "激发活跃的想象力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "creativity and imagination",
+            "optionText": "active imagination",
+            "matchType": "exact",
+            "relationNote": "imagination（想象力）出自作者讲拟音师要自己重现声音（recreate sounds themselves）的那一处，是作者列出的素质之一；Jack Foley 的原话没提想象力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:5",
+              "quote": "recreate sounds themselves, which requires creativity and imagination.",
+              "anchor": "需要创造力和想象力"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Jack Foley",
+          "sourceRole": "stem",
+          "targetText": "It makes a big difference,” Jack Foley once stressed.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "You have to be the actors and get into the spirit of the story the same as the actors did",
+          "bridgeZh": "It 指引号里说的那种做法，正是他强调的",
+          "note": "题干 Jack Foley 原词出现在原文。"
+        },
+        {
+          "sourceText": "Being at one with actors",
+          "sourceRole": "correctOption",
+          "targetText": "You have to be the actors and get into the spirit of the story the same as the actors did, on the set.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "“与演员融为一体”（at one with actors）就是他说的“你得成为演员，像演员一样入戏”（be the actors … get into the spirit of the story）；他还说这样做差别很大（makes a big difference），可见这是他最看重的，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读懂作者对拟音行业的担忧和 However 后的转折，推出拟音工作今后会怎样。",
+      "stemTranslationZh": "最后一段暗示了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6]]，看 However 前作者担心什么、之后又宽慰什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "拟音工作将来可能被重新定义。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+              "quote": "However, Foley work, to my relief, may change as virtual reality develops.",
+              "anchor": "拟音工作可能改变"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "现代观众很了解拟音工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Next time you’re watching a movie, remember those subtle sounds.",
+            "sourceHighlight": "remember those subtle sounds",
+            "optionHighlight": "well aware",
+            "explanation": "作者提醒读者下次看电影时记得留意那些细微的声音（remember those subtle sounds），言下之意是观众平时很少注意拟音，谈不上很了解。",
+            "optionText": "Modern audiences are well aware of Foley work."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+              "quote": "Next time you’re watching a movie, remember those subtle sounds.",
+              "anchor": "提醒留意细微声音"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "拟音师可能很快会被虚拟现实取代。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "virtual reality",
+            "optionText": "virtual reality",
+            "matchType": "exact",
+            "relationNote": "选项借了 virtual reality（虚拟现实），原文说拟音工作会随它的发展而改变（may change），作者为此感到宽慰（to my relief），没说拟音师会被它取代。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+              "quote": "However, Foley work, to my relief, may change as virtual reality develops.",
+              "anchor": "随虚拟现实发展而变"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "随着技术发展，拟音工作不再必不可少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "while Foley work is an incredible addition to movies",
+            "sourceHighlight": "an incredible addition to movies",
+            "optionHighlight": "no longer a must",
+            "explanation": "作者说拟音为电影增色不少（an incredible addition），担心的只是从业者太少；说到技术发展，作者认为拟音会随之改变，没说它变得可有可无。",
+            "optionText": "Foley work is no longer a must as technology develops."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+              "quote": "I stumbled upon the sad truth that while Foley work is an incredible addition to movies, the small number of working artists today may put it on the path to becoming a dying art.",
+              "anchor": "拟音为电影增色"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "may be redefined in the future",
+          "sourceRole": "correctOption",
+          "targetText": "Foley work, to my relief, may change as virtual reality develops.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "“将来可能被重新定义”对应原文“可能随虚拟现实的发展而改变”（may change as virtual reality develops）：作者先担心拟音会成为消亡的艺术（a dying art），再用 However 转到令他宽慰的一面，可见他看到的是拟音工作的形式会变，而不是只能走向消亡，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:27": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "通读各段写了什么，判断作者写这篇文章的目的。",
+      "stemTranslationZh": "本文的写作目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:1]] 观影时的疑问入手，看后面几段围绕拟音分别讲了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "劝说读者从事拟音工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To persuade readers to engage in Foley work.",
+            "explanation": "作者只在结尾请读者看电影时留意那些细微的声音（remember those subtle sounds），没有劝人去从事拟音工作。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "介绍拟音工作及其意义。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+              "quote": "Foley artists are like magicians of sound, adding vitality to films.",
+              "anchor": "拟音为电影增添活力"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2",
+              "quote": "The term Foley was coined in memory of Jack Foley and his contribution to the art of sound effects.",
+              "anchor": "拟音一词的由来"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+              "quote": "Foley work is an incredible addition to movies",
+              "anchor": "拟音为电影增色"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "探究《哪吒2》成功的原因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "During the Spring Festival, Ne Zha 2 has become a phenomenon-level animated film, with cinema attendance rate reaching over 90%.",
+            "sourceEntity": "Ne Zha 2",
+            "optionEntity": "Ne Zha 2’s success",
+            "explanation": "《哪吒2》只在开头出现，作者借观影时冒出的疑问（How were these impressive sounds created?）引出拟音话题，并没有分析它为什么成功。",
+            "optionText": "To explore the reasons for Ne Zha 2’s success."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:1",
+              "quote": "Suddenly, a question popped into my mind: How were these impressive sounds created?",
+              "anchor": "观影引出疑问"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "讨论拟音工作将面临的挑战。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "the small number of working artists today may put it on the path to becoming a dying art",
+            "sourceHighlight": "the small number of working artists",
+            "optionHighlight": "the challenges",
+            "explanation": "从业者稀少（the small number of working artists）只是 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6]] 提到的处境，作者随后还说拟音可能随技术改变；前面几段讲的都是拟音的由来、做法和素质。",
+            "optionText": "To discuss the challenges Foley work will face."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6",
+              "quote": "the small number of working artists today may put it on the path to becoming a dying art",
+              "anchor": "从业者稀少"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "introduce Foley work and its significance",
+          "sourceRole": "correctOption",
+          "targetText": "Foley artists are like magicians of sound, adding vitality to films.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "各段都围绕拟音展开：[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:2]] 讲它的由来，[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:3]] 讲拟音师怎样工作，[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:4]] 讲他们需要的素质，[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-b:6]] 讲这一行的现状。“介绍拟音工作”包住了这些内容，“意义”落在为电影增添活力（adding vitality to films）和为电影增色（an incredible addition）这两处，选 B。"
+        }
+      ]
+    }
+  }
+}

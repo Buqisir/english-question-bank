@@ -1,0 +1,2038 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:cloze": {
+      "overview": "作者发现爱犬亨利善于体察孩子，把它改训成治疗犬，带去小学听孩子读书。一个特教男孩读书吃力，亨利用鼻子推书页陪他玩，男孩第一次读得流利；多年来亨利一直陪着孩子们。",
+      "fullTranslationZh": "我的爱尔兰赛特犬亨利曾被训练成一只表演犬。但我很快就认识到了它的与众不同——别的冠军犬喜欢在聚光灯下高高昂起头，亨利却总待在台下陪着孩子们。它歪着头，棕色的眼睛追随着孩子们细微的面部表情。因为它天性善于体察，又惹人喜爱，我决定把它重新训练成一只治疗犬。\n它的工作是走访小学课堂，听学生们给它读书。它全神贯注地听着读书的孩子，孩子们结巴时，它从不纠正，也从不嘲笑。读完以后，学生们可以把一块零食放在亨利的鼻子上，它会把它往上一翘，再用嘴接住。\n有一天，一个接受特殊教育的男孩来到课堂，加入了我们。男孩发抖的膝盖边，亨利贴着他趴在地上，男孩则十分努力地读着他的图画书。那些词卡在他的喉咙里。亨利舔了舔他的手，男孩又试了一次：“猫……在……这……”接着，一只凉凉的鼻子推了推画着一顶帽子的那一页。“帽子！”男孩喊了出来。从此他们有了一个游戏：亨利闻一闻书，男孩就读出三个词。\n他们刚一读完，老师就小声说：“太了不起了！”我以为她说的是亨利，便回答：“是啊，它真是一条了不起的狗。”\n“不，”她说，“这是这个学生第一次读得这么流利！”\n我曾许多次看到亨利能创造的小小奇迹有多么可贵，这只是其中一次。在200多次走访学校的过程中，亨利得到了600多块饼干的奖励，也把孩子们沉默的恐惧变成了勇敢的声音。孩子们渐渐长大，告别了图画书，教室里的海报换了一批又一批，但我这位红毛听众始终如一。",
+      "mainLine": {
+        "theme": {
+          "text": "小小的陪伴也能创造奇迹：亨利帮孩子把沉默的恐惧变成勇敢的声音（silent fears into brave voices）。",
+          "quote": "silent fears into brave voices"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+            "text": "主人看出表演犬亨利善解孩子，决定把它改训成治疗犬。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+            "text": "亨利走进小学听孩子读书，专注耐心，从不嘲笑。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+            "text": "特教男孩读书受阻，亨利用鼻子推书页，帮他读出单词。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+            "text": "老师惊叹，主人误以为她在夸亨利。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+            "text": "老师点明，这是男孩第一次读得流利。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+            "text": "主人感叹亨利创造的小奇迹，它多年陪伴孩子始终如一。"
+          }
+        ],
+        "emotion": "欣赏亨利→替男孩着急→惊喜→感动"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-cloze-1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+          "sourceText": "But I __41__ his uniqueness right away – while other champion dogs enjoyed holding their heads high in the spotlight, Henry would stay with children off stage.",
+          "displayText": "But I recognized his uniqueness right away – while other champion dogs enjoyed holding their heads high in the spotlight, Henry would stay with children off stage.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:41"
+          ],
+          "translationZh": "但我很快就认识到了它的与众不同——别的冠军犬喜欢在聚光灯下高高昂起头，亨利却总待在台下陪着孩子们。",
+          "analysisZh": "主干是“我很快看出了它的独特之处”（I recognized his uniqueness）。破折号后面用 while 连起两个对比的分句：别的冠军犬爱在聚光灯下昂着头，亨利却待在台下陪孩子。破折号后的对比，就是在具体说明“独特”指什么。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 31,
+              "quote": "I recognized his uniqueness"
+            },
+            {
+              "start": 45,
+              "end": 103,
+              "quote": "while other champion dogs enjoyed holding their heads high"
+            },
+            {
+              "start": 122,
+              "end": 152,
+              "quote": "Henry would stay with children"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-cloze-2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+          "sourceText": "Children __55__ picture books, and classrooms changed posters, but my red-furred listener remained constant.",
+          "displayText": "Children outgrew picture books, and classrooms changed posters, but my red-furred listener remained constant.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:55"
+          ],
+          "translationZh": "孩子们渐渐长大，告别了图画书，教室里的海报换了一批又一批，但我这位红毛听众始终如一。",
+          "analysisZh": "全句由三个分句组成。前两个用 and 并列，孩子们不再读图画书、教室换了海报，都在写时间带来的变化；but 一转，主语换成“我的红毛听众”（my red-furred listener），说它始终不变。前面的变化越多，越衬出亨利的不变。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "Children outgrew picture books"
+            },
+            {
+              "start": 36,
+              "end": 62,
+              "quote": "classrooms changed posters"
+            },
+            {
+              "start": 68,
+              "end": 108,
+              "quote": "my red-furred listener remained constant"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1"
+              ],
+              "start": 0,
+              "end": 126,
+              "quote": "我的爱尔兰赛特犬亨利曾被训练成一只表演犬。但我很快就认识到了它的与众不同——别的冠军犬喜欢在聚光灯下高高昂起头，亨利却总待在台下陪着孩子们。它歪着头，棕色的眼睛追随着孩子们细微的面部表情。因为它天性善于体察，又惹人喜爱，我决定把它重新训练成一只治疗犬。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2"
+              ],
+              "start": 127,
+              "end": 220,
+              "quote": "它的工作是走访小学课堂，听学生们给它读书。它全神贯注地听着读书的孩子，孩子们结巴时，它从不纠正，也从不嘲笑。读完以后，学生们可以把一块零食放在亨利的鼻子上，它会把它往上一翘，再用嘴接住。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3"
+              ],
+              "start": 221,
+              "end": 384,
+              "quote": "有一天，一个接受特殊教育的男孩来到课堂，加入了我们。男孩发抖的膝盖边，亨利贴着他趴在地上，男孩则十分努力地读着他的图画书。那些词卡在他的喉咙里。亨利舔了舔他的手，男孩又试了一次：“猫……在……这……”接着，一只凉凉的鼻子推了推画着一顶帽子的那一页。“帽子！”男孩喊了出来。从此他们有了一个游戏：亨利闻一闻书，男孩就读出三个词。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4"
+              ],
+              "start": 385,
+              "end": 437,
+              "quote": "他们刚一读完，老师就小声说：“太了不起了！”我以为她说的是亨利，便回答：“是啊，它真是一条了不起的狗。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5"
+              ],
+              "start": 438,
+              "end": 463,
+              "quote": "“不，”她说，“这是这个学生第一次读得这么流利！”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6"
+              ],
+              "start": 464,
+              "end": 587,
+              "quote": "我曾许多次看到亨利能创造的小小奇迹有多么可贵，这只是其中一次。在200多次走访学校的过程中，亨利得到了600多块饼干的奖励，也把孩子们沉默的恐惧变成了勇敢的声音。孩子们渐渐长大，告别了图画书，教室里的海报换了一批又一批，但我这位红毛听众始终如一。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+            "text": "My Irish setter, Henry, had been trained to be a show dog. But I recognized his uniqueness right away – while other champion dogs enjoyed holding their heads high in the spotlight, Henry would stay with children off stage. He tilted (倾斜) his head, brown eyes tracking their minor facial expressions. Because of his insightful nature and welcome presence, I decided to retrain him to be a therapy dog."
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+            "text": "His job was to visit elementary school classes and listen to students read to him. He gave undivided attention to the readers and never corrected or laughed at them when they stuttered (结巴). After reading, students got to put a treat on Henry’s nose, which he’d flip (翘动) up and catch in his mouth."
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+            "text": "One day, a special education student joined us in class. Henry lay on the floor against the boy’s shaking knees as he worked with great effort to read his picture book. Words got stuck in his throat. Henry licked his hands, and the boy tried again: “Cat... in... the...” Then a cool nose pushed the page with a picture of a hat. “HAT!” the boy shouted. Now they had a game: Henry smelt the book, and the boy read three words."
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+            "text": "As soon as they finished, the teacher whispered, “That was amazing!” Thinking she meant Henry, I replied. “Yes, he’s quite a dog.”"
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+            "text": "“No,” she said,“that is the first time this student has ever read smoothly!”"
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+            "text": "It was just one of the many times I saw the value of the tiny miracles that Henry could create. Over 200 school visits, Henry was rewarded with more than 600 biscuits and transformed silent fears into brave voices. Children outgrew picture books, and classrooms changed posters, but my red-furred listener remained constant."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 72,
+                "end": 86,
+                "quote": "his uniqueness"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 177,
+                "end": 217,
+                "quote": "Henry would stay with children off stage"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 32,
+                "end": 36,
+                "quote": "与众不同"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 56,
+                "end": 69,
+                "quote": "亨利却总待在台下陪着孩子们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 244,
+                "end": 254,
+                "quote": "brown eyes"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 268,
+                "end": 292,
+                "quote": "minor facial expressions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 75,
+                "end": 80,
+                "quote": "棕色的眼睛"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 86,
+                "end": 93,
+                "quote": "细微的面部表情"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 268,
+                "end": 292,
+                "quote": "minor facial expressions"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 316,
+                "end": 322,
+                "quote": "nature"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 86,
+                "end": 93,
+                "quote": "细微的面部表情"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 97,
+                "end": 99,
+                "quote": "天性"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 22,
+                "end": 47,
+                "quote": "elementary school classes"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 52,
+                "end": 82,
+                "quote": "listen to students read to him"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 7,
+                "end": 11,
+                "quote": "小学课堂"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 12,
+                "end": 20,
+                "quote": "听学生们给它读书"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 99,
+                "end": 108,
+                "quote": "attention"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 128,
+                "end": 162,
+                "quote": "never corrected or laughed at them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 43,
+                "end": 53,
+                "quote": "从不纠正，也从不嘲笑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 278,
+                "end": 296,
+                "quote": "catch in his mouth"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 142,
+                "end": 164,
+                "quote": "more than 600 biscuits"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 87,
+                "end": 92,
+                "quote": "再用嘴接住"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 51,
+                "end": 58,
+                "quote": "600多块饼干"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 9,
+                "end": 36,
+                "quote": "a special education student"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 44,
+                "end": 55,
+                "quote": "us in class"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 4,
+                "end": 19,
+                "quote": "一个接受特殊教育的男孩来到课堂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 118,
+                "end": 135,
+                "quote": "worked with great"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 98,
+                "end": 111,
+                "quote": "shaking knees"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 28,
+                "end": 33,
+                "quote": "发抖的膝盖"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 182,
+                "end": 195,
+                "quote": "in his throat"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 225,
+                "end": 244,
+                "quote": "the boy tried again"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 65,
+                "end": 71,
+                "quote": "在他的喉咙里"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 81,
+                "end": 88,
+                "quote": "男孩又试了一次"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 287,
+                "end": 302,
+                "quote": "pushed the page"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 373,
+                "end": 393,
+                "quote": "Henry smelt the book"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 110,
+                "end": 123,
+                "quote": "推了推画着一顶帽子的那一页"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 147,
+                "end": 153,
+                "quote": "亨利闻一闻书"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 89,
+                "end": 94,
+                "quote": "Henry"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 113,
+                "end": 129,
+                "quote": "he’s quite a dog"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 40,
+                "end": 50,
+                "quote": "它真是一条了不起的狗"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "start": 24,
+                "end": 38,
+                "quote": "the first time"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 247,
+                "end": 266,
+                "quote": "Cat... in... the..."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "start": 14,
+                "end": 17,
+                "quote": "第一次"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 90,
+                "end": 99,
+                "quote": "猫……在……这……"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 50,
+                "end": 67,
+                "quote": "That was amazing!"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "start": 24,
+                "end": 38,
+                "quote": "the first time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 15,
+                "end": 21,
+                "quote": "太了不起了！"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "start": 14,
+                "end": 17,
+                "quote": "第一次"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 176,
+                "end": 206,
+                "quote": "silent fears into brave voices"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 67,
+                "end": 72,
+                "quote": "沉默的恐惧"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 74,
+                "end": 80,
+                "quote": "了勇敢的声音"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 224,
+                "end": 237,
+                "quote": "picture books"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 243,
+                "end": 269,
+                "quote": "classrooms changed posters"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 298,
+                "end": 315,
+                "quote": "remained constant"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 96,
+                "end": 109,
+                "quote": "教室里的海报换了一批又一批"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 118,
+                "end": 122,
+                "quote": "始终如一"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:41"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 65,
+                "end": 75,
+                "quote": "recognized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 26,
+                "end": 29,
+                "quote": "认识到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:42"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 259,
+                "end": 267,
+                "quote": "tracking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 80,
+                "end": 83,
+                "quote": "追随着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:43"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 315,
+                "end": 325,
+                "quote": "insightful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 99,
+                "end": 103,
+                "quote": "善于体察"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:44"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 15,
+                "end": 20,
+                "quote": "visit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 5,
+                "end": 7,
+                "quote": "走访"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:45"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 91,
+                "end": 100,
+                "quote": "undivided"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 22,
+                "end": 26,
+                "quote": "全神贯注"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:46"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 228,
+                "end": 233,
+                "quote": "treat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:2",
+                "start": 67,
+                "end": 69,
+                "quote": "零食"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:47"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 37,
+                "end": 43,
+                "quote": "joined"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 20,
+                "end": 22,
+                "quote": "加入"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:48"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 136,
+                "end": 142,
+                "quote": "effort"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 50,
+                "end": 52,
+                "quote": "努力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:49"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 175,
+                "end": 184,
+                "quote": "got stuck"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 64,
+                "end": 65,
+                "quote": "卡"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:50"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 283,
+                "end": 287,
+                "quote": "nose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:3",
+                "start": 108,
+                "end": 110,
+                "quote": "鼻子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:51"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 82,
+                "end": 87,
+                "quote": "meant"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:4",
+                "start": 26,
+                "end": 29,
+                "quote": "说的是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:52"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "start": 66,
+                "end": 74,
+                "quote": "smoothly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:5",
+                "start": 21,
+                "end": 23,
+                "quote": "流利"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:53"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 62,
+                "end": 70,
+                "quote": "miracles"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 15,
+                "end": 17,
+                "quote": "奇迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:54"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 171,
+                "end": 182,
+                "quote": "transformed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 72,
+                "end": 74,
+                "quote": "变成"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:55"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 224,
+                "end": 231,
+                "quote": "outgrew"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 86,
+                "end": 92,
+                "quote": "长大，告别了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sentence-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:41"
+            ],
+            "selectedSentenceId": "sentence-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 59,
+                "end": 222,
+                "quote": "But I recognized his uniqueness right away – while other champion dogs enjoyed holding their heads high in the spotlight, Henry would stay with children off stage."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:1",
+                "start": 21,
+                "end": 70,
+                "quote": "但我很快就认识到了它的与众不同——别的冠军犬喜欢在聚光灯下高高昂起头，亨利却总待在台下陪着孩子们。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sentence-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:55"
+            ],
+            "selectedSentenceId": "sentence-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 215,
+                "end": 324,
+                "quote": "Children outgrew picture books, and classrooms changed posters, but my red-furred listener remained constant."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:cloze:6",
+                "start": 81,
+                "end": 123,
+                "quote": "孩子们渐渐长大，告别了图画书，教室里的海报换了一批又一批，但我这位红毛听众始终如一。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "欣赏亨利→替男孩着急→惊喜→感动"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:41": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "主人发现亨利和别的表演犬不一样，这是后来改训他的起点。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是他的独特之处（his uniqueness），破折号后举出他陪孩子的表现，说明主人是看出了这一点。",
+        "quotes": [
+          "his uniqueness"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "认识到",
+        "reason": "主人发现亨利和别的表演犬不一样，这是后来改训他的起点。动词看搭配：宾语是他的独特之处（his uniqueness），破折号后举出他陪孩子的表现，说明主人是看出了这一点。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "changed",
+          "meaning": "改变；破折号后写的是亨利本来就爱陪孩子（stay with children），主人只是看出来。",
+          "quote": "stay with children"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "rejected",
+          "meaning": "拒绝；主人后来正因这种天性改训他（I decided to retrain him），并没有排斥。",
+          "quote": "I decided to retrain him"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "improved",
+          "meaning": "改进；独特之处（his uniqueness）是亨利天生的，后文只是举例说明，谈不上改进。",
+          "quote": "his uniqueness"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his uniqueness",
+          "signalSide": "context-after",
+          "targetText": "recognized his uniqueness",
+          "relation": "看出的对象是亨利的独特之处，动词要表示“认识到”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "while",
+          "signalSide": "context-after",
+          "relation": "破折号后用表对比的连词（while）把别的冠军犬和亨利对照，具体说明他独特在哪里。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:42": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "亨利歪着头，眼睛要一直盯着孩子们细小的表情变化。",
+      "find": {
+        "check": "collocation",
+        "text": "动作发出者是眼睛（brown eyes），对象是细微的面部表情（minor facial expressions），眼睛能做的是追着看。",
+        "quotes": [
+          "brown eyes",
+          "minor facial expressions"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "跟踪",
+        "meaning": "目光紧紧追随",
+        "reason": "亨利歪着头，眼睛要一直盯着孩子们细小的表情变化。动词看搭配：动作发出者是眼睛（brown eyes），对象是细微的面部表情（minor facial expressions），眼睛能做的是追着看。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "terrifying",
+          "meaning": "使惊恐；对象是孩子的表情（facial expressions），亨利是安静陪着孩子，不会吓人。",
+          "quote": "facial expressions"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "causing",
+          "meaning": "导致；孩子的表情（facial expressions）是他们自己的，不是亨利的眼睛造成的。",
+          "quote": "facial expressions"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "avoiding",
+          "meaning": "避开；他歪着头（tilted his head）凑近看孩子，不是躲开他们的表情。",
+          "quote": "tilted"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "brown eyes",
+          "signalSide": "context-before",
+          "targetText": "brown eyes tracking",
+          "relation": "眼睛是动作发出者，要的是“看、追随”一类动作。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "minor facial expressions",
+          "signalSide": "context-after",
+          "targetText": "tracking their minor facial expressions",
+          "relation": "细微的表情是眼睛追着看的对象。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:43": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "要用一个词概括前文亨利会读孩子表情的天性，这正是改训他的理由。",
+      "find": {
+        "check": "echo",
+        "text": "前一句写他的眼睛紧盯孩子细微的表情（minor facial expressions），这种本事用形容词概括就是有洞察力。",
+        "quotes": [
+          "minor facial expressions"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "有洞察力的",
+        "meaning": "善于体察他人情绪",
+        "reason": "要用一个词概括前文亨利会读孩子表情的天性，这正是改训他的理由。形容词看复现：前一句写他的眼睛紧盯孩子细微的表情（minor facial expressions），这种本事用形容词概括就是有洞察力。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "graceful",
+          "meaning": "优雅的；前文夸的是他盯着孩子细微表情（minor facial expressions），是会察觉，不是姿态美。",
+          "quote": "minor facial expressions"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "amusing",
+          "meaning": "逗人发笑的；他只是安静地看孩子的表情（minor facial expressions），并不逗乐。",
+          "quote": "minor facial expressions"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dominant",
+          "meaning": "支配的；他甘愿待在台下陪孩子（stay with children off stage），一点也不强势。",
+          "quote": "stay with children off stage"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "minor facial expressions",
+          "signalSide": "context-before",
+          "relation": "能留意细微表情，复现为“有洞察力的”天性。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "nature",
+          "signalSide": "context-after",
+          "targetText": "insightful nature",
+          "relation": "形容词修饰天性（nature），描述亨利的性情。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:44": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "detail",
+      "context": "治疗犬的工作要先到小学课堂去，才能在那里听学生读书。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是小学课堂（elementary school classes），后面接着要听学生读书（listen to students read），只能是去走访。",
+        "quotes": [
+          "elementary school classes",
+          "listen to students read"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "访问",
+        "reason": "治疗犬的工作要先到小学课堂去，才能在那里听学生读书。动词看搭配：宾语是小学课堂（elementary school classes），后面接着要听学生读书（listen to students read），只能是去走访。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "design",
+          "meaning": "设计；亨利的任务是听学生读书（listen to students read），狗不会去设计课程。",
+          "quote": "listen to students read"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "interrupt",
+          "meaning": "打断；他要安静地听学生读（listen to students read），打断课堂和这份工作相反。",
+          "quote": "listen to students read"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "instruct",
+          "meaning": "指导；后文说他从不纠正（never corrected）学生，他是去听，不是去教。",
+          "quote": "never corrected"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "elementary school classes",
+          "signalSide": "context-after",
+          "targetText": "visit elementary school classes",
+          "relation": "宾语是小学课堂，动词要表示“去到那里”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "listen to students read",
+          "signalSide": "context-after",
+          "relation": "到了课堂才能听学生读书，前后两个动作接得上。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:45": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "他给读书孩子的注意力要是专心的，和后面不纠正、不嘲笑同向。",
+      "find": {
+        "check": "collocation",
+        "text": "修饰注意力（attention），并列的另一半是从不纠正或嘲笑（never corrected or laughed at them），说明他一心听着。",
+        "quotes": [
+          "attention",
+          "never corrected or laughed at them"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "专一的",
+        "meaning": "全神贯注的",
+        "reason": "他给读书孩子的注意力要是专心的，和后面不纠正、不嘲笑同向。形容词看搭配：修饰注意力（attention），并列的另一半是从不纠正或嘲笑（never corrected or laughed at them），说明他一心听着。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unwanted",
+          "meaning": "不想要的；学生读书正需要有人听（listen to students read），他的关注并不多余。",
+          "quote": "listen to students read"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "uncomfortable",
+          "meaning": "令人不舒服的；他从不嘲笑结巴的孩子（never corrected or laughed at them），让人安心。",
+          "quote": "never corrected or laughed at them"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unusual",
+          "meaning": "不寻常的；同句后半强调他耐心不纠正（never corrected），说的是专心，不是方式特别。",
+          "quote": "never corrected"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "attention",
+          "signalSide": "context-after",
+          "targetText": "undivided attention",
+          "relation": "形容词修饰注意力，全部的注意力（undivided attention）就是专心。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "never corrected or laughed at them",
+          "signalSide": "context-after",
+          "relation": "从不纠正也不嘲笑，和专心倾听同向。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:46": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "读完书后放到亨利鼻子上、他能翘起来用嘴接住的，应是给狗的小奖励。",
+      "find": {
+        "check": "echo",
+        "text": "他会用嘴接住（catch in his mouth），末段又说他得到600多块饼干的奖励（more than 600 biscuits），就是零食。",
+        "quotes": [
+          "catch in his mouth",
+          "more than 600 biscuits"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "零食",
+        "meaning": "给狗的奖励",
+        "reason": "读完书后放到亨利鼻子上、他能翘起来用嘴接住的，应是给狗的小奖励。名词看复现：他会用嘴接住（catch in his mouth），末段又说他得到600多块饼干的奖励（more than 600 biscuits），就是零食。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "page",
+          "meaning": "书页；读完书后放在狗鼻子上、让他用嘴接住（catch in his mouth）的不会是书页。",
+          "quote": "catch in his mouth"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "coin",
+          "meaning": "硬币；末段说亨利得到的奖励是饼干（more than 600 biscuits），不是硬币。",
+          "quote": "more than 600 biscuits"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hand",
+          "meaning": "手；手放不到鼻子上再被翘起来，用嘴接住（catch in his mouth）。",
+          "quote": "catch in his mouth"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "catch in his mouth",
+          "signalSide": "context-after",
+          "targetText": "put a treat on Henry’s nose",
+          "relation": "东西被翘起后用嘴接住，应是能吃的小零食。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "more than 600 biscuits",
+          "signalSide": "context-after",
+          "relation": "末段的饼干复现了这里的零食奖励。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:47": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "一个特教学生来到课堂，和我们一起上课，成为亨利的新听众。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是一个特教学生（a special education student），宾语是在课堂上的我们（us in class），是加入。",
+        "quotes": [
+          "a special education student",
+          "us in class"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "加入",
+        "reason": "一个特教学生来到课堂，和我们一起上课，成为亨利的新听众。动词看搭配：主语是一个特教学生（a special education student），宾语是在课堂上的我们（us in class），是加入。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "witnessed",
+          "meaning": "目睹；后文是他亲自给亨利读书（to read his picture book），不是在旁边看。",
+          "quote": "to read his picture book"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "led",
+          "meaning": "带领；他膝盖发抖（shaking knees）、读书吃力，不是带领我们的人。",
+          "quote": "shaking knees"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "invited",
+          "meaning": "邀请；是主人带亨利来课堂，这个男孩是来读书的学生（a special education student）。",
+          "quote": "a special education student"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "us in class",
+          "signalSide": "context-after",
+          "targetText": "joined us in class",
+          "relation": "宾语是课堂上的我们，动词表示“加入”。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:48": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "男孩读书很吃力，要费很大的劲，这是他读书困难的开始。",
+      "find": {
+        "check": "collocation",
+        "text": "费了很大的（worked with great）后面要接表示力气的名词；膝盖发抖（shaking knees）也说明他读得吃力。",
+        "quotes": [
+          "worked with great",
+          "shaking knees"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "努力",
+        "reason": "男孩读书很吃力，要费很大的劲，这是他读书困难的开始。名词看搭配：费了很大的（worked with great）后面要接表示力气的名词；膝盖发抖（shaking knees）也说明他读得吃力。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "respect",
+          "meaning": "尊重；他膝盖发抖（shaking knees）是因为紧张吃力，不是怀着敬意读书。",
+          "quote": "shaking knees"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "risk",
+          "meaning": "风险；读一本图画书（read his picture book）谈不上冒险，难处在于读不出来。",
+          "quote": "read his picture book"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "speed",
+          "meaning": "速度；接着说词卡在喉咙里（in his throat），他读得很慢，谈不上快。",
+          "quote": "in his throat"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "worked with great",
+          "signalSide": "context-before",
+          "targetText": "worked with great effort",
+          "relation": "费很大力气去做（work with great effort），名词要表示力气、努力。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "shaking knees",
+          "signalSide": "context-before",
+          "relation": "膝盖发抖，说明他读得紧张吃力。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:49": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:49",
+      "blankNo": 49,
+      "pos": "phrase",
+      "role": "main",
+      "context": "男孩读不出来，词说不出口，这是他读书的低谷。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "词在喉咙里（in his throat），亨利舔他的手后他才又试一次（tried again），说明刚才没读出来。",
+        "quotes": [
+          "in his throat",
+          "tried again"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "被卡住",
+        "meaning": "说不出口",
+        "reason": "男孩读不出来，词说不出口，这是他读书的低谷。词组看语境义：词在喉咙里（in his throat），亨利舔他的手后他才又试一次（tried again），说明刚才没读出来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "turned up",
+          "meaning": "出现；男孩之后要再试一次（tried again），说明词没能顺利出口。",
+          "quote": "tried again"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "spread out",
+          "meaning": "散开；词在喉咙里（in his throat）散开说不通，他是读不出声。",
+          "quote": "in his throat"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "came true",
+          "meaning": "实现；词在喉咙里（in his throat）实现说不通，男孩是读不出来。",
+          "quote": "in his throat"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in his throat",
+          "signalSide": "context-after",
+          "targetText": "got stuck in his throat",
+          "relation": "词卡在喉咙里，用“被卡住”（get stuck）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "got",
+          "signalSide": "option",
+          "targetText": "got stuck",
+          "relation": "选项里的变得（got）与卡住的（stuck）组合，表示“被卡住”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "tried again",
+          "signalSide": "context-after",
+          "relation": "要再试一次，说明刚才没读出来。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:50": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "推动画着帽子那页的是亨利凉凉的鼻子，他开始帮男孩认词。",
+      "find": {
+        "check": "echo",
+        "text": "紧接着的游戏是亨利闻书（Henry smelt the book），前文零食也放在他鼻子上（Henry’s nose），推书页的是鼻子。",
+        "quotes": [
+          "Henry smelt the book",
+          "Henry’s nose"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "鼻子",
+        "reason": "推动画着帽子那页的是亨利凉凉的鼻子，他开始帮男孩认词。名词看复现：紧接着的游戏是亨利闻书（Henry smelt the book），前文零食也放在他鼻子上（Henry’s nose），推书页的是鼻子。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wind",
+          "meaning": "风；风不会专挑画着帽子的那页推（pushed the page），后文是亨利闻书配合男孩。",
+          "quote": "pushed the page"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "teacher",
+          "meaning": "老师；老师到读完才小声说话（the teacher whispered），推书页的是亨利。",
+          "quote": "the teacher whispered"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "finger",
+          "meaning": "手指；后文的游戏是亨利闻书（Henry smelt the book），推页的不是人的手指。",
+          "quote": "Henry smelt the book"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "pushed the page",
+          "signalSide": "context-after",
+          "targetText": "a cool nose pushed the page",
+          "relation": "凉凉的东西推书页，应是狗湿凉的鼻子。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Henry smelt the book",
+          "signalSide": "context-after",
+          "relation": "亨利用鼻子闻书，复现了推书页的鼻子。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:51": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "主人以为老师夸的是亨利，这个误会引出下一段老师的纠正。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是亨利（Henry），主人回答它真是条好狗（he’s quite a dog），可见他以为老师说的是亨利。",
+        "quotes": [
+          "Henry",
+          "he’s quite a dog"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "意指",
+        "reason": "主人以为老师夸的是亨利，这个误会引出下一段老师的纠正。动词看搭配：宾语是亨利（Henry），主人回答它真是条好狗（he’s quite a dog），可见他以为老师说的是亨利。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "encouraged",
+          "meaning": "鼓励；老师是在感叹（That was amazing），主人接话夸狗，不是以为老师在鼓励亨利。",
+          "quote": "That was amazing"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ordered",
+          "meaning": "命令；老师只是小声感叹（whispered），并没有给亨利下指令。",
+          "quote": "whispered"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "compared",
+          "meaning": "比较；后面没有比较的对象，主人接着只是夸亨利（he’s quite a dog）。",
+          "quote": "he’s quite a dog"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Henry",
+          "signalSide": "context-after",
+          "targetText": "meant Henry",
+          "relation": "“以为她指的是亨利”，宾语是亨利。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he’s quite a dog",
+          "signalSide": "context-after",
+          "relation": "主人接着夸狗，说明他以为老师夸的是亨利。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:52": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:52",
+      "blankNo": 52,
+      "pos": "adverb",
+      "role": "main",
+      "context": "老师纠正说，惊人的是男孩第一次读顺了，这是全文的转折点。",
+      "find": {
+        "check": "direction",
+        "text": "男孩先前一词一顿（Cat... in... the...），玩了游戏后读了出来，老师说是第一次（the first time），走向是读顺了。",
+        "quotes": [
+          "Cat... in... the...",
+          "the first time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "流畅地",
+        "reason": "老师纠正说，惊人的是男孩第一次读顺了，这是全文的转折点。副词看走向：男孩先前一词一顿（Cat... in... the...），玩了游戏后读了出来，老师说是第一次（the first time），走向是读顺了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "regularly",
+          "meaning": "定期地；老师说这是第一次（the first time），和经常、定期矛盾。",
+          "quote": "the first time"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "carefully",
+          "meaning": "仔细地；男孩之前就在使劲读（worked with great），难得的不是仔细而是读顺。",
+          "quote": "worked with great"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "silently",
+          "meaning": "默默地；男孩刚刚大声喊出“帽子”（the boy shouted），老师惊叹的是他读出了声。",
+          "quote": "the boy shouted"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "read",
+          "signalSide": "context-before",
+          "targetText": "read smoothly",
+          "relation": "副词修饰读（read），说明读得怎么样。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the first time",
+          "signalSide": "context-before",
+          "relation": "第一次，与前文读得磕磕绊绊形成对照。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:53": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "要用一个名词概括男孩第一次读顺这样的事，点出亨利创造的小小奇迹。",
+      "find": {
+        "check": "echo",
+        "text": "前文老师惊叹（That was amazing!），又说这是男孩第一次读顺（the first time），这样的事概括成奇迹。",
+        "quotes": [
+          "That was amazing!",
+          "the first time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "奇迹",
+        "meaning": "孩子身上的惊人变化",
+        "reason": "要用一个名词概括男孩第一次读顺这样的事，点出亨利创造的小小奇迹。名词看复现：前文老师惊叹（That was amazing!），又说这是男孩第一次读顺（the first time），这样的事概括成奇迹。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "memories",
+          "meaning": "回忆；亨利创造的（Henry could create）是让孩子开口的变化，不是回忆。",
+          "quote": "Henry could create"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sounds",
+          "meaning": "声音；亨利自己不出声，他促成的是男孩第一次读顺（the first time）这样的变化。",
+          "quote": "the first time"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "opportunities",
+          "meaning": "机会；老师惊叹（That was amazing!）的是已经发生的变化，不只是一次机会。",
+          "quote": "That was amazing!"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Henry could create",
+          "signalSide": "context-after",
+          "targetText": "miracles that Henry could create",
+          "relation": "名词作亨利能创造的（Henry could create）东西，要是他促成的变化。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "That was amazing!",
+          "signalSide": "context-before",
+          "relation": "老师的惊叹复现为“奇迹”。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:54": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "概括亨利多年的作用：让孩子从沉默害怕变得勇敢开口。",
+      "find": {
+        "check": "collocation",
+        "text": "后面是变成某物的结构（silent fears into brave voices），动词要表示把恐惧转变成勇敢的声音。",
+        "quotes": [
+          "silent fears into brave voices"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "使转变",
+        "reason": "概括亨利多年的作用：让孩子从沉默害怕变得勇敢开口。动词看搭配：后面是变成某物的结构（silent fears into brave voices），动词要表示把恐惧转变成勇敢的声音。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "persuaded",
+          "meaning": "说服；说服的对象应是人，这里的宾语是恐惧（silent fears），无法被说服。",
+          "quote": "silent fears"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "broke",
+          "meaning": "打破；能打破恐惧，但后面的变成勇敢的声音（into brave voices）要的是转变。",
+          "quote": "into brave voices"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "brought",
+          "meaning": "带来；亨利不会给孩子带来恐惧，后面接的是变成勇敢的声音（into brave voices）。",
+          "quote": "into brave voices"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "silent fears into brave voices",
+          "signalSide": "context-after",
+          "targetText": "transformed silent fears into brave voices",
+          "relation": "把甲变成乙（transform A into B），这里是把沉默的恐惧变成勇敢的声音。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:55": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "detail",
+      "context": "孩子们长大，不再读图画书，和换海报一起写时间带来的变化。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是图画书（picture books），与换海报（classrooms changed posters）并列写变化，再转到亨利不变。",
+        "quotes": [
+          "picture books",
+          "classrooms changed posters"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "因长大而放弃",
+        "meaning": "长大后不再读",
+        "reason": "孩子们长大，不再读图画书，和换海报一起写时间带来的变化。动词看搭配：宾语是图画书（picture books），与换海报（classrooms changed posters）并列写变化，再转到亨利不变。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "overlooked",
+          "meaning": "忽视；与换海报（classrooms changed posters）并列的是孩子长大的变化，不是不理图画书。",
+          "quote": "classrooms changed posters"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "downloaded",
+          "meaning": "下载；全句拿孩子和教室的变化反衬亨利不变（remained constant），下载不是成长。",
+          "quote": "remained constant"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "undertook",
+          "meaning": "承担；图画书（picture books）不是要承担的任务，这里说的是孩子长大了。",
+          "quote": "picture books"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "picture books",
+          "signalSide": "context-after",
+          "targetText": "outgrew picture books",
+          "relation": "宾语是图画书，长大不再读图画书（outgrew picture books）。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but",
+          "signalSide": "context-after",
+          "relation": "前面写孩子和教室在变，转折词（but）后写亨利不变。"
+        }
+      ]
+    }
+  }
+}

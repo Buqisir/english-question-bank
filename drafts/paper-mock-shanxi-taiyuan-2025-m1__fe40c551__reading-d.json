@@ -1,0 +1,808 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-d": {
+      "overview": "文章反思“赢家从不放弃”的说法：坚持要有限度，执着于不切实际的目标既可能白白耗费人生，又会错失其他机会；作者介绍“目标脱离”的好处，并给出明智放弃目标的几条建议。",
+      "fullTranslationZh": "许多人鼓励竞争，看重成功。“放弃”遭人白眼。听到有人坚持不懈终获成功的故事，我们欣喜不已。朋友和同事总是鼓励你继续尝试。“如果一开始没有成功，那就再试一次，再试一次。”“追随你的梦想！赢家从不放弃！”\n坚持固然重要，但要有限度。然而，千万别过头。一方面，目标和梦想可能遥不可及。靠坚持实现儿时梦想的故事也许催人奋进，但它们存在“选择偏差”。简单地说，这些故事提供不了真实的信息，因为没有人讲述那许多坚持了却在浪费大半生之后仍然失败的人的故事。如果你追逐一个不切实际的梦想，确实会令人沮丧。另一方面，每走一条路，就意味着另一条路没走。一个不切实际的目标意味着错过其他机会。如果每个从小梦想成为宇航员的人都永远坚持下去，会怎样？赢家总是明智地选择放弃什么、追求什么。\n最近的研究表明，能够放弃一些目标和梦想，并把精力转向更合理的目标，对心理健康很重要，而且从长远看能带来更高的生活质量。这个心理学术语叫作“目标脱离”。如果你目前正在一个无法实现的目标上投入过多的时间和精力，下面这些提示也许能帮到你。\n首先，不要把目标和你的身份绑在一起。没有人能被单一的目标或兴趣所定义。此外，放下一个目标，但保留部分投入。这叫作“把它变成爱好”。集邮和集币的人很少想成为专业人士，但很多人乐在其中。最后也最重要的是，不要把放弃看作失败，而要把它看作一种选择。你的时间是有限的。尝试新的活动，重拾以前的兴趣，调整你的抱负。诚实地面对自己的机会，选择最适合你的目标。并且记住，当你放弃一个目标时，你并没有失败。你是在做一个选择，为其他可能腾出时间。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+          "sourceText": "Recent studies have shown that being able to give up some goals and dreams and redirect your energy toward more reasonable ones is important for mental well-being and leads to higher quality of life in the long term.",
+          "displayText": "Recent studies have shown that being able to give up some goals and dreams and redirect your energy toward more reasonable ones is important for mental well-being and leads to higher quality of life in the long term.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:33"
+          ],
+          "translationZh": "最近的研究表明，能够放弃一些目标和梦想，并把精力转向更合理的目标，对心理健康很重要，而且从长远看能带来更高的生活质量。",
+          "analysisZh": "主干是 Recent studies have shown that …（最近的研究表明……）。that 从句的主语是一个很长的动名词短语 being able to give up some goals and dreams and redirect your energy toward more reasonable ones（能够放弃一些目标和梦想、把精力转向更合理的目标），give up 和 redirect 并列，都接在 be able to 后面，ones 指 goals；从句有两个并列谓语：is important for mental well-being 和 leads to higher quality of life。",
+          "underlineRanges": [
+            {
+              "start": 31,
+              "end": 52,
+              "quote": "being able to give up"
+            },
+            {
+              "start": 128,
+              "end": 162,
+              "quote": "is important for mental well-being"
+            },
+            {
+              "start": 167,
+              "end": 175,
+              "quote": "leads to"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+          "sourceText": "Put simply, they are not informative, because nobody tells stories about the many people who persevered but failed after wasting a good part of their lives.",
+          "displayText": "Put simply, they are not informative, because nobody tells stories about the many people who persevered but failed after wasting a good part of their lives.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:32"
+          ],
+          "translationZh": "简单地说，这些故事提供不了真实的信息，因为没有人讲述那许多坚持了却在浪费大半生之后仍然失败的人的故事。",
+          "analysisZh": "Put simply 是插入语（简单地说），表示下面要解释上句的 selection bias。主句 they are not informative 很短，they 指上句那些靠坚持圆梦的故事；because 引导原因状语从句，主干是 nobody tells stories about the many people（没人讲那许多人的故事），who persevered but failed 修饰 people，after wasting a good part of their lives 补充他们是在耗掉大半生之后才失败的。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 10,
+              "quote": "Put simply"
+            },
+            {
+              "start": 12,
+              "end": 36,
+              "quote": "they are not informative"
+            },
+            {
+              "start": 38,
+              "end": 66,
+              "quote": "because nobody tells stories"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1"
+              ],
+              "start": 0,
+              "end": 100,
+              "quote": "许多人鼓励竞争，看重成功。“放弃”遭人白眼。听到有人坚持不懈终获成功的故事，我们欣喜不已。朋友和同事总是鼓励你继续尝试。“如果一开始没有成功，那就再试一次，再试一次。”“追随你的梦想！赢家从不放弃！”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2"
+              ],
+              "start": 101,
+              "end": 331,
+              "quote": "坚持固然重要，但要有限度。然而，千万别过头。一方面，目标和梦想可能遥不可及。靠坚持实现儿时梦想的故事也许催人奋进，但它们存在“选择偏差”。简单地说，这些故事提供不了真实的信息，因为没有人讲述那许多坚持了却在浪费大半生之后仍然失败的人的故事。如果你追逐一个不切实际的梦想，确实会令人沮丧。另一方面，每走一条路，就意味着另一条路没走。一个不切实际的目标意味着错过其他机会。如果每个从小梦想成为宇航员的人都永远坚持下去，会怎样？赢家总是明智地选择放弃什么、追求什么。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3"
+              ],
+              "start": 332,
+              "end": 448,
+              "quote": "最近的研究表明，能够放弃一些目标和梦想，并把精力转向更合理的目标，对心理健康很重要，而且从长远看能带来更高的生活质量。这个心理学术语叫作“目标脱离”。如果你目前正在一个无法实现的目标上投入过多的时间和精力，下面这些提示也许能帮到你。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4"
+              ],
+              "start": 449,
+              "end": 663,
+              "quote": "首先，不要把目标和你的身份绑在一起。没有人能被单一的目标或兴趣所定义。此外，放下一个目标，但保留部分投入。这叫作“把它变成爱好”。集邮和集币的人很少想成为专业人士，但很多人乐在其中。最后也最重要的是，不要把放弃看作失败，而要把它看作一种选择。你的时间是有限的。尝试新的活动，重拾以前的兴趣，调整你的抱负。诚实地面对自己的机会，选择最适合你的目标。并且记住，当你放弃一个目标时，你并没有失败。你是在做一个选择，为其他可能腾出时间。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+                "start": 251,
+                "end": 407,
+                "quote": "Put simply, they are not informative, because nobody tells stories about the many people who persevered but failed after wasting a good part of their lives."
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+                "start": 408,
+                "end": 468,
+                "quote": "It is indeed frustrating if you follow an unrealistic dream."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p2",
+                "start": 69,
+                "end": 119,
+                "quote": "简单地说，这些故事提供不了真实的信息，因为没有人讲述那许多坚持了却在浪费大半生之后仍然失败的人的故事"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p2",
+                "start": 120,
+                "end": 142,
+                "quote": "如果你追逐一个不切实际的梦想，确实会令人沮丧"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+                "start": 31,
+                "end": 162,
+                "quote": "being able to give up some goals and dreams and redirect your energy toward more reasonable ones is important for mental well-being"
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+                "start": 611,
+                "end": 674,
+                "quote": "You make a choice to free up your time for other possibilities."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p3",
+                "start": 8,
+                "end": 41,
+                "quote": "能够放弃一些目标和梦想，并把精力转向更合理的目标，对心理健康很重要"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p4",
+                "start": 195,
+                "end": 213,
+                "quote": "你是在做一个选择，为其他可能腾出时间"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+                "start": 95,
+                "end": 193,
+                "quote": "Besides, disengage from a goal but keep some of the effort. It’s called “turning it into a hobby”."
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+                "start": 265,
+                "end": 343,
+                "quote": "If you are currently devoting too much time and effort to an unattainable goal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p4",
+                "start": 35,
+                "end": 64,
+                "quote": "此外，放下一个目标，但保留部分投入。这叫作“把它变成爱好”"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p3",
+                "start": 75,
+                "end": 102,
+                "quote": "如果你目前正在一个无法实现的目标上投入过多的时间和精力"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+                "start": 696,
+                "end": 757,
+                "quote": "Winners always wisely choose what to quit and what to pursue."
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+                "start": 513,
+                "end": 548,
+                "quote": "choose the goals that best suit you"
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1",
+                "start": 282,
+                "end": 301,
+                "quote": "Winners never quit!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p2",
+                "start": 211,
+                "end": 229,
+                "quote": "赢家总是明智地选择放弃什么、追求什么"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p4",
+                "start": 163,
+                "end": 172,
+                "quote": "选择最适合你的目标"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p1",
+                "start": 92,
+                "end": 99,
+                "quote": "赢家从不放弃！"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+                "start": 0,
+                "end": 216,
+                "quote": "Recent studies have shown that being able to give up some goals and dreams and redirect your energy toward more reasonable ones is important for mental well-being and leads to higher quality of life in the long term."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p3",
+                "start": 0,
+                "end": 58,
+                "quote": "最近的研究表明，能够放弃一些目标和梦想，并把精力转向更合理的目标，对心理健康很重要，而且从长远看能带来更高的生活质量"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+                "start": 251,
+                "end": 407,
+                "quote": "Put simply, they are not informative, because nobody tells stories about the many people who persevered but failed after wasting a good part of their lives."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-d-p2",
+                "start": 69,
+                "end": 119,
+                "quote": "简单地说，这些故事提供不了真实的信息，因为没有人讲述那许多坚持了却在浪费大半生之后仍然失败的人的故事"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先摆出人们推崇坚持、反对放弃的普遍看法，再用“选择偏差”和错失机会说明坚持不能过头，接着引出“目标脱离”的研究，最后给出怎样明智放弃目标的建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1",
+            "summary": "人们普遍鼓励坚持，把“放弃”看成坏事",
+            "function": "摆出常见看法，作为下文反驳的对象"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+            "summary": "坚持要有度：成功故事有选择偏差，不切实际的目标会让人错失其他机会",
+            "function": "提出并论证作者的观点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+            "summary": "研究表明适时放弃、转向合理目标有益身心，这叫“目标脱离”",
+            "function": "引出概念，过渡到建议"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+            "summary": "别把目标和身份绑定，可以把目标变成爱好，要把放弃看作选择",
+            "function": "给出具体建议，呼应主题"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:32": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "弄清“选择偏差”指什么，再推出它会让人对坚持产生怎样的判断。",
+      "stemTranslationZh": "“选择偏差”可能给人们带来什么后果？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看 Put simply 怎么解释",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "给自己设限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "to a limit",
+            "optionText": "self-limit",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了 to a limit（有限度），那是作者对坚持提出的要求；选择偏差的问题在于让人只看到成功、看不到失败，和给自己设限无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "Perseverance is indeed important, to a limit.",
+              "anchor": "坚持要有度"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "更容易放弃。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Stories of achieving childhood dreams through perseverance might be uplifting",
+            "sourceHighlight": "uplifting",
+            "optionHighlight": "Giving up more easily",
+            "explanation": "这类只讲坚持圆梦的故事催人奋进（uplifting），让人更想咬牙坚持，而不是更容易放弃。",
+            "optionText": "Giving up more easily."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "Stories of achieving childhood dreams through perseverance might be uplifting",
+              "anchor": "成功故事催人奋进"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "误判形势。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "Put simply, they are not informative, because nobody tells stories about the many people who persevered but failed after wasting a good part of their lives.",
+              "anchor": "选择偏差的解释"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "It is indeed frustrating if you follow an unrealistic dream.",
+              "anchor": "追逐不切实际的梦想"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "忽视成功的故事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "nobody tells stories about the many people who persevered but failed",
+            "sourceEntity": "the many people who persevered but failed",
+            "optionEntity": "successful stories",
+            "explanation": "被忽略的是坚持了却失败的人（the many people who persevered but failed），成功的故事反而人人在讲。",
+            "optionText": "Ignoring successful stories."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "nobody tells stories about the many people who persevered but failed",
+              "anchor": "失败者没人讲"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "selection bias",
+          "sourceRole": "stem",
+          "targetText": "Stories of achieving childhood dreams through perseverance might be uplifting, but they suffer from “selection bias”.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "they are not informative, because nobody tells stories about the many people who persevered but failed",
+          "bridgeZh": "Put simply 后在解释这种偏差是怎么回事",
+          "note": "题干 selection bias 原词出现在原文。"
+        },
+        {
+          "sourceText": "Misjudging the situation",
+          "sourceRole": "correctOption",
+          "targetText": "Put simply, they are not informative, because nobody tells stories about the many people who persevered but failed after wasting a good part of their lives.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "原文说这些故事提供不了真实信息（not informative），因为坚持了却失败的人没人讲；人们只听到成功的例子，就容易高估坚持的胜算，看不清自己的处境，所以是“误判形势”，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出“目标脱离”具体指什么做法，以及这样做为什么对人有好处。",
+      "stemTranslationZh": "人们怎样从“目标脱离”中受益？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句看这个术语指什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "激发对成功的渴望。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "focus on success",
+            "optionText": "success",
+            "matchType": "exact",
+            "relationNote": "success（成功）出自 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1]] 人们鼓励竞争、看重成功的普遍看法，那正是作者要反思的；目标脱离讲的是放下够不着的目标。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1",
+              "quote": "Many people encourage competition and focus on success.",
+              "anchor": "看重成功"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "获得自我满足感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By gaining a sense of self-satisfaction.",
+            "explanation": "原文说的好处是心理健康（mental well-being）和更高的生活质量（higher quality of life），来自把精力转向更合理的目标，没提自我满足感。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "分清容易的目标和困难的目标。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "redirect your energy toward more reasonable ones",
+            "sourceEntity": "more reasonable ones",
+            "optionEntity": "easy goals from difficult goals",
+            "explanation": "原文区分的是够不着的目标（an unattainable goal）和更合理的目标（more reasonable ones），看的是现不现实，不是难易。",
+            "optionText": "By telling easy goals from difficult goals."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+              "quote": "redirect your energy toward more reasonable ones",
+              "anchor": "转向更合理的目标"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把精力省下来专注于务实的目标。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+              "quote": "being able to give up some goals and dreams and redirect your energy toward more reasonable ones is important for mental well-being",
+              "anchor": "放下目标、转移精力"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "You make a choice to free up your time for other possibilities.",
+              "anchor": "腾出时间"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "goal disengagement",
+          "sourceRole": "stem",
+          "targetText": "The psychological term is “goal disengagement”.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "give up some goals and dreams and redirect your energy toward more reasonable ones",
+          "bridgeZh": "这个术语就是给研究里说的那种做法起的名字",
+          "note": "题干 goal disengagement 原词出现在原文。"
+        },
+        {
+          "sourceText": "saving energy to focus on practical goals",
+          "sourceRole": "correctOption",
+          "targetText": "give up some goals and dreams and redirect your energy toward more reasonable ones",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "“省下精力”对应放下一些目标、把精力转出来（redirect your energy），“务实的目标”（practical goals）就是更合理的目标（more reasonable ones）；研究说这样做有益心理健康、提高生活质量，好处就在这里，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把四个选项放回作者给出的建议里，判断哪一项和作者的观点一致。",
+      "stemTranslationZh": "作者可能同意下列哪一项？",
+      "locateBy": "options",
+      "locateFindZh": "把各项放回 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4]] 的几条建议里逐一核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "坦然接受失败确实有道理。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "do not think of giving up as a failure, but as a choice.",
+            "sourceHighlight": "do not think of giving up as a failure",
+            "optionHighlight": "Accepting failure",
+            "explanation": "作者说不要把放弃看成失败，而要看成一种选择（but as a choice），还说放弃目标并不是失败；选项要人坦然接受失败，又把放弃当成了失败。",
+            "optionText": "Accepting failure with ease does make sense."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "Last and most important, do not think of giving up as a failure, but as a choice.",
+              "anchor": "放弃不是失败"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人可以把无法实现的目标变成爱好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "Besides, disengage from a goal but keep some of the effort. It’s called “turning it into a hobby”.",
+              "anchor": "把目标变成爱好"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3",
+              "quote": "If you are currently devoting too much time and effort to an unattainable goal",
+              "anchor": "无法实现的目标"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "实现个人目标时要求助专业人士。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "become professionals",
+            "optionText": "professionals",
+            "matchType": "exact",
+            "relationNote": "选项借了 professionals（专业人士），原文是说集邮集币的人很少想成为专业人士，却照样乐在其中，没让人在实现目标时去找专业人士。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "Few stamp and coin collectors desire to become professionals, yet many enjoy collecting.",
+              "anchor": "收藏者不求专业"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "选择目标比实现目标更难。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Choosing a goal is more challenging than realizing it.",
+            "explanation": "原文没有比较选目标和实现目标哪个更难，只建议诚实估计自己的机会，选最适合自己的目标（choose the goals that best suit you）。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "make a hobby out of an unattainable goal",
+          "sourceRole": "correctOption",
+          "targetText": "It’s called “turning it into a hobby”.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项由两处合成：“够不着的目标”（an unattainable goal）出自 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3|devoting too much time and effort to an unattainable goal]]，后面的建议正是给这种人提的；“把……变成爱好”（make a hobby out of）就是 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4]] 说的 turning it into a hobby，即放下目标但保留部分投入，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "抓住作者反驳“赢家从不放弃”的主线，选出能概括全文观点的标题。",
+      "stemTranslationZh": "下列哪一项是本文的最佳标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1]] 的 Winners never quit 入手，看作者后文怎样回应",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "身份危机：做真实的自己",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "First, do not tie a goal to your identity.",
+            "sourceHighlight": "your identity",
+            "optionHighlight": "Identity Crisis",
+            "explanation": "identity（身份）只出现在 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4]] 的一条建议里，说的是别把目标和身份绑在一起；全文没谈身份危机，讲的是该不该一直坚持某个目标。",
+            "optionText": "Identity Crisis: Be True to Yourself"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "First, do not tie a goal to your identity.",
+              "anchor": "别把目标和身份绑定"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "目标还是爱好：做出你的选择",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "It’s called “turning it into a hobby”.",
+            "sourceHighlight": "turning it into a hobby",
+            "optionHighlight": "Goals or Hobbies",
+            "explanation": "把目标变成爱好（turning it into a hobby）只是 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4]] 几条建议中的一条，作者也没让人在目标和爱好之间二选一。",
+            "optionText": "Goals or Hobbies: Make Your Choice"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "It’s called “turning it into a hobby”.",
+              "anchor": "变成爱好"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "永不言弃：成功的关键",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Winners always wisely choose what to quit and what to pursue.",
+            "sourceHighlight": "choose what to quit",
+            "optionHighlight": "Never Say Never",
+            "explanation": "“永不言弃”正是 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1]] 里众人挂在嘴边的说法（Winners never quit），作者恰恰反对把坚持推到极端，主张明智地选择放弃什么。",
+            "optionText": "Never Say Never: The Key to Success"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "Winners always wisely choose what to quit and what to pursue.",
+              "anchor": "明智选择放弃什么"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "赢家也会放弃：明智对待你的目标",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+              "quote": "Winners always wisely choose what to quit and what to pursue.",
+              "anchor": "赢家会选择放弃"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4",
+              "quote": "choose the goals that best suit you",
+              "anchor": "选最适合的目标"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1",
+              "quote": "Winners never quit!",
+              "anchor": "流行说法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Winners Do Quit: Be Wise About Your Goals",
+          "sourceRole": "correctOption",
+          "targetText": "Winners always wisely choose what to quit and what to pursue.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:1]] 摆出“赢家从不放弃”（Winners never quit）的流行说法，[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:2]] 反驳说坚持要有度，赢家会明智地选择放弃什么（wisely choose what to quit），[[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:3]] 和 [[block:paper-mock-shanxi-taiyuan-2025-m1:reading-d:4]] 讲目标脱离的好处和做法。标题前半 Winners Do Quit 回应开头的说法，后半 Be Wise About Your Goals 概括后面的建议，选 D。"
+        }
+      ]
+    }
+  }
+}

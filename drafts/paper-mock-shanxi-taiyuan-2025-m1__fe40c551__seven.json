@@ -1,0 +1,978 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:seven-choices": {
+      "overview": "文章谈“睡前拖延”：忙碌一天的人舍不得睡，熬夜刷手机，第二天疲惫又陷入循环。作者给出三条建议：把自我时间提前、别在床上消磨时间、建立放松的睡前程序，并提醒改变贵在坚持。",
+      "fullTranslationZh": "如何改掉睡前拖延的习惯\n当我洗完碗、打扫完客厅、发出当晚最后一封工作邮件后，就到了“属于自己”的时间。残酷的是，这也正是该睡觉的时间。我知道自己应该睡了，却总是在抖音上刷屏到很晚。这是我唯一不被打扰的时间，我想把它用足。这种现象被称为“睡前拖延”。白天压力大、几乎无法掌控自己时间的人最容易陷入这种情况。然而，睡前拖延的人第二天往往筋疲力尽，从而陷入恶性循环。下面这些建议能帮你重新掌控睡眠。\n把“属于自己”的时间提前。虽然未必人人都做得到，但可以考虑把照顾自己的事挪到白天早些时候。投资一台高端洗碗机，挤出时间做一节简短的瑜伽；或者在每周安排里加入“周日备餐”，这样每个工作日晚上本要花在做饭上的时间就省回来了。\n别赖在床上。无论工作日还是周末，你在床上刷手机、看电视，都是在训练大脑，让它以为这就是你在床上该做的事。好的做法是把床只留给睡觉，尤其是在你晚上难以入睡的时候。\n建立一套放松的睡前程序。建一套让你期待的程序：练瑜伽、洗个热水澡或听有声书——关键是做你觉得最能让自己平静、最享受的事。专家还建议晚饭后马上洗脸刷牙。这样等你困了，上床就不那么费劲了。\n一定要记住，克服睡前拖延追求的不是完美，而是进步。小而持续的改变，日积月累会带来显著的改善。无论你正受睡眠问题还是精神压力困扰，解决睡前拖延都可能让情况彻底改观。今晚就开始吧：定一个合理的就寝时间，并坚持下去。将来那个睡足了觉的你会感谢现在的自己。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:seven-choices:1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+          "sourceText": "__37__, or include meal preparation Sundays in your weekly routine so you can get the hours back that you would have spent cooking each weeknight.",
+          "displayText": "Invest in a high-end dishwasher to get in a quick yoga session, or include meal preparation Sundays in your weekly routine so you can get the hours back that you would have spent cooking each weeknight.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:37"
+          ],
+          "translationZh": "投资一台高端洗碗机，挤出时间做一节简短的瑜伽；或者在每周安排里加入“周日备餐”，这样每个工作日晚上本要花在做饭上的时间就省回来了。",
+          "analysisZh": "主干是两个由 or 并列的祈使句：Invest in a high-end dishwasher 和 include meal preparation Sundays，都是“替你省时间”的办法。前一句里 to get in a quick yoga session 说买洗碗机的目的。后一句 so 引出结果 you can get the hours back，that 引导的定语从句修饰 the hours，would have spent 表示“本来要花、现在省下”的时间。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "Invest in a high-end dishwasher"
+            },
+            {
+              "start": 64,
+              "end": 99,
+              "quote": "or include meal preparation Sundays"
+            },
+            {
+              "start": 153,
+              "end": 186,
+              "quote": "that you would have spent cooking"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:seven-choices:2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+          "sourceText": "When you scroll on your phone or watch TV in bed, weekdays or weekends, you’re training your brain to think that’s what you’re supposed to do in bed.",
+          "displayText": "When you scroll on your phone or watch TV in bed, weekdays or weekends, you’re training your brain to think that’s what you’re supposed to do in bed.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:38"
+          ],
+          "translationZh": "无论工作日还是周末，你在床上刷手机、看电视，都是在训练大脑，让它以为这就是你在床上该做的事。",
+          "analysisZh": "主干是 you’re training your brain to think...，“你在训练大脑去认为……”。When 从句交代条件：在床上刷手机或看电视；weekdays or weekends 是插入的补充，说明不分哪天。think 后面省略了 that，宾语从句里又套着 what 从句 what you’re supposed to do in bed，指“在床上该做的事”。这句说明了为什么不要赖在床上。",
+          "underlineRanges": [
+            {
+              "start": 72,
+              "end": 98,
+              "quote": "you’re training your brain"
+            },
+            {
+              "start": 115,
+              "end": 148,
+              "quote": "what you’re supposed to do in bed"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先用作者自己深夜刷屏的经历引出“睡前拖延”这一现象及其危害，再分三条给出改善办法，最后提醒读者重在进步、从今晚开始。",
+        "units": [
+          {
+            "unitId": "unit:seven-choices:1",
+            "paragraphIds": [
+              "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:1",
+              "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2"
+            ],
+            "summary": "标题点题；作者描述深夜舍不得睡、刷屏熬夜的现象，说明它叫睡前拖延，并指出它会让人第二天更累、陷入循环。"
+          },
+          {
+            "unitId": "unit:seven-choices:2",
+            "paragraphIds": [
+              "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3"
+            ],
+            "summary": "把自我关照的时间提前，用省时的办法把晚上的时间腾出来。"
+          },
+          {
+            "unitId": "unit:seven-choices:3",
+            "paragraphIds": [
+              "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4"
+            ],
+            "summary": "不要在床上刷手机、看电视，床只留给睡觉。"
+          },
+          {
+            "unitId": "unit:seven-choices:4",
+            "paragraphIds": [
+              "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:5"
+            ],
+            "summary": "建立让自己放松、期待的睡前程序，把洗漱提前到饭后。"
+          },
+          {
+            "unitId": "unit:seven-choices:5",
+            "paragraphIds": [
+              "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:6"
+            ],
+            "summary": "总结：克服睡前拖延重在一点点进步，鼓励读者今晚就定好就寝时间并坚持。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 38,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 \"physical books\" 像是第 38 题空后 \"scroll on your phone or watch TV in bed\" 的替代做法。但第 38 题在段首，\"instead\" 前面没有可替换的事；空后又要 \"reserve your bed for sleep\"，在床上看书也不行。",
+          "quotes": [
+            "physical books",
+            "scroll on your phone or watch TV in bed",
+            "instead",
+            "reserve your bed for sleep"
+          ]
+        },
+        "D": {
+          "target": 37,
+          "secondary": 38,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 \"tight schedule\" 像在接第 37 题空前 \"might not be possible for everyone\"。但它是 If 从句，后面只跟 \"or include\" 的祈使句，没有主句；周末都忙也和空后 \"meal preparation Sundays\" 矛盾。也可能误填第 38 题，空后有 \"weekdays or weekends\"。",
+          "quotes": [
+            "tight schedule",
+            "might not be possible for everyone",
+            "If",
+            "or include",
+            "meal preparation Sundays",
+            "weekdays or weekends"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 11,
+              "quote": "如何改掉睡前拖延的习惯"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2"
+              ],
+              "start": 12,
+              "end": 196,
+              "quote": "当我洗完碗、打扫完客厅、发出当晚最后一封工作邮件后，就到了“属于自己”的时间。残酷的是，这也正是该睡觉的时间。我知道自己应该睡了，却总是在抖音上刷屏到很晚。这是我唯一不被打扰的时间，我想把它用足。这种现象被称为“睡前拖延”。白天压力大、几乎无法掌控自己时间的人最容易陷入这种情况。然而，睡前拖延的人第二天往往筋疲力尽，从而陷入恶性循环。下面这些建议能帮你重新掌控睡眠。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3"
+              ],
+              "start": 197,
+              "end": 307,
+              "quote": "把“属于自己”的时间提前。虽然未必人人都做得到，但可以考虑把照顾自己的事挪到白天早些时候。投资一台高端洗碗机，挤出时间做一节简短的瑜伽；或者在每周安排里加入“周日备餐”，这样每个工作日晚上本要花在做饭上的时间就省回来了。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4"
+              ],
+              "start": 308,
+              "end": 388,
+              "quote": "别赖在床上。无论工作日还是周末，你在床上刷手机、看电视，都是在训练大脑，让它以为这就是你在床上该做的事。好的做法是把床只留给睡觉，尤其是在你晚上难以入睡的时候。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:5"
+              ],
+              "start": 389,
+              "end": 481,
+              "quote": "建立一套放松的睡前程序。建一套让你期待的程序：练瑜伽、洗个热水澡或听有声书——关键是做你觉得最能让自己平静、最享受的事。专家还建议晚饭后马上洗脸刷牙。这样等你困了，上床就不那么费劲了。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:6"
+              ],
+              "start": 482,
+              "end": 606,
+              "quote": "一定要记住，克服睡前拖延追求的不是完美，而是进步。小而持续的改变，日积月累会带来显著的改善。无论你正受睡眠问题还是精神压力困扰，解决睡前拖延都可能让情况彻底改观。今晚就开始吧：定一个合理的就寝时间，并坚持下去。将来那个睡足了觉的你会感谢现在的自己。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:seven-choices:2",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2",
+            "text": "When I have done the dishes, cleaned the living room, and shot off my last work email of the night, it is “me” time. It is also, cruelly, bedtime. I know I should sleep, but instead I stay up way too late scrolling (滚屏) on TikTok. This is my only uninterrupted time. I want to maximize it. Such a phenomenon is called “bedtime procrastination”. People with stressful days and little control over their time are those who are most likely to fall into that category. However, all too often, bedtime procrastinators end up exhausted the next day, thus sinking into a terrible cycle. Here are some tips to regain control of your sleep."
+          },
+          {
+            "textId": "completed:seven-choices:3",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+            "text": "· Move up your “me” time. Although this might not be possible for everyone, consider shifting your self-care tasks to an earlier time in the day. Invest in a high-end dishwasher to get in a quick yoga session, or include meal preparation Sundays in your weekly routine so you can get the hours back that you would have spent cooking each weeknight."
+          },
+          {
+            "textId": "completed:seven-choices:4",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+            "text": "· Don’t hang out in bed. When you scroll on your phone or watch TV in bed, weekdays or weekends, you’re training your brain to think that’s what you’re supposed to do in bed. A good choice is to reserve your bed for sleep, especially if you struggle to fall asleep at night."
+          },
+          {
+            "textId": "completed:seven-choices:5",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:5",
+            "text": "· Create a relaxing bedtime routine. Create one that you look forward to. Practice yoga, take a warm shower, or listen to an audiobook – the key is to do whatever you find most calming and enjoyable. Experts also recommend washing your face and brushing your teeth, right after dinner. Then it won’t be such an effort to get into bed when you feel sleepy."
+          },
+          {
+            "textId": "completed:seven-choices:6",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:6",
+            "text": "Do remember, overcoming bedtime procrastination is not about perfection, but progress. Small but consistent changes bring significant improvements over time. Whether you’re struggling with sleep problems or mental stress, addressing sleep procrastination can be a game-changer. Start tonight by setting a reasonable bedtime and sticking to it. Your future, well-rested self will thank you."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2",
+                "start": 231,
+                "end": 265,
+                "quote": "This is my only uninterrupted time"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2",
+                "start": 275,
+                "end": 292,
+                "quote": "Such a phenomenon"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 78,
+                "end": 90,
+                "quote": "这是我唯一不被打扰的时间"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 98,
+                "end": 102,
+                "quote": "这种现象"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+                "start": 76,
+                "end": 144,
+                "quote": "consider shifting your self-care tasks to an earlier time in the day"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+                "start": 154,
+                "end": 189,
+                "quote": "or include meal preparation Sundays"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 25,
+                "end": 44,
+                "quote": "可以考虑把照顾自己的事挪到白天早些时候"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 68,
+                "end": 84,
+                "quote": "或者在每周安排里加入“周日备餐”"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+                "start": 43,
+                "end": 58,
+                "quote": "watch TV in bed"
+              },
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+                "start": 160,
+                "end": 206,
+                "quote": "A good choice is to reserve your bed for sleep"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 16,
+                "end": 27,
+                "quote": "你在床上刷手机、看电视"
+              },
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 52,
+                "end": 64,
+                "quote": "好的做法是把床只留给睡觉"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:5",
+                "start": 200,
+                "end": 285,
+                "quote": "Experts also recommend washing your face and brushing your teeth, right after dinner."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:5",
+                "start": 60,
+                "end": 75,
+                "quote": "专家还建议晚饭后马上洗脸刷牙。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:6",
+                "start": 51,
+                "end": 85,
+                "quote": "not about perfection, but progress"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:6",
+                "start": 12,
+                "end": 24,
+                "quote": "追求的不是完美，而是进步"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:36"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:2",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2",
+                "start": 267,
+                "end": 288,
+                "quote": "I want to maximize it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:2",
+                "start": 91,
+                "end": 97,
+                "quote": "我想把它用足"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:37"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+                "start": 146,
+                "end": 208,
+                "quote": "Invest in a high-end dishwasher to get in a quick yoga session"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 45,
+                "end": 67,
+                "quote": "投资一台高端洗碗机，挤出时间做一节简短的瑜伽"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:38"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:4",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+                "start": 2,
+                "end": 23,
+                "quote": "Don’t hang out in bed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 0,
+                "end": 5,
+                "quote": "别赖在床上"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:39"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:5",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:5",
+                "start": 286,
+                "end": 354,
+                "quote": "Then it won’t be such an effort to get into bed when you feel sleepy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:5",
+                "start": 75,
+                "end": 91,
+                "quote": "这样等你困了，上床就不那么费劲了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:40"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:6",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:6",
+                "start": 87,
+                "end": 156,
+                "quote": "Small but consistent changes bring significant improvements over time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:6",
+                "start": 25,
+                "end": 45,
+                "quote": "小而持续的改变，日积月累会带来显著的改善"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:37"
+            ],
+            "selectedSentenceId": "sentence:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven-choices:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+                "start": 146,
+                "end": 348,
+                "quote": "Invest in a high-end dishwasher to get in a quick yoga session, or include meal preparation Sundays in your weekly routine so you can get the hours back that you would have spent cooking each weeknight."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:3",
+                "start": 45,
+                "end": 110,
+                "quote": "投资一台高端洗碗机，挤出时间做一节简短的瑜伽；或者在每周安排里加入“周日备餐”，这样每个工作日晚上本要花在做饭上的时间就省回来了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:38"
+            ],
+            "selectedSentenceId": "sentence:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:seven-choices",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+                "start": 10,
+                "end": 159,
+                "quote": "When you scroll on your phone or watch TV in bed, weekdays or weekends, you’re training your brain to think that’s what you’re supposed to do in bed."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven-choices",
+                "paragraphId": "translation-paragraph:seven-choices:4",
+                "start": 6,
+                "end": 52,
+                "quote": "无论工作日还是周末，你在床上刷手机、看电视，都是在训练大脑，让它以为这就是你在床上该做的事。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:36": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "“me” time",
+        "stay up way too late scrolling",
+        "my only uninterrupted time",
+        "bedtime procrastination"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:2",
+        "beforeQuote": "I know I should sleep, but instead I stay up way too late scrolling (滚屏) on TikTok. This is my only uninterrupted time",
+        "afterQuote": "Such a phenomenon is called “bedtime procrastination”"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "option",
+          "targetText": "my only uninterrupted time",
+          "relation": "it 回指空前 my only uninterrupted time，说的是想把这段自由时间用足。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "my only uninterrupted time",
+          "signalSide": "context-before",
+          "targetText": "maximize it",
+          "relation": "“唯一”的时间才让人想尽量占满，给 maximize 提供了理由。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Such a phenomenon",
+          "signalSide": "context-after",
+          "targetText": "stay up way too late scrolling / I want to maximize it",
+          "relation": "Such a phenomenon 把前面“舍不得睡、熬夜刷屏”这一整件事概括成一种现象。"
+        }
+      ],
+      "lock": [
+        "my only uninterrupted time",
+        "maximize it",
+        "Such a phenomenon"
+      ],
+      "find": {
+        "text": "空后 \"Such a phenomenon\" 要前面先有一种现象。A 的 it 回指空前 \"my only uninterrupted time\"，想把它用足，正是熬夜刷屏的心理。",
+        "quotes": [
+          "Such a phenomenon",
+          "my only uninterrupted time"
+        ]
+      },
+      "explain": "空前写深夜刷屏和“只有这段时间属于我”，这句点出背后的心理：舍不得让它溜走。行为加心理凑齐了，空后才能把它命名为 bedtime procrastination。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "my only uninterrupted time",
+            "optionSide": "maximize it",
+            "relation": "时间只有这一段，所以想把它用到最多，于是不肯睡。"
+          },
+          {
+            "contextSide": "Such a phenomenon",
+            "optionSide": "I want to maximize it",
+            "relation": "空后的“这种现象”要有前文具体的做法和心理来指。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前写深夜刷屏和“只有这段时间属于我”，这句点出背后的心理：舍不得让它溜走。行为加心理凑齐了，空后才能把它命名为 bedtime procrastination。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:37": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Move up your “me” time",
+        "self-care tasks",
+        "an earlier time in the day",
+        "meal preparation Sundays",
+        "get the hours back"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:3",
+        "beforeQuote": "Although this might not be possible for everyone, consider shifting your self-care tasks to an earlier time in the day",
+        "afterQuote": "or include meal preparation Sundays in your weekly routine so you can get the hours back"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "or include",
+          "signalSide": "context-after",
+          "targetText": "Invest in a high-end dishwasher",
+          "relation": "or 后面是祈使句 include...，前面也要一条同样以动词开头的建议，二者是可选的两种办法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Invest in",
+          "signalSide": "option",
+          "targetText": "or include",
+          "relation": "Invest in 是动词开头的祈使句，和 or 后的 include 平行。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "yoga session",
+          "signalSide": "option",
+          "targetText": "self-care tasks",
+          "relation": "做瑜伽就是空前说要提前做的 self-care。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "self-care tasks",
+          "signalSide": "context-before",
+          "targetText": "quick yoga session",
+          "relation": "空前提出把自我关照提前，空里给出具体做法。"
+        }
+      ],
+      "lock": [
+        "self-care tasks",
+        "Invest in",
+        "or include"
+      ],
+      "find": {
+        "text": "空后 \"or include\" 是祈使句，空里也要一条动词开头的建议；E 以 \"Invest in\" 开头，省下家务时间做瑜伽，正是空前的 \"self-care tasks\"。",
+        "quotes": [
+          "or include",
+          "Invest in",
+          "self-care tasks"
+        ]
+      },
+      "explain": "空前只提了“把自我关照提前”的总建议，这句和空后的周日备餐是两种具体办法：一个靠机器省家务，一个集中做饭，都把晚上的时间腾到白天。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "self-care tasks / an earlier time in the day",
+            "optionSide": "get in a quick yoga session",
+            "relation": "瑜伽是自我关照，靠洗碗机省下时间就能在白天做。"
+          },
+          {
+            "contextSide": "or include meal preparation Sundays",
+            "optionSide": "Invest in a high-end dishwasher",
+            "relation": "两条都是减少晚上家务的省时办法，用 or 并列。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前只提了“把自我关照提前”的总建议，这句和空后的周日备餐是两种具体办法：一个靠机器省家务，一个集中做饭，都把晚上的时间腾到白天。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "选项的 \"tight schedule\" 像在接第 37 题空前 \"might not be possible for everyone\"。但它是 If 从句，后面只跟 \"or include\" 的祈使句，没有主句；周末都忙也和空后 \"meal preparation Sundays\" 矛盾。也可能误填第 38 题，空后有 \"weekdays or weekends\"。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:38": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "scroll on your phone or watch TV in bed",
+        "what you’re supposed to do in bed",
+        "reserve your bed for sleep",
+        "struggle to fall asleep"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "When you scroll on your phone or watch TV in bed, weekdays or weekends, you’re training your brain to think that’s what you’re supposed to do in bed. A good choice is to reserve your bed for sleep"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "hang out in bed",
+          "signalSide": "option",
+          "targetText": "scroll on your phone or watch TV in bed",
+          "relation": "hang out in bed 概括了空后在床上刷手机、看电视这些消磨时间的做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "watch TV in bed",
+          "signalSide": "context-after",
+          "targetText": "hang out in bed",
+          "relation": "空后举的就是在床上耗时间的具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "reserve your bed for sleep",
+          "signalSide": "context-after",
+          "targetText": "Don’t hang out in bed",
+          "relation": "把床只留给睡觉，是“别赖在床上”从正面说的同一个建议。"
+        }
+      ],
+      "lock": [
+        "hang out in bed",
+        "watch TV in bed",
+        "reserve your bed for sleep"
+      ],
+      "find": {
+        "text": "段首是本条建议，看空后：先说在床上 \"watch TV in bed\" 不好，再给 \"reserve your bed for sleep\"。B 的 \"hang out in bed\" 把这两点合成一句。",
+        "quotes": [
+          "watch TV in bed",
+          "reserve your bed for sleep",
+          "hang out in bed"
+        ]
+      },
+      "explain": "这句作本条建议的标题，先下结论；下面先说在床上刷屏会让大脑把床和娱乐连在一起，再从正面给出做法，标题和段内的道理、办法一一对得上。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "scroll on your phone or watch TV in bed",
+            "optionSide": "hang out in bed",
+            "relation": "空后的两个例子就是“在床上消磨时间”。"
+          },
+          {
+            "contextSide": "reserve your bed for sleep",
+            "optionSide": "Don’t hang out in bed",
+            "relation": "一个反面说，一个正面说，指同一个建议。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "这句作本条建议的标题，先下结论；下面先说在床上刷屏会让大脑把床和娱乐连在一起，再从正面给出做法，标题和段内的道理、办法一一对得上。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "选项的 \"physical books\" 像是第 38 题空后 \"scroll on your phone or watch TV in bed\" 的替代做法。但第 38 题在段首，\"instead\" 前面没有可替换的事；空后又要 \"reserve your bed for sleep\"，在床上看书也不行。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:39": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:39",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "relaxing bedtime routine",
+        "take a warm shower",
+        "washing your face and brushing your teeth",
+        "right after dinner"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:5",
+        "beforeQuote": "Experts also recommend washing your face and brushing your teeth, right after dinner",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "option",
+          "targetText": "washing your face and brushing your teeth, right after dinner",
+          "relation": "Then 表示“这样一来”，引出饭后就洗漱带来的结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "right after dinner",
+          "signalSide": "context-before",
+          "targetText": "when you feel sleepy",
+          "relation": "洗漱提前到饭后，困的时候就不用再做这些事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "such an effort",
+          "signalSide": "option",
+          "targetText": "washing your face and brushing your teeth",
+          "relation": "such an effort 指临睡前还得洗脸刷牙的麻烦。"
+        }
+      ],
+      "lock": [
+        "right after dinner",
+        "Then",
+        "such an effort"
+      ],
+      "find": {
+        "text": "空在段尾，看空前：专家建议 \"right after dinner\" 就洗脸刷牙。F 的 \"Then\" 接出这样做的结果，\"such an effort\" 指睡前再洗漱的麻烦。",
+        "quotes": [
+          "right after dinner",
+          "Then",
+          "such an effort"
+        ]
+      },
+      "explain": "这句给饭后洗漱的建议补上好处，也替整条建议收尾：睡前该做的事早做完，困了直接上床，就少了一个拖着不睡的理由。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 像段尾总结，但空前刚说 \"right after dinner\" 洗漱，要接这样做的结果，G 没交代结果。",
+          "quotes": [
+            "right after dinner"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "washing your face and brushing your teeth, right after dinner",
+            "optionSide": "Then it won’t be such an effort to get into bed",
+            "relation": "洗漱提前完成，困了上床就不费劲，前因后果相接。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "这句给饭后洗漱的建议补上好处，也替整条建议收尾：睡前该做的事早做完，困了直接上床，就少了一个拖着不睡的理由。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 像段尾总结，但空前刚说 \"right after dinner\" 洗漱，要接这样做的结果，G 没交代结果。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:40": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "not about perfection, but progress",
+        "overcoming bedtime procrastination",
+        "a game-changer",
+        "sticking to it"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:seven-choices:6",
+        "beforeQuote": "Do remember, overcoming bedtime procrastination is not about perfection, but progress",
+        "afterQuote": "Whether you’re struggling with sleep problems or mental stress, addressing sleep procrastination can be a game-changer"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "progress",
+          "signalSide": "context-before",
+          "targetText": "significant improvements over time",
+          "relation": "progress 说要的是进步，选项把进步具体成“日积月累的明显改善”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Small but consistent changes",
+          "signalSide": "option",
+          "targetText": "not about perfection",
+          "relation": "小改变不求一步到位，对应“不求完美”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a game-changer",
+          "signalSide": "context-after",
+          "targetText": "significant improvements",
+          "relation": "空后说解决拖延会带来大转变，承接选项说的显著改善。"
+        }
+      ],
+      "lock": [
+        "not about perfection, but progress",
+        "Small but consistent changes"
+      ],
+      "find": {
+        "text": "空前说要的 \"not about perfection, but progress\"，G 的 \"Small but consistent changes\" 不求完美，\"improvements over time\" 正是一点点进步。",
+        "quotes": [
+          "not about perfection, but progress",
+          "Small but consistent changes",
+          "improvements over time"
+        ]
+      },
+      "explain": "最后一段先摆正心态，这句把“进步”说具体，告诉读者小步坚持就会见效；空后再说解决拖延能带来大改变，最后落到今晚就定好就寝时间。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "not about perfection, but progress",
+            "optionSide": "Small but consistent changes bring significant improvements over time",
+            "relation": "不求完美对应小改变，进步对应日积月累的改善。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "最后一段先摆正心态，这句把“进步”说具体，告诉读者小步坚持就会见效；空后再说解决拖延能带来大改变，最后落到今晚就定好就寝时间。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

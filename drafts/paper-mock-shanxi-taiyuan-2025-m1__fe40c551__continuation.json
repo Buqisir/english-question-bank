@@ -1,0 +1,199 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: When Alex heard this, his eyes began to light up. He uncrossed his arms and turned to me. “Maybe we could hold a game for the environment,” he said. I could hardly believe my ears. “And people could bring plastic bottles as tickets,” I added. For the next week, Alex’s team practiced hard on their half, and after training, the players stayed to pick up the scattered bottles and help us rebuild the sculpture. In return, my club cleared our tools off the floor every evening. Once Alex even handed me a bottle and joked, “Here’s some more trash for you.” By the day before the game, the sculpture stood tall beside the court again.\n\nParagraph 2: Our eco-basketball game was a big success. Students poured in, each holding a plastic bottle or two, and soon a mountain of bottles piled up at the entrance. Alex’s team played brilliantly and won by ten points. After the final whistle, the players posed for photos in front of our sculpture. Then Alex walked up to me, wiping sweat from his face. “Sorry about the dunk,” he said. “Your sculpture isn’t trash after all.” I laughed and shook his hand. Standing on the same court where we had once shouted at each other, we both knew the answer to the principal’s question. The court could serve both.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是“我”（环保社社长）和篮球队队长 Alex，两人为争球场闹翻；校长是调解人，已经抛出“一块场地能否两用”的问题。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "“我”用第一人称讲述，一般过去时；句子多为中短句，冲突处靠短促的直接引语推进，几乎每个转折都有一两句人物原话。续写照样用第一人称过去时，在转折处安排几句短对话即可。",
+          "evidence": [
+            "“You ruined our three weeks of work!” I yelled."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在校长用勇士队的例子发问，“我”已点头，Alex 还抱着胳膊。要解决的是：两人怎样从对抗变成合作，让球场既能训练比赛、又能宣传环保。",
+          "evidence": [
+            "You see what I mean?"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "环保社社长",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "用回收塑料瓶做一座大雕塑，宣传塑料污染和回收。",
+              "evidence": "I was thrilled about our latest project"
+            },
+            {
+              "label": "此刻",
+              "text": "已经点头接受校长的意思，愿意找两全的办法。"
+            }
+          ]
+        },
+        {
+          "name": "Alex",
+          "role": "篮球队队长",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "把球场留给球队训练，备战地区决赛。",
+              "evidence": "We need it for practice"
+            },
+            {
+              "label": "性格",
+              "text": "好胜、脾气急，吵起来寸步不让。",
+              "evidence": "“Your trash ruined my shot!” he roared back."
+            },
+            {
+              "label": "此刻",
+              "text": "还没松口，但校长说的是他熟悉的篮球明星球队。",
+              "evidence": "Alex still crossed his arms"
+            }
+          ]
+        },
+        {
+          "name": "校长",
+          "role": "调解人",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "不偏向任何一方，用一个问题引两人自己想办法。",
+              "evidence": "Can this court serve both?"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "They have advocated that water bottles should be recycled properly after every match.",
+          "use": "第 1 段用它触发 Alex 的转变：比赛和回收瓶子能放在一起，于是想出“用塑料瓶当门票”的环保篮球赛。"
+        },
+        {
+          "sourceQuote": "leaving holes and broken pieces",
+          "use": "第 1 段让球员帮忙修补被球砸坏的雕塑，把原来的破坏变成合作的行动。"
+        },
+        {
+          "sourceQuote": "Can this court serve both?",
+          "use": "第 2 段结尾回答校长的问题，用“球场两用”收住全文的冲突。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "勇士队的例子让 Alex 想到办一场“环保篮球赛”，两队分工合作修好雕塑，比赛当天球队获胜、瓶子堆成山，两人和好。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "写 Alex 听完校长的话后态度转变，并且第 1 段结束前要把“环保篮球赛”定下来、准备好，第二段才能直接写比赛很成功。",
+          "draft": "Alex 松开胳膊提议为环保办一场比赛，“我”补充用塑料瓶当门票；接下来一周两队分享球场、互相帮忙，雕塑在赛前重新立起。",
+          "bridgeQuote": "When Alex heard this, his eyes began to light up.",
+          "bridge": "Alex 眼睛一亮，是想到了什么，又怎样一步步变成第二段那场环保篮球赛？"
+        },
+        {
+          "paragraph": 2,
+          "must": "具体写出比赛怎样成功，并收住两人的矛盾和校长的问题。",
+          "draft": "学生带瓶子入场，瓶子堆成山；Alex 的球队获胜后在雕塑前合影；Alex 向“我”道歉并和好，球场真的两用了。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: When Alex heard this, his eyes began to light up. He uncrossed his arms and turned to me. “Maybe we could hold a game for the environment,” he said. I could hardly believe my ears. “And people could bring plastic bottles as tickets,” I added. For the next week, Alex’s team practiced hard on their half, and after training, the players stayed to pick up the scattered bottles and help us rebuild the sculpture. In return, my club cleared our tools off the floor every evening. Once Alex even handed me a bottle and joked, “Here’s some more trash for you.” By the day before the game, the sculpture stood tall beside the court again.\n\nParagraph 2: Our eco-basketball game was a big success. Students poured in, each holding a plastic bottle or two, and soon a mountain of bottles piled up at the entrance. Alex’s team played brilliantly and won by ten points. After the final whistle, the players posed for photos in front of our sculpture. Then Alex walked up to me, wiping sweat from his face. “Sorry about the dunk,” he said. “Your sculpture isn’t trash after all.” I laughed and shook his hand. Standing on the same court where we had once shouted at each other, we both knew the answer to the principal’s question. The court could serve both.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写 Alex 从抗拒到提出办法，再写两队一周的合作，把第二段的比赛准备好。",
+          "items": [
+            {
+              "quote": "He uncrossed his arms and turned to me.",
+              "explain": "原文最后 Alex “还抱着胳膊”，这里让他松开胳膊、转向“我”，用一个看得见的动作写出态度变了，不用直接说“他被说服了”。"
+            },
+            {
+              "quote": "“And people could bring plastic bottles as tickets,” I added.",
+              "explain": "“我”接过 Alex 的话补上环保那一半，校长说的勇士队回收瓶子在这里变成了具体办法，也让两人第一次站在一起想事情。"
+            },
+            {
+              "quote": "the players stayed to pick up the scattered bottles and help us rebuild the sculpture",
+              "explain": "原文里球砸坏了雕塑、瓶子散了一地，这里让球员亲手收拾修补，合作是用行动写出来的。"
+            },
+            {
+              "quote": "By the day before the game, the sculpture stood tall beside the court again.",
+              "explain": "段尾把雕塑和比赛都准备好，第二段一开头写比赛成功就顺理成章。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写比赛怎样成功，再让两人和解，回答校长的问题。",
+          "items": [
+            {
+              "quote": "each holding a plastic bottle or two, and soon a mountain of bottles piled up at the entrance",
+              "explain": "“成功”落在两件看得见的事上：人多、瓶子多，正好对应环保这一半的目的。"
+            },
+            {
+              "quote": "“Sorry about the dunk,” he said. “Your sculpture isn’t trash after all.”",
+              "explain": "Alex 主动提起原文那次扣篮撞雕塑，又收回了 “Your trash” 这句气话，和解有来处，也用短对话接住原文的写法。"
+            },
+            {
+              "quote": "The court could serve both.",
+              "explain": "结尾直接回应校长的问题 “Can this court serve both?”，用原文的线索收束，不另加大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "uncrossed his arms",
+          "function": "和原文 “crossed his arms” 相反的动作，写出 Alex 放下戒备。"
+        },
+        {
+          "expression": "I could hardly believe my ears.",
+          "function": "写“我”听到对手主动提议时的意外，情绪由事件触发。"
+        },
+        {
+          "expression": "a mountain of bottles piled up",
+          "function": "用夸张的画面把比赛“成功”写具体，也呼应用瓶子当门票的办法。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段直接写比赛开打或结果",
+          "why": "第二段首句才说比赛很成功，第 1 段应停在比赛准备好的时候，否则第二段无事可写。"
+        },
+        {
+          "pitfall": "让校长或新出现的老师替两人想出办法",
+          "why": "段首句写的是 Alex 眼睛一亮，转变要由 Alex 自己想到、两人一起完成，靠旁人解决就成了天降帮助。"
+        },
+        {
+          "pitfall": "“环保篮球赛”和原文脱节，只写打球不写塑料瓶",
+          "why": "比赛要同时满足“赢球”和“环保”两个目标，原文的雕塑和塑料瓶必须在比赛里起作用。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: When Alex heard this, his eyes began to light up. Slowly, his crossed arms dropped to his sides. “So the Warriors play to win and still care about the planet,” he muttered. “What if we held a game that does both?” I blinked, surprised that the boy who had just roared at me was offering a plan. “Fans could pay for tickets with plastic bottles,” I suggested, “and every bottle could go into the sculpture.” A grin spread across his face. That week, Alex’s team still trained on the left half, but after practice the players stayed behind to sort bottles and patch up the holes their balls had made. My club, in turn, cleared every tool off the floor and moved the sculpture base to the edge so it would never block a shot again. By the night before the game, the rebuilt sculpture rose higher than ever.\n\nParagraph 2: Our eco-basketball game was a big success. Long before the first whistle, a line of students wound past the gym, each clutching empty bottles, and the pile at the entrance grew taller by the minute. On the court, Alex’s team moved like a single machine, passing quickly and defending hard. In the last seconds, Alex leaped high for a dunk, this time far away from the sculpture, and the crowd went wild as his team won by twelve points. After the game, the players gathered in front of our sculpture for a team photo and waved me over. “Sorry about the crash,” Alex said, tossing me the game ball. “Your bottles aren’t trash after all.” I laughed. “And your shots aren’t so bad either.” As the camera flashed, I thought of the principal’s question. The court could serve both.",
+      "beyondStandard": [
+        {
+          "quote": "“So the Warriors play to win and still care about the planet,” he muttered.",
+          "explain": "让 Alex 先低声嘀咕，消化校长的例子，转变有一个“想通”的过程，比标准版直接提议更像真人反应。"
+        },
+        {
+          "quote": "moved the sculpture base to the edge so it would never block a shot again",
+          "explain": "把原文 “blocked their training” 的矛盾具体解决掉，“我”这一方的让步也写进了行动。"
+        },
+        {
+          "quote": "Alex leaped high for a dunk, this time far away from the sculpture",
+          "explain": "有意重写原文那次撞雕塑的扣篮，this time 一词让前后两次形成对照，比标准版的“打得很好”更具体。"
+        }
+      ]
+    }
+  }
+}

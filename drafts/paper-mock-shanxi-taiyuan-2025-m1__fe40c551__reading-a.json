@@ -1,0 +1,841 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:reading-a": {
+      "overview": "这是 Volunteer.gov 网站上的四则国家公园志愿者招募信息，分别介绍海滩清洁、营地看守、社区清洁和法英翻译四个岗位的时间、工作内容、要求和联系人。",
+      "fullTranslationZh": "招募中的志愿者岗位\n找到你的热爱，发挥你的影响，来做志愿者吧。Volunteer.gov 是一个志愿者招募和管理网站。下面这些项目能让你为自己关心的公益事业出一份力。\n海滩清洁——海峡群岛国家公园\n现场岗位；2025年1月20日\n该岗位寻找热心人士，按照一系列指示辨认、清点并收集海岸线上的垃圾。由于志愿者分组工作，这项工作一点也不耗体力。无需提前登记，欢迎直接到场。此外，志愿者应具备与各类人员有效沟通的能力。\n联系人：Emily Zivot（chis_volunteer@nps.gov）\n棉白杨营地看守——约书亚树国家公园\n现场岗位；2025年2月9日—2025年6月1日\n约书亚树国家公园正在为棉白杨营地招募营地看守，服务期为露营旺季——2025年2月初至5月底。开始和结束日期可以灵活安排，但看守必须承诺至少服务6周。看守将解答游客的问题，协助营地预订系统的运作，并提供优质的客户服务。\n联系人：Sasha Travaglio（sasha_travaglio@nps.gov）\n阿纳卡斯蒂亚公园社区清洁——首都东部国家公园\n现场岗位；2025年2月7日—2025年2月8日\n让一周的结束也成为垃圾的终结。这是一个帮助环境的绝佳机会。所有人上午9点在社区中心集合，届时会提供手套、垃圾袋和垃圾夹。请根据天气着装，因为这次活动需要在不平坦的地面上步行最多3英里，并且要不断弯腰和跪下。\n联系人：Becky George（rebecca_george@nps.gov）\n法英翻译——甘蔗河克里奥尔国家历史公园\n线上岗位；2024年6月5日—2025年2月4日\n该岗位在线上开展，工作内容是把公园的文字材料译成法语。志愿者将在线上协助公园工作人员，为众多法国游客提供文字信息。主要职责包括翻译以及仔细编辑、校对译文。须具备有条理地记录工作的能力。\n联系人：Da' Nira McClary（danira_mcclary@nps.gov）",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+          "sourceText": "This position is seeking passionate individuals to follow a series of instructions to identify, count, and collect trash from shorelines.",
+          "displayText": "This position is seeking passionate individuals to follow a series of instructions to identify, count, and collect trash from shorelines.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:21"
+          ],
+          "translationZh": "该岗位寻找热心人士，按照一系列指示辨认、清点并收集海岸线上的垃圾。",
+          "analysisZh": "主干是 This position is seeking passionate individuals（这个岗位在找热心的人）。后面两个不定式一层接一层：to follow a series of instructions 说这些人要做什么，即遵照一系列指示；to identify, count, and collect trash 再说照着指示具体干什么，三个动词并列，共用宾语 trash，from shorelines 交代垃圾在海岸线上。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 24,
+              "quote": "This position is seeking"
+            },
+            {
+              "start": 48,
+              "end": 82,
+              "quote": "to follow a series of instructions"
+            },
+            {
+              "start": 83,
+              "end": 114,
+              "quote": "to identify, count, and collect"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:14",
+          "sourceText": "Please dress for the weather since this event will require walking distances of up to 3 miles on uneven ground and consistent bending and kneeling.",
+          "displayText": "Please dress for the weather since this event will require walking distances of up to 3 miles on uneven ground and consistent bending and kneeling.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:23"
+          ],
+          "translationZh": "请根据天气着装，因为这次活动需要在不平坦的地面上步行最多3英里，并且要不断弯腰和跪下。",
+          "analysisZh": "主句是祈使句 Please dress for the weather（请根据天气着装）。since 引导原因状语从句，说明为什么要注意着装：require 后面接两个并列宾语，一是 walking distances of up to 3 miles on uneven ground（在不平的地面上走最多 3 英里），二是 consistent bending and kneeling（不断弯腰、跪地），up to 意为“最多”。这句说明社区清洁很耗体力。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "Please dress for the weather"
+            },
+            {
+              "start": 29,
+              "end": 34,
+              "quote": "since"
+            },
+            {
+              "start": 46,
+              "end": 58,
+              "quote": "will require"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:1"
+              ],
+              "start": 0,
+              "end": 9,
+              "quote": "招募中的志愿者岗位"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:2"
+              ],
+              "start": 10,
+              "end": 83,
+              "quote": "找到你的热爱，发挥你的影响，来做志愿者吧。Volunteer.gov 是一个志愿者招募和管理网站。下面这些项目能让你为自己关心的公益事业出一份力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:3"
+              ],
+              "start": 84,
+              "end": 98,
+              "quote": "海滩清洁——海峡群岛国家公园"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:4"
+              ],
+              "start": 99,
+              "end": 114,
+              "quote": "现场岗位；2025年1月20日"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5"
+              ],
+              "start": 115,
+              "end": 206,
+              "quote": "该岗位寻找热心人士，按照一系列指示辨认、清点并收集海岸线上的垃圾。由于志愿者分组工作，这项工作一点也不耗体力。无需提前登记，欢迎直接到场。此外，志愿者应具备与各类人员有效沟通的能力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:6"
+              ],
+              "start": 207,
+              "end": 246,
+              "quote": "联系人：Emily Zivot（chis_volunteer@nps.gov）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:7"
+              ],
+              "start": 247,
+              "end": 264,
+              "quote": "棉白杨营地看守——约书亚树国家公园"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:8"
+              ],
+              "start": 265,
+              "end": 289,
+              "quote": "现场岗位；2025年2月9日—2025年6月1日"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:9",
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:10"
+              ],
+              "start": 290,
+              "end": 398,
+              "quote": "约书亚树国家公园正在为棉白杨营地招募营地看守，服务期为露营旺季——2025年2月初至5月底。开始和结束日期可以灵活安排，但看守必须承诺至少服务6周。看守将解答游客的问题，协助营地预订系统的运作，并提供优质的客户服务。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:11"
+              ],
+              "start": 399,
+              "end": 443,
+              "quote": "联系人：Sasha Travaglio（sasha_travaglio@nps.gov）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:12"
+              ],
+              "start": 444,
+              "end": 466,
+              "quote": "阿纳卡斯蒂亚公园社区清洁——首都东部国家公园"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:13"
+              ],
+              "start": 467,
+              "end": 491,
+              "quote": "现场岗位；2025年2月7日—2025年2月8日"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:14"
+              ],
+              "start": 492,
+              "end": 595,
+              "quote": "让一周的结束也成为垃圾的终结。这是一个帮助环境的绝佳机会。所有人上午9点在社区中心集合，届时会提供手套、垃圾袋和垃圾夹。请根据天气着装，因为这次活动需要在不平坦的地面上步行最多3英里，并且要不断弯腰和跪下。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:15"
+              ],
+              "start": 596,
+              "end": 636,
+              "quote": "联系人：Becky George（rebecca_george@nps.gov）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:16"
+              ],
+              "start": 637,
+              "end": 656,
+              "quote": "法英翻译——甘蔗河克里奥尔国家历史公园"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:17"
+              ],
+              "start": 657,
+              "end": 681,
+              "quote": "线上岗位；2024年6月5日—2025年2月4日"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18"
+              ],
+              "start": 682,
+              "end": 774,
+              "quote": "该岗位在线上开展，工作内容是把公园的文字材料译成法语。志愿者将在线上协助公园工作人员，为众多法国游客提供文字信息。主要职责包括翻译以及仔细编辑、校对译文。须具备有条理地记录工作的能力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:19"
+              ],
+              "start": 775,
+              "end": 819,
+              "quote": "联系人：Da' Nira McClary（danira_mcclary@nps.gov）"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+                "start": 0,
+                "end": 137,
+                "quote": "This position is seeking passionate individuals to follow a series of instructions to identify, count, and collect trash from shorelines."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p5",
+                "start": 0,
+                "end": 32,
+                "quote": "该岗位寻找热心人士，按照一系列指示辨认、清点并收集海岸线上的垃圾"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:11",
+                "start": 0,
+                "end": 33,
+                "quote": "Point of Contact: Sasha Travaglio"
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:9",
+                "start": 83,
+                "end": 143,
+                "quote": "during peak camping season – early February to late May 2025"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p10",
+                "start": 0,
+                "end": 19,
+                "quote": "联系人：Sasha Travaglio"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p9",
+                "start": 23,
+                "end": 45,
+                "quote": "服务期为露营旺季——2025年2月初至5月底"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18",
+                "start": 0,
+                "end": 33,
+                "quote": "This position functions virtually"
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:17",
+                "start": 0,
+                "end": 16,
+                "quote": "Virtual Position"
+              },
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:4",
+                "start": 0,
+                "end": 16,
+                "quote": "On-Site Position"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p17",
+                "start": 0,
+                "end": 8,
+                "quote": "该岗位在线上开展"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p16",
+                "start": 0,
+                "end": 4,
+                "quote": "线上岗位"
+              },
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p4",
+                "start": 0,
+                "end": 4,
+                "quote": "现场岗位"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+                "start": 0,
+                "end": 137,
+                "quote": "This position is seeking passionate individuals to follow a series of instructions to identify, count, and collect trash from shorelines."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p5",
+                "start": 0,
+                "end": 32,
+                "quote": "该岗位寻找热心人士，按照一系列指示辨认、清点并收集海岸线上的垃圾"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:14",
+                "start": 217,
+                "end": 364,
+                "quote": "Please dress for the weather since this event will require walking distances of up to 3 miles on uneven ground and consistent bending and kneeling."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a",
+                "paragraphId": "zh-group:paper-mock-shanxi-taiyuan-2025-m1:reading-a-p13",
+                "start": 60,
+                "end": 102,
+                "quote": "请根据天气着装，因为这次活动需要在不平坦的地面上步行最多3英里，并且要不断弯腰和跪下"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头介绍招募网站，随后逐个列出岗位：海滩清洁、营地看守、社区清洁三个现场岗位和一个线上翻译岗位，每则都写明岗位形式、日期、工作内容、要求和联系人。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:1",
+            "summary": "志愿者岗位招募中",
+            "function": "点明这是一则招募启事"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:2",
+            "summary": "介绍 Volunteer.gov 网站，鼓励读者为公益出力",
+            "function": "引出下面四个岗位"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:3",
+            "summary": "海滩清洁岗位，地点在海峡群岛国家公园",
+            "function": "引出第一个岗位"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:4",
+            "summary": "现场岗位，只在2025年1月20日这一天",
+            "function": "交代岗位形式和日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+            "summary": "按指示辨认、清点、收集海岸垃圾；分组干活不累，无需预约，要善于沟通",
+            "function": "交代职责和要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:7",
+            "summary": "营地看守岗位，地点在约书亚树国家公园",
+            "function": "引出第二个岗位"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:8",
+            "summary": "现场岗位，2025年2月9日至6月1日",
+            "function": "交代岗位形式和日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:9",
+            "summary": "露营旺季招看守，日期灵活但至少服务6周，负责答疑、预订和客服",
+            "function": "交代服务时间和职责"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:12",
+            "summary": "社区清洁活动，地点在首都东部国家公园",
+            "function": "引出第三个岗位"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:13",
+            "summary": "现场岗位，2025年2月7日至8日",
+            "function": "交代岗位形式和日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:14",
+            "summary": "周末捡垃圾，9点集合并提供工具；要长距离步行、不断弯腰，注意着装",
+            "function": "交代安排和体力要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:16",
+            "summary": "法英翻译岗位，地点在甘蔗河克里奥尔国家历史公园",
+            "function": "引出第四个岗位"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:17",
+            "summary": "线上岗位，2024年6月5日至2025年2月4日",
+            "function": "交代岗位形式和日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18",
+            "summary": "在线上把公园文字译成法语并编辑校对，要能有条理地记录工作",
+            "function": "交代职责和要求"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在海滩清洁一栏里找出这个岗位要志愿者做的事。",
+      "stemTranslationZh": "海滩清洁的志愿者需要做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往下读正文，看岗位招人做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "提前报名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Pre-registration is not required; walk-ins are welcome.",
+            "sourceHighlight": "Pre-registration is not required",
+            "optionHighlight": "Sign up in advance",
+            "explanation": "原文明说不用提前登记（Pre-registration is not required），直接到场也欢迎（walk-ins are welcome），并不要求提前报名。",
+            "optionText": "Sign up in advance."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+              "quote": "Pre-registration is not required; walk-ins are welcome.",
+              "anchor": "无需提前登记"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "精通一门外语。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This position functions virtually and involves translating park text into French.",
+            "sourceEntity": "translating park text into French",
+            "optionEntity": "a foreign language",
+            "explanation": "要用外语的是法英翻译岗（translating park text into French）；海滩清洁只要求能和各类人员有效沟通（communicate effectively），没提外语。",
+            "optionText": "Master a foreign language."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18",
+              "quote": "This position functions virtually and involves translating park text into French.",
+              "anchor": "翻译岗译成法语"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "遵照清洁指示。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+              "quote": "This position is seeking passionate individuals to follow a series of instructions to identify, count, and collect trash from shorelines.",
+              "anchor": "海滩清洁岗位职责"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "单独或分组工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "volunteers will work in groups",
+            "optionText": "in groups",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 in groups（分组），原文是说志愿者分组干活，所以活不累；并没有让人在单干和分组之间挑，“单独”（individually）原文没提。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+              "quote": "It is far from physically demanding as volunteers will work in groups.",
+              "anchor": "分组工作"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Beach Cleanup",
+          "sourceRole": "stem",
+          "targetText": "Beach Cleanup – Channel Islands National Park",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:3",
+          "relationType": "locationCue",
+          "answerText": "follow a series of instructions to identify, count, and collect trash",
+          "bridgeZh": "This position 就是这个海滩清洁岗位",
+          "note": "题干 Beach Cleanup 原词是这一栏的小标题。"
+        },
+        {
+          "sourceText": "Follow cleanup directions",
+          "sourceRole": "correctOption",
+          "targetText": "follow a series of instructions to identify, count, and collect trash from shorelines",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+          "relationType": "paraphrase",
+          "note": "选项的“遵照”（Follow）和原文用词相同，“指示”（directions）对应 instructions，“清洁”（cleanup）概括了辨认、清点、收集垃圾（collect trash）这几步，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把“2025年5月有空”和四个岗位的服务时间逐一比对，找出对应岗位的联系人。",
+      "stemTranslationZh": "如果你在2025年5月有空，应该联系谁？",
+      "locateBy": "stem",
+      "locateFindZh": "往下找这一栏的联系人",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Emily Zivot。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "On-Site Position; 1/20/2025",
+            "sourceEntity": "1/20/2025",
+            "optionEntity": "Emily Zivot",
+            "explanation": "Emily Zivot 负责海滩清洁，这项活动只在2025年1月20日（1/20/2025）一天，不在五月。",
+            "optionText": "Emily Zivot."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:4",
+              "quote": "On-Site Position; 1/20/2025",
+              "anchor": "海滩清洁日期"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Sasha Travaglio。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:11",
+              "quote": "Point of Contact: Sasha Travaglio",
+              "anchor": "营地看守联系人"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:9",
+              "quote": "during peak camping season – early February to late May 2025",
+              "anchor": "营地看守服务期"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Becky George。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "On-Site Position; 2/7/2025~2/8/2025",
+            "sourceEntity": "2/7/2025~2/8/2025",
+            "optionEntity": "Becky George",
+            "explanation": "Becky George 留在社区清洁一栏，那次活动只在2025年2月7日至8日这个周末（2/7/2025~2/8/2025），和五月不沾边。",
+            "optionText": "Becky George."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:13",
+              "quote": "On-Site Position; 2/7/2025~2/8/2025",
+              "anchor": "社区清洁日期"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Da’ Nira McClary。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Virtual Position; 6/5/2024~2/4/2025",
+            "sourceEntity": "6/5/2024~2/4/2025",
+            "optionEntity": "Da’ Nira McClary",
+            "explanation": "留 Da’ Nira McClary 联系方式的是线上翻译岗，服务期到2025年2月4日（2/4/2025）就结束了，赶不上五月。",
+            "optionText": "Da’ Nira McClary."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:17",
+              "quote": "Virtual Position; 6/5/2024~2/4/2025",
+              "anchor": "翻译岗服务期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "May 2025",
+          "sourceRole": "stem",
+          "targetText": "Joshua Tree National Park is recruiting campground hosts for Cottonwood Campground during peak camping season – early February to late May 2025.",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:9",
+          "relationType": "locationCue",
+          "answerText": "Point of Contact: Sasha Travaglio",
+          "bridgeZh": "只有营地看守的服务期包含五月，联系人就是这一栏留的人",
+          "note": "题干 May 2025 原词出现在原文。"
+        },
+        {
+          "sourceText": "Sasha Travaglio",
+          "sourceRole": "correctOption",
+          "targetText": "Point of Contact: Sasha Travaglio",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:11",
+          "relationType": "locationCue",
+          "note": "四个岗位里只有营地看守的服务期跨到五月：2月初到5月底（early February to late May 2025）；其余三个分别是1月20日一天、2月7日至8日、2024年6月到2025年2月4日。营地看守的联系人是 Sasha Travaglio，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个岗位的工作方式放在一起比，找出只有法英翻译岗具备的特点。",
+      "stemTranslationZh": "法英翻译岗位和其他项目有什么不同？",
+      "locateBy": "options",
+      "locateFindZh": "拿每个选项比四个岗位，找只有翻译岗有的一项",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它很耗体力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "far from physically demanding",
+            "optionText": "physically demanding",
+            "matchType": "exact",
+            "relationNote": "选项照搬 physically demanding（耗体力），原文是说海滩清洁一点也不累（far from）；要长距离步行、不断弯腰的是社区清洁，翻译岗在线上做，谈不上耗体力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:5",
+              "quote": "It is far from physically demanding as volunteers will work in groups.",
+              "anchor": "海滩清洁不累"
+            },
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:14",
+              "quote": "this event will require walking distances of up to 3 miles on uneven ground and consistent bending and kneeling",
+              "anchor": "社区清洁要走路弯腰"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它要求具备组织能力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "keep an organized record of work",
+            "optionText": "organizational skills",
+            "matchType": "wordFamily",
+            "relationNote": "选项由 organized（有条理的）变出 organizational skills（组织能力）；翻译岗只要求把工作记录得有条理（keep an organized record of work），说的是记录习惯，不是组织协调的能力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18",
+              "quote": "Ability to keep an organized record of work is necessary.",
+              "anchor": "有条理地记录工作"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它允许志愿者不到现场工作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18",
+              "quote": "This position functions virtually",
+              "anchor": "翻译岗线上开展"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:17",
+              "quote": "Virtual Position",
+              "anchor": "线上岗位"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:4",
+              "quote": "On-Site Position",
+              "anchor": "其他岗位为现场岗位"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它侧重与游客互动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Hosts will answer visitor questions, assist with the campground reservation system, and provide excellent customer service.",
+            "sourceEntity": "Hosts",
+            "optionEntity": "It",
+            "explanation": "要直接回答游客提问的是营地看守（answer visitor questions）；翻译岗是在线上协助公园工作人员（support park staff），为法国游客准备文字材料。",
+            "optionText": "It focuses on interaction with visitors."
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:10",
+              "quote": "Hosts will answer visitor questions, assist with the campground reservation system, and provide excellent customer service.",
+              "anchor": "营地看守答疑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "work off-site",
+          "sourceRole": "correctOption",
+          "targetText": "This position functions virtually",
+          "targetParagraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:reading-a:18",
+          "relationType": "paraphrase",
+          "note": "“不用到现场”（work off-site）对应翻译岗标的线上岗位（Virtual Position）和在线上开展（functions virtually）；另外三个岗位都标着现场岗位（On-Site Position），所以这是翻译岗独有的，选 C。"
+        }
+      ]
+    }
+  }
+}

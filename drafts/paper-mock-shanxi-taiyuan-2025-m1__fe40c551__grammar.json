@@ -1,0 +1,1099 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill": {
+      "overview": "短文介绍冬季冰城哈尔滨的冰雕：工人从松花江采冰切块，工程师用钢架、冰块和冰水建起巨型冰建筑，再嵌入彩灯；团队顶着严寒轮班赶工，把原冰变成短暂却动人的艺术。",
+      "fullTranslationZh": "冬季假日里，处处装点华美、灯火闪耀。每年正是这个时候，被誉为“冰城”的哈尔滨化身为一片被银白色包裹的冬日仙境。\n在哈尔滨，吸引我们目光、令我们惊叹不已的东西，是这里的冰雕。它们不只是冰冻的艺术品，更是人类智慧的象征，证明了即使在极寒之中，美也能蓬勃绽放。\n在冰封的松花江上——这里是晶莹剔透、没有气泡的冰的唯一来源——工人们正忙着采集成千上万立方米的冰，用来建造壮观的冰雪大世界。他们把冰面切成大小相同的冰块，每块重700公斤。在施工现场，为了撑起双子冰塔这样的巨型建筑，工程师们先搭起高达40米的钢架，冰块像砖块一样被堆砌在钢架四周。然后，他们在钢架和冰块之间的缝隙里填入冰和水，冰水瞬间冻成坚如磐石的冰墙。对于造型独特的建筑，工人们把掺了纸浆的水浇在充气的模具上，制成比普通冰坚固三倍的冰。几天后拆掉模具，一件令人惊叹又经久耐用的作品便显露出来。LED灯被一层层嵌进雕刻出的凹槽里，把冰雕变成发光的奇观。\n尽管面临巨大的挑战——路面湿滑、零下25摄氏度的严寒和工期限制——各个团队仍全天候轮班工作。他们的奉献把原冰变成了令人叹为观止的艺术——艺术本身是短暂的，但这份体验和精致的美将永远留存。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-grammar-1",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+          "sourceText": "In Harbin, __57__ catches our eyes and leaves us stunned is its ice sculptures, which are more than frozen art, but a symbol of human wisdom, proving that even in the extreme cold, beauty can thrive.",
+          "displayText": "In Harbin, what catches our eyes and leaves us stunned is its ice sculptures, which are more than frozen art, but a symbol of human wisdom, proving that even in the extreme cold, beauty can thrive.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:57"
+          ],
+          "translationZh": "在哈尔滨，吸引我们目光、令我们惊叹不已的东西，是这里的冰雕。它们不只是冰冻的艺术品，更是人类智慧的象征，证明了即使在极寒之中，美也能蓬勃绽放。",
+          "analysisZh": "先找主干：what 引导的从句作主语，谓语是 is，表语是冰雕（its ice sculptures），意思是“吸引我们、让我们惊叹的是冰雕”。which 引导非限制性定语从句，补充说明冰雕不只是冰冻的艺术，更是人类智慧的象征；末尾的 proving 短语再说明这一点证明了什么，proving 后的 that 从句作它的宾语。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 54,
+              "quote": "what catches our eyes and leaves us stunned"
+            },
+            {
+              "start": 55,
+              "end": 76,
+              "quote": "is its ice sculptures"
+            },
+            {
+              "start": 140,
+              "end": 152,
+              "quote": "proving that"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-grammar-2",
+          "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+          "sourceText": "At the construction site, to support massive structures like twin ice towers, engineers first build steel frames up to 40 meters tall, around which ice blocks __60__ (pile) like bricks.",
+          "displayText": "At the construction site, to support massive structures like twin ice towers, engineers first build steel frames up to 40 meters tall, around which ice blocks are piled like bricks.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shanxi-taiyuan-2025-m1:60"
+          ],
+          "translationZh": "在施工现场，为了撑起双子冰塔这样的巨型建筑，工程师们先搭起高达40米的钢架，冰块像砖块一样被堆砌在钢架四周。",
+          "analysisZh": "主干是“工程师们先搭起钢架”（engineers first build steel frames）。前面的不定式短语（to support …）说明搭钢架的目的；后面的 around which 引导非限制性定语从句，which 指钢架，从句主语是冰块，说明冰块围绕钢架堆砌起来。",
+          "underlineRanges": [
+            {
+              "start": 78,
+              "end": 112,
+              "quote": "engineers first build steel frames"
+            },
+            {
+              "start": 26,
+              "end": 55,
+              "quote": "to support massive structures"
+            },
+            {
+              "start": 135,
+              "end": 168,
+              "quote": "around which ice blocks are piled"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 55,
+              "quote": "冬季假日里，处处装点华美、灯火闪耀。每年正是这个时候，被誉为“冰城”的哈尔滨化身为一片被银白色包裹的冬日仙境。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2"
+              ],
+              "start": 56,
+              "end": 127,
+              "quote": "在哈尔滨，吸引我们目光、令我们惊叹不已的东西，是这里的冰雕。它们不只是冰冻的艺术品，更是人类智慧的象征，证明了即使在极寒之中，美也能蓬勃绽放。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3"
+              ],
+              "start": 128,
+              "end": 404,
+              "quote": "在冰封的松花江上——这里是晶莹剔透、没有气泡的冰的唯一来源——工人们正忙着采集成千上万立方米的冰，用来建造壮观的冰雪大世界。他们把冰面切成大小相同的冰块，每块重700公斤。在施工现场，为了撑起双子冰塔这样的巨型建筑，工程师们先搭起高达40米的钢架，冰块像砖块一样被堆砌在钢架四周。然后，他们在钢架和冰块之间的缝隙里填入冰和水，冰水瞬间冻成坚如磐石的冰墙。对于造型独特的建筑，工人们把掺了纸浆的水浇在充气的模具上，制成比普通冰坚固三倍的冰。几天后拆掉模具，一件令人惊叹又经久耐用的作品便显露出来。LED灯被一层层嵌进雕刻出的凹槽里，把冰雕变成发光的奇观。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4"
+              ],
+              "start": 405,
+              "end": 498,
+              "quote": "尽管面临巨大的挑战——路面湿滑、零下25摄氏度的严寒和工期限制——各个团队仍全天候轮班工作。他们的奉献把原冰变成了令人叹为观止的艺术——艺术本身是短暂的，但这份体验和精致的美将永远留存。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+            "text": "The winter holiday season shines with decorations and lights. It is this time of year when Harbin, known as the city of ice, becomes a winter wonderland wrapped in silver and white."
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+            "text": "In Harbin, what catches our eyes and leaves us stunned is its ice sculptures, which are more than frozen art, but a symbol of human wisdom, proving that even in the extreme cold, beauty can thrive."
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+            "text": "On the frozen Songhua River, the only source of crystal-clear and bubble-free ice, workers are busy harvesting thousands of cubic meters of ice to build the splendid Ice and Snow World. They slice the surface into blocks of the same size, each weighing 700 kg. At the construction site, to support massive structures like twin ice towers, engineers first build steel frames up to 40 meters tall, around which ice blocks are piled like bricks. Then they fill the gaps between frames and blocks with ice and water, which freeze instantly to rock-solid walls. For unique structures, workers apply water mixed with paper pulp (纸浆) onto a blown-up mould (模具), creating ice three times stronger than normal. Days later, the mould is removed, revealing an amazing, durable creation. LED lights are embedded in carved sinks, layer by layer, changing sculptures into glowing wonders."
+          },
+          {
+            "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+            "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+            "text": "Despite immense challenges – slippery surfaces, -25°Cand time limit, the teams work 24/7 in shifts. Their dedication turns raw ice into breathtaking art – the art itself is momentary, but the experience and the delicate beauty will last forever."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "start": 133,
+                "end": 152,
+                "quote": "a winter wonderland"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "start": 167,
+                "end": 186,
+                "quote": "in silver and white"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "start": 50,
+                "end": 54,
+                "quote": "冬日仙境"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "start": 44,
+                "end": 47,
+                "quote": "银白色"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 18,
+                "end": 56,
+                "quote": "catches our eyes and leaves us stunned"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 57,
+                "end": 78,
+                "quote": "is its ice sculptures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 5,
+                "end": 20,
+                "quote": "吸引我们目光、令我们惊叹不已的"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 23,
+                "end": 29,
+                "quote": "是这里的冰雕"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 83,
+                "end": 110,
+                "quote": "workers are busy harvesting"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 159,
+                "end": 190,
+                "quote": "the splendid Ice and Snow World"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 31,
+                "end": 48,
+                "quote": "工人们正忙着采集成千上万立方米的冰"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 53,
+                "end": 61,
+                "quote": "壮观的冰雪大世界"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 220,
+                "end": 243,
+                "quote": "blocks of the same size"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 245,
+                "end": 249,
+                "quote": "each"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 69,
+                "end": 76,
+                "quote": "大小相同的冰块"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 77,
+                "end": 79,
+                "quote": "每块"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 408,
+                "end": 431,
+                "quote": "around which ice blocks"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 351,
+                "end": 372,
+                "quote": "engineers first build"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 124,
+                "end": 131,
+                "quote": "冰块像砖块一样"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 108,
+                "end": 115,
+                "quote": "工程师们先搭起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 474,
+                "end": 482,
+                "quote": "the gaps"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 490,
+                "end": 507,
+                "quote": "frames and blocks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 146,
+                "end": 151,
+                "quote": "钢架和冰块"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 153,
+                "end": 156,
+                "quote": "的缝隙"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 528,
+                "end": 540,
+                "quote": "which freeze"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 167,
+                "end": 176,
+                "quote": "冻成坚如磐石的冰墙"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 775,
+                "end": 800,
+                "quote": "amazing, durable creation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 229,
+                "end": 241,
+                "quote": "令人惊叹又经久耐用的作品"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 0,
+                "end": 15,
+                "quote": "Despite immense"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 37,
+                "end": 75,
+                "quote": "slippery surfaces, -25°Cand time limit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 0,
+                "end": 7,
+                "quote": "尽管面临巨大的"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 11,
+                "end": 31,
+                "quote": "路面湿滑、零下25摄氏度的严寒和工期限制"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 163,
+                "end": 170,
+                "quote": "the art"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 197,
+                "end": 257,
+                "quote": "but the experience and the delicate beauty will last forever"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 68,
+                "end": 70,
+                "quote": "艺术"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 77,
+                "end": 92,
+                "quote": "但这份体验和精致的美将永远留存"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:56"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "start": 153,
+                "end": 160,
+                "quote": "wrapped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:1",
+                "start": 47,
+                "end": 49,
+                "quote": "包裹"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:57"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 11,
+                "end": 15,
+                "quote": "what"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 20,
+                "end": 22,
+                "quote": "东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:58"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 144,
+                "end": 152,
+                "quote": "to build"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 49,
+                "end": 53,
+                "quote": "用来建造"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:59"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 244,
+                "end": 252,
+                "quote": "weighing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 79,
+                "end": 80,
+                "quote": "重"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:60"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 420,
+                "end": 429,
+                "quote": "are piled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 131,
+                "end": 134,
+                "quote": "被堆砌"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:61"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 467,
+                "end": 474,
+                "quote": "between"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 151,
+                "end": 153,
+                "quote": "之间"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:62"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 526,
+                "end": 535,
+                "quote": "instantly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 165,
+                "end": 167,
+                "quote": "瞬间"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:63"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 746,
+                "end": 748,
+                "quote": "an"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 227,
+                "end": 229,
+                "quote": "一件"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:64"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 16,
+                "end": 26,
+                "quote": "challenges"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 7,
+                "end": 9,
+                "quote": "挑战"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:65"
+            ],
+            "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 163,
+                "end": 169,
+                "quote": "itself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:4",
+                "start": 70,
+                "end": 72,
+                "quote": "本身"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sentence-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:57"
+            ],
+            "selectedSentenceId": "sentence-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 0,
+                "end": 197,
+                "quote": "In Harbin, what catches our eyes and leaves us stunned is its ice sculptures, which are more than frozen art, but a symbol of human wisdom, proving that even in the extreme cold, beauty can thrive."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:2",
+                "start": 0,
+                "end": 71,
+                "quote": "在哈尔滨，吸引我们目光、令我们惊叹不已的东西，是这里的冰雕。它们不只是冰冻的艺术品，更是人类智慧的象征，证明了即使在极寒之中，美也能蓬勃绽放。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sentence-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shanxi-taiyuan-2025-m1:60"
+            ],
+            "selectedSentenceId": "sentence-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 261,
+                "end": 442,
+                "quote": "At the construction site, to support massive structures like twin ice towers, engineers first build steel frames up to 40 meters tall, around which ice blocks are piled like bricks."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shanxi-taiyuan-2025-m1:grammar-fill:3",
+                "start": 86,
+                "end": 140,
+                "quote": "在施工现场，为了撑起双子冰塔这样的巨型建筑，工程师们先搭起高达40米的钢架，冰块像砖块一样被堆砌在钢架四周。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-shanxi-taiyuan-2025-m1:56": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "wrap",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "wrapped",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格修饰名词「冬日仙境」（a winter wonderland），作后置定语：句中谓语已是变成（becomes），这里只能用非谓语。仙境是被银白色包裹的，与包裹（wrap）是被动关系，用过去分词（wrapped）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a winter wonderland",
+          "signalSide": "passage",
+          "relation": "被修饰的名词是冬日仙境，非谓语作它的后置定语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "in silver and white",
+          "signalSide": "passage",
+          "relation": "“被银白色包裹”（wrapped in），仙境是动作的承受者。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:57": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "what",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "subject-clause"
+        ]
+      },
+      "reason": "空格引导从句作全句主语，全句骨架是“（……的东西）是冰雕”（… is its ice sculptures）。从句里谓语是吸引和使（catches … and leaves），缺主语，前面又没有先行词，要表示“吸引我们目光的东西”，用（what）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "catches our eyes and leaves us stunned",
+          "signalSide": "passage",
+          "relation": "从句有并列谓语却缺主语，连接词要在从句中作主语。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "is its ice sculptures",
+          "signalSide": "passage",
+          "relation": "整个从句作系动词（is）的主语，是主语从句。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:58": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "build",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to build",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "空格说明工人采冰（are busy harvesting … ice）是为了什么，作目的状语：采这些冰是为了建造冰雪大世界，用不定式（to build）。句子谓语已经是忙着采冰，这里不能再用谓语形式。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "workers are busy harvesting",
+          "signalSide": "passage",
+          "relation": "谓语已是忙着采冰，空格说明采冰的目的。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "the splendid Ice and Snow World",
+          "signalSide": "passage",
+          "relation": "建造的对象是冰雪大世界，这正是采冰的目的。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:59": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "weigh",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "weighing",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "空格和前面的每块（each）一起作状语，补充说明切出的冰块（blocks）有多重；这个部分没有谓语，句子谓语是切（slice）。每块冰与重（weigh）是主动关系，用现在分词（weighing）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "each",
+          "signalSide": "passage",
+          "relation": "分词的逻辑主语是每块冰（each），二者是主动关系。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "blocks of the same size",
+          "signalSide": "passage",
+          "relation": "每块（each）指的是这些大小相同的冰块。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:60": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "pile",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are piled",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作定语从句（around which …）的谓语，主语是冰块（ice blocks）。冰块是被堆起来的，要用被动；这一段用一般现在时介绍施工流程（engineers first build），主语是复数，所以用（are piled）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "around which ice blocks",
+          "signalSide": "passage",
+          "relation": "从句主语是复数的冰块，冰块是被堆砌的。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "engineers first build",
+          "signalSide": "passage",
+          "relation": "主句用一般现在时介绍施工流程，从句时态与之一致。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:61": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "between",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把钢架和冰块（frames and blocks）接到缝隙（the gaps）上，说明缝隙在哪里。后面是用并列连词（and）连起的两样东西，表示“在……和……之间”，用介词（between）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the gaps",
+          "signalSide": "passage",
+          "relation": "介词短语修饰缝隙，说明缝隙的位置。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "frames and blocks",
+          "signalSide": "passage",
+          "relation": "两样东西并列，搭配“在两者之间”（between … and …）。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:62": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "instant",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "instantly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰定语从句的谓语冻结（freeze），说明冻得有多快，要用副词，把形容词（instant）加后缀（-ly）变成（instantly）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "which freeze",
+          "signalSide": "passage",
+          "relation": "副词修饰从句谓语冻结（freeze），说明冻得多快。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:63": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "an",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-first-mention",
+        "features": [
+          "an-vowel-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词作品（creation），这是拆模后第一次提到的一件新作品，用不定冠词。紧跟的令人惊叹的（amazing）以元音音素开头，所以用（an）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "amazing, durable creation",
+          "signalSide": "passage",
+          "relation": "单数可数名词前缺限定词，令人惊叹的（amazing）以元音音素开头。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:64": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "challenge",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "challenges",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作介词尽管（Despite）的宾语，挑战（challenge）是可数名词，前面只有形容词巨大的（immense）、没有冠词；破折号后列出路面湿滑、低温和工期三项，挑战不止一个，用复数（challenges）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "Despite immense",
+          "signalSide": "passage",
+          "relation": "介词后要名词，只有形容词修饰、没有冠词，可数名词用复数。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "slippery surfaces, -25°Cand time limit",
+          "signalSide": "passage",
+          "relation": "破折号后列举了三项困难，说明挑战不止一个。"
+        }
+      ]
+    },
+    "question:paper-mock-shanxi-taiyuan-2025-m1:65": {
+      "blankId": "blank:paper-mock-shanxi-taiyuan-2025-m1:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "it",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "itself",
+      "role": null,
+      "similarityProfile": {
+        "route": "reflexive-pronoun",
+        "features": []
+      },
+      "reason": "空格紧跟在主语艺术（the art）后面作同位语，起强调作用，指的就是这门艺术本身，所以用反身代词（itself）；后半句用转折（but）说体验和美会长存，正好与艺术本身的短暂对照。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the art",
+          "signalSide": "passage",
+          "relation": "反身代词紧跟这门艺术（the art），强调艺术本身。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "but the experience and the delicate beauty will last forever",
+          "signalSide": "passage",
+          "relation": "转折（but）后写体验和美长存，与艺术本身的短暂形成对照。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1015 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-shanxi-taiyuan-2025-m1",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Hey, you know what? There are already 50 students who have signed up for our skiing club, and the number is still increasing. Don’t celebrate too soon. There aren’t enough facilities for them.",
+      "translationZh": "嘿，你知道吗？我们滑雪俱乐部已经有50名学生报名了，而且人数还在增加。别高兴得太早。设施不够他们用的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士告诉男士学校滑雪俱乐部的报名情况，男士提醒她还有设施方面的问题。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "嘿，你知道吗？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我们滑雪俱乐部已经有50名学生报名了，而且人数还在增加。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "别高兴得太早。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "设施不够他们用的。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "Steve, can you help me out? My computer won’t connect to the Wi-Fi. I’m sorry, Anne. I’m on my way to lunch with a client and already running late. It’s okay. Then I will seek help from the technology department.",
+      "translationZh": "史蒂夫，你能帮我个忙吗？我的电脑连不上无线网。抱歉，安妮。我正要去和一位客户吃午饭，已经要迟到了。没关系。那我去找技术部帮忙吧。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "安妮向同事史蒂夫提出请求，史蒂夫正赶着去见客户，安妮只好另作打算。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "史蒂夫，你能帮我个忙吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我的电脑连不上无线网。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "抱歉，安妮。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "我正要去和一位客户吃午饭，已经要迟到了。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "没关系。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "那我去找技术部帮忙吧。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "Well, among all the candidates, Jenny may be the most suitable for the job. Yes, she is sort of flexible, but she’s not ambitious enough. Well, I guess we’ll give her a chance and see how she works out.",
+      "translationZh": "嗯，在所有应聘者中，珍妮可能最适合这份工作。是的，她还算灵活，但上进心不够。好吧，我想我们就给她一个机会，看看她干得怎么样。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "两人在挑选应聘者时交换看法，谈到其中一人的长处和不足，最后作出决定。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "嗯，在所有应聘者中，珍妮可能最适合这份工作。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "是的，她还算灵活，但上进心不够。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "好吧，我想我们就给她一个机会，看看她干得怎么样。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "Look at that line. There is only one person working at the counter, and it’s going to take ages to get our luggage checked in. Don’t worry. Our flight takes off in 2 hours. We have enough time.",
+      "translationZh": "看那条队。柜台只有一个人在办理，托运行李要等好久。别担心。我们的航班两小时后才起飞。我们时间够。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人看到柜台前排起长队，一人担心要等很久，另一人安慰对方时间来得及。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "看那条队。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "柜台只有一个人在办理，托运行李要等好久。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我们的航班两小时后才起飞。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "我们时间够。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "Hi, Susan, can you send an invitation email to Linda? Right. I’ll do it after completing the report about our new project. Please do this first. It’s a priority and very urgent. All right.",
+      "translationZh": "嗨，苏珊，你能给琳达发一封邀请邮件吗？好的。我写完新项目的报告就发。请先发这封邮件。这件事要优先办，而且非常紧急。好吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "男士请同事苏珊给琳达发邀请邮件，苏珊手头还有报告要写，两人商量先做哪件事。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "嗨，苏珊，你能给琳达发一封邀请邮件吗？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我写完新项目的报告就发。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "请先发这封邮件。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "这件事要优先办，而且非常紧急。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "好吧。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "Hi Tim, did you decide to major in geography in the end? Yes, I finally transferred from history to geography, and your major is biology, if I remember correctly. Yes, I have settled on it. I am on my way to the library for the 1st course essay. Our professor has assigned us to write about animal language. Hmm, that will take a lot of time. You will probably have to do much field research and observation.",
+      "translationZh": "嗨，蒂姆，你最后决定主修地理了吗？是的，我最终从历史专业转到了地理专业。如果我没记错的话，你的专业是生物吧。对，我已经定下来了。我正要去图书馆写第一门课的论文。我们教授布置我们写动物的语言。嗯，那会花很多时间。你可能得做大量的实地研究和观察。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "蒂姆和一位女同学聊各自最终选定的专业，女同学又说起教授刚布置的课程论文。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "嗨，蒂姆，你最后决定主修地理了吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "是的，我最终从历史专业转到了地理专业。如果我没记错的话，你的专业是生物吧。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "对，我已经定下来了。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我正要去图书馆写第一门课的论文。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我们教授布置我们写动物的语言。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "嗯，那会花很多时间。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "你可能得做大量的实地研究和观察。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "Good afternoon. This is Harry Stills. I’m calling to ask about a delivery I have been expecting. Good afternoon, Mr. Stills. What can I do for you? I placed an order of a computer yesterday. It was supposed to be here by noon, but here we are 2 hours later, and I am still waiting. I’m sorry about that. There are more packages than usual today, and the delivery man is on the road, and should arrive in 30 minutes. Are you sure? I have to leave in 40 minutes for an appointment, so I need to make sure I have it before then. I understand. I will call him right now and ask him to make you the 1st stop. Again, I apologize for the delay.",
+      "translationZh": "下午好。我是哈里·斯蒂尔斯。我打电话是想问一下我一直在等的一件快递。下午好，斯蒂尔斯先生。有什么可以帮您的？我昨天订了一台电脑。本来应该中午前送到，可现在已经过了两个小时，我还在等。非常抱歉。今天的包裹比平时多，送货员正在路上，应该30分钟后到。你确定吗？我40分钟后得出门赴约，所以我得确保在那之前拿到它。我明白。我现在就给他打电话，让他第一站先送您这里。再次为延误向您道歉。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "哈里·斯蒂尔斯打电话给商家，说起昨天订购的电脑，客服解释原因并提出补救办法。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "下午好。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "我是哈里·斯蒂尔斯。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "我打电话是想问一下我一直在等的一件快递。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "下午好，斯蒂尔斯先生。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "有什么可以帮您的？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "我昨天订了一台电脑。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "本来应该中午前送到，可现在已经过了两个小时，我还在等。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "非常抱歉。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "今天的包裹比平时多，送货员正在路上，应该30分钟后到。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "你确定吗？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我40分钟后得出门赴约，所以我得确保在那之前拿到它。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "我明白。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我现在就给他打电话，让他第一站先送您这里。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "再次为延误向您道歉。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Good morning. I saw on the university online job board that you were looking for a student receptionist. Is it still available? Yes, it is. Would you like to fill out an application? Well, I am very interested, but I have 20 credit-hour courses to take in a week. Does the job guarantee flexibility? Yes, you can attach a copy of this semester’s class schedule to your application. This way, we can determine the proper workload for you. That sounds great. What are the main responsibilities? Well, as a student receptionist, your main duties will include greeting visitors, answering phone calls, and providing information about the department or services we offer. I see. I believe I can be up to it. I am good at dealing with people. Great. We plan to conduct the interviews on Monday. Hope to see you then.",
+      "translationZh": "早上好。我在学校的网上招聘栏看到你们在招一名学生接待员。这个职位还空着吗？是的，还空着。你想填一份申请表吗？嗯，我很感兴趣，但我一周要上20学时的课。这份工作能保证时间灵活吗？能，你可以在申请表后附上一份本学期的课程表。这样我们就能为你确定合适的工作量。听起来很好。主要职责有哪些？嗯，作为学生接待员，你的主要职责包括接待来访者、接听电话，以及介绍本部门的情况或我们提供的服务。我明白了。我相信我能胜任。我很擅长和人打交道。很好。我们计划周一进行面试。希望到时候见到你。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "一名女生看到学校的招聘信息前来询问，工作人员介绍申请方式、工作职责和面试安排。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "早上好。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我在学校的网上招聘栏看到你们在招一名学生接待员。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "这个职位还空着吗？"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "是的，还空着。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "你想填一份申请表吗？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "嗯，我很感兴趣，但我一周要上20学时的课。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "这份工作能保证时间灵活吗？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "能，你可以在申请表后附上一份本学期的课程表。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "这样我们就能为你确定合适的工作量。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "听起来很好。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "主要职责有哪些？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "嗯，作为学生接待员，你的主要职责包括接待来访者、接听电话，以及介绍本部门的情况或我们提供的服务。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我明白了。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "我相信我能胜任。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "我很擅长和人打交道。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "很好。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "我们计划周一进行面试。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "希望到时候见到你。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "The children’s book festival is coming up again soon, and here with me is the festival’s organizer, Jenny Morgan. So could you tell us what we can expect this year, Jenny? Well, as usual, we’ve got 5 days of exciting events for children with writers coming from all over the country. There’s a very special event called Superheroes. This is a chance for deaf children to share their reading experiences with author Madeline Gordon, who is also deaf. Thanks, Jenny. I’m just wondering if you have a favorite book you could recommend to our readers. It’s hard to choose, but Alive and Kicking is worth mentioning. It deals with all the challenges the boy has to face at the new school, and with the language barrier, etc. It has made me laugh out loud. I think my kids would enjoy that. What about any advice for parents on how to encourage their children to read more? Well, one thing I’d say is to make time to sit down with your children and share books with them. It’s also good to read more advanced books to them to develop their vocabulary. Thank you for your advice and introduction.",
+      "translationZh": "儿童图书节又快到了，今天和我一起来到节目的是图书节的组织者珍妮·摩根。珍妮，能跟我们说说今年有什么值得期待的吗？嗯，和往年一样，我们为孩子们准备了为期5天的精彩活动，作家们从全国各地赶来。有一个非常特别的活动，叫“超级英雄”。这是一个让聋哑儿童和同样失聪的作家玛德琳·戈登分享阅读体验的机会。谢谢你，珍妮。我想知道你有没有一本最喜欢、可以推荐给我们读者的书。很难选，不过《活蹦乱跳》值得一提。它讲的是一个男孩在新学校要面对的种种挑战，还有语言障碍等等。它让我笑出了声。我想我的孩子们会喜欢这本书。那对于怎样鼓励孩子多读书，你对家长有什么建议吗？嗯，我想说的一点是，要抽出时间和孩子坐下来，和他们一起分享书。给他们读一些程度更深的书来扩大他们的词汇量也很好。谢谢你的建议和介绍。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "乐于学习"
+      },
+      "summaryZh": "主持人采访儿童图书节的组织者珍妮·摩根，她介绍今年的活动、推荐图书并给家长提建议。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "儿童图书节又快到了，今天和我一起来到节目的是图书节的组织者珍妮·摩根。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "珍妮，能跟我们说说今年有什么值得期待的吗？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "嗯，和往年一样，我们为孩子们准备了为期5天的精彩活动，作家们从全国各地赶来。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "有一个非常特别的活动，叫“超级英雄”。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "这是一个让聋哑儿童和同样失聪的作家玛德琳·戈登分享阅读体验的机会。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "谢谢你，珍妮。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "我想知道你有没有一本最喜欢、可以推荐给我们读者的书。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "很难选，不过《活蹦乱跳》值得一提。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "它讲的是一个男孩在新学校要面对的种种挑战，还有语言障碍等等。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "它让我笑出了声。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我想我的孩子们会喜欢这本书。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "那对于怎样鼓励孩子多读书，你对家长有什么建议吗？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "嗯，我想说的一点是，要抽出时间和孩子坐下来，和他们一起分享书。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "给他们读一些程度更深的书来扩大他们的词汇量也很好。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "谢谢你的建议和介绍。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Hi everyone. Thank you for coming in on short notice. As I mentioned in my email yesterday, we have been working hard on our project to keep senior citizens in the area active. With community support, we proudly opened the senior community center last Monday. This center offers free exercise classes, music sessions, and social events for elderly members. While this is a big achievement, our project now faces a problem. We are running out of funds for specialized programs. For example, some members need gentle yoga classes or wheelchair friendly activities, but these require trained instructors and equipment we can’t afford. That’s why we are reaching out for help. We urgently need volunteers, especially dance teachers, and physical trainers to lead fun, safe activities. Even one hour a week can make a difference. Additionally, I’ve handed out a list of local businesses that might donate supplies or services. If you can call or email them to explain our needs, it would greatly help. Our goal is to create a welcoming space where seniors feel valued and engaged. With your help, we can turn this vision into reality. Please let me know by Friday if you can volunteer or contact a business. Together, we can keep this center thriving.",
+      "translationZh": "大家好。感谢大家临时接到通知就赶来。正如我昨天在邮件里提到的，我们一直在努力推进一个让本地区老年人保持活跃的项目。在社区的支持下，我们上周一自豪地开放了老年人社区中心。中心为老年成员提供免费的健身课、音乐活动和社交活动。这虽然是一项很大的成就，但我们的项目现在遇到了一个问题。我们用于专项活动的资金快用完了。比如，有些成员需要舒缓的瑜伽课或适合轮椅使用者的活动，但这些都需要受过培训的教练和我们买不起的器材。这就是我们寻求帮助的原因。我们急需志愿者，尤其是舞蹈老师和体能教练，来带领有趣又安全的活动。哪怕每周一小时，也能带来改变。另外，我发了一份可能会捐赠物资或服务的本地企业名单。如果你们能打电话或发邮件向他们说明我们的需要，那会帮上大忙。我们的目标是创造一个让老年人感到被重视、愿意参与的温馨空间。有了你们的帮助，我们就能把这个愿景变成现实。请在周五前告诉我你能否做志愿者或联系一家企业。让我们一起让这个中心兴旺下去。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "志愿服务"
+      },
+      "summaryZh": "一位负责人在临时召开的会议上，向大家介绍一个帮助本地老人保持活跃的社区项目。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "大家好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "感谢大家临时接到通知就赶来。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "正如我昨天在邮件里提到的，我们一直在努力推进一个让本地区老年人保持活跃的项目。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "在社区的支持下，我们上周一自豪地开放了老年人社区中心。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "中心为老年成员提供免费的健身课、音乐活动和社交活动。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "这虽然是一项很大的成就，但我们的项目现在遇到了一个问题。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "我们用于专项活动的资金快用完了。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "比如，有些成员需要舒缓的瑜伽课或适合轮椅使用者的活动，但这些都需要受过培训的教练和我们买不起的器材。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "这就是我们寻求帮助的原因。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "我们急需志愿者，尤其是舞蹈老师和体能教练，来带领有趣又安全的活动。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "哪怕每周一小时，也能带来改变。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "另外，我发了一份可能会捐赠物资或服务的本地企业名单。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "如果你们能打电话或发邮件向他们说明我们的需要，那会帮上大忙。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "我们的目标是创造一个让老年人感到被重视、愿意参与的温馨空间。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "有了你们的帮助，我们就能把这个愿景变成现实。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "请在周五前告诉我你能否做志愿者或联系一家企业。"
+        },
+        {
+          "id": "listening-text-10:17",
+          "zh": "让我们一起让这个中心兴旺下去。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士听起来怎么样？",
+      "optionTranslationsZh": {
+        "A": "兴奋的。",
+        "B": "困惑的。",
+        "C": "失望的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "There are already 50 students who have signed up for our skiing club, and the number is still increasing."
+      },
+      "reasonZh": "女士开口就报喜：已有50人报名，人数还在涨；男士回她“别高兴得太早”（Don’t celebrate too soon），可见她正兴奋，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "设施不够（There aren’t enough facilities）是男士泼的冷水，女士自己说的全是好消息，并不失望。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士请男士做什么？",
+      "optionTranslationsZh": {
+        "A": "和她一起吃午饭。",
+        "B": "解决网络连接问题。",
+        "C": "向技术部求助。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "My computer won’t connect to the Wi-Fi."
+      },
+      "reasonZh": "安妮先请史蒂夫帮忙（can you help me out），紧接着说电脑连不上无线网，她要他帮的就是解决连接问题，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "午饭（lunch）是史蒂夫要和客户去吃的，是他推辞的理由，不是安妮的请求。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "找技术部帮忙（seek help from the technology department）是史蒂夫推辞以后安妮自己的打算，不是她请男士做的事。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "职位要求。",
+        "B": "最可能录用的应聘者。",
+        "C": "一位员工的外貌。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Well, among all the candidates, Jenny may be the most suitable for the job."
+      },
+      "reasonZh": "两人从“珍妮可能最合适”（the most suitable）谈到她灵活但上进心不够，最后决定给她机会，始终围绕这位最可能录用的应聘者，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "灵活、有上进心（flexible … ambitious）是在评价珍妮本人，两人没有逐条列这个职位的要求。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人可能在哪里？",
+      "optionTranslationsZh": {
+        "A": "在酒店。",
+        "B": "在机场。",
+        "C": "在公交车站。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "There is only one person working at the counter, and it’s going to take ages to get our luggage checked in."
+      },
+      "reasonZh": "男士嫌柜台办理行李托运（get our luggage checked in）太慢，女士又说航班两小时后才起飞（Our flight takes off），两处合起来可知在机场，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "酒店前台也排队，但这里排队是为了托运行李、赶航班，不是办理入住。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "写报告。",
+        "B": "启动一个新项目。",
+        "C": "发一封邮件。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Please do this first."
+      },
+      "reasonZh": "苏珊本想写完报告再发邀请邮件，男士要她先发邮件（do this first），说很紧急，她答应了（All right），所以接下来发邮件，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "写报告（the report）是苏珊原本想先做的事，男士让她把发邮件排在了前面。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "新项目（our new project）只是那份报告的内容，没有人说要启动什么项目。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "蒂姆最终选定了什么专业？",
+      "optionTranslationsZh": {
+        "A": "地理。",
+        "B": "历史。",
+        "C": "生物。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Yes, I finally transferred from history to geography, and your major is biology, if I remember correctly."
+      },
+      "reasonZh": "蒂姆说自己最终从历史转到了地理（transferred from history to geography），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "历史（history）是蒂姆转出去的原专业，不是最终选定的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "生物（biology）是蒂姆说的女同学的专业，不是他自己的。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "蒂姆认为莉比的作业怎么样？",
+      "optionTranslationsZh": {
+        "A": "很费时间。",
+        "B": "很有趣。",
+        "C": "很专业。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Hmm, that will take a lot of time."
+      },
+      "reasonZh": "女同学说教授布置写动物语言的论文，蒂姆回应这会花很多时间（take a lot of time），“费时”就是这个意思，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "蒂姆的两句回应都在说作业要花时间、要做大量调查，没有评价它有不有趣。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "实地研究和观察（field research and observation）是蒂姆在说作业为什么费时，不是在夸它专业。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士为什么打这个电话？",
+      "optionTranslationsZh": {
+        "A": "为了下订单。",
+        "B": "为了询问延误的快递。",
+        "C": "为了投诉包裹破损。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m calling to ask about a delivery I have been expecting."
+      },
+      "reasonZh": "男士说打电话是问一直在等的快递（ask about a delivery），又说本该中午到、过了两小时还没到，可见是询问延误的快递，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "下单（placed an order）是他昨天已经做完的事，这通电话问的是货为什么还没到。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士还能等多久？",
+      "optionTranslationsZh": {
+        "A": "两小时。",
+        "B": "三十分钟。",
+        "C": "四十分钟。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I have to leave in 40 minutes for an appointment, so I need to make sure I have it before then."
+      },
+      "reasonZh": "男士40分钟后要出门赴约（leave in 40 minutes），东西必须在这之前送到，所以他最多还能等40分钟，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "两小时（2 hours later）是快递已经比约定的中午晚了多久，不是他还能等的时间。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "30分钟（in 30 minutes）是女士估计送货员还要多久到，不是男士能等的时长。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士将提供什么服务？",
+      "optionTranslationsZh": {
+        "A": "优先配送。",
+        "B": "全额退款。",
+        "C": "免运费。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I will call him right now and ask him to make you the 1st stop."
+      },
+      "reasonZh": "女士要让送货员把男士家作为第一站（make you the 1st stop），也就是优先给他送，选 A。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士对什么职位感兴趣？",
+      "optionTranslationsZh": {
+        "A": "学生接待员。",
+        "B": "接线员。",
+        "C": "助教。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I saw on the university online job board that you were looking for a student receptionist."
+      },
+      "reasonZh": "女士说在学校网上招聘栏看到在招学生接待员（student receptionist），选项沿用原词，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "接听电话（answering phone calls）只是学生接待员的一项职责，不是另一个职位。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "这份工作提供什么？",
+      "optionTranslationsZh": {
+        "A": "灵活的工作量。",
+        "B": "合适的薪酬。",
+        "C": "额外的学时。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "This way, we can determine the proper workload for you."
+      },
+      "reasonZh": "女士问工作能否保证灵活（guarantee flexibility），对方说附上课表就能为她定合适的工作量（proper workload），即工作量可按课表调整，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "合适的（proper）修饰的是工作量（workload），对方说的是按课表安排工作量，没有谈薪酬。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "20学时的课（20 credit-hour courses）是女士自己一周要上的课，是她担心时间的原因，不是工作提供的。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "什么让她能胜任这份工作？",
+      "optionTranslationsZh": {
+        "A": "学业背景。",
+        "B": "沟通能力。",
+        "C": "工作经验。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I am good at dealing with people."
+      },
+      "reasonZh": "女士说自己擅长和人打交道（good at dealing with people），这正是接待来访、接听电话需要的沟通能力，选 B。"
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "今年的图书节有什么特别之处？",
+      "optionTranslationsZh": {
+        "A": "时间更长。",
+        "B": "有作家参加。",
+        "C": "有一个面向聋哑儿童的活动。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "This is a chance for deaf children to share their reading experiences with author Madeline Gordon, who is also deaf."
+      },
+      "reasonZh": "珍妮先说有个非常特别的活动（a very special event），接着说明它是让聋哑儿童和失聪作家分享阅读体验（deaf children），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "5天的活动前面有“和往年一样”（as usual），不是今年才有的特别之处。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "作家从全国各地赶来（writers coming from all over the country）也在“和往年一样”那句里，不算特别。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士认为《活蹦乱跳》这本书怎么样？",
+      "optionTranslationsZh": {
+        "A": "非常有趣。",
+        "B": "读起来很难。",
+        "C": "有助于语言学习。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It has made me laugh out loud."
+      },
+      "reasonZh": "珍妮说这本书让她笑出了声（laugh out loud），也就是读起来很有趣，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "挑战（challenges）是书中男孩在新学校要面对的，说的是故事内容，不是这本书难读。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "语言障碍（language barrier）也是书中男孩遇到的困难，不是说这本书能帮人学语言。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "珍妮建议家长怎样扩大孩子的词汇量？",
+      "optionTranslationsZh": {
+        "A": "和孩子分享想法。",
+        "B": "读程度更深的书。",
+        "C": "介绍新作家。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It’s also good to read more advanced books to them to develop their vocabulary."
+      },
+      "reasonZh": "珍妮说给孩子读程度更深的书来扩充词汇（read more advanced books … develop their vocabulary），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "和孩子一起分享（share books with them）的是书，是她鼓励孩子多读书的另一条建议，扩词汇靠的是读更深的书。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "作家（writers）出现在介绍书展的话里，新（new）是书中男孩到了新学校，都和扩词汇的建议无关。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "上周一项目有什么进展？",
+      "optionTranslationsZh": {
+        "A": "开设了一节免费课。",
+        "B": "张贴了一则临时通知。",
+        "C": "开放了一个老年中心。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "With community support, we proudly opened the senior community center last Monday."
+      },
+      "reasonZh": "说话人说上周一（last Monday）在社区支持下开放了老年人社区中心，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "免费健身课（free exercise classes）是中心开放后一直提供的内容，不是上周一这一天的进展。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "临时通知（short notice）是说话人感谢大家临时赶来开会，没有说张贴了通知，也不是项目进展。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "项目面临什么问题？",
+      "optionTranslationsZh": {
+        "A": "设备陈旧。",
+        "B": "管理不善。",
+        "C": "资金短缺。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We are running out of funds for specialized programs."
+      },
+      "reasonZh": "说话人说项目遇到问题，专项活动的资金快用完了（running out of funds），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "器材（equipment）是专项活动需要却买不起的东西，说的是缺钱，不是现有设备陈旧。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "根据说话人所说，志愿者需要做什么？",
+      "optionTranslationsZh": {
+        "A": "联系本地企业。",
+        "B": "捐赠钱款和器材。",
+        "C": "让更多老人参与中心活动。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "If you can call or email them to explain our needs, it would greatly help."
+      },
+      "reasonZh": "说话人发了一份本地企业名单，请大家打电话或发邮件（call or email them）向这些企业说明需求，就是联系本地企业，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "捐赠物资或服务（donate supplies or services）是希望企业做的事，交给听众的是去联系企业。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "让老人感到被重视、愿意参与（seniors feel valued and engaged）是中心的目标，不是交给志愿者的具体任务。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人为什么发表这番讲话？",
+      "optionTranslationsZh": {
+        "A": "为了庆祝。",
+        "B": "为了告知。",
+        "C": "为了倡议。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We urgently need volunteers, especially dance teachers, and physical trainers to lead fun, safe activities."
+      },
+      "reasonZh": "说话人讲完资金困难后急招志愿者（urgently need volunteers），又请大家联系企业、周五前回复，整段讲话是在号召大家出力，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "中心开放被称为一大成就（a big achievement），但紧接着就转到项目遇到的问题，庆祝不是目的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "介绍进展和困难只是铺垫，讲话最后落在请大家报名做志愿者、联系企业上。"
+        }
+      ]
+    }
+  }
+}
